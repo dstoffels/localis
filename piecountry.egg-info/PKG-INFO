@@ -1,0 +1,4 @@
+Metadata-Version: 2.4
+Name: piecountry
+Version: 1.0.0
+Requires-Dist: rapidfuzz>=3.13.0

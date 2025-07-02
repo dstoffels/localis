@@ -1,0 +1,7 @@
+[project]
+name = "piecountry"
+version = "1.0.0"
+
+dependencies = [
+    "rapidfuzz>=3.13.0"
+]
