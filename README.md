@@ -1,7 +1,7 @@
 
-# piecountry
+# villager
 
-`piecountry` is a Python package providing fast, easy access to ISO country and subdivision data with exact and fuzzy search capabilities. A better pycountry.
+`villager` is a Python package providing fast, easy access to ISO country and subdivision data with exact and fuzzy search capabilities. A better pycountry.
 
 ## Overview
 
@@ -13,15 +13,15 @@
 
 All functionality is exposed through:
 
-- `piecountry.countries`
-- `piecountry.subdivisions`
+- `villager.countries`
+- `villager.subdivisions`
 
 ---
 
 ## Installation
 
 ```bash
-pip install piecountry
+pip install villager
 ```
 
 ---
@@ -31,39 +31,41 @@ pip install piecountry
 ### Countries API
 
 ```python
-import piecountry
+import villager
 
-# Exact lookup by alpha2, alpha3, numeric code, or country name
-country = piecountry.countries.get("GB")          # United Kingdom
-country = piecountry.countries.get("uk")          # United Kingdom (alias)
-country = piecountry.countries.get("United Kingdom")
-country = piecountry.countries.get(826)           # Numeric code for UK
+# Exact lookup by alpha2, alpha3, numeric code, or country name (case-insentive)
+country = villager.countries.get("GB")          # United Kingdom
+country = villager.countries.get("uk")          # United Kingdom (alias)
+country = villager.countries.get("United Kingdom")
+country = villager.countries.get(826)           # Numeric code for UK
 
 # Fuzzy search returns list of (Country, similarity_score)
-results = piecountry.countries.search("cananda")  # Will match "Canada"
-for country, score in results:
-    print(country.name, score)
+results = villager.countries.search("cananda") 
+
+print([(c.name, ratio) for c, ratio in results])
+# [('Canada', 92.3076923076923), ('Tanzania', 66.66666666666667), ('Panama', 61.53846153846154), ('Rwanda', 61.53846153846154), ('Uganda', 61.53846153846154)]
+
 ```
 
 ### Subdivisions API
 
 ```python
-import piecountry
+import villager
 
-# Exact lookup by subdivision name, ISO code, or alpha2 code
-subdivision = piecountry.subdivisions.get("California")
+# Exact lookup by subdivision name, ISO code, or alpha2 code (case-insentive)
+subdivision = villager.subdivisions.get("California")
 
 # Fuzzy search for subdivisions
-results = piecountry.subdivisions.search("calif")
+results = villager.subdivisions.search("calif")
 for subdivision, score in results:
     print(subdivision.name, score)
 
 # List all subdivisions in a country by country name or alpha2 code
-us_subdivisions = piecountry.subdivisions.by_country("United States")
-gb_subdivisions = piecountry.subdivisions.by_country_code("GB")
+us_subdivisions = villager.subdivisions.by_country("United States")
+gb_subdivisions = villager.subdivisions.by_country_code("GB")
 
 # Get all subdivision types within a country (e.g., "state", "province")
-types = piecountry.subdivisions.get_types("GB")
+types = villager.subdivisions.get_types("GB")
 print(types)
 ```
 
@@ -71,7 +73,7 @@ print(types)
 
 ## API Reference
 
-### `piecountry.countries`
+### `villager.countries`
 
 - `get(identifier: str | int) -> Optional[Country]`  
   Retrieve a country by ISO alpha-2 code, alpha-3 code, numeric code, or full name (case-insensitive).  
@@ -82,7 +84,7 @@ print(types)
 
 ---
 
-### `piecountry.subdivisions`
+### `villager.subdivisions`
 
 - `get(identifier: str) -> Optional[Subdivision]`  
   Retrieve a subdivision by name, ISO code, or alpha2 code (case-insensitive).
@@ -99,4 +101,4 @@ print(types)
 - `get_types(code: str) -> list[str]`  
   List all subdivision types (e.g., "state", "province") within a given country code.
 
-This site or product includes Ipregistry ISO 3166 data available from https://ipregistry.co."
+villager includes Ipregistry ISO 3166 data available from https://ipregistry.co."
