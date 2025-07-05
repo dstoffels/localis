@@ -19,7 +19,8 @@ class Subdivision:
     alt_name: str
     iso_code: str
     code: str
-    type: str
+    category: str
+    # subdivisions: list["Subdivision"]
     country: str
     country_alpha2: str
     country_alpha3: str
@@ -30,16 +31,14 @@ class Locality:
     """Represents a geographic locality such as a city, town, village, or hamlet."""
 
     name: str
-    display_name: str
-    admin1: Optional[str]
-    admin1_iso_code: Optional[str]
-    admin1_code: Optional[str]
+    subdivisions: list[Subdivision]
     country: str
     country_alpha2: str
     country_alpha3: str
+    display_name: str
     lat: float
     lng: float
-    classification: Optional[str]
+    classification: str | None
     osm_type: str
     osm_id: int
-    population: Optional[int]
+    population: int | None

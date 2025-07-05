@@ -1,8 +1,19 @@
-from peewee import Model, CharField, IntegerField, AutoField, Select, FloatField
+from peewee import (
+    Model,
+    CharField,
+    IntegerField,
+    AutoField,
+    Select,
+    FloatField,
+    ForeignKeyField,
+    TextField,
+)
 from .database import db
 from abc import abstractmethod
 from ..types import Country, Subdivision, Locality
 from typing import TypeVar, Generic
+from playhouse.sqlite_ext import FTS5Model, SearchField
+
 
 T = TypeVar("T")
 
@@ -49,25 +60,40 @@ class CountryModel(BaseModel, DTOModel[Country]):
 class SubdivisionModel(BaseModel, DTOModel[Subdivision]):
     id = AutoField()
     name = CharField(index=True)
-    alt_name = CharField(index=True)
+    alt_name = CharField(index=True, null=True)
     iso_code = CharField(unique=True)
     code = CharField(index=True)
-    type = CharField()
-    country = CharField(index=True)
-    country_code = CharField(index=True)
-    country_alpha3 = CharField(index=True)
+    category = CharField(index=True, null=True)
+    parent_iso_code = CharField(index=True, null=True)
+    parent: "SubdivisionModel" = ForeignKeyField(
+        "self", backref="subdivisions", null=True
+    )
+    admin_level = IntegerField(index=True, default=1)
+    country: CountryModel = ForeignKeyField(CountryModel, backref="subdivisions")
 
-    def to_dto(self):
+    subdivisions: list["SubdivisionModel"]
+
+    def to_dto(self) -> Subdivision:
         return Subdivision(
-            self.name,
-            self.alt_name,
-            self.iso_code,
-            self.code,
-            self.type,
-            self.country,
-            self.country_code,
-            self.country_alpha3,
+            name=self.name,
+            alt_name=self.alt_name,
+            iso_code=self.iso_code,
+            code=self.code,
+            category=self.category,
+            # subdivisions=[child.to_dto() for child in self.subdivisions],
+            country=self.country.name,
+            country_alpha2=self.country.alpha2,
+            country_alpha3=self.country.alpha3,
         )
+
+    def get_ancestors(self) -> list["SubdivisionModel"]:
+        """Return list of subdivisions from top-level parent down to self."""
+        ancestors = []
+        current = self
+        while current:
+            ancestors.append(current)
+            current = current.parent
+        return list(reversed(ancestors))
 
     class Meta:
         table_name = "subdivisions"
@@ -76,13 +102,10 @@ class SubdivisionModel(BaseModel, DTOModel[Subdivision]):
 class LocalityModel(BaseModel, DTOModel[Locality]):
     id = AutoField()
     name = CharField(index=True)
-    display_name = CharField(index=True)
-    admin1 = CharField(index=True)
-    admin1_iso_code = CharField(index=True)
-    admin1_code = CharField(index=True, null=True)
-    country = CharField(index=True)
-    country_alpha2 = CharField(index=True)
-    country_alpha3 = CharField(index=True)
+    subdivision: SubdivisionModel = ForeignKeyField(
+        SubdivisionModel, backref="localities"
+    )
+    country: CountryModel = ForeignKeyField(CountryModel, backref="localities")
     lat = FloatField()
     lng = FloatField()
     classification = CharField()
@@ -91,22 +114,38 @@ class LocalityModel(BaseModel, DTOModel[Locality]):
     population = IntegerField(null=True)
 
     def to_dto(self):
+        subdivisions_chain = [sub.to_dto() for sub in self.subdivision.get_ancestors()]
         return Locality(
-            self.name,
-            self.display_name,
-            self.admin1,
-            self.admin1_iso_code,
-            self.admin1_code,
-            self.country,
-            self.country_alpha2,
-            self.country_alpha3,
-            self.lat,
-            self.lng,
-            self.classification,
-            self.osm_type,
-            self.osm_id,
-            self.population,
+            name=self.name,
+            subdivisions=subdivisions_chain,
+            country=self.country.name,
+            country_alpha2=self.country.alpha2,
+            country_alpha3=self.country.alpha3,
+            display_name=", ".join(
+                [self.name]
+                + [sub.name for sub in subdivisions_chain]
+                + [self.country.name]
+            ),
+            lat=self.lat,
+            lng=self.lng,
+            classification=self.classification,
+            osm_type=self.osm_type,
+            osm_id=self.osm_id,
+            population=self.population,
         )
 
     class Meta:
         table_name = "localities"
+
+
+class LocalityFTS(FTS5Model):
+    full_text = SearchField()
+
+    class Meta:
+        extension_options = {
+            "tokenize": "porter",
+            "content_rowid": "id",
+            "prefix": "2 3 4 5 6 7 8 9",
+        }
+        content = "localities"
+        database = db

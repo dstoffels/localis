@@ -2,9 +2,12 @@ villager:
   countries:
     get:
       description: >
-        Lookup a country by exact name, alpha-2, alpha-3, or numeric code.
-        Returns a single Country or None.
+        Lookup a country by exact alpha-2, alpha-3, or numeric code.
       returns: Country | None
+    lookup:
+      description: >
+        Lookup a country by name.
+      returns: List[Country]
     search:
       description: >
         Fuzzy search countries by name, alpha-2, or alpha-3 code.
