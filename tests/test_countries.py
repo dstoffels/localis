@@ -31,16 +31,9 @@ class TestCountryGet:
             assert country is not None
             assert country.alpha2 == alpha_2
 
-    def test_country_get_is_case_insensitive(self):
+    def test_country_get_is_normalized(self):
         for c in countries:
-            country = countries.get(c.alpha2.lower())
-            assert isinstance(country, Country)
-            assert country is not None
-            assert c.alpha2 == country.alpha2
-
-    def test_country_get_input_normalization(self):
-        for c in countries:
-            test = f"   {'.'.join(c.alpha2.split())}   "
+            test = f"   {'.'.join(c.alpha2.split()).lower()}   "
             country = countries.get(test)
             assert isinstance(country, Country)
             assert country is not None
@@ -75,29 +68,27 @@ class TestCountryLookup:
             country = results[0]
             assert country.name == name
 
-    def test_country_lookup_is_case_insensitive(self):
-        country = countries.lookup("united states")[0]
-        assert isinstance(country, Country)
-        assert country is not None
-        assert country.alpha2 == "US"
-
-    def test_country_lookup_trims_whitespace(self):
-        results = countries.lookup("   united states   ")
-        assert results[0].alpha2 == "US"
+    def test_country_lookup_is_normalized(self):
+        for c in countries:
+            results = countries.lookup(f"   {c.name.lower()}   ")
+            assert results
+            assert len(results) > 0
+            country = results[0]
+            assert country.name == c.name
 
     def test_country_lookup_empty(self):
         results = countries.lookup("california")
         assert results == []
 
 
-# class TestCountrySearchAccuracy:
-#     def test_exact_name_should_rank_first(self):
-#         results = countries.search("Georgia")
-#         assert results
-#         country, score = results[0]
-#         assert country.name == "Georgia"
-#         assert country.alpha2 == "GE"
-#         assert score == 100
+class TestCountrySearchAccuracy:
+    def test_exact_name_should_rank_first(self):
+        for c in countries:
+            results = countries.search(c.name)
+            assert results
+            country, score = results[0]
+            assert country.name == c.name
+            assert score == 100
 
 
 #     def test_alpha2_should_rank_first(self):

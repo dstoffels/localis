@@ -4,6 +4,7 @@ from ..types import Country
 from ..literals import CountryCode, CountryName, CountryNumeric
 from typing import Optional
 from rapidfuzz import process, fuzz
+from peewee import fn
 from ..utils import normalize
 
 
@@ -52,7 +53,16 @@ class CountryRegistry(Registry[CountryModel, Country]):
         return []
 
     def search(self, query, limit=5):
-        return super().search(query, limit)
+        """Search for a country by name."""
+        query = normalize(query)
+        similarity_expr = fn.trigram_sim(CountryModel.normalized_name, query)
+
+        q = (
+            CountryModel.select(CountryModel, similarity_expr.alias("similarity"))
+            .order_by(similarity_expr.desc())
+            .limit(limit)
+        )
+        return [(m.to_dto(), float(m.similarity)) for m in q]
 
     def _load_cache(self) -> list[Country]:
         return super()._load_cache()

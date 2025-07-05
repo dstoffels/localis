@@ -4,11 +4,11 @@ from typing import List, Optional
 
 @dataclass(frozen=True)
 class Country:
-    name: str
-    alpha2: str
-    alpha3: str
-    numeric: str
-    long_name: str
+    name: str | None = None
+    alpha2: str | None = None
+    alpha3: str | None = None
+    numeric: str | None = None
+    long_name: str | None = None
 
 
 @dataclass(frozen=True)
