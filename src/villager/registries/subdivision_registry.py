@@ -1,13 +1,13 @@
 from .registry import Registry
 from ..types import Subdivision
 from typing import Callable, Optional
+from ..db import SubdivisionModel, CountryModel
 from ..literals import CountryCode, CountryName, CountryNumeric
 from rapidfuzz import fuzz
-from collections import defaultdict
-from ..trie import Trie
+from peewee import prefetch
 
 
-class SubdivisionRegistry(Registry[Subdivision]):
+class SubdivisionRegistry(Registry[SubdivisionModel, Subdivision]):
     """
     Registry for managing Subdivision entities.
 
@@ -18,8 +18,20 @@ class SubdivisionRegistry(Registry[Subdivision]):
     def __init__(self, db, model):
         super().__init__(db, model)
 
+    def get(self, identifier: str) -> Subdivision:
+        """Fetch a subdivision by exact iso code."""
+        return self._model.get_or_none(SubdivisionModel.iso_code == identifier)
+
+    def lookup(self, identifier):
+        return super().lookup(identifier)
+
     def search(self, query, limit=5):
-        pass
+        return super().search(query, limit)
+
+    def _load_cache(self) -> list[Subdivision]:
+        q = self._model.select()
+        models = list(prefetch(q, CountryModel.select()))
+        return [m.to_dto() for m in models]
 
     # def __init__(self, data: list[Subdivision]):
     #     self._data = data

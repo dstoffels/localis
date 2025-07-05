@@ -1,11 +1,13 @@
 from .registry import Registry
+from ..db.models import CountryModel
 from ..types import Country
 from ..literals import CountryCode, CountryName, CountryNumeric
 from typing import Optional
 from rapidfuzz import process, fuzz
+from peewee import fn
 
 
-class CountryRegistry(Registry[Country]):
+class CountryRegistry(Registry[CountryModel, Country]):
     """
     Registry for managing Country entities.
 
@@ -20,62 +22,98 @@ class CountryRegistry(Registry[Country]):
     def __init__(self, db, model):
         super().__init__(db, model)
 
-        # lookup caches
-        self._by_name: dict[str, Country] = {}
-        self._by_code: dict[str, Country] = {}
-        self._by_numeric: dict[str, Country] = {}
+    def get(self, identifier: CountryCode | CountryNumeric) -> Optional[Country]:
+        if not identifier:
+            return None
 
-        for c in self._cache:
-            name = self._normalize(c.name)
-            self._by_name[name] = c
-
-            self._by_code[c.alpha2.lower()] = c
-            self._by_code[c.alpha3.lower()] = c
-
-            self._by_numeric[c.numeric] = c
-
-        # aliases
-        for alias, a2 in self.ALIASES.items():
-            country = self._by_code.get(a2)
-            if country:
-                self._by_code[alias] = country
-
-    def get(
-        self, identifier: CountryName | CountryCode | CountryNumeric
-    ) -> Optional[Country]:
         if isinstance(identifier, int):
-            return self._by_numeric.get(identifier)
+            model = self._model.get_or_none(CountryModel.numeric == identifier)
+        else:
+            model = self._model.get_or_none(
+                (fn.LOWER(CountryModel.alpha2.collate("NOCASE")) == identifier.lower())
+                | (
+                    fn.LOWER(CountryModel.alpha3.collate("NOCASE"))
+                    == identifier.lower()
+                )
+            )
+        if model:
+            return model.to_dto()
 
-        if len(identifier) in [2, 3]:
-            return self._by_code.get(identifier.lower())
-
-        identifier = self._normalize(identifier)
-        return self._by_name.get(identifier)
-
-    def search(self, query: str | int, limit=5) -> list[tuple[Country, float]]:
-        query = self._normalize(query)
-        if not query:
+    def lookup(self, identifier: CountryName) -> list[Country]:
+        """Lookup a country by exact name."""
+        if not identifier:
             return []
 
-        choices = {
-            **self._by_name,
-            **self._by_code,
-        }
+        models: list[CountryModel] = self._model.select().where(
+            fn.LOWER(CountryModel.name.collate("NOCASE")) == identifier.lower()
+        )
+        if models:
+            return [m.to_dto() for m in models]
+        return []
 
-        seen = {}
-        for match, score, _ in process.extract(
-            query, choices.keys(), scorer=fuzz.ratio, limit=limit
-        ):
-            country = choices[match]
-            if country.alpha2 in seen:
-                if score > seen[country.alpha2][1]:
-                    seen[country.alpha2] = (country, score)
-            else:
-                seen[country.alpha2] = (country, score)
+    def search(self, query, limit=5):
+        return super().search(query, limit)
 
-        return sorted(seen.values(), key=lambda x: x[1], reverse=True)[:limit]
+    def _load_cache(self) -> list[Country]:
+        return super()._load_cache()
 
-        # def _search(
+        # lookup caches
+
+    #     self._by_name: dict[str, Country] = {}
+    #     self._by_code: dict[str, Country] = {}
+    #     self._by_numeric: dict[str, Country] = {}
+
+    #     for c in self._cache:
+    #         name = self._normalize(c.name)
+    #         self._by_name[name] = c
+
+    #         self._by_code[c.alpha2.lower()] = c
+    #         self._by_code[c.alpha3.lower()] = c
+
+    #         self._by_numeric[c.numeric] = c
+
+    #     # aliases
+    #     for alias, a2 in self.ALIASES.items():
+    #         country = self._by_code.get(a2)
+    #         if country:
+    #             self._by_code[alias] = country
+
+    # def get(
+    #     self, identifier: CountryName | CountryCode | CountryNumeric
+    # ) -> Optional[Country]:
+    #     if isinstance(identifier, int):
+    #         return self._by_numeric.get(identifier)
+
+    #     if len(identifier) in [2, 3]:
+    #         return self._by_code.get(identifier.lower())
+
+    #     identifier = self._normalize(identifier)
+    #     return self._by_name.get(identifier)
+
+    # def search(self, query: str | int, limit=5) -> list[tuple[Country, float]]:
+    #     query = self._normalize(query)
+    #     if not query:
+    #         return []
+
+    #     choices = {
+    #         **self._by_name,
+    #         **self._by_code,
+    #     }
+
+    #     seen = {}
+    #     for match, score, _ in process.extract(
+    #         query, choices.keys(), scorer=fuzz.ratio, limit=limit
+    #     ):
+    #         country = choices[match]
+    #         if country.alpha2 in seen:
+    #             if score > seen[country.alpha2][1]:
+    #                 seen[country.alpha2] = (country, score)
+    #         else:
+    #             seen[country.alpha2] = (country, score)
+
+    #     return sorted(seen.values(), key=lambda x: x[1], reverse=True)[:limit]
+
+    # def _search(
 
     #     self, query: str, lookups: list[dict[str, T]], limit: int = 5
     # ) -> list[tuple[T, float]]:

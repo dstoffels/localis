@@ -1,37 +1,44 @@
 import pytest
 from typing import Optional
-from villager import countries
+from villager import countries, Country
 
 
 class TestCountryGet:
     def test_country_get_us(self):
         country = countries.get("US")
+        assert isinstance(country, Country | None)
         assert country is not None
         assert country.name == "United States"
 
     def test_country_get_by_alpha3(self):
         country = countries.get("USA")
+        assert isinstance(country, Country | None)
         assert country is not None
         assert country.alpha2 == "US"
 
     def test_country_get_by_numeric(self):
         country = countries.get(840)
-        assert country is not None
-        assert country.alpha2 == "US"
-
-    def test_country_get_by_name_case_insensitive(self):
-        country = countries.get("united states")
+        assert isinstance(country, Country | None)
         assert country is not None
         assert country.alpha2 == "US"
 
     def test_country_get_with_alias(self):
         country = countries.get("UK")
+        assert isinstance(country, Country | None)
         assert country is not None
         assert country.alpha2 == "GB"
 
     def test_country_get_none(self):
         country = countries.get("ZZZ")
         assert country is None
+
+
+class TestCountryLookup:
+    def test_country_lookup_us(self):
+        country = countries.lookup("United States")[0]
+        assert isinstance(country, Country | None)
+        assert country is not None
+        assert country.alpha2 == "US"
 
 
 class TestCountrySearchAccuracy:

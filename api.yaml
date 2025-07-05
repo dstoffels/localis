@@ -2,11 +2,11 @@ villager:
   countries:
     get:
       description: >
-        Lookup a country by exact alpha-2, alpha-3, or numeric code.
+        Fetch a country by exact alpha-2, alpha-3, or numeric code.
       returns: Country | None
     lookup:
       description: >
-        Lookup a country by name.
+        Lookup a country by exact name.
       returns: List[Country]
     search:
       description: >
@@ -15,6 +15,10 @@ villager:
       returns: List[Tuple[Country, float]]
 
   subdivisions:
+    get:
+      description: >
+        Fetch a subdivision by exact iso code.
+      returns: Subdivision | None
     by_country:
       description: >
         Returns all subdivisions for a given country, using country name or code (alpha-2/3).
@@ -41,6 +45,9 @@ villager:
       returns: List[Tuple[Subdivision, float]]
 
   localities:
+    get:
+      description: >
+        Fetch a locality by exact OSM ID.
     by_country:
       description: >
         Return all localities for a given country name/code (alpha-2/3).
