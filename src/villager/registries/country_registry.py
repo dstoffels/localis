@@ -4,7 +4,7 @@ from ..types import Country
 from ..literals import CountryCode, CountryName, CountryNumeric
 from typing import Optional
 from rapidfuzz import process, fuzz
-from peewee import fn
+from peewee import fn, Value
 from ..utils import normalize
 
 
@@ -52,17 +52,65 @@ class CountryRegistry(Registry[CountryModel, Country]):
             return [m.to_dto() for m in models]
         return []
 
-    def search(self, query, limit=5):
-        """Search for a country by name."""
-        query = normalize(query)
-        similarity_expr = fn.trigram_sim(CountryModel.normalized_name, query)
+    def search(self, query, limit=5) -> list[tuple[Country, float]]:
+        """Fuzzy search countries by name, alpha-2, or alpha-3 code.
 
-        q = (
-            CountryModel.select(CountryModel, similarity_expr.alias("similarity"))
-            .order_by(similarity_expr.desc())
-            .limit(limit)
-        )
-        return [(m.to_dto(), float(m.similarity)) for m in q]
+        Returns a list of (Country, match_score) tuples."""
+        if not query:
+            return []
+
+        # Lookup exact matches first
+        if len(query) in [2, 3]:
+            exact_match = self.get(query)
+            if exact_match:
+                return [(exact_match, 1.0)]
+        else:
+            exact_match = self.lookup(query)
+            if exact_match:
+                return [(m, 1.0) for m in exact_match]
+
+        # Fuzzy search
+        from collections import Counter
+
+        def match_char_index(s1: str, s2: str) -> float:
+            if not s1 or not s2:
+                return 0
+
+            max_len = max(len(s1), len(s2))
+
+            if max_len == 0:
+                return 0
+
+            matches = sum(1 for a, b in zip(s1, s2) if a == b)
+            return matches / max_len * 100
+
+        def letter_score(s1: str, s2: str) -> float:
+            c1, c2 = Counter(s1), Counter(s2)
+            if not c1 or not c2:
+                return 0
+
+            common = sum(min(c1[char], c2[char]) for char in c1 if char in c2)
+            total = max(sum(c1.values()), sum(c2.values()))
+            return common / total * 100
+
+        def average_fuzzy_score(s1: str, s2: str) -> float:
+            scores = [
+                fuzz.ratio(s1, s2),
+                letter_score(s1, s2),
+                match_char_index(s1, s2),
+            ]
+            return sum(scores) / len(scores) / 100
+
+        query = normalize(query)
+
+        candidates = [c for c in self]
+
+        matches = []
+        for c in candidates:
+            score = average_fuzzy_score(query, normalize(c.name))
+            matches.append((c, score))
+
+        return sorted(matches, key=lambda x: x[1], reverse=True)[:limit]
 
     def _load_cache(self) -> list[Country]:
         return super()._load_cache()
