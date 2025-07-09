@@ -2,19 +2,19 @@ from .registry import Registry
 from ..db import LocalityModel, SubdivisionModel, CountryModel
 from ..types import Locality
 from peewee import prefetch
-from peewee import fn
+from typing import Iterator
 
 
 class LocalityRegistry(Registry[LocalityModel, Locality]):
     """Registry for localities.
 
-    WARNING: using this registry as an iterable will load all localities into memory. This is very heavy and slow, iterate at your own risk!
+    WARNING: It is not recommened to use this registry as an iterable, as it will load all localities into memory. This is very heavy and slow, iterate at your own risk!
 
-    Alternatively, get_batch allows you to load a filtered slice of the locality table by name prefix.
+    Alternatively, get_batch allows you to load a filtered slice of localities by name prefix.
     """
 
-    def __init__(self, db, model):
-        super().__init__(db, model)
+    def __init__(self, model):
+        super().__init__(model)
 
     def get(self, identifier: int) -> Locality:
         if isinstance(identifier, str):
@@ -22,7 +22,7 @@ class LocalityRegistry(Registry[LocalityModel, Locality]):
                 identifier = int(identifier)
             except:
                 return None
-        return self._model.get_or_none(LocalityModel.osm_id == identifier)
+        return self._model_cls.get_or_none(LocalityModel.osm_id == identifier)
 
     def lookup(self, identifier):
         return super().lookup(identifier)
@@ -34,21 +34,20 @@ class LocalityRegistry(Registry[LocalityModel, Locality]):
         self, limit=1000, offset=0, name_prefix: str | None = None
     ) -> list[Locality]:
         """Loads a batch of localities from the database."""
-        q = self._model.select()
+        q = self._model_cls.select()
 
         if name_prefix:
-            q = q.where(self._model.name.startswith(name_prefix))
+            q = (
+                q.where(self._model_cls.name.startswith(name_prefix))
+                .limit(limit)
+                .offset(offset)
+            )
 
-        q = q.limit(limit).offset(offset)
         prefetched = prefetch(q, SubdivisionModel.select(), CountryModel.select())
         return [m.to_dto() for m in prefetched]
 
-    def _load_cache(self) -> list[Locality]:
-        q = self._model.select()
-        results = []
-        for model in self._batched_prefetch(q):
-            results.append(model.to_dto())
-        return results
+    def _load_cache(self, *related_models):
+        return super()._load_cache(SubdivisionModel, CountryModel)
 
     def _batched_prefetch(self, query, batch_size=1000):
         """Yields LocalityModel instances in batches, using prefetch()."""
@@ -68,3 +67,6 @@ class LocalityRegistry(Registry[LocalityModel, Locality]):
                 break
             yield from prefetched
             offset += batch_size
+
+    # def __iter__(self) -> Iterator[Locality]:
+    #     return super().__iter__()

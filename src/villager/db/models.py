@@ -6,7 +6,6 @@ from peewee import (
     Select,
     FloatField,
     ForeignKeyField,
-    TextField,
 )
 from .database import db
 from abc import abstractmethod
@@ -19,6 +18,8 @@ T = TypeVar("T")
 
 
 class DTOModel(Generic[T]):
+    id = AutoField()
+
     def to_dto(self) -> T:
         raise NotImplementedError
 
@@ -32,12 +33,22 @@ class DTOModel(Generic[T]):
 
 
 class BaseModel(Model):
-    id = AutoField()
     name = CharField(index=True)
     normalized_name = CharField(index=True)
 
     class Meta:
         database = db
+
+
+class FTSBase(FTS5Model):
+    tokens = SearchField()
+
+    class Meta:
+        database = db
+        options = {
+            "tokenize": "porter",
+            "content_rowid": "id",
+        }
 
 
 class CountryModel(BaseModel, DTOModel[Country]):
@@ -59,9 +70,13 @@ class CountryModel(BaseModel, DTOModel[Country]):
         table_name = "countries"
 
 
+class CountryFTS(FTSBase):
+    pass
+
+
 class SubdivisionModel(BaseModel, DTOModel[Subdivision]):
-    alt_name = CharField(index=True, null=True)
     iso_code = CharField(unique=True)
+    alt_name = CharField(index=True, null=True)
     code = CharField(index=True)
     category = CharField(index=True, null=True)
     parent_iso_code = CharField(index=True, null=True)
@@ -80,7 +95,6 @@ class SubdivisionModel(BaseModel, DTOModel[Subdivision]):
             iso_code=self.iso_code,
             code=self.code,
             category=self.category,
-            # subdivisions=[child.to_dto() for child in self.subdivisions],
             country=self.country.name,
             country_alpha2=self.country.alpha2,
             country_alpha3=self.country.alpha3,
@@ -99,21 +113,27 @@ class SubdivisionModel(BaseModel, DTOModel[Subdivision]):
         table_name = "subdivisions"
 
 
+class SubdivisionFTS(FTSBase):
+    pass
+
+
 class LocalityModel(BaseModel, DTOModel[Locality]):
+    osm_id = IntegerField(index=True)
+    osm_type = CharField(index=True, max_length=1)
     subdivision: SubdivisionModel = ForeignKeyField(
         SubdivisionModel, backref="localities"
     )
     country: CountryModel = ForeignKeyField(CountryModel, backref="localities")
     lat = FloatField()
     lng = FloatField()
-    classification = CharField()
-    osm_type = CharField()
-    osm_id = IntegerField()
+    classification = CharField(max_length=1)
     population = IntegerField(null=True)
 
     def to_dto(self):
         subdivisions_chain = [sub.to_dto() for sub in self.subdivision.get_ancestors()]
         return Locality(
+            osm_id=self.osm_id,
+            osm_type=self.osm_type,
             name=self.name,
             subdivisions=subdivisions_chain,
             country=self.country.name,
@@ -127,8 +147,6 @@ class LocalityModel(BaseModel, DTOModel[Locality]):
             lat=self.lat,
             lng=self.lng,
             classification=self.classification,
-            osm_type=self.osm_type,
-            osm_id=self.osm_id,
             population=self.population,
         )
 
@@ -136,14 +154,5 @@ class LocalityModel(BaseModel, DTOModel[Locality]):
         table_name = "localities"
 
 
-class LocalityFTS(FTS5Model):
-    full_text = SearchField()
-
-    class Meta:
-        extension_options = {
-            "tokenize": "porter",
-            "content_rowid": "id",
-            "prefix": "2 3 4 5 6 7 8 9",
-        }
-        content = "localities"
-        database = db
+class LocalityFTS(FTSBase):
+    pass

@@ -1,11 +1,12 @@
 from .registry import Registry
-from ..db.models import CountryModel
+from ..db.models import CountryModel, db
 from ..types import Country
 from ..literals import CountryCode, CountryName, CountryNumeric
 from typing import Optional
-from rapidfuzz import process, fuzz
-from peewee import fn, Value
+from rapidfuzz import fuzz
 from ..utils import normalize
+from collections import Counter
+import cProfile
 
 
 class CountryRegistry(Registry[CountryModel, Country]):
@@ -16,8 +17,8 @@ class CountryRegistry(Registry[CountryModel, Country]):
     and fuzzy search.
     """
 
-    def __init__(self, db, model):
-        super().__init__(db, model)
+    def __init__(self, model):
+        super().__init__(model)
 
     def get(self, identifier: CountryCode | CountryNumeric) -> Optional[Country]:
         if not identifier:
@@ -26,10 +27,12 @@ class CountryRegistry(Registry[CountryModel, Country]):
         identifier = normalize(identifier)
 
         if isinstance(identifier, int):
-            model = self._model.get_or_none(CountryModel.numeric == identifier)
+            model: CountryModel = self._model_cls.get_or_none(
+                CountryModel.numeric == identifier
+            )
         else:
             identifier = self.CODE_ALIASES.get(identifier.lower(), identifier)
-            model = self._model.get_or_none(
+            model: CountryModel = self._model_cls.get_or_none(
                 (CountryModel.alpha2.collate("NOCASE") == identifier)
                 | (CountryModel.alpha3.collate("NOCASE") == identifier)
             )
@@ -45,7 +48,7 @@ class CountryRegistry(Registry[CountryModel, Country]):
         identifier = self.ALIASES.get(identifier.lower(), identifier)
         identifier = normalize(identifier)
 
-        models: list[CountryModel] = self._model.select().where(
+        models: list[CountryModel] = self._model_cls.select().where(
             CountryModel.normalized_name.collate("NOCASE") == identifier
         )
         if models:
@@ -65,55 +68,87 @@ class CountryRegistry(Registry[CountryModel, Country]):
             if exact_match:
                 return [(exact_match, 1.0)]
         else:
-            exact_match = self.lookup(query)
-            if exact_match:
-                return [(m, 1.0) for m in exact_match]
+            exact_matches = self.lookup(query)
+            if exact_matches:
+                return [(m, 1.0) for m in exact_matches]
 
         # Fuzzy search
-        from collections import Counter
+        norm_query = normalize(query)
+        tokens = norm_query.split(" ")
 
-        def match_char_index(s1: str, s2: str) -> float:
-            if not s1 or not s2:
-                return 0
+        matches: dict[str, tuple[Country, float]] = {}
 
-            max_len = max(len(s1), len(s2))
+        tokens_len = sum([len(t) for t in tokens])
 
-            if max_len == 0:
-                return 0
+        while tokens_len > len(tokens) * 2 and len(matches) < limit:
+            tokens_len = 0
+            for i, t in enumerate(tokens):
+                if len(t) <= 1:
+                    continue
+                tokens[i] = t[:-1]
+                tokens_len += len(t)
 
-            matches = sum(1 for a, b in zip(s1, s2) if a == b)
-            return matches / max_len * 100
+            print(tokens)
 
-        def letter_score(s1: str, s2: str) -> float:
-            c1, c2 = Counter(s1), Counter(s2)
-            if not c1 or not c2:
-                return 0
+            fts_q = " ".join([f"{t}*" for t in tokens])
+            cursor = db.execute_sql(
+                f"""
+                SELECT c.* FROM countryfts f
+                JOIN countries c ON f.rowid = c.id
+                WHERE f.tokens MATCH ?
+                ORDER BY rank
+                LIMIT 100
+                """,
+                (fts_q,),
+            )
 
-            common = sum(min(c1[char], c2[char]) for char in c1 if char in c2)
-            total = max(sum(c1.values()), sum(c2.values()))
-            return common / total * 100
+            results = [Country.from_row(row) for row in cursor]
+            for c in results:
+                score = fuzz.token_set_ratio(query, c.name) / 100
+                if score >= 0.75:
+                    matches[c.name] = (c, score)
 
-        def average_fuzzy_score(s1: str, s2: str) -> float:
-            scores = [
-                fuzz.ratio(s1, s2),
-                letter_score(s1, s2),
-                match_char_index(s1, s2),
-            ]
-            return sum(scores) / len(scores) / 100
+        return sorted(matches.values(), key=lambda x: x[1], reverse=True)[:limit]
 
-        query = normalize(query)
+        # # Fuzzy search
 
-        candidates = [c for c in self]
+        # def match_char_index(s1: str, s2: str) -> float:
+        #     if not s1 or not s2:
+        #         return 0
 
-        matches = []
-        for c in candidates:
-            score = average_fuzzy_score(query, normalize(c.name))
-            matches.append((c, score))
+        #     max_len = max(len(s1), len(s2))
 
-        return sorted(matches, key=lambda x: x[1], reverse=True)[:limit]
+        #     if max_len == 0:
+        #         return 0
 
-    def _load_cache(self) -> list[Country]:
-        return super()._load_cache()
+        #     matches = sum(1 for a, b in zip(s1, s2) if a == b)
+        #     return matches / max_len * 100
+
+        # def letter_score(s1: str, s2: str) -> float:
+        #     c1, c2 = Counter(s1), Counter(s2)
+        #     if not c1 or not c2:
+        #         return 0
+
+        #     common = sum(min(c1[char], c2[char]) for char in c1 if char in c2)
+        #     total = max(sum(c1.values()), sum(c2.values()))
+        #     return common / total * 100
+
+        # def average_score(s1: str, s2: str) -> float:
+        #     scores = [
+        #         fuzz.ratio(s1, s2),
+        #         letter_score(s1, s2),
+        #         match_char_index(s1, s2),
+        #     ]
+        #     return sum(scores) / len(scores) / 100
+
+        # query = normalize(query)
+
+        # matches = []
+        # for c in self.cache:
+        #     score = average_score(query, c.normalized_name)
+        #     matches.append((c, score))
+
+        # return sorted(matches, key=lambda x: x[1], reverse=True)[:limit]
 
     CODE_ALIASES = {
         "uk": "GB",

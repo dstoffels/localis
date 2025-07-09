@@ -4,7 +4,9 @@ import json
 from villager.db import (
     db,
     CountryModel,
+    CountryFTS,
     SubdivisionModel,
+    SubdivisionFTS,
     LocalityModel,
     LocalityFTS,
 )
@@ -42,9 +44,17 @@ def chunked(iterable, size):
         yield iterable[i : i + size]
 
 
+def tokenize(*parts: str) -> str:
+    tokens = set()
+    for part in parts:
+        tokens.update(normalize(part).split())
+    return " ".join(tokens)
+
+
 def load_countries() -> None:
-    db.create_tables([CountryModel], safe=True)
+    db.create_tables([CountryModel, CountryFTS], safe=True)
     countries = []
+    fts_rows: list[dict[str, str]] = []
 
     with open(DATA_DIR / "countries.csv", newline="", encoding="utf-8") as f:
         reader = csv.DictReader(f)
@@ -61,6 +71,16 @@ def load_countries() -> None:
                 }
             )
 
+            fts_rows.append(
+                {
+                    "tokens": tokenize(
+                        row["name_short"],
+                        row["#country_code_alpha2"],
+                        row["country_code_alpha3"],
+                    )
+                }
+            )
+
     with db.atomic():
         for batch in chunked(countries, 100):
             try:
@@ -68,11 +88,18 @@ def load_countries() -> None:
             except Exception as e:
                 print(f"Unexpected error on batch: {e}")
                 raise e
+        for batch in chunked(fts_rows, 100):
+            try:
+                CountryFTS.insert_many(batch).execute()
+            except Exception as e:
+                print(f"Unexpected error on batch: {e}")
+                raise e
 
 
 def load_subdivisions() -> None:
-    db.create_tables([SubdivisionModel], safe=True)
+    db.create_tables([SubdivisionModel, SubdivisionFTS], safe=True)
     subdivisions: list[dict[str, str | None]] = []
+    fts_rows: list[dict[str, str]] = []
 
     with open(DATA_DIR / "subdivisions.csv", newline="", encoding="utf-8") as f:
         reader = csv.DictReader(f)
@@ -97,9 +124,22 @@ def load_subdivisions() -> None:
                     "iso_code": iso_code,
                     "code": iso_code.split("-")[-1] if "-" in iso_code else iso_code,
                     "category": row.get("category") or None,
-                    "country": country.id,
+                    "country": country,
                     "alt_name": row.get("localVariant") or None,
                     "parent_iso_code": row.get("parent_subdivision"),
+                }
+            )
+
+            fts_rows.append(
+                {
+                    "tokens": tokenize(
+                        row["subdivision_name"],
+                        country.name,
+                        country.alpha2,
+                        country.alpha3,
+                        row.get("localVariant", ""),
+                        iso_code,
+                    )
                 }
             )
 
@@ -108,6 +148,13 @@ def load_subdivisions() -> None:
         for batch in chunked(subdivisions, 100):
             try:
                 SubdivisionModel.insert_many(batch).execute()
+            except Exception as e:
+                print(f"Unexpected error on batch: {e}")
+                raise e
+
+        for batch in chunked(fts_rows, 100):
+            try:
+                SubdivisionFTS.insert_many(batch).execute()
             except Exception as e:
                 print(f"Unexpected error on batch: {e}")
                 raise e
@@ -155,9 +202,9 @@ def parse_other_names(name, other_names: dict[str, str]) -> tuple[str, str]:
     if not other_names:
         return name, ""
 
-    en_name = other_names.pop("name:en", None)
+    en_name = normalize_name(other_names.pop("name:en", None))
     names = set(other_names.values())
-    normalized_names = {normalize_name(n) for n in names if n}
+    normalized_names = {normalize(n) for n in names if n}
     names_str = " ".join(normalized_names)
 
     if en_name:
@@ -166,7 +213,8 @@ def parse_other_names(name, other_names: dict[str, str]) -> tuple[str, str]:
 
 
 def load_localities() -> None:
-    db.create_tables([LocalityModel, LocalityFTS], safe=True)
+    db.create_tables([LocalityModel], safe=True)
+    LocalityFTS.create_table()
     locality_dir = DATA_DIR / "localities"
     localities = []
     fts_rows = []
@@ -194,12 +242,25 @@ def load_localities() -> None:
                     try:
                         data: dict = json.loads(line)
 
-                        osm_id = data.get("osm_id")
+                        # build id
+
+                        osm_id: int = data.get("osm_id")
                         if not osm_id:
                             continue
-                        if osm_id in seen:
+
+                        osm_type: str = data.get("osm_type")
+                        if not osm_type:
                             continue
-                        seen.add(osm_id)
+
+                        osm_type = osm_type[0]
+
+                        comp_id = f"{osm_type}:{osm_id}"
+
+                        if comp_id in seen:
+                            continue
+                        seen.add(comp_id)
+
+                        # build name
 
                         name, other_names = parse_other_names(
                             data.get("name", None), data.get("other_names", {})
@@ -232,22 +293,28 @@ def load_localities() -> None:
 
                         localities.append(
                             {
+                                "osm_id": osm_id,
+                                "osm_type": osm_type,
                                 "name": name,
-                                "normalized_name": normalize_name(name),
+                                "normalized_name": normalize(name),
                                 "subdivision": subdivision,
                                 "country": country,
                                 "lat": lat,
                                 "lng": lng,
                                 "classification": classification,
-                                "osm_type": data.get("osm_type"),
-                                "osm_id": osm_id,
                                 "population": data.get("population", None),
                             }
                         )
 
                         fts_rows.append(
                             {
-                                "full_text": f"{name} {subdivision.code} {country.alpha2} {subdivision.name} {subdivision.iso_code} {subdivision.alt_name} {country.alpha3} {country.name} {country.long_name} {other_names.replace(', ', ' ')}"
+                                "tokens": tokenize(
+                                    name,
+                                    subdivision.code,
+                                    subdivision.name,
+                                    country.alpha2,
+                                    country.name,
+                                )
                             }
                         )
 
@@ -259,11 +326,15 @@ def load_localities() -> None:
                         raise e
 
     with db.atomic():
-        for batch, fts_batch in zip(chunked(localities, 100), chunked(fts_rows, 100)):
+        for batch in chunked(localities, 100):
             try:
                 LocalityModel.insert_many(batch).execute()
-                LocalityFTS.insert_many(fts_batch).execute()
-
+            except Exception as e:
+                print(f"Unexpected error on batch: {e}")
+                raise e
+        for batch in chunked(fts_rows, 100):
+            try:
+                LocalityFTS.insert_many(batch).execute()
             except Exception as e:
                 print(f"Unexpected error on batch: {e}")
                 raise e

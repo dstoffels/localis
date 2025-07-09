@@ -15,12 +15,12 @@ class SubdivisionRegistry(Registry[SubdivisionModel, Subdivision]):
     fuzzy search by these keys, and filtering by country or country code.
     """
 
-    def __init__(self, db, model):
-        super().__init__(db, model)
+    def __init__(self, model):
+        super().__init__(model)
 
     def get(self, identifier: str) -> Subdivision:
         """Fetch a subdivision by exact iso code."""
-        return self._model.get_or_none(SubdivisionModel.iso_code == identifier)
+        return self._model_cls.get_or_none(SubdivisionModel.iso_code == identifier)
 
     def lookup(self, identifier):
         return super().lookup(identifier)
@@ -28,10 +28,8 @@ class SubdivisionRegistry(Registry[SubdivisionModel, Subdivision]):
     def search(self, query, limit=5):
         return super().search(query, limit)
 
-    def _load_cache(self) -> list[Subdivision]:
-        q = self._model.select()
-        models = list(prefetch(q, CountryModel.select()))
-        return [m.to_dto() for m in models]
+    def _load_cache(self):
+        return super()._load_cache(CountryModel)
 
     # def __init__(self, data: list[Subdivision]):
     #     self._data = data

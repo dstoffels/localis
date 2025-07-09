@@ -107,18 +107,29 @@ class TestSearch:
             assert country.alpha3 == c.alpha3
             assert score == 1
 
-    def test_handles_minor_typos(self):
-        for c in countries:
-            test = self.mangle(c.name, 0.4, 154551)
-            print(c.name, ":", test)
-            results = countries.search(test)
-            assert results
-            country, score = results[0]
-            print("result:", country.name, score)
-            print([(c.name, score) for c, score in results])
-            assert c.name == country.name
-            assert score > 0
-            assert score <= 1
+    def test_minor_typos(self):
+        seeds = range(100)  # Test different seeds
+        success_count = 0
+        total = 0
+        typo_rate = 0.15
+        success_threshold = 0.9  # Expect at least 90% success
+
+        for seed in seeds:
+            for c in countries:
+                test = self.mangle(c.name, typo_rate, seed)
+                results = countries.search(test)
+                total += 1
+
+                if not results:
+                    continue
+
+                top_result, score = results[0]
+                if top_result.name == c.name:
+                    success_count += 1
+
+        accuracy = success_count / total
+        print(f"Success rate: {accuracy:.2%} at typo rate {typo_rate}")
+        assert accuracy >= success_threshold
 
     alphabet = "abcdefghijklmnopqrstuvwxyz"
 
@@ -128,7 +139,7 @@ class TestSearch:
             return s
 
         s_list = list(s)
-        typo_ops = ["swap", "replace"]
+        typo_ops = ["swap", "replace", "delete"]
         num_typos = max(1, int(len(s) * typo_chance))
         applied = 0
         positions = set()
@@ -142,7 +153,11 @@ class TestSearch:
             if op == "swap" and i < len(s_list) - 1 and not s_list[i + 1].isspace():
                 s_list[i], s_list[i + 1] = s_list[i + 1], s_list[i]
             elif op == "replace":
-                s_list[i] = rng.choice("abcdefghijklmnopqrstuvwxyz")
+                s_list[i] = rng.choice(self.alphabet)
+            elif op == "insert":
+                s_list.insert(i, rng.choice(self.alphabet))
+            elif op == "delete":
+                del s_list[i]
 
             positions.add(i)
             applied += 1

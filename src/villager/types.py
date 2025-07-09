@@ -1,44 +1,80 @@
-from dataclasses import dataclass, field
-from typing import List, Optional
+from dataclasses import dataclass, asdict, field
+import json
 
 
-@dataclass(frozen=True)
-class Country:
-    name: str | None = None
-    alpha2: str | None = None
-    alpha3: str | None = None
-    numeric: str | None = None
-    long_name: str | None = None
+class DTOBase:
+    def to_dict(self):
+        return asdict(self)
+
+    def json(self):
+        return json.dumps(self.to_dict())
+
+    def __str__(self):
+        return self.json(indent=2)
 
 
-@dataclass(frozen=True)
-class Subdivision:
-    """Represents a country subdivision such as a state, province, or territory."""
+c = (
+    232,
+    "United States Minor Outlying Islands",
+    "united states minor outlying islands",
+    "UM",
+    "UMI",
+    581,
+    "United States Minor Outlying Islands (the)",
+)
 
+
+@dataclass
+class Country(DTOBase):
     name: str
-    alt_name: str
+    alpha2: str
+    alpha3: str
+    numeric: str
+    long_name: str
+
+    @classmethod
+    def from_row(self, tuple: tuple):
+        return Country(
+            name=tuple[1],
+            alpha2=tuple[3],
+            alpha3=tuple[4],
+            numeric=tuple[5],
+            long_name=tuple[6],
+        )
+
+
+@dataclass
+class SubdivisionBase(DTOBase):
+    name: str
     iso_code: str
     code: str
     category: str
-    # subdivisions: list["Subdivision"]
+    admin_level: int
+
+
+@dataclass
+class Subdivision(SubdivisionBase):
+    """Represents a country subdivision such as a state, province, or territory."""
+
+    alt_name: str
     country: str
     country_alpha2: str
     country_alpha3: str
 
 
-@dataclass(frozen=True)
-class Locality:
+@dataclass
+class Locality(DTOBase):
     """Represents a geographic locality such as a city, town, village, or hamlet."""
 
+    osm_id: int
+    osm_type: str
     name: str
-    subdivisions: list[Subdivision]
+    display_name: str
+    classification: str | None
+    population: int | None
+    lat: float
+    lng: float
     country: str
     country_alpha2: str
     country_alpha3: str
-    display_name: str
-    lat: float
-    lng: float
-    classification: str | None
-    osm_type: str
-    osm_id: int
-    population: int | None
+    subdivisions: list[SubdivisionBase] = field(default_factory=list)
