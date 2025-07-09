@@ -3,10 +3,8 @@ from ..db.models import CountryModel, db
 from ..types import Country
 from ..literals import CountryCode, CountryName, CountryNumeric
 from typing import Optional
-from rapidfuzz import fuzz
 from ..utils import normalize
 from collections import Counter
-import cProfile
 
 
 class CountryRegistry(Registry[CountryModel, Country]):
@@ -17,8 +15,8 @@ class CountryRegistry(Registry[CountryModel, Country]):
     and fuzzy search.
     """
 
-    def __init__(self, model):
-        super().__init__(model)
+    def __init__(self, model_cls, dto_cls):
+        super().__init__(model_cls, dto_cls)
 
     def get(self, identifier: CountryCode | CountryNumeric) -> Optional[Country]:
         if not identifier:
@@ -51,9 +49,7 @@ class CountryRegistry(Registry[CountryModel, Country]):
         models: list[CountryModel] = self._model_cls.select().where(
             CountryModel.normalized_name.collate("NOCASE") == identifier
         )
-        if models:
-            return [m.to_dto() for m in models]
-        return []
+        return [m.to_dto() for m in models]
 
     def search(self, query, limit=5) -> list[tuple[Country, float]]:
         """Fuzzy search countries by name, alpha-2, or alpha-3 code.
@@ -67,88 +63,14 @@ class CountryRegistry(Registry[CountryModel, Country]):
             exact_match = self.get(query)
             if exact_match:
                 return [(exact_match, 1.0)]
-        else:
-            exact_matches = self.lookup(query)
-            if exact_matches:
-                return [(m, 1.0) for m in exact_matches]
 
-        # Fuzzy search
-        norm_query = normalize(query)
-        tokens = norm_query.split(" ")
+        return self._fuzzy_search(query, limit)
 
-        matches: dict[str, tuple[Country, float]] = {}
-
-        tokens_len = sum([len(t) for t in tokens])
-
-        while tokens_len > len(tokens) * 2 and len(matches) < limit:
-            tokens_len = 0
-            for i, t in enumerate(tokens):
-                if len(t) <= 1:
-                    continue
-                tokens[i] = t[:-1]
-                tokens_len += len(t)
-
-            print(tokens)
-
-            fts_q = " ".join([f"{t}*" for t in tokens])
-            cursor = db.execute_sql(
-                f"""
-                SELECT c.* FROM countryfts f
-                JOIN countries c ON f.rowid = c.id
-                WHERE f.tokens MATCH ?
-                ORDER BY rank
-                LIMIT 100
-                """,
-                (fts_q,),
-            )
-
-            results = [Country.from_row(row) for row in cursor]
-            for c in results:
-                score = fuzz.token_set_ratio(query, c.name) / 100
-                if score >= 0.75:
-                    matches[c.name] = (c, score)
-
-        return sorted(matches.values(), key=lambda x: x[1], reverse=True)[:limit]
-
-        # # Fuzzy search
-
-        # def match_char_index(s1: str, s2: str) -> float:
-        #     if not s1 or not s2:
-        #         return 0
-
-        #     max_len = max(len(s1), len(s2))
-
-        #     if max_len == 0:
-        #         return 0
-
-        #     matches = sum(1 for a, b in zip(s1, s2) if a == b)
-        #     return matches / max_len * 100
-
-        # def letter_score(s1: str, s2: str) -> float:
-        #     c1, c2 = Counter(s1), Counter(s2)
-        #     if not c1 or not c2:
-        #         return 0
-
-        #     common = sum(min(c1[char], c2[char]) for char in c1 if char in c2)
-        #     total = max(sum(c1.values()), sum(c2.values()))
-        #     return common / total * 100
-
-        # def average_score(s1: str, s2: str) -> float:
-        #     scores = [
-        #         fuzz.ratio(s1, s2),
-        #         letter_score(s1, s2),
-        #         match_char_index(s1, s2),
-        #     ]
-        #     return sum(scores) / len(scores) / 100
-
-        # query = normalize(query)
-
-        # matches = []
-        # for c in self.cache:
-        #     score = average_score(query, c.normalized_name)
-        #     matches.append((c, score))
-
-        # return sorted(matches, key=lambda x: x[1], reverse=True)[:limit]
+    def _build_sql(self):
+        return """SELECT c.* FROM countries_fts f
+        JOIN countries c ON f.rowid = c.id
+        WHERE f.tokens MATCH ?
+        LIMIT ?"""
 
     CODE_ALIASES = {
         "uk": "GB",

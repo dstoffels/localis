@@ -1,6 +1,86 @@
 # import pytest
-# from villager import subdivisions
-# from villager.types import Subdivision
+from villager import subdivisions, Subdivision
+import random
+from utils import mangle
+
+
+class TestGet:
+    def test_iso_code(self):
+        for s in subdivisions:
+            subdivision = subdivisions.get(s.iso_code)
+            assert isinstance(subdivision, Subdivision)
+            assert subdivision is not None
+            assert s.iso_code == subdivision.iso_code
+
+    def test_is_normalized(self):
+        for s in subdivisions:
+            test = f"   {s.iso_code.lower()}   "
+            subdivision = subdivisions.get(test)
+            assert isinstance(subdivision, Subdivision)
+            assert subdivision is not None
+            assert s.iso_code == subdivision.iso_code
+
+    def test_none(self):
+        subdivision = subdivisions.get("ZFGCV2")
+        assert subdivision is None
+
+
+class TestLookup:
+    def test_lookup(self):
+        for s in subdivisions:
+            results = subdivisions.lookup(s.name)
+            assert results
+            assert isinstance(results, list)
+            assert len(results) > 0
+            assert s.name in [r.name for r in results]
+
+    def test_is_normalized(self):
+        for s in subdivisions:
+            test = f"   {s.name.lower()}   "
+            results = subdivisions.lookup(test)
+            assert isinstance(results, list)
+            assert results
+            assert len(results) > 0
+            assert s.name in [r.name for r in results]
+
+
+class TestSearch:
+    def test_none(self):
+        results = subdivisions.search("")
+        assert results == []
+
+    def test_exact_matches(self):
+        for s in subdivisions:
+            results = subdivisions.search(s.name)
+            assert isinstance(results, list)
+            assert results, f'Expected at least one subdivision for "{s.name}"'
+            assert len(results) > 0
+            assert s.name in [r.name for r, score in results]
+
+    def test_minor_typos(self):
+        seeds = range(10)
+        success_count = 0
+        total = 0
+        typo_rate = 0.15
+        success_threshold = 0.85
+
+        for seed in seeds:
+            for s in subdivisions:
+                test = mangle(s.name, typo_rate, seed)
+                results = subdivisions.search(test)
+                total += 1
+
+                if not results:
+                    continue
+
+                top_result, score = results[0]
+                if top_result.name == s.name:
+                    success_count += 1
+
+        accuracy = success_count / total
+        assert (
+            accuracy >= success_threshold
+        ), f"{accuracy:.2%} accuracy below threshold {success_threshold:.2%}"
 
 
 # class TestSubdivisionByCountry:

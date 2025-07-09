@@ -71,7 +71,8 @@ class CountryModel(BaseModel, DTOModel[Country]):
 
 
 class CountryFTS(FTSBase):
-    pass
+    class Meta:
+        table_name = "countries_fts"
 
 
 class SubdivisionModel(BaseModel, DTOModel[Subdivision]):
@@ -94,6 +95,7 @@ class SubdivisionModel(BaseModel, DTOModel[Subdivision]):
             alt_name=self.alt_name,
             iso_code=self.iso_code,
             code=self.code,
+            admin_level=self.admin_level,
             category=self.category,
             country=self.country.name,
             country_alpha2=self.country.alpha2,
@@ -114,7 +116,8 @@ class SubdivisionModel(BaseModel, DTOModel[Subdivision]):
 
 
 class SubdivisionFTS(FTSBase):
-    pass
+    class Meta:
+        table_name = "subdivisions_fts"
 
 
 class LocalityModel(BaseModel, DTOModel[Locality]):
@@ -155,4 +158,5 @@ class LocalityModel(BaseModel, DTOModel[Locality]):
 
 
 class LocalityFTS(FTSBase):
-    pass
+    class Meta:
+        table_name = "localities_fts"

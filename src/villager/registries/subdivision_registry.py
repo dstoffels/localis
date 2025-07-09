@@ -5,6 +5,7 @@ from ..db import SubdivisionModel, CountryModel
 from ..literals import CountryCode, CountryName, CountryNumeric
 from rapidfuzz import fuzz
 from peewee import prefetch
+from villager.utils import normalize
 
 
 class SubdivisionRegistry(Registry[SubdivisionModel, Subdivision]):
@@ -15,18 +16,57 @@ class SubdivisionRegistry(Registry[SubdivisionModel, Subdivision]):
     fuzzy search by these keys, and filtering by country or country code.
     """
 
-    def __init__(self, model):
-        super().__init__(model)
+    def __init__(self, model_cls, dto_cls):
+        super().__init__(model_cls, dto_cls)
 
     def get(self, identifier: str) -> Subdivision:
         """Fetch a subdivision by exact iso code."""
-        return self._model_cls.get_or_none(SubdivisionModel.iso_code == identifier)
+        if not identifier:
+            return None
+
+        identifier = identifier.upper().strip()
+
+        model: SubdivisionModel = self._model_cls.get_or_none(
+            SubdivisionModel.iso_code == identifier
+        )
+
+        if model:
+            return model.to_dto()
 
     def lookup(self, identifier):
-        return super().lookup(identifier)
+        """Lookup a subdivision by exact name"""
+        if not identifier:
+            return []
+
+        identifier = normalize(identifier)
+
+        models: list[SubdivisionModel] = self._model_cls.select().where(
+            SubdivisionModel.normalized_name.collate("NOCASE") == identifier
+        )
+
+        return [m.to_dto() for m in models]
 
     def search(self, query, limit=5):
-        return super().search(query, limit)
+        """Search for subdivisions by name."""
+
+        if not query:
+            return []
+
+        # find exact matches
+        exact_matches = self.lookup(query)
+        if exact_matches:
+            return [(m, 1.0) for m in exact_matches]
+
+        return self._fuzzy_search(query, limit)
+
+    def _build_sql(self):
+        return """SELECT s.*, c.* FROM subdivisions_fts f
+        JOIN subdivisions s ON f.rowid = s.id
+        JOIN countries c ON s.country_id = c.id
+        WHERE f.tokens MATCH ?
+        ORDER BY s.name
+        LIMIT ?
+        """
 
     def _load_cache(self):
         return super()._load_cache(CountryModel)

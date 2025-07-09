@@ -23,26 +23,18 @@ villager:
       description: >
         Returns all subdivisions for a given country, using country name or code (alpha-2/3).
       returns: List[Subdivision]
-    lookup_types:
-      description: >
-        Returns all subdivision types defined for a given country name or code (e.g. "state", "province").
-      returns: List[str]
     lookup:
       description: >
         Exact-match lookup by subdivision name, ISO code, or alpha-2 code.
       returns: List[Subdivision]
-    lookup_by_country:
-      description: >
-        Exact-match lookup by subdivision name/ISO/alpha-2, filtered by a specific country.
-      returns: List[Subdivision]
     search:
       description: >
-        Fuzzy search subdivisions by name, ISO code, or alpha-2.
+        Fuzzy search subdivisions by name, ISO code, or alpha-2 with optional country filter.
       returns: List[Tuple[Subdivision, float]]
-    search_by_country:
+    lookup_types:
       description: >
-        Fuzzy search subdivisions by name/ISO/alpha-2, filtered by country.
-      returns: List[Tuple[Subdivision, float]]
+        Returns all subdivision types defined for a given country name or code (e.g. "state", "province").
+      returns: List[str]
 
   localities:
     get:

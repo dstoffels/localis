@@ -1,4 +1,5 @@
 import unicodedata, re
+from unidecode import unidecode
 
 
 def normalize(s: str, lower=True) -> str:
@@ -8,7 +9,8 @@ def normalize(s: str, lower=True) -> str:
 
     if lower:
         s = s.lower()
-    s = unicodedata.normalize("NFKD", s).encode("ascii", "ignore").decode()
+
+    s = unidecode(s)
     s = re.sub(r"[^\w\s]", "", s)
     s = re.sub(r"\s+", " ", s).strip()
     return s

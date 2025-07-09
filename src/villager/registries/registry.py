@@ -1,12 +1,15 @@
 from typing import Iterator, Generic, TypeVar
 from abc import abstractmethod, ABC
-from peewee import SqliteDatabase
 from ..db.models import DTOModel
 from typing import Type, NamedTuple, Dict
-from peewee import prefetch, Model
+from peewee import prefetch
+from ..types import DTOBase
+from villager.db import db
+from villager.utils import normalize
+from rapidfuzz import fuzz
 
 TModel = TypeVar("TModel", bound=DTOModel)
-TDTO = TypeVar("TDTO")
+TDTO = TypeVar("TDTO", bound=DTOBase)
 
 
 class CacheItem(NamedTuple, Generic[TModel, TDTO]):
@@ -37,8 +40,9 @@ class Cache(Dict[int, CacheItem[TModel, TDTO]]):
 class Registry(Generic[TModel, TDTO], ABC):
     """Abstract base registry class defining interface for lookup and search."""
 
-    def __init__(self, model: Type[TModel]):
-        self._model_cls: Type[TModel] = model
+    def __init__(self, model_cls: Type[TModel], dto_cls: Type[TDTO]):
+        self._model_cls: Type[TModel] = model_cls
+        self._dto_cls: Type[TDTO] = dto_cls
         self._count: int | None = None
         self._cache: Cache[TModel, TDTO] | None = None
 
@@ -73,7 +77,43 @@ class Registry(Generic[TModel, TDTO], ABC):
 
     @abstractmethod
     def search(self, query: str, limit: int = 5) -> list[tuple[TDTO, float]]:
-        return []
+        return self._fuzzy_search(query, limit)
+
+    @abstractmethod
+    def _build_sql(self) -> str:
+        return ""
+
+    def _query_fts(self, fts_query: str, limit=100) -> list[TDTO]:
+        cursor = db.execute_sql(
+            self._build_sql(),
+            (fts_query, limit),
+        )
+        return [self._dto_cls.from_row(r) for r in cursor]
+
+    def _fuzzy_search(self, query: str, limit: int = 5) -> list[TDTO]:
+        norm_query = normalize(query)
+        tokens = norm_query.split(" ")
+
+        matches: dict[str, tuple[TDTO, float]] = {}
+
+        tokens_len = sum([len(t) for t in tokens])
+
+        while tokens_len > len(tokens) and len(matches) < limit:
+            fts_q = " ".join([f"{t}*" for t in tokens])
+            results: list[TDTO] = self._query_fts(fts_q, limit=100)
+            for r in results:
+                score = fuzz.token_sort_ratio(query, r.name) / 100
+
+                matches[r.name] = (r, score)
+
+            tokens_len = 0
+            for i, t in enumerate(tokens):
+                if len(t) <= 1:
+                    continue
+                tokens[i] = t[:-1]
+                tokens_len += len(t)
+
+        return sorted(matches.values(), key=lambda x: x[1], reverse=True)[:limit]
 
     def _load_cache(self, *related_models: Type[DTOModel]):
         self._cache = Cache(self._model_cls).load(*related_models)

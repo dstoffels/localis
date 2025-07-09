@@ -13,8 +13,8 @@ class LocalityRegistry(Registry[LocalityModel, Locality]):
     Alternatively, get_batch allows you to load a filtered slice of localities by name prefix.
     """
 
-    def __init__(self, model):
-        super().__init__(model)
+    def __init__(self, model_cls, dto_cls):
+        super().__init__(model_cls, dto_cls)
 
     def get(self, identifier: int) -> Locality:
         if isinstance(identifier, str):
@@ -29,6 +29,9 @@ class LocalityRegistry(Registry[LocalityModel, Locality]):
 
     def search(self, query, limit=5):
         return super().search(query, limit)
+
+    def _build_sql(self):
+        return super()._build_sql()
 
     def get_batch(
         self, limit=1000, offset=0, name_prefix: str | None = None
