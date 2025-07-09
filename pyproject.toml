@@ -12,6 +12,7 @@ python = "^3.12"
 rapidfuzz = "^3.13.0"
 peewee = "^3.18.1"
 pytest-watch = "^4.2.0"
+unidecode = "^1.4.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.4.1"

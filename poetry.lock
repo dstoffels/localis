@@ -237,6 +237,18 @@ files = [
 all = ["numpy"]
 
 [[package]]
+name = "unidecode"
+version = "1.4.0"
+description = "ASCII transliterations of Unicode text"
+optional = false
+python-versions = ">=3.7"
+groups = ["main"]
+files = [
+    {file = "Unidecode-1.4.0-py3-none-any.whl", hash = "sha256:c3c7606c27503ad8d501270406e345ddb480a7b5f38827eafe4fa82a137f0021"},
+    {file = "Unidecode-1.4.0.tar.gz", hash = "sha256:ce35985008338b676573023acc382d62c264f307c8f7963733405add37ea2b23"},
+]
+
+[[package]]
 name = "watchdog"
 version = "6.0.0"
 description = "Filesystem events monitoring"
@@ -282,4 +294,4 @@ watchmedo = ["PyYAML (>=3.10)"]
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.12"
-content-hash = "5cf0cd2bee995ff46d1f800e54ffb974d98d279ae37996c33e8b9fd9b03f3b26"
+content-hash = "d47756a216f7185e168a3ef5fc5713a53ac42126fbf5c065a3678f879402e2e4"
