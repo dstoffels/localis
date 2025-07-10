@@ -2,7 +2,7 @@
 name = "villager"
 version = "0.1.0"
 description = ""
-authors = ["Danimal"]
+authors = ["danimal"]
 packages = [
   { include = "villager", from = "src" }
 ]
@@ -11,8 +11,8 @@ packages = [
 python = "^3.12"
 rapidfuzz = "^3.13.0"
 peewee = "^3.18.1"
-pytest-watch = "^4.2.0"
 unidecode = "^1.4.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.4.1"
+pytest-watch = "^4.2.0"
