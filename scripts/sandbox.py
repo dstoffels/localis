@@ -156,7 +156,7 @@
 
 import villager
 
-results = villager.subdivisions.search("CA")
+results = villager.subdivisions.search("cali")
 
 
 print(results)

@@ -59,11 +59,12 @@ class CountryModel(BaseModel, DTOModel[Country]):
 
     def to_dto(self):
         return Country(
-            self.name,
-            self.alpha2,
-            self.alpha3,
-            self.numeric,
-            self.long_name,
+            id=self.id,
+            name=self.name,
+            alpha2=self.alpha2,
+            alpha3=self.alpha3,
+            numeric=self.numeric,
+            long_name=self.long_name,
         )
 
     class Meta:
@@ -91,6 +92,7 @@ class SubdivisionModel(BaseModel, DTOModel[Subdivision]):
 
     def to_dto(self) -> Subdivision:
         return Subdivision(
+            id=self.id,
             name=self.name,
             alt_name=self.alt_name,
             iso_code=self.iso_code,

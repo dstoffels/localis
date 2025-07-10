@@ -51,7 +51,7 @@ class CountryRegistry(Registry[CountryModel, Country]):
         )
         return [m.to_dto() for m in models]
 
-    def search(self, query, limit=5) -> list[tuple[Country, float]]:
+    def search(self, query, limit=5, **kwargs) -> list[tuple[Country, float]]:
         """Fuzzy search countries by name, alpha-2, or alpha-3 code.
 
         Returns a list of (Country, match_score) tuples."""
@@ -64,10 +64,14 @@ class CountryRegistry(Registry[CountryModel, Country]):
             if exact_match:
                 return [(exact_match, 1.0)]
 
+        exact_matches = self.lookup(query)
+        if exact_matches:
+            return [(m, 1.0) for m in exact_matches]
+
         return self._fuzzy_search(query, limit)
 
     def _build_sql(self):
-        return """SELECT c.* FROM countries_fts f
+        return """SELECT c.*, tokens FROM countries_fts f
         JOIN countries c ON f.rowid = c.id
         WHERE f.tokens MATCH ?
         LIMIT ?"""

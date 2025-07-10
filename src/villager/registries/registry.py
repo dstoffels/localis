@@ -7,6 +7,7 @@ from ..types import DTOBase
 from villager.db import db
 from villager.utils import normalize
 from rapidfuzz import fuzz
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 TModel = TypeVar("TModel", bound=DTOModel)
 TDTO = TypeVar("TDTO", bound=DTOBase)
@@ -76,42 +77,66 @@ class Registry(Generic[TModel, TDTO], ABC):
         return []
 
     @abstractmethod
-    def search(self, query: str, limit: int = 5) -> list[tuple[TDTO, float]]:
-        return self._fuzzy_search(query, limit)
-
-    @abstractmethod
     def _build_sql(self) -> str:
         return ""
 
-    def _query_fts(self, fts_query: str, limit=100) -> list[TDTO]:
+    def _query_fts(self, fts_query: str, limit=100) -> list[tuple[TDTO, str]]:
         cursor = db.execute_sql(
             self._build_sql(),
             (fts_query, limit),
         )
-        return [self._dto_cls.from_row(r) for r in cursor]
+        return [(self._dto_cls.from_row(r), r[len(r) - 1]) for r in cursor]
+
+    def _score(self, norm_query: str, fts_tokens: str, threshold=0.7) -> float:
+        q_tokens = norm_query.split()
+        f_tokens = fts_tokens.split()
+        q_len = len(q_tokens)
+        f_len = len(f_tokens)
+
+        match_scores = []
+
+        # Score each query token against all FTS tokens, collect best match & index
+        for qt in q_tokens:
+            best = max(fuzz.ratio(qt, ft) for ft in f_tokens) / 100
+            if best >= threshold:
+                match_scores.append(best)
+
+        if not match_scores:
+            return 0.0
+
+        # avg per query token
+        avg_match_score = 0.7 * (sum(match_scores) / q_len)
+
+        # fraction of FTS tokens matched
+        coverage = 0.3 * len(match_scores) / f_len if f_tokens else 0
+
+        return avg_match_score + coverage
 
     def _fuzzy_search(self, query: str, limit: int = 5) -> list[TDTO]:
         norm_query = normalize(query)
         tokens = norm_query.split(" ")
 
-        matches: dict[str, tuple[TDTO, float]] = {}
+        matches: dict[int, tuple[TDTO, float]] = {}
 
-        tokens_len = sum([len(t) for t in tokens])
+        while len(matches) < limit:
 
-        while tokens_len > len(tokens) and len(matches) < limit:
             fts_q = " ".join([f"{t}*" for t in tokens])
-            results: list[TDTO] = self._query_fts(fts_q, limit=100)
-            for r in results:
-                score = fuzz.token_sort_ratio(query, r.name) / 100
+            results = self._query_fts(fts_q, limit=100)
 
-                matches[r.name] = (r, score)
-
-            tokens_len = 0
-            for i, t in enumerate(tokens):
-                if len(t) <= 1:
+            for r, fts_tokens in results:
+                if r.id in matches:
                     continue
-                tokens[i] = t[:-1]
-                tokens_len += len(t)
+                score = self._score(norm_query, fts_tokens)
+
+                if score > 0.4:
+                    matches[r.id] = (r, score)
+
+            if all(len(t) <= 1 for t in tokens):
+                break
+
+            for i, t in enumerate(tokens):
+                if len(t) > 1:
+                    tokens[i] = t[:-1]
 
         return sorted(matches.values(), key=lambda x: x[1], reverse=True)[:limit]
 

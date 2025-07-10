@@ -46,7 +46,9 @@ class SubdivisionRegistry(Registry[SubdivisionModel, Subdivision]):
 
         return [m.to_dto() for m in models]
 
-    def search(self, query, limit=5):
+    def search(
+        self, query, limit=5, country: CountryCode | CountryName = None, **kwargs
+    ):
         """Search for subdivisions by name."""
 
         if not query:
@@ -60,11 +62,11 @@ class SubdivisionRegistry(Registry[SubdivisionModel, Subdivision]):
         return self._fuzzy_search(query, limit)
 
     def _build_sql(self):
-        return """SELECT s.*, c.* FROM subdivisions_fts f
+        return """SELECT s.*, c.*, tokens FROM subdivisions_fts f
         JOIN subdivisions s ON f.rowid = s.id
         JOIN countries c ON s.country_id = c.id
         WHERE f.tokens MATCH ?
-        ORDER BY s.name
+        ORDER BY rank
         LIMIT ?
         """
 

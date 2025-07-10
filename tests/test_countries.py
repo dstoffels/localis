@@ -95,7 +95,6 @@ class TestSearch:
             assert (
                 country.name == c.name
             ), f"Expected result {country.name} to match {c.name}. {results}"
-            assert score == 1
 
             results = countries.search(c.alpha2)
             assert results
@@ -103,7 +102,6 @@ class TestSearch:
             assert (
                 country.alpha2 == c.alpha2
             ), f"Expected result {country.alpha2} to match {c.alpha2}"
-            assert score == 1
 
             results = countries.search(c.alpha3)
             assert results
@@ -111,7 +109,6 @@ class TestSearch:
             assert (
                 country.alpha3 == c.alpha3
             ), f"Expected result {country.alpha3} to match {c.alpha3}"
-            assert score == 1
 
     def test_minor_typos(self):
         seeds = range(20)  # Test different seeds

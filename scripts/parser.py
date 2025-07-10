@@ -45,9 +45,13 @@ def chunked(iterable, size):
 
 
 def tokenize(*parts: str) -> str:
-    tokens = set()
+    seen = set()
+    tokens = []
     for part in parts:
-        tokens.update(normalize(part).split())
+        for token in normalize(part).split():
+            if token not in seen:
+                seen.add(token)
+                tokens.append(token)
     return " ".join(tokens)
 
 
@@ -134,11 +138,8 @@ def load_subdivisions() -> None:
                 {
                     "tokens": tokenize(
                         row["subdivision_name"],
-                        country.name,
                         country.alpha2,
-                        country.alpha3,
-                        row.get("localVariant", ""),
-                        iso_code,
+                        country.name,
                     )
                 }
             )
