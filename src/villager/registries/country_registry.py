@@ -1,6 +1,6 @@
 from .registry import Registry
 from ..db.models import CountryModel, db
-from ..types import Country
+from ..db.dtos import Country
 from ..literals import CountryCode, CountryName, CountryNumeric
 from typing import Optional
 from ..utils import normalize
@@ -36,7 +36,7 @@ class CountryRegistry(Registry[CountryModel, Country]):
             )
 
         if model:
-            return model.to_dto()
+            return model.from_row()
 
     def lookup(self, identifier: CountryName) -> list[Country]:
         """Lookup a country by exact name."""
@@ -49,7 +49,7 @@ class CountryRegistry(Registry[CountryModel, Country]):
         models: list[CountryModel] = self._model_cls.select().where(
             CountryModel.normalized_name.collate("NOCASE") == identifier
         )
-        return [m.to_dto() for m in models]
+        return [m.from_row() for m in models]
 
     @property
     def _sql_filter_base(self):

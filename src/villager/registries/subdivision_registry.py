@@ -1,10 +1,9 @@
 from .registry import Registry
-from ..types import Subdivision
+from ..db.dtos import Subdivision
 from typing import Callable, Optional
 from ..db import SubdivisionModel, CountryModel
 from ..literals import CountryCode, CountryName, CountryNumeric
 from rapidfuzz import fuzz
-from peewee import prefetch
 from villager.utils import normalize
 
 
@@ -31,7 +30,7 @@ class SubdivisionRegistry(Registry[SubdivisionModel, Subdivision]):
         )
 
         if model:
-            return model.to_dto()
+            return model.from_row()
 
     def lookup(self, identifier):
         """Lookup a subdivision by exact name"""
@@ -44,7 +43,7 @@ class SubdivisionRegistry(Registry[SubdivisionModel, Subdivision]):
             SubdivisionModel.normalized_name.collate("NOCASE") == identifier
         )
 
-        return [m.to_dto() for m in models]
+        return [m.from_row() for m in models]
 
     def search(
         self, query, limit=5, country: CountryCode | CountryName = None, **kwargs

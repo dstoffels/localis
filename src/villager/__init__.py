@@ -1,10 +1,10 @@
 from villager.registries import CountryRegistry, SubdivisionRegistry, LocalityRegistry
 from villager.db import CountryModel, SubdivisionModel, LocalityModel
-from villager.types import Country, Subdivision, Locality
+from villager.db.dtos import Country, Subdivision, Locality
 
-countries = CountryRegistry(CountryModel, Country)
-subdivisions = SubdivisionRegistry(SubdivisionModel, Subdivision)
-localities = LocalityRegistry(LocalityModel, Locality)
+# countries = CountryRegistry(CountryModel, Country)
+# subdivisions = SubdivisionRegistry(SubdivisionModel, Subdivision)
+# localities = LocalityRegistry(LocalityModel, Locality)
 
 # from peewee import fn
 

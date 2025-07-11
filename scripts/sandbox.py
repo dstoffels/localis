@@ -156,7 +156,7 @@
 
 # import villager
 # from villager.db import db
-from villager.types import Locality
+from villager.db.dtos import Locality
 
 import sqlite3
 

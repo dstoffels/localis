@@ -4,11 +4,8 @@ import json
 from villager.db import (
     db,
     CountryModel,
-    CountryFTS,
     SubdivisionModel,
-    SubdivisionFTS,
     LocalityModel,
-    LocalityFTS,
 )
 import re
 from typing import Optional
@@ -36,23 +33,12 @@ def run() -> None:
     load_localities()
 
     db.execute_sql("VACUUM;")
-    compress_sqlite_db(db.database)
+    compress_db(db.database)
 
 
 def chunked(iterable, size):
     for i in range(0, len(iterable), size):
         yield iterable[i : i + size]
-
-
-def tokenize(*parts: str) -> str:
-    seen = set()
-    tokens = []
-    for part in parts:
-        for token in normalize(part).split():
-            if token not in seen:
-                seen.add(token)
-                tokens.append(token)
-    return " ".join(tokens)
 
 
 def load_countries() -> None:
@@ -176,41 +162,6 @@ def load_subdivisions() -> None:
         SubdivisionModel.bulk_update(
             subs_by_iso.values(), fields=["parent", "admin_level"]
         )
-
-
-def extract_iso_code(address: dict) -> Optional[str]:
-    for key, value in address.items():
-        if re.match(r"ISO3166-2-lvl\d+$", key):
-            return value
-    return None
-
-
-def normalize_name(name: str) -> str:
-    if not name:
-        return ""
-
-    disallowed_pattern = re.compile(r"[^a-zA-Z\u00C0-\u00FF\u0100-\u017F]")
-
-    if disallowed_pattern.search(name):
-        return ""
-
-    return name.strip()
-
-
-def parse_other_names(name, other_names: dict[str, str]) -> tuple[str, str]:
-    name = normalize_name(name)
-
-    if not other_names:
-        return name, ""
-
-    en_name = normalize_name(other_names.pop("name:en", None))
-    names = set(other_names.values())
-    normalized_names = {normalize(n) for n in names if n}
-    names_str = " ".join(normalized_names)
-
-    if en_name:
-        return en_name, names_str
-    return name, names_str
 
 
 def load_localities() -> None:
@@ -341,7 +292,7 @@ def load_localities() -> None:
                 raise e
 
 
-def compress_sqlite_db(db_path: str | Path) -> Path:
+def compress_db(db_path: str | Path) -> Path:
     db_path = Path(db_path)
     if not db_path.exists():
         raise FileNotFoundError(f"Database file not found: {db_path}")

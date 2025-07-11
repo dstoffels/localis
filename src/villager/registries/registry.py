@@ -1,15 +1,13 @@
 from typing import Iterator, Generic, TypeVar
 from abc import abstractmethod, ABC
-from ..db.models import DTOModel
 from typing import Type, NamedTuple, Dict
-from peewee import prefetch
-from ..types import DTOBase
+from ..db.dtos import DTOBase
 from villager.db import db
 from villager.utils import normalize
 from rapidfuzz import fuzz
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-TModel = TypeVar("TModel", bound=DTOModel)
+TModel = TypeVar("TModel")
 TDTO = TypeVar("TDTO", bound=DTOBase)
 
 
@@ -27,15 +25,16 @@ class Cache(Dict[int, CacheItem[TModel, TDTO]]):
         super().__init__()
         self.model_cls: Type[TModel] = model
 
-    def load(self, *related_models: Type[DTOModel]) -> "Cache[TModel, TDTO]":
+    def load(self, *related_models) -> "Cache[TModel, TDTO]":
         """Prefetch model and related models, and populate the cache."""
-        base_query = self.model_cls.select()
-        prefetch_query: Iterator[TModel] = prefetch(base_query, *related_models)
+        # base_query = self.model_cls.select()
+        # prefetch_query: Iterator[TModel] = prefetch(base_query, *related_models)
 
-        for m in prefetch_query:
-            self[m.id] = CacheItem(m, m.to_dto())
+        # for m in prefetch_query:
+        #     self[m.id] = CacheItem(m, m.to_dto())
 
-        return self
+        # return self
+        pass
 
 
 class Registry(Generic[TModel, TDTO], ABC):
@@ -164,5 +163,5 @@ class Registry(Generic[TModel, TDTO], ABC):
 
         return sorted(matches.values(), key=lambda x: x[1], reverse=True)[:limit]
 
-    def _load_cache(self, *related_models: Type[DTOModel]):
+    def _load_cache(self, *related_models):
         self._cache = Cache(self._model_cls).load(*related_models)
