@@ -10,7 +10,6 @@ packages = [
 [tool.poetry.dependencies]
 python = "^3.12"
 rapidfuzz = "^3.13.0"
-peewee = "^3.18.1"
 unidecode = "^1.4.0"
 
 [tool.poetry.group.dev.dependencies]
