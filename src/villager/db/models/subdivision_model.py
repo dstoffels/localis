@@ -13,6 +13,7 @@ from villager.utils import normalize, tokenize
 class SubdivisionModel(Model[Subdivision]):
     table_name = "subdivisions"
     dto_class = Subdivision
+    fts_fields = ["name", "country", "country_code"]
     base_query = """SELECT
                     s.id as id,
                     s.name as name,
@@ -27,7 +28,12 @@ class SubdivisionModel(Model[Subdivision]):
                     c.name as country,
                     c.alpha2 as country_alpha2,
                     c.alpha3 as country_alpha3,
-                    f.tokens as tokens
+
+                    f.name as fts_name,
+                    f.country as fts_country,
+                    f.country_code as fts_country_code,
+                    f.name || ' ' || f.country || ' ' || f.country_code as tokens
+
                     FROM subdivisions_fts f
                     JOIN subdivisions s ON f.rowid = s.id
                     JOIN countries c ON s.country_id = c.id
@@ -46,7 +52,7 @@ class SubdivisionModel(Model[Subdivision]):
 
     @classmethod
     def parse_raw(cls, raw_data):
-        country_id, country, *_ = CountryModel.get(
+        country_id, country, _, c_norm_name = CountryModel.get(
             CountryModel.alpha2 == raw_data["#country_code_alpha2"]
         )
 
@@ -65,11 +71,9 @@ class SubdivisionModel(Model[Subdivision]):
         }
 
         fts = {
-            "tokens": tokenize(
-                name,
-                country.alpha2,
-                country.name,
-            )
+            "name": normalize(name),
+            "country": c_norm_name,
+            "country_code": normalize(country.alpha2),
         }
 
         return base, fts

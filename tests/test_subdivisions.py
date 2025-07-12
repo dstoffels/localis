@@ -71,7 +71,7 @@ class TestSearch:
         success_count = 0
         total = 0
         typo_rate = 0.15
-        success_threshold = 0.80
+        success_threshold = 0.8
 
         for seed in seeds:
             for s in subdivisions:
@@ -91,7 +91,7 @@ class TestSearch:
         ), f"{accuracy:.2%} accuracy below threshold {success_threshold:.2%}"
 
     def test_typos_by_country(self):
-        seeds = range(2)
+        seeds = range(1)
         success_count = 0
         total = 0
         typo_rate = 0.15

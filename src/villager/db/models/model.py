@@ -61,8 +61,7 @@ class Model(Generic[T], ABC):
         fields = []
         indexes = []
 
-        for name in dir(cls):
-            attr = getattr(cls, name)
+        for name, attr in cls.__dict__.items():
             if isinstance(attr, Field):
                 fields.append(attr.get_sql())
                 if attr.index:
@@ -81,7 +80,7 @@ class Model(Generic[T], ABC):
 
     @classmethod
     def _create_fts(cls) -> None:
-        db.create_fts_table(cls.table_name + "_fts", ["tokens"])
+        db.create_fts_table(cls.table_name + "_fts", cls.fts_fields)
 
     @classmethod
     @abstractmethod
@@ -143,8 +142,10 @@ class Model(Generic[T], ABC):
             fts_q = " ".join([f"{t}" for t in tokens])
         else:
             fts_q = " ".join([f"{t}*" for t in tokens])
+        fts_table = cls.table_name + "_fts"
         rows = db.execute(
-            cls.base_query + f" WHERE {cls.table_name}_fts MATCH ? LIMIT ?",
+            cls.base_query
+            + f" WHERE {fts_table} MATCH ? ORDER BY bm25({fts_table}, 3.0, 1.5, 1.0, 1.0) LIMIT ?",
             (fts_q, limit),
         ).fetchall()
         return [cls.from_row(row) for row in rows]

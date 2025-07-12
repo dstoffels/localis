@@ -63,17 +63,13 @@ class SubdivisionRegistry(Registry[SubdivisionModel, Subdivision]):
         # reset
         self._use_fts_match = True
         if country:
+            country = normalize(country)
             self._use_fts_match = False
             self._search_candidates = self._model_cls.where(
                 f'country = "{country}" OR country_alpha2 = "{country}" or country_alpha3 = "{country}"'
             )
         else:
             self._search_candidates = self._model_cls.fts_match(query, exact=True)
-
-        # # find exact matches
-        # exact_matches = self.lookup(query)
-        # if exact_matches:
-        #     return [(m, 1.0) for m in exact_matches]
 
         return self._fuzzy_search(query, limit)
 

@@ -17,10 +17,12 @@ import sqlite3
 class LocalityModel(Model[Locality]):
     table_name = "localities"
     dto_class = Locality
+    fts_fields = ["name", "subdivision", "country", "country_code"]
     base_query = """SELECT l.*, 
                     c.name as country, 
                     c.alpha2 as country_alpha2, 
                     c.alpha3 as country_alpha3,
+
                     s1.name as sub1_name, 
                     s1.iso_code as sub1_iso_code, 
                     s1.code as sub1_code, 
@@ -31,7 +33,13 @@ class LocalityModel(Model[Locality]):
                     s2.code as sub2_code, 
                     s2.category as sub2_category, 
                     s2.admin_level as sub2_admin_level,
-                    f.tokens as tokens
+
+                    f.name as fts_name,
+                    f.subdivision as fts_subdivision,
+                    f.country as fts_country,
+                    f.country_code as fts_country_code,
+                    f.name || ' ' || f.subdivision || ' ' || f.country || ' ' || f.country_code as tokens
+                    
                 FROM localities l
                 JOIN subdivisions s1 ON l.subdivision_id = s1.id
                 JOIN countries c ON l.country_id = c.id
@@ -83,10 +91,10 @@ class LocalityModel(Model[Locality]):
         sub_data = SubdivisionModel.get(SubdivisionModel.iso_code == sub_iso_code)
         if not sub_data:
             return None, None
-        subdivision_id, subdivision, *_ = sub_data
+        subdivision_id, subdivision, _, sub_norm_name = sub_data
 
         # Country
-        country_id, country, *_ = CountryModel.get(
+        country_id, country, _, c_norm_name = CountryModel.get(
             CountryModel.alpha2 == country_alpha2
         )
 
@@ -104,13 +112,10 @@ class LocalityModel(Model[Locality]):
         }
 
         fts = {
-            "tokens": tokenize(
-                name,
-                subdivision.name,
-                subdivision.code,
-                country.name,
-                country.alpha2,
-            )
+            "name": normalize(name),
+            "subdivision": sub_norm_name,
+            "country": c_norm_name,
+            "country_code": normalize(country_alpha2),
         }
 
         return base, fts

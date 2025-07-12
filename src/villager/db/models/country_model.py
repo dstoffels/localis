@@ -5,7 +5,16 @@ from villager.utils import normalize, tokenize
 class CountryModel(Model[Country]):
     table_name = "countries"
     dto_class = Country
-    base_query = "SELECT c.*, f.tokens as tokens FROM countries_fts f JOIN countries c ON f.rowid = c.id\n"
+    fts_fields = ["name", "alpha2", "alpha3"]
+    base_query = """SELECT 
+                    c.*, 
+                    
+                    f.name as fts_name,
+                    f.alpha2 as fts_alpha2,
+                    f.alpha3 as fts_alpha3,
+                    f.name || ' ' || f.alpha2 || ' ' || f.alpha3 as tokens
+
+                    FROM countries_fts f JOIN countries c ON f.rowid = c.id\n"""
 
     id = AutoField()
     name = CharField(index=True, nullable=False)
@@ -17,20 +26,21 @@ class CountryModel(Model[Country]):
 
     @classmethod
     def parse_raw(cls, raw_data):
+        norm_name = normalize(raw_data["name_short"])
+        alpha2 = raw_data["#country_code_alpha2"]
+        alpha3 = raw_data["country_code_alpha3"]
         base = {
             "name": raw_data["name_short"],
-            "normalized_name": normalize(raw_data["name_short"]),
-            "alpha2": raw_data["#country_code_alpha2"],
-            "alpha3": raw_data["country_code_alpha3"],
+            "normalized_name": norm_name,
+            "alpha2": alpha2,
+            "alpha3": alpha3,
             "numeric": int(raw_data["numeric_code"]),
             "long_name": raw_data["name_long"],
         }
 
         fts = {
-            "tokens": tokenize(
-                raw_data["name_short"],
-                raw_data["#country_code_alpha2"],
-                raw_data["country_code_alpha3"],
-            )
+            "name": norm_name,
+            "alpha2": normalize(alpha2),
+            "alpha3": normalize(alpha3),
         }
         return base, fts

@@ -60,7 +60,6 @@ class Registry(Generic[TModel, TDTO], ABC):
 
     def _score(self, norm_query: str, fts_tokens: str, threshold=0.6) -> float:
         """Scores a query against a FTS token string."""
-        # return fuzz.WRatio(norm_query, fts_tokens) / 100
 
         q_tokens = norm_query.split()
         f_tokens = fts_tokens.split()
@@ -77,7 +76,7 @@ class Registry(Generic[TModel, TDTO], ABC):
                 if qt == ft:
                     score = 1.0
                 else:
-                    score = fuzz.token_sort_ratio(qt, ft) / 100
+                    score = fuzz.ratio(qt, ft) / 100
 
                 position_penalty = POSITION_WEIGHT * (
                     abs(qi - fi) / max(len(q_tokens), len(f_tokens))

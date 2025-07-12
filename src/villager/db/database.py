@@ -102,16 +102,11 @@ class Database:
         self,
         fts_table: str,
         columns: List[str],
-        content_table: str = None,
-        content_rowid: str = "id",
     ) -> None:
         """Create FTS5 virtual table"""
         columns_str = ", ".join([f'"{c}"' for c in columns])
 
-        fts_options = []
-        if content_table:
-            fts_options.append(f"content='{content_table}'")
-            fts_options.append(f"content_rowid='{content_rowid}'")
+        fts_options = ['tokenize="porter"', 'prefix="2 3 4"']
 
         options_str = ", " + ", ".join(fts_options) if fts_options else ""
 
