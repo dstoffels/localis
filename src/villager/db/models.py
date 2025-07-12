@@ -79,6 +79,10 @@ class BaseModel(Generic[T], ABC):
         db.commit()
 
     @classmethod
+    def count(cls) -> int:
+        return db.execute(f"SELECT COUNT(*) FROM {cls.table_name}").fetchone()[0]
+
+    @classmethod
     def _create_fts(cls) -> None:
         db.create_fts_table(cls.table_name + "_fts", ["tokens"])
 
@@ -117,17 +121,37 @@ class BaseModel(Generic[T], ABC):
         cls,
         expr: Expression | None = None,
         order_by: str | None = None,
-        limit: str | None = None,
+        limit: int | None = None,
     ) -> list[RowData[T]]:
         order_by = f"ORDER BY {order_by}" if order_by else ""
         limit = f"LIMIT {limit}" if limit else ""
 
+        alias = cls.table_name[0]
         if expr:
             rows = db.execute(
-                f"{cls.base_query} WHERE {expr.sql} {order_by} {limit}", expr.params
+                f"{cls.base_query} WHERE {alias}.{expr.sql} {order_by} {limit}",
+                expr.params,
             ).fetchall()
         else:
             rows = db.execute(f"{cls.base_query} {order_by} {limit}").fetchall()
+        return [cls.from_row(row) for row in rows]
+
+    @classmethod
+    def where(
+        cls, sql: str, order_by: str | None = None, limit: int | None = None
+    ) -> list[RowData[T]]:
+        order_by = f"ORDER BY {order_by}" if order_by else ""
+        limit = f"LIMIT {limit}" if limit else ""
+        rows = db.execute(
+            f"{cls.base_query} WHERE {sql} {order_by} {limit}",
+        ).fetchall()
+        return [cls.from_row(row) for row in rows]
+
+    @classmethod
+    def fts_match(cls, query: str) -> list[RowData[T]]:
+        tokens = query.split(" ")
+        fts_q = " ".join([f"{t}*" for t in tokens])
+        rows = db.execute(cls.base_query + " WHERE tokens MATCH ?", (fts_q,)).fetchall()
         return [cls.from_row(row) for row in rows]
 
 
@@ -166,7 +190,16 @@ class SubdivisionModel(BaseModel[Subdivision]):
     table_name = "subdivisions"
     dto_class = Subdivision
     base_query = """SELECT
-                    s.*,
+                    s.id as id,
+                    s.name as name,
+                    s.normalized_name as normalized_name,
+                    s.iso_code as iso_code,
+                    s.alt_name as alt_name,
+                    s.code as code,
+                    s.category as category,
+                    s.parent_iso_code as parent_iso_code,
+                    s.admin_level as admin_level,
+
                     c.name as country,
                     c.alpha2 as country_alpha2,
                     c.alpha3 as country_alpha3,

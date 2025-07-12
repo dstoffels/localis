@@ -1,40 +1,13 @@
 from typing import Iterator, Generic, TypeVar
 from abc import abstractmethod, ABC
-from typing import Type, NamedTuple, Dict
-from ..db.dtos import DTOBase
-from villager.db import db
+from typing import Type, Callable
+from villager.db import db, DTO, BaseModel, RowData
 from villager.utils import normalize
 from rapidfuzz import fuzz
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-TModel = TypeVar("TModel")
-TDTO = TypeVar("TDTO", bound=DTOBase)
-
-
-class CacheItem(NamedTuple, Generic[TModel, TDTO]):
-    """Cache item for a registry entry."""
-
-    model: TModel
-    dto: TDTO
-
-
-class Cache(Dict[int, CacheItem[TModel, TDTO]]):
-    """Cache for registry entries."""
-
-    def __init__(self, model: Type[TModel]):
-        super().__init__()
-        self.model_cls: Type[TModel] = model
-
-    def load(self, *related_models) -> "Cache[TModel, TDTO]":
-        """Prefetch model and related models, and populate the cache."""
-        # base_query = self.model_cls.select()
-        # prefetch_query: Iterator[TModel] = prefetch(base_query, *related_models)
-
-        # for m in prefetch_query:
-        #     self[m.id] = CacheItem(m, m.to_dto())
-
-        # return self
-        pass
+TModel = TypeVar("TModel", bound=BaseModel)
+TDTO = TypeVar("TDTO", bound=DTO)
 
 
 class Registry(Generic[TModel, TDTO], ABC):
@@ -42,22 +15,20 @@ class Registry(Generic[TModel, TDTO], ABC):
 
     def __init__(self, model_cls: Type[TModel], dto_cls: Type[TDTO]):
         self._model_cls: Type[TModel] = model_cls
-        self._dto_cls: Type[TDTO] = dto_cls
         self._count: int | None = None
-        self._cache: Cache[TModel, TDTO] | None = None
-        self._sql_filter: str = ""
-        self._sql_filter_appendix: str = ""
+        self._cache: list[TDTO] = None
+        self._search_candidates: list = []
         self._update_candidates: bool = True
 
     def __iter__(self) -> Iterator[TDTO]:
-        return (item.dto for item in self.cache.values())
+        return iter(self.cache)
 
     def __getitem__(self, index: int) -> TDTO:
-        return self.cache.values()[index].to_dto()
+        return self.cache[index]
 
     def __len__(self) -> int:
         if self._count is None:
-            self._count = self._model_cls.select().count()
+            self._count = self._model_cls.count()
         return self._count
 
     @property
@@ -65,9 +36,9 @@ class Registry(Generic[TModel, TDTO], ABC):
         return self.__len__()
 
     @property
-    def cache(self) -> Cache[TModel, TDTO]:
+    def cache(self) -> list[TDTO]:
         if self._cache is None:
-            self._load_cache()
+            self._cache = [r.dto for r in self._model_cls.select()]
         return self._cache
 
     @abstractmethod
@@ -82,25 +53,10 @@ class Registry(Generic[TModel, TDTO], ABC):
     def search(self, query: str, limit=100, **kwargs) -> list[TDTO]:
         return []
 
-    @property
-    def _sql_filter_base(self) -> str:
-        return ""
-
-    def _build_sql_query(self) -> None:
-        self._sql_filter = self._sql_filter_base + self._sql_filter_appendix
-
-    def _build_fts_query(self, query: str, limit=100) -> str:
-        tokens = query.split(" ")
-        fts_q = " ".join([f"{t}*" for t in tokens])
-        self._sql_filter_appendix = (
-            f"""WHERE f.tokens MATCH "{fts_q}" ORDER BY rank LIMIT {limit}"""
-        )
-        self._build_sql_query()
-
-    def _filter_candidates(self) -> list[tuple[int, TDTO, str]]:
+    def _filter_candidates(self, norm_query: str) -> list[tuple[int, TDTO, str]]:
         """Returns a list of (id, dto, fts_tokens) tuples for candidates."""
-        cursor = db.execute_sql(self._sql_filter)
-        return [(r[0], self._dto_cls.from_row(r), r[len(r) - 1]) for r in cursor]
+        if self._update_candidates:
+            self._search_candidates = self._model_cls.fts_match(norm_query)
 
     def _score(self, norm_query: str, fts_tokens: str, threshold=0.6) -> float:
         """Scores a query against a FTS token string."""
@@ -136,16 +92,14 @@ class Registry(Generic[TModel, TDTO], ABC):
 
         matches: dict[int, tuple[TDTO, float]] = {}
 
-        candidates = self._filter_candidates()
-
         while len(matches) < limit:
-            for id, r, fts_tokens in candidates:
+            for id, dto, fts_tokens, _ in self._search_candidates:
                 if id in matches:
                     continue
                 score = self._score(norm_query, fts_tokens)
 
                 if score > 0.4:
-                    matches[id] = (r, score)
+                    matches[id] = (dto, score)
 
             if all(len(t) <= 1 for t in tokens):
                 break
@@ -157,11 +111,7 @@ class Registry(Generic[TModel, TDTO], ABC):
                 elif t_len > 1:
                     tokens[i] = t[:-1]
 
-            if self._update_candidates:
-                self._build_fts_query(" ".join(tokens))
-                candidates = self._filter_candidates()
+            q = " ".join(tokens)
+            self._filter_candidates(q)
 
         return sorted(matches.values(), key=lambda x: x[1], reverse=True)[:limit]
-
-    def _load_cache(self, *related_models):
-        self._cache = Cache(self._model_cls).load(*related_models)

@@ -1,10 +1,7 @@
-from .registry import Registry
-from ..db.models import CountryModel, db
-from ..db.dtos import Country
-from ..literals import CountryCode, CountryName, CountryNumeric
-from typing import Optional
-from ..utils import normalize
-from collections import Counter
+from villager.registries.registry import Registry
+from villager.db import CountryModel, Country, db
+from villager.literals import CountryCode, CountryName, CountryNumeric
+from villager.utils import normalize
 
 
 class CountryRegistry(Registry[CountryModel, Country]):
@@ -18,25 +15,23 @@ class CountryRegistry(Registry[CountryModel, Country]):
     def __init__(self, model_cls, dto_cls):
         super().__init__(model_cls, dto_cls)
 
-    def get(self, identifier: CountryCode | CountryNumeric) -> Optional[Country]:
+    def get(self, identifier: CountryCode | CountryNumeric) -> Country | None:
         if not identifier:
             return None
 
         identifier = normalize(identifier)
 
         if isinstance(identifier, int):
-            model: CountryModel = self._model_cls.get_or_none(
-                CountryModel.numeric == identifier
-            )
+            row = self._model_cls.get(CountryModel.numeric == identifier)
         else:
             identifier = self.CODE_ALIASES.get(identifier.lower(), identifier)
-            model: CountryModel = self._model_cls.get_or_none(
-                (CountryModel.alpha2.collate("NOCASE") == identifier)
-                | (CountryModel.alpha3.collate("NOCASE") == identifier)
+            row = self._model_cls.get(
+                (CountryModel.alpha2 == identifier)
+                | (CountryModel.alpha3 == identifier)
             )
 
-        if model:
-            return model.from_row()
+        if row:
+            return row.dto
 
     def lookup(self, identifier: CountryName) -> list[Country]:
         """Lookup a country by exact name."""
@@ -46,10 +41,8 @@ class CountryRegistry(Registry[CountryModel, Country]):
         identifier = self.ALIASES.get(identifier.lower(), identifier)
         identifier = normalize(identifier)
 
-        models: list[CountryModel] = self._model_cls.select().where(
-            CountryModel.normalized_name.collate("NOCASE") == identifier
-        )
-        return [m.from_row() for m in models]
+        rows = self._model_cls.select(CountryModel.normalized_name == identifier)
+        return [r.dto for r in rows]
 
     @property
     def _sql_filter_base(self):

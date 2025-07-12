@@ -4,7 +4,7 @@ from abc import ABC, abstractmethod
 
 
 @dataclass
-class DTOBase(ABC):
+class DTO(ABC):
     def to_dict(self):
         return asdict(self)
 
@@ -16,7 +16,7 @@ class DTOBase(ABC):
 
 
 @dataclass
-class Country(DTOBase):
+class Country(DTO):
     name: str
     alpha2: str
     alpha3: str
@@ -25,7 +25,7 @@ class Country(DTOBase):
 
 
 @dataclass
-class Subdivision(DTOBase):
+class Subdivision(DTO):
     """A country subdivision such as a state, province, or territory."""
 
     name: str
@@ -40,7 +40,7 @@ class Subdivision(DTOBase):
 
 
 @dataclass
-class SubdivisionBasic(DTOBase):
+class SubdivisionBasic(DTO):
     name: str
     iso_code: str
     code: str
@@ -49,7 +49,7 @@ class SubdivisionBasic(DTOBase):
 
 
 @dataclass
-class Locality(DTOBase):
+class Locality(DTO):
     """A geographic locality such as a city, town, village, or hamlet."""
 
     name: str

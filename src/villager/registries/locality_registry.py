@@ -4,15 +4,7 @@ from ..db.dtos import Locality
 
 
 class LocalityRegistry(Registry[LocalityModel, Locality]):
-    """Registry for localities.
-
-    WARNING: It is not recommened to use this registry as an iterable, as it will load all localities into memory. This is very heavy and slow, iterate at your own risk!
-
-    Alternatively, get_batch allows you to load a filtered slice of localities by name prefix.
-    """
-
-    def __init__(self, model_cls, dto_cls):
-        super().__init__(model_cls, dto_cls)
+    """Registry for localities."""
 
     def get(self, identifier: int) -> Locality:
         if isinstance(identifier, str):
@@ -20,7 +12,7 @@ class LocalityRegistry(Registry[LocalityModel, Locality]):
                 identifier = int(identifier)
             except:
                 return None
-        return self._model_cls.get_or_none(LocalityModel.osm_id == identifier)
+        return self._model_cls.get(LocalityModel.osm_id == identifier)
 
     def lookup(self, identifier):
         return super().lookup(identifier)

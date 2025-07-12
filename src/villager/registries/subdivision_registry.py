@@ -25,12 +25,10 @@ class SubdivisionRegistry(Registry[SubdivisionModel, Subdivision]):
 
         identifier = identifier.upper().strip()
 
-        model: SubdivisionModel = self._model_cls.get_or_none(
-            SubdivisionModel.iso_code == identifier
-        )
+        row = self._model_cls.get(SubdivisionModel.iso_code == identifier)
 
-        if model:
-            return model.from_row()
+        if row:
+            return row.dto
 
     def lookup(self, identifier):
         """Lookup a subdivision by exact name"""
@@ -38,12 +36,8 @@ class SubdivisionRegistry(Registry[SubdivisionModel, Subdivision]):
             return []
 
         identifier = normalize(identifier)
-
-        models: list[SubdivisionModel] = self._model_cls.select().where(
-            SubdivisionModel.normalized_name.collate("NOCASE") == identifier
-        )
-
-        return [m.from_row() for m in models]
+        rows = self._model_cls.select(SubdivisionModel.normalized_name == identifier)
+        return [r.dto for r in rows]
 
     def search(
         self, query, limit=5, country: CountryCode | CountryName = None, **kwargs
@@ -59,13 +53,9 @@ class SubdivisionRegistry(Registry[SubdivisionModel, Subdivision]):
 
         if country:
             self._update_candidates = False
-            self._sql_filter_appendix = f"""WHERE c.alpha2 = "{country}" COLLATE NOCASE
-                                            OR c.alpha3 = "{country}" COLLATE NOCASE
-                                            OR c.name = "{normalize(country)}" COLLATE NOCASE
-                                            """
-            self._build_sql_query()
-        else:
-            self._build_fts_query(query)
+            self._search_candidates = self._model_cls.where(
+                f'country = "{country}" OR country_alpha2 = "{country}" or country_alpha3 = "{country}"'
+            )
 
         # find exact matches
         exact_matches = self.lookup(query)
