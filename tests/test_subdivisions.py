@@ -1,4 +1,5 @@
-from villager import subdivisions, Subdivision
+from villager import subdivisions, Subdivision, countries
+from villager.db import SubdivisionModel, CountryModel
 import random
 from utils import mangle
 
@@ -40,6 +41,15 @@ class TestLookup:
             assert isinstance(results, list)
             assert results
             assert len(results) > 0
+            assert s.name in [r.name for r in results]
+
+    def test_by_country(self):
+        for s in subdivisions:
+            results = subdivisions.lookup(s.name, country=s.country_alpha2)
+            assert isinstance(
+                results, list
+            ), f"Expected results to be a list for {s.name}"
+            assert results, f'Expected at least one subdivision for "{s.name}"'
             assert s.name in [r.name for r in results]
 
 
@@ -102,6 +112,40 @@ class TestSearch:
         assert (
             accuracy >= success_threshold
         ), f"{accuracy:.2%} accuracy below threshold {success_threshold:.2%}"
+
+
+class TestByCountry:
+    def setup_method(self):
+        self.subs_by_country: dict[str, list[Subdivision]] = {}
+        for s in subdivisions:
+            self.subs_by_country.setdefault(s.country_alpha2, []).append(s)
+
+    def test_alpha2(self):
+        for alpha2, expected in self.subs_by_country.items():
+            results = subdivisions.by_country(alpha2)
+            assert isinstance(results, list), f"Expected list for {alpha2}"
+            assert len(results) == len(expected), f"Mismatched lengths for {alpha2}"
+            assert results == expected, f"Results mismatch for {alpha2}"
+
+    def test_alpha3(self):
+        for alpha2, expected in self.subs_by_country.items():
+            results = subdivisions.by_country(expected[0].country_alpha3)
+            assert isinstance(results, list), f"Expected list for {alpha2}"
+            assert len(results) == len(expected), f"Mismatched lengths for {alpha2}"
+            assert results == expected, f"Results mismatch for {alpha2}"
+
+
+class TestGetCategories:
+    def setup_method(self):
+        self.sub_cats_by_country: dict[str, set[str]] = {}
+        for s in subdivisions:
+            self.sub_cats_by_country.setdefault(s.country_alpha2, set()).add(s.category)
+
+    def test_country_alpha2(self):
+        for alpha2, expected in self.sub_cats_by_country.items():
+            results = subdivisions.get_categories(alpha2)
+            assert isinstance(results, list), f"Expected set for {alpha2}"
+            assert results == list(expected), f"Results mismatch for {alpha2}"
 
 
 # # for seed in seeds:

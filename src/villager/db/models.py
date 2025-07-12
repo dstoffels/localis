@@ -44,10 +44,6 @@ class BaseModel(Generic[T], ABC):
     dto_class: Type[T] = None
     base_query: str = ""
 
-    id = AutoField()
-    name = CharField(index=True, nullable=False)
-    normalized_name = CharField(index=True, nullable=False)
-
     @classmethod
     def from_row(cls, row: sqlite3.Row) -> RowData[T]:
         if not row:
@@ -107,13 +103,6 @@ class BaseModel(Generic[T], ABC):
         if not row:
             return None
 
-        required_keys = cls.dto_class.__annotations__.keys()
-        missing_keys = [
-            k for k in required_keys if k not in row.keys() or row[k] is None
-        ]
-        if missing_keys:
-            raise ValueError(f"Missing keys: {missing_keys}")
-
         return cls.from_row(row)
 
     @classmethod
@@ -129,7 +118,7 @@ class BaseModel(Generic[T], ABC):
         alias = cls.table_name[0]
         if expr:
             rows = db.execute(
-                f"{cls.base_query} WHERE {alias}.{expr.sql} {order_by} {limit}",
+                f"{cls.base_query} WHERE {expr.sql} {order_by} {limit}",
                 expr.params,
             ).fetchall()
         else:
@@ -160,6 +149,9 @@ class CountryModel(BaseModel[Country]):
     dto_class = Country
     base_query = "SELECT c.*, f.tokens as tokens FROM countries_fts f JOIN countries c ON f.rowid = c.id"
 
+    id = AutoField()
+    name = CharField(index=True, nullable=False)
+    normalized_name = CharField(index=True, nullable=False)
     alpha2 = CharField(unique=True, index=True)
     alpha3 = CharField(unique=True, index=True)
     numeric = IntegerField(unique=True)
@@ -209,6 +201,9 @@ class SubdivisionModel(BaseModel[Subdivision]):
                     JOIN countries c ON s.country_id = c.id
                     """
 
+    id = AutoField()
+    name = CharField(index=True, nullable=False)
+    normalized_name = CharField(index=True, nullable=False)
     iso_code = CharField(unique=True)
     alt_name = CharField(index=True, nullable=True)
     code = CharField()
@@ -252,11 +247,11 @@ class LocalityModel(BaseModel[Locality]):
     table_name = "localities"
     dto_class = Locality
     base_query = """SELECT l.*, 
-                    c.name as country_name, 
-                    c.alpha2, 
-                    c.alpha3,
-                    s1.name as subdivision_1_name, 
-                    s1.iso_code as subdivision_1_iso_code, 
+                    c.name as country, 
+                    c.alpha2 as country_alpha2, 
+                    c.alpha3 as country_alpha3,
+                    s1.name as sub1_name, 
+                    s1.iso_code as sub1_iso_code, 
                     s1.code as sub1_code, 
                     s1.category as sub1_category, 
                     s1.admin_level as sub1_admin_level,
@@ -272,6 +267,9 @@ class LocalityModel(BaseModel[Locality]):
                 LEFT JOIN subdivisions s2 ON s1.parent_iso_code = s2.iso_code
                 JOIN localities_fts f ON l.id = f.rowid"""
 
+    id = AutoField()
+    name = CharField(index=True, nullable=False)
+    normalized_name = CharField(index=True, nullable=False)
     classification = CharField()
     population = IntegerField(nullable=True)
     lat = FloatField()
@@ -374,9 +372,7 @@ class LocalityModel(BaseModel[Locality]):
                     admin_level=row["sub2_admin_level"],
                 )
             )
-
+        data["villager_id"] = f'{row["osm_type"]}:{row["osm_id"]}'
         data["subdivisions"] = subdivisions
-        data["display_name"] = (
-            f'{row["name"]}, {row['sub1_name']}, {row["country_name"]}'
-        )
+        data["display_name"] = f'{row["name"]}, {row['sub1_name']}, {row["country"]}'
         return RowData(id, cls.dto_class(**data), tokens, normalized_name)

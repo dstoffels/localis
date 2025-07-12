@@ -52,6 +52,7 @@ class SubdivisionBasic(DTO):
 class Locality(DTO):
     """A geographic locality such as a city, town, village, or hamlet."""
 
+    villager_id: str
     name: str
     display_name: str | None
     classification: str | None

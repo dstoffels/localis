@@ -33,7 +33,7 @@ class CountryRegistry(Registry[CountryModel, Country]):
         if row:
             return row.dto
 
-    def lookup(self, identifier: CountryName) -> list[Country]:
+    def lookup(self, identifier: CountryName, **kwargs) -> list[Country]:
         """Lookup a country by exact name."""
         if not identifier:
             return []

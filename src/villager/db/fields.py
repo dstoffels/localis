@@ -38,27 +38,29 @@ class Field(ABC):
 
     def __set_name__(self, owner, name):
         self.name = name
+        self.model = owner
+        self.full_name = f"{owner.table_name[0]}.{name}"
 
     def __eq__(self, other):
-        return Expression(f"{self.name} = ?", (other,))
+        return Expression(f"{self.full_name} = ?", (other,))
 
     def __ne__(self, other):
-        return Expression(f"{self.name} != ?", (other,))
+        return Expression(f"{self.full_name} != ?", (other,))
 
     def __lt__(self, other):
-        return Expression(f"{self.name} < ?", (other,))
+        return Expression(f"{self.full_name} < ?", (other,))
 
     def __le__(self, other):
-        return Expression(f"{self.name} <= ?", (other,))
+        return Expression(f"{self.full_name} <= ?", (other,))
 
     def __gt__(self, other):
-        return Expression(f"{self.name} > ?", (other,))
+        return Expression(f"{self.full_name} > ?", (other,))
 
     def __ge__(self, other):
-        return Expression(f"{self.name} >= ?", (other,))
+        return Expression(f"{self.full_name} >= ?", (other,))
 
     def like(self, pattern):
-        return Expression(f"{self.name} LIKE ?", (pattern,))
+        return Expression(f"{self.full_name} LIKE ?", (pattern,))
 
     def isin(self, values: list):
         placeholders = ", ".join("?" for _ in values)

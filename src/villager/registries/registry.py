@@ -46,7 +46,7 @@ class Registry(Generic[TModel, TDTO], ABC):
         return None
 
     @abstractmethod
-    def lookup(self, identifier: str) -> list[TDTO]:
+    def lookup(self, identifier: str, **kwargs) -> list[TDTO]:
         return []
 
     @abstractmethod
