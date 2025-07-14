@@ -24,7 +24,7 @@ villager:
       returns: List[Subdivision]
     search:
       description: >
-        Fuzzy search subdivisions, optionally filtered by country.
+        Fuzzy search subdivisions.
       returns: List[Tuple[Subdivision, float]]
     by_country:
       description: >
@@ -45,7 +45,7 @@ villager:
       returns: List[Locality]
     search:
       description: >
-        Fuzzy search localities, optionally filtered by country or subdivision.
+        Fuzzy search localities.
       returns: List[Tuple[Locality, float]]
     by_country:
       description: >

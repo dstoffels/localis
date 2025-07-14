@@ -50,23 +50,6 @@ class SubdivisionRegistry(Registry[SubdivisionModel, Subdivision]):
 
         return [r.dto for r in rows]
 
-    def search(
-        self, query: str, limit=5, country: CountryCode | CountryName = None, **kwargs
-    ) -> list[Subdivision]:
-        """Fuzzy search subdivisions, optionally filtered by country."""
-
-        if not query:
-            return []
-
-        # reset
-        self._addl_fts_clause = ""
-
-        if country:
-            country = normalize(country)
-            self._addl_fts_clause = f"AND (country = '{country}' OR country_alpha2 = '{country}' OR country_alpha3 = '{country}')"
-
-        return super().search(query, limit)
-
     def by_country(self, country_code: CountryCode) -> list[Subdivision]:
         """Fetch all subdivisions for a given country by code."""
         if not country_code:

@@ -17,7 +17,14 @@ import sqlite3
 class LocalityModel(Model[Locality]):
     table_name = "localities"
     dto_class = Locality
-    fts_fields = ["name", "subdivision", "country", "country_alpha2", "country_alpha3"]
+    fts_fields = [
+        "name",
+        "subdivision",
+        "sub_iso_code",
+        "country",
+        "country_alpha2",
+        "country_alpha3",
+    ]
     query_select = """SELECT 
                     l.*, 
 
@@ -38,12 +45,14 @@ class LocalityModel(Model[Locality]):
 
                     matched.name as fts_name,
                     matched.subdivision as fts_subdivision,
+                    matched.sub_iso_code as fts_sub_iso_code,
                     matched.country as fts_country,
                     matched.country_alpha2 as fts_country_alpha2,
                     matched.country_alpha3 as fts_country_alpha3,
 
                     matched.name || ' ' || 
                     matched.subdivision || ' ' || 
+                    matched.sub_iso_code || ' ' ||
                     matched.country || ' ' || 
                     matched.country_alpha2 || ' ' || 
                     matched.country_alpha3 
@@ -125,6 +134,7 @@ class LocalityModel(Model[Locality]):
         fts = {
             "name": norm_name,
             "subdivision": sub_norm_name,
+            "sub_iso_code": sub_iso_code,
             "country": c_norm_name,
             "country_alpha2": normalize(country_alpha2),
             "country_alpha3": normalize(country.alpha3),

@@ -1,7 +1,7 @@
 from villager.registries.registry import Registry
 from villager.db import LocalityModel, SubdivisionModel, CountryModel, Locality
 from villager.utils import normalize
-from villager.literals import CountryCode
+from villager.literals import CountryCode, CountryName
 
 
 class LocalityRegistry(Registry[LocalityModel, Locality]):
@@ -14,7 +14,7 @@ class LocalityRegistry(Registry[LocalityModel, Locality]):
     }
 
     def get(self, identifier: str) -> Locality:
-        '''Fetch a locality by exact OSM type & id. Format: "[osm_type]:[osm_id]"'''
+        '''Fetch a locality by exact OSM type & id. Format: "[type]:[id]"'''
         if not identifier:
             return None
 
@@ -36,29 +36,3 @@ class LocalityRegistry(Registry[LocalityModel, Locality]):
 
         rows = self._model_cls.select(LocalityModel.normalized_name == name)
         return [r.dto for r in rows]
-
-    def search(
-        self,
-        query,
-        subdivision: str = "",
-        country: CountryCode = "",
-        limit=10,
-        **kwargs,
-    ) -> list[Locality]:
-        """Fuzzy search localities, optionally filtered by country code or subdivision iso_code."""
-
-        if not query:
-            return []
-
-        # reset
-        self._addl_fts_clause = ""
-
-        if subdivision:
-            subdivision = normalize(subdivision)
-            self._addl_fts_clause += f" AND (subdivision_iso_code = '{subdivision}')"
-        elif country:
-            country = normalize(country)
-            self._use_fts_match = False
-            self._candidates = self._model_cls.where(f'country_alpha2 = "{country}"')
-
-        return super().search(query, limit)

@@ -93,7 +93,7 @@ class TestSearch:
                     success_count += 1
 
         accuracy = success_count / total
-        print(f"\nAccuracy: {accuracy:.2%}")
+        print(f"\n{success_count} / {total} = {accuracy:.2%} accuracy")
         assert (
             accuracy >= success_threshold
         ), f"{accuracy:.2%} accuracy below threshold {success_threshold:.2%}"
@@ -108,7 +108,7 @@ class TestSearch:
         for seed in seeds:
             for s in subdivisions:
                 test = mangle(s.name, typo_rate, seed)
-                results = subdivisions.search(test, country=s.country)
+                results = subdivisions.search(f"{test}, {s.country_alpha2}")
                 total += 1
 
                 if not results:
@@ -117,7 +117,7 @@ class TestSearch:
                 if s.name in [r.name for r in results]:
                     success_count += 1
         accuracy = success_count / total
-        print(f"\nAccuracy: {accuracy:.2%}")
+        print(f"\n{success_count} / {total} = {accuracy:.2%} accuracy")
         assert (
             accuracy >= success_threshold
         ), f"{accuracy:.2%} accuracy below threshold {success_threshold:.2%}"

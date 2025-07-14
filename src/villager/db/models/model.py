@@ -140,32 +140,28 @@ class Model(Generic[T], ABC):
         return [cls.from_row(row) for row in rows]
 
     @classmethod
-    def fts_match(
-        cls, query: str, limit=100, exact: bool = False, addl_clause: str = ""
-    ) -> list[RowData[T]]:
+    def fts_match(cls, query: str, limit=100, exact: bool = False) -> list[RowData[T]]:
         if not exact:
             tokens = query.split()
             query = " ".join([f"{t}*" for t in tokens])
 
         fts_table = cls.table_name + "_fts"
         tables = [t for t in cls.query_tables]
-        table_prefix = cls.table_name[0]
         tables[0] = f"FROM matched\n"
 
         matched = f"""WITH matched AS (
             SELECT rowid, * FROM {fts_table}
             WHERE {fts_table} MATCH ?
-            {addl_clause}
             ORDER BY bm25({fts_table}, 3.0, 1.5, 1.0, 1.0)
             LIMIT ?
         )
         """
 
-        fts_q = f"""{matched} {cls.query_select} {" ".join(tables)} 
-                    LIMIT ?"""
+        fts_q = f"""{matched}
+                    {cls.query_select}
+                    {" ".join(tables)} 
+                    LIMIT ?
+                    """
 
-        rows = db.execute(
-            fts_q,
-            (query, limit, limit),
-        ).fetchall()
+        rows = db.execute(fts_q, (query, limit, limit)).fetchall()
         return [cls.from_row(row) for row in rows]

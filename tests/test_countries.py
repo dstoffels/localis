@@ -140,7 +140,7 @@ class TestSearch:
                     success_count += 1
 
         accuracy = success_count / total
-        print(f"\nAccuracy: {accuracy:.2%}")
+        print(f"\n{success_count} / {total} = {accuracy:.2%} accuracy")
         assert (
             accuracy >= success_threshold
         ), f"{accuracy:.2%} accuracy below threshold {success_threshold:.2%}"
