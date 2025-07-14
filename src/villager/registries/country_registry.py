@@ -47,27 +47,26 @@ class CountryRegistry(Registry[CountryModel, Country]):
         JOIN countries c ON f.rowid = c.id
         """
 
-    def search(self, query, limit=5, **kwargs) -> list[tuple[Country, float]]:
-        """Fuzzy search countries by name, alpha-2, or alpha-3 code.
+    # def search(self, query, limit=5, **kwargs) -> list[Country]:
+    #     """Fuzzy search countries by name, alpha-2, or alpha-3 code.
 
-        Returns a list of (Country, match_score) tuples."""
-        if not query:
-            return []
+    #     Returns a list of (Country, match_score) tuples."""
+    #     if not query:
+    #         return []
 
-        # Lookup exact matches first
-        if len(query) in [2, 3]:
-            exact_match = self.get(query)
-            if exact_match:
-                return [(exact_match, 1.0)]
+    #     # # Lookup exact matches first
+    #     # if len(query) in [2, 3]:
+    #     #     exact_match = self.get(query)
+    #     #     if exact_match:
+    #     #         return [(exact_match, 1.0)]
 
-        exact_matches = self.lookup(query)
-        if exact_matches:
-            return [(m, 1.0) for m in exact_matches]
+    #     # exact_matches = self.lookup(query)
+    #     # if exact_matches:
+    #     #     return [(m, 1.0) for m in exact_matches]
 
-        query = normalize(query)
-        # self._build_sql_query(self._build_fts_query(query))
+    #     query = normalize(query)
 
-        return self._fuzzy_search(query, limit)
+    #     return self._fuzzy_search(query, limit)
 
     CODE_ALIASES = {
         "uk": "GB",

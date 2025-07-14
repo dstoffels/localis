@@ -64,16 +64,6 @@ class Database:
         cursor.executemany(query, params_list)
         return cursor
 
-    # def fetch_one(self, query: str, params: Tuple | Dict = ()) -> Optional[sqlite3.Row]:
-    #     """Execute query and return one row"""
-    #     cursor = self.execute(query, params)
-    #     return cursor.fetchone()
-
-    # def fetch_all(self, query: str, params: Tuple | Dict = ()) -> List[sqlite3.Row]:
-    #     """Execute query and return all rows"""
-    #     cursor = self.execute(query, params)
-    #     return cursor.fetchall()
-
     def insert_many(self, table: str, data_list: List[Dict[str, Any]]) -> None:
         """Insert multiple rows"""
         if not data_list:
@@ -106,7 +96,7 @@ class Database:
         """Create FTS5 virtual table"""
         columns_str = ", ".join([f'"{c}"' for c in columns])
 
-        fts_options = ['tokenize="porter"', 'prefix="2 3 4"']
+        fts_options = ['tokenize="unicode61"', 'prefix="2 3"']
 
         options_str = ", " + ", ".join(fts_options) if fts_options else ""
 

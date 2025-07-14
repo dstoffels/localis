@@ -13,8 +13,8 @@ from villager.utils import normalize, tokenize
 class SubdivisionModel(Model[Subdivision]):
     table_name = "subdivisions"
     dto_class = Subdivision
-    fts_fields = ["name", "country", "country_code"]
-    base_query = """SELECT
+    fts_fields = ["name", "country", "country_alpha2", "country_alpha3"]
+    query_select = """SELECT
                     s.id as id,
                     s.name as name,
                     s.normalized_name as normalized_name,
@@ -29,15 +29,23 @@ class SubdivisionModel(Model[Subdivision]):
                     c.alpha2 as country_alpha2,
                     c.alpha3 as country_alpha3,
 
-                    f.name as fts_name,
-                    f.country as fts_country,
-                    f.country_code as fts_country_code,
-                    f.name || ' ' || f.country || ' ' || f.country_code as tokens
-
-                    FROM subdivisions_fts f
-                    JOIN subdivisions s ON f.rowid = s.id
-                    JOIN countries c ON s.country_id = c.id
+                    matched.name as fts_name,
+                    matched.country as fts_country,
+                    matched.country_alpha2 as fts_country_alpha2,
+                    matched.country_alpha3 as fts_country_alpha3,
+                    
+                    matched.name || ' ' || 
+                    matched.country || ' ' || 
+                    matched.country_alpha2 || ' ' ||
+                    matched.country_alpha3
+                    as tokens
                     """
+
+    query_tables = [
+        "FROM subdivisions_fts matched",
+        "JOIN subdivisions s ON matched.rowid = s.id",
+        "JOIN countries c ON s.country_id = c.id",
+    ]
 
     id = AutoField()
     name = CharField(index=True, nullable=False)
@@ -58,10 +66,11 @@ class SubdivisionModel(Model[Subdivision]):
 
         iso_code = raw_data["subdivision_code_iso3166-2"]
         name = raw_data["subdivision_name"]
+        norm_name = normalize(name)
 
         base = {
             "name": name,
-            "normalized_name": normalize(name),
+            "normalized_name": norm_name,
             "iso_code": iso_code,
             "code": iso_code.split("-")[-1] if "-" in iso_code else iso_code,
             "category": raw_data.get("category", None),
@@ -71,9 +80,10 @@ class SubdivisionModel(Model[Subdivision]):
         }
 
         fts = {
-            "name": normalize(name),
+            "name": norm_name,
             "country": c_norm_name,
-            "country_code": normalize(country.alpha2),
+            "country_alpha2": normalize(country.alpha2),
+            "country_alpha3": normalize(country.alpha3),
         }
 
         return base, fts

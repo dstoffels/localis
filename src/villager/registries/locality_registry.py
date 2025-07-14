@@ -38,29 +38,27 @@ class LocalityRegistry(Registry[LocalityModel, Locality]):
         return [r.dto for r in rows]
 
     def search(
-        self, query, subdivision: str = "", country: CountryCode = "", limit=5, **kwargs
-    ) -> list[tuple[Locality, float]]:
+        self,
+        query,
+        subdivision: str = "",
+        country: CountryCode = "",
+        limit=10,
+        **kwargs,
+    ) -> list[Locality]:
         """Fuzzy search localities, optionally filtered by country code or subdivision iso_code."""
 
         if not query:
             return []
 
-        query = normalize(query)
-
         # reset
-        self._use_fts_match = True
+        self._addl_fts_clause = ""
 
         if subdivision:
-            self._use_fts_match = False
-            self._search_candidates = self._model_cls.where(
-                f'sub1_iso_code = "{subdivision}"'
-            )
+            subdivision = normalize(subdivision)
+            self._addl_fts_clause += f" AND (subdivision_iso_code = '{subdivision}')"
         elif country:
+            country = normalize(country)
             self._use_fts_match = False
-            self._search_candidates = self._model_cls.where(
-                f'country_alpha2 = "{country}"'
-            )
-        else:
-            self._search_candidates = self._model_cls.fts_match(query, exact=True)
+            self._candidates = self._model_cls.where(f'country_alpha2 = "{country}"')
 
-        return self._fuzzy_search(query, limit)
+        return super().search(query, limit)

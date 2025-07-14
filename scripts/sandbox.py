@@ -1,12 +1,27 @@
 import villager
-from rapidfuzz import fuzz
+from rapidfuzz import process, fuzz
 import time
 
-start = time.perf_counter()
 
-res = villager.countries.search("  meco")
+# dtos = villager.localities
 
-duration = time.perf_counter() - start
+# duration = 0.0
+# for c in dtos:
+#     start = time.perf_counter()
+#     results = villager.localities.search(c.name)
+#     results = [r.name for r in results]
+#     duration += time.perf_counter() - start
 
-print([(r.name, r.alpha2, s) for r, s in res])
-print(f"Duration: {duration:.3f}s")
+# print(f"Duration: {duration:.3f}s")
+
+tokens = ["carbondale"]
+
+for step in range(10):
+    print(step)
+
+    new_tokens = []
+    for t in tokens:
+        new_len = max(2, len(t) - step)
+        new_tokens.append(t[:new_len])
+
+        print(new_tokens)

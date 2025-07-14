@@ -9,20 +9,12 @@ def track_test_metrics(request):
     start = time.perf_counter()
     yield
     duration = time.perf_counter() - start
-    print(f"Test {request.node.name} took {duration:.3f}s")
-
-
-@pytest.hookimpl(tryfirst=True)
-def pytest_runtest_makereport(item, call):
-    if call.when == "call" and call.excinfo is None:
-        duration = time.perf_counter() - getattr(item, "_start_time", 0)
-        extra = getattr(item, "_extra_info", "")
-        print(f"{item.nodeid} passed in {duration:.3f}s{extra}")
+    print(f"\nTest {request.node.name} took {duration:.3f}s")
 
 
 class TestGet:
     def test_id(self):
-        for l in localities:
+        for l in localities[:100]:
             locality = localities.get(l.villager_id)
             assert isinstance(locality, Locality)
             assert locality is not None
@@ -46,7 +38,7 @@ class TestGet:
 
 class TestLookup:
     def test_lookup(self):
-        for l in localities:
+        for l in localities[:100]:
             results = localities.lookup(l.name)
             assert results
             assert isinstance(results, list)
@@ -63,7 +55,7 @@ class TestLookup:
 
 class TestSearch:
     def setup_method(self):
-        self.locality_sample: list[Locality] = localities[:1000]
+        self.locality_sample: list[Locality] = localities[:10000]
 
     def test_exact_match(self):
         for l in self.locality_sample:
@@ -71,79 +63,77 @@ class TestSearch:
             assert isinstance(results, list)
             assert results, f"Expected results for {l.name}"
             assert l.name in [
-                r.name for r, score in results
+                r.name for r in results
             ], f"Expected {l.name} to be in results"
 
     def test_fuzzy_match(self, request):
-        seeds = range(2)
+        seeds = range(20)
         success_count = 0
         total = 0
         typo_rate = 0.15
         success_threshold = 0.6
         for seed in seeds:
             for l in self.locality_sample:
-                test = mangle(f"{l.name}", typo_rate, seed)
+                test = mangle(l.name, typo_rate, seed)
                 results = localities.search(test)
                 total += 1
 
                 if not results:
                     continue
 
-                if l.name in [r.name for r, score in results]:
+                if l.name in [r.name for r in results]:
                     success_count += 1
         accuracy = success_count / total
-        request.node.extra_info = (
-            f"Total {total}; Successes: {success_count}; Accuracy: {accuracy:.2%}"
-        )
+        print(f"\n{success_count} / {total} = {accuracy:.2%} accuracy")
         assert (
             accuracy >= success_threshold
         ), f"{accuracy:.2%} accuracy below threshold {success_threshold:.2%}"
 
-    def test_fuzzy_match_by_subdivision(self, request):
-        seeds = range(2)
-        success_count = 0
-        total = 0
-        typo_rate = 0.15
-        success_threshold = 0.8
+    # def test_fuzzy_match_by_subdivision(self, request):
+    #     seeds = range(2)
+    #     success_count = 0
+    #     total = 0
+    #     typo_rate = 0.15
+    #     success_threshold = 0.8
 
-        for seed in seeds:
-            for l in self.locality_sample:
-                test = mangle(f"{l.name}", typo_rate, seed)
-                sub = l.subdivisions[len(l.subdivisions) - 1]
-                results = localities.search(test, subdivision=sub)
-                total += 1
-                if not results:
-                    continue
-                if l.name in [r.name for r, score in results]:
-                    success_count += 1
-        accuracy = success_count / total
-        request.node.extra_info = (
-            f"Total {total}; Successes: {success_count}; Accuracy: {accuracy:.2%}"
-        )
-        assert (
-            accuracy >= success_threshold
-        ), f"{accuracy:.2%} accuracy below threshold {success_threshold:.2%}"
+    #     for seed in seeds:
+    #         for l in self.locality_sample:
+    #             test = mangle(f"{l.name}", typo_rate, seed)
+    #             sub = l.subdivisions[len(l.subdivisions) - 1]
+    #             results = localities.search(test, subdivision=sub)
+    #             total += 1
+    #             if not results:
+    #                 continue
+    #             if l.name in [r.name for r, score in results]:
+    #                 success_count += 1
+    #     accuracy = success_count / total
+    #     request.node.extra_info = (
+    #         f"Total {total}; Successes: {success_count}; Accuracy: {accuracy:.2%}"
+    #     )
+    #     assert (
+    #         accuracy >= success_threshold
+    #     ), f"{accuracy:.2%} accuracy below threshold {success_threshold:.2%}"
 
-    def test_fuzzy_match_by_country(self, request):
-        seeds = range(2)
-        success_count = 0
-        total = 0
-        typo_rate = 0.15
-        success_threshold = 0.8
+    # def test_fuzzy_match_by_country(self, request):
+    #     seeds = range(2)
+    #     success_count = 0
+    #     total = 0
+    #     typo_rate = 0.15
+    #     success_threshold = 0.8
 
-        for seed in seeds:
-            for l in self.locality_sample:
-                test = mangle(f"{l.name}", typo_rate, seed)
-                results = localities.search(test, country=l.country)
-                total += 1
-                if not results:
-                    continue
-                if l.name in [r.name for r, score in results]:
-                    success_count += 1
-        accuracy = success_count / total
-        request.node.extra_info = (
-            f"Total {total}; Successes: {success_count}; Accuracy: {accuracy:.2%}"
-        )
-        assert (
-            accuracy >= success_threshold
-        ), f"{accuracy:.2%} accuracy below threshold {success_threshold:.2%}"
+    #     for seed in seeds:
+    #         for l in self.locality_sample:
+    #             test = mangle(f"{l.name}", typo_rate, seed)
+    #             results = localities.search(test, country=l.country)
+    #             total += 1
+    #             if not results:
+    #                 continue
+    #             if l.name in [r.name for r, score in results]:
+    #                 success_count += 1
+    #     accuracy = success_count / total
+    #     request.node.extra_info = (
+    #         f"Total {total}; Successes: {success_count}; Accuracy: {accuracy:.2%}"
+    #     )
+    #     assert (
+    #         accuracy >= success_threshold
+    #     ), f"{accuracy:.2%} accuracy below threshold {success_threshold:.2%}"

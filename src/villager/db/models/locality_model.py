@@ -17,8 +17,10 @@ import sqlite3
 class LocalityModel(Model[Locality]):
     table_name = "localities"
     dto_class = Locality
-    fts_fields = ["name", "subdivision", "country", "country_code"]
-    base_query = """SELECT l.*, 
+    fts_fields = ["name", "subdivision", "country", "country_alpha2", "country_alpha3"]
+    query_select = """SELECT 
+                    l.*, 
+
                     c.name as country, 
                     c.alpha2 as country_alpha2, 
                     c.alpha3 as country_alpha3,
@@ -34,18 +36,26 @@ class LocalityModel(Model[Locality]):
                     s2.category as sub2_category, 
                     s2.admin_level as sub2_admin_level,
 
-                    f.name as fts_name,
-                    f.subdivision as fts_subdivision,
-                    f.country as fts_country,
-                    f.country_code as fts_country_code,
-                    f.name || ' ' || f.subdivision || ' ' || f.country || ' ' || f.country_code as tokens
-                    
-                FROM localities l
-                JOIN subdivisions s1 ON l.subdivision_id = s1.id
-                JOIN countries c ON l.country_id = c.id
-                LEFT JOIN subdivisions s2 ON s1.parent_iso_code = s2.iso_code
-                JOIN localities_fts f ON l.id = f.rowid
+                    matched.name as fts_name,
+                    matched.subdivision as fts_subdivision,
+                    matched.country as fts_country,
+                    matched.country_alpha2 as fts_country_alpha2,
+                    matched.country_alpha3 as fts_country_alpha3,
+
+                    matched.name || ' ' || 
+                    matched.subdivision || ' ' || 
+                    matched.country || ' ' || 
+                    matched.country_alpha2 || ' ' || 
+                    matched.country_alpha3 
+                    as tokens
                 """
+    query_tables = [
+        "FROM localities_fts matched",
+        "JOIN localities l ON l.id = matched.rowid",
+        "JOIN subdivisions s1 ON l.subdivision_id = s1.id",
+        "JOIN countries c ON l.country_id = c.id",
+        "LEFT JOIN subdivisions s2 ON s1.parent_iso_code = s2.iso_code",
+    ]
 
     id = AutoField()
     name = CharField(index=True, nullable=False)
@@ -76,6 +86,7 @@ class LocalityModel(Model[Locality]):
         )
         if not name:
             return None, None
+        norm_name = normalize(name)
 
         # Address Data
         address: dict = raw_data.get("address", {})
@@ -100,7 +111,7 @@ class LocalityModel(Model[Locality]):
 
         base = {
             "name": name,
-            "normalized_name": normalize(name),
+            "normalized_name": norm_name,
             "classification": raw_data["classification"],
             "population": raw_data.get("population", None),
             "lat": lat,
@@ -112,10 +123,11 @@ class LocalityModel(Model[Locality]):
         }
 
         fts = {
-            "name": normalize(name),
+            "name": norm_name,
             "subdivision": sub_norm_name,
             "country": c_norm_name,
-            "country_code": normalize(country_alpha2),
+            "country_alpha2": normalize(country_alpha2),
+            "country_alpha3": normalize(country.alpha3),
         }
 
         return base, fts

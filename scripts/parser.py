@@ -148,7 +148,7 @@ def load_subdivisions() -> None:
 
     # Assign parents & admin level
     data_by_iso = {item["iso_code"]: item for item in subdivisions}
-    subs_by_iso = {sub.iso_code: sub for sub in SubdivisionModel.select()}
+    subs_by_iso = {sub.iso_code: sub for sub in SubdivisionModel.query_select()}
 
     with db.atomic():
         for sub in subs_by_iso.values():
@@ -170,8 +170,8 @@ def load_localities() -> None:
     locality_dir = DATA_DIR / "localities"
     localities = []
     fts_rows = []
-    country_map = {c.alpha2: c for c in CountryModel.select()}
-    sub_map = {s.iso_code: s for s in SubdivisionModel.select()}
+    country_map = {c.alpha2: c for c in CountryModel.query_select()}
+    sub_map = {s.iso_code: s for s in SubdivisionModel.query_select()}
 
     seen = set()
 

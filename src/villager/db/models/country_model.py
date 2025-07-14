@@ -6,15 +6,22 @@ class CountryModel(Model[Country]):
     table_name = "countries"
     dto_class = Country
     fts_fields = ["name", "alpha2", "alpha3"]
-    base_query = """SELECT 
+    query_select: str = """SELECT 
                     c.*, 
                     
-                    f.name as fts_name,
-                    f.alpha2 as fts_alpha2,
-                    f.alpha3 as fts_alpha3,
-                    f.name || ' ' || f.alpha2 || ' ' || f.alpha3 as tokens
+                    matched.name as fts_name,
+                    matched.alpha2 as fts_alpha2,
+                    matched.alpha3 as fts_alpha3,
 
-                    FROM countries_fts f JOIN countries c ON f.rowid = c.id\n"""
+                    matched.name || ' ' || 
+                    matched.alpha2 || ' ' || 
+                    matched.alpha3 
+                    as tokens
+                    """
+    query_tables: list[str] = [
+        "FROM countries_fts matched",
+        "JOIN countries c ON matched.rowid = c.id",
+    ]
 
     id = AutoField()
     name = CharField(index=True, nullable=False)
