@@ -1,5 +1,5 @@
-# This script aggregates country data from multiple sources and generates a TSV file containing country information such as ISO codes, names, and tokens for search optimization.
-# Sources: ISO 3166 CSV, Wikidata JSON, GeoNames TXT
+# This script aggregates country data primarily from ISO 3166-1, supplemented with Wikidata and GeoNames for aliases and search tokens.
+# We do not use geonames alternative names as they're noisy and mainly historical.
 
 from pathlib import Path
 import csv
@@ -18,8 +18,8 @@ class CountryDTO:
     alpha2: str
     alpha3: str
     numeric: int
-    name: str = ""
-    official_name: str = ""
+    name: str
+    official_name: str
     aliases: list[str] = field(default_factory=list)
     names: list[str] = field(default_factory=list)
     geonames_id: str = ""
@@ -32,19 +32,56 @@ countries: dict[str, CountryDTO] = {}
 
 
 def init_iso_countries():
-    with open(BASE_PATH / "source_data/iso_countries.csv", "r", encoding="utf-8") as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            country = CountryDTO(
-                alpha2=row["#country_code_alpha2"],
-                alpha3=row["country_code_alpha3"],
-                name=row["name_short"],
-                official_name=row["name_long"],
-                flag=row["flag"],
-                numeric=int(row["numeric_code"]),
+    # contemporary name mappings
+    NAME_MAP = {
+        "CG": "Republic of the Congo",
+        "CD": "Democratic Republic of the Congo",
+        "FK": "Falkland Islands",
+        "FM": "Micronesia",
+        "MF": "Saint-Martin",
+        "SX": "Sint Maarten",
+        "PS": "Palestine",
+        "SH": "Saint Helena",
+        "VA": "Holy See",
+        "VG": "British Virgin Islands",
+        "VI": "U.S. Virgin Islands",
+        "VN": "Viet Nam",
+    }
+
+    OFF_NAME_MAP = {
+        "FK": "Falkland Islands (Malvinas)",
+        "KR": "Republic of Korea",
+        "LA": "Lao People's Democratic Republic",
+        "MF": "Collectivity of Saint Martin",
+        "SX": "Country of Sint Maarten",
+        "SH": "Saint Helena, Ascension and Tristan da Cunha",
+        "SY": "Syrian Arab Republic",
+        "TW": "Republic of China",
+        "VA": "Vatican City State",
+    }
+
+    with open(BASE_PATH / "source_data/iso3166-1.json", "r", encoding="utf-8") as f:
+        iso_countries = json.load(f).get("3166-1")
+        iso_countries.sort(key=lambda c: c.get("alpha_2"))
+
+        for row in iso_countries:
+            name = (
+                NAME_MAP.get(row["alpha_2"])
+                or row.get("common_name")
+                or row.get("name")
+            )
+            official_name = (
+                OFF_NAME_MAP.get(row["alpha_2"]) or row.get("official_name") or name
             )
 
-            # country.names.append(row["name_long"])
+            country = CountryDTO(
+                alpha2=row["alpha_2"],
+                alpha3=row["alpha_3"],
+                numeric=int(row["numeric"]),
+                name=name,
+                official_name=official_name,
+                flag=row["flag"],
+            )
             countries[country.alpha2] = country
 
 
@@ -139,7 +176,7 @@ def parse_tokens(names: list[str], name: str) -> str:
 
 
 def build_row(country: CountryDTO) -> list[str]:
-    ALIASES = {
+    ALIAS_MAP = {
         "GB": [
             "Great Britain",
             "Britain",
@@ -170,6 +207,7 @@ def build_row(country: CountryDTO) -> list[str]:
         "MF": ["Collectivité de Saint-Martin"],
         "TW": ["ROC"],
     }
+
     return [
         country.geonames_id,
         country.name,
@@ -178,7 +216,7 @@ def build_row(country: CountryDTO) -> list[str]:
         country.alpha3,
         country.numeric,
         country.flag,
-        "|".join(ALIASES.get(country.alpha2, [])),
+        "|".join(ALIAS_MAP.get(country.alpha2, [])),
         parse_tokens(country.names, country.name),
     ]
 
@@ -212,4 +250,5 @@ def main():
     print_to_tsv()
 
 
-main()
+if __name__ == "__main__":
+    main()

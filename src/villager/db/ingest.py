@@ -1,19 +1,7 @@
 from villager.db import db, CountryModel, SubdivisionModel, CityModel
 import csv
 from pathlib import Path
-import hashlib
 import zipfile
-import json
-import os
-
-
-def run() -> None:
-    db.create_tables([CountryModel, SubdivisionModel, CityModel])
-    ingest_countries()
-    ingest_subdivisions()
-    ingest_cities()
-    db.vacuum()
-    compress_db(db.db_path)
 
 
 DATA_DIR = Path(__file__).parent.parent.parent.parent / "data"
@@ -98,6 +86,15 @@ def compress_db(db_path: str | Path) -> Path:
         "src/villager/db/villager_db.zip", "w", compression=zipfile.ZIP_DEFLATED
     ) as zipf:
         zipf.write(db_path, arcname=db_path.name)
+
+
+def run() -> None:
+    db.create_tables([CountryModel, SubdivisionModel, CityModel])
+    ingest_countries()
+    ingest_subdivisions()
+    ingest_cities()
+    db.vacuum()
+    # compress_db(db.db_path)
 
 
 if __name__ == "__main__":

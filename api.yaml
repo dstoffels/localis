@@ -1,5 +1,7 @@
 villager:
   countries:
+    get:
+      description: >
     lookup:
       description: >
         Fetch a country by exact alpha-2, alpha-3.

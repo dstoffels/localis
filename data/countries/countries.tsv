@@ -139,7 +139,7 @@ id	name	official_name	alpha2	alpha3	numeric	flag	aliases	tokens
 2993457	Monaco	Principality of Monaco	MC	MCO	492	🇲🇨		diocese fort hercule mon mùnegu negu principality principato principatu principauté prinçipatu
 617790	Moldova	Republic of Moldova	MD	MDA	498	🇲🇩		moldavia republica
 3194884	Montenegro	Montenegro	ME	MNE	499	🇲🇪		crna gora
-3578421	Saint Martin	Collectivity of Saint Martin	MF	MAF	663	🇲🇫	Collectivité de Saint-Martin	france french part
+3578421	Saint-Martin	Collectivity of Saint Martin	MF	MAF	663	🇲🇫	Collectivité de Saint-Martin	france french martin part saint
 1062947	Madagascar	Republic of Madagascar	MG	MDG	450	🇲🇬		mad malagascar malagaskar
 2080185	Marshall Islands	Republic of the Marshall Islands	MH	MHL	584	🇲🇭		
 718075	North Macedonia	Republic of North Macedonia	MK	MKD	807	🇲🇰	Macedonia	former fyr fyrom republic yugoslav
@@ -231,7 +231,7 @@ id	name	official_name	alpha2	alpha3	numeric	flag	aliases	tokens
 690791	Ukraine	Ukraine	UA	UKR	804	🇺🇦		ukr ukraina ukrainia ukraïna
 226074	Uganda	Republic of Uganda	UG	UGA	800	🇺🇬		256 africa ouganda pearl republic ugandah
 5854968	United States Minor Outlying Islands	United States Minor Outlying Islands	UM	UMI	581	🇺🇲		usmoi
-6252001	United States	United States of America	US	USA	840	🇺🇸	United States of America|America	america merica murica north usa
+6252001	United States	United States of America	US	USA	840	🇺🇸	America	america merica murica north usa
 3439705	Uruguay	Eastern Republic of Uruguay	UY	URY	858	🇺🇾		oriental republic uru
 1512440	Uzbekistan	Republic of Uzbekistan	UZ	UZB	860	🇺🇿		
 3164670	Holy See	Vatican City State	VA	VAT	336	🇻🇦		città city civitas civitatis del della papal state stato status vatican vaticana vaticanae vaticano
