@@ -1,7 +1,6 @@
 from .utils import *
 import json
 from .merge import merge_matched_sub
-import pyperclip
 import os
 
 
@@ -62,8 +61,7 @@ def resolve_unmatched_subs(
                     f"({iso_sub.iso_code}) (Admin{iso_sub.admin_level})",
                 )
 
-                # Copy the name and country to easily search.
-                # pyperclip.copy(f"")
+                # A helper link to quickly google search the subdivision
                 link = f"https://google.com/search?q={iso_sub.name} {iso_sub.country_name}".replace(
                     " ", "+"
                 )
