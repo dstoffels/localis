@@ -16,12 +16,12 @@ class SubdivisionModel(Model[Subdivision]):
     dto_class = Subdivision
 
     name = CharField()
-    code = CharField()
+    alt_names = CharField()
+    type = CharField(index=False)
+    geonames_code = CharField()
     iso_code = CharField()
-    category = CharField(index=False)
-    parent_code = CharField(index=False)
     country = CharField()
-    tokens = CharField()
+    parent_rowid = CharField()
 
     @classmethod
     def from_row(cls, row):
@@ -32,7 +32,7 @@ class SubdivisionModel(Model[Subdivision]):
 
         row["iso_code"] = f'{row["country_alpha2"]}-{row["code"]}'
 
-        subs = SubdivisionModel.select(SubdivisionModel.parent_code == row["iso_code"])
+        subs = SubdivisionModel.select(SubdivisionModel.parent_rowid == row["iso_code"])
         row["subdivisions"] = []
         for s in subs:
             row["subdivisions"].append(
@@ -46,4 +46,4 @@ class SubdivisionModel(Model[Subdivision]):
     def get_by_iso_code(cls, iso_code: str) -> Subdivision:
         alpha2, *code = tuple(iso_code.split("-"))
         code = "-".join([*code])
-        return cls.get((cls.country_alpha2 == alpha2) & (cls.code == code))
+        return cls.get((cls.country_alpha2 == alpha2) & (cls.geonames_code == code))

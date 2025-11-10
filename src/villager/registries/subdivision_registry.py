@@ -2,7 +2,8 @@ from .registry import Registry
 from ..db.dtos import Subdivision
 from typing import Callable, Optional
 from ..db import SubdivisionModel, CountryModel
-from ..literals import CountryCode, CountryName, CountryNumeric
+
+# from ..literals import CountryCode, CountryName, CountryNumeric
 from rapidfuzz import fuzz
 from villager.utils import normalize
 
@@ -27,9 +28,7 @@ class SubdivisionRegistry(Registry[SubdivisionModel, Subdivision]):
         if row:
             return row.dto
 
-    def lookup(
-        self, name: str, country: CountryCode | CountryName = "", **kwargs
-    ) -> list[Subdivision]:
+    def lookup(self, name: str, country="", **kwargs) -> list[Subdivision]:
         """Lookup subdivisions by exact name, optionally filtered by country."""
         if not name:
             return []
@@ -42,7 +41,7 @@ class SubdivisionRegistry(Registry[SubdivisionModel, Subdivision]):
 
         return [r.dto for r in rows]
 
-    def by_country(self, country_code: CountryCode) -> list[Subdivision]:
+    def by_country(self, country_code) -> list[Subdivision]:
         """Fetch all subdivisions for a given country by code."""
         if not country_code:
             return []
@@ -53,7 +52,7 @@ class SubdivisionRegistry(Registry[SubdivisionModel, Subdivision]):
         rows = self._model_cls.select(SubdivisionModel.country_id == c.id)
         return [r.dto for r in rows]
 
-    def get_categories(self, country_code: CountryCode) -> list[str]:
+    def get_categories(self, country_code) -> list[str]:
         """Fetch distinct subdivision categories for a given country by code (e.g. "state", "province"). Helpful for dynamic dropdowns."""
         if not country_code:
             return []

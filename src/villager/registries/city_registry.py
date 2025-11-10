@@ -1,7 +1,8 @@
 from villager.registries.registry import Registry
 from villager.db import CityModel, SubdivisionModel, CountryModel, City, RowData
 from villager.utils import normalize
-from villager.literals import CountryCode, CountryName
+
+# from villager.literals import CountryCode, CountryName
 
 
 class CityRegistry(Registry[CityModel, City]):
@@ -34,7 +35,7 @@ class CityRegistry(Registry[CityModel, City]):
     def lookup(
         self,
         name: str,
-        country: CountryCode | CountryName = None,
+        country=None,
         subdivision: str = None,
         **kwargs,
     ) -> list[City]:

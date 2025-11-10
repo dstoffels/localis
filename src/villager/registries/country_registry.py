@@ -1,6 +1,7 @@
 from villager.registries.registry import Registry
 from villager.db import CountryModel, Country, db
-from villager.literals import CountryCode, CountryName, CountryNumeric
+
+# from villager.literals import CountryCode, CountryName, CountryNumeric
 from villager.utils import normalize
 
 
@@ -16,7 +17,7 @@ class CountryRegistry(Registry[CountryModel, Country]):
         super().__init__(model_cls)
         self._addl_search_attrs = ["alpha2", "alpha3"]
 
-    def get(self, identifier: CountryCode | CountryNumeric) -> Country | None:
+    def get(self, identifier) -> Country | None:
         if not identifier:
             return None
 
@@ -34,7 +35,7 @@ class CountryRegistry(Registry[CountryModel, Country]):
         if row:
             return row.dto
 
-    def lookup(self, identifier: CountryName, **kwargs) -> list[Country]:
+    def lookup(self, identifier, **kwargs) -> list[Country]:
         """Lookup a country by exact name."""
         if not identifier:
             return []

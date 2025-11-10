@@ -142,3 +142,7 @@ class Model(Generic[TDTO], ABC):
 
         rows = db.execute(fts_q, (query, limit)).fetchall()
         return [cls.from_row(row) for row in rows]
+
+    @classmethod
+    def truncate(cls):
+        db.truncate(cls.table_name)

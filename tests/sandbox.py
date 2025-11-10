@@ -1,11 +1,18 @@
-import villager
-import pycountry
+# import villager
 
-print(pycountry.countries.lookup("gb"))
+# # import pycountry
 
-# results = villager.cities.search("madison wi")
+# # for s in pycountry.subdivisions:
+# #     print(s)
+
+# results = villager.cities.search("ஹராரே")
 
 
 # for r in results:
 #     print(r)
 #     print()
+
+
+from rapidfuzz import fuzz
+
+print(fuzz.token_set_ratio("Gur", "Gor"))

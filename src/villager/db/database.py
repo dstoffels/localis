@@ -115,6 +115,9 @@ class Database:
         """Analyze database for query optimization"""
         return self.execute("ANALYZE")
 
+    def truncate(self, table_name: str):
+        self.execute(f"DELETE FROM {table_name}")
+
 
 db = Database("src/villager/db/villager.db")
 

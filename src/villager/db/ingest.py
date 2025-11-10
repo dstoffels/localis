@@ -22,11 +22,11 @@ def ingest_countries() -> None:
     with open(DATA_DIR / "countries/countries.tsv", newline="", encoding="utf-8") as f:
         reader = csv.DictReader(f, delimiter="\t")
 
-        for line in reader:
-            line.pop("id")
-            k = line["alpha2"]
+        for row in reader:
+            row.pop("id")
+            k = row["alpha2"]
             if k not in countries:
-                countries[k] = clean_row(line)
+                countries[k] = clean_row(row)
 
     with db.atomic():
         for batch in chunked(list(countries.values()), 100):
@@ -38,20 +38,18 @@ def ingest_countries() -> None:
 
 
 def ingest_subdivisions() -> None:
-    subdivisions: dict[str, dict] = {}
+    subdivisions: list[dict] = []
 
     with open(
         DATA_DIR / "subdivisions/subdivisions.tsv", newline="", encoding="utf-8"
     ) as f:
         reader = csv.DictReader(f, delimiter="\t")
-        for line in reader:
-            line.pop("id")
-            k = line["code"]
-            if k not in subdivisions:
-                subdivisions[k] = clean_row(line)
+        for row in reader:
+            row.pop("id")
+            subdivisions.append(clean_row(row))
 
     with db.atomic():
-        for batch in chunked(list(subdivisions.values()), 100):
+        for batch in chunked(list(subdivisions), 100):
             try:
                 SubdivisionModel.insert_many(batch)
             except Exception as e:
@@ -89,10 +87,12 @@ def compress_db(db_path: str | Path) -> Path:
 
 
 def run() -> None:
+    CountryModel.truncate()
+    SubdivisionModel.truncate()
+    CityModel.truncate()
     db.create_tables([CountryModel, SubdivisionModel, CityModel])
     ingest_countries()
     ingest_subdivisions()
-    ingest_cities()
     db.vacuum()
     # compress_db(db.db_path)
 
