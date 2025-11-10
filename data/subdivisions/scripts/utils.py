@@ -38,6 +38,14 @@ class SubdivisionDTO:
             key = "|".join(key_parts)
             self.id = int.from_bytes(hashlib.md5(key.encode()).digest()[:8], "big")
 
+    def concat_country(self) -> str:
+        return "|".join(
+            [self.country_name, self.country_alpha2, self.country_alpha3 or ""]
+        )
+
+    def concat(self) -> str:
+        return "|".join([self.name, self.geonames_code, self.iso_code])
+
 
 class SubdivisionMap:
     def __init__(self):

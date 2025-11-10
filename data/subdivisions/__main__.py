@@ -31,7 +31,7 @@ def main():
     # rebuild cache with complete data, update parents
     sub_map.refresh()
 
-    dump_to_tsv(countries, sub_map)
+    dump_to_tsv(sub_map)
 
 
 if __name__ == "__main__":

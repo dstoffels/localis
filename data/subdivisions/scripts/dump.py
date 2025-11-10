@@ -1,11 +1,7 @@
 from .utils import *
 
 
-def concat_country(country: CountryDTO) -> str:
-    return f"{country.name}|{country.alpha2}{f'|{country.alpha3}' if country.alpha3 else ''}"
-
-
-def dump_to_tsv(countries: dict[str, CountryDTO], sub_map: SubdivisionMap):
+def dump_to_tsv(sub_map: SubdivisionMap):
     HEADERS = (
         "id",
         "name",
@@ -28,8 +24,8 @@ def dump_to_tsv(countries: dict[str, CountryDTO], sub_map: SubdivisionMap):
                     "alt_names": "|".join(sub.alt_names),
                     "geonames_code": sub.geonames_code,
                     "iso_code": sub.iso_code,
-                    "country": concat_country(countries[sub.country_alpha2]),
+                    "country": sub.concat_country(),
                     "type": sub.type,
-                    "parent_rowid": sub.parent_id,
+                    "parent_id": sub.parent_id,
                 }
             )
