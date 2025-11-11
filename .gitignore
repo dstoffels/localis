@@ -69,7 +69,7 @@ htmlcov/
 # ======================================
 # SQLite database & local data
 # ======================================
-villager.db*
+# villager.db*
 *.sqlite
 *.sqlite3
 

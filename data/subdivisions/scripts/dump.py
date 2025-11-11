@@ -10,7 +10,7 @@ def dump_to_tsv(sub_map: SubdivisionMap):
         "iso_code",
         "country",
         "type",
-        "parent_rowid",
+        "parent_id",
     )
 
     with open(BASE_PATH / "subdivisions.tsv", "w", encoding="utf-8", newline="") as f:

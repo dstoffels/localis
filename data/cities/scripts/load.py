@@ -60,9 +60,9 @@ def parse_fields(
     admin2_code = fields[11]
     country_code = fields[8]
 
-    admin1 = subdivisions.get(admin1_code)
-    admin2 = subdivisions.get(admin2_code)
     country = countries.get(country_code)
+    admin1 = subdivisions.get(".".join([country_code, admin1_code]))
+    admin2 = subdivisions.get(".".join([country_code, admin2_code]))
 
     lat = float(fields[4])
     lng = float(fields[5])
