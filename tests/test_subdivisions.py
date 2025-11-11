@@ -148,7 +148,7 @@ class TestGetCategories:
     def setup_method(self):
         self.sub_cats_by_country: dict[str, set[str]] = {}
         for s in subdivisions:
-            self.sub_cats_by_country.setdefault(s.country_alpha2, set()).add(s.category)
+            self.sub_cats_by_country.setdefault(s.country_alpha2, set()).add(s.type)
 
     def test_country_alpha2(self):
         for alpha2, expected in self.sub_cats_by_country.items():

@@ -1,6 +1,9 @@
 from abc import ABC
 from typing import Literal
 from villager.utils import normalize
+from typing import Generic, TypeVar
+
+T = TypeVar("T")
 
 
 class Expression:
@@ -18,14 +21,14 @@ class Expression:
         return self.sql
 
 
-class Field(ABC):
+class Field(Generic[T], ABC):
     type: Literal["TEXT", "INTEGER", "FLOAT", "BOOLEAN"] = "INTEGER"
 
     def __init__(
         self,
         *,
         nullable: bool = True,
-        default: str | None = None,
+        default: T | None = None,
         unique: bool = False,
         index: bool = True,
         primary_key: bool = False,
@@ -40,6 +43,14 @@ class Field(ABC):
     def __set_name__(self, owner, name):
         self.name = name
         self.model = owner
+
+    def __get__(self, instance, owner) -> T:
+        if instance is None:
+            return self
+        return instance.__dict__.get(self.name, self.default)
+
+    def __set__(self, instance, value: T):
+        instance.__dict__[self.name] = value
 
     def __eq__(self, other):
         return Expression(f"{self.name} MATCH ?", (f'"{other}"',))
@@ -90,28 +101,28 @@ class Field(ABC):
         return ""
 
 
-class AutoField(Field):
+class AutoField(Field[int]):
     def get_sql(self):
         return f"{self.name} INTEGER PRIMARY KEY AUTOINCREMENT"
 
 
-class CharField(Field):
+class CharField(Field[str]):
     type = "TEXT"
 
 
-class IntegerField(Field):
+class IntField(Field[int]):
     pass
 
 
-class FloatField(Field):
+class FloatField(Field[float]):
     type = "FLOAT"
 
 
-class BooleanField(Field):
+class BooleanField(Field[bool]):
     type = "BOOLEAN"
 
 
-class ForeignKeyField(Field):
+class ForeignKeyField(Field[int]):
     def __init__(
         self,
         *args,

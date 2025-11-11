@@ -1,18 +1,11 @@
-# import villager
+from villager.db.models import CountryModel, CityModel, SubdivisionModel
+import time
 
-# # import pycountry
+start = time.perf_counter()
 
-# # for s in pycountry.subdivisions:
-# #     print(s)
+for i in range(20):
+    results = CityModel.fts_match("ma")
 
-# results = villager.cities.search("ஹராரே")
+end = time.perf_counter()
 
-
-# for r in results:
-#     print(r)
-#     print()
-
-
-from rapidfuzz import fuzz
-
-print(fuzz.token_set_ratio("Gur", "Gor"))
+print(f"Took {end - start:.6f} seconds")

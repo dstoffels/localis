@@ -1,5 +1,5 @@
 from villager.registries.registry import Registry
-from villager.db import CityModel, SubdivisionModel, CountryModel, City, RowData
+from villager.db import CityModel, SubdivisionModel, CountryModel, City
 from villager.utils import normalize
 
 # from villager.literals import CountryCode, CountryName
@@ -52,9 +52,7 @@ class CityRegistry(Registry[CityModel, City]):
         rows = self._model_cls.fts_match(norm_q, exact=True)
         return [r.dto for r in rows]
 
-    def _sort_matches(
-        self, matches: list[tuple[RowData[City], float]], limit: int
-    ) -> list[City]:
+    def _sort_matches(self, matches: list, limit: int) -> list[City]:
         return [
             (row_data.dto, score)
             for row_data, score in sorted(

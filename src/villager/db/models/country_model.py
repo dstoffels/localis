@@ -1,6 +1,7 @@
-from .model import Model, AutoField, CharField, IntegerField, Country
-from villager.utils import normalize, tokenize
-import sqlite3
+from .model import Model
+from .fields import CharField, IntField
+from ..dtos import Country
+from dataclasses import dataclass
 
 
 class CountryModel(Model[Country]):
@@ -11,30 +12,30 @@ class CountryModel(Model[Country]):
     official_name = CharField()
     alpha2 = CharField()
     alpha3 = CharField()
-    numeric = IntegerField(index=False)
+    numeric = IntField()
     alt_names = CharField()
     flag = CharField(index=False)
 
-    @classmethod
-    def from_row(cls, row: sqlite3.Row):
-        row = dict(row)
-        alias_str = row["aliases"].replace("|", " ") if row["aliases"] else ""
-        cls.search_tokens = f'{row["name"]} {row["alpha2"]} {row["alpha3"]} {alias_str} {row.pop("tokens")}'
-        row["aliases"] = row["aliases"].split("|") if alias_str else []
-        return super().from_row(row)
+    def to_dto(self):
+        c = dict(self)
+        c["numeric"] = int(self.numeric) if self.numeric else None
+        return Country(**c)
 
-    @classmethod
-    def parse_raw(cls, raw_data):
-        name = raw_data["name_short"]
-        alpha2 = raw_data["#country_code_alpha2"]
-        alpha3 = raw_data["country_code_alpha3"]
-
-        long_name = raw_data["name_long"]
-        long_name = long_name if long_name != name else None
-
-        return {
-            "name": raw_data["name_short"],
-            "alpha2": alpha2,
-            "alpha3": alpha3,
-            "long_name": long_name,
-        }
+    def __init__(
+        self,
+        name: str,
+        official_name: str,
+        alpha2: str,
+        alpha3: str,
+        numeric: int,
+        alt_names: str,
+        flag: str,
+        **extra
+    ):
+        self.name = name
+        self.official_name = official_name
+        self.alpha2 = alpha2
+        self.alpha3 = alpha3
+        self.numeric = numeric
+        self.alt_names = alt_names
+        self.flag = flag

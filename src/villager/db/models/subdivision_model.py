@@ -1,14 +1,7 @@
-from .model import (
-    Model,
-    AutoField,
-    CharField,
-    IntegerField,
-    ForeignKeyField,
-    Subdivision,
-    SubdivisionBasic,
-)
-from .country_model import CountryModel
-from villager.utils import normalize, tokenize
+from .model import Model
+from .fields import CharField
+from ..dtos import Subdivision, SubdivisionBasic
+from dataclasses import dataclass
 
 
 class SubdivisionModel(Model[Subdivision]):
@@ -17,33 +10,35 @@ class SubdivisionModel(Model[Subdivision]):
 
     name = CharField()
     alt_names = CharField()
-    type = CharField(index=False)
+    type = CharField()
     geonames_code = CharField()
     iso_code = CharField()
     country = CharField()
     parent_id = CharField()
 
-    @classmethod
-    def from_row(cls, row):
-        row = dict(row)
+    def to_dto(self):
+        sub = dict(self)
+        sub["alt_names"] = self.alt_names.split("|")
+        sub["parent_id"] = int(self.parent_id) if self.parent_id else None
+        sub["admin_level"] = 2 if self.parent_id else 1
 
-        print(row)
-        exit()
+        return Subdivision(**sub)
 
-        row["iso_code"] = f'{row["country_alpha2"]}-{row["code"]}'
-
-        subs = SubdivisionModel.select(SubdivisionModel.parent_rowid == row["iso_code"])
-        row["subdivisions"] = []
-        for s in subs:
-            row["subdivisions"].append(
-                SubdivisionBasic(name=s.name, code=s.code, admin_level=s.admin_level)
-            )
-
-        row["aliases"] = [a for a in row["aliases"].split("|")]
-        return super().from_row(row)
-
-    @classmethod
-    def get_by_iso_code(cls, iso_code: str) -> Subdivision:
-        alpha2, *code = tuple(iso_code.split("-"))
-        code = "-".join([*code])
-        return cls.get((cls.country_alpha2 == alpha2) & (cls.geonames_code == code))
+    def __init__(
+        self,
+        name: str,
+        alt_names: str,
+        type: str,
+        geonames_code: str,
+        iso_code: str,
+        country: str,
+        parent_id: str,
+        **extra
+    ):
+        self.name = name
+        self.alt_names = alt_names
+        self.type = type
+        self.geonames_code = geonames_code
+        self.iso_code = iso_code
+        self.country = country
+        self.parent_id = parent_id

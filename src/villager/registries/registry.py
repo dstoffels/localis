@@ -1,7 +1,7 @@
 from typing import Iterator, Generic, TypeVar
 from abc import abstractmethod, ABC
 from typing import Type, Callable
-from villager.db import db, DTO, Model, RowData
+from villager.db import db, DTO, Model
 from villager.utils import normalize
 from rapidfuzz import fuzz, process
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -110,9 +110,7 @@ class Registry(Generic[TModel, TDTO], ABC):
 
         return self._sort_matches(matches.values(), limit)
 
-    def _sort_matches(
-        self, matches: list[tuple[RowData[TDTO], float]], limit: int
-    ) -> list[TDTO]:
+    def _sort_matches(self, matches: list, limit: int) -> list[TDTO]:
         return [
             (row_data.dto, score)
             for row_data, score in sorted(matches, key=lambda r: r[1], reverse=True)[

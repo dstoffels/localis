@@ -1,56 +1,28 @@
 from ..database import db
 from abc import abstractmethod
-from ..dtos import Country, Subdivision, SubdivisionBasic, City, DTO
+from ..dtos import DTO
 from typing import TypeVar, Generic
 from abc import ABC
 import sqlite3
 from dataclasses import dataclass
 from typing import Type
-from .fields import (
-    Field,
-    Expression,
-    AutoField,
-    BooleanField,
-    CharField,
-    FloatField,
-    ForeignKeyField,
-    IntegerField,
-)
-from ...utils import (
-    normalize,
-    tokenize,
-    extract_iso_code,
-    parse_other_names,
-)
+from .fields import Field, Expression
 
 TDTO = TypeVar("TDTO", bound=DTO)
 
 
-@dataclass
-class RowData(Generic[TDTO]):
-    id: int
-    dto: TDTO
-    search_tokens: str
-
-    def __iter__(self):
-        yield self.id
-        yield self.dto
-        yield self.search_tokens
-
-
+@dataclass(slots=True)
 class Model(Generic[TDTO], ABC):
-    table_name: str = ""
+    table_name = ""
     dto_class: Type[TDTO] = None
-    search_tokens: str = ""
 
     @classmethod
-    def from_row(cls, row: sqlite3.Row) -> RowData[TDTO]:
-        if not row:
-            return None
+    def from_row(cls, row: sqlite3.Row):
+        return cls(**dict(row))
 
-        data = {k: row[k] for k in row.keys() if k in cls.dto_class.__annotations__}
-        dto = cls.dto_class(**data)
-        return RowData(row["id"], dto, cls.search_tokens.lower())
+    @abstractmethod
+    def to_dto(self) -> TDTO:
+        pass
 
     @classmethod
     def create_table(cls) -> None:
@@ -72,11 +44,6 @@ class Model(Generic[TDTO], ABC):
     @classmethod
     def _create_fts(cls) -> None:
         db.create_fts_table(cls.table_name, cls.columns())
-
-    # @classmethod
-    # @abstractmethod
-    # def parse_raw(cls, raw_data: dict) -> str:
-    #     pass
 
     @classmethod
     def insert_many(cls, data: list[dict]) -> None:
@@ -116,9 +83,7 @@ class Model(Generic[TDTO], ABC):
         return [cls.from_row(row) for row in rows]
 
     @classmethod
-    def where(
-        cls, sql: str, order_by: str | None = None, limit: int | None = None
-    ) -> list[RowData[TDTO]]:
+    def where(cls, sql: str, order_by: str | None = None, limit: int | None = None):
         order_by = f"ORDER BY {order_by}" if order_by else ""
         limit = f"LIMIT {limit}" if limit else ""
         rows = db.execute(
@@ -127,18 +92,16 @@ class Model(Generic[TDTO], ABC):
         return [cls.from_row(row) for row in rows]
 
     @classmethod
-    def fts_match(
-        cls, query: str, limit=100, order_by="", exact: bool = False
-    ) -> list[RowData[TDTO]]:
+    def fts_match(cls, query: str, limit=100, order_by="", exact: bool = False):
         if not exact:
             tokens = query.split()
             query = " ".join([f"{t}*" for t in tokens])
         order_by = f", {order_by}" if order_by else ""
 
-        fts_q = f"""SELECT rowid as id, *, bm25({cls.table_name}, 50.0) as rank FROM {cls.table_name}
+        fts_q = f"""SELECT *, bm25({cls.table_name}, 50.0) as rank FROM {cls.table_name}
                     WHERE {cls.table_name} MATCH ?
                     ORDER BY rank{order_by}
                     LIMIT ?"""
 
-        rows = db.execute(fts_q, (query, limit)).fetchall()
-        return [cls.from_row(row) for row in rows]
+        rows: list[sqlite3.Row] = db.execute(fts_q, (query, limit)).fetchall()
+        return [cls.from_row(row) for row in rows if row]
