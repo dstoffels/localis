@@ -1,5 +1,6 @@
 from villager.registries.registry import Registry
-from villager.db import CountryModel, Country, db
+from villager.db import CountryModel, Country
+from villager.db.models.fields import Expression
 
 # from villager.literals import CountryCode, CountryName, CountryNumeric
 from villager.utils import normalize
@@ -17,34 +18,41 @@ class CountryRegistry(Registry[CountryModel, Country]):
         super().__init__(model_cls)
         self._addl_search_attrs = ["alpha2", "alpha3"]
 
-    def get(self, identifier) -> Country | None:
-        if not identifier:
-            return None
+    def get(
+        self,
+        *,
+        id: int | None = None,
+        alpha2: str | None = None,
+        alpha3: str | None = None,
+        numeric: int | None = None,
+    ):
+        cls = self._model_cls
 
-        identifier = normalize(identifier)
+        field_map = {
+            "id": None,
+            "alpha2": cls.alpha2,
+            "alpha3": cls.alpha3,
+            "numeric": cls.numeric,
+        }
 
-        if isinstance(identifier, int):
-            row = self._model_cls.get(CountryModel.numeric == identifier)
-        else:
-            identifier = self.CODE_ALIASES.get(identifier.lower(), identifier)
-            row = self._model_cls.get(
-                (CountryModel.alpha2 == identifier)
-                | (CountryModel.alpha3 == identifier)
-            )
+        model = None
+        for arg, field in field_map.items():
+            val = locals()[arg]
+            if val is not None:
+                model = cls.get_by_id(val) if arg == "id" else cls.get(field == val)
 
-        if row:
-            return row.dto
+        return model.to_dto() if model is not None else None
 
-    def lookup(self, identifier, **kwargs) -> list[Country]:
-        """Lookup a country by exact name."""
-        if not identifier:
-            return []
+    # def lookup(self, identifier, **kwargs) -> list[Country]:
+    #     """Lookup a country by exact name."""
+    #     if not identifier:
+    #         return []
 
-        identifier = self.ALIASES.get(identifier.lower(), identifier)
-        identifier = normalize(identifier)
+    #     identifier = self.ALIASES.get(identifier.lower(), identifier)
+    #     identifier = normalize(identifier)
 
-        rows = self._model_cls.fts_match(identifier, exact_match=True)
-        return [r.dto for r in rows]
+    #     rows = self._model_cls.fts_match(identifier, exact_match=True)
+    #     return [r.dto for r in rows]
 
     @property
     def _sql_filter_base(self):

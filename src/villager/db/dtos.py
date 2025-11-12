@@ -7,6 +7,7 @@ from abc import ABC
 
 @dataclass
 class DTO(ABC):
+    id: int
     name: str
 
     def to_dict(self):
@@ -21,6 +22,7 @@ class DTO(ABC):
 
 @dataclass
 class Country(DTO):
+    id: int
     name: str
     official_name: str
     alpha2: str
@@ -32,6 +34,7 @@ class Country(DTO):
 
 @dataclass
 class SubdivisionBasic:
+    id: int
     name: str
     geonames_code: str
     iso_code: str
@@ -40,6 +43,7 @@ class SubdivisionBasic:
 
 @dataclass
 class Subdivision(DTO):
+    id: int
     name: str
     alt_names: list[str]
     type: str
@@ -54,6 +58,7 @@ class Subdivision(DTO):
 
 @dataclass
 class City(DTO):
+    id: int
     name: str
     display_name: str | None
     subdivisions: list[SubdivisionBasic]

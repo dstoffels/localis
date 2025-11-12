@@ -31,7 +31,9 @@ class Model(Generic[TDTO], ABC):
 
     @abstractmethod
     def to_dto(self) -> TDTO:
-        pass
+        data = self.__dict__
+        data.pop("rank")
+        return self.dto_class(**data)
 
     @classmethod
     def create_table(cls) -> None:
@@ -70,12 +72,21 @@ class Model(Generic[TDTO], ABC):
         return cls.from_row(row)
 
     @classmethod
+    def get_by_id(cls, id: int):
+        row = cls.db.execute(
+            f"SELECT rowid as id, * FROM {cls.table_name} WHERE id = ? LIMIT 1", (id,)
+        ).fetchone()
+        if not row:
+            return None
+        return cls.from_row(row)
+
+    @classmethod
     def select(
         cls,
         expr: Expression | None = None,
         order_by: str | None = None,
         limit: int | None = None,
-    ) -> list[TDTO]:
+    ) -> list["Model"]:
 
         order_by = f"ORDER BY {order_by}" if order_by else ""
         limit = f"LIMIT {limit}" if limit else ""

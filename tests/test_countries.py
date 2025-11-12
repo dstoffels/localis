@@ -1,94 +1,82 @@
-# import pytest
-# from villager import countries, Country
-# from utils import mangle
-# import time
+import pytest
+from villager import countries, Country
+from utils import mangle
+import time
 
 
-# @pytest.fixture(autouse=True)
-# def track_test_metrics(request):
-#     start = time.perf_counter()
-#     yield
-#     duration = time.perf_counter() - start
-#     print(f"\nTest {request.node.name} took {duration:.3f}s")
+class TestGet:
+    """GET"""
+
+    def test_id(self):
+        """should return country by id"""
+        for c in countries:
+            country = countries.get(id=c.id)
+            assert isinstance(country, Country)
+            assert c.id == country.id
+
+    def test_alpha2(self):
+        """should return country by alpha2"""
+        for c in countries:
+            country = countries.get(alpha2=c.alpha2)
+            assert isinstance(country, Country)
+            assert c.alpha2 == country.alpha2
+
+    def test_alpha3(self):
+        """should return country by alpha3"""
+        for c in countries:
+            country = countries.get(alpha3=c.alpha3)
+            assert isinstance(country, Country)
+            assert c.alpha3 == country.alpha3
+
+    def test_numeric(self):
+        """should return country by numeric code"""
+        for c in countries:
+            country = countries.get(numeric=c.numeric)
+            assert isinstance(country, Country)
+            assert c.numeric == country.numeric
+
+    def test_is_normalized(self):
+        """should normalize input"""
+        for c in countries:
+            test = f"   {'.'.join(c.alpha2.split()).lower()}   "
+            country = countries.get(alpha2=test)
+            assert isinstance(country, Country)
+            assert country is not None
+            assert c.alpha2 == country.alpha2
+
+    def test_none(self):
+        """should return none with bad input"""
+        country = countries.get(alpha2="ZZZ")
+        assert country is None
 
 
-# class TestGet:
-#     def test_alpha2(self):
-#         for c in countries:
-#             country = countries.get(c.alpha2)
-#             assert isinstance(country, Country)
-#             assert country is not None
-#             assert c.alpha2 == country.alpha2
+class TestLookup:
+    """LOOKUP"""
 
-#     def test_alpha3(self):
-#         for c in countries:
-#             country = countries.get(c.alpha3)
-#             assert isinstance(country, Country)
-#             assert country is not None
-#             assert c.alpha3 == country.alpha3
+    def test_lookup(self):
+        """should return a list containing input country"""
+        for c in countries:
+            results = countries.lookup(c.name)
+            assert results
+            assert any(c.id == r.id for r in results)
 
-#     def test_numeric(self):
-#         for c in countries:
-#             country = countries.get(c.numeric)
-#             assert isinstance(country, Country)
-#             assert country is not None
-#             assert c.numeric == country.numeric
+    def test_is_normalized(self):
+        """should normalize input"""
+        for c in countries:
+            results = countries.lookup(f"   {c.name.lower()}   ")
+            assert results
+            assert any(c.name == r.name for r in results)
 
-#     def test_aliases(self):
-#         for alias, alpha_2 in countries.CODE_ALIASES.items():
-#             country = countries.get(alias)
-#             assert isinstance(country, Country)
-#             assert country is not None
-#             assert country.alpha2 == alpha_2
+    def test_none(self):
+        """should return [] with bad input"""
+        results = countries.lookup("california")
+        assert results == []
 
-#     def test_is_normalized(self):
-#         for c in countries:
-#             test = f"   {'.'.join(c.alpha2.split()).lower()}   "
-#             country = countries.get(test)
-#             assert isinstance(country, Country)
-#             assert country is not None
-#             assert c.alpha2 == country.alpha2
-
-#     def test_none(self):
-#         country = countries.get("ZZZ")
-#         assert country is None
-
-
-# class TestLookup:
-#     def test_lookup(self):
-#         for c in countries:
-#             results = countries.lookup(c.name)
-#             assert results
-#             assert len(results) > 0
-#             country = results[0]
-#             assert country.name == c.name
-
-#     def test_dupes(self):
-#         results = countries.lookup("Congo")
-#         alpha2s = [result.alpha2 for result in results]
-#         assert len(results) == 2
-#         assert "CG" in alpha2s
-#         assert "CD" in alpha2s
-
-#     def test_aliases(self):
-#         for alias, name in countries.ALIASES.items():
-#             results = countries.lookup(alias)
-#             assert results
-#             assert len(results) > 0
-#             country = results[0]
-#             assert country.name == name
-
-#     def test_is_normalized(self):
-#         for c in countries:
-#             results = countries.lookup(f"   {c.name.lower()}   ")
-#             assert results
-#             assert len(results) > 0
-#             country = results[0]
-#             assert country.name == c.name
-
-#     def test_none(self):
-#         results = countries.lookup("california")
-#         assert results == []
+    def test_limit(self):
+        """should respect limits"""
+        limit = 1
+        results = countries.lookup("Congo", limit=limit)
+        assert len(results) == limit
 
 
 # class TestSearch:
@@ -146,30 +134,30 @@
 #         ), f"{accuracy:.2%} accuracy below threshold {success_threshold:.2%}"
 
 
-# #     def test_partial_name_with_multiple_candidates(self):
-# #         results = countries.search("Korea")
-# #         names = [c.name for c, _ in results]
-# #         assert "South Korea" in names
-# #         assert "North Korea" in names
-# #         # South should usually score higher?
-# #         assert results[0][0].name == "South Korea"
+#     def test_partial_name_with_multiple_candidates(self):
+#         results = countries.search("Korea")
+#         names = [c.name for c, _ in results]
+#         assert "South Korea" in names
+#         assert "North Korea" in names
+#         # South should usually score higher?
+#         assert results[0][0].name == "South Korea"
 
-# #     def test_fuzzy_match_high_score(self):
-# #         results = countries.search("Brasil")
-# #         assert results
-# #         top = results[0][0]
-# #         assert top.alpha2 == "BR"
-# #         assert top.name == "Brazil"
+#     def test_fuzzy_match_high_score(self):
+#         results = countries.search("Brasil")
+#         assert results
+#         top = results[0][0]
+#         assert top.alpha2 == "BR"
+#         assert top.name == "Brazil"
 
-# #     def test_common_misspelling(self):
-# #         results = countries.search("Argentinia")
-# #         assert results
-# #         top = results[0][0]
-# #         assert top.alpha2 == "AR"
-# #         assert top.name == "Argentina"
+#     def test_common_misspelling(self):
+#         results = countries.search("Argentinia")
+#         assert results
+#         top = results[0][0]
+#         assert top.alpha2 == "AR"
+#         assert top.name == "Argentina"
 
-# #     def test_country_search_wild_misspelling_united_states(self):
-# #         results = countries.search("yoonited staits of amrika")
-# #         names = [c.name for c, _ in results]
-# #         assert any("United States" in name for name in names)
-# #         assert len(results) > 0
+#     def test_country_search_wild_misspelling_united_states(self):
+#         results = countries.search("yoonited staits of amrika")
+#         names = [c.name for c, _ in results]
+#         assert any("United States" in name for name in names)
+#         assert len(results) > 0

@@ -20,6 +20,12 @@ class Registry(Generic[TModel, TDTO], ABC):
         self._order_by: str = ""
         self._addl_search_attrs: list[str] = []
 
+    @property
+    def cache(self):
+        if self._cache is None:
+            self._cache = [m.to_dto() for m in self._model_cls.select()]
+        return self._cache
+
     def __iter__(self) -> Iterator[TDTO]:
         return iter(self.cache)
 
@@ -42,9 +48,11 @@ class Registry(Generic[TModel, TDTO], ABC):
 
     def lookup(self, query: str, limit: int | None = None) -> list[TDTO]:
         """Exact-match lookup of an input query across all fields. Returns a list of exact-matched entries."""
-        return self._model_cls.fts_match(
+        results = self._model_cls.fts_match(
             query, limit, order_by=["rank"], exact_match=True
         )
+
+        return [r.to_dto() for r in results]
 
     def search(self, query: str, limit=5, **kwargs) -> list[TDTO]:
         """"""

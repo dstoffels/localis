@@ -17,9 +17,9 @@ class CountryModel(Model[Country]):
     flag = CharField(index=False)
 
     def to_dto(self):
-        c = dict(self)
-        c["numeric"] = int(self.numeric) if self.numeric else None
-        return Country(**c)
+        self.numeric = int(self.numeric) if self.numeric else None
+        self.alt_names = self.alt_names.split("|") if self.alt_names else []
+        return super().to_dto()
 
     def __init__(
         self,
