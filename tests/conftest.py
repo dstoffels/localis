@@ -1,0 +1,31 @@
+import os
+
+
+def pytest_itemcollected(item):
+    """Display class and function docstrings, fallback to names, and include filename."""
+    # File name
+    filename = os.path.basename(item.fspath)
+    file_title = filename.replace("test_", "").replace(".py", "").title()
+
+    # Class docstring
+    cls_doc = getattr(getattr(item.parent, "obj", None), "__doc__", None)
+    cls_title = (
+        cls_doc.strip().split("\n")[0]
+        if cls_doc
+        else getattr(getattr(item.parent, "obj", None), "__name__", "")
+    )
+
+    # Function docstring
+    func_doc = getattr(item.obj, "__doc__", None)
+    func_title = func_doc.strip().split("\n")[0] if func_doc else item.obj.__name__
+
+    # Clean up function title
+    func_title = func_title.replace("test_", "")
+
+    parts = [file_title]
+    if cls_title:
+        parts.append(cls_title)
+    if func_title:
+        parts.append(func_title)
+
+    item._nodeid = " - ".join(parts)
