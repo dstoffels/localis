@@ -43,6 +43,9 @@ class Database:
     def commit(self) -> None:
         self._conn.commit()
 
+    def clone(self) -> "Database":
+        return Database(self.db_path)
+
     @contextmanager
     def atomic(self):
         try:

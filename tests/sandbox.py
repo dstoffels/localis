@@ -5,10 +5,9 @@ query = "san fran"
 
 start = time.perf_counter()
 for i in range(100):
-    results = CityModel.fts_match("san francisco ca", limit=100, exact_match=True)
+    results = CityModel.fts_match("milwaukee", order_by=["population desc"])
 end = time.perf_counter()
 
-print()
 for r in results:
     print(r)
 

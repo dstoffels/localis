@@ -36,10 +36,18 @@ class Registry(Generic[TModel, TDTO], ABC):
         return self.__len__()
 
     @abstractmethod
-    def lookup(self, identifier: str, **kwargs) -> list[TDTO]:
-        return []
+    def get(self, *, id: int | None = None) -> TDTO | None:
+        """Exact lookup by unique identifiers, must provide keyword args for the identifier."""
+        return None
+
+    def lookup(self, query: str, limit: int | None = None) -> list[TDTO]:
+        """Exact-match lookup of an input query across all fields. Returns a list of exact-matched entries."""
+        return self._model_cls.fts_match(
+            query, limit, order_by=["rank"], exact_match=True
+        )
 
     def search(self, query: str, limit=5, **kwargs) -> list[TDTO]:
+        """"""
         if not query:
             return []
 

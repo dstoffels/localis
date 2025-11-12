@@ -60,3 +60,20 @@ def parse_other_names(name, other_names: dict[str, str]) -> tuple[str, str]:
     if en_name:
         return en_name, other_names_str
     return name, other_names_str
+
+
+FTS_RESERVED = {"OR", "AND", "NOT", "NEAR"}
+
+
+def sanitize_fts_query(query: str) -> str:
+    """
+    Keep alphanumerics, spaces, *, quotes, and all Unicode combining marks.
+    Replace only characters illegal in FTS5.
+    """
+    q = re.sub(r"[^\w\s*\"\u0300-\u036f]+", " ", query)
+
+    tokens = q.split()
+    for i, token in enumerate(tokens):
+        if token in FTS_RESERVED:
+            tokens[i] = f'"{token}"'
+    return " ".join(tokens)
