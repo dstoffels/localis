@@ -41,14 +41,27 @@ class Registry(Generic[TModel, TDTO], ABC):
     def count(self) -> int:
         return self.__len__()
 
-    @abstractmethod
     def get(self, *, id: int | None = None) -> TDTO | None:
         return None
 
-    def filter(self, query: str = None, name: str = None, **kwargs) -> list[TDTO]:
-        results = self._model_cls.fts_match(
-            query, exact_match=True, order_by=["rank"], limit=None
-        )
+    def filter(
+        self, query: str = None, name: str = None, limit: int = None, **kwargs
+    ) -> list[TDTO]:
+        if kwargs:
+            if name:
+                kwargs.update({"name": name})
+            results = self._model_cls.fts_match(
+                field_queries=kwargs, order_by=["rank"], limit=limit
+            )
+
+        elif name:
+            results = self._model_cls.fts_match(
+                field_queries={"name": name}, order_by=["rank"], limit=limit
+            )
+        elif query:
+            results = self._model_cls.fts_match(query, order_by=["rank"], limit=limit)
+        else:
+            return []
 
         return [r.to_dto() for r in results]
 

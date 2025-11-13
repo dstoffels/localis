@@ -43,16 +43,22 @@ class CountryRegistry(Registry[CountryModel, Country]):
 
         return model.to_dto() if model is not None else None
 
-    # def lookup(self, identifier, **kwargs) -> list[Country]:
-    #     """Lookup a country by exact name."""
-    #     if not identifier:
-    #         return []
+    def filter(
+        self,
+        query=None,
+        name=None,
+        limit=None,
+        official_name: str = None,
+        alt_name: str = None,
+        **kwargs,
+    ):
 
-    #     identifier = self.ALIASES.get(identifier.lower(), identifier)
-    #     identifier = normalize(identifier)
+        if official_name:
+            kwargs["official_name"] = official_name
+        if alt_name:
+            kwargs["alt_names"] = alt_name
 
-    #     rows = self._model_cls.fts_match(identifier, exact_match=True)
-    #     return [r.dto for r in rows]
+        return super().filter(query, name, limit, **kwargs)
 
     @property
     def _sql_filter_base(self):

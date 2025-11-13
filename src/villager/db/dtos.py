@@ -34,7 +34,6 @@ class Country(DTO):
 
 @dataclass
 class SubdivisionBasic:
-    id: int
     name: str
     geonames_code: str
     iso_code: str

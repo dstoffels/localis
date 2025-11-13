@@ -40,6 +40,7 @@ class CityModel(Model[City]):
         display_name = ", ".join(display_parts)
 
         return City(
+            id=self.id,
             name=self.name,
             display_name=display_name,
             subdivisions=subdivisions,
@@ -68,7 +69,7 @@ class CityModel(Model[City]):
         self.admin1 = admin1
         self.admin2 = admin2
         self.country = country
-        self.alt_names = alt_names
+        self.alt_names = alt_names or ""
         self.population = population
         self.lat = lat
         self.lng = lng

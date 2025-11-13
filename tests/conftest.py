@@ -1,6 +1,10 @@
 import os
 import pytest
 
+BLUE = "\033[94m"
+BROWN = "\033[33m"
+RESET = "\033[0m"
+
 
 def pytest_itemcollected(item: pytest.Item):
     """Display class and function docstrings, fallback to names, and include filename."""

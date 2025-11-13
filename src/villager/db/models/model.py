@@ -8,7 +8,6 @@ from typing import Type
 from .fields import Field, Expression
 import json
 from villager.utils import sanitize_fts_query
-import threading
 
 TDTO = TypeVar("TDTO", bound=DTO)
 

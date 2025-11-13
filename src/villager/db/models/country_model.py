@@ -37,7 +37,7 @@ class CountryModel(Model[Country]):
         self.alpha2 = alpha2
         self.alpha3 = alpha3
         self.numeric = numeric
-        self.alt_names = alt_names
+        self.alt_names = alt_names or ""
         self.flag = flag
 
         super().__init__(**kwargs)

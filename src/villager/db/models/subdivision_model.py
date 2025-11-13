@@ -35,7 +35,7 @@ class SubdivisionModel(Model[Subdivision]):
         **kwargs
     ):
         self.name = name
-        self.alt_names = alt_names
+        self.alt_names = alt_names or ""
         self.type = type
         self.geonames_code = geonames_code
         self.iso_code = iso_code

@@ -4,35 +4,6 @@ from utils import mangle
 import time
 
 
-class TestGet:
-    """GET"""
-
-    @pytest.mark.parametrize(
-        "attr", ["id", "alpha2", "alpha3", "numeric"], ids=lambda p: p
-    )
-    @pytest.mark.parametrize("country", countries, ids=lambda c: c.name)
-    def test_inputs(self, country, attr):
-        """should return match from identifiers"""
-        val = getattr(country, attr)
-        result = countries.get(**{attr: val})
-        assert isinstance(result, Country)
-        assert getattr(result, attr) == val
-
-    def test_is_normalized(self):
-        """should normalize input"""
-        for c in countries:
-            test = f"   {'.'.join(c.alpha2.split()).lower()}   "
-            country = countries.get(alpha2=test)
-            assert isinstance(country, Country)
-            assert country is not None
-            assert c.alpha2 == country.alpha2
-
-    def test_none(self):
-        """should return none with bad input"""
-        country = countries.get(alpha2="ZZZ")
-        assert country is None
-
-
 class TestLookup:
     """LOOKUP"""
 

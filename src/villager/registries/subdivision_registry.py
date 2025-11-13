@@ -45,18 +45,18 @@ class SubdivisionRegistry(Registry[SubdivisionModel, Subdivision]):
     #     if row:
     #         return row.dto
 
-    def filter(self, name: str, country="", **kwargs) -> list[Subdivision]:
-        """Lookup subdivisions by exact name, optionally filtered by country."""
-        if not name:
-            return []
+    # def filter(self, name: str, country="", **kwargs) -> list[Subdivision]:
+    #     """Lookup subdivisions by exact name, optionally filtered by country."""
+    #     if not name:
+    #         return []
 
-        norm_q = normalize(name)
-        if country:
-            norm_q = f"{norm_q} {country}"
+    #     norm_q = normalize(name)
+    #     if country:
+    #         norm_q = f"{norm_q} {country}"
 
-        rows = self._model_cls.fts_match(norm_q, exact_match=True)
+    #     rows = self._model_cls.fts_match(norm_q, exact_match=True)
 
-        return [r.dto for r in rows]
+    #     return [r.dto for r in rows]
 
     def by_country(self, country_code) -> list[Subdivision]:
         """Fetch all subdivisions for a given country by code."""

@@ -18,25 +18,25 @@ def match_exact(model_cls: Type[Model], model: Model):
 
 
 class TestGet:
-    """get"""
+    """GET"""
 
     def test_returns_one(self):
-        """returns an exact match from field"""
+        """should return a single, exact match"""
         result = CountryModel.get(CountryModel.alpha2 == "US")
         assert not isinstance(result, list)
         assert result.alpha2 == "US"
 
     def test_returns_none(self):
-        """returns None if no match"""
+        """should return None if no match found"""
         result = CountryModel.get(CountryModel.name == "Chicago")
         assert result is None
 
 
 class TestSelect:
-    """select"""
+    """SELECT"""
 
     def test_all(self):
-        """returns the entire table with no params"""
+        """should return entire table if no args given"""
 
         results = CountryModel.select()
         count = CountryModel.count()
@@ -52,7 +52,7 @@ class TestSelect:
 
 
 class TestFTSMatch:
-    """fts_match"""
+    """FTS_MATCH"""
 
     sample = random.sample(list(villager.countries), 3)
 
