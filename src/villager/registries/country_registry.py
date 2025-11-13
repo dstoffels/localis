@@ -25,6 +25,7 @@ class CountryRegistry(Registry[CountryModel, Country]):
         alpha2: str = None,
         alpha3: str = None,
         numeric: int = None,
+        **kwargs,
     ):
         cls = self._model_cls
 
@@ -52,7 +53,8 @@ class CountryRegistry(Registry[CountryModel, Country]):
         alt_name: str = None,
         **kwargs,
     ):
-
+        if kwargs:
+            return []
         if official_name:
             kwargs["official_name"] = official_name
         if alt_name:

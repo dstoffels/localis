@@ -11,8 +11,13 @@ class TestGet:
     """GET"""
 
     def test_get_none(self, registry: Registry):
-        """get should return none if no match found"""
+        """should return None if no match found"""
         result = registry.get(id=-1)
+        assert result is None
+
+    def test_get_kwargs(self, registry: Registry):
+        """should return None if given an invalid kwarg"""
+        result = registry.get(pid=1)
         assert result is None
 
 
@@ -21,8 +26,13 @@ class TestFilter:
     """FILTER"""
 
     def test_filter_none(self, registry: Registry):
-        """should return an empty list when no matches found"""
+        """should return [] if no matches are found"""
         results = registry.filter("asjh238gjs")
+        assert results == []
+
+    def test_filter_kwargs(self, registry: Registry):
+        """should return [] if given an invalid kwarg"""
+        results = registry.filter(pid="1234")
         assert results == []
 
     def test_filter_limit(self, registry: Registry):

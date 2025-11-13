@@ -15,7 +15,6 @@ class TestGet:
     def test_get(self, field: str, city: City):
         """should fetch city by:"""
         value = getattr(city, field)
-        print(value)
         kwarg = {field: value}
         result = cities.get(**kwarg)
         assert isinstance(result, City)

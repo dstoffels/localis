@@ -41,7 +41,7 @@ class Registry(Generic[TModel, TDTO], ABC):
     def count(self) -> int:
         return self.__len__()
 
-    def get(self, *, id: int | None = None) -> TDTO | None:
+    def get(self, *, id: int | None = None, **kwargs) -> TDTO | None:
         return None
 
     def filter(
