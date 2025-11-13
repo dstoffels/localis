@@ -1,24 +1,37 @@
-# from villager import subdivisions, Subdivision, countries
-# from utils import mangle
-# import pytest
-# import time
+from villager import subdivisions, Subdivision, countries
+from utils import mangle
+import pytest
 
 
-# @pytest.fixture(autouse=True)
-# def track_test_metrics(request):
-#     start = time.perf_counter()
-#     yield
-#     duration = time.perf_counter() - start
-#     print(f"\nTest duration: {duration:.3f}s")
+class TestGet:
+    """GET"""
 
+    def test_id(self):
+        """should return subdivision by id"""
 
-# class TestGet:
-#     def test_iso_code(self):
-#         for s in subdivisions:
-#             subdivision = subdivisions.get(s.iso_code)
-#             assert isinstance(subdivision, Subdivision)
-#             assert subdivision is not None
-#             assert s.iso_code == subdivision.iso_code
+        for s in subdivisions:
+            sub = subdivisions.get(id=s.id)
+            assert isinstance(sub, Subdivision)
+            assert s.id == sub.id
+
+    def test_iso_code(self):
+        """should return subdivision by iso_code if it has one"""
+        for s in subdivisions:
+            sub = subdivisions.get(iso_code=s.iso_code)
+
+            # not all have iso_codes, so they CAN be None
+            if sub is not None:
+                assert isinstance(sub, Subdivision)
+                assert s.iso_code == sub.iso_code
+            else:
+                assert sub is None  # not found
+
+    def test_geonames_code(self):
+        '''should return subdivision by geonames_code if it has one'''
+
+        for s in subdivisions:
+            sub = 
+
 
 #     def test_is_normalized(self):
 #         for s in subdivisions:

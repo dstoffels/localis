@@ -21,10 +21,10 @@ class CountryRegistry(Registry[CountryModel, Country]):
     def get(
         self,
         *,
-        id: int | None = None,
-        alpha2: str | None = None,
-        alpha3: str | None = None,
-        numeric: int | None = None,
+        id: int = None,
+        alpha2: str = None,
+        alpha3: str = None,
+        numeric: int = None,
     ):
         cls = self._model_cls
 

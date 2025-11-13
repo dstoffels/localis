@@ -7,33 +7,16 @@ import time
 class TestGet:
     """GET"""
 
-    def test_id(self):
-        """should return country by id"""
-        for c in countries:
-            country = countries.get(id=c.id)
-            assert isinstance(country, Country)
-            assert c.id == country.id
-
-    def test_alpha2(self):
-        """should return country by alpha2"""
-        for c in countries:
-            country = countries.get(alpha2=c.alpha2)
-            assert isinstance(country, Country)
-            assert c.alpha2 == country.alpha2
-
-    def test_alpha3(self):
-        """should return country by alpha3"""
-        for c in countries:
-            country = countries.get(alpha3=c.alpha3)
-            assert isinstance(country, Country)
-            assert c.alpha3 == country.alpha3
-
-    def test_numeric(self):
-        """should return country by numeric code"""
-        for c in countries:
-            country = countries.get(numeric=c.numeric)
-            assert isinstance(country, Country)
-            assert c.numeric == country.numeric
+    @pytest.mark.parametrize(
+        "attr", ["id", "alpha2", "alpha3", "numeric"], ids=lambda p: p
+    )
+    @pytest.mark.parametrize("country", countries, ids=lambda c: c.name)
+    def test_inputs(self, country, attr):
+        """should return match from identifiers"""
+        val = getattr(country, attr)
+        result = countries.get(**{attr: val})
+        assert isinstance(result, Country)
+        assert getattr(result, attr) == val
 
     def test_is_normalized(self):
         """should normalize input"""
@@ -56,26 +39,26 @@ class TestLookup:
     def test_lookup(self):
         """should return a list containing input country"""
         for c in countries:
-            results = countries.lookup(c.name)
+            results = countries.filter(c.name)
             assert results
             assert any(c.id == r.id for r in results)
 
     def test_is_normalized(self):
         """should normalize input"""
         for c in countries:
-            results = countries.lookup(f"   {c.name.lower()}   ")
+            results = countries.filter(f"   {c.name.lower()}   ")
             assert results
             assert any(c.name == r.name for r in results)
 
     def test_none(self):
         """should return [] with bad input"""
-        results = countries.lookup("california")
+        results = countries.filter("california")
         assert results == []
 
     def test_limit(self):
         """should respect limits"""
         limit = 1
-        results = countries.lookup("Congo", limit=limit)
+        results = countries.filter("Congo", limit=limit)
         assert len(results) == limit
 
 

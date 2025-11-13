@@ -115,14 +115,18 @@ class Model(Generic[TDTO], ABC):
     def fts_match(
         cls,
         query: str,
-        limit: int | None = 100,
-        order_by: list[str] = [],
+        column: str = None,
         exact_match: bool = False,
+        order_by: list[str] = [],
+        limit: int | None = 100,
     ):
         if not query:
             return []
 
         query = sanitize_fts_query(query)
+
+        # attempt to match across all fields unless explicit column arg
+        column = column or cls.table_name
 
         if not exact_match:
             tokens = query.split()
@@ -133,7 +137,7 @@ class Model(Generic[TDTO], ABC):
         q_limit = "LIMIT ?" if limit is not None else ""
 
         q = f"""SELECT rowid as id, *, bm25({cls.table_name}, 50.0) as rank FROM {cls.table_name}
-                    WHERE {cls.table_name} MATCH ?
+                    WHERE {column} MATCH ?
                     {q_order_by}
                     {q_limit}"""
 

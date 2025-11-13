@@ -17,12 +17,11 @@ class SubdivisionModel(Model[Subdivision]):
     parent_id = CharField()
 
     def to_dto(self):
-        sub = dict(self)
-        sub["alt_names"] = self.alt_names.split("|")
-        sub["parent_id"] = int(self.parent_id) if self.parent_id else None
-        sub["admin_level"] = 2 if self.parent_id else 1
-
-        return Subdivision(**sub)
+        self.alt_names = self.alt_names.split("|") if self.alt_names else []
+        self.parent_id = int(self.parent_id) if self.parent_id else None
+        self.admin_level = 2 if self.parent_id else 1
+        self.country, self.country_alpha2, self.country_alpha3 = self.country.split("|")
+        return super().to_dto()
 
     def __init__(
         self,

@@ -32,7 +32,7 @@ class CityRegistry(Registry[CityModel, City]):
         )
         return row.dto
 
-    def lookup(
+    def filter(
         self,
         name: str,
         country=None,

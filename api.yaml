@@ -2,47 +2,57 @@ villager:
   countries:
     get:
       description: >
-    lookup:
-      description: >
-        Fetch a country by exact alpha-2, alpha-3.
+        Fetch a single country by id, alpha2, alpha3 or numeric codes
       returns: Country | None
+    filter:
+      description: >
+        Fetch a list of countries filtered by field. Can also filter by all fields with a general query. 
+      returns: list[Country]
     search:
       description: >
-        Fuzzy search countries.
-      returns: List[Tuple[Country, float]]
+        Search for a country with fuzzy matching and returning a list of candidates.
+      returns: list[tuple[Country, float]]
 
   subdivisions:
-    lookup:
+    get:
       description: >
-        Fetch a subdivision by exact iso code.
+        Fetch a single subdivision by unique id, ISO 3166-2 code or geonames code.
       returns: Subdivision | None
+    filter:
+      description: >
+        Fetch a list of subdivisions filtered by field. Can also filter by all fields with a general query. 
+      returns: list[Subdivision]
     search:
       description: >
-        Fuzzy search subdivisions.
+        Search for a subdivisions with fuzzy matching and returning a list of candidates.
       returns: List[Tuple[Subdivision, float]]
-    by_country:
+    for_country:
       description: >
         Fetch all subdivisions for a given country by code.
       returns: List[Subdivision]
-    categories:
+    types_for_country:
       description: >
-        Fetch distinct subdivision categories for a given country by code (e.g. "state", "province"). Helpful for dynamic dropdowns.
+        Fetch distinct subdivision types for a given country (e.g. "state", "province"). Can filter by admin level to refine the list. Helpful for dynamic dropdowns.
       returns: List[str]
 
   cities:
-    lookup:
+    get:
       description: >
-        Fetch a city by exact ?.
+        Fetch a single city by unique id or geonames code.
       returns: City | None
+    filter:
+      description: >
+        Fetch a list of subdivisions filtered by field. Can also filter by all fields with a general query. 
+      returns: list[City]
     search:
       description: >
-        Fuzzy search cities.
+        Search for a city with fuzzy matching and returning a list of candidates..
       returns: List[Tuple[City, float]]
-    by_country:
+    for_country:
       description: >
         Return all cities for a given country name/code (alpha-2/3).
       returns: List[City]
-    by_subdivision:
+    for_subdivision:
       description: >
         Return all cities for a given subdivision code.
       returns: List[City]

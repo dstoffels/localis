@@ -16,19 +16,36 @@ class SubdivisionRegistry(Registry[SubdivisionModel, Subdivision]):
     fuzzy search by these keys, and filtering by country or country code.
     """
 
-    def get(self, iso_code: str) -> Subdivision:
-        """Fetch a subdivision by exact iso code."""
-        if not iso_code:
-            return None
+    def get(self, *, id: int = None, iso_code: str = None, geonames_code: str = None):
+        cls = self._model_cls
 
-        iso_code = iso_code.upper().strip()
+        field_map = {
+            "id": None,
+            "iso_code": cls.iso_code,
+            "geonames_code": cls.geonames_code,
+        }
 
-        row = self._model_cls.get(SubdivisionModel.iso_code == iso_code)
+        model = None
+        for arg, field in field_map.items():
+            val = locals()[arg]
+            if val is not None:
+                model = cls.get_by_id(val) if arg == "id" else cls.get(field == val)
 
-        if row:
-            return row.dto
+        return model.to_dto() if model is not None else None
 
-    def lookup(self, name: str, country="", **kwargs) -> list[Subdivision]:
+    # def get(self, iso_code: str) -> Subdivision:
+    #     """Fetch a subdivision by exact iso code."""
+    #     if not iso_code:
+    #         return None
+
+    #     iso_code = iso_code.upper().strip()
+
+    #     row = self._model_cls.get(SubdivisionModel.iso_code == iso_code)
+
+    #     if row:
+    #         return row.dto
+
+    def filter(self, name: str, country="", **kwargs) -> list[Subdivision]:
         """Lookup subdivisions by exact name, optionally filtered by country."""
         if not name:
             return []
