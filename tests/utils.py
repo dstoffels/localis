@@ -1,5 +1,6 @@
 import random
 import string
+from villager.registries import Registry
 
 
 alphabet = string.ascii_lowercase
@@ -37,3 +38,8 @@ def mangle(s: str, typo_chance: float = 0.15, seed: int = 42) -> str:
         applied += 1
 
     return "".join(s_list)
+
+
+def select_random(reg: Registry):
+    id = random.choice(range(1, reg.count))
+    return reg.get(id=id)

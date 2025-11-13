@@ -11,6 +11,7 @@ BASE_PATH = Path(__file__).parent.parent
 # helper DTO class
 @dataclass
 class CityDTO:
+    geonames_id: int
     name: str
     alt_names: list[str]
     admin1: str

@@ -54,6 +54,8 @@ def parse_fields(
     if len(fields) != 19:
         raise ValueError(f"Expected 19 fields, got {len(fields)}")
 
+    geonames_id = fields[0]
+
     name, alt_names = filter_names(fields)
 
     admin1_code = fields[10]
@@ -73,6 +75,7 @@ def parse_fields(
         raise ValueError(f"Invalid population value: {fields[14]}")
 
     return CityDTO(
+        geonames_id=geonames_id,
         name=name,
         alt_names=alt_names,
         admin1=admin1,

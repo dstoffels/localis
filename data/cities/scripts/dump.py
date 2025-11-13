@@ -3,6 +3,7 @@ from .utils import *
 
 def dump_to_tsv(cities: list[CityDTO]) -> None:
     HEADERS = (
+        "geonames_id",
         "name",
         "alt_names",
         "admin1",

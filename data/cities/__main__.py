@@ -6,8 +6,6 @@
 from .scripts.utils import *
 from .scripts.load import load_cities
 from .scripts.dump import dump_to_tsv
-import json
-import re
 
 
 def main():
@@ -15,22 +13,6 @@ def main():
     subdivisions: dict[str, str] = load_subdivisions()
     cities: list[CityDTO] = load_cities(subdivisions, countries)
     dump_to_tsv(cities)
-
-
-# def parse_tokens(alt_names: str, name: str) -> str:
-#     STOPWORDS = {"the", "of", "and"}
-
-#     tokens: set[str] = set()
-
-#     names = alt_names.split("|")
-
-#     for n in names:
-#         parts = n.lower().strip().split()
-#         for p in parts:
-#             if p not in name.lower().split() and p not in STOPWORDS and len(p) > 2:
-#                 tokens.add(p)
-
-#     return " ".join(sorted(tokens))
 
 
 if __name__ == "__main__":
