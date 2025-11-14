@@ -1,6 +1,5 @@
 from abc import ABC
 from typing import Literal
-from villager.utils import normalize
 from typing import Generic, TypeVar
 
 T = TypeVar("T")

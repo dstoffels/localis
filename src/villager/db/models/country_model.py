@@ -1,7 +1,6 @@
-from .model import Model
-from .fields import CharField, IntField
-from ..dtos import Country
-from dataclasses import dataclass
+from villager.db.models.model import Model
+from villager.db.models.fields import CharField, IntField
+from villager.dtos import Country
 
 
 class CountryModel(Model[Country]):

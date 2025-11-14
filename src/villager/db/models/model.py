@@ -1,12 +1,12 @@
-from ..database import db, Database
-from abc import abstractmethod
-from ..dtos import DTO
+from villager.db import db, Database
+from villager.db.models.fields import Field, Expression
+from villager.dtos import DTO
 from typing import TypeVar, Generic
 from abc import ABC
 import sqlite3
 from typing import Type
-from .fields import Field, Expression
 import json
+from abc import abstractmethod
 from villager.utils import sanitize_fts_query
 
 TDTO = TypeVar("TDTO", bound=DTO)
@@ -33,10 +33,6 @@ class Model(Generic[TDTO], ABC):
         data = self.__dict__
         data.pop("rank")
         return self.dto_class(**data)
-
-    @classmethod
-    def from_tuple(cls, data: tuple) -> TDTO:
-        cls.dto_class
 
     @classmethod
     def create_table(cls) -> None:

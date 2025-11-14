@@ -1,7 +1,6 @@
-from .model import Model
-from .fields import CharField
-from ..dtos import Subdivision, SubdivisionBasic
-from dataclasses import dataclass
+from villager.db.models.model import Model
+from villager.db.models.fields import CharField
+from villager.dtos import Subdivision
 
 
 class SubdivisionModel(Model[Subdivision]):

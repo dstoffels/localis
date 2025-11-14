@@ -1,10 +1,9 @@
 from typing import Iterator, Generic, TypeVar
-from abc import abstractmethod, ABC
-from typing import Type, Callable
+from abc import ABC
+from typing import Type
 from villager.db import db, DTO, Model
 from villager.utils import normalize
 from rapidfuzz import fuzz, process
-from concurrent.futures import ThreadPoolExecutor, as_completed
 
 TModel = TypeVar("TModel", bound=Model)
 TDTO = TypeVar("TDTO", bound=DTO)

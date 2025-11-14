@@ -1,9 +1,6 @@
-from .registry import Registry
-from ..db.dtos import Subdivision
-from typing import Callable, Optional
-from ..db import SubdivisionModel, CountryModel
-
-# from ..literals import CountryCode, CountryName, CountryNumeric
+from villager.registries.registry import Registry
+from villager.dtos import Subdivision
+from villager.db import SubdivisionModel, CountryModel
 from rapidfuzz import fuzz
 from villager.utils import normalize
 

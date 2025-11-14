@@ -1,9 +1,5 @@
 from villager.registries.registry import Registry
 from villager.db import CountryModel, Country
-from villager.db.models.fields import Expression
-
-# from villager.literals import CountryCode, CountryName, CountryNumeric
-from villager.utils import normalize
 
 
 class CountryRegistry(Registry[CountryModel, Country]):

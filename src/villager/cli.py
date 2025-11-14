@@ -1,5 +1,5 @@
 import typer
-from villager.db import MetaStore, CityModel
+from villager.db import MetaStore
 from villager import CityRegistry
 import villager
 

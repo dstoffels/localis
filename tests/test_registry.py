@@ -1,6 +1,7 @@
 import pytest
 from villager import countries, subdivisions, cities
 from villager.registries import Registry
+from villager.dtos import DTO
 
 
 REGISTRIES = [countries, subdivisions, cities]
@@ -41,14 +42,14 @@ class TestFilter:
         assert len(results) == 1
 
     def test_filter_query(self, registry: Registry):
-        """should return a list of objects where any field contains the input"""
+        """should return a list of objects where at least one field contains the input query"""
         query = "Andorra"
-        results = registry.filter(query)
+        results: list[DTO] = registry.filter(query)
         assert len(results) > 0
         assert all(
-            any(query.lower() in str(value).lower() for value in vars(result).values())
-            for result in results
-        )
+            any(query.lower() in str(value).lower() for value in r.to_dict().values())
+            for r in results
+        ), "All results should have at least one field containing the query"
 
     def test_filter_by_name(self, registry: Registry):
         """should return a list of objects where the name field contains the name kwarg"""

@@ -1,8 +1,6 @@
 from villager.registries.registry import Registry
-from villager.db import CityModel, SubdivisionModel, CountryModel, City, MetaStore
+from villager.db import CityModel, City, MetaStore
 from villager.utils import normalize
-
-# from villager.literals import CountryCode, CountryName
 
 
 class CityRegistry(Registry[CityModel, City]):
