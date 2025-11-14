@@ -11,10 +11,13 @@ packages = [
 python = "^3.12"
 rapidfuzz = "^3.13.0"
 unidecode = "^1.4.0"
+typer = "^0.20.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.4.1"
 pytest-watch = "^4.2.0"
 pycountry = "^24.6.1"
 requests = "^2.32.4"
-pyperclip = "^1.11.0"
+
+[tool.poetry.scripts]
+villager = 'villager.cli:app'
