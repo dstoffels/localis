@@ -22,10 +22,10 @@ def pytest_itemcollected(item: pytest.Item):
 
     # Function docstring
     func_doc = getattr(item.obj, "__doc__", None)
-    func_title = func_doc.strip().split("\n")[0] if func_doc else item.obj.__name__
+    func_title: str = item.obj.__name__ + "::" + func_doc.strip().split("\n")[0]
 
     # Clean function title
-    func_title = func_title.replace("test_", "")
+    # func_title = func_title.replace("test_", "")
 
     parts = [file_title]
     if cls_title:
