@@ -60,7 +60,7 @@ class CityRegistry(Registry[CityModel, City]):
             print("No cities to unload.")
             return
         print(f"Removing {self.count} cities")
-        CityModel.truncate()
+        CityModel.drop()
         self._meta.set(self.META_LOADED_KEY, "0")
         print("Cities unloaded from db.")
 

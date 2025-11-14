@@ -11,14 +11,18 @@ class MetaStore:
 
     @classmethod
     def create_table(cls):
-        db.execute(
+        cls.db.execute(
             """
                 CREATE TABLE IF NOT EXISTS meta(
                     key TEXT PRIMARY KEY,
                     value TEXT)"""
         )
 
+        cls.db.execute("UPDATE meta SET value = 0 WHERE value = 1")
+        cls.db.commit()
+
     def get(self, key: str):
+
         if key in self._cache:
             return self._cache[key]
 

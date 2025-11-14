@@ -64,7 +64,16 @@ class Registry(Generic[TModel, TDTO], ABC):
 
         return [r.to_dto() for r in results]
 
-    def search(self, query: str, limit=5, **kwargs) -> list[TDTO]:
+    def search(self, query: str, limit=None, **kwargs) -> list[TDTO]:
+        if not query:
+            return []
+
+        norm_query = normalize(query)
+
+        # run loop until no new, acceptable fuzzy matches are produced from fts candidates?
+        return []
+
+    def search_old(self, query: str, limit=5, **kwargs) -> list[TDTO]:
         """"""
         if not query:
             return []

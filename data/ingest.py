@@ -46,7 +46,8 @@ def ingest_subdivisions() -> None:
                 raise e
 
 
-def ingest_cities(testing: bool = False) -> None:
+def ingest_cities() -> None:
+    db.create_tables([CityModel])
     with open(DATA_DIR / "cities/cities.tsv", newline="", encoding="utf-8") as f:
         CityModel.load(f)
 
@@ -69,9 +70,9 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    db.nuke()
-    db.create_tables([CountryModel, SubdivisionModel, CityModel])
+    db.drop_tables([CountryModel, SubdivisionModel, CityModel])
     MetaStore.create_table()
+    db.create_tables([CountryModel, SubdivisionModel])
     ingest_countries()
     ingest_subdivisions()
     if args.full:

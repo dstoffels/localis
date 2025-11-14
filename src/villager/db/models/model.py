@@ -152,10 +152,9 @@ class Model(Generic[TDTO], ABC):
         return [cls.from_row(row) for row in rows if row]
 
     @classmethod
-    def truncate(cls):
-        cls.db.execute(f"DROP TABLE {cls.table_name}")
+    def drop(cls):
+        cls.db.execute(f"DROP TABLE IF EXISTS {cls.table_name}")
         cls.db.commit()
-        cls.db.vacuum()
 
     def __str__(self):
         return json.dumps(self.__dict__, indent=4)

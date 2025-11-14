@@ -93,6 +93,11 @@ class Database:
             if hasattr(table, "create_table") and callable(table.create_table):
                 table.create_table()
 
+    def drop_tables(self, tables: list[object]) -> None:
+        for table in tables:
+            if hasattr(table, "drop") and callable(table.drop):
+                table.drop()
+
     def create_fts_table(
         self,
         table_name: str,
@@ -119,16 +124,6 @@ class Database:
     def analyze(self) -> sqlite3.Cursor:
         """Analyze database for query optimization"""
         return self.execute("ANALYZE")
-
-    def nuke(self) -> None:
-        self.execute("PRAGMA writable_schema = 1;")
-        self.execute(
-            "DELETE FROM sqlite_master WHERE type IN ('table', 'index', 'trigger');"
-        )
-        self.execute("PRAGMA writable_schema = 0;")
-        self.commit()
-
-        self.vacuum()
 
 
 db = Database("src/villager/db/villager.db")

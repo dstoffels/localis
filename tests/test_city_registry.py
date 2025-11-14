@@ -78,5 +78,6 @@ class TestFilter:
 
         assert len(results) > 0, f"should have at least 1 result, RESULTS{results}"
         assert all(
-            any(alt_name in name for name in r.alt_names) for r in results
+            any(alt_name in name or alt_name == name for name in r.alt_names)
+            for r in results
         ), f"alt_name: {alt_name}"
