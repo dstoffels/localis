@@ -69,16 +69,16 @@ htmlcov/
 # ======================================
 # SQLite database & local data
 # ======================================
-villager.db
+# villager.db*
 *.sqlite
 *.sqlite3
 
 # ======================================
 # Custom project-specific ignores
 # ======================================
-data/
-.villager_cache/  # If you use a custom cache dir
-*.zip              # Optional: ignore zipped DB dumps
+allCountries.txt
+.villager_cache/
+*.zip
 
 # Keep empty folders tracked (optional)
 !data/.gitkeep
