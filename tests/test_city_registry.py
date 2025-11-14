@@ -24,11 +24,38 @@ class TestGet:
 class TestFilter:
     """FILTER"""
 
-    @pytest.mark.parametrize("field", ["admin1", "admin2", "country"])
-    def test_fields(self, field: str, city: City):
-        """should return a list of cities where the field kwarg is in:"""
-        assert False, "UNIMPLEMENTED"
+    def test_country(self, city: City):
+        """should return a list of cities where its country contains the country kwarg"""
+        results = cities.filter(country=city.country)
+
+        assert len(results) > 0, "should return at least 1"
+        assert all(city.country in r.country for r in results)
+
+    @pytest.mark.parametrize("index", [0, 1])
+    def test_admin(self, index: int, city: City):
+        """should return a list of cities where its admin field contains the input admin1 kwarg"""
+
+        # ensure we have an admin1 to choose from
+        while not len(city.subdivisions) > 1:
+            city = select_random(cities)
+
+        sub_name = city.subdivisions[index].name
+
+        if index == 0:
+            results = cities.filter(admin1=sub_name)
+        elif index == 1:
+            results = cities.filter(admin2=sub_name)
+
+        assert len(results) > 0
+        assert all(sub_name == r.subdivisions[index].name for r in results)
 
     def test_alt_names(self, city: City):
         """should return a list of cities where the alt names contain the alt_name kwarg"""
-        assert False, "UNIMPLEMENTED"
+        while not city.alt_names:
+            city = select_random(cities)
+
+        alt_name = city.alt_names[0]
+        results = cities.filter(alt_name=alt_name)
+
+        assert len(results) > 0, "should have at least 1 result"
+        assert all(alt_name in r.alt_names for r in results)

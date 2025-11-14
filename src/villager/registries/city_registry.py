@@ -34,9 +34,28 @@ class CityRegistry(Registry[CityModel, City]):
 
         return model.to_dto() if model is not None else None
 
-    def filter(self, query=None, name=None, limit=None, **kwargs):
+    def filter(
+        self,
+        query: str = None,
+        name: str = None,
+        limit: int = None,
+        admin1: str = None,
+        admin2: str = None,
+        country: str = None,
+        alt_name: str = None,
+        **kwargs,
+    ):
         if kwargs:
             return []
+        if admin1:
+            kwargs["admin1"] = admin1
+        if admin2:
+            kwargs["admin2"] = admin2
+        if country:
+            kwargs["country"] = country
+        if alt_name:
+            kwargs["alt_names"] = alt_name
+
         return super().filter(query, name, limit, **kwargs)
 
     # def filter(
