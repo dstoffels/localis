@@ -67,39 +67,3 @@ class CountryRegistry(Registry[CountryModel, Country]):
         return f"""SELECT c.*, f.tokens FROM countries_fts f
         JOIN countries c ON f.rowid = c.id
         """
-
-    CODE_ALIASES = {
-        "uk": "GB",
-    }
-
-    ALIASES = {
-        "england": "United Kingdom",
-        "scotland": "United Kingdom",
-        "wales": "United Kingdom",
-        "northern ireland": "United Kingdom",
-        "great britain": "United Kingdom",
-        "britain": "United Kingdom",
-        "united states of america": "United States",
-        "america": "United States",
-        "czech republic": "Czechia",
-        "ivory coast": "Côte d'Ivoire",
-        "cote d'ivoire": "Côte d'Ivoire",
-        "burma": "Myanmar",
-        "swaziland": "Eswatini",
-        "holland": "Netherlands",
-        "macedonia": "North Macedonia",
-        "cape verde": "Cabo Verde",
-        "laos": "Lao People's Democratic Republic",
-        "syria": "Syrian Arab Republic",
-        "russia": "Russian Federation",
-        "ussr": "Russian Federation",
-        "soviet union": "Russian Federation",
-        "vietnam": "Viet Nam",
-        "zaire": "Congo",
-        "brunei": "Brunei Darussalam",
-        "são tomé and príncipe": "Sao Tome and Principe",
-        "east timor": "Timor-Leste",
-        "yugoslavia": "Serbia",
-        "east germany": "Germany",
-        "west germany": "Germany",
-    }

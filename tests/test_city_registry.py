@@ -19,3 +19,16 @@ class TestGet:
         result = cities.get(**kwarg)
         assert isinstance(result, City)
         assert getattr(result, field) == value
+
+
+class TestFilter:
+    """FILTER"""
+
+    @pytest.mark.parametrize("field", ["admin1", "admin2", "country"])
+    def test_fields(self, field: str, city: City):
+        """should return a list of cities where the field kwarg is in:"""
+        assert False, "UNIMPLEMENTED"
+
+    def test_alt_names(self, city: City):
+        """should return a list of cities where the alt names contain the alt_name kwarg"""
+        assert False, "UNIMPLEMENTED"

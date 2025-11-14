@@ -40,9 +40,25 @@ class SubdivisionRegistry(Registry[SubdivisionModel, Subdivision]):
 
         return model.to_dto() if model is not None else None
 
-    def filter(self, query=None, name=None, limit=None, **kwargs):
+    def filter(
+        self,
+        query: str = None,
+        name: str = None,
+        limit: int = None,
+        type: str = None,
+        country: str = None,
+        alt_name: str = None,
+        **kwargs
+    ):
         if kwargs:
             return []
+        if type:
+            kwargs["type"] = type
+        if country:
+            kwargs["country"] = country
+        if alt_name:
+            kwargs["alt_names"] = alt_name
+
         return super().filter(query, name, limit, **kwargs)
 
     def by_country(self, country_code) -> list[Subdivision]:
