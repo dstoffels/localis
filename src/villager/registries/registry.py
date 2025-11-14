@@ -1,119 +1,136 @@
 from typing import Iterator, Generic, TypeVar
 from abc import abstractmethod, ABC
-from ..db.models import DTOModel
-from typing import Type, NamedTuple, Dict
-from peewee import prefetch
-from ..types import DTOBase
-from villager.db import db
+from typing import Type, Callable
+from villager.db import db, DTO, Model
 from villager.utils import normalize
-from rapidfuzz import fuzz
+from rapidfuzz import fuzz, process
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
-TModel = TypeVar("TModel", bound=DTOModel)
-TDTO = TypeVar("TDTO", bound=DTOBase)
-
-
-class CacheItem(NamedTuple, Generic[TModel, TDTO]):
-    """Cache item for a registry entry."""
-
-    model: TModel
-    dto: TDTO
-
-
-class Cache(Dict[int, CacheItem[TModel, TDTO]]):
-    """Cache for registry entries."""
-
-    def __init__(self, model: Type[TModel]):
-        super().__init__()
-        self.model_cls: Type[TModel] = model
-
-    def load(self, *related_models: Type[DTOModel]) -> "Cache[TModel, TDTO]":
-        """Prefetch model and related models, and populate the cache."""
-        base_query = self.model_cls.select()
-        prefetch_query: Iterator[TModel] = prefetch(base_query, *related_models)
-
-        for m in prefetch_query:
-            self[m.id] = CacheItem(m, m.to_dto())
-
-        return self
+TModel = TypeVar("TModel", bound=Model)
+TDTO = TypeVar("TDTO", bound=DTO)
 
 
 class Registry(Generic[TModel, TDTO], ABC):
     """Abstract base registry class defining interface for lookup and search."""
 
-    def __init__(self, model_cls: Type[TModel], dto_cls: Type[TDTO]):
+    def __init__(self, model_cls: Type[TModel]):
         self._model_cls: Type[TModel] = model_cls
-        self._dto_cls: Type[TDTO] = dto_cls
         self._count: int | None = None
-        self._cache: Cache[TModel, TDTO] | None = None
+        self._cache: list[TDTO] = None
+        self._order_by: str = ""
+        self._addl_search_attrs: list[str] = []
+
+    @property
+    def cache(self):
+        if self._cache is None:
+            self._cache = [m.to_dto() for m in self._model_cls.select()]
+        return self._cache
 
     def __iter__(self) -> Iterator[TDTO]:
-        return (item.dto for item in self.cache.values())
+        return iter(self.cache)
 
-    def __getitem__(self, index: int) -> TDTO:
-        return self.cache.values()[index].to_dto()
+    def __getitem__(self, index: int | slice) -> TDTO | list[TDTO]:
+        return self.cache[index]
 
     def __len__(self) -> int:
         if self._count is None:
-            self._count = self._model_cls.select().count()
+            self._count = self._model_cls.count()
         return self._count
 
     @property
     def count(self) -> int:
         return self.__len__()
 
-    @property
-    def cache(self) -> Cache[TModel, TDTO]:
-        if self._cache is None:
-            self._load_cache()
-        return self._cache
-
-    @abstractmethod
-    def get(self, identifier: str | int) -> TDTO | None:
+    def get(self, *, id: int | None = None, **kwargs) -> TDTO | None:
         return None
 
-    @abstractmethod
-    def lookup(self, identifier: str) -> list[TDTO]:
-        return []
+    def filter(
+        self, query: str = None, name: str = None, limit: int = None, **kwargs
+    ) -> list[TDTO]:
+        if kwargs:
+            if name:
+                kwargs.update({"name": name})
+            results = self._model_cls.fts_match(
+                field_queries=kwargs, order_by=["rank"], limit=limit
+            )
 
-    @abstractmethod
-    def search(self, query: str, limit: int = 5) -> list[tuple[TDTO, float]]:
-        return self._fuzzy_search(query, limit)
+        elif name:
+            results = self._model_cls.fts_match(
+                field_queries={"name": name}, order_by=["rank"], limit=limit
+            )
+        elif query:
+            results = self._model_cls.fts_match(query, order_by=["rank"], limit=limit)
+        else:
+            return []
 
-    @abstractmethod
-    def _build_sql(self) -> str:
-        return ""
+        return [r.to_dto() for r in results]
 
-    def _query_fts(self, fts_query: str, limit=100) -> list[TDTO]:
-        cursor = db.execute_sql(
-            self._build_sql(),
-            (fts_query, limit),
-        )
-        return [self._dto_cls.from_row(r) for r in cursor]
+    def search(self, query: str, limit=5, **kwargs) -> list[TDTO]:
+        """"""
+        if not query:
+            return []
 
-    def _fuzzy_search(self, query: str, limit: int = 5) -> list[TDTO]:
         norm_query = normalize(query)
-        tokens = norm_query.split(" ")
+        tokens = norm_query.split()
+        min_len = len(tokens) if len(tokens) > 1 else 2
+        total_tok_len = sum(len(t) for t in tokens)
 
-        matches: dict[str, tuple[TDTO, float]] = {}
+        MAX_ITERATIONS = 20
+        NAME_WEIGHT = 0.7
+        TOKEN_WEIGHT = 0.3
 
-        tokens_len = sum([len(t) for t in tokens])
+        matches: dict[int, tuple[TDTO, float]] = {}
 
-        while tokens_len > len(tokens) and len(matches) < limit:
-            fts_q = " ".join([f"{t}*" for t in tokens])
-            results: list[TDTO] = self._query_fts(fts_q, limit=100)
-            for r in results:
-                score = fuzz.token_sort_ratio(query, r.name) / 100
+        # exact match on initial query unless overridden
+        candidates: list[RowData[TDTO]] = self._model_cls.fts_match(
+            norm_query, exact_match=True, order_by=self._order_by
+        )
 
-                matches[r.name] = (r, score)
+        for step in range(MAX_ITERATIONS):
+            results = process.extract(
+                norm_query,
+                choices=[c.search_tokens for c in candidates],
+                scorer=fuzz.WRatio,
+                limit=None,
+            )
 
-            tokens_len = 0
-            for i, t in enumerate(tokens):
-                if len(t) <= 1:
-                    continue
-                tokens[i] = t[:-1]
-                tokens_len += len(t)
+            for _, token_score, idx in results:
+                candidate = candidates[idx]
+                name_score = fuzz.ratio(norm_query, candidate.dto.name)
 
-        return sorted(matches.values(), key=lambda x: x[1], reverse=True)[:limit]
+                # consider additional attributes for scoring. uses name weighting on the highest score found betwen name and additional attrs
+                for attr in self._addl_search_attrs:
+                    attr_value = getattr(candidate.dto, attr, None)
+                    if attr_value:
+                        attr_score = fuzz.ratio(norm_query, normalize(attr_value))
+                        if attr_score > name_score:
+                            name_score = attr_score
 
-    def _load_cache(self, *related_models: Type[DTOModel]):
-        self._cache = Cache(self._model_cls).load(*related_models)
+                score = name_score * NAME_WEIGHT + token_score * TOKEN_WEIGHT
+
+                matches[candidate.id] = (candidate, score)
+
+            # stop if we have enough matches or tokens are too short
+            if len(matches) >= limit * 2 or total_tok_len <= min_len:
+                break
+
+            # truncate tokens and generate next FTS query
+            new_tokens = []
+            total_tok_len = 0
+            for t in tokens:
+                new_len = max(2, len(t) - step)
+                new_tokens.append(t[:new_len])
+                total_tok_len += new_len
+            fts_q = " ".join(new_tokens)
+
+            candidates = self._model_cls.fts_match(fts_q, order_by=self._order_by)
+
+        return self._sort_matches(matches.values(), limit)
+
+    def _sort_matches(self, matches: list, limit: int) -> list[TDTO]:
+        return [
+            (row_data.dto, score)
+            for row_data, score in sorted(matches, key=lambda r: r[1], reverse=True)[
+                :limit
+            ]
+        ]
