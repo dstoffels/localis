@@ -2,8 +2,8 @@ import pytest
 from villager import countries, subdivisions, cities
 from villager.registries import Registry
 from villager.dtos import DTO
-from utils import select_random
-
+from utils import select_random, mangle
+import random
 
 REGISTRIES = [countries, subdivisions, cities]
 
@@ -82,3 +82,21 @@ class TestSearch:
         results = registry.search(subject.name)
 
         assert any(subject.name == r.name for r, score in results)
+
+    def test_mangled(self, registry: Registry):
+        """should return a list of objects with at least one field matching input query"""
+        COUNT = 50
+        ids = random.choices(range(1, registry.count), k=COUNT + 1)
+        test_subjects: list[DTO] = []
+        for id in ids:
+            test_subjects.append(registry.get(id=id))
+
+        successes = 0
+        for subj in test_subjects:
+            results: list[tuple[DTO, float]] = registry.search(mangle(subj.name))
+            if any(subj.id == r.id for r, score in results):
+                successes += 1
+
+        assert successes > 0
+        rate = successes / COUNT
+        assert rate > 0.5

@@ -9,7 +9,7 @@ from abc import abstractmethod, ABC
 class SearchBase(ABC):
     MAX_ITERATIONS = 10
     MIN_TOKEN_LEN = 2
-    SCORE_THRESHOLD = 1.0
+    SCORE_THRESHOLD = 1.5
 
     def __init__(
         self,
@@ -38,15 +38,20 @@ class SearchBase(ABC):
 
         for i in range(self.MAX_ITERATIONS):
             self._score_candidates(candidates)
-            if self.at_limit():
+            if self._tokens_exhausted() or self._at_limit():
                 break
 
             self._truncate_tokens()
             candidates = self._fetch_candidates()
 
     def _fetch_candidates(self, exact=False) -> list[Model]:
+        tokens_exhausted = self._tokens_exhausted()
+        order_by = ["rank"] if tokens_exhausted else []
+        limit = 1000 if tokens_exhausted else None
         fts_q = " ".join(self.tokens)
-        return self.model_cls.fts_match(fts_q, exact_match=exact)
+        return self.model_cls.fts_match(
+            fts_q, exact_match=exact, limit=limit, order_by=order_by
+        )
 
     def _score_candidates(self, candidates: list[Model]):
         for c in candidates:
@@ -66,10 +71,13 @@ class SearchBase(ABC):
             t[:-1] if len(t) > self.MIN_TOKEN_LEN else t for t in self.tokens
         ]
 
-    def at_limit(self) -> bool:
+    def _at_limit(self) -> bool:
         if self.limit is not None:
             return len(self._matches) >= self.limit
         return False
+
+    def _tokens_exhausted(self) -> bool:
+        return all(len(t) <= self.MIN_TOKEN_LEN for t in self.tokens)
 
     @property
     def results(self) -> list[tuple[DTO, float]]:

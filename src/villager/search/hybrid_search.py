@@ -2,9 +2,10 @@ from villager.search.search_base import SearchBase
 from villager.db import Model
 from villager.utils import normalize
 from villager.dtos import DTO
+from rapidfuzz import fuzz
 
 
-class NgramSearch(SearchBase):
+class HybridSearch(SearchBase):
     NGRAM_LEN = 2
 
     def __init__(self, query, model_cls, field_weights, limit=None):
@@ -21,6 +22,8 @@ class NgramSearch(SearchBase):
 
         for field, weight in self.field_weights.items():
             value = getattr(model, field, "")
+            fuzz_score = fuzz.token_set_ratio(value, self.query) / 100 * weight
+            score += fuzz_score
             for token in value.replace("|", " ").split():
                 if token not in token_map:
                     token_map[token] = (self._ngram(token), weight)
