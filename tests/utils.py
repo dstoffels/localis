@@ -7,36 +7,55 @@ from villager.dtos import DTO
 alphabet = string.ascii_lowercase
 
 
-def mangle(s: str, typo_chance: float = 0.15, seed: int = 42) -> str:
-    rng = random.Random(seed)
+def mangle(
+    s: str,
+    typo_chance: float = 0.15,
+    seed: int | None = None,
+) -> str:
     if not s or len(s) < 4:
         return s
 
-    s_list = list(s)
-    typo_ops = ["swap", "replace", "delete", "insert"]
-    num_typos = max(1, int(len(s) * typo_chance))
-    applied = 0
-    positions = set()
+    rng = random.Random(seed)
 
-    while applied < num_typos:
-        # Skip first two characters to preserve prefix
-        i = rng.randint(2, len(s_list) - 2)
-        if i in positions or s_list[i].isspace():
+    s_list = list(s)
+    n = len(s_list)
+
+    realism_factor = 0.5
+    num_typos = max(1, round(n * typo_chance * realism_factor))
+
+    typo_ops = rng.choices(
+        ["replace", "swap", "delete", "insert"],
+        weights=[60, 25, 10, 5],
+        k=num_typos,
+    )
+
+    used_positions = set()
+
+    for op in typo_ops:
+        # find a usable position (avoid whitespace and repeats)
+        attempts = 0
+        while attempts < 10:
+            idx = rng.randint(1, len(s_list) - 2)
+            if idx not in used_positions and not s_list[idx].isspace():
+                break
+            attempts += 1
+        else:
             continue
 
-        op = rng.choice(typo_ops)
+        used_positions.add(idx)
 
-        if op == "swap" and i < len(s_list) - 1 and not s_list[i + 1].isspace():
-            s_list[i], s_list[i + 1] = s_list[i + 1], s_list[i]
-        elif op == "replace":
-            s_list[i] = rng.choice(alphabet)
-        elif op == "insert":
-            s_list.insert(i + 1, rng.choice(alphabet))
+        # apply op
+        if op == "replace":
+            s_list[idx] = rng.choice(alphabet)
+
+        elif op == "swap" and idx < len(s_list) - 1 and not s_list[idx + 1].isspace():
+            s_list[idx], s_list[idx + 1] = s_list[idx + 1], s_list[idx]
+
         elif op == "delete":
-            del s_list[i]
+            del s_list[idx]
 
-        positions.add(i)
-        applied += 1
+        elif op == "insert":
+            s_list.insert(idx + 1, rng.choice(alphabet))
 
     return "".join(s_list)
 
