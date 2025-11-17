@@ -1,15 +1,17 @@
 # Search Engine for registries.
 
 from villager.db import Model
-from villager.utils import normalize
+from villager.utils import normalize, sanitize_fts_query
 from villager.dtos import DTO
 from abc import abstractmethod, ABC
+from concurrent.futures import ThreadPoolExecutor
 
 
 class SearchBase(ABC):
-    MAX_ITERATIONS = 10
-    MIN_TOKEN_LEN = 2
-    SCORE_THRESHOLD = 1.5
+    MAX_ITERATIONS = 8
+    MIN_TOKEN_LEN = 1
+    SCORE_THRESHOLD = 0.35
+    MATCH_THRESHOLD = 0.55
 
     def __init__(
         self,
@@ -18,14 +20,16 @@ class SearchBase(ABC):
         field_weights: dict[str, float],
         limit: int = None,
     ):
-        self.query: str = normalize(query)
+        self.query: str = query
         self.tokens = self.query.split()
         self.model_cls: type[Model] = model_cls
         self.field_weights: dict[str, float] = field_weights
         self.limit: int | None = limit
 
-        # hold a map of seen candidates to prevent repeated scoring
-        self._scored: dict[int, Model] = {}
+        self._max_score = sum(field_weights.values())
+        self._iterations = max(len(t) for t in self.tokens) - self.MIN_TOKEN_LEN
+
+        self._scored: set[int] = set()
         self._matches: dict[Model, float] = {}
 
     def run(self) -> list[tuple[DTO, float]]:
@@ -33,34 +37,42 @@ class SearchBase(ABC):
         return self.results
 
     def main(self):
-        # run loop until no new, acceptable fuzzy matches are produced from fts candidates?
         candidates = self._fetch_candidates(exact=True)
 
-        for i in range(self.MAX_ITERATIONS):
+        for i in range(1, self._iterations + 1):
             self._score_candidates(candidates)
-            if self._tokens_exhausted() or self._at_limit():
-                break
 
             self._truncate_tokens()
-            candidates = self._fetch_candidates()
 
-    def _fetch_candidates(self, exact=False) -> list[Model]:
-        tokens_exhausted = self._tokens_exhausted()
-        order_by = ["rank"] if tokens_exhausted else []
-        limit = 1000 if tokens_exhausted else None
+            candidates = self._fetch_candidates(i)
+            if len(candidates) == 0:
+                continue
+
+    def _fetch_candidates(self, i: int = None, exact=False) -> list[Model]:
+        limit = i and i * 100
         fts_q = " ".join(self.tokens)
-        return self.model_cls.fts_match(
-            fts_q, exact_match=exact, limit=limit, order_by=order_by
-        )
+        fts_q = sanitize_fts_query(fts_q, exact_match=exact)
+
+        return self.model_cls.fts_match(fts_q, exact_match=exact, limit=limit)
 
     def _score_candidates(self, candidates: list[Model]):
         for c in candidates:
-            if c.id in self._scored:
-                continue
-            score = self.score_candidate(c)
-            if score >= self.SCORE_THRESHOLD:
-                self._matches[c] = score
-            self._scored[c.id] = c
+            if c.id not in self._scored:
+                score = self.score_candidate(c)
+                if score >= self.SCORE_THRESHOLD:
+                    self._matches[c] = score
+                self._scored.add(c.id)
+
+        # with ThreadPoolExecutor(max_workers=self.MAX_WORKERS) as executor:
+        #     executor.map(self.score_candidate, candidates)
+
+        # for c in candidates:
+        #     if c.id in self._scored:
+        #         continue
+        #     score = self.score_candidate(c)
+        #     if score >= self.SCORE_THRESHOLD:
+        #         self._matches[c] = score
+        #     self._scored[c.id] = c
 
     @abstractmethod
     def score_candidate(self, candidate: Model) -> float:
@@ -76,9 +88,6 @@ class SearchBase(ABC):
             return len(self._matches) >= self.limit
         return False
 
-    def _tokens_exhausted(self) -> bool:
-        return all(len(t) <= self.MIN_TOKEN_LEN for t in self.tokens)
-
     @property
     def results(self) -> list[tuple[DTO, float]]:
         # TODO: supplement with weak matches if len(strong_matches) < limit
@@ -86,4 +95,4 @@ class SearchBase(ABC):
             [(m.to_dto(), score) for m, score in self._matches.items()],
             key=lambda x: x[1],
             reverse=True,
-        )[: self.limit]
+        )

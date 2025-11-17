@@ -127,9 +127,9 @@ class Model(Generic[TDTO], ABC):
                 f"{col} MATCH ?" for col in field_queries.keys()
             )
         elif query:
-            query = sanitize_fts_query(query, exact_match)
+            sanitized_input = sanitize_fts_query(query, exact_match)
 
-            params = [query]
+            params = [sanitized_input]
             q_where = f"WHERE {cls.table_name} MATCH ?"
         else:
             return []
@@ -146,10 +146,17 @@ class Model(Generic[TDTO], ABC):
         if limit:
             params.append(limit)
 
-        cursor = cls.db.execute(q, params)
-        rows: list[sqlite3.Row] = cursor.fetchall()
-        cursor.close()
-        return [cls.from_row(row) for row in rows if row]
+        try:
+            cursor = cls.db.execute(q, params)
+            rows: list[sqlite3.Row] = cursor.fetchall()
+            cursor.close()
+            return [cls.from_row(row) for row in rows if row]
+        except Exception as e:
+            print(e)
+            print(query)
+            print(params)
+            print(q)
+            return []
 
     @classmethod
     def drop(cls):

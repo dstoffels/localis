@@ -38,3 +38,12 @@ def pytest_itemcollected(item: pytest.Item):
         parts.append("[" + item.name.split("[")[1])
 
     item._nodeid = " ".join(parts)
+
+
+def pytest_addoption(parser):
+    parser.addoption(
+        "--benchmark",
+        action="store_true",
+        default=False,
+        help="Run tests marked with benchmark",
+    )

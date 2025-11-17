@@ -4,7 +4,7 @@ from typing import Type
 from villager.db import db, DTO, Model
 from villager.utils import normalize
 from rapidfuzz import fuzz, process
-from villager.search import HybridSearch
+from villager.search import FuzzySearch, NgramSearch
 
 TModel = TypeVar("TModel", bound=Model)
 TDTO = TypeVar("TDTO", bound=DTO)
@@ -72,7 +72,7 @@ class Registry(Generic[TModel, TDTO], ABC):
         if not query:
             return []
 
-        search = HybridSearch(query, self._model_cls, self.SEARCH_FIELD_WEIGHTS, limit)
+        search = FuzzySearch(query, self._model_cls, self.SEARCH_FIELD_WEIGHTS, limit)
 
         return search.run()
 

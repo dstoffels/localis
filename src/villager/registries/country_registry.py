@@ -12,14 +12,9 @@ class CountryRegistry(Registry[CountryModel, Country]):
 
     SEARCH_FIELD_WEIGHTS = {
         "name": 1.0,
-        "official_name": 1.0,
-        "alt_names": 1.0,
-        "alpha2": 0.8,
-        "alpha3": 0.8,
+        "official_name": 0.5,
+        "alt_names": 0.4,
     }
-
-    def __init__(self, model_cls):
-        super().__init__(model_cls)
 
     def get(
         self,

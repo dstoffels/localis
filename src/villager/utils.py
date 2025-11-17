@@ -69,14 +69,17 @@ def sanitize_fts_query(query: str, exact_match: bool) -> str:
     """
     Keep alphanumerics, spaces, *, quotes, and all Unicode combining marks. Replaces illegal characters and adds wildcards to each token for prefix matching.
     """
-    q = re.sub(r"[^\w\s*\"\u0300-\u036f]+", " ", query)
+    q = re.sub(r"[^\w\s'\u0300-\u036f]+", " ", query)
+
+    # escape apostrophes
+    q = q.replace("'", '''"'"''')
 
     tokens = q.split()
     for i, token in enumerate(tokens):
         if token in FTS_RESERVED:
             tokens[i] = f'"{token}"'
         if not exact_match:
-            tokens[i] = f"{token}*"
+            tokens[i] += "*"
     return " ".join(tokens)
 
 
