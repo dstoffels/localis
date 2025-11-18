@@ -7,7 +7,7 @@ import sqlite3
 from typing import Type
 import json
 from abc import abstractmethod
-from villager.utils import sanitize_fts_query
+from villager.utils import prep_tokens
 
 TDTO = TypeVar("TDTO", bound=DTO)
 
@@ -120,25 +120,25 @@ class Model(Generic[TDTO], ABC):
         limit: int = None,
     ):
         if field_queries:
-            params = list(
-                sanitize_fts_query(q, exact_match) for q in field_queries.values()
-            )
+            params = list(prep_tokens(q, exact_match) for q in field_queries.values())
             q_where = "WHERE " + "AND ".join(
                 f"{col} MATCH ?" for col in field_queries.keys()
             )
         elif query:
-            sanitized_input = sanitize_fts_query(query, exact_match)
+            sanitized_input = prep_tokens(query, exact_match)
 
             params = [sanitized_input]
             q_where = f"WHERE {cls.table_name} MATCH ?"
         else:
             return []
 
+        bm25 = f", bm25({cls.table_name}, 50.0) as rank" if "rank" in order_by else ""
+
         q_order_by = "ORDER BY " + ", ".join(order_by) if order_by else ""
 
         q_limit = "LIMIT ?" if limit is not None else ""
 
-        q = f"""SELECT rowid as id, *, bm25({cls.table_name}, 50.0) as rank FROM {cls.table_name}
+        q = f"""SELECT rowid as id, *{bm25} FROM {cls.table_name}
                     {q_where}
                     {q_order_by}
                     {q_limit}"""
@@ -146,17 +146,10 @@ class Model(Generic[TDTO], ABC):
         if limit:
             params.append(limit)
 
-        try:
-            cursor = cls.db.execute(q, params)
-            rows: list[sqlite3.Row] = cursor.fetchall()
-            cursor.close()
-            return [cls.from_row(row) for row in rows if row]
-        except Exception as e:
-            print(e)
-            print(query)
-            print(params)
-            print(q)
-            return []
+        cursor = cls.db.execute(q, params)
+        rows: list[sqlite3.Row] = cursor.fetchall()
+        cursor.close()
+        return [cls.from_row(row) for row in rows if row]
 
     @classmethod
     def drop(cls):

@@ -8,10 +8,10 @@ class CityRegistry(Registry[CityModel, City]):
 
     SEARCH_FIELD_WEIGHTS = {
         "name": 1.0,
-        "alt_names": 0.6,
-        "admin1": 0.4,
-        "admin2": 0.2,
-        "country": 0.3,
+        "alt_names": 0.4,
+        "admin1": 0.3,
+        "admin2": 0.1,
+        "country": 0.2,
     }
 
     META_LOADED_KEY = "cities_loaded"

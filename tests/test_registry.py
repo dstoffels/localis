@@ -4,6 +4,7 @@ from villager.registries import Registry
 from villager.dtos import DTO
 from utils import select_random, mangle
 import random
+import json
 
 REGISTRIES = [countries, subdivisions, cities]
 
@@ -67,7 +68,7 @@ class TestSearch:
     def test_empty(self, registry: Registry):
         """should return [] with bad or no input."""
 
-        bad_queries = ["", "fh23897yuh"]
+        bad_queries = ["", "fh23897yuh", "zzzzzzzzz", "!@#$%"]
         for q in bad_queries:
             results = registry.search(q)
             assert isinstance(results, list)
@@ -86,17 +87,35 @@ class TestSearch:
     def test_mangled(self, registry: Registry):
         """should return a list of objects with at least one field matching input query"""
         COUNT = 50
-        ids = random.choices(range(1, registry.count), k=COUNT + 1)
-        test_subjects: list[DTO] = []
-        for id in ids:
-            test_subjects.append(registry.get(id=id))
+        SEED = 42
+
+        rng = random.Random(SEED)
+        ids = rng.sample(range(1, registry.count), k=COUNT)
 
         successes = 0
-        for subj in test_subjects:
-            results: list[tuple[DTO, float]] = registry.search(mangle(subj.name))
-            if any(subj.id == r.id for r, score in results):
-                successes += 1
+        failures = []
 
-        assert successes > 0
-        rate = successes / COUNT
-        assert rate > 0.5
+        for i, id in enumerate(ids):
+            subject: DTO = registry.get(id=id)
+            mangled_query = mangle(subject.name, seed=SEED + i)
+            results: list[tuple[DTO, float]] = registry.search(mangled_query, limit=10)
+
+            if any(subject.id == r.id for r, score in results):
+                successes += 1
+            else:
+                failures.append(
+                    {
+                        "original": subject.name,
+                        "mangled": mangled_query,
+                        "expected_id": subject.id,
+                        "resulting_ids": [r.id for r, _ in results],
+                    }
+                )
+
+        success_rate = successes / COUNT
+
+        assert success_rate >= 0.8, (
+            f"Success rate: {success_rate:.1%} below threshold. "
+            f"Failures: {len(failures)}/{COUNT}. "
+            f"Sample failures: {json.dumps(failures, indent=4, ensure_ascii=False)}"
+        )

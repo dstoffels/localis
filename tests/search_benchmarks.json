@@ -576,5 +576,89 @@
             "avg_hit_score": 0.557
         },
         "report": "Performance improvements negligible against accuracy degradation."
+    },
+    "2025-11-18T09:38:43.285996": {
+        "iterations": 3,
+        "sample_size": 300,
+        "notes": "Added noise reduction and relevance ratio to score_candidate (only non-noisy fields are calculated in score). this allows for strong match early. more relaxed, dynamic limits applied + hard limit of 5000. Expect to see high accuracy and diminished performance.",
+        "countries": {
+            "success_rate": 0.997,
+            "avg_time_ms": 0.211,
+            "avg_hit_score": 0.891
+        },
+        "subdivisions": {
+            "success_rate": 0.987,
+            "avg_time_ms": 23.68,
+            "avg_hit_score": 0.889
+        },
+        "cities": {
+            "success_rate": 0.91,
+            "avg_time_ms": 76.035,
+            "avg_hit_score": 0.897
+        },
+        "report": "Stronger than expected accuracy--the brute-force \"final round\" of the main loop appears to be responsible, but also induces expected performance costs. "
+    },
+    "2025-11-18T10:00:35.438662": {
+        "iterations": 3,
+        "sample_size": 300,
+        "notes": "Removed pipe splitting in score_candidate, expecting much better performance",
+        "countries": {
+            "success_rate": 0.999,
+            "avg_time_ms": 0.147,
+            "avg_hit_score": 0.891
+        },
+        "subdivisions": {
+            "success_rate": 0.989,
+            "avg_time_ms": 17.85,
+            "avg_hit_score": 0.889
+        },
+        "cities": {
+            "success_rate": 0.911,
+            "avg_time_ms": 58.401,
+            "avg_hit_score": 0.898
+        },
+        "report": "Even saw an improvement in accuracy"
+    },
+    "2025-11-18T10:05:46.870260": {
+        "iterations": 3,
+        "sample_size": 300,
+        "notes": "Switched from ratio > token_set_ratio for pipe-separated field values",
+        "countries": {
+            "success_rate": 0.999,
+            "avg_time_ms": 0.225,
+            "avg_hit_score": 0.849
+        },
+        "subdivisions": {
+            "success_rate": 0.988,
+            "avg_time_ms": 28.132,
+            "avg_hit_score": 0.859
+        },
+        "cities": {
+            "success_rate": 0.904,
+            "avg_time_ms": 82.342,
+            "avg_hit_score": 0.881
+        },
+        "report": "Brutally destructive on performance, need to test on alt_names fields for a more focused approach"
+    },
+    "2025-11-18T11:04:23.589847": {
+        "iterations": 3,
+        "sample_size": 300,
+        "notes": "",
+        "countries": {
+            "success_rate": 1.0,
+            "avg_time_ms": 0.355,
+            "avg_hit_score": 0.851
+        },
+        "subdivisions": {
+            "success_rate": 0.992,
+            "avg_time_ms": 31.286,
+            "avg_hit_score": 0.857
+        },
+        "cities": {
+            "success_rate": 0.918,
+            "avg_time_ms": 77.87,
+            "avg_hit_score": 0.881
+        },
+        "report": "Removed break in score_candidates (base), removed early exit for new matches"
     }
 }

@@ -62,22 +62,12 @@ def parse_other_names(name, other_names: dict[str, str]) -> tuple[str, str]:
     return name, other_names_str
 
 
-FTS_RESERVED = {"OR", "AND", "NOT", "NEAR"}
+def prep_tokens(query: str, exact_match: bool) -> str:
+    """Wrap each token in quotes and at * wildcard for prefixing if not exact_match"""
 
-
-def sanitize_fts_query(query: str, exact_match: bool) -> str:
-    """
-    Keep alphanumerics, spaces, *, quotes, and all Unicode combining marks. Replaces illegal characters and adds wildcards to each token for prefix matching.
-    """
-    q = re.sub(r"[^\w\s'\u0300-\u036f]+", " ", query)
-
-    # escape apostrophes
-    q = q.replace("'", '''"'"''')
-
-    tokens = q.split()
+    tokens = query.split()
     for i, token in enumerate(tokens):
-        if token in FTS_RESERVED:
-            tokens[i] = f'"{token}"'
+        tokens[i] = f'"{token}"'
         if not exact_match:
             tokens[i] += "*"
     return " ".join(tokens)

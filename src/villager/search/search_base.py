@@ -1,7 +1,6 @@
 # Search Engine for registries.
 
 from villager.db import Model
-from villager.utils import normalize, sanitize_fts_query
 from villager.dtos import DTO
 from abc import abstractmethod, ABC
 from concurrent.futures import ThreadPoolExecutor
@@ -10,8 +9,9 @@ from concurrent.futures import ThreadPoolExecutor
 class SearchBase(ABC):
     MAX_ITERATIONS = 8
     MIN_TOKEN_LEN = 1
-    SCORE_THRESHOLD = 0.35
-    MATCH_THRESHOLD = 0.55
+    MATCH_THRESHOLD = 0.6
+    STRONG_MATCH_THRESHOLD = 0.85
+    FTS_HARD_LIMIT = 5000
 
     def __init__(
         self,
@@ -32,6 +32,7 @@ class SearchBase(ABC):
         self._scored: set[int] = set()
         self._matches: dict[Model, float] = {}
         self._iteration_match_counts = [0]
+        self._has_strong_match = False
 
     def run(self) -> list[tuple[DTO, float]]:
         self.main()
@@ -40,7 +41,7 @@ class SearchBase(ABC):
     def main(self):
         candidates = self._fetch_candidates(exact=True)
 
-        for i in range(1, self._iterations + 1):
+        for i in range(1, self._iterations + 2):
             self._score_candidates(candidates)
 
             if self._should_exit_early(i):
@@ -53,21 +54,38 @@ class SearchBase(ABC):
                 continue
 
     def _fetch_candidates(self, i: int = None, exact=False) -> list[Model]:
-        limit = i and i * 100
-        fts_q = " ".join(self.tokens)
-        fts_q = sanitize_fts_query(fts_q, exact_match=exact)
+        if i is None:
+            limit = None
+        else:
+            if i == self._iterations:
+                limit = self.FTS_HARD_LIMIT
+            else:
+                limit = min(self.FTS_HARD_LIMIT, i * 1000)
 
-        return self.model_cls.fts_match(fts_q, exact_match=exact, limit=limit)
+        fts_q = " ".join(self.tokens)
+
+        order_by = ["rank"] if i == self._iterations else []
+
+        return self.model_cls.fts_match(
+            fts_q, exact_match=exact, limit=limit, order_by=order_by
+        )
 
     def _score_candidates(self, candidates: list[Model]):
         for c in candidates:
             if c.id not in self._scored:
                 score = self.score_candidate(c)
-                if score >= self.SCORE_THRESHOLD:
+                if score >= self.MATCH_THRESHOLD:
                     self._matches[c] = score
+                if score >= self.STRONG_MATCH_THRESHOLD:
+                    self._has_strong_match = True
                 self._scored.add(c.id)
 
     def _should_exit_early(self, i):
+        # Did we get a strong match?
+        if self._has_strong_match:
+            return True
+
+        # Did the last two iteration produce a significant number of new matches?
         prev_idx = i - 1
         prev_match_count = self._iteration_match_counts[prev_idx]
 
@@ -103,4 +121,4 @@ class SearchBase(ABC):
             [(m.to_dto(), score) for m, score in self._matches.items()],
             key=lambda x: x[1],
             reverse=True,
-        )
+        )[: self.limit]
