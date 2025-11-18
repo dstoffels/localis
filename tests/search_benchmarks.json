@@ -273,18 +273,18 @@
         "sample_size": 300,
         "notes": "Testing bigram search, swapped out FuzzySearch for NgramSearch",
         "countries": {
-            "avg_time_ms": 0.164,
             "success_rate": 0.657,
+            "avg_time_ms": 0.164,
             "total_queries": 2490
         },
         "subdivisions": {
-            "avg_time_ms": 2.87,
             "success_rate": 0.602,
+            "avg_time_ms": 2.87,
             "total_queries": 3000
         },
         "cities": {
-            "avg_time_ms": 11.342,
             "success_rate": 0.647,
+            "avg_time_ms": 11.342,
             "total_queries": 3000
         },
         "report": "Shockingly not bad compared to fuzzy search, slightly less performant"
@@ -492,5 +492,47 @@
             "total_queries": 900
         },
         "report": ""
+    },
+    "2025-11-17T19:53:40.353961": {
+        "iterations": 3,
+        "sample_size": 300,
+        "notes": "Overhaul of fuzzy search",
+        "countries": {
+            "success_rate": 0.81,
+            "avg_time_ms": 0.402,
+            "avg_hit_score": 0.661
+        },
+        "subdivisions": {
+            "success_rate": 0.761,
+            "avg_time_ms": 8.985,
+            "avg_hit_score": 0.657
+        },
+        "cities": {
+            "success_rate": 0.781,
+            "avg_time_ms": 57.629,
+            "avg_hit_score": 0.582
+        },
+        "report": "Accuracy is good, but performance needs tweaking. Exploring early-exit strategies for next round."
+    },
+    "2025-11-17T21:19:53.131977": {
+        "iterations": 3,
+        "sample_size": 300,
+        "notes": "Updated the mangle util to prevent multi-token inputs from mangling the first char of any token in the string.",
+        "countries": {
+            "success_rate": 0.878,
+            "avg_time_ms": 0.515,
+            "avg_hit_score": 0.618
+        },
+        "subdivisions": {
+            "success_rate": 0.851,
+            "avg_time_ms": 10.831,
+            "avg_hit_score": 0.62
+        },
+        "cities": {
+            "success_rate": 0.868,
+            "avg_time_ms": 40.465,
+            "avg_hit_score": 0.556
+        },
+        "report": "The fairer mangler revealed much higher accuracy and improved performance for cities. Subdivisions appears to need field-weight tweaking."
     }
 }
