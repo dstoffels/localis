@@ -13,7 +13,7 @@ class SubdivisionRegistry(Registry[SubdivisionModel, Subdivision]):
     fuzzy search by these keys, and filtering by country or country code.
     """
 
-    SEARCH_FIELD_WEIGHTS = {"name": 1.5, "alt_names": 0.9, "country": 0.5}
+    SEARCH_FIELD_WEIGHTS = {"name": 1.0, "alt_names": 0.4, "country": 0.33}
 
     def get(
         self,

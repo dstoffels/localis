@@ -534,5 +534,47 @@
             "avg_hit_score": 0.556
         },
         "report": "The fairer mangler revealed much higher accuracy and improved performance for cities. Subdivisions appears to need field-weight tweaking."
+    },
+    "2025-11-17T21:58:45.765986": {
+        "iterations": 3,
+        "sample_size": 300,
+        "notes": "Early exit: track match count deltas with each iteration to detect diminishing returns and break main search loop.",
+        "countries": {
+            "success_rate": 0.878,
+            "avg_time_ms": 0.325,
+            "avg_hit_score": 0.618
+        },
+        "subdivisions": {
+            "success_rate": 0.838,
+            "avg_time_ms": 8.918,
+            "avg_hit_score": 0.62
+        },
+        "cities": {
+            "success_rate": 0.851,
+            "avg_time_ms": 32.823,
+            "avg_hit_score": 0.556
+        },
+        "report": "~18% performance improvement, with ~1% degradation in accuracy."
+    },
+    "2025-11-17T22:04:16.129264": {
+        "iterations": 3,
+        "sample_size": 300,
+        "notes": "Balanced subdivisions field weighting, expecting slight boost to accuracy. more aggressive diminishing returns detection (1 > 2)",
+        "countries": {
+            "success_rate": 0.877,
+            "avg_time_ms": 0.277,
+            "avg_hit_score": 0.618
+        },
+        "subdivisions": {
+            "success_rate": 0.837,
+            "avg_time_ms": 7.975,
+            "avg_hit_score": 0.634
+        },
+        "cities": {
+            "success_rate": 0.844,
+            "avg_time_ms": 30.101,
+            "avg_hit_score": 0.557
+        },
+        "report": "Performance improvements negligible against accuracy degradation."
     }
 }

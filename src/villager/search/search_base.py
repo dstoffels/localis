@@ -31,6 +31,7 @@ class SearchBase(ABC):
 
         self._scored: set[int] = set()
         self._matches: dict[Model, float] = {}
+        self._iteration_match_counts = [0]
 
     def run(self) -> list[tuple[DTO, float]]:
         self.main()
@@ -41,6 +42,9 @@ class SearchBase(ABC):
 
         for i in range(1, self._iterations + 1):
             self._score_candidates(candidates)
+
+            if self._should_exit_early(i):
+                break
 
             self._truncate_tokens()
 
@@ -63,16 +67,20 @@ class SearchBase(ABC):
                     self._matches[c] = score
                 self._scored.add(c.id)
 
-        # with ThreadPoolExecutor(max_workers=self.MAX_WORKERS) as executor:
-        #     executor.map(self.score_candidate, candidates)
+    def _should_exit_early(self, i):
+        prev_idx = i - 1
+        prev_match_count = self._iteration_match_counts[prev_idx]
 
-        # for c in candidates:
-        #     if c.id in self._scored:
-        #         continue
-        #     score = self.score_candidate(c)
-        #     if score >= self.SCORE_THRESHOLD:
-        #         self._matches[c] = score
-        #     self._scored[c.id] = c
+        new_match_count = len(self._matches) - prev_match_count
+        self._iteration_match_counts.append(new_match_count)
+
+        if prev_match_count == 0:
+            return False
+
+        if i >= 3 and sum(self._iteration_match_counts[-2:]) <= 1:
+            return True
+
+        return False
 
     @abstractmethod
     def score_candidate(self, candidate: Model) -> float:
