@@ -79,6 +79,7 @@ htmlcov/
 allCountries.txt
 .villager_cache/
 *.zip
+sandbox.py
 
 # Keep empty folders tracked (optional)
 !data/.gitkeep
