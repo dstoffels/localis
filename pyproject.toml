@@ -1,23 +1,22 @@
 [tool.poetry]
 name = "villager"
 version = "0.1.0"
-description = ""
+description = "Offline geodata search and fuzzy lookup for countries, subdivisions, and cities."
 authors = ["danimal"]
 packages = [
   { include = "villager", from = "src" }
 ]
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = "^3.11"
 rapidfuzz = "^3.13.0"
-unidecode = "^1.4.0"
 typer = "^0.20.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.4.1"
 pytest-watch = "^4.2.0"
-pycountry = "^24.6.1"
 requests = "^2.32.4"
+unidecode = "^1.4.0"
 
 [tool.poetry.scripts]
 villager = 'villager.cli:app'
