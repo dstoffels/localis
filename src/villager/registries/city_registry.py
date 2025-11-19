@@ -2,10 +2,13 @@ from villager.registries.registry import Registry
 from villager.db import CityModel, City, MetaStore
 import requests
 import io
+import villager
 
 
 class CityRegistry(Registry[CityModel, City]):
     """Registry for cities"""
+
+    ID_FIELDS = ("id", "geonames_id")
 
     SEARCH_FIELD_WEIGHTS = {
         "name": 1.0,
@@ -129,3 +132,77 @@ class CityRegistry(Registry[CityModel, City]):
     def search(self, query, limit=None, **kwargs):
         self._ensure_loaded()
         return super().search(query, limit, **kwargs)
+
+    def for_country(
+        self,
+        *,
+        id: int = None,
+        alpha2: str = None,
+        alpha3: str = None,
+        numeric: int = None,
+        population__lt: int | None = None,
+        population__gt: int | None = None,
+        **kwargs,
+    ) -> list[City]:
+        if population__gt is not None and population__lt is not None:
+            raise ValueError("population__gt and population__lt are mutually exclusive")
+
+        provided = {
+            k: v
+            for k, v in locals().items()
+            if k in villager.countries.ID_FIELDS and v is not None
+        }
+        country = villager.countries.get(**provided)
+        if country is None:
+            return []
+
+        country_field = "|".join([country.name, country.alpha2, country.alpha3])
+        results: list[CityModel] = self._model_cls.select(
+            CityModel.country == country_field
+        )
+
+        dtos = [r.to_dto() for r in results]
+        if population__gt is not None:
+            return [d for d in dtos if d.population > population__gt]
+        elif population__lt is not None:
+            return [d for d in dtos if d.population < population__lt]
+        else:
+            return dtos
+
+    def for_subdivision(
+        self,
+        *,
+        id: int = None,
+        geonames_code: str = None,
+        iso_code: str = None,
+        population__lt: int | None = None,
+        population__gt: int | None = None,
+        **kwargs,
+    ) -> list[City]:
+        if population__gt is not None and population__lt is not None:
+            raise ValueError("population__gt and population__lt are mutually exclusive")
+
+        provided = {
+            k: v
+            for k, v in locals().items()
+            if k in villager.subdivisions.ID_FIELDS and v is not None
+        }
+
+        sub = villager.subdivisions.get(**provided)
+
+        if sub is None:
+            return []
+
+        sub_field = "|".join([sub.name, sub.geonames_code, sub.iso_code])
+        results: list[CityModel] = self._model_cls.select(CityModel.admin1 == sub_field)
+
+        if not results:
+            results = self._model_cls.select(CityModel.admin2 == sub_field)
+
+        dtos = [r.to_dto() for r in results]
+        if population__gt is not None:
+            return [d for d in dtos if d.population > population__gt]
+        elif population__lt is not None:
+            return [d for d in dtos if d.population < population__lt]
+        else:
+            return dtos

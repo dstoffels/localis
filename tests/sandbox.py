@@ -4,13 +4,13 @@ from rapidfuzz import fuzz
 
 
 start = time.perf_counter()
-results = villager.cities.search("new york", limit=10)
+results = villager.subdivisions.types_for_country(alpha2="US")
 end = time.perf_counter()
 
 print(end - start)
 
-for r, score in results:
-    print(r.display_name, r.population, score)
+for r in results:
+    print(r)
 
 
 # original, mangled = ["Musaffa|Musaffah City|Msfh", "Mskh"]

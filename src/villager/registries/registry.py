@@ -13,6 +13,8 @@ TDTO = TypeVar("TDTO", bound=DTO)
 class Registry(Generic[TModel, TDTO], ABC):
     """Abstract base registry class defining interface for lookup and search."""
 
+    ID_FIELDS: tuple[str] = ()
+
     SEARCH_FIELD_WEIGHTS: dict[str, float] = {}
     SEARCH_ORDER_FIELDS: list[str] = []
     """Override to provide the fields for search scoring."""

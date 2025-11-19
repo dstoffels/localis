@@ -26,14 +26,14 @@ villager:
       description: >
         Search for a list of subdivisions with fuzzy matching and return a list of candidates.
       returns: List[Tuple[Subdivision, float]]
-    # for_country:
-    #   description: >
-    #     Fetch all subdivisions for a given country by code.
-    #   returns: List[Subdivision]
-    # types_for_country:
-    #   description: >
-    #     Fetch distinct subdivision types for a given country (e.g. "state", "province"). Can filter by admin level to refine the list. Helpful for dynamic dropdowns.
-    #   returns: List[str]
+    for_country:
+      description: >
+        Fetch all subdivisions for a given country by code.
+      returns: List[Subdivision]
+    types_for_country:
+      description: >
+        Fetch distinct subdivision types for a given country (e.g. "state", "province"). Can filter by admin level to refine the list. Helpful for dynamic dropdowns.
+      returns: List[str]
 
   cities:
     get:
@@ -48,14 +48,14 @@ villager:
       description: >
         Search for a city with fuzzy matching and return a list of candidates.
       returns: List[Tuple[City, float]]
-  #   for_country:
-  #     description: >
-  #       Return all cities for a given country name/code (alpha-2/3).
-  #     returns: List[City]
-  #   for_subdivision:
-  #     description: >
-  #       Return all cities for a given subdivision code.
-  #     returns: List[City]
+    for_country:
+      description: >
+        Return all cities for a given country by its id, alpha2, alpha3 or numeric code. Can filter results by population, either greater than or less than a given value.
+      returns: List[City]
+    for_subdivision:
+      description: >
+        Return all cities for a given subdivision code.
+      returns: List[City]
   # autocomplete:
   #   description: >
-  #     Autocomplete for all cities, subdivisions and countries.
+  #     Autocomplete for all cities, subdivisions and countries. More performant than search but not typo-friendly.

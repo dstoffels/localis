@@ -10,6 +10,8 @@ class CountryRegistry(Registry[CountryModel, Country]):
     and fuzzy search.
     """
 
+    ID_FIELDS = ("id", "alpha2", "alpha3", "numeric")
+
     SEARCH_FIELD_WEIGHTS = {
         "name": 1.0,
         "official_name": 1.0,

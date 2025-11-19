@@ -13,6 +13,8 @@ class SubdivisionRegistry(Registry[SubdivisionModel, Subdivision]):
     fuzzy search by these keys, and filtering by country or country code.
     """
 
+    ID_FIELDS = ("id", "geonames_code", "iso_code")
+
     SEARCH_FIELD_WEIGHTS = {"name": 1.0, "alt_names": 0.4, "country": 0.33}
 
     def get(
@@ -103,10 +105,16 @@ class SubdivisionRegistry(Registry[SubdivisionModel, Subdivision]):
         provided = {
             k: v
             for k, v in locals().items()
-            if k in ("id", "alpha2", "alpha3", "numeric") and v is not None
+            if k in villager.countries.ID_FIELDS and v is not None
         }
         results = self.for_country(admin_level=admin_level, **provided)
 
-        types = set(r.type for r in results if r.type)
+        types = set(
+            [
+                r.type
+                for r in results
+                if r.type is not None and r.admin_level == admin_level
+            ]
+        )
 
         return list(types)

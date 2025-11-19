@@ -1,5 +1,5 @@
 import pytest
-from villager import subdivisions, Subdivision
+from villager import subdivisions, Subdivision, countries
 from utils import select_random
 
 
@@ -111,64 +111,26 @@ class TestTypes:
         assert isinstance(results, list)
         assert len(results) == 0
 
-    def test_country_code(self, sub: Subdivision):
-        """should return a list of distinct types, all of which are types for a given country"""
-
-        results = subdivisions.types_for_country(
-            alpha2=sub.country_alpha2, admin_level=None
-        )
-        filtered_subs = subdivisions.for_country(alpha2=sub.country_alpha2)
-
-        filtered_set = set(s.type for s in filtered_subs if s.type is not None)
-
-        assert len(results) == len(filtered_set)
-        assert set(results) == filtered_set
-
-    def test_admin_level(self, sub: Subdivision):
+    def test_country_and_admin_level(self, sub: Subdivision):
         """should return a list of distinct types for a given country, filtered by admin_level"""
 
-        admin_level = 1
-        results = subdivisions.types_for_country(
-            alpha2=sub.country_alpha2, admin_level=admin_level
-        )
-        filtered_subs = subdivisions.for_country(alpha2=sub.country_alpha2)
+        country = countries.get(alpha2=sub.country_alpha2)
+        admin_levels = [None, 1, 2]
 
-        filtered_subs = [s for s in filtered_subs if s.admin_level == 1]
-        filtered_set = set(
-            s.type
-            for s in filtered_subs
-            if s.type is not None and s.admin_level == admin_level
-        )
+        for field in countries.ID_FIELDS:
+            map = {field: getattr(country, field)}
 
-        assert len(results) == len(filtered_set)
-        assert set(results) == filtered_set
+            for lvl in admin_levels:
+                results = subdivisions.types_for_country(admin_level=lvl, **map)
+                filtered_subs = subdivisions.for_country(admin_level=lvl, **map)
 
-        admin_level = 2
-        results = subdivisions.types_for_country(
-            alpha2=sub.country_alpha2, admin_level=admin_level
-        )
-        filtered_subs = subdivisions.for_country(
-            alpha2=sub.country_alpha2, admin_level=admin_level
-        )
+                filtered_subs_type_set = set(
+                    [
+                        s.type
+                        for s in filtered_subs
+                        if s.type is not None and s.admin_level == lvl
+                    ]
+                )
 
-        filtered_set = set(
-            s.type
-            for s in filtered_subs
-            if s.type is not None and s.admin_level == admin_level
-        )
-
-        assert len(results) == len(filtered_set)
-        assert set(results) == filtered_set
-
-        admin_level = None
-        results = subdivisions.types_for_country(
-            alpha2=sub.country_alpha2, admin_level=admin_level
-        )
-        filtered_subs = subdivisions.for_country(
-            alpha2=sub.country_alpha2, admin_level=admin_level
-        )
-
-        filtered_set = set(s.type for s in filtered_subs if s.type is not None)
-
-        assert len(results) == len(filtered_set)
-        assert set(results) == filtered_set
+                assert len(results) == len(filtered_subs_type_set)
+                assert set(results) == filtered_subs_type_set

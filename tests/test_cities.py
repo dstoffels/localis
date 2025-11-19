@@ -1,5 +1,5 @@
 import pytest
-from villager import cities, City
+from villager import cities, City, countries, subdivisions
 from utils import select_random
 
 
@@ -104,3 +104,81 @@ class TestFilter:
             any(alt_name in name or alt_name == name for name in r.alt_names)
             for r in results
         ), f"alt_name: {alt_name}"
+
+
+class TestForCountry:
+    """FOR_COUNTRY"""
+
+    def test_empty(self, city: City):
+        """should return [] for invalid inputs"""
+
+        results = cities.for_country(alpha2="abcbbd")
+
+        assert isinstance(results, list)
+        assert len(results) == 0
+
+    def test_country_and_pop_filters(self, city: City):
+        """should return a population-filtered list of cities that all contain the input country code"""
+
+        country = countries.get(alpha2=city.country_alpha2)
+        filters = ["population__gt", "population__lt", None]
+
+        for field in countries.ID_FIELDS:
+            for filter in filters:
+                cmap = {field: getattr(country, field)}
+                fmap = {filter: city.population} if filter is not None else {}
+                results = cities.for_country(**cmap, **fmap)
+
+                if filter is not None:
+                    if "__gt" in filter:
+                        assert all(city.population < r.population for r in results)
+                    elif "__lt" in filter:
+                        assert all(city.population > r.population for r in results)
+
+                assert len(results) > 0
+                assert all(city.country_alpha2 == r.country_alpha2 for r in results)
+
+
+class TestForSubdivision:
+    """FOR_SUBDIVISION"""
+
+    def test_empty(self, city: City):
+        """should return [] for invalid inputs"""
+
+        inputs = [None, "", "9999999999"]
+
+        for field in subdivisions.ID_FIELDS:
+            for input in inputs:
+                map = {field: input}
+                results = cities.for_subdivision(**map)
+                assert results == []
+
+    def test_sub_and_pop_filters(self, city: City):
+        """should return a population-filtered list of cities that all contain the input subdivision id"""
+
+        while not city.subdivisions:
+            city = cities.get(city.id + 1)
+        else:
+            admin1 = city.subdivisions[0]
+            if admin1.geonames_code:
+                sub = subdivisions.get(geonames_code=admin1.geonames_code)
+            elif admin1.iso_code:
+                sub = subdivisions.get(iso_code=admin1.iso_code)
+
+        filters = ["population__gt", "population__lt", None]
+
+        for field in subdivisions.ID_FIELDS:
+            for filter in filters:
+                smap = {field: getattr(sub, field)}
+                fmap = {filter: city.population} if filter is not None else {}
+                results = cities.for_subdivision(**smap, **fmap)
+
+                assert len(results) > 0
+
+                if filter is not None:
+                    if "__gt" in filter:
+                        assert all(city.population < r.population for r in results)
+                    elif "__lt" in filter:
+                        assert all(city.population > r.population for r in results)
+
+                assert all(city.country_alpha2 == r.country_alpha2 for r in results)

@@ -56,9 +56,18 @@ class Model(Generic[TDTO], ABC):
         cls.db.create_fts_table(cls.table_name, cls.columns())
 
     @classmethod
+    def drop(cls):
+        cls.db.execute(f"DROP TABLE IF EXISTS {cls.table_name}")
+        cls.db.commit()
+        cls.db.vacuum()
+
+    @classmethod
     def insert_many(cls, data: list[dict]) -> None:
         """Insert multiple rows into the database, requires with atomic."""
         cls.db.insert_many(cls.table_name, data)
+
+    def __str__(self):
+        return json.dumps(self.__dict__, indent=4)
 
     @classmethod
     def get(cls, expr: Expression):
@@ -99,15 +108,6 @@ class Model(Generic[TDTO], ABC):
             rows = cls.db.execute(
                 f"SELECT rowid as id, * FROM {cls.table_name} {order_by} {limit}"
             ).fetchall()
-        return [cls.from_row(row) for row in rows]
-
-    @classmethod
-    def where(cls, sql: str, order_by: str | None = None, limit: int | None = None):
-        order_by = f"ORDER BY {order_by}" if order_by else ""
-        limit = f"LIMIT {limit}" if limit else ""
-        rows = cls.db.execute(
-            f"{cls.query_select} {" ".join(cls.query_tables)} WHERE {sql} {order_by} {limit}",
-        ).fetchall()
         return [cls.from_row(row) for row in rows]
 
     @classmethod
@@ -157,12 +157,3 @@ class Model(Generic[TDTO], ABC):
         rows: list[sqlite3.Row] = cursor.fetchall()
         cursor.close()
         return [cls.from_row(row) for row in rows if row]
-
-    @classmethod
-    def drop(cls):
-        cls.db.execute(f"DROP TABLE IF EXISTS {cls.table_name}")
-        cls.db.commit()
-        cls.db.vacuum()
-
-    def __str__(self):
-        return json.dumps(self.__dict__, indent=4)
