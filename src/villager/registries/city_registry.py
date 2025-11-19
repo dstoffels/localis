@@ -43,7 +43,7 @@ class CityRegistry(Registry[CityModel, City]):
 
         # USER CONFIRMATION
         confirmed = confirmed or typer.confirm(
-            "Loading cities is HEAVY, there are nearly half a million entries and it expands the database to ~200MB. Proceeding with load will copy the sqlite database to your project root, download cities.tsv and load it into the copied database and update your .gitignore. Are you sure you want to proceed?"
+            "Loading cities is HEAVY, there are nearly half a million entries and it expands the database to 200MB+. Proceeding with load will copy the sqlite database to your project root, download cities.tsv and load it into the copied database and update your .gitignore. Are you sure you want to proceed?"
         )
 
         # DID NOT CONFIRM

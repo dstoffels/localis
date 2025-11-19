@@ -1,5 +1,28 @@
 from .utils import *
 
+HEADERS = [
+    "geonameid",
+    "name",
+    "asciiname",
+    "alternatenames",
+    "latitude",
+    "longitude",
+    "feature class",
+    "feature code",
+    "country code",
+    "cc2",
+    "admin1 code",
+    "admin2 code",
+    "admin3 code",
+    "admin4 code",
+    "population",
+    "elevation",
+    "dem",
+    "timezone",
+    "modification date",
+]
+
+
 ALLOWED_FEATURE_CODES = {
     "PPL",
     "PPLA",
@@ -16,16 +39,16 @@ ALLOWED_FEATURE_CODES = {
 
 
 def is_valid_city(
-    fields: list[str], allowed_codes: set[str] = ALLOWED_FEATURE_CODES
+    row: dict[str, str], allowed_codes: set[str] = ALLOWED_FEATURE_CODES
 ) -> bool:
-    return fields[7] in allowed_codes and fields[14] not in ["", "0"]
+    return row["feature code"] in allowed_codes and row["population"] not in ["", "0"]
 
 
-def filter_names(fields: list[str]) -> tuple[str]:
+def filter_names(row: dict[str, str]) -> tuple[str]:
     """Keep Latin-based alt names, filter junk and dedupe"""
-    name = fields[1]
-    alt_names = fields[3].split(",") if fields[3] else []
-    alt_names.append(fields[2])
+    name = row["name"]
+    alt_names = row["alternatenames"].split(",") if row["alternatenames"] else []
+    alt_names.append(row["asciiname"])
 
     seen = set()
     base = normalize_name(name)
@@ -33,9 +56,9 @@ def filter_names(fields: list[str]) -> tuple[str]:
 
     for alt in alt_names:
         alt = alt.strip()
-        if len(alt) < 3:
+        if len(alt) < 3:  # filter out shorties
             continue
-        if not is_latin(alt):
+        if not is_latin(alt):  # filter out non-latin based names
             continue
 
         norm = normalize_name(alt)
@@ -48,31 +71,29 @@ def filter_names(fields: list[str]) -> tuple[str]:
     return name, "|".join(result)
 
 
-def parse_fields(
-    fields: list[str], subdivisions: dict[str, str], countries: dict[str, str]
+def parse_row(
+    row: dict[str, str], subdivisions: dict[str, str], countries: dict[str, str]
 ) -> CityDTO:
-    if len(fields) != 19:
-        raise ValueError(f"Expected 19 fields, got {len(fields)}")
 
-    geonames_id = fields[0]
+    geonames_id = row["geonameid"]
 
-    name, alt_names = filter_names(fields)
+    name, alt_names = filter_names(row)
 
-    admin1_code = fields[10]
-    admin2_code = fields[11]
-    country_code = fields[8]
+    admin1_code = row["admin1 code"]
+    admin2_code = row["admin2 code"]
+    country_code = row["country code"]
 
     country = countries.get(country_code)
     admin1 = subdivisions.get(".".join([country_code, admin1_code]))
-    admin2 = subdivisions.get(".".join([country_code, admin2_code]))
+    admin2 = subdivisions.get(".".join([country_code, admin1_code, admin2_code]))
 
-    lat = float(fields[4])
-    lng = float(fields[5])
+    lat = float(row["latitude"])
+    lng = float(row["longitude"])
 
     try:
-        population = int(fields[14]) if fields[14] else 0
+        population = int(row["population"]) if row["population"] else 0
     except ValueError:
-        raise ValueError(f"Invalid population value: {fields[14]}")
+        raise ValueError(f"Invalid population value: {row['population']}")
 
     return CityDTO(
         geonames_id=geonames_id,
@@ -92,11 +113,11 @@ def load_cities(
 ) -> list[CityDTO]:
     with open(BASE_PATH / "src/allCountries.txt", "r", encoding="utf-8") as f:
         print(f"Parsing cities from allCountries.txt...")
+        rows = csv.DictReader(f, fieldnames=HEADERS, delimiter="\t")
         cities = []
-        for row in f:
-            fields = row.split("\t")
-            if not is_valid_city(fields):
+        for row in rows:
+            if not is_valid_city(row):
                 continue
-            city = parse_fields(fields, subdivisions, countries)
+            city = parse_row(row, subdivisions, countries)
             cities.append(city)
         return cities

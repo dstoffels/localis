@@ -1,0 +1,25 @@
+name: Release
+
+on:
+  release:
+    types: [published, prereleased]
+
+jobs:
+  upload-assets:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Upload cities.tsv to release assets
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: .data/cities/cities.tsv
+          asset_name: cities.tsv
+          asset_content_type: text/tab-separated-values
