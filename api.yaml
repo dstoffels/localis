@@ -56,6 +56,3 @@ villager:
       description: >
         Return all cities for a given subdivision code.
       returns: List[City]
-  # autocomplete:
-  #   description: >
-  #     Autocomplete for all cities, subdivisions and countries. More performant than search but not typo-friendly.

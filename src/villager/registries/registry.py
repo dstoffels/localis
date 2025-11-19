@@ -1,10 +1,8 @@
 from typing import Iterator, Generic, TypeVar
-from abc import ABC, abstractmethod
+from abc import ABC
 from typing import Type
-from villager.db import db, DTO, Model
-from villager.utils import normalize
-from rapidfuzz import fuzz, process
-from villager.search import FuzzySearch, NgramSearch
+from villager.db import DTO, Model
+from villager.search import FuzzySearch
 
 TModel = TypeVar("TModel", bound=Model)
 TDTO = TypeVar("TDTO", bound=DTO)

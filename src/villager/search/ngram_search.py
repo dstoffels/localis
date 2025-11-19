@@ -1,6 +1,6 @@
 from villager.search.search_engine import SearchEngine
 from villager.db import Model
-from villager.utils import normalize
+
 from villager.dtos import DTO
 
 
@@ -11,7 +11,7 @@ class NgramSearch(SearchEngine):
     def __init__(self, query, model_cls, field_weights, limit=None):
         # split query into tokens and ngram each one
         self.q_token_ngrams: list[set[str]] = [
-            self._ngram(t, self.NGRAM_LEN) for t in normalize(query).split(" ")
+            self._ngram(t, self.NGRAM_LEN) for t in query.split(" ")
         ]
         super().__init__(query, model_cls, field_weights, limit)
 

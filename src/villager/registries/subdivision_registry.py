@@ -53,11 +53,11 @@ class SubdivisionRegistry(Registry[SubdivisionModel, Subdivision]):
     ):
         if kwargs:
             return []
-        if type:
+        if type is not None:
             kwargs["type"] = type
-        if country:
+        if country is not None:
             kwargs["country"] = country
-        if alt_name:
+        if alt_name is not None:
             kwargs["alt_names"] = alt_name
 
         return super().filter(query, name, limit, **kwargs)
