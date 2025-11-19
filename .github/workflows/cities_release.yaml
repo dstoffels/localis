@@ -2,7 +2,7 @@ name: Release
 
 on:
   release:
-    types: [published, prereleased]
+    types: [prereleased]
 
 jobs:
   upload-assets:
