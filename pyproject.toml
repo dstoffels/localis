@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "villager"
 version = "0.1.0"
-description = "Offline geodata search and fuzzy lookup for countries, subdivisions, and cities."
+description = "Offline geodata search and lookup for countries, subdivisions, and cities compiled from GeoNames and ISO 3166."
 authors = ["danimal"]
 packages = [
   { include = "villager", from = "src" }
@@ -11,11 +11,11 @@ packages = [
 python = "^3.11"
 rapidfuzz = "^3.13.0"
 typer = "^0.20.0"
+requests = "^2.32.4"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.4.1"
 pytest-watch = "^4.2.0"
-requests = "^2.32.4"
 unidecode = "^1.4.0"
 
 [tool.poetry.scripts]

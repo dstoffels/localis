@@ -1,16 +1,18 @@
 import atexit
 from typing import Any, Dict, List, Tuple
 from contextlib import contextmanager
-
-
 import sqlite3
+from importlib import resources
+import shutil
+import tempfile
+from pathlib import Path
 
 
 class Database:
     MAX_PREFIX = 24
 
-    def __init__(self, db_path: str):
-        self.db_path: str = db_path
+    def __init__(self, db_path: str = None):
+        self.db_path: str = db_path or self.get_db_path()
         self._conn: sqlite3.Connection | None = None
         self._setup_conn()
 
@@ -125,8 +127,15 @@ class Database:
         """Analyze database for query optimization"""
         return self.execute("ANALYZE")
 
+    @classmethod
+    def get_db_path(cls) -> str:
+        with resources.path("villager.db", "villager.db") as db_file:
+            temp_path = Path(tempfile.gettempdir()) / "villager.db"
+            shutil.copy(db_file, temp_path)
+            return str(temp_path)
 
-db = Database("src/villager/db/villager.db")
+
+db = Database()
 
 
 @atexit.register
