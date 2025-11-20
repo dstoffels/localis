@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "localis"
-version = "0.2.4"
+version = "0.0.0"
 description = "Fast, offline access to comprehensive geographic data for countries, subdivisions, and cities. Built on ISO 3166 and GeoNames datasets with support for exact lookups, filtering, and fuzzy search."
 authors = ["dstoffels"]
 readme = "README.md"
