@@ -1,7 +1,7 @@
 import random
 import string
-from villager.registries import Registry
-from villager.dtos import DTO
+from localis.registries import Registry
+from localis.dtos import DTO
 
 
 alphabet = string.ascii_lowercase

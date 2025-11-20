@@ -1,10 +1,11 @@
 [tool.poetry]
-name = "villager"
+name = "localis"
 version = "0.2.0"
-description = "Offline geodata search and lookup for countries, subdivisions, and cities compiled from GeoNames and ISO 3166."
+description = "Fast, offline access to comprehensive geographic data for countries, subdivisions, and cities. Built on ISO 3166 and GeoNames datasets with support for exact lookups, filtering, and fuzzy search."
 authors = ["danimal"]
+readme = "README.md"
 packages = [
-  { include = "villager", from = "src" }
+  { include = "localis", from = "src" }
 ]
 
 [tool.poetry.dependencies]
@@ -19,4 +20,4 @@ pytest-watch = "^4.2.0"
 unidecode = "^1.4.0"
 
 [tool.poetry.scripts]
-villager = 'villager.cli:app'
+localis = 'localis.cli:app'
