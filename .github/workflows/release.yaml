@@ -80,10 +80,11 @@ jobs:
           RAW_VERSION=$(poetry version -s)
 
           if [[ "$RAW_VERSION" =~ (a|alpha|b|beta|rc|.dev)[0-9]*$ ]]; then
-            echo "Incoming version is a pre-release and will not be published to PyPI."
-            echo "IS_PRERELEASE=true" >> $GITHUB_OUTPUT
+            echo "Incoming version is a pre-release."
+            echo "IS_PRERELEASE=true" >> "$GITHUB_OUTPUT"
           else
-            echo "IS_PRERELEASE=false" >> $GITHUB_OUTPUT
+            echo "IS_PRERELEASE=false" >> "$GITHUB_OUTPUT"
+          fi
           
       - name: Build
         if: steps.check_versions.outputs.SHOULD_RELEASE == 'true'
