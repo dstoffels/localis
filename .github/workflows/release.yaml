@@ -36,8 +36,10 @@ jobs:
           echo "VERSION=v$VERSION" >> $GITHUB_OUTPUT
 
       - name: Get latest tag
-        uses: actions-ecosystem/action-get-latest-tag@v1
         id: get_tag
+        run: |
+          LATEST_TAG=$(git tag | sort --version-sort | tail -n1)
+          echo "tag=$LATEST_TAG" >> "$GITHUB_OUTPUT"
 
       - name: Compare versions
         id: check_versions
