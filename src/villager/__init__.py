@@ -1,5 +1,5 @@
 from villager.registries import CountryRegistry, SubdivisionRegistry, CityRegistry
-from villager.db import CountryModel, SubdivisionModel, CityModel
+from villager.data import CountryModel, SubdivisionModel, CityModel
 from villager.dtos import Country, Subdivision, City
 
 countries = CountryRegistry(CountryModel)

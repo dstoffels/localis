@@ -97,7 +97,7 @@ def mangle(
         # reassemble token
         mangled_tokens.append(first_char + "".join(rest))
 
-    return "".join(mangled_tokens)
+    return " ".join(mangled_tokens)
 
 
 def select_random(reg: Registry) -> DTO:

@@ -1,5 +1,5 @@
 import pytest
-from villager.db.models import CountryModel, SubdivisionModel, CityModel, Model
+from villager.data.models import CountryModel, SubdivisionModel, CityModel, Model
 from typing import Type
 import villager
 import random

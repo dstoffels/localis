@@ -1,4 +1,4 @@
-from villager.db import db, CountryModel, SubdivisionModel, CityModel, MetaStore
+from villager.data import db, CountryModel, SubdivisionModel, CityModel, MetaStore
 from villager.utils import clean_row, chunked
 import csv
 from pathlib import Path

@@ -9,6 +9,7 @@ from abc import ABC
 class DTO(ABC):
     id: int
     name: str
+    alt_names: list[str]
 
     def to_dict(self):
         return asdict(self)

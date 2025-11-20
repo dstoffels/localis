@@ -5,9 +5,10 @@ from villager.dtos import DTO
 from villager.registries import Registry
 import villager
 from tests.utils import mangle
+import random
 
 ITERATIONS = 3
-SAMPLE_SIZE = 300
+SAMPLE_SIZE = 1000
 
 
 def benchmark():
@@ -33,39 +34,39 @@ def benchmark():
         avg_time = 0.0
         top_scores = []
 
+        def search(q: str):
+            nonlocal total_queries, num_hit, num_miss, avg_time
+
+            seed = hash((entry.id, i))
+            mangled_q = mangle(q, seed=seed)
+            start = time.perf_counter()
+            search_results = registry.search(mangled_q, limit=15)
+            end = time.perf_counter()
+            elapsed = (end - start) * 1000
+
+            if total_queries == 0:
+                avg_time = elapsed
+            else:
+                avg_time = (avg_time * total_queries + elapsed) / (total_queries + 1)
+
+            total_queries += 1
+
+            for r, score in search_results:
+                if entry.id == r.id:
+                    num_hit += 1
+                    top_scores.append(score)
+                else:
+                    num_miss += 1
+
+        # BEGIN SEARCHES
         for i in range(ITERATIONS):
             print(f"Pass {i}")
             for entry in entries[:SAMPLE_SIZE]:
-                seed = hash((entry.id, i))
-                query = mangle(entry.name, seed=seed)
-                start = time.perf_counter()
-                search_results = registry.search(query, limit=10)
-                end = time.perf_counter()
-                elapsed = (end - start) * 1000
-                # avg_entry_score = not len(search_results) or sum(
-                #     [score for _, score in search_results]
-                # ) / len(search_results)
+                search(entry.name)
+                if entry.alt_names:
+                    rand_alt_name = random.Random(42 + i).choice(entry.alt_names)
+                    search(rand_alt_name)
 
-                if total_queries == 0:
-                    avg_time = elapsed
-                    # avg_top_score = avg_entry_score
-                else:
-                    avg_time = (avg_time * total_queries + elapsed) / (
-                        total_queries + 1
-                    )
-
-                    # avg_top_score = (avg_top_score * total_queries + avg_entry_score) / (
-                    #     total_queries + 1
-                    # )
-
-                total_queries += 1
-
-                for r, score in search_results:
-                    if entry.id == r.id:
-                        num_hit += 1
-                        top_scores.append(score)
-                    else:
-                        num_miss += 1
         success_rate = num_hit / total_queries if total_queries else 0.0
         avg_hit_score = sum(top_scores) / num_hit
 

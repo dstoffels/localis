@@ -1,15 +1,30 @@
-from villager.search.search_base import SearchBase
-from rapidfuzz import fuzz
-from villager.utils import normalize
+from villager.search.search_engine import SearchEngine
+from rapidfuzz import fuzz, process
 
 
-class FuzzySearch(SearchBase):
+class FuzzySearch(SearchEngine):
+    NOISE_THRESHOLD = 0.6
+
     def score_candidate(self, candidate):
         score = 0.0
-        for field, weight in self.field_weights.items():
-            values = getattr(candidate, field, "").split("|")
-            score += (
-                max(fuzz.token_sort_ratio(v, self.query) for v in values) / 100 * weight
-            )
+        total_matched_weight = 0.0
 
-        return score / self._max_score
+        for field, weight in self.field_weights.items():
+            fvalue = getattr(candidate, field, "")
+            if fvalue:
+                values = fvalue.lower().split("|")
+                matches = process.extract(
+                    self.query,
+                    values,
+                    scorer=fuzz.token_set_ratio,
+                    score_cutoff=60,
+                )
+                field_score = (
+                    max(score for _, score, i in matches) / 100 if matches else 0.0
+                )
+
+                # # Filter noise
+                if field_score >= self.NOISE_THRESHOLD:
+                    score += field_score * weight
+                    total_matched_weight += weight
+        return score / total_matched_weight if total_matched_weight > 0 else 0.0

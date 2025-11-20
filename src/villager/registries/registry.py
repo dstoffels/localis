@@ -1,10 +1,8 @@
 from typing import Iterator, Generic, TypeVar
-from abc import ABC, abstractmethod
+from abc import ABC
 from typing import Type
-from villager.db import db, DTO, Model
-from villager.utils import normalize
-from rapidfuzz import fuzz, process
-from villager.search import FuzzySearch, NgramSearch
+from villager.data import DTO, Model
+from villager.search import FuzzySearch
 
 TModel = TypeVar("TModel", bound=Model)
 TDTO = TypeVar("TDTO", bound=DTO)
@@ -13,7 +11,10 @@ TDTO = TypeVar("TDTO", bound=DTO)
 class Registry(Generic[TModel, TDTO], ABC):
     """Abstract base registry class defining interface for lookup and search."""
 
-    SEARCH_FIELD_WEIGHTS = {}
+    ID_FIELDS: tuple[str] = ()
+
+    SEARCH_FIELD_WEIGHTS: dict[str, float] = {}
+    SEARCH_ORDER_FIELDS: list[str] = []
     """Override to provide the fields for search scoring."""
 
     def __init__(self, model_cls: Type[TModel]):
@@ -72,7 +73,13 @@ class Registry(Generic[TModel, TDTO], ABC):
         if not query:
             return []
 
-        search = FuzzySearch(query, self._model_cls, self.SEARCH_FIELD_WEIGHTS, limit)
+        search = FuzzySearch(
+            query,
+            self._model_cls,
+            self.SEARCH_FIELD_WEIGHTS,
+            self.SEARCH_ORDER_FIELDS,
+            limit,
+        )
 
         return search.run()
 

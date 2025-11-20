@@ -1,5 +1,6 @@
 import typer
-from villager.db import MetaStore
+from typing_extensions import Annotated
+from villager.data import MetaStore, Database
 from villager import CityRegistry
 import villager
 
@@ -9,9 +10,23 @@ meta = MetaStore()
 
 
 @app.command()
-def load(dataset: str):
+def load(
+    dataset: str,
+    confirmed: Annotated[
+        bool, typer.Option("--yes", "-y", help="Auto-confirm without prompting")
+    ] = False,
+    custom_dir: Annotated[
+        str,
+        typer.Option(
+            "--path",
+            "-p",
+            help="Custom directory to store the database, by default load will copy the sqlite file to your current working directory.",
+        ),
+    ] = "",
+):
     """Load a remote dataset into the database. Use `villager status` to view eligible datasets."""
-    DATASETS = {"cities": villager.cities.load}
+
+    DATASETS = {"cities": lambda: villager.cities.load(confirmed, custom_dir)}
 
     if dataset in DATASETS:
         DATASETS[dataset]()
@@ -44,6 +59,6 @@ def seturl(url: str):
 def status():
     """View the current state of datasets"""
     url_key = CityRegistry.META_URL_KEY
-    loaded_key = CityRegistry.META_LOADED_KEY
     typer.echo(f"{url_key}: {meta.get(url_key)}")
-    typer.echo(f"{loaded_key}: {meta.get(loaded_key) == '1'}")
+    typer.echo(f"Current Daabase: {Database.get_db_path()}")
+    typer.echo(f"Cities Loaded: {Database.CONFIG_FILE.exists()}")

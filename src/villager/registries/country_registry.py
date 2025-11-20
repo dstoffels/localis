@@ -1,5 +1,5 @@
 from villager.registries.registry import Registry
-from villager.db import CountryModel, Country
+from villager.data import CountryModel, Country
 
 
 class CountryRegistry(Registry[CountryModel, Country]):
@@ -10,10 +10,12 @@ class CountryRegistry(Registry[CountryModel, Country]):
     and fuzzy search.
     """
 
+    ID_FIELDS = ("id", "alpha2", "alpha3", "numeric")
+
     SEARCH_FIELD_WEIGHTS = {
         "name": 1.0,
-        "official_name": 0.5,
-        "alt_names": 0.4,
+        "official_name": 1.0,
+        "alt_names": 1.0,
     }
 
     def get(
