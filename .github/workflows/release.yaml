@@ -2,63 +2,104 @@ name: Release
 
 on:
   push:
-    tags:
-      - 'v*'
-
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+    types:
+      - closed
+    
 jobs:
   release:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      id-token: write
-      
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
 
-      - name: Set up Python
+    if: github.repository == 'dstoffels/localis' && github.event_name != 'pull_request'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'    
+          python-version: '3.11'
+          cache: poetry
 
-      - name: Extract version from tag
+      - name: Get project version
         id: get_version
-        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
-
-      - name: Determine if pre-release
-        id: prerelease
         run: |
-          if [[ "${{ steps.get_version.outputs.VERSION }}" =~ ^0\. ]]; then
-            echo "PRERELEASE=true" >> $GITHUB_OUTPUT
+          VERSION=$(poetry version -s)
+          echo "VERSION=v$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Get latest tag
+        uses: actions-ecosystem/action-get-latest-tag@v1
+        id: get_tag
+
+      - name: Compare versions
+        id: check_versions
+        run: |
+          LATEST_TAG="${{ steps.get_tag.outputs.tag }}"
+          VERSION="${{ steps.get_version.outputs.VERSION }}"
+
+          if [ "$LATEST_TAG" == "$VERSION" ]; then
+            echo "Version match. Workflow complete."
+            echo "SHOULD_RELEASE=false" >> $GITHUB_OUTPUT
           else
-            echo "PRERELEASE=false" >> $GITHUB_OUTPUT
+            echo "New version incoming. Generating new release."
+            echo "SHOULD_RELEASE=true" >> $GITHUB_OUTPUT
           fi
 
-      - name: Create GitHub Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref_name }}
-          release_name: Release ${{ github.ref_name }}
-          prerelease: ${{ steps.prerelease.outputs.PRERELEASE == 'true' }}
+      - name: Update database and commit for release.
+        if: steps.check_versions.outputs.SHOULD_RELEASE == 'true'
+        run: | 
+          REPO_URL=${{ github.server_url }}/${{ github.repository }}
+          NEW_VERSION=${{ steps.get_version.outputs.VERSION }}
+          
+          poetry install
 
-      - name: Upload cities.tsv to release assets
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./data/cities/cities.tsv
-          asset_name: cities.tsv
-          asset_content_type: text/tab-separated-values
+          # update the database meta with the asset download url for cities.tsv
+          poetry run python3 ./.github/workflows/update_assets.py $REPO_URL $NEW_VERSION
+
+          git config user.name "GitHub Actions Bot"
+          git config user.email "actions@github.com"
+
+          git add src/localis/data/localis.db
+          git commit -m "CI: Release $NEW_VERSION [skip ci]"
+          git push origin main
+
+      - name: Determine if pre-release (PEP 440).
+        if: steps.check_versions.outputs.SHOULD_RELEASE == 'true'
+        id: check_prerelease
+        run: |
+          RAW_VERSION=$(poetry version -s)
+
+          if [[ "$RAW_VERSION" =~ (a|alpha|b|beta|rc|.dev)[0-9]*$ ]]; then
+            echo "Incoming version is a pre-release and will not be published to PyPI."
+            echo "IS_PRERELEASE=true" >> $GITHUB_OUTPUT
+          else
+            echo "IS_PRERELEASE=false" >> $GITHUB_OUTPUT
           
-      - name: Install Poetry
-        uses: snok/install-poetry@v1  
-          
-      - name: Build package
+      - name: Build
+        if: steps.check_versions.outputs.SHOULD_RELEASE == 'true'
         run: poetry build
+        
+      - name: Generate new release
+        if: steps.check_versions.outputs.SHOULD_RELEASE == 'true'
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ steps.get_version.outputs.VERSION }}
+          name: ${{ steps.get_version.outputs.VERSION }}
+          generate_release_notes: true
+          draft: false
+          prerelease: ${{ steps.check_prerelease.outputs.IS_PRERELEASE }}
+          files: |
+            data/cities/cities.tsv
+            dist/*.whl
+            dist/*.tar.gz
 
+        
       - name: Publish to PyPI
-        uses: pypa/gh-action-pypi-publish@release/v1          
+        if: steps.check_versions.outputs.SHOULD_RELEASE == 'true'
+        uses: pypa/gh-action-pypi-publish@release/v1

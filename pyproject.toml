@@ -1,23 +1,50 @@
-[tool.poetry]
+[project]
 name = "localis"
 version = "1.0.0a0"
 description = "Fast, offline access to comprehensive geographic data for countries, subdivisions, and cities. Built on ISO 3166 and GeoNames datasets with support for exact lookups, filtering, and fuzzy search."
-authors = ["dstoffels"]
 readme = "README.md"
+authors = [
+  {name = 'danimal', email= 'dan.stoffels@gmail.com'}
+]
+license = "MIT"
+keywords = ["country", "subdivision", "city", "iso", "3166", "3166-1", "3166-2", "geonames"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Scientific/Engineering :: GIS",
+]
+requires-python = ">=3.11"
+dependencies = [
+  "rapidfuzz>=3.13.0",
+  "typer>=0.20.0",
+  "requests>=2.32.4",
+]
+
+[project.urls]
+homepage = "https://pypi.org/project/localis/"
+repository = "https://github.com/dstoffels/localis"
+
+[project.scripts]
+localis = 'localis.cli:app'
+
+
+[tool.poetry]
 packages = [
   { include = "localis", from = "src" }
 ]
 
-[tool.poetry.dependencies]
-python = "^3.11"
-rapidfuzz = "^3.13.0"
-typer = "^0.20.0"
-requests = "^2.32.4"
 
 [tool.poetry.group.dev.dependencies]
-pytest = "^8.4.1"
-pytest-watch = "^4.2.0"
-unidecode = "^1.4.0"
+pytest = ">=8.4.1"
+pytest-watch = ">=4.2.0"
+unidecode = ">=1.4.0"
 
-[tool.poetry.scripts]
-localis = 'localis.cli:app'
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
