@@ -42,8 +42,7 @@ jobs:
         with:
           tag_name: ${{ github.ref_name }}
           release_name: Release ${{ github.ref_name }}
-          draft: false
-          prerelease: ${{ steps.prerelease.outputs.PRERELEASE }}
+          prerelease: ${{ steps.prerelease.outputs.PRERELEASE == 'true' }}
 
       - name: Upload cities.tsv to release assets
         uses: actions/upload-release-asset@v1
@@ -55,13 +54,11 @@ jobs:
           asset_name: cities.tsv
           asset_content_type: text/tab-separated-values
           
-      - name: Install build dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install build   
+      - name: Install Poetry
+        uses: snok/install-poetry@v1  
           
       - name: Build package
-        run: python -m build
+        run: poetry build
 
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1          
