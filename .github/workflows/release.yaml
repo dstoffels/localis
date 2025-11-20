@@ -15,6 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      id-token: write
 
     if: github.repository == 'dstoffels/localis' && github.event_name != 'pull_request'
 
