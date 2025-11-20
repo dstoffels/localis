@@ -121,9 +121,11 @@ class Database:
         """Create FTS5 virtual table"""
         columns_str = ", ".join(columns)
 
+        prefix_list = " ".join([str(i) for i in range(2, self.MAX_PREFIX + 1)])
+
         fts_options = [
             '''tokenize = "unicode61 remove_diacritics 2"''',
-            f'prefix="{' '.join([str(i) for i in range(2, self.MAX_PREFIX + 1)])}"',
+            f'''prefix="{prefix_list}"''',
         ]
 
         options_str = ", " + ", ".join(fts_options) if fts_options else ""
