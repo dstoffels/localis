@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "localis"
 version = "0.2.1"
-authors = [{ name ="danimal", email="dan.stoffels@gmail.com"},]
+authors = ["dstoffels"]
 description = "Fast, offline access to comprehensive geographic data for countries, subdivisions, and cities. Built on ISO 3166 and GeoNames datasets with support for exact lookups, filtering, and fuzzy search."
 readme = "README.md"
 packages = [
