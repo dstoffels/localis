@@ -338,4 +338,1023 @@ sandbox.py
 
 # Keep empty folders tracked (optional)
 !data/.gitkeep
-villager.db
+villager.db# ======================================
+# Python standard ignores
+# ======================================
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Cython debug symbols
+cython_debug/
+
+# ======================================
+# Virtual environments
+# ======================================
+.venv/
+venv/
+ENV/
+env/
+Venv/
+VENV/
+
+# Pipenv and Poetry
+Pipfile.lock
+poetry.lock
+
+# pyenv
+.python-version
+
+# pip wheel cache
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+
+# ======================================
+# IDEs & editors
+# ======================================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ======================================
+# Logs and temp files
+# ======================================
+*.log
+*.tmp
+*.bak
+*.orig
+*.old
+
+# ======================================
+# OS-generated files
+# ======================================
+.DS_Store
+Thumbs.db
+
+# ======================================
+# Tests and coverage
+# ======================================
+.coverage
+coverage.xml
+htmlcov/
+.tox/
+.pytest_cache/
+
+# ======================================
+# SQLite database & local data
+# ======================================
+# *
+*.sqlite
+*.sqlite3
+
+# ======================================
+# Custom project-specific ignores
+# ======================================
+allCountries.txt
+.villager_cache/
+*.zip
+sandbox.py
+
+# Keep empty folders tracked (optional)
+!data/.gitkeep
+# ======================================
+# Python standard ignores
+# ======================================
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Cython debug symbols
+cython_debug/
+
+# ======================================
+# Virtual environments
+# ======================================
+.venv/
+venv/
+ENV/
+env/
+Venv/
+VENV/
+
+# Pipenv and Poetry
+Pipfile.lock
+poetry.lock
+
+# pyenv
+.python-version
+
+# pip wheel cache
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+
+# ======================================
+# IDEs & editors
+# ======================================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ======================================
+# Logs and temp files
+# ======================================
+*.log
+*.tmp
+*.bak
+*.orig
+*.old
+
+# ======================================
+# OS-generated files
+# ======================================
+.DS_Store
+Thumbs.db
+
+# ======================================
+# Tests and coverage
+# ======================================
+.coverage
+coverage.xml
+htmlcov/
+.tox/
+.pytest_cache/
+
+# ======================================
+# SQLite database & local data
+# ======================================
+# *
+*.sqlite
+*.sqlite3
+
+# ======================================
+# Custom project-specific ignores
+# ======================================
+allCountries.txt
+.villager_cache/
+*.zip
+sandbox.py
+
+# Keep empty folders tracked (optional)
+!data/.gitkeep
+# ======================================
+# Python standard ignores
+# ======================================
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Cython debug symbols
+cython_debug/
+
+# ======================================
+# Virtual environments
+# ======================================
+.venv/
+venv/
+ENV/
+env/
+Venv/
+VENV/
+
+# Pipenv and Poetry
+Pipfile.lock
+poetry.lock
+
+# pyenv
+.python-version
+
+# pip wheel cache
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+
+# ======================================
+# IDEs & editors
+# ======================================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ======================================
+# Logs and temp files
+# ======================================
+*.log
+*.tmp
+*.bak
+*.orig
+*.old
+
+# ======================================
+# OS-generated files
+# ======================================
+.DS_Store
+Thumbs.db
+
+# ======================================
+# Tests and coverage
+# ======================================
+.coverage
+coverage.xml
+htmlcov/
+.tox/
+.pytest_cache/
+
+# ======================================
+# SQLite database & local data
+# ======================================
+# *
+*.sqlite
+*.sqlite3
+
+# ======================================
+# Custom project-specific ignores
+# ======================================
+allCountries.txt
+.villager_cache/
+*.zip
+sandbox.py
+
+# Keep empty folders tracked (optional)
+!data/.gitkeep
+# ======================================
+# Python standard ignores
+# ======================================
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Cython debug symbols
+cython_debug/
+
+# ======================================
+# Virtual environments
+# ======================================
+.venv/
+venv/
+ENV/
+env/
+Venv/
+VENV/
+
+# Pipenv and Poetry
+Pipfile.lock
+poetry.lock
+
+# pyenv
+.python-version
+
+# pip wheel cache
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+
+# ======================================
+# IDEs & editors
+# ======================================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ======================================
+# Logs and temp files
+# ======================================
+*.log
+*.tmp
+*.bak
+*.orig
+*.old
+
+# ======================================
+# OS-generated files
+# ======================================
+.DS_Store
+Thumbs.db
+
+# ======================================
+# Tests and coverage
+# ======================================
+.coverage
+coverage.xml
+htmlcov/
+.tox/
+.pytest_cache/
+
+# ======================================
+# SQLite database & local data
+# ======================================
+# *
+*.sqlite
+*.sqlite3
+
+# ======================================
+# Custom project-specific ignores
+# ======================================
+allCountries.txt
+.villager_cache/
+*.zip
+sandbox.py
+
+# Keep empty folders tracked (optional)
+!data/.gitkeep
+villager.db# ======================================
+# Python standard ignores
+# ======================================
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Cython debug symbols
+cython_debug/
+
+# ======================================
+# Virtual environments
+# ======================================
+.venv/
+venv/
+ENV/
+env/
+Venv/
+VENV/
+
+# Pipenv and Poetry
+Pipfile.lock
+poetry.lock
+
+# pyenv
+.python-version
+
+# pip wheel cache
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+
+# ======================================
+# IDEs & editors
+# ======================================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ======================================
+# Logs and temp files
+# ======================================
+*.log
+*.tmp
+*.bak
+*.orig
+*.old
+
+# ======================================
+# OS-generated files
+# ======================================
+.DS_Store
+Thumbs.db
+
+# ======================================
+# Tests and coverage
+# ======================================
+.coverage
+coverage.xml
+htmlcov/
+.tox/
+.pytest_cache/
+
+# ======================================
+# SQLite database & local data
+# ======================================
+# *
+*.sqlite
+*.sqlite3
+
+# ======================================
+# Custom project-specific ignores
+# ======================================
+allCountries.txt
+.villager_cache/
+*.zip
+sandbox.py
+
+# Keep empty folders tracked (optional)
+!data/.gitkeep
+# ======================================
+# Python standard ignores
+# ======================================
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Cython debug symbols
+cython_debug/
+
+# ======================================
+# Virtual environments
+# ======================================
+.venv/
+venv/
+ENV/
+env/
+Venv/
+VENV/
+
+# Pipenv and Poetry
+Pipfile.lock
+poetry.lock
+
+# pyenv
+.python-version
+
+# pip wheel cache
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+
+# ======================================
+# IDEs & editors
+# ======================================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ======================================
+# Logs and temp files
+# ======================================
+*.log
+*.tmp
+*.bak
+*.orig
+*.old
+
+# ======================================
+# OS-generated files
+# ======================================
+.DS_Store
+Thumbs.db
+
+# ======================================
+# Tests and coverage
+# ======================================
+.coverage
+coverage.xml
+htmlcov/
+.tox/
+.pytest_cache/
+
+# ======================================
+# SQLite database & local data
+# ======================================
+# *
+*.sqlite
+*.sqlite3
+
+# ======================================
+# Custom project-specific ignores
+# ======================================
+allCountries.txt
+.villager_cache/
+*.zip
+sandbox.py
+
+# Keep empty folders tracked (optional)
+!data/.gitkeep
+# ======================================
+# Python standard ignores
+# ======================================
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Cython debug symbols
+cython_debug/
+
+# ======================================
+# Virtual environments
+# ======================================
+.venv/
+venv/
+ENV/
+env/
+Venv/
+VENV/
+
+# Pipenv and Poetry
+Pipfile.lock
+poetry.lock
+
+# pyenv
+.python-version
+
+# pip wheel cache
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+
+# ======================================
+# IDEs & editors
+# ======================================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ======================================
+# Logs and temp files
+# ======================================
+*.log
+*.tmp
+*.bak
+*.orig
+*.old
+
+# ======================================
+# OS-generated files
+# ======================================
+.DS_Store
+Thumbs.db
+
+# ======================================
+# Tests and coverage
+# ======================================
+.coverage
+coverage.xml
+htmlcov/
+.tox/
+.pytest_cache/
+
+# ======================================
+# SQLite database & local data
+# ======================================
+# *
+*.sqlite
+*.sqlite3
+
+# ======================================
+# Custom project-specific ignores
+# ======================================
+allCountries.txt
+.villager_cache/
+*.zip
+sandbox.py
+
+# Keep empty folders tracked (optional)
+!data/.gitkeep
+# ======================================
+# Python standard ignores
+# ======================================
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Cython debug symbols
+cython_debug/
+
+# ======================================
+# Virtual environments
+# ======================================
+.venv/
+venv/
+ENV/
+env/
+Venv/
+VENV/
+
+# Pipenv and Poetry
+Pipfile.lock
+poetry.lock
+
+# pyenv
+.python-version
+
+# pip wheel cache
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+
+# ======================================
+# IDEs & editors
+# ======================================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ======================================
+# Logs and temp files
+# ======================================
+*.log
+*.tmp
+*.bak
+*.orig
+*.old
+
+# ======================================
+# OS-generated files
+# ======================================
+.DS_Store
+Thumbs.db
+
+# ======================================
+# Tests and coverage
+# ======================================
+.coverage
+coverage.xml
+htmlcov/
+.tox/
+.pytest_cache/
+
+# ======================================
+# SQLite database & local data
+# ======================================
+# *
+*.sqlite
+*.sqlite3
+
+# ======================================
+# Custom project-specific ignores
+# ======================================
+allCountries.txt
+.villager_cache/
+*.zip
+sandbox.py
+
+# Keep empty folders tracked (optional)
+!data/.gitkeep
+# ======================================
+# Python standard ignores
+# ======================================
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Cython debug symbols
+cython_debug/
+
+# ======================================
+# Virtual environments
+# ======================================
+.venv/
+venv/
+ENV/
+env/
+Venv/
+VENV/
+
+# Pipenv and Poetry
+Pipfile.lock
+poetry.lock
+
+# pyenv
+.python-version
+
+# pip wheel cache
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+
+# ======================================
+# IDEs & editors
+# ======================================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ======================================
+# Logs and temp files
+# ======================================
+*.log
+*.tmp
+*.bak
+*.orig
+*.old
+
+# ======================================
+# OS-generated files
+# ======================================
+.DS_Store
+Thumbs.db
+
+# ======================================
+# Tests and coverage
+# ======================================
+.coverage
+coverage.xml
+htmlcov/
+.tox/
+.pytest_cache/
+
+# ======================================
+# SQLite database & local data
+# ======================================
+# *
+*.sqlite
+*.sqlite3
+
+# ======================================
+# Custom project-specific ignores
+# ======================================
+allCountries.txt
+.villager_cache/
+*.zip
+sandbox.py
+
+# Keep empty folders tracked (optional)
+!data/.gitkeep
+# ======================================
+# Python standard ignores
+# ======================================
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Cython debug symbols
+cython_debug/
+
+# ======================================
+# Virtual environments
+# ======================================
+.venv/
+venv/
+ENV/
+env/
+Venv/
+VENV/
+
+# Pipenv and Poetry
+Pipfile.lock
+poetry.lock
+
+# pyenv
+.python-version
+
+# pip wheel cache
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+
+# ======================================
+# IDEs & editors
+# ======================================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ======================================
+# Logs and temp files
+# ======================================
+*.log
+*.tmp
+*.bak
+*.orig
+*.old
+
+# ======================================
+# OS-generated files
+# ======================================
+.DS_Store
+Thumbs.db
+
+# ======================================
+# Tests and coverage
+# ======================================
+.coverage
+coverage.xml
+htmlcov/
+.tox/
+.pytest_cache/
+
+# ======================================
+# SQLite database & local data
+# ======================================
+# *
+*.sqlite
+*.sqlite3
+
+# ======================================
+# Custom project-specific ignores
+# ======================================
+allCountries.txt
+.villager_cache/
+*.zip
+sandbox.py
+
+# Keep empty folders tracked (optional)
+!data/.gitkeep
+# ======================================
+# Python standard ignores
+# ======================================
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Cython debug symbols
+cython_debug/
+
+# ======================================
+# Virtual environments
+# ======================================
+.venv/
+venv/
+ENV/
+env/
+Venv/
+VENV/
+
+# Pipenv and Poetry
+Pipfile.lock
+poetry.lock
+
+# pyenv
+.python-version
+
+# pip wheel cache
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+
+# ======================================
+# IDEs & editors
+# ======================================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ======================================
+# Logs and temp files
+# ======================================
+*.log
+*.tmp
+*.bak
+*.orig
+*.old
+
+# ======================================
+# OS-generated files
+# ======================================
+.DS_Store
+Thumbs.db
+
+# ======================================
+# Tests and coverage
+# ======================================
+.coverage
+coverage.xml
+htmlcov/
+.tox/
+.pytest_cache/
+
+# ======================================
+# SQLite database & local data
+# ======================================
+# *
+*.sqlite
+*.sqlite3
+
+# ======================================
+# Custom project-specific ignores
+# ======================================
+allCountries.txt
+.villager_cache/
+*.zip
+sandbox.py
+
+# Keep empty folders tracked (optional)
+!data/.gitkeep
+# ======================================
+# Python standard ignores
+# ======================================
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Cython debug symbols
+cython_debug/
+
+# ======================================
+# Virtual environments
+# ======================================
+.venv/
+venv/
+ENV/
+env/
+Venv/
+VENV/
+
+# Pipenv and Poetry
+Pipfile.lock
+poetry.lock
+
+# pyenv
+.python-version
+
+# pip wheel cache
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+
+# ======================================
+# IDEs & editors
+# ======================================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ======================================
+# Logs and temp files
+# ======================================
+*.log
+*.tmp
+*.bak
+*.orig
+*.old
+
+# ======================================
+# OS-generated files
+# ======================================
+.DS_Store
+Thumbs.db
+
+# ======================================
+# Tests and coverage
+# ======================================
+.coverage
+coverage.xml
+htmlcov/
+.tox/
+.pytest_cache/
+
+# ======================================
+# SQLite database & local data
+# ======================================
+# *
+*.sqlite
+*.sqlite3
+
+# ======================================
+# Custom project-specific ignores
+# ======================================
+allCountries.txt
+.villager_cache/
+*.zip
+sandbox.py
+
+# Keep empty folders tracked (optional)
+!data/.gitkeep
