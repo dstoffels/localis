@@ -48,7 +48,8 @@ if ($versionPart -eq 'revert') {
     
     # Revert to previous commit
     Write-Host "Reverting last commit..."
-    git reset --hard HEAD~1
+    git revert HEAD --no-edit
+    git push origin main
     
     Write-Host "Revert complete!" -ForegroundColor Green
     exit 0
