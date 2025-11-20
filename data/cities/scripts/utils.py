@@ -1,6 +1,5 @@
 from pathlib import Path
 from dataclasses import dataclass
-from ...subdivisions.scripts.utils import SubdivisionDTO, SubdivisionMap
 import csv
 import unicodedata
 from unidecode import unidecode
