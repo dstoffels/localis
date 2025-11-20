@@ -45,6 +45,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./cities.tsv
+          asset_path: .data/cities/cities.tsv
           asset_name: cities.tsv
           asset_content_type: text/tab-separated-values
