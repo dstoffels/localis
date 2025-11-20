@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "villager"
-version = "0.1.0"
+version = "0.2.0"
 description = "Offline geodata search and lookup for countries, subdivisions, and cities compiled from GeoNames and ISO 3166."
 authors = ["danimal"]
 packages = [
