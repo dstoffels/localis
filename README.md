@@ -411,7 +411,7 @@ localis load cities
 localis load cities -y
 
 # Load to custom directory
-localis load cities -d ./data
+localis load cities -p ./data
 
 # Unload cities dataset
 localis unload cities
