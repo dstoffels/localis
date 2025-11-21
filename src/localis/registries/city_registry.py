@@ -1,5 +1,6 @@
 from localis.registries.registry import Registry
 from localis.data import CityModel, City, MetaStore, db
+from localis.utils import pad_num_w_zeros
 import requests
 import io
 import localis
@@ -245,7 +246,12 @@ class CityRegistry(Registry[CityModel, City]):
             return []
 
         sub_field = "|".join([sub.name, sub.geonames_code, sub.iso_code])
-        results: list[CityModel] = self._model_cls.select(CityModel.admin1 == sub_field)
+        expr = CityModel.admin1 == sub_field
+        if population__lt:
+            expr = expr & (CityModel.population < pad_num_w_zeros(population__lt))
+        elif population__gt:
+            expr = expr & (CityModel.population > pad_num_w_zeros(population__gt))
+        results: list[CityModel] = self._model_cls.select(expr)
 
         if not results:
             results = self._model_cls.select(CityModel.admin2 == sub_field)
