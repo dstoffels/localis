@@ -7,7 +7,7 @@ import sqlite3
 from typing import Type
 import json
 from abc import abstractmethod
-from localis.utils import prep_tokens
+from localis.utils import prep_fts_tokens
 
 TDTO = TypeVar("TDTO", bound=DTO)
 
@@ -121,12 +121,14 @@ class Model(Generic[TDTO], ABC):
         offset: int = None,
     ):
         if field_queries:
-            params = list(prep_tokens(q, exact_match) for q in field_queries.values())
+            params = list(
+                prep_fts_tokens(q, exact_match) for q in field_queries.values()
+            )
             q_where = "WHERE " + "AND ".join(
                 f"{col} MATCH ?" for col in field_queries.keys()
             )
         elif query:
-            sanitized_input = prep_tokens(query, exact_match)
+            sanitized_input = prep_fts_tokens(query, exact_match)
 
             params = [sanitized_input]
             q_where = f"WHERE {cls.table_name} MATCH ?"

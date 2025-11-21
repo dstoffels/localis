@@ -1,6 +1,7 @@
 from abc import ABC
 from typing import Literal
 from typing import Generic, TypeVar
+from localis.utils import prep_fts_tokens
 
 T = TypeVar("T")
 
@@ -10,10 +11,10 @@ class Expression:
         self.sql = sql
         self.params = params
 
-    def __and__(self, other):
+    def __and__(self, other: "Expression"):
         return Expression(f"({self.sql} AND {other.sql})", self.params + other.params)
 
-    def __or__(self, other):
+    def __or__(self, other: "Expression"):
         return Expression(f"({self.sql} OR {other.sql})", self.params + other.params)
 
     def __str__(self):
@@ -52,7 +53,7 @@ class Field(Generic[T], ABC):
         instance.__dict__[self.name] = value
 
     def __eq__(self, other):
-        return Expression(f"{self.name} = ?", (str(other),))
+        return Expression(f"{self.name} MATCH ?", (f'''"{other}"''',))
 
     def __ne__(self, other):
         return Expression(f"{self.name} != ?", (str(other),))

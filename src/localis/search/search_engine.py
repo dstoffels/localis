@@ -43,9 +43,6 @@ class SearchEngine(ABC):
         candidates = self._fetch_candidates(exact=True)
 
         for i in range(1, self._iterations + 1):
-            if self.query == "beuzchov":
-                print(i, self.tokens)
-                print(self._iterations)
             self._score_candidates(candidates)
 
             if self._should_exit_early(i):

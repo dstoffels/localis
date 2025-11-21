@@ -1,7 +1,7 @@
 from localis.data.models.model import Model
 from localis.data.models.fields import CharField, IntField, FloatField
 from localis.dtos import SubdivisionBasic, City
-from localis.utils import clean_row, chunked
+from localis.utils import clean_row, chunked, pad_num_w_zeros
 import csv
 
 
@@ -58,13 +58,13 @@ class CityModel(Model[City]):
 
     @classmethod
     def load(cls, file):
+        """Loads and entire TSV file into the database."""
         cls.db.create_tables([CityModel])
         cities: list[dict] = []
         reader = csv.DictReader(file, delimiter="\t")
 
         for row in reader:
-            MAX_DIGITS = 9
-            row["population"] = f"{int(row['population']):0{MAX_DIGITS}d}"
+            row["population"] = pad_num_w_zeros(row["population"])
             cities.append(clean_row(row))
 
         with cls.db.atomic():
