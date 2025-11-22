@@ -69,7 +69,6 @@ htmlcov/
 # ======================================
 # SQLite database & local data
 # ======================================
-# villager.db*
 *.sqlite
 *.sqlite3
 
@@ -83,4 +82,6 @@ sandbox.py
 
 # Keep empty folders tracked (optional)
 !data/.gitkeep
+
+.localis.conf
 localis.db
