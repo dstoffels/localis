@@ -212,6 +212,10 @@ class CityRegistry(Registry[CityModel, City]):
             CityModel.country == country_field
         )
 
+        print()
+        print(len(results))
+        print()
+
         dtos = [r.to_dto() for r in results]
         if population__gt is not None:
             return [d for d in dtos if d.population > population__gt]
@@ -245,7 +249,7 @@ class CityRegistry(Registry[CityModel, City]):
         if sub is None:
             return []
 
-        sub_field = "|".join([sub.name, sub.geonames_code, sub.iso_code])
+        sub_field = "|".join([sub.name, sub.geonames_code or "", sub.iso_code or ""])
         expr = CityModel.admin1 == sub_field
         if population__lt:
             expr = expr & (CityModel.population < pad_num_w_zeros(population__lt))
@@ -256,7 +260,15 @@ class CityRegistry(Registry[CityModel, City]):
         if not results:
             results = self._model_cls.select(CityModel.admin2 == sub_field)
 
-        dtos = [r.to_dto() for r in results]
+        dtos = [
+            r.to_dto()
+            for r in results
+            if r.admin1 == sub_field or r.admin2 == sub_field
+        ]
+
+        for r in results:
+            print(r.admin1)
+            print(r.admin2)
         if population__gt is not None:
             return [d for d in dtos if d.population > population__gt]
         elif population__lt is not None:
