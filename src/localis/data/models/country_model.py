@@ -1,5 +1,5 @@
 from localis.data.models.model import Model
-from localis.data.models.fields import CharField, IntField
+from localis.data.models.fields import CharField, IntField, CompoundField
 from localis.dtos import Country
 
 
@@ -12,7 +12,7 @@ class CountryModel(Model[Country]):
     alpha2 = CharField()
     alpha3 = CharField()
     numeric = IntField()
-    alt_names = CharField()
+    alt_names = CompoundField()
     flag = CharField(index=False)
 
     def to_dto(self):
@@ -29,7 +29,7 @@ class CountryModel(Model[Country]):
         numeric: int,
         alt_names: str,
         flag: str,
-        **kwargs
+        **kwargs,
     ):
         self.name = name
         self.official_name = official_name or ""

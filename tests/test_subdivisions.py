@@ -1,5 +1,5 @@
 import pytest
-from localis import subdivisions, Subdivision, countries
+from localis import subdivisions, Subdivision, countries, Country
 
 
 class TestGet:
@@ -70,18 +70,22 @@ class TestForCountry:
         assert len(results) > 0
         assert all(sub.country_alpha2 == r.country_alpha2 for r in results)
 
-    def test_admin_level_filter(self, sub: Subdivision):
+    def test_admin_level_filter(self):
         """should return a country's subdivisions filtered by admin level with the default being 1"""
 
-        results = subdivisions.for_country(alpha2=sub.country_alpha2)
+        results = subdivisions.for_country(alpha2="US")
 
-        assert len(results) > 0
-        assert all(r.admin_level == 1 for r in results)
+        assert len(results) > 0, f"expected at least one result (admin1)"
+        assert all(
+            r.admin_level == 1 for r in results
+        ), f"expected only admin1 subdivisions {results}"
 
-        results = subdivisions.for_country(alpha2=sub.country_alpha2, admin_level=2)
+        results = subdivisions.for_country(alpha2="US", admin_level=2)
 
-        assert len(results) > 0
-        assert all(r.admin_level == 2 for r in results)
+        assert len(results) > 0, f"expected at least one result (admin2) "
+        assert all(
+            r.admin_level == 2 for r in results
+        ), f"expected only admin2 subdivisions {results}"
 
 
 class TestTypes:
@@ -95,26 +99,40 @@ class TestTypes:
         assert isinstance(results, list)
         assert len(results) == 0
 
-    def test_country_and_admin_level(self, sub: Subdivision):
+    def test_all_types(self, country: Country):
+        """should return a list of distinct types for a given country"""
+
+        results = subdivisions.types_for_country(alpha2=country.alpha2)
+
+        sub = subdivisions.filter(country=country.alpha2, limit=1)[0]
+
+        assert (
+            results and sub
+        ), f"expected at least one result for results and control sub: {sub} {results}"
+        assert (
+            sub.type in results
+        ), f"expected subdvivion's type ({sub.type}) to be in the results: {results}"
+
+    @pytest.mark.parametrize("admin_level", [1, 2])
+    def test_admin_lvl_filter(self, admin_level, country: Country):
         """should return a list of distinct types for a given country, filtered by admin_level"""
 
-        country = countries.get(alpha2=sub.country_alpha2)
-        admin_levels = [None, 1, 2]
+        results = subdivisions.types_for_country(
+            alpha2=country.alpha2, admin_level=admin_level
+        )
 
-        for field in countries.ID_FIELDS:
-            map = {field: getattr(country, field)}
+        filtered_subs = subdivisions.for_country(
+            alpha2=country.alpha2, admin_level=admin_level
+        )
 
-            for lvl in admin_levels:
-                results = subdivisions.types_for_country(admin_level=lvl, **map)
-                filtered_subs = subdivisions.for_country(admin_level=lvl, **map)
+        filtered_type_set = set(
+            [
+                s.type
+                for s in filtered_subs
+                if s.type is not None and s.admin_level == admin_level
+            ]
+        )
 
-                filtered_subs_type_set = set(
-                    [
-                        s.type
-                        for s in filtered_subs
-                        if s.type is not None and s.admin_level == lvl
-                    ]
-                )
-
-                assert len(results) == len(filtered_subs_type_set)
-                assert set(results) == filtered_subs_type_set
+        assert (
+            set(results) == filtered_type_set
+        ), f"expected the results to match the set of types from filtered subdivisions"

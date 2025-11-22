@@ -112,6 +112,15 @@ class CharField(Field[str]):
     type = "TEXT"
 
 
+class CompoundField(Field[str]):
+    """A charfield containing pipe-delimited values."""
+
+    type = "TEXT"
+
+    # def __eq__(self, other):
+    #     return Expression(f"")
+
+
 class IntField(Field[int]):
     pass
 

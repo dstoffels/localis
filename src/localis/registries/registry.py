@@ -2,6 +2,7 @@ from typing import Iterator, Generic, TypeVar
 from abc import ABC
 from typing import Type
 from localis.data import DTO, Model
+from localis.data.models.fields import Expression
 from localis.search import FuzzySearch
 
 TModel = TypeVar("TModel", bound=Model)
@@ -51,22 +52,16 @@ class Registry(Generic[TModel, TDTO], ABC):
     def filter(
         self, query: str = None, name: str = None, limit: int = None, **kwargs
     ) -> list[TDTO]:
+        if name:
+            kwargs["name"] = name
         if kwargs:
-            if name:
-                kwargs.update({"name": name})
             results = self._model_cls.fts_match(
                 field_queries=kwargs, order_by=["rank"], limit=limit
-            )
-
-        elif name:
-            results = self._model_cls.fts_match(
-                field_queries={"name": name}, order_by=["rank"], limit=limit
             )
         elif query:
             results = self._model_cls.fts_match(query, order_by=["rank"], limit=limit)
         else:
             return []
-
         return [r.to_dto() for r in results]
 
     def search(self, query: str, limit=None, **kwargs) -> list[tuple[TDTO, float]]:

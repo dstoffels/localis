@@ -17,14 +17,14 @@ class SearchEngine(ABC):
         query: str,
         model_cls: type[Model],
         field_weights: dict[str, float],
-        order_fields: list[str],
+        orderby_fields: list[str],
         limit: int = None,
     ):
         self.query: str = query.lower()
         self.tokens = self.query.split()
         self.model_cls: type[Model] = model_cls
         self.field_weights: dict[str, float] = field_weights
-        self.order_fields: list[str] = order_fields
+        self.orderby_fields: list[str] = orderby_fields
         self.limit: int | None = limit
 
         self._max_score = sum(field_weights.values())
@@ -111,15 +111,10 @@ class SearchEngine(ABC):
             t[:-1] if len(t) > self.MIN_TOKEN_LEN else t for t in self.tokens
         ]
 
-    def _at_limit(self) -> bool:
-        if self.limit is not None:
-            return len(self._matches) >= self.limit
-        return False
-
     @property
     def results(self) -> list[tuple[DTO, float]]:
         return sorted(
             [(m.to_dto(), score) for m, score in self._matches.items()],
-            key=lambda x: (x[1], *[getattr(x[0], f) for f in self.order_fields]),
+            key=lambda x: (x[1], *[getattr(x[0], f) for f in self.orderby_fields]),
             reverse=True,
         )[: self.limit]

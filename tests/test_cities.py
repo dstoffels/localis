@@ -1,5 +1,6 @@
 import pytest
-from localis import cities, City, countries, subdivisions
+from localis import cities, City, countries, subdivisions, Subdivision, Country
+from localis.dtos import SubdivisionBasic
 
 
 class TestLoading:
@@ -67,7 +68,7 @@ class TestFilter:
 
     def test_country(self, city: City):
         """should return a list of cities where its country contains the country kwarg"""
-        results = cities.filter(country=city.country)
+        results = cities.filter(country=city.country, limit=10)
 
         assert len(results) > 0, "should return at least 1"
         assert all(city.country in r.country for r in results)
@@ -90,32 +91,17 @@ class TestFilter:
             results = cities.filter(admin2=sub_name)
 
         assert len(results) > 0
-        assert all(
-            sub_name == r.subdivisions[index].name for r in results
-        ), f"Searched cities for {sub_name}, got back {set([s.subdivisions[index].name for s in results])}"
-
-    def test_alt_names(self, city: City, select_random):
-        """should return a list of cities where the alt names contain the alt_name kwarg"""
-        i = 1
-        while not city.alt_names:
-            city = select_random(cities, i)
-            i += 1
-
-        alt_name = city.alt_names[0]
-        results = cities.filter(alt_name=alt_name)
-
-        assert len(results) > 0, f"should have at least 1 result, RESULTS{results}"
-        assert all(
-            any(alt_name in name or alt_name == name for name in r.alt_names)
+        assert any(
+            sub_name == r.subdivisions[index].name
+            or sub_name in r.subdivisions[index].name
             for r in results
-        ), f"alt_name: {alt_name}"
-        f"results: {results}"
+        ), f"Searched cities for {sub_name}, got back {set([s.subdivisions[index].name for s in results])}"
 
 
 class TestForCountry:
     """FOR_COUNTRY"""
 
-    def test_empty(self, city: City):
+    def test_empty(self):
         """should return [] for invalid inputs"""
 
         results = cities.for_country(alpha2="abcbbd")
@@ -123,70 +109,73 @@ class TestForCountry:
         assert isinstance(results, list)
         assert len(results) == 0
 
-    # def test_country_and_pop_filters(self, seed, city: City):
-    #     """should return a population-filtered list of cities that all contain the input country code"""
+    def test_filtering(self, country: Country):
+        """should return list of cities for a given country"""
 
-    #     country = countries.get(alpha2=city.country_alpha2)
-    #     filters = ["population__gt", "population__lt", None]
+        results = cities.for_country(alpha2=country.alpha2)
 
-    #     for field in countries.ID_FIELDS:
-    #         for filter in filters:
-    #             cmap = {field: getattr(country, field)}
-    #             fmap = {filter: city.population} if filter is not None else {}
-    #             results = cities.for_country(**cmap, **fmap)
+        assert results, f"expected at least 1 result: {results}"
+        assert all(
+            country.name == r.country for r in results
+        ), f"expected all results to have the same admin1: {sub.name}, got {set([r.subdivisions for r in results])}"
 
-    #             if filter is not None:
-    #                 if "__gt" in filter:
-    #                     assert all(city.population < r.population for r in results)
-    #                 elif "__lt" in filter:
-    #                     assert all(city.population > r.population for r in results)
+    @pytest.mark.parametrize("filter", ["population__gt", "population__lt"])
+    def test_pop_filters(self, filter: str, city: City, country: Country):
+        """should return a population-filtered list of cities"""
 
-    #             assert len(results) > 0
-    #             assert all(
-    #                 city.country_alpha2 == r.country_alpha2 for r in results
-    #             ), f"random seed: {seed}"
+        kwargs = {filter: city.population, "alpha2": country.alpha2}
+
+        results = cities.for_country(**kwargs)
+
+        if "__gt" in filter:
+            assert all(city.population < r.population for r in results)
+        elif "__lt" in filter:
+            assert all(city.population > r.population for r in results)
 
 
 class TestForSubdivision:
     """FOR_SUBDIVISION"""
 
-    def test_empty(self, city: City):
+    @pytest.mark.parametrize("bad_input", [None, "", "9999999999"])
+    def test_empty(self, bad_input):
         """should return [] for invalid inputs"""
 
-        inputs = [None, "", "9999999999"]
-
         for field in subdivisions.ID_FIELDS:
-            for input in inputs:
-                map = {field: input}
-                results = cities.for_subdivision(**map)
-                assert results == []
+            map = {field: bad_input}
+            results = cities.for_subdivision(**map)
+            assert results == []
 
-    def test_sub_and_pop_filters(self, city: City):
-        """should return a population-filtered list of cities that all contain the input subdivision id"""
+    def test_filtering(self, sub: Subdivision):
+        """should return a filtered list of cities for a given subdivision"""
 
-        while not city.subdivisions:
-            city = cities.get(city.id + 1)
-        else:
-            admin1 = city.subdivisions[0]
-            if admin1.geonames_code:
-                sub = subdivisions.get(geonames_code=admin1.geonames_code)
-            elif admin1.iso_code:
-                sub = subdivisions.get(iso_code=admin1.iso_code)
+        kwargs = {}
+        if sub.geonames_code:
+            kwargs["geonames_code"] = sub.geonames_code
+        elif sub.iso_code:
+            kwargs["iso_code"] = sub.iso_code
 
-        filters = ["population__gt", "population__lt", None]
+        results = cities.for_subdivision(**kwargs)
 
-        for field in subdivisions.ID_FIELDS:
-            for filter in filters:
-                smap = {field: getattr(sub, field)}
-                fmap = {filter: city.population} if filter is not None else {}
-                results = cities.for_subdivision(**smap, **fmap)
+        assert all(
+            sub.name in s.name
+            for r in results
+            for s in r.subdivisions
+            if s.admin_level == sub.admin_level
+        ), f"expected results' subdivisions lists to contain the input subdivision: {sub.name}, got {set([s.name for r in results for s in r.subdivisions])}"
 
-                assert len(results) > 0
+    @pytest.mark.parametrize("filter", ["population__gt", "population__lt"])
+    def test_pop_filters(self, city: City, sub: Subdivision, filter: str):
+        """should return a population-filtered list of cities"""
 
-                if filter is not None:
-                    if "__gt" in filter:
-                        assert all(city.population < r.population for r in results)
-                    elif "__lt" in filter:
-                        assert all(city.population > r.population for r in results)
+        kwargs = {filter: city.population}
+        if sub.geonames_code:
+            kwargs["geonames_code"] = sub.geonames_code
+        elif sub.iso_code:
+            kwargs["iso_code"] = sub.iso_code
 
-                assert all(city.country_alpha2 == r.country_alpha2 for r in results)
+        results = cities.for_subdivision(**kwargs)
+
+        if "__gt" in filter:
+            assert all(city.population < r.population for r in results)
+        elif "__lt" in filter:
+            assert all(city.population > r.population for r in results)

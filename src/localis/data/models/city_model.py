@@ -1,5 +1,5 @@
 from localis.data.models.model import Model
-from localis.data.models.fields import CharField, IntField, FloatField
+from localis.data.models.fields import CharField, IntField, FloatField, CompoundField
 from localis.dtos import SubdivisionBasic, City
 from localis.utils import clean_row, chunked, pad_num_w_zeros
 import csv
@@ -11,10 +11,10 @@ class CityModel(Model[City]):
 
     name = CharField()
     geonames_id = CharField()
-    admin1 = CharField()
-    admin2 = CharField()
-    country = CharField()
-    alt_names = CharField()
+    admin1 = CompoundField()
+    admin2 = CompoundField()
+    country = CompoundField()
+    alt_names = CompoundField()
     population = IntField(index=False)
     lat = FloatField(index=False)
     lng = FloatField(index=False)

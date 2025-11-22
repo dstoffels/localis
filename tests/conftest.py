@@ -42,19 +42,19 @@ def select_random(seed):
 
 
 @pytest.fixture(scope="session")
-def country(select_random) -> tuple[localis.Country, int]:
+def country(select_random) -> localis.Country:
     """Selects a single country to be tested with the seed that generated it."""
     return select_random(localis.countries)
 
 
 @pytest.fixture(scope="session")
-def sub(select_random) -> tuple[localis.Subdivision, int]:
+def sub(select_random) -> localis.Subdivision:
     """Selects a single subdivision to be tested with the seed that generated it."""
     return select_random(localis.subdivisions)
 
 
 @pytest.fixture(scope="session")
-def city(select_random) -> tuple[localis.City, int]:
+def city(select_random) -> localis.City:
     """Selects a single city to be tested with the seed that generated it."""
     return select_random(localis.cities)
 

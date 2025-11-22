@@ -1,5 +1,5 @@
 from localis.data.models.model import Model
-from localis.data.models.fields import CharField
+from localis.data.models.fields import CharField, CompoundField
 from localis.dtos import Subdivision
 
 
@@ -12,7 +12,7 @@ class SubdivisionModel(Model[Subdivision]):
     type = CharField()
     geonames_code = CharField()
     iso_code = CharField()
-    country = CharField()
+    country = CompoundField()
     parent_id = CharField()
 
     def to_dto(self):
@@ -31,7 +31,7 @@ class SubdivisionModel(Model[Subdivision]):
         iso_code: str,
         country: str,
         parent_id: str,
-        **kwargs
+        **kwargs,
     ):
         self.name = name
         self.alt_names = alt_names or ""
