@@ -3,8 +3,6 @@ import pytest
 import random
 import localis
 from localis.registries import Registry
-from localis.dtos import DTO
-from typing import Protocol
 
 
 def pytest_addoption(parser: pytest.Parser):
@@ -87,8 +85,12 @@ def pytest_itemcollected(item: pytest.Item):
     )
 
     # Function docstring
-    func_doc = getattr(item.obj, "__doc__", None)
-    func_title: str = item.obj.__name__ + " > " + func_doc.strip().split("\n")[0]
+    try:
+        func_doc: str = getattr(item.obj, "__doc__", None)
+        func_title: str = item.obj.__name__ + " > " + func_doc.strip().split("\n")[0]
+    except AttributeError as e:
+        e.add_note("Did you forget to include a docstring?")
+        raise e
 
     parts = [file_title]
     if cls_title:
