@@ -5,8 +5,8 @@ Fast, offline access to comprehensive geographic data for **countries**, **subdi
 ## Features
 
 - 🌍 **249 countries** with ISO codes (alpha-2, alpha-3, numeric)
-- 🗺️ **5,000+ subdivisions** (states, provinces, regions, etc.)
-- 🏙️ **451,000+ cities** (optional GeoNames dataset, requires manual installation)
+- 🗺️ **51,541 subdivisions** (states, provinces, regions, etc.)
+- 🏙️ **451,870 cities** (optional GeoNames dataset, requires manual installation)
 - 🔍 **Search Engine** for typo-tolerant lookups with 90%+ accuracy
 - ⚡ **Blazing fast** - all data stored offline in optimized SQLite with FTS5
 - 🔌 **Aliases** - support for colloquial, historic and alternate names.

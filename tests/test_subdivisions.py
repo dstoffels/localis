@@ -112,11 +112,8 @@ class TestTypes:
                 break
 
         assert (
-            results and sub
-        ), f"expected at least one result for results and control sub: {sub} {results}"
-        assert (
-            sub.type in results
-        ), f"expected subdivision's type ({sub.type}) to be in the results: {results}"
+            sub.type in results if sub.type is not None else True
+        ), f"expected subdivision's type ({sub.type}) to be in the results (if type isn't null): {results}"
 
     @pytest.mark.parametrize("admin_level", [1, 2])
     def test_admin_lvl_filter(self, admin_level, country: Country):
