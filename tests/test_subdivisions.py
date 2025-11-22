@@ -112,7 +112,7 @@ class TestTypes:
                 break
 
         assert (
-            sub.type in results if sub.type is not None else True
+            sub.type in results if sub and sub.type is not None else True
         ), f"expected subdivision's type ({sub.type}) to be in the results (if type isn't null): {results}"
 
     @pytest.mark.parametrize("admin_level", [1, 2])
