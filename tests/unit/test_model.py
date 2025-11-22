@@ -1,8 +1,5 @@
-import pytest
 from localis.data.models import CountryModel, SubdivisionModel, CityModel, Model
 from typing import Type
-import localis
-import random
 
 
 def trunc(text: str) -> str:

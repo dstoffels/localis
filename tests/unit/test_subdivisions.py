@@ -1,5 +1,5 @@
 import pytest
-from localis import subdivisions, Subdivision, countries, Country
+from localis import subdivisions, Subdivision, Country
 
 
 class TestGet:

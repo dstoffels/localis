@@ -21,7 +21,6 @@ classifiers = [
 requires-python = ">=3.11"
 dependencies = [
   "rapidfuzz>=3.13.0",
-  "typer>=0.20.0",
   "requests>=2.32.4",
 ]
 
@@ -30,7 +29,7 @@ homepage = "https://pypi.org/project/localis/"
 repository = "https://github.com/dstoffels/localis"
 
 [project.scripts]
-localis = 'localis.cli:app'
+localis = 'localis.cli:main'
 
 
 [tool.poetry]

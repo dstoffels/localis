@@ -1,64 +1,39 @@
-import typer
-from typing_extensions import Annotated
-from localis.data import MetaStore, Database
-from localis import CityRegistry
 import localis
+import argparse
 
 
-app = typer.Typer(help="localis CLI")
-meta = MetaStore()
+def loadcities(args):
+    """Load the cities dataset"""
+    localis.cities.load(confirmed=args.yes, custom_dir=args.path)
 
 
-@app.command()
-def load(
-    dataset: str,
-    confirmed: Annotated[
-        bool, typer.Option("--yes", "-y", help="Auto-confirm without prompting")
-    ] = False,
-    custom_dir: Annotated[
-        str,
-        typer.Option(
-            "--path",
-            "-p",
-            help="Custom directory to store the database, by default load will copy the sqlite file to your current working directory.",
-        ),
-    ] = "",
-):
-    """Load a remote dataset into the database. Use `localis status` to view eligible datasets."""
-
-    DATASETS = {"cities": lambda: localis.cities.load(confirmed, custom_dir)}
-
-    if dataset in DATASETS:
-        DATASETS[dataset]()
-    else:
-        typer.echo(f"Unknown dataset.")
-        raise typer.Exit(code=1)
+def unloadcities(args):
+    localis.cities.unload()
 
 
-@app.command()
-def unload(dataset: str):
-    """Drop an eligible table from the database. Use `localis status` to view eligible datasets."""
-    DATASETS = {"cities": localis.cities.unload}
+def main():
+    parser = argparse.ArgumentParser(prog="localis", description="localis CLI")
+    subparsers = parser.add_subparsers(dest="command", required=True)
 
-    if dataset in DATASETS:
-        DATASETS[dataset]()
-    else:
-        typer.echo(f"Unknown dataset.")
-        raise typer.Exit(code=1)
-
-
-@app.command(hidden=True)
-def seturl(url: str):
-    meta.set(CityRegistry.META_URL_KEY, url)
-    typer.echo(
-        f"Fixture url set to: {meta.get(CityRegistry.META_URL_KEY)}",
+    # LOADCITIES
+    loadcities_parser = subparsers.add_parser(
+        "loadcities", help="Load the cities data into localis"
     )
+    loadcities_parser.add_argument("-y", "--yes", action="store_true")
+    loadcities_parser.add_argument("-p", "--path", default=None)
+
+    loadcities_parser.set_defaults(func=loadcities)
+
+    # UNLOADCITIES
+    unloadcities_parser = subparsers.add_parser(
+        "unloadcities", help="Remove the cities dataset from localis"
+    )
+    unloadcities_parser.set_defaults(func=unloadcities)
+
+    args = parser.parse_args()
+
+    args.func(args)
 
 
-@app.command()
-def status():
-    """View the current state of datasets"""
-    url_key = CityRegistry.META_URL_KEY
-    typer.echo(f"{url_key}: {meta.get(url_key)}")
-    typer.echo(f"Current Daabase: {Database.get_db_path()}")
-    typer.echo(f"Cities Loaded: {Database.CONFIG_FILE.exists()}")
+if __name__ == "__main__":
+    main()

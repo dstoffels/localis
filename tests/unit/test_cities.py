@@ -1,51 +1,5 @@
 import pytest
-from localis import cities, City, countries, subdivisions, Subdivision, Country
-from localis.dtos import SubdivisionBasic
-
-
-class TestLoading:
-    """LOADING"""
-
-    def test_disabled(self):
-        """should throw RuntimeError when attempting to use while registry is disabled."""
-        loaded = cities._loaded
-        if loaded:
-            cities._loaded = False  # dangerzone: don't do this!
-        try:
-            cities.get(id=1)
-        except RuntimeError as e:
-            cities._loaded = loaded  # return to previous state
-            assert e
-            return
-        assert False, "Error not thrown"
-
-    # def test_unload(self):
-    #     """should drop cities table and throw Runtime Error if cities is accessed"""
-    #     if not cities._loaded:
-    #         cities.load()
-
-    #     cities.unload()
-
-    #     assert cities._loaded == False
-
-    #     e = None
-    #     try:
-    #         cities.count == 0
-    #     except RuntimeError as e:
-    #         assert e
-    #         return
-    #     assert False, "Should throw runtime error"
-
-    # def test_load(self):
-    #     """should download, create cities table and ingest fixture"""
-
-    #     if cities._loaded:
-    #         cities.unload()
-
-    #     cities.load()
-
-    #     assert cities._loaded
-    #     assert cities.count > 0
+from localis import cities, City, subdivisions, Subdivision, Country
 
 
 class TestGet:

@@ -15,11 +15,11 @@ import sqlite3
 def db():
     """A memory-bound sqlite db for testing."""
 
+    orig_path = DB.get_db_path()
     DB.set_db_path(":memory:")
 
     yield DB
 
-    orig_path = DB.get_db_path()
     DB.set_db_path(orig_path)
 
 

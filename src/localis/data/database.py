@@ -61,8 +61,8 @@ class Database:
         path = Path(dir) if dir else Path.cwd()
         target_path = path / filename
 
-        with resources.path(cls.PATH, cls.FILENAME) as db_file:
-            shutil.copy(db_file, target_path)
+        db_file = resources.files(cls.PATH) / cls.FILENAME
+        shutil.copy(db_file, target_path)
 
         return str(target_path)
 
@@ -151,18 +151,24 @@ class Database:
         if cls.CONFIG_FILE.exists():
             return cls.CONFIG_FILE.read_text().strip()
 
-        from importlib.resources import files
-
-        db_file = files(cls.PATH) / cls.FILENAME
+        db_file = resources.files(cls.PATH) / cls.FILENAME
         return str(db_file)
 
     def revert_to_default(self):
         """Removes config file, external database and reverts to the bundled db file."""
         self.close()
-        self.CONFIG_FILE.unlink()
+
+        if self.CONFIG_FILE.exists():
+            self.CONFIG_FILE.unlink()
+
         db_file = Path(self.db_path)
-        db_file.unlink()
-        self.db_path = self.get_db_path()
+
+        new_path = self.get_db_path()
+
+        if db_file.exists() and str(db_file) != new_path:
+            db_file.unlink()
+
+        self.db_path = new_path
         self._setup_conn()
 
 
