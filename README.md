@@ -250,7 +250,7 @@ The cities dataset is **NOT included by default** due to its size (250MB+, 451,0
 
 ```bash
 # Via CLI
-localis load cities
+localis loadcities
 
 # Or in Python
 import localis
@@ -268,7 +268,7 @@ This will:
 
 ```bash
 # Via CLI
-localis unload cities
+localis unloadcities
 
 # Or in Python
 localis.cities.unload()
@@ -401,20 +401,18 @@ city.subdivisions[0].admin_level     # 1
 ## CLI Commands
 
 ```bash
-# Check dataset status
-localis status
 
 # Load cities dataset
-localis load cities
+localis loadcities
 
 # Auto-confirm load
-localis load cities -y
+localis loadcities -y
 
 # Load to custom directory
-localis load cities -p ./data
+localis loadcities -p ./data
 
 # Unload cities dataset
-localis unload cities
+localis unloadcities
 ```
 
 ---
@@ -443,8 +441,6 @@ localis unload cities
 - Python 3.9+
 - `rapidfuzz` required for search features
 - `requests` required for loading cities dataset
-- `typer` required for CLI
-
 ---
 
 ## License
