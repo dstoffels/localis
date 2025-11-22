@@ -1,9 +1,75 @@
 import os
 import pytest
+import random
+import localis
+from localis.registries import Registry
+from localis.dtos import DTO
+from typing import Protocol
 
-BLUE = "\033[94m"
-BROWN = "\033[33m"
-RESET = "\033[0m"
+
+def pytest_addoption(parser: pytest.Parser):
+    parser.addoption(
+        "--seed",
+        default=None,
+        help="Set a specific random seed for debugging tests.",
+    )
+
+
+_SESSION_SEED = None
+
+
+@pytest.fixture(scope="session", autouse=True)
+def seed(request: pytest.FixtureRequest):
+    global _SESSION_SEED
+    seed = request.config.getoption("--seed")
+    if seed is not None:
+        seed = int(seed)
+    else:
+        seed = random.randrange(1, 10000001)
+    _SESSION_SEED = seed
+
+    yield seed
+
+
+@pytest.fixture(scope="session")
+def select_random(seed):
+    def callback(reg: Registry, seed_offset: int = 0):
+        rng = random.Random(seed + seed_offset)
+        id = rng.choice(range(1, reg.count))
+        return reg.get(id=id)
+
+    return callback
+
+
+@pytest.fixture(scope="session")
+def country(select_random) -> tuple[localis.Country, int]:
+    """Selects a single country to be tested with the seed that generated it."""
+    return select_random(localis.countries)
+
+
+@pytest.fixture(scope="session")
+def sub(select_random) -> tuple[localis.Subdivision, int]:
+    """Selects a single subdivision to be tested with the seed that generated it."""
+    return select_random(localis.subdivisions)
+
+
+@pytest.fixture(scope="session")
+def city(select_random) -> tuple[localis.City, int]:
+    """Selects a single city to be tested with the seed that generated it."""
+    return select_random(localis.cities)
+
+
+@pytest.fixture(scope="session", autouse=True)
+def ensure_cities_loaded(request: pytest.FixtureRequest):
+    """Ensure cities are loaded before running city-dependent tests
+
+    This runs once per session and loads cities if needed."""
+
+    from localis import cities
+
+    if not cities._loaded:
+        print("\n⚠️  Cities not loaded. Attempting to load...")
+        cities.load(confirmed=True)
 
 
 def pytest_itemcollected(item: pytest.Item):
@@ -22,10 +88,7 @@ def pytest_itemcollected(item: pytest.Item):
 
     # Function docstring
     func_doc = getattr(item.obj, "__doc__", None)
-    func_title: str = item.obj.__name__ + "::" + func_doc.strip().split("\n")[0]
-
-    # Clean function title
-    # func_title = func_title.replace("test_", "")
+    func_title: str = item.obj.__name__ + " > " + func_doc.strip().split("\n")[0]
 
     parts = [file_title]
     if cls_title:
@@ -40,10 +103,15 @@ def pytest_itemcollected(item: pytest.Item):
     item._nodeid = " ".join(parts)
 
 
-def pytest_addoption(parser):
-    parser.addoption(
-        "--benchmark",
-        action="store_true",
-        default=False,
-        help="Run tests marked with benchmark",
-    )
+@pytest.hookimpl(hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    """
+    Hook wrapper to attach extra information (like the seed) to the report object.
+    """
+    outcome = yield
+    report = outcome.get_result()
+
+    if report.when == "call" and report.failed:
+        global _SESSION_SEED
+        seed_message = f" (Reproduce with: pytest --seed={_SESSION_SEED})"
+        report.nodeid += seed_message

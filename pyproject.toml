@@ -43,6 +43,10 @@ packages = [
 pytest = ">=8.4.1"
 pytest-watch = ">=4.2.0"
 unidecode = ">=1.4.0"
+pytest-cov = "^7.0.0"
+pytest-xdist = "^3.8.0"
+black = "^25.11.0"
+ruff = "^0.14.6"
 
 
 [build-system]
