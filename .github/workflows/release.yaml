@@ -12,6 +12,7 @@ on:
     
 jobs:
   release:
+    needs: test
     runs-on: ubuntu-latest
     permissions:
       contents: write

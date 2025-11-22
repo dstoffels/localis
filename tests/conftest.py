@@ -12,6 +12,30 @@ def pytest_addoption(parser: pytest.Parser):
         help="Set a specific random seed for debugging tests.",
     )
 
+    parser.addoption(
+        "-F",
+        "--fast",
+        action="store_true",
+        default=False,
+        help="Skips slow tests (integration, analysis, etc.)",
+    )
+
+
+def pytest_configure(config: pytest.Config):
+    config.addinivalue_line(
+        "markers", "slow: marks tests as slow (skipped with --fast)"
+    )
+
+
+def pytest_collection_modifyitems(config: pytest.Config, items):
+    if not config.getoption("--fast"):
+        return
+
+    skip_slow = pytest.mark.skip(reason="use --fast to skip slow tests.")
+    for item in items:
+        if "slow" in item.keywords:
+            item.add_marker(skip_slow)
+
 
 _SESSION_SEED = None
 
@@ -67,7 +91,7 @@ def ensure_cities_loaded(request: pytest.FixtureRequest):
 
     if not cities._loaded:
         print("\n⚠️  Cities not loaded. Attempting to load...")
-        cities.load(confirmed=True)
+    cities.load(confirmed=True)
 
 
 def pytest_itemcollected(item: pytest.Item):
