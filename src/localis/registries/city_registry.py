@@ -1,9 +1,9 @@
 from localis.registries.registry import Registry
 from localis.data import CityModel, City, MetaStore, db
+from localis.utils import pad_num_w_zeros
 import requests
 import io
 import localis
-import typer
 import os
 
 
@@ -42,22 +42,22 @@ class CityRegistry(Registry[CityModel, City]):
             return
 
         # USER CONFIRMATION
-        confirmed = confirmed or typer.confirm(
-            "Loading cities is HEAVY, there are nearly half a million entries and it expands the database to 200MB+. Proceeding with load will copy the sqlite database to your project root, download cities.tsv and load it into the copied database and update your .gitignore. Are you sure you want to proceed?"
-        )
+        confirmed = confirmed or input(
+            "Loading cities is HEAVY, there are nearly half a million entries and it expands the database to 200MB+. Proceeding with load will copy the sqlite database to your project root, download cities.tsv and load it into the copied database and update your .gitignore. Are you sure you want to proceed? [y/N] "
+        ).lower() in ["y", "yes"]
 
         # DID NOT CONFIRM
         if not confirmed:
-            typer.echo("Aborting load.")
-            raise typer.Exit()
+            print("Aborting load.")
+            return
 
         # COPY DATABASE
-        typer.echo(f"Copying database to {custom_dir}/{db.FILENAME}...")
+        print(f"Copying database to {custom_dir}/{db.FILENAME}...")
         path = db.copy_to(custom_dir)
         db.set_db_path(path)
 
         # UPDATE GITIGNORE
-        typer.echo(f"Updating .gitignore...")
+        print(f"Updating .gitignore...")
 
         gitignore_path = ".gitignore"
 
@@ -65,7 +65,7 @@ class CityRegistry(Registry[CityModel, City]):
             with open(gitignore_path, "r") as f:
                 existing_content = f.read()
                 if db.FILENAME in existing_content:
-                    typer.echo("Database already in .gitignore. Skipping...")
+                    print("Database already in .gitignore. Skipping...")
         else:
             existing_content = ""
 
@@ -77,7 +77,7 @@ class CityRegistry(Registry[CityModel, City]):
         # DOWNLOAD TSV FIXTURE
         url = self._meta.get(self.META_URL_KEY)
         if url:
-            typer.echo("Downloading TSV fixture...")
+            print("Downloading TSV fixture...")
 
             try:
                 response = requests.get(url)
@@ -90,13 +90,13 @@ class CityRegistry(Registry[CityModel, City]):
                 raise e
 
             # LOAD TSV INTO DATABASE
-            typer.echo("TSV fixture downloaded, loading cities into database...")
+            print("TSV fixture downloaded, loading cities into database...")
             tsv = io.StringIO(response.text)
             CityModel.load(tsv)
 
             self.set_loaded()
-            typer.echo(f"{self.count} cities loaded.")
-            typer.echo(
+            print(f"{self.count} cities loaded.")
+            print(
                 "Run 'localis unload cities' in the CLI or 'localis.cities.unload()' to revert."
             )
 
@@ -107,23 +107,25 @@ class CityRegistry(Registry[CityModel, City]):
 
     def unload(self) -> None:
         if not self._loaded:
-            typer.echo("No cities to unload.")
+            print("No cities to unload.")
         else:
             # UNLOAD FILES
-            typer.echo(f"Removing database and localis.conf...")
+            print(f"Removing database and localis.conf...")
             db.revert_to_default()
-            typer.echo("Files removed.")
+            print("Files removed.")
 
             # UPDATE GITIGNORE
-            typer.echo("Updating .gitignore...")
+            print("Updating .gitignore...")
             with open(".gitignore", "r+") as f:
                 content = f.read()
                 content = content.replace(db.FILENAME, "")
+                f.seek(0)
                 f.write(content)
+                f.truncate()
 
             self.set_loaded()
             self._count = None
-            typer.echo("Cities successfully unloaded from db.")
+            print("Cities successfully unloaded from db.")
 
     @property
     def count(self):
@@ -244,13 +246,23 @@ class CityRegistry(Registry[CityModel, City]):
         if sub is None:
             return []
 
-        sub_field = "|".join([sub.name, sub.geonames_code, sub.iso_code])
-        results: list[CityModel] = self._model_cls.select(CityModel.admin1 == sub_field)
+        sub_field = "|".join([sub.name, sub.geonames_code or "", sub.iso_code or ""])
+        expr = CityModel.admin1 == sub_field
+        if population__lt:
+            expr = expr & (CityModel.population < pad_num_w_zeros(population__lt))
+        elif population__gt:
+            expr = expr & (CityModel.population > pad_num_w_zeros(population__gt))
+        results: list[CityModel] = self._model_cls.select(expr)
 
         if not results:
             results = self._model_cls.select(CityModel.admin2 == sub_field)
 
-        dtos = [r.to_dto() for r in results]
+        dtos = [
+            r.to_dto()
+            for r in results
+            if r.admin1 == sub_field or r.admin2 == sub_field
+        ]
+
         if population__gt is not None:
             return [d for d in dtos if d.population > population__gt]
         elif population__lt is not None:

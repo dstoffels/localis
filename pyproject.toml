@@ -1,6 +1,6 @@
 [project]
 name = "localis"
-version = "1.0.0a1"
+version = "1.0.0a2"
 description = "Fast, offline access to comprehensive geographic data for countries, subdivisions, and cities. Built on ISO 3166 and GeoNames datasets with support for exact lookups, filtering, and fuzzy search."
 readme = "README.md"
 authors = [
@@ -21,7 +21,6 @@ classifiers = [
 requires-python = ">=3.11"
 dependencies = [
   "rapidfuzz>=3.13.0",
-  "typer>=0.20.0",
   "requests>=2.32.4",
 ]
 
@@ -30,7 +29,7 @@ homepage = "https://pypi.org/project/localis/"
 repository = "https://github.com/dstoffels/localis"
 
 [project.scripts]
-localis = 'localis.cli:app'
+localis = 'localis.cli:main'
 
 
 [tool.poetry]
@@ -43,6 +42,10 @@ packages = [
 pytest = ">=8.4.1"
 pytest-watch = ">=4.2.0"
 unidecode = ">=1.4.0"
+pytest-cov = "^7.0.0"
+pytest-xdist = "^3.8.0"
+black = "^25.11.0"
+ruff = "^0.14.6"
 
 
 [build-system]

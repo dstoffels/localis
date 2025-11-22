@@ -98,8 +98,3 @@ def mangle(
         mangled_tokens.append(first_char + "".join(rest))
 
     return " ".join(mangled_tokens)
-
-
-def select_random(reg: Registry) -> DTO:
-    id = random.choice(range(1, reg.count))
-    return reg.get(id=id)
