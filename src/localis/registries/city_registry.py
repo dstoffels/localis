@@ -43,7 +43,7 @@ class CityRegistry(Registry[CityModel, City]):
 
         # USER CONFIRMATION
         confirmed = confirmed or input(
-            "Loading cities is HEAVY, there are nearly half a million entries and it expands the database to 200MB+. Proceeding with load will copy the sqlite database to your project root, download cities.tsv and load it into the copied database and update your .gitignore. Are you sure you want to proceed? [y/N] "
+            "Loading cities is HEAVY, there are nearly half a million entries and it expands the database to ~250MB. Proceeding with load will copy the sqlite database to your project root, download cities.tsv, load it into the copied database and update your .gitignore. Are you sure you want to proceed? [y/N] "
         ).lower() in ["y", "yes"]
 
         # DID NOT CONFIRM
@@ -60,19 +60,20 @@ class CityRegistry(Registry[CityModel, City]):
         print(f"Updating .gitignore...")
 
         gitignore_path = ".gitignore"
+        gitignore_lines = f"{db.FILENAME}\n.localis.conf\n"
 
         if os.path.exists(gitignore_path):
             with open(gitignore_path, "r") as f:
                 existing_content = f.read()
-                if db.FILENAME in existing_content:
-                    print("Database already in .gitignore. Skipping...")
+                if gitignore_lines in existing_content:
+                    print(".gitignore already updated. Skipping...")
         else:
             existing_content = ""
 
         with open(gitignore_path, "a") as f:
             if existing_content and not existing_content.endswith("\n"):
                 f.write("\n")
-            f.write(db.FILENAME)
+            f.write(gitignore_lines)
 
         # DOWNLOAD TSV FIXTURE
         url = self._meta.get(self.META_URL_KEY)
@@ -115,10 +116,12 @@ class CityRegistry(Registry[CityModel, City]):
             print("Files removed.")
 
             # UPDATE GITIGNORE
+            gitignore_lines = f"{db.FILENAME}\n.localis.conf\n"
+
             print("Updating .gitignore...")
             with open(".gitignore", "r+") as f:
                 content = f.read()
-                content = content.replace(db.FILENAME, "")
+                content = content.replace(gitignore_lines, "")
                 f.seek(0)
                 f.write(content)
                 f.truncate()
