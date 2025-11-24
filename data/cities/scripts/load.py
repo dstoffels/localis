@@ -72,20 +72,23 @@ def filter_names(row: dict[str, str]) -> tuple[str]:
 
 
 def parse_row(
-    row: dict[str, str], subdivisions: dict[str, str], countries: dict[str, str]
+    row: dict[str, str], subdivisions: dict[str, int], countries: dict[str, int]
 ) -> CityDTO:
 
     geonames_id = row["geonameid"]
 
     name, alt_names = filter_names(row)
 
-    admin1_code = row["admin1 code"]
-    admin2_code = row["admin2 code"]
+    admin1_raw = row["admin1 code"]
+    admin2_raw = row["admin2 code"]
     country_code = row["country code"]
 
-    country = countries.get(country_code)
-    admin1 = subdivisions.get(".".join([country_code, admin1_code]))
-    admin2 = subdivisions.get(".".join([country_code, admin1_code, admin2_code]))
+    admin1 = ".".join([country_code, admin1_raw])
+    admin2 = ".".join([country_code, admin1_raw, admin2_raw])
+
+    admin1_id = subdivisions.get(admin1, None)
+    admin2_id = subdivisions.get(admin2, None)
+    country_id = countries.get(country_code, None)
 
     lat = float(row["latitude"])
     lng = float(row["longitude"])
@@ -99,9 +102,12 @@ def parse_row(
         geonames_id=geonames_id,
         name=name,
         alt_names=alt_names,
-        admin1=admin1,
-        admin2=admin2,
-        country=country,
+        admin1_id=admin1_id,
+        admin2_id=admin2_id,
+        country_id=country_id,
+        # admin1_str=admin1,
+        # admin2_str=admin2,
+        # country_str=country,
         population=population,
         lat=lat,
         lng=lng,
@@ -109,7 +115,7 @@ def parse_row(
 
 
 def load_cities(
-    subdivisions: dict[str, str], countries: dict[str, str]
+    subdivisions: dict[str, int], countries: dict[str, int]
 ) -> list[CityDTO]:
     with open(BASE_PATH / "src/allCountries.txt", "r", encoding="utf-8") as f:
         print(f"Parsing cities from allCountries.txt...")

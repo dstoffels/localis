@@ -31,6 +31,7 @@ def load_geonames_file(
 
             subdivision = SubdivisionDTO(
                 name=name,
+                country_id=country.id,
                 country_alpha2=country.alpha2,
                 country_alpha3=country.alpha3,
                 country_name=country.name,

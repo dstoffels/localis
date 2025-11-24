@@ -4,12 +4,13 @@ import csv
 
 def dump_to_tsv(countries: dict[str, CountryDTO]):
     headers = (
+        # "id",
         "name",
         "official_name",
+        "alt_names",
         "alpha2",
         "alpha3",
         "numeric",
-        "alt_names",
         "flag",
     )
 

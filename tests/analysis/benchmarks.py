@@ -1,7 +1,7 @@
 import json
 from datetime import datetime
 import time
-from localis.dtos import DTO
+from localis.data.dtos import DTO
 from localis.registries import Registry
 import localis
 from tests.utils import mangle
