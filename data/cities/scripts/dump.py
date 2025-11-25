@@ -6,7 +6,7 @@ def dump_to_tsv(cities: list[CityDTO]) -> None:
         # "id",
         # "geonames_id",
         "name",
-        # "alt_names",
+        "ascii_name",
         "admin1_id",
         "admin2_id",
         "country_id",
@@ -15,7 +15,12 @@ def dump_to_tsv(cities: list[CityDTO]) -> None:
         "lng",
     )
 
-    with open(BASE_PATH / "cities.tsv", "w", encoding="utf-8", newline="") as f:
+    with open(
+        BASE_PATH.parent.parent / "src/localis/data/cities.tsv",
+        "w",
+        encoding="utf-8",
+        newline="",
+    ) as f:
         print(f"Writing {len(cities)} cities to cities.tsv...")
 
         writer = csv.DictWriter(f, delimiter="\t", fieldnames=HEADERS)
@@ -23,7 +28,7 @@ def dump_to_tsv(cities: list[CityDTO]) -> None:
         for city in cities:
             writer.writerow(
                 {
-                    # "id": id,
+                    "ascii_name": city.ascii_name,
                     "name": city.name,
                     "admin1_id": city.admin1_id,
                     "admin2_id": city.admin2_id,

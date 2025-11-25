@@ -29,4 +29,3 @@ cities = CityRegistry(countries=countries, subdivisions=subdivisions)
 t2 = time.perf_counter()
 
 print(t2 - t1)
-input()

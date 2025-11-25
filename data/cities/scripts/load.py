@@ -77,7 +77,8 @@ def parse_row(
 
     geonames_id = row["geonameid"]
 
-    name, alt_names = filter_names(row)
+    name = row["name"]
+    ascii_name = row["asciiname"] if row["asciiname"].lower() != name.lower() else ""
 
     admin1_raw = row["admin1 code"]
     admin2_raw = row["admin2 code"]
@@ -90,18 +91,19 @@ def parse_row(
     admin2_id = subdivisions.get(admin2, None)
     country_id = countries.get(country_code, None)
 
-    lat = float(row["latitude"])
-    lng = float(row["longitude"])
+    lat = row["latitude"]
+    lng = row["longitude"]
 
     try:
-        population = int(row["population"]) if row["population"] else 0
+        population = row["population"] if row["population"] else 0
     except ValueError:
         raise ValueError(f"Invalid population value: {row['population']}")
 
     return CityDTO(
         geonames_id=geonames_id,
         name=name,
-        alt_names=alt_names,
+        ascii_name=ascii_name,
+        alt_names=[],
         admin1_id=admin1_id,
         admin2_id=admin2_id,
         country_id=country_id,
@@ -122,8 +124,7 @@ def load_cities(
         rows = csv.DictReader(f, fieldnames=HEADERS, delimiter="\t")
         cities = []
         for row in rows:
-            if not is_valid_city(row):
-                continue
-            city = parse_row(row, subdivisions, countries)
-            cities.append(city)
+            if is_valid_city(row):
+                city = parse_row(row, subdivisions, countries)
+                cities.append(city)
         return cities

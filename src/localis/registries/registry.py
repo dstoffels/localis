@@ -1,12 +1,10 @@
 from typing import Iterator, Generic, TypeVar
-from localis.data import DTO
+from localis.data import Model
 from abc import ABC, abstractmethod
 from pathlib import Path
 import csv
-from localis.index import Index, NgramIndex, FilterIndex
+from localis.index import Index, NgramIndex, FilterIndex, TrigramEngine
 from functools import wraps
-
-TDTO = TypeVar("TDTO", bound=DTO)
 
 
 def is_loaded(cache_attr: str = "_cache", callback_attr: str = "load"):
@@ -25,7 +23,10 @@ def is_loaded(cache_attr: str = "_cache", callback_attr: str = "load"):
     return decorator
 
 
-class Registry(Generic[TDTO], ABC):
+T = TypeVar("Model", bound=Model)
+
+
+class Registry(Generic[T], ABC):
     """"""
 
     AUTOLOAD = True
@@ -39,16 +40,16 @@ class Registry(Generic[TDTO], ABC):
 
     def __init__(self, **kwargs):
 
-        self._cache: dict[int, TDTO] = None  # id-raw dict map
+        self.cache: dict[int, T] = None  # id-model map
         self._lookup_index: dict[str | int, dict] = None
         self._filter_index: FilterIndex = None
-        self._search_index: NgramIndex = None
+        self._search_index: TrigramEngine = None
 
         if self.AUTOLOAD:
             self.load()
 
     def load(self) -> None:
-        self._cache = {}
+        self.cache = {}
         with open(self.DATA_PATH / self.DATAFILE, "r", encoding="utf-8") as f:
             reader = csv.reader(f, delimiter="\t")
             headers = next(reader)
@@ -56,19 +57,14 @@ class Registry(Generic[TDTO], ABC):
             for id, row in enumerate(reader, 1):
                 self._parse_row(id, row)
 
-    @property
-    @is_loaded()
-    def cache(self) -> dict[int, TDTO]:
-        return self._cache
-
     @abstractmethod
     def _parse_row(self, id: int, row: dict):
         pass
 
-    def __iter__(self) -> Iterator[TDTO]:
+    def __iter__(self) -> Iterator[T]:
         return iter(self.cache.values())
 
-    def __getitem__(self, index: int) -> TDTO:
+    def __getitem__(self, index: int) -> T:
         return list(self.cache.values())[index]
 
     def __len__(self) -> int:
@@ -78,7 +74,7 @@ class Registry(Generic[TDTO], ABC):
         self._lookup_index = {}
 
     @is_loaded("_lookup_index", "load_lookups")
-    def get(self, *, id: int = None, **kwargs) -> TDTO:
+    def get(self, *, id: int = None, **kwargs) -> T:
         """Fetches a single item by one of its unique identifiers. Raises a ValueError if multiple kwargs are assigned."""
         if id is not None and len([v for v in kwargs.values() if v is not None]) > 0:
             raise ValueError("get can only accept one keyword argument at a time.")
@@ -92,10 +88,10 @@ class Registry(Generic[TDTO], ABC):
             return self._lookup_index.get(v)
 
     def load_filters(self):
-        self._filter_index = Index[TDTO]()
+        self._filter_index = Index[T]()
 
     @is_loaded("_filter_index", "load_filters")
-    def filter(self, *, name: str = None, **kwargs) -> list[TDTO]:
+    def filter(self, *, name: str = None, **kwargs) -> list[T]:
         """Filter by exact matches on specified fields with AND logic when filtering by multiple fields. Case insensitive."""
         kwargs["name"] = name
 
@@ -123,11 +119,14 @@ class Registry(Generic[TDTO], ABC):
         return results_list
 
     def load_searches(self):
-        self._search_index = NgramIndex[TDTO]()
+        self._search_index = TrigramEngine(self.cache)
 
     @is_loaded("_search_index", "load_searches")
     def search(self, query: str, limit: int = None):
-        pass
+        return [
+            (self.cache[id].dto, score)
+            for id, score in self._search_index.search(query)
+        ]
 
 
 # from typing import Type

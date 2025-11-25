@@ -13,7 +13,12 @@ def dump_to_tsv(sub_map: SubdivisionMap):
         "country_id",
     )
 
-    with open(BASE_PATH / "subdivisions.tsv", "w", encoding="utf-8", newline="") as f:
+    with open(
+        BASE_PATH.parent / "src/localis/data/subdivisions.tsv",
+        "w",
+        encoding="utf-8",
+        newline="",
+    ) as f:
         writer = csv.DictWriter(f, fieldnames=HEADERS, delimiter="\t")
         writer.writeheader()
         for sub in sub_map.get_final():

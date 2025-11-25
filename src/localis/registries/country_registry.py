@@ -1,25 +1,30 @@
-from localis.data import Country
+from localis.data import CountryModel
 from localis.registries import Registry
 from localis.index import FilterIndex
+from sys import intern
 
 
-class CountryRegistry(Registry[Country]):
+class CountryRegistry(Registry[CountryModel]):
     DATAFILE = "countries.tsv"
 
     def _parse_row(self, id: int, row: list[str]):
         if id == 0:
             return
 
-        self.cache[id] = Country(
+        country = CountryModel(
             id=id,
-            name=row[0],
-            official_name=row[1],
-            alt_names=[alt for alt in row[2].split("|") if alt],
-            alpha2=row[3],
-            alpha3=row[4],
+            name=intern(row[0]),
+            official_name=intern(row[1]),
+            alt_names=[intern(alt) for alt in row[2].split("|") if alt],
+            alpha2=intern(row[3]),
+            alpha3=intern(row[4]),
             numeric=int(row[5]),
             flag=row[6],
         )
+
+        country.parse_docs()
+
+        self.cache[id] = country
 
     def load_lookups(self):
         self._lookup_index = {}

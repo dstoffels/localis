@@ -1,10 +1,11 @@
-from localis.data import Subdivision, Country
+from localis.data import SubdivisionModel, Country
 from localis.registries import Registry, CountryRegistry
 import csv
 from localis.index import FilterIndex
+from sys import intern
 
 
-class SubdivisionRegistry(Registry[Subdivision]):
+class SubdivisionRegistry(Registry[SubdivisionModel]):
     DATAFILE = "subdivisions.tsv"
 
     def __init__(self, countries: CountryRegistry, **kwargs):
@@ -13,7 +14,7 @@ class SubdivisionRegistry(Registry[Subdivision]):
 
     def load(self):
         # need to sort the subdivision rows before parsing so the parent subdivisions are already cached when their children need to reference them.
-        self._cache = {}
+        self.cache = {}
         sub_groups: list[tuple[int, list[str]]] = []
 
         with open(self.DATA_PATH / self.DATAFILE, "r", encoding="utf-8") as f:
@@ -28,17 +29,21 @@ class SubdivisionRegistry(Registry[Subdivision]):
             self._parse_row(id, row)
 
     def _parse_row(self, id: int, row: list[str]):
-        self.cache[id] = Subdivision(
+        subdivision = SubdivisionModel(
             id=id,
-            name=row[0],
-            alt_names=[alt for alt in row[1].split("|") if alt],
-            geonames_code=row[2] or None,
-            iso_code=row[3] or None,
-            type=row[4] or None,
+            name=intern(row[0]),
+            alt_names=[intern(alt) for alt in row[1].split("|") if alt],
+            geonames_code=intern(row[2]) or None,
+            iso_code=intern(row[3]) or None,
+            type=intern(row[4]) or None,
             admin_level=1 if row[5] is None else 2,
             parent=self.cache.get(int(row[5])) if row[5] else None,
             country=self._countries.cache.get(int(row[6])),
         )
+
+        subdivision.parse_docs()
+
+        self.cache[id] = subdivision
 
     def load_lookups(self):
         self._lookup_index = {}

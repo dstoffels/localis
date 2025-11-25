@@ -1,10 +1,11 @@
-from localis.data import Subdivision, Country, City
+from localis.data import Subdivision, Country, CityModel
 from localis.registries import Registry, CountryRegistry, SubdivisionRegistry
 from localis.index.filter_index import FilterIndex
 from collections import defaultdict
+from sys import intern
 
 
-class CityRegistry(Registry[City]):
+class CityRegistry(Registry[CityModel]):
     DATAFILE = "cities.tsv"
 
     def __init__(
@@ -14,16 +15,26 @@ class CityRegistry(Registry[City]):
         self._subdivisions = subdivisions
         super().__init__(**kwargs)
 
-    def _parse_row(self, id: int, row: dict):
-        self.cache[id] = City(
+    def _parse_row(self, id: int, row: list[str]):
+        name = row[0]
+        ascii_name = row[1]
+        admin1 = self._subdivisions.cache.get(int(row[2])) if row[2] else None
+        admin2 = self._subdivisions.cache.get(int(row[3])) if row[3] else None
+        country = self._countries.cache.get(int(row[4])) if row[4] else None
+        population = int(row[5])
+        lat = float(row[6])
+        lng = float(row[7])
+
+        self.cache[id] = CityModel(
             id=id,
-            name=row[0],
-            admin1=self._subdivisions.cache.get(int(row[1])) if row[1] else None,
-            admin2=self._subdivisions.cache.get(int(row[2])) if row[2] else None,
-            country=self._countries.cache.get(int(row[3])) if row[3] else None,
-            population=int(row[4]),
-            lat=float(row[5]),
-            lng=float(row[6]),
+            name=intern(name),
+            ascii_name=ascii_name,
+            admin1=admin1,
+            admin2=admin2,
+            country=country,
+            population=population,
+            lat=lat,
+            lng=lng,
         )
 
     def load_filters(self):
@@ -38,19 +49,19 @@ class CityRegistry(Registry[City]):
 
             admin1 = city.admin1
             if admin1:
-                index["admin1"][admin1.name].add(city_id)
+                index["subdivision"][admin1.name].add(city_id)
                 if admin1.geonames_code:
-                    index["admin1"][admin1.geonames_code].add(city_id)
+                    index["subdivision"][admin1.geonames_code].add(city_id)
                 if admin1.iso_code:
-                    index["admin1"][admin1.iso_code].add(city_id)
+                    index["subdivision"][admin1.iso_code].add(city_id)
 
             admin2 = city.admin2
             if admin2:
-                index["admin2"][admin2.name].add(city_id)
+                index["subdivision"][admin2.name].add(city_id)
                 if admin2.geonames_code:
-                    index["admin2"][admin2.geonames_code].add(city_id)
+                    index["subdivision"][admin2.geonames_code].add(city_id)
                 if admin2.iso_code:
-                    index["admin2"][admin2.iso_code].add(city_id)
+                    index["subdivision"][admin2.iso_code].add(city_id)
 
             country = city.country
             if country:
@@ -59,6 +70,32 @@ class CityRegistry(Registry[City]):
                 index["country"][country.alpha3].add(city_id)
 
         self._filter_index.index = index
+
+    def filter(
+        self,
+        *,
+        name=None,
+        subdivision: str = None,
+        country: str = None,
+        population__lt: int = None,
+        population__gt: int = None,
+        **kwargs,
+    ):
+        """Filter cities by name, subdivision or country with additional filtering by population. Multiple filters use logical AND."""
+        kwargs = {
+            "subdivision": subdivision,
+            "country": country,
+        }
+        results = super().filter(name=name, **kwargs)
+        if population__gt is not None or population__lt is not None:
+            results.sort()
+
+    # def load_searches(self):
+    #     super().load_searches()
+
+    #     for id, (city, search_tokens) in self.cache.items():
+    #         for token in search_tokens:
+    #             self._search_index.add(token, id)
 
 
 #     ID_FIELDS = ("id", "geonames_id")

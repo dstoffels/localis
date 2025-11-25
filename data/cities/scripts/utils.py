@@ -12,6 +12,7 @@ BASE_PATH = Path(__file__).parent.parent
 class CityDTO:
     geonames_id: int
     name: str
+    ascii_name: str
     alt_names: list[str]
     admin1_id: int
     # admin1_str: str
