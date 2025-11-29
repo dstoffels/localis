@@ -26,7 +26,7 @@ class CountryData:
         # final dedupe before dump
         self.alt_names = "|".join(set(self.alt_names) - {self.name, self.official_name})
 
-        self.search_tokens = "".join(set(generate_token_trigrams(self.name)))
+        self.search_tokens = " ".join(set(generate_token_trigrams(self.name)))
 
         data = self.__dict__
         data.pop("id")

@@ -111,7 +111,7 @@ def parse_row(
         population=population,
         lat=lat,
         lng=lng,
-        search_tokens="".join(set(generate_token_trigrams(name))),
+        search_tokens=" ".join(set(generate_token_trigrams(name))),
     )
 
 

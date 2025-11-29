@@ -88,12 +88,10 @@ class CityRegistry(Registry[CityModel]):
         if population__gt is not None or population__lt is not None:
             results.sort()
 
-    # def load_searches(self):
-    #     super().load_searches()
-
-    #     for id, (city, search_tokens) in self.cache.items():
-    #         for token in search_tokens:
-    #             self._search_index.add(token, id)
+    def search(self, query, limit=None):
+        results = super().search(query=query, limit=None)
+        results.sort(key=lambda x: x[0].population, reverse=True)
+        return results[:limit]
 
 
 #     ID_FIELDS = ("id", "geonames_id")
