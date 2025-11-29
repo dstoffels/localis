@@ -1,10 +1,9 @@
-from .utils import *
+from data.utils import CityData, FIXTURE_PATH
+import csv
 
 
-def dump_to_tsv(cities: list[CityDTO]) -> None:
+def dump_to_tsv(cities: list[CityData]) -> None:
     HEADERS = (
-        # "id",
-        # "geonames_id",
         "name",
         "ascii_name",
         "admin1_id",
@@ -13,14 +12,10 @@ def dump_to_tsv(cities: list[CityDTO]) -> None:
         "population",
         "lat",
         "lng",
+        "search_tokens",
     )
 
-    with open(
-        BASE_PATH.parent.parent / "src/localis/data/cities.tsv",
-        "w",
-        encoding="utf-8",
-        newline="",
-    ) as f:
+    with open(FIXTURE_PATH / "cities.tsv", "w", encoding="utf-8", newline="") as f:
         print(f"Writing {len(cities)} cities to cities.tsv...")
 
         writer = csv.DictWriter(f, delimiter="\t", fieldnames=HEADERS)
@@ -36,5 +31,6 @@ def dump_to_tsv(cities: list[CityDTO]) -> None:
                     "population": city.population,
                     "lat": city.lat,
                     "lng": city.lng,
+                    "search_tokens": city.search_tokens,
                 }
             )

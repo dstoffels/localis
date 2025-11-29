@@ -1,35 +1,13 @@
-from pathlib import Path
-from dataclasses import dataclass
 import csv
 import unicodedata
-from unidecode import unidecode
-
-BASE_PATH = Path(__file__).parent.parent
-
-
-# helper DTO class
-@dataclass
-class CityDTO:
-    geonames_id: int
-    name: str
-    ascii_name: str
-    alt_names: list[str]
-    admin1_id: int
-    # admin1_str: str
-    admin2_id: int
-    # admin2_str: str
-    country_id: int
-    # country_str: str
-    population: int
-    lat: float
-    lng: float
+from data.utils import FIXTURE_PATH
 
 
 def load_countries() -> dict[str, int]:
     """loads a dict of country codes mapped to their ids"""
     print("Loading Countries...")
     countries: dict[str, int] = {}
-    with open(BASE_PATH.parent / "countries/countries.tsv", "r", encoding="utf-8") as f:
+    with open(FIXTURE_PATH / "countries.tsv", "r", encoding="utf-8") as f:
         reader = csv.DictReader(f, delimiter="\t")
 
         for id, row in enumerate(reader, 1):
@@ -41,9 +19,7 @@ def load_subdivisions() -> dict[str, int]:
     """loads a dict of subdivision geonames codes mapped to their ids"""
     print("Loading Subdivisions...")
     subdivisions: dict[str, int] = {}
-    with open(
-        BASE_PATH.parent / "subdivisions/subdivisions.tsv", "r", encoding="utf-8"
-    ) as f:
+    with open(FIXTURE_PATH / "subdivisions.tsv", "r", encoding="utf-8") as f:
         reader = csv.DictReader(f, delimiter="\t")
 
         for id, row in enumerate(reader, 1):

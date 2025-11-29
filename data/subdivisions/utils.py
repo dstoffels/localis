@@ -77,7 +77,7 @@ class SubdivisionMap:
         for sub in all_subs:
             sub.id = id_map[sub.id]
             sub.parent_id = id_map.get(sub.parent_id)
-            sub.search_tokens = " ".join(set(generate_token_trigrams(sub.name)))
+            sub.search_tokens = "".join(set(generate_token_trigrams(sub.name)))
 
         return all_subs
 

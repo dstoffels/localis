@@ -1,4 +1,5 @@
-from .utils import *
+from data.utils import CityData, CITIES_SRC_PATH, generate_token_trigrams
+from data.cities.scripts.utils import *
 
 HEADERS = [
     "geonameid",
@@ -73,7 +74,7 @@ def filter_names(row: dict[str, str]) -> tuple[str]:
 
 def parse_row(
     row: dict[str, str], subdivisions: dict[str, int], countries: dict[str, int]
-) -> CityDTO:
+) -> CityData:
 
     geonames_id = row["geonameid"]
 
@@ -99,7 +100,7 @@ def parse_row(
     except ValueError:
         raise ValueError(f"Invalid population value: {row['population']}")
 
-    return CityDTO(
+    return CityData(
         geonames_id=geonames_id,
         name=name,
         ascii_name=ascii_name,
@@ -107,19 +108,17 @@ def parse_row(
         admin1_id=admin1_id,
         admin2_id=admin2_id,
         country_id=country_id,
-        # admin1_str=admin1,
-        # admin2_str=admin2,
-        # country_str=country,
         population=population,
         lat=lat,
         lng=lng,
+        search_tokens="".join(set(generate_token_trigrams(name))),
     )
 
 
 def load_cities(
     subdivisions: dict[str, int], countries: dict[str, int]
-) -> list[CityDTO]:
-    with open(BASE_PATH / "src/allCountries.txt", "r", encoding="utf-8") as f:
+) -> list[CityData]:
+    with open(CITIES_SRC_PATH / "allCountries.txt", "r", encoding="utf-8") as f:
         print(f"Parsing cities from allCountries.txt...")
         rows = csv.DictReader(f, fieldnames=HEADERS, delimiter="\t")
         cities = []

@@ -26,7 +26,7 @@ class CountryData:
         # final dedupe before dump
         self.alt_names = "|".join(set(self.alt_names) - {self.name, self.official_name})
 
-        self.search_tokens = " ".join(set(generate_token_trigrams(self.name)))
+        self.search_tokens = "".join(set(generate_token_trigrams(self.name)))
 
         data = self.__dict__
         data.pop("id")
@@ -68,3 +68,18 @@ class SubdivisionData:
 
     def concat(self) -> str:
         return "|".join([self.name, self.geonames_code, self.iso_code])
+
+
+@dataclass
+class CityData:
+    geonames_id: int
+    name: str
+    ascii_name: str
+    alt_names: list[str]
+    admin1_id: int
+    admin2_id: int
+    country_id: int
+    population: int
+    lat: float
+    lng: float
+    search_tokens: str = ""
