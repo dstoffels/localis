@@ -17,9 +17,6 @@ def load_geonames_file(
         for row in reader:
             # code, name, name_ascii, geonames_id
             name: str = row["name"]
-            norm_name: str = normalize(name, False)
-            ascii_name = norm_name if norm_name != name else None
-            # row["name_ascii"] if row["name_ascii"] != name else None
             geonames_code: str = row["code"]
 
             # determine parent code and set admin level
@@ -40,7 +37,6 @@ def load_geonames_file(
 
             subdivision = SubdivisionData(
                 name=name,
-                ascii_name=ascii_name,
                 country_id=country.id,
                 country_alpha2=country.alpha2,
                 country_alpha3=country.alpha3,

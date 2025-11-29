@@ -1,8 +1,10 @@
-from data.utils import CountryData, SubdivisionData, FIXTURE_PATH
+from data.utils import (
+    CountryData,
+    SubdivisionData,
+    FIXTURE_PATH,
+    generate_token_trigrams,
+)
 import csv
-import unicodedata
-from unidecode import unidecode
-from pathlib import Path
 
 
 class SubdivisionMap:
@@ -75,6 +77,7 @@ class SubdivisionMap:
         for sub in all_subs:
             sub.id = id_map[sub.id]
             sub.parent_id = id_map.get(sub.parent_id)
+            sub.search_tokens = " ".join(set(generate_token_trigrams(sub.name)))
 
         return all_subs
 
@@ -90,7 +93,6 @@ def load_countries() -> dict[str, CountryData]:
             row["alpha2"]: CountryData(
                 id=id,
                 name=row["name"],
-                ascii_name=row["ascii_name"],
                 official_name=row["official_name"],
                 alpha2=row["alpha2"],
                 alpha3=row["alpha3"],

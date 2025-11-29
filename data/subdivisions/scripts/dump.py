@@ -4,13 +4,13 @@ from ..utils import *
 def dump_to_tsv(sub_map: SubdivisionMap):
     HEADERS = (
         "name",
-        "ascii_name",
         "alt_names",
         "geonames_code",
         "iso_code",
         "type",
         "parent_id",
         "country_id",
+        "search_tokens",
     )
 
     with open(
@@ -25,12 +25,12 @@ def dump_to_tsv(sub_map: SubdivisionMap):
             writer.writerow(
                 {
                     "name": sub.name,
-                    "ascii_name": sub.ascii_name,
                     "alt_names": "|".join(sub.alt_names),
                     "geonames_code": sub.geonames_code,
                     "iso_code": sub.iso_code,
                     "type": sub.type,
                     "parent_id": sub.parent_id,
                     "country_id": sub.country_id,
+                    "search_tokens": sub.search_tokens,
                 }
             )

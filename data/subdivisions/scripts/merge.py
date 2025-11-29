@@ -1,7 +1,7 @@
 from ..utils import *
 import re
 from rapidfuzz import fuzz
-from data.utils import normalize, hashnorm
+from data.utils import normalize
 
 DIRECTIONAL_TOKENS = {
     "north",
@@ -54,7 +54,7 @@ def prepare_names(sub: SubdivisionData) -> list[str]:
     """Combine and normalize all names for comparison"""
 
     def clean(s: str) -> str:
-        s = hashnorm(s)
+        s = normalize(s)
         s = s.replace("-", " ").replace("_", " ")
         s = re.sub(r"[,\(\)\[\]\"']", "", s).strip()
         return strip_cat_tokens(s)

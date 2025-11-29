@@ -21,8 +21,6 @@ def load_iso_subs(countries: dict[str, CountryData]) -> dict[int, SubdivisionDat
 
             # Assign names, generate ascii alt names
             name = local_name or iso_name
-            ascii_name = normalize(name).title()
-            ascii_name = ascii_name if ascii_name != name else None
 
             alt_name = iso_name if local_name else None
             ascii_alt_name = normalize(alt_name).title() if alt_name else None
@@ -35,7 +33,6 @@ def load_iso_subs(countries: dict[str, CountryData]) -> dict[int, SubdivisionDat
                 # create new subdivision and cache
                 subdivision = SubdivisionData(
                     name=name,
-                    ascii_name=ascii_name,
                     country_id=country.id,
                     country_alpha2=country.alpha2,
                     country_alpha3=country.alpha3,

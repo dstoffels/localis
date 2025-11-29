@@ -2,8 +2,6 @@ from dataclasses import dataclass, field
 import hashlib
 from pathlib import Path
 from localis.utils import normalize, generate_token_trigrams
-import unicodedata
-from unidecode import unidecode
 
 BASE_PATH = Path(__file__).parent
 FIXTURE_PATH = BASE_PATH.parent / "src" / "localis" / "data" / "fixtures"
@@ -35,20 +33,9 @@ class CountryData:
         return [*data.values()]
 
 
-# def hashnorm(s: str) -> str:
-#     MAP = {"ə": "a", "ǝ": "ä"}
-
-#     s = unicodedata.normalize("NFKD", s)
-#     s = "".join(ch for ch in s if not unicodedata.combining(ch))
-#     s = "".join(MAP.get(ch, ch) for ch in s)
-#     s = unidecode(s)
-#     return s.strip()
-
-
 @dataclass
 class SubdivisionData:
     name: str
-    ascii_name: str
     country_id: int
     country_alpha2: str
     country_alpha3: str
@@ -61,13 +48,14 @@ class SubdivisionData:
     id: int = field(init=False)
     parent_id: int | None = None
     parent_code: str | None = None  # Can be iso or GeoNames code, detect later
+    search_tokens: str = ""
 
     # deterministically hash a unique id to later map admin2 subdivisions to their parents and to manually map ISO subdivisions that cannot be automatically merged with its geonames counterpart. id is ONLY used internally for these purposes; once the subdvision data has been successfully merged, the hashed id is discarded.
     def __post_init__(self):
         key_parts = [
             self.country_alpha2,
             str(self.admin_level),
-            hashnorm(self.name).lower(),
+            normalize(self.name),
             self.iso_code or self.geonames_code,  # whichever comes first at creation
         ]
         key = "|".join(key_parts)
