@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
 import hashlib
 from pathlib import Path
-from localis.utils import normalize
+from localis.utils import normalize, generate_token_trigrams
 import unicodedata
 from unidecode import unidecode
 
@@ -22,23 +22,27 @@ class CountryData:
     alpha3: str
     numeric: int
     flag: str
+    search_tokens: str = ""
 
     def dump(self):
         # final dedupe before dump
         self.alt_names = "|".join(set(self.alt_names) - {self.name, self.official_name})
+
+        self.search_tokens = " ".join(set(generate_token_trigrams(self.name)))
+
         data = self.__dict__
         data.pop("id")
         return [*data.values()]
 
 
-def hashnorm(s: str) -> str:
-    MAP = {"ə": "a", "ǝ": "ä"}
+# def hashnorm(s: str) -> str:
+#     MAP = {"ə": "a", "ǝ": "ä"}
 
-    s = unicodedata.normalize("NFKD", s)
-    s = "".join(ch for ch in s if not unicodedata.combining(ch))
-    s = "".join(MAP.get(ch, ch) for ch in s)
-    s = unidecode(s)
-    return s.strip()
+#     s = unicodedata.normalize("NFKD", s)
+#     s = "".join(ch for ch in s if not unicodedata.combining(ch))
+#     s = "".join(MAP.get(ch, ch) for ch in s)
+#     s = unidecode(s)
+#     return s.strip()
 
 
 @dataclass

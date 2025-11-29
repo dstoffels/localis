@@ -1,6 +1,5 @@
 import unicodedata
 import re
-from collections.abc import Generator
 from unidecode import unidecode
 
 
@@ -31,8 +30,22 @@ re_whitespace = re.compile(r"\s+")
 
 def generate_trigrams(s: str):
     if not s:
-        yield ""
         return
 
     for i in range(max(len(s) - 2, 1)):
         yield s[i : i + 3]
+
+
+def generate_tokens(s: str):
+    if not s:
+        return
+
+    s = s.replace(",", "").replace(".", "")
+    for token in s.split():
+        yield token
+
+
+def generate_token_trigrams(s: str):
+    norm = normalize(s)
+    for token in generate_tokens(norm):
+        yield from generate_trigrams(token)

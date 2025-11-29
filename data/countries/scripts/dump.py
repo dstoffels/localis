@@ -5,13 +5,13 @@ import csv
 def dump_to_tsv(countries: dict[str, CountryData]):
     headers = (
         "name",
-        "ascii_name",
         "official_name",
         "alt_names",
         "alpha2",
         "alpha3",
         "numeric",
         "flag",
+        "search_tokens",
     )
 
     with open(

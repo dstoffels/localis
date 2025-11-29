@@ -78,8 +78,6 @@ def init_iso_countries() -> dict[str, CountryData]:
             alpha2 = c["alpha_2"]
             # Prioritize name by mapping > common name field > name field
             name = NAME_MAP.get(alpha2) or c.get("common_name") or c.get("name")
-            ascii_name = normalize(name, lower=False)
-            ascii_name = ascii_name if ascii_name != name else None
 
             # Get official name from either mapping or field, otherwise null
             official_name = OFFICIAL_NAME_MAP.get(alpha2) or c.get("official_name", "")
@@ -88,7 +86,6 @@ def init_iso_countries() -> dict[str, CountryData]:
             countries[alpha2] = CountryData(
                 id=id,
                 name=name,
-                ascii_name=ascii_name,
                 official_name=official_name,
                 alpha2=alpha2,
                 alpha3=c["alpha_3"],
