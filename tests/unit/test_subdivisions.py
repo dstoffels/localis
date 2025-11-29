@@ -44,7 +44,7 @@ class TestFilter:
 
         sub = subdivisions.get(id=7)  # Saint Julia de Loria
 
-        alt_name = sub.alt_names[0]  # grab the first alias
+        alt_name = sub.aliases[0]  # grab the first alias
         results = subdivisions.filter(alt_name=alt_name)
 
         assert len(results) > 0, "should return at least 1"

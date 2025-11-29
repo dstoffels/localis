@@ -25,10 +25,10 @@ class CityRegistry(Registry[CityModel]):
         lat = float(row[6])
         lng = float(row[7])
 
-        self.cache[id] = CityModel(
+        city = CityModel(
             id=id,
             name=intern(name),
-            ascii_name=ascii_name,
+            ascii_name=intern(ascii_name),
             admin1=admin1,
             admin2=admin2,
             country=country,
@@ -36,6 +36,8 @@ class CityRegistry(Registry[CityModel]):
             lat=lat,
             lng=lng,
         )
+        city.set_search_meta()
+        self.cache[id] = city
 
     def load_filters(self):
         self._filter_index = FilterIndex()

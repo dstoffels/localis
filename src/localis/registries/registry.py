@@ -3,7 +3,7 @@ from localis.data import Model
 from abc import ABC, abstractmethod
 from pathlib import Path
 import csv
-from localis.index import Index, NgramIndex, FilterIndex, TrigramEngine
+from localis.index import Index, NgramIndex, FilterIndex, SearchEngine
 from functools import wraps
 
 
@@ -30,7 +30,7 @@ class Registry(Generic[T], ABC):
     """"""
 
     AUTOLOAD = True
-    DATA_PATH = Path(__file__).parent.parent / "data"
+    DATA_PATH = Path(__file__).parent.parent / "data" / "fixtures"
     DATAFILE: str = ""
 
     # These field lists must be overridden in subclasses for any methods to work.
@@ -43,7 +43,7 @@ class Registry(Generic[T], ABC):
         self.cache: dict[int, T] = None  # id-model map
         self._lookup_index: dict[str | int, dict] = None
         self._filter_index: FilterIndex = None
-        self._search_index: TrigramEngine = None
+        self._search_index: SearchEngine = None
 
         if self.AUTOLOAD:
             self.load()
@@ -119,14 +119,11 @@ class Registry(Generic[T], ABC):
         return results_list
 
     def load_searches(self):
-        self._search_index = TrigramEngine(self.cache)
+        self._search_index = SearchEngine(self.cache)
 
     @is_loaded("_search_index", "load_searches")
     def search(self, query: str, limit: int = None):
-        return [
-            (self.cache[id].dto, score)
-            for id, score in self._search_index.search(query)
-        ]
+        return self._search_index.search(query=query, limit=limit)
 
 
 # from typing import Type

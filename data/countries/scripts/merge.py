@@ -1,8 +1,8 @@
-from .utils import *
+from data.utils import *
 import json
 
 
-def is_valid_name(alias: str, country: CountryDTO):
+def is_valid_name(alias: str, country: CountryData):
     if "ISO 3166" in alias:
         return False
 
@@ -20,8 +20,8 @@ def is_valid_name(alias: str, country: CountryDTO):
     return True
 
 
-def merge_wikidata(countries: dict[str, CountryDTO]):
-    with open(BASE_PATH / "src/wiki_countries.json", "r", encoding="utf-8") as f:
+def merge_wikidata(countries: dict[str, CountryData]):
+    with open(COUNTRIES_SRC_PATH / "wiki_countries.json", "r", encoding="utf-8") as f:
         wiki_countries: list[dict] = json.load(f)
 
         for row in wiki_countries:
@@ -33,14 +33,14 @@ def merge_wikidata(countries: dict[str, CountryDTO]):
 
                 # create new if not in cache
                 if alpha2 not in countries:
-                    countries[alpha2] = CountryDTO(
+                    countries[alpha2] = CountryData(
                         alpha2=alpha2,
                         alpha3=row.get("alpha3"),
                         name=row.get("name"),
                         numeric=None,
                     )
 
-                country: CountryDTO = countries.get(alpha2)
+                country: CountryData = countries.get(alpha2)
 
                 # merge name
                 name: str = row.get("name", "")
@@ -54,8 +54,10 @@ def merge_wikidata(countries: dict[str, CountryDTO]):
                         country.alt_names.append(a)
 
 
-def merge_geonames(countries: dict[str, CountryDTO]):
-    with open(BASE_PATH / "src/geonames_countries.txt", "r", encoding="utf-8") as f:
+def merge_geonames(countries: dict[str, CountryData]):
+    with open(
+        COUNTRIES_SRC_PATH / "geonames_countries.txt", "r", encoding="utf-8"
+    ) as f:
 
         for row in f:
             parts = row.strip().split("\t")
@@ -63,7 +65,7 @@ def merge_geonames(countries: dict[str, CountryDTO]):
             alpha3 = parts[1]
             name = parts[4]
 
-            country: CountryDTO = countries.get(alpha2)
+            country: CountryData = countries.get(alpha2)
 
             # skip mismatches
             if not country:

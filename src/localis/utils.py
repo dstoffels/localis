@@ -1,15 +1,7 @@
-def prep_fts_tokens(s: str, exact_match: bool) -> str:
-    """Wrap each token in quotes and at * wildcard for prefixing if not exact_match"""
-    if not s:
-        return s
-
-    tokens = s.split()
-    for i, token in enumerate(tokens):
-        tokens[i] = f'''"{token}"'''
-        if not exact_match:
-            tokens[i] += "*"
-    final = " ".join(tokens)
-    return final
+import unicodedata
+import re
+from collections.abc import Generator
+from unidecode import unidecode
 
 
 def clean_row(row: dict[str, str]) -> dict[str, str | None]:
@@ -22,12 +14,25 @@ def chunked(list: list, size: int):
         yield list[i : i + size]
 
 
-MAX_DIGITS = 8
+def normalize(s: str, lower: bool = True) -> str:
+    """Custom transliteration of a string into an ASCII-only search form with optional lowercasing (default=True)."""
+    MAP = {"ə": "a", "ǝ": "ä"}
+
+    s = unicodedata.normalize("NFKD", s)
+    s = "".join(ch for ch in s if not unicodedata.combining(ch))
+    s = "".join(MAP.get(ch, ch) for ch in s)
+    s = unidecode(s).strip()
+    return s.lower() if lower else s
 
 
-def pad_num_w_zeros(val: str | int) -> str:
-    """
-    Pads a number with leading zeros to ensure a fixed width of 8 characters (up to 99,999,999).
-    For consistent string-based sorting and comparison.
-    """
-    return f"{int(val):0{MAX_DIGITS}d}"
+re_non_alphanumeric = re.compile(r"[^a-z0-9\s]+")
+re_whitespace = re.compile(r"\s+")
+
+
+def generate_trigrams(s: str):
+    if not s:
+        yield ""
+        return
+
+    for i in range(max(len(s) - 2, 1)):
+        yield s[i : i + 3]

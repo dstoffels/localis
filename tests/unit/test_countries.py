@@ -31,12 +31,12 @@ class TestFilter:
         """should filter results by country's alt_names field"""
 
         i = 1
-        while not country.alt_names:
+        while not country.aliases:
             country = select_random(countries, i)
             i += 1
 
-        alt_name = country.alt_names[0]
+        alt_name = country.aliases[0]
         results = countries.filter(alt_name=alt_name)
 
         assert len(results) > 0, "should have at least 1 result"
-        assert all(alt_name in r.alt_names for r in results)
+        assert all(alt_name in r.aliases for r in results)

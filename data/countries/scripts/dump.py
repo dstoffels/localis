@@ -1,11 +1,11 @@
-from .utils import *
+from data.utils import *
 import csv
 
 
-def dump_to_tsv(countries: dict[str, CountryDTO]):
+def dump_to_tsv(countries: dict[str, CountryData]):
     headers = (
-        # "id",
         "name",
+        "ascii_name",
         "official_name",
         "alt_names",
         "alpha2",
@@ -15,7 +15,7 @@ def dump_to_tsv(countries: dict[str, CountryDTO]):
     )
 
     with open(
-        BASE_PATH.parent.parent / "src/localis/data/countries.tsv",
+        FIXTURE_PATH / "countries.tsv",
         "w",
         encoding="utf-8",
         newline="",

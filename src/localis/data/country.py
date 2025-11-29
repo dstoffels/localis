@@ -12,7 +12,7 @@ class CountryBase(DTO):
 @dataclass(slots=True)
 class Country(CountryBase):
     official_name: str
-    alt_names: list[str]
+    aliases: list[str]
     numeric: int
     flag: str
 
@@ -20,11 +20,13 @@ class Country(CountryBase):
 @dataclass(slots=True)
 class CountryModel(Country, Model):
 
-    def parse_docs(self):
-        self.search_docs = (
-            intern(self.name.lower()),
-            intern(self.alpha2.lower()),
-            intern(self.alpha3.lower()),
-            intern(self.official_name.lower()),
-            *(intern(alt.lower()) for alt in self.alt_names),
+    def set_search_meta(self):
+        self.search_fields = (
+            self.name.lower(),
+            self.official_name.lower(),
+            self.alpha2.lower(),
+            self.alpha3.lower(),
+            *(a.lower() for a in self.aliases),
         )
+
+        self.search_context = " ".join(self.search_fields)

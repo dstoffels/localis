@@ -13,7 +13,7 @@ class SubdivisionBase(DTO):
 
 @dataclass(slots=True)
 class Subdivision(SubdivisionBase):
-    alt_names: list[str]
+    aliases: list[str]
     admin_level: int
     parent: SubdivisionBase | None
     country: CountryBase
@@ -31,11 +31,15 @@ class SubdivisionModel(Subdivision, Model):
         dto.country = self.country and extract_base(self.country, depth=2)
         return dto
 
-    def parse_docs(self):
-        parent_docs = self.parent.search_docs if self.parent else tuple()
-        self.search_docs = (
-            intern(self.name.lower()),
-            *parent_docs,
-            *self.country.search_docs,
-            *(intern(alt) for alt in self.alt_names),
+    def set_search_meta(self):
+        iso_code = self.iso_code.split("-")[1] if self.iso_code else ""
+
+        self.search_fields = (
+            self.name.lower(),
+            iso_code.lower(),
+            *(a.lower() for a in self.aliases),
         )
+
+        country_context = self.country.search_context if self.country else ""
+
+        self.search_context = f'{" ".join(self.search_fields)} {country_context}'

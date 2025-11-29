@@ -8,14 +8,15 @@ BASE_PATH = Path(__file__).parent.parent
 # helper dto class
 @dataclass
 class CountryDTO:
+    id: str
     name: str
+    ascii_name: str
     official_name: str
     alt_names: list[str]
     alpha2: str
     alpha3: str
     numeric: int
     flag: str
-    # id: int = field(default=None)
 
     def dump(self):
         # final dedupe before dump

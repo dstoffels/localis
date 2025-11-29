@@ -1,31 +1,63 @@
-from .registries import CountryRegistry, SubdivisionRegistry, CityRegistry
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from .registries import CountryRegistry, SubdivisionRegistry, CityRegistry
+    from .data import Country, Subdivision, City
+
 from .data import Country, Subdivision, City
-import time
 
-t1 = time.perf_counter()
-countries = CountryRegistry()
-"""The countries registry
+_countries = None
+_subdivisions = None
+_cities = None
 
-- Registries are iterable. NOTE: caches all entries on first iterable access.
-- To manually trigger caching, access `localis.countries.cache` (property).
-"""
 
-subdivisions = SubdivisionRegistry(countries=countries)
-"""The subdivisions registry
+def _init_countries():
+    from .registries import CountryRegistry
 
-- Registries are iterable. NOTE: caches all entries (51k entries, 30MB) on first iterable access.
-- To manually trigger caching, access `localis.subdivisions.cache` (property).
-"""
+    global _countries
+    if _countries is None:
+        _countries = CountryRegistry()
 
-cities = CityRegistry(countries=countries, subdivisions=subdivisions)
-"""The cities registry.
+        import sys
 
-- Must be loaded before use: `localis.cities.load()` or via CLI `localis load cities`.
-- WARNING: Loading this registry expands the database to ~250MB.
-- Registries are iterable. WARNING: caches all entries (451k cities, 461MB) on first iterable access.
-- To manually trigger caching, access `localis.cities.cache` (property).
-"""
+        sys.modules[__name__].countries = _countries
+    return _countries
 
-t2 = time.perf_counter()
 
-print(t2 - t1)
+def _init_subdivisions():
+    from .registries import SubdivisionRegistry
+
+    global _subdivisions
+    if _subdivisions is None:
+        _subdivisions = SubdivisionRegistry(countries=_init_countries())
+        import sys
+
+        sys.modules[__name__].subdivisions = _subdivisions
+    return _subdivisions
+
+
+def _init_cities():
+    from .registries import CityRegistry
+
+    global _cities
+    if _cities is None:
+        _cities = CityRegistry(
+            countries=_init_countries(), subdivisions=_init_subdivisions()
+        )
+        import sys
+
+        sys.modules[__name__].cities = _cities
+    return _cities
+
+
+def __getattr__(name):
+    if name == "countries":
+        return _init_countries()
+    elif name == "subdivisions":
+        return _init_subdivisions()
+    elif name == "cities":
+        return _init_cities()
+    raise AttributeError(f"module {__name__} has no attribute {name}")
+
+
+__all__ = ["Country", "Subdivision", "City", "countries", "subdivisions", "cities"]

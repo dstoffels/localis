@@ -1,12 +1,14 @@
-from .utils import *
+from data.utils import *
+from data.subdivisions.utils import dedupe
+import csv
 
 
-def load_iso_subs(countries: dict[str, CountryDTO]) -> dict[int, SubdivisionDTO]:
+def load_iso_subs(countries: dict[str, CountryData]) -> dict[int, SubdivisionData]:
     print("Loading ISO subdivisions...")
-    with open(BASE_PATH / "src/iso-3166-2.csv", "r", encoding="utf-8") as f:
+    with open(SUB_SRC_PATH / "iso-3166-2.csv", "r", encoding="utf-8") as f:
         reader = csv.DictReader(f)
 
-        iso_subs: dict[int, SubdivisionDTO] = {}  # cache
+        iso_subs: dict[int, SubdivisionData] = {}  # cache
 
         for row in reader:
             local_name = row["localVariant"]  # canonical name if present
@@ -20,6 +22,7 @@ def load_iso_subs(countries: dict[str, CountryDTO]) -> dict[int, SubdivisionDTO]
             # Assign names, generate ascii alt names
             name = local_name or iso_name
             ascii_name = normalize(name).title()
+            ascii_name = ascii_name if ascii_name != name else None
 
             alt_name = iso_name if local_name else None
             ascii_alt_name = normalize(alt_name).title() if alt_name else None
@@ -30,8 +33,9 @@ def load_iso_subs(countries: dict[str, CountryDTO]) -> dict[int, SubdivisionDTO]
 
             if iso_code not in iso_subs:
                 # create new subdivision and cache
-                subdivision = SubdivisionDTO(
+                subdivision = SubdivisionData(
                     name=name,
+                    ascii_name=ascii_name,
                     country_id=country.id,
                     country_alpha2=country.alpha2,
                     country_alpha3=country.alpha3,
@@ -48,7 +52,7 @@ def load_iso_subs(countries: dict[str, CountryDTO]) -> dict[int, SubdivisionDTO]
                 subdivision = iso_subs[iso_code]
 
             # build alt names
-            for n in [name, alt_name, ascii_name, ascii_alt_name]:
+            for n in [name, alt_name]:
                 if n and n not in subdivision.alt_names and n != subdivision.name:
                     subdivision.alt_names.append(n)
 

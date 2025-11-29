@@ -28,16 +28,13 @@ class DTO:
 
 # @dataclass(slots=True)
 class Model(DTO):
-    FILTER_PARAMS: tuple[str] = ()
-    SEARCH_PARAMS: tuple[str] = ()
-
-    name_str: str = ""
-    search_docs: tuple[str] = defaultdict(tuple)
-    trigram_lens: tuple[int] = ()
+    search_tokens: str
+    search_fields: tuple[str] = ()
+    search_context: str = ""
 
     @property
     def dto(self) -> DTO:
         return extract_base(self)
 
-    def parse_docs(self):
+    def set_search_meta(self):
         pass
