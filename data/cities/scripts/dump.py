@@ -5,7 +5,6 @@ import csv
 def dump_to_tsv(cities: list[CityData]) -> None:
     HEADERS = (
         "name",
-        "ascii_name",
         "admin1_id",
         "admin2_id",
         "country_id",
@@ -23,7 +22,6 @@ def dump_to_tsv(cities: list[CityData]) -> None:
         for city in cities:
             writer.writerow(
                 {
-                    "ascii_name": city.ascii_name,
                     "name": city.name,
                     "admin1_id": city.admin1_id,
                     "admin2_id": city.admin2_id,

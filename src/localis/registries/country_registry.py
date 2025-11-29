@@ -11,18 +11,20 @@ class CountryRegistry(Registry[CountryModel]):
         if id == 0:
             return
 
+        name, official_name, aliases, alpha2, alpha3, numeric, flag, search_tokens = row
+
         country = CountryModel(
             id=id,
-            name=intern(row[0]),
-            official_name=intern(row[1]),
-            aliases=[intern(alt) for alt in row[2].split("|") if alt],
-            alpha2=intern(row[3]),
-            alpha3=intern(row[4]),
-            numeric=int(row[5]),
-            flag=row[6],
+            name=name,
+            official_name=official_name,
+            aliases=[alt for alt in aliases.split("|") if alt],
+            alpha2=alpha2,
+            alpha3=alpha3,
+            numeric=int(numeric),
+            flag=flag,
         )
 
-        country.set_search_meta()
+        country.search_tokens = search_tokens
 
         self.cache[id] = country
 

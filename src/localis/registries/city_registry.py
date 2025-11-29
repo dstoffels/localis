@@ -2,7 +2,6 @@ from localis.data import Subdivision, Country, CityModel
 from localis.registries import Registry, CountryRegistry, SubdivisionRegistry
 from localis.index.filter_index import FilterIndex
 from collections import defaultdict
-from sys import intern
 
 
 class CityRegistry(Registry[CityModel]):
@@ -16,27 +15,24 @@ class CityRegistry(Registry[CityModel]):
         super().__init__(**kwargs)
 
     def _parse_row(self, id: int, row: list[str]):
-        name = row[0]
-        ascii_name = row[1]
-        admin1 = self._subdivisions.cache.get(int(row[2])) if row[2] else None
-        admin2 = self._subdivisions.cache.get(int(row[3])) if row[3] else None
-        country = self._countries.cache.get(int(row[4])) if row[4] else None
-        population = int(row[5])
-        lat = float(row[6])
-        lng = float(row[7])
+        name, admin1_id, admin2_id, country_id, population, lat, lng, search_tokens = (
+            row
+        )
+        admin1 = self._subdivisions.cache.get(int(admin1_id)) if admin1_id else None
+        admin2 = self._subdivisions.cache.get(int(admin2_id)) if admin2_id else None
+        country = self._countries.cache.get(int(country_id)) if country_id else None
 
         city = CityModel(
             id=id,
-            name=intern(name),
-            ascii_name=intern(ascii_name),
+            name=name,
             admin1=admin1,
             admin2=admin2,
             country=country,
-            population=population,
-            lat=lat,
-            lng=lng,
+            population=int(population),
+            lat=float(lat),
+            lng=float(lng),
         )
-        city.set_search_meta()
+        city.search_tokens = search_tokens
         self.cache[id] = city
 
     def load_filters(self):

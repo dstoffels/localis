@@ -29,20 +29,30 @@ class SubdivisionRegistry(Registry[SubdivisionModel]):
             self._parse_row(id, row)
 
     def _parse_row(self, id: int, row: list[str]):
+        (
+            name,
+            aliases,
+            geonames_code,
+            iso_code,
+            type,
+            parent_id,
+            country_id,
+            search_tokens,
+        ) = row
+
         subdivision = SubdivisionModel(
             id=id,
-            name=intern(row[0]),
-            ascii_name=row[1],
-            aliases=[intern(alt) for alt in row[2].split("|") if alt],
-            geonames_code=intern(row[3]) or None,
-            iso_code=intern(row[4]) or None,
-            type=intern(row[5]) or None,
-            admin_level=1 if row[6] is None else 2,
-            parent=self.cache.get(int(row[6])) if row[6] else None,
-            country=self._countries.cache.get(int(row[7])),
+            name=name,
+            aliases=[alt for alt in aliases.split("|") if alt],
+            geonames_code=geonames_code or None,
+            iso_code=iso_code or None,
+            type=type or None,
+            admin_level=1 if not parent_id else 2,
+            parent=self.cache.get(int(parent_id)) if parent_id else None,
+            country=self._countries.cache.get(int(country_id)),
         )
 
-        subdivision.set_search_meta()
+        subdivision.search_tokens = search_tokens
 
         self.cache[id] = subdivision
 

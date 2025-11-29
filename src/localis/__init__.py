@@ -1,3 +1,4 @@
+# src/localis/__init__.py
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -6,58 +7,56 @@ if TYPE_CHECKING:
 
 from .data import Country, Subdivision, City
 
+# placeholders for type checkers and autocomplete
+countries: "CountryRegistry"
+subdivisions: "SubdivisionRegistry"
+cities: "CityRegistry"
+
+# internal private variables
 _countries = None
 _subdivisions = None
 _cities = None
 
 
-def _init_countries():
-    from .registries import CountryRegistry
-
+def _init_countries() -> "CountryRegistry":
     global _countries
     if _countries is None:
+        from .registries import CountryRegistry
+
         _countries = CountryRegistry()
-
-        import sys
-
-        sys.modules[__name__].countries = _countries
     return _countries
 
 
-def _init_subdivisions():
-    from .registries import SubdivisionRegistry
-
+def _init_subdivisions() -> "SubdivisionRegistry":
     global _subdivisions
     if _subdivisions is None:
-        _subdivisions = SubdivisionRegistry(countries=_init_countries())
-        import sys
+        from .registries import SubdivisionRegistry
 
-        sys.modules[__name__].subdivisions = _subdivisions
+        _subdivisions = SubdivisionRegistry(countries=_init_countries())
     return _subdivisions
 
 
-def _init_cities():
-    from .registries import CityRegistry
-
+def _init_cities() -> "CityRegistry":
     global _cities
     if _cities is None:
+        from .registries import CityRegistry
+
         _cities = CityRegistry(
             countries=_init_countries(), subdivisions=_init_subdivisions()
         )
-        import sys
-
-        sys.modules[__name__].cities = _cities
     return _cities
 
 
+# module-level lazy attribute access
 def __getattr__(name):
     if name == "countries":
         return _init_countries()
-    elif name == "subdivisions":
+    if name == "subdivisions":
         return _init_subdivisions()
-    elif name == "cities":
+    if name == "cities":
         return _init_cities()
     raise AttributeError(f"module {__name__} has no attribute {name}")
 
 
+# inform static tools about what exists
 __all__ = ["Country", "Subdivision", "City", "countries", "subdivisions", "cities"]
