@@ -81,19 +81,6 @@ def city(select_random) -> localis.City:
     return select_random(localis.cities)
 
 
-@pytest.fixture(scope="session", autouse=True)
-def ensure_cities_loaded(request: pytest.FixtureRequest):
-    """Ensure cities are loaded before running city-dependent tests
-
-    This runs once per session and loads cities if needed."""
-
-    from localis import cities
-
-    if not cities._loaded:
-        print("\n⚠️  Cities not loaded. Attempting to load...")
-    cities.load(confirmed=True)
-
-
 def pytest_itemcollected(item: pytest.Item):
     """Display class and function docstrings, fallback to names, and include filename."""
     # File name

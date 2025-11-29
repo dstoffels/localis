@@ -1,4 +1,4 @@
-from data.utils import CityData, CITIES_SRC_PATH, generate_token_trigrams
+from data.utils import CityData, CITIES_SRC_PATH, generate_trigrams, normalize
 from data.cities.scripts.utils import *
 
 HEADERS = [
@@ -111,7 +111,7 @@ def parse_row(
         population=population,
         lat=lat,
         lng=lng,
-        search_tokens=" ".join(set(generate_token_trigrams(name))),
+        search_tokens="|".join(set(generate_trigrams(normalize(name)))),
     )
 
 

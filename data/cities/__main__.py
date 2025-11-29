@@ -6,12 +6,13 @@
 from .scripts.utils import *
 from .scripts.load import load_cities
 from .scripts.dump import dump_to_tsv
+from data.utils import CityData
 
 
 def main():
     countries: dict[str, str] = load_countries()
     subdivisions: dict[str, str] = load_subdivisions()
-    cities: list[CityDTO] = load_cities(subdivisions, countries)
+    cities: list[CityData] = load_cities(subdivisions, countries)
     dump_to_tsv(cities)
 
 
