@@ -1,4 +1,5 @@
-from .utils import *
+from data.utils import *
+from data.subdivisions.utils import *
 import json
 from .merge import merge_matched_sub
 import os
@@ -9,9 +10,9 @@ def clear_terminal():
 
 
 def resolve_unmatched_subs(
-    unmatched_iso_subs: list[SubdivisionDTO], sub_map: SubdivisionMap
+    unmatched_iso_subs: list[SubdivisionData], sub_map: SubdivisionMap
 ) -> dict | None:
-    with open(BASE_PATH / "src/resolution_map.json", "r+", encoding="utf-8") as f:
+    with open(SUB_SRC_PATH / "resolution_map.json", "r+", encoding="utf-8") as f:
         # load existing mappings
         resolution_map: dict[str, dict[int, str | list[str]]] = json.load(f) or {}
 

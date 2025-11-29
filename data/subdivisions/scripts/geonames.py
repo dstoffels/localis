@@ -1,17 +1,26 @@
 from pathlib import Path
-from .utils import *
+from data.subdivisions.utils import *
+from data.utils import SUB_SRC_PATH, normalize
+import csv
 
 
 def load_geonames_file(
-    file_name: Path, countries: dict[str, CountryDTO], sub_map: SubdivisionMap
+    file_name: Path, countries: dict[str, CountryData], sub_map: SubdivisionMap
 ) -> None:
-    with open(BASE_PATH / file_name, "r", encoding="utf-8") as f:
-        for line in f:
+    with open(SUB_SRC_PATH / file_name, "r", encoding="utf-8") as f:
+        HEADERS = ["code", "name", "name_ascii", "geonames_id"]
+        reader = csv.DictReader(
+            f,
+            fieldnames=HEADERS,
+            delimiter="\t",
+        )
+        for row in reader:
             # code, name, name_ascii, geonames_id
-            parts = line.strip().split("\t")
-            name = parts[1]
-            ascii_name = parts[2] if parts[2] != name else None
-            geonames_code = parts[0]
+            name: str = row["name"]
+            norm_name: str = normalize(name, False)
+            ascii_name = norm_name if norm_name != name else None
+            # row["name_ascii"] if row["name_ascii"] != name else None
+            geonames_code: str = row["code"]
 
             # determine parent code and set admin level
             code_parts = geonames_code.split(".")
@@ -29,8 +38,9 @@ def load_geonames_file(
                 print(f"Country {country_alpha2} not found, skipping {name}.")
                 continue
 
-            subdivision = SubdivisionDTO(
+            subdivision = SubdivisionData(
                 name=name,
+                ascii_name=ascii_name,
                 country_id=country.id,
                 country_alpha2=country.alpha2,
                 country_alpha3=country.alpha3,
@@ -40,19 +50,14 @@ def load_geonames_file(
                 admin_level=admin_level,
             )
 
-            if ascii_name and ascii_name not in subdivision.alt_names:
-                subdivision.alt_names.append(ascii_name)
-
-            subdivision.alt_names = dedupe(subdivision.alt_names)
-
             sub_map.add(subdivision)
 
 
 def map_subdivisions(
-    countries: dict[str, CountryDTO],
+    countries: dict[str, CountryData],
 ) -> SubdivisionMap:
     print("Loading GeoNames subdivisions...")
     sub_map = SubdivisionMap()
-    load_geonames_file("src/admin1CodesASCII.txt", countries, sub_map)
-    load_geonames_file("src/admin2.txt", countries, sub_map)
+    load_geonames_file("admin1CodesASCII.txt", countries, sub_map)
+    load_geonames_file("admin2.txt", countries, sub_map)
     return sub_map

@@ -23,7 +23,7 @@ class SubdivisionRegistry(Registry[SubdivisionModel]):
             for id, row in enumerate(reader, 1):
                 sub_groups.append((id, row))
 
-        sub_groups.sort(key=lambda r: r[1][5])
+        sub_groups.sort(key=lambda r: r[1][6])
 
         for id, row in sub_groups:
             self._parse_row(id, row)
@@ -32,16 +32,17 @@ class SubdivisionRegistry(Registry[SubdivisionModel]):
         subdivision = SubdivisionModel(
             id=id,
             name=intern(row[0]),
-            alt_names=[intern(alt) for alt in row[1].split("|") if alt],
-            geonames_code=intern(row[2]) or None,
-            iso_code=intern(row[3]) or None,
-            type=intern(row[4]) or None,
-            admin_level=1 if row[5] is None else 2,
-            parent=self.cache.get(int(row[5])) if row[5] else None,
-            country=self._countries.cache.get(int(row[6])),
+            ascii_name=row[1],
+            aliases=[intern(alt) for alt in row[2].split("|") if alt],
+            geonames_code=intern(row[3]) or None,
+            iso_code=intern(row[4]) or None,
+            type=intern(row[5]) or None,
+            admin_level=1 if row[6] is None else 2,
+            parent=self.cache.get(int(row[6])) if row[6] else None,
+            country=self._countries.cache.get(int(row[7])),
         )
 
-        subdivision.parse_docs()
+        subdivision.set_search_meta()
 
         self.cache[id] = subdivision
 

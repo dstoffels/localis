@@ -1,10 +1,10 @@
-from .utils import *
+from ..utils import *
 
 
 def dump_to_tsv(sub_map: SubdivisionMap):
     HEADERS = (
-        # "id",
         "name",
+        "ascii_name",
         "alt_names",
         "geonames_code",
         "iso_code",
@@ -14,7 +14,7 @@ def dump_to_tsv(sub_map: SubdivisionMap):
     )
 
     with open(
-        BASE_PATH.parent / "src/localis/data/subdivisions.tsv",
+        FIXTURE_PATH / "subdivisions.tsv",
         "w",
         encoding="utf-8",
         newline="",
@@ -24,8 +24,8 @@ def dump_to_tsv(sub_map: SubdivisionMap):
         for sub in sub_map.get_final():
             writer.writerow(
                 {
-                    # "id": sub.id,
                     "name": sub.name,
+                    "ascii_name": sub.ascii_name,
                     "alt_names": "|".join(sub.alt_names),
                     "geonames_code": sub.geonames_code,
                     "iso_code": sub.iso_code,

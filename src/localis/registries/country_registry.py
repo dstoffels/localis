@@ -15,14 +15,14 @@ class CountryRegistry(Registry[CountryModel]):
             id=id,
             name=intern(row[0]),
             official_name=intern(row[1]),
-            alt_names=[intern(alt) for alt in row[2].split("|") if alt],
+            aliases=[intern(alt) for alt in row[2].split("|") if alt],
             alpha2=intern(row[3]),
             alpha3=intern(row[4]),
             numeric=int(row[5]),
             flag=row[6],
         )
 
-        country.parse_docs()
+        country.set_search_meta()
 
         self.cache[id] = country
 
@@ -55,7 +55,7 @@ class CountryRegistry(Registry[CountryModel]):
             self._filter_index.add("name", country.name, country.id)
             if country.official_name:
                 self._filter_index.add("name", country.official_name, country.id)
-            for alt in country.alt_names:
+            for alt in country.aliases:
                 self._filter_index.add("name", alt, country.id)
 
     def filter(self, *, name=None, **kwargs):
