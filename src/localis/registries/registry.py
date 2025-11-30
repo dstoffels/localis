@@ -3,7 +3,7 @@ from localis.data import Model
 from abc import ABC, abstractmethod
 from pathlib import Path
 import csv
-from localis.index import Index, FilterIndex, SearchEngine
+from localis.index import FilterIndex, SearchEngine, LookupIndex
 from functools import wraps
 
 
@@ -31,7 +31,7 @@ class Registry(Generic[T], ABC):
 
     DATA_PATH = Path(__file__).parent.parent / "data" / "fixtures"
     DATAFILE: str = ""
-    MODEL_CLS: type[Model] = None
+    MODEL_CLS: Model = None
 
     def __init__(self, **kwargs):
         self._cache: dict[int, T] = None  # id-model map
@@ -71,25 +71,22 @@ class Registry(Generic[T], ABC):
     def __len__(self) -> int:
         return len(self.cache)
 
+    # ----------- API METHODS ----------- #
+
+    # ----------- GET ----------- #
     def load_lookups(self):
-        self._lookup_index = {}
+        self._lookup_index = LookupIndex(self.cache, self.MODEL_CLS.LOOKUP_FIELDS)
 
     @is_loaded("_lookup_index", "load_lookups")
-    def get(self, *, id: int = None, **kwargs) -> T:
+    def get(self, identifier: str | int) -> T:
         """Fetches a single item by one of its unique identifiers. Raises a ValueError if multiple kwargs are assigned."""
-        if id is not None and len([v for v in kwargs.values() if v is not None]) > 0:
-            raise ValueError("get can only accept one keyword argument at a time.")
 
-        if id is not None:
-            return self.cache.get(id)  # returns None if id not found
+        return self._lookup_index.get(identifier)
 
-        kwargs = {k: v for k, v in kwargs.items() if v is not None}
-
-        for v in kwargs.values():
-            return self._lookup_index.get(v)
+    # ----------- FILTER ----------- #
 
     def load_filters(self):
-        self._filter_index = Index[T]()
+        self._filter_index = FilterIndex(self.cache, self.MODEL_CLS.FILTER_FIELDS)
 
     @is_loaded("_filter_index", "load_filters")
     def filter(self, *, name: str = None, **kwargs) -> list[T]:

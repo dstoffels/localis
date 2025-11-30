@@ -89,7 +89,7 @@ def init_iso_countries() -> dict[str, CountryData]:
                 official_name=official_name,
                 alpha2=alpha2,
                 alpha3=c["alpha_3"],
-                numeric=int(c["numeric"]),
+                numeric=c["numeric"],
                 alt_names=ALIAS_MAP.get(alpha2, []),
                 flag=c["flag"],
             )

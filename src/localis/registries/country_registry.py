@@ -20,36 +20,16 @@ class CountryRegistry(Registry[CountryModel]):
             aliases=[alt for alt in aliases.split("|") if alt],
             alpha2=alpha2,
             alpha3=alpha3,
-            numeric=int(numeric),
+            numeric=numeric,
             flag=flag,
         )
 
         country.search_tokens = search_tokens
-
         self._cache[id] = country
 
-    def load_lookups(self):
-        self._lookup_index = {}
-        for c in self.cache.values():
-            self._lookup_index[c.alpha2] = c
-            self._lookup_index[c.alpha3] = c
-            self._lookup_index[c.numeric] = c
-
-    def get(
-        self,
-        *,
-        id: int = None,
-        alpha2: str = None,
-        alpha3: str = None,
-        numeric: int = None,
-        **kwargs,
-    ):
-        kwargs = {
-            "alpha2": alpha2,
-            "alpha3": alpha3,
-            "numeric": numeric,
-        }
-        return super().get(id=id, **kwargs)
+    def get(self, identifier: str | int) -> CountryModel | None:
+        """Get a country by its alpha2, alpha3, numeric code, or id."""
+        return super().get(identifier)
 
     def load_filters(self):
         self._filter_index = FilterIndex()
