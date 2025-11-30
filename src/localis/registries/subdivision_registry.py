@@ -61,32 +61,15 @@ class SubdivisionRegistry(Registry[SubdivisionModel]):
         return super().get(identifier)
 
     def load_filters(self):
-        self._filter_index = FilterIndex()
-
-        # Pre-build the index dict structure, then bulk assign
-        from collections import defaultdict
-
-        index = defaultdict(lambda: defaultdict(set))
-        subs = self.cache.values()
-
-        for sub in subs:
-            sub_id = sub.id
-            country = sub.country  # Single access
-
-            # Direct dict assignments (faster than method calls)
-            index["name"][sub.name].add(sub_id)
-            index["type"][sub.type].add(sub_id)
-            index["admin_level"][sub.admin_level].add(sub_id)
-            index["country"][country.name].add(sub_id)
-            index["country"][country.alpha2].add(sub_id)
-            index["country"][country.alpha3].add(sub_id)
-
-        self._filter_index.index = index
+        self._filter_index = FilterIndex(
+            cache=self.cache, filter_fields=self.MODEL_CLS.FILTER_FIELDS
+        )
 
     def filter(
         self,
         *,
         name: str = None,
+        limit: int = None,
         type: str = None,
         admin_level: int = None,
         country: str = None,
@@ -98,7 +81,7 @@ class SubdivisionRegistry(Registry[SubdivisionModel]):
             "country": country,
         }
 
-        return super().filter(name=name, **kwargs)
+        return super().filter(name=name, limit=limit, **kwargs)
 
 
 # singleton

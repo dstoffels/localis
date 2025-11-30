@@ -41,43 +41,15 @@ class CityRegistry(Registry[CityModel]):
         return super().get(identifier)
 
     def load_filters(self):
-        self._filter_index = FilterIndex()
-
-        index = defaultdict(lambda: defaultdict(set))
-        cities = self.cache.values()
-        for city in cities:
-            city_id = city.id
-
-            index["name"][city.name].add(city_id)
-
-            admin1 = city.admin1
-            if admin1:
-                index["subdivision"][admin1.name].add(city_id)
-                if admin1.geonames_code:
-                    index["subdivision"][admin1.geonames_code].add(city_id)
-                if admin1.iso_code:
-                    index["subdivision"][admin1.iso_code].add(city_id)
-
-            admin2 = city.admin2
-            if admin2:
-                index["subdivision"][admin2.name].add(city_id)
-                if admin2.geonames_code:
-                    index["subdivision"][admin2.geonames_code].add(city_id)
-                if admin2.iso_code:
-                    index["subdivision"][admin2.iso_code].add(city_id)
-
-            country = city.country
-            if country:
-                index["country"][country.name].add(city_id)
-                index["country"][country.alpha2].add(city_id)
-                index["country"][country.alpha3].add(city_id)
-
-        self._filter_index.index = index
+        self._filter_index = FilterIndex(
+            cache=self.cache, filter_fields=self.MODEL_CLS.FILTER_FIELDS
+        )
 
     def filter(
         self,
         *,
         name=None,
+        limit: int = None,
         subdivision: str = None,
         country: str = None,
         population__lt: int = None,
@@ -89,9 +61,10 @@ class CityRegistry(Registry[CityModel]):
             "subdivision": subdivision,
             "country": country,
         }
-        results = super().filter(name=name, **kwargs)
-        if population__gt is not None or population__lt is not None:
-            results.sort()
+        results = super().filter(name=name, limit=limit, **kwargs)
+        # if population__gt is not None or population__lt is not None:
+        #     results.sort()
+        return results
 
     def search(self, query, limit=None):
         results = super().search(query=query, limit=None)

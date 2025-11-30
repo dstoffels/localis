@@ -88,7 +88,7 @@ class Registry(Generic[T], ABC):
     def load_filters(self):
         self._filter_index = FilterIndex(self.cache, self.MODEL_CLS.FILTER_FIELDS)
 
-    def filter(self, *, name: str = None, **kwargs) -> list[T]:
+    def filter(self, *, name: str = None, limit: int = None, **kwargs) -> list[T]:
         """Filter by exact matches on specified fields with AND logic when filtering by multiple fields. Case insensitive."""
         kwargs["name"] = name
 
@@ -101,7 +101,7 @@ class Registry(Generic[T], ABC):
             return []
 
         for key, value in kwargs.items():
-            matches = self._filter_index.get(key, value)
+            matches = self.filter_index.get(key, value)
 
             # short circuit if any field fails to match, all or nothing
             if not matches:
@@ -113,8 +113,9 @@ class Registry(Generic[T], ABC):
                 results &= matches
         results_list = [self.cache[id] for id in results]
         results_list.sort(key=lambda r: r.name)  # sort alphabetically by name
-        return results_list
+        return results_list[:limit]
 
+    # ----------- SEARCH ----------- #
     def load_searches(self):
         self._search_index = SearchEngine(self.cache)
 

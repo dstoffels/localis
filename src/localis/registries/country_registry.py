@@ -32,16 +32,16 @@ class CountryRegistry(Registry[CountryModel]):
         return super().get(identifier)
 
     def load_filters(self):
-        self._filter_index = FilterIndex()
-        for country in self.cache.values():
-            self._filter_index.add("name", country.name, country.id)
-            if country.official_name:
-                self._filter_index.add("name", country.official_name, country.id)
-            for alt in country.aliases:
-                self._filter_index.add("name", alt, country.id)
+        self._filter_index = FilterIndex(
+            cache=self.cache, filter_fields=self.MODEL_CLS.FILTER_FIELDS
+        )
 
-    def filter(self, *, name=None, **kwargs):
-        return super().filter(name=name, **kwargs)
+    def filter(self, *, name: str = None, limit: int = None, **kwargs):
+        """Filter countries by any of its names (name, official_name, or aliases)."""
+        return super().filter(name=name, limit=limit, **kwargs)
+
+    def search(self, query, limit=None) -> list[tuple[CountryModel, float]]:
+        return super().search(query, limit)
 
 
 countries = CountryRegistry()
