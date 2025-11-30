@@ -1,727 +1,296 @@
 {
-    "2025-11-15T02:26:50.054976": {
-        "countries": {
-            "avg_time_ms": 0.168,
-            "success_rate": 0.77,
-            "num_hit": 385,
-            "num_miss": 115,
-            "total_queries": 500
-        },
-        "subdivisions": {
-            "avg_time_ms": 5.612,
-            "success_rate": 0.696,
-            "num_hit": 348,
-            "num_miss": 152,
-            "total_queries": 500
-        },
-        "cities": {
-            "avg_time_ms": 22.637,
-            "success_rate": 0.526,
-            "num_hit": 263,
-            "num_miss": 237,
-            "total_queries": 500
-        },
-        "notes": "Using fuzzy search only, most registries with name weighted at 1.5"
-    },
-    "2025-11-15T14:09:29.220822": {
-        "countries": {
-            "avg_time_ms": 0.144,
-            "success_rate": 0.674,
-            "num_hit": 1348,
-            "num_miss": 652,
-            "total_queries": 2000
-        },
-        "subdivisions": {
-            "avg_time_ms": 4.75,
-            "success_rate": 0.64,
-            "num_hit": 1281,
-            "num_miss": 719,
-            "total_queries": 2000
-        },
-        "cities": {
-            "avg_time_ms": 18.394,
-            "success_rate": 0.488,
-            "num_hit": 976,
-            "num_miss": 1024,
-            "total_queries": 2000
-        },
-        "notes": "Short test: 20 iterations, 100-entry sample"
-    },
-    "2025-11-16T12:10:40.191805": {
-        "countries": {
-            "avg_time_ms": 0.142,
-            "success_rate": 0.665,
-            "total_queries": 1000
-        },
-        "subdivisions": {
-            "avg_time_ms": 4.855,
-            "success_rate": 0.648,
-            "total_queries": 1000
-        },
-        "cities": {
-            "avg_time_ms": 18.749,
-            "success_rate": 0.499,
-            "total_queries": 1000
-        },
-        "notes": "Short test: 10 iterations, 100-entry sample"
-    },
-    "2025-11-16T12:11:37.657927": {
-        "countries": {
-            "avg_time_ms": 0.135,
-            "success_rate": 0.665,
-            "total_queries": 1000
-        },
-        "subdivisions": {
-            "avg_time_ms": 4.028,
-            "success_rate": 0.664,
-            "total_queries": 1000
-        },
-        "cities": {
-            "avg_time_ms": 11.411,
-            "success_rate": 0.624,
-            "total_queries": 1000
-        },
-        "notes": "Short test: 10 iterations, 100-entry sample. FIX: ORDERBY WAS KILLING time and accuracy."
-    },
-    "2025-11-16T12:15:17.521680": {
-        "countries": {
-            "avg_time_ms": 0.124,
-            "success_rate": 0.665,
-            "total_queries": 1000
-        },
-        "subdivisions": {
-            "avg_time_ms": 7.578,
-            "success_rate": 0.652,
-            "total_queries": 1000
-        },
-        "cities": {
-            "avg_time_ms": 100.732,
-            "success_rate": 0.532,
-            "total_queries": 1000
-        },
-        "notes": "Short test: 10 iterations, 100-entry sample: removed orderby and limit in _fetch_candidates()",
-        "report": "Removing orderby = significant improvement, removing limit was very destructive, particularly against search time."
-    },
-    "2025-11-16T12:20:34.181040": {
-        "countries": {
-            "avg_time_ms": 0.127,
-            "success_rate": 0.665,
-            "total_queries": 1000
-        },
-        "subdivisions": {
-            "avg_time_ms": 2.605,
-            "success_rate": 0.67,
-            "total_queries": 1000
-        },
-        "cities": {
-            "avg_time_ms": 7.729,
-            "success_rate": 0.634,
-            "total_queries": 1000
-        },
-        "notes": "Short test: 10 iterations, 100-entry sample: brought back progressive limit (iteration * 100), remove limit cap of 1000",
-        "report": "Removing limit cap yielded minor improvements across the board, except for countries (10% decline in accuracy)."
-    },
-    "2025-11-16T12:25:08.781204": {
-        "iterations": 10,
-        "sample_size": 100,
-        "notes": "Raised score threshold from 1.0 - 2.0",
-        "countries": {
-            "avg_time_ms": 0.124,
-            "success_rate": 0.53,
-            "total_queries": 1000
-        },
-        "subdivisions": {
-            "avg_time_ms": 2.519,
-            "success_rate": 0.215,
-            "total_queries": 1000
-        },
-        "cities": {
-            "avg_time_ms": 7.429,
-            "success_rate": 0.14,
-            "total_queries": 1000
-        },
-        "report": "Destroyed success_rate"
-    },
-    "2025-11-16T12:27:27.973151": {
-        "iterations": 10,
-        "sample_size": 100,
-        "notes": "Lowered score threshold from 2.0 > 0.75",
-        "countries": {
-            "avg_time_ms": 0.127,
-            "success_rate": 0.665,
-            "total_queries": 1000
-        },
-        "subdivisions": {
-            "avg_time_ms": 2.612,
-            "success_rate": 0.67,
-            "total_queries": 1000
-        },
-        "cities": {
-            "avg_time_ms": 7.823,
-            "success_rate": 0.634,
-            "total_queries": 1000
-        },
-        "report": "No change from a threshold of 1.0"
-    },
-    "2025-11-16T12:31:26.324987": {
-        "iterations": 10,
-        "sample_size": 100,
-        "notes": "removed limit from results method, checking if positives are being truncated from the results due to a lower fuzzy score",
-        "countries": {
-            "avg_time_ms": 0.132,
-            "success_rate": 0.665,
-            "total_queries": 1000
-        },
-        "subdivisions": {
-            "avg_time_ms": 2.614,
-            "success_rate": 0.694,
-            "total_queries": 1000
-        },
-        "cities": {
-            "avg_time_ms": 8.172,
-            "success_rate": 0.662,
-            "total_queries": 1000
-        },
-        "report": "Small improvement except for countries--still a lingering effect that's damaging countries' success rate."
-    },
-    "2025-11-16T12:33:25.005106": {
-        "iterations": 10,
-        "sample_size": 100,
-        "notes": "Adjusted countries' field weights: name: 1.5 > 2.0, official name: 1.5 > 1.0",
-        "countries": {
-            "avg_time_ms": 0.127,
-            "success_rate": 0.665,
-            "total_queries": 1000
-        },
-        "subdivisions": {
-            "avg_time_ms": 2.606,
-            "success_rate": 0.694,
-            "total_queries": 1000
-        },
-        "cities": {
-            "avg_time_ms": 8.076,
-            "success_rate": 0.662,
-            "total_queries": 1000
-        },
-        "report": "No change, resetting."
-    },
-    "2025-11-16T12:36:33.236902": {
-        "iterations": 10,
-        "sample_size": 100,
-        "notes": "added at_limit() to break criteria in main() loop",
-        "countries": {
-            "avg_time_ms": 0.127,
-            "success_rate": 0.665,
-            "total_queries": 1000
-        },
-        "subdivisions": {
-            "avg_time_ms": 1.69,
-            "success_rate": 0.651,
-            "total_queries": 1000
-        },
-        "cities": {
-            "avg_time_ms": 3.868,
-            "success_rate": 0.515,
-            "total_queries": 1000
-        },
-        "report": "Still no change to countries, subdivisions and cities took a huge hit to accuracy, but avg_time was halved. Removing _at_limit() from main loop"
-    },
-    "2025-11-16T12:51:32.956838": {
-        "iterations": 20,
-        "sample_size": 100,
-        "notes": "Same test (no at_limit), but iterations: 10 > 20",
-        "countries": {
-            "avg_time_ms": 0.128,
-            "success_rate": 0.674,
-            "total_queries": 2000
-        },
-        "subdivisions": {
-            "avg_time_ms": 2.611,
-            "success_rate": 0.693,
-            "total_queries": 2000
-        },
-        "cities": {
-            "avg_time_ms": 8.036,
-            "success_rate": 0.654,
-            "total_queries": 2000
-        },
-        "report": "more iterations (different typos) showed minor improvements except for cities."
-    },
-    "2025-11-16T13:01:11.948794": {
-        "iterations": 20,
-        "sample_size": 1000,
-        "notes": "20 iterations, 1000 samples",
-        "countries": {
-            "avg_time_ms": 0.127,
-            "success_rate": 0.67,
-            "total_queries": 4980
-        },
-        "subdivisions": {
-            "avg_time_ms": 1.989,
-            "success_rate": 0.636,
-            "total_queries": 20000
-        },
-        "cities": {
-            "avg_time_ms": 8.07,
-            "success_rate": 0.689,
-            "total_queries": 20000
-        },
-        "report": "More accurate numbers, countries is still underpeforming."
-    },
-    "2025-11-16T13:05:36.476928": {
-        "iterations": 10,
-        "sample_size": 300,
-        "notes": "Testing bigram search, swapped out FuzzySearch for NgramSearch",
-        "countries": {
-            "success_rate": 0.657,
-            "avg_time_ms": 0.164,
-            "total_queries": 2490
-        },
-        "subdivisions": {
-            "success_rate": 0.602,
-            "avg_time_ms": 2.87,
-            "total_queries": 3000
-        },
-        "cities": {
-            "success_rate": 0.647,
-            "avg_time_ms": 11.342,
-            "total_queries": 3000
-        },
-        "report": "Shockingly not bad compared to fuzzy search, slightly less performant"
-    },
-    "2025-11-16T13:21:37.493603": {
-        "iterations": 10,
-        "sample_size": 300,
-        "notes": "Swapped out NgramSearch for FuzzySearch, added avg score to narrow down scoring criteria.",
-        "countries": {
-            "success_rate": 0.668,
-            "avg_time_ms": 0.125,
-            "avg_score": 1.381,
-            "total_queries": 2490
-        },
-        "subdivisions": {
-            "success_rate": 0.665,
-            "avg_time_ms": 2.279,
-            "avg_score": 1.296,
-            "total_queries": 3000
-        },
-        "cities": {
-            "success_rate": 0.678,
-            "avg_time_ms": 7.855,
-            "avg_score": 1.217,
-            "total_queries": 3000
-        },
-        "report": ""
-    },
-    "2025-11-16T13:24:25.317472": {
-        "iterations": 10,
-        "sample_size": 300,
-        "notes": "bumped country name weight up to 20 to see if that's a factor",
-        "countries": {
-            "success_rate": 0.668,
-            "avg_time_ms": 0.13,
-            "avg_score": 9.875,
-            "total_queries": 2490
-        },
-        "subdivisions": {
-            "success_rate": 0.665,
-            "avg_time_ms": 2.256,
-            "avg_score": 1.296,
-            "total_queries": 3000
-        },
-        "cities": {
-            "success_rate": 0.678,
-            "avg_time_ms": 7.787,
-            "avg_score": 1.217,
-            "total_queries": 3000
-        },
-        "report": "No change"
-    },
-    "2025-11-16T13:31:19.804754": {
-        "iterations": 10,
-        "sample_size": 300,
-        "notes": "countries only, logging misses ",
-        "countries": {
-            "success_rate": 0.668,
-            "avg_time_ms": 0.126,
-            "avg_score": 1.381,
-            "total_queries": 2490
-        },
-        "report": "mangle util was injecting typos into the 2nd char of input  tokens, but the search only truncates down to 2 chars (limitation). I'm adjusting mangle for a minimum typo idx of 2"
-    },
-    "2025-11-16T13:34:51.228230": {
-        "iterations": 10,
-        "sample_size": 300,
-        "notes": "Testing new mangle util which now will not inject typos on the 1st or 2nd char",
-        "countries": {
-            "success_rate": 0.808,
-            "avg_time_ms": 0.139,
-            "avg_score": 1.438,
-            "total_queries": 2490
-        },
-        "report": "Vastly improved scoring"
-    },
-    "2025-11-16T13:36:23.853006": {
-        "iterations": 10,
-        "sample_size": 300,
-        "notes": "Decided to allow the mangler to inject at token[1] and lowered the MIN_TOKEN_LEN in the search enginer to 1",
-        "countries": {
-            "success_rate": 0.79,
-            "avg_time_ms": 0.373,
-            "avg_score": 1.375,
-            "total_queries": 2490
-        },
-        "report": "2x slower but I think the score threshold needs to be tweaked."
-    },
-    "2025-11-16T13:36:58.677069": {
-        "iterations": 10,
-        "sample_size": 300,
-        "notes": "Lowered search engine score threshold to 0.9",
-        "countries": {
-            "success_rate": 0.79,
-            "avg_time_ms": 0.377,
-            "avg_score": 1.319,
-            "total_queries": 2490
-        },
-        "report": "No Change"
-    },
-    "2025-11-16T13:37:29.421132": {
-        "iterations": 10,
-        "sample_size": 300,
-        "notes": "Lowered score threshold to 0.8",
-        "countries": {
-            "success_rate": 0.79,
-            "avg_time_ms": 0.378,
-            "avg_score": 1.263,
-            "total_queries": 2490
-        },
-        "report": "No change"
-    },
-    "2025-11-16T13:39:35.421057": {
-        "iterations": 10,
-        "sample_size": 300,
-        "notes": "went heavy handed, lowered score threshold to 0.5",
-        "countries": {
-            "success_rate": 0.79,
-            "avg_time_ms": 0.395,
-            "avg_score": 1.114,
-            "total_queries": 2490
-        },
-        "report": "No change, problem is most likely in alt_names, which may be laden with duplicates causing excessive scoring"
-    },
-    "2025-11-16T13:45:58.572911": {
-        "iterations": 10,
-        "sample_size": 300,
-        "notes": "Reset score threshold to 1.1 (just below avg_score), added scoreing logic to prevent duplicate values from being evaluated.",
-        "countries": {
-            "success_rate": 0.768,
-            "avg_time_ms": 0.406,
-            "avg_score": 1.414,
-            "total_queries": 2490
-        },
-        "report": "Slower and less accurate. Re-evaluating scoring logic."
-    },
-    "2025-11-16T14:22:14.261090": {
-        "iterations": 10,
-        "sample_size": 300,
-        "notes": "bugfix: MAX_ITERATIONS wasn't allowing longer tokens to truncate far enough, now dynamically generating iterations based on query tokens. overhaul: swapped token_set_ratio > WRatio, normalizing query & field values in scoring, added early-exit by checking if truncation produced new candidates.",
-        "countries": {
-            "success_rate": 0.799,
-            "avg_time_ms": 0.379,
-            "avg_score": 2.0,
-            "total_queries": 2490
-        },
-        "report": "Some obvious matches failed, and performance is still down, will adjust threshold"
-    },
-    "2025-11-16T14:23:50.052777": {
-        "iterations": 10,
-        "sample_size": 300,
-        "notes": "SCORE_THRESHOLD 1.0 > 0.7",
-        "countries": {
-            "success_rate": 0.799,
-            "avg_time_ms": 0.38,
-            "avg_score": 1.961,
-            "total_queries": 2490
-        },
-        "report": "No change to performance/success rate"
-    },
-    "2025-11-17T00:12:32.240075": {
+    "2025-11-30T00:04:33.393286": {
         "iterations": 3,
         "sample_size": 300,
-        "notes": "",
+        "notes": "1st benchmark",
         "countries": {
-            "success_rate": 0.81,
-            "avg_time_ms": 0.287,
-            "avg_score": 1.466,
-            "total_queries": 747
+            "success_rate": 0.858,
+            "avg_time_ms": 0.033,
+            "avg_hit_score": 0.863
         },
         "subdivisions": {
-            "success_rate": 0.751,
-            "avg_time_ms": 7.146,
-            "avg_score": 1.17,
-            "total_queries": 900
+            "success_rate": 0.821,
+            "avg_time_ms": 3.949,
+            "avg_hit_score": 0.921
         },
         "cities": {
-            "success_rate": 0.777,
-            "avg_time_ms": 44.931,
-            "avg_score": 1.18,
-            "total_queries": 900
-        },
-        "report": ""
-    },
-    "2025-11-17T00:45:30.241363": {
-        "iterations": 3,
-        "sample_size": 300,
-        "notes": "",
-        "countries": {
-            "success_rate": 0.81,
-            "avg_time_ms": 0.254,
-            "avg_score": 1.224,
-            "total_queries": 747
-        },
-        "subdivisions": {
-            "success_rate": 0.751,
-            "avg_time_ms": 5.904,
-            "avg_score": 1.098,
-            "total_queries": 900
-        },
-        "cities": {
-            "success_rate": 0.777,
-            "avg_time_ms": 40.741,
-            "avg_score": 0.995,
-            "total_queries": 900
-        },
-        "report": ""
-    },
-    "2025-11-17T19:53:40.353961": {
-        "iterations": 3,
-        "sample_size": 300,
-        "notes": "Overhaul of fuzzy search",
-        "countries": {
-            "success_rate": 0.81,
-            "avg_time_ms": 0.402,
-            "avg_hit_score": 0.661
-        },
-        "subdivisions": {
-            "success_rate": 0.761,
-            "avg_time_ms": 8.985,
-            "avg_hit_score": 0.657
-        },
-        "cities": {
-            "success_rate": 0.781,
-            "avg_time_ms": 57.629,
-            "avg_hit_score": 0.582
-        },
-        "report": "Accuracy is good, but performance needs tweaking. Exploring early-exit strategies for next round."
-    },
-    "2025-11-17T21:19:53.131977": {
-        "iterations": 3,
-        "sample_size": 300,
-        "notes": "Updated the mangle util to prevent multi-token inputs from mangling the first char of any token in the string.",
-        "countries": {
-            "success_rate": 0.878,
-            "avg_time_ms": 0.515,
-            "avg_hit_score": 0.618
-        },
-        "subdivisions": {
-            "success_rate": 0.851,
-            "avg_time_ms": 10.831,
-            "avg_hit_score": 0.62
-        },
-        "cities": {
-            "success_rate": 0.868,
-            "avg_time_ms": 40.465,
-            "avg_hit_score": 0.556
-        },
-        "report": "The fairer mangler revealed much higher accuracy and improved performance for cities. Subdivisions appears to need field-weight tweaking."
-    },
-    "2025-11-17T21:58:45.765986": {
-        "iterations": 3,
-        "sample_size": 300,
-        "notes": "Early exit: track match count deltas with each iteration to detect diminishing returns and break main search loop.",
-        "countries": {
-            "success_rate": 0.878,
-            "avg_time_ms": 0.325,
-            "avg_hit_score": 0.618
-        },
-        "subdivisions": {
-            "success_rate": 0.838,
-            "avg_time_ms": 8.918,
-            "avg_hit_score": 0.62
-        },
-        "cities": {
-            "success_rate": 0.851,
-            "avg_time_ms": 32.823,
-            "avg_hit_score": 0.556
-        },
-        "report": "~18% performance improvement, with ~1% degradation in accuracy."
-    },
-    "2025-11-17T22:04:16.129264": {
-        "iterations": 3,
-        "sample_size": 300,
-        "notes": "Balanced subdivisions field weighting, expecting slight boost to accuracy. more aggressive diminishing returns detection (1 > 2)",
-        "countries": {
-            "success_rate": 0.877,
-            "avg_time_ms": 0.277,
-            "avg_hit_score": 0.618
-        },
-        "subdivisions": {
-            "success_rate": 0.837,
-            "avg_time_ms": 7.975,
-            "avg_hit_score": 0.634
-        },
-        "cities": {
-            "success_rate": 0.844,
-            "avg_time_ms": 30.101,
-            "avg_hit_score": 0.557
-        },
-        "report": "Performance improvements negligible against accuracy degradation."
-    },
-    "2025-11-18T09:38:43.285996": {
-        "iterations": 3,
-        "sample_size": 300,
-        "notes": "Added noise reduction and relevance ratio to score_candidate (only non-noisy fields are calculated in score). this allows for strong match early. more relaxed, dynamic limits applied + hard limit of 5000. Expect to see high accuracy and diminished performance.",
-        "countries": {
-            "success_rate": 0.997,
-            "avg_time_ms": 0.211,
-            "avg_hit_score": 0.891
-        },
-        "subdivisions": {
-            "success_rate": 0.987,
-            "avg_time_ms": 23.68,
-            "avg_hit_score": 0.889
-        },
-        "cities": {
-            "success_rate": 0.91,
-            "avg_time_ms": 76.035,
-            "avg_hit_score": 0.897
-        },
-        "report": "Stronger than expected accuracy--the brute-force \"final round\" of the main loop appears to be responsible, but also induces expected performance costs. "
-    },
-    "2025-11-18T10:00:35.438662": {
-        "iterations": 3,
-        "sample_size": 300,
-        "notes": "Removed pipe splitting in score_candidate, expecting much better performance",
-        "countries": {
-            "success_rate": 0.999,
-            "avg_time_ms": 0.147,
-            "avg_hit_score": 0.891
-        },
-        "subdivisions": {
-            "success_rate": 0.989,
-            "avg_time_ms": 17.85,
-            "avg_hit_score": 0.889
-        },
-        "cities": {
-            "success_rate": 0.911,
-            "avg_time_ms": 58.401,
-            "avg_hit_score": 0.898
-        },
-        "report": "Even saw an improvement in accuracy"
-    },
-    "2025-11-18T10:05:46.870260": {
-        "iterations": 3,
-        "sample_size": 300,
-        "notes": "Switched from ratio > token_set_ratio for pipe-separated field values",
-        "countries": {
-            "success_rate": 0.999,
-            "avg_time_ms": 0.225,
-            "avg_hit_score": 0.849
-        },
-        "subdivisions": {
-            "success_rate": 0.988,
-            "avg_time_ms": 28.132,
-            "avg_hit_score": 0.859
-        },
-        "cities": {
-            "success_rate": 0.904,
-            "avg_time_ms": 82.342,
-            "avg_hit_score": 0.881
-        },
-        "report": "Brutally destructive on performance, need to test on alt_names fields for a more focused approach"
-    },
-    "2025-11-18T11:04:23.589847": {
-        "iterations": 3,
-        "sample_size": 300,
-        "notes": "",
-        "countries": {
-            "success_rate": 1.0,
-            "avg_time_ms": 0.355,
-            "avg_hit_score": 0.851
-        },
-        "subdivisions": {
-            "success_rate": 0.992,
-            "avg_time_ms": 31.286,
+            "success_rate": 0.546,
+            "avg_time_ms": 10.334,
             "avg_hit_score": 0.857
         },
+        "report": "Decent accuracy with countries and subdivisions, cities needs work. performance is amazing."
+    },
+    "2025-11-30T00:10:05.819215": {
+        "iterations": 3,
+        "sample_size": 300,
+        "notes": "lowered noise threshold to see if good candidates were being filtered out",
+        "countries": {
+            "success_rate": 0.858,
+            "avg_time_ms": 0.027,
+            "avg_hit_score": 0.764
+        },
+        "subdivisions": {
+            "success_rate": 0.821,
+            "avg_time_ms": 4.891,
+            "avg_hit_score": 0.919
+        },
         "cities": {
-            "success_rate": 0.918,
-            "avg_time_ms": 77.87,
+            "success_rate": 0.328,
+            "avg_time_ms": 11.802,
+            "avg_hit_score": 0.839
+        },
+        "report": "Opposite effect"
+    },
+    "2025-11-30T00:11:17.644412": {
+        "iterations": 3,
+        "sample_size": 300,
+        "notes": "Bring noise threshold up to .75",
+        "countries": {
+            "success_rate": 0.854,
+            "avg_time_ms": 0.031,
+            "avg_hit_score": 0.888
+        },
+        "subdivisions": {
+            "success_rate": 0.821,
+            "avg_time_ms": 3.462,
+            "avg_hit_score": 0.921
+        },
+        "cities": {
+            "success_rate": 0.574,
+            "avg_time_ms": 9.909,
+            "avg_hit_score": 0.885
+        },
+        "report": "overall improvement"
+    },
+    "2025-11-30T00:12:39.981089": {
+        "iterations": 3,
+        "sample_size": 300,
+        "notes": "Loosed the noose on search result limits. Was 15, but cities is ordered by population so it may have truncated the actual result",
+        "countries": {
+            "success_rate": 0.854,
+            "avg_time_ms": 0.028,
+            "avg_hit_score": 0.888
+        },
+        "subdivisions": {
+            "success_rate": 0.823,
+            "avg_time_ms": 3.513,
+            "avg_hit_score": 0.921
+        },
+        "cities": {
+            "success_rate": 0.589,
+            "avg_time_ms": 9.95,
+            "avg_hit_score": 0.885
+        },
+        "report": "Minor improvement, clearly some were being truncated, but more work needed for accuracy"
+    },
+    "2025-11-30T00:15:34.854938": {
+        "iterations": 3,
+        "sample_size": 300,
+        "notes": "Attempting to try Wratio instead of token_set_ratio, expecting much lower results",
+        "countries": {
+            "success_rate": 0.857,
+            "avg_time_ms": 0.048,
+            "avg_hit_score": 0.87
+        },
+        "subdivisions": {
+            "success_rate": 0.826,
+            "avg_time_ms": 9.05,
+            "avg_hit_score": 0.921
+        },
+        "cities": {
+            "success_rate": 0.6,
+            "avg_time_ms": 23.262,
             "avg_hit_score": 0.881
         },
-        "report": "Removed break in score_candidates (base), removed early exit for new matches"
+        "report": "Accuracy improved, but search time doubled"
     },
-    "2025-11-18T14:48:50.149311": {
+    "2025-11-30T00:21:11.121866": {
         "iterations": 3,
         "sample_size": 300,
-        "notes": "",
+        "notes": "Tweaking intersection threshold for early candidate exit",
         "countries": {
-            "success_rate": 0.996,
-            "avg_time_ms": 0.275,
-            "avg_hit_score": 0.843
+            "success_rate": 0.857,
+            "avg_time_ms": 0.046,
+            "avg_hit_score": 0.87
         },
         "subdivisions": {
-            "success_rate": 0.936,
-            "avg_time_ms": 30.504,
-            "avg_hit_score": 0.846
+            "success_rate": 0.826,
+            "avg_time_ms": 9.182,
+            "avg_hit_score": 0.921
         },
         "cities": {
-            "success_rate": 0.794,
-            "avg_time_ms": 99.243,
-            "avg_hit_score": 0.85
+            "success_rate": 0.601,
+            "avg_time_ms": 30.923,
+            "avg_hit_score": 0.881
         },
-        "report": "Added additional searches to inner loop for alt_names if they exist on the subject, randomly selecting 1, mangling and searching. 10% hit to success rate, but we also bumped the noise threshold up to 60%."
+        "report": "nuked performance"
     },
-    "2025-11-18T15:34:52.201054": {
+    "2025-11-30T00:22:35.071591": {
         "iterations": 3,
         "sample_size": 300,
-        "notes": "lowered noise threshold to 0.5",
+        "notes": "reset candidate threshold, running a two-pass candidate reduction",
         "countries": {
-            "success_rate": 0.992,
-            "avg_time_ms": 0.292,
-            "avg_hit_score": 0.81
+            "success_rate": 0.558,
+            "avg_time_ms": 0.029,
+            "avg_hit_score": 0.878
         },
         "subdivisions": {
-            "success_rate": 0.912,
-            "avg_time_ms": 35.371,
+            "success_rate": 0.111,
+            "avg_time_ms": 0.717,
+            "avg_hit_score": 0.923
+        },
+        "cities": {
+            "success_rate": 0.401,
+            "avg_time_ms": 4.749,
+            "avg_hit_score": 0.891
+        },
+        "report": "ope"
+    },
+    "2025-11-30T00:26:03.548562": {
+        "iterations": 3,
+        "sample_size": 300,
+        "notes": "testing dynamic intersection bailout threshold",
+        "countries": {
+            "success_rate": 0.857,
+            "avg_time_ms": 0.056,
+            "avg_hit_score": 0.87
+        },
+        "subdivisions": {
+            "success_rate": 0.826,
+            "avg_time_ms": 7.779,
+            "avg_hit_score": 0.921
+        },
+        "cities": {
+            "success_rate": 0.6,
+            "avg_time_ms": 19.094,
+            "avg_hit_score": 0.881
+        },
+        "report": "Effective, slight performance boost, accuracy unchanged"
+    },
+    "2025-11-30T08:49:11.557458": {
+        "iterations": 3,
+        "sample_size": 300,
+        "notes": "Impl field weighting, always keep 1st two sets of candidates to prevent removing strong candidates with early typos in query",
+        "countries": {
+            "success_rate": 0.857,
+            "avg_time_ms": 0.064,
+            "avg_hit_score": 0.87
+        },
+        "subdivisions": {
+            "success_rate": 0.836,
+            "avg_time_ms": 7.37,
+            "avg_hit_score": 0.921
+        },
+        "cities": {
+            "success_rate": 0.611,
+            "avg_time_ms": 56.921,
+            "avg_hit_score": 0.883
+        },
+        "report": "Insignificant improvement in accuracy, nuked performance"
+    },
+    "2025-11-30T08:55:14.235136": {
+        "iterations": 3,
+        "sample_size": 300,
+        "notes": "Readjusted noise threshold to 0.6",
+        "countries": {
+            "success_rate": 0.858,
+            "avg_time_ms": 0.041,
             "avg_hit_score": 0.831
         },
-        "cities": {
-            "success_rate": 0.773,
-            "avg_time_ms": 127.336,
-            "avg_hit_score": 0.829
+        "subdivisions": {
+            "success_rate": 0.836,
+            "avg_time_ms": 5.031,
+            "avg_hit_score": 0.92
         },
-        "report": ""
+        "cities": {
+            "success_rate": 0.71,
+            "avg_time_ms": 36.028,
+            "avg_hit_score": 0.851
+        },
+        "report": "10% boost to accuracy, while maintaining performance"
     },
-    "2025-11-19T22:10:15.476536": {
-        "iterations": 1,
+    "2025-11-30T10:54:26.209664": {
+        "iterations": 3,
         "sample_size": 300,
-        "notes": "Discovered search main loop was executing 1 superfluous final iteration, doubling the slowest one.",
+        "notes": "Fine tune maximum top_k candidates to balance accuracy w speed. Max=1000",
         "countries": {
-            "success_rate": 0.995,
-            "avg_time_ms": 0.257,
-            "avg_hit_score": 0.866
+            "success_rate": 0.938,
+            "avg_time_ms": 0.078,
+            "avg_hit_score": 0.837
         },
         "subdivisions": {
-            "success_rate": 0.963,
-            "avg_time_ms": 13.445,
-            "avg_hit_score": 0.844
+            "success_rate": 0.996,
+            "avg_time_ms": 11.51,
+            "avg_hit_score": 0.919
         },
         "cities": {
-            "success_rate": 0.896,
-            "avg_time_ms": 48.771,
-            "avg_hit_score": 0.86
+            "success_rate": 0.869,
+            "avg_time_ms": 13.242,
+            "avg_hit_score": 0.846
         },
-        "report": "Maintained accuracy and improved performance."
+        "report": "Near optimal accuracy for cities (max: 88%). LIGHTNING FAST."
+    },
+    "2025-11-30T12:04:39.160812": {
+        "iterations": 3,
+        "sample_size": 300,
+        "notes": "Added very minor, gradient penalty to missed fields during scoring to improve ranking for multi-field hits.",
+        "countries": {
+            "success_rate": 0.936,
+            "avg_time_ms": 0.112,
+            "avg_hit_score": 0.753
+        },
+        "subdivisions": {
+            "success_rate": 0.994,
+            "avg_time_ms": 9.44,
+            "avg_hit_score": 0.714
+        },
+        "cities": {
+            "success_rate": 0.889,
+            "avg_time_ms": 15.453,
+            "avg_hit_score": 0.766
+        },
+        "report": "Maintained overall accuracy, improved ranking at the cost of a small performance hit."
+    },
+    "2025-11-30T12:19:03.088334": {
+        "iterations": 3,
+        "sample_size": 10000,
+        "notes": "Larger benchmark test",
+        "countries": {
+            "success_rate": 0.936,
+            "avg_time_ms": 0.121,
+            "avg_hit_score": 0.753
+        },
+        "subdivisions": {
+            "success_rate": 0.866,
+            "avg_time_ms": 6.635,
+            "avg_hit_score": 0.708
+        },
+        "cities": {
+            "success_rate": 0.892,
+            "avg_time_ms": 16.957,
+            "avg_hit_score": 0.751
+        },
+        "report": "Massive 13% drop in subdivisions, everything else remained the same"
+    },
+    "2025-11-30T12:43:14.712217": {
+        "iterations": 1,
+        "sample_size": 10000,
+        "notes": "",
+        "countries": {
+            "success_rate": 0.928,
+            "avg_time_ms": 0.114,
+            "avg_hit_score": 0.76
+        },
+        "subdivisions": {
+            "success_rate": 0.957,
+            "avg_time_ms": 7.102,
+            "avg_hit_score": 0.722
+        },
+        "cities": {
+            "success_rate": 0.898,
+            "avg_time_ms": 17.965,
+            "avg_hit_score": 0.748
+        },
+        "report": "Lowered NOISE_THRESHOLD to 0.5. Slightly longer search times, but accuracy maintained."
     }
 }

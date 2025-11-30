@@ -66,9 +66,11 @@ class CityRegistry(Registry[CityModel]):
         #     results.sort()
         return results
 
-    def search(self, query, limit=None):
-        results = super().search(query=query, limit=None)
-        results.sort(key=lambda x: x[0].population, reverse=True)
+    def search(self, query, limit=None, population_sort: bool = False, **kwargs):
+        """Search cities by name, subdivision, or country. Can optionally sort by population, which is great for autocompletes."""
+        results = super().search(query=query, limit=None, **kwargs)
+        if population_sort:
+            results.sort(key=lambda x: x[0].population, reverse=True)
         return results[:limit]
 
 

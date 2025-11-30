@@ -119,7 +119,7 @@ class Registry(Generic[T], ABC):
     def load_searches(self):
         self._search_index = SearchEngine(self.cache)
 
-    def search(self, query: str, limit: int = None):
+    def search(self, query: str, limit: int = None, **kwargs) -> list[tuple[T, float]]:
         return self.search_index.search(query=query, limit=limit)
 
 

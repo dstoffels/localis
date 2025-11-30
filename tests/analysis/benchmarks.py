@@ -8,7 +8,7 @@ from tests.utils import mangle
 import random
 
 ITERATIONS = 1
-SAMPLE_SIZE = 300
+SAMPLE_SIZE = 10000
 
 
 def benchmark():
@@ -40,7 +40,7 @@ def benchmark():
             seed = hash((entry.id, i))
             mangled_q = mangle(q, seed=seed)
             start = time.perf_counter()
-            search_results = registry.search(mangled_q, limit=15)
+            search_results = registry.search(mangled_q)
             end = time.perf_counter()
             elapsed = (end - start) * 1000
 
@@ -60,12 +60,15 @@ def benchmark():
 
         # BEGIN SEARCHES
         for i in range(ITERATIONS):
-            print(f"Pass {i}")
+            print(f"Pass {i + 1}")
             for entry in entries[:SAMPLE_SIZE]:
-                search(entry.name)
-                if entry.alt_names:
-                    rand_alt_name = random.Random(42 + i).choice(entry.alt_names)
-                    search(rand_alt_name)
+                q = entry.name
+                if hasattr(entry, "admin1") and entry.admin1:
+                    q += f" {entry.admin1.name}"
+                search(q)
+                # if entry.aliases:
+                #     rand_alt_name = random.Random(42 + i).choice(entry.alt_names)
+                #     search(rand_alt_name)
 
         success_rate = num_hit / total_queries if total_queries else 0.0
         avg_hit_score = sum(top_scores) / num_hit
@@ -80,7 +83,7 @@ def benchmark():
 
 def write_file(results: dict):
 
-    file_path = "tests/search_benchmarks.json"
+    file_path = "tests/analysis/search_benchmarks.json"
     now_key = datetime.now().isoformat()
 
     # load existing data if file exists
