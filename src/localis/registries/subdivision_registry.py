@@ -1,12 +1,12 @@
-from localis.data import SubdivisionModel, Country
+from localis.data import SubdivisionModel
 from localis.registries import Registry, CountryRegistry
-import csv
 from localis.index import FilterIndex
-from sys import intern
+import csv
 
 
 class SubdivisionRegistry(Registry[SubdivisionModel]):
     DATAFILE = "subdivisions.tsv"
+    MODEL_CLS = SubdivisionModel
 
     def __init__(self, countries: CountryRegistry, **kwargs):
         self._countries = countries
@@ -14,7 +14,7 @@ class SubdivisionRegistry(Registry[SubdivisionModel]):
 
     def load(self):
         # need to sort the subdivision rows before parsing so the parent subdivisions are already cached when their children need to reference them.
-        self.cache = {}
+        self._cache = {}
         sub_groups: list[tuple[int, list[str]]] = []
 
         with open(self.DATA_PATH / self.DATAFILE, "r", encoding="utf-8") as f:
@@ -54,7 +54,7 @@ class SubdivisionRegistry(Registry[SubdivisionModel]):
 
         subdivision.search_tokens = search_tokens
 
-        self.cache[id] = subdivision
+        self._cache[id] = subdivision
 
     def load_lookups(self):
         self._lookup_index = {}
@@ -114,6 +114,11 @@ class SubdivisionRegistry(Registry[SubdivisionModel]):
 
         return super().filter(name=name, **kwargs)
 
+
+# singleton
+from localis.registries.country_registry import countries
+
+subdivisions = SubdivisionRegistry(countries=countries)
 
 # class SubdivisionRegistry(Registry[SubdivisionModel, Subdivision]):
 #     """

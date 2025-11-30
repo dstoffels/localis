@@ -3,7 +3,7 @@ from localis.data import Model
 from abc import ABC, abstractmethod
 from pathlib import Path
 import csv
-from localis.index import Index, NgramIndex, FilterIndex, SearchEngine
+from localis.index import Index, FilterIndex, SearchEngine
 from functools import wraps
 
 
@@ -29,30 +29,31 @@ T = TypeVar("Model", bound=Model)
 class Registry(Generic[T], ABC):
     """"""
 
-    AUTOLOAD = True
     DATA_PATH = Path(__file__).parent.parent / "data" / "fixtures"
     DATAFILE: str = ""
-
-    # These field lists must be overridden in subclasses for any methods to work.
-    LOOKUP_FIELDS: tuple[str] = tuple()
-    FILTER_ARGS: tuple[str] = tuple()
-    SEARCH_FIELDS: tuple[str] = tuple()
+    MODEL_CLS: type[Model] = None
 
     def __init__(self, **kwargs):
-
-        self.cache: dict[int, T] = None  # id-model map
+        self._cache: dict[int, T] = None  # id-model map
         self._lookup_index: dict[str | int, dict] = None
         self._filter_index: FilterIndex = None
         self._search_index: SearchEngine = None
 
-        if self.AUTOLOAD:
+    @property
+    def count(self) -> int:
+        return len(self.cache)
+
+    @property
+    def cache(self):
+        if self._cache is None:
             self.load()
+        return self._cache
 
     def load(self) -> None:
-        self.cache = {}
+        self._cache = {}
         with open(self.DATA_PATH / self.DATAFILE, "r", encoding="utf-8") as f:
             reader = csv.reader(f, delimiter="\t")
-            headers = next(reader)
+            next(reader)
 
             for id, row in enumerate(reader, 1):
                 self._parse_row(id, row)

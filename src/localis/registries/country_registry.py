@@ -1,11 +1,11 @@
 from localis.data import CountryModel
 from localis.registries import Registry
 from localis.index import FilterIndex
-from sys import intern
 
 
 class CountryRegistry(Registry[CountryModel]):
     DATAFILE = "countries.tsv"
+    MODEL_CLS = CountryModel
 
     def _parse_row(self, id: int, row: list[str]):
         if id == 0:
@@ -26,7 +26,7 @@ class CountryRegistry(Registry[CountryModel]):
 
         country.search_tokens = search_tokens
 
-        self.cache[id] = country
+        self._cache[id] = country
 
     def load_lookups(self):
         self._lookup_index = {}
@@ -63,6 +63,8 @@ class CountryRegistry(Registry[CountryModel]):
     def filter(self, *, name=None, **kwargs):
         return super().filter(name=name, **kwargs)
 
+
+countries = CountryRegistry()
 
 # class CountryRegistry(Registry[CountryModel, Country]):
 #     """

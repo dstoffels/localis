@@ -1,4 +1,4 @@
-from localis.data import Subdivision, Country, CityModel
+from localis.data import CityModel
 from localis.registries import Registry, CountryRegistry, SubdivisionRegistry
 from localis.index.filter_index import FilterIndex
 from collections import defaultdict
@@ -6,6 +6,7 @@ from collections import defaultdict
 
 class CityRegistry(Registry[CityModel]):
     DATAFILE = "cities.tsv"
+    MODEL_CLS = CityModel
 
     def __init__(
         self, countries: CountryRegistry, subdivisions: SubdivisionRegistry, **kwargs
@@ -33,7 +34,7 @@ class CityRegistry(Registry[CityModel]):
             lng=float(lng),
         )
         city.search_tokens = search_tokens
-        self.cache[id] = city
+        self._cache[id] = city
 
     def load_filters(self):
         self._filter_index = FilterIndex()
@@ -93,6 +94,12 @@ class CityRegistry(Registry[CityModel]):
         results.sort(key=lambda x: x[0].population, reverse=True)
         return results[:limit]
 
+
+from localis.registries.country_registry import countries
+from localis.registries.subdivision_registry import subdivisions
+
+# singleton
+cities: CityRegistry = CityRegistry(countries=countries, subdivisions=subdivisions)
 
 #     ID_FIELDS = ("id", "geonames_id")
 
