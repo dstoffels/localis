@@ -36,6 +36,10 @@ class CityRegistry(Registry[CityModel]):
         city.search_tokens = search_tokens
         self._cache[id] = city
 
+    def get(self, identifier) -> CityModel | None:
+        """Get a city by its id"""
+        return super().get(identifier)
+
     def load_filters(self):
         self._filter_index = FilterIndex()
 
@@ -95,11 +99,12 @@ class CityRegistry(Registry[CityModel]):
         return results[:limit]
 
 
+# ----------- SINGLETON ----------- #
 from localis.registries.country_registry import countries
 from localis.registries.subdivision_registry import subdivisions
 
-# singleton
 cities: CityRegistry = CityRegistry(countries=countries, subdivisions=subdivisions)
+
 
 #     ID_FIELDS = ("id", "geonames_id")
 

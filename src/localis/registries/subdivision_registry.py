@@ -56,23 +56,9 @@ class SubdivisionRegistry(Registry[SubdivisionModel]):
 
         self._cache[id] = subdivision
 
-    def load_lookups(self):
-        self._lookup_index = {}
-        for sub in self.cache.values():
-            if sub.geonames_code:
-                self._lookup_index[sub.geonames_code] = sub
-
-            if sub.iso_code:
-                self._lookup_index[sub.iso_code] = sub
-
-    def get(
-        self, *, id=None, geonames_code: str = None, iso_code: str = None, **kwargs
-    ):
-        kwargs = {
-            "geonames_code": geonames_code,
-            "iso_code": iso_code,
-        }
-        return super().get(id=id, **kwargs)
+    def get(self, identifier):
+        """Get a subdivision by its id, iso_code, or geonames_code."""
+        return super().get(identifier)
 
     def load_filters(self):
         self._filter_index = FilterIndex()

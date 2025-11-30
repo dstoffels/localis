@@ -4,24 +4,6 @@ from abc import ABC, abstractmethod
 from pathlib import Path
 import csv
 from localis.index import FilterIndex, SearchEngine, LookupIndex
-from functools import wraps
-
-
-def is_loaded(cache_attr: str = "_cache", callback_attr: str = "load"):
-    def decorator(func):
-        @wraps(func)
-        def wrapper(self, *args, **kwargs):
-            cache = getattr(self, cache_attr)
-            if cache == None:
-                callback = getattr(self, callback_attr)
-                callback()
-
-            return func(self, *args, **kwargs)
-
-        return wrapper
-
-    return decorator
-
 
 T = TypeVar("Model", bound=Model)
 
@@ -43,11 +25,30 @@ class Registry(Generic[T], ABC):
     def count(self) -> int:
         return len(self.cache)
 
+    # ----------- LAZY LOADERS ----------- #
     @property
     def cache(self):
         if self._cache is None:
             self.load()
         return self._cache
+
+    @property
+    def lookup_index(self):
+        if self._lookup_index is None:
+            self.load_lookups()
+        return self._lookup_index
+
+    @property
+    def filter_index(self):
+        if self._filter_index is None:
+            self.load_filters()
+        return self._filter_index
+
+    @property
+    def search_index(self):
+        if self._search_index is None:
+            self.load_searches()
+        return self._search_index
 
     def load(self) -> None:
         self._cache = {}
@@ -77,18 +78,16 @@ class Registry(Generic[T], ABC):
     def load_lookups(self):
         self._lookup_index = LookupIndex(self.cache, self.MODEL_CLS.LOOKUP_FIELDS)
 
-    @is_loaded("_lookup_index", "load_lookups")
     def get(self, identifier: str | int) -> T:
         """Fetches a single item by one of its unique identifiers. Raises a ValueError if multiple kwargs are assigned."""
 
-        return self._lookup_index.get(identifier)
+        return self.lookup_index.get(identifier)
 
     # ----------- FILTER ----------- #
 
     def load_filters(self):
         self._filter_index = FilterIndex(self.cache, self.MODEL_CLS.FILTER_FIELDS)
 
-    @is_loaded("_filter_index", "load_filters")
     def filter(self, *, name: str = None, **kwargs) -> list[T]:
         """Filter by exact matches on specified fields with AND logic when filtering by multiple fields. Case insensitive."""
         kwargs["name"] = name
@@ -119,9 +118,8 @@ class Registry(Generic[T], ABC):
     def load_searches(self):
         self._search_index = SearchEngine(self.cache)
 
-    @is_loaded("_search_index", "load_searches")
     def search(self, query: str, limit: int = None):
-        return self._search_index.search(query=query, limit=limit)
+        return self.search_index.search(query=query, limit=limit)
 
 
 # from typing import Type
