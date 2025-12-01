@@ -52,16 +52,23 @@ class Registry(Generic[T], ABC):
 
     def load(self) -> None:
         self._cache = {}
-        with open(self.DATA_PATH / self.DATAFILE, "r", encoding="utf-8") as f:
-            reader = csv.reader(f, delimiter="\t")
-            next(reader)
+        filepath = self.DATA_PATH / self.DATAFILE
+        if not filepath.exists():
+            raise FileNotFoundError(f"Data file not found: {filepath}")
 
-            for id, row in enumerate(reader, 1):
-                self._parse_row(id, row)
+        try:
+            with open(filepath, "r", encoding="utf-8") as f:
+                reader = csv.reader(f, delimiter="\t")
+                next(reader)
+
+                for id, row in enumerate(reader, 1):
+                    self._parse_row(id, row)
+        except Exception as e:
+            raise RuntimeError(f"Failed to load data file: {filepath}") from e
 
     @abstractmethod
     def _parse_row(self, id: int, row: dict):
-        pass
+        raise NotImplementedError("_parse_row must be implemented in subclass")
 
     def __iter__(self) -> Iterator[T]:
         return iter(self.cache.values())
@@ -121,73 +128,3 @@ class Registry(Generic[T], ABC):
 
     def search(self, query: str, limit: int = None, **kwargs) -> list[tuple[T, float]]:
         return self.search_index.search(query=query, limit=limit)
-
-
-# from typing import Type
-# from localis.data import DTO, Model
-# from localis.data.models.fields import Expression
-# from localis.search import FuzzySearch
-
-# TModel = TypeVar("TModel", bound=Model)
-
-
-# class Registry(Generic[TModel, TDTO], ABC):
-#     """Abstract base registry class defining interface for lookup and search."""
-
-#     ID_FIELDS: tuple[str] = ()
-
-#     SEARCH_FIELD_WEIGHTS: dict[str, float] = {}
-#     SEARCH_ORDER_FIELDS: list[str] = []
-#     """Override to provide the fields for search scoring."""
-
-#     def __init__(self, model_cls: Type[TModel]):
-#         self._model_cls: Type[TModel] = model_cls
-#         self._count: int | None = None
-#         self._cache: list[TDTO] = None
-#         self._order_by: str = ""
-#         self._addl_search_attrs: list[str] = []
-
-
-#     @property
-#     def count(self) -> int:
-#         return self.__len__()
-
-#     def get(self, *, id: int | None = None, **kwargs) -> TDTO | None:
-#         return None
-
-#     def filter(
-#         self, query: str = None, name: str = None, limit: int = None, **kwargs
-#     ) -> list[TDTO]:
-#         if name:
-#             kwargs["name"] = name
-#         if kwargs:
-#             results = self._model_cls.fts_match(
-#                 field_queries=kwargs, order_by=["rank"], limit=limit
-#             )
-#         elif query:
-#             results = self._model_cls.fts_match(query, order_by=["rank"], limit=limit)
-#         else:
-#             return []
-#         return [r.to_dto() for r in results]
-
-#     def search(self, query: str, limit=None, **kwargs) -> list[tuple[TDTO, float]]:
-#         if not query:
-#             return []
-
-#         search = FuzzySearch(
-#             query,
-#             self._model_cls,
-#             self.SEARCH_FIELD_WEIGHTS,
-#             self.SEARCH_ORDER_FIELDS,
-#             limit,
-#         )
-
-#         return search.run()
-
-#     def _sort_matches(self, matches: list, limit: int) -> list[TDTO]:
-#         return [
-#             (row_data.dto, score)
-#             for row_data, score in sorted(matches, key=lambda r: r[1], reverse=True)[
-#                 :limit
-#             ]
-#         ]
