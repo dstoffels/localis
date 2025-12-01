@@ -2,6 +2,7 @@ from dataclasses import dataclass, field
 import hashlib
 from pathlib import Path
 from localis.utils import normalize, generate_trigrams
+import itertools
 
 BASE_PATH = Path(__file__).parent
 FIXTURE_PATH = BASE_PATH.parent / "src" / "localis" / "data" / "fixtures"
@@ -15,7 +16,7 @@ class CountryData:
     id: str
     name: str
     official_name: str
-    alt_names: list[str]
+    alt_names: list[str] | str
     alpha2: str
     alpha3: str
     numeric: int
@@ -26,7 +27,13 @@ class CountryData:
         # final dedupe before dump
         self.alt_names = "|".join(set(self.alt_names) - {self.name, self.official_name})
 
-        self.search_tokens = "|".join(set(generate_trigrams(normalize(self.name))))
+        all_trigrams = itertools.chain(
+            generate_trigrams(self.name),
+            *(generate_trigrams(n) for n in self.alt_names.split("|") if n),
+            [self.alpha2, self.alpha3],
+        )
+
+        self.search_tokens = "|".join(set(normalize(t) for t in all_trigrams))
 
         data = self.__dict__
         data.pop("id")

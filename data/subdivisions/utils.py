@@ -6,6 +6,7 @@ from data.utils import (
     normalize,
 )
 import csv
+import itertools
 
 
 class SubdivisionMap:
@@ -78,7 +79,13 @@ class SubdivisionMap:
         for sub in all_subs:
             sub.id = id_map[sub.id]
             sub.parent_id = id_map.get(sub.parent_id)
-            sub.search_tokens = "|".join(set(generate_trigrams(normalize(sub.name))))
+            all_trigrams = itertools.chain(
+                generate_trigrams(sub.name),
+                *(generate_trigrams(n) for n in sub.alt_names if n),
+                [sub.iso_code.split("-")[1] if sub.iso_code else ""],
+            )
+
+            sub.search_tokens = "|".join(set(normalize(t) for t in all_trigrams))
 
         return all_subs
 
