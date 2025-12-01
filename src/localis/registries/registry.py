@@ -47,7 +47,7 @@ class Registry(Generic[T], ABC):
     @property
     def search_index(self):
         if self._search_index is None:
-            self.load_searches()
+            self.load_search_index()
         return self._search_index
 
     def load(self) -> None:
@@ -123,7 +123,7 @@ class Registry(Generic[T], ABC):
         return results_list[:limit]
 
     # ----------- SEARCH ----------- #
-    def load_searches(self):
+    def load_search_index(self):
         self._search_index = SearchEngine(self.cache)
 
     def search(self, query: str, limit: int = None, **kwargs) -> list[tuple[T, float]]:

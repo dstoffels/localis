@@ -93,7 +93,7 @@ class SubdivisionRegistry(Registry[SubdivisionModel]):
 
         return super().filter(name=name, limit=limit, **kwargs)
 
-    def load_searches(self):
+    def load_search_index(self):
         self._search_index = SearchEngine(
             cache=self.cache, noise_threshold=0.5, penality_factor=0.1
         )
