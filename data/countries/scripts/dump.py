@@ -1,8 +1,21 @@
 from data.utils import *
 import csv
+import json
+from collections import defaultdict
+import gzip
 
 
-def dump_to_tsv(countries: dict[str, CountryData]):
+def dump(countries: dict[str, CountryData]):
+    # Dump country search index
+    with gzip.open(
+        FIXTURE_PATH / "country_search_index.json.gz", "wt", compresslevel=9
+    ) as f:
+        search_index = defaultdict(list)
+        for c in countries.values():
+            for trigram in c.extract_trigrams():
+                search_index[trigram].append(c.id)
+        json.dump(search_index, f, ensure_ascii=False, indent=2, separators=(",", ": "))
+
     headers = (
         "name",
         "official_name",
@@ -11,9 +24,9 @@ def dump_to_tsv(countries: dict[str, CountryData]):
         "alpha3",
         "numeric",
         "flag",
-        "search_tokens",
     )
 
+    # Dump country data file
     with open(
         FIXTURE_PATH / "countries.tsv",
         "w",

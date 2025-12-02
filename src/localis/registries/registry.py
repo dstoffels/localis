@@ -13,13 +13,13 @@ class Registry(Generic[T], ABC):
 
     DATA_PATH = Path(__file__).parent.parent / "data" / "fixtures"
     DATAFILE: str = ""
-    MODEL_CLS: Model = None
+    MODEL_CLS: type[Model]
 
     def __init__(self, **kwargs):
-        self._cache: dict[int, T] = None  # id-model map
-        self._lookup_index: dict[str | int, dict] = None
-        self._filter_index: FilterIndex = None
-        self._search_index: SearchEngine = None
+        self._cache: dict[int, T] | None = None  # id-model map
+        self._lookup_index: dict[str | int, dict] | None = None
+        self._filter_index: FilterIndex | None = None
+        self._search_index: SearchEngine | None = None
 
     @property
     def count(self) -> int:
@@ -27,7 +27,7 @@ class Registry(Generic[T], ABC):
 
     # ----------- LAZY LOADERS ----------- #
     @property
-    def cache(self):
+    def cache(self) -> dict[int, T]:
         if self._cache is None:
             self.load()
         return self._cache

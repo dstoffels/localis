@@ -21,19 +21,19 @@ class CountryData:
     alpha3: str
     numeric: int
     flag: str
-    search_tokens: str = ""
+    # search_tokens: str = ""
 
-    def dump(self):
-        # final dedupe before dump
-        self.alt_names = "|".join(set(self.alt_names) - {self.name, self.official_name})
-
+    def extract_trigrams(self) -> set[str]:
         all_trigrams = itertools.chain(
             generate_trigrams(self.name),
-            *(generate_trigrams(n) for n in self.alt_names.split("|") if n),
+            *(generate_trigrams(n) for n in self.alt_names if n),
             [self.alpha2, self.alpha3],
         )
+        return set(normalize(t) for t in all_trigrams)
 
-        self.search_tokens = "|".join(set(normalize(t) for t in all_trigrams))
+    def dump(self):
+        """This is the final step before writing to tsv; prepare the data row"""
+        self.alt_names = "|".join(set(self.alt_names) - {self.name, self.official_name})
 
         data = self.__dict__
         data.pop("id")
@@ -75,6 +75,14 @@ class SubdivisionData:
 
     def concat(self) -> str:
         return "|".join([self.name, self.geonames_code, self.iso_code])
+
+    def extract_trigrams(self) -> set[str]:
+        all_trigrams = itertools.chain(
+            generate_trigrams(self.name),
+            *(generate_trigrams(n) for n in self.alt_names if n),
+            [self.iso_code.split("-")[1] if self.iso_code else ""],
+        )
+        return set(normalize(t) for t in all_trigrams)
 
 
 @dataclass

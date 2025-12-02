@@ -1,7 +1,20 @@
 from ..utils import *
+import gzip
+import json
+from collections import defaultdict
 
 
 def dump_to_tsv(sub_map: SubdivisionMap):
+    subdivisions = sub_map.get_final()
+
+    with gzip.open(
+        FIXTURE_PATH / "subdivisions_search_index.gz", "wt", compresslevel=9
+    ) as f:
+        search_index = defaultdict(list)
+        for sub in subdivisions:
+            for trigram in sub.extract_trigrams():
+                search_index[trigram].append(sub.iso_code)
+
     HEADERS = (
         "name",
         "alt_names",
@@ -10,7 +23,6 @@ def dump_to_tsv(sub_map: SubdivisionMap):
         "type",
         "parent_id",
         "country_id",
-        "search_tokens",
     )
 
     with open(
@@ -31,6 +43,5 @@ def dump_to_tsv(sub_map: SubdivisionMap):
                     "type": sub.type,
                     "parent_id": sub.parent_id,
                     "country_id": sub.country_id,
-                    "search_tokens": sub.search_tokens,
                 }
             )
