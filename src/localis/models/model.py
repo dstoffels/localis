@@ -28,36 +28,22 @@ class DTO:
 
 
 class Model(DTO):
-    LOOKUP_FIELDS: tuple[str] = ()
-
-    FILTER_FIELDS: dict[str, tuple[str]] = defaultdict(tuple)
-    """Fields that can be used for filtering. Key is the filter name, value is a tuple of field names to search on."""
-
-    SEARCH_FIELDS: dict[str, float] = {}
-    """Fields that are used to identify the obj when searching. Key is the field name (can be nested fields using dot notation), value is the weight for search relevance."""
-
-    search_tokens: str = ""
-
     @property
     def dto(self) -> DTO:
         return extract_base(self)
 
-    def extract_search_trigrams(self):
-        """Used in processing to produce a normalized, trigram search index for each model from its SEARCH_FIELDS keys."""
-        for field in self.SEARCH_FIELDS.keys():
-            obj = self
-            for nested in field.split("."):
-                value: str | list[str] = getattr(obj, nested)
-                if value is None:
-                    break
-                obj = value
+    LOOKUP_FIELDS: tuple[str] = ()
 
-            if isinstance(value, list):
-                for v in value:
-                    yield from generate_trigrams(normalize(v))
+    def extract_lookup_values(self):
+        """Used in processing to produce a normalized lookup index for each model from its LOOKUP_FIELDS."""
 
-            elif value is not None:
-                yield from generate_trigrams(normalize(value))
+        for field in self.LOOKUP_FIELDS:
+            value: str = getattr(self, field)
+            if value:
+                yield normalize(value)
+
+    FILTER_FIELDS: dict[str, tuple[str]] = defaultdict(tuple)
+    """Fields that can be used for filtering. Key is the filter name, value is a tuple of field names to search on."""
 
     def extract_filter_values(self) -> dict[str, set[str]]:
         """Used in processing to produce a normalized filter index for each model from its FILTER_FIELDS."""
@@ -81,13 +67,25 @@ class Model(DTO):
 
         return filter_values
 
-    def extract_lookup_values(self):
-        """Used in processing to produce a normalized lookup index for each model from its LOOKUP_FIELDS."""
+    SEARCH_FIELDS: dict[str, float] = {}
+    """Fields that are used to identify the obj when searching. Key is the field name (can be nested fields using dot notation), value is the weight for search relevance."""
 
-        for field in self.LOOKUP_FIELDS:
-            value: str = getattr(self, field)
-            if value:
-                yield normalize(value)
+    def extract_search_trigrams(self):
+        """Used in processing to produce a normalized, trigram search index for each model from its SEARCH_FIELDS keys."""
+        for field in self.SEARCH_FIELDS.keys():
+            obj = self
+            for nested in field.split("."):
+                value: str | list[str] = getattr(obj, nested)
+                if value is None:
+                    break
+                obj = value
 
-    def to_row(self) -> list[str]:
-        return [*self.to_dict().values()]
+            if isinstance(value, list):
+                for v in value:
+                    yield from generate_trigrams(normalize(v))
+
+            elif value is not None:
+                yield from generate_trigrams(normalize(value))
+
+    def to_row(self) -> tuple[str | int | None]:
+        return tuple(self.to_dict().values())

@@ -58,11 +58,11 @@ class SubdivisionModel(Subdivision, Model):
         dto.country = self.country and extract_base(self.country, depth=2)
         return dto
 
-    def to_row(self):
+    def to_row(self) -> tuple[str | int | None]:
         data = self.to_dict()
         data["parent"] = self.parent.id if self.parent else None
         data["country"] = self.country.id
-        return [*data.values()]
+        return tuple(data.values())
 
     # deterministically hash a unique id to later map admin2 subdivisions to their parents and to manually map ISO subdivisions that cannot be automatically merged with its geonames counterpart. hashid is ONLY used internally for these purposes; once the subdvision data has been successfully merged, hashid is discarded.
     hashid: int = None

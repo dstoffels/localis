@@ -5,37 +5,38 @@ import csv
 
 
 class SubdivisionRegistry(Registry[SubdivisionModel]):
-    DATAFILE = "subdivisions.tsv"
+    DATA_PATH = Registry.DATA_PATH / "subdivisions"
+    DATAFILE = "subdivisions.json.gz"
     MODEL_CLS = SubdivisionModel
 
     def __init__(self, countries: CountryRegistry, **kwargs):
         self._countries = countries
         super().__init__(**kwargs)
 
-    def load(self):
-        self._cache = {}
-        sub_groups: list[tuple[int, list[str]]] = []
+    # def load(self):
+    #     self._cache = {}
+    #     sub_groups: list[tuple[int, list[str]]] = []
 
-        filepath = self.DATA_PATH / self.DATAFILE
-        if not filepath.exists():
-            raise FileNotFoundError(f"Data file not found: {filepath}")
+    #     filepath = self.DATA_PATH / self.DATAFILE
+    #     if not filepath.exists():
+    #         raise FileNotFoundError(f"Data file not found: {filepath}")
 
-        try:
-            with open(filepath, "r", encoding="utf-8") as f:
-                reader = csv.reader(f, delimiter="\t")
-                next(reader)
-                for id, row in enumerate(reader, 1):
-                    sub_groups.append((id, row))
-        except Exception as e:
-            raise RuntimeError(f"Error loading subdivisions data: {e}") from e
+    #     try:
+    #         with open(filepath, "r", encoding="utf-8") as f:
+    #             reader = csv.reader(f, delimiter="\t")
+    #             next(reader)
+    #             for id, row in enumerate(reader, 1):
+    #                 sub_groups.append((id, row))
+    #     except Exception as e:
+    #         raise RuntimeError(f"Error loading subdivisions data: {e}") from e
 
-        PARENT_ID_INDEX = 5
+    #     PARENT_ID_INDEX = 5
 
-        # We need to sort the subdivision rows by parent_id before parsing so the parent subdivisions are already cached when their children need to reference them.
-        sub_groups.sort(key=lambda r: r[1][PARENT_ID_INDEX])
+    #     # We need to sort the subdivision rows by parent_id before parsing so the parent subdivisions are already cached when their children need to reference them.
+    #     sub_groups.sort(key=lambda r: r[1][PARENT_ID_INDEX])
 
-        for id, row in sub_groups:
-            self._parse_row(id, row)
+    #     for id, row in sub_groups:
+    #         self._parse_row(id, row)
 
     def _parse_row(self, id: int, row: list[str]):
         (

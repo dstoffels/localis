@@ -2,6 +2,9 @@ import unicodedata
 import re
 from unidecode import unidecode
 
+ModelData = list[str | int | list[str]]
+"""Raw model data list"""
+
 
 def clean_row(row: dict[str, str]) -> dict[str, str | None]:
     """Clean and normalize all fields in a dict"""

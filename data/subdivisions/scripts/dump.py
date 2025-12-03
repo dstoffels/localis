@@ -6,14 +6,20 @@ SUBDIVISIONS_DATA_PATH = DATA_PATH / "subdivisions"
 
 def dump(sub_map: SubdivisionMap):
     subdivisions = sub_map.all()
+    print(f"Dumping {len(subdivisions)} subdivisions...")
+    dump_data(subdivisions, SUBDIVISIONS_DATA_PATH / "subdivisions.pkl.gz")
 
-    dump_data(subdivisions, SUBDIVISIONS_DATA_PATH / "subdivisions.json.gz")
+    print("Dumping subdivision lookup indexes...")
     dump_lookup_index(
-        subdivisions, SUBDIVISIONS_DATA_PATH / "subdivisions_lookup_index.json.gz"
+        subdivisions, SUBDIVISIONS_DATA_PATH / "subdivisions_lookup_index.pkl.gz"
     )
+
+    print("Dumping subdivision filter index...")
     dump_filter_index(
-        subdivisions, SUBDIVISIONS_DATA_PATH / "subdivisions_filter_index.json.gz"
+        subdivisions, SUBDIVISIONS_DATA_PATH / "subdivisions_filter_index.pkl.gz"
     )
+
+    print("Dumping subdivision search index...")
     dump_search_index(
-        subdivisions, SUBDIVISIONS_DATA_PATH / "subdivisions_search_index.json.gz"
+        subdivisions, SUBDIVISIONS_DATA_PATH / "subdivisions_search_index.pkl.gz"
     )

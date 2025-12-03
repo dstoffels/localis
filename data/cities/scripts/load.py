@@ -1,6 +1,7 @@
 from data.utils import CITIES_SRC_PATH
 from data.cities.scripts.utils import *
 from localis.models import SubdivisionModel, CountryModel, CityModel
+import csv
 
 HEADERS = [
     "geonameid",

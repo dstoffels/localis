@@ -52,12 +52,12 @@ class CityModel(City, Model):
         dto.country = self.country and extract_base(self.country, depth=2)
         return dto
 
-    def to_row(self) -> list:
+    def to_row(self) -> tuple[str | int | None]:
         data = self.to_dict()
         data["admin1"] = self.admin1.id if self.admin1 else None
         data["admin2"] = self.admin2.id if self.admin2 else None
         data["country"] = self.country.id if self.country else None
-        return [*data.values()]
+        return tuple(data.values())
 
     # _search_context: str | None = None
 

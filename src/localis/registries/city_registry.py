@@ -5,7 +5,8 @@ from collections import defaultdict
 
 
 class CityRegistry(Registry[CityModel]):
-    DATAFILE = "cities.tsv"
+    DATA_PATH = Registry.DATA_PATH / "cities"
+    DATAFILE = "cities.json.gz"
     MODEL_CLS = CityModel
 
     def __init__(
