@@ -64,6 +64,28 @@ class SubdivisionModel(Subdivision, Model):
         data["country"] = self.country.id
         return tuple(data.values())
 
+    @classmethod
+    def from_row(
+        cls, row, countries: dict[int, list], subdivisions: dict[int, list], **kwargs
+    ) -> Subdivision | None:
+        """Builds a model instance from a raw data tuple (row) and injects country and parent models passed in from respective caches. Returns the final DTO for the user."""
+        if not row:
+            return None
+
+        flat_model = cls(*row)
+
+        raw_country = countries.get(flat_model.country)
+        if raw_country:
+            flat_model.country = CountryModel.from_row(raw_country)
+
+        raw_parent = subdivisions.get(flat_model.parent)
+        if raw_parent:
+            flat_model.parent = SubdivisionModel.from_row(
+                raw_parent, countries=countries, subdivisions=subdivisions
+            )
+
+        return flat_model.dto
+
     # deterministically hash a unique id to later map admin2 subdivisions to their parents and to manually map ISO subdivisions that cannot be automatically merged with its geonames counterpart. hashid is ONLY used internally for these purposes; once the subdvision data has been successfully merged, hashid is discarded.
     hashid: int = None
 

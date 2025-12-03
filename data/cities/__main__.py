@@ -11,12 +11,8 @@ from localis.models import SubdivisionModel, CountryModel, CityModel
 
 
 def main():
-    countries: dict[str, CountryModel] = (
-        load_countries()
-    )  # map of country codes to CountryModel
-    subdivisions: dict[str, SubdivisionModel] = (
-        load_subdivisions()
-    )  # map of subdivision geonames codes to SubdivisionModel
+    countries: dict[str, CountryModel] = load_countries()
+    subdivisions: dict[str, SubdivisionModel] = load_subdivisions()
     cities: list[CityModel] = load_cities(
         subdivisions, countries
     )  # load and parse cities

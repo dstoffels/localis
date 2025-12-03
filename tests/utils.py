@@ -1,7 +1,7 @@
 import random
 import string
 from localis.registries import Registry
-from localis.data.model import DTO
+from localis.models import DTO
 
 
 alphabet = string.ascii_lowercase

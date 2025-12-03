@@ -5,7 +5,7 @@ from localis.indexes import FilterIndex
 
 class CountryRegistry(Registry[CountryModel]):
     REGISTRY_NAME = "countries"
-    MODEL_CLS = CountryModel
+    _MODEL_CLS = CountryModel
 
     def _parse_row(self, id: int, row: list[str]):
         if id == 0:
@@ -27,13 +27,13 @@ class CountryRegistry(Registry[CountryModel]):
         country.search_tokens = search_tokens
         self._cache[id] = country
 
-    def get(self, identifier: str | int) -> CountryModel | None:
+    def lookup(self, identifier: str | int) -> CountryModel | None:
         """Get a country by its alpha2, alpha3, numeric code, or id."""
-        return super().get(identifier)
+        return super().lookup(identifier)
 
     def load_filters(self):
         self._filter_index = FilterIndex(
-            cache=self.cache, filter_fields=self.MODEL_CLS.FILTER_FIELDS
+            cache=self.cache, filter_fields=self._MODEL_CLS.FILTER_FIELDS
         )
 
     def filter(

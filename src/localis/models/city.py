@@ -21,12 +21,16 @@ class CityModel(City, Model):
     FILTER_FIELDS = {
         "name": ("name",),
         "country": (
+            "country.name",
             "country.alpha2",
             "country.alpha3",
         ),
-        "subdvision": (
+        "subdivision": (
+            "admin1.name",
+            "admin1.iso_suffix",
             "admin1.iso_code",
             "admin1.geonames_code",
+            "admin2.name",
             "admin2.iso_code",
             "admin2.geonames_code",
         ),
@@ -47,9 +51,9 @@ class CityModel(City, Model):
     @property
     def dto(self) -> City:
         dto: City = extract_base(self, depth=1)
-        dto.admin1 = self.admin1 and extract_base(self.admin1, depth=2)
-        dto.admin2 = self.admin2 and extract_base(self.admin2, depth=2)
-        dto.country = self.country and extract_base(self.country, depth=2)
+        dto.admin1 = self.admin1 and extract_base(self.admin1)
+        dto.admin2 = self.admin2 and extract_base(self.admin2)
+        dto.country = self.country and extract_base(self.country)
         return dto
 
     def to_row(self) -> tuple[str | int | None]:
@@ -58,6 +62,38 @@ class CityModel(City, Model):
         data["admin2"] = self.admin2.id if self.admin2 else None
         data["country"] = self.country.id if self.country else None
         return tuple(data.values())
+
+    @classmethod
+    def from_row(
+        cls,
+        row: tuple[str | int | None],
+        countries: dict[int, list],
+        subdivisions: dict[int, list],
+        **kwargs,
+    ) -> DTO | None:
+        """Builds a CityModel instance from a raw data tuple (row) and injects country and subdivision models from their respective caches. Returns the final DTO for the user."""
+        if not row:
+            return None
+
+        flat_model: "CityModel" = cls(*row)
+
+        country_data = countries.get(flat_model.country)
+        if country_data:
+            flat_model.country = CountryModel.from_row(country_data)
+
+        admin1_data = subdivisions.get(flat_model.admin1)
+        if admin1_data:
+            flat_model.admin1 = SubdivisionModel.from_row(
+                admin1_data, countries=countries, subdivisions=subdivisions
+            )
+
+        admin2_data = subdivisions.get(flat_model.admin2)
+        if admin2_data:
+            flat_model.admin2 = SubdivisionModel.from_row(
+                admin2_data, countries=countries, subdivisions=subdivisions
+            )
+
+        return flat_model.dto
 
     # _search_context: str | None = None
 

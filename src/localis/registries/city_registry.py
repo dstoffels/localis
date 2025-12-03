@@ -6,7 +6,7 @@ from collections import defaultdict
 
 class CityRegistry(Registry[CityModel]):
     REGISTRY_NAME = "cities"
-    MODEL_CLS = CityModel
+    _MODEL_CLS = CityModel
 
     def __init__(
         self, countries: CountryRegistry, subdivisions: SubdivisionRegistry, **kwargs
@@ -15,35 +15,33 @@ class CityRegistry(Registry[CityModel]):
         self._subdivisions = subdivisions
         super().__init__(**kwargs)
 
-    def _parse_row(self, id: int, row: list[str]):
-        name, admin1_id, admin2_id, country_id, population, lat, lng, search_tokens = (
-            row
-        )
-        admin1 = self._subdivisions.cache.get(int(admin1_id)) if admin1_id else None
-        admin2 = self._subdivisions.cache.get(int(admin2_id)) if admin2_id else None
-        country = self._countries.cache.get(int(country_id)) if country_id else None
+    def _resolve_model(self, id: int) -> CityModel | None:
+        row = self.cache.get(id)
+        if not row:
+            return None
 
-        city = CityModel(
-            id=id,
-            name=name,
-            admin1=admin1,
-            admin2=admin2,
-            country=country,
-            population=int(population),
-            lat=float(lat),
-            lng=float(lng),
-        )
-        city.search_tokens = search_tokens
-        self._cache[id] = city
+        flat_model: CityModel = self._MODEL_CLS(*row)
 
-    def get(self, identifier) -> CityModel | None:
+        # Unresolved/flat models contain only IDs for dependencies from the row data.
+        # We need to resolve those dependencies into full DTOs.
+        flat_model.country = self._countries._resolve_model(flat_model.country)
+
+        if flat_model.admin1:
+            flat_model.admin1 = self._subdivisions._resolve_model(flat_model.admin1)
+
+        if flat_model.admin2:
+            flat_model.admin2 = self._subdivisions._resolve_model(flat_model.admin2)
+
+        # Collapse model to final DTO
+        return flat_model.dto
+
+    def get(self, id) -> CityModel | None:
+        """Get by localis ID."""
+        return super().get(id)
+
+    def lookup(self, identifier) -> CityModel | None:
         """Get a city by its id"""
-        return super().get(identifier)
-
-    def load_filters(self):
-        self._filter_index = FilterIndex(
-            cache=self.cache, filter_fields=self.MODEL_CLS.FILTER_FIELDS
-        )
+        return super().lookup(identifier)
 
     def filter(
         self,

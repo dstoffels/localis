@@ -2,7 +2,7 @@ import unicodedata
 import re
 from unidecode import unidecode
 
-ModelData = list[str | int | list[str]]
+ModelData = list[str | int | list[str] | None]
 """Raw model data list"""
 
 

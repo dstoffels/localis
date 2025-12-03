@@ -81,7 +81,6 @@ def filter_names(row: dict[str, str]) -> tuple[str]:
 
 
 def parse_row(
-    id: int,
     row: dict[str, str],
     subdivisions: dict[str, SubdivisionModel],
     countries: dict[str, CountryModel],
@@ -90,7 +89,6 @@ def parse_row(
     geonames_id = row["geonameid"]
 
     name = row["name"]
-    ascii_name = row["asciiname"] if row["asciiname"].lower() != name.lower() else ""
 
     admin1_raw = row["admin1 code"]
     admin2_raw = row["admin2 code"]
@@ -112,15 +110,15 @@ def parse_row(
         raise ValueError(f"Invalid population value: {row['population']}")
 
     return CityModel(
-        id=id,
-        geonames_id=geonames_id,
+        id=0,  # to be set before dump
+        geonames_id=int(geonames_id),
         name=name,
         admin1=admin1,
         admin2=admin2,
         country=country,
-        population=population,
-        lat=lat,
-        lng=lng,
+        population=int(population),
+        lat=float(lat),
+        lng=float(lng),
     )
 
 
@@ -131,8 +129,9 @@ def load_cities(
         print(f"Parsing cities from allCountries.txt...")
         rows = csv.DictReader(f, fieldnames=HEADERS, delimiter="\t")
         cities = []
-        for id, row in enumerate(rows, start=1):
+        for row in rows:
             if is_valid_city(row):
-                city = parse_row(id, row, subdivisions, countries)
+                city = parse_row(row, subdivisions, countries)
+                city.id = len(cities) + 1
                 cities.append(city)
         return cities
