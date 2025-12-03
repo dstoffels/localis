@@ -1,6 +1,6 @@
 from pathlib import Path
 import gzip
-import json
+import pickle
 from localis.models import Model
 import pickle
 
@@ -18,7 +18,7 @@ class Index:
         self.index: dict[str, int | list[int]] = None
 
         try:
-            bytes = gzip.open(filepath, "rb").read()
-            self.index = json.loads(bytes.decode("utf-8"))
+            with gzip.open(filepath, "rb") as f:
+                self.index = pickle.load(f)
         except Exception as e:
             raise RuntimeError(f"Failed to load index file: {filepath}") from e

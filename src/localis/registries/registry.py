@@ -3,7 +3,7 @@ from localis.models import Model
 from abc import ABC, abstractmethod
 from pathlib import Path
 import gzip
-import json
+import pickle
 from localis.indexes import FilterIndex, SearchEngine, LookupIndex
 
 T = TypeVar("Model", bound=Model)
@@ -12,8 +12,28 @@ T = TypeVar("Model", bound=Model)
 class Registry(Generic[T], ABC):
     """"""
 
-    DATA_PATH = Path(__file__).parent.parent / "data"
-    DATAFILE: str = ""
+    REGISTRY_NAME: str = ""
+
+    @property
+    def _DATA_PATH(self) -> Path:
+        return Path(__file__).parent.parent / "data" / self.REGISTRY_NAME
+
+    @property
+    def DATAFILE_PATH(self) -> Path:
+        return self._DATA_PATH / f"{self.REGISTRY_NAME}.pkl.gz"
+
+    @property
+    def LOOKUPFILE_PATH(self) -> Path:
+        return self._DATA_PATH / f"{self.REGISTRY_NAME}_lookup_index.pkl.gz"
+
+    @property
+    def FILTERFILE_PATH(self) -> Path:
+        return self._DATA_PATH / f"{self.REGISTRY_NAME}_filter_index.pkl.gz"
+
+    @property
+    def SEARCHFILE_PATH(self) -> Path:
+        return self._DATA_PATH / f"{self.REGISTRY_NAME}_search_index.pkl.gz"
+
     MODEL_CLS: type[Model]
 
     def __init__(self, **kwargs):
@@ -30,37 +50,47 @@ class Registry(Generic[T], ABC):
     @property
     def cache(self) -> dict[int, T]:
         if self._cache is None:
-            self.load()
+            if not self.DATAFILE_PATH.exists():
+                raise FileNotFoundError(f"Data file not found: {self.DATAFILE_PATH}")
+
+            try:
+                with gzip.open(self.DATAFILE_PATH, "rb") as f:
+                    self._cache = pickle.load(f)
+            except Exception as e:
+                raise RuntimeError(
+                    f"Failed to load data file: {self.DATAFILE_PATH}"
+                ) from e
         return self._cache
 
     @property
     def lookup_index(self):
         if self._lookup_index is None:
-            self.load_lookups()
+            self.lookup_index = LookupIndex(
+                model_cls=self.MODEL_CLS,
+                cache=self.cache,
+                filepath=self.LOOKUPFILE_PATH,
+            )
         return self._lookup_index
 
     @property
     def filter_index(self):
         if self._filter_index is None:
-            self.load_filters()
+            self.filter_index = FilterIndex(
+                model_cls=self.MODEL_CLS,
+                cache=self.cache,
+                filepath=self.FILTERFILE_PATH,
+            )
         return self._filter_index
 
     @property
     def search_index(self):
         if self._search_index is None:
-            self.load_search_index()
+            self.search_index = SearchEngine(
+                model_cls=self.MODEL_CLS,
+                cache=self.cache,
+                filepath=self.SEARCHFILE_PATH,
+            )
         return self._search_index
-
-    def load(self) -> None:
-        filepath = self.DATA_PATH / self.DATAFILE
-        if not filepath.exists():
-            raise FileNotFoundError(f"Data file not found: {filepath}")
-
-        try:
-            bytes = gzip.open(filepath, "rb").read()
-            self._cache = json.loads(bytes.decode("utf-8"))
-        except Exception as e:
-            raise RuntimeError(f"Failed to load data file: {filepath}") from e
 
     @abstractmethod
     def _parse_row(self, id: int, row: dict):

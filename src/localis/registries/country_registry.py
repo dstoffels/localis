@@ -4,8 +4,7 @@ from localis.indexes import FilterIndex
 
 
 class CountryRegistry(Registry[CountryModel]):
-    DATA_PATH = Registry.DATA_PATH / "countries"
-    DATAFILE = "countries.json.gz"
+    REGISTRY_NAME = "countries"
     MODEL_CLS = CountryModel
 
     def _parse_row(self, id: int, row: list[str]):

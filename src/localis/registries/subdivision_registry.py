@@ -5,8 +5,7 @@ import csv
 
 
 class SubdivisionRegistry(Registry[SubdivisionModel]):
-    DATA_PATH = Registry.DATA_PATH / "subdivisions"
-    DATAFILE = "subdivisions.json.gz"
+    REGISTRY_NAME = "subdivisions"
     MODEL_CLS = SubdivisionModel
 
     def __init__(self, countries: CountryRegistry, **kwargs):
