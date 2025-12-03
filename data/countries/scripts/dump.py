@@ -1,6 +1,5 @@
 from data.utils import *
 from localis.models import CountryModel
-from collections import defaultdict
 
 COUNTRIES_DATA_PATH = DATA_PATH / "countries"
 

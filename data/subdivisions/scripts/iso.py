@@ -20,15 +20,12 @@ def load_iso_subs(
             alpha2 = row["country_code"]
             iso_code = row["iso_code"]
             parent_iso_code = row.get("parent_iso_code", None)
-            # parent_code = parent_iso_code.replace("-", ".") if parent_iso_code else None
-            # parent = submap.get(geo_code=parent_code) if parent_code else None
             admin_level = 1 if not parent_iso_code else 2
 
             # Assign names, generate ascii alt names
             name = local_name or iso_name
 
             alt_name = iso_name if local_name else None
-            # ascii_alt_name = normalize(alt_name).title() if alt_name else None
 
             country = countries.get(alpha2)
             if not country:

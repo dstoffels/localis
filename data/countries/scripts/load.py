@@ -4,7 +4,6 @@
 from data.utils import *
 from localis.models import CountryModel
 import json
-from src.localis.utils import normalize
 
 
 def init_iso_countries() -> dict[str, CountryModel]:
