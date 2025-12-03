@@ -1,47 +1,55 @@
-from ..utils import *
-import gzip
-import json
-from collections import defaultdict
+from data.utils import *
+from data.subdivisions.utils import SubdivisionMap
+
+SUBDIVISIONS_DATA_PATH = DATA_PATH / "subdivisions"
 
 
-def dump_to_tsv(sub_map: SubdivisionMap):
-    subdivisions = sub_map.get_final()
+def dump(sub_map: SubdivisionMap):
+    subdivisions = sub_map.all()
 
-    with gzip.open(
-        FIXTURE_PATH / "subdivisions_search_index.gz", "wt", compresslevel=9
-    ) as f:
-        search_index = defaultdict(list)
-        for sub in subdivisions:
-            for trigram in sub.extract_trigrams():
-                search_index[trigram].append(sub.iso_code)
+    dump_data(subdivisions, SUBDIVISIONS_DATA_PATH / "subdivisions.json.gz")
+    dump_lookup_index(
+        subdivisions, SUBDIVISIONS_DATA_PATH / "subdivisions_lookup_index.json.gz"
+    )
+    dump_filter_index(
+        subdivisions, SUBDIVISIONS_DATA_PATH / "subdivisions_filter_index.json.gz"
+    )
+    dump_search_index(
+        subdivisions, SUBDIVISIONS_DATA_PATH / "subdivisions_search_index.json.gz"
+    )
 
     HEADERS = (
+        "id",
         "name",
-        "alt_names",
+        "aliases",
         "geonames_code",
         "iso_code",
         "type",
+        "admin_level",
         "parent_id",
         "country_id",
     )
 
-    with open(
-        FIXTURE_PATH / "subdivisions.tsv",
-        "w",
-        encoding="utf-8",
-        newline="",
-    ) as f:
-        writer = csv.DictWriter(f, fieldnames=HEADERS, delimiter="\t")
-        writer.writeheader()
-        for sub in sub_map.get_final():
-            writer.writerow(
-                {
-                    "name": sub.name,
-                    "alt_names": "|".join(sub.alt_names),
-                    "geonames_code": sub.geonames_code,
-                    "iso_code": sub.iso_code,
-                    "type": sub.type,
-                    "parent_id": sub.parent_id,
-                    "country_id": sub.country_id,
-                }
-            )
+    # # Dump subdivision data file
+    # with open(
+    #     DATA_PATH / "subdivisions.tsv",
+    #     "w",
+    #     encoding="utf-8",
+    #     newline="",
+    # ) as f:
+    #     writer = csv.DictWriter(f, fieldnames=HEADERS, delimiter="\t")
+    #     writer.writeheader()
+    #     for sub in subdivisions:
+    #         writer.writerow(
+    #             {
+    #                 "id": sub.id,
+    #                 "name": sub.name,
+    #                 "aliases": "|".join(sub.aliases),
+    #                 "geonames_code": sub.geonames_code,
+    #                 "iso_code": sub.iso_code,
+    #                 "type": sub.type,
+    #                 "admin_level": sub.admin_level,
+    #                 "parent_id": sub.parent.id if sub.parent else None,
+    #                 "country_id": sub.country.id,
+    #             }
+    #         )

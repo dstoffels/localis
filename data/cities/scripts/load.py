@@ -1,5 +1,6 @@
-from data.utils import CityData, CITIES_SRC_PATH, generate_trigrams, normalize
+from data.utils import CITIES_SRC_PATH
 from data.cities.scripts.utils import *
+from localis.models import SubdivisionModel, CountryModel, CityModel
 
 HEADERS = [
     "geonameid",
@@ -42,7 +43,13 @@ ALLOWED_FEATURE_CODES = {
 def is_valid_city(
     row: dict[str, str], allowed_codes: set[str] = ALLOWED_FEATURE_CODES
 ) -> bool:
-    return row["feature code"] in allowed_codes and row["population"] not in ["", "0"]
+    return (
+        row["feature code"]
+        in allowed_codes  # filter out anything that's not a populated place
+        and row["population"]
+        not in ["", "0"]  # filter out places with no population data
+        and row["country code"]  # filter out places with no country code
+    )
 
 
 def filter_names(row: dict[str, str]) -> tuple[str]:
@@ -73,8 +80,11 @@ def filter_names(row: dict[str, str]) -> tuple[str]:
 
 
 def parse_row(
-    row: dict[str, str], subdivisions: dict[str, int], countries: dict[str, int]
-) -> CityData:
+    id: int,
+    row: dict[str, str],
+    subdivisions: dict[str, SubdivisionModel],
+    countries: dict[str, CountryModel],
+) -> CityModel:
 
     geonames_id = row["geonameid"]
 
@@ -85,12 +95,12 @@ def parse_row(
     admin2_raw = row["admin2 code"]
     country_code = row["country code"]
 
-    admin1 = ".".join([country_code, admin1_raw])
-    admin2 = ".".join([country_code, admin1_raw, admin2_raw])
+    admin1_code = ".".join([country_code, admin1_raw])
+    admin2_code = ".".join([country_code, admin1_raw, admin2_raw])
 
-    admin1_id = subdivisions.get(admin1, None)
-    admin2_id = subdivisions.get(admin2, None)
-    country_id = countries.get(country_code, None)
+    admin1 = subdivisions.get(admin1_code, None)
+    admin2 = subdivisions.get(admin2_code, None)
+    country = countries.get(country_code, None)
 
     lat = row["latitude"]
     lng = row["longitude"]
@@ -100,30 +110,28 @@ def parse_row(
     except ValueError:
         raise ValueError(f"Invalid population value: {row['population']}")
 
-    return CityData(
+    return CityModel(
+        id=id,
         geonames_id=geonames_id,
         name=name,
-        ascii_name=ascii_name,
-        alt_names=[],
-        admin1_id=admin1_id,
-        admin2_id=admin2_id,
-        country_id=country_id,
+        admin1=admin1,
+        admin2=admin2,
+        country=country,
         population=population,
         lat=lat,
         lng=lng,
-        search_tokens="|".join(set(generate_trigrams(normalize(name)))),
     )
 
 
 def load_cities(
     subdivisions: dict[str, int], countries: dict[str, int]
-) -> list[CityData]:
+) -> list[CityModel]:
     with open(CITIES_SRC_PATH / "allCountries.txt", "r", encoding="utf-8") as f:
         print(f"Parsing cities from allCountries.txt...")
         rows = csv.DictReader(f, fieldnames=HEADERS, delimiter="\t")
         cities = []
-        for row in rows:
+        for id, row in enumerate(rows, start=1):
             if is_valid_city(row):
-                city = parse_row(row, subdivisions, countries)
+                city = parse_row(id, row, subdivisions, countries)
                 cities.append(city)
         return cities

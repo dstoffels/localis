@@ -1,6 +1,6 @@
-from localis.data import CountryModel
+from localis.models import CountryModel
 from localis.registries import Registry
-from localis.index import FilterIndex
+from localis.indexes import FilterIndex
 
 
 class CountryRegistry(Registry[CountryModel]):

@@ -1,7 +1,8 @@
-from ..utils import *
+from data.subdivisions.utils import *
 import re
 from rapidfuzz import fuzz
-from data.utils import normalize
+from localis.models import SubdivisionModel
+from localis.utils import normalize
 
 DIRECTIONAL_TOKENS = {
     "north",
@@ -50,7 +51,7 @@ def strip_cat_tokens(s: str) -> str:
     return " ".join(filtered)
 
 
-def prepare_names(sub: SubdivisionData) -> list[str]:
+def prepare_names(sub: SubdivisionModel) -> list[str]:
     """Combine and normalize all names for comparison"""
 
     def clean(s: str) -> str:
@@ -59,27 +60,28 @@ def prepare_names(sub: SubdivisionData) -> list[str]:
         s = re.sub(r"[,\(\)\[\]\"']", "", s).strip()
         return strip_cat_tokens(s)
 
-    return [clean(sub.name)] + [clean(n) for n in sub.alt_names]
+    return [clean(sub.name)] + [clean(n) for n in sub.aliases]
 
 
-def merge_matched_sub(iso_sub: SubdivisionData, geo_sub: SubdivisionData) -> None:
+def merge_matched_sub(iso_sub: SubdivisionModel, geo_sub: SubdivisionModel) -> None:
+    """Merge ISO subdivision data into the corresponding GeoNames subdivision."""
     geo_sub.type = iso_sub.type
     geo_sub.iso_code = iso_sub.iso_code
     geo_sub.admin_level = iso_sub.admin_level
     current_name = geo_sub.name
-    if geo_sub.name != iso_sub.name and geo_sub.name not in geo_sub.alt_names:
-        geo_sub.alt_names.append(current_name)
+    if geo_sub.name != iso_sub.name and geo_sub.name not in geo_sub.aliases:
+        geo_sub.aliases.append(current_name)
         geo_sub.name = iso_sub.name
-    geo_sub.alt_names.extend(iso_sub.alt_names)
-    geo_sub.alt_names = dedupe(geo_sub.alt_names)
+    geo_sub.aliases.extend(iso_sub.aliases)
+    geo_sub.aliases = dedupe(geo_sub.aliases)
 
     dupes = []
-    for alt in geo_sub.alt_names:
+    for alt in geo_sub.aliases:
         if alt == geo_sub.name:
             dupes.append(alt)
 
     for d in dupes:
-        geo_sub.alt_names.remove(d)
+        geo_sub.aliases.remove(d)
 
 
 def threshold(name_a: str, name_b: str) -> int:
@@ -107,23 +109,23 @@ def threshold(name_a: str, name_b: str) -> int:
     return threshold
 
 
-def try_merge(iso_subs: dict[str, SubdivisionData], sub_map: SubdivisionMap) -> None:
+def try_merge(iso_subs: dict[str, SubdivisionModel], sub_map: SubdivisionMap) -> None:
 
-    unmatched_iso_subs: list[SubdivisionData] = []
+    unmatched_iso_subs: list[SubdivisionModel] = []
 
     print("Attemping to merge ISO to GeoNames subdivisions...")
     for _, iso_sub in iso_subs.items():
-        iso_sub.alt_names = dedupe(iso_sub.alt_names)
+        iso_sub.aliases = dedupe(iso_sub.aliases)
 
         # Add the country if it wasn't added when caching GeoNames subdivisions (for safety) and add the ISO subdivision as is
-        country_map = sub_map.filter(iso_sub.country_alpha2)
+        country_map = sub_map.filter(iso_sub.country.alpha2)
         if not country_map:
-            print(f"Creating new country map for {iso_sub.country_name}")
+            print(f"Creating new country map for {iso_sub.country.name}")
             sub_map.add(iso_sub)
             continue
 
         # extract geonames subdivisions in map by country and admin level
-        geo_subs = sub_map.filter(iso_sub.country_alpha2, iso_sub.admin_level)
+        geo_subs = sub_map.filter(iso_sub.country.alpha2, iso_sub.admin_level)
 
         iso_names = prepare_names(iso_sub)
 

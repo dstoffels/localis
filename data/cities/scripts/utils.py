@@ -1,31 +1,31 @@
 import csv
 import unicodedata
-from data.utils import FIXTURE_PATH
+from data.utils import DATA_PATH
 
 
-def load_countries() -> dict[str, int]:
-    """loads a dict of country codes mapped to their ids"""
-    print("Loading Countries...")
-    countries: dict[str, int] = {}
-    with open(FIXTURE_PATH / "countries.tsv", "r", encoding="utf-8") as f:
-        reader = csv.DictReader(f, delimiter="\t")
+# def load_countries() -> dict[str, int]:
+#     """loads a dict of country codes mapped to their ids"""
+#     print("Loading Countries...")
+#     countries: dict[str, int] = {}
+#     with open(DATA_PATH / "countries.tsv", "r", encoding="utf-8") as f:
+#         reader = csv.DictReader(f, delimiter="\t")
 
-        for id, row in enumerate(reader, 1):
-            countries[row["alpha2"]] = id
-    return countries
+#         for id, row in enumerate(reader, 1):
+#             countries[row["alpha2"]] = id
+#     return countries
 
 
-def load_subdivisions() -> dict[str, int]:
-    """loads a dict of subdivision geonames codes mapped to their ids"""
-    print("Loading Subdivisions...")
-    subdivisions: dict[str, int] = {}
-    with open(FIXTURE_PATH / "subdivisions.tsv", "r", encoding="utf-8") as f:
-        reader = csv.DictReader(f, delimiter="\t")
+# def load_subdivisions() -> dict[str, int]:
+#     """loads a dict of subdivision geonames codes mapped to their ids"""
+#     print("Loading Subdivisions...")
+#     subdivisions: dict[str, int] = {}
+#     with open(DATA_PATH / "subdivisions.tsv", "r", encoding="utf-8") as f:
+#         reader = csv.DictReader(f, delimiter="\t")
 
-        for id, row in enumerate(reader, 1):
-            subdivisions[row["geonames_code"]] = id
+#         for id, row in enumerate(reader, 1):
+#             subdivisions[row["geonames_code"]] = id
 
-    return subdivisions
+#     return subdivisions
 
 
 def normalize_name(name: str) -> str:

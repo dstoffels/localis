@@ -1,9 +1,9 @@
 from typing import Iterator, Generic, TypeVar
-from localis.data import Model
+from localis.models import Model
 from abc import ABC, abstractmethod
 from pathlib import Path
 import csv
-from localis.index import FilterIndex, SearchEngine, LookupIndex
+from localis.indexes import FilterIndex, SearchEngine, LookupIndex
 
 T = TypeVar("Model", bound=Model)
 

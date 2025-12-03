@@ -2,13 +2,14 @@
 # These will be merged with data from their GeoNames and Wikipedia counterparts.
 
 from data.utils import *
+from localis.models import CountryModel
 import json
 from src.localis.utils import normalize
 
 
-def init_iso_countries() -> dict[str, CountryData]:
+def init_iso_countries() -> dict[str, CountryModel]:
     """Parses country data from ISO 3166-1 and returns an alpha2 mapped cache"""
-    countries: dict[str, CountryData] = {}
+    countries: dict[str, CountryModel] = {}
 
     # contemporary name mappings
     NAME_MAP = {
@@ -83,14 +84,14 @@ def init_iso_countries() -> dict[str, CountryData]:
             official_name = OFFICIAL_NAME_MAP.get(alpha2) or c.get("official_name", "")
 
             # Create and cache
-            countries[alpha2] = CountryData(
+            countries[alpha2] = CountryModel(
                 id=id,
                 name=name,
                 official_name=official_name,
                 alpha2=alpha2,
                 alpha3=c["alpha_3"],
                 numeric=c["numeric"],
-                alt_names=ALIAS_MAP.get(alpha2, []),
+                aliases=ALIAS_MAP.get(alpha2, []),
                 flag=c["flag"],
             )
     return countries

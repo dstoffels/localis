@@ -1,6 +1,6 @@
-from localis.data import SubdivisionModel
+from localis.models import SubdivisionModel
 from localis.registries import Registry, CountryRegistry
-from localis.index import FilterIndex, SearchEngine
+from localis.indexes import FilterIndex, SearchEngine
 import csv
 
 

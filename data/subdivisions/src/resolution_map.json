@@ -1,3391 +1,3391 @@
 {
 	"AM-VD": {
-		"id": 18259341876283111906,
+		"hashid": 18259341876283111906,
 		"names": [],
 		"added": false
 	},
 	"AT-2": {
-		"id": 10264642646313965189,
+		"hashid": 10264642646313965189,
 		"names": [],
 		"added": false
 	},
 	"AT-3": {
-		"id": 8583196529622387103,
+		"hashid": 8583196529622387103,
 		"names": [],
 		"added": false
 	},
 	"AT-4": {
-		"id": 17642062264448635185,
+		"hashid": 17642062264448635185,
 		"names": [],
 		"added": false
 	},
 	"AT-6": {
-		"id": 5554678294385227951,
+		"hashid": 5554678294385227951,
 		"names": [],
 		"added": false
 	},
 	"AT-9": {
-		"id": 5033946932732263266,
+		"hashid": 5033946932732263266,
 		"names": [],
 		"added": false
 	},
 	"AZ-NX": {
-		"id": 2696797773052634198,
+		"hashid": 2696797773052634198,
 		"names": [],
 		"added": false
 	},
 	"AZ-NV": {
-		"id": 17519324897445817609,
+		"hashid": 17519324897445817609,
 		"names": [],
 		"added": false
 	},
 	"AZ-XVD": {
-		"id": 632633854087999523,
+		"hashid": 632633854087999523,
 		"names": [],
 		"added": false
 	},
 	"BA-BIH": {
-		"id": 9964537520505996191,
+		"hashid": 9964537520505996191,
 		"names": [],
 		"added": false
 	},
 	"BD-A": {
-		"id": 2831414602029012506,
+		"hashid": 2831414602029012506,
 		"names": [],
 		"added": false
 	},
 	"BD-22": {
-		"id": 13017779450755984638,
+		"hashid": 13017779450755984638,
 		"names": [],
 		"added": false
 	},
 	"BE-BRU": {
-		"id": 1303302418975648253,
+		"hashid": 1303302418975648253,
 		"names": [],
 		"added": false
 	},
 	"BE-VLG": {
-		"id": 7114087128947764291,
+		"hashid": 7114087128947764291,
 		"names": [],
 		"added": false
 	},
 	"BF-KMD": {
-		"id": 4875584601790877806,
+		"hashid": 4875584601790877806,
 		"names": [],
 		"added": false
 	},
 	"BH-14": {
-		"id": 17626728950368949944,
+		"hashid": 17626728950368949944,
 		"names": [],
 		"added": false
 	},
 	"BH-13": {
-		"id": 17193323948274891287,
+		"hashid": 17193323948274891287,
 		"names": [],
 		"added": false
 	},
 	"BH-17": {
-		"id": 3296527386319725693,
+		"hashid": 3296527386319725693,
 		"names": ["Northern Governorate"],
 		"added": false
 	},
 	"BO-B": {
-		"id": 15283482136559554218,
+		"hashid": 15283482136559554218,
 		"names": [],
 		"added": false
 	},
 	"BT-43": {
-		"id": 16098220528632627989,
+		"hashid": 16098220528632627989,
 		"names": [],
 		"added": false
 	},
 	"BW-SO": {
-		"id": 5911163335100115086,
+		"hashid": 5911163335100115086,
 		"names": [],
 		"added": false
 	},
 	"BY-BR": {
-		"id": 14031285334843102465,
+		"hashid": 14031285334843102465,
 		"names": [],
 		"added": false
 	},
 	"BY-HO": {
-		"id": 3554050341891480791,
+		"hashid": 3554050341891480791,
 		"names": [],
 		"added": false
 	},
 	"BY-MA": {
-		"id": 15866662703133056887,
+		"hashid": 15866662703133056887,
 		"names": [],
 		"added": false
 	},
 	"BZ-SC": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"CD-BC": {
-		"id": 12083054728932433545,
+		"hashid": 12083054728932433545,
 		"names": [],
 		"added": false
 	},
 	"CD-NK": {
-		"id": 3626445824490165039,
+		"hashid": 3626445824490165039,
 		"names": [],
 		"added": false
 	},
 	"CD-SK": {
-		"id": 9186806592796032547,
+		"hashid": 9186806592796032547,
 		"names": [],
 		"added": false
 	},
 	"CF-KB": {
-		"id": 16578592607792538849,
+		"hashid": 16578592607792538849,
 		"names": [],
 		"added": false
 	},
 	"CH-BS": {
-		"id": 619646476019425698,
+		"hashid": 619646476019425698,
 		"names": [],
 		"added": false
 	},
 	"CH-GR": {
-		"id": 10764539335603049747,
+		"hashid": 10764539335603049747,
 		"names": [],
 		"added": false
 	},
 	"CN-MO": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"CN-HK": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"CN-NM": {
-		"id": 17192407251240072214,
+		"hashid": 17192407251240072214,
 		"names": [],
 		"added": false
 	},
 	"CN-TW": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"CN-XZ": {
-		"id": 17811222786113383183,
+		"hashid": 17811222786113383183,
 		"names": [],
 		"added": false
 	},
 	"CO-DC": {
-		"id": 6794102982673819394,
+		"hashid": 6794102982673819394,
 		"names": [],
 		"added": false
 	},
 	"CU-03": {
-		"id": 3018805721934171385,
+		"hashid": 3018805721934171385,
 		"names": [],
 		"added": false
 	},
 	"CV-BV": {
-		"id": 705132612200659926,
+		"hashid": 705132612200659926,
 		"names": [],
 		"added": false
 	},
 	"CV-BR": {
-		"id": 10983424776763243137,
+		"hashid": 10983424776763243137,
 		"names": [],
 		"added": false
 	},
 	"CV-B": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"CV-S": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"CV-MA": {
-		"id": 3894072371730316330,
+		"hashid": 3894072371730316330,
 		"names": [],
 		"added": false
 	},
 	"CV-MO": {
-		"id": 12990632026175913445,
+		"hashid": 12990632026175913445,
 		"names": [],
 		"added": false
 	},
 	"CV-PA": {
-		"id": 13344093838652070261,
+		"hashid": 13344093838652070261,
 		"names": [],
 		"added": false
 	},
 	"CV-PN": {
-		"id": 7034729200488182788,
+		"hashid": 7034729200488182788,
 		"names": [],
 		"added": false
 	},
 	"CV-PR": {
-		"id": 8086121627744482082,
+		"hashid": 8086121627744482082,
 		"names": [],
 		"added": false
 	},
 	"CV-RB": {
-		"id": 15078839076604930817,
+		"hashid": 15078839076604930817,
 		"names": [],
 		"added": false
 	},
 	"CV-RG": {
-		"id": 13224718789698419456,
+		"hashid": 13224718789698419456,
 		"names": [],
 		"added": false
 	},
 	"CV-RS": {
-		"id": 16209442399567980064,
+		"hashid": 16209442399567980064,
 		"names": [],
 		"added": false
 	},
 	"CV-SL": {
-		"id": 1614766708942554705,
+		"hashid": 1614766708942554705,
 		"names": [],
 		"added": false
 	},
 	"CV-CR": {
-		"id": 6331602945788660171,
+		"hashid": 6331602945788660171,
 		"names": [],
 		"added": false
 	},
 	"CV-SD": {
-		"id": 12173059146301659138,
+		"hashid": 12173059146301659138,
 		"names": [],
 		"added": false
 	},
 	"CV-SF": {
-		"id": 6284023071982029689,
+		"hashid": 6284023071982029689,
 		"names": [],
 		"added": false
 	},
 	"CV-SV": {
-		"id": 15131506162063892562,
+		"hashid": 15131506162063892562,
 		"names": [],
 		"added": false
 	},
 	"CV-TA": {
-		"id": 14249535839153097734,
+		"hashid": 14249535839153097734,
 		"names": [],
 		"added": false
 	},
 	"CV-TS": {
-		"id": 15645238902898204492,
+		"hashid": 15645238902898204492,
 		"names": [],
 		"added": false
 	},
 	"CY-01": {
-		"id": 17575498885477680404,
+		"hashid": 17575498885477680404,
 		"names": [],
 		"added": false
 	},
 	"CY-02": {
-		"id": 2433773035988939339,
+		"hashid": 2433773035988939339,
 		"names": [],
 		"added": false
 	},
 	"CZ-64": {
-		"id": 8410285739409551244,
+		"hashid": 8410285739409551244,
 		"names": [],
 		"added": false
 	},
 	"CZ-10": {
-		"id": 10494646732197057085,
+		"hashid": 10494646732197057085,
 		"names": [],
 		"added": false
 	},
 	"CZ-20": {
-		"id": 2984933425631119902,
+		"hashid": 2984933425631119902,
 		"names": [],
 		"added": false
 	},
 	"CZ-72": {
-		"id": 5579150566464626108,
+		"hashid": 5579150566464626108,
 		"names": [],
 		"added": false
 	},
 	"DE-BY": {
-		"id": 15683273651164955012,
+		"hashid": 15683273651164955012,
 		"names": [],
 		"added": false
 	},
 	"DE-NI": {
-		"id": 16161630923016687986,
+		"hashid": 16161630923016687986,
 		"names": [],
 		"added": false
 	},
 	"DE-NW": {
-		"id": 767740820275888350,
+		"hashid": 767740820275888350,
 		"names": [],
 		"added": false
 	},
 	"DE-SN": {
-		"id": 9340599352467930100,
+		"hashid": 9340599352467930100,
 		"names": [],
 		"added": false
 	},
 	"DE-ST": {
-		"id": 17823492179474453441,
+		"hashid": 17823492179474453441,
 		"names": [],
 		"added": false
 	},
 	"DE-TH": {
-		"id": 5512921328756895368,
+		"hashid": 5512921328756895368,
 		"names": [],
 		"added": false
 	},
 	"DK-84": {
-		"id": 14695464582438295744,
+		"hashid": 14695464582438295744,
 		"names": [],
 		"added": false
 	},
 	"DK-82": {
-		"id": 3180824788497675873,
+		"hashid": 3180824788497675873,
 		"names": ["Mid-Jutland"],
 		"added": false
 	},
 	"DK-81": {
-		"id": 6587282618310438224,
+		"hashid": 6587282618310438224,
 		"names": ["North Jutland"],
 		"added": false
 	},
 	"DK-85": {
-		"id": 15380463672029119977,
+		"hashid": 15380463672029119977,
 		"names": [],
 		"added": false
 	},
 	"DK-83": {
-		"id": 12361097487423467211,
+		"hashid": 12361097487423467211,
 		"names": [],
 		"added": false
 	},
 	"DO-03": {
-		"id": 10898163477123812698,
+		"hashid": 10898163477123812698,
 		"names": [],
 		"added": false
 	},
 	"DO-33": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"DO-34": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"DO-35": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"DO-36": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"DO-01": {
-		"id": 2545951785960071624,
+		"hashid": 2545951785960071624,
 		"names": [],
 		"added": false
 	},
 	"DO-06": {
-		"id": 10552907223733560021,
+		"hashid": 10552907223733560021,
 		"names": [],
 		"added": false
 	},
 	"DO-37": {
-		"id": 2787579815037811371,
+		"hashid": 2787579815037811371,
 		"names": [],
 		"added": false
 	},
 	"DO-07": {
-		"id": 10230849822333583155,
+		"hashid": 10230849822333583155,
 		"names": [],
 		"added": false
 	},
 	"DO-38": {
-		"id": 11788846863026775093,
+		"hashid": 11788846863026775093,
 		"names": [],
 		"added": false
 	},
 	"DO-09": {
-		"id": 14548261186608404783,
+		"hashid": 14548261186608404783,
 		"names": [],
 		"added": false
 	},
 	"DO-19": {
-		"id": 12655063999735625467,
+		"hashid": 12655063999735625467,
 		"names": [],
 		"added": false
 	},
 	"DO-39": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"DO-10": {
-		"id": 4204623252710196221,
+		"hashid": 4204623252710196221,
 		"names": [],
 		"added": false
 	},
 	"DO-11": {
-		"id": 17496805393458962437,
+		"hashid": 17496805393458962437,
 		"names": [],
 		"added": false
 	},
 	"DO-28": {
-		"id": 6437022730056275695,
+		"hashid": 6437022730056275695,
 		"names": [],
 		"added": false
 	},
 	"DO-40": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"DO-17": {
-		"id": 2037131853133885597,
+		"hashid": 2037131853133885597,
 		"names": [],
 		"added": false
 	},
 	"DO-41": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"DO-27": {
-		"id": 14138765543379867363,
+		"hashid": 14138765543379867363,
 		"names": [],
 		"added": false
 	},
 	"DO-42": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"EG-DK": {
-		"id": 9318628226602789107,
+		"hashid": 9318628226602789107,
 		"names": [],
 		"added": false
 	},
 	"EG-BH": {
-		"id": 10557151971485804498,
+		"hashid": 10557151971485804498,
 		"names": [],
 		"added": false
 	},
 	"EG-FYM": {
-		"id": 7240044506828043996,
+		"hashid": 7240044506828043996,
 		"names": [],
 		"added": false
 	},
 	"EG-GH": {
-		"id": 11368199509458151310,
+		"hashid": 11368199509458151310,
 		"names": [],
 		"added": false
 	},
 	"EG-IS": {
-		"id": 12053722315705010735,
+		"hashid": 12053722315705010735,
 		"names": [],
 		"added": false
 	},
 	"EG-MNF": {
-		"id": 7738599447646777811,
+		"hashid": 7738599447646777811,
 		"names": [],
 		"added": false
 	},
 	"EG-KB": {
-		"id": 733095517075002237,
+		"hashid": 733095517075002237,
 		"names": [],
 		"added": false
 	},
 	"EG-SHR": {
-		"id": 13365197459742857616,
+		"hashid": 13365197459742857616,
 		"names": [],
 		"added": false
 	},
 	"EG-BNS": {
-		"id": 14486115580737868210,
+		"hashid": 14486115580737868210,
 		"names": [],
 		"added": false
 	},
 	"EG-KFS": {
-		"id": 5947396524261461379,
+		"hashid": 5947396524261461379,
 		"names": [],
 		"added": false
 	},
 	"ER-SK": {
-		"id": 2839622781250076862,
+		"hashid": 2839622781250076862,
 		"names": [],
 		"added": false
 	},
 	"ES-C": {
-		"id": 16663251777587820009,
+		"hashid": 16663251777587820009,
 		"names": [],
 		"added": false
 	},
 	"ES-CL": {
-		"id": 515885370972376802,
+		"hashid": 515885370972376802,
 		"names": [],
 		"added": false
 	},
 	"ES-CT": {
-		"id": 1724482950771920377,
+		"hashid": 1724482950771920377,
 		"names": [],
 		"added": false
 	},
 	"ES-PV": {
-		"id": 6263351742782356773,
+		"hashid": 6263351742782356773,
 		"names": [],
 		"added": false
 	},
 	"ES-IB": {
-		"id": 10273630057322074318,
+		"hashid": 10273630057322074318,
 		"names": [],
 		"added": false
 	},
 	"ET-SN": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"ET-SW": {
-		"id": 12385432535360788755,
+		"hashid": 12385432535360788755,
 		"names": [],
 		"added": false
 	},
 	"FI-01": {
-		"id": null,
+		"hashid": null,
 		"names": ["\u00c5land Islands"],
 		"added": true
 	},
 	"FI-19": {
-		"id": 6029943825149156179,
+		"hashid": 6029943825149156179,
 		"names": [],
 		"added": false
 	},
 	"FI-02": {
-		"id": 14213347715668903798,
+		"hashid": 14213347715668903798,
 		"names": [],
 		"added": false
 	},
 	"FI-03": {
-		"id": 7386778009856642809,
+		"hashid": 7386778009856642809,
 		"names": [],
 		"added": false
 	},
 	"FI-04": {
-		"id": 7556312291482969511,
+		"hashid": 7556312291482969511,
 		"names": [],
 		"added": false
 	},
 	"FI-07": {
-		"id": 18270890864754931112,
+		"hashid": 18270890864754931112,
 		"names": [],
 		"added": false
 	},
 	"FI-08": {
-		"id": 16859499639511552715,
+		"hashid": 16859499639511552715,
 		"names": [],
 		"added": false
 	},
 	"FI-13": {
-		"id": 1464986632952177745,
+		"hashid": 1464986632952177745,
 		"names": [],
 		"added": false
 	},
 	"FI-15": {
-		"id": 12250652957173949327,
+		"hashid": 12250652957173949327,
 		"names": [],
 		"added": false
 	},
 	"FI-14": {
-		"id": 2425753874731096670,
+		"hashid": 2425753874731096670,
 		"names": [],
 		"added": false
 	},
 	"FI-12": {
-		"id": 17006021513674694543,
+		"hashid": 17006021513674694543,
 		"names": [],
 		"added": false
 	},
 	"FR-6AE": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"FR-BRE": {
-		"id": 7840592450004425197,
+		"hashid": 7840592450004425197,
 		"names": [],
 		"added": false
 	},
 	"FR-CP": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"FR-20R": {
-		"id": 7029890424806918353,
+		"hashid": 7029890424806918353,
 		"names": [],
 		"added": false
 	},
 	"FR-2A": {
-		"id": 12156907213450421279,
+		"hashid": 12156907213450421279,
 		"names": [],
 		"added": false
 	},
 	"FR-971": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"FR-973": {
-		"id": null,
+		"hashid": null,
 		"names": ["French Guiana"],
 		"added": true
 	},
 	"FR-2B": {
-		"id": 1811162133395380813,
+		"hashid": 1811162133395380813,
 		"names": [],
 		"added": false
 	},
 	"FR-31": {
-		"id": 15422762469903055286,
+		"hashid": 15422762469903055286,
 		"names": [],
 		"added": false
 	},
 	"FR-974": {
-		"id": null,
+		"hashid": null,
 		"names": ["R\u00e9union Island"],
 		"added": true
 	},
 	"FR-972": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"FR-976": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"FR-69M": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"FR-NC": {
-		"id": null,
+		"hashid": null,
 		"names": ["New Caledonia"],
 		"added": true
 	},
 	"FR-PF": {
-		"id": null,
+		"hashid": null,
 		"names": ["French Polynesia"],
 		"added": true
 	},
 	"FR-BL": {
-		"id": null,
+		"hashid": null,
 		"names": ["St. Barts"],
 		"added": true
 	},
 	"FR-MF": {
-		"id": null,
+		"hashid": null,
 		"names": ["Saint Martin (French side)"],
 		"added": true
 	},
 	"FR-PM": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"FR-TF": {
-		"id": null,
+		"hashid": null,
 		"names": ["French Southern Lands", "French Southern and Antarctic Lands"],
 		"added": true
 	},
 	"FR-WF": {
-		"id": null,
+		"hashid": null,
 		"names": ["Wallis and Futuna"],
 		"added": true
 	},
 	"GB-BDG": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"GB-BNE": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"GB-BEX": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"GB-BEN": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"GB-BRY": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"GB-CMD": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"GB-CRY": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"GB-GRE": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"GB-HCK": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"GB-HMF": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"GB-HRY": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"GB-HRW": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"GB-HAV": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"GB-HIL": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"GB-HNS": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"GB-ISL": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"GB-KEC": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"GB-KTT": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"GB-LBH": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"GB-LEW": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"GB-MRT": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"GB-NWM": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"GB-RDB": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"GB-RIC": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"GB-SWK": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"GB-STN": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"GB-TWH": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"GB-WFT": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"GB-WND": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"GB-WSM": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"GQ-BN": {
-		"id": 3023793281405305766,
+		"hashid": 3023793281405305766,
 		"names": [],
 		"added": false
 	},
 	"GQ-BS": {
-		"id": 17797878681589620323,
+		"hashid": 17797878681589620323,
 		"names": [],
 		"added": false
 	},
 	"GQ-CS": {
-		"id": 11737113617557607118,
+		"hashid": 11737113617557607118,
 		"names": [],
 		"added": false
 	},
 	"GQ-DJ": {
-		"id": 7336099691248937475,
+		"hashid": 7336099691248937475,
 		"names": [],
 		"added": false
 	},
 	"GQ-KN": {
-		"id": 17905929667799451702,
+		"hashid": 17905929667799451702,
 		"names": [],
 		"added": false
 	},
 	"GQ-LI": {
-		"id": 5879842871864002706,
+		"hashid": 5879842871864002706,
 		"names": [],
 		"added": false
 	},
 	"GQ-C": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"GQ-I": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"GQ-WN": {
-		"id": 1958570059220681696,
+		"hashid": 1958570059220681696,
 		"names": [],
 		"added": false
 	},
 	"GR-A": {
-		"id": 1205156330726946481,
+		"hashid": 1205156330726946481,
 		"names": [],
 		"added": false
 	},
 	"GR-I": {
-		"id": 13223891665784901235,
+		"hashid": 13223891665784901235,
 		"names": [],
 		"added": false
 	},
 	"GR-G": {
-		"id": 14847102287474261620,
+		"hashid": 14847102287474261620,
 		"names": [],
 		"added": false
 	},
 	"GR-C": {
-		"id": 5728449947567529500,
+		"hashid": 5728449947567529500,
 		"names": [],
 		"added": false
 	},
 	"GR-F": {
-		"id": 9255607841537206187,
+		"hashid": 9255607841537206187,
 		"names": [],
 		"added": false
 	},
 	"GR-B": {
-		"id": 1728227864186137884,
+		"hashid": 1728227864186137884,
 		"names": [],
 		"added": false
 	},
 	"GR-M": {
-		"id": 17541537819736985722,
+		"hashid": 17541537819736985722,
 		"names": [],
 		"added": false
 	},
 	"GR-L": {
-		"id": 7697577093007225769,
+		"hashid": 7697577093007225769,
 		"names": [],
 		"added": false
 	},
 	"GR-J": {
-		"id": 7892918363463324032,
+		"hashid": 7892918363463324032,
 		"names": [],
 		"added": false
 	},
 	"GR-H": {
-		"id": 15653771003529369246,
+		"hashid": 15653771003529369246,
 		"names": [],
 		"added": false
 	},
 	"GR-K": {
-		"id": 17649593875317055821,
+		"hashid": 17649593875317055821,
 		"names": [],
 		"added": false
 	},
 	"GR-69": {
-		"id": 564268597855427151,
+		"hashid": 564268597855427151,
 		"names": [],
 		"added": false
 	},
 	"GR-D": {
-		"id": 3041433102075313050,
+		"hashid": 3041433102075313050,
 		"names": [],
 		"added": false
 	},
 	"GW-BM": {
-		"id": 7106958541391228738,
+		"hashid": 7106958541391228738,
 		"names": [],
 		"added": false
 	},
 	"GW-L": {
-		"id": null,
+		"hashid": null,
 		"names": ["East"],
 		"added": true
 	},
 	"GW-N": {
-		"id": null,
+		"hashid": null,
 		"names": ["North"],
 		"added": true
 	},
 	"GW-OI": {
-		"id": 15202394174908504040,
+		"hashid": 15202394174908504040,
 		"names": [],
 		"added": false
 	},
 	"GW-QU": {
-		"id": 2307774773964476808,
+		"hashid": 2307774773964476808,
 		"names": [],
 		"added": false
 	},
 	"GW-S": {
-		"id": null,
+		"hashid": null,
 		"names": ["South"],
 		"added": true
 	},
 	"GW-TO": {
-		"id": 17552616587020259708,
+		"hashid": 17552616587020259708,
 		"names": [],
 		"added": false
 	},
 	"HN-IB": {
-		"id": 1710350278707837977,
+		"hashid": 1710350278707837977,
 		"names": [],
 		"added": false
 	},
 	"HR-07": {
-		"id": 6137860277085836514,
+		"hashid": 6137860277085836514,
 		"names": [],
 		"added": false
 	},
 	"HR-12": {
-		"id": 2462660711680687613,
+		"hashid": 2462660711680687613,
 		"names": [],
 		"added": false
 	},
 	"HR-19": {
-		"id": 9831373956248052199,
+		"hashid": 9831373956248052199,
 		"names": [],
 		"added": false
 	},
 	"HR-18": {
-		"id": 13593419230890173594,
+		"hashid": 13593419230890173594,
 		"names": [],
 		"added": false
 	},
 	"HR-04": {
-		"id": 7595259266207563253,
+		"hashid": 7595259266207563253,
 		"names": [],
 		"added": false
 	},
 	"HR-06": {
-		"id": 515303284250205483,
+		"hashid": 515303284250205483,
 		"names": [],
 		"added": false
 	},
 	"HR-02": {
-		"id": 9464094650309313369,
+		"hashid": 9464094650309313369,
 		"names": [],
 		"added": false
 	},
 	"HR-09": {
-		"id": 15679379278698257234,
+		"hashid": 15679379278698257234,
 		"names": [],
 		"added": false
 	},
 	"HR-20": {
-		"id": 7130259495444217249,
+		"hashid": 7130259495444217249,
 		"names": [],
 		"added": false
 	},
 	"HR-14": {
-		"id": 17686476244825850176,
+		"hashid": 17686476244825850176,
 		"names": [],
 		"added": false
 	},
 	"HR-11": {
-		"id": 571633011816446691,
+		"hashid": 571633011816446691,
 		"names": [],
 		"added": false
 	},
 	"HR-08": {
-		"id": 13393484788884074394,
+		"hashid": 13393484788884074394,
 		"names": [],
 		"added": false
 	},
 	"HR-03": {
-		"id": 5373331629619585599,
+		"hashid": 5373331629619585599,
 		"names": [],
 		"added": false
 	},
 	"HR-17": {
-		"id": 4728741655569437311,
+		"hashid": 4728741655569437311,
 		"names": [],
 		"added": false
 	},
 	"HR-05": {
-		"id": 6869589799992934814,
+		"hashid": 6869589799992934814,
 		"names": [],
 		"added": false
 	},
 	"HR-10": {
-		"id": 9115739172909847332,
+		"hashid": 9115739172909847332,
 		"names": [],
 		"added": false
 	},
 	"HR-16": {
-		"id": 9228354118196276891,
+		"hashid": 9228354118196276891,
 		"names": [],
 		"added": false
 	},
 	"HR-13": {
-		"id": 1075406954298904301,
+		"hashid": 1075406954298904301,
 		"names": [],
 		"added": false
 	},
 	"HR-01": {
-		"id": 18165030935922230113,
+		"hashid": 18165030935922230113,
 		"names": [],
 		"added": false
 	},
 	"HR-15": {
-		"id": 4924830280273446913,
+		"hashid": 4924830280273446913,
 		"names": [],
 		"added": false
 	},
 	"HU-BC": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"HU-DE": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"HU-DU": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"HU-EG": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"HU-HV": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"HU-KV": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"HU-KM": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"HU-MI": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"HU-NK": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"HU-NY": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"HU-ST": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"HU-SD": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"HU-SS": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"HU-SH": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"HU-SF": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"HU-TB": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"HU-ZE": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"HU-ER": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"ID-BA": {
-		"id": 14437149475941329817,
+		"hashid": 14437149475941329817,
 		"names": [],
 		"added": false
 	},
 	"ID-BT": {
-		"id": 16898327688087271583,
+		"hashid": 16898327688087271583,
 		"names": [],
 		"added": false
 	},
 	"ID-JK": {
-		"id": 4695078975331386170,
+		"hashid": 4695078975331386170,
 		"names": [],
 		"added": false
 	},
 	"ID-JW": {
-		"id": null,
+		"hashid": null,
 		"names": ["Java"],
 		"added": true
 	},
 	"ID-JB": {
-		"id": 16251826661717728445,
+		"hashid": 16251826661717728445,
 		"names": [],
 		"added": false
 	},
 	"ID-JT": {
-		"id": 5170221511504565878,
+		"hashid": 5170221511504565878,
 		"names": [],
 		"added": false
 	},
 	"ID-JI": {
-		"id": 16933184291865474393,
+		"hashid": 16933184291865474393,
 		"names": [],
 		"added": false
 	},
 	"ID-KA": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"ID-KB": {
-		"id": 11473268994770462644,
+		"hashid": 11473268994770462644,
 		"names": [],
 		"added": false
 	},
 	"ID-KS": {
-		"id": 10884306699022656519,
+		"hashid": 10884306699022656519,
 		"names": [],
 		"added": false
 	},
 	"ID-KT": {
-		"id": 9309806926450444053,
+		"hashid": 9309806926450444053,
 		"names": [],
 		"added": false
 	},
 	"ID-KI": {
-		"id": 2921321320579836663,
+		"hashid": 2921321320579836663,
 		"names": [],
 		"added": false
 	},
 	"ID-KU": {
-		"id": 488010603257107888,
+		"hashid": 488010603257107888,
 		"names": [],
 		"added": false
 	},
 	"ID-BB": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"ID-KR": {
-		"id": 12905742396118802260,
+		"hashid": 12905742396118802260,
 		"names": [],
 		"added": false
 	},
 	"ID-NU": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"ID-NB": {
-		"id": 3734814404109093988,
+		"hashid": 3734814404109093988,
 		"names": [],
 		"added": false
 	},
 	"ID-NT": {
-		"id": 14150503068299783292,
+		"hashid": 14150503068299783292,
 		"names": [],
 		"added": false
 	},
 	"ID-PA": {
-		"id": 2349863149870575641,
+		"hashid": 2349863149870575641,
 		"names": [],
 		"added": false
 	},
 	"ID-PB": {
-		"id": 15690768876590646321,
+		"hashid": 15690768876590646321,
 		"names": [],
 		"added": false
 	},
 	"ID-PD": {
-		"id": 16750269530231598089,
+		"hashid": 16750269530231598089,
 		"names": [],
 		"added": false
 	},
 	"ID-PE": {
-		"id": 9039127612095223945,
+		"hashid": 9039127612095223945,
 		"names": [],
 		"added": false
 	},
 	"ID-PS": {
-		"id": 9690589497824215987,
+		"hashid": 9690589497824215987,
 		"names": [],
 		"added": false
 	},
 	"ID-PT": {
-		"id": 1050673848426258652,
+		"hashid": 1050673848426258652,
 		"names": [],
 		"added": false
 	},
 	"ID-RI": {
-		"id": 13187188712659963782,
+		"hashid": 13187188712659963782,
 		"names": [],
 		"added": false
 	},
 	"ID-SR": {
-		"id": 9032186593170709723,
+		"hashid": 9032186593170709723,
 		"names": [],
 		"added": false
 	},
 	"ID-SN": {
-		"id": 3823630053724623924,
+		"hashid": 3823630053724623924,
 		"names": [],
 		"added": false
 	},
 	"ID-ST": {
-		"id": 4085803315462924868,
+		"hashid": 4085803315462924868,
 		"names": [],
 		"added": false
 	},
 	"ID-SG": {
-		"id": 9084027117939096023,
+		"hashid": 9084027117939096023,
 		"names": [],
 		"added": false
 	},
 	"ID-SA": {
-		"id": 6067747453582173765,
+		"hashid": 6067747453582173765,
 		"names": [],
 		"added": false
 	},
 	"ID-SM": {
-		"id": null,
+		"hashid": null,
 		"names": ["Sumatra"],
 		"added": true
 	},
 	"ID-SB": {
-		"id": 16506488556942819759,
+		"hashid": 16506488556942819759,
 		"names": [],
 		"added": false
 	},
 	"ID-SS": {
-		"id": 6304627934268481224,
+		"hashid": 6304627934268481224,
 		"names": [],
 		"added": false
 	},
 	"ID-SU": {
-		"id": 17907624763766127488,
+		"hashid": 17907624763766127488,
 		"names": [],
 		"added": false
 	},
 	"IN-LD": {
-		"id": 14549909737988745832,
+		"hashid": 14549909737988745832,
 		"names": [],
 		"added": false
 	},
 	"IQ-BA": {
-		"id": 1013493769503682949,
+		"hashid": 1013493769503682949,
 		"names": [],
 		"added": false
 	},
 	"IQ-KR": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"IQ-NI": {
-		"id": 17781746567032927209,
+		"hashid": 17781746567032927209,
 		"names": [],
 		"added": false
 	},
 	"IR-14": {
-		"id": 4625986401276980376,
+		"hashid": 4625986401276980376,
 		"names": [],
 		"added": false
 	},
 	"IR-29": {
-		"id": 12173395667560177644,
+		"hashid": 12173395667560177644,
 		"names": [],
 		"added": false
 	},
 	"IR-28": {
-		"id": 8721294254740518750,
+		"hashid": 8721294254740518750,
 		"names": [],
 		"added": false
 	},
 	"IR-17": {
-		"id": 2974314715470604749,
+		"hashid": 2974314715470604749,
 		"names": [],
 		"added": false
 	},
 	"IR-04": {
-		"id": 4479526141123771482,
+		"hashid": 4479526141123771482,
 		"names": [],
 		"added": false
 	},
 	"IR-03": {
-		"id": 10150047789535428902,
+		"hashid": 10150047789535428902,
 		"names": [],
 		"added": false
 	},
 	"IS-AKU": {
-		"id": 553178230596876682,
+		"hashid": 553178230596876682,
 		"names": [],
 		"added": false
 	},
 	"IS-7": {
-		"id": 12164249442769020690,
+		"hashid": 12164249442769020690,
 		"names": ["Eastern Region"],
 		"added": false
 	},
 	"IS-1": {
-		"id": 9219425528052223450,
+		"hashid": 9219425528052223450,
 		"names": [],
 		"added": false
 	},
 	"IS-6": {
-		"id": 6023120278771054811,
+		"hashid": 6023120278771054811,
 		"names": ["Northeastern Region"],
 		"added": false
 	},
 	"IS-5": {
-		"id": 795211146841358785,
+		"hashid": 795211146841358785,
 		"names": ["Northwestern Region"],
 		"added": false
 	},
 	"IS-SEL": {
-		"id": 6615047419742401157,
+		"hashid": 6615047419742401157,
 		"names": [],
 		"added": false
 	},
 	"IS-STY": {
-		"id": 1021072839387780641,
+		"hashid": 1021072839387780641,
 		"names": [],
 		"added": false
 	},
 	"IS-8": {
-		"id": 12602850471021152263,
+		"hashid": 12602850471021152263,
 		"names": ["Southern Region"],
 		"added": false
 	},
 	"IS-2": {
-		"id": 5048011360429024333,
+		"hashid": 5048011360429024333,
 		"names": [],
 		"added": false
 	},
 	"IS-4": {
-		"id": 4425878157171424353,
+		"hashid": 4425878157171424353,
 		"names": [],
 		"added": false
 	},
 	"IS-3": {
-		"id": 7653236894486095335,
+		"hashid": 7653236894486095335,
 		"names": ["Western Region"],
 		"added": false
 	},
 	"IT-FI": {
-		"id": 15543438096627701506,
+		"hashid": 15543438096627701506,
 		"names": [],
 		"added": false
 	},
 	"IT-AQ": {
-		"id": 8561809201375208854,
+		"hashid": 8561809201375208854,
 		"names": [],
 		"added": false
 	},
 	"IT-57": {
-		"id": 12173900138812391768,
+		"hashid": 12173900138812391768,
 		"names": [],
 		"added": false
 	},
 	"IT-52": {
-		"id": 12378494993894100351,
+		"hashid": 12378494993894100351,
 		"names": [],
 		"added": false
 	},
 	"JM-11": {
-		"id": 10771186088306258525,
+		"hashid": 10771186088306258525,
 		"names": [],
 		"added": false
 	},
 	"JO-AT": {
-		"id": 4797534579874715950,
+		"hashid": 4797534579874715950,
 		"names": [],
 		"added": false
 	},
 	"KE-30": {
-		"id": 2923499421654690271,
+		"hashid": 2923499421654690271,
 		"names": [],
 		"added": false
 	},
 	"KG-Y": {
-		"id": 3656353010716542953,
+		"hashid": 3656353010716542953,
 		"names": [],
 		"added": false
 	},
 	"KH-22": {
-		"id": 3240263747258738540,
+		"hashid": 3240263747258738540,
 		"names": [],
 		"added": false
 	},
 	"KN-01": {
-		"id": 12423913270595386387,
+		"hashid": 12423913270595386387,
 		"names": [],
 		"added": false
 	},
 	"KN-N": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"KN-02": {
-		"id": 2164695258169901673,
+		"hashid": 2164695258169901673,
 		"names": [],
 		"added": false
 	},
 	"KN-03": {
-		"id": 11639069091376387750,
+		"hashid": 11639069091376387750,
 		"names": [],
 		"added": false
 	},
 	"KN-04": {
-		"id": 11018434289117781986,
+		"hashid": 11018434289117781986,
 		"names": [],
 		"added": false
 	},
 	"KN-05": {
-		"id": 10733846781621917979,
+		"hashid": 10733846781621917979,
 		"names": [],
 		"added": false
 	},
 	"KN-06": {
-		"id": 10995064443795365637,
+		"hashid": 10995064443795365637,
 		"names": [],
 		"added": false
 	},
 	"KN-07": {
-		"id": 9882314475943838562,
+		"hashid": 9882314475943838562,
 		"names": [],
 		"added": false
 	},
 	"KN-K": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"KN-08": {
-		"id": 3486894574020203535,
+		"hashid": 3486894574020203535,
 		"names": [],
 		"added": false
 	},
 	"KN-09": {
-		"id": 10793555208060804522,
+		"hashid": 10793555208060804522,
 		"names": [],
 		"added": false
 	},
 	"KN-10": {
-		"id": 9784374482785042580,
+		"hashid": 9784374482785042580,
 		"names": [],
 		"added": false
 	},
 	"KN-11": {
-		"id": 4285433211973833644,
+		"hashid": 4285433211973833644,
 		"names": [],
 		"added": false
 	},
 	"KN-12": {
-		"id": 10684707109783613193,
+		"hashid": 10684707109783613193,
 		"names": [],
 		"added": false
 	},
 	"KN-13": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"KN-15": {
-		"id": 18442979588013112927,
+		"hashid": 18442979588013112927,
 		"names": [],
 		"added": false
 	},
 	"KP-09": {
-		"id": 2329316686056121626,
+		"hashid": 2329316686056121626,
 		"names": [],
 		"added": false
 	},
 	"KP-08": {
-		"id": 15192388887962133757,
+		"hashid": 15192388887962133757,
 		"names": [],
 		"added": false
 	},
 	"KP-06": {
-		"id": 15231716958369597870,
+		"hashid": 15231716958369597870,
 		"names": [],
 		"added": false
 	},
 	"KP-05": {
-		"id": 2025009314193706296,
+		"hashid": 2025009314193706296,
 		"names": [],
 		"added": false
 	},
 	"KP-02": {
-		"id": 15780170749367927203,
+		"hashid": 15780170749367927203,
 		"names": [],
 		"added": false
 	},
 	"KR-43": {
-		"id": 1517402799822141499,
+		"hashid": 1517402799822141499,
 		"names": [],
 		"added": false
 	},
 	"KZ-10": {
-		"id": 12636157825479033245,
+		"hashid": 12636157825479033245,
 		"names": [],
 		"added": false
 	},
 	"KZ-23": {
-		"id": 4461614445371699252,
+		"hashid": 4461614445371699252,
 		"names": [],
 		"added": false
 	},
 	"KZ-35": {
-		"id": 7673241944757869582,
+		"hashid": 7673241944757869582,
 		"names": [],
 		"added": false
 	},
 	"KZ-59": {
-		"id": 12228830181606311542,
+		"hashid": 12228830181606311542,
 		"names": [],
 		"added": false
 	},
 	"KZ-63": {
-		"id": 4104895903136225813,
+		"hashid": 4104895903136225813,
 		"names": [],
 		"added": false
 	},
 	"KZ-33": {
-		"id": 10446380241204940183,
+		"hashid": 10446380241204940183,
 		"names": [],
 		"added": false
 	},
 	"LB-JA": {
-		"id": 10617169925680117639,
+		"hashid": 10617169925680117639,
 		"names": [],
 		"added": false
 	},
 	"LT-01": {
-		"id": 406860503781235146,
+		"hashid": 406860503781235146,
 		"names": [],
 		"added": false
 	},
 	"LT-AL": {
-		"id": 15409547676661033663,
+		"hashid": 15409547676661033663,
 		"names": [],
 		"added": false
 	},
 	"LT-02": {
-		"id": 15001632796481774440,
+		"hashid": 15001632796481774440,
 		"names": [],
 		"added": false
 	},
 	"LT-KU": {
-		"id": 6358162912628164537,
+		"hashid": 6358162912628164537,
 		"names": [],
 		"added": false
 	},
 	"LT-15": {
-		"id": 17467046928780271064,
+		"hashid": 17467046928780271064,
 		"names": [],
 		"added": false
 	},
 	"LT-17": {
-		"id": 17934350700505276342,
+		"hashid": 17934350700505276342,
 		"names": [],
 		"added": false
 	},
 	"LT-KL": {
-		"id": 13096035689074730780,
+		"hashid": 13096035689074730780,
 		"names": [],
 		"added": false
 	},
 	"LT-20": {
-		"id": 5551303738594484484,
+		"hashid": 5551303738594484484,
 		"names": [],
 		"added": false
 	},
 	"LT-MR": {
-		"id": 13374968506867060219,
+		"hashid": 13374968506867060219,
 		"names": [],
 		"added": false
 	},
 	"LT-31": {
-		"id": 963770582829409616,
+		"hashid": 963770582829409616,
 		"names": [],
 		"added": false
 	},
 	"LT-PN": {
-		"id": 18342392509572486940,
+		"hashid": 18342392509572486940,
 		"names": [],
 		"added": false
 	},
 	"LT-32": {
-		"id": 11210156437866092859,
+		"hashid": 11210156437866092859,
 		"names": [],
 		"added": false
 	},
 	"LT-TA": {
-		"id": 860896335233941387,
+		"hashid": 860896335233941387,
 		"names": [],
 		"added": false
 	},
 	"LT-TE": {
-		"id": 1135349877990082472,
+		"hashid": 1135349877990082472,
 		"names": [],
 		"added": false
 	},
 	"LT-UT": {
-		"id": 13508312519362484184,
+		"hashid": 13508312519362484184,
 		"names": [],
 		"added": false
 	},
 	"LT-VL": {
-		"id": 2118055237091729524,
+		"hashid": 2118055237091729524,
 		"names": [],
 		"added": false
 	},
 	"LT-57": {
-		"id": 5587629267389044396,
+		"hashid": 5587629267389044396,
 		"names": [],
 		"added": false
 	},
 	"LT-SA": {
-		"id": 11273864751049948540,
+		"hashid": 11273864751049948540,
 		"names": [],
 		"added": false
 	},
 	"LT-43": {
-		"id": 288275511191950946,
+		"hashid": 288275511191950946,
 		"names": [],
 		"added": false
 	},
 	"LV-112": {
-		"id": 12915233290321831653,
+		"hashid": 12915233290321831653,
 		"names": [],
 		"added": false
 	},
 	"LY-TB": {
-		"id": 15696952609896182296,
+		"hashid": 15696952609896182296,
 		"names": [],
 		"added": false
 	},
 	"MC-FO": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"MC-JE": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"MC-CL": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"MC-CO": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"MC-GA": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"MC-SO": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"MC-LA": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"MC-MA": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"MC-MO": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"MC-MG": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"MC-MC": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"MC-MU": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"MC-PH": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"MC-SR": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"MC-SD": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"MC-SP": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"MC-VR": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"MD-SN": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"MG-T": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"MG-F": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"MG-M": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"MG-A": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"MG-U": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"MH-ALK": {
-		"id": 12144577573616495080,
+		"hashid": 12144577573616495080,
 		"names": [],
 		"added": false
 	},
 	"MH-ALL": {
-		"id": 7349104837858105052,
+		"hashid": 7349104837858105052,
 		"names": [],
 		"added": false
 	},
 	"MH-ARN": {
-		"id": 13512385430353429628,
+		"hashid": 13512385430353429628,
 		"names": [],
 		"added": false
 	},
 	"MH-AUR": {
-		"id": 17104795972934081706,
+		"hashid": 17104795972934081706,
 		"names": [],
 		"added": false
 	},
 	"MH-KIL": {
-		"id": 10403203346832938662,
+		"hashid": 10403203346832938662,
 		"names": [],
 		"added": false
 	},
 	"MH-EBO": {
-		"id": 3073728394902659973,
+		"hashid": 3073728394902659973,
 		"names": [],
 		"added": false
 	},
 	"MH-LIB": {
-		"id": 13659688599688531951,
+		"hashid": 13659688599688531951,
 		"names": [],
 		"added": false
 	},
 	"MH-ENI": {
-		"id": 1075796552779941048,
+		"hashid": 1075796552779941048,
 		"names": [],
 		"added": false
 	},
 	"MH-JAB": {
-		"id": 4147686238860691141,
+		"hashid": 4147686238860691141,
 		"names": [],
 		"added": false
 	},
 	"MH-JAL": {
-		"id": 13607874029451040169,
+		"hashid": 13607874029451040169,
 		"names": [],
 		"added": false
 	},
 	"MH-KWA": {
-		"id": 5049204141271922352,
+		"hashid": 5049204141271922352,
 		"names": [],
 		"added": false
 	},
 	"MH-LAE": {
-		"id": 8814226708020331303,
+		"hashid": 8814226708020331303,
 		"names": [],
 		"added": false
 	},
 	"MH-LIK": {
-		"id": 16051571296304008981,
+		"hashid": 16051571296304008981,
 		"names": [],
 		"added": false
 	},
 	"MH-MAJ": {
-		"id": 2642096413468593410,
+		"hashid": 2642096413468593410,
 		"names": [],
 		"added": false
 	},
 	"MH-MAL": {
-		"id": 2669803651442908646,
+		"hashid": 2669803651442908646,
 		"names": [],
 		"added": false
 	},
 	"MH-MEJ": {
-		"id": 9169661255654375268,
+		"hashid": 9169661255654375268,
 		"names": [],
 		"added": false
 	},
 	"MH-MIL": {
-		"id": 12301825083522749918,
+		"hashid": 12301825083522749918,
 		"names": [],
 		"added": false
 	},
 	"MH-NMK": {
-		"id": 3247856036455473007,
+		"hashid": 3247856036455473007,
 		"names": [],
 		"added": false
 	},
 	"MH-NMU": {
-		"id": 7203980462487419496,
+		"hashid": 7203980462487419496,
 		"names": [],
 		"added": false
 	},
 	"MH-L": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"MH-T": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"MH-RON": {
-		"id": 8906472764364873651,
+		"hashid": 8906472764364873651,
 		"names": [],
 		"added": false
 	},
 	"MH-UJA": {
-		"id": 5138048018600910023,
+		"hashid": 5138048018600910023,
 		"names": [],
 		"added": false
 	},
 	"MH-UTI": {
-		"id": 6995398708228631277,
+		"hashid": 6995398708228631277,
 		"names": [],
 		"added": false
 	},
 	"MH-WTH": {
-		"id": 2248130488039291728,
+		"hashid": 2248130488039291728,
 		"names": [],
 		"added": false
 	},
 	"MH-WTJ": {
-		"id": 10446605093805346636,
+		"hashid": 10446605093805346636,
 		"names": [],
 		"added": false
 	},
 	"MK-801": {
-		"id": 1967882102506962385,
+		"hashid": 1967882102506962385,
 		"names": [],
 		"added": false
 	},
 	"MK-803": {
-		"id": 6662517821754098005,
+		"hashid": 6662517821754098005,
 		"names": [],
 		"added": false
 	},
 	"MK-804": {
-		"id": 11440826139250950984,
+		"hashid": 11440826139250950984,
 		"names": [],
 		"added": false
 	},
 	"MK-805": {
-		"id": 3839952001397607543,
+		"hashid": 3839952001397607543,
 		"names": [],
 		"added": false
 	},
 	"MK-808": {
-		"id": 5174417831585034929,
+		"hashid": 5174417831585034929,
 		"names": [],
 		"added": false
 	},
 	"MK-809": {
-		"id": 12256797490397984703,
+		"hashid": 12256797490397984703,
 		"names": [],
 		"added": false
 	},
 	"MK-607": {
-		"id": 17639000505547207090,
+		"hashid": 17639000505547207090,
 		"names": [],
 		"added": false
 	},
 	"MK-811": {
-		"id": 3952443925188008792,
+		"hashid": 3952443925188008792,
 		"names": [],
 		"added": false
 	},
 	"MK-815": {
-		"id": 3733443151782153633,
+		"hashid": 3733443151782153633,
 		"names": [],
 		"added": false
 	},
 	"MK-817": {
-		"id": 16383913190614332034,
+		"hashid": 16383913190614332034,
 		"names": [],
 		"added": false
 	},
 	"MN-061": {
-		"id": 9585712840336596111,
+		"hashid": 9585712840336596111,
 		"names": [],
 		"added": false
 	},
 	"MN-059": {
-		"id": 9989960793436448514,
+		"hashid": 9989960793436448514,
 		"names": [],
 		"added": false
 	},
 	"MN-047": {
-		"id": 10763201958965415751,
+		"hashid": 10763201958965415751,
 		"names": [],
 		"added": false
 	},
 	"MT-20": {
-		"id": 14060794330404898945,
+		"hashid": 14060794330404898945,
 		"names": ["L-Isla"],
 		"added": false
 	},
 	"MT-29": {
-		"id": 2027252361259183610,
+		"hashid": 2027252361259183610,
 		"names": [],
 		"added": false
 	},
 	"MT-34": {
-		"id": 7283280956312778645,
+		"hashid": 7283280956312778645,
 		"names": [],
 		"added": false
 	},
 	"MT-31": {
-		"id": 4545650921294503719,
+		"hashid": 4545650921294503719,
 		"names": [],
 		"added": false
 	},
 	"MT-45": {
-		"id": 16435943678541635541,
+		"hashid": 16435943678541635541,
 		"names": [],
 		"added": false
 	},
 	"MT-46": {
-		"id": 3143423021480362247,
+		"hashid": 3143423021480362247,
 		"names": [],
 		"added": false
 	},
 	"MT-65": {
-		"id": 12237986544530731858,
+		"hashid": 12237986544530731858,
 		"names": [],
 		"added": false
 	},
 	"MT-66": {
-		"id": 17530391404755092900,
+		"hashid": 17530391404755092900,
 		"names": [],
 		"added": false
 	},
 	"MV-00": {
-		"id": 13219269519053427498,
+		"hashid": 13219269519053427498,
 		"names": [],
 		"added": false
 	},
 	"MV-29": {
-		"id": 13506559077854383931,
+		"hashid": 13506559077854383931,
 		"names": [],
 		"added": false
 	},
 	"MY-07": {
-		"id": 18169120409375522837,
+		"hashid": 18169120409375522837,
 		"names": ["George Town"],
 		"added": false
 	},
 	"NG-FC": {
-		"id": 15161502435643536419,
+		"hashid": 15161502435643536419,
 		"names": [],
 		"added": false
 	},
 	"NI-AN": {
-		"id": 14023943212862245751,
+		"hashid": 14023943212862245751,
 		"names": [],
 		"added": false
 	},
 	"NI-AS": {
-		"id": 15753930690437346736,
+		"hashid": 15753930690437346736,
 		"names": [],
 		"added": false
 	},
 	"NL-AW": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"NL-BQ1": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"NL-CW": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"NL-NB": {
-		"id": 5789774175653932580,
+		"hashid": 5789774175653932580,
 		"names": [],
 		"added": false
 	},
 	"NL-NH": {
-		"id": 4437779861935336424,
+		"hashid": 4437779861935336424,
 		"names": [],
 		"added": false
 	},
 	"NL-BQ2": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"NL-BQ3": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"NL-SX": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"NL-ZH": {
-		"id": 4756003881996369433,
+		"hashid": 4756003881996369433,
 		"names": [],
 		"added": false
 	},
 	"NO-22": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"NO-21": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"NO-30": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"OM-ZA": {
-		"id": 2253280230748755125,
+		"hashid": 2253280230748755125,
 		"names": [],
 		"added": false
 	},
 	"OM-BJ": {
-		"id": 9909966786566088664,
+		"hashid": 9909966786566088664,
 		"names": [],
 		"added": false
 	},
 	"OM-SJ": {
-		"id": 10224144753603154808,
+		"hashid": 10224144753603154808,
 		"names": ["Ash Sharqiyah South Governorate"],
 		"added": false
 	},
 	"OM-BS": {
-		"id": 2247354754004633700,
+		"hashid": 2247354754004633700,
 		"names": [],
 		"added": false
 	},
 	"OM-SS": {
-		"id": 6733230875470607118,
+		"hashid": 6733230875470607118,
 		"names": ["Ash Sharqiyah North Governorate"],
 		"added": false
 	},
 	"PA-NB": {
-		"id": 10141063140612339087,
+		"hashid": 10141063140612339087,
 		"names": [],
 		"added": false
 	},
 	"PG-NPP": {
-		"id": 15136600677507208305,
+		"hashid": 15136600677507208305,
 		"names": [],
 		"added": false
 	},
 	"PG-SAN": {
-		"id": 7604449715707197466,
+		"hashid": 7604449715707197466,
 		"names": [],
 		"added": false
 	},
 	"PH-00": {
-		"id": 4531478531881960882,
+		"hashid": 4531478531881960882,
 		"names": [],
 		"added": false
 	},
 	"PL-02": {
-		"id": 9622801894243356010,
+		"hashid": 9622801894243356010,
 		"names": ["Lower Silesian Voivodeship"],
 		"added": false
 	},
 	"PL-06": {
-		"id": 14803663615464194133,
+		"hashid": 14803663615464194133,
 		"names": [],
 		"added": false
 	},
 	"PL-08": {
-		"id": 14929539704115956919,
+		"hashid": 14929539704115956919,
 		"names": [],
 		"added": false
 	},
 	"PL-14": {
-		"id": 6588097791056965407,
+		"hashid": 6588097791056965407,
 		"names": ["Masovian Voivodeship"],
 		"added": false
 	},
 	"PL-12": {
-		"id": 2229702156474321928,
+		"hashid": 2229702156474321928,
 		"names": [],
 		"added": false
 	},
 	"PL-18": {
-		"id": 2280156956738344048,
+		"hashid": 2280156956738344048,
 		"names": [],
 		"added": false
 	},
 	"PL-28": {
-		"id": 5522545777576020706,
+		"hashid": 5522545777576020706,
 		"names": ["Warmian-Masurian Voivodeship"],
 		"added": false
 	},
 	"PL-30": {
-		"id": 2636766960297218800,
+		"hashid": 2636766960297218800,
 		"names": [],
 		"added": false
 	},
 	"PL-32": {
-		"id": 15119312566673674755,
+		"hashid": 15119312566673674755,
 		"names": ["West Pomeranian Voivodeship"],
 		"added": false
 	},
 	"PL-10": {
-		"id": 9511617335727629078,
+		"hashid": 9511617335727629078,
 		"names": [],
 		"added": false
 	},
 	"PS-HBN": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"PS-JEM": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"PS-JRH": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"PS-BTH": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"PS-DEB": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"PS-JEN": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"PS-KYS": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"PS-NBS": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"PS-QQA": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"PS-RFH": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"PS-RBH": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"PS-SLT": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"PS-TBS": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"PS-TKM": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"PT-20": {
-		"id": 9905212583802727864,
+		"hashid": 9905212583802727864,
 		"names": [],
 		"added": false
 	},
 	"QA-KH": {
-		"id": 9260662469905258862,
+		"hashid": 9260662469905258862,
 		"names": [],
 		"added": false
 	},
 	"QA-SH": {
-		"id": 3458764560033647406,
+		"hashid": 3458764560033647406,
 		"names": [],
 		"added": false
 	},
 	"QA-ZA": {
-		"id": 7961520828083852767,
+		"hashid": 7961520828083852767,
 		"names": [],
 		"added": false
 	},
 	"RS-00": {
-		"id": 2261036951398823460,
+		"hashid": 2261036951398823460,
 		"names": [],
 		"added": false
 	},
 	"RS-14": {
-		"id": 16692949788267999180,
+		"hashid": 16692949788267999180,
 		"names": [],
 		"added": false
 	},
 	"RS-11": {
-		"id": 8266684864892905012,
+		"hashid": 8266684864892905012,
 		"names": [],
 		"added": false
 	},
 	"RS-23": {
-		"id": 15643168579886590536,
+		"hashid": 15643168579886590536,
 		"names": [],
 		"added": false
 	},
 	"RS-04": {
-		"id": 3211225215157060456,
+		"hashid": 3211225215157060456,
 		"names": [],
 		"added": false
 	},
 	"RS-06": {
-		"id": 2634916573080655919,
+		"hashid": 2634916573080655919,
 		"names": [],
 		"added": false
 	},
 	"RS-09": {
-		"id": 12281675230089451347,
+		"hashid": 12281675230089451347,
 		"names": [],
 		"added": false
 	},
 	"RS-KM": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"RS-25": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"RS-28": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"RS-29": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"RS-08": {
-		"id": 18030723076985488796,
+		"hashid": 18030723076985488796,
 		"names": [],
 		"added": false
 	},
 	"RS-17": {
-		"id": null,
+		"hashid": null,
 		"names": ["Moravica District"],
 		"added": true
 	},
 	"RS-20": {
-		"id": 8607968362581713881,
+		"hashid": 8607968362581713881,
 		"names": [],
 		"added": false
 	},
 	"RS-26": {
-		"id": null,
+		"hashid": null,
 		"names": ["Pec District", "Peja"],
 		"added": true
 	},
 	"RS-22": {
-		"id": 7132707809960337072,
+		"hashid": 7132707809960337072,
 		"names": [],
 		"added": false
 	},
 	"RS-10": {
-		"id": 877430470720266233,
+		"hashid": 877430470720266233,
 		"names": [],
 		"added": false
 	},
 	"RS-13": {
-		"id": 12770771673290255666,
+		"hashid": 12770771673290255666,
 		"names": [],
 		"added": false
 	},
 	"RS-27": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"RS-24": {
-		"id": 10986726528498881424,
+		"hashid": 10986726528498881424,
 		"names": [],
 		"added": false
 	},
 	"RS-19": {
-		"id": 6062434931597701230,
+		"hashid": 6062434931597701230,
 		"names": [],
 		"added": false
 	},
 	"RS-18": {
-		"id": 8883607600551777633,
+		"hashid": 8883607600551777633,
 		"names": [],
 		"added": false
 	},
 	"RS-03": {
-		"id": 1898006791975994569,
+		"hashid": 1898006791975994569,
 		"names": [],
 		"added": false
 	},
 	"RS-01": {
-		"id": 2031130841662701549,
+		"hashid": 2031130841662701549,
 		"names": [],
 		"added": false
 	},
 	"RS-02": {
-		"id": 9128581073021432014,
+		"hashid": 9128581073021432014,
 		"names": [],
 		"added": false
 	},
 	"RS-07": {
-		"id": 1417165427619069597,
+		"hashid": 1417165427619069597,
 		"names": [],
 		"added": false
 	},
 	"RS-21": {
-		"id": 6526456787020893198,
+		"hashid": 6526456787020893198,
 		"names": [],
 		"added": false
 	},
 	"RS-15": {
-		"id": 1905351296954003983,
+		"hashid": 1905351296954003983,
 		"names": [],
 		"added": false
 	},
 	"RS-05": {
-		"id": 3631238349781337952,
+		"hashid": 3631238349781337952,
 		"names": [],
 		"added": false
 	},
 	"RS-16": {
-		"id": 7220701864527662704,
+		"hashid": 7220701864527662704,
 		"names": [],
 		"added": false
 	},
 	"RS-12": {
-		"id": 4579568366761033391,
+		"hashid": 4579568366761033391,
 		"names": [],
 		"added": false
 	},
 	"RU-ALT": {
-		"id": 12029983960079969518,
+		"hashid": 12029983960079969518,
 		"names": [],
 		"added": false
 	},
 	"RU-AMU": {
-		"id": 3564877688652438496,
+		"hashid": 3564877688652438496,
 		"names": [],
 		"added": false
 	},
 	"RU-AST": {
-		"id": 6314780441760680594,
+		"hashid": 6314780441760680594,
 		"names": [],
 		"added": false
 	},
 	"RU-BEL": {
-		"id": 14395605944003923415,
+		"hashid": 14395605944003923415,
 		"names": [],
 		"added": false
 	},
 	"RU-CE": {
-		"id": 6135301521273065306,
+		"hashid": 6135301521273065306,
 		"names": [],
 		"added": false
 	},
 	"RU-CHU": {
-		"id": 3994123895913893768,
+		"hashid": 3994123895913893768,
 		"names": [],
 		"added": false
 	},
 	"RU-CU": {
-		"id": 3339917218039156100,
+		"hashid": 3339917218039156100,
 		"names": ["Chuvashia Republic"],
 		"added": false
 	},
 	"RU-YEV": {
-		"id": 4260619908015296724,
+		"hashid": 4260619908015296724,
 		"names": [],
 		"added": false
 	},
 	"RU-KHM": {
-		"id": 3194177561074805616,
+		"hashid": 3194177561074805616,
 		"names": ["Khanty-Mansi"],
 		"added": false
 	},
 	"RU-IVA": {
-		"id": 11128394373667816732,
+		"hashid": 11128394373667816732,
 		"names": [],
 		"added": false
 	},
 	"RU-YAN": {
-		"id": 18348616786859836010,
+		"hashid": 18348616786859836010,
 		"names": [],
 		"added": false
 	},
 	"RU-YAR": {
-		"id": 6707544347066385912,
+		"hashid": 6707544347066385912,
 		"names": [],
 		"added": false
 	},
 	"RU-KB": {
-		"id": 8087258748193626361,
+		"hashid": 8087258748193626361,
 		"names": ["Kabardino-Balkarian Republic"],
 		"added": false
 	},
 	"RU-KLU": {
-		"id": 8412674840954211905,
+		"hashid": 8412674840954211905,
 		"names": [],
 		"added": false
 	},
 	"RU-KC": {
-		"id": 18122531594846014721,
+		"hashid": 18122531594846014721,
 		"names": ["Karachay-Cherkessia"],
 		"added": false
 	},
 	"RU-KEM": {
-		"id": 9605658618877195787,
+		"hashid": 9605658618877195787,
 		"names": ["Kemerovo Oblast"],
 		"added": false
 	},
 	"RU-KIR": {
-		"id": 4148273271217966559,
+		"hashid": 4148273271217966559,
 		"names": [],
 		"added": false
 	},
 	"RU-KDA": {
-		"id": 12348863572666823891,
+		"hashid": 12348863572666823891,
 		"names": [],
 		"added": false
 	},
 	"RU-KYA": {
-		"id": 3619997478595510165,
+		"hashid": 3619997478595510165,
 		"names": [],
 		"added": false
 	},
 	"RU-KGN": {
-		"id": 2338786785431311076,
+		"hashid": 2338786785431311076,
 		"names": [],
 		"added": false
 	},
 	"RU-MAG": {
-		"id": 17345291407026819566,
+		"hashid": 17345291407026819566,
 		"names": [],
 		"added": false
 	},
 	"RU-MOS": {
-		"id": 13273641290265862893,
+		"hashid": 13273641290265862893,
 		"names": [],
 		"added": false
 	},
 	"RU-MOW": {
-		"id": 3258581842110834080,
+		"hashid": 3258581842110834080,
 		"names": [],
 		"added": false
 	},
 	"RU-NEN": {
-		"id": 17073748534712567087,
+		"hashid": 17073748534712567087,
 		"names": [],
 		"added": false
 	},
 	"RU-NIZ": {
-		"id": 4852427441877561120,
+		"hashid": 4852427441877561120,
 		"names": [],
 		"added": false
 	},
 	"RU-NGR": {
-		"id": 11995116326225485270,
+		"hashid": 11995116326225485270,
 		"names": [],
 		"added": false
 	},
 	"RU-OMS": {
-		"id": 7500196554326312148,
+		"hashid": 7500196554326312148,
 		"names": [],
 		"added": false
 	},
 	"RU-ORE": {
-		"id": 13478986573595297682,
+		"hashid": 13478986573595297682,
 		"names": [],
 		"added": false
 	},
 	"RU-ORL": {
-		"id": 8979791915229015043,
+		"hashid": 8979791915229015043,
 		"names": [],
 		"added": false
 	},
 	"RU-PNZ": {
-		"id": 14326089345810223908,
+		"hashid": 14326089345810223908,
 		"names": [],
 		"added": false
 	},
 	"RU-PER": {
-		"id": 10261989690408291632,
+		"hashid": 10261989690408291632,
 		"names": [],
 		"added": false
 	},
 	"RU-PRI": {
-		"id": 12858798995064529732,
+		"hashid": 12858798995064529732,
 		"names": ["Primorsky Krai"],
 		"added": false
 	},
 	"RU-PSK": {
-		"id": 904561209121422179,
+		"hashid": 904561209121422179,
 		"names": [],
 		"added": false
 	},
 	"RU-ROS": {
-		"id": 18123819915664279978,
+		"hashid": 18123819915664279978,
 		"names": [],
 		"added": false
 	},
 	"RU-SAK": {
-		"id": 9985823315474617372,
+		"hashid": 9985823315474617372,
 		"names": [],
 		"added": false
 	},
 	"RU-SPE": {
-		"id": 4232461155050798759,
+		"hashid": 4232461155050798759,
 		"names": ["Saint Petersburg"],
 		"added": false
 	},
 	"RU-SAR": {
-		"id": 6314780441760680594,
+		"hashid": 6314780441760680594,
 		"names": [],
 		"added": false
 	},
 	"RU-SE": {
-		"id": 6143364267211636069,
+		"hashid": 6143364267211636069,
 		"names": [],
 		"added": false
 	},
 	"RU-TAM": {
-		"id": 14913409514633786502,
+		"hashid": 14913409514633786502,
 		"names": [],
 		"added": false
 	},
 	"RU-TYU": {
-		"id": 9699803483096959591,
+		"hashid": 9699803483096959591,
 		"names": [],
 		"added": false
 	},
 	"RU-TVE": {
-		"id": 17399276939062637374,
+		"hashid": 17399276939062637374,
 		"names": ["Tverskaya Oblast"],
 		"added": false
 	},
 	"RU-UD": {
-		"id": 14541944928783741036,
+		"hashid": 14541944928783741036,
 		"names": ["Udmurt Republic", "Udmurtia"],
 		"added": false
 	},
 	"RU-VLA": {
-		"id": 13704586036058585340,
+		"hashid": 13704586036058585340,
 		"names": [],
 		"added": false
 	},
 	"RU-VGG": {
-		"id": 3148723129214086681,
+		"hashid": 3148723129214086681,
 		"names": [],
 		"added": false
 	},
 	"RU-VLG": {
-		"id": 10066477885342897583,
+		"hashid": 10066477885342897583,
 		"names": [],
 		"added": false
 	},
 	"RU-VOR": {
-		"id": 544391547647517512,
+		"hashid": 544391547647517512,
 		"names": [],
 		"added": false
 	},
 	"SA-03": {
-		"id": 10931621330971892142,
+		"hashid": 10931621330971892142,
 		"names": [],
 		"added": false
 	},
 	"SA-08": {
-		"id": 2231055105134844245,
+		"hashid": 2231055105134844245,
 		"names": [],
 		"added": false
 	},
 	"SA-01": {
-		"id": 16192633577499773531,
+		"hashid": 16192633577499773531,
 		"names": [],
 		"added": false
 	},
 	"SA-04": {
-		"id": 18318796420527814835,
+		"hashid": 18318796420527814835,
 		"names": [],
 		"added": false
 	},
 	"SA-02": {
-		"id": 6502001067469570312,
+		"hashid": 6502001067469570312,
 		"names": [],
 		"added": false
 	},
 	"SB-CT": {
-		"id": 12079778416417898316,
+		"hashid": 12079778416417898316,
 		"names": [],
 		"added": false
 	},
 	"SD-DE": {
-		"id": 14676559362294609044,
+		"hashid": 14676559362294609044,
 		"names": [],
 		"added": false
 	},
 	"SD-DW": {
-		"id": 16893600177064140760,
+		"hashid": 16893600177064140760,
 		"names": [],
 		"added": false
 	},
 	"SD-DS": {
-		"id": 17483507531817771289,
+		"hashid": 17483507531817771289,
 		"names": [],
 		"added": false
 	},
 	"SD-KS": {
-		"id": 357109493241392426,
+		"hashid": 357109493241392426,
 		"names": [],
 		"added": false
 	},
 	"SD-DN": {
-		"id": 9595482567314125562,
+		"hashid": 9595482567314125562,
 		"names": [],
 		"added": false
 	},
 	"SG-02": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"SG-03": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"SG-04": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"SG-05": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"SI-204": {
-		"id": 1238558279824120958,
+		"hashid": 1238558279824120958,
 		"names": [],
 		"added": false
 	},
 	"SK-BC": {
-		"id": 8318502562947389166,
+		"hashid": 8318502562947389166,
 		"names": [],
 		"added": false
 	},
 	"SK-NI": {
-		"id": 10968676926629682447,
+		"hashid": 10968676926629682447,
 		"names": [],
 		"added": false
 	},
 	"SK-TC": {
-		"id": 1233010961031440010,
+		"hashid": 1233010961031440010,
 		"names": [],
 		"added": false
 	},
 	"SK-TA": {
-		"id": 15679865993945834598,
+		"hashid": 15679865993945834598,
 		"names": [],
 		"added": false
 	},
 	"SK-ZI": {
-		"id": 1123881341061186469,
+		"hashid": 1123881341061186469,
 		"names": [],
 		"added": false
 	},
 	"SL-NW": {
-		"id": 8689589460541490510,
+		"hashid": 8689589460541490510,
 		"names": [],
 		"added": false
 	},
 	"SO-JD": {
-		"id": 330327119661260168,
+		"hashid": 330327119661260168,
 		"names": [],
 		"added": false
 	},
 	"SO-JH": {
-		"id": 5339680270721879838,
+		"hashid": 5339680270721879838,
 		"names": [],
 		"added": false
 	},
 	"SO-SD": {
-		"id": 13086581652671860984,
+		"hashid": 13086581652671860984,
 		"names": [],
 		"added": false
 	},
 	"SO-SH": {
-		"id": 9285378674561556716,
+		"hashid": 9285378674561556716,
 		"names": [],
 		"added": false
 	},
 	"ST-02": {
-		"id": 6903917090929772929,
+		"hashid": 6903917090929772929,
 		"names": [],
 		"added": false
 	},
 	"ST-03": {
-		"id": 14380395368623961072,
+		"hashid": 14380395368623961072,
 		"names": [],
 		"added": false
 	},
 	"ST-04": {
-		"id": 17161923140038964170,
+		"hashid": 17161923140038964170,
 		"names": [],
 		"added": false
 	},
 	"ST-05": {
-		"id": 9034195474857729183,
+		"hashid": 9034195474857729183,
 		"names": [],
 		"added": false
 	},
 	"ST-06": {
-		"id": 12832038061278381934,
+		"hashid": 12832038061278381934,
 		"names": [],
 		"added": false
 	},
 	"ST-01": {
-		"id": 6164812243096640456,
+		"hashid": 6164812243096640456,
 		"names": [],
 		"added": false
 	},
 	"SY-LA": {
-		"id": 9802596479661505071,
+		"hashid": 9802596479661505071,
 		"names": [],
 		"added": false
 	},
 	"SY-QU": {
-		"id": 9455971235664827594,
+		"hashid": 9455971235664827594,
 		"names": [],
 		"added": false
 	},
 	"SY-DY": {
-		"id": 10646026469075718082,
+		"hashid": 10646026469075718082,
 		"names": ["Deir ez-Zur"],
 		"added": false
 	},
 	"SY-HL": {
-		"id": 3762837242430182475,
+		"hashid": 3762837242430182475,
 		"names": [],
 		"added": false
 	},
 	"TD-BG": {
-		"id": 14773675848620624815,
+		"hashid": 14773675848620624815,
 		"names": [],
 		"added": false
 	},
 	"TH-16": {
-		"id": 17254591509274440040,
+		"hashid": 17254591509274440040,
 		"names": [],
 		"added": false
 	},
 	"TH-82": {
-		"id": 7635688061410028324,
+		"hashid": 7635688061410028324,
 		"names": [],
 		"added": false
 	},
 	"TH-S": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"TJ-GB": {
-		"id": 7086324121537645377,
+		"hashid": 7086324121537645377,
 		"names": [],
 		"added": false
 	},
 	"TJ-RA": {
-		"id": 2534473934241277,
+		"hashid": 2534473934241277,
 		"names": [],
 		"added": false
 	},
 	"TN-12": {
-		"id": 2272176405179608317,
+		"hashid": 2272176405179608317,
 		"names": [],
 		"added": false
 	},
 	"TN-33": {
-		"id": 3409237347529898038,
+		"hashid": 3409237347529898038,
 		"names": [],
 		"added": false
 	},
 	"TW-CHA": {
-		"id": 10089794323390592764,
+		"hashid": 10089794323390592764,
 		"names": [],
 		"added": false
 	},
 	"TW-CYI": {
-		"id": 18135050751418712371,
+		"hashid": 18135050751418712371,
 		"names": [],
 		"added": false
 	},
 	"TW-CYQ": {
-		"id": 3561095530799283534,
+		"hashid": 3561095530799283534,
 		"names": [],
 		"added": false
 	},
 	"TW-HSZ": {
-		"id": 887605648218148808,
+		"hashid": 887605648218148808,
 		"names": ["Hsinchu City"],
 		"added": false
 	},
 	"TW-HSQ": {
-		"id": 4535628893126300721,
+		"hashid": 4535628893126300721,
 		"names": [],
 		"added": false
 	},
 	"TW-HUA": {
-		"id": 7817759887835542787,
+		"hashid": 7817759887835542787,
 		"names": [],
 		"added": false
 	},
 	"TW-KHH": {
-		"id": 12098964556828766862,
+		"hashid": 12098964556828766862,
 		"names": [],
 		"added": false
 	},
 	"TW-KEE": {
-		"id": 16319559159705347008,
+		"hashid": 16319559159705347008,
 		"names": [],
 		"added": false
 	},
 	"TW-KIN": {
-		"id": 10323338674234555792,
+		"hashid": 10323338674234555792,
 		"names": [],
 		"added": false
 	},
 	"TW-LIE": {
-		"id": 3355114527669192124,
+		"hashid": 3355114527669192124,
 		"names": [],
 		"added": false
 	},
 	"TW-MIA": {
-		"id": 1221008822157466508,
+		"hashid": 1221008822157466508,
 		"names": [],
 		"added": false
 	},
 	"TW-NAN": {
-		"id": 298705129024327892,
+		"hashid": 298705129024327892,
 		"names": [],
 		"added": false
 	},
 	"TW-PEN": {
-		"id": 363837838745673513,
+		"hashid": 363837838745673513,
 		"names": [],
 		"added": false
 	},
 	"TW-PIF": {
-		"id": 5877591741094134784,
+		"hashid": 5877591741094134784,
 		"names": [],
 		"added": false
 	},
 	"TW-TXG": {
-		"id": 9568831249387768967,
+		"hashid": 9568831249387768967,
 		"names": [],
 		"added": false
 	},
 	"TW-TTT": {
-		"id": 10783698458031020514,
+		"hashid": 10783698458031020514,
 		"names": [],
 		"added": false
 	},
 	"TW-TAO": {
-		"id": 17845494994606569298,
+		"hashid": 17845494994606569298,
 		"names": [],
 		"added": false
 	},
 	"TW-ILA": {
-		"id": 2920371300561202902,
+		"hashid": 2920371300561202902,
 		"names": [],
 		"added": false
 	},
 	"TW-YUN": {
-		"id": 5239111375752633916,
+		"hashid": 5239111375752633916,
 		"names": [],
 		"added": false
 	},
 	"TZ-11": {
-		"id": 15915021927561266673,
+		"hashid": 15915021927561266673,
 		"names": ["Unguja South"],
 		"added": false
 	},
 	"UA-43": {
-		"id": 15630885013821227032,
+		"hashid": 15630885013821227032,
 		"names": [],
 		"added": false
 	},
 	"UA-32": {
-		"id": 2657893483748005304,
+		"hashid": 2657893483748005304,
 		"names": [],
 		"added": false
 	},
 	"UA-46": {
-		"id": 1434923756316575289,
+		"hashid": 1434923756316575289,
 		"names": [],
 		"added": false
 	},
 	"UA-56": {
-		"id": 2923664624240062158,
+		"hashid": 2923664624240062158,
 		"names": [],
 		"added": false
 	},
 	"UA-59": {
-		"id": 944476680999702972,
+		"hashid": 944476680999702972,
 		"names": [],
 		"added": false
 	},
 	"UA-23": {
-		"id": 1792139180078377873,
+		"hashid": 1792139180078377873,
 		"names": [],
 		"added": false
 	},
 	"UG-236": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"UG-335": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"UG-126": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"UG-433": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"UG-432": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"UG-434": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"UG-333": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"UG-336": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"UG-334": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"UG-337": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"UG-435": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"US-AS": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"US-GU": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"US-MP": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"US-PR": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"US-UM": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"US-VI": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"UZ-BU": {
-		"id": 1198137143814369282,
+		"hashid": 1198137143814369282,
 		"names": [],
 		"added": false
 	},
 	"UZ-FA": {
-		"id": 12336418125108737453,
+		"hashid": 12336418125108737453,
 		"names": [],
 		"added": false
 	},
 	"UZ-QR": {
-		"id": 12099354064887633246,
+		"hashid": 12099354064887633246,
 		"names": [],
 		"added": false
 	},
 	"VE-A": {
-		"id": 31765546814182217,
+		"hashid": 31765546814182217,
 		"names": [],
 		"added": false
 	},
 	"VE-X": {
-		"id": 12011261348272810222,
+		"hashid": 12011261348272810222,
 		"names": [],
 		"added": false
 	},
 	"VN-43": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"VN-57": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"VN-58": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"VN-40": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"VN-55": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"VN-54": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"VN-53": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"VN-50": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"VN-63": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"VN-14": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"VN-61": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"VN-47": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"VN-28": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"VN-41": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"VN-67": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"VN-36": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"VN-27": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"VN-52": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"VN-20": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"VN-46": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"VN-51": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"VN-70": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"VN-06": {
-		"id": null,
+		"hashid": null,
 		"names": [],
 		"added": true
 	},
 	"YE-SU": {
-		"id": 11737489094080405928,
+		"hashid": 11737489094080405928,
 		"names": ["Socotra"],
 		"added": false
 	},
 	"YE-TA": {
-		"id": 16471307555714828150,
+		"hashid": 16471307555714828150,
 		"names": ["Taizz"],
 		"added": false
 	},
 	"YE-SN": {
-		"id": 14709242116230691324,
+		"hashid": 14709242116230691324,
 		"names": [],
 		"added": false
 	},
 	"YE-SD": {
-		"id": 3164115982902117647,
+		"hashid": 3164115982902117647,
 		"names": ["Sa'dah"],
 		"added": false
 	},
 	"YE-HD": {
-		"id": 7463794332468838244,
+		"hashid": 7463794332468838244,
 		"names": ["Hadhramaut Governorate"],
 		"added": false
 	}

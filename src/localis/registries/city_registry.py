@@ -1,6 +1,6 @@
-from localis.data import CityModel
+from localis.models import CityModel
 from localis.registries import Registry, CountryRegistry, SubdivisionRegistry
-from localis.index.filter_index import FilterIndex
+from localis.indexes.filter_index import FilterIndex
 from collections import defaultdict
 
 

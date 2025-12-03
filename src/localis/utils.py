@@ -15,6 +15,8 @@ def chunked(list: list, size: int):
 
 def normalize(s: str, lower: bool = True) -> str:
     """Custom transliteration of a string into an ASCII-only search form with optional lowercasing (default=True)."""
+    if not isinstance(s, str):
+        return s
     MAP = {"ə": "a", "ǝ": "ä"}
 
     s = unicodedata.normalize("NFKD", s)
