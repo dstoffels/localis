@@ -12,7 +12,7 @@ class CountryBase(DTO):
 class Country(CountryBase):
     official_name: str
     aliases: list[str]
-    numeric: str
+    numeric: int
     flag: str
 
 
@@ -35,6 +35,9 @@ class CountryModel(Country, Model):
     @classmethod
     def from_row(cls, id: int, row: list[str | int | None], **kwargs) -> "CountryModel":
         ALIAS_IDX = 4
+        NUMERIC_IDX = 5
+
         row[ALIAS_IDX] = [a for a in row[ALIAS_IDX].split("|") if a]
+        row[NUMERIC_IDX] = int(row[NUMERIC_IDX])
 
         return cls(id, *row)

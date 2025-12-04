@@ -25,10 +25,15 @@ class TestLookup:
 
         for field in lookup_fields:
             lookup_value = getattr(subject, field)
+
+            while not lookup_value:
+                subject = select_random(registry, subject.id + 1)
+                lookup_value = getattr(subject, field)
+
             result = registry.lookup(lookup_value)
             assert (
                 result is not None
-            ), f"expected a result, got None for lookup field {field} with value {lookup_value}"
+            ), f"expected a result, got None for lookup field [{field}] with value [{lookup_value}]"
             assert isinstance(
                 result, DTO
             ), f"expected a DTO, got {type(result)} for lookup field {field}"
