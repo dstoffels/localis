@@ -47,9 +47,10 @@ class Model(DTO):
 
     def extract_filter_values(self) -> dict[str, set[str]]:
         """Used in processing to produce a normalized filter index for each model from its FILTER_FIELDS."""
-        filter_values: dict[str, set[str]] = defaultdict(set)
+        filter_values: dict[str, set[str]] = {}
 
-        for filter_kw, field_names in self.FILTER_FIELDS.items():
+        for param, field_names in self.FILTER_FIELDS.items():
+            filter_values[param] = set()
             for field in field_names:
                 obj = self
                 for nested in field.split("."):
@@ -60,10 +61,10 @@ class Model(DTO):
 
                 if isinstance(value, list):
                     for v in value:
-                        filter_values[filter_kw].add(normalize(v))
+                        filter_values[param].add(normalize(v))
 
                 elif value is not None:
-                    filter_values[filter_kw].add(normalize(value))
+                    filter_values[param].add(normalize(value))
 
         return filter_values
 
@@ -89,3 +90,7 @@ class Model(DTO):
 
     def to_row(self) -> tuple[str | int | None]:
         return tuple(self.to_dict().values())
+
+    @classmethod
+    def from_row(cls, id: int, row: list[str | int | None], **kwargs) -> "Model":
+        return cls(id, *row)

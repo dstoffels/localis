@@ -1,7 +1,7 @@
 from localis.models import Model, DTO
 from rapidfuzz import fuzz, process
 from localis.indexes.index import Index
-from localis.utils import normalize, generate_trigrams
+from localis.utils import normalize, generate_trigrams, decode_id_list
 import math
 import heapq
 
@@ -20,24 +20,15 @@ class SearchIndex(Index):
         self.PENALITY_FACTOR = penalty_factor
         super().__init__(model_cls, cache, filepath, **kwargs)
 
-    # def __init__(
-    #     self, cache: dict[int, Model], noise_threshold=0.6, penality_factor=0.15
-    # ):
-    #     self.cache = cache
-
-    #     index: dict[str, set[int]] = defaultdict(set)
-
-    #     for id, model in cache.items():
-    #         for trigram in model.search_tokens.split("|"):
-    #             index[trigram].add(id)
-    #         if model.EXT_TRIGRAMS:
-    #             for field in model.EXT_TRIGRAMS:
-    #                 value = getattr(model, field, None)
-    #                 if value:
-    #                     for trigram in value.search_tokens.split("|"):
-    #                         index[trigram].add(id)
-
-    #     self.index = index
+    def load(self, filepath):
+        try:
+            with open(filepath, "r", encoding="utf-8") as f:
+                for line in f:
+                    trigram, ids_str = line.split("\t")
+                    ids = set(decode_id_list(ids_str))
+                    self.index[trigram] = ids
+        except Exception as e:
+            raise Exception(f"Failed to load search index from {filepath}: {e}")
 
     def search(self, query: str, limit=10):
         if not query:

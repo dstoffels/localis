@@ -101,6 +101,9 @@ def parse_row(
     admin2 = subdivisions.get(admin2_code, None)
     country = countries.get(country_code, None)
 
+    if not country:
+        return None
+
     lat = row["latitude"]
     lng = row["longitude"]
 
@@ -132,6 +135,7 @@ def load_cities(
         for row in rows:
             if is_valid_city(row):
                 city = parse_row(row, subdivisions, countries)
-                city.id = len(cities) + 1
-                cities.append(city)
+                if city:
+                    city.id = len(cities) + 1
+                    cities.append(city)
         return cities

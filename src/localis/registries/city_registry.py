@@ -15,6 +15,11 @@ class CityRegistry(Registry[CityModel]):
         self._subdivisions = subdivisions
         super().__init__(**kwargs)
 
+    def parse_row(self, id, row):
+        return self._MODEL_CLS.from_row(
+            id, row, self._countries.cache, self._subdivisions.cache
+        )
+
     def _resolve_model(self, id: int) -> CityModel | None:
         row = self.cache.get(id)
         if not row:

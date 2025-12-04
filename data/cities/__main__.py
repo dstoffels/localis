@@ -12,7 +12,7 @@ from localis.models import SubdivisionModel, CountryModel, CityModel
 
 def main():
     countries: dict[str, CountryModel] = load_countries()
-    subdivisions: dict[str, SubdivisionModel] = load_subdivisions()
+    subdivisions: dict[str, SubdivisionModel] = load_subdivisions(countries)
     cities: list[CityModel] = load_cities(
         subdivisions, countries
     )  # load and parse cities

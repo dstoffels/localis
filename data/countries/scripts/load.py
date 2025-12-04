@@ -93,4 +93,5 @@ def init_iso_countries() -> dict[str, CountryModel]:
                 aliases=ALIAS_MAP.get(alpha2, []),
                 flag=c["flag"],
             )
+
     return countries

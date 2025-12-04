@@ -10,7 +10,7 @@ def main():
     countries = init_iso_countries()
     merge_wikidata(countries)
     merge_geonames(countries)
-    dump(countries.values())
+    dump(list(countries.values()))
 
 
 if __name__ == "__main__":

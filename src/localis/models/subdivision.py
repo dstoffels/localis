@@ -62,31 +62,26 @@ class SubdivisionModel(Subdivision, Model):
         data = self.to_dict()
         data["parent"] = self.parent.id if self.parent else None
         data["country"] = self.country.id
+        data.pop("hashid", None)
+        data["aliases"] = "|".join(self.aliases) if self.aliases else None
+        data.pop("id")
         return tuple(data.values())
 
     @classmethod
     def from_row(
-        cls, row, countries: dict[int, list], subdivisions: dict[int, list], **kwargs
-    ) -> Subdivision | None:
-        """Builds a model instance from a raw data tuple (row) and injects country and parent models passed in from respective caches. Returns the final DTO for the user."""
-        if not row:
-            return None
+        cls,
+        id: int,
+        row: tuple[str | int | None],
+        country_cache: dict[int, CountryModel],
+    ) -> "SubdivisionModel":
+        COUNTRY_IDX = 7
+        ALIAS_IDX = 4
+        row[ALIAS_IDX] = row[ALIAS_IDX].split("|")
 
-        flat_model = cls(*row)
+        row[COUNTRY_IDX] = country_cache.get(int(row[COUNTRY_IDX]))
+        return cls(id, *row)
 
-        raw_country = countries.get(flat_model.country)
-        if raw_country:
-            flat_model.country = CountryModel.from_row(raw_country)
-
-        raw_parent = subdivisions.get(flat_model.parent)
-        if raw_parent:
-            flat_model.parent = SubdivisionModel.from_row(
-                raw_parent, countries=countries, subdivisions=subdivisions
-            )
-
-        return flat_model.dto
-
-    # deterministically hash a unique id to later map admin2 subdivisions to their parents and to manually map ISO subdivisions that cannot be automatically merged with its geonames counterpart. hashid is ONLY used internally for these purposes; once the subdvision data has been successfully merged, hashid is discarded.
+    # temporarily hash a unique id to later map admin2 subdivisions to their parents and to manually map ISO subdivisions that cannot be automatically merged with its geonames counterpart. hashid is ONLY used internally for these purposes; once the subdvision data has been successfully merged, hashid is discarded.
     hashid: int = None
 
     def __post_init__(self):

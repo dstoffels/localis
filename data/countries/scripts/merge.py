@@ -79,5 +79,12 @@ def merge_geonames(countries: dict[str, CountryModel]):
             if name and name.lower() not in [
                 country.name.lower(),
                 country.official_name.lower(),
-            ] + [n.lower() for n in country.aliases]:
+                *[n.lower() for n in country.aliases],
+            ]:
                 country.aliases.append(name)
+
+            # remove name/official name from aliases if present
+            if country.name in country.aliases:
+                country.aliases.remove(country.name)
+            if country.official_name in country.aliases:
+                country.aliases.remove(country.official_name)

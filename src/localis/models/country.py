@@ -25,3 +25,16 @@ class CountryModel(Country, Model):
         "official_name": 1.0,
         "aliases": 1.0,
     }
+
+    def to_row(self) -> tuple[str | int | None]:
+        data = self.to_dict()
+        data["aliases"] = "|".join(self.aliases)
+        data.pop("id")
+        return tuple(data.values())
+
+    @classmethod
+    def from_row(cls, id: int, row: list[str | int | None], **kwargs) -> "CountryModel":
+        ALIAS_IDX = 4
+        row[ALIAS_IDX] = row[ALIAS_IDX].split("|")
+
+        return cls(id, *row)

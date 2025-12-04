@@ -82,14 +82,14 @@
 		"name": "Australia",
 		"alpha2": "AU",
 		"alpha3": "AUS",
-		"aliases": "Stria|Oz|Down Under|Stralia|Aussieland|Nova Hollandia|Straya|New Holland"
+		"aliases": "Oz|Aussieland|Nova Hollandia|New Holland"
 	},
 	{
 		"qid": "Q40",
 		"name": "Austria",
 		"alpha2": "AT",
 		"alpha3": "AUT",
-		"aliases": "Republik Österreich|Republic of Austria|Österreich"
+		"aliases": "Österreich"
 	},
 	{
 		"qid": "Q227",

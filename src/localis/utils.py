@@ -1,6 +1,7 @@
 import unicodedata
 import re
 from unidecode import unidecode
+import base64
 
 ModelData = list[str | int | list[str] | None]
 """Raw model data list"""
@@ -54,3 +55,30 @@ def generate_token_trigrams(s: str):
     norm = normalize(s)
     for token in generate_tokens(norm):
         yield from generate_trigrams(token)
+
+
+def decode_id_list(b64: str) -> list[int]:
+    """Convert base64(varint(delta(ids))) → [1,5,6,...]."""
+    data = base64.b64decode(b64)
+    out = []
+    prev = 0
+
+    i = 0
+    n = len(data)
+
+    while i < n:
+        shift = 0
+        value = 0
+
+        while True:
+            b = data[i]
+            i += 1
+            value |= (b & 0x7F) << shift
+            if not (b & 0x80):
+                break
+            shift += 7
+
+        prev += value
+        out.append(prev)
+
+    return out

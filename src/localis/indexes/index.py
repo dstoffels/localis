@@ -15,10 +15,8 @@ class Index:
     ):
         self.MODEL_CLS = model_cls
         self.cache = cache
-        self.index: dict[str, int | list[int]] = None
+        self.index: dict[str, int | list[int]] = {}
+        self.load(filepath)
 
-        try:
-            with gzip.open(filepath, "rb") as f:
-                self.index = pickle.load(f)
-        except Exception as e:
-            raise RuntimeError(f"Failed to load index file: {filepath}") from e
+    def load(self, filepath: Path):
+        pass

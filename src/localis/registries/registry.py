@@ -3,8 +3,7 @@ from localis.models import Model
 from abc import ABC
 from localis.models import DTO
 from pathlib import Path
-import gzip
-import pickle
+import csv
 from localis.indexes import FilterIndex, SearchIndex, LookupIndex
 from localis.utils import ModelData
 
@@ -19,8 +18,6 @@ class Registry(Generic[T], ABC):
 
     def __init__(self, **kwargs):
         # ---------- Lazy loaded attributes ---------- #
-
-        # For speed, the cache stores raw data rows as tuples, and the model/dto instances are created on demand
         self._cache: dict[int, ModelData] | None = None
         self._lookup_index: LookupIndex | None = None
         self._filter_index: FilterIndex | None = None
@@ -32,19 +29,19 @@ class Registry(Generic[T], ABC):
 
     @property
     def _data_filepath(self) -> Path:
-        return self._data_path / f"{self.REGISTRY_NAME}.pkl.gz"
+        return self._data_path / f"{self.REGISTRY_NAME}.tsv"
 
     @property
     def _lookup_filepath(self) -> Path:
-        return self._data_path / f"{self.REGISTRY_NAME}_lookup_index.pkl.gz"
+        return self._data_path / f"{self.REGISTRY_NAME}_lookup_index.tsv"
 
     @property
     def _filter_filepath(self) -> Path:
-        return self._data_path / f"{self.REGISTRY_NAME}_filter_index.pkl.gz"
+        return self._data_path / f"{self.REGISTRY_NAME}_filter_index.tsv"
 
     @property
     def _search_filepath(self) -> Path:
-        return self._data_path / f"{self.REGISTRY_NAME}_search_index.pkl.gz"
+        return self._data_path / f"{self.REGISTRY_NAME}_search_index.tsv"
 
     @property
     def count(self) -> int:
@@ -54,17 +51,22 @@ class Registry(Generic[T], ABC):
     @property
     def cache(self) -> dict[int, ModelData]:
         if self._cache is None:
+            # Load data file
             if not self._data_filepath.exists():
                 raise FileNotFoundError(f"Data file not found: {self._data_filepath}")
 
+            self._cache = {}
             try:
-                with gzip.open(self._data_filepath, "rb") as f:
-                    self._cache = pickle.load(f)
+                with open(self._data_filepath, "r", encoding="utf-8") as f:
+                    for id, line in enumerate(f, start=1):
+                        row = line.split("\t")
+                        self._cache[id] = self.parse_row(id, row)
             except Exception as e:
-                raise RuntimeError(
-                    f"Failed to load data file: {self._data_filepath}"
-                ) from e
+                raise e
         return self._cache
+
+    def parse_row(self, id, row: list[str | int | None]) -> T:
+        return self._MODEL_CLS.from_row(id, row)
 
     @property
     def lookup_index(self) -> LookupIndex:
@@ -97,40 +99,22 @@ class Registry(Generic[T], ABC):
         return self._search_index
 
     def __iter__(self) -> Iterator[T]:
-        return iter(self.cache.values())
-
-    def __getitem__(self, index: int) -> T:
-        return list(self.cache.values())[index]
+        return iter([self._resolve_model(id) for id in self.cache.keys()])
 
     def __len__(self) -> int:
         return len(self.cache)
 
-    def _resolve_model(self, id: int) -> T | None:
-        """Resolves a DTO instance from its ID, resolves dependency DTOs, and returns the final DTO for the user."""
-        row = self.cache.get(id)
-        if not row:
-            return None
-
-        flat_model = self._MODEL_CLS(*row)
-        return flat_model.dto
-
     # ----------- API METHODS ----------- #
-
-    # ----------- GET ----------- #
 
     def get(self, id: int) -> T | None:
         """Get by localis ID."""
-        return self._resolve_model(id)
-
-    # ----------- LOOKUP ----------- #
+        return self.cache.get(id).dto
 
     def lookup(self, identifier: str | int) -> T | None:
         """Fetches a single item by one of its other unique identifiers (use .get() for localis ID)."""
 
         model_id = self.lookup_index.get(identifier)
         return self._resolve_model(model_id)
-
-    # ----------- FILTER ----------- #
 
     def filter(self, *, name: str = None, limit: int = None, **kwargs) -> list[T]:
         """Filter by exact matches on specified fields with AND logic when filtering by multiple fields. Case insensitive."""
@@ -158,8 +142,6 @@ class Registry(Generic[T], ABC):
         results_list = [self._resolve_model(id) for id in list(results)[:limit]]
         results_list.sort(key=lambda r: r.name)  # sort alphabetically by name
         return results_list
-
-    # ----------- SEARCH ----------- #
 
     def search(self, query: str, limit: int = None, **kwargs) -> list[tuple[T, float]]:
         return self.search_index.search(query=query, limit=limit)
