@@ -12,23 +12,7 @@ class SubdivisionRegistry(Registry[Subdivision]):
         super().__init__(**kwargs)
 
     def parse_row(self, id, row):
-        return self._MODEL_CLS.from_row(id, row, self._countries.cache)
-
-    def _resolve_model(self, id):
-        row = self.cache.get(id)
-        if not row:
-            return None
-        flat_model: SubdivisionModel = self._MODEL_CLS(*row)
-
-        # Unresolved/flat models contain only IDs for dependencies from the row data.
-        # We need to resolve those dependencies into full DTOs.
-        flat_model.country = self._countries._resolve_model(flat_model.country)
-
-        if flat_model.parent:
-            flat_model.parent = self._resolve_model(flat_model.parent)
-
-        # Collapse model to final DTO
-        return flat_model.dto
+        return self._MODEL_CLS.from_row(id, row, self._countries._cache, self._cache)
 
     def lookup(self, identifier) -> SubdivisionModel | None:
         """Get a subdivision by its id, iso_code, or geonames_code."""

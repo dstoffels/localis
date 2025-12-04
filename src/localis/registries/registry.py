@@ -3,7 +3,6 @@ from localis.models import Model
 from abc import ABC
 from localis.models import DTO
 from pathlib import Path
-import csv
 from localis.indexes import FilterIndex, SearchIndex, LookupIndex
 from localis.utils import ModelData
 
@@ -17,8 +16,11 @@ class Registry(Generic[T], ABC):
     _MODEL_CLS: type[Model]
 
     def __init__(self, **kwargs):
-        # ---------- Lazy loaded attributes ---------- #
-        self._cache: dict[int, ModelData] | None = None
+        # ---------- Eager loaded ---------- #
+        self._cache: dict[int, Model] | None = None
+        self._load_cache()
+
+        # ---------- Lazy loaded ---------- #
         self._lookup_index: LookupIndex | None = None
         self._filter_index: FilterIndex | None = None
         self._search_index: SearchIndex | None = None
@@ -45,11 +47,9 @@ class Registry(Generic[T], ABC):
 
     @property
     def count(self) -> int:
-        return len(self.cache)
+        return len(self._cache)
 
-    # ----------- LAZY LOADERS ----------- #
-    @property
-    def cache(self) -> dict[int, ModelData]:
+    def _load_cache(self) -> dict[int, Model]:
         if self._cache is None:
             # Load data file
             if not self._data_filepath.exists():
@@ -63,61 +63,66 @@ class Registry(Generic[T], ABC):
                         self._cache[id] = self.parse_row(id, row)
             except Exception as e:
                 raise e
-        return self._cache
 
     def parse_row(self, id, row: list[str | int | None]) -> T:
         return self._MODEL_CLS.from_row(id, row)
 
-    @property
-    def lookup_index(self) -> LookupIndex:
+    def load_all(self) -> None:
+        """Force load all indexes."""
+        self._load_lookup_index()
+        self._load_filter_index()
+        self._load_search_index()
+
+    # ----------- LAZY LOADERS ----------- #
+
+    def _load_lookup_index(self) -> None:
         if self._lookup_index is None:
             self._lookup_index = LookupIndex(
                 model_cls=self._MODEL_CLS,
-                cache=self.cache,
+                cache=self._cache,
                 filepath=self._lookup_filepath,
             )
-        return self._lookup_index
 
-    @property
-    def filter_index(self) -> FilterIndex:
+    def _load_filter_index(self) -> None:
         if self._filter_index is None:
             self._filter_index = FilterIndex(
                 model_cls=self._MODEL_CLS,
-                cache=self.cache,
+                cache=self._cache,
                 filepath=self._filter_filepath,
             )
-        return self._filter_index
 
-    @property
-    def search_index(self) -> SearchIndex:
+    def _load_search_index(self) -> None:
         if self._search_index is None:
             self._search_index = SearchIndex(
                 model_cls=self._MODEL_CLS,
-                cache=self.cache,
+                cache=self._cache,
                 filepath=self._search_filepath,
             )
-        return self._search_index
 
     def __iter__(self) -> Iterator[T]:
-        return iter([self._resolve_model(id) for id in self.cache.keys()])
+        return iter([m.to_dto() for m in self._cache.values()])
 
     def __len__(self) -> int:
-        return len(self.cache)
+        return len(self._cache)
 
     # ----------- API METHODS ----------- #
 
-    def get(self, id: int) -> T | None:
+    def get(self, id: int) -> DTO | None:
         """Get by localis ID."""
-        return self.cache.get(id).dto
+        model = self._cache.get(id)
+        return model.to_dto() if model else None
 
-    def lookup(self, identifier: str | int) -> T | None:
+    def lookup(self, identifier: str | int) -> DTO | None:
         """Fetches a single item by one of its other unique identifiers (use .get() for localis ID)."""
+        self._load_lookup_index()
 
-        model_id = self.lookup_index.get(identifier)
-        return self._resolve_model(model_id)
+        model_id = self._lookup_index.get(identifier)
+        model = self._cache.get(model_id)
+        return model.to_dto() if model else None
 
-    def filter(self, *, name: str = None, limit: int = None, **kwargs) -> list[T]:
+    def filter(self, *, name: str = None, limit: int = None, **kwargs) -> list[DTO]:
         """Filter by exact matches on specified fields with AND logic when filtering by multiple fields. Case insensitive."""
+        self._load_filter_index()
         kwargs["name"] = name
 
         filter_kws = {k: v for k, v in kwargs.items() if v is not None}
@@ -129,7 +134,7 @@ class Registry(Generic[T], ABC):
             return []
 
         for key, value in filter_kws.items():
-            matches = self.filter_index.filter(filter_kw=key, field_value=value)
+            matches = self._filter_index.get(filter_kw=key, field_value=value)
 
             # short circuit if any field fails to match, all or nothing
             if not matches:
@@ -139,9 +144,10 @@ class Registry(Generic[T], ABC):
                 results = matches
             else:
                 results &= matches
-        results_list = [self._resolve_model(id) for id in list(results)[:limit]]
+        results_list = [self._cache[id] for id in list(results)[:limit]]
         results_list.sort(key=lambda r: r.name)  # sort alphabetically by name
         return results_list
 
     def search(self, query: str, limit: int = None, **kwargs) -> list[tuple[T, float]]:
-        return self.search_index.search(query=query, limit=limit)
+        self._load_search_index()
+        return self._search_index.search(query=query, limit=limit)

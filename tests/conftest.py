@@ -58,7 +58,7 @@ def select_random(seed):
     def callback(reg: Registry, seed_offset: int = 0):
         rng = random.Random(seed + seed_offset)
         id = rng.choice(range(1, reg.count))
-        return reg.lookup(id)
+        return reg.get(id)
 
     return callback
 
@@ -81,39 +81,31 @@ def city(select_random) -> localis.City:
     return select_random(localis.cities)
 
 
-def pytest_itemcollected(item: pytest.Item):
-    """Display class and function docstrings, fallback to names, and include filename."""
-    # File name
-    filename = os.path.basename(item.fspath)
-    file_title = filename.replace("test_", "").replace(".py", "").title()
+# def pytest_itemcollected(item: pytest.Item):
+#     """Display class and function docstrings, fallback to names, and include filename."""
+#     # File name
+#     filename = os.path.basename(item.fspath)
 
-    # Class docstring
-    cls_doc = getattr(getattr(item.parent, "obj", None), "__doc__", None)
-    cls_title = (
-        cls_doc.strip().split("\n")[0]
-        if cls_doc
-        else getattr(getattr(item.parent, "obj", None), "__name__", "")
-    )
 
-    # Function docstring
-    try:
-        func_doc: str = getattr(item.obj, "__doc__", None)
-        func_title: str = item.obj.__name__ + " > " + func_doc.strip().split("\n")[0]
-    except AttributeError as e:
-        e.add_note("Did you forget to include a docstring?")
-        raise e
+#     # Function docstring
+#     try:
+#         func_doc: str = getattr(item.obj, "__doc__", None)
+#         func_title: str = item.obj.__name__ + " > " + func_doc.strip().split("\n")[0]
+#     except AttributeError as e:
+#         e.add_note("Did you forget to include a docstring?")
+#         raise e
 
-    parts = [file_title]
-    if cls_title:
-        parts.append(cls_title)
-    if func_title:
-        parts.append(func_title)
+#     parts = [filename]
+#     # if cls_title:
+#     #     parts.append(cls_title)
+#     if func_title:
+#         parts.append(func_title)
 
-    # detect parametrized id value and append
-    if "[" in item.name:
-        parts.append("[" + item.name.split("[")[1])
+#     # detect parametrized id value and append
+#     if "[" in item.name:
+#         parts.append("[" + item.name.split("[")[1])
 
-    item._nodeid = " ".join(parts)
+#     item._nodeid = " ".join(parts)
 
 
 @pytest.hookimpl(hookwrapper=True)

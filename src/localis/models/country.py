@@ -35,6 +35,6 @@ class CountryModel(Country, Model):
     @classmethod
     def from_row(cls, id: int, row: list[str | int | None], **kwargs) -> "CountryModel":
         ALIAS_IDX = 4
-        row[ALIAS_IDX] = row[ALIAS_IDX].split("|")
+        row[ALIAS_IDX] = [a for a in row[ALIAS_IDX].split("|") if a]
 
         return cls(id, *row)

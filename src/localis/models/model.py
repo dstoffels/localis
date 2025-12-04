@@ -28,9 +28,18 @@ class DTO:
 
 
 class Model(DTO):
-    @property
-    def dto(self) -> DTO:
+    # ----------- Serialization Methods ----------- #
+    def to_dto(self) -> DTO:
         return extract_base(self)
+
+    def to_row(self) -> tuple[str | int | None]:
+        return tuple(self.to_dict().values())
+
+    @classmethod
+    def from_row(cls, id: int, row: list[str | int | None], **kwargs) -> "Model":
+        return cls(id, *row)
+
+    # ----------- Indexing Methods ----------- #
 
     LOOKUP_FIELDS: tuple[str] = ()
 
@@ -87,10 +96,3 @@ class Model(DTO):
 
             elif value is not None:
                 yield from generate_trigrams(normalize(value))
-
-    def to_row(self) -> tuple[str | int | None]:
-        return tuple(self.to_dict().values())
-
-    @classmethod
-    def from_row(cls, id: int, row: list[str | int | None], **kwargs) -> "Model":
-        return cls(id, *row)

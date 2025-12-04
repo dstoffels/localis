@@ -48,8 +48,7 @@ class CityModel(City, Model):
     admin2: SubdivisionModel | None
     country: CountryModel | None
 
-    @property
-    def dto(self) -> City:
+    def to_dto(self) -> City:
         dto: City = extract_base(self, depth=1)
         dto.admin1 = self.admin1 and extract_base(self.admin1, depth=2)
         dto.admin2 = self.admin2 and extract_base(self.admin2, depth=2)

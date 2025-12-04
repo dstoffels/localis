@@ -17,35 +17,15 @@ class CityRegistry(Registry[CityModel]):
 
     def parse_row(self, id, row):
         return self._MODEL_CLS.from_row(
-            id, row, self._countries.cache, self._subdivisions.cache
+            id, row, self._countries._cache, self._subdivisions._cache
         )
 
-    def _resolve_model(self, id: int) -> CityModel | None:
-        row = self.cache.get(id)
-        if not row:
-            return None
-
-        flat_model: CityModel = self._MODEL_CLS(*row)
-
-        # Unresolved/flat models contain only IDs for dependencies from the row data.
-        # We need to resolve those dependencies into full DTOs.
-        flat_model.country = self._countries._resolve_model(flat_model.country)
-
-        if flat_model.admin1:
-            flat_model.admin1 = self._subdivisions._resolve_model(flat_model.admin1)
-
-        if flat_model.admin2:
-            flat_model.admin2 = self._subdivisions._resolve_model(flat_model.admin2)
-
-        # Collapse model to final DTO
-        return flat_model.dto
-
-    def get(self, id) -> CityModel | None:
+    def get(self, id: int) -> CityModel | None:
         """Get by localis ID."""
         return super().get(id)
 
     def lookup(self, identifier) -> CityModel | None:
-        """Get a city by its id"""
+        """Get a city by its GeoNames ID."""
         return super().lookup(identifier)
 
     def filter(

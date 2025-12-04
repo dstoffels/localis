@@ -2,9 +2,17 @@ import random
 import string
 from localis.registries import Registry
 from localis.models import DTO
+from localis import countries, subdivisions, cities
+import pytest
 
+REGISTRIES = [countries, subdivisions, cities]
 
-alphabet = string.ascii_lowercase
+registry_param = pytest.mark.parametrize(
+    "registry", REGISTRIES, ids=lambda r: type(r).__name__
+)
+"""Tests will loop over all registries and perform the same assertions."""
+
+ALPHABET = string.ascii_lowercase
 
 
 def mangle(
@@ -83,7 +91,7 @@ def mangle(
 
             # apply op
             if op == "replace":
-                rest[idx] = rng.choice(alphabet)
+                rest[idx] = rng.choice(ALPHABET)
 
             elif op == "swap" and idx < len(rest) - 1:
                 rest[idx], rest[idx + 1] = rest[idx + 1], rest[idx]
@@ -92,7 +100,7 @@ def mangle(
                 del rest[idx]
 
             elif op == "insert":
-                rest.insert(idx + 1, rng.choice(alphabet))
+                rest.insert(idx + 1, rng.choice(ALPHABET))
 
         # reassemble token
         mangled_tokens.append(first_char + "".join(rest))

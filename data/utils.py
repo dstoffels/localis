@@ -52,10 +52,10 @@ def dump_lookup_index(data: list[Model], path: Path) -> None:
     with open(path, "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f, delimiter="\t")
         for item in data:
-            id = item.id
+            row = []
             for value in item.extract_lookup_values():
-                writer.writerow([id, value])
-                id = None  # only write id once
+                row.append(str(value))
+            writer.writerow(["|".join(row)])
 
 
 def dump_filter_index(data: list[Model], path: Path) -> None:
@@ -106,7 +106,7 @@ def encode_id_list(ids: set[int]) -> str:
     return base64.b64encode(buf).decode("ascii")
 
 
-def dump_search_index(data: list, path: Path) -> None:
+def dump_search_index(data: list[Model], path: Path) -> None:
     index: dict[str, set[int]] = defaultdict(set)
 
     # Build posting lists

@@ -64,6 +64,7 @@ class SubdivisionMap:
     def refresh(self):
         self._subs, self._by_geo_code, self._by_iso_code = {}, {}, {}
         for sub in self._by_id.values():
+            sub.admin_level = 2 if sub.parent else 1
             self.add(sub)
 
     def __len__(self):

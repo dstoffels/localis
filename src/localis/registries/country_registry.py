@@ -33,7 +33,7 @@ class CountryRegistry(Registry[CountryModel]):
 
     def load_filters(self):
         self._filter_index = FilterIndex(
-            cache=self.cache, filter_fields=self._MODEL_CLS.FILTER_FIELDS
+            cache=self._cache, filter_fields=self._MODEL_CLS.FILTER_FIELDS
         )
 
     def filter(

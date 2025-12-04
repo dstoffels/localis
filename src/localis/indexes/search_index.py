@@ -24,9 +24,9 @@ class SearchIndex(Index):
         try:
             with open(filepath, "r", encoding="utf-8") as f:
                 for line in f:
-                    trigram, ids_str = line.split("\t")
-                    ids = set(decode_id_list(ids_str))
-                    self.index[trigram] = ids
+                    trigram, ids_str = line.strip().split("\t")
+                    # ids = tuple(decode_id_list(ids_str)) # TODO: decide to decode on load or search
+                    self.index[trigram] = ids_str
         except Exception as e:
             raise Exception(f"Failed to load search index from {filepath}: {e}")
 

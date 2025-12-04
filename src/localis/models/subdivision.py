@@ -51,8 +51,7 @@ class SubdivisionModel(Subdivision, Model):
     parent: "SubdivisionModel"
     country: CountryModel
 
-    @property
-    def dto(self):
+    def to_dto(self) -> Subdivision:
         dto: Subdivision = extract_base(self)
         dto.parent = self.parent and extract_base(self.parent, depth=2)
         dto.country = self.country and extract_base(self.country, depth=2)
@@ -73,12 +72,23 @@ class SubdivisionModel(Subdivision, Model):
         id: int,
         row: tuple[str | int | None],
         country_cache: dict[int, CountryModel],
+        subdivision_cache: dict[int, "SubdivisionModel"] = None,
+        **kwargs,
     ) -> "SubdivisionModel":
-        COUNTRY_IDX = 7
         ALIAS_IDX = 4
-        row[ALIAS_IDX] = row[ALIAS_IDX].split("|")
+        ADMIN_LEVEL_IDX = 5
+        PARENT_IDX = 6
+        COUNTRY_IDX = 7
 
+        row[ALIAS_IDX] = [a for a in row[ALIAS_IDX].split("|") if a]
+        row[ADMIN_LEVEL_IDX] = int(row[ADMIN_LEVEL_IDX])
+        row[PARENT_IDX] = (
+            subdivision_cache.get(int(row[PARENT_IDX]))
+            if subdivision_cache and row[PARENT_IDX]
+            else None
+        )
         row[COUNTRY_IDX] = country_cache.get(int(row[COUNTRY_IDX]))
+
         return cls(id, *row)
 
     # temporarily hash a unique id to later map admin2 subdivisions to their parents and to manually map ISO subdivisions that cannot be automatically merged with its geonames counterpart. hashid is ONLY used internally for these purposes; once the subdvision data has been successfully merged, hashid is discarded.

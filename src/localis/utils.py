@@ -17,6 +17,9 @@ def chunked(list: list, size: int):
         yield list[i : i + size]
 
 
+SPACE_RE = re.compile(r"\s+")
+
+
 def normalize(s: str, lower: bool = True) -> str:
     """Custom transliteration of a string into an ASCII-only search form with optional lowercasing (default=True)."""
     if not isinstance(s, str):
@@ -26,7 +29,8 @@ def normalize(s: str, lower: bool = True) -> str:
     s = unicodedata.normalize("NFKD", s)
     s = "".join(ch for ch in s if not unicodedata.combining(ch))
     s = "".join(MAP.get(ch, ch) for ch in s)
-    s = unidecode(s).strip()
+    s = unidecode(s)
+    s = SPACE_RE.sub(" ", s).strip()
     return s.lower() if lower else s
 
 
@@ -57,6 +61,9 @@ def generate_token_trigrams(s: str):
         yield from generate_trigrams(token)
 
 
+# The search indexes store tens of thousands of trigrams and some have thousands of associated IDs.
+# To reduce the size of these indexes on disk, we encode the list of IDs for each trigram using
+# base64-encoded varint delta encoding, which must be decoded on load.
 def decode_id_list(b64: str) -> list[int]:
     """Convert base64(varint(delta(ids))) → [1,5,6,...]."""
     data = base64.b64decode(b64)
