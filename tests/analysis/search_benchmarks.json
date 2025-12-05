@@ -41,25 +41,25 @@
         },
         "report": "A ~50% reduction in search time"
     },
-    "2025-12-05T08:06:30.369789": {
+    "2025-12-05T08:33:53.729348": {
         "iterations": 1,
         "sample_size": 1000,
-        "notes": "Bump city's admin1 weighting from 0.4 > 0.6",
+        "notes": "Lowered noise threshold from 0.6 > 0.55",
         "countries": {
             "success_rate": 0.811,
-            "avg_time_ms": 0.069,
-            "avg_hit_score": 0.876
+            "avg_time_ms": 0.07,
+            "avg_hit_score": 0.866
         },
         "subdivisions": {
             "success_rate": 0.825,
-            "avg_time_ms": 1.432,
-            "avg_hit_score": 0.913
+            "avg_time_ms": 1.367,
+            "avg_hit_score": 0.911
         },
         "cities": {
-            "success_rate": 0.782,
-            "avg_time_ms": 17.265,
-            "avg_hit_score": 0.904
+            "success_rate": 0.866,
+            "avg_time_ms": 17.235,
+            "avg_hit_score": 0.878
         },
-        "report": "Improved performance but not accuracy. Problem is likely in early exits or candiate culling on short strings."
+        "report": "Significant performance boost to cities, but apparent ceiling hit for countries and subdivisions, suggesting false negatives in candidate reduction"
     }
 }

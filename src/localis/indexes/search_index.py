@@ -13,7 +13,7 @@ class SearchIndex(Index):
         filepath,
         **kwargs,
     ):
-        self.NOISE_THRESHOLD = 0.6
+        self.NOISE_THRESHOLD = 0.55
         self.STRONG_MATCH_THRESHOLD = 0.75
         self.PENALITY_FACTOR = 0.01
         super().__init__(model_cls, cache, filepath, **kwargs)
