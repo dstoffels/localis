@@ -13,9 +13,9 @@ class SearchIndex(Index):
         filepath,
         **kwargs,
     ):
-        self.NOISE_THRESHOLD = 0.55
-        self.STRONG_MATCH_THRESHOLD = 0.75
-        self.PENALITY_FACTOR = 0.01
+        self.NOISE_THRESHOLD = 0.5
+        self.STRONG_MATCH_THRESHOLD = 0.8
+        self.CANDIDATE_CNT_THRESHOLD = 1000
         super().__init__(model_cls, cache, filepath, **kwargs)
 
     def load(self, filepath):
@@ -36,9 +36,21 @@ class SearchIndex(Index):
         self.trigram_count = 0
 
         self._build_match_counts()
-
         all_results: dict[int, tuple[Model, float]] = {}
         scored_ids: set[int] = set()
+
+        candidate_count = len(self.match_counts)
+
+        if candidate_count <= self.CANDIDATE_CNT_THRESHOLD:
+            for id in self.match_counts.keys():
+                candidate = self.cache[id]
+                score = self._score_candidate(candidate)
+                if score >= self.NOISE_THRESHOLD:
+                    all_results[id] = (candidate, score)
+                scored_ids.add(id)
+            return sorted(all_results.values(), key=lambda x: x[1], reverse=True)[
+                :limit
+            ]
 
         for min_trigram_matches in range(self.trigram_count, 1, -1):
             candidates = self._get_candidates(min_trigram_matches)

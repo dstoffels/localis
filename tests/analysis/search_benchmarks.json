@@ -61,5 +61,26 @@
             "avg_hit_score": 0.878
         },
         "report": "Significant performance boost to cities, but apparent ceiling hit for countries and subdivisions, suggesting false negatives in candidate reduction"
+    },
+    "2025-12-05T13:00:02.960963": {
+        "iterations": 1,
+        "sample_size": 1000,
+        "notes": "Implemented CANDIDATE_CNT_THRESHOLD (1000), run all candidates if the count is below threshold. Lowered noise threshold from 0.55 to 0.5, raise strong match threshold from 0.75 to 0.8",
+        "countries": {
+            "success_rate": 0.928,
+            "avg_time_ms": 0.233,
+            "avg_hit_score": 0.842
+        },
+        "subdivisions": {
+            "success_rate": 0.902,
+            "avg_time_ms": 2.076,
+            "avg_hit_score": 0.898
+        },
+        "cities": {
+            "success_rate": 0.946,
+            "avg_time_ms": 23.046,
+            "avg_hit_score": 0.843
+        },
+        "report": "Solid performance and accuracy across the board, however, we're only hitting first 1000 subdivisions and cities."
     }
 }
