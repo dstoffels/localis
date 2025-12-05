@@ -37,9 +37,9 @@ class CityModel(City, Model):
     }
     SEARCH_FIELDS = {
         "name": 1.0,
-        "admin1.name": 0.4,
+        "admin1.name": 0.6,
+        "admin1.iso_suffix": 0.6,
         "country.name": 0.3,
-        "admin1.iso_suffix": 0.4,
         "country.alpha2": 0.3,
         "country.alpha3": 0.3,
     }

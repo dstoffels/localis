@@ -19,5 +19,47 @@
             "avg_hit_score": 0.897
         },
         "report": ""
+    },
+    "2025-12-05T08:04:58.001932": {
+        "iterations": 1,
+        "sample_size": 1000,
+        "notes": "Add early exit for low name score in search scoring",
+        "countries": {
+            "success_rate": 0.811,
+            "avg_time_ms": 0.068,
+            "avg_hit_score": 0.876
+        },
+        "subdivisions": {
+            "success_rate": 0.825,
+            "avg_time_ms": 1.416,
+            "avg_hit_score": 0.913
+        },
+        "cities": {
+            "success_rate": 0.782,
+            "avg_time_ms": 19.714,
+            "avg_hit_score": 0.897
+        },
+        "report": "A ~50% reduction in search time"
+    },
+    "2025-12-05T08:06:30.369789": {
+        "iterations": 1,
+        "sample_size": 1000,
+        "notes": "Bump city's admin1 weighting from 0.4 > 0.6",
+        "countries": {
+            "success_rate": 0.811,
+            "avg_time_ms": 0.069,
+            "avg_hit_score": 0.876
+        },
+        "subdivisions": {
+            "success_rate": 0.825,
+            "avg_time_ms": 1.432,
+            "avg_hit_score": 0.913
+        },
+        "cities": {
+            "success_rate": 0.782,
+            "avg_time_ms": 17.265,
+            "avg_hit_score": 0.904
+        },
+        "report": "Improved performance but not accuracy. Problem is likely in early exits or candiate culling on short strings."
     }
 }

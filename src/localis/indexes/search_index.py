@@ -89,9 +89,6 @@ class SearchIndex(Index):
         score = 0.0
         total_weight = 0.0
 
-        if candidate.name == "Madison" and candidate.admin1.name == "Wisconsin":
-            pass
-
         for i, (field_value, weight) in enumerate(candidate.get_search_values()):
             if not field_value:
                 continue
@@ -117,9 +114,8 @@ class SearchIndex(Index):
                 score += field_score * weight
                 total_weight += weight
             elif i == 0:
-                # primary field miss is worse
-                score = 0.0
-                total_weight = 1.0
+                # early exit if the name field is a poor match
+                return 0.0
         return score / total_weight if total_weight > 0 else 0.0
 
     REMOVE_CHARS = (",", ".")
