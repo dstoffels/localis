@@ -82,17 +82,33 @@ class Model(DTO):
 
     def extract_search_trigrams(self):
         """Used in processing to produce a normalized, trigram search index for each model from its SEARCH_FIELDS keys."""
+        values = []
+
         for field in self.SEARCH_FIELDS.keys():
             obj = self
             for nested in field.split("."):
-                value: str | list[str] = getattr(obj, nested)
+                value: str | list[str] = getattr(obj, nested, None)
                 if value is None:
                     break
                 obj = value
 
             if isinstance(value, list):
                 for v in value:
-                    yield from generate_trigrams(normalize(v))
+                    values.append(v)
 
             elif value is not None:
-                yield from generate_trigrams(normalize(value))
+                values.append(value)
+
+        return generate_trigrams(normalize(" ".join(values)))
+
+    def get_search_values(self):
+        for field_name, weight in self.SEARCH_FIELDS.items():
+            obj = self
+            for nested in field_name.split("."):
+                value: str | list[str] = getattr(obj, nested, None)
+                if value is None:
+                    break
+                obj = value
+
+            if value is not None:
+                yield (value, weight)

@@ -66,6 +66,8 @@ def generate_token_trigrams(s: str):
 # base64-encoded varint delta encoding, which must be decoded on load.
 def decode_id_list(b64: str) -> list[int]:
     """Convert base64(varint(delta(ids))) → [1,5,6,...]."""
+    if not b64:
+        return []
     data = base64.b64decode(b64)
     out = []
     prev = 0

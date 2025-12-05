@@ -148,6 +148,9 @@ class Registry(Generic[T], ABC):
         results_list.sort(key=lambda r: r.name)  # sort alphabetically by name
         return results_list
 
-    def search(self, query: str, limit: int = None, **kwargs) -> list[tuple[T, float]]:
+    def search(
+        self, query: str, limit: int = None, **kwargs
+    ) -> list[tuple[DTO, float]]:
         self._load_search_index()
-        return self._search_index.search(query=query, limit=limit)
+        results = self._search_index.search(query=query, limit=limit)
+        return results

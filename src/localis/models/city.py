@@ -37,11 +37,11 @@ class CityModel(City, Model):
     }
     SEARCH_FIELDS = {
         "name": 1.0,
-        "admin1.iso_suffix": 0.5,
-        "admin1.name": 0.5,
-        "country.alpha2": 0.4,
-        "country.alpha3": 0.4,
-        "country.name": 0.4,
+        "admin1.name": 0.4,
+        "country.name": 0.3,
+        "admin1.iso_suffix": 0.4,
+        "country.alpha2": 0.3,
+        "country.alpha3": 0.3,
     }
 
     admin1: SubdivisionModel | None

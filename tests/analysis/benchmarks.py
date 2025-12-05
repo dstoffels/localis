@@ -1,14 +1,14 @@
 import json
 from datetime import datetime
 import time
-from localis.data.model import DTO
+from localis.models import DTO
 from localis.registries import Registry
 import localis
 from tests.utils import mangle
 import random
 
 ITERATIONS = 1
-SAMPLE_SIZE = 300
+SAMPLE_SIZE = 1000
 
 
 def benchmark():

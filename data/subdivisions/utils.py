@@ -56,6 +56,9 @@ class SubdivisionMap:
             for sub in level_map.values()
         ]
 
+        # ensure subdivisions are sorted by admin level so level 2 subdivisions are processed after their level 1 parents
+        # all.sort(key=lambda s: s.admin_level)
+
         for id, sub in enumerate(all, start=1):
             sub.id = id
 

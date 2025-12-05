@@ -51,10 +51,10 @@ class CityRegistry(Registry[CityModel]):
         self, query, limit=None, population_sort: bool = False, **kwargs
     ) -> list[tuple[CityModel, float]]:
         """Search cities by name, subdivision, or country. Can optionally sort by population, which is great for autocompletes."""
-        results = super().search(query=query, limit=None, **kwargs)
+        results = super().search(query=query, limit=limit, **kwargs)
         if population_sort:
             results.sort(key=lambda x: x[0].population, reverse=True)
-        return results[:limit]
+        return results
 
 
 # ----------- SINGLETON ----------- #
