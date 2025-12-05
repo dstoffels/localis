@@ -31,7 +31,7 @@ class SearchIndex(Index):
         if not query:
             return []
 
-        self.query = self.normalize(query)
+        self.query = self._normalize_query(query)
         self.query_token_count = len(self.query.split())
         self.match_counts: dict[int, int] = defaultdict(int)
         self.trigram_count = 0
@@ -113,7 +113,7 @@ class SearchIndex(Index):
         score_values = candidate.get_search_values()
 
         name, weight = next(score_values)  # name is always the first SEARCH_FIELD
-        name_score = fuzz.WRatio(self.query, self.normalize(name)) / 100.0
+        name_score = fuzz.WRatio(self.query, self._normalize_query(name)) / 100.0
         if name_score >= self.NOISE_THRESHOLD:
             score += name_score * weight
             total_weight += weight
@@ -152,7 +152,7 @@ class SearchIndex(Index):
 
     REMOVE_CHARS = (",", ".")
 
-    def normalize(self, text: str) -> str:
+    def _normalize_query(self, text: str) -> str:
         norm = normalize(text)
 
         trans_table = str.maketrans("", "", "".join(self.REMOVE_CHARS))

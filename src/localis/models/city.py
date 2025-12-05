@@ -71,8 +71,8 @@ class CityModel(City, Model):
         country_cache: dict[int, CountryModel],
         subdivision_cache: dict[int, SubdivisionModel],
         **kwargs,
-    ) -> DTO | None:
-        """Builds a CityModel instance from a raw data tuple (row) and injects country and subdivision models from their respective caches. Returns the final DTO for the user."""
+    ) -> "CityModel":
+        """Builds a CityModel instance from a raw data tuple (row) and injects country and subdivision models from their respective caches."""
         GEONAMES_ID_IDX = 1
         ADMIN1_IDX = 2
         ADMIN2_IDX = 3
