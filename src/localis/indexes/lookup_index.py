@@ -1,7 +1,5 @@
-from localis.models import Model
 from localis.indexes.index import Index
-from localis.utils import normalize, ModelData
-import csv
+from localis.utils import normalize
 
 
 class LookupIndex(Index):

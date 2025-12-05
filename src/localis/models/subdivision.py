@@ -105,16 +105,3 @@ class SubdivisionModel(Subdivision, Model):
             ]
             key = "|".join(key_parts)
             self.hashid = int.from_bytes(hashlib.md5(key.encode()).digest()[:8], "big")
-
-    # @property
-    # def search_context(self) -> str:
-    #     return " ".join(
-    #         [
-    #             self.name,
-    #             self.iso_suffix,
-    #             self.type or "",
-    #             self.country.alpha2 if self.country else "",
-    #             self.country.alpha3 if self.country else "",
-    #             self.country.name if self.country else "",
-    #         ],
-    #     ).lower()

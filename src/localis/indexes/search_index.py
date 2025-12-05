@@ -27,7 +27,7 @@ class SearchIndex(Index):
         except Exception as e:
             raise Exception(f"Failed to load search index from {filepath}: {e}")
 
-    def search(self, query: str, limit=10) -> list[tuple[DTO, float]]:
+    def search(self, query: str, limit=10) -> list[tuple[Model, float]]:
         if not query:
             return []
 

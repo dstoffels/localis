@@ -1,7 +1,5 @@
-from localis.models import CityModel
+from localis.models import CityModel, City
 from localis.registries import Registry, CountryRegistry, SubdivisionRegistry
-from localis.indexes.filter_index import FilterIndex
-from collections import defaultdict
 
 
 class CityRegistry(Registry[CityModel]):
@@ -20,11 +18,11 @@ class CityRegistry(Registry[CityModel]):
             id, row, self._countries._cache, self._subdivisions._cache
         )
 
-    def get(self, id: int) -> CityModel | None:
-        """Get by localis ID."""
+    def get(self, id: int) -> City | None:
+        """Get a city by its localis ID."""
         return super().get(id)
 
-    def lookup(self, identifier) -> CityModel | None:
+    def lookup(self, identifier) -> City | None:
         """Get a city by its GeoNames ID."""
         return super().lookup(identifier)
 
@@ -35,11 +33,11 @@ class CityRegistry(Registry[CityModel]):
         limit: int = None,
         subdivision: str = None,
         country: str = None,
-        # population__lt: int = None, # to be implemented
-        # population__gt: int = None, # to be implemented
+        # population__lt: int = None, # TODO: to be implemented
+        # population__gt: int = None, # TODO: to be implemented
         **kwargs,
-    ) -> list[CityModel]:
-        """Filter cities by name, subdivision or country with additional filtering by population. Multiple filters use logical AND."""
+    ) -> list[City]:
+        """Filter cities by name, subdivision (name, iso/geonames code) or country (name, alpha2, alpha3) with additional filtering by population. Multiple filters use logical AND."""
         kwargs = {
             "subdivision": subdivision,
             "country": country,
@@ -50,8 +48,10 @@ class CityRegistry(Registry[CityModel]):
     def search(
         self, query, limit=None, population_sort: bool = False, **kwargs
     ) -> list[tuple[CityModel, float]]:
-        """Search cities by name, subdivision, or country. Can optionally sort by population, which is great for autocompletes."""
-        results = super().search(query=query, limit=limit, **kwargs)
+        """Search cities by name, subdivision (name, iso/geonames code), or country (name, alpha2, alpha3). Can optionally sort by population, which is great for autocompletes."""
+        results: list[tuple[City, float]] = super().search(
+            query=query, limit=limit, **kwargs
+        )
         if population_sort:
             results.sort(key=lambda x: x[0].population, reverse=True)
         return results

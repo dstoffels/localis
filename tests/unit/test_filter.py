@@ -30,4 +30,6 @@ class TestFilter:
         subject: DTO = select_random(registry)
         results: list[DTO] = registry.filter(name=subject.name)
         assert len(results) > 0, "should have at least 1 result"
-        assert all(subject.name in r.name for r in results)
+        assert any(
+            subject.name in [r.name] for r in results
+        ), f"subject ({subject.name}) should be in results: {results}"

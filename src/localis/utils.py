@@ -3,20 +3,6 @@ import re
 from unidecode import unidecode
 import base64
 
-ModelData = list[str | int | list[str] | None]
-"""Raw model data list"""
-
-
-def clean_row(row: dict[str, str]) -> dict[str, str | None]:
-    """Clean and normalize all fields in a dict"""
-    return {k: (v if v.strip() != "" else None) for k, v in row.items()}
-
-
-def chunked(list: list, size: int):
-    for i in range(0, len(list), size):
-        yield list[i : i + size]
-
-
 SPACE_RE = re.compile(r"\s+")
 
 
@@ -34,31 +20,12 @@ def normalize(s: str, lower: bool = True) -> str:
     return s.lower() if lower else s
 
 
-re_non_alphanumeric = re.compile(r"[^a-z0-9\s]+")
-re_whitespace = re.compile(r"\s+")
-
-
 def generate_trigrams(s: str):
     if not s:
         return
 
     for i in range(max(len(s) - 2, 1)):
         yield s[i : i + 3]
-
-
-def generate_tokens(s: str):
-    if not s:
-        return
-
-    s = s.replace(",", "").replace(".", "")
-    for token in s.split():
-        yield token
-
-
-def generate_token_trigrams(s: str):
-    norm = normalize(s)
-    for token in generate_tokens(norm):
-        yield from generate_trigrams(token)
 
 
 # The search indexes store tens of thousands of trigrams and some have thousands of associated IDs.

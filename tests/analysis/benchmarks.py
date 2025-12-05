@@ -8,7 +8,7 @@ from tests.utils import mangle
 import random
 
 ITERATIONS = 1
-SAMPLE_SIZE = 5000
+SAMPLE_SIZE = 3000
 
 
 def benchmark():

@@ -1,10 +1,8 @@
 from typing import Iterator, Generic, TypeVar
-from localis.models import Model
-from abc import ABC
-from localis.models import DTO
 from pathlib import Path
+from abc import ABC
+from localis.models import Model, DTO
 from localis.indexes import FilterIndex, SearchIndex, LookupIndex
-from localis.utils import ModelData
 
 T = TypeVar("DTO", bound=DTO)
 
@@ -64,10 +62,10 @@ class Registry(Generic[T], ABC):
             except Exception as e:
                 raise e
 
-    def parse_row(self, id, row: list[str | int | None]) -> T:
+    def parse_row(self, id, row: list[str | int | None]) -> Model:
         return self._MODEL_CLS.from_row(id, row)
 
-    def load_all(self) -> None:
+    def load_all(self):
         """Force load all indexes."""
         self._load_lookup_index()
         self._load_filter_index()
@@ -75,7 +73,7 @@ class Registry(Generic[T], ABC):
 
     # ----------- LAZY LOADERS ----------- #
 
-    def _load_lookup_index(self) -> None:
+    def _load_lookup_index(self):
         if self._lookup_index is None:
             self._lookup_index = LookupIndex(
                 model_cls=self._MODEL_CLS,
@@ -83,7 +81,7 @@ class Registry(Generic[T], ABC):
                 filepath=self._lookup_filepath,
             )
 
-    def _load_filter_index(self) -> None:
+    def _load_filter_index(self):
         if self._filter_index is None:
             self._filter_index = FilterIndex(
                 model_cls=self._MODEL_CLS,
@@ -91,7 +89,7 @@ class Registry(Generic[T], ABC):
                 filepath=self._filter_filepath,
             )
 
-    def _load_search_index(self) -> None:
+    def _load_search_index(self):
         if self._search_index is None:
             self._search_index = SearchIndex(
                 model_cls=self._MODEL_CLS,
@@ -99,7 +97,7 @@ class Registry(Generic[T], ABC):
                 filepath=self._search_filepath,
             )
 
-    def __iter__(self) -> Iterator[T]:
+    def __iter__(self) -> Iterator[DTO]:
         return iter([m.to_dto() for m in self._cache.values()])
 
     def __len__(self) -> int:
@@ -146,11 +144,11 @@ class Registry(Generic[T], ABC):
                 results &= matches
         results_list = [self._cache[id] for id in list(results)[:limit]]
         results_list.sort(key=lambda r: r.name)  # sort alphabetically by name
-        return results_list
+        return [r.to_dto() for r in results_list]
 
     def search(
         self, query: str, limit: int = None, **kwargs
     ) -> list[tuple[DTO, float]]:
         self._load_search_index()
         results = self._search_index.search(query=query, limit=limit)
-        return results
+        return [(r.to_dto(), score) for r, score in results]

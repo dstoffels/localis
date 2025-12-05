@@ -1,8 +1,7 @@
-from localis.models import Model
 from localis.indexes.index import Index
 from localis.utils import normalize
-import csv
 from collections import defaultdict
+import csv
 
 
 class FilterIndex(Index):
