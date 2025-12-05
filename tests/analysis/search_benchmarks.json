@@ -103,5 +103,26 @@
             "avg_hit_score": 0.86
         },
         "report": "Incredible accuracy and performance for cities. countries and subdivisions saw little change, likely because cities test with both name and admin1 name (mangled), while the others test with name alone."
+    },
+    "2025-12-05T13:45:39.353153": {
+        "iterations": 1,
+        "sample_size": 5000,
+        "notes": "",
+        "countries": {
+            "success_rate": 1.0,
+            "avg_time_ms": 1.533,
+            "avg_hit_score": 0.875
+        },
+        "subdivisions": {
+            "success_rate": 0.939,
+            "avg_time_ms": 3.009,
+            "avg_hit_score": 0.914
+        },
+        "cities": {
+            "success_rate": 0.993,
+            "avg_time_ms": 29.962,
+            "avg_hit_score": 0.839
+        },
+        "report": "Larger sample size for greater precision (countries at 100!). Cities is a bit slow, but in a great spot. Subdivisions is in good shape too (uses mangled name only)."
     }
 }

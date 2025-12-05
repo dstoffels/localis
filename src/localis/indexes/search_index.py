@@ -32,6 +32,7 @@ class SearchIndex(Index):
             return []
 
         self.query = self.normalize(query)
+        self.query_token_count = len(self.query.split())
         self.match_counts: dict[int, int] = defaultdict(int)
         self.trigram_count = 0
 
@@ -77,8 +78,16 @@ class SearchIndex(Index):
         return sorted_results[:limit]
 
     def _build_match_counts(self):
+        """Builds a mapping of document IDs to the count of matching trigrams with the query."""
         index = self.index
         match_counts = self.match_counts
+
+        # If the index is small, consider all entries as matches
+        if len(self.cache) < 300:
+            for doc_id in self.cache.keys():
+                match_counts[doc_id] = 1
+            self.trigram_count = 1
+            return
 
         for trigram in generate_trigrams(self.query):
             try:
@@ -111,30 +120,33 @@ class SearchIndex(Index):
         else:
             return 0.0
 
-        for field_value, weight in score_values:
-            if not field_value:
-                continue
+        if self.query_token_count > 1:
+            for field_value, weight in score_values:
+                if not field_value:
+                    continue
 
-            if isinstance(field_value, list):
-                matches = process.extract(
-                    self.query,
-                    [normalize(v) for v in field_value],
-                    scorer=fuzz.token_set_ratio,
-                    score_cutoff=60,
-                    limit=None,
-                )
+                if isinstance(field_value, list):
+                    matches = process.extract(
+                        self.query,
+                        [normalize(v) for v in field_value],
+                        scorer=fuzz.token_set_ratio,
+                        score_cutoff=60,
+                        limit=None,
+                    )
 
-                field_score = (
-                    max(score for _, score, _ in matches) / 100.0 if matches else 0.0
-                )
-            else:
-                field_score = (
-                    fuzz.token_set_ratio(self.query, normalize(field_value)) / 100.0
-                )
+                    field_score = (
+                        max(score for _, score, _ in matches) / 100.0
+                        if matches
+                        else 0.0
+                    )
+                else:
+                    field_score = (
+                        fuzz.token_set_ratio(self.query, normalize(field_value)) / 100.0
+                    )
 
-            if field_score >= self.NOISE_THRESHOLD:
-                score += field_score * weight
-                total_weight += weight
+                if field_score >= self.NOISE_THRESHOLD:
+                    score += field_score * weight
+                    total_weight += weight
 
         return score / total_weight if total_weight > 0 else 0.0
 
