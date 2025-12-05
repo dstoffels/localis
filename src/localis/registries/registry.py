@@ -57,7 +57,7 @@ class Registry(Generic[T], ABC):
             try:
                 with open(self._data_filepath, "r", encoding="utf-8") as f:
                     for id, line in enumerate(f, start=1):
-                        row = line.split("\t")
+                        row = line.strip().split("\t")
                         self._cache[id] = self.parse_row(id, row)
             except Exception as e:
                 raise e

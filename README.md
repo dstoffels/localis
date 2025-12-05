@@ -303,9 +303,8 @@ nested_country = subdivision.country
 
 nested_country.id
 nested_country.name
-nested_country.geonames_code
-nested_country.iso_code
-nested_country.type
+nested_country.alpha2
+nested_country.alpha3
 ```
 
 ### SubdivisionBase Object
@@ -322,27 +321,35 @@ nested_sub.type
 
 ## Performance
 
-### Load Times (Cold Start)
+### Load Times
 
-All data is loaded eagerly on import:
+All data is eager-loaded on import. Each registry method lazy loads its respective indexes on first use, incurring a *cold start* cost. Indexes can be pre-loaded via `load_all()` to avoid this during queries.
 
-- **Full dataset load**: ~1.1s (all 503k+ entities)
-- **Countries** (249): < 1ms
-- **Subdivisions** (51,541): ~350ms
-- **Cities** (451,792):
+- **Full dataset eager load**: ~1.1s (all 503k+ entities)
+- **Countries** (249): < 5ms for all indexes
+- **Subdivisions** (51,541): ~350ms for all indexes
+- **Cities** (451,792)
   - Lookup index: ~150ms
   - Filter index: ~1.1s
   - Search index: ~1.7s
+- **Total load time**: ~4.3s for all datasets and indexes
 
 **Note:** These are best-case timings on modern hardware. Actual load times may vary based on host system.
 
 ### Query Performance
 
-- **Countries**: All queries < 2ms
-- **Subdivisions**: Lookups < 1ms, filters < 3ms, searches ~3ms
-- **Cities**: Lookups < 5ms, filters ~5ms, searches < 30ms
+- **Countries**: 
+  - All queries < 2ms
+- **Subdivisions**: 
+  - Lookups < 1ms
+  - Filters < 3ms
+  - Searches ~3ms
+- **Cities**: 
+  - Lookups < 5ms
+  - Filters ~5ms
+  - Searches < 30ms
 
-### Accuracy
+### Search Accuracy
 
 Fuzzy search accuracy on mangled/misspelled queries:
 
@@ -354,8 +361,14 @@ Fuzzy search accuracy on mangled/misspelled queries:
 
 ## Data Sources
 
-- **Countries & Subdivisions**: [ISO 3166](https://www.iso.org/iso-3166-country-codes.html) data via [Ipregistry](https://ipregistry.co)
-- **Cities**: [GeoNames](https://www.geonames.org/) `allCountries.txt` dataset (cities with population data, filtered by feature code)
+- **Countries**
+  - [ISO 3166-1](https://www.iso.org/iso-3166-country-codes.html) data via [Ipregistry](https://ipregistry.co)
+- **Subdivisions**
+  - [ISO 3166-2](https://www.iso.org/iso-3166-country-codes.html) data via [Ipregistry](https://ipregistry.co)
+  - [GeoNames](https://www.geonames.org/) `admin1CodesASCII.txt` and `admin2Codes.txt`
+- **Cities**
+  - [GeoNames](https://www.geonames.org/) `allCountries.txt` dataset (cities with population data, filtered by feature codes)
+  - Feature Codes used for cities: PPL, PPLA, PPLA2, PPLA3, PPLA4, PPLA5, PPLC, PPLF, PPLL, PPLS, STLMT
 
 ---
 
