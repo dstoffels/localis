@@ -15,7 +15,7 @@ class SearchIndex(Index):
     ):
         self.NOISE_THRESHOLD = 0.5
         self.STRONG_MATCH_THRESHOLD = 0.8
-        self.CANDIDATE_CNT_THRESHOLD = 1000
+        self.CANDIDATE_CNT_THRESHOLD = 2000
         super().__init__(model_cls, cache, filepath, **kwargs)
 
     def load(self, filepath):
@@ -101,7 +101,17 @@ class SearchIndex(Index):
         score = 0.0
         total_weight = 0.0
 
-        for i, (field_value, weight) in enumerate(candidate.get_search_values()):
+        score_values = candidate.get_search_values()
+
+        name, weight = next(score_values)  # name is always the first SEARCH_FIELD
+        name_score = fuzz.WRatio(self.query, self.normalize(name)) / 100.0
+        if name_score >= self.NOISE_THRESHOLD:
+            score += name_score * weight
+            total_weight += weight
+        else:
+            return 0.0
+
+        for field_value, weight in score_values:
             if not field_value:
                 continue
 
@@ -125,9 +135,7 @@ class SearchIndex(Index):
             if field_score >= self.NOISE_THRESHOLD:
                 score += field_score * weight
                 total_weight += weight
-            elif i == 0:
-                # early exit if the name field is a poor match
-                return 0.0
+
         return score / total_weight if total_weight > 0 else 0.0
 
     REMOVE_CHARS = (",", ".")

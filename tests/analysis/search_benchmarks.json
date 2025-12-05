@@ -82,5 +82,26 @@
             "avg_hit_score": 0.843
         },
         "report": "Solid performance and accuracy across the board, however, we're only hitting first 1000 subdivisions and cities."
+    },
+    "2025-12-05T13:19:36.840910": {
+        "iterations": 1,
+        "sample_size": 1000,
+        "notes": "Added early exit name scoring ahead of remaining field scoring, using WRatio instead of token_set_ratio",
+        "countries": {
+            "success_rate": 0.928,
+            "avg_time_ms": 0.333,
+            "avg_hit_score": 0.842
+        },
+        "subdivisions": {
+            "success_rate": 0.914,
+            "avg_time_ms": 4.246,
+            "avg_hit_score": 0.897
+        },
+        "cities": {
+            "success_rate": 0.997,
+            "avg_time_ms": 15.901,
+            "avg_hit_score": 0.86
+        },
+        "report": "Incredible accuracy and performance for cities. countries and subdivisions saw little change, likely because cities test with both name and admin1 name (mangled), while the others test with name alone."
     }
 }
