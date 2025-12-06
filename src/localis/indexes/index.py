@@ -1,8 +1,5 @@
 from pathlib import Path
-import gzip
-import pickle
 from localis.models import Model
-import pickle
 
 
 class Index:
