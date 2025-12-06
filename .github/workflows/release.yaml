@@ -54,24 +54,6 @@ jobs:
             echo "SHOULD_RELEASE=true" >> $GITHUB_OUTPUT
           fi
 
-      - name: Update database and commit for release.
-        if: steps.check_versions.outputs.SHOULD_RELEASE == 'true'
-        run: | 
-          REPO_URL=${{ github.server_url }}/${{ github.repository }}
-          NEW_VERSION=${{ steps.get_version.outputs.VERSION }}
-          
-          poetry install
-
-          # update the database meta with the asset download url for cities.tsv
-          poetry run python3 ./.github/workflows/update_assets.py $REPO_URL $NEW_VERSION
-
-          git config user.name "GitHub Actions Bot"
-          git config user.email "actions@github.com"
-
-          git add src/localis/data/localis.db
-          git commit -m "CI: Release $NEW_VERSION [skip ci]"
-          git push origin main
-
       - name: Determine if pre-release (PEP 440).
         if: steps.check_versions.outputs.SHOULD_RELEASE == 'true'
         id: check_prerelease
@@ -98,8 +80,7 @@ jobs:
           generate_release_notes: true
           draft: false
           prerelease: ${{ steps.check_prerelease.outputs.IS_PRERELEASE }}
-          files: |
-            data/cities/cities.tsv
+          files:
             dist/*.whl
             dist/*.tar.gz
 

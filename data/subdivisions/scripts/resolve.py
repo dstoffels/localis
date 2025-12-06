@@ -1,7 +1,9 @@
-from .utils import *
+from data.utils import *
+from data.subdivisions.utils import *
 import json
-from .merge import merge_matched_sub
+from data.subdivisions.scripts.merge import merge_matched_sub
 import os
+from localis.models import SubdivisionModel
 
 
 def clear_terminal():
@@ -9,9 +11,9 @@ def clear_terminal():
 
 
 def resolve_unmatched_subs(
-    unmatched_iso_subs: list[SubdivisionDTO], sub_map: SubdivisionMap
+    unmatched_iso_subs: list[SubdivisionModel], submap: SubdivisionMap
 ) -> dict | None:
-    with open(BASE_PATH / "src/resolution_map.json", "r+", encoding="utf-8") as f:
+    with open(SUB_SRC_PATH / "resolution_map.json", "r+", encoding="utf-8") as f:
         # load existing mappings
         resolution_map: dict[str, dict[int, str | list[str]]] = json.load(f) or {}
 
@@ -21,14 +23,14 @@ def resolve_unmatched_subs(
                 data: dict[int, str | list[str]] = resolution_map[iso_sub.iso_code]
                 added: bool = data.get("added")
                 if added:
-                    iso_sub.alt_names.extend(data.get("names", []))
-                    sub_map.add(iso_sub)
+                    iso_sub.aliases.extend(data.get("names", []))
+                    submap.add(iso_sub)
                     continue
 
-                mapped_sub = sub_map.get(data.get("id"))
+                mapped_sub = submap.get(data.get("hashid"))
                 if mapped_sub:
                     mapped_names = data.get("names", [])
-                    mapped_sub.alt_names.extend(mapped_names)
+                    mapped_sub.aliases.extend(mapped_names)
                     merge_matched_sub(iso_sub, mapped_sub)
                     continue
                 else:
@@ -36,7 +38,7 @@ def resolve_unmatched_subs(
 
             admin_level = iso_sub.admin_level
 
-            merge_data = {
+            merge_data: dict[int | list[str] | bool | None] = {
                 "id": None,
                 "names": [],
                 "added": False,
@@ -46,23 +48,23 @@ def resolve_unmatched_subs(
             while True:
                 clear_terminal()
                 candidate_geo_subs = sorted(
-                    sub_map.filter(iso_sub.country_alpha2, admin_level),
+                    submap.filter(iso_sub.country.alpha2, admin_level),
                     key=lambda x: x.name,
                 )
 
                 for i, geo_sub in enumerate(candidate_geo_subs):
                     print(
-                        f"{i + 1}. {[geo_sub.name, *geo_sub.alt_names]} ({geo_sub.geonames_code}) (Admin{geo_sub.admin_level})"
+                        f"{i + 1}. {[geo_sub.name, *geo_sub.aliases]} ({geo_sub.geonames_code}) (Admin{geo_sub.admin_level})"
                     )
 
                 print(f"\nResolve subdivision ({num}/{len(unmatched_iso_subs)}):")
                 print(
-                    [iso_sub.name, *iso_sub.alt_names],
+                    [iso_sub.name, *iso_sub.aliases],
                     f"({iso_sub.iso_code}) (Admin{iso_sub.admin_level})",
                 )
 
                 # A helper link to quickly google search the subdivision
-                link = f"https://google.com/search?q={iso_sub.name} {iso_sub.country_name}".replace(
+                link = f"https://google.com/search?q={iso_sub.name} {iso_sub.country.name}".replace(
                     " ", "+"
                 )
 
@@ -75,7 +77,7 @@ def resolve_unmatched_subs(
 
                 choice = choice.lower()
                 if choice == "a":
-                    sub_map.add(iso_sub)
+                    submap.add(iso_sub)
                     merge_data["added"] = True
                     break
 
@@ -85,7 +87,7 @@ def resolve_unmatched_subs(
                         new_name = input(f'Enter a new name or type "EXIT" to return: ')
                         if new_name == "EXIT":
                             break
-                        iso_sub.alt_names.append(new_name)
+                        iso_sub.aliases.append(new_name)
                         merge_data["names"].append(new_name)
                 elif choice == "s":
                     if admin_level == 1:
@@ -95,10 +97,10 @@ def resolve_unmatched_subs(
                 elif choice.isdigit() and 1 <= int(choice) <= len(candidate_geo_subs):
                     selected_geo_sub = candidate_geo_subs[int(choice) - 1]
                     merge_matched_sub(iso_sub, selected_geo_sub)
-                    merge_data["id"] = selected_geo_sub.id
+                    merge_data["hashid"] = selected_geo_sub.hashid
 
                     if admin_level != iso_sub.admin_level:
-                        sub_map.refresh()
+                        submap.refresh()
 
                     break
                 else:

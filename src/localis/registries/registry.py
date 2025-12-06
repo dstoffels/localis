@@ -1,87 +1,154 @@
 from typing import Iterator, Generic, TypeVar
+from pathlib import Path
 from abc import ABC
-from typing import Type
-from localis.data import DTO, Model
-from localis.data.models.fields import Expression
-from localis.search import FuzzySearch
+from localis.models import Model, DTO
+from localis.indexes import FilterIndex, SearchIndex, LookupIndex
 
-TModel = TypeVar("TModel", bound=Model)
-TDTO = TypeVar("TDTO", bound=DTO)
+T = TypeVar("DTO", bound=DTO)
 
 
-class Registry(Generic[TModel, TDTO], ABC):
-    """Abstract base registry class defining interface for lookup and search."""
+class Registry(Generic[T], ABC):
+    """"""
 
-    ID_FIELDS: tuple[str] = ()
+    REGISTRY_NAME: str = ""
+    _MODEL_CLS: type[Model]
 
-    SEARCH_FIELD_WEIGHTS: dict[str, float] = {}
-    SEARCH_ORDER_FIELDS: list[str] = []
-    """Override to provide the fields for search scoring."""
+    def __init__(self, **kwargs):
+        # ---------- Eager loaded ---------- #
+        self._cache: dict[int, Model] | None = None
+        self._load_cache()
 
-    def __init__(self, model_cls: Type[TModel]):
-        self._model_cls: Type[TModel] = model_cls
-        self._count: int | None = None
-        self._cache: list[TDTO] = None
-        self._order_by: str = ""
-        self._addl_search_attrs: list[str] = []
+        # ---------- Lazy loaded ---------- #
+        self._lookup_index: LookupIndex | None = None
+        self._filter_index: FilterIndex | None = None
+        self._search_index: SearchIndex | None = None
 
     @property
-    def cache(self):
-        if self._cache is None:
-            self._cache = [m.to_dto() for m in self._model_cls.select()]
-        return self._cache
+    def _data_path(self) -> Path:
+        return Path(__file__).parent.parent / "data" / self.REGISTRY_NAME
 
-    def __iter__(self) -> Iterator[TDTO]:
-        return iter(self.cache)
+    @property
+    def _data_filepath(self) -> Path:
+        return self._data_path / f"{self.REGISTRY_NAME}.tsv"
 
-    def __getitem__(self, index: int | slice) -> TDTO | list[TDTO]:
-        return self.cache[index]
+    @property
+    def _lookup_filepath(self) -> Path:
+        return self._data_path / f"{self.REGISTRY_NAME}_lookup_index.tsv"
 
-    def __len__(self) -> int:
-        if self._count is None:
-            self._count = self._model_cls.count()
-        return self._count
+    @property
+    def _filter_filepath(self) -> Path:
+        return self._data_path / f"{self.REGISTRY_NAME}_filter_index.tsv"
+
+    @property
+    def _search_filepath(self) -> Path:
+        return self._data_path / f"{self.REGISTRY_NAME}_search_index.tsv"
 
     @property
     def count(self) -> int:
-        return self.__len__()
+        return len(self._cache)
 
-    def get(self, *, id: int | None = None, **kwargs) -> TDTO | None:
-        return None
+    def _load_cache(self) -> dict[int, Model]:
+        if self._cache is None:
+            # Load data file
+            if not self._data_filepath.exists():
+                raise FileNotFoundError(f"Data file not found: {self._data_filepath}")
 
-    def filter(
-        self, query: str = None, name: str = None, limit: int = None, **kwargs
-    ) -> list[TDTO]:
-        if name:
-            kwargs["name"] = name
-        if kwargs:
-            results = self._model_cls.fts_match(
-                field_queries=kwargs, order_by=["rank"], limit=limit
+            self._cache = {}
+            try:
+                with open(self._data_filepath, "r", encoding="utf-8") as f:
+                    for id, line in enumerate(f, start=1):
+                        row = line.strip().split("\t")
+                        self._cache[id] = self.parse_row(id, row)
+            except Exception as e:
+                raise e
+
+    def parse_row(self, id, row: list[str | int | None]) -> Model:
+        return self._MODEL_CLS.from_row(id, row)
+
+    def load_all(self):
+        """Force load all indexes."""
+        self._load_lookup_index()
+        self._load_filter_index()
+        self._load_search_index()
+
+    # ----------- LAZY LOADERS ----------- #
+
+    def _load_lookup_index(self):
+        if self._lookup_index is None:
+            self._lookup_index = LookupIndex(
+                model_cls=self._MODEL_CLS,
+                cache=self._cache,
+                filepath=self._lookup_filepath,
             )
-        elif query:
-            results = self._model_cls.fts_match(query, order_by=["rank"], limit=limit)
-        else:
+
+    def _load_filter_index(self):
+        if self._filter_index is None:
+            self._filter_index = FilterIndex(
+                model_cls=self._MODEL_CLS,
+                cache=self._cache,
+                filepath=self._filter_filepath,
+            )
+
+    def _load_search_index(self):
+        if self._search_index is None:
+            self._search_index = SearchIndex(
+                model_cls=self._MODEL_CLS,
+                cache=self._cache,
+                filepath=self._search_filepath,
+            )
+
+    def __iter__(self) -> Iterator[DTO]:
+        return iter([m.to_dto() for m in self._cache.values()])
+
+    def __len__(self) -> int:
+        return len(self._cache)
+
+    # ----------- API METHODS ----------- #
+
+    def get(self, id: int) -> DTO | None:
+        """Get by localis ID."""
+        model = self._cache.get(id)
+        return model.to_dto() if model else None
+
+    def lookup(self, identifier: str | int) -> DTO | None:
+        """Fetches a single item by one of its other unique identifiers (use .get() for localis ID)."""
+        self._load_lookup_index()
+
+        model_id = self._lookup_index.get(identifier)
+        model = self._cache.get(model_id)
+        return model.to_dto() if model else None
+
+    def filter(self, *, name: str = None, limit: int = None, **kwargs) -> list[DTO]:
+        """Filter by exact matches on specified fields with AND logic when filtering by multiple fields. Case insensitive."""
+        self._load_filter_index()
+        kwargs["name"] = name
+
+        filter_kws = {k: v for k, v in kwargs.items() if v is not None}
+
+        results: set[int] = None
+
+        # short circuit
+        if not filter_kws:
             return []
-        return [r.to_dto() for r in results]
 
-    def search(self, query: str, limit=None, **kwargs) -> list[tuple[TDTO, float]]:
-        if not query:
-            return []
+        for key, value in filter_kws.items():
+            matches = self._filter_index.get(filter_kw=key, field_value=value)
 
-        search = FuzzySearch(
-            query,
-            self._model_cls,
-            self.SEARCH_FIELD_WEIGHTS,
-            self.SEARCH_ORDER_FIELDS,
-            limit,
-        )
+            # short circuit if any field fails to match, all or nothing
+            if not matches:
+                return []
 
-        return search.run()
+            if results is None:
+                results = matches
+            else:
+                results &= matches
+        results_list = [self._cache[id] for id in list(results)[:limit]]
+        results_list.sort(key=lambda r: r.name)  # sort alphabetically by name
+        return [r.to_dto() for r in results_list]
 
-    def _sort_matches(self, matches: list, limit: int) -> list[TDTO]:
-        return [
-            (row_data.dto, score)
-            for row_data, score in sorted(matches, key=lambda r: r[1], reverse=True)[
-                :limit
-            ]
-        ]
+    def search(
+        self, query: str, limit: int = None, **kwargs
+    ) -> list[tuple[DTO, float]]:
+        self._load_search_index()
+        results = self._search_index.search(query=query, limit=limit)
+        return [(r.to_dto(), score) for r, score in results]

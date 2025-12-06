@@ -1,13 +1,14 @@
 # This script initializes the dataset from ISO 3166-1, with a few contemporary naming updates and aliases.
 # These will be merged with data from their GeoNames and Wikipedia counterparts.
 
-from .utils import *
+from data.utils import *
+from localis.models import CountryModel
 import json
 
 
-def init_iso_countries() -> dict[str, CountryDTO]:
+def init_iso_countries() -> dict[str, CountryModel]:
     """Parses country data from ISO 3166-1 and returns an alpha2 mapped cache"""
-    countries: dict[str, CountryDTO] = {}
+    countries: dict[str, CountryModel] = {}
 
     # contemporary name mappings
     NAME_MAP = {
@@ -69,11 +70,11 @@ def init_iso_countries() -> dict[str, CountryDTO]:
         "TW": ["ROC"],
     }
 
-    with open(BASE_PATH / "src/iso3166-1.json", "r", encoding="utf-8") as f:
+    with open(COUNTRIES_SRC_PATH / "iso3166-1.json", "r", encoding="utf-8") as f:
         iso_countries: list[dict] = json.load(f).get("3166-1")
         iso_countries.sort(key=lambda c: c.get("alpha_2"))
 
-        for c in iso_countries:
+        for id, c in enumerate(iso_countries, 1):
             alpha2 = c["alpha_2"]
             # Prioritize name by mapping > common name field > name field
             name = NAME_MAP.get(alpha2) or c.get("common_name") or c.get("name")
@@ -82,13 +83,15 @@ def init_iso_countries() -> dict[str, CountryDTO]:
             official_name = OFFICIAL_NAME_MAP.get(alpha2) or c.get("official_name", "")
 
             # Create and cache
-            countries[alpha2] = CountryDTO(
+            countries[alpha2] = CountryModel(
+                id=id,
                 name=name,
                 official_name=official_name,
                 alpha2=alpha2,
                 alpha3=c["alpha_3"],
-                numeric=int(c["numeric"]),
-                alt_names=ALIAS_MAP.get(alpha2, []),
+                numeric=c["numeric"],
+                aliases=ALIAS_MAP.get(alpha2, []),
                 flag=c["flag"],
             )
+
     return countries

@@ -1,20 +1,11 @@
-from .utils import *
-import csv
+from data.utils import *
+from localis.models import CountryModel
+
+COUNTRIES_DATA_PATH = DATA_PATH / "countries"
 
 
-def dump_to_tsv(countries: dict[str, CountryDTO]):
-    headers = (
-        "name",
-        "official_name",
-        "alpha2",
-        "alpha3",
-        "numeric",
-        "alt_names",
-        "flag",
-    )
-
-    with open(BASE_PATH / "countries.tsv", "w", encoding="utf-8", newline="") as f:
-        writer = csv.writer(f, delimiter="\t")
-        writer.writerow(headers)
-        for c in countries.values():
-            writer.writerow(c.dump())
+def dump(countries: list[CountryModel]) -> None:
+    dump_data(countries, COUNTRIES_DATA_PATH / "countries.tsv")
+    dump_lookup_index(countries, COUNTRIES_DATA_PATH / "countries_lookup_index.tsv")
+    dump_filter_index(countries, COUNTRIES_DATA_PATH / "countries_filter_index.tsv")
+    dump_search_index(countries, COUNTRIES_DATA_PATH / "countries_search_index.tsv")

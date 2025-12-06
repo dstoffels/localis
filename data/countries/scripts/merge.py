@@ -1,8 +1,9 @@
-from .utils import *
+from data.utils import *
 import json
+from localis.models import CountryModel
 
 
-def is_valid_name(alias: str, country: CountryDTO):
+def is_valid_name(alias: str, country: CountryModel):
     if "ISO 3166" in alias:
         return False
 
@@ -20,9 +21,9 @@ def is_valid_name(alias: str, country: CountryDTO):
     return True
 
 
-def merge_wikidata(countries: dict[str, CountryDTO]):
-    with open(BASE_PATH / "src/wiki_countries.json", "r", encoding="utf-8") as f:
-        wiki_countries: list[dict] = json.load(f)
+def merge_wikidata(countries: dict[str, CountryModel]):
+    with open(COUNTRIES_SRC_PATH / "wiki_countries.json", "r", encoding="utf-8") as f:
+        wiki_countries: list[dict[str, str]] = json.load(f)
 
         for row in wiki_countries:
             alpha3: str = row.get("alpha3", "")
@@ -33,29 +34,31 @@ def merge_wikidata(countries: dict[str, CountryDTO]):
 
                 # create new if not in cache
                 if alpha2 not in countries:
-                    countries[alpha2] = CountryDTO(
+                    countries[alpha2] = CountryModel(
                         alpha2=alpha2,
                         alpha3=row.get("alpha3"),
                         name=row.get("name"),
                         numeric=None,
                     )
 
-                country: CountryDTO = countries.get(alpha2)
+                country: CountryModel = countries.get(alpha2)
 
                 # merge name
                 name: str = row.get("name", "")
-                if name and name.lower() not in [n.lower() for n in country.alt_names]:
-                    country.alt_names.append(name)
+                if name and name.lower() not in [n.lower() for n in country.aliases]:
+                    country.aliases.append(name)
 
                 # merge validated alt names
                 aliases: list[str] = row.get("aliases", "").split("|")
                 for a in aliases:
                     if is_valid_name(a, country):
-                        country.alt_names.append(a)
+                        country.aliases.append(a)
 
 
-def merge_geonames(countries: dict[str, CountryDTO]):
-    with open(BASE_PATH / "src/geonames_countries.txt", "r", encoding="utf-8") as f:
+def merge_geonames(countries: dict[str, CountryModel]):
+    with open(
+        COUNTRIES_SRC_PATH / "geonames_countries.txt", "r", encoding="utf-8"
+    ) as f:
 
         for row in f:
             parts = row.strip().split("\t")
@@ -63,7 +66,7 @@ def merge_geonames(countries: dict[str, CountryDTO]):
             alpha3 = parts[1]
             name = parts[4]
 
-            country: CountryDTO = countries.get(alpha2)
+            country: CountryModel = countries.get(alpha2)
 
             # skip mismatches
             if not country:
@@ -72,8 +75,16 @@ def merge_geonames(countries: dict[str, CountryDTO]):
             # merge
             country.alpha3 = alpha3
 
+            # add name if not duplicate
             if name and name.lower() not in [
                 country.name.lower(),
                 country.official_name.lower(),
-            ] + [n.lower() for n in country.alt_names]:
-                country.alt_names.append(name)
+                *[n.lower() for n in country.aliases],
+            ]:
+                country.aliases.append(name)
+
+            # remove name/official name from aliases if present
+            if country.name in country.aliases:
+                country.aliases.remove(country.name)
+            if country.official_name in country.aliases:
+                country.aliases.remove(country.official_name)
