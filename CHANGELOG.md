@@ -14,14 +14,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Trigram-based fuzzy search with 30ms average query time
-- Lazy-loaded indexes for optimal memory usage
+- Lazy-loaded indexes
 
 ### Removed
 - Deprecated old SQLite backend
-- Eliminated legacy code and dependencies
+- CLI
+- Downloading and copying of db with cities dataset
 - Subdivisions
   - `for_country` method removed
-  - `types_for_country` method removed
+  - `types_for_country` method removed (may be added again)
 - Cities
   - `for_subdivision` method removed
   - `for_country` method removed
