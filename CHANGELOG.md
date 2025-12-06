@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0a3] - 2025-12-05
+
 ### Changed
 - Migrated from SQLite to TSV-based, lazy loading architecture for improved performance
 - Reduced eager cold start time to 1.1s for full dataset

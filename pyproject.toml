@@ -1,6 +1,6 @@
 [project]
 name = "localis"
-version = "1.0.0a2"
+version = "1.0.0a3"
 description = "Fast, offline access to comprehensive data for countries, subdivisions, and cities. Built on ISO 3166 and GeoNames datasets with support for exact lookups, filtering, and fuzzy search."
 readme = "README.md"
 authors = [
