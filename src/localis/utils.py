@@ -1,33 +1,60 @@
-def prep_fts_tokens(s: str, exact_match: bool) -> str:
-    """Wrap each token in quotes and at * wildcard for prefixing if not exact_match"""
-    if not s:
+import unicodedata
+import re
+from unidecode import unidecode
+import base64
+
+SPACE_RE = re.compile(r"\s+")
+
+
+def normalize(s: str, lower: bool = True) -> str:
+    """Custom transliteration of a string into an ASCII-only search form with optional lowercasing (default=True)."""
+    if not isinstance(s, str):
         return s
+    MAP = {"ə": "a", "ǝ": "ä"}
 
-    tokens = s.split()
-    for i, token in enumerate(tokens):
-        tokens[i] = f'''"{token}"'''
-        if not exact_match:
-            tokens[i] += "*"
-    final = " ".join(tokens)
-    return final
-
-
-def clean_row(row: dict[str, str]) -> dict[str, str | None]:
-    """Clean and normalize all fields in a dict"""
-    return {k: (v if v.strip() != "" else None) for k, v in row.items()}
+    s = unicodedata.normalize("NFKD", s)
+    s = "".join(ch for ch in s if not unicodedata.combining(ch))
+    s = "".join(MAP.get(ch, ch) for ch in s)
+    s = unidecode(s)
+    s = SPACE_RE.sub(" ", s).strip()
+    return s.lower() if lower else s
 
 
-def chunked(list: list, size: int):
-    for i in range(0, len(list), size):
-        yield list[i : i + size]
+def generate_trigrams(s: str):
+    if not s:
+        return
+
+    for i in range(max(len(s) - 2, 1)):
+        yield s[i : i + 3]
 
 
-MAX_DIGITS = 8
+# The search indexes store tens of thousands of trigrams and some have thousands of associated IDs.
+# To reduce the size of these indexes on disk, we encode the list of IDs for each trigram using
+# base64-encoded varint delta encoding, which must be decoded on load.
+def decode_id_list(b64: str) -> list[int]:
+    """Convert base64(varint(delta(ids))) → [1,5,6,...]."""
+    if not b64:
+        return []
+    data = base64.b64decode(b64)
+    out = []
+    prev = 0
 
+    i = 0
+    n = len(data)
 
-def pad_num_w_zeros(val: str | int) -> str:
-    """
-    Pads a number with leading zeros to ensure a fixed width of 8 characters (up to 99,999,999).
-    For consistent string-based sorting and comparison.
-    """
-    return f"{int(val):0{MAX_DIGITS}d}"
+    while i < n:
+        shift = 0
+        value = 0
+
+        while True:
+            b = data[i]
+            i += 1
+            value |= (b & 0x7F) << shift
+            if not (b & 0x80):
+                break
+            shift += 7
+
+        prev += value
+        out.append(prev)
+
+    return out

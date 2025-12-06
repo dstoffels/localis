@@ -4,49 +4,49 @@
 		"name": "Afghanistan",
 		"alpha2": "AF",
 		"alpha3": "AFG",
-		"aliases": "Afghaunistaun|Afghaunistan|Afghanisthan|Affghaunistan|Affghanisthan|Afghania|Affghanistan"
+		"aliases": ""
 	},
 	{
 		"qid": "Q222",
 		"name": "Albania",
 		"alpha2": "AL",
 		"alpha3": "ALB",
-		"aliases": "Shqipërisë|Republika Popullore Socialiste e Shqiperise|Republika Popullore e Shqiperise|Republika e Shqipërisë|People's Socialist Republic of Albania|People's Republic of Albania|Republic of Albania|ALB|AL"
+		"aliases": "Shqipërisë"
 	},
 	{
 		"qid": "Q262",
 		"name": "Algeria",
 		"alpha2": "DZ",
 		"alpha3": "DZA",
-		"aliases": "People's Democratic Republic of Algeria|Dzayer|Djazaïr|dz|ALG"
+		"aliases": ""
 	},
 	{
 		"qid": "Q16641",
 		"name": "American Samoa",
 		"alpha2": "AS",
 		"alpha3": "ASM",
-		"aliases": "Samoa, United States|US-AS|American Sāmoa|US Samoa|U.S. Samoa|Territory of American Samoa|Samoa (American)|East Samoa"
+		"aliases": "American Sāmoa|Eastern Samoa"
 	},
 	{
 		"qid": "Q228",
 		"name": "Andorra",
 		"alpha2": "AD",
 		"alpha3": "AND",
-		"aliases": "Principality of the Valleys of Andorra|Principality of Andorra|AD|AND"
+		"aliases": "Principality of the Valleys of Andorra"
 	},
 	{
 		"qid": "Q916",
 		"name": "Angola",
 		"alpha2": "AO",
 		"alpha3": "AGO",
-		"aliases": "Republic of Angola|Ngola|ANG|ao"
+		"aliases": ""
 	},
 	{
 		"qid": "Q25228",
 		"name": "Anguilla",
 		"alpha2": "AI",
 		"alpha3": "AIA",
-		"aliases": "AIA|Malliouhana|ai"
+		"aliases": "Malliouhana"
 	},
 	{ "qid": "Q51", "name": "Antarctica", "alpha2": "AQ", "alpha3": "ATA", "aliases": "" },
 	{
@@ -54,7 +54,7 @@
 		"name": "Antigua and Barbuda",
 		"alpha2": "AG",
 		"alpha3": "ATG",
-		"aliases": "A&B|ag|ATG|ANT"
+		"aliases": ""
 	},
 	{
 		"qid": "Q414",
@@ -68,120 +68,126 @@
 		"name": "Armenia",
 		"alpha2": "AM",
 		"alpha3": "ARM",
-		"aliases": "Hayastani Hanrapetut’yun|Republic of Armenia|Hayastan|ARM|AM"
+		"aliases": "Hayastani Hanrapetut’yun|Hayastan"
 	},
 	{
 		"qid": "Q21203",
 		"name": "Aruba",
 		"alpha2": "AW",
 		"alpha3": "ABW",
-		"aliases": "Island of Aruba|Country of Aruba|aw|ARU"
+		"aliases": ""
 	},
 	{
 		"qid": "Q408",
 		"name": "Australia",
 		"alpha2": "AU",
 		"alpha3": "AUS",
-		"aliases": "Commonwealth of Australia|Stria|AU|Oz|Down Under|AUS|The Commonwealth of Australia|Stralia|New Hollandia|Aussieland|Nova Hollandia|Straya|New Holland"
+		"aliases": "Oz|Aussieland|Nova Hollandia|New Holland"
 	},
 	{
 		"qid": "Q40",
 		"name": "Austria",
 		"alpha2": "AT",
 		"alpha3": "AUT",
-		"aliases": "Republik Österreich|Republic of Austria|Österreich"
+		"aliases": "Österreich"
 	},
 	{
 		"qid": "Q227",
 		"name": "Azerbaijan",
 		"alpha2": "AZ",
 		"alpha3": "AZE",
-		"aliases": "Republic of Azerbaijan|Azərbaycan Respublikası|Azərbaycan|az|AZE"
+		"aliases": "Azərbaycan"
 	},
 	{
 		"qid": "Q398",
 		"name": "Bahrain",
 		"alpha2": "BH",
 		"alpha3": "BHR",
-		"aliases": "Mamlakat al-Baḥrayn|Kingdom of Bahrain|Dawlat al-Bahrain|Bahrein Islands"
+		"aliases": "Mamlakat al-Baḥrayn|Dawlat al-Bahrain"
 	},
 	{
 		"qid": "Q25230",
-		"name": "Bailiwick of Guernsey",
+		"name": "Guernsey",
 		"alpha2": "GG",
 		"alpha3": "GGY",
-		"aliases": "XA-GG|Great Britain Guernsey|Giernési|GB-GSY|Bailliage dé Guernési|Bailliage de Guernesey|Bailiwick of Guernsey|Lisia|GBG|GGY|gg"
+		"aliases": "Bailiwick of Guernsey"
 	},
 	{
 		"qid": "Q902",
 		"name": "Bangladesh",
 		"alpha2": "BD",
 		"alpha3": "BGD",
-		"aliases": "People's Republic of Bangladesh|Land of Bengal|Country of Bengal|Bangla Desh|bd|BAN"
+		"aliases": "Bangla"
 	},
 	{
 		"qid": "Q244",
 		"name": "Barbados",
 		"alpha2": "BB",
 		"alpha3": "BRB",
-		"aliases": "bb|Barbadoes|BAR|BB"
+		"aliases": "Bim|Bimshire "
 	},
 	{
 		"qid": "Q184",
 		"name": "Belarus",
 		"alpha2": "BY",
 		"alpha3": "BLR",
-		"aliases": "White Ruthenia|Respublika Bielaruś|Respublika Belarus'|Republic of Belarus|Byelorussia|Byeloruss|Bielorussia|Bielaruś|Belorussia|BLR|White Russia|by"
+		"aliases": "Byelorussia|Byeloruss|Bielorussia|Bielaruś|Belorussia|White Russia"
 	},
 	{
 		"qid": "Q31",
 		"name": "Belgium",
 		"alpha2": "BE",
 		"alpha3": "BEL",
-		"aliases": "Kingdom of Belgium|BE|BEL|be"
+		"aliases": "Belgique|België"
 	},
-	{ "qid": "Q242", "name": "Belize", "alpha2": "BZ", "alpha3": "BLZ", "aliases": "bz" },
+	{
+		"qid": "Q242",
+		"name": "Belize",
+		"alpha2": "BZ",
+		"alpha3": "BLZ",
+		"aliases": "British Honduras"
+	},
 	{
 		"qid": "Q962",
 		"name": "Benin",
 		"alpha2": "BJ",
 		"alpha3": "BEN",
-		"aliases": "BEN|Republic of Benin|BJ|Dahomey"
+		"aliases": "Dahomey"
 	},
 	{
 		"qid": "Q23635",
 		"name": "Bermuda",
 		"alpha2": "BM",
 		"alpha3": "BMU",
-		"aliases": "Virgineola|The Somers Isles|Territory of Bermuda|Summers' Isles|Summer's Isles|Somers Islands|Isle of Devils|Devil's Isles|Colony of Bermuda|Bermudian Islands|Bermuda Islands|Bermoothes|Barmudas|Barmuda Islands|Barmuda Isl.|Barmuda I.|Barmuda|Atlantic/Bermuda|bm|Bermudas|Somers Isles"
+		"aliases": "Virgineola"
 	},
 	{
 		"qid": "Q917",
 		"name": "Bhutan",
 		"alpha2": "BT",
 		"alpha3": "BTN",
-		"aliases": "Kingdom of Bhutan|BHU|bt"
+		"aliases": "Druk Yul"
 	},
 	{
 		"qid": "Q750",
 		"name": "Bolivia",
 		"alpha2": "BO",
 		"alpha3": "BOL",
-		"aliases": "bo|BOL|bol|Republic of Bolivia|Plurinational State of Bolivia|Bolivia (Plurinational State of)"
+		"aliases": ""
 	},
 	{
 		"qid": "Q225",
 		"name": "Bosnia and Herzegovina",
 		"alpha2": "BA",
 		"alpha3": "BIH",
-		"aliases": "Bosnia-Herzegovina|Bosnia and Hercegovina|Bosnia & Herzegovina|BiH|B&H|ba|BIH|Bosnia"
+		"aliases": "Bosnia-Herzegovina|Bosnia and Hercegovina|Bosnia"
 	},
 	{
 		"qid": "Q963",
 		"name": "Botswana",
 		"alpha2": "BW",
 		"alpha3": "BWA",
-		"aliases": "Republic of Botswana|Lefatshe la Botswana|bw|BOT"
+		"aliases": ""
 	},
 	{ "qid": "Q23408", "name": "Bouvet Island", "alpha2": "BV", "alpha3": "BVT", "aliases": "" },
 	{
@@ -189,49 +195,49 @@
 		"name": "Brazil",
 		"alpha2": "BR",
 		"alpha3": "BRA",
-		"aliases": "Federative Republic of Brazil|br|Brasil"
+		"aliases": "Brasil"
 	},
 	{
 		"qid": "Q43448",
 		"name": "British Indian Ocean Territory",
 		"alpha2": "IO",
 		"alpha3": "IOT",
-		"aliases": "The British Indian Ocean Territory|BIOT|io|🇮🇴"
+		"aliases": ""
 	},
 	{
 		"qid": "Q25305",
 		"name": "British Virgin Islands",
 		"alpha2": "VG",
 		"alpha3": "VGB",
-		"aliases": "Virgin Islands of the United Kingdom|BVI|B.V.I.|vg|IVB|Virgin Islands, United Kingdom"
+		"aliases": "BVI"
 	},
 	{
 		"qid": "Q921",
 		"name": "Brunei",
 		"alpha2": "BN",
 		"alpha3": "BRN",
-		"aliases": "Negara Brunei Darussalam|Nation of Brunei, the Abode of Peace|Brunei Darussalam|BRU|BRN|bn"
+		"aliases": "Nation of Brunei, the Abode of Peace"
 	},
 	{
 		"qid": "Q219",
 		"name": "Bulgaria",
 		"alpha2": "BG",
 		"alpha3": "BGR",
-		"aliases": "Republic of Bulgaria|bg|BUL|BGR"
+		"aliases": ""
 	},
 	{
 		"qid": "Q965",
 		"name": "Burkina Faso",
 		"alpha2": "BF",
 		"alpha3": "BFA",
-		"aliases": "Republic of Upper Volta (-1984)|Republic of Burkina Faso|bf"
+		"aliases": "Upper Volta"
 	},
 	{
 		"qid": "Q967",
 		"name": "Burundi",
 		"alpha2": "BI",
 		"alpha3": "BDI",
-		"aliases": "Republika y'Uburundi|Republic of Burundi|Gouvernement du Burundi|bi"
+		"aliases": "Uburundi"
 	},
 	{
 		"qid": "Q424",
@@ -247,96 +253,96 @@
 		"alpha3": "CMR",
 		"aliases": "Republic of Cameroon|CMR|CM|CAM"
 	},
-	{ "qid": "Q16", "name": "Canada", "alpha2": "CA", "alpha3": "CAN", "aliases": "CAN|CA" },
+	{ "qid": "Q16", "name": "Canada", "alpha2": "CA", "alpha3": "CAN", "aliases": "" },
 	{
 		"qid": "Q1011",
-		"name": "Cape Verde",
+		"name": "Cabo Verde",
 		"alpha2": "CV",
 		"alpha3": "CPV",
-		"aliases": "Republic of Cape Verde|Republic of Cabo Verde|Cape Verde Islands|Cabo Verde|CPV|CV|cv"
+		"aliases": "Cape Verde"
 	},
 	{
 		"qid": "Q27561",
-		"name": "Caribbean Netherlands",
+		"name": "Bonaire",
 		"alpha2": "BQ",
 		"alpha3": "BES",
-		"aliases": "Bonaire, Saint Eustatius and Saba|BES islands"
+		"aliases": "Bonaire, Saint Eustatius and Saba|Caribbean Netherlands"
 	},
 	{
 		"qid": "Q5785",
 		"name": "Cayman Islands",
 		"alpha2": "KY",
 		"alpha3": "CYM",
-		"aliases": "ky|CAY|Caymans"
+		"aliases": "Caymans"
 	},
 	{
 		"qid": "Q929",
 		"name": "Central African Republic",
 		"alpha2": "CF",
 		"alpha3": "CAF",
-		"aliases": "cf|Central Africa|CAF|CAR"
+		"aliases": "Central Africa"
 	},
 	{
 		"qid": "Q657",
 		"name": "Chad",
 		"alpha2": "TD",
 		"alpha3": "TCD",
-		"aliases": "td|CHA|GUM|Republic of Chad"
+		"aliases": ""
 	},
 	{
 		"qid": "Q298",
 		"name": "Chile",
 		"alpha2": "CL",
 		"alpha3": "CHL",
-		"aliases": "República de Chile|Republic of Chile|cl|CL|CHI"
+		"aliases": ""
 	},
 	{
 		"qid": "Q148",
 		"name": "China",
 		"alpha2": "CN",
 		"alpha3": "CHN",
-		"aliases": "P.R.C.|Zhōngguó|The PRC|Red China|PR China|China PR|Communist China|cn|RPC|CN|CHN|PRC|China"
+		"aliases": "Zhōngguó|PRC|Zhongguo"
 	},
 	{
 		"qid": "Q31063",
 		"name": "Christmas Island",
 		"alpha2": "CX",
 		"alpha3": "CXR",
-		"aliases": "Territory of Christmas Island|Christmas Island, Other Territories, Australia|Christmas Island, Other Territories|cx"
+		"aliases": ""
 	},
 	{
 		"qid": "Q161258",
 		"name": "Clipperton Island",
 		"alpha2": "CP",
-		"aliases": "La Passion–Clipperton|Clipperton|Passion Island"
+		"aliases": "Clipperton's Rock|Clipperton Atoll|Passion Island"
 	},
 	{
 		"qid": "Q36004",
 		"name": "Cocos (Keeling) Islands",
 		"alpha2": "CC",
 		"alpha3": "CCK",
-		"aliases": "Territory of the Cocos (Keeling) Islands|Keeling Islands|cc|Cocos Islands"
+		"aliases": "Territory of the Cocos (Keeling) Islands|Keeling Islands|Cocos Islands"
 	},
 	{
 		"qid": "Q126125",
 		"name": "Collectivity of Saint Martin",
 		"alpha2": "MF",
 		"alpha3": "MAF",
-		"aliases": "St. Martin (French part)|Saint Martin (France)|mf|FR-MF|Collectivity of Saint Martin|MF|St Martin|St. Martin|Saint Martin (French part)"
+		"aliases": "St. Martin (French part)|Saint Martin (France)|Collectivity of Saint Martin|St Martin|St. Martin|Saint Martin (French part)"
 	},
 	{
 		"qid": "Q739",
 		"name": "Colombia",
 		"alpha2": "CO",
 		"alpha3": "COL",
-		"aliases": "The Republic of Colombia|Republic of Colombia|Colombiá"
+		"aliases": "Colombiá"
 	},
 	{
 		"qid": "Q970",
 		"name": "Comoros",
 		"alpha2": "KM",
 		"alpha3": "COM",
-		"aliases": "Union of the Comoros|Union des Comores|Udzima wa Komori|ouvoimoja wakomori|Massiwa ya komori|Juzur al-Qumur|Juzur al-Qamar|al-Ittiḥād al-Qumurī|the Comoros"
+		"aliases": "Udzima wa Komori|Waku-Moria|Juzur al-Qumur|Juzur al-Qamar|al-Ittiḥād al-Qumurī"
 	},
 	{
 		"qid": "Q26988",
@@ -357,49 +363,49 @@
 		"name": "Croatia",
 		"alpha2": "HR",
 		"alpha3": "HRV",
-		"aliases": "Republic of Croatia|HRV|RH|CRO|HR"
+		"aliases": "Republic of Croatia"
 	},
 	{
 		"qid": "Q241",
 		"name": "Cuba",
 		"alpha2": "CU",
 		"alpha3": "CUB",
-		"aliases": "cu|CUB|Republic of Cuba"
+		"aliases": "|Republic of Cuba"
 	},
 	{
 		"qid": "Q25279",
 		"name": "Curaçao",
 		"alpha2": "CW",
 		"alpha3": "CUW",
-		"aliases": "Kòrsou|Island Territory of Curaçao|CUW|Curocao|Curaςao|Curazao|Curaçoa|Curacau|Country of Curaçao|CW|Curacao"
+		"aliases": "Kòrsou|Curocao|Curaςao|Curazao|Curaçoa|Curacau|Curacao"
 	},
 	{
 		"qid": "Q229",
 		"name": "Cyprus",
 		"alpha2": "CY",
 		"alpha3": "CYP",
-		"aliases": "Greek Cypriot State|Greek Administration of Southern Cyprus|CYP|CY|Republic of Cyprus"
+		"aliases": "Greek Cypriot State"
 	},
 	{
 		"qid": "Q213",
 		"name": "Czech Republic",
 		"alpha2": "CZ",
 		"alpha3": "CZE",
-		"aliases": "CZ|CZE|Czechia|CZR"
+		"aliases": "Czechia"
 	},
 	{
 		"qid": "Q974",
 		"name": "Democratic Republic of the Congo",
 		"alpha2": "CD",
 		"alpha3": "COD",
-		"aliases": "DR Congo|Democratic Republic of Congo|Dem. Republic of the Congo|Dem. Republic of Congo|Dem. Rep. Congo|Congo-Kinshasa|Congo (Kinshasa)|cd|COD|D.R.C.|DRC|Zaire|Congo"
+		"aliases": "DR Congo|Congo-Kinshasa|Congo (Kinshasa)|DRC|Zaire|Congo"
 	},
 	{
 		"qid": "Q35",
 		"name": "Denmark",
 		"alpha2": "DK",
 		"alpha3": "DNK",
-		"aliases": "metropolitan Denmark|Denmark proper|dk|TAN|DEK|DEN|Danmark|DNK|DK"
+		"aliases": "Danmark"
 	},
 	{ "qid": "Q184851", "name": "Diego Garcia", "alpha2": "DG", "aliases": "🇲🇺" },
 	{
@@ -407,182 +413,182 @@
 		"name": "Djibouti",
 		"alpha2": "DJ",
 		"alpha3": "DJI",
-		"aliases": "Republic of Djibouti|Jībūtī|Gabuuti|Jabuuti|dj"
+		"aliases": "Republic of Djibouti|Jībūtī|Gabuuti|Jabuuti"
 	},
 	{
 		"qid": "Q784",
 		"name": "Dominica",
 		"alpha2": "DM",
 		"alpha3": "DMA",
-		"aliases": "dm|DOM|DMA|Wai‘tu kubuli|Wai'tu kubuli|The Commonwealth of Dominica|Island of Dominica|Commonwealth of Dominica"
+		"aliases": "Wai‘tu kubuli|Wai'tu kubuli"
 	},
 	{
 		"qid": "Q786",
 		"name": "Dominican Republic",
 		"alpha2": "DO",
 		"alpha3": "DOM",
-		"aliases": "República Dominicana|Republica Dominicana|DomRep|Dominicana|DO|RD|DR"
+		"aliases": "Dominicana"
 	},
 	{
 		"qid": "Q736",
 		"name": "Ecuador",
 		"alpha2": "EC",
 		"alpha3": "ECU",
-		"aliases": "The Ecuadorian State|Republic of the Equator|Republic of Ecuador"
+		"aliases": ""
 	},
 	{
 		"qid": "Q79",
 		"name": "Egypt",
 		"alpha2": "EG",
 		"alpha3": "EGY",
-		"aliases": "Rep. Egypt|Arab Republic of Egypt|Arab Rep. Egypt|EGY|Republic of Egypt|Misr|eg"
+		"aliases": "Misr"
 	},
 	{
 		"qid": "Q792",
 		"name": "El Salvador",
 		"alpha2": "SV",
 		"alpha3": "SLV",
-		"aliases": "Republic of El Salvador|sv|ESA|Salvador"
+		"aliases": "Salvador"
 	},
 	{
 		"qid": "Q983",
 		"name": "Equatorial Guinea",
 		"alpha2": "GQ",
 		"alpha3": "GNQ",
-		"aliases": "Republic of Equatorial Guinea|gq|GEQ"
+		"aliases": ""
 	},
 	{
 		"qid": "Q986",
 		"name": "Eritrea",
 		"alpha2": "ER",
 		"alpha3": "ERI",
-		"aliases": "ERI|State of Eritrea|Iritriyā|Ertrā|IRI|er"
+		"aliases": "Iritriyā|Ertrā"
 	},
 	{
 		"qid": "Q191",
 		"name": "Estonia",
 		"alpha2": "EE",
 		"alpha3": "EST",
-		"aliases": "Republic of Estonia|Eesti Vabariik|Estland|ee|Eesti|EST"
+		"aliases": "Eesti Vabariik|Estland"
 	},
 	{
 		"qid": "Q1050",
 		"name": "Eswatini",
 		"alpha2": "SZ",
 		"alpha3": "SWZ",
-		"aliases": "sz|SWZ|Kingdom of Swaziland|Kingdom of Eswatini|eSwatini|Swaziland|Umbuso weSwatini"
+		"aliases": "eSwatini|Swaziland|Umbuso weSwatini"
 	},
 	{
 		"qid": "Q115",
 		"name": "Ethiopia",
 		"alpha2": "ET",
 		"alpha3": "ETH",
-		"aliases": "Federal Democratic Republic of Ethiopia|et|ETH"
+		"aliases": "Abyssinia"
 	},
 	{
 		"qid": "Q9648",
 		"name": "Falkland Islands",
 		"alpha2": "FK",
 		"alpha3": "FLK",
-		"aliases": "Malvinas Islands|FLK|Islas Malvinas|FK|Falklands"
+		"aliases": "Malvinas Islands|Islas Malvinas|Falklands"
 	},
 	{
 		"qid": "Q4628",
 		"name": "Faroe Islands",
 		"alpha2": "FO",
 		"alpha3": "FRO",
-		"aliases": "Faer Oer|Atlantic/Faroe|Faroes|Sheep Islands|Faeroes|fo|Farre|Færøyene|Færøerne|🇫🇴|the Faroe Islands|the Faeroe Islands|Føroyar|Foroyar|Farre Islands|Farre Isl.|Farre Is.|Farre I.|Faroese Islands|Färöer|Faroer|Faroe Isles|Faröe Islands|Faroe Island|Fareo islands|Far Oer|Faeroyene|Færoes|Faeroerne|Færøer|Faeroer|Faeroe Isles|Faeroe Islands|Faeroe Is|Færeyjar|Fær Øer"
+		"aliases": "Faer Oer|Faroes|Sheep Islands"
 	},
 	{
 		"qid": "Q702",
 		"name": "Federated States of Micronesia",
 		"alpha2": "FM",
 		"alpha3": "FSM",
-		"aliases": "Federated States of Micronesia, FSM|Fed. Sts. of Micronesia|Fed. Sts. Micronesia|fm|FSM|Micronesia"
+		"aliases": ""
 	},
 	{
 		"qid": "Q712",
 		"name": "Fiji",
 		"alpha2": "FJ",
 		"alpha3": "FJI",
-		"aliases": "Republic of the Fiji Islands|Republic of Fiji|Matanitu Tugalala o Viti|Fijī Gaṇarājya|Fijī|fj|FIJ|Viti"
+		"aliases": "Matanitu Tugalala o Viti|Fijī Gaṇarājya|Fijī"
 	},
 	{
 		"qid": "Q33",
 		"name": "Finland",
 		"alpha2": "FI",
 		"alpha3": "FIN",
-		"aliases": "Suomen tasavalta|Republiken Finland|Republic of Finland|Land of Thousand Lakes|Finnia|Suomi|fi|FIN"
+		"aliases": "Suomen tasavalta|Land of a Thousand Lakes|Finnia|Suomi"
 	},
 	{
 		"qid": "Q142",
 		"name": "France",
 		"alpha2": "FR",
 		"alpha3": "FRA",
-		"aliases": "FRA|FR|French Republic"
+		"aliases": "French Republic"
 	},
 	{
 		"qid": "Q3769",
 		"name": "French Guiana",
 		"alpha2": "GF",
 		"alpha3": "GUF",
-		"aliases": "Guyane française|Guiana, France|gf|Guyane|GF|Guiana"
+		"aliases": "Guyane"
 	},
 	{
 		"qid": "Q30971",
 		"name": "French Polynesia",
 		"alpha2": "PF",
 		"alpha3": "PYF",
-		"aliases": "pf|Territory of French Polynesia|French Settlements in Oceania|French Oceania|French Establishments in Oceania"
+		"aliases": "French Oceania"
 	},
 	{
 		"qid": "Q129003",
 		"name": "French Southern and Antarctic Lands",
 		"alpha2": "TF",
 		"alpha3": "ATF",
-		"aliases": "tf|French Southern Territories|🇹🇫"
+		"aliases": ""
 	},
 	{
 		"qid": "Q1000",
 		"name": "Gabon",
 		"alpha2": "GA",
 		"alpha3": "GAB",
-		"aliases": "République Gabonaise|Republique Gabonaise|Gabonese Republic|GAB|ga"
+		"aliases": "Gabonaise|Gabonese Republic"
 	},
 	{
 		"qid": "Q230",
 		"name": "Georgia (country)",
 		"alpha2": "GE",
 		"alpha3": "GEO",
-		"aliases": "Republic of Georgia|GEO|Georgia (country)"
+		"aliases": ""
 	},
 	{
 		"qid": "Q183",
 		"name": "Germany",
 		"alpha2": "DE",
 		"alpha3": "DEU",
-		"aliases": "Deutschland|Federal Republic of Germany|Bundesrepublik Deutschland|BR Deutschland"
+		"aliases": "Deutschland"
 	},
 	{
 		"qid": "Q117",
 		"name": "Ghana",
 		"alpha2": "GH",
 		"alpha3": "GHA",
-		"aliases": "gh|Republic of Ghana|GHA"
+		"aliases": ""
 	},
 	{
 		"qid": "Q1410",
 		"name": "Gibraltar",
 		"alpha2": "GI",
 		"alpha3": "GIB",
-		"aliases": "The Rock of Gibraltar|Gib|gi"
+		"aliases": ""
 	},
 	{
 		"qid": "Q41",
 		"name": "Greece",
 		"alpha2": "GR",
 		"alpha3": "GRC",
-		"aliases": "Greek Republic|Ellada|el|Hellenic Republic|Hellas, Greece|gr|GRE|Hellas"
+		"aliases": "Ellada|Hellenic Republic|Hellas"
 	},
 	{
 		"qid": "Q223",
@@ -597,70 +603,70 @@
 		"name": "Guadeloupe",
 		"alpha2": "GP",
 		"alpha3": "GLP",
-		"aliases": "Karukera|Gwadloup|Gwada|gp|971"
+		"aliases": "Karukera|Gwadloup|Gwada"
 	},
 	{
 		"qid": "Q16635",
 		"name": "Guam",
 		"alpha2": "GU",
 		"alpha3": "GUM",
-		"aliases": "Guåhån|Guahan|GU|GUM|Island of Guam|Guam (USA)|Guåhan|US-GU|Territory of Guam"
+		"aliases": "Guåhån|Guahan|Guåhan"
 	},
 	{
 		"qid": "Q774",
 		"name": "Guatemala",
 		"alpha2": "GT",
 		"alpha3": "GTM",
-		"aliases": "Republic of Guatemala|gt|GUA"
+		"aliases": ""
 	},
 	{
 		"qid": "Q1006",
 		"name": "Guinea",
 		"alpha2": "GN",
 		"alpha3": "GIN",
-		"aliases": "Republic of Guinea|Guinea-Conakry|GUI|gn"
+		"aliases": "Guinea-Conakry"
 	},
 	{
 		"qid": "Q1007",
 		"name": "Guinea-Bissau",
 		"alpha2": "GW",
 		"alpha3": "GNB",
-		"aliases": "Republic of Guinea-Bissau|gw|GBS"
+		"aliases": ""
 	},
 	{
 		"qid": "Q734",
 		"name": "Guyana",
 		"alpha2": "GY",
 		"alpha3": "GUY",
-		"aliases": "Republic of Guyana|Co-operative Republic of Guyana|gy|GUY"
+		"aliases": "British Guiana"
 	},
 	{
 		"qid": "Q790",
 		"name": "Haiti",
 		"alpha2": "HT",
 		"alpha3": "HTI",
-		"aliases": "Republic of Haiti|Haitian Republic|Ayiti|HT|HAI|ht|Hayti"
+		"aliases": "Ayiti"
 	},
 	{
 		"qid": "Q131198",
 		"name": "Heard Island and McDonald Islands",
 		"alpha2": "HM",
 		"alpha3": "HMD",
-		"aliases": "Territory of Heard Island and McDonald Islands|HIMI|Heard and McDonald Islands|Heard and Macdonald Islands|HMD|hm"
+		"aliases": ""
 	},
 	{
 		"qid": "Q783",
 		"name": "Honduras",
 		"alpha2": "HN",
 		"alpha3": "HND",
-		"aliases": "Republic of Honduras|Honduran Republic|hn|HN|HND|HON"
+		"aliases": ""
 	},
 	{
 		"qid": "Q8646",
 		"name": "Hong Kong",
 		"alpha2": "HK",
 		"alpha3": "HKG",
-		"aliases": "Hong Kong Special Administrative Region of the People's Republic of China|Hong Kong Special Administrative Region|Hong Kong SAR, China|Hong Kong SAR|HKSAR|China Hong Kong|hk|HK|HKG|Hongkong|Hong Kong, China"
+		"aliases": "HKSAR"
 	},
 	{ "qid": "Q28", "name": "Hungary", "alpha2": "HU", "alpha3": "HUN", "aliases": "Magyarország" },
 	{
@@ -668,35 +674,35 @@
 		"name": "Iceland",
 		"alpha2": "IS",
 		"alpha3": "ISL",
-		"aliases": "Icelandic republic|Isl.|Republic of Iceland|Ysland|ISL"
+		"aliases": "Ísland|Ysland"
 	},
 	{
 		"qid": "Q668",
 		"name": "India",
 		"alpha2": "IN",
 		"alpha3": "IND",
-		"aliases": "Republic of India|Indostan|Bharat Ganarajya|Bharatvarsh|Hindoostan|IND|Bharata|IN|Hindustan|Bharat"
+		"aliases": "Indostan|Bharat Ganarajya|Bharatvarsh|Hindoostan|Bharata|Hindustan|Bharat"
 	},
 	{
 		"qid": "Q252",
 		"name": "Indonesia",
 		"alpha2": "ID",
 		"alpha3": "IDN",
-		"aliases": "Republic of Indonesia|IDN|INA|ID|id"
+		"aliases": "East Indies"
 	},
 	{
 		"qid": "Q794",
 		"name": "Iran",
 		"alpha2": "IR",
 		"alpha3": "IRN",
-		"aliases": "Persia|Islamic Republic of Iran|Islamic Rep. Iran|IRN|ir|IRI"
+		"aliases": "Persia"
 	},
 	{
 		"qid": "Q796",
 		"name": "Iraq",
 		"alpha2": "IQ",
 		"alpha3": "IRQ",
-		"aliases": "iq|Republic of Iraq|IRQ"
+		"aliases": "Mesopotamia"
 	},
 	{
 		"qid": "Q9676",
@@ -710,834 +716,834 @@
 		"name": "Israel",
 		"alpha2": "IL",
 		"alpha3": "ISR",
-		"aliases": "Yisrael|il|IL|ISR|State of Israel"
+		"aliases": ""
 	},
 	{
 		"qid": "Q38",
 		"name": "Italy",
 		"alpha2": "IT",
 		"alpha3": "ITA",
-		"aliases": "ITA|IT|Italia|Republic of Italy|Repubblica Italiana|Italian Republic"
+		"aliases": "Italia"
 	},
 	{
 		"qid": "Q1008",
 		"name": "Ivory Coast",
 		"alpha2": "CI",
 		"alpha3": "CIV",
-		"aliases": "Côte d'Ivoire|The Ivory Coast|Republic of the Ivory Coast|Republic of Ivory Coast|Republic of Côte d'Ivoire|Republic of Cote d'Ivoire|Côte-d'Ivoire|Cote-d'Ivoire|Cote Ivoire|Côte d’Ivoire|Cote d'lvoire|Cote d'Ivoire|CIV|ci"
+		"aliases": "Côte d'Ivoire|Côte-d'Ivoire|Cote-d'Ivoire|Cote d'lvoire|Cote d'Ivoire"
 	},
 	{
 		"qid": "Q766",
 		"name": "Jamaica",
 		"alpha2": "JM",
 		"alpha3": "JAM",
-		"aliases": "Commonwealth of Jamaica|JA|JM|JAM"
+		"aliases": ""
 	},
 	{
 		"qid": "Q17",
 		"name": "Japan",
 		"alpha2": "JP",
 		"alpha3": "JPN",
-		"aliases": "Ja|jp|JPN|Land of the Rising Sun|JP|State of Japan|Nippon-koku|Nihon-koku|Land of Rising Sun|Iapon|Iapan|JAP|JA|Nihon|Jap|Nippon"
+		"aliases": "Land of the Rising Sun|Nippon-koku|Nihon-koku|Nihon|Nippon"
 	},
 	{
 		"qid": "Q785",
 		"name": "Jersey",
 		"alpha2": "JE",
 		"alpha3": "JEY",
-		"aliases": "Jersey I.|Jèrri|Iersey I.|I. Jersey|I. Iersey|Balliwick of Jersey|Bailliage de Jersey|Bailliage de Jèrri|Bailliage de Jerri|Bailiwick of Jersey|Jersey Island|Jerri|je|Iersey|Isle of Jersey"
+		"aliases": "Jèrri|Jerri|Iersey"
 	},
 	{
 		"qid": "Q810",
 		"name": "Jordan",
 		"alpha2": "JO",
 		"alpha3": "JOR",
-		"aliases": "Yarden|State of Jordan|Kingdom of Jordan|Hashemite Kingdom of Jordan|Giordania|HKJ"
+		"aliases": "Yarden|Giordania"
 	},
 	{
 		"qid": "Q232",
 		"name": "Kazakhstan",
 		"alpha2": "KZ",
 		"alpha3": "KAZ",
-		"aliases": "Republic of Qazaqstan|Republic of Kazakhstan|Qazaqstan|kz|KAZ"
+		"aliases": "Qazaqstan"
 	},
 	{
 		"qid": "Q114",
 		"name": "Kenya",
 		"alpha2": "KE",
 		"alpha3": "KEN",
-		"aliases": "Republic of Kenya|KE|ke|KEN"
+		"aliases": ""
 	},
 	{
 		"qid": "Q29999",
-		"name": "Kingdom of the Netherlands",
+		"name": "Netherlands",
 		"alpha2": "NL",
 		"alpha3": "NLD",
-		"aliases": "Nederlanden|NL|the Netherlands|Netherlands"
+		"aliases": "Nederlanden"
 	},
 	{
 		"qid": "Q710",
 		"name": "Kiribati",
 		"alpha2": "KI",
 		"alpha3": "KIR",
-		"aliases": "Republic of Kiribati|KIR|ki"
+		"aliases": ""
 	},
 	{
 		"qid": "Q1246",
 		"name": "Kosovo",
 		"alpha2": "XK",
-		"aliases": "RKS|XKX|Republic of Kosovo|Kosova|KV|XK|KOS"
+		"aliases": ""
 	},
 	{
 		"qid": "Q817",
 		"name": "Kuwait",
 		"alpha2": "KW",
 		"alpha3": "KWT",
-		"aliases": "kw|KUW|State of Kuwait"
+		"aliases": ""
 	},
 	{
 		"qid": "Q813",
 		"name": "Kyrgyzstan",
 		"alpha2": "KG",
 		"alpha3": "KGZ",
-		"aliases": "Kyrgyz Republic|kg|KGZ"
+		"aliases": "Kyrgyz|Kirghizia"
 	},
 	{
 		"qid": "Q819",
 		"name": "Laos",
 		"alpha2": "LA",
 		"alpha3": "LAO",
-		"aliases": "Lao People's Democratic Republic|Lao PDR|LAO|la"
+		"aliases": "LPDR"
 	},
 	{
 		"qid": "Q211",
 		"name": "Latvia",
 		"alpha2": "LV",
 		"alpha3": "LVA",
-		"aliases": "Republic of Latvia|LVA|Leţmо̄ Vabāmо̄|Leţmо̄|Latvijas Republika|Latvija|Latvian Republic|Latvejas Republika|Latveja|lv|LAT"
+		"aliases": "Leţmо̄ Vabāmо̄|Leţmо̄|Latvija|Latveja"
 	},
 	{
 		"qid": "Q822",
 		"name": "Lebanon",
 		"alpha2": "LB",
 		"alpha3": "LBN",
-		"aliases": "Republic of Lebanon|Lubnan|Lebanese Republic|LBN|lb|State of Lebanon"
+		"aliases": "Lubnan"
 	},
 	{
 		"qid": "Q1013",
 		"name": "Lesotho",
 		"alpha2": "LS",
 		"alpha3": "LSO",
-		"aliases": "The Mountain Kingdom|ls|LES|Kingdom of Lesotho"
+		"aliases": "The Mountain Kingdom"
 	},
 	{
 		"qid": "Q1014",
 		"name": "Liberia",
 		"alpha2": "LR",
 		"alpha3": "LBR",
-		"aliases": "Liber|Republic of Liberia|lr|LBR"
+		"aliases": ""
 	},
 	{
 		"qid": "Q1016",
 		"name": "Libya",
 		"alpha2": "LY",
 		"alpha3": "LBY",
-		"aliases": "State of Libya|ly|LBA"
+		"aliases": "Libyan Arab Jamahiriya"
 	},
 	{
 		"qid": "Q347",
 		"name": "Liechtenstein",
 		"alpha2": "LI",
 		"alpha3": "LIE",
-		"aliases": "Principality of Liechtenstein|LI|FL|LIE|li"
+		"aliases": ""
 	},
 	{
 		"qid": "Q37",
 		"name": "Lithuania",
 		"alpha2": "LT",
 		"alpha3": "LTU",
-		"aliases": "Republic of Lithuania|Lietuvos Respublika|Lietuva|LT|LTU"
+		"aliases": "Lietuva"
 	},
 	{
 		"qid": "Q32",
 		"name": "Luxembourg",
 		"alpha2": "LU",
 		"alpha3": "LUX",
-		"aliases": "Grand Duchy of Luxembourg|Luxemburg|LUX|LU"
+		"aliases": "Luxemburg"
 	},
 	{
 		"qid": "Q14773",
 		"name": "Macau",
 		"alpha2": "MO",
 		"alpha3": "MAC",
-		"aliases": "Macau Special Administrative Region of the People's Republic of China|Macau Special Administrative Region|Macau SAR, China|Macau SAR|Macao Special Administrative Region of the People's Republic of China|Macao Special Administrative Region|Macao SAR, China|Macao SAR|Macao S.A.R.|Aomen|MO|Macao"
+		"aliases": "Macau SAR|Macao SAR|Aomen|Macao"
 	},
 	{
 		"qid": "Q1019",
 		"name": "Madagascar",
 		"alpha2": "MG",
 		"alpha3": "MDG",
-		"aliases": "MDG|Republic of Madagascar|mg|Malagaskar|Malagascar|MAD"
+		"aliases": "Malagaskar|Malagascar|Malagasy Republic"
 	},
 	{
 		"qid": "Q1020",
 		"name": "Malawi",
 		"alpha2": "MW",
 		"alpha3": "MWI",
-		"aliases": "Republic of Malawi|mw|MAW"
+		"aliases": "Nyasaland"
 	},
 	{
 		"qid": "Q833",
 		"name": "Malaysia",
 		"alpha2": "MY",
 		"alpha3": "MYS",
-		"aliases": "Malaysia Federation|Federation of Malaysia|MAS"
+		"aliases": ""
 	},
 	{
 		"qid": "Q826",
 		"name": "Maldives",
 		"alpha2": "MV",
 		"alpha3": "MDV",
-		"aliases": "Republic of Maldives|mv|MDV"
+		"aliases": "Maldive Islands"
 	},
 	{
 		"qid": "Q912",
 		"name": "Mali",
 		"alpha2": "ML",
 		"alpha3": "MLI",
-		"aliases": "Republic of Mali|ml|MLI"
+		"aliases": "French Sudan"
 	},
 	{
 		"qid": "Q233",
 		"name": "Malta",
 		"alpha2": "MT",
 		"alpha3": "MLT",
-		"aliases": "Republic of Malta|MLT|MT"
+		"aliases": ""
 	},
 	{
 		"qid": "Q709",
 		"name": "Marshall Islands",
 		"alpha2": "MH",
 		"alpha3": "MHL",
-		"aliases": "Republic of the Marshall Islands|mh|MHL"
+		"aliases": "RMI"
 	},
 	{
 		"qid": "Q17054",
 		"name": "Martinique",
 		"alpha2": "MQ",
 		"alpha3": "MTQ",
-		"aliases": "Wanakaera|Territorial Collectivity of Martinique|Matnik|Matinino|Matinik|Martinica|Madinina|Jouanacaëra|Madiana|MQ"
+		"aliases": "Iguanacaera|Matinino|Martinica|Madinina|Jouanacaëra|Madiana|Maritiniki|Ioünacaëra"
 	},
 	{
 		"qid": "Q1025",
 		"name": "Mauritania",
 		"alpha2": "MR",
 		"alpha3": "MRT",
-		"aliases": "Murutaane|Muritanya|mr|Moritani|Mauretania|Islamic Republic of Mauritania|Gànnaar|Gannaar|Agawej|MTN"
+		"aliases": "Murutaane|Muritanya|Moritani|Mauretania|Gànnaar|Gannaar|Agawej"
 	},
 	{
 		"qid": "Q1027",
 		"name": "Mauritius",
 		"alpha2": "MU",
 		"alpha3": "MUS",
-		"aliases": "Republic of Mauritius|Moris|MU|MRI|Maurice"
+		"aliases": "Moris|Maurice"
 	},
 	{
 		"qid": "Q17063",
 		"name": "Mayotte",
 		"alpha2": "YT",
 		"alpha3": "MYT",
-		"aliases": "Department of Mayotte|MYT|YT"
+		"aliases": ""
 	},
 	{
 		"qid": "Q96",
 		"name": "Mexico",
 		"alpha2": "MX",
 		"alpha3": "MEX",
-		"aliases": "US of M|Mexican Republic|MXN|mx|United Mexican States|MEX|MX|Mexican United States"
+		"aliases": "Estados Unidos Mexicanos"
 	},
 	{
 		"qid": "Q217",
 		"name": "Moldova",
 		"alpha2": "MD",
 		"alpha3": "MDA",
-		"aliases": "Republica Moldova|Republic of Moldova|Moldavia|MDA|MD"
+		"aliases": "Moldavia"
 	},
 	{
 		"qid": "Q235",
 		"name": "Monaco",
 		"alpha2": "MC",
 		"alpha3": "MCO",
-		"aliases": "Principauté de Monaco|Prinçipatu de Mùnegu|Principatu de Mu̍negu|Principato di Monaco|Principality of Monaco|Principality and Diocese of Monaco|Mùnegu|Fort-Hercule|mc|MON"
+		"aliases": "Mùnegu"
 	},
 	{
 		"qid": "Q711",
 		"name": "Mongolia",
 		"alpha2": "MN",
 		"alpha3": "MNG",
-		"aliases": "State of Mongolia|Mongol State"
+		"aliases": "Outer Mongolia|Mongol State"
 	},
 	{
 		"qid": "Q236",
 		"name": "Montenegro",
 		"alpha2": "ME",
 		"alpha3": "MNE",
-		"aliases": "Crna Gora|MNE|me"
+		"aliases": "Crna Gora"
 	},
 	{
 		"qid": "Q13353",
 		"name": "Montserrat",
 		"alpha2": "MS",
 		"alpha3": "MSR",
-		"aliases": "Island of Montserrat|ms|MS"
+		"aliases": ""
 	},
 	{
 		"qid": "Q1028",
 		"name": "Morocco",
 		"alpha2": "MA",
 		"alpha3": "MAR",
-		"aliases": "Marocco|Maroc|MAR|Lmaġrib|Kingdom of Morocco|al-Maġrib|ma"
+		"aliases": "Marocco|Maroc|Lmaġrib|al-Maġrib"
 	},
 	{
 		"qid": "Q1029",
 		"name": "Mozambique",
 		"alpha2": "MZ",
 		"alpha3": "MOZ",
-		"aliases": "República de Moçambique|Republic of Mozambique|MZ|mz|MOZ|Moçambique"
+		"aliases": "Moçambique"
 	},
 	{
 		"qid": "Q836",
 		"name": "Myanmar",
 		"alpha2": "MM",
 		"alpha3": "MMR",
-		"aliases": "MM|Burma|Republic of the Union of Myanmar|BUR|MYA|Union of Burma"
+		"aliases": "Burma"
 	},
 	{
 		"qid": "Q1030",
 		"name": "Namibia",
 		"alpha2": "NA",
 		"alpha3": "NAM",
-		"aliases": "Republic of Namibia|na|NAM"
+		"aliases": "South West Africa"
 	},
 	{
 		"qid": "Q697",
 		"name": "Nauru",
 		"alpha2": "NR",
 		"alpha3": "NRU",
-		"aliases": "Republic of Nauru|Naoero|nr|Pleasant Island"
+		"aliases": "Naoero|Pleasant Island"
 	},
 	{
 		"qid": "Q837",
 		"name": "Nepal",
 		"alpha2": "NP",
 		"alpha3": "NPL",
-		"aliases": "Népál|Nepál|Nekpal|Balpo-yul|Niepal|Ni-po-louo|Ni-po-lo|Nercerri|Nepaul|Nepall|Népaal|Nei-pal|Necbal|Ne-pel|Naipál|Bal-yul|Bal-po'i yul|Bal-bo|Balpo|Paï-pou|Pai-pou|Pa-eul-pou|Pa-lo-pou|Pa-le-pou|Palpou|Nipal|Nekbal|Nehpal|Naipála|Naipala|Federal Democratic Republic of Nepal|Balbo|Palpa"
+		"aliases": ""
 	},
 	{
 		"qid": "Q33788",
 		"name": "New Caledonia",
 		"alpha2": "NC",
 		"alpha3": "NCL",
-		"aliases": "Territory of New Caledonia and Dependencies|Nouvelle-Calédonie|FR-NC|Kanaky|NC|NCL"
+		"aliases": "Nouvelle-Calédonie|Kanaky"
 	},
 	{
 		"qid": "Q664",
 		"name": "New Zealand",
 		"alpha2": "NZ",
 		"alpha3": "NZL",
-		"aliases": "Aotearoa New Zealand|Dominion of New Zealand|NZ|NZL|nz|Aotearoa|Zelandia Nova|Zeelandia Nova|Nova Zelandia|New Zeeland"
+		"aliases": "Aotearoa|Zealandia Nova|New Zeeland"
 	},
 	{
 		"qid": "Q811",
 		"name": "Nicaragua",
 		"alpha2": "NI",
 		"alpha3": "NIC",
-		"aliases": "Republic of Nicaragua|NIC|ni|NI|NCA"
+		"aliases": ""
 	},
 	{
 		"qid": "Q1032",
 		"name": "Niger",
 		"alpha2": "NE",
 		"alpha3": "NER",
-		"aliases": "The Niger|Republic of the Niger|Republic of Niger|Republic Niger|ne"
+		"aliases": ""
 	},
 	{
 		"qid": "Q1033",
 		"name": "Nigeria",
 		"alpha2": "NG",
 		"alpha3": "NGA",
-		"aliases": "Federal Republic of Nigeria|NGA|NGR|NG|Naija|FRN"
+		"aliases": "Naija"
 	},
-	{ "qid": "Q34020", "name": "Niue", "alpha2": "NU", "alpha3": "NIU", "aliases": "Niuē|nu" },
+	{ "qid": "Q34020", "name": "Niue", "alpha2": "NU", "alpha3": "NIU", "aliases": "Niuē" },
 	{
 		"qid": "Q31057",
 		"name": "Norfolk Island",
 		"alpha2": "NF",
 		"alpha3": "NFK",
-		"aliases": "Territory of Norfolk Island|Norfolk Island, Other Territories, Australia|Norfolk Island, Other Territories|Norfolk Island, Australia"
+		"aliases": ""
 	},
 	{
 		"qid": "Q423",
 		"name": "North Korea",
 		"alpha2": "KP",
 		"alpha3": "PRK",
-		"aliases": "Democratic People's Republic of Korea|kp|PRK|DPR Korea|N. Korea|DPRK"
+		"aliases": "DPRK|Joseon|Chosŏn"
 	},
 	{
 		"qid": "Q221",
 		"name": "North Macedonia",
 		"alpha2": "MK",
 		"alpha3": "MKD",
-		"aliases": "Macedonia|Republic of North Macedonia|Republic of Macedonia|FYROM|FYR Macedonia|Former Yugoslav Republic of Macedonia|MKD|NM"
+		"aliases": "Macedonia"
 	},
 	{
 		"qid": "Q16644",
 		"name": "Northern Mariana Islands",
 		"alpha2": "MP",
 		"alpha3": "MNP",
-		"aliases": "US-MP|Northern Marianas|nmi|Commonwealth of the Northern Maria Islands|CNMI|NMI|mp|MP|the Northern Mariana Islands|Commonwealth of the Northern Mariana Islands"
+		"aliases": "Northern Marianas"
 	},
 	{
 		"qid": "Q20",
 		"name": "Norway",
 		"alpha2": "NO",
 		"alpha3": "NOR",
-		"aliases": "Kingdom of Norway"
+		"aliases": "Norge"
 	},
 	{
 		"qid": "Q842",
 		"name": "Oman",
 		"alpha2": "OM",
 		"alpha3": "OMN",
-		"aliases": "Sultanate of Oman|omn|om|Uman"
+		"aliases": "Uman|Muscat and Oman"
 	},
 	{
 		"qid": "Q843",
 		"name": "Pakistan",
 		"alpha2": "PK",
 		"alpha3": "PAK",
-		"aliases": "Republic of Pakistan|Islamic Republic of Pakistan|pk|PAK"
+		"aliases": ""
 	},
 	{
 		"qid": "Q695",
 		"name": "Palau",
 		"alpha2": "PW",
 		"alpha3": "PLW",
-		"aliases": "Republic of Palau|Republic of Belau|Pelew islands|Pelew|Peeloo|Pellew|pw|Belau"
+		"aliases": "Pelew|Belau"
 	},
 	{
 		"qid": "Q219060",
 		"name": "Palestine",
 		"alpha2": "PS",
 		"alpha3": "PSE",
-		"aliases": "Palestinian National Authority|Palestinian Authority|Palestine"
+		"aliases": ""
 	},
 	{
 		"qid": "Q804",
 		"name": "Panama",
 		"alpha2": "PA",
 		"alpha3": "PAN",
-		"aliases": "Republic of Panama|pa"
+		"aliases": "Canal Zone"
 	},
 	{
 		"qid": "Q691",
 		"name": "Papua New Guinea",
 		"alpha2": "PG",
 		"alpha3": "PNG",
-		"aliases": "Independent State of Papua New Guinea|pg|PNG"
+		"aliases": ""
 	},
 	{
 		"qid": "Q733",
 		"name": "Paraguay",
 		"alpha2": "PY",
 		"alpha3": "PRY",
-		"aliases": "Republic of Paraguay|Heart of South America|py|pry"
+		"aliases": ""
 	},
 	{
 		"qid": "Q419",
 		"name": "Peru",
 		"alpha2": "PE",
 		"alpha3": "PER",
-		"aliases": "República del Perú|Republica del Peru|Republic of Peru|pe|per"
+		"aliases": "Perú"
 	},
 	{
 		"qid": "Q928",
 		"name": "Philippines",
 		"alpha2": "PH",
 		"alpha3": "PHL",
-		"aliases": "The Philippines|Philippine Islands|ph|Republic of the Philippines|RP|PHI"
+		"aliases": "Philippine Islands"
 	},
 	{
 		"qid": "Q35672",
 		"name": "Pitcairn Islands",
 		"alpha2": "PN",
 		"alpha3": "PCN",
-		"aliases": "Pitcairn, Henderson, Ducie and Oeno Islands|Occas Island|pn|Pitcairn"
+		"aliases": "Pitcairn"
 	},
 	{
 		"qid": "Q36",
 		"name": "Poland",
 		"alpha2": "PL",
 		"alpha3": "POL",
-		"aliases": "Republic of Poland"
+		"aliases": "Polska"
 	},
 	{
 		"qid": "Q45",
 		"name": "Portugal",
 		"alpha2": "PT",
 		"alpha3": "PRT",
-		"aliases": "Portuguese Republic|POR|PRT"
+		"aliases": "Lusitania"
 	},
 	{
 		"qid": "Q1183",
 		"name": "Puerto Rico",
 		"alpha2": "PR",
 		"alpha3": "PRI",
-		"aliases": "Puerto Rico, USA|Puerto Rico (USA)|Isle of Enchantment|Territory of Puerto Rico|Island of Enchantment|Free Associated State of Puerto Rico|Commonwealth of Puerto Rico|Boriquén|Borikén|Porto Rico|Borinquen"
+		"aliases": "Boriquén|Borikén|Porto Rico|Borinquen"
 	},
 	{
 		"qid": "Q846",
 		"name": "Qatar",
 		"alpha2": "QA",
 		"alpha3": "QAT",
-		"aliases": "State of Qatar|qat|qa"
+		"aliases": ""
 	},
 	{
 		"qid": "Q27",
-		"name": "Republic of Ireland",
+		"name": "Ireland",
 		"alpha2": "IE",
 		"alpha3": "IRL",
-		"aliases": "Irish Republic|Southern Ireland|Hibernia|Republic of Ireland|Éire"
+		"aliases": "Hibernia|Éire"
 	},
 	{
 		"qid": "Q971",
 		"name": "Republic of the Congo",
 		"alpha2": "CG",
 		"alpha3": "COG",
-		"aliases": "CGO|Congo|République du Congo|Republique du Congo|Republic of Congo|Rep. Congo|Congo-Brazzaville|Congo Republic|Congo (Brazzaville)|cg"
+		"aliases": "Congo|Congo-Brazzaville|Congo (Brazzaville)"
 	},
 	{
 		"qid": "Q218",
 		"name": "Romania",
 		"alpha2": "RO",
 		"alpha3": "ROU",
-		"aliases": "România|Rumania|ro|Roumania|ROU"
+		"aliases": "România|Rumania|Roumania"
 	},
 	{
 		"qid": "Q159",
 		"name": "Russia",
 		"alpha2": "RU",
 		"alpha3": "RUS",
-		"aliases": "Federation of Russia|RF|Russian Federation"
+		"aliases": "USSR|Rossiyskaya Federatsiya"
 	},
 	{
 		"qid": "Q1037",
 		"name": "Rwanda",
 		"alpha2": "RW",
 		"alpha3": "RWA",
-		"aliases": "rw|Republic of Rwanda|The Land of a Thousand Hills|RW"
+		"aliases": "The Land of a Thousand Hills"
 	},
 	{
 		"qid": "Q17070",
 		"name": "Réunion",
 		"alpha2": "RE",
 		"alpha3": "REU",
-		"aliases": "Reunion Island|Bourbon Island|La Réunion Island|Île de La Réunion|Île de la Réunion|.re|La Reunion|La Réunion|re|Reunion"
+		"aliases": "Reunion Island|Bourbon Island|Reunion"
 	},
 	{
 		"qid": "Q25362",
 		"name": "Saint Barthélemy",
 		"alpha2": "BL",
 		"alpha3": "BLM",
-		"aliases": "St. Barths|St. Barthélemy|St. Barthelemy|St. Barth|St barts|St barths|St barthelemy|Saint Bartz|Saint Barts|Saint Barths|Saint Barthélémy|Saint Barthelemy|Saint Barth|Ouanalao|Île Saint-Barthélemy|Ile Saint-Barthélemy|Ile Saint-Barthelemy|FR-BL|Collectivity of Saint Barthélemy|Collectivity of Saint Barthelemy|Collectivité de Saint-Barthélemy|Collectivite de Saint-Barthelemy|America/St Barthelemy|Saint-Barthelemy|St. Barts|bl|Saint-Barthélémy"
+		"aliases": "St. Barths|St. Barthélemy|St. Barthelemy|St. Barth|St. Barts"
 	},
 	{
 		"qid": "Q192184",
-		"name": "Saint Helena, Ascension and Tristan da Cunha",
+		"name": "Saint Helena",
 		"alpha2": "SH",
 		"alpha3": "SHN",
-		"aliases": "SHN|Saint Helena, Ascension, and Tristan da Cunha|Saint Helena and Dependencies|SH"
+		"aliases": ""
 	},
 	{
 		"qid": "Q763",
 		"name": "Saint Kitts and Nevis",
 		"alpha2": "KN",
 		"alpha3": "KNA",
-		"aliases": "Federation of Saint Christopher and Nevis|St Kitts & Nevis|Kitts and Nevis|St. Kitts and Nevis|St. Kitts & Nevis|St Kitts and Nevis|Saint Christopher and Nevis|Kitts & Nevis|Federation of Saint Kitts and Nevis|SKN"
+		"aliases": "Saint Christopher and Nevis|Kitts & Nevis"
 	},
 	{
 		"qid": "Q760",
 		"name": "Saint Lucia",
 		"alpha2": "LC",
 		"alpha3": "LCA",
-		"aliases": "lc|Iyonola|Hewanorra|lca|St. Lucia|St Lucia"
+		"aliases": "Iyonola|Hewanorra"
 	},
 	{
 		"qid": "Q34617",
 		"name": "Saint Pierre and Miquelon",
 		"alpha2": "PM",
 		"alpha3": "SPM",
-		"aliases": "St.-Pierre & Miquelon|St. Pierre & Miquelon|St-Pierre & Miquelon|St Pierre & Miquelon|Saint-Pierre & Miquelon|Saint Pierre & Miquelon|St.-Pierre and Miquelon|Saint-Pierre and Miquelon|FR-PM|St. Pierre and Miquelon|St Pierre and Miquelon|Saint-Pierre et Miquelon|PM|Saint-Pierre-et-Miquelon|pm"
+		"aliases": ""
 	},
 	{
 		"qid": "Q757",
 		"name": "Saint Vincent and the Grenadines",
 		"alpha2": "VC",
 		"alpha3": "VCT",
-		"aliases": "vct|St. Vincent and the Grenadines|St Vincent and the Grenadines|vc|Saint Vincent|St Vincent|St. Vincent"
+		"aliases": ""
 	},
 	{
 		"qid": "Q683",
 		"name": "Samoa",
 		"alpha2": "WS",
 		"alpha3": "WSM",
-		"aliases": "Independent State of Samoa|Western Samoa|ws|SAM"
+		"aliases": "Western Samoa"
 	},
 	{
 		"qid": "Q238",
 		"name": "San Marino",
 		"alpha2": "SM",
 		"alpha3": "SMR",
-		"aliases": "Most Serene Republic of San Marino|sm|SMR"
+		"aliases": ""
 	},
 	{
 		"qid": "Q851",
 		"name": "Saudi Arabia",
 		"alpha2": "SA",
 		"alpha3": "SAU",
-		"aliases": "Saudi Kingdom of Arabia|Saudi Arabian Kingdom|Saudi Arab Kingdom|Saudia|sa|KSA|Saudi|Kingdom of Saudi Arabia|Arabia"
+		"aliases": "KSA"
 	},
 	{
 		"qid": "Q1041",
 		"name": "Senegal",
 		"alpha2": "SN",
 		"alpha3": "SEN",
-		"aliases": "SN|sn|SEN|Republic of Senegal"
+		"aliases": "Sénégal"
 	},
 	{
 		"qid": "Q403",
 		"name": "Serbia",
 		"alpha2": "RS",
 		"alpha3": "SRB",
-		"aliases": "SRB|RS|Republika Srbija|Republic of Serbia|Srbija"
+		"aliases": "Srbija|Yugoslavia"
 	},
 	{
 		"qid": "Q1042",
 		"name": "Seychelles",
 		"alpha2": "SC",
 		"alpha3": "SYC",
-		"aliases": "SEY|sc|Republic of Seychelles|SYC"
+		"aliases": ""
 	},
 	{
 		"qid": "Q1044",
 		"name": "Sierra Leone",
 		"alpha2": "SL",
 		"alpha3": "SLE",
-		"aliases": "SLE|sl|Republic of Sierra Leone"
+		"aliases": ""
 	},
 	{
 		"qid": "Q334",
 		"name": "Singapore",
 		"alpha2": "SG",
 		"alpha3": "SGP",
-		"aliases": "S'pore|Republic of Singapore|Singapore City|Lion City|SGP|sg|SIN|SG|Garden City"
+		"aliases": "Lion City|Garden City"
 	},
 	{
 		"qid": "Q26273",
 		"name": "Sint Maarten",
 		"alpha2": "SX",
 		"alpha3": "SXM",
-		"aliases": "sxm|St. Maarten|Sint Martin|Saint Martin (Dutch part)|NL-SX|SX|St Martin|Sint Maarten (Dutch part)|Saint Martin"
+		"aliases": "Sint Martin|Saint Martin (Dutch part)|Sint Maarten (Dutch part)|Saint Martin"
 	},
 	{
 		"qid": "Q214",
 		"name": "Slovakia",
 		"alpha2": "SK",
 		"alpha3": "SVK",
-		"aliases": "Slovak Republic|SK|SVK"
+		"aliases": "Slovensko"
 	},
 	{
 		"qid": "Q215",
 		"name": "Slovenia",
 		"alpha2": "SI",
 		"alpha3": "SVN",
-		"aliases": "slo|Republika Slovenija|Republic of Slovenia|Slovenija|svn|si|SLO"
+		"aliases": "Slovenija"
 	},
 	{
 		"qid": "Q685",
 		"name": "Solomon Islands",
 		"alpha2": "SB",
 		"alpha3": "SLB",
-		"aliases": "sb|SOL"
+		"aliases": ""
 	},
 	{
 		"qid": "Q1045",
 		"name": "Somalia",
 		"alpha2": "SO",
 		"alpha3": "SOM",
-		"aliases": "Federal Republic of Somalia"
+		"aliases": "Somali Republic"
 	},
 	{
 		"qid": "Q258",
 		"name": "South Africa",
 		"alpha2": "ZA",
 		"alpha3": "ZAF",
-		"aliases": "zaf|Republic of South Africa|R.S.A.|RSA|SA"
+		"aliases": "Mzansi|RSA"
 	},
 	{
 		"qid": "Q35086",
 		"name": "South Georgia and the South Sandwich Islands",
 		"alpha2": "GS",
 		"alpha3": "SGS",
-		"aliases": "gs|South Sandwich Islands|South Georgia|South Georgia and South Sandwich Islands|SGSSI"
+		"aliases": ""
 	},
 	{
 		"qid": "Q884",
 		"name": "South Korea",
 		"alpha2": "KR",
 		"alpha3": "KOR",
-		"aliases": "S. Korea|Rep. Korea|Korea Republic|Daehanminguk|Daehan Minguk|Hanguk|Korea (South)|Choson|kr|ROK|SK|🇰🇷|Silla|KOR|Republic of Korea"
+		"aliases": "Daehanminguk|Daehan Minguk|Hanguk|Choson"
 	},
 	{
 		"qid": "Q958",
 		"name": "South Sudan",
 		"alpha2": "SS",
 		"alpha3": "SSD",
-		"aliases": "Republic of South Sudan|Southern Sudan|ss|SSD"
+		"aliases": ""
 	},
-	{ "qid": "Q29", "name": "Spain", "alpha2": "ES", "alpha3": "ESP", "aliases": "Kingdom of Spain" },
+	{ "qid": "Q29", "name": "Spain", "alpha2": "ES", "alpha3": "ESP", "aliases": "Hispania" },
 	{
 		"qid": "Q854",
 		"name": "Sri Lanka",
 		"alpha2": "LK",
 		"alpha3": "LKA",
-		"aliases": "lke|lk|Lanka, Sri|Democratic Socialist Republic of Sri Lanka|Srilanka|sri|Taprobane|Serendib|ce|Ceylan|SRI|Ceylon"
+		"aliases": "Serendib|Ceylon"
 	},
 	{
 		"qid": "Q1049",
 		"name": "Sudan",
 		"alpha2": "SD",
 		"alpha3": "SDN",
-		"aliases": "the Sudan|SUD|Soudan|sd|Republic of the Sudan|Republic of Sudan|North Sudan|as-Sūdān|as-Sudan|al-Sudan"
+		"aliases": "as-Sūdān|al-Sudan"
 	},
 	{
 		"qid": "Q730",
 		"name": "Suriname",
 		"alpha2": "SR",
 		"alpha3": "SUR",
-		"aliases": "Surrinam|Republic of Suriname|Republic of Surinam|Dutch Guiana|Surinam|SUR|sr"
+		"aliases": "Surrinam|Dutch Guiana|Surinam"
 	},
 	{
 		"qid": "Q842829",
 		"name": "Svalbard and Jan Mayen",
 		"alpha2": "SJ",
 		"alpha3": "SJM",
-		"aliases": "sj|🇸🇯"
+		"aliases": ""
 	},
 	{
 		"qid": "Q34",
 		"name": "Sweden",
 		"alpha2": "SE",
 		"alpha3": "SWE",
-		"aliases": "Swedish Kingdom|se|SWE|Kingdom of Sweden"
+		"aliases": "Sverige"
 	},
 	{
 		"qid": "Q39",
 		"name": "Switzerland",
 		"alpha2": "CH",
 		"alpha3": "CHE",
-		"aliases": "Swiss Confederation|Confoederatio Helvetica|Swiss"
+		"aliases": "Swiss|Suisse|Schweiz|Svizzera|Svizra"
 	},
 	{
 		"qid": "Q858",
 		"name": "Syria",
 		"alpha2": "SY",
 		"alpha3": "SYR",
-		"aliases": "Syrian Arab Republic|sy|SYR|Surya"
+		"aliases": "Surya"
 	},
 	{
 		"qid": "Q1039",
 		"name": "São Tomé and Príncipe",
 		"alpha2": "ST",
 		"alpha3": "STP",
-		"aliases": "st|São Tomé og Príncipe|Sao Tome & Principe|Democratic Republic of São Tomé and Príncipe|Sao Tome and Principe|STP"
+		"aliases": ""
 	},
 	{
 		"qid": "Q865",
 		"name": "Taiwan",
 		"alpha2": "TW",
 		"alpha3": "TWN",
-		"aliases": "Thoi-van|The ROC|Taywan|Taivangʉ|Taivang|Nanasian|Ilaod|Chunghwa Minkwo|Chunghwa Minkuo|China, Republic|Taiwan ROC|Free China|Nationalist China|Republic of China|TW|Taioan|Toiˇ Vanˇ|Teywan|Taywang|Taiwaan|Tai-waan|Tâi-uân|Tâi-oân|Lawlaw|Dài-uăng|Republic of China (Taiwan)|Formosa|TWN|Chinese Taipei|ROC|TPE"
+		"aliases": "Tâi-uân|Tâi-oân|Formosa|Chinese Taipei|ROC"
 	},
 	{
 		"qid": "Q863",
 		"name": "Tajikistan",
 		"alpha2": "TJ",
 		"alpha3": "TJK",
-		"aliases": "tj|TJK|Republic of Tajikistan"
+		"aliases": ""
 	},
 	{
 		"qid": "Q924",
 		"name": "Tanzania",
 		"alpha2": "TZ",
 		"alpha3": "TZA",
-		"aliases": "United Republic of Tanganyika and Zanzibar|tza|tz|Tanzania, United Republic of|United Republic of Tanzania"
+		"aliases": "Tanganyika and Zanzibar"
 	},
 	{
 		"qid": "Q869",
 		"name": "Thailand",
 		"alpha2": "TH",
 		"alpha3": "THA",
-		"aliases": "Kingdom of Thailand|Land of Smiles|THA|th|Siam"
+		"aliases": "Land of Smiles|Siam"
 	},
 	{
 		"qid": "Q778",
 		"name": "The Bahamas",
 		"alpha2": "BS",
 		"alpha3": "BHS",
-		"aliases": "Commonwealth of The Bahamas|Commonwealth of the Bahamas|Bahama Islands|bs|Bahamas|BAH"
+		"aliases": "Bahama Islands"
 	},
 	{
 		"qid": "Q1005",
 		"name": "The Gambia",
 		"alpha2": "GM",
 		"alpha3": "GMB",
-		"aliases": "Republic of the Gambia|Islamic Republic of the Gambia|GM|GAM|Gambia"
+		"aliases": "Gambia"
 	},
 	{
 		"qid": "Q574",
 		"name": "Timor-Leste",
 		"alpha2": "TL",
 		"alpha3": "TLS",
-		"aliases": "Timor Leste|Democratic Republic of Timor-Leste|East Timor"
+		"aliases": "East Timor"
 	},
 	{
 		"qid": "Q945",
 		"name": "Togo",
 		"alpha2": "TG",
 		"alpha3": "TGO",
-		"aliases": "tg|TOG|Togolese Republic"
+		"aliases": ""
 	},
 	{
 		"qid": "Q36823",
 		"name": "Tokelau",
 		"alpha2": "TK",
 		"alpha3": "TKL",
-		"aliases": "Union Islands|Tokelau Islands|tk"
+		"aliases": "Union Islands"
 	},
 	{
 		"qid": "Q678",
 		"name": "Tonga",
 		"alpha2": "TO",
 		"alpha3": "TON",
-		"aliases": "Friendly Islands|Tonga Islands|Kingdom of Tonga|TGA|to"
+		"aliases": "Friendly Islands|Tonga Islands"
 	},
 	{
 		"qid": "Q754",
 		"name": "Trinidad and Tobago",
 		"alpha2": "TT",
 		"alpha3": "TTO",
-		"aliases": "Trinidad & Tobago|tt|Republic of Trinidad and Tobago|TRI|TTO"
+		"aliases": "T&T"
 	},
 
 	{
@@ -1545,173 +1551,167 @@
 		"name": "Tunisia",
 		"alpha2": "TN",
 		"alpha3": "TUN",
-		"aliases": "Tunisian Republic|Republic of Tunisia|tn|TUN"
+		"aliases": ""
 	},
 	{
 		"qid": "Q43",
 		"name": "Turkey",
 		"alpha2": "TR",
 		"alpha3": "TUR",
-		"aliases": "Republic of Türkiye|Republic of Turkey|Türkiye|TUR|TR"
+		"aliases": "Türkiye"
 	},
 	{
 		"qid": "Q874",
 		"name": "Turkmenistan",
 		"alpha2": "TM",
 		"alpha3": "TKM",
-		"aliases": "Turkmenia|tm|TKM"
+		"aliases": "Turkmenia"
 	},
 	{
 		"qid": "Q18221",
 		"name": "Turks and Caicos Islands",
 		"alpha2": "TC",
 		"alpha3": "TCA",
-		"aliases": "Turks and Caicos|tc|Turks & Caicos|TCI"
+		"aliases": "Turks and Caicos"
 	},
 	{
 		"qid": "Q672",
 		"name": "Tuvalu",
 		"alpha2": "TV",
 		"alpha3": "TUV",
-		"aliases": "Ellice Islands|TUV|tv"
+		"aliases": "Ellice Islands"
 	},
 	{
 		"qid": "Q1036",
 		"name": "Uganda",
 		"alpha2": "UG",
 		"alpha3": "UGA",
-		"aliases": "+256|Ugandah|Ouganda|Pearl of Africa|UGA|UG|ug|The Republic of Uganda|Republic of Uganda"
+		"aliases": "Ouganda|Pearl of Africa"
 	},
 	{
 		"qid": "Q212",
 		"name": "Ukraine",
 		"alpha2": "UA",
 		"alpha3": "UKR",
-		"aliases": "Ukraïna|Ukr.|Ukraina|Ukrainia|UKR|UA"
+		"aliases": "Ukraïna|Ukraina|Ukrainia"
 	},
 	{
 		"qid": "Q878",
 		"name": "United Arab Emirates",
 		"alpha2": "AE",
 		"alpha3": "ARE",
-		"aliases": "U.A.E.|the UAE|the U.A.E.|the Emirates|UAE|ARE|the United Arab Emirates|ae|Emirates"
+		"aliases": "UAE|Emirates"
 	},
 	{
 		"qid": "Q145",
 		"name": "United Kingdom",
 		"alpha2": "GB",
 		"alpha3": "GBR",
-		"aliases": "United Kingdom of Great Britain and Northern Ireland|U. K.|U K|The United Kingdom of Great Britain and Northern Ireland|The UK|Great Britain and Northern Ireland|G.B.R.|G. B.|G B R|G B|G.B.|U.K.|UK|Britain|Great Britain"
+		"aliases": "UK|Britain|Great Britain|England"
 	},
 	{
 		"qid": "Q30",
 		"name": "United States",
 		"alpha2": "US",
 		"alpha3": "USA",
-		"aliases": "Merica|USA|the USA|United States of America|the United States|America|US of America|US of A|U.S. of America|U. S. A.|U. S.|the US of America|the US of A|the US|the United States of America|the U.S.A.|the U.S. of America|the U.S. of A|the U.S.|the States|United States of North America|U.S.|U.S.A.|Murica|US"
+		"aliases": "America"
 	},
 	{
 		"qid": "Q16645",
 		"name": "United States Minor Outlying Islands",
 		"alpha2": "UM",
 		"alpha3": "UMI",
-		"aliases": "USMOI|US-UM|US Minor Outlying Islands|U.S. Minor Outlying Islands|um"
+		"aliases": "USMOI"
 	},
 	{
 		"qid": "Q11703",
 		"name": "United States Virgin Islands",
 		"alpha2": "VI",
 		"alpha3": "VIR",
-		"aliases": "Virgin Islands of the United States|USVI|US-VI|US Virgin Islands|the United States Virgin Islands|American Virgin Islands|VI|ISV|U.S. Virgin Islands"
+		"aliases": "USVI|US Virgin Islands|American Virgin Islands"
 	},
 	{
 		"qid": "Q77",
 		"name": "Uruguay",
 		"alpha2": "UY",
 		"alpha3": "URY",
-		"aliases": "Oriental Republic of Uruguay|Eastern Republic of Uruguay|URU|uy"
+		"aliases": "Banda Oriental"
 	},
 	{
 		"qid": "Q265",
 		"name": "Uzbekistan",
 		"alpha2": "UZ",
 		"alpha3": "UZB",
-		"aliases": "Republic of Uzbekistan"
+		"aliases": ""
 	},
 	{
 		"qid": "Q686",
 		"name": "Vanuatu",
 		"alpha2": "VU",
 		"alpha3": "VUT",
-		"aliases": "vu|VAN|van|vut|Republic of Vanuatu"
+		"aliases": "New Hebrides"
 	},
 	{
 		"qid": "Q237",
 		"name": "Vatican City",
 		"alpha2": "VA",
 		"alpha3": "VAT",
-		"aliases": "Papal State|The Vatican|Vatican|vat|Vatican City State|va|Status Civitatis Vaticanae|Stato della Città del Vaticano|State of Vatican City|Civitas Vaticana|Città del Vaticano"
+		"aliases": "Papal State|The Vatican|Vatican City State"
 	},
 	{
 		"qid": "Q717",
 		"name": "Venezuela",
 		"alpha2": "VE",
 		"alpha3": "VEN",
-		"aliases": "BR Venezuela|Bolivarian Republic of Venezuela"
+		"aliases": ""
 	},
 	{
 		"qid": "Q881",
 		"name": "Vietnam",
 		"alpha2": "VN",
 		"alpha3": "VNM",
-		"aliases": "Việt Nam|Viet Nam|Socialist Republic of Vietnam|VIE|SRV|VN|VNM|Socialist Republic of Viet Nam"
+		"aliases": "Việt Nam|Viet Nam"
 	},
 	{
 		"qid": "Q35555",
 		"name": "Wallis and Futuna",
 		"alpha2": "WF",
 		"alpha3": "WLF",
-		"aliases": "Wallis & Futuna|Wallis and Futuna Islands"
+		"aliases": ""
 	},
 	{
 		"qid": "Q6250",
 		"name": "Western Sahara",
 		"alpha2": "EH",
 		"alpha3": "ESH",
-		"aliases": "West Sahara|Spanish Sahara|Southern Provinces|EH"
+		"aliases": ""
 	},
 	{
 		"qid": "Q805",
 		"name": "Yemen",
 		"alpha2": "YE",
 		"alpha3": "YEM",
-		"aliases": "Republic of Yemen|Rep. Yemen|YE|YEM|ye"
-	},
-	{
-		"qid": "Q36704",
-		"name": "Yugoslavia",
-		"alpha2": "YU",
-		"aliases": "YU, Jugoslavija, Federal People's Republic of Yugoslavia, SFR Yugoslavia"
+		"aliases": "South Arabia"
 	},
 	{
 		"qid": "Q953",
 		"name": "Zambia",
 		"alpha2": "ZM",
 		"alpha3": "ZMB",
-		"aliases": "Republic of Zambia|zm|ZAM|Zed"
+		"aliases": "Northern Rhodesia"
 	},
 	{
 		"qid": "Q954",
 		"name": "Zimbabwe",
 		"alpha2": "ZW",
 		"alpha3": "ZWE",
-		"aliases": "Republic of Zimbabwe|Zimbabwe Rhodesia|Southern Rhodesia|ZIM|Rhodesia"
+		"aliases": "Southern Rhodesia"
 	},
 	{
 		"qid": "Q5689",
 		"name": "Åland",
 		"alpha2": "AX",
 		"alpha3": "ALA",
-		"aliases": "Åland region|Aland Isles|Aland Islands|Ahvenanmaa|Aland|Åland Islands|Aaland Islands|Aaland|ax"
+		"aliases": "Aland Islands|Ahvenanmaa|Åland Islands"
 	}
 ]

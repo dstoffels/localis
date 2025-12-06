@@ -83,5 +83,4 @@ sandbox.py
 # Keep empty folders tracked (optional)
 !data/.gitkeep
 
-.localis.conf
-localis.db
+*.ps1
