@@ -81,33 +81,6 @@ def city(select_random) -> localis.City:
     return select_random(localis.cities)
 
 
-# def pytest_itemcollected(item: pytest.Item):
-#     """Display class and function docstrings, fallback to names, and include filename."""
-#     # File name
-#     filename = os.path.basename(item.fspath)
-
-
-#     # Function docstring
-#     try:
-#         func_doc: str = getattr(item.obj, "__doc__", None)
-#         func_title: str = item.obj.__name__ + " > " + func_doc.strip().split("\n")[0]
-#     except AttributeError as e:
-#         e.add_note("Did you forget to include a docstring?")
-#         raise e
-
-#     parts = [filename]
-#     # if cls_title:
-#     #     parts.append(cls_title)
-#     if func_title:
-#         parts.append(func_title)
-
-#     # detect parametrized id value and append
-#     if "[" in item.name:
-#         parts.append("[" + item.name.split("[")[1])
-
-#     item._nodeid = " ".join(parts)
-
-
 @pytest.hookimpl(hookwrapper=True)
 def pytest_runtest_makereport(item, call):
     """

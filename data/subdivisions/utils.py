@@ -1,7 +1,4 @@
-from data.utils import DATA_PATH
-import csv
-import gzip
-from localis.models import CountryModel, SubdivisionModel
+from localis.models import SubdivisionModel
 
 
 class SubdivisionMap:
@@ -56,7 +53,7 @@ class SubdivisionMap:
             for sub in level_map.values()
         ]
 
-        # ensure subdivisions are sorted by admin level so level 2 subdivisions are processed after their level 1 parents
+        # TODO: ensure subdivisions are sorted by admin level so level 2 subdivisions are processed after their level 1 parents
         # all.sort(key=lambda s: s.admin_level)
 
         for id, sub in enumerate(all, start=1):

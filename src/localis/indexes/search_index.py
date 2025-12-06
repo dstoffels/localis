@@ -1,4 +1,4 @@
-from localis.models import Model, DTO
+from localis.models import Model
 from rapidfuzz import fuzz, process
 from localis.indexes.index import Index
 from localis.utils import normalize, generate_trigrams, decode_id_list

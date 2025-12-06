@@ -1,6 +1,5 @@
 from localis.models import SubdivisionModel, Subdivision
 from localis.registries import Registry, CountryRegistry
-from localis.indexes import FilterIndex, SearchIndex
 
 
 class SubdivisionRegistry(Registry[Subdivision]):

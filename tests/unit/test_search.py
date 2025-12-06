@@ -29,7 +29,7 @@ class TestSearch:
         ], f"should find exact match for '{subject.name}'"
 
     def test_mangled_name(self, registry: Registry, select_random, seed):
-        """should return results with a top score >= 60% (minimum return threshold)"""
+        """should return results with a top score >= 50% (minimum return threshold)"""
         subject: DTO = select_random(registry)
         mangled_name = mangle(subject.name, seed=seed)
         results = registry.search(mangled_name)
@@ -38,4 +38,4 @@ class TestSearch:
 
             assert (
                 top_score >= 0.5
-            ), f"should see a top score over 0.6. Top score: {top_score}"
+            ), f"should see a top score over 0.5. Top score: {top_score}"

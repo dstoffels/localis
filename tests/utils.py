@@ -1,7 +1,5 @@
 import random
 import string
-from localis.registries import Registry
-from localis.models import DTO
 from localis import countries, subdivisions, cities
 import pytest
 
