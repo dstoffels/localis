@@ -13,6 +13,14 @@ Fast, offline access to comprehensive data for **countries**, **subdivisions**, 
 
 ---
 
+## Status
+
+localis is currently in **alpha**. The API is stable but performance optimizations and additional features are ongoing. Feedback welcome!
+
+Report issues: https://github.com/dstoffels/localis/issues
+
+---
+
 ## Installation
 
 ```bash
