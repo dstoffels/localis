@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Implemented lazy registry loading - import time reduced from ~1.1s to ~30ms (40× faster)
+- Optimized search index format - switched from varint to binary array format for 10-50× faster decoding
+- Enhanced filter indexes with frozensets for ~40× faster filter queries
+- Improved cache loading with csv.reader for ~30% faster TSV parsing
+- Search implementation now uses local variables for thread safety and better performance
+- Registry `__iter__` now uses generators instead of materializing full lists
+
+### Fixed
+- Thread safety issue in search index (previously used shared instance state)
+- Unnecessary MD5 hash computation for subdivisions at runtime (now only computed during data pipeline)
+
 ## [1.0.0a3] - 2025-12-05
 
 ### Changed

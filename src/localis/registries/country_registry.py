@@ -1,5 +1,6 @@
 from localis.models import CountryModel, Country
 from localis.registries import Registry
+from localis.lazy import LazyRegistry
 
 
 class CountryRegistry(Registry[CountryModel]):
@@ -20,4 +21,4 @@ class CountryRegistry(Registry[CountryModel]):
 
 
 # --------- Singleton --------- #
-countries = CountryRegistry()
+countries = LazyRegistry(lambda: CountryRegistry())

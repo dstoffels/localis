@@ -19,33 +19,64 @@ class SearchIndex(Index):
         super().__init__(model_cls, cache, filepath, **kwargs)
 
     def load(self, filepath):
+        """Load search index with lazy decoding - stores raw base64 strings."""
         try:
             with open(filepath, "r", encoding="utf-8") as f:
                 for line in f:
                     trigram, ids_str = line.strip().split("\t")
-                    self.index[trigram] = decode_id_list(ids_str)
+                    # Store raw string - decode on first access
+                    self.index[trigram] = ids_str
         except Exception as e:
             raise Exception(f"Failed to load search index from {filepath}: {e}")
+
+    def _get_trigram_ids(self, trigram: str) -> list[int]:
+        """Get posting list for a trigram, decoding and caching on first access."""
+        value = self.index.get(trigram)
+        if value is None:
+            return None
+        
+        # If still a string, decode and cache in place
+        if isinstance(value, str):
+            decoded = decode_id_list(value)
+            self.index[trigram] = decoded
+            return decoded
+        
+        # Already decoded
+        return value
 
     def search(self, query: str, limit=10) -> list[tuple[Model, float]]:
         if not query:
             return []
 
-        self.query = self._normalize_query(query)
-        self.query_token_count = len(self.query.split())
-        self.match_counts: dict[int, int] = defaultdict(int)
-        self.trigram_count = 0
+        # Use local variables for thread safety and performance
+        normalized_query = self._normalize_query(query)
+        query_token_count = len(normalized_query.split())
+        match_counts: dict[int, int] = defaultdict(int)
+        trigram_count = 0
 
-        self._build_match_counts()
+        # Build match counts inline to use local variables
+        if len(self.cache) < 300:
+            for doc_id in self.cache.keys():
+                match_counts[doc_id] = 1
+            trigram_count = 1
+        else:
+            for trigram in generate_trigrams(normalized_query):
+                ids = self._get_trigram_ids(trigram)
+                if ids is None:
+                    continue
+                trigram_count += 1
+                for doc_id in ids:
+                    match_counts[doc_id] += 1
+
         all_results: dict[int, tuple[Model, float]] = {}
         scored_ids: set[int] = set()
 
-        candidate_count = len(self.match_counts)
+        candidate_count = len(match_counts)
 
         if candidate_count <= self.CANDIDATE_CNT_THRESHOLD:
-            for id in self.match_counts.keys():
+            for id in match_counts.keys():
                 candidate = self.cache[id]
-                score = self._score_candidate(candidate)
+                score = self._score_candidate(candidate, normalized_query, query_token_count)
                 if score >= self.NOISE_THRESHOLD:
                     all_results[id] = (candidate, score)
                 scored_ids.add(id)
@@ -53,8 +84,8 @@ class SearchIndex(Index):
                 :limit
             ]
 
-        for min_trigram_matches in range(self.trigram_count, 1, -1):
-            candidates = self._get_candidates(min_trigram_matches)
+        for min_trigram_matches in range(trigram_count, 1, -1):
+            candidates = self._get_candidates_from_counts(match_counts, min_trigram_matches)
 
             new_candidates = candidates - scored_ids
 
@@ -63,7 +94,7 @@ class SearchIndex(Index):
 
             for id in new_candidates:
                 candidate = self.cache[id]
-                score = self._score_candidate(candidate)
+                score = self._score_candidate(candidate, normalized_query, query_token_count)
                 if score >= self.NOISE_THRESHOLD:
                     all_results[id] = (candidate, score)
                 scored_ids.add(id)
@@ -77,57 +108,35 @@ class SearchIndex(Index):
         sorted_results = sorted(all_results.values(), key=lambda x: x[1], reverse=True)
         return sorted_results[:limit]
 
-    def _build_match_counts(self):
-        """Builds a mapping of document IDs to the count of matching trigrams with the query."""
-        index = self.index
-        match_counts = self.match_counts
-
-        # If the index is small, consider all entries as matches
-        if len(self.cache) < 300:
-            for doc_id in self.cache.keys():
-                match_counts[doc_id] = 1
-            self.trigram_count = 1
-            return
-
-        for trigram in generate_trigrams(self.query):
-            try:
-                ids = index[trigram]
-            except KeyError:
-                continue
-
-            self.trigram_count += 1
-            for doc_id in ids:
-                match_counts[doc_id] += 1
-
-    def _get_candidates(self, min_matches: int):
+    def _get_candidates_from_counts(self, match_counts: dict[int, int], min_matches: int) -> set[int]:
         return {
             doc_id
-            for doc_id, count in self.match_counts.items()
+            for doc_id, count in match_counts.items()
             if count >= min_matches
         }
 
-    def _score_candidate(self, candidate: Model) -> float:
+    def _score_candidate(self, candidate: Model, normalized_query: str, query_token_count: int) -> float:
         score = 0.0
         total_weight = 0.0
 
         score_values = candidate.get_search_values()
 
         name, weight = next(score_values)  # name is always the first SEARCH_FIELD
-        name_score = fuzz.WRatio(self.query, self._normalize_query(name)) / 100.0
+        name_score = fuzz.WRatio(normalized_query, self._normalize_query(name)) / 100.0
         if name_score >= self.NOISE_THRESHOLD:
             score += name_score * weight
             total_weight += weight
         else:
             return 0.0
 
-        if self.query_token_count > 1:
+        if query_token_count > 1:
             for field_value, weight in score_values:
                 if not field_value:
                     continue
 
                 if isinstance(field_value, list):
                     matches = process.extract(
-                        self.query,
+                        normalized_query,
                         [normalize(v) for v in field_value],
                         scorer=fuzz.token_set_ratio,
                         score_cutoff=60,
@@ -141,7 +150,7 @@ class SearchIndex(Index):
                     )
                 else:
                     field_score = (
-                        fuzz.token_set_ratio(self.query, normalize(field_value)) / 100.0
+                        fuzz.token_set_ratio(normalized_query, normalize(field_value)) / 100.0
                     )
 
                 if field_score >= self.NOISE_THRESHOLD:

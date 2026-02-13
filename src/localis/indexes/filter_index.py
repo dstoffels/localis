@@ -6,7 +6,7 @@ import csv
 
 class FilterIndex(Index):
     def __init__(self, model_cls, cache, filepath, **kwargs):
-        self.index: dict[str, dict[str, list[int]]] = {}
+        self.index: dict[str, dict[str, frozenset[int]]] = {}
         super().__init__(model_cls, cache, filepath, **kwargs)
 
     def load(self, filepath):
@@ -22,11 +22,18 @@ class FilterIndex(Index):
                         values = cell.split("|")
                         for value in values:
                             self.index[param][value].append(id)
+                
+                # Convert all lists to frozensets after loading
+                for param in params:
+                    self.index[param] = {
+                        value: frozenset(ids) 
+                        for value, ids in self.index[param].items()
+                    }
         except Exception as e:
             raise e
 
-    def get(self, filter_kw: str, field_value: str) -> set[int]:
+    def get(self, filter_kw: str, field_value: str) -> frozenset[int]:
         if isinstance(field_value, str):
             field_value = normalize(field_value)
-        ids = self.index.get(filter_kw, {}).get(field_value, set())
-        return set(ids)
+        ids = self.index.get(filter_kw, {}).get(field_value, frozenset())
+        return ids

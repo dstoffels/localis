@@ -55,9 +55,10 @@ class Registry(Generic[T], ABC):
 
             self._cache = {}
             try:
+                import csv
                 with open(self._data_filepath, "r", encoding="utf-8") as f:
-                    for id, line in enumerate(f, start=1):
-                        row = line.strip().split("\t")
+                    reader = csv.reader(f, delimiter="\t")
+                    for id, row in enumerate(reader, start=1):
                         self._cache[id] = self.parse_row(id, row)
             except Exception as e:
                 raise e
@@ -98,7 +99,7 @@ class Registry(Generic[T], ABC):
             )
 
     def __iter__(self) -> Iterator[DTO]:
-        return iter([m.to_dto() for m in self._cache.values()])
+        return (m.to_dto() for m in self._cache.values())
 
     def __len__(self) -> int:
         return len(self._cache)
