@@ -94,14 +94,17 @@ def _varint_encode(value: int) -> bytes:
 
 
 def encode_id_list(ids: set[int]) -> str:
-    """Convert {1,5,6,...} → base64(varint(delta(ids)))"""
+    """Convert {1,5,6,...} → base64(BIN1 + array.array('I') delta-encoded IDs)"""
+    import array
+    
     deltas = _delta_encode(list(ids))
-
-    # concat varints
-    buf = bytearray()
-    for d in deltas:
-        buf.extend(_varint_encode(d))
-
+    
+    # Pack deltas as unsigned 32-bit integers
+    arr = array.array('I', deltas)
+    
+    # Prepend magic marker 'BIN1' for format detection
+    buf = b'BIN1' + arr.tobytes()
+    
     # Base64 encode for safe TSV storage
     return base64.b64encode(buf).decode("ascii")
 

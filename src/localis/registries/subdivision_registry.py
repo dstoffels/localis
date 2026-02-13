@@ -1,12 +1,13 @@
 from localis.models import SubdivisionModel, Subdivision
-from localis.registries import Registry, CountryRegistry
+from localis.registries import Registry
+from localis.lazy import LazyRegistry
 
 
 class SubdivisionRegistry(Registry[Subdivision]):
     REGISTRY_NAME = "subdivisions"
     _MODEL_CLS = SubdivisionModel
 
-    def __init__(self, countries: CountryRegistry, **kwargs):
+    def __init__(self, countries, **kwargs):
         self._countries = countries
         super().__init__(**kwargs)
 
@@ -44,6 +45,9 @@ class SubdivisionRegistry(Registry[Subdivision]):
 
 
 # singleton
-from localis.registries.country_registry import countries
+def _create_subdivision_registry():
+    from localis.registries.country_registry import countries
+    return SubdivisionRegistry(countries=countries)
 
-subdivisions = SubdivisionRegistry(countries=countries)
+
+subdivisions = LazyRegistry(_create_subdivision_registry)

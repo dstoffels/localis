@@ -1,14 +1,13 @@
 from localis.models import CityModel, City
-from localis.registries import Registry, CountryRegistry, SubdivisionRegistry
+from localis.registries import Registry
+from localis.lazy import LazyRegistry
 
 
 class CityRegistry(Registry[CityModel]):
     REGISTRY_NAME = "cities"
     _MODEL_CLS = CityModel
 
-    def __init__(
-        self, countries: CountryRegistry, subdivisions: SubdivisionRegistry, **kwargs
-    ):
+    def __init__(self, countries, subdivisions, **kwargs):
         self._countries = countries
         self._subdivisions = subdivisions
         super().__init__(**kwargs)
@@ -58,7 +57,10 @@ class CityRegistry(Registry[CityModel]):
 
 
 # ----------- SINGLETON ----------- #
-from localis.registries.country_registry import countries
-from localis.registries.subdivision_registry import subdivisions
+def _create_city_registry():
+    from localis.registries.country_registry import countries
+    from localis.registries.subdivision_registry import subdivisions
+    return CityRegistry(countries=countries, subdivisions=subdivisions)
 
-cities: CityRegistry = CityRegistry(countries=countries, subdivisions=subdivisions)
+
+cities = LazyRegistry(_create_city_registry)

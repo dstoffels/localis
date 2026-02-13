@@ -95,13 +95,14 @@ class SubdivisionModel(Subdivision, Model):
     hashid: int = None
 
     def __post_init__(self):
-        if not isinstance(self.country, int):
+        # Skip hashid computation at runtime (only needed during data pipeline)
+        # During pipeline, country is still an int; at runtime it's a CountryModel
+        if isinstance(self.country, int):
             key_parts = [
-                self.country.alpha2,
+                str(self.country),  # country is an int ID during pipeline
                 str(self.admin_level),
                 normalize(self.name),
-                self.iso_code
-                or self.geonames_code,  # whichever is present at initialization
+                self.iso_code or self.geonames_code,
             ]
             key = "|".join(key_parts)
             self.hashid = int.from_bytes(hashlib.md5(key.encode()).digest()[:8], "big")

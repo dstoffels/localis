@@ -8,7 +8,7 @@ Fast, offline access to comprehensive data for **countries**, **subdivisions**, 
 - 🗺️ **51,541 subdivisions** administrative levels 1 & 2
 - 🏙️ **451,792 cities** sourced from GeoNames
 - 🔍 **Search Engine** for typo-tolerant lookups with 99%+ accuracy
-- ⚡ **Blazing fast** - full dataset loads in 1.1s, lookups < 5ms, searches < 30ms
+- ⚡ **Blazing fast** - lazy loading (~30ms import), lookups < 5ms, searches < 30ms
 - 📌 **Aliases** - support for colloquial, historic and alternate names
 
 ---
@@ -331,16 +331,18 @@ nested_sub.type
 
 ### Load Times
 
-All data is eager-loaded on import. Each registry method lazy loads its respective indexes on first use, incurring a *cold start* cost. Indexes can be pre-loaded via `load_all()` to avoid this during queries.
+Registries use lazy loading - import is near-instant, and data loads only when first accessed. Each registry method lazy-loads its respective indexes on first use, incurring a *cold start* cost. Indexes can be pre-loaded via `load_all()` to avoid this during queries.
 
-- **Full dataset eager load**: ~1.1s (all 503k+ entities)
-- **Countries** (249): < 5ms for all indexes
-- **Subdivisions** (51,541): ~350ms for all indexes
-- **Cities** (451,792)
-  - Lookup index: ~150ms
-  - Filter index: ~1.1s
-  - Search index: ~1.7s
-- **Total load time**: ~4.3s for all datasets and indexes
+- **Import time**: ~30ms (lazy loading - no data loaded)
+- **First access** (cache load):
+  - Countries (249): < 1ms
+  - Subdivisions (51,541): ~70ms
+  - Cities (451,792): ~840ms
+- **Index loading** (on first query):
+  - Countries: < 2ms for all indexes
+  - Subdivisions: ~100ms for all indexes
+  - Cities: ~2s for all indexes
+- **Total load time**: ~2s for all datasets and indexes (when needed)
 
 **Note:** These are best-case timings on modern hardware. Actual load times may vary based on host system.
 
