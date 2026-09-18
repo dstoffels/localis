@@ -1,4 +1,4 @@
-from data.utils import CITIES_SRC_PATH
+from data.utils import CITIES_RAW_PATH
 from data.cities.scripts.utils import *
 from localis.models import SubdivisionModel, CountryModel, CityModel
 import csv
@@ -64,10 +64,13 @@ def filter_names(row: dict[str, str]) -> tuple[str]:
     result = []
 
     for alt in alt_names:
+        # filter out shorties, lots of noise
         alt = alt.strip()
-        if len(alt) < 3:  # filter out shorties
+        if len(alt) < 3:
             continue
-        if not is_latin(alt):  # filter out non-latin based names
+
+        # filter out non-latin based names, dataset would be massive
+        if not is_latin(alt):
             continue
 
         norm = normalize_name(alt)
@@ -126,16 +129,21 @@ def parse_row(
 
 
 def load_cities(
-    subdivisions: dict[str, int], countries: dict[str, int]
+    subdivisions: dict[str, SubdivisionModel], countries: dict[str, CountryModel]
 ) -> list[CityModel]:
-    with open(CITIES_SRC_PATH / "allCountries.txt", "r", encoding="utf-8") as f:
+    with open(CITIES_RAW_PATH / "allCountries.txt", "r", encoding="utf-8") as f:
         print(f"Parsing cities from allCountries.txt...")
         rows = csv.DictReader(f, fieldnames=HEADERS, delimiter="\t")
         cities = []
         for row in rows:
-            if is_valid_city(row):
-                city = parse_row(row, subdivisions, countries)
-                if city:
-                    city.id = len(cities) + 1
-                    cities.append(city)
+            if not is_valid_city(row):
+                continue
+
+            city = parse_row(row, subdivisions, countries)
+
+            if not city:
+                continue
+
+            city.id = len(cities) + 1
+            cities.append(city)
         return cities

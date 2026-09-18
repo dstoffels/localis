@@ -84,3 +84,6 @@ sandbox.py
 !data/.gitkeep
 
 *.ps1
+data/*/raw/*
+!data/countries/raw/wiki_countries.json
+!data/subdivisions/raw/resolution_map.json

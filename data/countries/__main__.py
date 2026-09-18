@@ -2,11 +2,13 @@
 # GeoNames' alternateNames.txt is not used since the names tend to be noisy and mainly historical.
 
 from data.countries.scripts.load import init_iso_countries
+from data.countries.scripts.fetch import fetch_countries_sources
 from data.countries.scripts.merge import merge_wikidata, merge_geonames
 from data.countries.scripts.dump import dump
 
 
 def main():
+    fetch_countries_sources()
     countries = init_iso_countries()
     merge_wikidata(countries)
     merge_geonames(countries)

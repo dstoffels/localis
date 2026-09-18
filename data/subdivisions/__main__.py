@@ -4,9 +4,10 @@
 # villager only supports administrative levels 1 and 2, which covers most cases.
 
 from data.utils import *
+from data.subdivisions.scripts.fetch import fetch_subdivisions_sources
 from data.subdivisions.utils import SubdivisionMap
 from localis.models import CountryModel, SubdivisionModel
-from .scripts.geonames import map_subdivisions
+from .scripts.geonames import map_geonames_subdivisions
 from .scripts.iso import load_iso_subs
 from .scripts.merge import try_merge
 from .scripts.resolve import resolve_unmatched_subs
@@ -14,12 +15,14 @@ from .scripts.dump import dump
 
 
 def main():
+    fetch_subdivisions_sources()
+
     # Cache countries by alpha2 code
     countries: dict[str, CountryModel] = load_countries()
 
     # Initialize subdivision cache with geonames subdivisions into a mapping of country_alpha2 > admin_level > id.
     # SubdivisionMap also flat maps by id, geoname code and iso code
-    sub_map: SubdivisionMap = map_subdivisions(countries)
+    sub_map: SubdivisionMap = map_geonames_subdivisions(countries)
 
     # Cache and dedupe iso subs by id
     iso_subs: dict[int, SubdivisionModel] = load_iso_subs(countries, sub_map)

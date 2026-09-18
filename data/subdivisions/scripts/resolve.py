@@ -13,7 +13,9 @@ def clear_terminal():
 def resolve_unmatched_subs(
     unmatched_iso_subs: list[SubdivisionModel], submap: SubdivisionMap
 ) -> dict | None:
-    with open(SUB_SRC_PATH / "resolution_map.json", "r+", encoding="utf-8") as f:
+    with open(
+        SUBDIVISIONS_RAW_PATH / "resolution_map.json", "r+", encoding="utf-8"
+    ) as f:
         # load existing mappings
         resolution_map: dict[str, dict[int, str | list[str]]] = json.load(f) or {}
 

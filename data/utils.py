@@ -3,12 +3,18 @@ import csv
 from collections import defaultdict
 from localis.models import Model, CountryModel, SubdivisionModel
 import base64
+import urllib.request
 
+# Paths
 BASE_PATH = Path(__file__).parent
 DATA_PATH = BASE_PATH.parent / "src" / "localis" / "data"
-COUNTRIES_SRC_PATH = BASE_PATH / "countries" / "src"
-SUB_SRC_PATH = BASE_PATH / "subdivisions" / "src"
-CITIES_SRC_PATH = BASE_PATH / "cities" / "src"
+COUNTRIES_RAW_PATH = BASE_PATH / "countries" / "raw"
+SUBDIVISIONS_RAW_PATH = BASE_PATH / "subdivisions" / "raw"
+CITIES_RAW_PATH = BASE_PATH / "cities" / "raw"
+
+# Fetch URLs
+USER_AGENT = "localis-data-refresh (+https://github.com/dstoffels/localis)"
+GEONAMES_DUMP_URL = "https://download.geonames.org/export/dump"
 
 
 def load_countries() -> dict[str, CountryModel]:
@@ -28,6 +34,7 @@ def load_subdivisions(
     print("Loading Subdivisions...")
     GEONAMES_CODE_INDEX = 1
     COUNTRY_INDEX = 7
+    countries_by_id: dict[int, CountryModel] = {c.id: c for c in countries.values()}
     with open(
         DATA_PATH / "subdivisions" / "subdivisions.tsv", "r", encoding="utf-8"
     ) as f:
@@ -35,8 +42,8 @@ def load_subdivisions(
         subdivisions: dict[str, SubdivisionModel] = {}
         reader = csv.reader(f, delimiter="\t")
         for id, row in enumerate(reader, start=1):
-            country = [c for c in countries.values() if c.id == int(row[COUNTRY_INDEX])]
-            row = row[:COUNTRY_INDEX] + country
+            country = countries_by_id.get(int(row[COUNTRY_INDEX]))
+            row = row[:COUNTRY_INDEX] + ([country] if country else [])
             subdivisions[row[GEONAMES_CODE_INDEX]] = SubdivisionModel(id, *row)
         return subdivisions
 
@@ -121,3 +128,23 @@ def dump_search_index(data: list[Model], path: Path) -> None:
         for trigram, ids in index.items():
             encoded = encode_id_list(ids)
             writer.writerow([trigram, encoded])
+
+
+def strip_comment_lines(path: Path) -> None:
+    lines = path.read_text(encoding="utf-8").splitlines(keepends=True)
+    path.write_text(
+        "".join(l for l in lines if not l.startswith("#")), encoding="utf-8"
+    )
+
+
+def download(url: str, dest: Path) -> None:
+    """Downloads url to dest, via a .part temp file so a failed transfer never leaves a corrupt file at dest."""
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    tmp = dest.with_suffix(dest.suffix + ".part")
+
+    request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
+    with urllib.request.urlopen(request, timeout=60) as response, open(tmp, "wb") as f:
+        while chunk := response.read(1024 * 1024):
+            f.write(chunk)
+
+    tmp.replace(dest)

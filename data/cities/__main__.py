@@ -9,6 +9,7 @@ sys.path.append(str(Path(__file__).resolve().parents[2]))
 # allCountries.txt (1.64GB) must be manually downloaded to the src folder from https://download.geonames.org/export/dump/
 
 from data.cities.scripts.utils import *
+from data.cities.scripts.fetch import fetch_cities_sources
 from data.cities.scripts.load import load_cities
 from data.cities.scripts.dump import dump
 from data.utils import *
@@ -16,11 +17,10 @@ from localis.models import SubdivisionModel, CountryModel, CityModel
 
 
 def main():
+    fetch_cities_sources()
     countries: dict[str, CountryModel] = load_countries()
     subdivisions: dict[str, SubdivisionModel] = load_subdivisions(countries)
-    cities: list[CityModel] = load_cities(
-        subdivisions, countries
-    )  # load and parse cities
+    cities: list[CityModel] = load_cities(subdivisions, countries)
     dump(cities)
 
 

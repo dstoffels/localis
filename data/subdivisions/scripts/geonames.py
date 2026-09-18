@@ -1,6 +1,6 @@
 from pathlib import Path
 from data.subdivisions.utils import *
-from data.utils import SUB_SRC_PATH
+from data.utils import SUBDIVISIONS_RAW_PATH
 import csv
 from localis.models import CountryModel, SubdivisionModel
 
@@ -8,7 +8,7 @@ from localis.models import CountryModel, SubdivisionModel
 def load_geonames_file(
     file_name: Path, countries: dict[str, CountryModel], sub_map: SubdivisionMap
 ) -> None:
-    with open(SUB_SRC_PATH / file_name, "r", encoding="utf-8") as f:
+    with open(SUBDIVISIONS_RAW_PATH / file_name, "r", encoding="utf-8") as f:
         HEADERS = ("code", "name", "name_ascii", "geonames_id")
         reader = csv.DictReader(
             f,
@@ -53,7 +53,7 @@ def load_geonames_file(
             sub_map.add(subdivision)
 
 
-def map_subdivisions(
+def map_geonames_subdivisions(
     countries: dict[str, CountryModel],
 ) -> SubdivisionMap:
     print("Loading GeoNames subdivisions...")

@@ -9,23 +9,22 @@ def load_iso_subs(
     countries: dict[str, CountryModel], submap=SubdivisionMap
 ) -> dict[int, SubdivisionModel]:
     print("Loading ISO subdivisions...")
-    with open(SUB_SRC_PATH / "iso-3166-2.csv", "r", encoding="utf-8") as f:
+    with open(SUBDIVISIONS_RAW_PATH / "iso-3166-2.csv", "r", encoding="utf-8") as f:
         reader = csv.DictReader(f)
 
         iso_subs: dict[int, SubdivisionModel] = {}  # cache
 
         for row in reader:
-            local_name = row["localVariant"]  # canonical name if present
-            iso_name = row["name"]  # canonical name if no local variant
+            name = row["name"]
+            local_variant = row["localVariant"]
             alpha2 = row["country_code"]
             iso_code = row["iso_code"]
             parent_iso_code = row.get("parent_iso_code", None)
             admin_level = 1 if not parent_iso_code else 2
 
             # Assign names, generate ascii alt names
-            name = local_name or iso_name
 
-            alt_name = iso_name if local_name else None
+            alt_name = local_variant or None
 
             country = countries.get(alpha2)
             if not country:

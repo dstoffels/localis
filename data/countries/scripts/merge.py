@@ -22,7 +22,7 @@ def is_valid_name(alias: str, country: CountryModel):
 
 
 def merge_wikidata(countries: dict[str, CountryModel]):
-    with open(COUNTRIES_SRC_PATH / "wiki_countries.json", "r", encoding="utf-8") as f:
+    with open(COUNTRIES_RAW_PATH / "wiki_countries.json", "r", encoding="utf-8") as f:
         wiki_countries: list[dict[str, str]] = json.load(f)
 
         for row in wiki_countries:
@@ -57,7 +57,7 @@ def merge_wikidata(countries: dict[str, CountryModel]):
 
 def merge_geonames(countries: dict[str, CountryModel]):
     with open(
-        COUNTRIES_SRC_PATH / "geonames_countries.txt", "r", encoding="utf-8"
+        COUNTRIES_RAW_PATH / "geonames_countries.txt", "r", encoding="utf-8"
     ) as f:
 
         for row in f:
