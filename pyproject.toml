@@ -28,10 +28,6 @@ dependencies = [
 homepage = "https://pypi.org/project/localis/"
 repository = "https://github.com/dstoffels/localis"
 
-[project.scripts]
-localis = 'localis.cli:main'
-
-
 [tool.poetry]
 packages = [
   { include = "localis", from = "src" }
