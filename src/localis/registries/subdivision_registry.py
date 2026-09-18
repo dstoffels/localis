@@ -36,9 +36,7 @@ class SubdivisionRegistry(Registry[Subdivision]):
 
         return super().filter(name=name, limit=limit, **kwargs)
 
-    def search(
-        self, query, limit=None, **kwargs
-    ) -> list[tuple[SubdivisionModel, float]]:
+    def search(self, query, limit=10, **kwargs) -> list[tuple[SubdivisionModel, float]]:
         """Fuzzy search for subdivisions by name, aliases, parent name, or country name"""
         return super().search(query, limit, **kwargs)
 
