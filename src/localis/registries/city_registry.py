@@ -14,7 +14,7 @@ class CityRegistry(Registry[City]):
         self._subdivisions = subdivisions
         super().__init__(**kwargs)
 
-    def parse_row(self, id, row):
+    def parse_row(self, id, row, cache):
         return self._MODEL_CLS.from_row(
             id, row, self._countries._cache, self._subdivisions._cache
         )

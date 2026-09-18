@@ -28,6 +28,10 @@ dependencies = [
 homepage = "https://pypi.org/project/localis/"
 repository = "https://github.com/dstoffels/localis"
 
+[project.scripts]
+test = "pytest:console_main"
+test-watch = "pytest_watch.command:main"
+
 [tool.poetry]
 packages = [
   { include = "localis", from = "src" }

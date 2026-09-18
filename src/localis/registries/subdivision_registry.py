@@ -10,8 +10,8 @@ class SubdivisionRegistry(Registry[Subdivision]):
         self._countries = countries
         super().__init__(**kwargs)
 
-    def parse_row(self, id, row):
-        return self._MODEL_CLS.from_row(id, row, self._countries._cache, self._cache)
+    def parse_row(self, id, row, cache):
+        return self._MODEL_CLS.from_row(id, row, cache, self._countries._cache)
 
     def lookup(self, identifier) -> SubdivisionModel | None:
         """Get a subdivision by its id, iso_code, or geonames_code."""

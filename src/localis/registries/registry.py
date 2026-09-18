@@ -52,7 +52,7 @@ class Registry(Generic[T], ABC):
         with open(self._data_filepath, "r", encoding="utf-8") as f:
             for id, line in enumerate(f, start=1):
                 row = line.strip().split("\t")
-                cache[id] = self.parse_row(id, row)
+                cache[id] = self.parse_row(id, row, cache)
         return cache
 
     @cached_property
@@ -79,11 +79,11 @@ class Registry(Generic[T], ABC):
             filepath=self._search_filepath,
         )
 
-    def parse_row(self, id, row: list[str]) -> Model:
+    def parse_row(self, id, row: list[str], cache: dict[int, Model]) -> Model:
         return self._MODEL_CLS.from_row(id, row)
 
-    def load_all(self):
-        """Force load all indexes."""
+    def force_cache_all(self):
+        """Force-cache all data and indexes that have not yet been loaded."""
         _ = self._cache
         _ = self._lookup_index
         _ = self._filter_index

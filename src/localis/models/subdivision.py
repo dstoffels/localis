@@ -71,8 +71,8 @@ class SubdivisionModel(Subdivision, Model):
         cls,
         id: int,
         row: tuple[str | int | None],
+        subdivision_cache: dict[int, "SubdivisionModel"],
         country_cache: dict[int, CountryModel],
-        subdivision_cache: dict[int, "SubdivisionModel"] = None,
         **kwargs,
     ) -> "SubdivisionModel":
         ALIAS_IDX = 4
