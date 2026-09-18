@@ -329,9 +329,9 @@ nested_sub.type
 
 ## Performance
 
-### Load Times
+### Caching
 
-All data is eager-loaded on import. Each registry method lazy loads its respective indexes on first use, incurring a *cold start* cost. Indexes can be pre-loaded via `load_all()` to avoid this during queries.
+**Countries** and **Subdivisions** are eager-loaded on import, but **Cities** are not due to their large dataset. All registries methods lazy load their respective *indexes* on first use, incurring a *cold start* cost. Indexes (and cities) can be pre-loaded with `.force_cache()` to avoid this during queries.
 
 - **Full dataset eager load**: ~1.1s (all 503k+ entities)
 - **Countries** (249): < 5ms for all indexes
@@ -342,7 +342,9 @@ All data is eager-loaded on import. Each registry method lazy loads its respecti
   - Search index: ~1.7s
 - **Total load time**: ~4.3s for all datasets and indexes
 
-**Note:** These are best-case timings on modern hardware. Actual load times may vary based on host system.
+**Note:** These are best-case timings on modern hardware. Actual load times may vary depending on the host system.
+
+**Concurrency:** It is recommended to call `.force_cache()` on all registries if they will be accessed from multiple threads to avoid potential race conditions during the first access of any lazy-loaded caches and indexes.
 
 ### Query Performance
 

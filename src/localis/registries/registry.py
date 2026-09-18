@@ -82,7 +82,7 @@ class Registry(Generic[T], ABC):
     def parse_row(self, id, row: list[str], cache: dict[int, Model]) -> Model:
         return self._MODEL_CLS.from_row(id, row)
 
-    def force_cache_all(self):
+    def force_cache(self):
         """Force-cache all data and indexes that have not yet been loaded."""
         _ = self._cache
         _ = self._lookup_index
