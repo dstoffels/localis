@@ -1,5 +1,8 @@
+import logging
 from pathlib import Path
 from localis.models import Model
+
+logger = logging.getLogger(__name__)
 
 
 class Index:

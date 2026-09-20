@@ -1,6 +1,7 @@
 from pathlib import Path
-from data.subdivisions.utils import *
+from data.subdivisions.subdivisions_utils import *
 from data.utils import SUBDIVISIONS_RAW_PATH
+from data.logger import log
 import csv
 from localis.models import CountryModel, SubdivisionModel
 
@@ -35,7 +36,7 @@ def load_geonames_file(
 
             country = countries.get(country_alpha2)
             if not country:
-                print(f"Country {country_alpha2} not found, skipping {name}.")
+                log.writeline(f"country not found: {country_alpha2}, skipping {name}")
                 continue
 
             subdivision = SubdivisionModel(

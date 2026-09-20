@@ -27,7 +27,7 @@ Saint Barthélemy	BL	BLM		St. Barths|St. Barthélemy|St. Barthelemy|St. Barth|St
 Bermuda	BM	BMU		Virgineola	060	🇧🇲
 Brunei Darussalam	BN	BRN		Brunei|Nation of Brunei, the Abode of Peace	096	🇧🇳
 Bolivia	BO	BOL	Plurinational State of Bolivia		068	🇧🇴
-Bonaire, Sint Eustatius and Saba	BQ	BES	Bonaire, Sint Eustatius and Saba	Netherlands Antilles|Dutch Antilles|Carribean Netherlands|Bonaire|Bonaire, Saint Eustatius and Saba|Caribbean Netherlands|Bonaire, Saint Eustatius and Saba 	535	🇧🇶
+Bonaire, Sint Eustatius and Saba	BQ	BES	Bonaire, Sint Eustatius and Saba	Netherlands Antilles|Dutch Antilles|Caribbean Netherlands|Bonaire|Bonaire, Saint Eustatius and Saba|Caribbean Netherlands|Bonaire, Saint Eustatius and Saba 	535	🇧🇶
 Brazil	BR	BRA	Federative Republic of Brazil	Brasil	076	🇧🇷
 Bahamas	BS	BHS	Commonwealth of the Bahamas	The Bahamas|Bahama Islands	044	🇧🇸
 Bhutan	BT	BTN	Kingdom of Bhutan	Druk Yul	064	🇧🇹
@@ -74,7 +74,7 @@ Micronesia	FM	FSM	Federated States of Micronesia		583	🇫🇲
 Faroe Islands	FO	FRO		Faer Oer|Faroes|Sheep Islands	234	🇫🇴
 France	FR	FRA	French Republic		250	🇫🇷
 Gabon	GA	GAB	Gabonese Republic	Gabonaise	266	🇬🇦
-United Kingdom	GB	GBR	United Kingdom of Great Britain and Northern Ireland	Great Britain|Britain|UK|England|Scotland|Wales|Northern Ireland|Britain|Great Britain|England	826	🇬🇧
+United Kingdom	GB	GBR	United Kingdom of Great Britain and Northern Ireland	Great Britain|Britain|UK|Britain|Great Britain|England	826	🇬🇧
 Grenada	GD	GRD			308	🇬🇩
 Georgia	GE	GEO		Georgia (country)	268	🇬🇪
 French Guiana	GF	GUF		Guyane	254	🇬🇫
@@ -187,8 +187,8 @@ Paraguay	PY	PRY	Republic of Paraguay		600	🇵🇾
 Qatar	QA	QAT	State of Qatar		634	🇶🇦
 Réunion	RE	REU		Reunion Island|Bourbon Island|Reunion	638	🇷🇪
 Romania	RO	ROU		România|Rumania|Roumania	642	🇷🇴
-Serbia	RS	SRB	Republic of Serbia	Yugoslavia|Srbija|Yugoslavia	688	🇷🇸
-Russian Federation	RU	RUS		Russia|USSR|Soviet Union|USSR|Rossiyskaya Federatsiya	643	🇷🇺
+Serbia	RS	SRB	Republic of Serbia	Srbija|Yugoslavia	688	🇷🇸
+Russian Federation	RU	RUS		Russia|USSR|Rossiyskaya Federatsiya	643	🇷🇺
 Rwanda	RW	RWA	Rwandese Republic	The Land of a Thousand Hills	646	🇷🇼
 Saudi Arabia	SA	SAU	Kingdom of Saudi Arabia		682	🇸🇦
 Solomon Islands	SB	SLB			090	🇸🇧
@@ -238,7 +238,7 @@ Saint Vincent and the Grenadines	VC	VCT			670	🇻🇨
 Venezuela	VE	VEN	Bolivarian Republic of Venezuela		862	🇻🇪
 British Virgin Islands	VG	VGB	British Virgin Islands		092	🇻🇬
 U.S. Virgin Islands	VI	VIR	Virgin Islands of the United States	United States Virgin Islands|USVI|US Virgin Islands|American Virgin Islands	850	🇻🇮
-Viet Nam	VN	VNM	Socialist Republic of Viet Nam	Vietnam|Việt Nam	704	🇻🇳
+Vietnam	VN	VNM	Socialist Republic of Viet Nam	Viet Nam|Việt Nam|Viet Nam	704	🇻🇳
 Vanuatu	VU	VUT	Republic of Vanuatu	New Hebrides	548	🇻🇺
 Wallis and Futuna	WF	WLF			876	🇼🇫
 Samoa	WS	WSM	Independent State of Samoa	Western Samoa	882	🇼🇸

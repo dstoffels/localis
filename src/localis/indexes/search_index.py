@@ -1,8 +1,12 @@
+import logging
+import time
 from localis.models import Model
 from rapidfuzz import fuzz, process
 from localis.indexes.index import Index
 from localis.utils import normalize, generate_trigrams, decode_id_list
 from collections import defaultdict
+
+logger = logging.getLogger(__name__)
 
 
 class SearchIndex(Index):
@@ -20,10 +24,12 @@ class SearchIndex(Index):
 
     def load(self, filepath):
         try:
+            t0 = time.perf_counter()
             with open(filepath, "r", encoding="utf-8") as f:
                 for line in f:
                     trigram, ids_str = line.strip().split("\t")
                     self.index[trigram] = decode_id_list(ids_str)
+            logger.debug("Loaded search index from %s: %d trigrams in %.3fs", filepath, len(self.index), time.perf_counter() - t0)
         except Exception as e:
             raise Exception(f"Failed to load search index from {filepath}: {e}")
 

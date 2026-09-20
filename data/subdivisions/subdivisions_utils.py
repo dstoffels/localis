@@ -67,8 +67,20 @@ class SubdivisionMap:
             sub.admin_level = 2 if sub.parent else 1
             self.add(sub)
 
+        # parent may still be a raw iso_code string (see load_iso_subs) if it was
+        # set before its target was merged into another object. Resolve it now
+        # against the final, authoritative map so it points at whatever object
+        # actually holds that iso_code.
+        for sub in self._by_id.values():
+            if isinstance(sub.parent, str):
+                sub.parent = self._by_iso_code.get(sub.parent)
+
     def __len__(self):
         return len(self._by_id)
+
+    def to_geocode_map(self) -> dict[str, SubdivisionModel]:
+        """Return a plain dict keyed by geonames_code, matching the shape data.utils.load_subdivisions() reconstructs from disk."""
+        return self._by_geo_code
 
 
 def dedupe(items: list[str]) -> list[str]:

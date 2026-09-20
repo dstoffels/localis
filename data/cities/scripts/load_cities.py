@@ -1,5 +1,6 @@
 from data.utils import CITIES_RAW_PATH
-from data.cities.scripts.utils import *
+from data.cities.scripts.cities_utils import *
+from data.logger import log
 from localis.models import SubdivisionModel, CountryModel, CityModel
 import csv
 
@@ -105,6 +106,9 @@ def parse_row(
     country = countries.get(country_code, None)
 
     if not country:
+        log.writeline(
+            f"country not found: {country_code}, dropping city {name} ({geonames_id})"
+        )
         return None
 
     lat = row["latitude"]

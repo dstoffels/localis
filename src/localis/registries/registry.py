@@ -1,9 +1,13 @@
+import logging
+import time
 from functools import cached_property
 from typing import Iterator, Generic, TypeVar
 from pathlib import Path
 from abc import ABC
 from localis.models import Model, DTO
 from localis.indexes import FilterIndex, SearchIndex, LookupIndex
+
+logger = logging.getLogger(__name__)
 
 T = TypeVar("T", bound=DTO)
 
@@ -16,6 +20,7 @@ class Registry(Generic[T], ABC):
     _MODEL_CLS: type[Model]
 
     def __init__(self, **kwargs):
+        logger.info("Initializing %s registry", self.REGISTRY_NAME)
         if not self.LAZY_LOAD:
             _ = self._cache
 
@@ -48,46 +53,65 @@ class Registry(Generic[T], ABC):
         if not self._data_filepath.exists():
             raise FileNotFoundError(f"Data file not found: {self._data_filepath}")
 
+        logger.debug("Loading %s data from %s", self.REGISTRY_NAME, self._data_filepath)
+        t0 = time.perf_counter()
         cache: dict[int, Model] = {}
         with open(self._data_filepath, "r", encoding="utf-8") as f:
             for id, line in enumerate(f, start=1):
                 row = line.strip().split("\t")
                 cache[id] = self.parse_row(id, row, cache)
+        elapsed = time.perf_counter() - t0
+        logger.debug("Loaded %d %s records in %.3fs", len(cache), self.REGISTRY_NAME, elapsed)
         return cache
 
     @cached_property
     def _lookup_index(self) -> LookupIndex:
-        return LookupIndex(
+        logger.debug("Building %s lookup index", self.REGISTRY_NAME)
+        t0 = time.perf_counter()
+        index = LookupIndex(
             model_cls=self._MODEL_CLS,
             cache=self._cache,
             filepath=self._lookup_filepath,
         )
+        logger.debug("Built %s lookup index in %.3fs", self.REGISTRY_NAME, time.perf_counter() - t0)
+        return index
 
     @cached_property
     def _filter_index(self) -> FilterIndex:
-        return FilterIndex(
+        logger.debug("Building %s filter index", self.REGISTRY_NAME)
+        t0 = time.perf_counter()
+        index = FilterIndex(
             model_cls=self._MODEL_CLS,
             cache=self._cache,
             filepath=self._filter_filepath,
         )
+        logger.debug("Built %s filter index in %.3fs", self.REGISTRY_NAME, time.perf_counter() - t0)
+        return index
 
     @cached_property
     def _search_index(self) -> SearchIndex:
-        return SearchIndex(
+        logger.debug("Building %s search index", self.REGISTRY_NAME)
+        t0 = time.perf_counter()
+        index = SearchIndex(
             model_cls=self._MODEL_CLS,
             cache=self._cache,
             filepath=self._search_filepath,
         )
+        logger.debug("Built %s search index in %.3fs", self.REGISTRY_NAME, time.perf_counter() - t0)
+        return index
 
     def parse_row(self, id, row: list[str], cache: dict[int, Model]) -> Model:
         return self._MODEL_CLS.from_row(id, row)
 
     def force_cache(self):
         """Force-cache all data and indexes that have not yet been loaded."""
+        logger.info("Force-caching all %s data and indexes", self.REGISTRY_NAME)
+        t0 = time.perf_counter()
         _ = self._cache
         _ = self._lookup_index
         _ = self._filter_index
         _ = self._search_index
+        logger.info("Force-cached %s registry (%d records) in %.3fs", self.REGISTRY_NAME, len(self._cache), time.perf_counter() - t0)
 
     def __iter__(self) -> Iterator[T]:
         return iter([m.to_dto() for m in self._cache.values()])

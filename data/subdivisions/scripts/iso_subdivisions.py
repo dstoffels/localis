@@ -1,6 +1,6 @@
 from data.utils import *
-from data.subdivisions.utils import SubdivisionMap
-from data.subdivisions.utils import dedupe
+from data.subdivisions.subdivisions_utils import SubdivisionMap
+from data.subdivisions.subdivisions_utils import dedupe
 import csv
 from localis.models import CountryModel, SubdivisionModel
 
@@ -59,9 +59,7 @@ def load_iso_subs(
 
             subdivision.aliases = dedupe(subdivision.aliases)
 
-        # Second pass to resolve parents now that all iso subs are loaded
-        for iso_sub in iso_subs.values():
-            parent_iso_code = iso_sub.parent
-            iso_sub.parent = iso_subs.get(parent_iso_code, None)
-
+        # parent stays as the raw iso_code string here; SubdivisionMap.refresh()
+        # resolves it to the actual object once merging/resolution has settled,
+        # since the object it should point to may be discarded during merge.
         return iso_subs

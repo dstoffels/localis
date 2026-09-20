@@ -1,5 +1,5 @@
 from data.utils import *
-from data.subdivisions.utils import SubdivisionMap
+from data.subdivisions.subdivisions_utils import SubdivisionMap
 
 SUBDIVISIONS_DATA_PATH = DATA_PATH / "subdivisions"
 
