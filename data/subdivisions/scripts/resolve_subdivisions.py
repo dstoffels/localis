@@ -1,3 +1,4 @@
+import sys
 from data.utils import *
 from data.subdivisions.subdivisions_utils import *
 from data.logger import log
@@ -5,9 +6,24 @@ import json
 from data.subdivisions.scripts.merge_subdivisions import merge_matched_sub
 from localis.models import SubdivisionModel
 
+ORPHANED_SUBS_EXIT_CODE = 10
+
 
 def clear_terminal():
     print("\033c", end="")
+
+
+def _apply_cached_resolutions(
+    unmerged_iso_subs: list[SubdivisionModel],
+    resolution_map: dict[str, dict[str, str | list[str] | bool | None]],
+    submap: SubdivisionMap,
+) -> list[SubdivisionModel]:
+    """Re-apply cached resolutions to a list of unmatched ISO subdivisions."""
+    still_unmerged: list[SubdivisionModel] = []
+    for iso_sub in unmerged_iso_subs:
+        if not _apply_cached_resolution(iso_sub, resolution_map, submap):
+            still_unmerged.append(iso_sub)
+    return still_unmerged
 
 
 def _apply_cached_resolution(
@@ -50,10 +66,7 @@ def _resolve_interactively(
     # Main Menu Loop
     while True:
         clear_terminal()
-        candidate_geo_subs = sorted(
-            submap.filter(iso_sub.country.alpha2, admin_level),
-            key=lambda x: x.name,
-        )
+        candidate_geo_subs = get_geonames_candidates(iso_sub, submap)
 
         for i, geo_sub in enumerate(candidate_geo_subs):
             print(
@@ -112,12 +125,50 @@ def _resolve_interactively(
     return merge_data
 
 
-def resolve_unmatched_subs(
-    unmatched_iso_subs: list[SubdivisionModel],
+def handle_orphans(orphaned_subs: list[UnmergedIsoSub]) -> None:
+    if orphaned_subs:
+        payload = []
+
+        # log
+        for o in orphaned_subs:
+            log.writeline(
+                f"orphaned iso subdivision: {o.iso_sub.iso_code} ({o.iso_sub.name}, {o.iso_sub.country.name}) requires manual resolution against GeoNames counterparts."
+            )
+
+            # build JSON array
+            payload.append(
+                {
+                    "iso_code": o.iso_sub.iso_code,
+                    "name": o.iso_sub.name,
+                    "aliases": o.iso_sub.aliases,
+                    "country": o.iso_sub.country.name,
+                    "admin_level": o.iso_sub.admin_level,
+                    "candidates": [
+                        {
+                            "hashid": c.hashid,
+                            "name": c.name,
+                            "aliases": c.aliases,
+                            "geonames_code": c.geonames_code,
+                        }
+                        for c in o.geonames_candidates
+                    ],
+                }
+            )
+        # dump orphaned subdivisions to JSON file
+        (SUBDIVISIONS_RAW_PATH / "orphaned_subdivisions.json").write_text(
+            json.dumps(payload, indent=2, ensure_ascii=False), encoding="utf-8"
+        )
+
+        # break pipeline and flag for manual resolution
+        sys.exit(ORPHANED_SUBS_EXIT_CODE)
+
+
+def resolve_unmerged_subs(
+    unmerged_iso_subs: list[SubdivisionModel],
     submap: SubdivisionMap,
     interactive_mode: bool = False,
-) -> list[SubdivisionModel]:
-    orphaned: list[SubdivisionModel] = []
+) -> None:
+    orphaned: list[UnmergedIsoSub] = []
 
     with open(
         SUBDIVISIONS_RAW_PATH / "resolution_map.json", "r+", encoding="utf-8"
@@ -127,16 +178,22 @@ def resolve_unmatched_subs(
             json.load(f) or {}
         )
 
-        for num, iso_sub in enumerate(unmatched_iso_subs, start=1):
-            if _apply_cached_resolution(iso_sub, resolution_map, submap):
-                continue
+        unmerged_iso_subs = _apply_cached_resolutions(
+            unmerged_iso_subs, resolution_map, submap
+        )
 
+        for num, iso_sub in enumerate(unmerged_iso_subs, start=1):
             if not interactive_mode:
-                orphaned.append(iso_sub)
+                orphaned.append(
+                    UnmergedIsoSub(
+                        iso_sub=iso_sub,
+                        geonames_candidates=get_geonames_candidates(iso_sub, submap),
+                    )
+                )
                 continue
 
             merge_data = _resolve_interactively(
-                iso_sub, submap, num, len(unmatched_iso_subs)
+                iso_sub, submap, num, len(unmerged_iso_subs)
             )
 
             # update mapping file
@@ -146,4 +203,4 @@ def resolve_unmatched_subs(
             f.truncate()
             print()
 
-    return orphaned
+    handle_orphans(orphaned)

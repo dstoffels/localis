@@ -109,9 +109,11 @@ def threshold(name_a: str, name_b: str) -> int:
     return threshold
 
 
-def try_merge(iso_subs: dict[str, SubdivisionModel], sub_map: SubdivisionMap) -> None:
+def try_merge(
+    iso_subs: dict[str, SubdivisionModel], sub_map: SubdivisionMap
+) -> list[SubdivisionModel]:
 
-    unmatched_iso_subs: list[SubdivisionModel] = []
+    unmerged_iso_subs: list[SubdivisionModel] = []
 
     print("Attemping to merge ISO to GeoNames subdivisions...")
     for _, iso_sub in iso_subs.items():
@@ -143,9 +145,9 @@ def try_merge(iso_subs: dict[str, SubdivisionModel], sub_map: SubdivisionMap) ->
                 merge_matched_sub(iso_sub, geo_sub)
                 break
         else:
-            unmatched_iso_subs.append(iso_sub)
+            unmerged_iso_subs.append(iso_sub)
 
     print(
-        f"Merged {len(iso_subs) - len(unmatched_iso_subs)}/{len(iso_subs)} ISO subdivisions"
+        f"Merged {len(iso_subs) - len(unmerged_iso_subs)}/{len(iso_subs)} ISO subdivisions"
     )
-    return unmatched_iso_subs
+    return unmerged_iso_subs

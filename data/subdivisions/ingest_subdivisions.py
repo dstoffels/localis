@@ -11,7 +11,7 @@ from localis.models import CountryModel, SubdivisionModel
 from .scripts.geonames_subdivisions import map_geonames_subdivisions
 from .scripts.iso_subdivisions import load_iso_subs
 from .scripts.merge_subdivisions import try_merge
-from .scripts.resolve_subdivisions import resolve_unmatched_subs
+from .scripts.resolve_subdivisions import resolve_unmerged_subs
 from .scripts.dump_subdivisions import dump
 
 
@@ -34,24 +34,16 @@ def ingest_subdivisions(
     iso_subs: dict[int, SubdivisionModel] = load_iso_subs(countries, sub_map)
 
     # Attempt to auto-merge with fuzzy matching and yield a list of iso_subs that couldn't be auto-matched with GeoNames counterparts.
-    unmatched_iso_subs: list[SubdivisionModel] = try_merge(iso_subs, sub_map)
+    unmerged_iso_subs: list[SubdivisionModel] = try_merge(iso_subs, sub_map)
 
     # Manually match or add the dangling iso subs to the sub_map
-    orphaned_subs = resolve_unmatched_subs(
-        unmatched_iso_subs, sub_map, interactive_mode
-    )
-    for orphan in orphaned_subs:
-        log.writeline(
-            f"orphaned: {orphan.iso_code} ({orphan.name}, {orphan.country.name}) - no fuzzy match, requires manual resolution."
-        )
+    resolve_unmerged_subs(unmerged_iso_subs, sub_map, interactive_mode)
 
     # rebuild cache with complete data, update parents
     sub_map.refresh()
 
     dump(sub_map)
-    log.writeline(
-        f"completed: {len(sub_map)} subdivisions, {len(orphaned_subs)} orphaned"
-    )
+    log.writeline(f"completed: {len(sub_map)} subdivisions")
     return sub_map
 
 

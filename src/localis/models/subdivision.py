@@ -91,7 +91,6 @@ class SubdivisionModel(Subdivision, Model):
 
         return cls(id, *row)
 
-    # temporarily hash a unique id to later map admin2 subdivisions to their parents and to manually map ISO subdivisions that cannot be automatically merged with its geonames counterpart. hashid is ONLY used internally for these purposes; once the subdvision data has been successfully merged, hashid is discarded.
     hashid: int = None
 
     def __post_init__(self):
@@ -104,4 +103,5 @@ class SubdivisionModel(Subdivision, Model):
                 or self.geonames_code,  # whichever is present at initialization
             ]
             key = "|".join(key_parts)
+            # temporarily hash a unique id to later map admin2 subdivisions to their parents and to manually map ISO subdivisions that cannot be automatically merged with its geonames counterpart. hashid is ONLY used internally for these purposes during ingestion; once the subdvision data has been successfully merged, hashid is discarded.
             self.hashid = int.from_bytes(hashlib.md5(key.encode()).digest()[:8], "big")
