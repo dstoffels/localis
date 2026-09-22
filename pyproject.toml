@@ -34,8 +34,10 @@ test-watch = "pytest_watch.command:main"
 
 [tool.poetry]
 packages = [
-  { include = "localis", from = "src" }
+  { include = "localis", from = "src" },
+  { include = "data" }
 ]
+exclude = ["data/**"]
 
 
 [tool.poetry.group.dev.dependencies]

@@ -125,38 +125,38 @@ def _resolve_interactively(
     return merge_data
 
 
-def handle_orphans(orphaned_subs: list[UnmergedIsoSub]) -> None:
+def handle_orphans(orphaned_subs: list[SubdivisionModel]) -> None:
     if orphaned_subs:
-        payload = []
+        payload = {}
 
         # log
-        for o in orphaned_subs:
+        for iso_sub in orphaned_subs:
             log.writeline(
-                f"orphaned iso subdivision: {o.iso_sub.iso_code} ({o.iso_sub.name}, {o.iso_sub.country.name}) requires manual resolution against GeoNames counterparts."
+                f"orphaned iso subdivision: {iso_sub.iso_code} ({iso_sub.name}, {iso_sub.country.name}) requires manual resolution against GeoNames counterparts."
             )
 
-            # build JSON array
-            payload.append(
-                {
-                    "iso_code": o.iso_sub.iso_code,
-                    "name": o.iso_sub.name,
-                    "aliases": o.iso_sub.aliases,
-                    "country": o.iso_sub.country.name,
-                    "admin_level": o.iso_sub.admin_level,
-                    "candidates": [
-                        {
-                            "hashid": c.hashid,
-                            "name": c.name,
-                            "aliases": c.aliases,
-                            "geonames_code": c.geonames_code,
-                        }
-                        for c in o.geonames_candidates
-                    ],
-                }
-            )
+            # build JSON object keyed by iso_code for O(1) lookup. Candidates are no
+            # longer precomputed/stored here; the resolve-subdivisions skill computes
+            # them fresh (both GeoNames tiers, paginated) via its own next <page>
+            # command instead. `type` is the ISO category (PROVINCE/DISTRICT/REGION/
+            # etc.) -- included as context for telling apart same-named admin1/admin2
+            # candidates, NOT the computed admin_level, which is the unreliable value
+            # that caused the original admin-level mismatch bug.
+            payload[iso_sub.iso_code] = {
+                "name": iso_sub.name,
+                "aliases": iso_sub.aliases,
+                "country": iso_sub.country.name,
+                "type": iso_sub.type,
+            }
+
         # dump orphaned subdivisions to JSON file
         (SUBDIVISIONS_RAW_PATH / "orphaned_subdivisions.json").write_text(
             json.dumps(payload, indent=2, ensure_ascii=False), encoding="utf-8"
+        )
+
+        print("Exiting due to orphaned subdivisions.")
+        print(
+            f"{len(orphaned_subs)} orphaned subdivisions have been written to {SUBDIVISIONS_RAW_PATH / 'orphaned_subdivisions.json'}"
         )
 
         # break pipeline and flag for manual resolution
@@ -168,11 +168,13 @@ def resolve_unmerged_subs(
     submap: SubdivisionMap,
     interactive_mode: bool = False,
 ) -> None:
-    orphaned: list[UnmergedIsoSub] = []
+    orphaned: list[SubdivisionModel] = []
 
-    with open(
-        SUBDIVISIONS_RAW_PATH / "resolution_map.json", "r+", encoding="utf-8"
-    ) as f:
+    resolution_map_path = SUBDIVISIONS_RAW_PATH / "resolution_map.json"
+    if not resolution_map_path.exists():
+        resolution_map_path.write_text("{}", encoding="utf-8")
+
+    with open(resolution_map_path, "r+", encoding="utf-8") as f:
         # load existing mappings
         resolution_map: dict[int, dict[str, str | list[str] | bool | None]] = (
             json.load(f) or {}
@@ -184,12 +186,7 @@ def resolve_unmerged_subs(
 
         for num, iso_sub in enumerate(unmerged_iso_subs, start=1):
             if not interactive_mode:
-                orphaned.append(
-                    UnmergedIsoSub(
-                        iso_sub=iso_sub,
-                        geonames_candidates=get_geonames_candidates(iso_sub, submap),
-                    )
-                )
+                orphaned.append(iso_sub)
                 continue
 
             merge_data = _resolve_interactively(

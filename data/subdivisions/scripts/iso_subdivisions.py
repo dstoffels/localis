@@ -15,11 +15,11 @@ def load_iso_subs(
         iso_subs: dict[int, SubdivisionModel] = {}  # cache
 
         for row in reader:
-            name = row["name"]
+            name = row["subdivision_name"]
             local_variant = row["localVariant"]
-            alpha2 = row["country_code"]
-            iso_code = row["iso_code"]
-            parent_iso_code = row.get("parent_iso_code", None)
+            alpha2 = row["#country_code_alpha2"]
+            iso_code = row["subdivision_code_iso3166-2"]
+            parent_iso_code = row.get("parent_subdivision", None)
             admin_level = 1 if not parent_iso_code else 2
 
             # Assign names, generate ascii alt names

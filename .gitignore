@@ -87,3 +87,4 @@ sandbox.py
 data/*/raw/*
 !data/countries/raw/wiki_countries.json
 !data/subdivisions/raw/resolution_map.json
+!data/subdivisions/raw/orphaned_subdivisions.json

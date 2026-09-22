@@ -1,4 +1,3 @@
-from typing import NamedTuple
 from localis.models import SubdivisionModel
 
 
@@ -82,11 +81,6 @@ class SubdivisionMap:
     def to_geocode_map(self) -> dict[str, SubdivisionModel]:
         """Return a plain dict keyed by geonames_code, matching the shape data.utils.load_subdivisions() reconstructs from disk."""
         return self._by_geo_code
-
-
-class UnmergedIsoSub(NamedTuple):
-    iso_sub: SubdivisionModel
-    geonames_candidates: list[SubdivisionModel]
 
 
 def get_geonames_candidates(
