@@ -20,7 +20,7 @@ from data.subdivisions.scripts.geonames_subdivisions import map_geonames_subdivi
 RESOLUTION_MAP_PATH = SUBDIVISIONS_RAW_PATH / "resolution_map.json"
 ORPHANED_PATH = SUBDIVISIONS_RAW_PATH / "orphaned_subdivisions.json"
 RESOLUTION_LOG_PATH = SUBDIVISIONS_RAW_PATH / "resolution_log.txt"
-PAGE_SIZE = 300
+PAGE_SIZE = 100
 
 
 def _read_json(path: Path) -> dict | list:

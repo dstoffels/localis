@@ -15,7 +15,7 @@ class IngestLog:
 
     def writeline(self, message: str) -> None:
         line = f"[{self._stage}] {message}"
-        print(line)
+        # print(line)
         with open(self.path, "a", encoding="utf-8") as f:
             f.write(line + "\n")
 

@@ -5,32 +5,64 @@ description: Resolves ISO 3166-2 subdivisions that localis's data-ingestion pipe
 
 # Resolve Subdivisions
 
-## Status
+You've been dispatched to resolve orphaned ISO 3166-2 subdivisions, ones localis's ingestion pipeline couldn't confidently auto-merge with a GeoNames counterpart via fuzzy string matching. Your job: use real-world geographic knowledge to decide each one with high confidence, or explicitly skip it for a human rather than guess. Using ONLY the API commands listed in the ## API section (literally and verbatim), execute the workflow as described below.
 
-Not yet run against real data.
+## API
 
-## Why this exists
+Everything goes through one CLI, invoked directly by path. YOU ARE ONLY ALLOWED TO USE THE COMMANDS LISTED BELOW, VERBATIM, AND MUST NOT ATTEMPT TO EXECUTE ANY OTHER COMMANDS OR COMMAND CHAINS.
 
-`data/subdivisions/raw/orphaned_subdivisions.json` is written by the subdivisions pipeline when it can't auto-resolve every ISO subdivision against its GeoNames counterpart, and the pipeline hard-exits at that point — `ingest_cities()` never runs on an incomplete subdivision map. This skill's job is to resolve as many of those orphans as possible using real-world knowledge fuzzy-matching couldn't apply, before a human has to.
+### next
+- ref: `next`
+- command: poetry run python .claude/skills/resolve-subdivisions/scripts/api.py next <page>
 
-## Workflow
+### merge
+- ref: `merge`
+- command: poetry run python .claude/skills/resolve-subdivisions/scripts/api.py merge <iso_code> <hashid> [--names NAME ...]
 
-You are the orchestrator, dispatching bounded subagents to do the actual resolution work, not looping through hundreds of entries yourself in this conversation. Holding all of them in one context at once is exactly what this design avoids.
+### add
+- ref: `add`
+- command: poetry run python .claude/skills/resolve-subdivisions/scripts/api.py add <iso_code> [--names NAME ...]
 
-1. **Check there's something to do.** Run:
-   ```
-   poetry run python .claude/skills/resolve-subdivisions/scripts/api.py next
-   ```
-   If it prints `null`, nothing's orphaned right now — say so rather than inventing work.
+### skip
+- ref: `skip`
+- command: poetry run python .claude/skills/resolve-subdivisions/scripts/api.py skip <iso_code> "<reason>"
 
-2. **Dispatch a subagent for a bounded batch.** Use the Agent tool. Use this exact prompt every time, verbatim — do not paraphrase or re-explain the task yourself, that's the one thing to avoid here:
-   ```
-   Run .claude/skills/resolve-subdivisions/references/worker.md.
-   ```
+## Workflow Loop
 
-3. **Dispatch another subagent, and repeat, until `next` returns `null`.** One batch at a time, never concurrently (see Guardrails).
+- !CRITICAL: DO NOT INVOKE ANY OTHER CLI COMMANDS OUTSIDE OF THIS DESIGNATED INTERFACE OR ATTEMPT TO EXECUTE COMMAND CHAINS.
+- Use real-world knowledge, not string similarity.
+
+`MAX_CANDIDATES` = 300
+`CANDIDATES_PROCESSED` = 0
+
+
+1. IF `CANDIDATES_PROCESSED` >= `MAX_CANDIDATES`: 
+   1. STOP.
+2. `PAGE` = 1
+3. CALL `next <PAGE>` to retrieve the next undecided orphaned subdivision and its first page of candidates.
+   1. `CANDIDATES_PROCESSED` += <len(orphan.candidates)>
+   2. IF `next` returns `null`: 
+      1. STOP.
+   3. IF `candidates` IS EMPTY: 
+      1. GOTO 4.
+   4. IF you have high confidence that this ISO subdivision and one specific candidate are the same place (a transliteration difference, an old vs. current name, a local vs. official form, etc.):
+      - Note: If multiple candidates share a name, use the candidate's `admin_level` against the orphan's own `type` to pick the right one, not just the first match.
+      1. CALL `merge <iso_code> <hashid> [--names NAME ...]`
+      2. GOTO 1.
+   5. ELSE: 
+      1. `PAGE` += 1
+      2. GOTO 3.
+4. IF There is genuinely no matching GeoNames candidate for an existing subdivision, but the ISO subdivision exists in reality:
+   1. CALL `add <iso_code> [--names NAME ...]`
+   2. GOTO 1.
+5. ELSE IF there is no suitable match and you need to defer the decision to a human reviewer because you are unsure, lack sufficient information or there appears to be a conflict or ambiguity:
+   1. CALL `skip <iso_code> "<reason>"`
+   2. GOTO 1.
+
 
 ## Guardrails
 
-- Dispatch batches sequentially, never concurrently — neither `orphaned_subdivisions.json` nor `resolution_map.json` has any locking, so two subagents writing at the same time could silently clobber each other's decisions.
-- After this skill runs, the pipeline needs to actually be re-run to pick up the new `resolution_map.json` entries and (assuming nothing's left orphaned) finish subdivisions and proceed to cities. This skill doesn't re-run the pipeline itself.
+- !CRITICAL: DO NOT INVOKE ANY OTHER CLI COMMANDS OUTSIDE OF THIS DESIGNATED INTERFACE OR ATTEMPT TO EXECUTE COMMAND CHAINS.
+- NEVER READ OR EDIT `orphaned_subdivisions.json` or `resolution_map.json`
+- Never fabricate a `hashid` — it must come from that specific entry's own `candidates` list; `merge` validates this and raises if it wasn't.
+

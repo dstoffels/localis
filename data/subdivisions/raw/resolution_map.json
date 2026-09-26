@@ -1,1398 +1,1073 @@
 {
-  "AM-VD": {
-    "hashid": 18259341876283111906,
-    "names": [
-      "Vayoc̣ Jor"
-    ]
-  },
-  "AT-2": {
-    "hashid": 10264642646313965189,
-    "names": [
-      "Kärnten"
-    ]
-  },
-  "AT-3": {
-    "hashid": 8583196529622387103,
-    "names": [
-      "Niederösterreich"
-    ]
-  },
-  "AT-4": {
-    "hashid": 17642062264448635185,
-    "names": [
-      "Oberösterreich"
-    ]
-  },
-  "AT-6": {
-    "hashid": 5554678294385227951,
-    "names": [
-      "Steiermark"
-    ]
-  },
-  "AT-9": {
-    "hashid": 5033946932732263266,
-    "names": [
-      "Wien"
-    ]
-  },
-  "AZ-NX": {
-    "hashid": 17126612131445476090,
-    "names": [
-      "Naxçıvan"
-    ]
-  },
-  "AZ-NV": {
-    "hashid": 10327351081856570025,
-    "names": [
-      "Naxçıvan"
-    ]
-  },
-  "AZ-XCI": {
-    "hashid": 3948403324092252865,
-    "names": [
-      "Xocalı"
-    ]
-  },
-  "AZ-XVD": {
-    "hashid": 632633854087999523,
-    "names": [
-      "Xocavənd"
-    ]
-  },
-  "BA-BIH": {
-    "hashid": 9964537520505996191,
-    "names": [
-      "Federacija Bosne i Hercegovine"
-    ]
-  },
-  "BD-A": {
-    "hashid": 2831414602029012506,
-    "names": [
-      "Barishal"
-    ]
-  },
-  "BD-22": {
-    "hashid": 13017779450755984638,
-    "names": [
-      "Jashore"
-    ]
-  },
-  "BE-BRU": {
-    "hashid": 1303302418975648253,
-    "names": [
-      "Brussels Hoofdstedelijk Gewest",
-      "Bruxelles-Capitale"
-    ]
-  },
-  "BE-VLG": {
-    "hashid": 7114087128947764291,
-    "names": [
-      "Vlaams Gewest"
-    ]
-  },
-  "BF-KMD": {
-    "hashid": 4875584601790877806,
-    "names": [
-      "Komondjari"
-    ]
-  },
-  "BF-LOR": {
-    "hashid": 3722567644184048257,
-    "names": [
-      "Loroum"
-    ]
-  },
-  "BF-SOM": {
-    "hashid": 6183290825741632034,
-    "names": [
-      "Soum",
-      "Djelgodji"
-    ]
-  },
-  "BH-14": {
-    "hashid": 17626728950368949944,
-    "names": [
-      "Al Janūbīyah"
-    ]
-  },
-  "BH-13": {
-    "hashid": 17193323948274891287,
-    "names": [
-      "Al ‘Āşimah",
-      "Al Manāmah"
-    ]
-  },
-  "BH-17": {
-    "hashid": 3296527386319725693,
-    "names": [
-      "Ash Shamālīyah"
-    ]
-  },
-  "BI-KR": {
-    "added": true,
-    "names": [
-      "Karuzi"
-    ]
-  },
-  "BI-MW": {
-    "added": true,
-    "names": [
-      "Mwaro"
-    ]
-  },
-  "BO-B": {
-    "hashid": 15283482136559554218,
-    "names": [
-      "El Beni"
-    ]
-  },
-  "BT-43": {
-    "hashid": 16098220528632627989,
-    "names": [
-      "Pema Gatshel"
-    ]
-  },
-  "BW-SO": {
-    "hashid": 5911163335100115086,
-    "names": [
-      "Southern"
-    ]
-  },
-  "BY-BR": {
-    "hashid": 14031285334843102465,
-    "names": [
-      "Bresckaja voblasć",
-      "Brestskaja oblast'",
-      "Brestskaya oblast'",
-      "Brestskaya voblasts'"
-    ]
-  },
-  "BY-HO": {
-    "hashid": 3776654294727470660,
-    "names": [
-      "Gomel'skaja oblast'",
-      "Gomel'skaya oblast'",
-      "Homiel'skaja voblasć",
-      "Homyel'skaya voblasts'"
-    ]
-  },
-  "BY-MA": {
-    "hashid": 15866662703133056887,
-    "names": [
-      "Mahilioŭskaja voblasć",
-      "Mahilyowskaya voblasts'",
-      "Mogilevskaja oblast'",
-      "Mogilevskaya oblast'"
-    ]
-  },
-  "BZ-SC": {
-    "hashid": 251736499394777374,
-    "names": [
-      "Stann Creek"
-    ]
-  },
-  "CD-BC": {
-    "hashid": 12083054728932433545,
-    "names": [
-      "Kongo Central"
-    ]
-  },
-  "CD-NK": {
-    "hashid": 3626445824490165039,
-    "names": [
-      "Nord-Kivu"
-    ]
-  },
-  "CD-SK": {
-    "hashid": 9186806592796032547,
-    "names": [
-      "Sud-Kivu"
-    ]
-  },
-  "CF-KB": {
-    "hashid": 16578592607792538849,
-    "names": [
-      "Gribingui",
-      "Gïrïbïngï"
-    ]
-  },
-  "CH-BS": {
-    "hashid": 619646476019425698,
-    "names": [
-      "Basel-Stadt"
-    ]
-  },
-  "CH-GR": {
-    "hashid": 10764539335603049747,
-    "names": [
-      "Graubünden",
-      "Grigioni",
-      "Grischun"
-    ]
-  },
-  "CN-MO": {
-    "added": true,
-    "names": [
-      "Macao SAR",
-      "Macau SAR",
-      "Aomen Tebiexingzhengqu"
-    ]
-  },
-  "CN-HK": {
-    "added": true,
-    "names": [
-      "Hong Kong SAR",
-      "Xianggang Tebiexingzhengqu"
-    ]
-  },
-  "CN-NM": {
-    "hashid": 17192407251240072214,
-    "names": [
-      "Nei Mongol Zizhiqu"
-    ]
-  },
-  "CN-TW": {
-    "added": true,
-    "names": [
-      "Taiwan Sheng",
-      "Taiwan"
-    ]
-  },
-  "CN-XZ": {
-    "hashid": 17811222786113383183,
-    "names": [
-      "Xizang Zizhiqu"
-    ]
-  },
-  "CO-DC": {
-    "hashid": 6794102982673819394,
-    "names": [
-      "Distrito Capital de Bogotá",
-      "Distrito Capital"
-    ]
-  },
-  "CU-03": {
-    "hashid": 3018805721934171385,
-    "names": [
-      "La Habana"
-    ]
-  },
-  "CV-BV": {
-    "hashid": 705132612200659926,
-    "names": []
-  },
-  "CV-BR": {
-    "hashid": 10983424776763243137,
-    "names": []
-  },
-  "CV-B": {
-    "added": true,
-    "names": [
-      "Ilhas de Barlavento",
-      "Windward Islands"
-    ]
-  },
-  "CV-S": {
-    "added": true,
-    "names": [
-      "Ilhas de Sotavento",
-      "Leeward Islands"
-    ]
-  },
-  "CV-MA": {
-    "hashid": 3894072371730316330,
-    "names": []
-  },
-  "CV-MO": {
-    "hashid": 12990632026175913445,
-    "names": []
-  },
-  "CV-PA": {
-    "hashid": 13344093838652070261,
-    "names": []
-  },
-  "CV-PN": {
-    "hashid": 7034729200488182788,
-    "names": []
-  },
-  "CV-PR": {
-    "hashid": 8086121627744482082,
-    "names": []
-  },
-  "CV-RB": {
-    "hashid": 15078839076604930817,
-    "names": []
-  },
-  "CV-RG": {
-    "hashid": 13224718789698419456,
-    "names": []
-  },
-  "CV-RS": {
-    "hashid": 16209442399567980064,
-    "names": []
-  },
-  "CV-SL": {
-    "hashid": 1614766708942554705,
-    "names": []
-  },
-  "CV-CR": {
-    "hashid": 6331602945788660171,
-    "names": []
-  },
-  "CV-SD": {
-    "hashid": 12173059146301659138,
-    "names": []
-  },
-  "CV-SF": {
-    "hashid": 6284023071982029689,
-    "names": []
-  },
-  "CV-SV": {
-    "hashid": 15131506162063892562,
-    "names": []
-  },
-  "CV-TA": {
-    "hashid": 14249535839153097734,
-    "names": []
-  },
-  "CV-TS": {
-    "hashid": 15645238902898204492,
-    "names": []
-  },
-  "CY-01": {
-    "hashid": 17575498885477680404,
-    "names": [
-      "Lefkosia",
-      "Lefkoşa"
-    ]
-  },
-  "CY-02": {
-    "hashid": 2433773035988939339,
-    "names": [
-      "Lemesos"
-    ]
-  },
-  "CZ-64": {
-    "hashid": 8410285739409551244,
-    "names": [
-      "Jihomoravský kraj"
-    ]
-  },
-  "CZ-31": {
-    "hashid": 15914444895162063424,
-    "names": [
-      "Jihočeský kraj"
-    ]
-  },
-  "CZ-41": {
-    "hashid": 16599347618015154062,
-    "names": [
-      "Karlovarský kraj"
-    ]
-  },
-  "CZ-52": {
-    "hashid": 18306139455349334466,
-    "names": [
-      "Královéhradecký kraj"
-    ]
-  },
-  "CZ-80": {
-    "hashid": 351061663911687314,
-    "names": [
-      "Moravskoslezský kraj"
-    ]
-  },
-  "CZ-10": {
-    "hashid": 10494646732197057085,
-    "names": [
-      "Praha"
-    ]
-  },
-  "CZ-20": {
-    "hashid": 2984933425631119902,
-    "names": [
-      "Středočeský kraj"
-    ]
-  },
-  "CZ-72": {
-    "hashid": 5579150566464626108,
-    "names": [
-      "Zlínský kraj"
-    ]
-  },
-  "CZ-42": {
-    "hashid": 9499542719324458103,
-    "names": [
-      "Ústecký kraj"
-    ]
-  },
-  "DE-BY": {
-    "hashid": 15683273651164955012,
-    "names": [
-      "Bayern"
-    ]
-  },
-  "DE-NI": {
-    "hashid": 16161630923016687986,
-    "names": [
-      "Niedersachsen"
-    ]
-  },
-  "DE-NW": {
-    "hashid": 767740820275888350,
-    "names": [
-      "Nordrhein-Westfalen"
-    ]
-  },
-  "DE-SN": {
-    "hashid": 9340599352467930100,
-    "names": [
-      "Sachsen"
-    ]
-  },
-  "DE-ST": {
-    "hashid": 17823492179474453441,
-    "names": [
-      "Sachsen-Anhalt"
-    ]
-  },
-  "DE-TH": {
-    "hashid": 5512921328756895368,
-    "names": [
-      "Thüringen"
-    ]
-  },
-  "DK-84": {
-    "hashid": 14695464582438295744,
-    "names": [
-      "Hovedstaden"
-    ]
-  },
-  "DK-82": {
-    "hashid": 3180824788497675873,
-    "names": [
-      "Midtjylland"
-    ]
-  },
-  "DK-81": {
-    "hashid": 6587282618310438224,
-    "names": [
-      "Nordjylland"
-    ]
-  },
-  "DK-85": {
-    "hashid": 15380463672029119977,
-    "names": [
-      "Sjælland"
-    ]
-  },
-  "DK-83": {
-    "hashid": 12361097487423467211,
-    "names": [
-      "Syddanmark"
-    ]
-  },
-  "DO-03": {
-    "hashid": 10898163477123812698,
-    "names": []
-  },
-  "DO-33": {
-    "added": true,
-    "names": []
-  },
-  "DO-34": {
-    "added": true,
-    "names": []
-  },
-  "DO-35": {
-    "added": true,
-    "names": []
-  },
-  "DO-36": {
-    "added": true,
-    "names": []
-  },
-  "DO-01": {
-    "hashid": 2545951785960071624,
-    "names": [
-      "Distrito Nacional"
-    ]
-  },
-  "DO-06": {
-    "hashid": 10552907223733560021,
-    "names": []
-  },
-  "DO-37": {
-    "added": true,
-    "names": []
-  },
-  "DO-07": {
-    "hashid": 10230849822333583155,
-    "names": []
-  },
-  "DO-38": {
-    "added": true,
-    "names": []
-  },
-  "DO-09": {
-    "hashid": 14548261186608404783,
-    "names": []
-  },
-  "DO-19": {
-    "hashid": 12655063999735625467,
-    "names": []
-  },
-  "DO-39": {
-    "added": true,
-    "names": []
-  },
-  "DO-10": {
-    "hashid": 4204623252710196221,
-    "names": []
-  },
-  "DO-11": {
-    "hashid": 17496805393458962437,
-    "names": []
-  },
-  "DO-28": {
-    "hashid": 6437022730056275695,
-    "names": []
-  },
-  "DO-40": {
-    "added": true,
-    "names": []
-  },
-  "DO-17": {
-    "hashid": 2037131853133885597,
-    "names": []
-  },
-  "DO-41": {
-    "added": true,
-    "names": []
-  },
-  "DO-27": {
-    "hashid": 14138765543379867363,
-    "names": []
-  },
-  "DO-42": {
-    "added": true,
-    "names": []
-  },
-  "EG-DK": {
-    "hashid": 9318628226602789107,
-    "names": [
-      "Ad Daqahlīyah"
-    ]
-  },
-  "EG-BH": {
-    "hashid": 10557151971485804498,
-    "names": [
-      "Al Buḥayrah"
-    ]
-  },
-  "EG-FYM": {
-    "hashid": 7240044506828043996,
-    "names": [
-      "Al Fayyūm"
-    ]
-  },
-  "EG-GH": {
-    "hashid": 11368199509458151310,
-    "names": [
-      "Al Gharbīyah"
-    ]
-  },
-  "EG-IS": {
-    "hashid": 12053722315705010735,
-    "names": [
-      "Al Ismāʻīlīyah"
-    ]
-  },
-  "EG-MNF": {
-    "hashid": 7738599447646777811,
-    "names": [
-      "Al Minūfīyah"
-    ]
-  },
-  "EG-KB": {
-    "hashid": 733095517075002237,
-    "names": [
-      "Al Qalyūbīyah"
-    ]
-  },
-  "EG-SHR": {
-    "hashid": 13365197459742857616,
-    "names": [
-      "Ash Sharqīyah"
-    ]
-  },
-  "EG-BNS": {
-    "hashid": 14486115580737868210,
-    "names": [
-      "Banī Suwayf"
-    ]
-  },
-  "EG-KFS": {
-    "hashid": 5947396524261461379,
-    "names": [
-      "Kafr ash Shaykh"
-    ]
-  },
-  "ER-SK": {
-    "hashid": 2839622781250076862,
-    "names": [
-      "Semienawi Keyih Bahri"
-    ]
-  },
-  "ES-C": {
-    "hashid": 16663251777587820009,
-    "names": []
-  },
-  "ES-CL": {
-    "hashid": 515885370972376802,
-    "names": [
-      "Castilla y León"
-    ]
-  },
-  "ES-CT": {
-    "hashid": 1724482950771920377,
-    "names": [
-      "Catalunya"
-    ]
-  },
-  "ES-PV": {
-    "hashid": 6263351742782356773,
-    "names": [
-      "Euskal Herria",
-      "País Vasco"
-    ]
-  },
-  "ES-IB": {
-    "hashid": 10273630057322074318,
-    "names": [
-      "Illes Balears"
-    ]
-  },
-  "ET-SW": {
-    "hashid": 12385432535360788755,
-    "names": [
-      "Southwest Ethiopia Peoples"
-    ]
-  },
-  "FI-01": {
-    "added": true,
-    "names": [
-      "Åland"
-    ]
-  },
-  "FI-19": {
-    "hashid": 6029943825149156179,
-    "names": [
-      "Varsinais-Suomi",
-      "Egentliga Finland"
-    ]
-  },
-  "FI-02": {
-    "hashid": 14213347715668903798,
-    "names": [
-      "Etelä-Karjala",
-      "Södra Karelen"
-    ]
-  },
-  "FI-03": {
-    "hashid": 7386778009856642809,
-    "names": [
-      "Etelä-Pohjanmaa",
-      "Södra Österbotten"
-    ]
-  },
-  "FI-04": {
-    "hashid": 7556312291482969511,
-    "names": [
-      "Etelä-Savo",
-      "Södra Savolax"
-    ]
-  },
-  "FI-07": {
-    "hashid": 18270890864754931112,
-    "names": [
-      "Keski-Pohjanmaa",
-      "Mellersta Österbotten"
-    ]
-  },
-  "FI-08": {
-    "hashid": 16859499639511552715,
-    "names": [
-      "Keski-Suomi",
-      "Mellersta Finland"
-    ]
-  },
-  "FI-13": {
-    "hashid": 1464986632952177745,
-    "names": [
-      "Pohjois-Karjala",
-      "Norra Karelen"
-    ]
-  },
-  "FI-15": {
-    "hashid": 12250652957173949327,
-    "names": [
-      "Pohjois-Savo",
-      "Norra Savolax"
-    ]
-  },
-  "FI-14": {
-    "hashid": 2425753874731096670,
-    "names": [
-      "Pohjois-Pohjanmaa",
-      "Norra Österbotten"
-    ]
-  },
-  "FI-12": {
-    "hashid": 17006021513674694543,
-    "names": [
-      "Pohjanmaa",
-      "Österbotten"
-    ]
-  },
-  "FR-6AE": {
-    "added": true,
-    "names": []
-  },
-  "FR-BRE": {
-    "hashid": 7840592450004425197,
-    "names": [
-      "Bretagne"
-    ]
-  },
-  "FR-CP": {
-    "added": true,
-    "names": []
-  },
-  "FR-20R": {
-    "hashid": 7029890424806918353,
-    "names": [
-      "Corse"
-    ]
-  },
-  "FR-2A": {
-    "hashid": 12156907213450421279,
-    "names": [
-      "Corse-du-Sud"
-    ]
-  },
-  "FR-971": {
-    "added": true,
-    "names": []
-  },
-  "FR-973": {
-    "added": true,
-    "names": [
-      "French Guiana"
-    ]
-  },
-  "FR-2B": {
-    "hashid": 1811162133395380813,
-    "names": [
-      "Haute-Corse"
-    ]
-  },
-  "FR-31": {
-    "hashid": 15422762469903055286,
-    "names": [
-      "Haute-Garonne"
-    ]
-  },
-  "FR-974": {
-    "added": true,
-    "names": [
-      "Réunion"
-    ]
-  },
-  "FR-972": {
-    "added": true,
-    "names": []
-  },
-  "FR-976": {
-    "added": true,
-    "names": []
-  },
-  "FR-69M": {
-    "added": true,
-    "names": []
-  },
-  "FR-NAQ": {
-    "hashid": 2098146037107974944,
-    "names": [
-      "Nouvelle-Aquitaine"
-    ]
-  },
-  "FR-NC": {
-    "added": true,
-    "names": [
-      "New Caledonia"
-    ]
-  },
-  "FR-PF": {
-    "added": true,
-    "names": [
-      "French Polynesia"
-    ]
-  },
-  "FR-BL": {
-    "added": true,
-    "names": [
-      "Saint Barthélemy"
-    ]
-  },
-  "FR-MF": {
-    "added": true,
-    "names": []
-  },
-  "FR-PM": {
-    "added": true,
-    "names": [
-      "Saint Pierre and Miquelon"
-    ]
-  },
-  "FR-TF": {
-    "added": true,
-    "names": [
-      "French Southern and Antarctic Lands"
-    ]
-  },
-  "FR-WF": {
-    "added": true,
-    "names": [
-      "Wallis and Futuna"
-    ]
-  },
-  "GB-BDG": {
-    "added": true,
-    "names": []
-  },
-  "GB-BNE": {
-    "added": true,
-    "names": []
-  },
-  "GB-BEX": {
-    "added": true,
-    "names": []
-  },
-  "GB-BEN": {
-    "added": true,
-    "names": []
-  },
-  "GB-BRY": {
-    "added": true,
-    "names": []
-  },
-  "GB-CMD": {
-    "added": true,
-    "names": []
-  },
-  "GB-CRY": {
-    "added": true,
-    "names": []
-  },
-  "GB-GRE": {
-    "added": true,
-    "names": []
-  },
-  "GB-HCK": {
-    "added": true,
-    "names": []
-  },
-  "GB-HMF": {
-    "added": true,
-    "names": []
-  },
-  "GB-HRY": {
-    "added": true,
-    "names": []
-  },
-  "GB-HRW": {
-    "added": true,
-    "names": []
-  },
-  "GB-HAV": {
-    "added": true,
-    "names": []
-  },
-  "GB-HIL": {
-    "added": true,
-    "names": []
-  },
-  "GB-HNS": {
-    "added": true,
-    "names": []
-  },
-  "GB-ISL": {
-    "added": true,
-    "names": []
-  },
-  "GB-KEC": {
-    "added": true,
-    "names": []
-  },
-  "GB-KTT": {
-    "added": true,
-    "names": []
-  },
-  "GB-LBH": {
-    "added": true,
-    "names": []
-  },
-  "GB-LEW": {
-    "added": true,
-    "names": []
-  },
-  "GB-MRT": {
-    "added": true,
-    "names": []
-  },
-  "GB-NWM": {
-    "added": true,
-    "names": []
-  },
-  "GB-RDB": {
-    "added": true,
-    "names": []
-  },
-  "GB-RIC": {
-    "added": true,
-    "names": []
-  },
-  "GB-SWK": {
-    "added": true,
-    "names": []
-  },
-  "GB-STN": {
-    "added": true,
-    "names": []
-  },
-  "GB-TWH": {
-    "added": true,
-    "names": []
-  },
-  "GB-WFT": {
-    "added": true,
-    "names": []
-  },
-  "GB-WND": {
-    "added": true,
-    "names": []
-  },
-  "GB-WSM": {
-    "added": true,
-    "names": []
-  },
-  "GQ-BN": {
-    "hashid": 3023793281405305766,
-    "names": []
-  },
-  "GQ-BS": {
-    "hashid": 17797878681589620323,
-    "names": []
-  },
-  "GQ-CS": {
-    "hashid": 11737113617557607118,
-    "names": []
-  },
-  "GQ-DJ": {
-    "hashid": 7336099691248937475,
-    "names": []
-  },
-  "GQ-KN": {
-    "hashid": 17905929667799451702,
-    "names": []
-  },
-  "GQ-LI": {
-    "hashid": 5879842871864002706,
-    "names": []
-  },
-  "GQ-C": {
-    "added": true,
-    "names": [
-      "Región Continental",
-      "Région Continentale"
-    ]
-  },
-  "GQ-I": {
-    "added": true,
-    "names": [
-      "Región Insular",
-      "Région Insulaire"
-    ]
-  },
-  "GQ-WN": {
-    "hashid": 1958570059220681696,
-    "names": []
-  },
-  "GR-A": {
-    "hashid": 1205156330726946481,
-    "names": [
-      "Anatoliki Makedonia kai Thraki"
-    ]
-  },
-  "GR-I": {
-    "hashid": 13223891665784901235,
-    "names": [
-      "Attiki"
-    ]
-  },
-  "GR-G": {
-    "hashid": 14847102287474261620,
-    "names": [
-      "Dytiki Ellada"
-    ]
-  },
-  "GR-C": {
-    "hashid": 5728449947567529500,
-    "names": [
-      "Dytiki Makedonia"
-    ]
-  },
-  "GR-F": {
-    "hashid": 9255607841537206187,
-    "names": [
-      "Ionia Nisia"
-    ]
-  },
-  "GR-B": {
-    "hashid": 1728227864186137884,
-    "names": [
-      "Kentriki Makedonia"
-    ]
-  },
-  "GR-M": {
-    "hashid": 17541537819736985722,
-    "names": [
-      "Kriti"
-    ]
-  },
-  "GR-L": {
-    "hashid": 7697577093007225769,
-    "names": [
-      "Notio Aigaio"
-    ]
-  },
-  "GR-J": {
-    "hashid": 7892918363463324032,
-    "names": [
-      "Peloponnisos"
-    ]
-  },
-  "GR-H": {
-    "hashid": 15653771003529369246,
-    "names": [
-      "Sterea Ellada"
-    ]
-  },
-  "GR-K": {
-    "hashid": 17649593875317055821,
-    "names": [
-      "Voreio Aigaio"
-    ]
-  },
-  "GR-69": {
-    "hashid": 564268597855427151,
-    "names": [
-      "Agion Oros"
-    ]
-  },
-  "GR-D": {
-    "hashid": 3041433102075313050,
-    "names": [
-      "Ipeiros"
-    ]
-  },
-  "GW-BM": {
-    "hashid": 7106958541391228738,
-    "names": []
-  },
-  "GW-L": {
-    "added": true,
-    "names": []
-  },
-  "GW-N": {
-    "added": true,
-    "names": []
-  },
-  "GW-OI": {
-    "hashid": 15202394174908504040,
-    "names": []
-  },
-  "GW-QU": {
-    "hashid": 2307774773964476808,
-    "names": []
-  },
-  "GW-S": {
-    "added": true,
-    "names": []
-  },
-  "GW-TO": {
-    "hashid": 17552616587020259708,
-    "names": []
-  },
-  "HN-IB": {
-    "hashid": 1710350278707837977,
-    "names": []
-  },
-  "HR-07": {
-    "hashid": 6137860277085836514,
-    "names": [
-      "Bjelovarsko-bilogorska zupanija"
-    ]
-  },
-  "HR-12": {
-    "hashid": 2462660711680687613,
-    "names": [
-      "Brodsko-posavska zupanija"
-    ]
-  },
-  "HR-19": {
-    "hashid": 9831373956248052199,
-    "names": [
-      "Dubrovacko-neretvanska zupanija"
-    ]
-  },
-  "HR-18": {
-    "hashid": 13593419230890173594,
-    "names": [
-      "Istarska zupanija"
-    ]
-  },
-  "HR-04": {
-    "hashid": 7595259266207563253,
-    "names": [
-      "Karlovacka zupanija"
-    ]
-  },
-  "HR-06": {
-    "hashid": 515303284250205483,
-    "names": [
-      "Koprivnicko-krizevacka zupanija"
-    ]
-  },
-  "HR-02": {
-    "hashid": 9464094650309313369,
-    "names": [
-      "Krapinsko-zagorska zupanija"
-    ]
-  },
-  "HR-09": {
-    "hashid": 15679379278698257234,
-    "names": [
-      "Licko-senjska zupanija"
-    ]
-  },
-  "HR-20": {
-    "hashid": 7130259495444217249,
-    "names": [
-      "Medimurska zupanija"
-    ]
-  },
-  "HR-14": {
-    "hashid": 17686476244825850176,
-    "names": [
-      "Osjecko-baranjska zupanija"
-    ]
-  },
-  "HR-11": {
-    "hashid": 571633011816446691,
-    "names": [
-      "Pozesko-slavonska zupanija"
-    ]
-  },
-  "HR-08": {
-    "hashid": 13393484788884074394,
-    "names": [
-      "Primorsko-goranska zupanija"
-    ]
-  },
-  "HR-03": {
-    "hashid": 5373331629619585599,
-    "names": [
-      "Sisacko-moslavacka zupanija"
-    ]
-  },
-  "HR-17": {
-    "hashid": 4728741655569437311,
-    "names": [
-      "Splitsko-dalmatinska zupanija"
-    ]
-  },
-  "HR-05": {
-    "hashid": 6869589799992934814,
-    "names": [
-      "Varazdinska zupanija"
-    ]
-  },
-  "HR-10": {
-    "hashid": 9115739172909847332,
-    "names": [
-      "Viroviticko-podravska zupanija"
-    ]
-  },
-  "HR-16": {
-    "hashid": 9228354118196276891,
-    "names": [
-      "Vukovarsko-srijemska zupanija"
-    ]
-  },
-  "HR-13": {
-    "hashid": 1075406954298904301,
-    "names": [
-      "Zadarska zupanija"
-    ]
-  },
-  "HR-01": {
-    "hashid": 18165030935922230113,
-    "names": [
-      "Zagrebacka zupanija"
-    ]
-  },
-  "HR-15": {
-    "hashid": 4924830280273446913,
-    "names": [
-      "Sibensko-kninska zupanija"
-    ]
-  },
-  "HU-BC": {
-    "added": true,
-    "names": []
-  },
-  "HU-DE": {
-    "added": true,
-    "names": []
-  },
-  "HU-DU": {
-    "added": true,
-    "names": []
-  },
-  "HU-EG": {
-    "added": true,
-    "names": []
-  },
-  "HU-HV": {
-    "added": true,
-    "names": []
-  },
-  "HU-KV": {
-    "added": true,
-    "names": []
-  },
-  "HU-KM": {
-    "added": true,
-    "names": []
-  },
-  "HU-MI": {
-    "added": true,
-    "names": []
-  },
-  "HU-NK": {
-    "added": true,
-    "names": []
-  },
-  "HU-NY": {
-    "added": true,
-    "names": []
-  },
-  "HU-ST": {
-    "added": true,
-    "names": []
-  },
-  "HU-SD": {
-    "added": true,
-    "names": []
-  },
-  "HU-SS": {
-    "added": true,
-    "names": []
-  },
-  "HU-SH": {
-    "added": true,
-    "names": []
-  },
-  "HU-SF": {
-    "added": true,
-    "names": []
-  },
-  "HU-TB": {
-    "added": true,
-    "names": []
-  },
-  "HU-ZE": {
-    "added": true,
-    "names": []
-  },
-  "HU-ER": {
-    "added": true,
-    "names": []
-  },
-  "ID-BA": {
-    "hashid": 14437149475941329817,
-    "names": []
-  },
-  "ID-BT": {
-    "hashid": 16898327688087271583,
-    "names": []
-  },
-  "ID-JK": {
-    "hashid": 4695078975331386170,
-    "names": [
-      "DKI Jakarta"
-    ]
-  },
-  "ID-JW": {
-    "added": true,
-    "names": []
-  },
-  "ID-JB": {
-    "hashid": 16251826661717728445,
-    "names": [
-      "Jawa Barat"
-    ]
-  },
-  "ID-JT": {
-    "hashid": 5170221511504565878,
-    "names": [
-      "Jawa Tengah"
-    ]
-  },
-  "ID-JI": {
-    "hashid": 16933184291865474393,
-    "names": [
-      "Jawa Timur"
-    ]
-  },
-  "ID-KA": {
-    "added": true,
-    "names": []
-  },
-  "ID-KB": {
-    "hashid": 11473268994770462644,
-    "names": [
-      "Kalimantan Barat"
-    ]
-  },
-  "ID-KS": {
-    "hashid": 10884306699022656519,
-    "names": [
-      "Kalimantan Selatan"
-    ]
-  },
-  "ID-KT": {
-    "hashid": 9309806926450444053,
-    "names": [
-      "Kalimantan Tengah"
-    ]
-  },
-  "ID-KI": {
-    "hashid": 2921321320579836663,
-    "names": [
-      "Kalimantan Timur"
-    ]
-  }
+	"AM-VD": {
+		"hashid": 18259341876283111906,
+		"names": ["Vayoc̣ Jor"]
+	},
+	"AT-2": {
+		"hashid": 10264642646313965189,
+		"names": ["Kärnten"]
+	},
+	"AT-3": {
+		"hashid": 8583196529622387103,
+		"names": ["Niederösterreich"]
+	},
+	"AT-4": {
+		"hashid": 17642062264448635185,
+		"names": ["Oberösterreich"]
+	},
+	"AT-6": {
+		"hashid": 5554678294385227951,
+		"names": ["Steiermark"]
+	},
+	"AT-9": {
+		"hashid": 5033946932732263266,
+		"names": ["Wien"]
+	},
+	"AZ-NX": {
+		"hashid": 17126612131445476090,
+		"names": ["Naxçıvan"]
+	},
+	"AZ-NV": {
+		"hashid": 10327351081856570025,
+		"names": ["Naxçıvan"]
+	},
+	"AZ-XCI": {
+		"hashid": 3948403324092252865,
+		"names": ["Xocalı"]
+	},
+	"AZ-XVD": {
+		"hashid": 632633854087999523,
+		"names": ["Xocavənd"]
+	},
+	"BA-BIH": {
+		"hashid": 9964537520505996191,
+		"names": ["Federacija Bosne i Hercegovine"]
+	},
+	"BD-A": {
+		"hashid": 2831414602029012506,
+		"names": ["Barishal"]
+	},
+	"BD-22": {
+		"hashid": 13017779450755984638,
+		"names": ["Jashore"]
+	},
+	"BE-BRU": {
+		"hashid": 1303302418975648253,
+		"names": ["Brussels Hoofdstedelijk Gewest", "Bruxelles-Capitale"]
+	},
+	"BE-VLG": {
+		"hashid": 7114087128947764291,
+		"names": ["Vlaams Gewest"]
+	},
+	"BF-KMD": {
+		"hashid": 4875584601790877806,
+		"names": ["Komondjari"]
+	},
+	"BF-LOR": {
+		"hashid": 3722567644184048257,
+		"names": ["Loroum"]
+	},
+	"BF-SOM": {
+		"hashid": 6183290825741632034,
+		"names": ["Soum", "Djelgodji"]
+	},
+	"BH-14": {
+		"hashid": 17626728950368949944,
+		"names": ["Al Janūbīyah"]
+	},
+	"BH-13": {
+		"hashid": 17193323948274891287,
+		"names": ["Al ‘Āşimah", "Al Manāmah"]
+	},
+	"BH-17": {
+		"hashid": 3296527386319725693,
+		"names": ["Ash Shamālīyah"]
+	},
+	"BI-KR": {
+		"added": true,
+		"names": ["Karuzi"]
+	},
+	"BI-MW": {
+		"added": true,
+		"names": ["Mwaro"]
+	},
+	"BO-B": {
+		"hashid": 15283482136559554218,
+		"names": ["El Beni"]
+	},
+	"BT-43": {
+		"hashid": 16098220528632627989,
+		"names": ["Pema Gatshel"]
+	},
+	"BW-SO": {
+		"hashid": 5911163335100115086,
+		"names": ["Southern"]
+	},
+	"BY-BR": {
+		"hashid": 14031285334843102465,
+		"names": [
+			"Bresckaja voblasć",
+			"Brestskaja oblast'",
+			"Brestskaya oblast'",
+			"Brestskaya voblasts'"
+		]
+	},
+	"BY-HO": {
+		"hashid": 3776654294727470660,
+		"names": [
+			"Gomel'skaja oblast'",
+			"Gomel'skaya oblast'",
+			"Homiel'skaja voblasć",
+			"Homyel'skaya voblasts'"
+		]
+	},
+	"BY-MA": {
+		"hashid": 15866662703133056887,
+		"names": [
+			"Mahilioŭskaja voblasć",
+			"Mahilyowskaya voblasts'",
+			"Mogilevskaja oblast'",
+			"Mogilevskaya oblast'"
+		]
+	},
+	"BZ-SC": {
+		"hashid": 251736499394777374,
+		"names": ["Stann Creek"]
+	},
+	"CD-BC": {
+		"hashid": 12083054728932433545,
+		"names": ["Kongo Central"]
+	},
+	"CD-NK": {
+		"hashid": 3626445824490165039,
+		"names": ["Nord-Kivu"]
+	},
+	"CD-SK": {
+		"hashid": 9186806592796032547,
+		"names": ["Sud-Kivu"]
+	},
+	"CF-KB": {
+		"hashid": 16578592607792538849,
+		"names": ["Gribingui", "Gïrïbïngï"]
+	},
+	"CH-BS": {
+		"hashid": 619646476019425698,
+		"names": ["Basel-Stadt"]
+	},
+	"CH-GR": {
+		"hashid": 10764539335603049747,
+		"names": ["Graubünden", "Grigioni", "Grischun"]
+	},
+	"CN-MO": {
+		"added": true,
+		"names": ["Macao SAR", "Macau SAR", "Aomen Tebiexingzhengqu"]
+	},
+	"CN-HK": {
+		"added": true,
+		"names": ["Hong Kong SAR", "Xianggang Tebiexingzhengqu"]
+	},
+	"CN-NM": {
+		"hashid": 17192407251240072214,
+		"names": ["Nei Mongol Zizhiqu"]
+	},
+	"CN-TW": {
+		"added": true,
+		"names": ["Taiwan Sheng", "Taiwan"]
+	},
+	"CN-XZ": {
+		"hashid": 17811222786113383183,
+		"names": ["Xizang Zizhiqu"]
+	},
+	"CO-DC": {
+		"hashid": 6794102982673819394,
+		"names": ["Distrito Capital de Bogotá", "Distrito Capital"]
+	},
+	"CU-03": {
+		"hashid": 3018805721934171385,
+		"names": ["La Habana"]
+	},
+	"CV-BV": {
+		"hashid": 705132612200659926,
+		"names": []
+	},
+	"CV-BR": {
+		"hashid": 10983424776763243137,
+		"names": []
+	},
+	"CV-B": {
+		"added": true,
+		"names": ["Ilhas de Barlavento", "Windward Islands"]
+	},
+	"CV-S": {
+		"added": true,
+		"names": ["Ilhas de Sotavento", "Leeward Islands"]
+	},
+	"CV-MA": {
+		"hashid": 3894072371730316330,
+		"names": []
+	},
+	"CV-MO": {
+		"hashid": 12990632026175913445,
+		"names": []
+	},
+	"CV-PA": {
+		"hashid": 13344093838652070261,
+		"names": []
+	},
+	"CV-PN": {
+		"hashid": 7034729200488182788,
+		"names": []
+	},
+	"CV-PR": {
+		"hashid": 8086121627744482082,
+		"names": []
+	},
+	"CV-RB": {
+		"hashid": 15078839076604930817,
+		"names": []
+	},
+	"CV-RG": {
+		"hashid": 13224718789698419456,
+		"names": []
+	},
+	"CV-RS": {
+		"hashid": 16209442399567980064,
+		"names": []
+	},
+	"CV-SL": {
+		"hashid": 1614766708942554705,
+		"names": []
+	},
+	"CV-CR": {
+		"hashid": 6331602945788660171,
+		"names": []
+	},
+	"CV-SD": {
+		"hashid": 12173059146301659138,
+		"names": []
+	},
+	"CV-SF": {
+		"hashid": 6284023071982029689,
+		"names": []
+	},
+	"CV-SV": {
+		"hashid": 15131506162063892562,
+		"names": []
+	},
+	"CV-TA": {
+		"hashid": 14249535839153097734,
+		"names": []
+	},
+	"CV-TS": {
+		"hashid": 15645238902898204492,
+		"names": []
+	},
+	"CY-01": {
+		"hashid": 17575498885477680404,
+		"names": ["Lefkosia", "Lefkoşa"]
+	},
+	"CY-02": {
+		"hashid": 2433773035988939339,
+		"names": ["Lemesos"]
+	},
+	"CZ-64": {
+		"hashid": 8410285739409551244,
+		"names": ["Jihomoravský kraj"]
+	},
+	"CZ-31": {
+		"hashid": 15914444895162063424,
+		"names": ["Jihočeský kraj"]
+	},
+	"CZ-41": {
+		"hashid": 16599347618015154062,
+		"names": ["Karlovarský kraj"]
+	},
+	"CZ-52": {
+		"hashid": 18306139455349334466,
+		"names": ["Královéhradecký kraj"]
+	},
+	"CZ-80": {
+		"hashid": 351061663911687314,
+		"names": ["Moravskoslezský kraj"]
+	},
+	"CZ-10": {
+		"hashid": 10494646732197057085,
+		"names": ["Praha"]
+	},
+	"CZ-20": {
+		"hashid": 2984933425631119902,
+		"names": ["Středočeský kraj"]
+	},
+	"CZ-72": {
+		"hashid": 5579150566464626108,
+		"names": ["Zlínský kraj"]
+	},
+	"CZ-42": {
+		"hashid": 9499542719324458103,
+		"names": ["Ústecký kraj"]
+	},
+	"DE-BY": {
+		"hashid": 15683273651164955012,
+		"names": ["Bayern"]
+	},
+	"DE-NI": {
+		"hashid": 16161630923016687986,
+		"names": ["Niedersachsen"]
+	},
+	"DE-NW": {
+		"hashid": 767740820275888350,
+		"names": ["Nordrhein-Westfalen"]
+	},
+	"DE-SN": {
+		"hashid": 9340599352467930100,
+		"names": ["Sachsen"]
+	},
+	"DE-ST": {
+		"hashid": 17823492179474453441,
+		"names": ["Sachsen-Anhalt"]
+	},
+	"DE-TH": {
+		"hashid": 5512921328756895368,
+		"names": ["Thüringen"]
+	},
+	"DK-84": {
+		"hashid": 14695464582438295744,
+		"names": ["Hovedstaden"]
+	},
+	"DK-82": {
+		"hashid": 3180824788497675873,
+		"names": ["Midtjylland"]
+	},
+	"DK-81": {
+		"hashid": 6587282618310438224,
+		"names": ["Nordjylland"]
+	},
+	"DK-85": {
+		"hashid": 15380463672029119977,
+		"names": ["Sjælland"]
+	},
+	"DK-83": {
+		"hashid": 12361097487423467211,
+		"names": ["Syddanmark"]
+	},
+	"DO-03": {
+		"hashid": 10898163477123812698,
+		"names": []
+	},
+	"DO-33": {
+		"added": true,
+		"names": []
+	},
+	"DO-34": {
+		"added": true,
+		"names": []
+	},
+	"DO-35": {
+		"added": true,
+		"names": []
+	},
+	"DO-36": {
+		"added": true,
+		"names": []
+	},
+	"DO-01": {
+		"hashid": 2545951785960071624,
+		"names": ["Distrito Nacional"]
+	},
+	"DO-06": {
+		"hashid": 10552907223733560021,
+		"names": []
+	},
+	"DO-37": {
+		"added": true,
+		"names": []
+	},
+	"DO-07": {
+		"hashid": 10230849822333583155,
+		"names": []
+	},
+	"DO-38": {
+		"added": true,
+		"names": []
+	},
+	"DO-09": {
+		"hashid": 14548261186608404783,
+		"names": []
+	},
+	"DO-19": {
+		"hashid": 12655063999735625467,
+		"names": []
+	},
+	"DO-39": {
+		"added": true,
+		"names": []
+	},
+	"DO-10": {
+		"hashid": 4204623252710196221,
+		"names": []
+	},
+	"DO-11": {
+		"hashid": 17496805393458962437,
+		"names": []
+	},
+	"DO-28": {
+		"hashid": 6437022730056275695,
+		"names": []
+	},
+	"DO-40": {
+		"added": true,
+		"names": []
+	},
+	"DO-17": {
+		"hashid": 2037131853133885597,
+		"names": []
+	},
+	"DO-41": {
+		"added": true,
+		"names": []
+	},
+	"DO-27": {
+		"hashid": 14138765543379867363,
+		"names": []
+	},
+	"DO-42": {
+		"added": true,
+		"names": []
+	},
+	"EG-DK": {
+		"hashid": 9318628226602789107,
+		"names": ["Ad Daqahlīyah"]
+	},
+	"EG-BH": {
+		"hashid": 10557151971485804498,
+		"names": ["Al Buḥayrah"]
+	},
+	"EG-FYM": {
+		"hashid": 7240044506828043996,
+		"names": ["Al Fayyūm"]
+	},
+	"EG-GH": {
+		"hashid": 11368199509458151310,
+		"names": ["Al Gharbīyah"]
+	},
+	"EG-IS": {
+		"hashid": 12053722315705010735,
+		"names": ["Al Ismāʻīlīyah"]
+	},
+	"EG-MNF": {
+		"hashid": 7738599447646777811,
+		"names": ["Al Minūfīyah"]
+	},
+	"EG-KB": {
+		"hashid": 733095517075002237,
+		"names": ["Al Qalyūbīyah"]
+	},
+	"EG-SHR": {
+		"hashid": 13365197459742857616,
+		"names": ["Ash Sharqīyah"]
+	},
+	"EG-BNS": {
+		"hashid": 14486115580737868210,
+		"names": ["Banī Suwayf"]
+	},
+	"EG-KFS": {
+		"hashid": 5947396524261461379,
+		"names": ["Kafr ash Shaykh"]
+	},
+	"ER-SK": {
+		"hashid": 2839622781250076862,
+		"names": ["Semienawi Keyih Bahri"]
+	},
+	"ES-C": {
+		"hashid": 16663251777587820009,
+		"names": []
+	},
+	"ES-CL": {
+		"hashid": 515885370972376802,
+		"names": ["Castilla y León"]
+	},
+	"ES-CT": {
+		"hashid": 1724482950771920377,
+		"names": ["Catalunya"]
+	},
+	"ES-PV": {
+		"hashid": 6263351742782356773,
+		"names": ["Euskal Herria", "País Vasco"]
+	},
+	"ES-IB": {
+		"hashid": 10273630057322074318,
+		"names": ["Illes Balears"]
+	},
+	"ET-SW": {
+		"hashid": 12385432535360788755,
+		"names": ["Southwest Ethiopia Peoples"]
+	},
+	"FI-01": {
+		"added": true,
+		"names": ["Åland"]
+	},
+	"FI-19": {
+		"hashid": 6029943825149156179,
+		"names": ["Varsinais-Suomi", "Egentliga Finland"]
+	},
+	"FI-02": {
+		"hashid": 14213347715668903798,
+		"names": ["Etelä-Karjala", "Södra Karelen"]
+	},
+	"FI-03": {
+		"hashid": 7386778009856642809,
+		"names": ["Etelä-Pohjanmaa", "Södra Österbotten"]
+	},
+	"FI-04": {
+		"hashid": 7556312291482969511,
+		"names": ["Etelä-Savo", "Södra Savolax"]
+	},
+	"FI-07": {
+		"hashid": 18270890864754931112,
+		"names": ["Keski-Pohjanmaa", "Mellersta Österbotten"]
+	},
+	"FI-08": {
+		"hashid": 16859499639511552715,
+		"names": ["Keski-Suomi", "Mellersta Finland"]
+	},
+	"FI-13": {
+		"hashid": 1464986632952177745,
+		"names": ["Pohjois-Karjala", "Norra Karelen"]
+	},
+	"FI-15": {
+		"hashid": 12250652957173949327,
+		"names": ["Pohjois-Savo", "Norra Savolax"]
+	},
+	"FI-14": {
+		"hashid": 2425753874731096670,
+		"names": ["Pohjois-Pohjanmaa", "Norra Österbotten"]
+	},
+	"FI-12": {
+		"hashid": 17006021513674694543,
+		"names": ["Pohjanmaa", "Österbotten"]
+	},
+	"FR-6AE": {
+		"added": true,
+		"names": []
+	},
+	"FR-BRE": {
+		"hashid": 7840592450004425197,
+		"names": ["Bretagne"]
+	},
+	"FR-CP": {
+		"added": true,
+		"names": []
+	},
+	"FR-20R": {
+		"hashid": 7029890424806918353,
+		"names": ["Corse"]
+	},
+	"FR-2A": {
+		"hashid": 12156907213450421279,
+		"names": ["Corse-du-Sud"]
+	},
+	"FR-971": {
+		"added": true,
+		"names": []
+	},
+	"FR-973": {
+		"added": true,
+		"names": ["French Guiana"]
+	},
+	"FR-2B": {
+		"hashid": 1811162133395380813,
+		"names": ["Haute-Corse"]
+	},
+	"FR-31": {
+		"hashid": 15422762469903055286,
+		"names": ["Haute-Garonne"]
+	},
+	"FR-974": {
+		"added": true,
+		"names": ["Réunion"]
+	},
+	"FR-972": {
+		"added": true,
+		"names": []
+	},
+	"FR-976": {
+		"added": true,
+		"names": []
+	},
+	"FR-69M": {
+		"added": true,
+		"names": []
+	},
+	"FR-NAQ": {
+		"hashid": 2098146037107974944,
+		"names": ["Nouvelle-Aquitaine"]
+	},
+	"FR-NC": {
+		"added": true,
+		"names": ["New Caledonia"]
+	},
+	"FR-PF": {
+		"added": true,
+		"names": ["French Polynesia"]
+	},
+	"FR-BL": {
+		"added": true,
+		"names": ["Saint Barthélemy"]
+	},
+	"FR-MF": {
+		"added": true,
+		"names": []
+	},
+	"FR-PM": {
+		"added": true,
+		"names": ["Saint Pierre and Miquelon"]
+	},
+	"FR-TF": {
+		"added": true,
+		"names": ["French Southern and Antarctic Lands"]
+	},
+	"FR-WF": {
+		"added": true,
+		"names": ["Wallis and Futuna"]
+	},
+	"GB-BDG": {
+		"added": true,
+		"names": []
+	},
+	"GB-BNE": {
+		"added": true,
+		"names": []
+	},
+	"GB-BEX": {
+		"added": true,
+		"names": []
+	},
+	"GB-BEN": {
+		"added": true,
+		"names": []
+	},
+	"GB-BRY": {
+		"added": true,
+		"names": []
+	},
+	"GB-CMD": {
+		"added": true,
+		"names": []
+	},
+	"GB-CRY": {
+		"added": true,
+		"names": []
+	},
+	"GB-GRE": {
+		"added": true,
+		"names": []
+	},
+	"GB-HCK": {
+		"added": true,
+		"names": []
+	},
+	"GB-HMF": {
+		"added": true,
+		"names": []
+	},
+	"GB-HRY": {
+		"added": true,
+		"names": []
+	},
+	"GB-HRW": {
+		"added": true,
+		"names": []
+	},
+	"GB-HAV": {
+		"added": true,
+		"names": []
+	},
+	"GB-HIL": {
+		"added": true,
+		"names": []
+	},
+	"GB-HNS": {
+		"added": true,
+		"names": []
+	},
+	"GB-ISL": {
+		"added": true,
+		"names": []
+	},
+	"GB-KEC": {
+		"added": true,
+		"names": []
+	},
+	"GB-KTT": {
+		"added": true,
+		"names": []
+	},
+	"GB-LBH": {
+		"added": true,
+		"names": []
+	},
+	"GB-LEW": {
+		"added": true,
+		"names": []
+	},
+	"GB-MRT": {
+		"added": true,
+		"names": []
+	},
+	"GB-NWM": {
+		"added": true,
+		"names": []
+	},
+	"GB-RDB": {
+		"added": true,
+		"names": []
+	},
+	"GB-RIC": {
+		"added": true,
+		"names": []
+	},
+	"GB-SWK": {
+		"added": true,
+		"names": []
+	},
+	"GB-STN": {
+		"added": true,
+		"names": []
+	},
+	"GB-TWH": {
+		"added": true,
+		"names": []
+	},
+	"GB-WFT": {
+		"added": true,
+		"names": []
+	},
+	"GB-WND": {
+		"added": true,
+		"names": []
+	},
+	"GB-WSM": {
+		"added": true,
+		"names": []
+	},
+	"GQ-BN": {
+		"hashid": 3023793281405305766,
+		"names": []
+	},
+	"GQ-BS": {
+		"hashid": 17797878681589620323,
+		"names": []
+	},
+	"GQ-CS": {
+		"hashid": 11737113617557607118,
+		"names": []
+	},
+	"GQ-DJ": {
+		"hashid": 7336099691248937475,
+		"names": []
+	},
+	"GQ-KN": {
+		"hashid": 17905929667799451702,
+		"names": []
+	},
+	"GQ-LI": {
+		"hashid": 5879842871864002706,
+		"names": []
+	},
+	"GQ-C": {
+		"added": true,
+		"names": ["Región Continental", "Région Continentale"]
+	},
+	"GQ-I": {
+		"added": true,
+		"names": ["Región Insular", "Région Insulaire"]
+	},
+	"GQ-WN": {
+		"hashid": 1958570059220681696,
+		"names": []
+	},
+	"GR-A": {
+		"hashid": 1205156330726946481,
+		"names": ["Anatoliki Makedonia kai Thraki"]
+	},
+	"GR-I": {
+		"hashid": 13223891665784901235,
+		"names": ["Attiki"]
+	},
+	"GR-G": {
+		"hashid": 14847102287474261620,
+		"names": ["Dytiki Ellada"]
+	},
+	"GR-C": {
+		"hashid": 5728449947567529500,
+		"names": ["Dytiki Makedonia"]
+	},
+	"GR-F": {
+		"hashid": 9255607841537206187,
+		"names": ["Ionia Nisia"]
+	},
+	"GR-B": {
+		"hashid": 1728227864186137884,
+		"names": ["Kentriki Makedonia"]
+	},
+	"GR-M": {
+		"hashid": 17541537819736985722,
+		"names": ["Kriti"]
+	},
+	"GR-L": {
+		"hashid": 7697577093007225769,
+		"names": ["Notio Aigaio"]
+	},
+	"GR-J": {
+		"hashid": 7892918363463324032,
+		"names": ["Peloponnisos"]
+	},
+	"GR-H": {
+		"hashid": 15653771003529369246,
+		"names": ["Sterea Ellada"]
+	},
+	"GR-K": {
+		"hashid": 17649593875317055821,
+		"names": ["Voreio Aigaio"]
+	},
+	"GR-69": {
+		"hashid": 564268597855427151,
+		"names": ["Agion Oros"]
+	},
+	"GR-D": {
+		"hashid": 3041433102075313050,
+		"names": ["Ipeiros"]
+	},
+	"GW-BM": {
+		"hashid": 7106958541391228738,
+		"names": []
+	},
+	"GW-L": {
+		"added": true,
+		"names": []
+	},
+	"GW-N": {
+		"added": true,
+		"names": []
+	},
+	"GW-OI": {
+		"hashid": 15202394174908504040,
+		"names": []
+	},
+	"GW-QU": {
+		"hashid": 2307774773964476808,
+		"names": []
+	},
+	"GW-S": {
+		"added": true,
+		"names": []
+	},
+	"GW-TO": {
+		"hashid": 17552616587020259708,
+		"names": []
+	},
+	"HN-IB": {
+		"hashid": 1710350278707837977,
+		"names": []
+	},
+	"HR-07": {
+		"hashid": 6137860277085836514,
+		"names": ["Bjelovarsko-bilogorska zupanija"]
+	},
+	"HR-12": {
+		"hashid": 2462660711680687613,
+		"names": ["Brodsko-posavska zupanija"]
+	},
+	"HR-19": {
+		"hashid": 9831373956248052199,
+		"names": ["Dubrovacko-neretvanska zupanija"]
+	},
+	"HR-18": {
+		"hashid": 13593419230890173594,
+		"names": ["Istarska zupanija"]
+	},
+	"HR-04": {
+		"hashid": 7595259266207563253,
+		"names": ["Karlovacka zupanija"]
+	},
+	"HR-06": {
+		"hashid": 515303284250205483,
+		"names": ["Koprivnicko-krizevacka zupanija"]
+	},
+	"HR-02": {
+		"hashid": 9464094650309313369,
+		"names": ["Krapinsko-zagorska zupanija"]
+	},
+	"HR-09": {
+		"hashid": 15679379278698257234,
+		"names": ["Licko-senjska zupanija"]
+	},
+	"HR-20": {
+		"hashid": 7130259495444217249,
+		"names": ["Medimurska zupanija"]
+	},
+	"HR-14": {
+		"hashid": 17686476244825850176,
+		"names": ["Osjecko-baranjska zupanija"]
+	},
+	"HR-11": {
+		"hashid": 571633011816446691,
+		"names": ["Pozesko-slavonska zupanija"]
+	},
+	"HR-08": {
+		"hashid": 13393484788884074394,
+		"names": ["Primorsko-goranska zupanija"]
+	},
+	"HR-03": {
+		"hashid": 5373331629619585599,
+		"names": ["Sisacko-moslavacka zupanija"]
+	},
+	"HR-17": {
+		"hashid": 4728741655569437311,
+		"names": ["Splitsko-dalmatinska zupanija"]
+	},
+	"HR-05": {
+		"hashid": 6869589799992934814,
+		"names": ["Varazdinska zupanija"]
+	},
+	"HR-10": {
+		"hashid": 9115739172909847332,
+		"names": ["Viroviticko-podravska zupanija"]
+	},
+	"HR-16": {
+		"hashid": 9228354118196276891,
+		"names": ["Vukovarsko-srijemska zupanija"]
+	},
+	"HR-13": {
+		"hashid": 1075406954298904301,
+		"names": ["Zadarska zupanija"]
+	},
+	"HR-01": {
+		"hashid": 18165030935922230113,
+		"names": ["Zagrebacka zupanija"]
+	},
+	"HR-15": {
+		"hashid": 4924830280273446913,
+		"names": ["Sibensko-kninska zupanija"]
+	},
+	"HU-BC": {
+		"added": true,
+		"names": []
+	},
+	"HU-DE": {
+		"added": true,
+		"names": []
+	},
+	"HU-DU": {
+		"added": true,
+		"names": []
+	},
+	"HU-EG": {
+		"added": true,
+		"names": []
+	},
+	"HU-HV": {
+		"added": true,
+		"names": []
+	},
+	"HU-KV": {
+		"added": true,
+		"names": []
+	},
+	"HU-KM": {
+		"added": true,
+		"names": []
+	},
+	"HU-MI": {
+		"added": true,
+		"names": []
+	},
+	"HU-NK": {
+		"added": true,
+		"names": []
+	},
+	"HU-NY": {
+		"added": true,
+		"names": []
+	},
+	"HU-ST": {
+		"added": true,
+		"names": []
+	},
+	"HU-SD": {
+		"added": true,
+		"names": []
+	},
+	"HU-SS": {
+		"added": true,
+		"names": []
+	},
+	"HU-SH": {
+		"added": true,
+		"names": []
+	},
+	"HU-SF": {
+		"added": true,
+		"names": []
+	},
+	"HU-TB": {
+		"added": true,
+		"names": []
+	},
+	"HU-ZE": {
+		"added": true,
+		"names": []
+	},
+	"HU-ER": {
+		"added": true,
+		"names": []
+	},
+	"ID-BA": {
+		"hashid": 14437149475941329817,
+		"names": []
+	},
+	"ID-BT": {
+		"hashid": 16898327688087271583,
+		"names": []
+	},
+	"ID-JK": {
+		"hashid": 4695078975331386170,
+		"names": ["DKI Jakarta"]
+	},
+	"ID-JW": {
+		"added": true,
+		"names": []
+	},
+	"ID-JB": {
+		"hashid": 16251826661717728445,
+		"names": ["Jawa Barat"]
+	},
+	"ID-JT": {
+		"hashid": 5170221511504565878,
+		"names": ["Jawa Tengah"]
+	},
+	"ID-JI": {
+		"hashid": 16933184291865474393,
+		"names": ["Jawa Timur"]
+	},
+	"ID-KA": {
+		"added": true,
+		"names": []
+	},
+	"ID-KB": {
+		"hashid": 11473268994770462644,
+		"names": ["Kalimantan Barat"]
+	},
+	"ID-KS": {
+		"hashid": 10884306699022656519,
+		"names": ["Kalimantan Selatan"]
+	},
+	"ID-KT": {
+		"hashid": 9309806926450444053,
+		"names": ["Kalimantan Tengah"]
+	},
+	"ID-KI": {
+		"hashid": 2921321320579836663,
+		"names": ["Kalimantan Timur"]
+	}
 }
