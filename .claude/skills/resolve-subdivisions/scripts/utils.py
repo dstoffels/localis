@@ -115,7 +115,7 @@ def get_candidates(iso_code: str, return_all: bool = False) -> dict[int, str]:
     cutoff = _get_tier_size(len(candidates))
     candidates = candidates[cutoff:] if return_all else candidates[:cutoff]
 
-    return dict(_format_candidate(c) for c in candidates)
+    return dict(_format_candidate(c) for c in candidates if c.iso_code is None)
 
 
 def is_valid_candidate(iso_code: str, geo_sub_hashid: int) -> bool:

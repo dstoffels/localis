@@ -26,33 +26,37 @@ def merge_wikidata(countries: dict[str, CountryModel]):
         wiki_countries: list[dict[str, str]] = json.load(f)
 
         for row in wiki_countries:
-            alpha3: str = row.get("alpha3", "")
+            # alpha3: str = row.get("alpha3", "")
 
             # Skip partial data
-            if alpha3:
-                alpha2: str = row["alpha2"]
+            # if alpha3:
+            alpha2: str = row["alpha2"]
 
-                # create new if not in cache
-                if alpha2 not in countries:
-                    countries[alpha2] = CountryModel(
-                        alpha2=alpha2,
-                        alpha3=row.get("alpha3"),
-                        name=row.get("name"),
-                        numeric=None,
-                    )
+            # create new if not in cache
+            if alpha2 not in countries:
+                countries[alpha2] = CountryModel(
+                    id=len(countries) + 1,
+                    alpha2=alpha2,
+                    alpha3=row.get("alpha3", ""),
+                    name=row.get("name", ""),
+                    official_name=row.get("official_name", ""),
+                    numeric=None,
+                    aliases=[],
+                    flag=None,
+                )
 
-                country: CountryModel = countries.get(alpha2)
+            country: CountryModel = countries.get(alpha2)
 
-                # merge name
-                name: str = row.get("name", "")
-                if name and name.lower() not in [n.lower() for n in country.aliases]:
-                    country.aliases.append(name)
+            # merge name
+            name: str = row.get("name", "")
+            if name and name.lower() not in [n.lower() for n in country.aliases]:
+                country.aliases.append(name)
 
-                # merge validated alt names
-                aliases: list[str] = row.get("aliases", "").split("|")
-                for a in aliases:
-                    if is_valid_name(a, country):
-                        country.aliases.append(a)
+            # merge validated alt names
+            aliases: list[str] = row.get("aliases", "").split("|")
+            for a in aliases:
+                if is_valid_name(a, country):
+                    country.aliases.append(a)
 
 
 def merge_geonames(countries: dict[str, CountryModel]):
@@ -64,16 +68,23 @@ def merge_geonames(countries: dict[str, CountryModel]):
             parts = row.strip().split("\t")
             alpha2 = parts[0]
             alpha3 = parts[1]
+            numeric = parts[2]
             name = parts[4]
 
             country: CountryModel = countries.get(alpha2)
 
-            # skip mismatches
             if not country:
-                continue
-
-            # merge
-            country.alpha3 = alpha3
+                country = CountryModel(
+                    id=len(countries) + 1,
+                    alpha2=alpha2,
+                    alpha3=alpha3,
+                    numeric=numeric,
+                    name=name,
+                    official_name="",
+                    aliases=[],
+                    flag=None,
+                )
+                countries[alpha2] = country
 
             # add name if not duplicate
             if name and name.lower() not in [

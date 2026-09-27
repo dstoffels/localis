@@ -1,53 +1,272 @@
-[COUNTRIES] completed: 249 countries
-[SUBDIVISIONS] country not found: XK, skipping Ferizaj
-[SUBDIVISIONS] country not found: XK, skipping Gjakova
-[SUBDIVISIONS] country not found: XK, skipping Gjilan
-[SUBDIVISIONS] country not found: XK, skipping Mitrovica
-[SUBDIVISIONS] country not found: XK, skipping Pec
-[SUBDIVISIONS] country not found: XK, skipping Pristina
-[SUBDIVISIONS] country not found: XK, skipping Prizren
-[SUBDIVISIONS] country not found: XK, skipping Vushtrri
-[SUBDIVISIONS] country not found: XK, skipping Komuna e Vitisë
-[SUBDIVISIONS] country not found: XK, skipping Komuna e Ferizajt
-[SUBDIVISIONS] country not found: XK, skipping Komuna e Mitrovicës
-[SUBDIVISIONS] country not found: XK, skipping Komuna e Thërandës
-[SUBDIVISIONS] country not found: XK, skipping Komuna e Skenderajt
-[SUBDIVISIONS] country not found: XK, skipping Prizren
-[SUBDIVISIONS] country not found: XK, skipping Komuna e Prishtinës
-[SUBDIVISIONS] country not found: XK, skipping Podujevo
-[SUBDIVISIONS] country not found: XK, skipping Komuna e Pejës
-[SUBDIVISIONS] country not found: XK, skipping Orahovac
-[SUBDIVISIONS] country not found: XK, skipping Lipjan
-[SUBDIVISIONS] country not found: XK, skipping Komuna e Leposaviqit
-[SUBDIVISIONS] country not found: XK, skipping Kamenica
-[SUBDIVISIONS] country not found: XK, skipping Komuna e Klines
-[SUBDIVISIONS] country not found: XK, skipping Komuna e Kaçanikut
-[SUBDIVISIONS] country not found: XK, skipping Komuna e Istogut
-[SUBDIVISIONS] country not found: XK, skipping Komuna e Gjilanit
-[SUBDIVISIONS] country not found: XK, skipping Komuna e Drenasit
-[SUBDIVISIONS] country not found: XK, skipping Komuna e Dragashit
-[SUBDIVISIONS] country not found: XK, skipping Komuna e Deçanit
-[SUBDIVISIONS] country not found: XK, skipping Komuna e Gjakovës
-[SUBDIVISIONS] country not found: XK, skipping Kosovo Polje
-[SUBDIVISIONS] country not found: XK, skipping Opština Štrpce
-[SUBDIVISIONS] country not found: XK, skipping Komuna e Shtimes
-[SUBDIVISIONS] country not found: XK, skipping Novo Brdo
-[SUBDIVISIONS] country not found: XK, skipping Komuna e Obiliqit
-[SUBDIVISIONS] country not found: XK, skipping Komuna e Malisheves
-[SUBDIVISIONS] country not found: XK, skipping Komuna e Zubin Potokut
-[SUBDIVISIONS] country not found: XK, skipping Komuna e Zveçanit
-[SUBDIVISIONS] country not found: XK, skipping Komuna e Graçanicës
-[SUBDIVISIONS] country not found: XK, skipping Hani i Elezit
-[SUBDIVISIONS] country not found: XK, skipping Komuna e Junikut
-[SUBDIVISIONS] country not found: XK, skipping Komuna e Kllokotit
-[SUBDIVISIONS] country not found: XK, skipping Komuna e Mamushës
-[SUBDIVISIONS] country not found: XK, skipping Komuna e Parteshit
-[SUBDIVISIONS] country not found: XK, skipping Komuna e Ranillugut
-[SUBDIVISIONS] country not found: XK, skipping Mitrovica Veriore
+[COUNTRIES] completed: 254 countries
+[SUBDIVISIONS] orphaned iso subdivision: AM-VD (Vayoć Jor, Armenia) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: AT-2 (Kärnten, Austria) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: AT-3 (Niederösterreich, Austria) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: AT-4 (Oberösterreich, Austria) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: AT-6 (Steiermark, Austria) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: AT-9 (Wien, Austria) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: AZ-NX (Naxçıvan, Azerbaijan) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: AZ-NV (Naxçıvan, Azerbaijan) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: AZ-XCI (Xocalı, Azerbaijan) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: AZ-XVD (Xocavənd, Azerbaijan) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: BA-BIH (Federacija Bosne i Hercegovine, Bosnia and Herzegovina) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: BD-A (Barishal, Bangladesh) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: BD-22 (Jashore, Bangladesh) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: BE-BRU (Brussels Hoofdstedelijk Gewest, Belgium) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: BE-VLG (Vlaams Gewest, Belgium) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: BF-KMD (Komondjari, Burkina Faso) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: BF-KOS (Kossi, Burkina Faso) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: BF-LOR (Loroum, Burkina Faso) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: BF-SMT (Sanmatenga, Burkina Faso) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: BF-SOM (Soum, Burkina Faso) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: BF-TAP (Tapoa, Burkina Faso) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: BH-14 (Al Janūbīyah, Bahrain) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: BH-13 (Al ‘Āşimah, Bahrain) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: BH-17 (Ash Shamālīyah, Bahrain) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: BI-KR (Karuzi, Burundi) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: BI-MW (Mwaro, Burundi) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: BO-B (El Beni, Bolivia) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: BT-43 (Pema Gatshel, Bhutan) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: BW-SO (Southern, Botswana) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: BY-BR (Bresckaja voblasć, Belarus) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: BY-HO (Gomel'skaja oblast', Belarus) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: BY-MA (Mahilioŭskaja voblasć, Belarus) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: BZ-SC (Stann Creek, Belize) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: CD-BC (Kongo Central, Democratic Republic of the Congo) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: CD-NK (Nord-Kivu, Democratic Republic of the Congo) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: CD-SK (Sud-Kivu, Democratic Republic of the Congo) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: CF-KB (Gribingui, Central African Republic) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: CH-BS (Basel-Stadt, Switzerland) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: CH-GR (Graubünden, Switzerland) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: CN-MO (Aomen Tebiexingzhengqu, China) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: CN-HK (Hong Kong SAR, China) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: CN-NM (Nei Mongol Zizhiqu, China) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: CN-TW (Taiwan Sheng, China) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: CN-XZ (Xizang Zizhiqu, China) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: CO-DC (Distrito Capital de Bogotá, Colombia) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: CU-03 (La Habana, Cuba) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: CV-BV (Boa Vista, Cabo Verde) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: CV-BR (Brava, Cabo Verde) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: CV-B (Ilhas de Barlavento, Cabo Verde) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: CV-S (Ilhas de Sotavento, Cabo Verde) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: CV-MA (Maio, Cabo Verde) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: CV-MO (Mosteiros, Cabo Verde) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: CV-PA (Paul, Cabo Verde) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: CV-PN (Porto Novo, Cabo Verde) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: CV-PR (Praia, Cabo Verde) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: CV-RB (Ribeira Brava, Cabo Verde) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: CV-RG (Ribeira Grande, Cabo Verde) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: CV-RS (Ribeira Grande de Santiago, Cabo Verde) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: CV-SL (Sal, Cabo Verde) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: CV-CR (Santa Cruz, Cabo Verde) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: CV-SD (São Domingos, Cabo Verde) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: CV-SF (São Filipe, Cabo Verde) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: CV-SV (São Vicente, Cabo Verde) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: CV-TA (Tarrafal, Cabo Verde) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: CV-TS (Tarrafal de São Nicolau, Cabo Verde) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: CY-01 (Lefkosia, Cyprus) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: CY-02 (Lemesos, Cyprus) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: CZ-64 (Jihomoravský kraj, Czechia) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: CZ-31 (Jihočeský kraj, Czechia) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: CZ-41 (Karlovarský kraj, Czechia) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: CZ-52 (Královéhradecký kraj, Czechia) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: CZ-80 (Moravskoslezský kraj, Czechia) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: CZ-10 (Praha, Czechia) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: CZ-20 (Středočeský kraj, Czechia) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: CZ-72 (Zlínský kraj, Czechia) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: CZ-42 (Ústecký kraj, Czechia) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: DE-BY (Bayern, Germany) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: DE-NI (Niedersachsen, Germany) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: DE-NW (Nordrhein-Westfalen, Germany) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: DE-SN (Sachsen, Germany) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: DE-ST (Sachsen-Anhalt, Germany) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: DE-TH (Thüringen, Germany) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: DK-84 (Hovedstaden, Denmark) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: DK-82 (Midtjylland, Denmark) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: DK-81 (Nordjylland, Denmark) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: DK-85 (Sjælland, Denmark) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: DK-83 (Syddanmark, Denmark) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: DO-03 (Baoruco, Dominican Republic) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: DO-33 (Cibao Nordeste, Dominican Republic) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: DO-34 (Cibao Noroeste, Dominican Republic) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: DO-35 (Cibao Norte, Dominican Republic) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: DO-36 (Cibao Sur, Dominican Republic) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: DO-01 (Distrito Nacional, Dominican Republic) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: DO-06 (Duarte, Dominican Republic) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: DO-37 (El Valle, Dominican Republic) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: DO-07 (Elías Piña, Dominican Republic) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: DO-38 (Enriquillo, Dominican Republic) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: DO-09 (Espaillat, Dominican Republic) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: DO-19 (Hermanas Mirabal, Dominican Republic) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: DO-39 (Higuamo, Dominican Republic) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: DO-10 (Independencia, Dominican Republic) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: DO-11 (La Altagracia, Dominican Republic) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: DO-28 (Monseñor Nouel, Dominican Republic) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: DO-40 (Ozama, Dominican Republic) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: DO-17 (Peravia, Dominican Republic) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: DO-41 (Valdesia, Dominican Republic) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: DO-27 (Valverde, Dominican Republic) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: DO-42 (Yuma, Dominican Republic) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: EG-DK (Ad Daqahlīyah, Egypt) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: EG-BH (Al Buḩayrah, Egypt) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: EG-FYM (Al Fayyūm, Egypt) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: EG-GH (Al Gharbīyah, Egypt) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: EG-IS (Al Ismā'īlīyah, Egypt) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: EG-MNF (Al Minūfīyah, Egypt) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: EG-KB (Al Qalyūbīyah, Egypt) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: EG-SHR (Ash Sharqīyah, Egypt) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: EG-BNS (Banī Suwayf, Egypt) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: EG-KFS (Kafr ash Shaykh, Egypt) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: ER-SK (Semienawi K’eyyĭḥ Baḥri, Eritrea) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: ES-C (A Coruña, Spain) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: ES-CL (Castilla y León, Spain) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: ES-CT (Catalunya, Spain) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: ES-PV (Euskal Herria, Spain) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: ES-IB (Illes Balears, Spain) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: ET-SN (Southern Nations, Ethiopia) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: ET-SW (Southwest Ethiopia Peoples, Ethiopia) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: FI-01 (Ahvenanmaan maakunta, Finland) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: FI-19 (Egentliga Finland, Finland) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: FI-02 (Etelä-Karjala, Finland) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: FI-03 (Etelä-Pohjanmaa, Finland) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: FI-04 (Etelä-Savo, Finland) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: FI-07 (Keski-Pohjanmaa, Finland) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: FI-08 (Keski-Suomi, Finland) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: FI-13 (Norra Karelen, Finland) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: FI-15 (Norra Savolax, Finland) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: FI-14 (Norra Österbotten, Finland) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: FI-12 (Pohjanmaa, Finland) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: FR-6AE (Alsace, France) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: FR-BRE (Bretagne, France) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: FR-CP (Clipperton, France) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: FR-20R (Corse, France) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: FR-2A (Corse-du-Sud, France) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: FR-971 (Guadeloupe, France) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: FR-973 (Guyane, France) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: FR-2B (Haute-Corse, France) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: FR-31 (Haute-Garonne, France) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: FR-974 (La Réunion, France) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: FR-972 (Martinique, France) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: FR-976 (Mayotte, France) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: FR-69M (Métropole de Lyon, France) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: FR-NAQ (Nouvelle-Aquitaine, France) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: FR-NC (Nouvelle-Calédonie, France) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: FR-PF (Polynésie française, France) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: FR-BL (Saint-Barthélemy, France) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: FR-MF (Saint-Martin, France) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: FR-PM (Saint-Pierre-et-Miquelon, France) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: FR-TF (Terres australes françaises, France) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: FR-WF (Wallis-et-Futuna, France) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GB-BDG (Barking and Dagenham, United Kingdom) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GB-BNE (Barnet, United Kingdom) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GB-BEX (Bexley, United Kingdom) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GB-BEN (Brent, United Kingdom) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GB-BRY (Bromley, United Kingdom) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GB-CMD (Camden, United Kingdom) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GB-CRY (Croydon, United Kingdom) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GB-GRE (Greenwich, United Kingdom) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GB-HCK (Hackney, United Kingdom) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GB-HMF (Hammersmith and Fulham, United Kingdom) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GB-HRY (Haringey, United Kingdom) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GB-HRW (Harrow, United Kingdom) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GB-HAV (Havering, United Kingdom) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GB-HIL (Hillingdon, United Kingdom) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GB-HNS (Hounslow, United Kingdom) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GB-ISL (Islington, United Kingdom) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GB-KEC (Kensington and Chelsea, United Kingdom) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GB-KTT (Kingston upon Thames, United Kingdom) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GB-LBH (Lambeth, United Kingdom) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GB-LEW (Lewisham, United Kingdom) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GB-MRT (Merton, United Kingdom) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GB-NWM (Newham, United Kingdom) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GB-RDB (Redbridge, United Kingdom) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GB-RIC (Richmond upon Thames, United Kingdom) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GB-SWK (Southwark, United Kingdom) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GB-STN (Sutton, United Kingdom) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GB-TWH (Tower Hamlets, United Kingdom) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GB-WFT (Waltham Forest, United Kingdom) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GB-WND (Wandsworth, United Kingdom) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GB-WSM (Westminster, United Kingdom) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GQ-BN (Bioko Nord, Equatorial Guinea) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GQ-BS (Bioko Sud, Equatorial Guinea) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GQ-CS (Centro Sud, Equatorial Guinea) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GQ-DJ (Djibloho, Equatorial Guinea) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GQ-KN (Kié-Ntem, Equatorial Guinea) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GQ-LI (Litoral, Equatorial Guinea) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GQ-C (Região Continental, Equatorial Guinea) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GQ-I (Região Insular, Equatorial Guinea) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GQ-WN (Wele-Nzas, Equatorial Guinea) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GR-A (Anatolikí Makedonía kai Thráki, Greece) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GR-I (Attikí, Greece) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GR-G (Dytikí Elláda, Greece) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GR-C (Dytikí Makedonía, Greece) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GR-F (Ionía Nísia, Greece) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GR-B (Kentrikí Makedonía, Greece) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GR-M (Kríti, Greece) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GR-L (Nótio Aigaío, Greece) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GR-J (Pelopónnisos, Greece) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GR-H (Stereá Elláda, Greece) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GR-K (Vóreio Aigaío, Greece) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GR-69 (Ágion Óros, Greece) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GR-D (Ípeiros, Greece) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GW-BM (Biombo, Guinea-Bissau) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GW-L (Leste, Guinea-Bissau) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GW-N (Norte, Guinea-Bissau) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GW-OI (Oio, Guinea-Bissau) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GW-QU (Quinara, Guinea-Bissau) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GW-S (Sul, Guinea-Bissau) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: GW-TO (Tombali, Guinea-Bissau) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: HN-IB (Islas de la Bahía, Honduras) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: HR-07 (Bjelovarsko-bilogorska županija, Croatia) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: HR-12 (Brodsko-posavska županija, Croatia) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: HR-19 (Dubrovačko-neretvanska županija, Croatia) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: HR-18 (Istarska županija, Croatia) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: HR-04 (Karlovačka županija, Croatia) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: HR-06 (Koprivničko-križevačka županija, Croatia) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: HR-02 (Krapinsko-zagorska županija, Croatia) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: HR-09 (Ličko-senjska županija, Croatia) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: HR-20 (Međimurska županija, Croatia) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: HR-14 (Osječko-baranjska županija, Croatia) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: HR-11 (Požeško-slavonska županija, Croatia) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: HR-08 (Primorsko-goranska županija, Croatia) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: HR-03 (Sisačko-moslavačka županija, Croatia) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: HR-17 (Splitsko-dalmatinska županija, Croatia) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: HR-05 (Varaždinska županija, Croatia) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: HR-10 (Virovitičko-podravska županija, Croatia) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: HR-16 (Vukovarsko-srijemska županija, Croatia) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: HR-13 (Zadarska županija, Croatia) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: HR-01 (Zagrebačka županija, Croatia) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: HR-15 (Šibensko-kninska županija, Croatia) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: HU-BC (Békéscsaba, Hungary) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: HU-DE (Debrecen, Hungary) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: HU-DU (Dunaújváros, Hungary) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: HU-EG (Eger, Hungary) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: HU-HV (Hódmezővásárhely, Hungary) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: HU-KV (Kaposvár, Hungary) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: HU-KM (Kecskemét, Hungary) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: HU-MI (Miskolc, Hungary) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: HU-NK (Nagykanizsa, Hungary) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: HU-NY (Nyíregyháza, Hungary) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: HU-ST (Salgótarján, Hungary) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: HU-SD (Szeged, Hungary) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: HU-SS (Szekszárd, Hungary) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: HU-SH (Szombathely, Hungary) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: HU-SF (Székesfehérvár, Hungary) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: HU-TB (Tatabánya, Hungary) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: HU-ZE (Zalaegerszeg, Hungary) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: HU-ER (Érd, Hungary) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: ID-BA (Bali, Indonesia) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: ID-BT (Banten, Indonesia) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: ID-JK (Jakarta Raya, Indonesia) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: ID-JW (Jawa, Indonesia) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: ID-JB (Jawa Barat, Indonesia) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: ID-JT (Jawa Tengah, Indonesia) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: ID-JI (Jawa Timur, Indonesia) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: ID-KA (Kalimantan, Indonesia) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: ID-KB (Kalimantan Barat, Indonesia) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: ID-KS (Kalimantan Selatan, Indonesia) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: ID-KT (Kalimantan Tengah, Indonesia) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: ID-KI (Kalimantan Timur, Indonesia) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: ID-KU (Kalimantan Utara, Indonesia) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: ID-BB (Kepulauan Bangka Belitung, Indonesia) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: ID-KR (Kepulauan Riau, Indonesia) requires manual resolution against GeoNames counterparts.
@@ -482,633 +701,3 @@
 [SUBDIVISIONS] orphaned iso subdivision: YE-SN (Şanʻā’, Yemen) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: YE-SD (Şāʻdah, Yemen) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: YE-HD (Ḩaḑramawt, Yemen) requires manual resolution against GeoNames counterparts.
-[] country not found: XK, skipping Ferizaj
-[] country not found: XK, skipping Gjakova
-[] country not found: XK, skipping Gjilan
-[] country not found: XK, skipping Mitrovica
-[] country not found: XK, skipping Pec
-[] country not found: XK, skipping Pristina
-[] country not found: XK, skipping Prizren
-[] country not found: XK, skipping Vushtrri
-[] country not found: XK, skipping Komuna e Vitisë
-[] country not found: XK, skipping Komuna e Ferizajt
-[] country not found: XK, skipping Komuna e Mitrovicës
-[] country not found: XK, skipping Komuna e Thërandës
-[] country not found: XK, skipping Komuna e Skenderajt
-[] country not found: XK, skipping Prizren
-[] country not found: XK, skipping Komuna e Prishtinës
-[] country not found: XK, skipping Podujevo
-[] country not found: XK, skipping Komuna e Pejës
-[] country not found: XK, skipping Orahovac
-[] country not found: XK, skipping Lipjan
-[] country not found: XK, skipping Komuna e Leposaviqit
-[] country not found: XK, skipping Kamenica
-[] country not found: XK, skipping Komuna e Klines
-[] country not found: XK, skipping Komuna e Kaçanikut
-[] country not found: XK, skipping Komuna e Istogut
-[] country not found: XK, skipping Komuna e Gjilanit
-[] country not found: XK, skipping Komuna e Drenasit
-[] country not found: XK, skipping Komuna e Dragashit
-[] country not found: XK, skipping Komuna e Deçanit
-[] country not found: XK, skipping Komuna e Gjakovës
-[] country not found: XK, skipping Kosovo Polje
-[] country not found: XK, skipping Opština Štrpce
-[] country not found: XK, skipping Komuna e Shtimes
-[] country not found: XK, skipping Novo Brdo
-[] country not found: XK, skipping Komuna e Obiliqit
-[] country not found: XK, skipping Komuna e Malisheves
-[] country not found: XK, skipping Komuna e Zubin Potokut
-[] country not found: XK, skipping Komuna e Zveçanit
-[] country not found: XK, skipping Komuna e Graçanicës
-[] country not found: XK, skipping Hani i Elezit
-[] country not found: XK, skipping Komuna e Junikut
-[] country not found: XK, skipping Komuna e Kllokotit
-[] country not found: XK, skipping Komuna e Mamushës
-[] country not found: XK, skipping Komuna e Parteshit
-[] country not found: XK, skipping Komuna e Ranillugut
-[] country not found: XK, skipping Mitrovica Veriore
-[] country not found: XK, skipping Ferizaj
-[] country not found: XK, skipping Gjakova
-[] country not found: XK, skipping Gjilan
-[] country not found: XK, skipping Mitrovica
-[] country not found: XK, skipping Pec
-[] country not found: XK, skipping Pristina
-[] country not found: XK, skipping Prizren
-[] country not found: XK, skipping Vushtrri
-[] country not found: XK, skipping Komuna e Vitisë
-[] country not found: XK, skipping Komuna e Ferizajt
-[] country not found: XK, skipping Komuna e Mitrovicës
-[] country not found: XK, skipping Komuna e Thërandës
-[] country not found: XK, skipping Komuna e Skenderajt
-[] country not found: XK, skipping Prizren
-[] country not found: XK, skipping Komuna e Prishtinës
-[] country not found: XK, skipping Podujevo
-[] country not found: XK, skipping Komuna e Pejës
-[] country not found: XK, skipping Orahovac
-[] country not found: XK, skipping Lipjan
-[] country not found: XK, skipping Komuna e Leposaviqit
-[] country not found: XK, skipping Kamenica
-[] country not found: XK, skipping Komuna e Klines
-[] country not found: XK, skipping Komuna e Kaçanikut
-[] country not found: XK, skipping Komuna e Istogut
-[] country not found: XK, skipping Komuna e Gjilanit
-[] country not found: XK, skipping Komuna e Drenasit
-[] country not found: XK, skipping Komuna e Dragashit
-[] country not found: XK, skipping Komuna e Deçanit
-[] country not found: XK, skipping Komuna e Gjakovës
-[] country not found: XK, skipping Kosovo Polje
-[] country not found: XK, skipping Opština Štrpce
-[] country not found: XK, skipping Komuna e Shtimes
-[] country not found: XK, skipping Novo Brdo
-[] country not found: XK, skipping Komuna e Obiliqit
-[] country not found: XK, skipping Komuna e Malisheves
-[] country not found: XK, skipping Komuna e Zubin Potokut
-[] country not found: XK, skipping Komuna e Zveçanit
-[] country not found: XK, skipping Komuna e Graçanicës
-[] country not found: XK, skipping Hani i Elezit
-[] country not found: XK, skipping Komuna e Junikut
-[] country not found: XK, skipping Komuna e Kllokotit
-[] country not found: XK, skipping Komuna e Mamushës
-[] country not found: XK, skipping Komuna e Parteshit
-[] country not found: XK, skipping Komuna e Ranillugut
-[] country not found: XK, skipping Mitrovica Veriore
-[] country not found: XK, skipping Ferizaj
-[] country not found: XK, skipping Gjakova
-[] country not found: XK, skipping Gjilan
-[] country not found: XK, skipping Mitrovica
-[] country not found: XK, skipping Pec
-[] country not found: XK, skipping Pristina
-[] country not found: XK, skipping Prizren
-[] country not found: XK, skipping Vushtrri
-[] country not found: XK, skipping Komuna e Vitisë
-[] country not found: XK, skipping Komuna e Ferizajt
-[] country not found: XK, skipping Komuna e Mitrovicës
-[] country not found: XK, skipping Komuna e Thërandës
-[] country not found: XK, skipping Komuna e Skenderajt
-[] country not found: XK, skipping Prizren
-[] country not found: XK, skipping Komuna e Prishtinës
-[] country not found: XK, skipping Podujevo
-[] country not found: XK, skipping Komuna e Pejës
-[] country not found: XK, skipping Orahovac
-[] country not found: XK, skipping Lipjan
-[] country not found: XK, skipping Komuna e Leposaviqit
-[] country not found: XK, skipping Kamenica
-[] country not found: XK, skipping Komuna e Klines
-[] country not found: XK, skipping Komuna e Kaçanikut
-[] country not found: XK, skipping Komuna e Istogut
-[] country not found: XK, skipping Komuna e Gjilanit
-[] country not found: XK, skipping Komuna e Drenasit
-[] country not found: XK, skipping Komuna e Dragashit
-[] country not found: XK, skipping Komuna e Deçanit
-[] country not found: XK, skipping Komuna e Gjakovës
-[] country not found: XK, skipping Kosovo Polje
-[] country not found: XK, skipping Opština Štrpce
-[] country not found: XK, skipping Komuna e Shtimes
-[] country not found: XK, skipping Novo Brdo
-[] country not found: XK, skipping Komuna e Obiliqit
-[] country not found: XK, skipping Komuna e Malisheves
-[] country not found: XK, skipping Komuna e Zubin Potokut
-[] country not found: XK, skipping Komuna e Zveçanit
-[] country not found: XK, skipping Komuna e Graçanicës
-[] country not found: XK, skipping Hani i Elezit
-[] country not found: XK, skipping Komuna e Junikut
-[] country not found: XK, skipping Komuna e Kllokotit
-[] country not found: XK, skipping Komuna e Mamushës
-[] country not found: XK, skipping Komuna e Parteshit
-[] country not found: XK, skipping Komuna e Ranillugut
-[] country not found: XK, skipping Mitrovica Veriore
-[] country not found: XK, skipping Ferizaj
-[] country not found: XK, skipping Gjakova
-[] country not found: XK, skipping Gjilan
-[] country not found: XK, skipping Mitrovica
-[] country not found: XK, skipping Pec
-[] country not found: XK, skipping Pristina
-[] country not found: XK, skipping Prizren
-[] country not found: XK, skipping Vushtrri
-[] country not found: XK, skipping Komuna e Vitisë
-[] country not found: XK, skipping Komuna e Ferizajt
-[] country not found: XK, skipping Komuna e Mitrovicës
-[] country not found: XK, skipping Komuna e Thërandës
-[] country not found: XK, skipping Komuna e Skenderajt
-[] country not found: XK, skipping Prizren
-[] country not found: XK, skipping Komuna e Prishtinës
-[] country not found: XK, skipping Podujevo
-[] country not found: XK, skipping Komuna e Pejës
-[] country not found: XK, skipping Orahovac
-[] country not found: XK, skipping Lipjan
-[] country not found: XK, skipping Komuna e Leposaviqit
-[] country not found: XK, skipping Kamenica
-[] country not found: XK, skipping Komuna e Klines
-[] country not found: XK, skipping Komuna e Kaçanikut
-[] country not found: XK, skipping Komuna e Istogut
-[] country not found: XK, skipping Komuna e Gjilanit
-[] country not found: XK, skipping Komuna e Drenasit
-[] country not found: XK, skipping Komuna e Dragashit
-[] country not found: XK, skipping Komuna e Deçanit
-[] country not found: XK, skipping Komuna e Gjakovës
-[] country not found: XK, skipping Kosovo Polje
-[] country not found: XK, skipping Opština Štrpce
-[] country not found: XK, skipping Komuna e Shtimes
-[] country not found: XK, skipping Novo Brdo
-[] country not found: XK, skipping Komuna e Obiliqit
-[] country not found: XK, skipping Komuna e Malisheves
-[] country not found: XK, skipping Komuna e Zubin Potokut
-[] country not found: XK, skipping Komuna e Zveçanit
-[] country not found: XK, skipping Komuna e Graçanicës
-[] country not found: XK, skipping Hani i Elezit
-[] country not found: XK, skipping Komuna e Junikut
-[] country not found: XK, skipping Komuna e Kllokotit
-[] country not found: XK, skipping Komuna e Mamushës
-[] country not found: XK, skipping Komuna e Parteshit
-[] country not found: XK, skipping Komuna e Ranillugut
-[] country not found: XK, skipping Mitrovica Veriore
-[] country not found: XK, skipping Ferizaj
-[] country not found: XK, skipping Gjakova
-[] country not found: XK, skipping Gjilan
-[] country not found: XK, skipping Mitrovica
-[] country not found: XK, skipping Pec
-[] country not found: XK, skipping Pristina
-[] country not found: XK, skipping Prizren
-[] country not found: XK, skipping Vushtrri
-[] country not found: XK, skipping Komuna e Vitisë
-[] country not found: XK, skipping Komuna e Ferizajt
-[] country not found: XK, skipping Komuna e Mitrovicës
-[] country not found: XK, skipping Komuna e Thërandës
-[] country not found: XK, skipping Komuna e Skenderajt
-[] country not found: XK, skipping Prizren
-[] country not found: XK, skipping Komuna e Prishtinës
-[] country not found: XK, skipping Podujevo
-[] country not found: XK, skipping Komuna e Pejës
-[] country not found: XK, skipping Orahovac
-[] country not found: XK, skipping Lipjan
-[] country not found: XK, skipping Komuna e Leposaviqit
-[] country not found: XK, skipping Kamenica
-[] country not found: XK, skipping Komuna e Klines
-[] country not found: XK, skipping Komuna e Kaçanikut
-[] country not found: XK, skipping Komuna e Istogut
-[] country not found: XK, skipping Komuna e Gjilanit
-[] country not found: XK, skipping Komuna e Drenasit
-[] country not found: XK, skipping Komuna e Dragashit
-[] country not found: XK, skipping Komuna e Deçanit
-[] country not found: XK, skipping Komuna e Gjakovës
-[] country not found: XK, skipping Kosovo Polje
-[] country not found: XK, skipping Opština Štrpce
-[] country not found: XK, skipping Komuna e Shtimes
-[] country not found: XK, skipping Novo Brdo
-[] country not found: XK, skipping Komuna e Obiliqit
-[] country not found: XK, skipping Komuna e Malisheves
-[] country not found: XK, skipping Komuna e Zubin Potokut
-[] country not found: XK, skipping Komuna e Zveçanit
-[] country not found: XK, skipping Komuna e Graçanicës
-[] country not found: XK, skipping Hani i Elezit
-[] country not found: XK, skipping Komuna e Junikut
-[] country not found: XK, skipping Komuna e Kllokotit
-[] country not found: XK, skipping Komuna e Mamushës
-[] country not found: XK, skipping Komuna e Parteshit
-[] country not found: XK, skipping Komuna e Ranillugut
-[] country not found: XK, skipping Mitrovica Veriore
-[] country not found: XK, skipping Ferizaj
-[] country not found: XK, skipping Gjakova
-[] country not found: XK, skipping Gjilan
-[] country not found: XK, skipping Mitrovica
-[] country not found: XK, skipping Pec
-[] country not found: XK, skipping Pristina
-[] country not found: XK, skipping Prizren
-[] country not found: XK, skipping Vushtrri
-[] country not found: XK, skipping Komuna e Vitisë
-[] country not found: XK, skipping Komuna e Ferizajt
-[] country not found: XK, skipping Komuna e Mitrovicës
-[] country not found: XK, skipping Komuna e Thërandës
-[] country not found: XK, skipping Komuna e Skenderajt
-[] country not found: XK, skipping Prizren
-[] country not found: XK, skipping Komuna e Prishtinës
-[] country not found: XK, skipping Podujevo
-[] country not found: XK, skipping Komuna e Pejës
-[] country not found: XK, skipping Orahovac
-[] country not found: XK, skipping Lipjan
-[] country not found: XK, skipping Komuna e Leposaviqit
-[] country not found: XK, skipping Kamenica
-[] country not found: XK, skipping Komuna e Klines
-[] country not found: XK, skipping Komuna e Kaçanikut
-[] country not found: XK, skipping Komuna e Istogut
-[] country not found: XK, skipping Komuna e Gjilanit
-[] country not found: XK, skipping Komuna e Drenasit
-[] country not found: XK, skipping Komuna e Dragashit
-[] country not found: XK, skipping Komuna e Deçanit
-[] country not found: XK, skipping Komuna e Gjakovës
-[] country not found: XK, skipping Kosovo Polje
-[] country not found: XK, skipping Opština Štrpce
-[] country not found: XK, skipping Komuna e Shtimes
-[] country not found: XK, skipping Novo Brdo
-[] country not found: XK, skipping Komuna e Obiliqit
-[] country not found: XK, skipping Komuna e Malisheves
-[] country not found: XK, skipping Komuna e Zubin Potokut
-[] country not found: XK, skipping Komuna e Zveçanit
-[] country not found: XK, skipping Komuna e Graçanicës
-[] country not found: XK, skipping Hani i Elezit
-[] country not found: XK, skipping Komuna e Junikut
-[] country not found: XK, skipping Komuna e Kllokotit
-[] country not found: XK, skipping Komuna e Mamushës
-[] country not found: XK, skipping Komuna e Parteshit
-[] country not found: XK, skipping Komuna e Ranillugut
-[] country not found: XK, skipping Mitrovica Veriore
-[] country not found: XK, skipping Ferizaj
-[] country not found: XK, skipping Gjakova
-[] country not found: XK, skipping Gjilan
-[] country not found: XK, skipping Mitrovica
-[] country not found: XK, skipping Pec
-[] country not found: XK, skipping Pristina
-[] country not found: XK, skipping Prizren
-[] country not found: XK, skipping Vushtrri
-[] country not found: XK, skipping Komuna e Vitisë
-[] country not found: XK, skipping Komuna e Ferizajt
-[] country not found: XK, skipping Komuna e Mitrovicës
-[] country not found: XK, skipping Komuna e Thërandës
-[] country not found: XK, skipping Komuna e Skenderajt
-[] country not found: XK, skipping Prizren
-[] country not found: XK, skipping Komuna e Prishtinës
-[] country not found: XK, skipping Podujevo
-[] country not found: XK, skipping Komuna e Pejës
-[] country not found: XK, skipping Orahovac
-[] country not found: XK, skipping Lipjan
-[] country not found: XK, skipping Komuna e Leposaviqit
-[] country not found: XK, skipping Kamenica
-[] country not found: XK, skipping Komuna e Klines
-[] country not found: XK, skipping Komuna e Kaçanikut
-[] country not found: XK, skipping Komuna e Istogut
-[] country not found: XK, skipping Komuna e Gjilanit
-[] country not found: XK, skipping Komuna e Drenasit
-[] country not found: XK, skipping Komuna e Dragashit
-[] country not found: XK, skipping Komuna e Deçanit
-[] country not found: XK, skipping Komuna e Gjakovës
-[] country not found: XK, skipping Kosovo Polje
-[] country not found: XK, skipping Opština Štrpce
-[] country not found: XK, skipping Komuna e Shtimes
-[] country not found: XK, skipping Novo Brdo
-[] country not found: XK, skipping Komuna e Obiliqit
-[] country not found: XK, skipping Komuna e Malisheves
-[] country not found: XK, skipping Komuna e Zubin Potokut
-[] country not found: XK, skipping Komuna e Zveçanit
-[] country not found: XK, skipping Komuna e Graçanicës
-[] country not found: XK, skipping Hani i Elezit
-[] country not found: XK, skipping Komuna e Junikut
-[] country not found: XK, skipping Komuna e Kllokotit
-[] country not found: XK, skipping Komuna e Mamushës
-[] country not found: XK, skipping Komuna e Parteshit
-[] country not found: XK, skipping Komuna e Ranillugut
-[] country not found: XK, skipping Mitrovica Veriore
-[] country not found: XK, skipping Ferizaj
-[] country not found: XK, skipping Gjakova
-[] country not found: XK, skipping Gjilan
-[] country not found: XK, skipping Mitrovica
-[] country not found: XK, skipping Pec
-[] country not found: XK, skipping Pristina
-[] country not found: XK, skipping Prizren
-[] country not found: XK, skipping Vushtrri
-[] country not found: XK, skipping Komuna e Vitisë
-[] country not found: XK, skipping Komuna e Ferizajt
-[] country not found: XK, skipping Komuna e Mitrovicës
-[] country not found: XK, skipping Komuna e Thërandës
-[] country not found: XK, skipping Komuna e Skenderajt
-[] country not found: XK, skipping Prizren
-[] country not found: XK, skipping Komuna e Prishtinës
-[] country not found: XK, skipping Podujevo
-[] country not found: XK, skipping Komuna e Pejës
-[] country not found: XK, skipping Orahovac
-[] country not found: XK, skipping Lipjan
-[] country not found: XK, skipping Komuna e Leposaviqit
-[] country not found: XK, skipping Kamenica
-[] country not found: XK, skipping Komuna e Klines
-[] country not found: XK, skipping Komuna e Kaçanikut
-[] country not found: XK, skipping Komuna e Istogut
-[] country not found: XK, skipping Komuna e Gjilanit
-[] country not found: XK, skipping Komuna e Drenasit
-[] country not found: XK, skipping Komuna e Dragashit
-[] country not found: XK, skipping Komuna e Deçanit
-[] country not found: XK, skipping Komuna e Gjakovës
-[] country not found: XK, skipping Kosovo Polje
-[] country not found: XK, skipping Opština Štrpce
-[] country not found: XK, skipping Komuna e Shtimes
-[] country not found: XK, skipping Novo Brdo
-[] country not found: XK, skipping Komuna e Obiliqit
-[] country not found: XK, skipping Komuna e Malisheves
-[] country not found: XK, skipping Komuna e Zubin Potokut
-[] country not found: XK, skipping Komuna e Zveçanit
-[] country not found: XK, skipping Komuna e Graçanicës
-[] country not found: XK, skipping Hani i Elezit
-[] country not found: XK, skipping Komuna e Junikut
-[] country not found: XK, skipping Komuna e Kllokotit
-[] country not found: XK, skipping Komuna e Mamushës
-[] country not found: XK, skipping Komuna e Parteshit
-[] country not found: XK, skipping Komuna e Ranillugut
-[] country not found: XK, skipping Mitrovica Veriore
-[] country not found: XK, skipping Ferizaj
-[] country not found: XK, skipping Gjakova
-[] country not found: XK, skipping Gjilan
-[] country not found: XK, skipping Mitrovica
-[] country not found: XK, skipping Pec
-[] country not found: XK, skipping Pristina
-[] country not found: XK, skipping Prizren
-[] country not found: XK, skipping Vushtrri
-[] country not found: XK, skipping Komuna e Vitisë
-[] country not found: XK, skipping Komuna e Ferizajt
-[] country not found: XK, skipping Komuna e Mitrovicës
-[] country not found: XK, skipping Komuna e Thërandës
-[] country not found: XK, skipping Komuna e Skenderajt
-[] country not found: XK, skipping Prizren
-[] country not found: XK, skipping Komuna e Prishtinës
-[] country not found: XK, skipping Podujevo
-[] country not found: XK, skipping Komuna e Pejës
-[] country not found: XK, skipping Orahovac
-[] country not found: XK, skipping Lipjan
-[] country not found: XK, skipping Komuna e Leposaviqit
-[] country not found: XK, skipping Kamenica
-[] country not found: XK, skipping Komuna e Klines
-[] country not found: XK, skipping Komuna e Kaçanikut
-[] country not found: XK, skipping Komuna e Istogut
-[] country not found: XK, skipping Komuna e Gjilanit
-[] country not found: XK, skipping Komuna e Drenasit
-[] country not found: XK, skipping Komuna e Dragashit
-[] country not found: XK, skipping Komuna e Deçanit
-[] country not found: XK, skipping Komuna e Gjakovës
-[] country not found: XK, skipping Kosovo Polje
-[] country not found: XK, skipping Opština Štrpce
-[] country not found: XK, skipping Komuna e Shtimes
-[] country not found: XK, skipping Novo Brdo
-[] country not found: XK, skipping Komuna e Obiliqit
-[] country not found: XK, skipping Komuna e Malisheves
-[] country not found: XK, skipping Komuna e Zubin Potokut
-[] country not found: XK, skipping Komuna e Zveçanit
-[] country not found: XK, skipping Komuna e Graçanicës
-[] country not found: XK, skipping Hani i Elezit
-[] country not found: XK, skipping Komuna e Junikut
-[] country not found: XK, skipping Komuna e Kllokotit
-[] country not found: XK, skipping Komuna e Mamushës
-[] country not found: XK, skipping Komuna e Parteshit
-[] country not found: XK, skipping Komuna e Ranillugut
-[] country not found: XK, skipping Mitrovica Veriore
-[] country not found: XK, skipping Ferizaj
-[] country not found: XK, skipping Gjakova
-[] country not found: XK, skipping Gjilan
-[] country not found: XK, skipping Mitrovica
-[] country not found: XK, skipping Pec
-[] country not found: XK, skipping Pristina
-[] country not found: XK, skipping Prizren
-[] country not found: XK, skipping Vushtrri
-[] country not found: XK, skipping Komuna e Vitisë
-[] country not found: XK, skipping Komuna e Ferizajt
-[] country not found: XK, skipping Komuna e Mitrovicës
-[] country not found: XK, skipping Komuna e Thërandës
-[] country not found: XK, skipping Komuna e Skenderajt
-[] country not found: XK, skipping Prizren
-[] country not found: XK, skipping Komuna e Prishtinës
-[] country not found: XK, skipping Podujevo
-[] country not found: XK, skipping Komuna e Pejës
-[] country not found: XK, skipping Orahovac
-[] country not found: XK, skipping Lipjan
-[] country not found: XK, skipping Komuna e Leposaviqit
-[] country not found: XK, skipping Kamenica
-[] country not found: XK, skipping Komuna e Klines
-[] country not found: XK, skipping Komuna e Kaçanikut
-[] country not found: XK, skipping Komuna e Istogut
-[] country not found: XK, skipping Komuna e Gjilanit
-[] country not found: XK, skipping Komuna e Drenasit
-[] country not found: XK, skipping Komuna e Dragashit
-[] country not found: XK, skipping Komuna e Deçanit
-[] country not found: XK, skipping Komuna e Gjakovës
-[] country not found: XK, skipping Kosovo Polje
-[] country not found: XK, skipping Opština Štrpce
-[] country not found: XK, skipping Komuna e Shtimes
-[] country not found: XK, skipping Novo Brdo
-[] country not found: XK, skipping Komuna e Obiliqit
-[] country not found: XK, skipping Komuna e Malisheves
-[] country not found: XK, skipping Komuna e Zubin Potokut
-[] country not found: XK, skipping Komuna e Zveçanit
-[] country not found: XK, skipping Komuna e Graçanicës
-[] country not found: XK, skipping Hani i Elezit
-[] country not found: XK, skipping Komuna e Junikut
-[] country not found: XK, skipping Komuna e Kllokotit
-[] country not found: XK, skipping Komuna e Mamushës
-[] country not found: XK, skipping Komuna e Parteshit
-[] country not found: XK, skipping Komuna e Ranillugut
-[] country not found: XK, skipping Mitrovica Veriore
-[] country not found: XK, skipping Ferizaj
-[] country not found: XK, skipping Gjakova
-[] country not found: XK, skipping Gjilan
-[] country not found: XK, skipping Mitrovica
-[] country not found: XK, skipping Pec
-[] country not found: XK, skipping Pristina
-[] country not found: XK, skipping Prizren
-[] country not found: XK, skipping Vushtrri
-[] country not found: XK, skipping Komuna e Vitisë
-[] country not found: XK, skipping Komuna e Ferizajt
-[] country not found: XK, skipping Komuna e Mitrovicës
-[] country not found: XK, skipping Komuna e Thërandës
-[] country not found: XK, skipping Komuna e Skenderajt
-[] country not found: XK, skipping Prizren
-[] country not found: XK, skipping Komuna e Prishtinës
-[] country not found: XK, skipping Podujevo
-[] country not found: XK, skipping Komuna e Pejës
-[] country not found: XK, skipping Orahovac
-[] country not found: XK, skipping Lipjan
-[] country not found: XK, skipping Komuna e Leposaviqit
-[] country not found: XK, skipping Kamenica
-[] country not found: XK, skipping Komuna e Klines
-[] country not found: XK, skipping Komuna e Kaçanikut
-[] country not found: XK, skipping Komuna e Istogut
-[] country not found: XK, skipping Komuna e Gjilanit
-[] country not found: XK, skipping Komuna e Drenasit
-[] country not found: XK, skipping Komuna e Dragashit
-[] country not found: XK, skipping Komuna e Deçanit
-[] country not found: XK, skipping Komuna e Gjakovës
-[] country not found: XK, skipping Kosovo Polje
-[] country not found: XK, skipping Opština Štrpce
-[] country not found: XK, skipping Komuna e Shtimes
-[] country not found: XK, skipping Novo Brdo
-[] country not found: XK, skipping Komuna e Obiliqit
-[] country not found: XK, skipping Komuna e Malisheves
-[] country not found: XK, skipping Komuna e Zubin Potokut
-[] country not found: XK, skipping Komuna e Zveçanit
-[] country not found: XK, skipping Komuna e Graçanicës
-[] country not found: XK, skipping Hani i Elezit
-[] country not found: XK, skipping Komuna e Junikut
-[] country not found: XK, skipping Komuna e Kllokotit
-[] country not found: XK, skipping Komuna e Mamushës
-[] country not found: XK, skipping Komuna e Parteshit
-[] country not found: XK, skipping Komuna e Ranillugut
-[] country not found: XK, skipping Mitrovica Veriore
-[] country not found: XK, skipping Ferizaj
-[] country not found: XK, skipping Gjakova
-[] country not found: XK, skipping Gjilan
-[] country not found: XK, skipping Mitrovica
-[] country not found: XK, skipping Pec
-[] country not found: XK, skipping Pristina
-[] country not found: XK, skipping Prizren
-[] country not found: XK, skipping Vushtrri
-[] country not found: XK, skipping Komuna e Vitisë
-[] country not found: XK, skipping Komuna e Ferizajt
-[] country not found: XK, skipping Komuna e Mitrovicës
-[] country not found: XK, skipping Komuna e Thërandës
-[] country not found: XK, skipping Komuna e Skenderajt
-[] country not found: XK, skipping Prizren
-[] country not found: XK, skipping Komuna e Prishtinës
-[] country not found: XK, skipping Podujevo
-[] country not found: XK, skipping Komuna e Pejës
-[] country not found: XK, skipping Orahovac
-[] country not found: XK, skipping Lipjan
-[] country not found: XK, skipping Komuna e Leposaviqit
-[] country not found: XK, skipping Kamenica
-[] country not found: XK, skipping Komuna e Klines
-[] country not found: XK, skipping Komuna e Kaçanikut
-[] country not found: XK, skipping Komuna e Istogut
-[] country not found: XK, skipping Komuna e Gjilanit
-[] country not found: XK, skipping Komuna e Drenasit
-[] country not found: XK, skipping Komuna e Dragashit
-[] country not found: XK, skipping Komuna e Deçanit
-[] country not found: XK, skipping Komuna e Gjakovës
-[] country not found: XK, skipping Kosovo Polje
-[] country not found: XK, skipping Opština Štrpce
-[] country not found: XK, skipping Komuna e Shtimes
-[] country not found: XK, skipping Novo Brdo
-[] country not found: XK, skipping Komuna e Obiliqit
-[] country not found: XK, skipping Komuna e Malisheves
-[] country not found: XK, skipping Komuna e Zubin Potokut
-[] country not found: XK, skipping Komuna e Zveçanit
-[] country not found: XK, skipping Komuna e Graçanicës
-[] country not found: XK, skipping Hani i Elezit
-[] country not found: XK, skipping Komuna e Junikut
-[] country not found: XK, skipping Komuna e Kllokotit
-[] country not found: XK, skipping Komuna e Mamushës
-[] country not found: XK, skipping Komuna e Parteshit
-[] country not found: XK, skipping Komuna e Ranillugut
-[] country not found: XK, skipping Mitrovica Veriore
-[] country not found: XK, skipping Ferizaj
-[] country not found: XK, skipping Gjakova
-[] country not found: XK, skipping Gjilan
-[] country not found: XK, skipping Mitrovica
-[] country not found: XK, skipping Pec
-[] country not found: XK, skipping Pristina
-[] country not found: XK, skipping Prizren
-[] country not found: XK, skipping Vushtrri
-[] country not found: XK, skipping Komuna e Vitisë
-[] country not found: XK, skipping Komuna e Ferizajt
-[] country not found: XK, skipping Komuna e Mitrovicës
-[] country not found: XK, skipping Komuna e Thërandës
-[] country not found: XK, skipping Komuna e Skenderajt
-[] country not found: XK, skipping Prizren
-[] country not found: XK, skipping Komuna e Prishtinës
-[] country not found: XK, skipping Podujevo
-[] country not found: XK, skipping Komuna e Pejës
-[] country not found: XK, skipping Orahovac
-[] country not found: XK, skipping Lipjan
-[] country not found: XK, skipping Komuna e Leposaviqit
-[] country not found: XK, skipping Kamenica
-[] country not found: XK, skipping Komuna e Klines
-[] country not found: XK, skipping Komuna e Kaçanikut
-[] country not found: XK, skipping Komuna e Istogut
-[] country not found: XK, skipping Komuna e Gjilanit
-[] country not found: XK, skipping Komuna e Drenasit
-[] country not found: XK, skipping Komuna e Dragashit
-[] country not found: XK, skipping Komuna e Deçanit
-[] country not found: XK, skipping Komuna e Gjakovës
-[] country not found: XK, skipping Kosovo Polje
-[] country not found: XK, skipping Opština Štrpce
-[] country not found: XK, skipping Komuna e Shtimes
-[] country not found: XK, skipping Novo Brdo
-[] country not found: XK, skipping Komuna e Obiliqit
-[] country not found: XK, skipping Komuna e Malisheves
-[] country not found: XK, skipping Komuna e Zubin Potokut
-[] country not found: XK, skipping Komuna e Zveçanit
-[] country not found: XK, skipping Komuna e Graçanicës
-[] country not found: XK, skipping Hani i Elezit
-[] country not found: XK, skipping Komuna e Junikut
-[] country not found: XK, skipping Komuna e Kllokotit
-[] country not found: XK, skipping Komuna e Mamushës
-[] country not found: XK, skipping Komuna e Parteshit
-[] country not found: XK, skipping Komuna e Ranillugut
-[] country not found: XK, skipping Mitrovica Veriore
-[] country not found: XK, skipping Ferizaj
-[] country not found: XK, skipping Gjakova
-[] country not found: XK, skipping Gjilan
-[] country not found: XK, skipping Mitrovica
-[] country not found: XK, skipping Pec
-[] country not found: XK, skipping Pristina
-[] country not found: XK, skipping Prizren
-[] country not found: XK, skipping Vushtrri
-[] country not found: XK, skipping Komuna e Vitisë
-[] country not found: XK, skipping Komuna e Ferizajt
-[] country not found: XK, skipping Komuna e Mitrovicës
-[] country not found: XK, skipping Komuna e Thërandës
-[] country not found: XK, skipping Komuna e Skenderajt
-[] country not found: XK, skipping Prizren
-[] country not found: XK, skipping Komuna e Prishtinës
-[] country not found: XK, skipping Podujevo
-[] country not found: XK, skipping Komuna e Pejës
-[] country not found: XK, skipping Orahovac
-[] country not found: XK, skipping Lipjan
-[] country not found: XK, skipping Komuna e Leposaviqit
-[] country not found: XK, skipping Kamenica
-[] country not found: XK, skipping Komuna e Klines
-[] country not found: XK, skipping Komuna e Kaçanikut
-[] country not found: XK, skipping Komuna e Istogut
-[] country not found: XK, skipping Komuna e Gjilanit
-[] country not found: XK, skipping Komuna e Drenasit
-[] country not found: XK, skipping Komuna e Dragashit
-[] country not found: XK, skipping Komuna e Deçanit
-[] country not found: XK, skipping Komuna e Gjakovës
-[] country not found: XK, skipping Kosovo Polje
-[] country not found: XK, skipping Opština Štrpce
-[] country not found: XK, skipping Komuna e Shtimes
-[] country not found: XK, skipping Novo Brdo
-[] country not found: XK, skipping Komuna e Obiliqit
-[] country not found: XK, skipping Komuna e Malisheves
-[] country not found: XK, skipping Komuna e Zubin Potokut
-[] country not found: XK, skipping Komuna e Zveçanit
-[] country not found: XK, skipping Komuna e Graçanicës
-[] country not found: XK, skipping Hani i Elezit
-[] country not found: XK, skipping Komuna e Junikut
-[] country not found: XK, skipping Komuna e Kllokotit
-[] country not found: XK, skipping Komuna e Mamushës
-[] country not found: XK, skipping Komuna e Parteshit
-[] country not found: XK, skipping Komuna e Ranillugut
-[] country not found: XK, skipping Mitrovica Veriore

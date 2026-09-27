@@ -4,7 +4,7 @@ Fast, offline access to comprehensive data for **countries**, **subdivisions**, 
 
 ## Features
 
-- 🌍 **249 countries** with ISO codes (alpha-2, alpha-3, numeric)
+- 🌍 **254 countries** with ISO codes (alpha-2, alpha-3, numeric)
 - 🗺️ **51,541 subdivisions** administrative levels 1 & 2
 - 🏙️ **451,792 cities** sourced from GeoNames
 - 🔍 **Search Engine** for typo-tolerant lookups with 99%+ accuracy
@@ -373,6 +373,8 @@ Fuzzy search accuracy on mangled/misspelled queries:
 
 - **Countries**
   - [ISO 3166-1](https://www.iso.org/iso-3166-country-codes.html) data via [Ipregistry](https://ipregistry.co)
+  - [Geonames](https://www.geonames.org/) `geonames_countries.txt`
+  - Additional country aliases from Wikidata.
 - **Subdivisions**
   - [ISO 3166-2](https://www.iso.org/iso-3166-country-codes.html) data via [Ipregistry](https://ipregistry.co)
   - [GeoNames](https://www.geonames.org/) `admin1CodesASCII.txt` and `admin2Codes.txt`

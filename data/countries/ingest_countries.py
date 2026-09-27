@@ -13,8 +13,8 @@ def ingest_countries() -> dict[str, CountryModel]:
     log.set_stage("COUNTRIES")
     fetch_countries_sources()
     countries = init_iso_countries()
-    merge_wikidata(countries)
     merge_geonames(countries)
+    merge_wikidata(countries)
     dump(list(countries.values()))
     log.writeline(f"completed: {len(countries)} countries")
     return countries

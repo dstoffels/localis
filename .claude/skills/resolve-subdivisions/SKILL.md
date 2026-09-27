@@ -19,7 +19,7 @@ disallowed-tools: Bash Read Grep Glob Edit Write Agent WebFetch
 - If multiple candidates share a name, use the candidate's `admin_level` against the orphan's `type` to pick the right one, not just the first match.
 
 **IF** you have high confidence that this ISO subdivision and one specific candidate are the same place (a transliteration difference, an old vs. current name, a local vs. official form, etc.):
-  1. **CALL** `merge` with `iso_code`, `hashid` and any additional names if applicable.
+  1. **CALL** `merge` with `iso_code`, `geo_sub_hashid` and any additional names if applicable.
   2. Return to Step 1.
 
 **IF** none of the *top-tier* candidates fit:
@@ -27,20 +27,20 @@ disallowed-tools: Bash Read Grep Glob Edit Write Agent WebFetch
   2. Rerun Step 2 with the full list of candidates.
 
 **IF** none of the full candidate list fits either:
-  1. Escalate to Step 3.
+  1. Proceed to Step 3. Do not proceed to Step 4 without first making an actual Websearch tool call for this orphan in this turn. If no such call has been made yet, make it now.
 
 ### Step 3. Escalate to Websearch
 **CALL** the `Websearch` tool with the orphan's name and ISO code to gather additional information about the orphaned subdivision.
 
 **IF** a confident match is found after the websearch:
-  1. **CALL** `merge` with `iso_code`, `hashid` and any additional names if applicable.
+  1. **CALL** `merge` with `iso_code`, `geo_sub_hashid` and any additional names if applicable.
   2. Return to Step 1.
 
 **IF** no confident match is found after the websearch:
-  1. Escalate to Step 4.
+  1. Proceed to Step 4.
 
 ### Step 4. Escalate genuinely ambiguous cases
-**STOP** and prompt the user for guidance on how to proceed with this orphaned subdivision. Display the orphan data and a numbered list of candidate names for review. The user will instruct you with the appropriate action (either `merge` with a chosen candidate or `add` a new entry)
+Display the names of the ENTIRE candidate list from Step 2 (every item, unfiltered, in the order returned), numbered, alongside the orphan's raw data. Do not summarize, filter to "relevant" entries, or replace this list with a shorter multiple-choice question. Do not call add or merge yourself here, post the list as plain output and wait for the user's explicit instruction.
 
 ## Guardrails
 - Never fabricate a `hashid` — it must come from that specific entry's own `candidates` list; `merge` validates this and raises if it wasn't.
