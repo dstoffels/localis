@@ -78,7 +78,7 @@ def merge_geonames(countries: dict[str, CountryModel]):
                     id=len(countries) + 1,
                     alpha2=alpha2,
                     alpha3=alpha3,
-                    numeric=numeric,
+                    numeric=int(numeric),
                     name=name,
                     official_name="",
                     aliases=[],

@@ -26,6 +26,7 @@ from data.subdivisions.scripts.geonames_subdivisions import map_geonames_subdivi
 RESOLUTION_MAP_PATH = SUBDIVISIONS_RAW_PATH / "resolution_map.json"
 ORPHANED_PATH = SUBDIVISIONS_RAW_PATH / "orphaned_subdivisions.json"
 RESOLUTION_LOG_PATH = SUBDIVISIONS_RAW_PATH / "resolution_log.txt"
+REVIEW_OUTPUT_PATH = SUBDIVISIONS_RAW_PATH / "review_output.json"
 
 
 def _read_json(path: Path) -> dict | list:
@@ -127,6 +128,23 @@ def is_valid_candidate(iso_code: str, geo_sub_hashid: int) -> bool:
     return any(
         c.hashid == geo_sub_hashid for c in sub_map.filter(iso_sub.country.alpha2)
     )
+
+
+def get_next_orphan() -> dict:
+    orphaned = read_orphaned()
+    if not orphaned:
+        return None
+
+    iso_code, entry = next(iter(orphaned.items()))
+    result = {"iso_code": iso_code, **entry}
+    result["candidates"] = get_candidates(iso_code, return_all=False)
+    return result
+
+
+def write_orphan_for_review(orphan: dict) -> None:
+    """Writes the given orphan to the review output."""
+    with open(REVIEW_OUTPUT_PATH, "w", encoding="utf-8") as f:
+        json.dump(orphan, f, indent=2, ensure_ascii=False)
 
 
 def log_decision(line: str) -> None:

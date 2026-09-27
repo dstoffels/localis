@@ -8,8 +8,10 @@ processed_candidates = 0
 
 
 @mcp.tool(name="next")
-def next(return_all: bool = False) -> dict:
+def next(return_all: bool = False) -> dict | str | None:
     """Returns the next orphaned subdivision, optionally with a page of candidates.
+
+    Candidates are flat formatted: { hashid: "name1, name2  [admin_level]", ... }
 
     Args:
         return_all (bool): Whether to return all candidates or just the top tier.
@@ -18,15 +20,9 @@ def next(return_all: bool = False) -> dict:
     if processed_candidates >= MAX_CANDIDATES:
         return "MAX CANDIDATES REACHED: Tell the user to have you call the reset tool, then /clear to clear context. The next tool will not return candidates until the count is reset."
 
-    for iso_code, entry in read_orphaned().items():
-        if entry.get("skipped"):
-            continue
-        result = {"iso_code": iso_code, **entry}
-        candidates = get_candidates(iso_code, return_all)
-        result["candidates"] = candidates
-        processed_candidates += len(candidates)
-        return result
-    return None
+    orphan = get_next_orphan()
+    processed_candidates += len(orphan["candidates"])
+    return orphan
 
 
 @mcp.tool(name="merge")
@@ -93,22 +89,17 @@ def reset() -> str:
     return "SUCCESS"
 
 
-# @mcp.tool(name="skip")
-# def skip(iso_code: str, reason: str) -> str:
-#     """Leaves an orphaned subdivision unresolved for a human, annotated with why. Does not touch
-#     resolution_map.json -- if it's still in orphaned_subdivisions.json when the interactive
-#     wizard runs, it'll show up there, same as any other unresolved entry. Returns (and logs)
-#     a human-readable line."""
-#     orphan = get_orphan(iso_code)
+@mcp.tool(name="review")
+def review() -> str:
+    """Dumps the next orphan to the review_output.json."""
 
-#     if orphan is None:
-#         return "ERROR: INVALID ISO CODE FOR ORPHAN"
+    orphan = get_next_orphan()
+    if orphan is None:
+        return "NO ORPHANS TO REVIEW"
 
-#     mark_skipped(iso_code, reason)
+    write_orphan_for_review(orphan)
 
-#     line = f"SKIP   {iso_code}  {orphan['name']!r} - {reason}"
-#     log_decision(line)
-#     return "SUCCESS"
+    return "SUCCESS"
 
 
 if __name__ == "__main__":

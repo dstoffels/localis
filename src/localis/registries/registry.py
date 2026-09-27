@@ -58,10 +58,12 @@ class Registry(Generic[T], ABC):
         cache: dict[int, Model] = {}
         with open(self._data_filepath, "r", encoding="utf-8") as f:
             for id, line in enumerate(f, start=1):
-                row = line.strip().split("\t")
+                row = line.rstrip("\r\n").split("\t")
                 cache[id] = self.parse_row(id, row, cache)
         elapsed = time.perf_counter() - t0
-        logger.debug("Loaded %d %s records in %.3fs", len(cache), self.REGISTRY_NAME, elapsed)
+        logger.debug(
+            "Loaded %d %s records in %.3fs", len(cache), self.REGISTRY_NAME, elapsed
+        )
         return cache
 
     @cached_property
@@ -73,7 +75,11 @@ class Registry(Generic[T], ABC):
             cache=self._cache,
             filepath=self._lookup_filepath,
         )
-        logger.debug("Built %s lookup index in %.3fs", self.REGISTRY_NAME, time.perf_counter() - t0)
+        logger.debug(
+            "Built %s lookup index in %.3fs",
+            self.REGISTRY_NAME,
+            time.perf_counter() - t0,
+        )
         return index
 
     @cached_property
@@ -85,7 +91,11 @@ class Registry(Generic[T], ABC):
             cache=self._cache,
             filepath=self._filter_filepath,
         )
-        logger.debug("Built %s filter index in %.3fs", self.REGISTRY_NAME, time.perf_counter() - t0)
+        logger.debug(
+            "Built %s filter index in %.3fs",
+            self.REGISTRY_NAME,
+            time.perf_counter() - t0,
+        )
         return index
 
     @cached_property
@@ -97,7 +107,11 @@ class Registry(Generic[T], ABC):
             cache=self._cache,
             filepath=self._search_filepath,
         )
-        logger.debug("Built %s search index in %.3fs", self.REGISTRY_NAME, time.perf_counter() - t0)
+        logger.debug(
+            "Built %s search index in %.3fs",
+            self.REGISTRY_NAME,
+            time.perf_counter() - t0,
+        )
         return index
 
     def parse_row(self, id, row: list[str], cache: dict[int, Model]) -> Model:
@@ -111,7 +125,12 @@ class Registry(Generic[T], ABC):
         _ = self._lookup_index
         _ = self._filter_index
         _ = self._search_index
-        logger.info("Force-cached %s registry (%d records) in %.3fs", self.REGISTRY_NAME, len(self._cache), time.perf_counter() - t0)
+        logger.info(
+            "Force-cached %s registry (%d records) in %.3fs",
+            self.REGISTRY_NAME,
+            len(self._cache),
+            time.perf_counter() - t0,
+        )
 
     def __iter__(self) -> Iterator[T]:
         return iter([m.to_dto() for m in self._cache.values()])
