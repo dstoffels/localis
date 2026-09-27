@@ -1,47 +1,52 @@
 [COUNTRIES] completed: 254 countries
-[SUBDIVISIONS] orphaned iso subdivision: EG-DK (Ad Daqahlīyah, Egypt) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: AT-2 (Kärnten, Austria) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: AT-3 (Niederösterreich, Austria) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: AT-4 (Oberösterreich, Austria) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: BF-TAP (Tapoa, Burkina Faso) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: BI-KR (Karuzi, Burundi) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: BI-MW (Mwaro, Burundi) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: BW-SO (Southern, Botswana) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: CF-KB (Gribingui, Central African Republic) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: CN-MO (Aomen Tebiexingzhengqu, China) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: CN-HK (Hong Kong SAR, China) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: CN-TW (Taiwan Sheng, China) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: CN-XZ (Xizang Zizhiqu, China) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: CV-B (Ilhas de Barlavento, Cabo Verde) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: CV-S (Ilhas de Sotavento, Cabo Verde) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: CZ-31 (Jihočeský kraj, Czechia) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: CZ-41 (Karlovarský kraj, Czechia) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: CZ-10 (Praha, Czechia) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: CZ-20 (Středočeský kraj, Czechia) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: DE-BY (Bayern, Germany) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: DK-84 (Hovedstaden, Denmark) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: DO-33 (Cibao Nordeste, Dominican Republic) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: DO-34 (Cibao Noroeste, Dominican Republic) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: DO-35 (Cibao Norte, Dominican Republic) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: DO-36 (Cibao Sur, Dominican Republic) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: DO-37 (El Valle, Dominican Republic) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: DO-38 (Enriquillo, Dominican Republic) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: DO-39 (Higuamo, Dominican Republic) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: DO-40 (Ozama, Dominican Republic) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: DO-41 (Valdesia, Dominican Republic) requires manual resolution against GeoNames counterparts.
+[SUBDIVISIONS] orphaned iso subdivision: DO-42 (Yuma, Dominican Republic) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: EG-BH (Al Buḩayrah, Egypt) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: EG-FYM (Al Fayyūm, Egypt) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: EG-GH (Al Gharbīyah, Egypt) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: EG-IS (Al Ismā'īlīyah, Egypt) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: EG-MNF (Al Minūfīyah, Egypt) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: EG-KB (Al Qalyūbīyah, Egypt) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: EG-SHR (Ash Sharqīyah, Egypt) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: EG-BNS (Banī Suwayf, Egypt) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: EG-KFS (Kafr ash Shaykh, Egypt) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: ER-SK (Semienawi K’eyyĭḥ Baḥri, Eritrea) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: ES-C (A Coruña, Spain) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: ES-CL (Castilla y León, Spain) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: ES-CT (Catalunya, Spain) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: ES-PV (Euskal Herria, Spain) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: ES-IB (Illes Balears, Spain) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: ET-SN (Southern Nations, Ethiopia) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: ET-SW (Southwest Ethiopia Peoples, Ethiopia) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: FI-01 (Ahvenanmaan maakunta, Finland) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: FI-19 (Egentliga Finland, Finland) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: FI-02 (Etelä-Karjala, Finland) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: FI-03 (Etelä-Pohjanmaa, Finland) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: FI-04 (Etelä-Savo, Finland) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: FI-07 (Keski-Pohjanmaa, Finland) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: FI-08 (Keski-Suomi, Finland) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: FI-13 (Norra Karelen, Finland) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: FI-15 (Norra Savolax, Finland) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: FI-14 (Norra Österbotten, Finland) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: FI-12 (Pohjanmaa, Finland) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: FR-6AE (Alsace, France) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: FR-BRE (Bretagne, France) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: FR-CP (Clipperton, France) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: FR-20R (Corse, France) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: FR-2A (Corse-du-Sud, France) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: FR-971 (Guadeloupe, France) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: FR-973 (Guyane, France) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: FR-2B (Haute-Corse, France) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: FR-31 (Haute-Garonne, France) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: FR-974 (La Réunion, France) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: FR-972 (Martinique, France) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: FR-976 (Mayotte, France) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: FR-69M (Métropole de Lyon, France) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: FR-NAQ (Nouvelle-Aquitaine, France) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: FR-NC (Nouvelle-Calédonie, France) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: FR-PF (Polynésie française, France) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: FR-BL (Saint-Barthélemy, France) requires manual resolution against GeoNames counterparts.
@@ -79,56 +84,16 @@
 [SUBDIVISIONS] orphaned iso subdivision: GB-WFT (Waltham Forest, United Kingdom) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: GB-WND (Wandsworth, United Kingdom) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: GB-WSM (Westminster, United Kingdom) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: GQ-BN (Bioko Nord, Equatorial Guinea) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: GQ-BS (Bioko Sud, Equatorial Guinea) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: GQ-CS (Centro Sud, Equatorial Guinea) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: GQ-DJ (Djibloho, Equatorial Guinea) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: GQ-KN (Kié-Ntem, Equatorial Guinea) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: GQ-LI (Litoral, Equatorial Guinea) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: GQ-C (Região Continental, Equatorial Guinea) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: GQ-I (Região Insular, Equatorial Guinea) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: GQ-WN (Wele-Nzas, Equatorial Guinea) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: GR-A (Anatolikí Makedonía kai Thráki, Greece) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: GR-I (Attikí, Greece) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: GR-G (Dytikí Elláda, Greece) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: GR-C (Dytikí Makedonía, Greece) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: GR-F (Ionía Nísia, Greece) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: GR-B (Kentrikí Makedonía, Greece) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: GR-M (Kríti, Greece) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: GR-L (Nótio Aigaío, Greece) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: GR-J (Pelopónnisos, Greece) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: GR-H (Stereá Elláda, Greece) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: GR-K (Vóreio Aigaío, Greece) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: GR-69 (Ágion Óros, Greece) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: GR-D (Ípeiros, Greece) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: GW-BM (Biombo, Guinea-Bissau) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: GW-L (Leste, Guinea-Bissau) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: GW-N (Norte, Guinea-Bissau) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: GW-OI (Oio, Guinea-Bissau) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: GW-QU (Quinara, Guinea-Bissau) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: GW-S (Sul, Guinea-Bissau) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: GW-TO (Tombali, Guinea-Bissau) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: HN-IB (Islas de la Bahía, Honduras) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: HR-07 (Bjelovarsko-bilogorska županija, Croatia) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: HR-12 (Brodsko-posavska županija, Croatia) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: HR-19 (Dubrovačko-neretvanska županija, Croatia) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: HR-18 (Istarska županija, Croatia) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: HR-04 (Karlovačka županija, Croatia) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: HR-06 (Koprivničko-križevačka županija, Croatia) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: HR-02 (Krapinsko-zagorska županija, Croatia) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: HR-09 (Ličko-senjska županija, Croatia) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: HR-20 (Međimurska županija, Croatia) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: HR-14 (Osječko-baranjska županija, Croatia) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: HR-11 (Požeško-slavonska županija, Croatia) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: HR-08 (Primorsko-goranska županija, Croatia) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: HR-03 (Sisačko-moslavačka županija, Croatia) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: HR-17 (Splitsko-dalmatinska županija, Croatia) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: HR-05 (Varaždinska županija, Croatia) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: HR-10 (Virovitičko-podravska županija, Croatia) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: HR-16 (Vukovarsko-srijemska županija, Croatia) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: HR-13 (Zadarska županija, Croatia) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: HR-01 (Zagrebačka županija, Croatia) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: HR-15 (Šibensko-kninska županija, Croatia) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: HU-BC (Békéscsaba, Hungary) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: HU-DE (Debrecen, Hungary) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: HU-DU (Dunaújváros, Hungary) requires manual resolution against GeoNames counterparts.
@@ -147,39 +112,14 @@
 [SUBDIVISIONS] orphaned iso subdivision: HU-TB (Tatabánya, Hungary) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: HU-ZE (Zalaegerszeg, Hungary) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: HU-ER (Érd, Hungary) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: ID-BA (Bali, Indonesia) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: ID-BT (Banten, Indonesia) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: ID-JK (Jakarta Raya, Indonesia) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: ID-JW (Jawa, Indonesia) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: ID-JB (Jawa Barat, Indonesia) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: ID-JT (Jawa Tengah, Indonesia) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: ID-JI (Jawa Timur, Indonesia) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: ID-KA (Kalimantan, Indonesia) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: ID-KB (Kalimantan Barat, Indonesia) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: ID-KS (Kalimantan Selatan, Indonesia) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: ID-KT (Kalimantan Tengah, Indonesia) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: ID-KI (Kalimantan Timur, Indonesia) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: ID-KU (Kalimantan Utara, Indonesia) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: ID-BB (Kepulauan Bangka Belitung, Indonesia) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: ID-KR (Kepulauan Riau, Indonesia) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: ID-NU (Nusa Tenggara, Indonesia) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: ID-NB (Nusa Tenggara Barat, Indonesia) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: ID-NT (Nusa Tenggara Timur, Indonesia) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: ID-PA (Papua, Indonesia) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: ID-PB (Papua Barat, Indonesia) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: ID-PD (Papua Barat Daya, Indonesia) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: ID-PE (Papua Pegunungan, Indonesia) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: ID-PS (Papua Selatan, Indonesia) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: ID-PT (Papua Tengah, Indonesia) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: ID-RI (Riau, Indonesia) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: ID-SR (Sulawesi Barat, Indonesia) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: ID-SN (Sulawesi Selatan, Indonesia) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: ID-ST (Sulawesi Tengah, Indonesia) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: ID-SG (Sulawesi Tenggara, Indonesia) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: ID-SA (Sulawesi Utara, Indonesia) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: ID-SM (Sumatera, Indonesia) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: ID-SB (Sumatera Barat, Indonesia) requires manual resolution against GeoNames counterparts.
-[SUBDIVISIONS] orphaned iso subdivision: ID-SS (Sumatera Selatan, Indonesia) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: ID-SU (Sumatera Utara, Indonesia) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: IQ-BA (Al Başrah, Iraq) requires manual resolution against GeoNames counterparts.
 [SUBDIVISIONS] orphaned iso subdivision: IQ-KR (Herêm-î Kurdistan, Iraq) requires manual resolution against GeoNames counterparts.

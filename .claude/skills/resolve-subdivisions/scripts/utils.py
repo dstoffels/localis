@@ -75,7 +75,7 @@ def _get_iso_subs() -> dict[str, SubdivisionModel]:
 def _format_candidate(candidate: SubdivisionModel) -> tuple[int, str]:
     return (
         candidate.hashid,
-        f'{candidate.name} {" ".join(candidate.aliases)} [{candidate.admin_level}]',
+        f'{candidate.name} {" ".join(candidate.aliases)} - [{candidate.admin_level}]',
     )
 
 
@@ -93,16 +93,19 @@ def _rank_candidates(
     return sorted(candidates, key=score_candidate, reverse=True)
 
 
-TIER_ONE_MIN = 10
-TIER_ONE_MAX = 100
-TIER_ONE_FRACTION = 0.1
+TOP_TIER_MIN = 10
+TOP_TIER_MAX = 100
+TOP_TIER_FRACTION = 0.1
+BATCH_SIZE = 200
 
 
-def _get_tier_size(pool_size: int) -> int:
-    return min(max(TIER_ONE_MIN, round(pool_size * TIER_ONE_FRACTION)), TIER_ONE_MAX)
+def _get_top_tier_batch_size(pool_size: int) -> int:
+    return min(max(TOP_TIER_MIN, round(pool_size * TOP_TIER_FRACTION)), TOP_TIER_MAX)
 
 
-def get_candidates(iso_code: str, return_all: bool = False) -> dict[int, str]:
+def get_candidates(
+    iso_code: str, batch_num: int = 0, return_all: bool = False
+) -> dict[int, str]:
     # Look up iso_sub
     iso_sub: SubdivisionModel | None = _get_iso_subs().get(iso_code, None)
     if not iso_sub:
@@ -113,8 +116,20 @@ def get_candidates(iso_code: str, return_all: bool = False) -> dict[int, str]:
     geo_subs = sub_map.filter(iso_sub.country.alpha2)
 
     candidates = _rank_candidates(iso_sub, geo_subs)
-    cutoff = _get_tier_size(len(candidates))
-    candidates = candidates[cutoff:] if return_all else candidates[:cutoff]
+
+    if not return_all:
+        top_tier_batch_size = _get_top_tier_batch_size(len(candidates))
+
+        if batch_num == 0:
+            batch_start, batch_end = 0, top_tier_batch_size
+        else:
+            batch_start = top_tier_batch_size + (batch_num - 1) * BATCH_SIZE
+            batch_end = min(batch_start + BATCH_SIZE, len(candidates))
+
+        if batch_start >= len(candidates):
+            return None
+
+        candidates = candidates[batch_start:batch_end]
 
     return dict(_format_candidate(c) for c in candidates if c.iso_code is None)
 
@@ -130,15 +145,13 @@ def is_valid_candidate(iso_code: str, geo_sub_hashid: int) -> bool:
     )
 
 
-def get_next_orphan(return_all: bool = False) -> dict:
-    orphaned = read_orphaned()
-    if not orphaned:
+def get_next_orphan() -> dict:
+    orphans = read_orphaned()
+    if not orphans:
         return None
 
-    iso_code, entry = next(iter(orphaned.items()))
-    result = {"iso_code": iso_code, **entry}
-    result["candidates"] = get_candidates(iso_code, return_all=return_all)
-    return result
+    iso_code, entry = next(iter(orphans.items()))
+    return {"iso_code": iso_code, **entry}
 
 
 def write_orphan_for_review(orphan: dict) -> None:
