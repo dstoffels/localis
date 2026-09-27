@@ -50,13 +50,6 @@ def write_resolution(iso_code: str, entry: dict) -> None:
     )
 
 
-def get_orphan(iso_code: str) -> dict:
-    orphaned = read_orphaned()
-    if iso_code not in orphaned:
-        raise ValueError(f"{iso_code} is not in orphaned_subdivisions.json")
-    return orphaned[iso_code]
-
-
 @functools.cache
 def _countries():
     return load_countries()
@@ -73,9 +66,10 @@ def _get_iso_subs() -> dict[str, SubdivisionModel]:
 
 
 def _format_candidate(candidate: SubdivisionModel) -> tuple[int, str]:
+    names = ", ".join([candidate.name, *candidate.aliases])
     return (
         candidate.hashid,
-        f'{candidate.name} {" ".join(candidate.aliases)} - [{candidate.admin_level}]',
+        f"{names} - [{candidate.admin_level}]",
     )
 
 
@@ -111,9 +105,9 @@ def get_candidates(
     if not iso_sub:
         raise ValueError(f"{iso_code} is not found in ISO subdivisions")
 
-    # Map subdivisions
+    # Map subdivisions, excluding candidates already claimed by another ISO subdivision
     sub_map = get_geonames_submap()
-    geo_subs = sub_map.filter(iso_sub.country.alpha2)
+    geo_subs = [c for c in sub_map.filter(iso_sub.country.alpha2) if c.iso_code is None]
 
     candidates = _rank_candidates(iso_sub, geo_subs)
 
@@ -131,18 +125,30 @@ def get_candidates(
 
         candidates = candidates[batch_start:batch_end]
 
-    return dict(_format_candidate(c) for c in candidates if c.iso_code is None)
+    return dict(_format_candidate(c) for c in candidates) or None
 
 
-def is_valid_candidate(iso_code: str, geo_sub_hashid: int) -> bool:
-    """True if geo_sub_hashid actually belongs to iso_code's own country's candidate pool."""
+def is_valid_candidate(iso_code: str, geo_sub_hashid: int) -> tuple[bool, str]:
+    """(True, "") if geo_sub_hashid belongs to iso_code's own country's candidate pool and hasn't already been claimed by another orphan; otherwise (False, <error message>)."""
+
     iso_sub = _get_iso_subs().get(iso_code)
-    if not iso_sub:
-        return False
-    sub_map = get_geonames_submap()
-    return any(
-        c.hashid == geo_sub_hashid for c in sub_map.filter(iso_sub.country.alpha2)
-    )
+    if iso_sub is None:
+        return False, "ERROR: Invalid candidate: ISO subdivision not found"
+
+    candidate = get_geonames_submap().get(geo_sub_hashid)
+    if candidate is None:
+        return False, "ERROR: Invalid candidate: not found"
+
+    if candidate.iso_code is not None:
+        return (
+            False,
+            "ERROR: Invalid candidate: already claimed by another ISO subdivision",
+        )
+
+    if candidate.country.alpha2 != iso_sub.country.alpha2:
+        return False, "ERROR: Invalid candidate: wrong country for this ISO code"
+
+    return True, ""
 
 
 def get_next_orphan() -> dict:
@@ -171,18 +177,6 @@ def pop_orphan(iso_code: str) -> None:
     if iso_code not in orphaned:
         raise ValueError(f"{iso_code} is not in orphaned_subdivisions.json")
     del orphaned[iso_code]
-    ORPHANED_PATH.write_text(
-        json.dumps(orphaned, indent=2, ensure_ascii=False), encoding="utf-8"
-    )
-
-
-def mark_skipped(iso_code: str, reason: str) -> None:
-    """Annotates iso_code in place as escalated to a human, without removing it from the queue."""
-    orphaned = read_orphaned()
-    if iso_code not in orphaned:
-        raise ValueError(f"{iso_code} is not in orphaned_subdivisions.json")
-    orphaned[iso_code]["skipped"] = True
-    orphaned[iso_code]["reason"] = reason
     ORPHANED_PATH.write_text(
         json.dumps(orphaned, indent=2, ensure_ascii=False), encoding="utf-8"
     )

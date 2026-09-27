@@ -23,7 +23,7 @@ disallowed-tools: Bash Read Grep Glob Edit Write Agent WebFetch
 - If multiple candidates share a name, use the candidate's `admin_level` against the orphan's `type` to pick the right one, not just the first match.
 
 **IF** you have high confidence that this ISO subdivision and one specific candidate are the same place (a transliteration difference, an old vs. current name, a local vs. official form, etc.):
-  1. **CALL** the `merge` tool with `iso_code`, `geo_sub_hashid` and any additional names if applicable.
+  1. **CALL** the `merge` tool with `candidate_hashid` and any `aliases` if applicable.
   2. Return to Step 1.
 
 **IF** none of the candidates fit:
@@ -31,7 +31,7 @@ disallowed-tools: Bash Read Grep Glob Edit Write Agent WebFetch
 
 ### Step 3. Add a new entry
 **IF** none of the candidates fit, but you know for certain the orphaned subdivision is a valid and confirmed entity:
-  1. **CALL** the `add` tool with `iso_code` and any additional names if applicable.
+  1. **CALL** the `add` tool with any `aliases` if applicable.
   2. Return to Step 1.
 
 **ELSE**: Proceed to Step 4.
@@ -40,11 +40,11 @@ disallowed-tools: Bash Read Grep Glob Edit Write Agent WebFetch
 **CALL** the `Websearch` tool with the orphan's `name` and `iso_code` to gather additional information about the orphaned subdivision. DO NOT add additional search terms.
 
 **IF** a confident match is found after the websearch:
-  1. **CALL** the `merge` tool with `iso_code`, `geo_sub_hashid` and any additional names if applicable.
+  1. **CALL** the `merge` tool with `candidate_hashid` and any `aliases` if applicable.
   2. Return to Step 1.
 
 **IF** no confident match is found after the websearch, but the orphan is now a confirmed and valid entity:
-  1. **CALL** the `add` tool with `iso_code` and any additional names if applicable.
+  1. **CALL** the `add` tool with any `aliases` if applicable.
   2. Return to Step 1.
 
 **ELSE**: Proceed to Step 5.
@@ -55,6 +55,6 @@ disallowed-tools: Bash Read Grep Glob Edit Write Agent WebFetch
   2. `Merge` the orphan with an existing candidate by inputting the hashid.
 
 ## Guardrails
-- Never fabricate a `hashid` — it must come from that specific entry's own `candidates` list; `merge` validates this and raises if it wasn't.
-- Never pass the orphan's own name in the names argument when calling `merge` or `add`.
+- Never fabricate a `hashid` — it must come from that specific entry's own `candidates` list
+- Never pass the orphan's own name in the names argument when calling `merge` or `add`
 
