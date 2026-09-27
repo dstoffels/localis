@@ -121,11 +121,11 @@ def get_candidates(
             batch_end = min(batch_start + BATCH_SIZE, len(candidates))
 
         if batch_start >= len(candidates):
-            return None
+            return []
 
         candidates = candidates[batch_start:batch_end]
 
-    return dict(_format_candidate(c) for c in candidates) or None
+    return dict(_format_candidate(c) for c in candidates)
 
 
 def is_valid_candidate(iso_code: str, geo_sub_hashid: int) -> tuple[bool, str]:
