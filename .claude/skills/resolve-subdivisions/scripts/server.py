@@ -32,10 +32,6 @@ def next() -> dict | str | None:
 
     candidates = get_candidates(orphan["iso_code"], batch_num)
 
-    if candidates is None:
-        batch_num = 0
-        return "END OF CANDIDATES FOR THIS ORPHAN"
-
     orphan["candidates"] = candidates
 
     batch_num += 1

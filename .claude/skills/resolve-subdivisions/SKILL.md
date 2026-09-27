@@ -12,9 +12,9 @@ disallowed-tools: Bash Read Grep Glob Edit Write Agent WebFetch
 **CALL** the `next` tool to retrieve the queued orphaned ISO subdivision and its next batch of candidates.
 **IF** `next` returns `null`, **STOP**. We've reached the end of the orphaned subdivisions list.
 
-**IF** `next` returns "MAX CANDIDATES REACHED...", follow the instructions provided in that message verbatim.
+**IF** `next` returns "MAX CANDIDATES REACHED...", follow the instructions provided in that message verbatim. DO NOT report session progress.
 
-**IF** `next` returns "END OF CANDIDATES FOR THIS ORPHAN", proceed to Step 3.
+**IF** `next` returns an empty candidates array, proceed to Step 3.
 
 **IF** `next` returns a valid orphaned subdivision with candidates, proceed to Step 2.
 
