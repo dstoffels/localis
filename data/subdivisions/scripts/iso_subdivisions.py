@@ -5,14 +5,12 @@ import csv
 from localis.models import CountryModel, SubdivisionModel
 
 
-def load_iso_subs(
-    countries: dict[str, CountryModel], submap=SubdivisionMap
-) -> dict[int, SubdivisionModel]:
+def load_iso_subs(countries: dict[str, CountryModel]) -> dict[int, SubdivisionModel]:
     print("Loading ISO subdivisions...")
     with open(SUBDIVISIONS_RAW_PATH / "iso-3166-2.csv", "r", encoding="utf-8") as f:
         reader = csv.DictReader(f)
 
-        iso_subs: dict[int, SubdivisionModel] = {}  # cache
+        iso_subs: dict[str, SubdivisionModel] = {}  # cache
 
         for row in reader:
             name = row["subdivision_name"]

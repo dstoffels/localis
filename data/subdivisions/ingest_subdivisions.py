@@ -31,7 +31,7 @@ def ingest_subdivisions(
     sub_map: SubdivisionMap = map_geonames_subdivisions(countries)
 
     # Cache and dedupe iso subs by id
-    iso_subs: dict[int, SubdivisionModel] = load_iso_subs(countries, sub_map)
+    iso_subs: dict[int, SubdivisionModel] = load_iso_subs(countries)
 
     # Attempt to auto-merge with fuzzy matching and yield a list of iso_subs that couldn't be auto-matched with GeoNames counterparts.
     unmerged_iso_subs: list[SubdivisionModel] = try_merge(iso_subs, sub_map)

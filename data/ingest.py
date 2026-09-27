@@ -13,9 +13,4 @@ def ingest_all(interactive_mode: bool = False) -> None:
 
 
 if __name__ == "__main__":
-    import argparse
-
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--interactive", action="store_true")
-    args = parser.parse_args()
-    ingest_all(interactive_mode=args.interactive)
+    ingest_all()

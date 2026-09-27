@@ -1,6 +1,12 @@
+import functools
 import json
 import sys
 from pathlib import Path
+from rapidfuzz import process, fuzz
+from data.subdivisions.scripts.merge_subdivisions import prepare_names
+from data.subdivisions.scripts.iso_subdivisions import load_iso_subs
+from data.subdivisions.subdivisions_utils import SubdivisionMap
+from localis.models.subdivision import SubdivisionModel
 
 
 def _find_project_root(start: Path) -> Path:
@@ -20,7 +26,6 @@ from data.subdivisions.scripts.geonames_subdivisions import map_geonames_subdivi
 RESOLUTION_MAP_PATH = SUBDIVISIONS_RAW_PATH / "resolution_map.json"
 ORPHANED_PATH = SUBDIVISIONS_RAW_PATH / "orphaned_subdivisions.json"
 RESOLUTION_LOG_PATH = SUBDIVISIONS_RAW_PATH / "resolution_log.txt"
-PAGE_SIZE = 100
 
 
 def _read_json(path: Path) -> dict | list:
@@ -51,37 +56,75 @@ def get_orphan(iso_code: str) -> dict:
     return orphaned[iso_code]
 
 
-def get_all_country_candidates(iso_code: str) -> list[dict]:
-    alpha2 = iso_code.split("-")[0]
-    countries = load_countries()
-    sub_map = map_geonames_subdivisions(countries)
-    candidates = sorted(sub_map.filter(alpha2), key=lambda s: s.name)
-    return [
-        {
-            "hashid": c.hashid,
-            "name": c.name,
-            "aliases": c.aliases,
-            "admin_level": c.admin_level,
-        }
-        for c in candidates
-    ]
+@functools.cache
+def _countries():
+    return load_countries()
 
 
-def get_country_candidates_page(iso_code: str, page: int) -> list[dict]:
-    all_candidates = get_all_country_candidates(iso_code)
-    start = (page - 1) * PAGE_SIZE
-    return all_candidates[start : start + PAGE_SIZE]
+@functools.cache
+def get_geonames_submap() -> SubdivisionMap:
+    return map_geonames_subdivisions(_countries())
+
+
+@functools.cache
+def _iso_subs() -> dict[str, SubdivisionModel]:
+    return load_iso_subs(_countries())
+
+
+def _format_candidate(candidate: SubdivisionModel) -> tuple[int, str]:
+    return (
+        candidate.hashid,
+        f'{candidate.name} {" ".join(candidate.aliases)} [{candidate.admin_level}]',
+    )
+
+
+def _rank_candidates(
+    iso_sub: SubdivisionModel, candidates: list[SubdivisionModel]
+) -> list[SubdivisionModel]:
+    """Orders candidates by their best name/alias match against any of the ISO names"""
+    iso_names = prepare_names(iso_sub)
+
+    def score_candidate(candidate: SubdivisionModel) -> float:
+        return max(
+            fuzz.WRatio(i, n) for i in iso_names for n in prepare_names(candidate)
+        )
+
+    return sorted(candidates, key=score_candidate, reverse=True)
+
+
+TIER_ONE_MIN = 10
+TIER_ONE_MAX = 100
+TIER_ONE_FRACTION = 0.1
+
+
+def _get_tier_size(pool_size: int) -> int:
+    return min(max(TIER_ONE_MIN, round(pool_size * TIER_ONE_FRACTION)), TIER_ONE_MAX)
+
+
+def get_candidates(iso_code: str, return_all: bool = False) -> dict[int, str]:
+    # Look up iso_sub
+    iso_sub: SubdivisionModel | None = _iso_subs().get(iso_code, None)
+    if not iso_sub:
+        raise ValueError(f"{iso_code} is not found in ISO subdivisions")
+
+    # Map subdivisions
+    sub_map = get_geonames_submap()
+    geo_subs = sub_map.filter(iso_sub.country.alpha2)
+
+    candidates = _rank_candidates(iso_sub, geo_subs)
+    cutoff = _get_tier_size(len(candidates))
+    candidates = candidates[cutoff:] if return_all else candidates[:cutoff]
+
+    return dict(_format_candidate(c) for c in candidates)
 
 
 def log_decision(line: str) -> None:
-    """Appends one human-readable line to resolution_log.txt, so every merge/add/skip
-    decision (names, not just hashids) can be reviewed after the fact."""
     with open(RESOLUTION_LOG_PATH, "a", encoding="utf-8") as f:
         f.write(line + "\n")
 
 
 def pop_orphan(iso_code: str) -> None:
-    """Removes iso_code from orphaned_subdivisions.json -- it's been resolved and recorded in resolution_map.json."""
+    """Removes an orphan from orphaned_subdivisions.json by iso_code"""
     orphaned = read_orphaned()
     if iso_code not in orphaned:
         raise ValueError(f"{iso_code} is not in orphaned_subdivisions.json")
