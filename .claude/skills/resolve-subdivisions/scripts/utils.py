@@ -67,7 +67,7 @@ def get_geonames_submap() -> SubdivisionMap:
 
 
 @functools.cache
-def _iso_subs() -> dict[str, SubdivisionModel]:
+def _get_iso_subs() -> dict[str, SubdivisionModel]:
     return load_iso_subs(_countries())
 
 
@@ -103,7 +103,7 @@ def _get_tier_size(pool_size: int) -> int:
 
 def get_candidates(iso_code: str, return_all: bool = False) -> dict[int, str]:
     # Look up iso_sub
-    iso_sub: SubdivisionModel | None = _iso_subs().get(iso_code, None)
+    iso_sub: SubdivisionModel | None = _get_iso_subs().get(iso_code, None)
     if not iso_sub:
         raise ValueError(f"{iso_code} is not found in ISO subdivisions")
 
@@ -116,6 +116,17 @@ def get_candidates(iso_code: str, return_all: bool = False) -> dict[int, str]:
     candidates = candidates[cutoff:] if return_all else candidates[:cutoff]
 
     return dict(_format_candidate(c) for c in candidates)
+
+
+def is_valid_candidate(iso_code: str, geo_sub_hashid: int) -> bool:
+    """True if geo_sub_hashid actually belongs to iso_code's own country's candidate pool."""
+    iso_sub = _get_iso_subs().get(iso_code)
+    if not iso_sub:
+        return False
+    sub_map = get_geonames_submap()
+    return any(
+        c.hashid == geo_sub_hashid for c in sub_map.filter(iso_sub.country.alpha2)
+    )
 
 
 def log_decision(line: str) -> None:

@@ -1067,3 +1067,48 @@
 [] country not found: XK, skipping Komuna e Parteshit
 [] country not found: XK, skipping Komuna e Ranillugut
 [] country not found: XK, skipping Mitrovica Veriore
+[] country not found: XK, skipping Ferizaj
+[] country not found: XK, skipping Gjakova
+[] country not found: XK, skipping Gjilan
+[] country not found: XK, skipping Mitrovica
+[] country not found: XK, skipping Pec
+[] country not found: XK, skipping Pristina
+[] country not found: XK, skipping Prizren
+[] country not found: XK, skipping Vushtrri
+[] country not found: XK, skipping Komuna e Vitisë
+[] country not found: XK, skipping Komuna e Ferizajt
+[] country not found: XK, skipping Komuna e Mitrovicës
+[] country not found: XK, skipping Komuna e Thërandës
+[] country not found: XK, skipping Komuna e Skenderajt
+[] country not found: XK, skipping Prizren
+[] country not found: XK, skipping Komuna e Prishtinës
+[] country not found: XK, skipping Podujevo
+[] country not found: XK, skipping Komuna e Pejës
+[] country not found: XK, skipping Orahovac
+[] country not found: XK, skipping Lipjan
+[] country not found: XK, skipping Komuna e Leposaviqit
+[] country not found: XK, skipping Kamenica
+[] country not found: XK, skipping Komuna e Klines
+[] country not found: XK, skipping Komuna e Kaçanikut
+[] country not found: XK, skipping Komuna e Istogut
+[] country not found: XK, skipping Komuna e Gjilanit
+[] country not found: XK, skipping Komuna e Drenasit
+[] country not found: XK, skipping Komuna e Dragashit
+[] country not found: XK, skipping Komuna e Deçanit
+[] country not found: XK, skipping Komuna e Gjakovës
+[] country not found: XK, skipping Kosovo Polje
+[] country not found: XK, skipping Opština Štrpce
+[] country not found: XK, skipping Komuna e Shtimes
+[] country not found: XK, skipping Novo Brdo
+[] country not found: XK, skipping Komuna e Obiliqit
+[] country not found: XK, skipping Komuna e Malisheves
+[] country not found: XK, skipping Komuna e Zubin Potokut
+[] country not found: XK, skipping Komuna e Zveçanit
+[] country not found: XK, skipping Komuna e Graçanicës
+[] country not found: XK, skipping Hani i Elezit
+[] country not found: XK, skipping Komuna e Junikut
+[] country not found: XK, skipping Komuna e Kllokotit
+[] country not found: XK, skipping Komuna e Mamushës
+[] country not found: XK, skipping Komuna e Parteshit
+[] country not found: XK, skipping Komuna e Ranillugut
+[] country not found: XK, skipping Mitrovica Veriore

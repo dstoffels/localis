@@ -42,12 +42,14 @@ def merge(iso_code: str, geo_sub_hashid: str, names: list[str] = []) -> str:
 
     if orphan is None:
         return "ERROR: INVALID ISO CODE FOR ORPHAN"
+    hashid = int(geo_sub_hashid)
 
-    candidate = get_geonames_submap().get(int(geo_sub_hashid))
-    if candidate is None:
-        return "ERROR: INVALID HASHID FOR GEONAMES CANDIDATE"
+    if not is_valid_candidate(iso_code, hashid):
+        return "ERROR: INVALID CANDIDATE FOR ISO CODE"
 
-    write_resolution(iso_code, {"hashid": geo_sub_hashid, "names": names})
+    candidate = get_geonames_submap().get(hashid)
+
+    write_resolution(iso_code, {"hashid": hashid, "names": names})
     pop_orphan(iso_code)
 
     line = (
