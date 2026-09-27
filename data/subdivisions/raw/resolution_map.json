@@ -1,1 +1,1297 @@
-{}
+{
+  "AM-VD": {
+    "hashid": 18259341876283111906,
+    "names": []
+  },
+  "AT-2": {
+    "added": true,
+    "names": [
+      "Carinthia"
+    ]
+  },
+  "AT-3": {
+    "added": true,
+    "names": [
+      "Lower Austria"
+    ]
+  },
+  "AT-4": {
+    "added": true,
+    "names": [
+      "Upper Austria"
+    ]
+  },
+  "AT-6": {
+    "hashid": 5554678294385227951,
+    "names": []
+  },
+  "AT-9": {
+    "hashid": 5033946932732263266,
+    "names": []
+  },
+  "AZ-NX": {
+    "hashid": 17126612131445476090,
+    "names": []
+  },
+  "AZ-NV": {
+    "hashid": 10327351081856570025,
+    "names": []
+  },
+  "AZ-XCI": {
+    "hashid": 3948403324092252865,
+    "names": []
+  },
+  "AZ-XVD": {
+    "hashid": 632633854087999523,
+    "names": []
+  },
+  "BA-BIH": {
+    "hashid": 9964537520505996191,
+    "names": []
+  },
+  "BD-A": {
+    "hashid": 2831414602029012506,
+    "names": []
+  },
+  "BD-22": {
+    "hashid": 13017779450755984638,
+    "names": []
+  },
+  "BE-BRU": {
+    "hashid": 1303302418975648253,
+    "names": []
+  },
+  "BE-VLG": {
+    "hashid": 7114087128947764291,
+    "names": []
+  },
+  "BF-KMD": {
+    "hashid": 4875584601790877806,
+    "names": []
+  },
+  "BF-KOS": {
+    "hashid": 14407117942579027731,
+    "names": [
+      "Kossi"
+    ]
+  },
+  "BF-LOR": {
+    "hashid": 3722567644184048257,
+    "names": []
+  },
+  "BF-SMT": {
+    "hashid": 6444921371193110426,
+    "names": [
+      "Sanmatenga"
+    ]
+  },
+  "BF-SOM": {
+    "hashid": 6183290825741632034,
+    "names": [
+      "Soum"
+    ]
+  },
+  "BF-TAP": {
+    "added": true,
+    "names": []
+  },
+  "BH-14": {
+    "hashid": 17626728950368949944,
+    "names": []
+  },
+  "BH-13": {
+    "hashid": 17193323948274891287,
+    "names": []
+  },
+  "BH-17": {
+    "hashid": 3296527386319725693,
+    "names": []
+  },
+  "BI-KR": {
+    "added": true,
+    "names": []
+  },
+  "BI-MW": {
+    "added": true,
+    "names": []
+  },
+  "BO-B": {
+    "hashid": 15283482136559554218,
+    "names": []
+  },
+  "BT-43": {
+    "hashid": 16098220528632627989,
+    "names": []
+  },
+  "BW-SO": {
+    "added": true,
+    "names": []
+  },
+  "BY-BR": {
+    "hashid": 14031285334843102465,
+    "names": []
+  },
+  "BY-HO": {
+    "hashid": 3776654294727470660,
+    "names": []
+  },
+  "BY-MA": {
+    "hashid": 15866662703133056887,
+    "names": []
+  },
+  "BZ-SC": {
+    "hashid": 251736499394777374,
+    "names": [
+      "Stann Creek"
+    ]
+  },
+  "CD-BC": {
+    "hashid": 12083054728932433545,
+    "names": [
+      "Bas-Congo"
+    ]
+  },
+  "CD-NK": {
+    "hashid": 3626445824490165039,
+    "names": []
+  },
+  "CD-SK": {
+    "hashid": 9186806592796032547,
+    "names": []
+  },
+  "CF-KB": {
+    "added": true,
+    "names": []
+  },
+  "CH-BS": {
+    "hashid": 619646476019425698,
+    "names": []
+  },
+  "CH-GR": {
+    "hashid": 10764539335603049747,
+    "names": []
+  },
+  "CN-MO": {
+    "added": true,
+    "names": [
+      "Macao",
+      "Macau"
+    ]
+  },
+  "CN-HK": {
+    "added": true,
+    "names": [
+      "Hong Kong"
+    ]
+  },
+  "CN-NM": {
+    "hashid": 17192407251240072214,
+    "names": []
+  },
+  "CN-TW": {
+    "added": true,
+    "names": [
+      "Taiwan"
+    ]
+  },
+  "CN-XZ": {
+    "added": true,
+    "names": [
+      "Tibet"
+    ]
+  },
+  "CO-DC": {
+    "hashid": 6794102982673819394,
+    "names": []
+  },
+  "CU-03": {
+    "hashid": 3018805721934171385,
+    "names": []
+  },
+  "CV-BV": {
+    "hashid": 705132612200659926,
+    "names": []
+  },
+  "CV-BR": {
+    "hashid": 10983424776763243137,
+    "names": []
+  },
+  "CV-B": {
+    "added": true,
+    "names": [
+      "Barlavento Islands"
+    ]
+  },
+  "CV-S": {
+    "added": true,
+    "names": [
+      "Sotavento Islands"
+    ]
+  },
+  "CV-MA": {
+    "hashid": 3894072371730316330,
+    "names": []
+  },
+  "CV-MO": {
+    "hashid": 12990632026175913445,
+    "names": []
+  },
+  "CV-PA": {
+    "hashid": 13344093838652070261,
+    "names": []
+  },
+  "CV-PN": {
+    "hashid": 7034729200488182788,
+    "names": []
+  },
+  "CV-PR": {
+    "hashid": 8086121627744482082,
+    "names": []
+  },
+  "CV-RB": {
+    "hashid": 15078839076604930817,
+    "names": []
+  },
+  "CV-RG": {
+    "hashid": 13224718789698419456,
+    "names": []
+  },
+  "CV-RS": {
+    "hashid": 16209442399567980064,
+    "names": []
+  },
+  "CV-SL": {
+    "hashid": 1614766708942554705,
+    "names": []
+  },
+  "CV-CR": {
+    "hashid": 6331602945788660171,
+    "names": []
+  },
+  "CV-SD": {
+    "hashid": 12173059146301659138,
+    "names": []
+  },
+  "CV-SF": {
+    "hashid": 6284023071982029689,
+    "names": []
+  },
+  "CV-SV": {
+    "hashid": 15131506162063892562,
+    "names": []
+  },
+  "CV-TA": {
+    "hashid": 14249535839153097734,
+    "names": []
+  },
+  "CV-TS": {
+    "hashid": 15645238902898204492,
+    "names": []
+  },
+  "CY-01": {
+    "hashid": 17575498885477680404,
+    "names": [
+      "Lefkoşa"
+    ]
+  },
+  "CY-02": {
+    "hashid": 2433773035988939339,
+    "names": [
+      "Leymasun"
+    ]
+  },
+  "CZ-64": {
+    "hashid": 8410285739409551244,
+    "names": []
+  },
+  "CZ-31": {
+    "added": true,
+    "names": [
+      "South Bohemian Region"
+    ]
+  },
+  "CZ-41": {
+    "added": true,
+    "names": [
+      "Karlovy Vary Region"
+    ]
+  },
+  "CZ-52": {
+    "hashid": 18306139455349334466,
+    "names": []
+  },
+  "CZ-80": {
+    "hashid": 351061663911687314,
+    "names": []
+  },
+  "CZ-10": {
+    "added": true,
+    "names": [
+      "Prague"
+    ]
+  },
+  "CZ-20": {
+    "added": true,
+    "names": [
+      "Central Bohemian Region"
+    ]
+  },
+  "CZ-72": {
+    "hashid": 5579150566464626108,
+    "names": []
+  },
+  "CZ-42": {
+    "hashid": 9499542719324458103,
+    "names": []
+  },
+  "DE-BY": {
+    "added": true,
+    "names": [
+      "Bavaria"
+    ]
+  },
+  "DE-NI": {
+    "hashid": 16161630923016687986,
+    "names": []
+  },
+  "DE-NW": {
+    "hashid": 767740820275888350,
+    "names": []
+  },
+  "DE-SN": {
+    "hashid": 9340599352467930100,
+    "names": []
+  },
+  "DE-ST": {
+    "hashid": 17823492179474453441,
+    "names": []
+  },
+  "DE-TH": {
+    "hashid": 5512921328756895368,
+    "names": []
+  },
+  "DK-84": {
+    "added": true,
+    "names": [
+      "Capital Region of Denmark"
+    ]
+  },
+  "DK-82": {
+    "hashid": 3180824788497675873,
+    "names": []
+  },
+  "DK-81": {
+    "hashid": 6587282618310438224,
+    "names": []
+  },
+  "DK-85": {
+    "hashid": 15380463672029119977,
+    "names": []
+  },
+  "DK-83": {
+    "hashid": 12361097487423467211,
+    "names": []
+  },
+  "DO-03": {
+    "hashid": 10898163477123812698,
+    "names": []
+  },
+  "DO-33": {
+    "added": true,
+    "names": []
+  },
+  "DO-34": {
+    "added": true,
+    "names": []
+  },
+  "DO-35": {
+    "added": true,
+    "names": []
+  },
+  "DO-36": {
+    "added": true,
+    "names": []
+  },
+  "DO-01": {
+    "hashid": 2545951785960071624,
+    "names": []
+  },
+  "DO-06": {
+    "hashid": 10552907223733560021,
+    "names": []
+  },
+  "DO-37": {
+    "added": true,
+    "names": []
+  },
+  "DO-07": {
+    "hashid": 10230849822333583155,
+    "names": []
+  },
+  "DO-38": {
+    "added": true,
+    "names": []
+  },
+  "DO-09": {
+    "hashid": 14548261186608404783,
+    "names": []
+  },
+  "DO-19": {
+    "hashid": 12655063999735625467,
+    "names": []
+  },
+  "DO-39": {
+    "added": true,
+    "names": []
+  },
+  "DO-10": {
+    "hashid": 4204623252710196221,
+    "names": []
+  },
+  "DO-11": {
+    "hashid": 17496805393458962437,
+    "names": []
+  },
+  "DO-28": {
+    "hashid": 6437022730056275695,
+    "names": []
+  },
+  "DO-40": {
+    "added": true,
+    "names": []
+  },
+  "DO-17": {
+    "hashid": 2037131853133885597,
+    "names": []
+  },
+  "DO-41": {
+    "added": true,
+    "names": []
+  },
+  "DO-27": {
+    "hashid": 14138765543379867363,
+    "names": []
+  },
+  "DO-42": {
+    "added": true,
+    "names": []
+  },
+  "EG-DK": {
+    "hashid": 9318628226602789107,
+    "names": []
+  },
+  "EG-BH": {
+    "added": true,
+    "names": []
+  },
+  "EG-FYM": {
+    "added": true,
+    "names": []
+  },
+  "EG-GH": {
+    "added": true,
+    "names": []
+  },
+  "EG-IS": {
+    "added": true,
+    "names": []
+  },
+  "EG-MNF": {
+    "added": true,
+    "names": []
+  },
+  "EG-KB": {
+    "hashid": 733095517075002237,
+    "names": []
+  },
+  "EG-SHR": {
+    "hashid": 13365197459742857616,
+    "names": []
+  },
+  "EG-BNS": {
+    "hashid": 14486115580737868210,
+    "names": []
+  },
+  "EG-KFS": {
+    "hashid": 5947396524261461379,
+    "names": []
+  },
+  "ER-SK": {
+    "added": true,
+    "names": []
+  },
+  "ES-C": {
+    "hashid": 16663251777587820009,
+    "names": []
+  },
+  "ES-CL": {
+    "hashid": 515885370972376802,
+    "names": []
+  },
+  "ES-CT": {
+    "hashid": 1724482950771920377,
+    "names": []
+  },
+  "ES-PV": {
+    "hashid": 6263351742782356773,
+    "names": []
+  },
+  "ES-IB": {
+    "hashid": 10273630057322074318,
+    "names": []
+  },
+  "ET-SN": {
+    "added": true,
+    "names": []
+  },
+  "ET-SW": {
+    "hashid": 12385432535360788755,
+    "names": []
+  },
+  "FI-01": {
+    "added": true,
+    "names": []
+  },
+  "FI-19": {
+    "hashid": 6029943825149156179,
+    "names": []
+  },
+  "FI-02": {
+    "hashid": 14213347715668903798,
+    "names": []
+  },
+  "FI-03": {
+    "hashid": 7386778009856642809,
+    "names": []
+  },
+  "FI-04": {
+    "hashid": 7556312291482969511,
+    "names": []
+  },
+  "FI-07": {
+    "hashid": 18270890864754931112,
+    "names": []
+  },
+  "FI-08": {
+    "hashid": 16859499639511552715,
+    "names": []
+  },
+  "FI-13": {
+    "hashid": 1464986632952177745,
+    "names": []
+  },
+  "FI-15": {
+    "hashid": 12250652957173949327,
+    "names": []
+  },
+  "FI-14": {
+    "hashid": 2425753874731096670,
+    "names": []
+  },
+  "FI-12": {
+    "hashid": 17006021513674694543,
+    "names": []
+  },
+  "FR-6AE": {
+    "added": true,
+    "names": []
+  },
+  "FR-BRE": {
+    "hashid": 7840592450004425197,
+    "names": []
+  },
+  "FR-CP": {
+    "added": true,
+    "names": []
+  },
+  "FR-20R": {
+    "hashid": 7029890424806918353,
+    "names": []
+  },
+  "FR-2A": {
+    "added": true,
+    "names": []
+  },
+  "FR-971": {
+    "added": true,
+    "names": []
+  },
+  "FR-973": {
+    "added": true,
+    "names": []
+  },
+  "FR-2B": {
+    "added": true,
+    "names": []
+  },
+  "FR-31": {
+    "hashid": 15422762469903055286,
+    "names": []
+  },
+  "FR-974": {
+    "added": true,
+    "names": []
+  },
+  "FR-972": {
+    "added": true,
+    "names": []
+  },
+  "FR-976": {
+    "added": true,
+    "names": []
+  },
+  "FR-69M": {
+    "added": true,
+    "names": []
+  },
+  "FR-NAQ": {
+    "hashid": 2098146037107974944,
+    "names": []
+  },
+  "FR-NC": {
+    "added": true,
+    "names": []
+  },
+  "FR-PF": {
+    "added": true,
+    "names": []
+  },
+  "FR-BL": {
+    "added": true,
+    "names": []
+  },
+  "FR-MF": {
+    "added": true,
+    "names": []
+  },
+  "FR-PM": {
+    "added": true,
+    "names": []
+  },
+  "FR-TF": {
+    "added": true,
+    "names": []
+  },
+  "FR-WF": {
+    "added": true,
+    "names": []
+  },
+  "GB-BDG": {
+    "added": true,
+    "names": []
+  },
+  "GB-BNE": {
+    "added": true,
+    "names": []
+  },
+  "GB-BEX": {
+    "added": true,
+    "names": []
+  },
+  "GB-BEN": {
+    "added": true,
+    "names": []
+  },
+  "GB-BRY": {
+    "added": true,
+    "names": []
+  },
+  "GB-CMD": {
+    "added": true,
+    "names": []
+  },
+  "GB-CRY": {
+    "added": true,
+    "names": []
+  },
+  "GB-GRE": {
+    "added": true,
+    "names": []
+  },
+  "GB-HCK": {
+    "added": true,
+    "names": []
+  },
+  "GB-HMF": {
+    "added": true,
+    "names": []
+  },
+  "GB-HRY": {
+    "added": true,
+    "names": []
+  },
+  "GB-HRW": {
+    "added": true,
+    "names": []
+  },
+  "GB-HAV": {
+    "added": true,
+    "names": []
+  },
+  "GB-HIL": {
+    "added": true,
+    "names": []
+  },
+  "GB-HNS": {
+    "added": true,
+    "names": []
+  },
+  "GB-ISL": {
+    "added": true,
+    "names": []
+  },
+  "GB-KEC": {
+    "added": true,
+    "names": []
+  },
+  "GB-KTT": {
+    "added": true,
+    "names": []
+  },
+  "GB-LBH": {
+    "added": true,
+    "names": []
+  },
+  "GB-LEW": {
+    "added": true,
+    "names": []
+  },
+  "GB-MRT": {
+    "added": true,
+    "names": []
+  },
+  "GB-NWM": {
+    "added": true,
+    "names": []
+  },
+  "GB-RDB": {
+    "added": true,
+    "names": []
+  },
+  "GB-RIC": {
+    "added": true,
+    "names": []
+  },
+  "GB-SWK": {
+    "added": true,
+    "names": []
+  },
+  "GB-STN": {
+    "added": true,
+    "names": []
+  },
+  "GB-TWH": {
+    "added": true,
+    "names": []
+  },
+  "GB-WFT": {
+    "added": true,
+    "names": []
+  },
+  "GB-WND": {
+    "added": true,
+    "names": []
+  },
+  "GB-WSM": {
+    "added": true,
+    "names": []
+  },
+  "GQ-BN": {
+    "hashid": 3023793281405305766,
+    "names": []
+  },
+  "GQ-BS": {
+    "hashid": 17797878681589620323,
+    "names": []
+  },
+  "GQ-CS": {
+    "hashid": 11737113617557607118,
+    "names": []
+  },
+  "GQ-DJ": {
+    "hashid": 7336099691248937475,
+    "names": []
+  },
+  "GQ-KN": {
+    "hashid": 17905929667799451702,
+    "names": []
+  },
+  "GQ-LI": {
+    "hashid": 5879842871864002706,
+    "names": []
+  },
+  "GQ-C": {
+    "added": true,
+    "names": [
+      "Río Muni"
+    ]
+  },
+  "GQ-I": {
+    "added": true,
+    "names": []
+  },
+  "GQ-WN": {
+    "hashid": 1958570059220681696,
+    "names": []
+  },
+  "GR-A": {
+    "hashid": 1205156330726946481,
+    "names": []
+  },
+  "GR-I": {
+    "hashid": 13223891665784901235,
+    "names": []
+  },
+  "GR-G": {
+    "added": true,
+    "names": [
+      "Western Greece"
+    ]
+  },
+  "GR-C": {
+    "hashid": 5728449947567529500,
+    "names": []
+  },
+  "GR-F": {
+    "hashid": 9255607841537206187,
+    "names": []
+  },
+  "GR-B": {
+    "hashid": 1728227864186137884,
+    "names": []
+  },
+  "GR-M": {
+    "added": true,
+    "names": [
+      "Crete"
+    ]
+  },
+  "GR-L": {
+    "added": true,
+    "names": [
+      "South Aegean"
+    ]
+  },
+  "GR-J": {
+    "hashid": 7892918363463324032,
+    "names": []
+  },
+  "GR-H": {
+    "added": true,
+    "names": [
+      "Central Greece"
+    ]
+  },
+  "GR-K": {
+    "hashid": 17649593875317055821,
+    "names": []
+  },
+  "GR-69": {
+    "added": true,
+    "names": [
+      "Mount Athos"
+    ]
+  },
+  "GR-D": {
+    "hashid": 3041433102075313050,
+    "names": []
+  },
+  "GW-BM": {
+    "hashid": 7106958541391228738,
+    "names": []
+  },
+  "GW-L": {
+    "added": true,
+    "names": []
+  },
+  "GW-N": {
+    "added": true,
+    "names": []
+  },
+  "GW-OI": {
+    "hashid": 15202394174908504040,
+    "names": []
+  },
+  "GW-QU": {
+    "hashid": 2307774773964476808,
+    "names": []
+  },
+  "GW-S": {
+    "added": true,
+    "names": []
+  },
+  "GW-TO": {
+    "hashid": 17552616587020259708,
+    "names": []
+  },
+  "HN-IB": {
+    "hashid": 1710350278707837977,
+    "names": [
+      "Islas de la Bahía"
+    ]
+  },
+  "HR-07": {
+    "hashid": 6137860277085836514,
+    "names": [
+      "Bjelovarsko-bilogorska županija"
+    ]
+  },
+  "HR-12": {
+    "hashid": 2462660711680687613,
+    "names": [
+      "Brodsko-posavska županija"
+    ]
+  },
+  "HR-19": {
+    "hashid": 9831373956248052199,
+    "names": [
+      "Dubrovačko-neretvanska županija"
+    ]
+  },
+  "HR-18": {
+    "hashid": 13593419230890173594,
+    "names": [
+      "Istarska županija"
+    ]
+  },
+  "HR-04": {
+    "hashid": 7595259266207563253,
+    "names": [
+      "Karlovačka županija"
+    ]
+  },
+  "HR-06": {
+    "hashid": 515303284250205483,
+    "names": [
+      "Koprivničko-križevačka županija"
+    ]
+  },
+  "HR-02": {
+    "hashid": 9464094650309313369,
+    "names": [
+      "Krapinsko-zagorska županija"
+    ]
+  },
+  "HR-09": {
+    "hashid": 15679379278698257234,
+    "names": [
+      "Ličko-senjska županija"
+    ]
+  },
+  "HR-20": {
+    "hashid": 7130259495444217249,
+    "names": [
+      "Međimurska županija"
+    ]
+  },
+  "HR-14": {
+    "hashid": 17686476244825850176,
+    "names": [
+      "Osječko-baranjska županija"
+    ]
+  },
+  "HR-11": {
+    "hashid": 571633011816446691,
+    "names": [
+      "Požeško-slavonska županija"
+    ]
+  },
+  "HR-08": {
+    "hashid": 13393484788884074394,
+    "names": [
+      "Primorsko-goranska županija"
+    ]
+  },
+  "HR-03": {
+    "hashid": 5373331629619585599,
+    "names": [
+      "Sisačko-moslavačka županija"
+    ]
+  },
+  "HR-17": {
+    "hashid": 4728741655569437311,
+    "names": [
+      "Splitsko-dalmatinska županija"
+    ]
+  },
+  "HR-05": {
+    "hashid": 6869589799992934814,
+    "names": [
+      "Varaždinska županija"
+    ]
+  },
+  "HR-10": {
+    "hashid": 9115739172909847332,
+    "names": [
+      "Virovitičko-podravska županija"
+    ]
+  },
+  "HR-16": {
+    "hashid": 9228354118196276891,
+    "names": []
+  },
+  "HR-13": {
+    "hashid": 1075406954298904301,
+    "names": []
+  },
+  "HR-01": {
+    "hashid": 18165030935922230113,
+    "names": []
+  },
+  "HR-15": {
+    "hashid": 4924830280273446913,
+    "names": []
+  },
+  "HU-BC": {
+    "added": true,
+    "names": []
+  },
+  "HU-DE": {
+    "added": true,
+    "names": []
+  },
+  "HU-DU": {
+    "added": true,
+    "names": []
+  },
+  "HU-EG": {
+    "added": true,
+    "names": []
+  },
+  "HU-HV": {
+    "added": true,
+    "names": []
+  },
+  "HU-KV": {
+    "added": true,
+    "names": []
+  },
+  "HU-KM": {
+    "added": true,
+    "names": []
+  },
+  "HU-MI": {
+    "added": true,
+    "names": []
+  },
+  "HU-NK": {
+    "added": true,
+    "names": []
+  },
+  "HU-NY": {
+    "added": true,
+    "names": []
+  },
+  "HU-ST": {
+    "added": true,
+    "names": []
+  },
+  "HU-SD": {
+    "added": true,
+    "names": []
+  },
+  "HU-SS": {
+    "added": true,
+    "names": []
+  },
+  "HU-SH": {
+    "added": true,
+    "names": []
+  },
+  "HU-SF": {
+    "added": true,
+    "names": []
+  },
+  "HU-TB": {
+    "added": true,
+    "names": []
+  },
+  "HU-ZE": {
+    "added": true,
+    "names": []
+  },
+  "HU-ER": {
+    "added": true,
+    "names": []
+  },
+  "ID-BA": {
+    "hashid": 14437149475941329817,
+    "names": []
+  },
+  "ID-BT": {
+    "hashid": 16898327688087271583,
+    "names": []
+  },
+  "ID-JK": {
+    "hashid": 4695078975331386170,
+    "names": []
+  },
+  "ID-JW": {
+    "added": true,
+    "names": []
+  },
+  "ID-JB": {
+    "added": true,
+    "names": [
+      "West Java"
+    ]
+  },
+  "ID-JT": {
+    "added": true,
+    "names": [
+      "Central Java"
+    ]
+  },
+  "ID-JI": {
+    "added": true,
+    "names": [
+      "East Java"
+    ]
+  },
+  "ID-KA": {
+    "added": true,
+    "names": []
+  },
+  "ID-KB": {
+    "hashid": 11473268994770462644,
+    "names": [
+      "West Kalimantan"
+    ]
+  },
+  "ID-KS": {
+    "hashid": 10884306699022656519,
+    "names": [
+      "South Kalimantan"
+    ]
+  },
+  "ID-KT": {
+    "hashid": 9309806926450444053,
+    "names": [
+      "Central Kalimantan"
+    ]
+  },
+  "ID-KI": {
+    "hashid": 2921321320579836663,
+    "names": [
+      "East Kalimantan"
+    ]
+  },
+  "ID-KU": {
+    "hashid": 488010603257107888,
+    "names": [
+      "North Kalimantan"
+    ]
+  },
+  "ID-BB": {
+    "hashid": 5435165346766532399,
+    "names": [
+      "Bangka-Belitung Islands"
+    ]
+  },
+  "ID-KR": {
+    "hashid": 12905742396118802260,
+    "names": [
+      "Riau Islands"
+    ]
+  },
+  "ID-NU": {
+    "added": true,
+    "names": []
+  },
+  "ID-NB": {
+    "hashid": 3734814404109093988,
+    "names": [
+      "West Nusa Tenggara"
+    ]
+  },
+  "ID-NT": {
+    "hashid": 14150503068299783292,
+    "names": [
+      "East Nusa Tenggara"
+    ]
+  },
+  "ID-PA": {
+    "hashid": 2349863149870575641,
+    "names": []
+  },
+  "ID-PB": {
+    "hashid": 15690768876590646321,
+    "names": [
+      "West Papua"
+    ]
+  },
+  "ID-PD": {
+    "added": true,
+    "names": [
+      "Southwest Papua"
+    ]
+  },
+  "ID-PE": {
+    "hashid": 9039127612095223945,
+    "names": [
+      "Highland Papua"
+    ]
+  },
+  "ID-PS": {
+    "hashid": 9690589497824215987,
+    "names": [
+      "South Papua"
+    ]
+  },
+  "ID-PT": {
+    "hashid": 1050673848426258652,
+    "names": [
+      "Central Papua"
+    ]
+  },
+  "ID-RI": {
+    "hashid": 13187188712659963782,
+    "names": []
+  },
+  "ID-SR": {
+    "hashid": 9032186593170709723,
+    "names": [
+      "West Sulawesi"
+    ]
+  },
+  "ID-SN": {
+    "hashid": 3823630053724623924,
+    "names": [
+      "South Sulawesi"
+    ]
+  },
+  "ID-ST": {
+    "hashid": 4085803315462924868,
+    "names": [
+      "Central Sulawesi"
+    ]
+  },
+  "ID-SG": {
+    "hashid": 9084027117939096023,
+    "names": [
+      "Southeast Sulawesi"
+    ]
+  },
+  "ID-SA": {
+    "hashid": 6067747453582173765,
+    "names": [
+      "North Sulawesi"
+    ]
+  },
+  "ID-SM": {
+    "added": true,
+    "names": []
+  },
+  "ID-SB": {
+    "hashid": 16506488556942819759,
+    "names": [
+      "West Sumatra"
+    ]
+  },
+  "ID-SS": {
+    "hashid": 6304627934268481224,
+    "names": [
+      "South Sumatra"
+    ]
+  }
+}

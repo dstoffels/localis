@@ -130,14 +130,14 @@ def is_valid_candidate(iso_code: str, geo_sub_hashid: int) -> bool:
     )
 
 
-def get_next_orphan() -> dict:
+def get_next_orphan(return_all: bool = False) -> dict:
     orphaned = read_orphaned()
     if not orphaned:
         return None
 
     iso_code, entry = next(iter(orphaned.items()))
     result = {"iso_code": iso_code, **entry}
-    result["candidates"] = get_candidates(iso_code, return_all=False)
+    result["candidates"] = get_candidates(iso_code, return_all=return_all)
     return result
 
 

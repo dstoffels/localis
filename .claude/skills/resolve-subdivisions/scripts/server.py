@@ -20,7 +20,7 @@ def next(return_all: bool = False) -> dict | str | None:
     if processed_candidates >= MAX_CANDIDATES:
         return "MAX CANDIDATES REACHED: Tell the user to have you call the reset tool, then /clear to clear context. The next tool will not return candidates until the count is reset."
 
-    orphan = get_next_orphan()
+    orphan = get_next_orphan(return_all)
     processed_candidates += len(orphan["candidates"])
     return orphan
 
@@ -96,6 +96,10 @@ def review() -> str:
     orphan = get_next_orphan()
     if orphan is None:
         return "NO ORPHANS TO REVIEW"
+
+    top_candidates = orphan["candidates"]
+    orphan = get_next_orphan(True)
+    orphan["top_candidates"] = {**orphan["candidates"], **top_candidates}
 
     write_orphan_for_review(orphan)
 

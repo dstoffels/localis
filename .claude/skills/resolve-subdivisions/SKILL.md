@@ -30,7 +30,7 @@ disallowed-tools: Bash Read Grep Glob Edit Write Agent WebFetch
   1. Proceed to Step 3. Do not proceed to Step 4 without first making an actual Websearch tool call for this orphan in this turn. If no such call has been made yet, make it now.
 
 ### Step 3. Escalate to Websearch
-**CALL** the `Websearch` tool with the orphan's name and ISO code to gather additional information about the orphaned subdivision.
+**CALL** the `Websearch` tool with the orphan's `name` and `iso_code` to gather additional information about the orphaned subdivision. DO NOT add additional search terms.
 
 **IF** a confident match is found after the websearch:
   1. **CALL** the `merge` tool with `iso_code`, `geo_sub_hashid` and any additional names if applicable.
