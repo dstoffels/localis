@@ -75,7 +75,9 @@ class Model(DTO):
                 elif value is not None:
                     filter_values[param].add(normalize(value))
 
-        return filter_values
+        return {
+            filter_name: sorted(values) for filter_name, values in filter_values.items()
+        }
 
     SEARCH_FIELDS: dict[str, float] = {}
     """Fields that are used to identify the obj when searching. Key is the field name (can be nested fields using dot notation), value is the weight for search relevance."""
