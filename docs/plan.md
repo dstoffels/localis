@@ -12,7 +12,7 @@ This document outlines the project plan for the Localis project, detailing the o
 ~~- Update cities registry to lazy load for faster initialization/import.~~
 ~~- Implement resolve-subdivisions skill & MCP for locally automated data reconciliation when merging ISO and geonames datasets.~~
 ~~- Add checksums to data fetching to skip unnecessary downloads~~
-- Implement cron job in GHA ci for automated data fetching, updating the dataset and drafting a PR if the merging of the new data succeeds. If it cannot be merged automatically, notify the team for manual intervention.
+~~- Implement cron job in GHA ci for automated data fetching, updating the dataset and drafting a PR if the merging of the new data succeeds. If it cannot be merged automatically, notify the team for manual intervention.~~
 
 
 ## Backlog
@@ -20,41 +20,45 @@ This document outlines the project plan for the Localis project, detailing the o
 - Patch missing flags for countries
 - Implement native languages in countries?
 
-## Ingest CI cron job (implementation plan)
+## Ingest CI cron job
 
 ### Context
 
-The last MVP item is a scheduled CI job that fetches upstream data, merges it, and drafts a PR when it succeeds, or signals for manual intervention when it can't fully resolve (unmerged subdivisions). The checksum-aware fetching and ingest-side gating already built are the prerequisites this depends on: they're what make "did anything actually change" a trustworthy signal instead of noise.
+A scheduled CI job fetches upstream data, merges it, and drafts a PR when it succeeds, or blocks for manual intervention when it can't fully resolve (unmerged subdivisions). The checksum-aware fetching and ingest-side gating built earlier are the prerequisites this depends on: they're what make "did anything actually change" a trustworthy signal instead of noise.
 
-The architecture: `ingest` is a long-lived branch (already exists locally and on `origin`) that CI runs against on a monthly schedule and on every push to it. CI commits whatever the ingest pipeline produces straight back to `ingest`, and maintains a single PR from `ingest` into `main`. When subdivisions can't be fully auto-resolved, the run still commits and pushes whatever did resolve, including the freshly-written `orphaned_subdivisions.json`, so the PR reflects real partial progress, then fails at the end (GitHub already emails repo owners on scheduled-workflow failures, so no extra notification plumbing is needed). The maintainer pulls `ingest`, runs the resolve-subdivisions skill locally, commits, and pushes back to `origin/ingest`, which re-triggers the same workflow via the push trigger.
+`ingest` is a long-lived branch that CI runs against on a monthly schedule and on every push to it. CI commits whatever the ingest pipeline produces straight back to `ingest`, and maintains a single PR from `ingest` into `main`. `resolve_subdivisions.py`'s `dump_orphans()` (formerly `handle_orphans()`, which used to hard `sys.exit(10)` the moment it found any orphan, before the pipeline ever dumped anything) now just writes `orphaned_subdivisions.json` and lets the pipeline run to completion regardless, so a run with unresolved orphans still commits and pushes whatever *did* resolve. CI checks that file's content directly after the run (via `data/subdivisions/scripts/check_orphans.py`, exposed as `poetry run check-orphans`) rather than relying on any exit code, since the file is the actual source of truth and it's already committed to the branch. When it's non-empty, the script prints a markdown summary (each orphaned ISO code, name, country, and the resolve-subdivisions-skill instructions), which CI posts as a real comment on the PR, and the job fails at the end so it's visible in the Actions tab too. The maintainer pulls `ingest`, runs the resolve-subdivisions skill locally, commits, and pushes back to `origin/ingest`, which re-triggers the workflow via the push trigger.
 
-This originally required a behavior change: `resolve_subdivisions.py`'s `handle_orphans()` used to call `sys.exit(10)` the moment it found any orphan, before `ingest_subdivisions()` ever reached `sub_map.refresh()`/`dump(sub_map)`, so a run with orphans wrote nothing at all, which would've defeated "commit whatever succeeded." That call has been removed (the function is now `dump_orphans()` and only writes `orphaned_subdivisions.json`), so the pipeline always runs to completion and dumps whatever it resolved regardless of leftover orphans. The exit-code signal isn't needed either: CI can just check `orphaned_subdivisions.json`'s content directly after the run, since that file is the actual source of truth and it's already committed to the branch.
+The actual block on merging is the PR staying in **draft**: GitHub disables the merge button on a draft PR regardless of any check's pass/fail state, and this repo's branch protection on `main` only restricts direct pushes (PRs are the only way in), it doesn't require this workflow's check to pass. So the comment is purely visibility, the draft state is what actually blocks.
 
-### Code change: stop losing partial progress on orphans
+Version bumps are scoped specifically to `src/localis/data` (the published dataset), separately from the broader "is there anything to commit at all" check, since the raw bookkeeping files (per-domain `*.manifest.json`, `resolution_map.json`, `orphaned_subdivisions.json`) can change independently of the dataset output and still need to be committed even when they do. On a run where the dataset itself changed, `poetry version minor` bumps it. Reasoning: strict semver would call a data refresh a patch (no API change), but this package's actual value is the data as much as the API, and a refresh almost always means *more* coverage rather than a fix to something broken, so a minor bump reads more honestly to a consumer. This is a routine, ongoing bump for as long as the project is at `1.0.0` or later; it's independent of the alpha/beta/stable phase transitions the maintainer manages by hand in `pyproject.toml`.
 
-Done. `resolve_subdivisions.py`'s `dump_orphans()` (formerly `handle_orphans()`) no longer calls `sys.exit()`; it only writes the file. `ingest_countries()` and `ingest_cities()` needed no changes; their gating was already ordered correctly.
+Cities is included in the pipeline (`ingest_all()` calls `ingest_cities()` again); no changes were needed in `ingest.yaml` for this since its dataset-changed and diff-stat checks are already scoped generically to `src/localis/data`, not per-domain.
 
-### New workflow: `.github/workflows/ingest.yaml`
+Also fixed in passing, discovered while reviewing this: `release.yaml`'s `actions/checkout@v4` never fetched tags, so `git tag | sort --version-sort | tail -n1` always came back empty, meaning the workflow always believed no version had ever been released and would re-attempt publishing whatever version was already in `pyproject.toml`. That's what actually broke the most recent release run (PyPI rejects re-uploading an already-used filename), not a PyPI API deprecation. Fixed with `fetch-tags: true` on that checkout step. This matters here because merged `ingest` PRs are exactly the kind of `main` push that would trigger this failure mode again if it weren't fixed.
 
-Triggers: `schedule` (monthly cron) and `push: branches: [ingest]`.
+### Workflow: `.github/workflows/ingest.yaml`
 
-Job steps, following `test.yaml`'s existing conventions (`ubuntu-latest`, `actions/checkout@v4`, `actions/setup-python@v5` at `3.11`, `snok/install-poetry@v1`, `actions/cache@v3` keyed on `poetry.lock`):
+Triggers: `schedule` (monthly cron, `0 6 1 * *`) and `push: branches: [ingest]` (this is also how a manual run happens, there's no separate `workflow_dispatch`). Guarded with `if: github.repository == 'dstoffels/localis'`, matching `release.yaml`'s existing pattern, since scheduled triggers otherwise also fire on forks.
 
-1. Checkout with `ref: ingest` explicitly (the schedule trigger doesn't default to it).
-2. Install Python/Poetry deps (mirrors `test.yaml`).
-3. Configure git identity (`github-actions[bot]` / `github-actions[bot]@users.noreply.github.com`).
-4. Run `poetry run ingest` (always exits 0 now).
-5. `git add -A` (raw dir is gitignored except the manifest/resolution files already whitelisted, so this only ever picks up `src/localis/data/**` plus those state files) then check `git diff --cached --quiet` to decide whether there's anything to commit at all. If nothing changed, the job ends here, successfully, no commit/PR/failure.
-6. If there is a diff: commit and `git push origin ingest`.
-7. Ensure a PR exists: `gh pr list --head ingest --base main --json number` to check, `gh pr create --draft --head ingest --base main --title ... --body ...` if none exists yet. No explicit "update" step needed; GitHub reflects new commits on `ingest` into the existing PR's diff automatically.
-8. Check `data/subdivisions/raw/orphaned_subdivisions.json` directly (a small `python -c` one-liner: exit 1 if it parses to a non-empty object, 0 otherwise) to decide the orphan state, rather than relying on any exit code from step 4.
-9. If that check found no orphans and the PR is currently a draft: `gh pr ready`.
-10. If that check found orphans: fail the job now, after steps 5-9 have already run.
+Steps, following `test.yaml`'s existing conventions (`ubuntu-latest`, `actions/checkout@v4`, `actions/setup-python@v5` at `3.11`, `snok/install-poetry@v1`, `actions/cache@v3` keyed on `poetry.lock`):
 
-Needs `permissions: contents: write` and `pull-requests: write` on the job (default `GITHUB_TOKEN` covers both; no PAT needed since PR target and source are the same repo).
+1. Checkout `ref: ingest` with `fetch-depth: 0` (needed for the `HEAD~1` diff later; the default shallow clone would break it).
+2. Set up Python/Poetry, configure `github-actions[bot]` git identity.
+3. `poetry run ingest` (always exits `0`).
+4. Bump version if `src/localis/data` changed (see above).
+5. `git add -A`, check `git diff --cached --quiet` for whether there's anything to commit at all.
+6. If yes: commit (message includes the new version when bumped) and `git push origin ingest`.
+7. `poetry run check-orphans > orphan_summary.md`, capturing its exit code to know the current orphan state.
+8. Ensure an `ingest` → `main` PR exists (`gh pr list` then `gh pr create --draft` if none found); only runs when step 5 found a diff.
+9. If step 5 found a diff: post a comment with that run's actual changes (whether the version bumped, a `git diff --stat HEAD~1 HEAD -- src/localis/data` block), not a vague pointer at the commit history.
+10. If orphans were found: comment with the `check-orphans` summary.
+11. If no orphans were found: `gh pr ready` (unconditional on this alone, not also gated on step 5's diff, so a run that resolves the last orphan without any other upstream change still flips the PR out of draft).
+12. If orphans were found: fail the job, after everything above has already run.
+
+Needs `permissions: contents: write` and `pull-requests: write` (default `GITHUB_TOKEN` covers both).
 
 ### Verification
 
-- Unit-level: run `poetry run ingest` locally against a manually-seeded orphan (or temporarily force one) and confirm `subdivisions.tsv`/its indexes are written and `orphaned_subdivisions.json` is populated, with the process still exiting `0`.
-- Workflow-level: push a trivial change to `origin/ingest` and watch the Actions run: confirm it checks out `ingest`, runs ingest, and either short-circuits cleanly (no upstream changes) or commits and opens/updates the draft PR against `main`.
-- Confirm `gh pr list --head ingest --base main` shows at most one PR after repeated runs (idempotency), and that it flips out of draft only on a run that both changed data and left no orphans.
+- Unit-level: done. `poetry run check-orphans` tested locally against both an empty and a populated `orphaned_subdivisions.json`.
+- Workflow-level: not yet done. First real test requires pushing to `origin/ingest`, which triggers a genuine Actions run against the real repo.
+- Still to confirm live: `gh pr list --head ingest --base main` shows at most one PR after repeated runs (idempotency), and it flips out of draft only when clean.

@@ -32,6 +32,14 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
+      - name: Merge latest main
+        run: |
+          git fetch origin main
+          if ! git merge --no-edit origin/main; then
+            echo "::error::Merge conflict pulling main into ingest. Resolve locally: git checkout ingest && git pull && git merge main, then push."
+            exit 1
+          fi
+
       - name: Install Poetry
         uses: snok/install-poetry@v1
 
@@ -68,7 +76,7 @@ jobs:
             echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Commit and push
+      - name: Commit changes
         if: steps.stage.outputs.changed == 'true'
         run: |
           if [ "${{ steps.version.outputs.bumped }}" == "true" ]; then
@@ -76,7 +84,9 @@ jobs:
           else
             git commit -m "chore: automated data ingest"
           fi
-          git push origin ingest
+
+      - name: Push ingest branch
+        run: git push origin ingest
 
       - name: Check for orphaned subdivisions
         id: orphans
@@ -110,7 +120,7 @@ jobs:
             if [ "${{ steps.version.outputs.bumped }}" == "true" ]; then
               echo "Dataset changed, version bumped to \`${{ steps.version.outputs.version }}\`."
             else
-              echo "Only bookkeeping files changed (raw source manifests / resolution state); no dataset version bump."
+              echo "Only bookkeeping files changed; no dataset version bump."
             fi
             echo
             echo '```'
@@ -126,7 +136,7 @@ jobs:
         run: gh pr comment ingest --body-file orphan_summary.md
 
       - name: Mark PR ready if clean
-        if: steps.stage.outputs.changed == 'true' && steps.orphans.outputs.found == 'false'
+        if: steps.orphans.outputs.found == 'false'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: gh pr ready ingest || true

@@ -9,7 +9,7 @@ def ingest_all(interactive_mode: bool = False) -> None:
 
     countries = ingest_countries()
     geocode_sub_map = ingest_subdivisions(countries, interactive_mode=interactive_mode)
-    # ingest_cities(countries, geocode_sub_map)
+    ingest_cities(countries, geocode_sub_map)
 
 
 if __name__ == "__main__":
