@@ -1,12 +1,9 @@
-import sys
 from data.utils import *
 from data.subdivisions.subdivisions_utils import *
 from data.logger import log
 import json
 from data.subdivisions.scripts.merge_subdivisions import merge_matched_sub
 from localis.models import SubdivisionModel
-
-ORPHANED_SUBS_EXIT_CODE = 10
 
 
 def clear_terminal():
@@ -127,23 +124,11 @@ def _resolve_interactively(
     return merge_data
 
 
-def handle_orphans(orphaned_subs: list[SubdivisionModel]) -> None:
+def dump_orphans(orphaned_subs: list[SubdivisionModel]) -> None:
     if orphaned_subs:
         payload = {}
 
-        # log
         for iso_sub in orphaned_subs:
-            log.writeline(
-                f"orphaned iso subdivision: {iso_sub.iso_code} ({iso_sub.name}, {iso_sub.country.name}) requires manual resolution against GeoNames counterparts."
-            )
-
-            # build JSON object keyed by iso_code for O(1) lookup. Candidates are no
-            # longer precomputed/stored here; the resolve-subdivisions skill computes
-            # them fresh (both GeoNames tiers, paginated) via its own next <page>
-            # command instead. `type` is the ISO category (PROVINCE/DISTRICT/REGION/
-            # etc.) -- included as context for telling apart same-named admin1/admin2
-            # candidates, NOT the computed admin_level, which is the unreliable value
-            # that caused the original admin-level mismatch bug.
             payload[iso_sub.iso_code] = {
                 "name": iso_sub.name,
                 "aliases": iso_sub.aliases,
@@ -151,18 +136,9 @@ def handle_orphans(orphaned_subs: list[SubdivisionModel]) -> None:
                 "type": iso_sub.type,
             }
 
-        # dump orphaned subdivisions to JSON file
         (SUBDIVISIONS_RAW_PATH / "orphaned_subdivisions.json").write_text(
             json.dumps(payload, indent=2, ensure_ascii=False), encoding="utf-8"
         )
-
-        print("Exiting due to orphaned subdivisions.")
-        print(
-            f"{len(orphaned_subs)} orphaned subdivisions have been written to {SUBDIVISIONS_RAW_PATH / 'orphaned_subdivisions.json'}"
-        )
-
-        # break pipeline and flag for manual resolution
-        sys.exit(ORPHANED_SUBS_EXIT_CODE)
 
 
 def resolve_unmerged_subs(
@@ -202,4 +178,4 @@ def resolve_unmerged_subs(
             f.truncate()
             print()
 
-    handle_orphans(orphaned)
+    dump_orphans(orphaned)
