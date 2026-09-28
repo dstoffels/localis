@@ -2,8 +2,9 @@ from localis.models import CityModel, City
 from localis.registries import Registry, CountryRegistry, SubdivisionRegistry
 
 
-class CityRegistry(Registry[CityModel]):
+class CityRegistry(Registry[City]):
     REGISTRY_NAME = "cities"
+    LAZY_LOAD = True
     _MODEL_CLS = CityModel
 
     def __init__(
@@ -13,7 +14,7 @@ class CityRegistry(Registry[CityModel]):
         self._subdivisions = subdivisions
         super().__init__(**kwargs)
 
-    def parse_row(self, id, row):
+    def parse_row(self, id, row, cache):
         return self._MODEL_CLS.from_row(
             id, row, self._countries._cache, self._subdivisions._cache
         )
@@ -22,17 +23,17 @@ class CityRegistry(Registry[CityModel]):
         """Get a city by its localis ID."""
         return super().get(id)
 
-    def lookup(self, identifier) -> City | None:
+    def lookup(self, identifier: str | int) -> City | None:
         """Get a city by its GeoNames ID."""
         return super().lookup(identifier)
 
     def filter(
         self,
         *,
-        name=None,
-        limit: int = None,
-        subdivision: str = None,
-        country: str = None,
+        name: str | None = None,
+        limit: int | None = None,
+        subdivision: str | None = None,
+        country: str | None = None,
         # population__lt: int = None, # TODO: to be implemented
         # population__gt: int = None, # TODO: to be implemented
         **kwargs,
@@ -46,8 +47,8 @@ class CityRegistry(Registry[CityModel]):
         return results
 
     def search(
-        self, query, limit=None, population_sort: bool = False, **kwargs
-    ) -> list[tuple[CityModel, float]]:
+        self, query: str, limit: int = 10, population_sort: bool = False, **kwargs
+    ) -> list[tuple[City, float]]:
         """Search cities by name, subdivision (name, iso/geonames code), or country (name, alpha2, alpha3). Can optionally sort by population, which is great for autocompletes."""
         results: list[tuple[City, float]] = super().search(
             query=query, limit=limit, **kwargs

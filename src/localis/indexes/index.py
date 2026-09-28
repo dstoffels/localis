@@ -1,12 +1,15 @@
+import logging
 from pathlib import Path
 from localis.models import Model
+
+logger = logging.getLogger(__name__)
 
 
 class Index:
     def __init__(
         self,
-        model_cls: Model,
-        cache: dict[int, list[str | int | list[str]]],
+        model_cls: type[Model],
+        cache: dict[int, Model],
         filepath: Path,
         **kwargs,
     ):

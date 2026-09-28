@@ -1,0 +1,1717 @@
+[
+	{
+		"qid": "Q889",
+		"name": "Afghanistan",
+		"alpha2": "AF",
+		"alpha3": "AFG",
+		"aliases": ""
+	},
+	{
+		"qid": "Q222",
+		"name": "Albania",
+		"alpha2": "AL",
+		"alpha3": "ALB",
+		"aliases": "Shqipërisë"
+	},
+	{
+		"qid": "Q262",
+		"name": "Algeria",
+		"alpha2": "DZ",
+		"alpha3": "DZA",
+		"aliases": ""
+	},
+	{
+		"qid": "Q16641",
+		"name": "American Samoa",
+		"alpha2": "AS",
+		"alpha3": "ASM",
+		"aliases": "American Sāmoa|Eastern Samoa"
+	},
+	{
+		"qid": "Q228",
+		"name": "Andorra",
+		"alpha2": "AD",
+		"alpha3": "AND",
+		"aliases": "Principality of the Valleys of Andorra"
+	},
+	{
+		"qid": "Q916",
+		"name": "Angola",
+		"alpha2": "AO",
+		"alpha3": "AGO",
+		"aliases": ""
+	},
+	{
+		"qid": "Q25228",
+		"name": "Anguilla",
+		"alpha2": "AI",
+		"alpha3": "AIA",
+		"aliases": "Malliouhana"
+	},
+	{ "qid": "Q51", "name": "Antarctica", "alpha2": "AQ", "alpha3": "ATA", "aliases": "" },
+	{
+		"qid": "Q781",
+		"name": "Antigua and Barbuda",
+		"alpha2": "AG",
+		"alpha3": "ATG",
+		"aliases": ""
+	},
+	{
+		"qid": "Q414",
+		"name": "Argentina",
+		"alpha2": "AR",
+		"alpha3": "ARG",
+		"aliases": "Republic of Argentina|Republica Argentina|Argentine Republic"
+	},
+	{
+		"qid": "Q399",
+		"name": "Armenia",
+		"alpha2": "AM",
+		"alpha3": "ARM",
+		"aliases": "Hayastani Hanrapetut’yun|Hayastan"
+	},
+	{
+		"qid": "Q21203",
+		"name": "Aruba",
+		"alpha2": "AW",
+		"alpha3": "ABW",
+		"aliases": ""
+	},
+	{
+		"qid": "Q408",
+		"name": "Australia",
+		"alpha2": "AU",
+		"alpha3": "AUS",
+		"aliases": "Oz|Aussieland|Nova Hollandia|New Holland"
+	},
+	{
+		"qid": "Q40",
+		"name": "Austria",
+		"alpha2": "AT",
+		"alpha3": "AUT",
+		"aliases": "Österreich"
+	},
+	{
+		"qid": "Q227",
+		"name": "Azerbaijan",
+		"alpha2": "AZ",
+		"alpha3": "AZE",
+		"aliases": "Azərbaycan"
+	},
+	{
+		"qid": "Q398",
+		"name": "Bahrain",
+		"alpha2": "BH",
+		"alpha3": "BHR",
+		"aliases": "Mamlakat al-Baḥrayn|Dawlat al-Bahrain"
+	},
+	{
+		"qid": "Q25230",
+		"name": "Guernsey",
+		"alpha2": "GG",
+		"alpha3": "GGY",
+		"aliases": "Bailiwick of Guernsey"
+	},
+	{
+		"qid": "Q902",
+		"name": "Bangladesh",
+		"alpha2": "BD",
+		"alpha3": "BGD",
+		"aliases": "Bangla"
+	},
+	{
+		"qid": "Q244",
+		"name": "Barbados",
+		"alpha2": "BB",
+		"alpha3": "BRB",
+		"aliases": "Bim|Bimshire "
+	},
+	{
+		"qid": "Q184",
+		"name": "Belarus",
+		"alpha2": "BY",
+		"alpha3": "BLR",
+		"aliases": "Byelorussia|Byeloruss|Bielorussia|Bielaruś|Belorussia|White Russia"
+	},
+	{
+		"qid": "Q31",
+		"name": "Belgium",
+		"alpha2": "BE",
+		"alpha3": "BEL",
+		"aliases": "Belgique|België"
+	},
+	{
+		"qid": "Q242",
+		"name": "Belize",
+		"alpha2": "BZ",
+		"alpha3": "BLZ",
+		"aliases": "British Honduras"
+	},
+	{
+		"qid": "Q962",
+		"name": "Benin",
+		"alpha2": "BJ",
+		"alpha3": "BEN",
+		"aliases": "Dahomey"
+	},
+	{
+		"qid": "Q23635",
+		"name": "Bermuda",
+		"alpha2": "BM",
+		"alpha3": "BMU",
+		"aliases": "Virgineola"
+	},
+	{
+		"qid": "Q917",
+		"name": "Bhutan",
+		"alpha2": "BT",
+		"alpha3": "BTN",
+		"aliases": "Druk Yul"
+	},
+	{
+		"qid": "Q750",
+		"name": "Bolivia",
+		"alpha2": "BO",
+		"alpha3": "BOL",
+		"aliases": ""
+	},
+	{
+		"qid": "Q225",
+		"name": "Bosnia and Herzegovina",
+		"alpha2": "BA",
+		"alpha3": "BIH",
+		"aliases": "Bosnia-Herzegovina|Bosnia and Hercegovina|Bosnia"
+	},
+	{
+		"qid": "Q963",
+		"name": "Botswana",
+		"alpha2": "BW",
+		"alpha3": "BWA",
+		"aliases": ""
+	},
+	{ "qid": "Q23408", "name": "Bouvet Island", "alpha2": "BV", "alpha3": "BVT", "aliases": "" },
+	{
+		"qid": "Q155",
+		"name": "Brazil",
+		"alpha2": "BR",
+		"alpha3": "BRA",
+		"aliases": "Brasil"
+	},
+	{
+		"qid": "Q43448",
+		"name": "British Indian Ocean Territory",
+		"alpha2": "IO",
+		"alpha3": "IOT",
+		"aliases": ""
+	},
+	{
+		"qid": "Q25305",
+		"name": "British Virgin Islands",
+		"alpha2": "VG",
+		"alpha3": "VGB",
+		"aliases": "BVI"
+	},
+	{
+		"qid": "Q921",
+		"name": "Brunei",
+		"alpha2": "BN",
+		"alpha3": "BRN",
+		"aliases": "Nation of Brunei, the Abode of Peace"
+	},
+	{
+		"qid": "Q219",
+		"name": "Bulgaria",
+		"alpha2": "BG",
+		"alpha3": "BGR",
+		"aliases": ""
+	},
+	{
+		"qid": "Q965",
+		"name": "Burkina Faso",
+		"alpha2": "BF",
+		"alpha3": "BFA",
+		"aliases": "Upper Volta"
+	},
+	{
+		"qid": "Q967",
+		"name": "Burundi",
+		"alpha2": "BI",
+		"alpha3": "BDI",
+		"aliases": "Uburundi"
+	},
+	{
+		"qid": "Q424",
+		"name": "Cambodia",
+		"alpha2": "KH",
+		"alpha3": "KHM",
+		"aliases": "Kampuchea|Kambodzha|Campuchia|Camboya|kh|KHM|Kingdom of Cambodia|Kamboja"
+	},
+	{
+		"qid": "Q1009",
+		"name": "Cameroon",
+		"alpha2": "CM",
+		"alpha3": "CMR",
+		"aliases": "Republic of Cameroon|CMR|CM|CAM"
+	},
+	{ "qid": "Q16", "name": "Canada", "alpha2": "CA", "alpha3": "CAN", "aliases": "" },
+	{
+		"qid": "Q1011",
+		"name": "Cabo Verde",
+		"alpha2": "CV",
+		"alpha3": "CPV",
+		"aliases": "Cape Verde"
+	},
+	{
+		"qid": "Q27561",
+		"name": "Bonaire",
+		"alpha2": "BQ",
+		"alpha3": "BES",
+		"aliases": "Bonaire, Saint Eustatius and Saba|Caribbean Netherlands"
+	},
+	{
+		"qid": "Q5785",
+		"name": "Cayman Islands",
+		"alpha2": "KY",
+		"alpha3": "CYM",
+		"aliases": "Caymans"
+	},
+	{
+		"qid": "Q929",
+		"name": "Central African Republic",
+		"alpha2": "CF",
+		"alpha3": "CAF",
+		"aliases": "Central Africa"
+	},
+	{
+		"qid": "Q657",
+		"name": "Chad",
+		"alpha2": "TD",
+		"alpha3": "TCD",
+		"aliases": ""
+	},
+	{
+		"qid": "Q298",
+		"name": "Chile",
+		"alpha2": "CL",
+		"alpha3": "CHL",
+		"aliases": ""
+	},
+	{
+		"qid": "Q148",
+		"name": "China",
+		"alpha2": "CN",
+		"alpha3": "CHN",
+		"aliases": "Zhōngguó|PRC|Zhongguo"
+	},
+	{
+		"qid": "Q31063",
+		"name": "Christmas Island",
+		"alpha2": "CX",
+		"alpha3": "CXR",
+		"aliases": ""
+	},
+	{
+		"qid": "Q161258",
+		"name": "Clipperton Island",
+		"alpha2": "CP",
+		"aliases": "Clipperton's Rock|Clipperton Atoll|Passion Island"
+	},
+	{
+		"qid": "Q36004",
+		"name": "Cocos (Keeling) Islands",
+		"alpha2": "CC",
+		"alpha3": "CCK",
+		"aliases": "Territory of the Cocos (Keeling) Islands|Keeling Islands|Cocos Islands"
+	},
+	{
+		"qid": "Q126125",
+		"name": "Collectivity of Saint Martin",
+		"alpha2": "MF",
+		"alpha3": "MAF",
+		"aliases": "St. Martin (French part)|Saint Martin (France)|Collectivity of Saint Martin|St Martin|St. Martin|Saint Martin (French part)"
+	},
+	{
+		"qid": "Q739",
+		"name": "Colombia",
+		"alpha2": "CO",
+		"alpha3": "COL",
+		"aliases": "Colombiá"
+	},
+	{
+		"qid": "Q970",
+		"name": "Comoros",
+		"alpha2": "KM",
+		"alpha3": "COM",
+		"aliases": "Udzima wa Komori|Waku-Moria|Juzur al-Qumur|Juzur al-Qamar|al-Ittiḥād al-Qumurī"
+	},
+	{
+		"qid": "Q26988",
+		"name": "Cook Islands",
+		"alpha2": "CK",
+		"alpha3": "COK",
+		"aliases": "Hervey Islands|Cook Group"
+	},
+	{
+		"qid": "Q800",
+		"name": "Costa Rica",
+		"alpha2": "CR",
+		"alpha3": "CRI",
+		"aliases": "Republic of Costa Rica"
+	},
+	{
+		"qid": "Q224",
+		"name": "Croatia",
+		"alpha2": "HR",
+		"alpha3": "HRV",
+		"aliases": "Republic of Croatia"
+	},
+	{
+		"qid": "Q241",
+		"name": "Cuba",
+		"alpha2": "CU",
+		"alpha3": "CUB",
+		"aliases": "|Republic of Cuba"
+	},
+	{
+		"qid": "Q25279",
+		"name": "Curaçao",
+		"alpha2": "CW",
+		"alpha3": "CUW",
+		"aliases": "Kòrsou|Curocao|Curaςao|Curazao|Curaçoa|Curacau|Curacao"
+	},
+	{
+		"qid": "Q229",
+		"name": "Cyprus",
+		"alpha2": "CY",
+		"alpha3": "CYP",
+		"aliases": "Greek Cypriot State"
+	},
+	{
+		"qid": "Q213",
+		"name": "Czech Republic",
+		"alpha2": "CZ",
+		"alpha3": "CZE",
+		"aliases": "Czechia"
+	},
+	{
+		"qid": "Q974",
+		"name": "Democratic Republic of the Congo",
+		"alpha2": "CD",
+		"alpha3": "COD",
+		"aliases": "DR Congo|Congo-Kinshasa|Congo (Kinshasa)|DRC|Zaire|Congo"
+	},
+	{
+		"qid": "Q35",
+		"name": "Denmark",
+		"alpha2": "DK",
+		"alpha3": "DNK",
+		"aliases": "Danmark"
+	},
+	{ "qid": "Q184851", "name": "Diego Garcia", "alpha2": "DG", "aliases": "🇲🇺" },
+	{
+		"qid": "Q977",
+		"name": "Djibouti",
+		"alpha2": "DJ",
+		"alpha3": "DJI",
+		"aliases": "Republic of Djibouti|Jībūtī|Gabuuti|Jabuuti"
+	},
+	{
+		"qid": "Q784",
+		"name": "Dominica",
+		"alpha2": "DM",
+		"alpha3": "DMA",
+		"aliases": "Wai‘tu kubuli|Wai'tu kubuli"
+	},
+	{
+		"qid": "Q786",
+		"name": "Dominican Republic",
+		"alpha2": "DO",
+		"alpha3": "DOM",
+		"aliases": "Dominicana"
+	},
+	{
+		"qid": "Q736",
+		"name": "Ecuador",
+		"alpha2": "EC",
+		"alpha3": "ECU",
+		"aliases": ""
+	},
+	{
+		"qid": "Q79",
+		"name": "Egypt",
+		"alpha2": "EG",
+		"alpha3": "EGY",
+		"aliases": "Misr"
+	},
+	{
+		"qid": "Q792",
+		"name": "El Salvador",
+		"alpha2": "SV",
+		"alpha3": "SLV",
+		"aliases": "Salvador"
+	},
+	{
+		"qid": "Q983",
+		"name": "Equatorial Guinea",
+		"alpha2": "GQ",
+		"alpha3": "GNQ",
+		"aliases": ""
+	},
+	{
+		"qid": "Q986",
+		"name": "Eritrea",
+		"alpha2": "ER",
+		"alpha3": "ERI",
+		"aliases": "Iritriyā|Ertrā"
+	},
+	{
+		"qid": "Q191",
+		"name": "Estonia",
+		"alpha2": "EE",
+		"alpha3": "EST",
+		"aliases": "Eesti Vabariik|Estland"
+	},
+	{
+		"qid": "Q1050",
+		"name": "Eswatini",
+		"alpha2": "SZ",
+		"alpha3": "SWZ",
+		"aliases": "eSwatini|Swaziland|Umbuso weSwatini"
+	},
+	{
+		"qid": "Q115",
+		"name": "Ethiopia",
+		"alpha2": "ET",
+		"alpha3": "ETH",
+		"aliases": "Abyssinia"
+	},
+	{
+		"qid": "Q9648",
+		"name": "Falkland Islands",
+		"alpha2": "FK",
+		"alpha3": "FLK",
+		"aliases": "Malvinas Islands|Islas Malvinas|Falklands"
+	},
+	{
+		"qid": "Q4628",
+		"name": "Faroe Islands",
+		"alpha2": "FO",
+		"alpha3": "FRO",
+		"aliases": "Faer Oer|Faroes|Sheep Islands"
+	},
+	{
+		"qid": "Q702",
+		"name": "Federated States of Micronesia",
+		"alpha2": "FM",
+		"alpha3": "FSM",
+		"aliases": ""
+	},
+	{
+		"qid": "Q712",
+		"name": "Fiji",
+		"alpha2": "FJ",
+		"alpha3": "FJI",
+		"aliases": "Matanitu Tugalala o Viti|Fijī Gaṇarājya|Fijī"
+	},
+	{
+		"qid": "Q33",
+		"name": "Finland",
+		"alpha2": "FI",
+		"alpha3": "FIN",
+		"aliases": "Suomen tasavalta|Land of a Thousand Lakes|Finnia|Suomi"
+	},
+	{
+		"qid": "Q142",
+		"name": "France",
+		"alpha2": "FR",
+		"alpha3": "FRA",
+		"aliases": "French Republic"
+	},
+	{
+		"qid": "Q3769",
+		"name": "French Guiana",
+		"alpha2": "GF",
+		"alpha3": "GUF",
+		"aliases": "Guyane"
+	},
+	{
+		"qid": "Q30971",
+		"name": "French Polynesia",
+		"alpha2": "PF",
+		"alpha3": "PYF",
+		"aliases": "French Oceania"
+	},
+	{
+		"qid": "Q129003",
+		"name": "French Southern and Antarctic Lands",
+		"alpha2": "TF",
+		"alpha3": "ATF",
+		"aliases": ""
+	},
+	{
+		"qid": "Q1000",
+		"name": "Gabon",
+		"alpha2": "GA",
+		"alpha3": "GAB",
+		"aliases": "Gabonaise|Gabonese Republic"
+	},
+	{
+		"qid": "Q230",
+		"name": "Georgia (country)",
+		"alpha2": "GE",
+		"alpha3": "GEO",
+		"aliases": ""
+	},
+	{
+		"qid": "Q183",
+		"name": "Germany",
+		"alpha2": "DE",
+		"alpha3": "DEU",
+		"aliases": "Deutschland"
+	},
+	{
+		"qid": "Q117",
+		"name": "Ghana",
+		"alpha2": "GH",
+		"alpha3": "GHA",
+		"aliases": ""
+	},
+	{
+		"qid": "Q1410",
+		"name": "Gibraltar",
+		"alpha2": "GI",
+		"alpha3": "GIB",
+		"aliases": ""
+	},
+	{
+		"qid": "Q41",
+		"name": "Greece",
+		"alpha2": "GR",
+		"alpha3": "GRC",
+		"aliases": "Ellada|Hellenic Republic|Hellas"
+	},
+	{
+		"qid": "Q223",
+		"name": "Greenland",
+		"alpha2": "GL",
+		"alpha3": "GRL",
+		"aliases": "Greenlandia|Kalaallit Nunaat|Groenland"
+	},
+	{ "qid": "Q769", "name": "Grenada", "alpha2": "GD", "alpha3": "GRD", "aliases": "gd|GRN" },
+	{
+		"qid": "Q17012",
+		"name": "Guadeloupe",
+		"alpha2": "GP",
+		"alpha3": "GLP",
+		"aliases": "Karukera|Gwadloup|Gwada"
+	},
+	{
+		"qid": "Q16635",
+		"name": "Guam",
+		"alpha2": "GU",
+		"alpha3": "GUM",
+		"aliases": "Guåhån|Guahan|Guåhan"
+	},
+	{
+		"qid": "Q774",
+		"name": "Guatemala",
+		"alpha2": "GT",
+		"alpha3": "GTM",
+		"aliases": ""
+	},
+	{
+		"qid": "Q1006",
+		"name": "Guinea",
+		"alpha2": "GN",
+		"alpha3": "GIN",
+		"aliases": "Guinea-Conakry"
+	},
+	{
+		"qid": "Q1007",
+		"name": "Guinea-Bissau",
+		"alpha2": "GW",
+		"alpha3": "GNB",
+		"aliases": ""
+	},
+	{
+		"qid": "Q734",
+		"name": "Guyana",
+		"alpha2": "GY",
+		"alpha3": "GUY",
+		"aliases": "British Guiana"
+	},
+	{
+		"qid": "Q790",
+		"name": "Haiti",
+		"alpha2": "HT",
+		"alpha3": "HTI",
+		"aliases": "Ayiti"
+	},
+	{
+		"qid": "Q131198",
+		"name": "Heard Island and McDonald Islands",
+		"alpha2": "HM",
+		"alpha3": "HMD",
+		"aliases": ""
+	},
+	{
+		"qid": "Q783",
+		"name": "Honduras",
+		"alpha2": "HN",
+		"alpha3": "HND",
+		"aliases": ""
+	},
+	{
+		"qid": "Q8646",
+		"name": "Hong Kong",
+		"alpha2": "HK",
+		"alpha3": "HKG",
+		"aliases": "HKSAR"
+	},
+	{ "qid": "Q28", "name": "Hungary", "alpha2": "HU", "alpha3": "HUN", "aliases": "Magyarország" },
+	{
+		"qid": "Q189",
+		"name": "Iceland",
+		"alpha2": "IS",
+		"alpha3": "ISL",
+		"aliases": "Ísland|Ysland"
+	},
+	{
+		"qid": "Q668",
+		"name": "India",
+		"alpha2": "IN",
+		"alpha3": "IND",
+		"aliases": "Indostan|Bharat Ganarajya|Bharatvarsh|Hindoostan|Bharata|Hindustan|Bharat"
+	},
+	{
+		"qid": "Q252",
+		"name": "Indonesia",
+		"alpha2": "ID",
+		"alpha3": "IDN",
+		"aliases": "East Indies"
+	},
+	{
+		"qid": "Q794",
+		"name": "Iran",
+		"alpha2": "IR",
+		"alpha3": "IRN",
+		"aliases": "Persia"
+	},
+	{
+		"qid": "Q796",
+		"name": "Iraq",
+		"alpha2": "IQ",
+		"alpha3": "IRQ",
+		"aliases": "Mesopotamia"
+	},
+	{
+		"qid": "Q9676",
+		"name": "Isle of Man",
+		"alpha2": "IM",
+		"alpha3": "IMN",
+		"aliases": "Isle of Mann|I. Mannin|I. Mann|I. Man|I. M.|Manx|Mann|the Isle of Man|Man"
+	},
+	{
+		"qid": "Q801",
+		"name": "Israel",
+		"alpha2": "IL",
+		"alpha3": "ISR",
+		"aliases": ""
+	},
+	{
+		"qid": "Q38",
+		"name": "Italy",
+		"alpha2": "IT",
+		"alpha3": "ITA",
+		"aliases": "Italia"
+	},
+	{
+		"qid": "Q1008",
+		"name": "Ivory Coast",
+		"alpha2": "CI",
+		"alpha3": "CIV",
+		"aliases": "Côte d'Ivoire|Côte-d'Ivoire|Cote-d'Ivoire|Cote d'lvoire|Cote d'Ivoire"
+	},
+	{
+		"qid": "Q766",
+		"name": "Jamaica",
+		"alpha2": "JM",
+		"alpha3": "JAM",
+		"aliases": ""
+	},
+	{
+		"qid": "Q17",
+		"name": "Japan",
+		"alpha2": "JP",
+		"alpha3": "JPN",
+		"aliases": "Land of the Rising Sun|Nippon-koku|Nihon-koku|Nihon|Nippon"
+	},
+	{
+		"qid": "Q785",
+		"name": "Jersey",
+		"alpha2": "JE",
+		"alpha3": "JEY",
+		"aliases": "Jèrri|Jerri|Iersey"
+	},
+	{
+		"qid": "Q810",
+		"name": "Jordan",
+		"alpha2": "JO",
+		"alpha3": "JOR",
+		"aliases": "Yarden|Giordania"
+	},
+	{
+		"qid": "Q232",
+		"name": "Kazakhstan",
+		"alpha2": "KZ",
+		"alpha3": "KAZ",
+		"aliases": "Qazaqstan"
+	},
+	{
+		"qid": "Q114",
+		"name": "Kenya",
+		"alpha2": "KE",
+		"alpha3": "KEN",
+		"aliases": ""
+	},
+	{
+		"qid": "Q29999",
+		"name": "Netherlands",
+		"alpha2": "NL",
+		"alpha3": "NLD",
+		"aliases": "Nederlanden"
+	},
+	{
+		"qid": "Q710",
+		"name": "Kiribati",
+		"alpha2": "KI",
+		"alpha3": "KIR",
+		"aliases": ""
+	},
+	{
+		"qid": "Q1246",
+		"name": "Kosovo",
+		"alpha2": "XK",
+		"aliases": ""
+	},
+	{
+		"qid": "Q817",
+		"name": "Kuwait",
+		"alpha2": "KW",
+		"alpha3": "KWT",
+		"aliases": ""
+	},
+	{
+		"qid": "Q813",
+		"name": "Kyrgyzstan",
+		"alpha2": "KG",
+		"alpha3": "KGZ",
+		"aliases": "Kyrgyz|Kirghizia"
+	},
+	{
+		"qid": "Q819",
+		"name": "Laos",
+		"alpha2": "LA",
+		"alpha3": "LAO",
+		"aliases": "LPDR"
+	},
+	{
+		"qid": "Q211",
+		"name": "Latvia",
+		"alpha2": "LV",
+		"alpha3": "LVA",
+		"aliases": "Leţmо̄ Vabāmо̄|Leţmо̄|Latvija|Latveja"
+	},
+	{
+		"qid": "Q822",
+		"name": "Lebanon",
+		"alpha2": "LB",
+		"alpha3": "LBN",
+		"aliases": "Lubnan"
+	},
+	{
+		"qid": "Q1013",
+		"name": "Lesotho",
+		"alpha2": "LS",
+		"alpha3": "LSO",
+		"aliases": "The Mountain Kingdom"
+	},
+	{
+		"qid": "Q1014",
+		"name": "Liberia",
+		"alpha2": "LR",
+		"alpha3": "LBR",
+		"aliases": ""
+	},
+	{
+		"qid": "Q1016",
+		"name": "Libya",
+		"alpha2": "LY",
+		"alpha3": "LBY",
+		"aliases": "Libyan Arab Jamahiriya"
+	},
+	{
+		"qid": "Q347",
+		"name": "Liechtenstein",
+		"alpha2": "LI",
+		"alpha3": "LIE",
+		"aliases": ""
+	},
+	{
+		"qid": "Q37",
+		"name": "Lithuania",
+		"alpha2": "LT",
+		"alpha3": "LTU",
+		"aliases": "Lietuva"
+	},
+	{
+		"qid": "Q32",
+		"name": "Luxembourg",
+		"alpha2": "LU",
+		"alpha3": "LUX",
+		"aliases": "Luxemburg"
+	},
+	{
+		"qid": "Q14773",
+		"name": "Macau",
+		"alpha2": "MO",
+		"alpha3": "MAC",
+		"aliases": "Macau SAR|Macao SAR|Aomen|Macao"
+	},
+	{
+		"qid": "Q1019",
+		"name": "Madagascar",
+		"alpha2": "MG",
+		"alpha3": "MDG",
+		"aliases": "Malagaskar|Malagascar|Malagasy Republic"
+	},
+	{
+		"qid": "Q1020",
+		"name": "Malawi",
+		"alpha2": "MW",
+		"alpha3": "MWI",
+		"aliases": "Nyasaland"
+	},
+	{
+		"qid": "Q833",
+		"name": "Malaysia",
+		"alpha2": "MY",
+		"alpha3": "MYS",
+		"aliases": ""
+	},
+	{
+		"qid": "Q826",
+		"name": "Maldives",
+		"alpha2": "MV",
+		"alpha3": "MDV",
+		"aliases": "Maldive Islands"
+	},
+	{
+		"qid": "Q912",
+		"name": "Mali",
+		"alpha2": "ML",
+		"alpha3": "MLI",
+		"aliases": "French Sudan"
+	},
+	{
+		"qid": "Q233",
+		"name": "Malta",
+		"alpha2": "MT",
+		"alpha3": "MLT",
+		"aliases": ""
+	},
+	{
+		"qid": "Q709",
+		"name": "Marshall Islands",
+		"alpha2": "MH",
+		"alpha3": "MHL",
+		"aliases": "RMI"
+	},
+	{
+		"qid": "Q17054",
+		"name": "Martinique",
+		"alpha2": "MQ",
+		"alpha3": "MTQ",
+		"aliases": "Iguanacaera|Matinino|Martinica|Madinina|Jouanacaëra|Madiana|Maritiniki|Ioünacaëra"
+	},
+	{
+		"qid": "Q1025",
+		"name": "Mauritania",
+		"alpha2": "MR",
+		"alpha3": "MRT",
+		"aliases": "Murutaane|Muritanya|Moritani|Mauretania|Gànnaar|Gannaar|Agawej"
+	},
+	{
+		"qid": "Q1027",
+		"name": "Mauritius",
+		"alpha2": "MU",
+		"alpha3": "MUS",
+		"aliases": "Moris|Maurice"
+	},
+	{
+		"qid": "Q17063",
+		"name": "Mayotte",
+		"alpha2": "YT",
+		"alpha3": "MYT",
+		"aliases": ""
+	},
+	{
+		"qid": "Q96",
+		"name": "Mexico",
+		"alpha2": "MX",
+		"alpha3": "MEX",
+		"aliases": "Estados Unidos Mexicanos"
+	},
+	{
+		"qid": "Q217",
+		"name": "Moldova",
+		"alpha2": "MD",
+		"alpha3": "MDA",
+		"aliases": "Moldavia"
+	},
+	{
+		"qid": "Q235",
+		"name": "Monaco",
+		"alpha2": "MC",
+		"alpha3": "MCO",
+		"aliases": "Mùnegu"
+	},
+	{
+		"qid": "Q711",
+		"name": "Mongolia",
+		"alpha2": "MN",
+		"alpha3": "MNG",
+		"aliases": "Outer Mongolia|Mongol State"
+	},
+	{
+		"qid": "Q236",
+		"name": "Montenegro",
+		"alpha2": "ME",
+		"alpha3": "MNE",
+		"aliases": "Crna Gora"
+	},
+	{
+		"qid": "Q13353",
+		"name": "Montserrat",
+		"alpha2": "MS",
+		"alpha3": "MSR",
+		"aliases": ""
+	},
+	{
+		"qid": "Q1028",
+		"name": "Morocco",
+		"alpha2": "MA",
+		"alpha3": "MAR",
+		"aliases": "Marocco|Maroc|Lmaġrib|al-Maġrib"
+	},
+	{
+		"qid": "Q1029",
+		"name": "Mozambique",
+		"alpha2": "MZ",
+		"alpha3": "MOZ",
+		"aliases": "Moçambique"
+	},
+	{
+		"qid": "Q836",
+		"name": "Myanmar",
+		"alpha2": "MM",
+		"alpha3": "MMR",
+		"aliases": "Burma"
+	},
+	{
+		"qid": "Q1030",
+		"name": "Namibia",
+		"alpha2": "NA",
+		"alpha3": "NAM",
+		"aliases": "South West Africa"
+	},
+	{
+		"qid": "Q697",
+		"name": "Nauru",
+		"alpha2": "NR",
+		"alpha3": "NRU",
+		"aliases": "Naoero|Pleasant Island"
+	},
+	{
+		"qid": "Q837",
+		"name": "Nepal",
+		"alpha2": "NP",
+		"alpha3": "NPL",
+		"aliases": ""
+	},
+	{
+		"qid": "Q33788",
+		"name": "New Caledonia",
+		"alpha2": "NC",
+		"alpha3": "NCL",
+		"aliases": "Nouvelle-Calédonie|Kanaky"
+	},
+	{
+		"qid": "Q664",
+		"name": "New Zealand",
+		"alpha2": "NZ",
+		"alpha3": "NZL",
+		"aliases": "Aotearoa|Zealandia Nova|New Zeeland"
+	},
+	{
+		"qid": "Q811",
+		"name": "Nicaragua",
+		"alpha2": "NI",
+		"alpha3": "NIC",
+		"aliases": ""
+	},
+	{
+		"qid": "Q1032",
+		"name": "Niger",
+		"alpha2": "NE",
+		"alpha3": "NER",
+		"aliases": ""
+	},
+	{
+		"qid": "Q1033",
+		"name": "Nigeria",
+		"alpha2": "NG",
+		"alpha3": "NGA",
+		"aliases": "Naija"
+	},
+	{ "qid": "Q34020", "name": "Niue", "alpha2": "NU", "alpha3": "NIU", "aliases": "Niuē" },
+	{
+		"qid": "Q31057",
+		"name": "Norfolk Island",
+		"alpha2": "NF",
+		"alpha3": "NFK",
+		"aliases": ""
+	},
+	{
+		"qid": "Q423",
+		"name": "North Korea",
+		"alpha2": "KP",
+		"alpha3": "PRK",
+		"aliases": "DPRK|Joseon|Chosŏn"
+	},
+	{
+		"qid": "Q221",
+		"name": "North Macedonia",
+		"alpha2": "MK",
+		"alpha3": "MKD",
+		"aliases": "Macedonia"
+	},
+	{
+		"qid": "Q16644",
+		"name": "Northern Mariana Islands",
+		"alpha2": "MP",
+		"alpha3": "MNP",
+		"aliases": "Northern Marianas"
+	},
+	{
+		"qid": "Q20",
+		"name": "Norway",
+		"alpha2": "NO",
+		"alpha3": "NOR",
+		"aliases": "Norge"
+	},
+	{
+		"qid": "Q842",
+		"name": "Oman",
+		"alpha2": "OM",
+		"alpha3": "OMN",
+		"aliases": "Uman|Muscat and Oman"
+	},
+	{
+		"qid": "Q843",
+		"name": "Pakistan",
+		"alpha2": "PK",
+		"alpha3": "PAK",
+		"aliases": ""
+	},
+	{
+		"qid": "Q695",
+		"name": "Palau",
+		"alpha2": "PW",
+		"alpha3": "PLW",
+		"aliases": "Pelew|Belau"
+	},
+	{
+		"qid": "Q219060",
+		"name": "Palestine",
+		"alpha2": "PS",
+		"alpha3": "PSE",
+		"aliases": ""
+	},
+	{
+		"qid": "Q804",
+		"name": "Panama",
+		"alpha2": "PA",
+		"alpha3": "PAN",
+		"aliases": "Canal Zone"
+	},
+	{
+		"qid": "Q691",
+		"name": "Papua New Guinea",
+		"alpha2": "PG",
+		"alpha3": "PNG",
+		"aliases": ""
+	},
+	{
+		"qid": "Q733",
+		"name": "Paraguay",
+		"alpha2": "PY",
+		"alpha3": "PRY",
+		"aliases": ""
+	},
+	{
+		"qid": "Q419",
+		"name": "Peru",
+		"alpha2": "PE",
+		"alpha3": "PER",
+		"aliases": "Perú"
+	},
+	{
+		"qid": "Q928",
+		"name": "Philippines",
+		"alpha2": "PH",
+		"alpha3": "PHL",
+		"aliases": "Philippine Islands"
+	},
+	{
+		"qid": "Q35672",
+		"name": "Pitcairn Islands",
+		"alpha2": "PN",
+		"alpha3": "PCN",
+		"aliases": "Pitcairn"
+	},
+	{
+		"qid": "Q36",
+		"name": "Poland",
+		"alpha2": "PL",
+		"alpha3": "POL",
+		"aliases": "Polska"
+	},
+	{
+		"qid": "Q45",
+		"name": "Portugal",
+		"alpha2": "PT",
+		"alpha3": "PRT",
+		"aliases": "Lusitania"
+	},
+	{
+		"qid": "Q1183",
+		"name": "Puerto Rico",
+		"alpha2": "PR",
+		"alpha3": "PRI",
+		"aliases": "Boriquén|Borikén|Porto Rico|Borinquen"
+	},
+	{
+		"qid": "Q846",
+		"name": "Qatar",
+		"alpha2": "QA",
+		"alpha3": "QAT",
+		"aliases": ""
+	},
+	{
+		"qid": "Q27",
+		"name": "Ireland",
+		"alpha2": "IE",
+		"alpha3": "IRL",
+		"aliases": "Hibernia|Éire"
+	},
+	{
+		"qid": "Q971",
+		"name": "Republic of the Congo",
+		"alpha2": "CG",
+		"alpha3": "COG",
+		"aliases": "Congo|Congo-Brazzaville|Congo (Brazzaville)"
+	},
+	{
+		"qid": "Q218",
+		"name": "Romania",
+		"alpha2": "RO",
+		"alpha3": "ROU",
+		"aliases": "România|Rumania|Roumania"
+	},
+	{
+		"qid": "Q159",
+		"name": "Russia",
+		"alpha2": "RU",
+		"alpha3": "RUS",
+		"aliases": "USSR|Rossiyskaya Federatsiya"
+	},
+	{
+		"qid": "Q1037",
+		"name": "Rwanda",
+		"alpha2": "RW",
+		"alpha3": "RWA",
+		"aliases": "The Land of a Thousand Hills"
+	},
+	{
+		"qid": "Q17070",
+		"name": "Réunion",
+		"alpha2": "RE",
+		"alpha3": "REU",
+		"aliases": "Reunion Island|Bourbon Island|Reunion"
+	},
+	{
+		"qid": "Q25362",
+		"name": "Saint Barthélemy",
+		"alpha2": "BL",
+		"alpha3": "BLM",
+		"aliases": "St. Barths|St. Barthélemy|St. Barthelemy|St. Barth|St. Barts"
+	},
+	{
+		"qid": "Q192184",
+		"name": "Saint Helena",
+		"alpha2": "SH",
+		"alpha3": "SHN",
+		"aliases": ""
+	},
+	{
+		"qid": "Q763",
+		"name": "Saint Kitts and Nevis",
+		"alpha2": "KN",
+		"alpha3": "KNA",
+		"aliases": "Saint Christopher and Nevis|Kitts & Nevis"
+	},
+	{
+		"qid": "Q760",
+		"name": "Saint Lucia",
+		"alpha2": "LC",
+		"alpha3": "LCA",
+		"aliases": "Iyonola|Hewanorra"
+	},
+	{
+		"qid": "Q34617",
+		"name": "Saint Pierre and Miquelon",
+		"alpha2": "PM",
+		"alpha3": "SPM",
+		"aliases": ""
+	},
+	{
+		"qid": "Q757",
+		"name": "Saint Vincent and the Grenadines",
+		"alpha2": "VC",
+		"alpha3": "VCT",
+		"aliases": ""
+	},
+	{
+		"qid": "Q683",
+		"name": "Samoa",
+		"alpha2": "WS",
+		"alpha3": "WSM",
+		"aliases": "Western Samoa"
+	},
+	{
+		"qid": "Q238",
+		"name": "San Marino",
+		"alpha2": "SM",
+		"alpha3": "SMR",
+		"aliases": ""
+	},
+	{
+		"qid": "Q851",
+		"name": "Saudi Arabia",
+		"alpha2": "SA",
+		"alpha3": "SAU",
+		"aliases": "KSA"
+	},
+	{
+		"qid": "Q1041",
+		"name": "Senegal",
+		"alpha2": "SN",
+		"alpha3": "SEN",
+		"aliases": "Sénégal"
+	},
+	{
+		"qid": "Q403",
+		"name": "Serbia",
+		"alpha2": "RS",
+		"alpha3": "SRB",
+		"aliases": "Srbija|Yugoslavia"
+	},
+	{
+		"qid": "Q1042",
+		"name": "Seychelles",
+		"alpha2": "SC",
+		"alpha3": "SYC",
+		"aliases": ""
+	},
+	{
+		"qid": "Q1044",
+		"name": "Sierra Leone",
+		"alpha2": "SL",
+		"alpha3": "SLE",
+		"aliases": ""
+	},
+	{
+		"qid": "Q334",
+		"name": "Singapore",
+		"alpha2": "SG",
+		"alpha3": "SGP",
+		"aliases": "Lion City|Garden City"
+	},
+	{
+		"qid": "Q26273",
+		"name": "Sint Maarten",
+		"alpha2": "SX",
+		"alpha3": "SXM",
+		"aliases": "Sint Martin|Saint Martin (Dutch part)|Sint Maarten (Dutch part)|Saint Martin"
+	},
+	{
+		"qid": "Q214",
+		"name": "Slovakia",
+		"alpha2": "SK",
+		"alpha3": "SVK",
+		"aliases": "Slovensko"
+	},
+	{
+		"qid": "Q215",
+		"name": "Slovenia",
+		"alpha2": "SI",
+		"alpha3": "SVN",
+		"aliases": "Slovenija"
+	},
+	{
+		"qid": "Q685",
+		"name": "Solomon Islands",
+		"alpha2": "SB",
+		"alpha3": "SLB",
+		"aliases": ""
+	},
+	{
+		"qid": "Q1045",
+		"name": "Somalia",
+		"alpha2": "SO",
+		"alpha3": "SOM",
+		"aliases": "Somali Republic"
+	},
+	{
+		"qid": "Q258",
+		"name": "South Africa",
+		"alpha2": "ZA",
+		"alpha3": "ZAF",
+		"aliases": "Mzansi|RSA"
+	},
+	{
+		"qid": "Q35086",
+		"name": "South Georgia and the South Sandwich Islands",
+		"alpha2": "GS",
+		"alpha3": "SGS",
+		"aliases": ""
+	},
+	{
+		"qid": "Q884",
+		"name": "South Korea",
+		"alpha2": "KR",
+		"alpha3": "KOR",
+		"aliases": "Daehanminguk|Daehan Minguk|Hanguk|Choson"
+	},
+	{
+		"qid": "Q958",
+		"name": "South Sudan",
+		"alpha2": "SS",
+		"alpha3": "SSD",
+		"aliases": ""
+	},
+	{ "qid": "Q29", "name": "Spain", "alpha2": "ES", "alpha3": "ESP", "aliases": "Hispania" },
+	{
+		"qid": "Q854",
+		"name": "Sri Lanka",
+		"alpha2": "LK",
+		"alpha3": "LKA",
+		"aliases": "Serendib|Ceylon"
+	},
+	{
+		"qid": "Q1049",
+		"name": "Sudan",
+		"alpha2": "SD",
+		"alpha3": "SDN",
+		"aliases": "as-Sūdān|al-Sudan"
+	},
+	{
+		"qid": "Q730",
+		"name": "Suriname",
+		"alpha2": "SR",
+		"alpha3": "SUR",
+		"aliases": "Surrinam|Dutch Guiana|Surinam"
+	},
+	{
+		"qid": "Q842829",
+		"name": "Svalbard and Jan Mayen",
+		"alpha2": "SJ",
+		"alpha3": "SJM",
+		"aliases": ""
+	},
+	{
+		"qid": "Q34",
+		"name": "Sweden",
+		"alpha2": "SE",
+		"alpha3": "SWE",
+		"aliases": "Sverige"
+	},
+	{
+		"qid": "Q39",
+		"name": "Switzerland",
+		"alpha2": "CH",
+		"alpha3": "CHE",
+		"aliases": "Swiss|Suisse|Schweiz|Svizzera|Svizra"
+	},
+	{
+		"qid": "Q858",
+		"name": "Syria",
+		"alpha2": "SY",
+		"alpha3": "SYR",
+		"aliases": "Surya"
+	},
+	{
+		"qid": "Q1039",
+		"name": "São Tomé and Príncipe",
+		"alpha2": "ST",
+		"alpha3": "STP",
+		"aliases": ""
+	},
+	{
+		"qid": "Q865",
+		"name": "Taiwan",
+		"alpha2": "TW",
+		"alpha3": "TWN",
+		"aliases": "Tâi-uân|Tâi-oân|Formosa|Chinese Taipei|ROC"
+	},
+	{
+		"qid": "Q863",
+		"name": "Tajikistan",
+		"alpha2": "TJ",
+		"alpha3": "TJK",
+		"aliases": ""
+	},
+	{
+		"qid": "Q924",
+		"name": "Tanzania",
+		"alpha2": "TZ",
+		"alpha3": "TZA",
+		"aliases": "Tanganyika and Zanzibar"
+	},
+	{
+		"qid": "Q869",
+		"name": "Thailand",
+		"alpha2": "TH",
+		"alpha3": "THA",
+		"aliases": "Land of Smiles|Siam"
+	},
+	{
+		"qid": "Q778",
+		"name": "The Bahamas",
+		"alpha2": "BS",
+		"alpha3": "BHS",
+		"aliases": "Bahama Islands"
+	},
+	{
+		"qid": "Q1005",
+		"name": "The Gambia",
+		"alpha2": "GM",
+		"alpha3": "GMB",
+		"aliases": "Gambia"
+	},
+	{
+		"qid": "Q574",
+		"name": "Timor-Leste",
+		"alpha2": "TL",
+		"alpha3": "TLS",
+		"aliases": "East Timor"
+	},
+	{
+		"qid": "Q945",
+		"name": "Togo",
+		"alpha2": "TG",
+		"alpha3": "TGO",
+		"aliases": ""
+	},
+	{
+		"qid": "Q36823",
+		"name": "Tokelau",
+		"alpha2": "TK",
+		"alpha3": "TKL",
+		"aliases": "Union Islands"
+	},
+	{
+		"qid": "Q678",
+		"name": "Tonga",
+		"alpha2": "TO",
+		"alpha3": "TON",
+		"aliases": "Friendly Islands|Tonga Islands"
+	},
+	{
+		"qid": "Q754",
+		"name": "Trinidad and Tobago",
+		"alpha2": "TT",
+		"alpha3": "TTO",
+		"aliases": "T&T"
+	},
+
+	{
+		"qid": "Q948",
+		"name": "Tunisia",
+		"alpha2": "TN",
+		"alpha3": "TUN",
+		"aliases": ""
+	},
+	{
+		"qid": "Q43",
+		"name": "Turkey",
+		"alpha2": "TR",
+		"alpha3": "TUR",
+		"aliases": "Türkiye"
+	},
+	{
+		"qid": "Q874",
+		"name": "Turkmenistan",
+		"alpha2": "TM",
+		"alpha3": "TKM",
+		"aliases": "Turkmenia"
+	},
+	{
+		"qid": "Q18221",
+		"name": "Turks and Caicos Islands",
+		"alpha2": "TC",
+		"alpha3": "TCA",
+		"aliases": "Turks and Caicos"
+	},
+	{
+		"qid": "Q672",
+		"name": "Tuvalu",
+		"alpha2": "TV",
+		"alpha3": "TUV",
+		"aliases": "Ellice Islands"
+	},
+	{
+		"qid": "Q1036",
+		"name": "Uganda",
+		"alpha2": "UG",
+		"alpha3": "UGA",
+		"aliases": "Ouganda|Pearl of Africa"
+	},
+	{
+		"qid": "Q212",
+		"name": "Ukraine",
+		"alpha2": "UA",
+		"alpha3": "UKR",
+		"aliases": "Ukraïna|Ukraina|Ukrainia"
+	},
+	{
+		"qid": "Q878",
+		"name": "United Arab Emirates",
+		"alpha2": "AE",
+		"alpha3": "ARE",
+		"aliases": "UAE|Emirates"
+	},
+	{
+		"qid": "Q145",
+		"name": "United Kingdom",
+		"alpha2": "GB",
+		"alpha3": "GBR",
+		"aliases": "UK|Britain|Great Britain|England"
+	},
+	{
+		"qid": "Q30",
+		"name": "United States",
+		"alpha2": "US",
+		"alpha3": "USA",
+		"aliases": "America"
+	},
+	{
+		"qid": "Q16645",
+		"name": "United States Minor Outlying Islands",
+		"alpha2": "UM",
+		"alpha3": "UMI",
+		"aliases": "USMOI"
+	},
+	{
+		"qid": "Q11703",
+		"name": "United States Virgin Islands",
+		"alpha2": "VI",
+		"alpha3": "VIR",
+		"aliases": "USVI|US Virgin Islands|American Virgin Islands"
+	},
+	{
+		"qid": "Q77",
+		"name": "Uruguay",
+		"alpha2": "UY",
+		"alpha3": "URY",
+		"aliases": "Banda Oriental"
+	},
+	{
+		"qid": "Q265",
+		"name": "Uzbekistan",
+		"alpha2": "UZ",
+		"alpha3": "UZB",
+		"aliases": ""
+	},
+	{
+		"qid": "Q686",
+		"name": "Vanuatu",
+		"alpha2": "VU",
+		"alpha3": "VUT",
+		"aliases": "New Hebrides"
+	},
+	{
+		"qid": "Q237",
+		"name": "Vatican City",
+		"alpha2": "VA",
+		"alpha3": "VAT",
+		"aliases": "Papal State|The Vatican|Vatican City State"
+	},
+	{
+		"qid": "Q717",
+		"name": "Venezuela",
+		"alpha2": "VE",
+		"alpha3": "VEN",
+		"aliases": ""
+	},
+	{
+		"qid": "Q881",
+		"name": "Vietnam",
+		"alpha2": "VN",
+		"alpha3": "VNM",
+		"aliases": "Việt Nam|Viet Nam"
+	},
+	{
+		"qid": "Q35555",
+		"name": "Wallis and Futuna",
+		"alpha2": "WF",
+		"alpha3": "WLF",
+		"aliases": ""
+	},
+	{
+		"qid": "Q6250",
+		"name": "Western Sahara",
+		"alpha2": "EH",
+		"alpha3": "ESH",
+		"aliases": ""
+	},
+	{
+		"qid": "Q805",
+		"name": "Yemen",
+		"alpha2": "YE",
+		"alpha3": "YEM",
+		"aliases": "South Arabia"
+	},
+	{
+		"qid": "Q953",
+		"name": "Zambia",
+		"alpha2": "ZM",
+		"alpha3": "ZMB",
+		"aliases": "Northern Rhodesia"
+	},
+	{
+		"qid": "Q954",
+		"name": "Zimbabwe",
+		"alpha2": "ZW",
+		"alpha3": "ZWE",
+		"aliases": "Southern Rhodesia"
+	},
+	{
+		"qid": "Q5689",
+		"name": "Åland",
+		"alpha2": "AX",
+		"alpha3": "ALA",
+		"aliases": "Aland Islands|Ahvenanmaa|Åland Islands"
+	}
+]

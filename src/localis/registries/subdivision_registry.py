@@ -10,8 +10,8 @@ class SubdivisionRegistry(Registry[Subdivision]):
         self._countries = countries
         super().__init__(**kwargs)
 
-    def parse_row(self, id, row):
-        return self._MODEL_CLS.from_row(id, row, self._countries._cache, self._cache)
+    def parse_row(self, id, row, cache):
+        return self._MODEL_CLS.from_row(id, row, cache, self._countries._cache)
 
     def lookup(self, identifier) -> SubdivisionModel | None:
         """Get a subdivision by its id, iso_code, or geonames_code."""
@@ -36,9 +36,7 @@ class SubdivisionRegistry(Registry[Subdivision]):
 
         return super().filter(name=name, limit=limit, **kwargs)
 
-    def search(
-        self, query, limit=None, **kwargs
-    ) -> list[tuple[SubdivisionModel, float]]:
+    def search(self, query, limit=10, **kwargs) -> list[tuple[SubdivisionModel, float]]:
         """Fuzzy search for subdivisions by name, aliases, parent name, or country name"""
         return super().search(query, limit, **kwargs)
 

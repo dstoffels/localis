@@ -5,15 +5,15 @@ from .model import DTO, Model
 @dataclass(slots=True)
 class CountryBase(DTO):
     alpha2: str
-    alpha3: str
+    alpha3: str | None
 
 
 @dataclass(slots=True)
 class Country(CountryBase):
     official_name: str
     aliases: list[str]
-    numeric: int
-    flag: str
+    numeric: int | None
+    flag: str | None
 
 
 @dataclass(slots=True)
@@ -38,6 +38,6 @@ class CountryModel(Country, Model):
         NUMERIC_IDX = 5
 
         row[ALIAS_IDX] = [a for a in row[ALIAS_IDX].split("|") if a]
-        row[NUMERIC_IDX] = int(row[NUMERIC_IDX])
+        row[NUMERIC_IDX] = int(row[NUMERIC_IDX]) if row[NUMERIC_IDX] else None
 
         return cls(id, *row)
