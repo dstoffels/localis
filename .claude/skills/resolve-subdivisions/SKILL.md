@@ -21,6 +21,7 @@ disallowed-tools: Bash Read Grep Glob Edit Write Agent WebFetch
 ### Step 2. Resolve the orphaned subdivision with a candidate
 - Use real-world knowledge, not string similarity.
 - If multiple candidates share a name, use the candidate's `admin_level` against the orphan's `type` to pick the right one, not just the first match.
+- If iterating over candidates of the same country as the previous orphan, you can use that previous context to inform your decision, especially with large numbers of subdivisions within that country.
 
 **IF** you have high confidence that this ISO subdivision and one specific candidate are the same place (a transliteration difference, an old vs. current name, a local vs. official form, etc.):
   1. **CALL** the `merge` tool with `candidate_hashid` and any `aliases` if applicable.
@@ -30,16 +31,16 @@ disallowed-tools: Bash Read Grep Glob Edit Write Agent WebFetch
   1. Return to Step 1 to retrieve the next batch of candidates for the orphan.
 
 ### Step 3. Add a new entry
-**IF** none of the candidates fit, but you know for certain the orphaned subdivision is a valid and confirmed entity:
+**IF** none of the candidates fit, but you know for **certain** the orphaned subdivision is a valid, confirmed entity, current or historical:
   1. **CALL** the `add` tool with any `aliases` if applicable.
   2. Return to Step 1.
 
 **ELSE**: Proceed to Step 4.
 
 ### Step 4. Escalate to Websearch
-**CALL** the `Websearch` tool with the orphan's `name` and `iso_code` to gather additional information about the orphaned subdivision. DO NOT add additional search terms.
+**CALL** the `Websearch` tool with the only orphan's `name` and `iso_code` to gather additional information about the orphaned subdivision. DO NOT add additional search terms.
 
-**IF** a confident match is found after the websearch:
+**IF** the websearch reveals a certain match, that you have high confidence that this ISO subdivision and a specific candidate are the *same place*:
   1. **CALL** the `merge` tool with `candidate_hashid` and any `aliases` if applicable.
   2. Return to Step 1.
 
