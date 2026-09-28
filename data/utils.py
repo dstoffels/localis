@@ -47,14 +47,14 @@ def load_subdivisions(
 
 def dump_data(data: list[Model], path: Path) -> None:
     with open(path, "w", newline="", encoding="utf-8") as f:
-        writer = csv.writer(f, delimiter="\t")
+        writer = csv.writer(f, delimiter="\t", lineterminator="\n")
         for item in data:
             writer.writerow(item.to_row())
 
 
 def dump_lookup_index(data: list[Model], path: Path) -> None:
     with open(path, "w", newline="", encoding="utf-8") as f:
-        writer = csv.writer(f, delimiter="\t")
+        writer = csv.writer(f, delimiter="\t", lineterminator="\n")
         for item in data:
             row = []
             for value in item.extract_lookup_values():
@@ -64,7 +64,7 @@ def dump_lookup_index(data: list[Model], path: Path) -> None:
 
 def dump_filter_index(data: list[Model], path: Path) -> None:
     with open(path, "w", newline="", encoding="utf-8") as f:
-        writer = csv.writer(f, delimiter="\t")
+        writer = csv.writer(f, delimiter="\t", lineterminator="\n")
         headers = data[0].FILTER_FIELDS.keys()
         writer.writerow(headers)
         for item in data:
@@ -120,7 +120,7 @@ def dump_search_index(data: list[Model], path: Path) -> None:
 
     # Write compressed format
     with open(path, "w", newline="", encoding="utf-8") as f:
-        writer = csv.writer(f, delimiter="\t")
+        writer = csv.writer(f, delimiter="\t", lineterminator="\n")
 
         for trigram, ids in index.items():
             encoded = encode_id_list(ids)
