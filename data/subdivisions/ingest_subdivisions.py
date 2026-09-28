@@ -17,7 +17,7 @@ from .scripts.dump_subdivisions import dump
 
 def ingest_subdivisions(
     countries: dict[str, CountryModel] = None,
-    interactive_mode: bool = False,
+    interactive_mode: bool = False,  # deprecated: use the resolve-subdivisions skill instead
 ) -> dict[str, SubdivisionModel] | None:
     log.set_stage("SUBDIVISIONS")
     has_update = fetch_subdivisions_sources()
@@ -55,6 +55,10 @@ if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("--interactive", action="store_true")
+    parser.add_argument(
+        "--interactive",
+        action="store_true",
+        help="Deprecated: use the resolve-subdivisions skill instead.",
+    )
     args = parser.parse_args()
     ingest_subdivisions(interactive_mode=args.interactive)

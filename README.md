@@ -331,7 +331,7 @@ nested_sub.type
 
 ### Caching
 
-**Countries** and **Subdivisions** are eager-loaded on import, but **Cities** are not due to their large dataset. All registries methods lazy load their respective *indexes* on first use, incurring a *cold start* cost. Indexes (and cities) can be pre-loaded with `.force_cache()` to avoid this during queries.
+**Countries** and **Subdivisions** are eager-loaded on import, but **Cities** are not due to their large dataset. All registry methods lazy load their respective *indexes* on first use, incurring a cold start cost. Indexes (and cities) can be pre-loaded with `.force_cache()` to avoid this during queries.
 
 - **Full dataset eager load**: ~1.1s (all 503k+ entities)
 - **Countries** (249): < 5ms for all indexes
@@ -370,6 +370,7 @@ Fuzzy search accuracy on mangled/misspelled queries:
 ---
 
 ## Data Sources
+Data in this project is kept current monthly from the following sources:
 
 - **Countries**
   - [ISO 3166-1](https://www.iso.org/iso-3166-country-codes.html) data via [Ipregistry](https://ipregistry.co)

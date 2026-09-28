@@ -59,7 +59,9 @@ def _resolve_interactively(
     num: int,
     total: int,
 ) -> dict[str, str | list[str] | bool | None]:
-    """Prompt a human to resolve one unmatched subdivision. Returns the decision to persist."""
+    """Deprecated: superseded by the resolve-subdivisions skill/MCP. Kept as a manual
+    fallback. Prompts a human to resolve one unmatched subdivision, returning the
+    decision to persist."""
     admin_level = iso_sub.admin_level
     merge_data: dict[str, list[str] | bool | None] = {"names": [], "added": False}
 
@@ -166,7 +168,7 @@ def handle_orphans(orphaned_subs: list[SubdivisionModel]) -> None:
 def resolve_unmerged_subs(
     unmerged_iso_subs: list[SubdivisionModel],
     submap: SubdivisionMap,
-    interactive_mode: bool = False,
+    interactive_mode: bool = False,  # deprecated: use the resolve-subdivisions skill instead
 ) -> None:
     orphaned: list[SubdivisionModel] = []
 
