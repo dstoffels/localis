@@ -8,7 +8,5 @@
 [SUBDIVISIONS] No update needed for admin2Codes.txt
 [SUBDIVISIONS] No update needed for iso-3166-2.csv
 [SUBDIVISIONS] No updates for subdivisions.
-[CITIES] Downloading allCountries.zip from https://download.geonames.org/export/dump/allCountries.zip
-[CITIES] Downloaded and updated allCountries.zip
-[CITIES] Loading Subdivisions...
-[CITIES] completed: 472613 cities
+[CITIES] No update needed for allCountries.zip
+[CITIES] No updates for cities.
