@@ -155,9 +155,8 @@ def _head_signals(url: str) -> _ManifestEntry:
         }
 
 
-def download(url: str, dest: Path, manifest_path: Path) -> bool:
-    """Downloads a file from the given URL to the specified destination path. Checks the remote file's metadata against a manifest, only downloading the target file if it's changed. Returns True if a fresh download occurred, False otherwise."""
-
+def has_changed(url: str, dest: Path, manifest_path: Path) -> bool:
+    """Read-only HEAD check against manifest_path; never downloads or writes."""
     manifest = _load_manifest(manifest_path)
     signals = _head_signals(url)
 
@@ -165,6 +164,11 @@ def download(url: str, dest: Path, manifest_path: Path) -> bool:
         log.writeline(f"No update needed for {dest.name}")
         return False
 
+    return True
+
+
+def download(url: str, dest: Path, manifest_path: Path) -> None:
+    """Unconditional fetch via a .part temp file; pair with has_changed()."""
     dest.parent.mkdir(parents=True, exist_ok=True)
     tmp = dest.with_suffix(dest.suffix + ".part")
 
@@ -178,6 +182,6 @@ def download(url: str, dest: Path, manifest_path: Path) -> bool:
     tmp.replace(dest)
     log.writeline(f"Downloaded and updated {dest.name}")
 
-    manifest[dest.name] = signals
+    manifest = _load_manifest(manifest_path)
+    manifest[dest.name] = _head_signals(url)
     _save_manifest(manifest_path, manifest)
-    return True

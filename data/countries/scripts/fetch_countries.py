@@ -1,4 +1,4 @@
-from data.utils import COUNTRIES_RAW_PATH, GEONAMES_DUMP_URL, download
+from data.utils import COUNTRIES_RAW_PATH, GEONAMES_DUMP_URL, has_changed, download
 from data.paths import COUNTRIES_MANIFEST_PATH, Path
 
 ISO_CODES_COUNTRIES_URL = (
@@ -14,17 +14,28 @@ def _strip_comment_lines(path: Path) -> None:
 
 
 def fetch_countries_sources() -> bool:
-    # Fetch ISO 3166-1 country data
     iso_codes_dest = COUNTRIES_RAW_PATH / "iso_3166-1.json"
-    iso_changed = download(ISO_CODES_COUNTRIES_URL, iso_codes_dest, COUNTRIES_MANIFEST_PATH)
-
-    # Fetch GeoNames country data
+    geonames_url = f"{GEONAMES_DUMP_URL}/countryInfo.txt"
     geonames_dest = COUNTRIES_RAW_PATH / "geonames_countries.txt"
-    geonames_changed = download(
-        f"{GEONAMES_DUMP_URL}/countryInfo.txt", geonames_dest, COUNTRIES_MANIFEST_PATH
-    )
-    if geonames_changed:
-        # GeoNames ships this with a '#' doc header the parser doesn't expect
-        _strip_comment_lines(geonames_dest)
 
-    return iso_changed or geonames_changed
+    # Check first: if either source changed, we need both files locally to merge,
+    # so a partial fetch (only the changed one) would leave the other missing.
+    any_changed = any(
+        [
+            has_changed(
+                ISO_CODES_COUNTRIES_URL, iso_codes_dest, COUNTRIES_MANIFEST_PATH
+            ),
+            has_changed(geonames_url, geonames_dest, COUNTRIES_MANIFEST_PATH),
+        ]
+    )
+
+    if not any_changed:
+        return False
+
+    download(ISO_CODES_COUNTRIES_URL, iso_codes_dest, COUNTRIES_MANIFEST_PATH)
+
+    download(geonames_url, geonames_dest, COUNTRIES_MANIFEST_PATH)
+    # GeoNames ships this with a '#' doc header the parser doesn't expect
+    _strip_comment_lines(geonames_dest)
+
+    return True
