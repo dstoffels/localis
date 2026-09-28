@@ -5,19 +5,11 @@ Fast, offline access to comprehensive data for **countries**, **subdivisions**, 
 ## Features
 
 - 🌍 **254 countries** with ISO codes (alpha-2, alpha-3, numeric)
-- 🗺️ **51,541 subdivisions** administrative levels 1 & 2
-- 🏙️ **451,792 cities** sourced from GeoNames
+- 🗺️ **51,684 subdivisions** administrative levels 1 & 2
+- 🏙️ **472,613 cities** sourced from GeoNames
 - 🔍 **Search Engine** for typo-tolerant lookups with 99%+ accuracy
 - ⚡ **Blazing fast** - full dataset loads in 1.1s, lookups < 5ms, searches < 30ms
 - 📌 **Aliases** - support for colloquial, historic and alternate names
-
----
-
-## Status
-
-localis is currently in **alpha**. The API is stable but performance optimizations and additional features are ongoing. Feedback welcome!
-
-Report issues: https://github.com/dstoffels/localis/issues
 
 ---
 
@@ -333,10 +325,10 @@ nested_sub.type
 
 **Countries** and **Subdivisions** are eager-loaded on import, but **Cities** are not due to their large dataset. All registry methods lazy load their respective *indexes* on first use, incurring a cold start cost. Indexes (and cities) can be pre-loaded with `.force_cache()` to avoid this during queries.
 
-- **Full dataset eager load**: ~1.1s (all 503k+ entities)
+- **Full dataset eager load**: ~1.1s (all 524k+ entities)
 - **Countries** (249): < 5ms for all indexes
-- **Subdivisions** (51,541): ~350ms for all indexes
-- **Cities** (451,792)
+- **Subdivisions** (51,684): ~350ms for all indexes
+- **Cities** (472,613)
   - Lookup index: ~150ms
   - Filter index: ~1.1s
   - Search index: ~1.7s
@@ -373,7 +365,7 @@ Fuzzy search accuracy on mangled/misspelled queries:
 Data in this project is kept current monthly from the following sources:
 
 - **Countries**
-  - [ISO 3166-1](https://www.iso.org/iso-3166-country-codes.html) data via [Ipregistry](https://ipregistry.co)
+  - [ISO 3166-1](https://www.iso.org/iso-3166-country-codes.html) data via [Debian's iso-codes project](https://salsa.debian.org/iso-codes-team/iso-codes)
   - [Geonames](https://www.geonames.org/) `geonames_countries.txt`
   - Additional country aliases from Wikidata.
 - **Subdivisions**
@@ -387,7 +379,7 @@ Data in this project is kept current monthly from the following sources:
 
 ## Requirements
 
-- Python 3.9+
+- Python 3.11+
 - `rapidfuzz` - Fast fuzzy string matching
 - `unidecode` - Unicode text normalization
 
@@ -401,4 +393,5 @@ MIT
 
 ## Contributing
 
-Issues and pull requests welcome at [github.com/dstoffels/localis](https://github.com/dstoffels/localis)
+Pull requests welcome at [github.com/dstoffels/localis](https://github.com/dstoffels/localis)
+Report issues: https://github.com/dstoffels/localis/issues
