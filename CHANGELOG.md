@@ -7,6 +7,44 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Automated data ingest pipeline now version-bumps patch instead of minor
+
+## [1.1.1] - 2026-09-28
+
+### Changed
+- Minor README updates
+
+## [1.1.0] - 2026-09-28
+
+### Changed
+- Ran the automated ingestion pipeline for the first time, refreshing the shipped dataset
+  - Countries: 249 -> 254
+  - Subdivisions: 51,541 -> 51,684
+  - Cities: 451,792 -> 472,613
+
+## [1.0.0] - 2026-09-28
+
+### Added
+- `resolve-subdivisions` Claude Code skill and MCP server for resolving ISO/GeoNames subdivision merge orphans, with human escalation for genuinely ambiguous cases
+- Checksum-aware source fetching: skips download, parsing, and merging for a domain when none of its sources have changed since the last run
+- CI: automated monthly ingest pipeline workflow, gated on orphan resolution, with draft PR automation
+- Developer guide (`docs/dev.md`)
+
+### Changed
+- Rewrote the ingestion pipeline to fetch current source data end-to-end
+
+### Fixed
+- Registry search and filter bugs, and type mismatches
+- Inaccessible cache in the subdivisions registry
+- Country aliasing and contemporary name mappings
+- Silent dropping of non-ISO countries during ingest
+- Indeterminate set ordering in the countries filter index
+- Line-ending inconsistencies in dataset TSVs that broke CI diff checks
+
+### Removed
+- Dead CLI code path
+
 ## [1.0.0a3] - 2025-12-05
 
 ### Changed

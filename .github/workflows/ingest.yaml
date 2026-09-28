@@ -61,7 +61,7 @@ jobs:
           if git diff --quiet -- src/localis/data; then
             echo "bumped=false" >> "$GITHUB_OUTPUT"
           else
-            poetry version minor
+            poetry version patch
             echo "bumped=true" >> "$GITHUB_OUTPUT"
             echo "version=$(poetry version -s)" >> "$GITHUB_OUTPUT"
           fi

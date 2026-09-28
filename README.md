@@ -326,7 +326,7 @@ nested_sub.type
 **Countries** and **Subdivisions** are eager-loaded on import, but **Cities** are not due to their large dataset. All registry methods lazy load their respective *indexes* on first use, incurring a cold start cost. Indexes (and cities) can be pre-loaded with `.force_cache()` to avoid this during queries.
 
 - **Full dataset eager load**: ~1.1s (all 524k+ entities)
-- **Countries** (249): < 5ms for all indexes
+- **Countries** (254): < 5ms for all indexes
 - **Subdivisions** (51,684): ~350ms for all indexes
 - **Cities** (472,613)
   - Lookup index: ~150ms
