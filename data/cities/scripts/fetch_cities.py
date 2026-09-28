@@ -1,5 +1,5 @@
-from data.utils import has_changed, download
-from data.paths import CITIES_RAW_PATH, CITIES_MANIFEST_PATH, GEONAMES_DUMP_URL
+from data.utils.download import has_changed, download
+from data.utils.paths import CITIES_RAW_PATH, CITIES_MANIFEST_PATH, GEONAMES_DUMP_URL
 import zipfile
 
 

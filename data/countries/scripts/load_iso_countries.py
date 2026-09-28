@@ -1,7 +1,7 @@
 # This script initializes the dataset from ISO 3166-1, with a few contemporary naming updates and aliases.
 # These will be merged with data from their GeoNames and Wikipedia counterparts.
 
-from data.utils import *
+from data.utils.paths import COUNTRIES_RAW_PATH
 from localis.models import CountryModel
 import json
 

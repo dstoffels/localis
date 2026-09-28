@@ -57,3 +57,54 @@ CI then runs `poetry run check-orphans` against whatever `orphaned_subdivisions.
 The failing check is advisory, not what actually blocks the merge. What blocks it is the PR staying in **draft**: GitHub disables the merge button on a draft regardless of any check's state, and this repo's branch protection on `main` only restricts direct pushes, it doesn't require this workflow's check to pass. The maintainer's real signal is draft vs. ready; the failed job and comment exist purely for visibility. Resolving orphans is still a local step: pull `ingest`, run the resolve-subdivisions skill, commit, and push back to `origin/ingest`, which re-triggers this workflow through its push trigger.
 
 One bug this surfaced and fixed in passing: `release.yaml`'s checkout step never fetched tags, so its `git tag | sort --version-sort | tail -n1` always came back empty. The workflow believed no version had ever shipped and re-attempted publishing whatever version was already in `pyproject.toml`, which is what actually broke the most recent release (PyPI rejects re-uploading an already-used filename), not a PyPI API change as it first appeared. Fixed with `fetch-tags: true` on that checkout step, which matters here specifically because a merged `ingest` PR is exactly the kind of push to `main` that would retrigger this failure mode.
+
+## Performance Profile
+
+Snapshot as of v1.1.1 (254 countries, 51,684 subdivisions, 472,613 cities). These numbers move as the dataset grows through the ingest pipeline; re-measure before relying on them for a release decision. Memory figures are RSS deltas measured by calling `force_cache()` on each registry in turn from a fresh interpreter.
+
+### Shipped data size
+
+`src/localis/data/` is 95MB total, almost entirely cities:
+
+| Domain | Size | Share |
+|---|---|---|
+| Countries | 68KB | 0.07% |
+| Subdivisions | 7.4MB | 7.8% |
+| Cities | 88MB | 92.6% |
+
+Within cities, the four files break down as: `cities.tsv` 26MB, `cities_filter_index.tsv` 35MB, `cities_search_index.tsv` 24MB, `cities_lookup_index.tsv` 3.6MB.
+
+### Memory footprint
+
+| Registry (`force_cache()`) | RSS delta |
+|---|---|
+| import baseline | 37MB |
+| countries | +0.4MB |
+| subdivisions | +93MB |
+| cities | +995MB |
+| **total, all three fully cached** | **1134MB** |
+
+Cities' 995MB breaks down further by structure:
+
+| Cities component | RSS delta |
+|---|---|
+| `_cache` (472,613 models) | 180MB |
+| `_lookup_index` | 61MB |
+| `_filter_index` | 109MB |
+| `_search_index` | 645MB |
+
+The search (trigram) index is 62% of cities' footprint and 57% of the package's total peak memory, despite being the second-smallest file on disk (24MB). The inflation comes from decoding the compact on-disk posting format (base64 + varint + delta encoded) into `dict[str, list[int]]`: each id ends up as a full boxed `int` object referenced by a list, roughly 36 bytes per id, instead of the 4 bytes a packed representation (e.g. `array.array("I", ...)`) would cost. This is a representation cost, not a data-volume cost: it doesn't shrink by reducing the dataset, only by changing how decoded postings are stored in memory.
+
+### City population distribution
+
+`cities.tsv` population field, all 472,613 rows, sorted:
+
+| Threshold | Cities remaining | Share |
+|---|---|---|
+| population > 0 (current) | 472,613 | 100% |
+| population > 100 | 304,916 | 64.5% |
+| population > 500 | 186,310 | 39.4% |
+| population > 1,000 | 138,441 | 29.3% |
+| population > 5,000 | 63,775 | 13.5% |
+
+Median population across the current dataset is 263. The current ingestion filter (`data/cities/scripts/load_cities.py`) admits any populated-place feature code (PPL, PPLA, PPLA2-5, PPLC, PPLF, PPLL, PPLS, STLMT) with a nonzero population; it does not apply a population floor.

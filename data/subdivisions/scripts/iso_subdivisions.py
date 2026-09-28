@@ -1,6 +1,5 @@
-from data.utils import *
-from data.subdivisions.subdivisions_utils import SubdivisionMap
-from data.subdivisions.subdivisions_utils import dedupe
+from data.utils.paths import SUBDIVISIONS_RAW_PATH
+from data.subdivisions.utils.strings import dedupe
 import csv
 from localis.models import CountryModel, SubdivisionModel
 

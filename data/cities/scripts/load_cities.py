@@ -1,5 +1,5 @@
-from data.utils import CITIES_RAW_PATH
-from data.cities.scripts.cities_utils import *
+from data.utils.paths import CITIES_RAW_PATH
+from data.cities.utils.strings import normalize_name, is_latin
 from data.logger import log
 from localis.models import SubdivisionModel, CountryModel, CityModel
 import csv

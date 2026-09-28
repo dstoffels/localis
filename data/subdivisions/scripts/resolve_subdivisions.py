@@ -1,5 +1,8 @@
-from data.utils import *
-from data.subdivisions.subdivisions_utils import *
+from data.utils.paths import SUBDIVISIONS_RAW_PATH
+from data.subdivisions.utils.subdivision_map import (
+    SubdivisionMap,
+    get_geonames_candidates,
+)
 from data.logger import log
 import json
 from data.subdivisions.scripts.merge_subdivisions import merge_matched_sub

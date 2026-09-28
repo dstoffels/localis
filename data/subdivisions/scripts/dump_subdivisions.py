@@ -1,5 +1,11 @@
-from data.utils import *
-from data.subdivisions.subdivisions_utils import SubdivisionMap
+from data.utils.paths import DATA_PATH
+from data.utils.index import (
+    dump_data,
+    dump_lookup_index,
+    dump_filter_index,
+    dump_search_index,
+)
+from data.subdivisions.utils.subdivision_map import SubdivisionMap
 
 SUBDIVISIONS_DATA_PATH = DATA_PATH / "subdivisions"
 

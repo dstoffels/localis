@@ -1,3 +1,4 @@
+from array import array
 import unicodedata
 import re
 from unidecode import unidecode
@@ -31,12 +32,12 @@ def generate_trigrams(s: str):
 # The search indexes store tens of thousands of trigrams and some have thousands of associated IDs.
 # To reduce the size of these indexes on disk, we encode the list of IDs for each trigram using
 # base64-encoded varint delta encoding, which must be decoded on load.
-def decode_id_list(b64: str) -> list[int]:
+def decode_id_list(b64: str) -> array:
     """Convert base64(varint(delta(ids))) → [1,5,6,...]."""
     if not b64:
-        return []
+        return array("I")
     data = base64.b64decode(b64)
-    out = []
+    out = array("I")
     prev = 0
 
     i = 0

@@ -1,4 +1,4 @@
-from data.utils import *
+from data.utils.paths import COUNTRIES_RAW_PATH
 import json
 from localis.models import CountryModel
 

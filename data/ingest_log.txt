@@ -1,12 +1,7 @@
+[COUNTRIES] No update needed for iso_3166-1.json
 [COUNTRIES] No update needed for geonames_countries.txt
-[COUNTRIES] Downloading iso_3166-1.json from https://salsa.debian.org/iso-codes-team/iso-codes/-/raw/main/data/iso_3166-1.json
-[COUNTRIES] Downloaded and updated iso_3166-1.json
-[COUNTRIES] Downloading geonames_countries.txt from https://download.geonames.org/export/dump/countryInfo.txt
-[COUNTRIES] Downloaded and updated geonames_countries.txt
-[COUNTRIES] completed: 254 countries
+[COUNTRIES] No updates for countries.
 [SUBDIVISIONS] No update needed for admin1CodesASCII.txt
 [SUBDIVISIONS] No update needed for admin2Codes.txt
 [SUBDIVISIONS] No update needed for iso-3166-2.csv
 [SUBDIVISIONS] No updates for subdivisions.
-[CITIES] No update needed for allCountries.zip
-[CITIES] No updates for cities.

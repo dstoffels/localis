@@ -79,7 +79,7 @@ class SubdivisionMap:
         return len(self._by_id)
 
     def to_geocode_map(self) -> dict[str, SubdivisionModel]:
-        """Return a plain dict keyed by geonames_code, matching the shape data.utils.load_subdivisions() reconstructs from disk."""
+        """Return a plain dict keyed by geonames_code, matching the shape data.utils.index.load_subdivisions() reconstructs from disk."""
         return self._by_geo_code
 
 
@@ -92,16 +92,3 @@ def get_geonames_candidates(
         submap.filter(iso_sub.country.alpha2, iso_sub.admin_level),
         key=lambda x: x.name,
     )
-
-
-def dedupe(items: list[str]) -> list[str]:
-    seen = {}
-    for s in items:
-        key = s.lower()
-        if key not in seen or len(s) < len(seen[key]):
-            seen[key] = s
-    return sorted(seen.values())
-
-
-def is_iso_code(code: str) -> bool:
-    return "-" in code

@@ -1,7 +1,7 @@
 # Reports on subdivisions the resolve-subdivisions skill hasn't resolved yet.
 # Used by the ingest CI workflow to decide whether to block the PR.
 
-from data.paths import SUBDIVISIONS_RAW_PATH
+from data.utils.paths import SUBDIVISIONS_RAW_PATH
 import json
 import sys
 

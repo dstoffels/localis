@@ -1,5 +1,10 @@
-from data.utils import COUNTRIES_RAW_PATH, GEONAMES_DUMP_URL, has_changed, download
-from data.paths import COUNTRIES_MANIFEST_PATH, Path
+from pathlib import Path
+from data.utils.paths import (
+    COUNTRIES_RAW_PATH,
+    COUNTRIES_MANIFEST_PATH,
+    GEONAMES_DUMP_URL,
+)
+from data.utils.download import has_changed, download
 
 ISO_CODES_COUNTRIES_URL = (
     "https://salsa.debian.org/iso-codes-team/iso-codes/-/raw/main/data/iso_3166-1.json"

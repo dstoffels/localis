@@ -1,5 +1,5 @@
-from data.utils import has_changed, download
-from data.paths import (
+from data.utils.download import has_changed, download
+from data.utils.paths import (
     SUBDIVISIONS_RAW_PATH,
     SUBDIVISIONS_MANIFEST_PATH,
     GEONAMES_DUMP_URL,

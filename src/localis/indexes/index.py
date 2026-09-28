@@ -1,3 +1,4 @@
+from array import array
 import logging
 from pathlib import Path
 from localis.models import Model
@@ -15,7 +16,7 @@ class Index:
     ):
         self.MODEL_CLS = model_cls
         self.cache = cache
-        self.index: dict[str, int | list[int]] = {}
+        self.index: dict[str, int | array] = {}
         self.load(filepath)
 
     def load(self, filepath: Path):

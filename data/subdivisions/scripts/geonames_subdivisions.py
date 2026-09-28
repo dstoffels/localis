@@ -1,6 +1,6 @@
 from pathlib import Path
-from data.subdivisions.subdivisions_utils import *
-from data.utils import SUBDIVISIONS_RAW_PATH
+from data.subdivisions.utils.subdivision_map import SubdivisionMap
+from data.utils.paths import SUBDIVISIONS_RAW_PATH
 from data.logger import log
 import csv
 from localis.models import CountryModel, SubdivisionModel

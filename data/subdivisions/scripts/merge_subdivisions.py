@@ -1,4 +1,5 @@
-from data.subdivisions.subdivisions_utils import *
+from data.subdivisions.utils.subdivision_map import SubdivisionMap
+from data.subdivisions.utils.strings import dedupe
 import re
 from rapidfuzz import fuzz
 from localis.models import SubdivisionModel

@@ -1,6 +1,6 @@
 from pathlib import Path
 
-BASE_PATH = Path(__file__).parent
+BASE_PATH = Path(__file__).parent.parent
 
 # localis data
 DATA_PATH = BASE_PATH.parent / "src" / "localis" / "data"

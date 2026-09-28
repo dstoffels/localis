@@ -3,16 +3,16 @@
 # Manual intervention is required for some entries, which is mapped in src/resoluton_map.json
 # villager only supports administrative levels 1 and 2, which covers most cases.
 
-from data.utils import *
+from data.utils.index import load_countries
 from data.subdivisions.scripts.fetch_subdivisions import fetch_subdivisions_sources
-from data.subdivisions.subdivisions_utils import SubdivisionMap
+from data.subdivisions.utils.subdivision_map import SubdivisionMap
 from data.logger import log
 from localis.models import CountryModel, SubdivisionModel
-from .scripts.geonames_subdivisions import map_geonames_subdivisions
-from .scripts.iso_subdivisions import load_iso_subs
-from .scripts.merge_subdivisions import try_merge
-from .scripts.resolve_subdivisions import resolve_unmerged_subs
-from .scripts.dump_subdivisions import dump
+from .geonames_subdivisions import map_geonames_subdivisions
+from .iso_subdivisions import load_iso_subs
+from .merge_subdivisions import try_merge
+from .resolve_subdivisions import resolve_unmerged_subs
+from .dump_subdivisions import dump
 
 
 def ingest_subdivisions(
