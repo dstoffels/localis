@@ -1,25 +1,22 @@
+from http.client import HTTPResponse
+import json
 from pathlib import Path
 import csv
 from collections import defaultdict
 from localis.models import Model, CountryModel, SubdivisionModel
 import base64
-import urllib.request
-
-# Paths
-BASE_PATH = Path(__file__).parent
-DATA_PATH = BASE_PATH.parent / "src" / "localis" / "data"
-COUNTRIES_RAW_PATH = BASE_PATH / "countries" / "raw"
-SUBDIVISIONS_RAW_PATH = BASE_PATH / "subdivisions" / "raw"
-CITIES_RAW_PATH = BASE_PATH / "cities" / "raw"
+from urllib.request import urlopen, Request
+from typing import cast
+from data.paths import *
+from data.logger import log
 
 # Fetch URLs
 USER_AGENT = "localis-data-refresh (+https://github.com/dstoffels/localis)"
-GEONAMES_DUMP_URL = "https://download.geonames.org/export/dump"
 
 
 def load_countries() -> dict[str, CountryModel]:
     ALPHA2_INDEX = 1
-    print("Loading countries...")
+    log.writeline("Loading countries...")
     with open(DATA_PATH / "countries" / "countries.tsv", "r", encoding="utf-8") as f:
         reader = csv.reader(f, delimiter="\t")
         return {
@@ -31,7 +28,7 @@ def load_countries() -> dict[str, CountryModel]:
 def load_subdivisions(
     countries: dict[str, CountryModel],
 ) -> dict[str, SubdivisionModel]:
-    print("Loading Subdivisions...")
+    log.writeline("Loading Subdivisions...")
     GEONAMES_CODE_INDEX = 1
     COUNTRY_INDEX = 7
     countries_by_id: dict[int, CountryModel] = {c.id: c for c in countries.values()}
@@ -130,21 +127,57 @@ def dump_search_index(data: list[Model], path: Path) -> None:
             writer.writerow([trigram, encoded])
 
 
-def strip_comment_lines(path: Path) -> None:
-    lines = path.read_text(encoding="utf-8").splitlines(keepends=True)
-    path.write_text(
-        "".join(l for l in lines if not l.startswith("#")), encoding="utf-8"
-    )
+_ManifestEntry = dict[str, str | None]
+_Manifest = dict[str, _ManifestEntry]
 
 
-def download(url: str, dest: Path) -> None:
-    """Downloads url to dest, via a .part temp file so a failed transfer never leaves a corrupt file at dest."""
+def _load_manifest(path: Path) -> _Manifest:
+    if not path.exists():
+        return {}
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+def _save_manifest(path: Path, manifest: _Manifest) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(manifest, f, indent=2)
+
+
+def _head_signals(url: str) -> _ManifestEntry:
+    head_request = Request(url, method="HEAD", headers={"User-Agent": USER_AGENT})
+    head_response = cast(HTTPResponse, urlopen(head_request, timeout=60))
+    with head_response:
+        return {
+            "etag": head_response.headers.get("ETag"),
+            "last_modified": head_response.headers.get("Last-Modified"),
+            "content_length": head_response.headers.get("Content-Length"),
+        }
+
+
+def download(url: str, dest: Path, manifest_path: Path) -> bool:
+    """Downloads a file from the given URL to the specified destination path. Checks the remote file's metadata against a manifest, only downloading the target file if it's changed. Returns True if a fresh download occurred, False otherwise."""
+
+    manifest = _load_manifest(manifest_path)
+    signals = _head_signals(url)
+
+    if signals == manifest.get(dest.name):
+        log.writeline(f"No update needed for {dest.name}")
+        return False
+
     dest.parent.mkdir(parents=True, exist_ok=True)
     tmp = dest.with_suffix(dest.suffix + ".part")
 
-    request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
-    with urllib.request.urlopen(request, timeout=60) as response, open(tmp, "wb") as f:
+    request = Request(url, headers={"User-Agent": USER_AGENT})
+    log.writeline(f"Downloading {dest.name} from {url}")
+    response = cast(HTTPResponse, urlopen(request, timeout=60))
+    with response, open(tmp, "wb") as f:
         while chunk := response.read(1024 * 1024):
             f.write(chunk)
 
     tmp.replace(dest)
+    log.writeline(f"Downloaded and updated {dest.name}")
+
+    manifest[dest.name] = signals
+    _save_manifest(manifest_path, manifest)
+    return True

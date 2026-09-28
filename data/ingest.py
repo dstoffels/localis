@@ -8,8 +8,8 @@ def ingest_all(interactive_mode: bool = False) -> None:
     log.clear()
 
     countries = ingest_countries()
-    sub_map = ingest_subdivisions(countries, interactive_mode=interactive_mode)
-    # ingest_cities(countries, sub_map.to_geocode_map())
+    geocode_sub_map = ingest_subdivisions(countries, interactive_mode=interactive_mode)
+    # ingest_cities(countries, geocode_sub_map)
 
 
 if __name__ == "__main__":

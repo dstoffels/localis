@@ -7,8 +7,15 @@ This document outlines the project plan for the Localis project, detailing the o
 
 - Bring API, data merging/validation and automated data fetching to release v1.0
 
-## Features
+## MVP Features
 
-- Implement cron job in ci for automated data fetching, updating the dataset and drafting a PR if the merging of the new data succeeds. If it cannot be merged automatically, notify the team for manual intervention.
+~~- Update cities registry to lazy load for faster initialization/import.~~
+~~- Implement resolve-subdivisions skill & MCP for locally automated data reconciliation when merging ISO and geonames datasets.~~
+- Add checksums to data fetching to skip unnecessary downloads
+- Implement cron job in GHA ci for automated data fetching, updating the dataset and drafting a PR if the merging of the new data succeeds. If it cannot be merged automatically, notify the team for manual intervention.
+
+
+## Backlog
 - Implement autocomplete for registries and/or global interface.
-- Add checksums to data fetching to skip unecessary downloads
+- Patch missing flags
+- Implement native languages in countries?

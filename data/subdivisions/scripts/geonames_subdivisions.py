@@ -57,8 +57,8 @@ def load_geonames_file(
 def map_geonames_subdivisions(
     countries: dict[str, CountryModel],
 ) -> SubdivisionMap:
-    print("Loading GeoNames subdivisions...")
+    log.writeline("Loading GeoNames subdivisions...")
     sub_map = SubdivisionMap()
     load_geonames_file("admin1CodesASCII.txt", countries, sub_map)
-    load_geonames_file("admin2.txt", countries, sub_map)
+    load_geonames_file("admin2Codes.txt", countries, sub_map)
     return sub_map

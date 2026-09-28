@@ -1,2 +1,7 @@
-[COUNTRIES] completed: 254 countries
-[SUBDIVISIONS] completed: 51684 subdivisions
+[COUNTRIES] No update needed for iso_3166-1.json
+[COUNTRIES] No update needed for geonames_countries.txt
+[COUNTRIES] No updates for countries.
+[SUBDIVISIONS] No update needed for admin1CodesASCII.txt
+[SUBDIVISIONS] No update needed for admin2Codes.txt
+[SUBDIVISIONS] No update needed for iso-3166-2.csv
+[SUBDIVISIONS] No updates for subdivisions.

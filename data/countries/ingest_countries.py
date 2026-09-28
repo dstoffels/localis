@@ -9,9 +9,12 @@ from data.logger import log
 from localis.models import CountryModel
 
 
-def ingest_countries() -> dict[str, CountryModel]:
+def ingest_countries() -> dict[str, CountryModel] | None:
     log.set_stage("COUNTRIES")
-    fetch_countries_sources()
+    has_update = fetch_countries_sources()
+    if not has_update:
+        log.writeline("No updates for countries.")
+        return None
     countries = init_iso_countries()
     merge_geonames(countries)
     merge_wikidata(countries)

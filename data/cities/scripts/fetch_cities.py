@@ -1,12 +1,17 @@
-from data.utils import CITIES_RAW_PATH, download, GEONAMES_DUMP_URL
+from data.utils import download
+from data.paths import CITIES_RAW_PATH, CITIES_MANIFEST_PATH, GEONAMES_DUMP_URL
 import zipfile
 
 
-def fetch_cities_sources() -> None:
+def fetch_cities_sources() -> bool:
+    cities_url = f"{GEONAMES_DUMP_URL}/allCountries.zip"
     zip_dest = CITIES_RAW_PATH / "allCountries.zip"
-    download(f"{GEONAMES_DUMP_URL}/allCountries.zip", zip_dest)
+    changed = download(cities_url, zip_dest, CITIES_MANIFEST_PATH)
 
-    with zipfile.ZipFile(zip_dest) as zf:
-        zf.extract("allCountries.txt", CITIES_RAW_PATH)
+    if changed:
+        with zipfile.ZipFile(zip_dest) as zf:
+            zf.extract("allCountries.txt", CITIES_RAW_PATH)
 
-    zip_dest.unlink()
+        zip_dest.unlink()
+
+    return changed

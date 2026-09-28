@@ -18,9 +18,13 @@ from .scripts.dump_subdivisions import dump
 def ingest_subdivisions(
     countries: dict[str, CountryModel] = None,
     interactive_mode: bool = False,
-) -> SubdivisionMap:
+) -> dict[str, SubdivisionModel] | None:
     log.set_stage("SUBDIVISIONS")
-    fetch_subdivisions_sources()
+    has_update = fetch_subdivisions_sources()
+
+    if not has_update:
+        log.writeline("No updates for subdivisions.")
+        return None
 
     # Cache countries by alpha2 code, unless already provided by a prior ingest stage
     if countries is None:
@@ -44,7 +48,7 @@ def ingest_subdivisions(
 
     dump(sub_map)
     log.writeline(f"completed: {len(sub_map)} subdivisions")
-    return sub_map
+    return sub_map.to_geocode_map()
 
 
 if __name__ == "__main__":

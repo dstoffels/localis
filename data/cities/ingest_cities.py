@@ -20,9 +20,13 @@ from localis.models import SubdivisionModel, CountryModel, CityModel
 def ingest_cities(
     countries: dict[str, CountryModel] = None,
     subdivisions: dict[str, SubdivisionModel] = None,
-) -> list[CityModel]:
+) -> None:
     log.set_stage("CITIES")
-    fetch_cities_sources()
+
+    has_update = fetch_cities_sources()
+    if not has_update:
+        log.writeline("No updates for cities.")
+        return None
 
     if countries is None:
         countries = load_countries()
@@ -32,7 +36,6 @@ def ingest_cities(
     cities: list[CityModel] = load_cities(subdivisions, countries)
     dump(cities)
     log.writeline(f"completed: {len(cities)} cities")
-    return cities
 
 
 if __name__ == "__main__":

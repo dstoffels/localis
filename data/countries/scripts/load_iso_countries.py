@@ -65,7 +65,7 @@ def init_iso_countries() -> dict[str, CountryModel]:
         "TW": ["ROC"],
     }
 
-    with open(COUNTRIES_RAW_PATH / "iso3166-1.json", "r", encoding="utf-8") as f:
+    with open(COUNTRIES_RAW_PATH / "iso_3166-1.json", "r", encoding="utf-8") as f:
         iso_countries: list[dict] = json.load(f).get("3166-1")
         iso_countries.sort(key=lambda c: c.get("alpha_2"))
 
