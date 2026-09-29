@@ -1,8 +1,3 @@
-import sys
-from pathlib import Path
-
-sys.path.append(str(Path(__file__).resolve().parents[2]))
-
 # This script parses geonames' cities500.txt into a TSV of cities with enriched data for country, subdivision and alternate city names as search tokens.
 # Country and subdivision data are loaded from separate TSV files.
 # cities500.txt is GeoNames' own pre-filtered export (population >= 500, or a seat of an

@@ -1,8 +1,5 @@
 from array import array
-import logging
 from pathlib import Path
-
-logger = logging.getLogger(__name__)
 
 
 class Index:

@@ -6,7 +6,7 @@ from ingest.subdivisions import SubdivisionModel
 
 @dataclass(slots=True)
 class CityModel(Model):
-    geonames_id: str
+    geonames_id: int
     admin1: SubdivisionModel | None
     admin2: SubdivisionModel | None
     country: CountryModel | None

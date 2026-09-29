@@ -54,16 +54,3 @@ def ingest_subdivisions(
     dump(sub_map)
     log.writeline(f"completed: {len(sub_map)} subdivisions")
     return sub_map.to_geocode_map()
-
-
-if __name__ == "__main__":
-    import argparse
-
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--interactive",
-        action="store_true",
-        help="Deprecated: use the resolve-subdivisions skill instead.",
-    )
-    args = parser.parse_args()
-    ingest_subdivisions(interactive_mode=args.interactive)

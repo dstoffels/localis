@@ -1,5 +1,3 @@
-import logging
-import time
 from functools import cached_property
 from typing import Iterator, Generic, TypeVar
 from pathlib import Path
@@ -8,19 +6,16 @@ from localis.entities import Entity
 from localis.views import View
 from localis.indexes import FilterIndex, SearchIndex, LookupIndex
 
-logger = logging.getLogger(__name__)
-
 T = TypeVar("T", bound=Entity)
 
 
 class Registry(Generic[T], ABC):
-    """"""
+    """Base API surface (get/lookup/filter/search) backed by a lazily-cached View dict and its indexes."""
 
     REGISTRY_NAME: str = ""
     LAZY_LOAD = False
 
     def __init__(self, **kwargs):
-        logger.info("Initializing %s registry", self.REGISTRY_NAME)
         if not self.LAZY_LOAD:
             _ = self._cache
 
@@ -65,14 +60,7 @@ class Registry(Generic[T], ABC):
         if not self._data_filepath.exists():
             raise FileNotFoundError(f"Data file not found: {self._data_filepath}")
 
-        logger.debug("Loading %s data from %s", self.REGISTRY_NAME, self._data_filepath)
-        t0 = time.perf_counter()
-        cache = self.build_cache()
-        elapsed = time.perf_counter() - t0
-        logger.debug(
-            "Loaded %d %s records in %.3fs", len(cache), self.REGISTRY_NAME, elapsed
-        )
-        return cache
+        return self.build_cache()
 
     def build_cache(self) -> dict[int, View[T]]:
         """Build the id -> view mapping for this registry. Overridden per registry to
@@ -81,64 +69,32 @@ class Registry(Generic[T], ABC):
 
     @cached_property
     def _lookup_index(self) -> LookupIndex:
-        logger.debug("Building %s lookup index", self.REGISTRY_NAME)
-        t0 = time.perf_counter()
-        index = LookupIndex(
+        return LookupIndex(
             filepath=self._lookup_filepath,
             int_filepath=self._lookup_int_filepath,
         )
-        logger.debug(
-            "Built %s lookup index in %.3fs",
-            self.REGISTRY_NAME,
-            time.perf_counter() - t0,
-        )
-        return index
 
     @cached_property
     def _filter_index(self) -> FilterIndex:
-        logger.debug("Building %s filter index", self.REGISTRY_NAME)
-        t0 = time.perf_counter()
-        index = FilterIndex(
+        return FilterIndex(
             filepath=self._filter_filepath,
         )
-        logger.debug(
-            "Built %s filter index in %.3fs",
-            self.REGISTRY_NAME,
-            time.perf_counter() - t0,
-        )
-        return index
 
     @cached_property
     def _search_index(self) -> SearchIndex[T]:
-        logger.debug("Building %s search index", self.REGISTRY_NAME)
-        t0 = time.perf_counter()
-        index = SearchIndex(
+        return SearchIndex(
             cache=self._cache,
             filepath=self._search_index_filepath,
             offsets_filepath=self._search_index_offsets_filepath,
             fields_filepath=self._search_fields_filepath,
         )
-        logger.debug(
-            "Built %s search index in %.3fs",
-            self.REGISTRY_NAME,
-            time.perf_counter() - t0,
-        )
-        return index
 
     def force_cache(self):
         """Force-cache all data and indexes that have not yet been loaded."""
-        logger.info("Force-caching all %s data and indexes", self.REGISTRY_NAME)
-        t0 = time.perf_counter()
         _ = self._cache
         _ = self._lookup_index
         _ = self._filter_index
         _ = self._search_index
-        logger.info(
-            "Force-cached %s registry (%d records) in %.3fs",
-            self.REGISTRY_NAME,
-            len(self._cache),
-            time.perf_counter() - t0,
-        )
 
     def __iter__(self) -> Iterator[T]:
         return iter([m.to_entity() for m in self._cache.values()])

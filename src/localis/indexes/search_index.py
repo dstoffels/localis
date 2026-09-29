@@ -1,18 +1,14 @@
 from array import array
 import csv
 import gzip
-import logging
 from pathlib import Path
-import time
 from typing import Generic, TypeVar
 from rapidfuzz import fuzz, process
 from localis.indexes.index import Index
 from localis.entities import Entity
 from localis.views import View
-from localis.utils import normalize, generate_trigrams, decode_id_list
+from localis.utils import normalize, generate_trigrams
 from collections import defaultdict
-
-logger = logging.getLogger(__name__)
 
 T = TypeVar("T", bound=Entity)
 
@@ -31,9 +27,6 @@ class SearchIndex(Index, Generic[T]):
         super().__init__(filepath, **kwargs)
 
     def load(self, filepath, offsets_filepath: Path, fields_filepath: Path):
-        # try:
-        t0 = time.perf_counter()
-
         self.SEARCH_FIELDS: dict[str, float] = {}
         with open(fields_filepath, "r", encoding="utf-8") as f:
             reader = csv.reader(f, delimiter="\t")
@@ -54,13 +47,6 @@ class SearchIndex(Index, Generic[T]):
 
         for trigram, (offset, count) in offsets.items():
             self.index[trigram] = full_array[offset : offset + count]
-
-        print(
-            f"Loaded search index from {filepath}: {len(self.index)} trigrams in {time.perf_counter() - t0}s"
-        )
-
-    # except Exception as e:
-    #     raise Exception(f"Failed to load search index from {filepath}: {e}")
 
     def search(self, query: str, limit: int) -> list[tuple[View[T], float]]:
         if not query:
