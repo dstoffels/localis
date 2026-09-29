@@ -34,7 +34,11 @@ class Registry(Generic[T], ABC):
 
     @property
     def _lookup_filepath(self) -> Path:
-        return self._data_path / "lookup_index.tsv"
+        return self._data_path / "lookup_index_str.tsv"
+
+    @property
+    def _lookup_int_filepath(self) -> Path:
+        return self._data_path / "lookup_index_int.tsv"
 
     @property
     def _filter_filepath(self) -> Path:
@@ -78,6 +82,7 @@ class Registry(Generic[T], ABC):
             model_cls=self._MODEL_CLS,
             cache=self._cache,
             filepath=self._lookup_filepath,
+            int_filepath=self._lookup_int_filepath,
         )
         logger.debug(
             "Built %s lookup index in %.3fs",

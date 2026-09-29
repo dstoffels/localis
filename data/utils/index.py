@@ -48,14 +48,30 @@ def dump_data(data: list[Model], file_path: Path) -> None:
 
 
 def dump_lookup_index(data: list[Model], datadir_path: Path) -> None:
-    path = datadir_path / "lookup_index.tsv"
-    with open(path, "w", newline="", encoding="utf-8") as f:
+    str_path = datadir_path / "lookup_index_str.tsv"
+    int_path = datadir_path / "lookup_index_int.tsv"
+
+    str_pairs: list[tuple[str, int]] = []
+    int_pairs: list[tuple[int, int]] = []
+
+    for item in data:
+        for value in item.extract_lookup_values():
+            key = str(value)
+            if key.isdigit():
+                int_pairs.append((int(key), item.id))
+            else:
+                str_pairs.append((key, item.id))
+
+    str_pairs.sort()
+    int_pairs.sort()
+
+    with open(str_path, "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f, delimiter="\t", lineterminator="\n")
-        for item in data:
-            row = []
-            for value in item.extract_lookup_values():
-                row.append(str(value))
-            writer.writerow(["|".join(row)])
+        writer.writerows(str_pairs)
+
+    with open(int_path, "w", newline="", encoding="utf-8") as f:
+        writer = csv.writer(f, delimiter="\t", lineterminator="\n")
+        writer.writerows(int_pairs)
 
 
 def dump_filter_index(data: list[Model], datadir_path: Path) -> None:
