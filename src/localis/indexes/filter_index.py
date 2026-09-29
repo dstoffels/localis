@@ -10,10 +10,6 @@ logger = logging.getLogger(__name__)
 
 
 class FilterIndex(Index):
-    def __init__(self, model_cls, cache, filepath, **kwargs):
-        self.index: dict[str, dict[str, array]] = {}
-        super().__init__(model_cls, cache, filepath, **kwargs)
-
     def load(self, filepath):
         try:
             t0 = time.perf_counter()

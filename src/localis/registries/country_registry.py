@@ -1,10 +1,10 @@
-from localis.models import CountryModel, CountryView, Country
+from localis.entities import Country
+from localis.views import CountryView
 from localis.registries import Registry
 
 
 class CountryRegistry(Registry[Country]):
     REGISTRY_NAME = "countries"
-    _MODEL_CLS = CountryModel
 
     def build_cache(self) -> dict[int, CountryView]:
         return CountryView.load(self._data_filepath)

@@ -4,12 +4,13 @@ from functools import cached_property
 from typing import Iterator, Generic, TypeVar
 from pathlib import Path
 from abc import ABC
-from localis.models import Model, DTO
+from localis.entities import Entity
+from localis.views import View
 from localis.indexes import FilterIndex, SearchIndex, LookupIndex
 
 logger = logging.getLogger(__name__)
 
-T = TypeVar("T", bound=DTO)
+T = TypeVar("T", bound=Entity)
 
 
 class Registry(Generic[T], ABC):
@@ -17,7 +18,6 @@ class Registry(Generic[T], ABC):
 
     REGISTRY_NAME: str = ""
     LAZY_LOAD = False
-    _MODEL_CLS: type[Model]
 
     def __init__(self, **kwargs):
         logger.info("Initializing %s registry", self.REGISTRY_NAME)
@@ -53,11 +53,15 @@ class Registry(Generic[T], ABC):
         return self._data_path / "search_index_offsets.tsv"
 
     @property
+    def _search_fields_filepath(self) -> Path:
+        return self._data_path / "search_fields.tsv"
+
+    @property
     def count(self) -> int:
         return self.__len__()
 
     @cached_property
-    def _cache(self) -> dict[int, Model]:
+    def _cache(self) -> dict[int, View[T]]:
         if not self._data_filepath.exists():
             raise FileNotFoundError(f"Data file not found: {self._data_filepath}")
 
@@ -70,7 +74,7 @@ class Registry(Generic[T], ABC):
         )
         return cache
 
-    def build_cache(self) -> dict[int, Model]:
+    def build_cache(self) -> dict[int, View[T]]:
         """Build the id -> view mapping for this registry. Overridden per registry to
         supply whatever cross-referenced caches its view class needs."""
         raise NotImplementedError
@@ -80,8 +84,6 @@ class Registry(Generic[T], ABC):
         logger.debug("Building %s lookup index", self.REGISTRY_NAME)
         t0 = time.perf_counter()
         index = LookupIndex(
-            model_cls=self._MODEL_CLS,
-            cache=self._cache,
             filepath=self._lookup_filepath,
             int_filepath=self._lookup_int_filepath,
         )
@@ -97,8 +99,6 @@ class Registry(Generic[T], ABC):
         logger.debug("Building %s filter index", self.REGISTRY_NAME)
         t0 = time.perf_counter()
         index = FilterIndex(
-            model_cls=self._MODEL_CLS,
-            cache=self._cache,
             filepath=self._filter_filepath,
         )
         logger.debug(
@@ -109,14 +109,14 @@ class Registry(Generic[T], ABC):
         return index
 
     @cached_property
-    def _search_index(self) -> SearchIndex:
+    def _search_index(self) -> SearchIndex[T]:
         logger.debug("Building %s search index", self.REGISTRY_NAME)
         t0 = time.perf_counter()
         index = SearchIndex(
-            model_cls=self._MODEL_CLS,
             cache=self._cache,
             filepath=self._search_index_filepath,
             offsets_filepath=self._search_index_offsets_filepath,
+            fields_filepath=self._search_fields_filepath,
         )
         logger.debug(
             "Built %s search index in %.3fs",
@@ -141,7 +141,7 @@ class Registry(Generic[T], ABC):
         )
 
     def __iter__(self) -> Iterator[T]:
-        return iter([m.to_dto() for m in self._cache.values()])
+        return iter([m.to_entity() for m in self._cache.values()])
 
     def __len__(self) -> int:
         return len(self._cache)
@@ -151,13 +151,13 @@ class Registry(Generic[T], ABC):
     def get(self, id: int) -> T | None:
         """Get by localis ID."""
         model = self._cache.get(id)
-        return model.to_dto() if model else None
+        return model.to_entity() if model else None
 
     def lookup(self, identifier: str | int) -> T | None:
         """Fetches a single item by one of its other unique identifiers (use .get() for localis ID)."""
         model_id = self._lookup_index.get(identifier)
         model = self._cache.get(model_id) if model_id is not None else None
-        return model.to_dto() if model else None
+        return model.to_entity() if model else None
 
     def filter(
         self, *, name: str | None = None, limit: int | None = None, **kwargs
@@ -191,8 +191,8 @@ class Registry(Generic[T], ABC):
         results_list.sort(key=lambda r: r.name)  # sort alphabetically by name
         if limit is not None:
             results_list = results_list[:limit]
-        return [r.to_dto() for r in results_list]
+        return [r.to_entity() for r in results_list]
 
     def search(self, query: str, limit: int = 10, **kwargs) -> list[tuple[T, float]]:
         results = self._search_index.search(query=query, limit=limit)
-        return [(r.to_dto(), score) for r, score in results]
+        return [(r.to_entity(), score) for r, score in results]

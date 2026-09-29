@@ -1,0 +1,36 @@
+from dataclasses import dataclass
+from ingest.utils import Model
+
+
+@dataclass(slots=True)
+class CountryModel(Model):
+    alpha2: str
+    alpha3: str | None
+    official_name: str
+    aliases: list[str]
+    numeric: int | None
+    flag: str | None
+
+    LOOKUP_FIELDS = ("alpha2", "alpha3", "numeric")
+    FILTER_FIELDS = {"name": ("name", "official_name", "aliases")}
+    SEARCH_FIELDS = {
+        "name": 1.0,
+        "official_name": 1.0,
+        "aliases": 1.0,
+    }
+
+    def to_row(self) -> tuple[str | int | None]:
+        data = self.to_dict()
+        data["aliases"] = "|".join(self.aliases)
+        data.pop("id")
+        return tuple(data.values())
+
+    @classmethod
+    def from_row(cls, id: int, row: list[str | int | None], **kwargs) -> "CountryModel":
+        ALIAS_IDX = 4
+        NUMERIC_IDX = 5
+
+        row[ALIAS_IDX] = [a for a in row[ALIAS_IDX].split("|") if a]
+        row[NUMERIC_IDX] = int(row[NUMERIC_IDX]) if row[NUMERIC_IDX] else None
+
+        return cls(id, *row)
