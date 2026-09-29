@@ -280,7 +280,7 @@ city.name            # "New York"
 city.admin1          # SubdivisionBase | None - Primary subdivision
 city.admin2          # SubdivisionBase | None - Secondary subdivision
 city.country         # CountryBase object
-city.population      # 8175133 | None
+city.population      # 8175133
 city.lat             # 40.71427
 city.lng             # -74.00597
 
