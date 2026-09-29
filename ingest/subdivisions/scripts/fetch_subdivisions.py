@@ -5,6 +5,10 @@ from ingest.utils import (
     GEONAMES_DUMP_URL,
 )
 
+ISO_CODES_SUBDIVISIONS_URL = (
+    "https://salsa.debian.org/iso-codes-team/iso-codes/-/raw/main/data/iso_3166-2.json"
+)
+
 IPREGISTRY_SUBDIVISIONS_URL = (
     "https://raw.githubusercontent.com/ipregistry/iso3166/main/subdivisions.csv"
 )
@@ -17,14 +21,18 @@ def fetch_subdivisions_sources(force: bool = False) -> bool:
     admin2_url = f"{GEONAMES_DUMP_URL}/admin2Codes.txt"
     geonames_admin2_dest = SUBDIVISIONS_RAW_PATH / "admin2Codes.txt"
 
-    ipregistry_dest = SUBDIVISIONS_RAW_PATH / "iso-3166-2.csv"
+    iso_codes_dest = SUBDIVISIONS_RAW_PATH / "iso_3166-2.json"
+    ipregistry_dest = SUBDIVISIONS_RAW_PATH / "ipregistry_subdivisions.csv"
 
-    # Check first: merging needs all three sources locally, so if any one of them
+    # Check first: merging needs all four sources locally, so if any one of them
     # changed, a partial fetch would leave the others missing.
     should_download = any(
         [
             has_changed(admin1_url, geonames_admin1_dest, SUBDIVISIONS_MANIFEST_PATH),
             has_changed(admin2_url, geonames_admin2_dest, SUBDIVISIONS_MANIFEST_PATH),
+            has_changed(
+                ISO_CODES_SUBDIVISIONS_URL, iso_codes_dest, SUBDIVISIONS_MANIFEST_PATH
+            ),
             has_changed(
                 IPREGISTRY_SUBDIVISIONS_URL, ipregistry_dest, SUBDIVISIONS_MANIFEST_PATH
             ),
@@ -37,6 +45,9 @@ def fetch_subdivisions_sources(force: bool = False) -> bool:
     if should_download:
         download(admin1_url, geonames_admin1_dest, SUBDIVISIONS_MANIFEST_PATH)
         download(admin2_url, geonames_admin2_dest, SUBDIVISIONS_MANIFEST_PATH)
+        download(
+            ISO_CODES_SUBDIVISIONS_URL, iso_codes_dest, SUBDIVISIONS_MANIFEST_PATH
+        )
         download(
             IPREGISTRY_SUBDIVISIONS_URL, ipregistry_dest, SUBDIVISIONS_MANIFEST_PATH
         )

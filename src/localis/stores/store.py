@@ -2,9 +2,7 @@ from abc import ABC, abstractmethod
 
 
 class Store(ABC):
-    """Columnar storage shared by every entity's View. One instance per registry,
-    holding every record's fields as parallel arrays/lists appended to during
-    load, indexed by (id - 1)."""
+    """Columnar storage backing each View; one instance per registry, indexed by (id - 1)."""
 
     __slots__ = ("names",)
 

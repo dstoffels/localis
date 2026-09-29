@@ -11,9 +11,7 @@ T = TypeVar("T", bound=Entity)
 
 
 class View(ABC, Generic[T]):
-    """Base for every entity's runtime view: owns only its id and a reference to
-    the shared columnar Store, every other field is a computed property reading
-    from that Store by (id - 1)."""
+    """Base runtime view: owns id and a Store reference; other fields read from Store by (id - 1)."""
 
     __slots__ = ("id", "_store")
 
@@ -34,9 +32,7 @@ class View(ABC, Generic[T]):
 
 
 class CrossReferencedView(View[T]):
-    """Shared by SubdivisionView and CityView, which both resolve references
-    lazily against already-loaded country and subdivision view dicts, so load
-    order never matters."""
+    """Shared by SubdivisionView/CityView; resolves references lazily against already-loaded view dicts."""
 
     __slots__ = ("_country_views", "_subdivision_views")
 

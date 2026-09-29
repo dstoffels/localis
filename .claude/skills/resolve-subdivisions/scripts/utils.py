@@ -3,7 +3,7 @@ import json
 import sys
 from pathlib import Path
 from rapidfuzz import fuzz
-from ingest.subdivisions.scripts import prepare_names, load_iso_subs
+from ingest.subdivisions.scripts import prepare_names, load_iso_subs, merge_ipregistry_aliases
 from ingest.subdivisions.utils.subdivision_map import SubdivisionMap
 from ingest.subdivisions import SubdivisionModel
 
@@ -62,7 +62,9 @@ def get_geonames_submap() -> SubdivisionMap:
 
 @functools.cache
 def _get_iso_subs() -> dict[str, SubdivisionModel]:
-    return load_iso_subs(_countries())
+    iso_subs = load_iso_subs(_countries())
+    merge_ipregistry_aliases(iso_subs)
+    return iso_subs
 
 
 def _format_candidate(candidate: SubdivisionModel) -> tuple[int, str]:

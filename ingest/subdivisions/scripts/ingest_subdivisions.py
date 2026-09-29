@@ -1,6 +1,7 @@
-# This script merges subdivision data from GeoNames and ISO 3166-2.
-# We initialize from GeoNames and merge in the ISO data, prompting to resolve ambiguities.
-# Manual intervention is required for some entries, which is mapped in src/resoluton_map.json
+# This script merges subdivision data from GeoNames and ISO 3166-2, with Ipregistry
+# layered in only for alias enrichment. We initialize from GeoNames and merge in the
+# ISO data, prompting to resolve ambiguities. Manual intervention is required for some
+# entries, which is mapped in ingest/subdivisions/raw/resolution_map.json.
 # villager only supports administrative levels 1 and 2, which covers most cases.
 
 from ingest.countries.scripts import load_countries
@@ -11,6 +12,7 @@ from ingest.countries import CountryModel
 from ingest.subdivisions import SubdivisionModel
 from .geonames_subdivisions import map_geonames_subdivisions
 from .iso_subdivisions import load_iso_subs
+from .merge_ipregistry import merge_ipregistry_aliases
 from .merge_subdivisions import try_merge
 from .resolve_subdivisions import resolve_unmerged_subs
 from .dump_subdivisions import dump
@@ -36,6 +38,9 @@ def ingest_subdivisions(
 
     # Cache and dedupe iso subs by id
     iso_subs: dict[int, SubdivisionModel] = load_iso_subs(countries)
+
+    # Enrich with Ipregistry's localVariant aliases; iso-codes has no alias field of its own
+    merge_ipregistry_aliases(iso_subs)
 
     # Attempt to auto-merge with fuzzy matching and yield a list of iso_subs that couldn't be auto-matched with GeoNames counterparts.
     unmerged_iso_subs: list[SubdivisionModel] = try_merge(iso_subs, sub_map)

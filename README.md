@@ -376,14 +376,15 @@ Accuracy tested on 5,000 mangled-query samples per registry; cities' search addi
 Data in this project is kept current monthly from the following sources:
 
 - **Countries**
-  - [ISO 3166-1](https://www.iso.org/iso-3166-country-codes.html) data via [Debian's iso-codes project](https://salsa.debian.org/iso-codes-team/iso-codes)
-  - [Geonames](https://www.geonames.org/) `geonames_countries.txt`
-  - Additional country aliases from Wikidata.
+  - **Canonical**: [ISO 3166-1](https://www.iso.org/iso-3166-country-codes.html) data via [Debian's iso-codes project](https://salsa.debian.org/iso-codes-team/iso-codes)
+  - **Merged**: [Geonames](https://www.geonames.org/) `geonames_countries.txt`
+  - **Merged**: Additional country aliases from Wikidata.
 - **Subdivisions**
-  - [ISO 3166-2](https://www.iso.org/iso-3166-country-codes.html) data via [Ipregistry](https://ipregistry.co)
-  - [GeoNames](https://www.geonames.org/) `admin1CodesASCII.txt` and `admin2Codes.txt`
+  - **Canonical**: [ISO 3166-2](https://www.iso.org/iso-3166-country-codes.html) data via [Debian's iso-codes project](https://salsa.debian.org/iso-codes-team/iso-codes)
+  - **Merged**: [GeoNames](https://www.geonames.org/) `admin1CodesASCII.txt` and `admin2Codes.txt`
+  - **Merged**: Additional subdivision aliases from [Ipregistry](https://ipregistry.co)
 - **Cities**
-  - [GeoNames](https://www.geonames.org/) `cities500.txt` dataset (GeoNames' own pre-filtered export: population ≥ 500, or a seat of an administrative division regardless of population)
+  - [GeoNames](https://www.geonames.org/) `cities500.txt` dataset
 
 ---
 

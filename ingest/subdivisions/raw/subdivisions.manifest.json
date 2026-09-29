@@ -13,5 +13,15 @@
     "etag": "\"49c35edaaa2ce17d6e833b84b496ecaa83dea6027e9639c5bc6ec70880e4e992\"",
     "last_modified": null,
     "content_length": "237562"
+  },
+  "iso_3166-2.json": {
+    "etag": "W/\"fbffbe3c69b915ad1093545358650827-gzip\"",
+    "last_modified": null,
+    "content_length": "498028"
+  },
+  "ipregistry_subdivisions.csv": {
+    "etag": "\"49c35edaaa2ce17d6e833b84b496ecaa83dea6027e9639c5bc6ec70880e4e992\"",
+    "last_modified": null,
+    "content_length": "237562"
   }
 }
