@@ -42,6 +42,7 @@ def load_iso_subs(countries: dict[str, CountryModel]) -> dict[int, SubdivisionMo
                 )
 
                 # set temporary id to hashid for later mapping
+                subdivision.set_hashid()
                 subdivision.id = subdivision.hashid
 
                 iso_subs[iso_code] = subdivision

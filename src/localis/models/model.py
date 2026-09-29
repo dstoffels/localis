@@ -1,13 +1,19 @@
 from dataclasses import dataclass, asdict, fields
+from functools import lru_cache
 import json
 from collections import defaultdict
 from localis.utils import generate_trigrams, normalize
 
 
+@lru_cache(maxsize=None)
+def _field_names(target_cls) -> tuple[str, ...]:
+    return tuple(f.name for f in fields(target_cls))
+
+
 def extract_base(from_obj, depth=1):
     """Returns an instance of a base class populated with subclass obj data. Depth indicates how many levels up the MRO to go."""
     target_cls = from_obj.__class__.__mro__[depth]
-    field_names = {f.name for f in fields(target_cls)}
+    field_names = _field_names(target_cls)
     data = {slot: getattr(from_obj, slot) for slot in field_names}
     return target_cls(**data)
 

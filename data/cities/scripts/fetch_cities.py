@@ -12,7 +12,8 @@ def fetch_cities_sources(force: bool = False) -> bool:
     if not should_download and not force:
         return False
 
-    download(cities_url, zip_dest, CITIES_MANIFEST_PATH)
+    if should_download:
+        download(cities_url, zip_dest, CITIES_MANIFEST_PATH)
 
     with zipfile.ZipFile(zip_dest) as zf:
         zf.extract("allCountries.txt", CITIES_RAW_PATH)

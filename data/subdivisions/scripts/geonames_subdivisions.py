@@ -50,6 +50,7 @@ def load_geonames_file(
                 type=None,  # GeoNames does not provide type info in these files, may be set by ISO data
                 aliases=[],  # may be set later if merged with ISO subdivision
             )
+            subdivision.set_hashid()
             subdivision.id = subdivision.hashid  # set hashid for internal mapping
             sub_map.add(subdivision)
 

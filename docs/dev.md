@@ -60,7 +60,7 @@ One bug this surfaced and fixed in passing: `release.yaml`'s checkout step never
 
 ## Performance Profile
 
-Snapshot taken after the search-index and filter-index memory rework (254 countries, 51,684 subdivisions, 472,613 cities). These numbers move as the dataset grows through the ingest pipeline; re-measure before relying on them for a release decision. Memory figures are RSS deltas measured by calling `force_cache()` on each registry in turn from a fresh interpreter.
+Snapshot taken after the search-index and filter-index memory rework and the subdivision `hashid` fix (254 countries, 51,684 subdivisions, 472,613 cities). These numbers move as the dataset grows through the ingest pipeline; re-measure before relying on them for a release decision. Memory figures are RSS deltas measured by calling `force_cache()` on each registry in turn from a fresh interpreter.
 
 ### Search and filter index architecture
 
@@ -69,6 +69,10 @@ Both indexes moved off `list[int]` postings (each id a full boxed Python object,
 The search index also changed format on disk. It used to be one TSV line per trigram, `base64(varint(delta(ids)))`, which requires a serial, byte-at-a-time Python loop to decode, that can't be bulk-loaded regardless of the target container. It's now two files: `search_index.bin.gz` (every trigram's sorted ids, packed as raw uint32, concatenated in one buffer, gzip'd as a whole) and `search_index_offsets.tsv` (`trigram, offset, count`, offset/count in id-count units, plain text since it's small and worth keeping git-diffable). Loading decompresses and `array.frombytes()`s the entire blob in one bulk call, then slices per-trigram arrays out of that single decoded array using the offsets table, decode once, slice many, rather than decoding per trigram.
 
 The filter index's fix didn't need a format change, just the container: `FilterIndex.load()` builds its reverse index (`value -> ids`) entirely in memory from per-entity rows already on disk, there was never a variable-length encoding to redesign, so swapping the `defaultdict(list)` factory for `defaultdict(lambda: array("I"))` was the whole change.
+
+### Subdivision hashid
+
+`SubdivisionModel.hashid` is an MD5-derived id used only during ingestion (merging ISO and GeoNames records, and supporting the resolve-subdivisions skill). It used to be computed in `__post_init__`, which runs on every construction, including the normal runtime `_cache` load, where nothing ever reads `hashid`, it's discarded once a subdivision has been merged. `set_hashid()` is now an explicit method, called only at the two ingestion sites that actually need it (`data/subdivisions/scripts/geonames_subdivisions.py`, `data/subdivisions/scripts/iso_subdivisions.py`); `SubdivisionModel.from_row()`, the runtime path, never calls it. Subdivisions' dataset load dropped from 289.5ms to 98.7ms (−66%) as a result.
 
 ### Shipped data size
 
@@ -105,7 +109,7 @@ Down from 1134MB before this rework, a 48% reduction overall. Cities' 498MB brea
 
 The remaining 195MB in `_search_index` is somewhat inflated by how `load()` currently builds it: one full temporary array is decoded via `frombytes()`, then sliced per trigram, and each slice is a copy, not a view, so the id data briefly exists twice before the temporary array is garbage collected. Using `memoryview` or writing directly into per-trigram arrays instead of slicing a shared one could shave further off this specific number; not done here, since the 70% reduction already achieved doesn't need it to be worth shipping.
 
-**Total load time** (all three registries, `_cache` plus every index) is now ~2.7s, down from ~4.3s. Countries and subdivisions' own `_cache` load is unaffected (eager, ~0.3s combined), subdivisions' index build time dropped from ~350ms to ~153ms for the same underlying reason as cities' search index.
+**Total load time** (all three registries, `_cache` plus every index) is now ~2.8s, down from ~4.3s. Subdivisions' combined load (dataset plus all three indexes) dropped from ~440ms to ~240ms: ~350ms to ~153ms of that was the index-build improvement described above, and the dataset load itself dropped a further ~191ms (289.5ms → 98.7ms) once `hashid` stopped being computed at runtime.
 
 ### City population distribution
 

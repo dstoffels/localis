@@ -91,9 +91,9 @@ class SubdivisionModel(Subdivision, Model):
 
         return cls(id, *row)
 
-    hashid: int = None
+    hashid: int | None = None
 
-    def __post_init__(self):
+    def set_hashid(self) -> None:
         if not isinstance(self.country, int):
             key_parts = [
                 self.country.alpha2,

@@ -1,21 +1,19 @@
+[COUNTRIES] No update needed for geonames_countries.txt
 [COUNTRIES] Downloading iso_3166-1.json from https://salsa.debian.org/iso-codes-team/iso-codes/-/raw/main/data/iso_3166-1.json
 [COUNTRIES] Downloaded and updated iso_3166-1.json
 [COUNTRIES] Downloading geonames_countries.txt from https://download.geonames.org/export/dump/countryInfo.txt
 [COUNTRIES] Downloaded and updated geonames_countries.txt
 [COUNTRIES] completed: 254 countries
+[SUBDIVISIONS] No update needed for admin1CodesASCII.txt
+[SUBDIVISIONS] No update needed for admin2Codes.txt
 [SUBDIVISIONS] No update needed for iso-3166-2.csv
-[SUBDIVISIONS] Downloading admin1CodesASCII.txt from https://download.geonames.org/export/dump/admin1CodesASCII.txt
-[SUBDIVISIONS] Downloaded and updated admin1CodesASCII.txt
-[SUBDIVISIONS] Downloading admin2Codes.txt from https://download.geonames.org/export/dump/admin2Codes.txt
-[SUBDIVISIONS] Downloaded and updated admin2Codes.txt
-[SUBDIVISIONS] Downloading iso-3166-2.csv from https://raw.githubusercontent.com/ipregistry/iso3166/main/subdivisions.csv
-[SUBDIVISIONS] Downloaded and updated iso-3166-2.csv
 [SUBDIVISIONS] Loading GeoNames subdivisions...
 [SUBDIVISIONS] Dumping 51684 subdivisions...
 [SUBDIVISIONS] Dumping subdivision lookup indexes...
 [SUBDIVISIONS] Dumping subdivision filter index...
 [SUBDIVISIONS] Dumping subdivision search index...
 [SUBDIVISIONS] completed: 51684 subdivisions
+[CITIES] No update needed for allCountries.zip
 [CITIES] Downloading allCountries.zip from https://download.geonames.org/export/dump/allCountries.zip
 [CITIES] Downloaded and updated allCountries.zip
 [CITIES] Dumping 472627 cities...

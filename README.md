@@ -325,31 +325,42 @@ nested_sub.type
 
 **Countries** and **Subdivisions** are eager-loaded on import, but **Cities** are not due to their large dataset. All registry methods lazy load their respective *indexes* on first use, incurring a cold start cost. Indexes (and cities) can be pre-loaded with `.force_cache()` to avoid this during queries.
 
-- **Full dataset eager load**: ~1.1s (all 524k+ entities)
-- **Countries** (254): < 5ms for all indexes
-- **Subdivisions** (51,684): ~150ms for all indexes
-- **Cities** (472,613)
-  - Lookup index: ~150ms
-  - Filter index: ~1.1s
-  - Search index: ~300ms
-- **Total load time**: ~2.7s for all datasets and indexes
-
-**Note:** These are best-case timings on modern hardware. Actual load times may vary depending on the host system.
+- **Countries** (254)
+  - Dataset: < 1ms
+  - Lookup index: < 1ms
+  - Filter index: < 1ms
+  - Search index: ~1ms
+  - **Combined load time**: ~3ms
+- **Subdivisions** (51,684):
+  - Dataset: ~99ms
+  - Lookup index: ~13ms
+  - Filter index: ~83ms
+  - Search index: ~46ms
+  - **Combined load time**: ~240ms
+- **Cities** (472,613):
+  - Dataset: ~815ms
+  - Lookup index: ~155ms
+  - Filter index: ~1.35s
+  - Search index: ~325ms
+  - **Combined load time**: ~2.65s
+- **Full Cache**: ~2.8s for all datasets and indexes
 
 **Concurrency:** It is recommended to call `.force_cache()` on all registries if they will be accessed from multiple threads to avoid potential race conditions during the first access of any lazy-loaded caches and indexes.
 
 ### Query Performance
 
 - **Countries**: 
-  - All queries < 2ms
+  - Lookup: < 1ms
+  - Filter: < 1ms
+  - Search: ~1.3ms
 - **Subdivisions**: 
-  - Lookups < 1ms
-  - Filters < 3ms
-  - Searches ~3ms
+  - Lookup: < 1ms
+  - Filter: < 1ms
+  - Search: ~3ms
 - **Cities**: 
-  - Lookups < 5ms
-  - Filters ~5ms
-  - Searches < 30ms
+  - Lookup: < 1ms
+  - Filter: ~7ms
+  - Search: ~10ms
 
 ### Search Accuracy
 
