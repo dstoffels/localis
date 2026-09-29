@@ -4,8 +4,8 @@ import zipfile
 
 
 def fetch_cities_sources(force: bool = False) -> bool:
-    cities_url = f"{GEONAMES_DUMP_URL}/allCountries.zip"
-    zip_dest = CITIES_RAW_PATH / "allCountries.zip"
+    cities_url = f"{GEONAMES_DUMP_URL}/cities500.zip"
+    zip_dest = CITIES_RAW_PATH / "cities500.zip"
 
     should_download = has_changed(cities_url, zip_dest, CITIES_MANIFEST_PATH)
 
@@ -16,7 +16,7 @@ def fetch_cities_sources(force: bool = False) -> bool:
         download(cities_url, zip_dest, CITIES_MANIFEST_PATH)
 
         with zipfile.ZipFile(zip_dest) as zf:
-            zf.extract("allCountries.txt", CITIES_RAW_PATH)
+            zf.extract("cities500.txt", CITIES_RAW_PATH)
 
         zip_dest.unlink()
 

@@ -3,10 +3,12 @@ from pathlib import Path
 
 sys.path.append(str(Path(__file__).resolve().parents[2]))
 
-# This script parses geonames' allCountries.txt into a filtered TSV of cities with enriched data for country, subdivision and alternate city names as search tokens.
+# This script parses geonames' cities500.txt into a TSV of cities with enriched data for country, subdivision and alternate city names as search tokens.
 # Country and subdivision data are loaded from separate TSV files.
-# Cities are filtered based on feature codes and population. We only want to include actual populated settlements as allCountries.txt contains many other geographical features.
-# allCountries.txt (1.64GB) must be manually downloaded to the src folder from https://download.geonames.org/export/dump/
+# cities500.txt is GeoNames' own pre-filtered export (population >= 500, or a seat of an
+# administrative division regardless of population), so no further feature-code or
+# population filtering is applied here, GeoNames already made that call.
+# Fetched automatically by fetch_cities_sources() from https://download.geonames.org/export/dump/cities500.zip
 
 from data.cities.scripts.fetch_cities import fetch_cities_sources
 from data.cities.scripts.load_cities import load_cities

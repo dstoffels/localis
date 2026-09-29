@@ -27,31 +27,8 @@ HEADERS = [
 ]
 
 
-ALLOWED_FEATURE_CODES = {
-    "PPL",
-    "PPLA",
-    "PPLA2",
-    "PPLA3",
-    "PPLA4",
-    "PPLA5",
-    "PPLC",
-    "PPLF",
-    "PPLL",
-    "PPLS",
-    "STLMT",
-}
-
-
-def is_valid_city(
-    row: dict[str, str], allowed_codes: set[str] = ALLOWED_FEATURE_CODES
-) -> bool:
-    return (
-        row["feature code"]
-        in allowed_codes  # filter out anything that's not a populated place
-        and row["population"]
-        not in ["", "0"]  # filter out places with no population data
-        and row["country code"]  # filter out places with no country code
-    )
+def is_valid_city(row: dict[str, str]) -> bool:
+    return bool(row["country code"])
 
 
 def filter_names(row: dict[str, str]) -> tuple[str]:
@@ -135,8 +112,8 @@ def parse_row(
 def load_cities(
     subdivisions: dict[str, SubdivisionModel], countries: dict[str, CountryModel]
 ) -> list[CityModel]:
-    with open(CITIES_RAW_PATH / "allCountries.txt", "r", encoding="utf-8") as f:
-        print(f"Parsing cities from allCountries.txt...")
+    with open(CITIES_RAW_PATH / "cities500.txt", "r", encoding="utf-8") as f:
+        print(f"Parsing cities from cities500.txt...")
         rows = csv.DictReader(f, fieldnames=HEADERS, delimiter="\t")
         cities = []
         for row in rows:
