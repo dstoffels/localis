@@ -6,7 +6,7 @@
 from data.utils.index import load_countries
 from data.subdivisions.scripts.fetch_subdivisions import fetch_subdivisions_sources
 from data.subdivisions.utils.subdivision_map import SubdivisionMap
-from data.logger import log
+from data.utils.logger import log
 from localis.models import CountryModel, SubdivisionModel
 from .geonames_subdivisions import map_geonames_subdivisions
 from .iso_subdivisions import load_iso_subs
@@ -16,11 +16,10 @@ from .dump_subdivisions import dump
 
 
 def ingest_subdivisions(
-    countries: dict[str, CountryModel] = None,
-    interactive_mode: bool = False,  # deprecated: use the resolve-subdivisions skill instead
+    countries: dict[str, CountryModel] = None, force: bool = False
 ) -> dict[str, SubdivisionModel] | None:
     log.set_stage("SUBDIVISIONS")
-    has_update = fetch_subdivisions_sources()
+    has_update = fetch_subdivisions_sources(force=force)
 
     if not has_update:
         log.writeline("No updates for subdivisions.")
@@ -41,7 +40,7 @@ def ingest_subdivisions(
     unmerged_iso_subs: list[SubdivisionModel] = try_merge(iso_subs, sub_map)
 
     # Manually match or add the dangling iso subs to the sub_map
-    resolve_unmerged_subs(unmerged_iso_subs, sub_map, interactive_mode)
+    resolve_unmerged_subs(unmerged_iso_subs, sub_map)
 
     # rebuild cache with complete data, update parents
     sub_map.refresh()

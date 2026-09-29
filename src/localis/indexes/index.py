@@ -17,7 +17,7 @@ class Index:
         self.MODEL_CLS = model_cls
         self.cache = cache
         self.index: dict[str, int | array] = {}
-        self.load(filepath)
+        self.load(filepath, **kwargs)
 
-    def load(self, filepath: Path):
+    def load(self, filepath: Path, **kwargs):
         pass

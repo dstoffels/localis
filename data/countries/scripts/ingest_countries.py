@@ -5,13 +5,13 @@ from data.countries.scripts.load_iso_countries import init_iso_countries
 from data.countries.scripts.fetch_countries import fetch_countries_sources
 from data.countries.scripts.merge_countries import merge_wikidata, merge_geonames
 from data.countries.scripts.dump_countries import dump
-from data.logger import log
+from data.utils.logger import log
 from localis.models import CountryModel
 
 
-def ingest_countries() -> dict[str, CountryModel] | None:
+def ingest_countries(force: bool = False) -> dict[str, CountryModel] | None:
     log.set_stage("COUNTRIES")
-    has_update = fetch_countries_sources()
+    has_update = fetch_countries_sources(force=force)
     if not has_update:
         log.writeline("No updates for countries.")
         return None
@@ -24,4 +24,4 @@ def ingest_countries() -> dict[str, CountryModel] | None:
 
 
 if __name__ == "__main__":
-    ingest_countries()
+    ingest_countries(force=True)

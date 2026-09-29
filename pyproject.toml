@@ -31,7 +31,7 @@ repository = "https://github.com/dstoffels/localis"
 [project.scripts]
 test = "pytest:console_main"
 test-watch = "pytest_watch.command:main"
-ingest = "data.ingest:ingest_all"
+ingest = "data.ingest:main"
 check-orphans = "data.subdivisions.scripts.check_orphans:main"
 
 [tool.poetry]

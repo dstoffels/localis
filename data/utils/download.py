@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 from urllib.request import urlopen, Request
 from typing import cast
-from data.logger import log
+from data.utils.logger import log
 
 # Fetch URLs
 USER_AGENT = "localis-data-refresh (+https://github.com/dstoffels/localis)"

@@ -1,6 +1,7 @@
 import csv
 import logging
 import time
+from array import array
 from localis.indexes.index import Index
 from localis.utils import normalize
 from collections import defaultdict
@@ -10,7 +11,7 @@ logger = logging.getLogger(__name__)
 
 class FilterIndex(Index):
     def __init__(self, model_cls, cache, filepath, **kwargs):
-        self.index: dict[str, dict[str, list[int]]] = {}
+        self.index: dict[str, dict[str, array]] = {}
         super().__init__(model_cls, cache, filepath, **kwargs)
 
     def load(self, filepath):
@@ -19,7 +20,7 @@ class FilterIndex(Index):
             with open(filepath, "r", encoding="utf-8") as f:
                 reader = csv.reader(f, delimiter="\t")
                 params = next(reader)
-                self.index = {p: defaultdict(list) for p in params}
+                self.index = {p: defaultdict(lambda: array("I")) for p in params}
 
                 row_count = 0
                 for id, row in enumerate(reader, start=1):

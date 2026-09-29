@@ -76,7 +76,8 @@ class Model(DTO):
                     filter_values[param].add(normalize(value))
 
         return {
-            filter_name: sorted(values) for filter_name, values in filter_values.items()
+            filter_name: sorted(values, key=str)
+            for filter_name, values in filter_values.items()
         }
 
     SEARCH_FIELDS: dict[str, float] = {}

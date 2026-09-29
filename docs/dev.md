@@ -60,40 +60,52 @@ One bug this surfaced and fixed in passing: `release.yaml`'s checkout step never
 
 ## Performance Profile
 
-Snapshot as of v1.1.1 (254 countries, 51,684 subdivisions, 472,613 cities). These numbers move as the dataset grows through the ingest pipeline; re-measure before relying on them for a release decision. Memory figures are RSS deltas measured by calling `force_cache()` on each registry in turn from a fresh interpreter.
+Snapshot taken after the search-index and filter-index memory rework (254 countries, 51,684 subdivisions, 472,613 cities). These numbers move as the dataset grows through the ingest pipeline; re-measure before relying on them for a release decision. Memory figures are RSS deltas measured by calling `force_cache()` on each registry in turn from a fresh interpreter.
+
+### Search and filter index architecture
+
+Both indexes moved off `list[int]` postings (each id a full boxed Python object, ~36 bytes) onto `array.array("I", ...)` (packed 4-byte unsigned ints), for the same reason in both cases: the cost was in the container, not the data.
+
+The search index also changed format on disk. It used to be one TSV line per trigram, `base64(varint(delta(ids)))`, which requires a serial, byte-at-a-time Python loop to decode, that can't be bulk-loaded regardless of the target container. It's now two files: `search_index.bin.gz` (every trigram's sorted ids, packed as raw uint32, concatenated in one buffer, gzip'd as a whole) and `search_index_offsets.tsv` (`trigram, offset, count`, offset/count in id-count units, plain text since it's small and worth keeping git-diffable). Loading decompresses and `array.frombytes()`s the entire blob in one bulk call, then slices per-trigram arrays out of that single decoded array using the offsets table, decode once, slice many, rather than decoding per trigram.
+
+The filter index's fix didn't need a format change, just the container: `FilterIndex.load()` builds its reverse index (`value -> ids`) entirely in memory from per-entity rows already on disk, there was never a variable-length encoding to redesign, so swapping the `defaultdict(list)` factory for `defaultdict(lambda: array("I"))` was the whole change.
 
 ### Shipped data size
 
-`src/localis/data/` is 95MB total, almost entirely cities:
+`src/localis/data/` is 98MB total, almost entirely cities:
 
 | Domain | Size | Share |
 |---|---|---|
-| Countries | 68KB | 0.07% |
-| Subdivisions | 7.4MB | 7.8% |
-| Cities | 88MB | 92.6% |
+| Countries | 72KB | 0.07% |
+| Subdivisions | 7.8MB | 8.0% |
+| Cities | 91MB | 92.9% |
 
-Within cities, the four files break down as: `cities.tsv` 26MB, `cities_filter_index.tsv` 35MB, `cities_search_index.tsv` 24MB, `cities_lookup_index.tsv` 3.6MB.
+Within cities: `cities.tsv` 26MB, `filter_index.tsv` 35MB, `search_index.bin.gz` 26MB, `search_index_offsets.tsv` 268KB, `lookup_index.tsv` 3.6MB. The search index's disk footprint grew slightly (24MB → 26.3MB combined) since gzip'd raw fixed-width ids don't compress quite as tightly as the old adaptive varint encoding, an intentional, small trade for the load-time win below.
 
 ### Memory footprint
 
 | Registry (`force_cache()`) | RSS delta |
 |---|---|
 | import baseline | 37MB |
-| countries | +0.4MB |
-| subdivisions | +93MB |
-| cities | +995MB |
-| **total, all three fully cached** | **1134MB** |
+| countries | +1.0MB |
+| subdivisions | +42MB |
+| cities | +498MB |
+| **total, all three fully cached** | **587MB** |
 
-Cities' 995MB breaks down further by structure:
+Down from 1134MB before this rework, a 48% reduction overall. Cities' 498MB breaks down further by structure:
 
-| Cities component | RSS delta |
-|---|---|
-| `_cache` (472,613 models) | 180MB |
-| `_lookup_index` | 61MB |
-| `_filter_index` | 109MB |
-| `_search_index` | 645MB |
+| Cities component | RSS delta | Build time |
+|---|---|---|
+| `_cache` (472,613 models) | 180MB | 0.76s |
+| `_lookup_index` | 61MB | 0.14s |
+| `_filter_index` | 78MB | 1.06s |
+| `_search_index` | 195MB | 0.30s |
 
-The search (trigram) index is 62% of cities' footprint and 57% of the package's total peak memory, despite being the second-smallest file on disk (24MB). The inflation comes from decoding the compact on-disk posting format (base64 + varint + delta encoded) into `dict[str, list[int]]`: each id ends up as a full boxed `int` object referenced by a list, roughly 36 bytes per id, instead of the 4 bytes a packed representation (e.g. `array.array("I", ...)`) would cost. This is a representation cost, not a data-volume cost: it doesn't shrink by reducing the dataset, only by changing how decoded postings are stored in memory.
+`_search_index` dropped from 645MB to 195MB (−70%) and from 1.57s to 0.30s to build (5.2x faster), the single biggest change in this rework. `_filter_index` dropped from 109MB to 78MB (−29%) at effectively unchanged build time, the `array.array` swap only ever targeted memory, not load speed, there was no encoding overhead to remove on that side.
+
+The remaining 195MB in `_search_index` is somewhat inflated by how `load()` currently builds it: one full temporary array is decoded via `frombytes()`, then sliced per trigram, and each slice is a copy, not a view, so the id data briefly exists twice before the temporary array is garbage collected. Using `memoryview` or writing directly into per-trigram arrays instead of slicing a shared one could shave further off this specific number; not done here, since the 70% reduction already achieved doesn't need it to be worth shipping.
+
+**Total load time** (all three registries, `_cache` plus every index) is now ~2.7s, down from ~4.3s. Countries and subdivisions' own `_cache` load is unaffected (eager, ~0.3s combined), subdivisions' index build time dropped from ~350ms to ~153ms for the same underlying reason as cities' search index.
 
 ### City population distribution
 

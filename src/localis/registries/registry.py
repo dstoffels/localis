@@ -34,15 +34,19 @@ class Registry(Generic[T], ABC):
 
     @property
     def _lookup_filepath(self) -> Path:
-        return self._data_path / f"{self.REGISTRY_NAME}_lookup_index.tsv"
+        return self._data_path / "lookup_index.tsv"
 
     @property
     def _filter_filepath(self) -> Path:
-        return self._data_path / f"{self.REGISTRY_NAME}_filter_index.tsv"
+        return self._data_path / "filter_index.tsv"
 
     @property
-    def _search_filepath(self) -> Path:
-        return self._data_path / f"{self.REGISTRY_NAME}_search_index.tsv"
+    def _search_index_filepath(self) -> Path:
+        return self._data_path / "search_index.bin.gz"
+
+    @property
+    def _search_index_offsets_filepath(self) -> Path:
+        return self._data_path / "search_index_offsets.tsv"
 
     @property
     def count(self) -> int:
@@ -105,7 +109,8 @@ class Registry(Generic[T], ABC):
         index = SearchIndex(
             model_cls=self._MODEL_CLS,
             cache=self._cache,
-            filepath=self._search_filepath,
+            filepath=self._search_index_filepath,
+            offsets_filepath=self._search_index_offsets_filepath,
         )
         logger.debug(
             "Built %s search index in %.3fs",

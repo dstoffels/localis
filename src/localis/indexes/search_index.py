@@ -1,4 +1,8 @@
+from array import array
+import csv
+import gzip
 import logging
+from pathlib import Path
 import time
 from localis.models import Model
 from rapidfuzz import fuzz, process
@@ -22,16 +26,31 @@ class SearchIndex(Index):
         self.CANDIDATE_CNT_THRESHOLD = 2000
         super().__init__(model_cls, cache, filepath, **kwargs)
 
-    def load(self, filepath):
-        try:
-            t0 = time.perf_counter()
-            with open(filepath, "r", encoding="utf-8") as f:
-                for line in f:
-                    trigram, ids_str = line.strip().split("\t")
-                    self.index[trigram] = decode_id_list(ids_str)
-            logger.debug("Loaded search index from %s: %d trigrams in %.3fs", filepath, len(self.index), time.perf_counter() - t0)
-        except Exception as e:
-            raise Exception(f"Failed to load search index from {filepath}: {e}")
+    def load(self, filepath, offsets_filepath: Path):
+        # try:
+        t0 = time.perf_counter()
+
+        offsets: dict[str, tuple[int, int]] = {}
+        with open(offsets_filepath, "r", encoding="utf-8") as f:
+            reader = csv.reader(f, delimiter="\t")
+            for trigram, offset, count in reader:
+                offsets[trigram] = (int(offset), int(count))
+
+        with gzip.open(filepath, "rb") as f:
+            raw = f.read()
+
+        full_array = array("I")
+        full_array.frombytes(raw)
+
+        for trigram, (offset, count) in offsets.items():
+            self.index[trigram] = full_array[offset : offset + count]
+
+        print(
+            f"Loaded search index from {filepath}: {len(self.index)} trigrams in {time.perf_counter() - t0}s"
+        )
+
+    # except Exception as e:
+    #     raise Exception(f"Failed to load search index from {filepath}: {e}")
 
     def search(self, query: str, limit: int) -> list[tuple[Model, float]]:
         if not query:

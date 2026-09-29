@@ -3,7 +3,7 @@ from data.subdivisions.utils.subdivision_map import (
     SubdivisionMap,
     get_geonames_candidates,
 )
-from data.logger import log
+from data.utils.logger import log
 import json
 from data.subdivisions.scripts.merge_subdivisions import merge_matched_sub
 from localis.models import SubdivisionModel

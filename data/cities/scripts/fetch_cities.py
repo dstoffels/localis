@@ -3,11 +3,13 @@ from data.utils.paths import CITIES_RAW_PATH, CITIES_MANIFEST_PATH, GEONAMES_DUM
 import zipfile
 
 
-def fetch_cities_sources() -> bool:
+def fetch_cities_sources(force: bool = False) -> bool:
     cities_url = f"{GEONAMES_DUMP_URL}/allCountries.zip"
     zip_dest = CITIES_RAW_PATH / "allCountries.zip"
 
-    if not has_changed(cities_url, zip_dest, CITIES_MANIFEST_PATH):
+    should_download = has_changed(cities_url, zip_dest, CITIES_MANIFEST_PATH)
+
+    if not should_download and not force:
         return False
 
     download(cities_url, zip_dest, CITIES_MANIFEST_PATH)

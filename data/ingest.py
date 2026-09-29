@@ -1,16 +1,30 @@
-from data.logger import log
+import argparse
+
+from data.utils.logger import log
 from data.countries.scripts.ingest_countries import ingest_countries
 from data.subdivisions.scripts.ingest_subdivisions import ingest_subdivisions
 from data.cities.scripts.ingest_cities import ingest_cities
 
 
-def ingest_all(interactive_mode: bool = False) -> None:
+def ingest_all(force: bool = False) -> None:
     log.clear()
 
-    countries = ingest_countries()
-    geocode_sub_map = ingest_subdivisions(countries, interactive_mode=interactive_mode)
-    # ingest_cities(countries, geocode_sub_map)
+    countries = ingest_countries(force)
+    geocode_submap = ingest_subdivisions(countries, force=force)
+    ingest_cities(countries, geocode_submap, force=force)
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--force",
+        action="store_true",
+        help="Force re-ingestion of all data sources regardless of whether they have changed",
+    )
+
+    args = parser.parse_args()
+    ingest_all(force=args.force)
 
 
 if __name__ == "__main__":
-    ingest_all()
+    main()

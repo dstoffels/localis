@@ -10,7 +10,7 @@ IPREGISTRY_SUBDIVISIONS_URL = (
 )
 
 
-def fetch_subdivisions_sources() -> bool:
+def fetch_subdivisions_sources(force: bool = False) -> bool:
     admin1_url = f"{GEONAMES_DUMP_URL}/admin1CodesASCII.txt"
     geonames_admin1_dest = SUBDIVISIONS_RAW_PATH / "admin1CodesASCII.txt"
 
@@ -21,7 +21,7 @@ def fetch_subdivisions_sources() -> bool:
 
     # Check first: merging needs all three sources locally, so if any one of them
     # changed, a partial fetch would leave the others missing.
-    any_changed = any(
+    should_download = any(
         [
             has_changed(admin1_url, geonames_admin1_dest, SUBDIVISIONS_MANIFEST_PATH),
             has_changed(admin2_url, geonames_admin2_dest, SUBDIVISIONS_MANIFEST_PATH),
@@ -31,11 +31,14 @@ def fetch_subdivisions_sources() -> bool:
         ]
     )
 
-    if not any_changed:
+    if not should_download and not force:
         return False
 
-    download(admin1_url, geonames_admin1_dest, SUBDIVISIONS_MANIFEST_PATH)
-    download(admin2_url, geonames_admin2_dest, SUBDIVISIONS_MANIFEST_PATH)
-    download(IPREGISTRY_SUBDIVISIONS_URL, ipregistry_dest, SUBDIVISIONS_MANIFEST_PATH)
+    if should_download:
+        download(admin1_url, geonames_admin1_dest, SUBDIVISIONS_MANIFEST_PATH)
+        download(admin2_url, geonames_admin2_dest, SUBDIVISIONS_MANIFEST_PATH)
+        download(
+            IPREGISTRY_SUBDIVISIONS_URL, ipregistry_dest, SUBDIVISIONS_MANIFEST_PATH
+        )
 
     return True

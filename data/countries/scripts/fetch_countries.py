@@ -18,14 +18,14 @@ def _strip_comment_lines(path: Path) -> None:
     )
 
 
-def fetch_countries_sources() -> bool:
+def fetch_countries_sources(force: bool = False) -> bool:
     iso_codes_dest = COUNTRIES_RAW_PATH / "iso_3166-1.json"
     geonames_url = f"{GEONAMES_DUMP_URL}/countryInfo.txt"
     geonames_dest = COUNTRIES_RAW_PATH / "geonames_countries.txt"
 
     # Check first: if either source changed, we need both files locally to merge,
-    # so a partial fetch (only the changed one) would leave the other missing.
-    any_changed = any(
+    # so a partial fetch would leave the other missing.
+    should_download = any(
         [
             has_changed(
                 ISO_CODES_COUNTRIES_URL, iso_codes_dest, COUNTRIES_MANIFEST_PATH
@@ -34,13 +34,14 @@ def fetch_countries_sources() -> bool:
         ]
     )
 
-    if not any_changed:
+    if not should_download and not force:
         return False
 
-    download(ISO_CODES_COUNTRIES_URL, iso_codes_dest, COUNTRIES_MANIFEST_PATH)
+    if should_download:
+        download(ISO_CODES_COUNTRIES_URL, iso_codes_dest, COUNTRIES_MANIFEST_PATH)
 
-    download(geonames_url, geonames_dest, COUNTRIES_MANIFEST_PATH)
-    # GeoNames ships this with a '#' doc header the parser doesn't expect
-    _strip_comment_lines(geonames_dest)
+        download(geonames_url, geonames_dest, COUNTRIES_MANIFEST_PATH)
+        # GeoNames ships this with a '#' doc header the parser doesn't expect
+        _strip_comment_lines(geonames_dest)
 
     return True

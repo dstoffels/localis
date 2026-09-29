@@ -327,12 +327,12 @@ nested_sub.type
 
 - **Full dataset eager load**: ~1.1s (all 524k+ entities)
 - **Countries** (254): < 5ms for all indexes
-- **Subdivisions** (51,684): ~350ms for all indexes
+- **Subdivisions** (51,684): ~150ms for all indexes
 - **Cities** (472,613)
   - Lookup index: ~150ms
   - Filter index: ~1.1s
-  - Search index: ~1.7s
-- **Total load time**: ~4.3s for all datasets and indexes
+  - Search index: ~300ms
+- **Total load time**: ~2.7s for all datasets and indexes
 
 **Note:** These are best-case timings on modern hardware. Actual load times may vary depending on the host system.
 

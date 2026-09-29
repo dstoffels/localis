@@ -6,6 +6,7 @@ from data.utils.index import (
     dump_search_index,
 )
 from data.subdivisions.utils.subdivision_map import SubdivisionMap
+from data.utils.logger import log
 
 SUBDIVISIONS_DATA_PATH = DATA_PATH / "subdivisions"
 
@@ -15,20 +16,14 @@ def dump(sub_map: SubdivisionMap):
 
     # ensure subdivisions are sorted by admin level so level 2 subdivisions are processed after their level 1 parents
     # subdivisions.sort(key=lambda s: s.admin_level)
-    print(f"Dumping {len(subdivisions)} subdivisions...")
+    log.writeline(f"Dumping {len(subdivisions)} subdivisions...")
     dump_data(subdivisions, SUBDIVISIONS_DATA_PATH / "subdivisions.tsv")
 
-    print("Dumping subdivision lookup indexes...")
-    dump_lookup_index(
-        subdivisions, SUBDIVISIONS_DATA_PATH / "subdivisions_lookup_index.tsv"
-    )
+    log.writeline("Dumping subdivision lookup indexes...")
+    dump_lookup_index(subdivisions, SUBDIVISIONS_DATA_PATH)
 
-    print("Dumping subdivision filter index...")
-    dump_filter_index(
-        subdivisions, SUBDIVISIONS_DATA_PATH / "subdivisions_filter_index.tsv"
-    )
+    log.writeline("Dumping subdivision filter index...")
+    dump_filter_index(subdivisions, SUBDIVISIONS_DATA_PATH)
 
-    print("Dumping subdivision search index...")
-    dump_search_index(
-        subdivisions, SUBDIVISIONS_DATA_PATH / "subdivisions_search_index.tsv"
-    )
+    log.writeline("Dumping subdivision search index...")
+    dump_search_index(subdivisions, SUBDIVISIONS_DATA_PATH)
