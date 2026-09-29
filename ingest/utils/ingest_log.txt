@@ -6,6 +6,7 @@
 [COUNTRIES] completed: 254 countries
 [SUBDIVISIONS] No update needed for admin1CodesASCII.txt
 [SUBDIVISIONS] No update needed for admin2Codes.txt
+[SUBDIVISIONS] No update needed for ipregistry_subdivisions.csv
 [SUBDIVISIONS] Downloading admin1CodesASCII.txt from https://download.geonames.org/export/dump/admin1CodesASCII.txt
 [SUBDIVISIONS] Downloaded and updated admin1CodesASCII.txt
 [SUBDIVISIONS] Downloading admin2Codes.txt from https://download.geonames.org/export/dump/admin2Codes.txt
