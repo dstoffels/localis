@@ -2,35 +2,35 @@
 
 ## resolve-subdivisions (Claude Skill)
 
-`ingest_subdivisions()` builds its subdivision set from GeoNames (`admin1CodesASCII.txt`, `admin2Codes.txt`) and merges in ISO 3166-2 as the source of truth, using fuzzy matching (`data/subdivisions/scripts/merge_subdivisions.py`) to pair each ISO subdivision with its GeoNames counterpart. Fuzzy matching alone can't confidently resolve every pair, GeoNames and ISO frequently disagree on transliteration, use different eras' names for the same region, or one side uses a colloquial/local form the other doesn't. Others may not have a Geonames counterpart and are added as new entries. 
+`ingest_subdivisions()` builds its subdivision set from GeoNames (`admin1CodesASCII.txt`, `admin2Codes.txt`) and merges in ISO 3166-2 as the source of truth, using fuzzy matching (`ingest/subdivisions/scripts/merge_subdivisions.py`) to pair each ISO subdivision with its GeoNames counterpart. Fuzzy matching alone can't confidently resolve every pair, GeoNames and ISO frequently disagree on transliteration, use different eras' names for the same region, or one side uses a colloquial/local form the other doesn't. Others may not have a Geonames counterpart and are added as new entries. 
 
 Whatever's left unmatched after fuzzy merging is an "orphan". Forcing a low-confidence match would silently corrupt the dataset, so orphans are instead handed off for resolution with real-world geographic knowledge using the resolve-subdivisions skill, which is almost entirely automated.
 
 ### Pipeline integration
 
-`resolve_unmerged_subs()` (`data/subdivisions/scripts/resolve_subdivisions.py`) is the seam between fuzzy matching and manual resolution:
+`resolve_unmerged_subs()` (`ingest/subdivisions/scripts/resolve_subdivisions.py`) is the seam between fuzzy matching and manual resolution:
 
 1. It first re-applies any previously recorded decisions from `resolution_map.json` (see below) to the unmerged list, this is what makes resolutions durable across ingest runs.
-2. Otherwise, remaining orphans are dumped to `orphaned_subdivisions.json` keyed by ISO code via `dump_orphans()`, and the pipeline runs to completion regardless, including cities. It used to hard-stop with `sys.exit(10)` the moment an orphan was found, but that made a run all-or-nothing: a single unresolved orphan meant nothing else from that run, including subdivisions that resolved cleanly, ever landed. Now any remaining orphans are just a known, tracked gap, and everything else still merges. CI treats orphan state as a fact to check after the run, reading `orphaned_subdivisions.json` directly (`data/subdivisions/scripts/check_orphans.py`, exposed as `poetry run check-orphans`), rather than relying on an exit code.
+2. Otherwise, remaining orphans are dumped to `orphaned_subdivisions.json` keyed by ISO code via `dump_orphans()`, and the pipeline runs to completion regardless, including cities. It used to hard-stop with `sys.exit(10)` the moment an orphan was found, but that made a run all-or-nothing: a single unresolved orphan meant nothing else from that run, including subdivisions that resolved cleanly, ever landed. Now any remaining orphans are just a known, tracked gap, and everything else still merges. CI treats orphan state as a fact to check after the run, reading `orphaned_subdivisions.json` directly (`ingest/subdivisions/scripts/check_orphans.py`, exposed as `poetry run check-orphans`), rather than relying on an exit code.
 
-### The resolve-subdivisions skill & MCP server
+### Resolving Orphans
 
 The skill (`.claude/skills/resolve-subdivisions/SKILL.md`) is a Claude Code skill backed by a local MCP server (`.claude/skills/resolve-subdivisions/scripts/server.py`, can be launched manually via `poetry run python ...`). It drains `orphaned_subdivisions.json` one entry at a time.
 
 **Tools**
 
 - **`next()`**: Returns the next orphan from `orphaned_subdivisions.json` and a batch of its GeoNames candidates of the same country, ranked by fuzzy score (`rapidfuzz` against every name/alias combo). Geonames candidates are paginated into batches. The first batch is a "top tier" slice (~10% of the pool, ~75% of matches are found in this batch), subsequent batches are fixed 200-candidate chunks, this keeps a country with thousands of subdivisions from blowing out the tool result payload. Repeated `next()` calls page through the same orphan until its candidates run out. Each session has a 1000-candidate soft cap, forcing a session `/clear` to keep agent context from drifting over a long run.
-- **`merge(candidate_hashid, aliases=[])`**: Merges the current orphan into a GeoNames candidate by hashid. 
+- **`merge(candidate_hashid, aliases=[])`**: Resolves the current orphan into a selected GeoNames candidate by hashid. 
 - **`add(aliases=[])`**: Adds the orphan as its own new entry, for subdivisions that are real but have no GeoNames counterpart to merge into.
-- **`review()`**: An escalation valve for genuinely ambiguous cases. `review` dumps the orphan and its full, unpaginated candidate list to `review_output.json` for a human to inspect and decide manually. The orphan must be resolved with `merge` or `add` before the session can continue.
+- **`review()`**: An escalation valve for unresolvable cases. `review` dumps the orphan and its full candidate list to `review_output.json` for a human to inspect and decide manually. The orphan must be resolved with `merge` or `add` before the session can continue.
 
-Both `merge` and `add` write to `resolution_map.json`  remove the orphan from `orphaned_subdivisions.json`, and append a one-line audit entry to `resolution_log.txt`.
+Both `merge` and `add` write to `resolution_map.json`, remove the orphan from `orphaned_subdivisions.json`, and append a one-line audit entry to `resolution_log.txt`.
 
 **Decision funnel** (`SKILL.md` Steps 1–5): try a high-confidence `merge` against the current candidate batch → if none fit, page to the next batch and repeat → if no candidate ever fits but the orphan is a real, confirmed entity, `add` it → if still uncertain, websearch the orphan → if that still doesn't resolve it, `review()` and defer to human intervention.
 
 ### State files
 
-All under `data/subdivisions/raw/` (gitignored except these, per `.gitignore`'s whitelist):
+All under `ingest/subdivisions/raw/` (gitignored except these, per `.gitignore`'s whitelist):
 
 | File | Written by | Purpose |
 |---|---|---|
@@ -42,7 +42,7 @@ All under `data/subdivisions/raw/` (gitignored except these, per `.gitignore`'s 
 
 ## Data Sourcing
 
-Countries pull ISO 3166-1 codes and names from Debian's iso-codes project, country metadata from GeoNames' `countryInfo.txt`, and additional aliases from a committed Wikidata snapshot (`wiki_countries.json`) that isn't part of the automated fetch. Subdivisions pull ISO 3166-2 codes from Ipregistry's `iso3166` repository and admin boundaries from GeoNames' `admin1CodesASCII.txt` and `admin2Codes.txt`. Cities pull from GeoNames' `allCountries.txt`, filtered down to populated places by feature code (PPL, PPLA, PPLA2, PPLA3, PPLA4, PPLA5, PPLC, PPLF, PPLL, PPLS, STLMT).
+Countries pull ISO 3166-1 codes and names from Debian's iso-codes project, country metadata from GeoNames' `countryInfo.txt`, and additional aliases from a committed Wikidata snapshot (`wiki_countries.json`) that isn't part of the automated fetch. Subdivisions pull ISO 3166-2 codes from Ipregistry's `iso3166` repository and admin boundaries from GeoNames' `admin1CodesASCII.txt` and `admin2Codes.txt`. Cities pull from GeoNames' `cities500.txt`, GeoNames' own pre-filtered export (population ≥ 500, or a seat of an administrative division regardless of population), so `ingest/cities/scripts/load_cities.py` no longer applies its own feature-code or population filtering on top, GeoNames already made that call, and re-filtering on population would wrongly drop the low/no-population admin seats `cities500` specifically includes on purpose.
 
 Fetching is checksum-aware: nothing gets downloaded unless its remote source has actually changed since the last successful fetch. A domain only ever re-fetches all of its sources together, never a subset, since merging needs the complete raw set on disk rather than whatever piece happened to change. That same check gates the rest of the pipeline too, skipping parsing and merging entirely for a domain with nothing new.
 
@@ -60,7 +60,7 @@ One bug this surfaced and fixed in passing: `release.yaml`'s checkout step never
 
 ## Performance Profile
 
-Snapshot taken after the search-index and filter-index memory rework and the subdivision `hashid` fix (254 countries, 51,684 subdivisions, 472,613 cities). These numbers move as the dataset grows through the ingest pipeline; re-measure before relying on them for a release decision. Memory figures are RSS deltas measured by calling `force_cache()` on each registry in turn from a fresh interpreter.
+Snapshot taken after the cities500 switch and the entities/views/stores refactor (254 countries, 51,684 subdivisions, 235,895 cities). These numbers move as the dataset grows through the ingest pipeline; re-measure before relying on them for a release decision. Memory figures are RSS deltas measured by calling `force_cache()` on each registry in turn from a fresh interpreter.
 
 ### Search and filter index architecture
 
@@ -72,55 +72,37 @@ The filter index's fix didn't need a format change, just the container: `FilterI
 
 ### Subdivision hashid
 
-`SubdivisionModel.hashid` is an MD5-derived id used only during ingestion (merging ISO and GeoNames records, and supporting the resolve-subdivisions skill). It used to be computed in `__post_init__`, which runs on every construction, including the normal runtime `_cache` load, where nothing ever reads `hashid`, it's discarded once a subdivision has been merged. `set_hashid()` is now an explicit method, called only at the two ingestion sites that actually need it (`data/subdivisions/scripts/geonames_subdivisions.py`, `data/subdivisions/scripts/iso_subdivisions.py`); `SubdivisionModel.from_row()`, the runtime path, never calls it. Subdivisions' dataset load dropped from 289.5ms to 98.7ms (−66%) as a result.
+`SubdivisionModel.hashid` is an MD5-derived id used only during ingestion (merging ISO and GeoNames records, and supporting the resolve-subdivisions skill). It used to be computed in `__post_init__`, which runs on every construction, including the normal runtime `_cache` load, where nothing ever reads `hashid`, it's discarded once a subdivision has been merged. `set_hashid()` is now an explicit method, called only at the two ingestion sites that actually need it (`ingest/subdivisions/scripts/geonames_subdivisions.py`, `ingest/subdivisions/scripts/iso_subdivisions.py`); `SubdivisionModel.from_row()`, the runtime path, never calls it. Subdivisions' dataset load dropped from 289.5ms to 98.7ms (−66%) as a result.
 
 ### Shipped data size
 
-`src/localis/data/` is 98MB total, almost entirely cities:
+`src/localis/data/` is 54MB total (down from 98MB after the cities500 switch), almost entirely cities:
 
 | Domain | Size | Share |
 |---|---|---|
-| Countries | 72KB | 0.07% |
-| Subdivisions | 7.8MB | 8.0% |
-| Cities | 91MB | 92.9% |
+| Countries | 84KB | 0.15% |
+| Subdivisions | 8.0MB | 14.8% |
+| Cities | 46MB | 85.1% |
 
-Within cities: `cities.tsv` 26MB, `filter_index.tsv` 35MB, `search_index.bin.gz` 26MB, `search_index_offsets.tsv` 268KB, `lookup_index.tsv` 3.6MB. The search index's disk footprint grew slightly (24MB → 26.3MB combined) since gzip'd raw fixed-width ids don't compress quite as tightly as the old adaptive varint encoding, an intentional, small trade for the load-time win below.
+Within cities: `cities.tsv` 13MB, `filter_index.tsv` 18MB, `search_index.bin.gz` 13MB, `search_index_offsets.tsv` 236KB, `lookup_index_int.tsv` 3.3MB.
 
 ### Memory footprint
 
 | Registry (`force_cache()`) | RSS delta |
 |---|---|
-| import baseline | 37MB |
-| countries | +1.0MB |
-| subdivisions | +42MB |
-| cities | +498MB |
-| **total, all three fully cached** | **587MB** |
+| import baseline | 42MB |
+| countries | +1MB |
+| subdivisions | +38MB |
+| cities | +213MB |
+| **total, all three fully cached** | **279MB** |
 
-Down from 1134MB before this rework, a 48% reduction overall. Cities' 498MB breaks down further by structure:
+Cities' 213MB breaks down further by structure:
 
 | Cities component | RSS delta | Build time |
 |---|---|---|
-| `_cache` (472,613 models) | 180MB | 0.76s |
-| `_lookup_index` | 61MB | 0.14s |
-| `_filter_index` | 78MB | 1.06s |
-| `_search_index` | 195MB | 0.30s |
+| `_cache` (235,895 views) | 57MB | 0.35s |
+| `_lookup_index` | 1MB | 0.07s |
+| `_filter_index` | 58MB | 0.57s |
+| `_search_index` | 97MB | 0.16s |
 
-`_search_index` dropped from 645MB to 195MB (−70%) and from 1.57s to 0.30s to build (5.2x faster), the single biggest change in this rework. `_filter_index` dropped from 109MB to 78MB (−29%) at effectively unchanged build time, the `array.array` swap only ever targeted memory, not load speed, there was no encoding overhead to remove on that side.
-
-The remaining 195MB in `_search_index` is somewhat inflated by how `load()` currently builds it: one full temporary array is decoded via `frombytes()`, then sliced per trigram, and each slice is a copy, not a view, so the id data briefly exists twice before the temporary array is garbage collected. Using `memoryview` or writing directly into per-trigram arrays instead of slicing a shared one could shave further off this specific number; not done here, since the 70% reduction already achieved doesn't need it to be worth shipping.
-
-**Total load time** (all three registries, `_cache` plus every index) is now ~2.8s, down from ~4.3s. Subdivisions' combined load (dataset plus all three indexes) dropped from ~440ms to ~240ms: ~350ms to ~153ms of that was the index-build improvement described above, and the dataset load itself dropped a further ~191ms (289.5ms → 98.7ms) once `hashid` stopped being computed at runtime.
-
-### City population distribution
-
-`cities.tsv` population field, all 472,613 rows, sorted:
-
-| Threshold | Cities remaining | Share |
-|---|---|---|
-| population > 0 (current) | 472,613 | 100% |
-| population > 100 | 304,916 | 64.5% |
-| population > 500 | 186,310 | 39.4% |
-| population > 1,000 | 138,441 | 29.3% |
-| population > 5,000 | 63,775 | 13.5% |
-
-Median population across the current dataset is 263. The current ingestion filter (`data/cities/scripts/load_cities.py`) admits any populated-place feature code (PPL, PPLA, PPLA2-5, PPLC, PPLF, PPLL, PPLS, STLMT) with a nonzero population; it does not apply a population floor.
+**Total load time** (all three registries, `_cache` plus every index) is ~1.3s.
