@@ -1,14 +1,13 @@
 # localis
 
-Fast, offline access to comprehensive data for **countries**, **subdivisions**, and **cities**. Built on ISO 3166 and GeoNames datasets with support for exact lookups, filtering, and fuzzy search.
+Fast, offline access to comprehensive data for **countries**, **subdivisions**, and **cities**. Built on ISO 3166 and GeoNames datasets (updated monthly) with support for exact lookups, filtering, and fuzzy search.
 
 ## Features
 
-- 🌍 **254 countries** with ISO codes (alpha-2, alpha-3, numeric)
-- 🗺️ **51,684 subdivisions** administrative levels 1 & 2
-- 🏙️ **472,613 cities** sourced from GeoNames
+- 🌍 **254 countries** sourced and merged from ISO 3166-1 and GeoNames
+- 🗺️ **51,684 subdivisions** sourced and merged from ISO 3166-2 and GeoNames
+- 🏙️ **235,895 cities** sourced from GeoNames cities500.txt
 - 🔍 **Search Engine** for typo-tolerant lookups with 99%+ accuracy
-- ⚡ **Blazing fast** - full dataset loads in 1.1s, lookups < 5ms, searches < 30ms
 - 📌 **Aliases** - support for colloquial, historic and alternate names
 
 ---
@@ -228,7 +227,7 @@ city = localis.cities.get(1)
 
 **Returns:** `City` object or `None`
 
-### Lookup by identifier
+### Lookup by GeoNames id
 
 ```python
 # By GeoNames ID
@@ -281,7 +280,7 @@ city.name            # "New York"
 city.admin1          # SubdivisionBase | None - Primary subdivision
 city.admin2          # SubdivisionBase | None - Secondary subdivision
 city.country         # CountryBase object
-city.population      # 8175133 | None
+city.population      # 8175133
 city.lat             # 40.71427
 city.lng             # -74.00597
 
@@ -323,41 +322,53 @@ nested_sub.type
 
 ### Caching
 
-**Countries** and **Subdivisions** are eager-loaded on import, but **Cities** are not due to their large dataset. All registry methods lazy load their respective *indexes* on first use, incurring a cold start cost. Indexes (and cities) can be pre-loaded with `.force_cache()` to avoid this during queries.
+**Countries** and **Subdivisions** registries are eager-loaded on import, **Cities** are lazy-loaded due to its large dataset. All registry methods lazy load their respective *indexes* on first use, incurring a cold start cost. Indexes (and cities) can be pre-loaded with the registry's `.force_cache()` to avoid this during queries.
 
-- **Full dataset eager load**: ~1.1s (all 524k+ entities)
-- **Countries** (249): < 5ms for all indexes
-- **Subdivisions** (51,684): ~350ms for all indexes
-- **Cities** (472,613)
-  - Lookup index: ~150ms
-  - Filter index: ~1.1s
-  - Search index: ~1.7s
-- **Total load time**: ~4.3s for all datasets and indexes
+#### Countries (254)
+| Component | Load Time | Memory |
+|---|---|---|
+| Dataset | < 1ms | 0KB |
+| Lookup index | < 1ms | 102.4KB |
+| Filter index | < 1ms | 307.2KB |
+| Search index | ~1ms | 512.0KB |
+| **Combined** | **~2ms** | **921.6KB** |
 
-**Note:** These are best-case timings on modern hardware. Actual load times may vary depending on the host system.
+#### Subdivisions (51,684)
+| Component | Load Time | Memory |
+|---|---|---|
+| Dataset | < 1ms | 0KB |
+| Lookup index | ~13ms | 3.7MB |
+| Filter index | ~95ms | 11.3MB |
+| Search index | ~39ms | 23.3MB |
+| **Combined** | **~147ms** | **38.3MB** |
+
+#### Cities (235,895)
+
+> ⚠️ **Memory-intensive.** Fully caching cities and its indexes adds 212.5MB of resident memory. Calling `localis.cities.force_cache()` loads all of it upfront.
+
+| Component | Load Time | Memory |
+|---|---|---|
+| Dataset | ~352ms | 57.0MB |
+| Lookup index | ~65ms | 921.6KB |
+| Filter index | ~566ms | 57.8MB |
+| Search index | ~155ms | 96.8MB |
+| **Combined** | **~1.14s** | **212.5MB** |
+
+**Full Cache**: ~1.3s load time, 278.9MB memory for all datasets and indexes
 
 **Concurrency:** It is recommended to call `.force_cache()` on all registries if they will be accessed from multiple threads to avoid potential race conditions during the first access of any lazy-loaded caches and indexes.
 
-### Query Performance
+### Benchmarks
 
-- **Countries**: 
-  - All queries < 2ms
-- **Subdivisions**: 
-  - Lookups < 1ms
-  - Filters < 3ms
-  - Searches ~3ms
-- **Cities**: 
-  - Lookups < 5ms
-  - Filters ~5ms
-  - Searches < 30ms
+Per-call query latency, and fuzzy search accuracy on mangled/misspelled queries:
 
-### Search Accuracy
+| Registry | Get | Lookup | Filter | Search | Search Accuracy |
+|---|---|---|---|---|---|
+| Countries | 0.0009ms | 0.0029ms | 0.0054ms | 1.27ms | 100% |
+| Subdivisions | 0.002ms | 0.0059ms | 0.013ms | 3.28ms | 94% |
+| Cities | 0.0043ms | 0.0046ms | 0.0166ms | 4.94ms | 99%+ |
 
-Fuzzy search accuracy on mangled/misspelled queries:
-
-- **Countries**: 100%
-- **Subdivisions**: 94% (tested on 5,000 samples)
-- **Cities**: 99%+ (tested on 5,000 samples with city + admin1 context)
+Accuracy tested on 5,000 mangled-query samples per registry; cities' search additionally includes city + admin1 context.
 
 ---
 
@@ -365,15 +376,15 @@ Fuzzy search accuracy on mangled/misspelled queries:
 Data in this project is kept current monthly from the following sources:
 
 - **Countries**
-  - [ISO 3166-1](https://www.iso.org/iso-3166-country-codes.html) data via [Debian's iso-codes project](https://salsa.debian.org/iso-codes-team/iso-codes)
-  - [Geonames](https://www.geonames.org/) `geonames_countries.txt`
-  - Additional country aliases from Wikidata.
+  - **Canonical**: [ISO 3166-1](https://www.iso.org/iso-3166-country-codes.html) data via [Debian's iso-codes project](https://salsa.debian.org/iso-codes-team/iso-codes)
+  - **Merged**: [Geonames](https://www.geonames.org/) `geonames_countries.txt`
+  - **Merged**: Additional country aliases from Wikidata.
 - **Subdivisions**
-  - [ISO 3166-2](https://www.iso.org/iso-3166-country-codes.html) data via [Ipregistry](https://ipregistry.co)
-  - [GeoNames](https://www.geonames.org/) `admin1CodesASCII.txt` and `admin2Codes.txt`
+  - **Canonical**: [ISO 3166-2](https://www.iso.org/iso-3166-country-codes.html) data via [Debian's iso-codes project](https://salsa.debian.org/iso-codes-team/iso-codes)
+  - **Merged**: [GeoNames](https://www.geonames.org/) `admin1CodesASCII.txt` and `admin2Codes.txt`
+  - **Merged**: Additional subdivision aliases from [Ipregistry](https://ipregistry.co)
 - **Cities**
-  - [GeoNames](https://www.geonames.org/) `allCountries.txt` dataset (cities with population data, filtered by feature codes)
-  - Feature Codes used for cities: PPL, PPLA, PPLA2, PPLA3, PPLA4, PPLA5, PPLC, PPLF, PPLL, PPLS, STLMT
+  - [GeoNames](https://www.geonames.org/) `cities500.txt` dataset
 
 ---
 

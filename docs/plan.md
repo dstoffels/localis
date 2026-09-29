@@ -5,60 +5,67 @@ This document outlines the project plan for the Localis project, detailing the o
 
 ## Objectives
 
-- Bring API, data merging/validation and automated data fetching to release v1.0
+- Reduce localis's shipped package size and runtime memory footprint, primarily driven by the cities dataset.
+- Ship comprehensive datasets by default, and let the API narrow them ad hoc (population floors, locales) at query time rather than shipping multiple hard-tiered dataset variants.
 
-## MVP Features
+## Features
+Features currently in development
 
-~~- Update cities registry to lazy load for faster initialization/import.~~
-~~- Implement resolve-subdivisions skill & MCP for locally automated data reconciliation when merging ISO and geonames datasets.~~
-~~- Add checksums to data fetching to skip unnecessary downloads~~
-~~- Implement cron job in GHA ci for automated data fetching, updating the dataset and drafting a PR if the merging of the new data succeeds. If it cannot be merged automatically, notify the team for manual intervention.~~
-
+- Add `Currency` entity + `Country.currency` (ISO 4217, sourced from iso-codes' `iso_4217.json`, not GeoNames' embedded currency fields, since iso-codes is the authoritative source and already the same upstream `countries` data comes from)
+- Add `Language` entity + `Country.languages` (ISO 639, sourced from iso-codes' `iso_639-3.json`, same reasoning as currency; supersedes the old "implement native languages in countries" idea)
+- Add standalone `Script` reference table (ISO 15924, code → name only). Low priority: a language can be written in more than one script, so it isn't 1:1 with `Language` or `Country`; mostly used for font rendering and BCP-47 locale tags, not something to wire into other entities.
+- Gettext-based name translation across `Country`/`Subdivision` (and `Currency`/`Language`/`Script` once they exist), including `language_code` support on `filter()`/`search()`. See Localization section below for the full design.
+- Population-floor filtering on `CityRegistry`. See Population Floor section below.
 
 ## Backlog
-- Implement autocomplete for registries and/or global interface.
 - Patch missing flags for countries
-- Implement native languages in countries?
+- City radius feature using lat/lng to return nearby cities within a specified distance
+- Add filter() kwarg error handling for invalid arguments
+- Add py.typed marker (PEP 561)
+- Implement custom exceptions (localis.exceptions module)?
+- Set thread locks for concurrent access to registries
+- Implement autocomplete for registries and/or global interface.
+- Add a separate `HistoricCountry` registry (ISO 3166-3: USSR, Yugoslavia, East Germany, etc.), kept apart from the live `countries` table rather than flattened in, since these entities no longer exist at all (unlike e.g. Kosovo, which is current but diplomatically contested). ISO 3166-3's former-to-successor mapping also isn't reliably 1:1 (some dissolved into several states), so there's no safe automatic redirect into the live table either. Before building it, audit whether cleaner 1:1 renames (Burma → Myanmar-style) are already covered by existing Wikidata aliases on the modern country.
+- Split `localis` into a lean core (countries + subdivisions) and a `localis-cities` companion distribution shipping the city dataset, installed via `pip install localis[cities]` extras. Same monorepo, same CI/release pipeline; a wheel can't conditionally include package data by install flag, so two coordinated PyPI distributions is the closest real implementation of a single-repo, opt-in-heavy-data package. Baseline: core would ship ~8.1MB disk / ~80MB peak memory versus the current 54MB disk / 279MB peak memory for the full package (see `docs/dev.md`'s Performance Profile).
 
-## Ingest CI cron job
+## Population Floor (ad hoc cities filtering)
 
-### Context
+Replaces the old idea of shipping separate hard-tiered cities datasets (geonamescache's approach: 500/1000/5000/15000 population cutoffs as separate bundled files). Since the shipped dataset is already the smallest useful tier (cities500), any higher floor is a filter over already-loaded data, not a new fetch, so it needs no new data source and no ingest changes.
 
-A scheduled CI job fetches upstream data, merges it, and drafts a PR when it succeeds, or blocks for manual intervention when it can't fully resolve (unmerged subdivisions). The checksum-aware fetching and ingest-side gating built earlier are the prerequisites this depends on: they're what make "did anything actually change" a trustworthy signal instead of noise.
+### API shape
 
-`ingest` is a long-lived branch that CI runs against on a monthly schedule and on every push to it. CI commits whatever the ingest pipeline produces straight back to `ingest`, and maintains a single PR from `ingest` into `main`. `resolve_subdivisions.py`'s `dump_orphans()` (formerly `handle_orphans()`, which used to hard `sys.exit(10)` the moment it found any orphan, before the pipeline ever dumped anything) now just writes `orphaned_subdivisions.json` and lets the pipeline run to completion regardless, so a run with unresolved orphans still commits and pushes whatever *did* resolve. CI checks that file's content directly after the run (via `data/subdivisions/scripts/check_orphans.py`, exposed as `poetry run check-orphans`) rather than relying on any exit code, since the file is the actual source of truth and it's already committed to the branch. When it's non-empty, the script prints a markdown summary (each orphaned ISO code, name, country, and the resolve-subdivisions-skill instructions), which CI posts as a real comment on the PR, and the job fails at the end so it's visible in the Actions tab too. The maintainer pulls `ingest`, runs the resolve-subdivisions skill locally, commits, and pushes back to `origin/ingest`, which re-triggers the workflow via the push trigger.
+`cities.set_population_floor(n: int)` narrows `_cache`, `_filter_index`, and `_search_index` to cities with population >= n; passing `None` (or a `reset_population_floor()` call) restores the full set. Each distinct floor value is cached the same way the registry already caches its indexes, so switching between previously-used floors doesn't rebuild.
 
-The actual block on merging is the PR staying in **draft**: GitHub disables the merge button on a draft PR regardless of any check's pass/fail state, and this repo's branch protection on `main` only restricts direct pushes (PRs are the only way in), it doesn't require this workflow's check to pass. So the comment is purely visibility, the draft state is what actually blocks.
+### Open questions
 
-Version bumps are scoped specifically to `src/localis/data` (the published dataset), separately from the broader "is there anything to commit at all" check, since the raw bookkeeping files (per-domain `*.manifest.json`, `resolution_map.json`, `orphaned_subdivisions.json`) can change independently of the dataset output and still need to be committed even when they do. On a run where the dataset itself changed, `poetry version minor` bumps it. Reasoning: strict semver would call a data refresh a patch (no API change), but this package's actual value is the data as much as the API, and a refresh almost always means *more* coverage rather than a fix to something broken, so a minor bump reads more honestly to a consumer. This is a routine, ongoing bump for as long as the project is at `1.0.0` or later; it's independent of the alpha/beta/stable phase transitions the maintainer manages by hand in `pyproject.toml`.
+- Registries are module-level singletons (`localis.cities`); deciding whether `set_population_floor()` mutates that shared instance in place (affecting every caller) or should instead hand back a separate, independent view.
+- Whether rebuilding `_filter_index`/`_search_index` on every new floor value is cheap enough to do synchronously, or should defer/lazy-build like the rest of the registry.
 
-Cities is included in the pipeline (`ingest_all()` calls `ingest_cities()` again); no changes were needed in `ingest.yaml` for this since its dataset-changed and diff-stat checks are already scoped generically to `src/localis/data`, not per-domain.
+## Localization (gettext-based name translation)
 
-Also fixed in passing, discovered while reviewing this: `release.yaml`'s `actions/checkout@v4` never fetched tags, so `git tag | sort --version-sort | tail -n1` always came back empty, meaning the workflow always believed no version had ever been released and would re-attempt publishing whatever version was already in `pyproject.toml`. That's what actually broke the most recent release run (PyPI rejects re-uploading an already-used filename), not a PyPI API deprecation. Fixed with `fetch-tags: true` on that checkout step. This matters here because merged `ingest` PRs are exactly the kind of `main` push that would trigger this failure mode again if it weren't fixed.
+Initial plan, not yet started. Goal: pycountry-style translation of `Country`/`Subdivision` names (and `Currency`/`Language`/`Script` once those exist) into other locales via gettext, available both as a per-object transform and as a query-time option on the registries.
 
-### Workflow: `.github/workflows/ingest.yaml`
+### Mechanism
 
-Triggers: `schedule` (monthly cron, `0 6 1 * *`) and `push: branches: [ingest]` (this is also how a manual run happens, there's no separate `workflow_dispatch`). Guarded with `if: github.repository == 'dstoffels/localis'`, matching `release.yaml`'s existing pattern, since scheduled triggers otherwise also fire on forks.
+Dependency: none. `gettext` is part of Python's standard library. The actual scope is data: iso-codes ships `.po`/`.mo` locale catalogs per domain (`iso3166-1`, `iso3166-2`, `iso4217`, `iso639-3`, `iso15924`), the same upstream project `countries`/`subdivisions` already source their base data from. Fetching and shipping those as package data (same category as `src/localis/data/*.tsv`) plus a small ingestion step is the actual work. Locale coverage varies a lot per language; gettext's own fallback (an untranslated msgid returns the original English string unchanged) means sparse locales degrade gracefully with no extra error handling needed.
 
-Steps, following `test.yaml`'s existing conventions (`ubuntu-latest`, `actions/checkout@v4`, `actions/setup-python@v5` at `3.11`, `snok/install-poetry@v1`, `actions/cache@v3` keyed on `poetry.lock`):
+### API shape
 
-1. Checkout `ref: ingest` with `fetch-depth: 0` (needed for the `HEAD~1` diff later; the default shallow clone would break it).
-2. Set up Python/Poetry, configure `github-actions[bot]` git identity.
-3. `poetry run ingest` (always exits `0`).
-4. Bump version if `src/localis/data` changed (see above).
-5. `git add -A`, check `git diff --cached --quiet` for whether there's anything to commit at all.
-6. If yes: commit (message includes the new version when bumped) and `git push origin ingest`.
-7. `poetry run check-orphans > orphan_summary.md`, capturing its exit code to know the current orphan state.
-8. Ensure an `ingest` → `main` PR exists (`gh pr list` then `gh pr create --draft` if none found); only runs when step 5 found a diff.
-9. If step 5 found a diff: post a comment with that run's actual changes (whether the version bumped, a `git diff --stat HEAD~1 HEAD -- src/localis/data` block), not a vague pointer at the commit history.
-10. If orphans were found: comment with the `check-orphans` summary.
-11. If no orphans were found: `gh pr ready` (unconditional on this alone, not also gated on step 5's diff, so a run that resolves the last orphan without any other upstream change still flips the PR out of draft).
-12. If orphans were found: fail the job, after everything above has already run.
+`Country.translate(locale: str) -> Country` (`.localize()` also reads fine; `.translate()` matches gettext's own vocabulary) returns a new DTO with `name`/`official_name` swapped to the localized string; `alpha2`/`alpha3`/`numeric`/`flag` stay untouched since codes don't translate. Same shape for `Subdivision.name`, and later `Currency`/`Language`/`Script` names. Out of scope: `aliases` (a separate, already-existing mechanism for colloquial/historical name variants, not systematic per-locale translation) and city names (GeoNames-sourced, no ISO/iso-codes backing; GeoNames has its own, much larger alternate-names-by-language file, a distinct future item). Catalogs load lazily and cache per `(domain, locale)`, the same `@cached_property` pattern `Registry` already uses for its indexes, so an unused locale costs nothing.
 
-Needs `permissions: contents: write` and `pull-requests: write` (default `GITHUB_TOKEN` covers both).
+### Registry-level `language_code` support
 
-### Verification
+`filter()` and `search()` accept an optional `language_code` kwarg; query mechanics differ between the two.
 
-- Unit-level: done. `poetry run check-orphans` tested locally against both an empty and a populated `orphaned_subdivisions.json`.
-- Workflow-level: not yet done. First real test requires pushing to `origin/ingest`, which triggers a genuine Actions run against the real repo.
-- Still to confirm live: `gh pr list --head ingest --base main` shows at most one PR after repeated runs (idempotency), and it flips out of draft only when clean.
+`filter()` is an exact match against `FilterIndex`, so a localized query reverse-translates cleanly: invert the target locale's gettext catalog into `{normalized_translated_string: english_canonical}`, resolve the localized `name` argument through it, run the existing English `FilterIndex.get()`, then translate the result DTOs back to the requested locale before returning.
+
+`search()` cannot use the same reverse-translation step, since the reverse map is an exact-string lookup and a typo in the localized query (e.g. "Deutschlnd") has no catalog entry to resolve, which would defeat the fuzzy-match tolerance `search()` exists for. Instead, `search()` fuzzy-matches directly against a per-locale corpus built from the localized name strings themselves, then resolves the winning match to its canonical id. Countries (254 entities) already skip trigram pre-filtering under 300 records, so a per-locale corpus is cheap there; subdivisions (51k) are the same cost class as the existing ~3ms English search and should be built lazily per `(domain, locale)` rather than precomputed and shipped for every locale upfront. Cities have no ISO/iso-codes source and stay out of scope, so this never needs to scale to city-sized data.
+
+`lookup()` matches on language-independent identifiers (`alpha2`, `alpha3`, `iso_code`, etc.), so it has no reverse-translation need; a `language_code` there would only mean "translate the returned DTO," equivalent to `.get(...).translate(locale)`.
+
+### Open questions
+
+- Which locales to ship: all of iso-codes' catalogs, or a curated subset. Leaning all, since gettext's fallback makes sparse coverage safe by default.
+- Whether iso-codes' catalogs cover secondary fields (e.g. `Subdivision.type`) or only the primary name/official_name fields, not yet verified.
+- Semantics of a cross-registry filter kwarg under `language_code`, e.g. `subdivisions.filter(country="Deutschland", language_code="de")`, where `country` references a different registry's translatable field.
+- Actual size of the compiled `.mo` catalogs across all locales isn't confirmed yet, needs measuring before deciding to ship all of them.

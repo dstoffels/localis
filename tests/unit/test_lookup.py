@@ -1,6 +1,20 @@
-from localis.registries import Registry
-from localis.models import DTO
+from localis.registries import (
+    Registry,
+    CountryRegistry,
+    SubdivisionRegistry,
+    CityRegistry,
+)
+from localis.entities import Entity
+from ingest.countries import CountryModel
+from ingest.subdivisions import SubdivisionModel
+from ingest.cities import CityModel
 from utils import registry_param
+
+LOOKUP_FIELDS_BY_REGISTRY = {
+    CountryRegistry: CountryModel.LOOKUP_FIELDS,
+    SubdivisionRegistry: SubdivisionModel.LOOKUP_FIELDS,
+    CityRegistry: CityModel.LOOKUP_FIELDS,
+}
 
 
 @registry_param
@@ -19,9 +33,9 @@ class TestLookup:
     def test_valid(self, registry: Registry, select_random):
         """should return a DTO with a valid lookup value from each lookup field"""
 
-        lookup_fields = registry._MODEL_CLS.LOOKUP_FIELDS
+        lookup_fields = LOOKUP_FIELDS_BY_REGISTRY[type(registry)]
 
-        subject: DTO = select_random(registry)
+        subject: Entity = select_random(registry)
 
         for field in lookup_fields:
             lookup_value = getattr(subject, field)
@@ -35,7 +49,7 @@ class TestLookup:
                 result is not None
             ), f"expected a result, got None for lookup field [{field}] with value [{lookup_value}]"
             assert isinstance(
-                result, DTO
+                result, Entity
             ), f"expected a DTO, got {type(result)} for lookup field {field}"
             assert (
                 getattr(result, field) == lookup_value

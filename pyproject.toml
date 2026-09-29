@@ -1,7 +1,7 @@
 [project]
 name = "localis"
-version = "1.1.1"
-description = "Fast, offline access to comprehensive data for countries, subdivisions, and cities. Built on ISO 3166 and GeoNames datasets with support for exact lookups, filtering, and fuzzy search."
+version = "1.1.2"
+description = "Fast, offline access to comprehensive data for countries, subdivisions, and cities. Built on ISO 3166 and GeoNames datasets (updated monthly) with support for exact lookups, filtering, and fuzzy search."
 readme = "README.md"
 authors = [
   {name = 'danimal', email= 'dan.stoffels@gmail.com'}
@@ -31,15 +31,15 @@ repository = "https://github.com/dstoffels/localis"
 [project.scripts]
 test = "pytest:console_main"
 test-watch = "pytest_watch.command:main"
-ingest = "data.ingest:ingest_all"
-check-orphans = "data.subdivisions.scripts.check_orphans:main"
+ingest = "ingest.__main__:main"
+check-orphans = "ingest.subdivisions.scripts.check_orphans:main"
 
 [tool.poetry]
 packages = [
   { include = "localis", from = "src" },
-  { include = "data" }
+  { include = "ingest" }
 ]
-exclude = ["data/**"]
+exclude = ["ingest/**"]
 
 
 [tool.poetry.group.dev.dependencies]

@@ -56,6 +56,6 @@ disallowed-tools: Bash Read Grep Glob Edit Write Agent WebFetch
   2. `Merge` the orphan with an existing candidate by inputting the hashid.
 
 ## Guardrails
-- Never fabricate a `hashid` — it must come from that specific entry's own `candidates` list
+- Never fabricate a `hashid`, it must come from that specific entry's own `candidates` list
 - Never pass the orphan's own name in the names argument when calling `merge` or `add`
 

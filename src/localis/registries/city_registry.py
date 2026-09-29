@@ -1,11 +1,11 @@
-from localis.models import CityModel, City
+from localis.entities import City
+from localis.views import CityView
 from localis.registries import Registry, CountryRegistry, SubdivisionRegistry
 
 
 class CityRegistry(Registry[City]):
     REGISTRY_NAME = "cities"
     LAZY_LOAD = True
-    _MODEL_CLS = CityModel
 
     def __init__(
         self, countries: CountryRegistry, subdivisions: SubdivisionRegistry, **kwargs
@@ -14,9 +14,9 @@ class CityRegistry(Registry[City]):
         self._subdivisions = subdivisions
         super().__init__(**kwargs)
 
-    def parse_row(self, id, row, cache):
-        return self._MODEL_CLS.from_row(
-            id, row, self._countries._cache, self._subdivisions._cache
+    def build_cache(self) -> dict[int, CityView]:
+        return CityView.load(
+            self._data_filepath, self._countries._cache, self._subdivisions._cache
         )
 
     def get(self, id: int) -> City | None:

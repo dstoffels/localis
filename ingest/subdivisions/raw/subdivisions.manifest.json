@@ -1,0 +1,27 @@
+{
+  "admin1CodesASCII.txt": {
+    "etag": "\"2501f-65c958405d8e6\"",
+    "last_modified": "Tue, 29 Sep 2026 01:58:15 GMT",
+    "content_length": "151583"
+  },
+  "admin2Codes.txt": {
+    "etag": "\"243e03-65c958405d8e6\"",
+    "last_modified": "Tue, 29 Sep 2026 01:58:15 GMT",
+    "content_length": "2375171"
+  },
+  "iso-3166-2.csv": {
+    "etag": "\"49c35edaaa2ce17d6e833b84b496ecaa83dea6027e9639c5bc6ec70880e4e992\"",
+    "last_modified": null,
+    "content_length": "237562"
+  },
+  "iso_3166-2.json": {
+    "etag": "W/\"fbffbe3c69b915ad1093545358650827-gzip\"",
+    "last_modified": null,
+    "content_length": "498028"
+  },
+  "ipregistry_subdivisions.csv": {
+    "etag": "\"49c35edaaa2ce17d6e833b84b496ecaa83dea6027e9639c5bc6ec70880e4e992\"",
+    "last_modified": null,
+    "content_length": "237562"
+  }
+}

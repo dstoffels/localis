@@ -1,39 +1,54 @@
-import logging
-import time
-from localis.models import Model
+from array import array
+import csv
+import gzip
+from pathlib import Path
+from typing import Generic, TypeVar
 from rapidfuzz import fuzz, process
 from localis.indexes.index import Index
-from localis.utils import normalize, generate_trigrams, decode_id_list
+from localis.entities import Entity
+from localis.views import View
+from localis.utils import normalize, generate_trigrams
 from collections import defaultdict
 
-logger = logging.getLogger(__name__)
+T = TypeVar("T", bound=Entity)
 
 
-class SearchIndex(Index):
+class SearchIndex(Index, Generic[T]):
     def __init__(
         self,
-        model_cls,
-        cache,
+        cache: dict[int, View[T]],
         filepath,
         **kwargs,
     ):
+        self.cache = cache
         self.NOISE_THRESHOLD = 0.5
         self.STRONG_MATCH_THRESHOLD = 0.8
         self.CANDIDATE_CNT_THRESHOLD = 2000
-        super().__init__(model_cls, cache, filepath, **kwargs)
+        super().__init__(filepath, **kwargs)
 
-    def load(self, filepath):
-        try:
-            t0 = time.perf_counter()
-            with open(filepath, "r", encoding="utf-8") as f:
-                for line in f:
-                    trigram, ids_str = line.strip().split("\t")
-                    self.index[trigram] = decode_id_list(ids_str)
-            logger.debug("Loaded search index from %s: %d trigrams in %.3fs", filepath, len(self.index), time.perf_counter() - t0)
-        except Exception as e:
-            raise Exception(f"Failed to load search index from {filepath}: {e}")
+    def load(self, filepath, offsets_filepath: Path, fields_filepath: Path):
+        self.SEARCH_FIELDS: dict[str, float] = {}
+        with open(fields_filepath, "r", encoding="utf-8") as f:
+            reader = csv.reader(f, delimiter="\t")
+            for field, weight in reader:
+                self.SEARCH_FIELDS[field] = float(weight)
 
-    def search(self, query: str, limit: int) -> list[tuple[Model, float]]:
+        offsets: dict[str, tuple[int, int]] = {}
+        with open(offsets_filepath, "r", encoding="utf-8") as f:
+            reader = csv.reader(f, delimiter="\t")
+            for trigram, offset, count in reader:
+                offsets[trigram] = (int(offset), int(count))
+
+        with gzip.open(filepath, "rb") as f:
+            raw = f.read()
+
+        full_array = array("I")
+        full_array.frombytes(raw)
+
+        for trigram, (offset, count) in offsets.items():
+            self.index[trigram] = full_array[offset : offset + count]
+
+    def search(self, query: str, limit: int) -> list[tuple[View[T], float]]:
         if not query:
             return []
 
@@ -43,7 +58,7 @@ class SearchIndex(Index):
         self.trigram_count = 0
 
         self._build_match_counts()
-        all_results: dict[int, tuple[Model, float]] = {}
+        all_results: dict[int, tuple[View[T], float]] = {}
         scored_ids: set[int] = set()
 
         candidate_count = len(self.match_counts)
@@ -112,11 +127,23 @@ class SearchIndex(Index):
             if count >= min_matches
         }
 
-    def _score_candidate(self, candidate: Model) -> float:
+    def _get_search_values(self, candidate: View[T]):
+        for field_name, weight in self.SEARCH_FIELDS.items():
+            obj = candidate
+            value = None
+            for nested in field_name.split("."):
+                value = getattr(obj, nested, None)
+                if value is None:
+                    break
+                obj = value
+            if value is not None:
+                yield (value, weight)
+
+    def _score_candidate(self, candidate: View[T]) -> float:
         score = 0.0
         total_weight = 0.0
 
-        score_values = candidate.get_search_values()
+        score_values = self._get_search_values(candidate)
 
         name, weight = next(score_values)  # name is always the first SEARCH_FIELD
         name_score = fuzz.WRatio(self.query, self._normalize_query(name)) / 100.0

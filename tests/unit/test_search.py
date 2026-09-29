@@ -1,6 +1,6 @@
 import pytest
 from localis.registries import Registry
-from localis.models import DTO
+from localis.entities import Entity
 from utils import registry_param, mangle
 
 
@@ -21,7 +21,7 @@ class TestSearch:
     def test_exact(self, registry: Registry, select_random):
         """should return results containing the input subject."""
 
-        subject: DTO = select_random(registry)
+        subject: Entity = select_random(registry)
         results = registry.search(subject.name)
 
         assert subject.name in [
@@ -30,7 +30,7 @@ class TestSearch:
 
     def test_mangled_name(self, registry: Registry, select_random, seed):
         """should return results with a top score >= 50% (minimum return threshold)"""
-        subject: DTO = select_random(registry)
+        subject: Entity = select_random(registry)
         mangled_name = mangle(subject.name, seed=seed)
         results = registry.search(mangled_name)
         if results:

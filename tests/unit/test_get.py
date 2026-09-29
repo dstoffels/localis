@@ -1,5 +1,5 @@
 from localis.registries import Registry
-from localis.models import DTO
+from localis.entities import Entity
 from utils import registry_param
 import pytest
 
@@ -22,5 +22,5 @@ class TestGet:
         valid_id = 10
         result = registry.get(valid_id)
         assert result is not None, "expected a result, got None"
-        assert isinstance(result, DTO), f"expected a DTO, got {type(result)}"
+        assert isinstance(result, Entity), f"expected a DTO, got {type(result)}"
         assert result.id == valid_id, f"expected ID {valid_id}, got {result.id}"

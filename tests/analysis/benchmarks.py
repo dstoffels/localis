@@ -1,7 +1,7 @@
 import json
 from datetime import datetime
 import time
-from localis.models import DTO
+from localis.entities import Entity
 from localis.registries import Registry
 import localis
 from tests.utils import mangle
@@ -26,7 +26,7 @@ def benchmark():
     for registry_name in registries:
         print(f"Starting {registry_name}...")
         registry: Registry = getattr(localis, registry_name)
-        entries: list[DTO] = list(registry)
+        entries: list[Entity] = list(registry)
 
         total_queries = 0
         num_hit = 0

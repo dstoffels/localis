@@ -1,19 +1,19 @@
-from localis.models import SubdivisionModel, Subdivision
+from localis.entities import Subdivision
+from localis.views import SubdivisionView
 from localis.registries import Registry, CountryRegistry
 
 
 class SubdivisionRegistry(Registry[Subdivision]):
     REGISTRY_NAME = "subdivisions"
-    _MODEL_CLS = SubdivisionModel
 
     def __init__(self, countries: CountryRegistry, **kwargs):
         self._countries = countries
         super().__init__(**kwargs)
 
-    def parse_row(self, id, row, cache):
-        return self._MODEL_CLS.from_row(id, row, cache, self._countries._cache)
+    def build_cache(self) -> dict[int, SubdivisionView]:
+        return SubdivisionView.load(self._data_filepath, self._countries._cache)
 
-    def lookup(self, identifier) -> SubdivisionModel | None:
+    def lookup(self, identifier) -> Subdivision | None:
         """Get a subdivision by its id, iso_code, or geonames_code."""
         return super().lookup(identifier)
 
@@ -26,7 +26,7 @@ class SubdivisionRegistry(Registry[Subdivision]):
         admin_level: int = None,
         country: str = None,
         **kwargs,
-    ) -> list[SubdivisionModel]:
+    ) -> list[Subdivision]:
         """Filter subdivisions by exact matches on specified fields with AND logic when filtering by multiple fields. Case insensitive."""
         kwargs = {
             "type": type,
@@ -36,7 +36,7 @@ class SubdivisionRegistry(Registry[Subdivision]):
 
         return super().filter(name=name, limit=limit, **kwargs)
 
-    def search(self, query, limit=10, **kwargs) -> list[tuple[SubdivisionModel, float]]:
+    def search(self, query, limit=10, **kwargs) -> list[tuple[Subdivision, float]]:
         """Fuzzy search for subdivisions by name, aliases, parent name, or country name"""
         return super().search(query, limit, **kwargs)
 

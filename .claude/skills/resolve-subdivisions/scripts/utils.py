@@ -2,11 +2,10 @@ import functools
 import json
 import sys
 from pathlib import Path
-from rapidfuzz import process, fuzz
-from data.subdivisions.scripts.merge_subdivisions import prepare_names
-from data.subdivisions.scripts.iso_subdivisions import load_iso_subs
-from data.subdivisions.subdivisions_utils import SubdivisionMap
-from localis.models.subdivision import SubdivisionModel
+from rapidfuzz import fuzz
+from ingest.subdivisions.scripts import prepare_names, load_iso_subs, merge_ipregistry_aliases
+from ingest.subdivisions.utils.subdivision_map import SubdivisionMap
+from ingest.subdivisions import SubdivisionModel
 
 
 def _find_project_root(start: Path) -> Path:
@@ -20,8 +19,9 @@ def _find_project_root(start: Path) -> Path:
 
 sys.path.insert(0, str(_find_project_root(Path(__file__).resolve())))
 
-from data.utils import SUBDIVISIONS_RAW_PATH, load_countries
-from data.subdivisions.scripts.geonames_subdivisions import map_geonames_subdivisions
+from ingest.utils import SUBDIVISIONS_RAW_PATH
+from ingest.countries.scripts import load_countries
+from ingest.subdivisions.scripts import map_geonames_subdivisions
 
 RESOLUTION_MAP_PATH = SUBDIVISIONS_RAW_PATH / "resolution_map.json"
 ORPHANED_PATH = SUBDIVISIONS_RAW_PATH / "orphaned_subdivisions.json"
@@ -62,7 +62,9 @@ def get_geonames_submap() -> SubdivisionMap:
 
 @functools.cache
 def _get_iso_subs() -> dict[str, SubdivisionModel]:
-    return load_iso_subs(_countries())
+    iso_subs = load_iso_subs(_countries())
+    merge_ipregistry_aliases(iso_subs)
+    return iso_subs
 
 
 def _format_candidate(candidate: SubdivisionModel) -> tuple[int, str]:
