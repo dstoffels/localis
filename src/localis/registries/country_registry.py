@@ -1,10 +1,13 @@
-from localis.models import CountryModel, Country
+from localis.models import CountryModel, CountryView, Country
 from localis.registries import Registry
 
 
 class CountryRegistry(Registry[Country]):
     REGISTRY_NAME = "countries"
     _MODEL_CLS = CountryModel
+
+    def build_cache(self) -> dict[int, CountryView]:
+        return CountryView.load(self._data_filepath)
 
     def lookup(self, identifier: str | int) -> Country | None:
         """Get a country by its alpha2, alpha3, numeric code, or id."""

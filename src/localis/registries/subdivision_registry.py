@@ -1,4 +1,4 @@
-from localis.models import SubdivisionModel, Subdivision
+from localis.models import SubdivisionModel, SubdivisionView, Subdivision
 from localis.registries import Registry, CountryRegistry
 
 
@@ -10,8 +10,8 @@ class SubdivisionRegistry(Registry[Subdivision]):
         self._countries = countries
         super().__init__(**kwargs)
 
-    def parse_row(self, id, row, cache):
-        return self._MODEL_CLS.from_row(id, row, cache, self._countries._cache)
+    def build_cache(self) -> dict[int, SubdivisionView]:
+        return SubdivisionView.load(self._data_filepath, self._countries._cache)
 
     def lookup(self, identifier) -> SubdivisionModel | None:
         """Get a subdivision by its id, iso_code, or geonames_code."""

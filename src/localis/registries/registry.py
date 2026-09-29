@@ -63,16 +63,17 @@ class Registry(Generic[T], ABC):
 
         logger.debug("Loading %s data from %s", self.REGISTRY_NAME, self._data_filepath)
         t0 = time.perf_counter()
-        cache: dict[int, Model] = {}
-        with open(self._data_filepath, "r", encoding="utf-8") as f:
-            for id, line in enumerate(f, start=1):
-                row = line.rstrip("\r\n").split("\t")
-                cache[id] = self.parse_row(id, row, cache)
+        cache = self.build_cache()
         elapsed = time.perf_counter() - t0
         logger.debug(
             "Loaded %d %s records in %.3fs", len(cache), self.REGISTRY_NAME, elapsed
         )
         return cache
+
+    def build_cache(self) -> dict[int, Model]:
+        """Build the id -> view mapping for this registry. Overridden per registry to
+        supply whatever cross-referenced caches its view class needs."""
+        raise NotImplementedError
 
     @cached_property
     def _lookup_index(self) -> LookupIndex:
@@ -123,9 +124,6 @@ class Registry(Generic[T], ABC):
             time.perf_counter() - t0,
         )
         return index
-
-    def parse_row(self, id, row: list[str], cache: dict[int, Model]) -> Model:
-        return self._MODEL_CLS.from_row(id, row)
 
     def force_cache(self):
         """Force-cache all data and indexes that have not yet been loaded."""
