@@ -25023,6 +25023,8 @@ sutton mills	ca|can|canada	ca-on|ca.08|ca.08.3510|frontenac county|on|ontario
 saint-ignace-de-loyola	ca|can|canada	ca-qc|ca.10|ca.10.14|lanaudiere|qc|quebec
 ferland-et-boilleau	ca|can|canada	ca-qc|ca.10|ca.10.02|qc|quebec|saguenay/lac-saint-jean
 winfield	ca|can|canada	bc|british columbia|ca-bc|ca.02|ca.02.5935|regional district of central okanagan
+sainte-foy-sillery-cap-rouge	ca|can|canada	ca-qc|ca.10|ca.10.03|capitale-nationale|qc|quebec
+cap-rouge	ca|can|canada	ca-qc|ca.10|ca.10.03|capitale-nationale|qc|quebec
 west island	cc|cck|cocos (keeling) islands	
 yangambi	cd|cod|democratic republic of the congo	cd-to|cd.30|cd.30.05|isangi|to|tshopo
 watsa	cd|cod|democratic republic of the congo	cd-hu|cd.16|cd.16.09|haut-uele|hu|watsa
@@ -97897,6 +97899,7 @@ kourou	french guiana|gf|guf	gf.gf|gf.gf.973|guyane
 iracoubo	french guiana|gf|guf	gf.gf|gf.gf.973|guyane
 grand-santi	french guiana|gf|guf	gf.gf|gf.gf.973|guyane
 cayenne	french guiana|gf|guf	gf.gf|gf.gf.973|guyane
+bellevue	french guiana|gf|guf	gf.gf|gf.gf.973|guyane
 apatou	french guiana|gf|guf	gf.gf|gf.gf.973|guyane
 awala-yalimapo	french guiana|gf|guf	gf.gf|gf.gf.973|guyane
 residence arc-en-ciel	french guiana|gf|guf	
@@ -98372,6 +98375,7 @@ ayene	equatorial guinea|gnq|gq	gq-wn|gq.09|wele-nzas|wn
 anisoc	equatorial guinea|gnq|gq	gq-wn|gq.09|wele-nzas|wn
 acurenam	equatorial guinea|gnq|gq	centro sud|cs|gq-cs|gq.06
 aconibe	equatorial guinea|gnq|gq	gq-wn|gq.09|wele-nzas|wn
+abaamang	equatorial guinea|gnq|gq	
 ciudad de la paz	equatorial guinea|gnq|gq	dj|djibloho|gq-dj|gq.10
 zoodochos	gr|grc|greece	d|gr-d|gr.esye21|gr.esye21.17|ipeiros|nomos ioanninon
 zoniana	gr|grc|greece	gr-m|gr.esye43|gr.esye43.44|kriti|m|nomos rethymnis

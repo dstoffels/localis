@@ -20,12 +20,12 @@ Blocked on the above, needs a dedicated design pass before implementation starts
 - Gettext-based name translation across `Country`/`Subdivision` (and `Currency`/`Language`/`Script` once they exist), including `language_code` support on `filter()`/`search()`.
 
 ## Backlog
-- City radius feature using lat/lng to return nearby cities within a specified distance
+- City radius feature using lat/lng to return nearby cities within a specified distance?
 - Add filter() kwarg error handling for invalid arguments
 - Implement custom exceptions (localis.exceptions module)?
 - Set thread locks for concurrent access to registries
 - Implement autocomplete for registries and/or global interface.
-- Split `localis` into a lean core (countries + subdivisions) and a `localis-cities` companion distribution shipping the city dataset, installed via `pip install localis[cities]` extras. Same monorepo, same CI/release pipeline; a wheel can't conditionally include package data by install flag, so two coordinated PyPI distributions is the closest real implementation of a single-repo, opt-in-heavy-data package. Baseline: core would ship ~8.1MB disk / ~46MB memory versus the current 54MB disk / 195.6MB memory for the full package (see `docs/dev.md`'s Performance Profile). Population-floor filtering on `CityRegistry` now covers most of this same need at runtime without a separate distribution, so this item's priority should be reassessed.
+- Redevelop Wikidata SPARQL query and parsing logic for country alias enrichment.
 
 ## Localization (gettext-based name translation)
 

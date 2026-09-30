@@ -26,26 +26,12 @@ def merge_wikidata(countries: dict[str, CountryModel]):
         wiki_countries: list[dict[str, str]] = json.load(f)
 
         for row in wiki_countries:
-            # alpha3: str = row.get("alpha3", "")
-
-            # Skip partial data
-            # if alpha3:
             alpha2: str = row["alpha2"]
 
-            # create new if not in cache
-            if alpha2 not in countries:
-                countries[alpha2] = CountryModel(
-                    id=len(countries) + 1,
-                    alpha2=alpha2,
-                    alpha3=row.get("alpha3", ""),
-                    name=row.get("name", ""),
-                    official_name=row.get("official_name", ""),
-                    numeric=None,
-                    aliases=[],
-                    flag=None,
-                )
+            country: CountryModel = countries.get(alpha2, None)
 
-            country: CountryModel = countries.get(alpha2)
+            if not country:
+                continue
 
             # merge name
             name: str = row.get("name", "")
