@@ -1,5 +1,6 @@
 from typing import Mapping, cast
 from localis.entities import City
+from localis.utils.data import CacheFilterPredicate
 from localis.views import CountryView, CityView, SubdivisionView
 from localis.registries import Registry, CountryRegistry, SubdivisionRegistry
 
@@ -11,6 +12,9 @@ class CityRegistry(Registry[City]):
     def __init__(
         self, countries: CountryRegistry, subdivisions: SubdivisionRegistry, **kwargs
     ):
+        self._population_threshold: int | None = None
+        self._population_filter: CacheFilterPredicate | None = None
+
         self._countries = countries
         self._subdivisions = subdivisions
         super().__init__(**kwargs)
@@ -20,7 +24,15 @@ class CityRegistry(Registry[City]):
         subdivision_views = cast(
             Mapping[int, SubdivisionView], self._subdivisions._cache
         )
-        return CityView.load(self._data_filepath, country_views, subdivision_views)
+        result = CityView.load(
+            self._data_filepath,
+            country_views,
+            subdivision_views,
+            self._population_filter,
+        )
+        if self._population_filter is not None:
+            self._allowed_ids = set(result.keys())
+        return result
 
     def get(self, id: int) -> City | None:
         """Get a city by its localis ID."""
@@ -59,6 +71,20 @@ class CityRegistry(Registry[City]):
         if population_sort:
             results.sort(key=lambda x: x[0].population, reverse=True)
         return results
+
+    def set_population_threshold(self, threshold: int | None) -> None:
+        self._population_threshold = threshold
+        if threshold is not None:
+            self._population_filter = lambda row: int(row[5]) >= threshold
+        else:
+            self._population_filter = None
+            self._allowed_ids = None
+
+        self.invalidate_cache()
+
+    @property
+    def population_threshold(self) -> int | None:
+        return self._population_threshold
 
 
 # ----------- SINGLETON ----------- #

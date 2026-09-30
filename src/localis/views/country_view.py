@@ -62,6 +62,7 @@ class CountryView(View[Country, CountryStore]):
                 name, alpha2, alpha3, official_name, alias_s, numeric_s, flag = row
                 alias_list = [a for a in alias_s.split("|") if a]
                 numeric = int(numeric_s) if numeric_s else None
+                store.id_to_idx.append(len(store))
                 store.append(
                     name, alpha2, alpha3, official_name, alias_list, numeric, flag
                 )

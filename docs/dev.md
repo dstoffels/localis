@@ -60,7 +60,7 @@ One bug this surfaced and fixed in passing: `release.yaml`'s checkout step never
 
 ## Performance Profile
 
-Snapshot taken after the cities500 switch and the entities/views/stores refactor (254 countries, 51,684 subdivisions, 235,895 cities). These numbers move as the dataset grows through the ingest pipeline; re-measure before relying on them for a release decision. Memory figures are RSS deltas measured by calling `force_cache()` on each registry in turn from a fresh interpreter.
+Snapshot taken after the cities500 switch and the entities/views/stores refactor (254 countries, 51,684 subdivisions, 235,895 cities). These numbers move as the dataset grows through the ingest pipeline; re-measure before relying on them for a release decision. Memory figures are retained RSS deltas (`VmRSS` read from `/proc/self/status` after an explicit `gc.collect()`), not `ru_maxrss` peak; see Memory measurement methodology below for why that distinction matters.
 
 ### Search and filter index architecture
 
@@ -73,6 +73,10 @@ The filter index's fix didn't need a format change, just the container: `FilterI
 ### Subdivision hashid
 
 `SubdivisionModel.hashid` is an MD5-derived id used only during ingestion (merging ISO and GeoNames records, and supporting the resolve-subdivisions skill). It used to be computed in `__post_init__`, which runs on every construction, including the normal runtime `_cache` load, where nothing ever reads `hashid`, it's discarded once a subdivision has been merged. `set_hashid()` is now an explicit method, called only at the two ingestion sites that actually need it (`ingest/subdivisions/scripts/geonames_subdivisions.py`, `ingest/subdivisions/scripts/iso_subdivisions.py`); `SubdivisionModel.from_row()`, the runtime path, never calls it. Subdivisions' dataset load dropped from 289.5ms to 98.7ms (−66%) as a result.
+
+### Memory measurement methodology
+
+Earlier benchmarks in this document used `resource.getrusage(resource.RUSAGE_SELF).ru_maxrss`, the process's historical peak resident memory, which only ever increases and never reflects memory freed later in the same process. That overstates any component whose loading path allocates a large transient buffer it doesn't keep: `SearchIndex.load()` decompresses its entire gzip blob into one big `array("I")` before slicing per-trigram arrays out of it (a copy, not a view), so the decompression peak gets permanently recorded by `ru_maxrss` even after that buffer is freed and unmapped moments later. Re-measuring with actual post-GC retained memory (`VmRSS` after `gc.collect()`) showed cities' search index really retains about a third of its previously documented figure (33.5MB vs. 96.8MB), while cache and filter index numbers, which don't have this transient-buffer pattern, held up closely under both methodologies. All numbers below use the retained methodology.
 
 ### Shipped data size
 
@@ -88,21 +92,28 @@ Within cities: `cities.tsv` 13MB, `filter_index.tsv` 18MB, `search_index.bin.gz`
 
 ### Memory footprint
 
-| Registry (`force_cache()`) | RSS delta |
+| Registry (`force_cache()`) | Retained memory |
 |---|---|
-| import baseline | 42MB |
-| countries | +1MB |
-| subdivisions | +38MB |
-| cities | +213MB |
-| **total, all three fully cached** | **279MB** |
+| countries | 892KB |
+| subdivisions | 44.6MB |
+| cities | 150.1MB |
+| **total, all three fully cached** | **195.6MB** |
 
-Cities' 213MB breaks down further by structure:
+Cities' 150.1MB breaks down further by structure:
 
-| Cities component | RSS delta | Build time |
+| Cities component | Retained memory | Build time |
 |---|---|---|
-| `_cache` (235,895 views) | 57MB | 0.35s |
-| `_lookup_index` | 1MB | 0.07s |
-| `_filter_index` | 58MB | 0.57s |
-| `_search_index` | 97MB | 0.16s |
+| `_cache` (235,895 views) | 59.9MB | 395ms |
+| `_lookup_index` | 4KB | 59ms |
+| `_filter_index` | 56.7MB | 543ms |
+| `_search_index` | 33.5MB | 144ms |
 
-**Total load time** (all three registries, `_cache` plus every index) is ~1.3s.
+**Total load time** (all three registries, `_cache` plus every index) is ~1.4s.
+
+### Population floor
+
+`CityRegistry.set_population_threshold(n)` narrows the cache and all three indexes to cities with population >= n, implemented via two predicate protocols in `localis/utils/data.py`: `CacheFilterPredicate` (`row -> bool`, evaluated inline as `CityView.load()` parses each TSV row, since population is only known once that row is parsed) and `IndexFilterPredicate` (`(id, allowed_ids) -> bool`, the shared membership check `Registry._is_id_allowed()` implements for `FilterIndex`/`SearchIndex`/`LookupIndex`, none of which have population data of their own and can only ever ask "is this id still allowed"). `CityRegistry.build_cache()` derives `self._allowed_ids` as a byproduct of the `CityView.load()` pass it already has to do; `Registry._lookup_index`/`_filter_index`/`_search_index` force `self._cache` before building, guaranteeing `_allowed_ids` reflects the current threshold, since none of the three indexes have any real use without the cache regardless of population filtering.
+
+Ids stay stable across thresholds. `Store.id_to_idx` (an `array.array("i")` sized to the full unfiltered id space, `-1` for an excluded id) decouples a View's physical position in its Store from its public `id`, so `View._idx` resolves through this array instead of assuming `id - 1`. That lets `CityStore` skip allocating rows for excluded cities entirely, a real memory saving rather than just fewer View wrapper objects, without ever renumbering an id a caller might already be holding.
+
+At a 15,000 threshold (the tier geonamescache ships as a separate bundled dataset), cities drops from 235,895 to 34,167 and retained memory drops from 150.1MB to 31.5MB.

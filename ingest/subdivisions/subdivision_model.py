@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from ingest.utils import Model
 from ingest.countries import CountryModel
-from localis.utils import normalize
+from localis.utils.strings import normalize
 import hashlib
 
 

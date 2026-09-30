@@ -2,6 +2,7 @@ from pathlib import Path
 from typing import Mapping
 from localis.entities import CountryBase, SubdivisionBase, City
 from localis.stores import CityStore
+from localis.utils.data import CacheFilterPredicate
 from .view import CrossReferencedView
 from .country_view import CountryView
 from .subdivision_view import SubdivisionView
@@ -95,38 +96,39 @@ class CityView(CrossReferencedView[City, CityStore, CountryView, SubdivisionView
         filepath: Path,
         country_views: Mapping[int, CountryView],
         subdivision_views: Mapping[int, SubdivisionView],
+        predicate: CacheFilterPredicate | None = None,
     ) -> dict[int, "CityView"]:
         store = CityStore()
         views: dict[int, CityView] = {}
+
         with open(filepath, "r", encoding="utf-8") as f:
             for id, line in enumerate(f, start=1):
+
                 row = line.rstrip("\r\n").split("\t")
+
+                if predicate and not predicate(row):
+                    store.id_to_idx.append(-1)
+                    continue
                 (
                     name,
-                    geonames_id_s,
-                    admin1_s,
-                    admin2_s,
-                    country_s,
-                    pop_s,
-                    lat_s,
-                    lng_s,
-                ) = row
-                geonames_id = int(geonames_id_s)
-                admin1_id = int(admin1_s) if admin1_s else None
-                admin2_id = int(admin2_s) if admin2_s else None
-                country_id = int(country_s)
-                population = int(pop_s)
-                lat = float(lat_s)
-                lng = float(lng_s)
-                store.append(
-                    name,
                     geonames_id,
-                    admin1_id,
-                    admin2_id,
-                    country_id,
-                    population,
+                    admin1,
+                    admin2,
+                    country,
+                    pop,
                     lat,
                     lng,
+                ) = row
+                store.id_to_idx.append(len(store))
+                store.append(
+                    name,
+                    int(geonames_id),
+                    int(admin1) if admin1 else None,
+                    int(admin2) if admin2 else None,
+                    int(country),
+                    int(pop),
+                    float(lat),
+                    float(lng),
                 )
                 views[id] = cls(id, store, country_views, subdivision_views)
         return views

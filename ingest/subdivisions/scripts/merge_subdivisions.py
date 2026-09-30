@@ -3,7 +3,7 @@ from ingest.subdivisions.utils.strings import dedupe
 import re
 from rapidfuzz import fuzz
 from ingest.subdivisions import SubdivisionModel
-from localis.utils import normalize
+from localis.utils.strings import normalize
 
 DIRECTIONAL_TOKENS = {
     "north",

@@ -107,6 +107,7 @@ class SubdivisionView(
                 admin_level = int(admin_level_s)
                 parent_id = int(parent_s) if parent_s else None
                 country_id = int(country_s)
+                store.id_to_idx.append(len(store))
                 store.append(
                     name,
                     geonames_code,

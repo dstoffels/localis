@@ -17,8 +17,13 @@ class Registry(Generic[T], ABC):
     LAZY_LOAD = False
 
     def __init__(self, **kwargs):
+        self._allowed_ids: set[int] | None = None
         if not self.LAZY_LOAD:
             _ = self._cache
+
+    @staticmethod
+    def _is_id_allowed(id: int, allowed_ids: set[int]) -> bool:
+        return id in allowed_ids
 
     @property
     def _data_path(self) -> Path:
@@ -70,15 +75,21 @@ class Registry(Generic[T], ABC):
 
     @cached_property
     def _lookup_index(self) -> LookupIndex:
+        _ = self._cache
         return LookupIndex(
             filepath=self._lookup_filepath,
             int_filepath=self._lookup_int_filepath,
+            predicate=self._is_id_allowed if self._allowed_ids is not None else None,
+            allowed_ids=self._allowed_ids,
         )
 
     @cached_property
     def _filter_index(self) -> FilterIndex:
+        _ = self._cache
         return FilterIndex(
             filepath=self._filter_filepath,
+            predicate=self._is_id_allowed if self._allowed_ids is not None else None,
+            allowed_ids=self._allowed_ids,
         )
 
     @cached_property
@@ -88,7 +99,16 @@ class Registry(Generic[T], ABC):
             filepath=self._search_index_filepath,
             offsets_filepath=self._search_index_offsets_filepath,
             fields_filepath=self._search_fields_filepath,
+            predicate=self._is_id_allowed if self._allowed_ids is not None else None,
+            allowed_ids=self._allowed_ids,
         )
+
+    def invalidate_cache(self):
+        for attr in ("_cache", "_lookup_index", "_filter_index", "_search_index"):
+            try:
+                delattr(self, attr)
+            except AttributeError:
+                pass
 
     def force_cache(self):
         """Force-cache all data and indexes that have not yet been loaded."""

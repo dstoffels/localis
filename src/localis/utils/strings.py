@@ -1,8 +1,6 @@
-from array import array
 import unicodedata
 import re
 from unidecode import unidecode
-import base64
 
 SPACE_RE = re.compile(r"\s+")
 

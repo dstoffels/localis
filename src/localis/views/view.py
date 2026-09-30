@@ -18,7 +18,7 @@ class View(ABC, Generic[T, S]):
 
     @property
     def _idx(self) -> int:
-        return self.id - 1
+        return self._store.id_to_idx[self.id - 1]
 
     @property
     @abstractmethod

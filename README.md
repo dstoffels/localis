@@ -269,6 +269,23 @@ for city, score in results:
 
 **Returns:** `list[tuple[City, float]]` - sorted by similarity score
 
+### Population Threshold
+
+```python
+# Narrow the cache and all indexes to cities with population >= 15000
+localis.cities.set_population_threshold(15000)
+
+# Check the current threshold
+localis.cities.get_population_threshold()  # 15000
+
+# Reset back to the full dataset
+localis.cities.set_population_threshold(None)
+```
+
+`cities` is fully lazy-loaded, nothing is read from disk until first access. Call `set_population_threshold()` before that first access (before any `.get()`, `.lookup()`, `.filter()`, `.search()`, or `.force_cache()` call) so the registry only ever loads the narrowed dataset. Calling it after the cache or indexes are already built still works, but it invalidates them, so the next access rebuilds the caches from scratch at the new threshold.
+
+**Returns:** `None`
+
 ### City Object
 
 ```python
@@ -327,34 +344,36 @@ nested_sub.type
 #### Countries (254)
 | Component | Load Time | Memory |
 |---|---|---|
-| Dataset | < 1ms | 0KB |
-| Lookup index | < 1ms | 102.4KB |
-| Filter index | < 1ms | 307.2KB |
-| Search index | ~1ms | 512.0KB |
-| **Combined** | **~2ms** | **921.6KB** |
+| Dataset | ~1ms | 140KB |
+| Lookup index | < 1ms | 24KB |
+| Filter index | ~1ms | 180KB |
+| Search index | ~7ms | 548KB |
+| **Combined** | **~9ms** | **892KB** |
 
 #### Subdivisions (51,684)
 | Component | Load Time | Memory |
 |---|---|---|
-| Dataset | < 1ms | 0KB |
-| Lookup index | ~13ms | 3.7MB |
-| Filter index | ~95ms | 11.3MB |
-| Search index | ~39ms | 23.3MB |
-| **Combined** | **~147ms** | **38.3MB** |
+| Dataset | ~68ms | 21.6MB |
+| Lookup index | ~12ms | 3.3MB |
+| Filter index | ~89ms | 10.6MB |
+| Search index | ~38ms | 9.0MB |
+| **Combined** | **~207ms** | **44.6MB** |
 
 #### Cities (235,895)
 
-> ⚠️ **Memory-intensive.** Fully caching cities and its indexes adds 212.5MB of resident memory. Calling `localis.cities.force_cache()` loads all of it upfront.
+> ⚠️ **Memory-intensive.** Fully caching cities and its indexes adds 150.1MB of resident memory. Calling `localis.cities.force_cache()` loads all of it upfront. You can call `cities.set_population_threshold(n)` before first access as a lever to control the memory footprint.
 
 | Component | Load Time | Memory |
 |---|---|---|
-| Dataset | ~352ms | 57.0MB |
-| Lookup index | ~65ms | 921.6KB |
-| Filter index | ~566ms | 57.8MB |
-| Search index | ~155ms | 96.8MB |
-| **Combined** | **~1.14s** | **212.5MB** |
+| Dataset | ~395ms | 59.9MB |
+| Lookup index | ~59ms | 4KB |
+| Filter index | ~543ms | 56.7MB |
+| Search index | ~144ms | 33.5MB |
+| **Combined** | **~1.14s** | **150.1MB** |
 
-**Full Cache**: ~1.3s load time, 278.9MB memory for all datasets and indexes
+At a threshold of 15,000 (the tier geonamescache ships as a separate bundled dataset), cities drops from 235,895 to 34,167 and memory drops from 150.1MB to 31.5MB.
+
+**Full Cache**: ~1.4s load time, 195.6MB memory for all datasets and indexes
 
 **Concurrency:** It is recommended to call `.force_cache()` on all registries if they will be accessed from multiple threads to avoid potential race conditions during the first access of any lazy-loaded caches and indexes.
 

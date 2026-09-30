@@ -9,9 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - `py.typed` marker (PEP 561)
+- `CityRegistry.set_population_threshold(n)` / `get_population_threshold()`, narrowing the cities cache and all three indexes to population >= n, w E2E tests.
 
 ### Fixed
 - Type hint discrepancies across `entities`/`views`/`stores`/`registries`/`indexes` (nullable fields, `View`/`Store` generics, `Mapping` covariance); `src/localis` now passes `pyright` with zero errors
+- Cities' documented search index memory was measured via `ru_maxrss` (peak, not retained); corrected to post-GC `VmRSS`, dropping the documented figure from 96.8MB to 33.5MB
 
 ## [1.1.2] - 2026-09-29
 

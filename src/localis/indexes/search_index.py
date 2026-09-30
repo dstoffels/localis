@@ -3,12 +3,13 @@ import csv
 import gzip
 from pathlib import Path
 from typing import Generic, Mapping, TypeVar
+from localis.utils.data import IndexFilterPredicate
 from rapidfuzz import fuzz, process
 from localis.indexes.index import Index
 from localis.entities import Entity
 from localis.views import View
 from localis.stores import Store
-from localis.utils import normalize, generate_trigrams
+from localis.utils.strings import normalize, generate_trigrams
 from collections import defaultdict
 
 T = TypeVar("T", bound=Entity)
@@ -27,7 +28,15 @@ class SearchIndex(Index, Generic[T]):
         self.CANDIDATE_CNT_THRESHOLD = 2000
         super().__init__(filepath, **kwargs)
 
-    def load(self, filepath: Path, offsets_filepath: Path, fields_filepath: Path):
+    def load(
+        self,
+        filepath: Path,
+        offsets_filepath: Path,
+        fields_filepath: Path,
+        predicate: IndexFilterPredicate | None = None,
+        allowed_ids: set[int] | None = None,
+    ):
+        ids_allowed = allowed_ids or set()
         self.index: dict[str, array] = {}
         self.SEARCH_FIELDS: dict[str, float] = {}
         with open(fields_filepath, "r", encoding="utf-8") as f:
@@ -48,7 +57,12 @@ class SearchIndex(Index, Generic[T]):
         full_array.frombytes(raw)
 
         for trigram, (offset, count) in offsets.items():
-            self.index[trigram] = full_array[offset : offset + count]
+            trigram_ids = full_array[offset : offset + count]
+            if predicate:
+                trigram_ids = array(
+                    "I", (id for id in trigram_ids if predicate(id, ids_allowed))
+                )
+            self.index[trigram] = trigram_ids
 
     def search(self, query: str, limit: int) -> list[tuple[View[T, Store], float]]:
         if not query:

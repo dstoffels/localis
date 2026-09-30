@@ -2,7 +2,7 @@ from dataclasses import dataclass, asdict
 import json
 from collections import defaultdict
 from typing import ClassVar
-from localis.utils import generate_trigrams, normalize
+from localis.utils.strings import generate_trigrams, normalize
 
 
 @dataclass(slots=True)

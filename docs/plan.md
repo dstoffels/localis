@@ -11,11 +11,10 @@ This document outlines the project plan for the Localis project, detailing the o
 ## Features
 Features currently in development, in priority order:
 
-1. Patch missing flags for countries. Small, contained data gap.
-2. Population-floor filtering on `CityRegistry`. See Population Floor section below. This is the direct answer to geonamescache's one real advantage (hard-tiered population datasets), worth shipping before leaning on that comparison publicly.
-3. Add `Currency` entity + `Country.currency` (ISO 4217, sourced from iso-codes' `iso_4217.json`, not GeoNames' embedded currency fields, since iso-codes is the authoritative source and already the same upstream `countries` data comes from)
-4. Add `Language` entity + `Country.languages` (ISO 639, sourced from iso-codes' `iso_639-3.json`, same reasoning as currency; supersedes the old "implement native languages in countries" idea). Currency and Language close the honest gap identified against pycountry (which also covers ISO 4217/639), so both should ship before that comparison gets used as marketing material.
-5. Add standalone `Script` reference table (ISO 15924, code → name only). Lowest priority of this batch: a language can be written in more than one script, so it isn't 1:1 with `Language` or `Country`; mostly used for font rendering and BCP-47 locale tags, not something to wire into other entities.
+1. Add `Country.is_historic` flag for defunct entries (Serbia and Montenegro, Netherlands Antilles, etc.), cross-referenced against iso-codes' `iso_3166-3.json` (ISO's own list of ~30 withdrawn codes; mechanical lookup, not resolve-subdivisions-scale work). `filter()`/`search()`/iteration exclude historic entries by default; `.get()`/`.lookup()` by explicit code still resolve them. Historic entries key off ISO 3166-3's 4-letter withdrawal codes (e.g. `CSHH` Czechoslovakia vs `CSXX` Serbia and Montenegro), not the reused 2-letter alpha2 (`CS` was reassigned between them, would collide). GeoNames entries matching neither current ISO 3166-1 nor ISO 3166-3 (Clipperton Island, Diego Garcia, not actual countries) are excluded from ingest entirely. Kosovo stays live and gets its flag patched normally: legitimate functioning state, just lacking ISO recognition, not a fit for the historic bucket.
+2. Add `Currency` entity + `Country.currency` (ISO 4217, sourced from iso-codes' `iso_4217.json`, not GeoNames' embedded currency fields, since iso-codes is the authoritative source and already the same upstream `countries` data comes from)
+3. Add `Language` entity + `Country.languages` (ISO 639, sourced from iso-codes' `iso_639-3.json`, same reasoning as currency; supersedes the old "implement native languages in countries" idea). Currency and Language close the honest gap identified against pycountry (which also covers ISO 4217/639), so both should ship before that comparison gets used as marketing material.
+4. Add standalone `Script` reference table (ISO 15924, code → name only). Lowest priority of this batch: a language can be written in more than one script, so it isn't 1:1 with `Language` or `Country`; mostly used for font rendering and BCP-47 locale tags, not something to wire into other entities.
 
 Blocked on the above, needs a dedicated design pass before implementation starts (see Localization section below for the open questions):
 - Gettext-based name translation across `Country`/`Subdivision` (and `Currency`/`Language`/`Script` once they exist), including `language_code` support on `filter()`/`search()`.
@@ -26,21 +25,7 @@ Blocked on the above, needs a dedicated design pass before implementation starts
 - Implement custom exceptions (localis.exceptions module)?
 - Set thread locks for concurrent access to registries
 - Implement autocomplete for registries and/or global interface.
-- Add a separate `HistoricCountry` registry (ISO 3166-3: USSR, Yugoslavia, East Germany, etc.), kept apart from the live `countries` table rather than flattened in, since these entities no longer exist at all (unlike e.g. Kosovo, which is current but diplomatically contested). ISO 3166-3's former-to-successor mapping also isn't reliably 1:1 (some dissolved into several states), so there's no safe automatic redirect into the live table either. Before building it, audit whether cleaner 1:1 renames (Burma → Myanmar-style) are already covered by existing Wikidata aliases on the modern country.
-- Split `localis` into a lean core (countries + subdivisions) and a `localis-cities` companion distribution shipping the city dataset, installed via `pip install localis[cities]` extras. Same monorepo, same CI/release pipeline; a wheel can't conditionally include package data by install flag, so two coordinated PyPI distributions is the closest real implementation of a single-repo, opt-in-heavy-data package. Baseline: core would ship ~8.1MB disk / ~80MB peak memory versus the current 54MB disk / 279MB peak memory for the full package (see `docs/dev.md`'s Performance Profile).
-
-## Population Floor (ad hoc cities filtering)
-
-Replaces the old idea of shipping separate hard-tiered cities datasets (geonamescache's approach: 500/1000/5000/15000 population cutoffs as separate bundled files). Since the shipped dataset is already the smallest useful tier (cities500), any higher floor is a filter over already-loaded data, not a new fetch, so it needs no new data source and no ingest changes.
-
-### API shape
-
-`cities.set_population_floor(n: int)` narrows `_cache`, `_filter_index`, and `_search_index` to cities with population >= n; passing `None` (or a `reset_population_floor()` call) restores the full set. Each distinct floor value is cached the same way the registry already caches its indexes, so switching between previously-used floors doesn't rebuild.
-
-### Open questions
-
-- Registries are module-level singletons (`localis.cities`); deciding whether `set_population_floor()` mutates that shared instance in place (affecting every caller) or should instead hand back a separate, independent view.
-- Whether rebuilding `_filter_index`/`_search_index` on every new floor value is cheap enough to do synchronously, or should defer/lazy-build like the rest of the registry.
+- Split `localis` into a lean core (countries + subdivisions) and a `localis-cities` companion distribution shipping the city dataset, installed via `pip install localis[cities]` extras. Same monorepo, same CI/release pipeline; a wheel can't conditionally include package data by install flag, so two coordinated PyPI distributions is the closest real implementation of a single-repo, opt-in-heavy-data package. Baseline: core would ship ~8.1MB disk / ~46MB memory versus the current 54MB disk / 195.6MB memory for the full package (see `docs/dev.md`'s Performance Profile). Population-floor filtering on `CityRegistry` now covers most of this same need at runtime without a separate distribution, so this item's priority should be reassessed.
 
 ## Localization (gettext-based name translation)
 
