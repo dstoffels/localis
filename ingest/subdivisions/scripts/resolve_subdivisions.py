@@ -1,21 +1,14 @@
 from ingest.utils import SUBDIVISIONS_OUTPUTS_PATH
-from ingest.subdivisions.utils.subdivision_map import (
-    SubdivisionMap,
-    get_geonames_candidates,
-)
+from ingest.subdivisions.utils.subdivision_map import SubdivisionMap
 from ingest.utils import ingest_log
 import json
 from .merge_subdivisions import merge_matched_sub
 from ingest.shared.models import SubdivisionModel
 
 
-def clear_terminal():
-    print("\033c", end="")
-
-
 def _apply_cached_resolutions(
     unmerged_iso_subs: list[SubdivisionModel],
-    resolution_map: dict[str, dict[str, str | list[str] | bool | None]],
+    resolution_map: dict[str, int | None],
     submap: SubdivisionMap,
 ) -> list[SubdivisionModel]:
     """Re-apply cached resolutions to a list of unmatched ISO subdivisions."""
@@ -28,20 +21,21 @@ def _apply_cached_resolutions(
 
 def _apply_cached_resolution(
     iso_sub: SubdivisionModel,
-    resolution_map: dict[str, dict[str, str | list[str] | bool | None]],
+    resolution_map: dict[str, int | None],
     submap: SubdivisionMap,
 ) -> bool:
-    """Re-apply a previously recorded decision for iso_sub, if one exists. Returns True if applied."""
-    data = resolution_map.get(iso_sub.iso_code)
-    if not data:
+    """Re-apply a previously recorded decision for iso_sub, if one exists. Returns True if applied.
+    A geonames_id of None means "add as-is"; absence from the map means no cached decision exists."""
+    if iso_sub.iso_code not in resolution_map:
         return False
 
-    if data.get("added"):
-        iso_sub.aliases.extend(data.get("names", []))
+    geonames_id = resolution_map[iso_sub.iso_code]
+
+    if geonames_id is None:
         submap.add(iso_sub)
         return True
 
-    mapped_sub = submap.get(data.get("hashid"))
+    mapped_sub = submap.get(geonames_id=geonames_id)
     if mapped_sub:
         if mapped_sub.iso_code and mapped_sub.iso_code != iso_sub.iso_code:
             ingest_log.writeline(
@@ -49,89 +43,14 @@ def _apply_cached_resolution(
                 level="WARN",
             )
             return False
-        mapped_sub.aliases.extend(data.get("names", []))
         merge_matched_sub(iso_sub, mapped_sub)
         return True
 
     ingest_log.writeline(
-        f"stale hashid reference: {data.get('hashid')} (iso_code {iso_sub.iso_code} '{iso_sub.name}') not found in current subdivision map",
+        f"stale geonames_id reference: {geonames_id} (iso_code {iso_sub.iso_code} '{iso_sub.name}') not found in current subdivision map",
         level="WARN",
     )
     return False
-
-
-def _resolve_interactively(
-    iso_sub: SubdivisionModel,
-    submap: SubdivisionMap,
-    num: int,
-    total: int,
-) -> dict[str, str | list[str] | bool | None]:
-    """Deprecated: superseded by the resolve-subdivisions skill/MCP. Kept as a manual
-    fallback. Prompts a human to resolve one unmatched subdivision, returning the
-    decision to persist."""
-    admin_level = iso_sub.admin_level
-    merge_data: dict[str, list[str] | bool | None] = {"names": [], "added": False}
-
-    # Main Menu Loop
-    while True:
-        clear_terminal()
-        candidate_geo_subs = get_geonames_candidates(iso_sub, submap)
-
-        for i, geo_sub in enumerate(candidate_geo_subs):
-            print(
-                f"{i + 1}. {[geo_sub.name, *geo_sub.aliases]} ({geo_sub.geonames_code}) (Admin{geo_sub.admin_level})"
-            )
-
-        print(f"\nResolve subdivision ({num}/{total}):")
-        print(
-            [iso_sub.name, *iso_sub.aliases],
-            f"({iso_sub.iso_code}) (Admin{iso_sub.admin_level})",
-        )
-
-        # A helper link to quickly google search the subdivision
-        link = f"https://google.com/search?q={iso_sub.name} {iso_sub.country.name}".replace(
-            " ", "+"
-        )
-
-        print(f"Select a candidate by number to merge with {iso_sub.name}.")
-        print(f"Enter 'a' to add {iso_sub.name} as-is.")
-        print(f"Enter 'e' to add names to {iso_sub.name}.")
-        print(f"Enter 's' to swap to other admin level candidates")
-        print(f"\033]8;;{link}\033\\SEARCH\033]8;;\033\\")
-        choice = input()
-
-        choice = choice.lower()
-        if choice == "a":
-            submap.add(iso_sub)
-            merge_data["added"] = True
-            break
-
-        elif choice == "e":
-            # Add Names Loop
-            while True:
-                new_name = input(f'Enter a new name or type "EXIT" to return: ')
-                if new_name == "EXIT":
-                    break
-                iso_sub.aliases.append(new_name)
-                merge_data["names"].append(new_name)
-        elif choice == "s":
-            if admin_level == 1:
-                admin_level = 2
-            else:
-                admin_level = 1
-        elif choice.isdigit() and 1 <= int(choice) <= len(candidate_geo_subs):
-            selected_geo_sub = candidate_geo_subs[int(choice) - 1]
-            merge_matched_sub(iso_sub, selected_geo_sub)
-            merge_data["hashid"] = selected_geo_sub.hashid
-
-            if admin_level != iso_sub.admin_level:
-                submap.refresh()
-
-            break
-        else:
-            print("Invalid input.\n")
-
-    return merge_data
 
 
 def dump_orphans(orphaned_subs: list[SubdivisionModel]) -> None:
@@ -154,43 +73,22 @@ def dump_orphans(orphaned_subs: list[SubdivisionModel]) -> None:
 def resolve_unmerged_subs(
     unmerged_iso_subs: list[SubdivisionModel],
     submap: SubdivisionMap,
-    interactive_mode: bool = False,  # deprecated: use the resolve-subdivisions skill instead
 ) -> None:
-    orphaned: list[SubdivisionModel] = []
-
+    """Applies cached resolutions and dumps whatever's left to orphaned_subdivisions.json
+    for the resolve-subdivisions skill to resolve."""
     resolution_map_path = SUBDIVISIONS_OUTPUTS_PATH / "resolution_map.json"
     if not resolution_map_path.exists():
         resolution_map_path.write_text("{}", encoding="utf-8")
 
-    with open(resolution_map_path, "r+", encoding="utf-8") as f:
-        # load existing mappings
-        resolution_map: dict[int, dict[str, str | list[str] | bool | None]] = (
-            json.load(f) or {}
-        )
+    resolution_map: dict[str, int | None] = (
+        json.loads(resolution_map_path.read_text(encoding="utf-8")) or {}
+    )
 
-        before = len(unmerged_iso_subs)
-        unmerged_iso_subs = _apply_cached_resolutions(
-            unmerged_iso_subs, resolution_map, submap
-        )
-        ingest_log.writeline(
-            f"resolved {before - len(unmerged_iso_subs)}/{before} unmerged subdivisions from cached resolutions"
-        )
-
-        for num, iso_sub in enumerate(unmerged_iso_subs, start=1):
-            if not interactive_mode:
-                orphaned.append(iso_sub)
-                continue
-
-            merge_data = _resolve_interactively(
-                iso_sub, submap, num, len(unmerged_iso_subs)
-            )
-
-            # update mapping file
-            resolution_map[iso_sub.iso_code] = merge_data
-            f.seek(0)
-            json.dump(resolution_map, f, indent=2)
-            f.truncate()
-            print()
+    before = len(unmerged_iso_subs)
+    orphaned = _apply_cached_resolutions(unmerged_iso_subs, resolution_map, submap)
+    ingest_log.writeline(
+        f"resolved {before - len(orphaned)}/{before} unmerged subdivisions from cached resolutions"
+    )
 
     ingest_log.writeline(f"{len(orphaned)} subdivisions orphaned, pending manual resolution")
     dump_orphans(orphaned)

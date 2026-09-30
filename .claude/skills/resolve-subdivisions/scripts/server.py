@@ -12,7 +12,7 @@ batch_num = 0
 def next() -> dict | str | None:
     """Returns the next orphaned subdivision and its candidates. Repeated calls paginate through the candidates until all candidates have been processed.
 
-    Candidates are flat formatted: { hashid: "name1, name2 - [admin_level]", ... }
+    Candidates are flat formatted: { geonames_id: "name1, name2 - [admin_level]", ... }
     """
     global processed_candidates, batch_num
 
@@ -40,12 +40,11 @@ def next() -> dict | str | None:
 
 
 @mcp.tool(name="merge")
-def merge(candidate_hashid: str, aliases: list[str] = []) -> str:
+def merge(candidate_geonames_id: str) -> str:
     """Merges an orphaned subdivision into an existing country candidate.
 
     Args:
-        candidate_hashid (str): The hashid of the geonames subdivision to merge into.
-        aliases (list[str], optional): Additional names for the subdivision.
+        candidate_geonames_id (str): The geonames_id of the geonames subdivision to merge into.
     """
     orphan = get_next_orphan()
     if orphan is None:
@@ -53,22 +52,21 @@ def merge(candidate_hashid: str, aliases: list[str] = []) -> str:
 
     iso_code = orphan["iso_code"]
 
-    hashid = int(candidate_hashid)
+    geonames_id = int(candidate_geonames_id)
 
-    is_valid, msg = is_valid_candidate(iso_code, hashid)
+    is_valid, msg = is_valid_candidate(iso_code, geonames_id)
     if not is_valid:
         return msg
 
-    candidate = get_geonames_submap().get(hashid)
+    candidate = get_geonames_submap().get(geonames_id=geonames_id)
     candidate.iso_code = iso_code
 
-    write_resolution(iso_code, {"hashid": hashid, "names": aliases})
+    write_resolution(iso_code, geonames_id)
     pop_orphan(iso_code)
 
-    line = f"MERGE  {iso_code}  {orphan['name']!r} -> {candidate_hashid} {candidate.name!r}"
-    if aliases:
-        line += f"  +names={aliases}"
-    log_decision(line)
+    log_decision(
+        f"MERGE  {iso_code}  {orphan['name']!r} -> {candidate_geonames_id} {candidate.name!r}"
+    )
 
     global batch_num
     batch_num = 0
@@ -77,25 +75,18 @@ def merge(candidate_hashid: str, aliases: list[str] = []) -> str:
 
 
 @mcp.tool(name="add")
-def add(aliases: list[str] = []) -> str:
-    """Adds an orphaned subdivision as a new entry.
-
-    Args:
-        aliases (list[str], optional): Additional names for the subdivision.
-    """
+def add() -> str:
+    """Adds an orphaned subdivision as a new entry."""
 
     orphan = get_next_orphan()
 
     if orphan is None:
         return "ERROR: NO ORPHAN TO ADD"
 
-    write_resolution(orphan["iso_code"], {"added": True, "names": aliases})
+    write_resolution(orphan["iso_code"], None)
     pop_orphan(orphan["iso_code"])
 
-    line = f"ADD    {orphan['iso_code']}  {orphan['name']!r}"
-    if aliases:
-        line += f"  +names={aliases}"
-    log_decision(line)
+    log_decision(f"ADD    {orphan['iso_code']}  {orphan['name']!r}")
 
     global batch_num
     batch_num = 0
@@ -105,7 +96,7 @@ def add(aliases: list[str] = []) -> str:
 
 @mcp.tool(name="review")
 def review() -> str:
-    """Dumps the next orphan and all its candidates to review_output.json for the user to manually review and decide on the resolution. Prompt the user to call add or merge (with the selected hashid)"""
+    """Dumps the next orphan and all its candidates to review_output.json for the user to manually review and decide on the resolution. Prompt the user to call add or merge (with the selected geonames_id)"""
 
     orphan = get_next_orphan()
 

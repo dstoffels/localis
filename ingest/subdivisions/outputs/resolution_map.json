@@ -1,3102 +1,704 @@
 {
-  "AM-VD": {
-    "hashid": 18259341876283111906,
-    "names": []
-  },
-  "AT-6": {
-    "hashid": 5554678294385227951,
-    "names": []
-  },
-  "AT-9": {
-    "hashid": 5033946932732263266,
-    "names": []
-  },
-  "AZ-NX": {
-    "hashid": 17126612131445476090,
-    "names": []
-  },
-  "AZ-NV": {
-    "hashid": 10327351081856570025,
-    "names": []
-  },
-  "AZ-XCI": {
-    "hashid": 3948403324092252865,
-    "names": []
-  },
-  "AZ-XVD": {
-    "hashid": 632633854087999523,
-    "names": []
-  },
-  "BA-BIH": {
-    "hashid": 9964537520505996191,
-    "names": []
-  },
-  "BD-A": {
-    "hashid": 2831414602029012506,
-    "names": []
-  },
-  "BD-22": {
-    "hashid": 13017779450755984638,
-    "names": []
-  },
-  "BE-BRU": {
-    "hashid": 1303302418975648253,
-    "names": []
-  },
-  "BE-VLG": {
-    "hashid": 7114087128947764291,
-    "names": []
-  },
-  "BF-KMD": {
-    "hashid": 4875584601790877806,
-    "names": []
-  },
-  "BF-KOS": {
-    "hashid": 14407117942579027731,
-    "names": [
-      "Kossi"
-    ]
-  },
-  "BF-LOR": {
-    "hashid": 3722567644184048257,
-    "names": []
-  },
-  "BF-SMT": {
-    "hashid": 6444921371193110426,
-    "names": [
-      "Sanmatenga"
-    ]
-  },
-  "BF-SOM": {
-    "hashid": 6183290825741632034,
-    "names": [
-      "Soum"
-    ]
-  },
-  "BH-14": {
-    "hashid": 17626728950368949944,
-    "names": []
-  },
-  "BH-13": {
-    "hashid": 17193323948274891287,
-    "names": []
-  },
-  "BH-17": {
-    "hashid": 3296527386319725693,
-    "names": []
-  },
-  "BO-B": {
-    "hashid": 15283482136559554218,
-    "names": []
-  },
-  "BT-43": {
-    "hashid": 16098220528632627989,
-    "names": []
-  },
-  "BY-BR": {
-    "hashid": 14031285334843102465,
-    "names": []
-  },
-  "BY-HO": {
-    "hashid": 3776654294727470660,
-    "names": []
-  },
-  "BY-MA": {
-    "hashid": 15866662703133056887,
-    "names": []
-  },
-  "BZ-SC": {
-    "hashid": 251736499394777374,
-    "names": [
-      "Stann Creek"
-    ]
-  },
-  "CD-BC": {
-    "hashid": 12083054728932433545,
-    "names": [
-      "Bas-Congo"
-    ]
-  },
-  "CD-NK": {
-    "hashid": 3626445824490165039,
-    "names": []
-  },
-  "CD-SK": {
-    "hashid": 9186806592796032547,
-    "names": []
-  },
-  "CH-BS": {
-    "hashid": 619646476019425698,
-    "names": []
-  },
-  "CH-GR": {
-    "hashid": 10764539335603049747,
-    "names": []
-  },
-  "CN-NM": {
-    "hashid": 17192407251240072214,
-    "names": []
-  },
-  "CO-DC": {
-    "hashid": 6794102982673819394,
-    "names": []
-  },
-  "CU-03": {
-    "hashid": 3018805721934171385,
-    "names": []
-  },
-  "CV-BV": {
-    "hashid": 705132612200659926,
-    "names": []
-  },
-  "CV-BR": {
-    "hashid": 10983424776763243137,
-    "names": []
-  },
-  "CV-MA": {
-    "hashid": 3894072371730316330,
-    "names": []
-  },
-  "CV-MO": {
-    "hashid": 12990632026175913445,
-    "names": []
-  },
-  "CV-PA": {
-    "hashid": 13344093838652070261,
-    "names": []
-  },
-  "CV-PN": {
-    "hashid": 7034729200488182788,
-    "names": []
-  },
-  "CV-PR": {
-    "hashid": 8086121627744482082,
-    "names": []
-  },
-  "CV-RB": {
-    "hashid": 15078839076604930817,
-    "names": []
-  },
-  "CV-RG": {
-    "hashid": 13224718789698419456,
-    "names": []
-  },
-  "CV-RS": {
-    "hashid": 16209442399567980064,
-    "names": []
-  },
-  "CV-SL": {
-    "hashid": 1614766708942554705,
-    "names": []
-  },
-  "CV-CR": {
-    "hashid": 6331602945788660171,
-    "names": []
-  },
-  "CV-SD": {
-    "hashid": 12173059146301659138,
-    "names": []
-  },
-  "CV-SF": {
-    "hashid": 6284023071982029689,
-    "names": []
-  },
-  "CV-SV": {
-    "hashid": 15131506162063892562,
-    "names": []
-  },
-  "CV-TA": {
-    "hashid": 14249535839153097734,
-    "names": []
-  },
-  "CV-TS": {
-    "hashid": 15645238902898204492,
-    "names": []
-  },
-  "CY-01": {
-    "hashid": 17575498885477680404,
-    "names": [
-      "Lefkoşa"
-    ]
-  },
-  "CY-02": {
-    "hashid": 2433773035988939339,
-    "names": [
-      "Leymasun"
-    ]
-  },
-  "CZ-64": {
-    "hashid": 8410285739409551244,
-    "names": []
-  },
-  "CZ-52": {
-    "hashid": 18306139455349334466,
-    "names": []
-  },
-  "CZ-80": {
-    "hashid": 351061663911687314,
-    "names": []
-  },
-  "CZ-72": {
-    "hashid": 5579150566464626108,
-    "names": []
-  },
-  "CZ-42": {
-    "hashid": 9499542719324458103,
-    "names": []
-  },
-  "DE-NI": {
-    "hashid": 16161630923016687986,
-    "names": []
-  },
-  "DE-NW": {
-    "hashid": 767740820275888350,
-    "names": []
-  },
-  "DE-SN": {
-    "hashid": 9340599352467930100,
-    "names": []
-  },
-  "DE-ST": {
-    "hashid": 17823492179474453441,
-    "names": []
-  },
-  "DE-TH": {
-    "hashid": 5512921328756895368,
-    "names": []
-  },
-  "DK-82": {
-    "hashid": 3180824788497675873,
-    "names": []
-  },
-  "DK-81": {
-    "hashid": 6587282618310438224,
-    "names": []
-  },
-  "DK-85": {
-    "hashid": 15380463672029119977,
-    "names": []
-  },
-  "DK-83": {
-    "hashid": 12361097487423467211,
-    "names": []
-  },
-  "DO-03": {
-    "hashid": 10898163477123812698,
-    "names": []
-  },
-  "DO-01": {
-    "hashid": 2545951785960071624,
-    "names": []
-  },
-  "DO-06": {
-    "hashid": 10552907223733560021,
-    "names": []
-  },
-  "DO-07": {
-    "hashid": 10230849822333583155,
-    "names": []
-  },
-  "DO-09": {
-    "hashid": 14548261186608404783,
-    "names": []
-  },
-  "DO-19": {
-    "hashid": 12655063999735625467,
-    "names": []
-  },
-  "DO-10": {
-    "hashid": 4204623252710196221,
-    "names": []
-  },
-  "DO-11": {
-    "hashid": 17496805393458962437,
-    "names": []
-  },
-  "DO-28": {
-    "hashid": 6437022730056275695,
-    "names": []
-  },
-  "DO-17": {
-    "hashid": 2037131853133885597,
-    "names": []
-  },
-  "DO-27": {
-    "hashid": 14138765543379867363,
-    "names": []
-  },
-  "EG-DK": {
-    "hashid": 9318628226602789107,
-    "names": []
-  },
-  "EG-KB": {
-    "hashid": 733095517075002237,
-    "names": []
-  },
-  "EG-SHR": {
-    "hashid": 13365197459742857616,
-    "names": []
-  },
-  "EG-BNS": {
-    "hashid": 14486115580737868210,
-    "names": []
-  },
-  "EG-KFS": {
-    "hashid": 5947396524261461379,
-    "names": []
-  },
-  "ES-C": {
-    "hashid": 16663251777587820009,
-    "names": []
-  },
-  "ES-CL": {
-    "hashid": 515885370972376802,
-    "names": []
-  },
-  "ES-CT": {
-    "hashid": 1724482950771920377,
-    "names": []
-  },
-  "ES-PV": {
-    "hashid": 6263351742782356773,
-    "names": []
-  },
-  "ES-IB": {
-    "hashid": 10273630057322074318,
-    "names": []
-  },
-  "ET-SW": {
-    "hashid": 12385432535360788755,
-    "names": []
-  },
-  "FI-19": {
-    "hashid": 6029943825149156179,
-    "names": []
-  },
-  "FI-02": {
-    "hashid": 14213347715668903798,
-    "names": []
-  },
-  "FI-03": {
-    "hashid": 7386778009856642809,
-    "names": []
-  },
-  "FI-04": {
-    "hashid": 7556312291482969511,
-    "names": []
-  },
-  "FI-07": {
-    "hashid": 18270890864754931112,
-    "names": []
-  },
-  "FI-08": {
-    "hashid": 16859499639511552715,
-    "names": []
-  },
-  "FI-13": {
-    "hashid": 1464986632952177745,
-    "names": []
-  },
-  "FI-15": {
-    "hashid": 12250652957173949327,
-    "names": []
-  },
-  "FI-14": {
-    "hashid": 2425753874731096670,
-    "names": []
-  },
-  "FI-12": {
-    "hashid": 17006021513674694543,
-    "names": []
-  },
-  "FR-BRE": {
-    "hashid": 7840592450004425197,
-    "names": []
-  },
-  "FR-20R": {
-    "hashid": 7029890424806918353,
-    "names": []
-  },
-  "FR-31": {
-    "hashid": 15422762469903055286,
-    "names": []
-  },
-  "FR-NAQ": {
-    "hashid": 2098146037107974944,
-    "names": []
-  },
-  "GQ-BN": {
-    "hashid": 3023793281405305766,
-    "names": []
-  },
-  "GQ-BS": {
-    "hashid": 17797878681589620323,
-    "names": []
-  },
-  "GQ-CS": {
-    "hashid": 11737113617557607118,
-    "names": []
-  },
-  "GQ-DJ": {
-    "hashid": 7336099691248937475,
-    "names": []
-  },
-  "GQ-KN": {
-    "hashid": 17905929667799451702,
-    "names": []
-  },
-  "GQ-LI": {
-    "hashid": 5879842871864002706,
-    "names": []
-  },
-  "GQ-WN": {
-    "hashid": 1958570059220681696,
-    "names": []
-  },
-  "GR-A": {
-    "hashid": 1205156330726946481,
-    "names": []
-  },
-  "GR-I": {
-    "hashid": 13223891665784901235,
-    "names": []
-  },
-  "GR-C": {
-    "hashid": 5728449947567529500,
-    "names": []
-  },
-  "GR-F": {
-    "hashid": 9255607841537206187,
-    "names": []
-  },
-  "GR-B": {
-    "hashid": 1728227864186137884,
-    "names": []
-  },
-  "GR-J": {
-    "hashid": 7892918363463324032,
-    "names": []
-  },
-  "GR-K": {
-    "hashid": 17649593875317055821,
-    "names": []
-  },
-  "GR-D": {
-    "hashid": 3041433102075313050,
-    "names": []
-  },
-  "GW-BM": {
-    "hashid": 7106958541391228738,
-    "names": []
-  },
-  "GW-OI": {
-    "hashid": 15202394174908504040,
-    "names": []
-  },
-  "GW-QU": {
-    "hashid": 2307774773964476808,
-    "names": []
-  },
-  "GW-TO": {
-    "hashid": 17552616587020259708,
-    "names": []
-  },
-  "HN-IB": {
-    "hashid": 1710350278707837977,
-    "names": [
-      "Islas de la Bahía"
-    ]
-  },
-  "HR-07": {
-    "hashid": 6137860277085836514,
-    "names": [
-      "Bjelovarsko-bilogorska županija"
-    ]
-  },
-  "HR-12": {
-    "hashid": 2462660711680687613,
-    "names": [
-      "Brodsko-posavska županija"
-    ]
-  },
-  "HR-19": {
-    "hashid": 9831373956248052199,
-    "names": [
-      "Dubrovačko-neretvanska županija"
-    ]
-  },
-  "HR-18": {
-    "hashid": 13593419230890173594,
-    "names": [
-      "Istarska županija"
-    ]
-  },
-  "HR-04": {
-    "hashid": 7595259266207563253,
-    "names": [
-      "Karlovačka županija"
-    ]
-  },
-  "HR-06": {
-    "hashid": 515303284250205483,
-    "names": [
-      "Koprivničko-križevačka županija"
-    ]
-  },
-  "HR-02": {
-    "hashid": 9464094650309313369,
-    "names": [
-      "Krapinsko-zagorska županija"
-    ]
-  },
-  "HR-09": {
-    "hashid": 15679379278698257234,
-    "names": [
-      "Ličko-senjska županija"
-    ]
-  },
-  "HR-20": {
-    "hashid": 7130259495444217249,
-    "names": [
-      "Međimurska županija"
-    ]
-  },
-  "HR-14": {
-    "hashid": 17686476244825850176,
-    "names": [
-      "Osječko-baranjska županija"
-    ]
-  },
-  "HR-11": {
-    "hashid": 571633011816446691,
-    "names": [
-      "Požeško-slavonska županija"
-    ]
-  },
-  "HR-08": {
-    "hashid": 13393484788884074394,
-    "names": [
-      "Primorsko-goranska županija"
-    ]
-  },
-  "HR-03": {
-    "hashid": 5373331629619585599,
-    "names": [
-      "Sisačko-moslavačka županija"
-    ]
-  },
-  "HR-17": {
-    "hashid": 4728741655569437311,
-    "names": [
-      "Splitsko-dalmatinska županija"
-    ]
-  },
-  "HR-05": {
-    "hashid": 6869589799992934814,
-    "names": [
-      "Varaždinska županija"
-    ]
-  },
-  "HR-10": {
-    "hashid": 9115739172909847332,
-    "names": [
-      "Virovitičko-podravska županija"
-    ]
-  },
-  "HR-16": {
-    "hashid": 9228354118196276891,
-    "names": []
-  },
-  "HR-13": {
-    "hashid": 1075406954298904301,
-    "names": []
-  },
-  "HR-01": {
-    "hashid": 18165030935922230113,
-    "names": []
-  },
-  "HR-15": {
-    "hashid": 4924830280273446913,
-    "names": []
-  },
-  "ID-BA": {
-    "hashid": 14437149475941329817,
-    "names": []
-  },
-  "ID-BT": {
-    "hashid": 16898327688087271583,
-    "names": []
-  },
-  "ID-JK": {
-    "hashid": 4695078975331386170,
-    "names": []
-  },
-  "ID-KB": {
-    "hashid": 11473268994770462644,
-    "names": [
-      "West Kalimantan"
-    ]
-  },
-  "ID-KS": {
-    "hashid": 10884306699022656519,
-    "names": [
-      "South Kalimantan"
-    ]
-  },
-  "ID-KT": {
-    "hashid": 9309806926450444053,
-    "names": [
-      "Central Kalimantan"
-    ]
-  },
-  "ID-KI": {
-    "hashid": 2921321320579836663,
-    "names": [
-      "East Kalimantan"
-    ]
-  },
-  "ID-KU": {
-    "hashid": 488010603257107888,
-    "names": [
-      "North Kalimantan"
-    ]
-  },
-  "ID-BB": {
-    "hashid": 5435165346766532399,
-    "names": [
-      "Bangka-Belitung Islands"
-    ]
-  },
-  "ID-KR": {
-    "hashid": 12905742396118802260,
-    "names": [
-      "Riau Islands"
-    ]
-  },
-  "ID-NB": {
-    "hashid": 3734814404109093988,
-    "names": [
-      "West Nusa Tenggara"
-    ]
-  },
-  "ID-NT": {
-    "hashid": 14150503068299783292,
-    "names": [
-      "East Nusa Tenggara"
-    ]
-  },
-  "ID-PA": {
-    "hashid": 2349863149870575641,
-    "names": []
-  },
-  "ID-PB": {
-    "hashid": 15690768876590646321,
-    "names": [
-      "West Papua"
-    ]
-  },
-  "ID-PE": {
-    "hashid": 9039127612095223945,
-    "names": [
-      "Highland Papua"
-    ]
-  },
-  "ID-PS": {
-    "hashid": 9690589497824215987,
-    "names": [
-      "South Papua"
-    ]
-  },
-  "ID-PT": {
-    "hashid": 1050673848426258652,
-    "names": [
-      "Central Papua"
-    ]
-  },
-  "ID-RI": {
-    "hashid": 13187188712659963782,
-    "names": []
-  },
-  "ID-SR": {
-    "hashid": 9032186593170709723,
-    "names": [
-      "West Sulawesi"
-    ]
-  },
-  "ID-SN": {
-    "hashid": 3823630053724623924,
-    "names": [
-      "South Sulawesi"
-    ]
-  },
-  "ID-ST": {
-    "hashid": 4085803315462924868,
-    "names": [
-      "Central Sulawesi"
-    ]
-  },
-  "ID-SG": {
-    "hashid": 9084027117939096023,
-    "names": [
-      "Southeast Sulawesi"
-    ]
-  },
-  "ID-SA": {
-    "hashid": 6067747453582173765,
-    "names": [
-      "North Sulawesi"
-    ]
-  },
-  "ID-SB": {
-    "hashid": 16506488556942819759,
-    "names": [
-      "West Sumatra"
-    ]
-  },
-  "ID-SS": {
-    "hashid": 6304627934268481224,
-    "names": [
-      "South Sumatra"
-    ]
-  },
-  "AT-2": {
-    "added": true,
-    "names": [
-      "Kärnten",
-      "Carinthia"
-    ]
-  },
-  "AT-3": {
-    "added": true,
-    "names": [
-      "Niederösterreich",
-      "Lower Austria"
-    ]
-  },
-  "AT-4": {
-    "added": true,
-    "names": [
-      "Oberösterreich",
-      "Upper Austria"
-    ]
-  },
-  "BF-TAP": {
-    "added": true,
-    "names": [
-      "Tapoa Province"
-    ]
-  },
-  "BI-KR": {
-    "added": true,
-    "names": [
-      "Karuzi Province"
-    ]
-  },
-  "BI-MW": {
-    "added": true,
-    "names": [
-      "Mwaro Province"
-    ]
-  },
-  "BW-SO": {
-    "added": true,
-    "names": [
-      "Southern District"
-    ]
-  },
-  "CF-KB": {
-    "added": true,
-    "names": [
-      "Gribingui",
-      "Nana-Grébizi"
-    ]
-  },
-  "CN-MO": {
-    "added": true,
-    "names": [
-      "Macao SAR",
-      "Macau SAR",
-      "Aomen Tebiexingzhengqu"
-    ]
-  },
-  "CN-HK": {
-    "added": true,
-    "names": [
-      "Hong Kong SAR",
-      "Xianggang Tebiexingzhengqu"
-    ]
-  },
-  "CN-TW": {
-    "added": true,
-    "names": [
-      "Taiwan Sheng",
-      "Taiwan Province"
-    ]
-  },
-  "CN-XZ": {
-    "added": true,
-    "names": [
-      "Xizang Zizhiqu",
-      "Tibet Autonomous Region"
-    ]
-  },
-  "CV-B": {
-    "added": true,
-    "names": [
-      "Ilhas de Barlavento",
-      "Barlavento Islands"
-    ]
-  },
-  "CV-S": {
-    "added": true,
-    "names": [
-      "Ilhas de Sotavento",
-      "Sotavento Islands"
-    ]
-  },
-  "CZ-31": {
-    "added": true,
-    "names": [
-      "Jihočeský kraj",
-      "South Bohemian Region"
-    ]
-  },
-  "CZ-41": {
-    "added": true,
-    "names": [
-      "Karlovarský kraj",
-      "Karlovy Vary Region"
-    ]
-  },
-  "CZ-10": {
-    "added": true,
-    "names": [
-      "Praha",
-      "Prague",
-      "Hlavní město Praha"
-    ]
-  },
-  "CZ-20": {
-    "added": true,
-    "names": [
-      "Středočeský kraj",
-      "Central Bohemian Region"
-    ]
-  },
-  "DE-BY": {
-    "added": true,
-    "names": [
-      "Bayern",
-      "Bavaria",
-      "Free State of Bavaria"
-    ]
-  },
-  "DK-84": {
-    "added": true,
-    "names": [
-      "Hovedstaden",
-      "Capital Region of Denmark"
-    ]
-  },
-  "DO-33": {
-    "added": true,
-    "names": [
-      "Cibao Nordeste"
-    ]
-  },
-  "DO-34": {
-    "added": true,
-    "names": [
-      "Cibao Noroeste"
-    ]
-  },
-  "DO-35": {
-    "added": true,
-    "names": [
-      "Cibao Norte"
-    ]
-  },
-  "DO-36": {
-    "added": true,
-    "names": [
-      "Cibao Sur"
-    ]
-  },
-  "DO-37": {
-    "added": true,
-    "names": [
-      "El Valle"
-    ]
-  },
-  "DO-38": {
-    "added": true,
-    "names": [
-      "Enriquillo"
-    ]
-  },
-  "DO-39": {
-    "added": true,
-    "names": []
-  },
-  "DO-40": {
-    "added": true,
-    "names": []
-  },
-  "DO-41": {
-    "added": true,
-    "names": []
-  },
-  "DO-42": {
-    "added": true,
-    "names": []
-  },
-  "EG-BH": {
-    "hashid": 10557151971485804498,
-    "names": []
-  },
-  "EG-FYM": {
-    "hashid": 7240044506828043996,
-    "names": []
-  },
-  "EG-GH": {
-    "hashid": 11368199509458151310,
-    "names": []
-  },
-  "EG-IS": {
-    "hashid": 12053722315705010735,
-    "names": []
-  },
-  "EG-MNF": {
-    "hashid": 7738599447646777811,
-    "names": []
-  },
-  "ER-SK": {
-    "hashid": 2839622781250076862,
-    "names": []
-  },
-  "ET-SN": {
-    "added": true,
-    "names": []
-  },
-  "FI-01": {
-    "added": true,
-    "names": [
-      "Åland",
-      "Åland Islands"
-    ]
-  },
-  "FR-6AE": {
-    "added": true,
-    "names": []
-  },
-  "FR-CP": {
-    "added": true,
-    "names": [
-      "Clipperton Island",
-      "Île de Clipperton"
-    ]
-  },
-  "FR-2A": {
-    "hashid": 12156907213450421279,
-    "names": [
-      "Corse-du-Sud"
-    ]
-  },
-  "FR-971": {
-    "added": true,
-    "names": [
-      "Guadeloupe"
-    ]
-  },
-  "FR-973": {
-    "added": true,
-    "names": [
-      "French Guiana",
-      "Guyane"
-    ]
-  },
-  "FR-2B": {
-    "hashid": 1811162133395380813,
-    "names": [
-      "Haute-Corse"
-    ]
-  },
-  "FR-974": {
-    "added": true,
-    "names": [
-      "Réunion",
-      "La Réunion"
-    ]
-  },
-  "FR-972": {
-    "added": true,
-    "names": [
-      "Martinique"
-    ]
-  },
-  "FR-976": {
-    "added": true,
-    "names": [
-      "Mayotte"
-    ]
-  },
-  "FR-69M": {
-    "added": true,
-    "names": [
-      "Métropole de Lyon",
-      "Lyon Metropolis"
-    ]
-  },
-  "FR-NC": {
-    "added": true,
-    "names": [
-      "New Caledonia",
-      "Nouvelle-Calédonie"
-    ]
-  },
-  "FR-PF": {
-    "added": true,
-    "names": [
-      "French Polynesia",
-      "Polynésie française"
-    ]
-  },
-  "FR-BL": {
-    "added": true,
-    "names": [
-      "Saint Barthélemy",
-      "Saint-Barthélemy"
-    ]
-  },
-  "FR-MF": {
-    "added": true,
-    "names": [
-      "Saint Martin",
-      "Saint-Martin"
-    ]
-  },
-  "FR-PM": {
-    "added": true,
-    "names": [
-      "Saint Pierre and Miquelon",
-      "Saint-Pierre-et-Miquelon"
-    ]
-  },
-  "FR-TF": {
-    "added": true,
-    "names": [
-      "French Southern and Antarctic Lands",
-      "Terres australes françaises"
-    ]
-  },
-  "FR-WF": {
-    "added": true,
-    "names": [
-      "Wallis and Futuna",
-      "Wallis-et-Futuna"
-    ]
-  },
-  "GB-BDG": {
-    "added": true,
-    "names": [
-      "Barking and Dagenham"
-    ]
-  },
-  "GB-BNE": {
-    "added": true,
-    "names": [
-      "Barnet"
-    ]
-  },
-  "GB-BEX": {
-    "added": true,
-    "names": [
-      "Bexley"
-    ]
-  },
-  "GB-BEN": {
-    "added": true,
-    "names": [
-      "Brent"
-    ]
-  },
-  "GB-BRY": {
-    "added": true,
-    "names": [
-      "Bromley"
-    ]
-  },
-  "GB-CMD": {
-    "added": true,
-    "names": [
-      "Camden"
-    ]
-  },
-  "GB-CRY": {
-    "added": true,
-    "names": [
-      "Croydon"
-    ]
-  },
-  "GB-GRE": {
-    "added": true,
-    "names": [
-      "Greenwich",
-      "Royal Borough of Greenwich"
-    ]
-  },
-  "GB-HCK": {
-    "added": true,
-    "names": [
-      "Hackney"
-    ]
-  },
-  "GB-HMF": {
-    "added": true,
-    "names": []
-  },
-  "GB-HRY": {
-    "added": true,
-    "names": []
-  },
-  "GB-HRW": {
-    "added": true,
-    "names": []
-  },
-  "GB-HAV": {
-    "added": true,
-    "names": []
-  },
-  "GB-HIL": {
-    "added": true,
-    "names": []
-  },
-  "GB-HNS": {
-    "added": true,
-    "names": []
-  },
-  "GB-ISL": {
-    "added": true,
-    "names": []
-  },
-  "GB-KEC": {
-    "added": true,
-    "names": []
-  },
-  "GB-KTT": {
-    "added": true,
-    "names": []
-  },
-  "GB-LBH": {
-    "added": true,
-    "names": []
-  },
-  "GB-LEW": {
-    "added": true,
-    "names": []
-  },
-  "GB-MRT": {
-    "added": true,
-    "names": []
-  },
-  "GB-NWM": {
-    "added": true,
-    "names": []
-  },
-  "GB-RDB": {
-    "added": true,
-    "names": []
-  },
-  "GB-RIC": {
-    "added": true,
-    "names": []
-  },
-  "GB-SWK": {
-    "added": true,
-    "names": []
-  },
-  "GB-STN": {
-    "added": true,
-    "names": []
-  },
-  "GB-TWH": {
-    "added": true,
-    "names": []
-  },
-  "GB-WFT": {
-    "added": true,
-    "names": []
-  },
-  "GB-WND": {
-    "added": true,
-    "names": []
-  },
-  "GB-WSM": {
-    "added": true,
-    "names": []
-  },
-  "GQ-C": {
-    "added": true,
-    "names": []
-  },
-  "GQ-I": {
-    "added": true,
-    "names": []
-  },
-  "GR-G": {
-    "hashid": 14847102287474261620,
-    "names": []
-  },
-  "GR-M": {
-    "hashid": 17541537819736985722,
-    "names": []
-  },
-  "GR-L": {
-    "hashid": 7697577093007225769,
-    "names": []
-  },
-  "GR-H": {
-    "hashid": 15653771003529369246,
-    "names": []
-  },
-  "GR-69": {
-    "hashid": 564268597855427151,
-    "names": []
-  },
-  "GW-L": {
-    "added": true,
-    "names": []
-  },
-  "GW-N": {
-    "added": true,
-    "names": []
-  },
-  "GW-S": {
-    "added": true,
-    "names": []
-  },
-  "HU-BC": {
-    "hashid": 9039312838488008407,
-    "names": []
-  },
-  "HU-DE": {
-    "hashid": 10215004738291688521,
-    "names": []
-  },
-  "HU-DU": {
-    "hashid": 17183147491853303087,
-    "names": []
-  },
-  "HU-EG": {
-    "hashid": 8223560997500829785,
-    "names": []
-  },
-  "HU-HV": {
-    "hashid": 2399576746515466043,
-    "names": []
-  },
-  "HU-KV": {
-    "hashid": 14392499543275258910,
-    "names": []
-  },
-  "HU-KM": {
-    "hashid": 9293343524913538459,
-    "names": []
-  },
-  "HU-MI": {
-    "hashid": 48236585243360147,
-    "names": []
-  },
-  "HU-NK": {
-    "hashid": 8371904853636485063,
-    "names": []
-  },
-  "HU-NY": {
-    "hashid": 2122314796598142711,
-    "names": []
-  },
-  "HU-ST": {
-    "hashid": 6084813978809666319,
-    "names": []
-  },
-  "HU-SD": {
-    "hashid": 16700219988799244306,
-    "names": []
-  },
-  "HU-SS": {
-    "hashid": 5965022178570032057,
-    "names": []
-  },
-  "HU-SH": {
-    "hashid": 6151693681933644572,
-    "names": []
-  },
-  "HU-SF": {
-    "hashid": 970623444109205651,
-    "names": []
-  },
-  "HU-TB": {
-    "hashid": 14191102652230510869,
-    "names": []
-  },
-  "HU-ZE": {
-    "hashid": 3743680179300124444,
-    "names": []
-  },
-  "HU-ER": {
-    "hashid": 1584956649435038757,
-    "names": []
-  },
-  "ID-JW": {
-    "added": true,
-    "names": []
-  },
-  "ID-JB": {
-    "hashid": 16251826661717728445,
-    "names": [
-      "Jawa Barat"
-    ]
-  },
-  "ID-JT": {
-    "hashid": 5170221511504565878,
-    "names": [
-      "Jawa Tengah"
-    ]
-  },
-  "ID-JI": {
-    "hashid": 16933184291865474393,
-    "names": []
-  },
-  "ID-KA": {
-    "added": true,
-    "names": []
-  },
-  "ID-NU": {
-    "added": true,
-    "names": []
-  },
-  "ID-PD": {
-    "hashid": 16750269530231598089,
-    "names": []
-  },
-  "ID-SM": {
-    "added": true,
-    "names": []
-  },
-  "ID-SU": {
-    "hashid": 17907624763766127488,
-    "names": []
-  },
-  "IQ-BA": {
-    "hashid": 1013493769503682949,
-    "names": []
-  },
-  "IQ-KR": {
-    "added": true,
-    "names": [
-      "Iqlīm Kūrdistān"
-    ]
-  },
-  "IQ-NI": {
-    "hashid": 17781746567032927209,
-    "names": []
-  },
-  "IR-14": {
-    "hashid": 4625986401276980376,
-    "names": []
-  },
-  "IR-29": {
-    "hashid": 12173395667560177644,
-    "names": []
-  },
-  "IR-28": {
-    "hashid": 8721294254740518750,
-    "names": []
-  },
-  "IR-17": {
-    "hashid": 2974314715470604749,
-    "names": []
-  },
-  "IR-04": {
-    "hashid": 4479526141123771482,
-    "names": []
-  },
-  "IR-03": {
-    "hashid": 10150047789535428902,
-    "names": []
-  },
-  "IS-AKU": {
-    "hashid": 553178230596876682,
-    "names": []
-  },
-  "IS-7": {
-    "hashid": 12164249442769020690,
-    "names": []
-  },
-  "IS-1": {
-    "hashid": 9219425528052223450,
-    "names": []
-  },
-  "IS-6": {
-    "hashid": 6023120278771054811,
-    "names": []
-  },
-  "IS-5": {
-    "hashid": 795211146841358785,
-    "names": []
-  },
-  "IS-SEL": {
-    "hashid": 6615047419742401157,
-    "names": []
-  },
-  "IS-STY": {
-    "hashid": 1021072839387780641,
-    "names": []
-  },
-  "IS-8": {
-    "hashid": 12602850471021152263,
-    "names": []
-  },
-  "IS-2": {
-    "hashid": 5048011360429024333,
-    "names": []
-  },
-  "IS-4": {
-    "hashid": 4425878157171424353,
-    "names": []
-  },
-  "IS-3": {
-    "hashid": 7653236894486095335,
-    "names": []
-  },
-  "IT-FI": {
-    "hashid": 15543438096627701506,
-    "names": []
-  },
-  "IT-AQ": {
-    "hashid": 8561809201375208854,
-    "names": []
-  },
-  "IT-57": {
-    "hashid": 12173900138812391768,
-    "names": []
-  },
-  "IT-52": {
-    "hashid": 12378494993894100351,
-    "names": []
-  },
-  "JM-11": {
-    "hashid": 10771186088306258525,
-    "names": []
-  },
-  "JO-AT": {
-    "hashid": 4797534579874715950,
-    "names": []
-  },
-  "KE-30": {
-    "hashid": 2923499421654690271,
-    "names": []
-  },
-  "KG-Y": {
-    "hashid": 3656353010716542953,
-    "names": []
-  },
-  "KH-22": {
-    "hashid": 3240263747258738540,
-    "names": []
-  },
-  "KN-01": {
-    "hashid": 12423913270595386387,
-    "names": []
-  },
-  "KN-N": {
-    "added": true,
-    "names": []
-  },
-  "KN-02": {
-    "hashid": 2164695258169901673,
-    "names": []
-  },
-  "KN-03": {
-    "hashid": 11639069091376387750,
-    "names": []
-  },
-  "KN-04": {
-    "hashid": 11018434289117781986,
-    "names": []
-  },
-  "KN-05": {
-    "hashid": 10733846781621917979,
-    "names": []
-  },
-  "KN-06": {
-    "hashid": 10995064443795365637,
-    "names": []
-  },
-  "KN-07": {
-    "hashid": 9882314475943838562,
-    "names": []
-  },
-  "KN-K": {
-    "added": true,
-    "names": []
-  },
-  "KN-08": {
-    "hashid": 3486894574020203535,
-    "names": []
-  },
-  "KN-09": {
-    "hashid": 10793555208060804522,
-    "names": []
-  },
-  "KN-10": {
-    "hashid": 9784374482785042580,
-    "names": []
-  },
-  "KN-11": {
-    "hashid": 4285433211973833644,
-    "names": []
-  },
-  "KN-12": {
-    "hashid": 10684707109783613193,
-    "names": []
-  },
-  "KN-13": {
-    "hashid": 6482157343107459975,
-    "names": []
-  },
-  "KN-15": {
-    "hashid": 18442979588013112927,
-    "names": []
-  },
-  "KP-09": {
-    "hashid": 2329316686056121626,
-    "names": []
-  },
-  "KP-08": {
-    "hashid": 15192388887962133757,
-    "names": []
-  },
-  "KP-06": {
-    "hashid": 15231716958369597870,
-    "names": []
-  },
-  "KP-05": {
-    "hashid": 2025009314193706296,
-    "names": []
-  },
-  "KP-02": {
-    "hashid": 15780170749367927203,
-    "names": []
-  },
-  "KR-43": {
-    "hashid": 1179425073108557627,
-    "names": []
-  },
-  "KZ-10": {
-    "hashid": 12636157825479033245,
-    "names": []
-  },
-  "KZ-15": {
-    "hashid": 14976906532816143864,
-    "names": []
-  },
-  "KZ-23": {
-    "hashid": 4461614445371699252,
-    "names": []
-  },
-  "KZ-27": {
-    "hashid": 7143369546967191076,
-    "names": []
-  },
-  "KZ-35": {
-    "hashid": 7673241944757869582,
-    "names": []
-  },
-  "KZ-39": {
-    "hashid": 12506386513480148887,
-    "names": []
-  },
-  "KZ-43": {
-    "hashid": 5027886026854016793,
-    "names": []
-  },
-  "KZ-47": {
-    "hashid": 99244784386408673,
-    "names": []
-  },
-  "KZ-59": {
-    "hashid": 12228830181606311542,
-    "names": []
-  },
-  "KZ-63": {
-    "hashid": 4104895903136225813,
-    "names": []
-  },
-  "KZ-33": {
-    "hashid": 11426476105135744059,
-    "names": []
-  },
-  "LB-JA": {
-    "hashid": 10617169925680117639,
-    "names": []
-  },
-  "LB-AS": {
-    "hashid": 15199169253756508864,
-    "names": []
-  },
-  "LB-BA": {
-    "hashid": 2448022031046669587,
-    "names": []
-  },
-  "LB-JL": {
-    "hashid": 188856985205658162,
-    "names": []
-  },
-  "LT-01": {
-    "hashid": 406860503781235146,
-    "names": []
-  },
-  "LT-AL": {
-    "hashid": 15409547676661033663,
-    "names": []
-  },
-  "LT-02": {
-    "hashid": 15001632796481774440,
-    "names": []
-  },
-  "LT-KU": {
-    "hashid": 6358162912628164537,
-    "names": []
-  },
-  "LT-15": {
-    "hashid": 5773099562292235191,
-    "names": []
-  },
-  "LT-17": {
-    "hashid": 17934350700505276342,
-    "names": []
-  },
-  "LT-KL": {
-    "hashid": 13096035689074730780,
-    "names": []
-  },
-  "LT-20": {
-    "hashid": 9969033800455074014,
-    "names": []
-  },
-  "LT-MR": {
-    "hashid": 13374968506867060219,
-    "names": []
-  },
-  "LT-31": {
-    "hashid": 963770582829409616,
-    "names": []
-  },
-  "LT-PN": {
-    "hashid": 18342392509572486940,
-    "names": []
-  },
-  "LT-32": {
-    "hashid": 11210156437866092859,
-    "names": []
-  },
-  "LT-TA": {
-    "hashid": 860896335233941387,
-    "names": []
-  },
-  "LT-TE": {
-    "hashid": 1135349877990082472,
-    "names": []
-  },
-  "LT-UT": {
-    "hashid": 13508312519362484184,
-    "names": []
-  },
-  "LT-VL": {
-    "hashid": 2118055237091729524,
-    "names": []
-  },
-  "LT-57": {
-    "hashid": 5587629267389044396,
-    "names": []
-  },
-  "LT-SA": {
-    "hashid": 11273864751049948540,
-    "names": []
-  },
-  "LT-43": {
-    "hashid": 288275511191950946,
-    "names": []
-  },
-  "LV-112": {
-    "hashid": 12915233290321831653,
-    "names": []
-  },
-  "LY-TB": {
-    "hashid": 15696952609896182296,
-    "names": []
-  },
-  "MC-FO": {
-    "added": true,
-    "names": []
-  },
-  "MC-JE": {
-    "added": true,
-    "names": []
-  },
-  "MC-CL": {
-    "added": true,
-    "names": []
-  },
-  "MC-CO": {
-    "added": true,
-    "names": []
-  },
-  "MC-GA": {
-    "added": true,
-    "names": []
-  },
-  "MC-SO": {
-    "added": true,
-    "names": []
-  },
-  "MC-LA": {
-    "added": true,
-    "names": []
-  },
-  "MC-MA": {
-    "added": true,
-    "names": []
-  },
-  "MC-MO": {
-    "added": true,
-    "names": []
-  },
-  "MC-MG": {
-    "added": true,
-    "names": []
-  },
-  "MC-MC": {
-    "added": true,
-    "names": []
-  },
-  "MC-MU": {
-    "added": true,
-    "names": []
-  },
-  "MC-PH": {
-    "added": true,
-    "names": []
-  },
-  "MC-SR": {
-    "added": true,
-    "names": []
-  },
-  "MC-SD": {
-    "added": true,
-    "names": []
-  },
-  "MC-SP": {
-    "added": true,
-    "names": []
-  },
-  "MC-VR": {
-    "added": true,
-    "names": []
-  },
-  "MD-SN": {
-    "hashid": 6493832667755678059,
-    "names": []
-  },
-  "MG-T": {
-    "added": true,
-    "names": []
-  },
-  "MG-F": {
-    "added": true,
-    "names": []
-  },
-  "MG-M": {
-    "added": true,
-    "names": [
-      "Majunga"
-    ]
-  },
-  "MG-A": {
-    "added": true,
-    "names": [
-      "Tamatave"
-    ]
-  },
-  "MG-U": {
-    "added": true,
-    "names": [
-      "Tulear"
-    ]
-  },
-  "MH-ALK": {
-    "hashid": 12144577573616495080,
-    "names": []
-  },
-  "MH-ALL": {
-    "hashid": 7349104837858105052,
-    "names": []
-  },
-  "MH-ARN": {
-    "hashid": 13512385430353429628,
-    "names": []
-  },
-  "MH-AUR": {
-    "hashid": 17104795972934081706,
-    "names": []
-  },
-  "MH-KIL": {
-    "added": true,
-    "names": [
-      "Bikini Atoll",
-      "Kili Island"
-    ]
-  },
-  "MH-EBO": {
-    "hashid": 3073728394902659973,
-    "names": []
-  },
-  "MH-LIB": {
-    "hashid": 13659688599688531951,
-    "names": []
-  },
-  "MH-ENI": {
-    "added": true,
-    "names": [
-      "Enewetak Atoll",
-      "Ujelang"
-    ]
-  },
-  "MH-JAB": {
-    "hashid": 4147686238860691141,
-    "names": []
-  },
-  "MH-JAL": {
-    "hashid": 13607874029451040169,
-    "names": []
-  },
-  "MH-KWA": {
-    "hashid": 5049204141271922352,
-    "names": []
-  },
-  "MH-LAE": {
-    "hashid": 8814226708020331303,
-    "names": []
-  },
-  "MH-LIK": {
-    "hashid": 16051571296304008981,
-    "names": []
-  },
-  "MH-MAJ": {
-    "hashid": 2642096413468593410,
-    "names": []
-  },
-  "MH-MAL": {
-    "hashid": 2669803651442908646,
-    "names": []
-  },
-  "MH-MEJ": {
-    "hashid": 9169661255654375268,
-    "names": []
-  },
-  "MH-MIL": {
-    "hashid": 12301825083522749918,
-    "names": []
-  },
-  "MH-NMK": {
-    "hashid": 3247856036455473007,
-    "names": []
-  },
-  "MH-NMU": {
-    "hashid": 7203980462487419496,
-    "names": []
-  },
-  "MH-L": {
-    "added": true,
-    "names": []
-  },
-  "MH-T": {
-    "added": true,
-    "names": []
-  },
-  "MH-RON": {
-    "hashid": 8906472764364873651,
-    "names": []
-  },
-  "MH-UJA": {
-    "hashid": 5138048018600910023,
-    "names": []
-  },
-  "MH-UTI": {
-    "hashid": 6995398708228631277,
-    "names": []
-  },
-  "MH-WTH": {
-    "hashid": 2248130488039291728,
-    "names": []
-  },
-  "MH-WTJ": {
-    "hashid": 10446605093805346636,
-    "names": []
-  },
-  "MK-801": {
-    "hashid": 1967882102506962385,
-    "names": []
-  },
-  "MK-803": {
-    "hashid": 6662517821754098005,
-    "names": []
-  },
-  "MK-804": {
-    "hashid": 11440826139250950984,
-    "names": []
-  },
-  "MK-805": {
-    "hashid": 3839952001397607543,
-    "names": []
-  },
-  "MK-808": {
-    "hashid": 5174417831585034929,
-    "names": []
-  },
-  "MK-809": {
-    "hashid": 12256797490397984703,
-    "names": []
-  },
-  "MK-607": {
-    "hashid": 17639000505547207090,
-    "names": []
-  },
-  "MK-811": {
-    "hashid": 3952443925188008792,
-    "names": []
-  },
-  "MK-815": {
-    "hashid": 3733443151782153633,
-    "names": []
-  },
-  "MK-817": {
-    "hashid": 16383913190614332034,
-    "names": []
-  },
-  "MN-061": {
-    "hashid": 9585712840336596111,
-    "names": []
-  },
-  "MN-059": {
-    "hashid": 9989960793436448514,
-    "names": []
-  },
-  "MN-047": {
-    "hashid": 10763201958965415751,
-    "names": []
-  },
-  "MR-14": {
-    "hashid": 4848966205750944216,
-    "names": []
-  },
-  "MR-13": {
-    "hashid": 7127825226013358190,
-    "names": []
-  },
-  "MR-15": {
-    "hashid": 11789026779014602138,
-    "names": []
-  },
-  "MT-20": {
-    "hashid": 14060794330404898945,
-    "names": [
-      "Senglea"
-    ]
-  },
-  "MT-29": {
-    "hashid": 2027252361259183610,
-    "names": []
-  },
-  "MT-34": {
-    "hashid": 7283280956312778645,
-    "names": []
-  },
-  "MT-31": {
-    "hashid": 4545650921294503719,
-    "names": []
-  },
-  "MT-45": {
-    "hashid": 16435943678541635541,
-    "names": [
-      "Rabat Gozo",
-      "Rabat Għawdex"
-    ]
-  },
-  "MT-46": {
-    "hashid": 3143423021480362247,
-    "names": []
-  },
-  "MT-65": {
-    "hashid": 12237986544530731858,
-    "names": []
-  },
-  "MT-66": {
-    "hashid": 17530391404755092900,
-    "names": []
-  },
-  "MV-00": {
-    "hashid": 13219269519053427498,
-    "names": []
-  },
-  "MV-29": {
-    "hashid": 13506559077854383931,
-    "names": []
-  },
-  "MY-07": {
-    "hashid": 18169120409375522837,
-    "names": []
-  },
-  "NG-FC": {
-    "hashid": 15161502435643536419,
-    "names": []
-  },
-  "NI-AN": {
-    "hashid": 14023943212862245751,
-    "names": []
-  },
-  "NI-AS": {
-    "hashid": 15753930690437346736,
-    "names": []
-  },
-  "NL-AW": {
-    "added": true,
-    "names": []
-  },
-  "NL-BQ1": {
-    "added": true,
-    "names": []
-  },
-  "NL-CW": {
-    "added": true,
-    "names": []
-  },
-  "NL-NB": {
-    "hashid": 5789774175653932580,
-    "names": []
-  },
-  "NL-NH": {
-    "hashid": 4437779861935336424,
-    "names": []
-  },
-  "NL-BQ2": {
-    "added": true,
-    "names": []
-  },
-  "NL-BQ3": {
-    "added": true,
-    "names": []
-  },
-  "NL-SX": {
-    "added": true,
-    "names": []
-  },
-  "NL-ZH": {
-    "hashid": 4756003881996369433,
-    "names": []
-  },
-  "NO-22": {
-    "added": true,
-    "names": []
-  },
-  "NO-21": {
-    "added": true,
-    "names": []
-  },
-  "NO-30": {
-    "added": true,
-    "names": []
-  },
-  "OM-ZA": {
-    "hashid": 2253280230748755125,
-    "names": []
-  },
-  "OM-BJ": {
-    "hashid": 9909966786566088664,
-    "names": []
-  },
-  "OM-SJ": {
-    "hashid": 10224144753603154808,
-    "names": []
-  },
-  "OM-BS": {
-    "hashid": 2247354754004633700,
-    "names": []
-  },
-  "OM-SS": {
-    "hashid": 6733230875470607118,
-    "names": []
-  },
-  "PA-NB": {
-    "hashid": 10141063140612339087,
-    "names": []
-  },
-  "PG-NPP": {
-    "hashid": 15136600677507208305,
-    "names": []
-  },
-  "PG-SAN": {
-    "hashid": 7604449715707197466,
-    "names": []
-  },
-  "PL-02": {
-    "hashid": 9622801894243356010,
-    "names": []
-  },
-  "PL-06": {
-    "hashid": 14803663615464194133,
-    "names": []
-  },
-  "PL-08": {
-    "hashid": 14929539704115956919,
-    "names": []
-  },
-  "PL-14": {
-    "hashid": 6588097791056965407,
-    "names": []
-  },
-  "PL-12": {
-    "hashid": 2229702156474321928,
-    "names": []
-  },
-  "PL-18": {
-    "hashid": 2280156956738344048,
-    "names": []
-  },
-  "PL-28": {
-    "hashid": 5522545777576020706,
-    "names": []
-  },
-  "PL-30": {
-    "hashid": 2636766960297218800,
-    "names": []
-  },
-  "PL-32": {
-    "hashid": 15119312566673674755,
-    "names": []
-  },
-  "PL-10": {
-    "hashid": 9511617335727629078,
-    "names": []
-  },
-  "PS-HBN": {
-    "hashid": 13554448376054938666,
-    "names": []
-  },
-  "PS-JEM": {
-    "hashid": 15191897423969096568,
-    "names": []
-  },
-  "PS-JRH": {
-    "hashid": 10844801490048807756,
-    "names": []
-  },
-  "PS-BTH": {
-    "hashid": 596578626998621924,
-    "names": []
-  },
-  "PS-DEB": {
-    "hashid": 8167516262645486060,
-    "names": []
-  },
-  "PS-JEN": {
-    "hashid": 15859221370880621360,
-    "names": []
-  },
-  "PS-KYS": {
-    "hashid": 14039645611556802622,
-    "names": []
-  },
-  "PS-NBS": {
-    "hashid": 6428928325082221659,
-    "names": []
-  },
-  "PS-QQA": {
-    "hashid": 13091337705604405302,
-    "names": []
-  },
-  "PS-RFH": {
-    "hashid": 2728992436097194148,
-    "names": []
-  },
-  "PS-RBH": {
-    "hashid": 13617951317860001259,
-    "names": [
-      "Al-Bireh"
-    ]
-  },
-  "PS-SLT": {
-    "hashid": 7504493796275877126,
-    "names": []
-  },
-  "PS-TBS": {
-    "hashid": 14145146146364108753,
-    "names": []
-  },
-  "PS-TKM": {
-    "hashid": 5418320022743169714,
-    "names": []
-  },
-  "PT-20": {
-    "hashid": 9905212583802727864,
-    "names": []
-  },
-  "QA-KH": {
-    "hashid": 9260662469905258862,
-    "names": [
-      "Al Thakhira"
-    ]
-  },
-  "QA-SH": {
-    "hashid": 3458764560033647406,
-    "names": []
-  },
-  "QA-ZA": {
-    "hashid": 7961520828083852767,
-    "names": []
-  },
-  "RO-B": {
-    "hashid": 1664992323477859117,
-    "names": []
-  },
-  "RS-00": {
-    "hashid": 2261036951398823460,
-    "names": []
-  },
-  "RS-14": {
-    "hashid": 16692949788267999180,
-    "names": []
-  },
-  "RS-11": {
-    "hashid": 8266684864892905012,
-    "names": []
-  },
-  "RS-23": {
-    "hashid": 15643168579886590536,
-    "names": []
-  },
-  "RS-04": {
-    "hashid": 3211225215157060456,
-    "names": []
-  },
-  "RS-06": {
-    "hashid": 2634916573080655919,
-    "names": []
-  },
-  "RS-09": {
-    "hashid": 12281675230089451347,
-    "names": []
-  },
-  "RS-KM": {
-    "added": true,
-    "names": []
-  },
-  "RS-25": {
-    "added": true,
-    "names": []
-  },
-  "RS-28": {
-    "added": true,
-    "names": []
-  },
-  "RS-29": {
-    "added": true,
-    "names": []
-  },
-  "RS-08": {
-    "hashid": 18030723076985488796,
-    "names": []
-  },
-  "RS-17": {
-    "hashid": 18351447918717955170,
-    "names": []
-  },
-  "RS-20": {
-    "hashid": 8607968362581713881,
-    "names": []
-  },
-  "RS-26": {
-    "added": true,
-    "names": []
-  },
-  "RS-22": {
-    "hashid": 7132707809960337072,
-    "names": []
-  },
-  "RS-10": {
-    "hashid": 877430470720266233,
-    "names": []
-  },
-  "RS-13": {
-    "hashid": 12770771673290255666,
-    "names": []
-  },
-  "RS-27": {
-    "added": true,
-    "names": []
-  },
-  "RS-24": {
-    "hashid": 10986726528498881424,
-    "names": []
-  },
-  "RS-19": {
-    "hashid": 6062434931597701230,
-    "names": []
-  },
-  "RS-18": {
-    "hashid": 8883607600551777633,
-    "names": []
-  },
-  "RS-03": {
-    "hashid": 1898006791975994569,
-    "names": []
-  },
-  "RS-01": {
-    "hashid": 2031130841662701549,
-    "names": []
-  },
-  "RS-02": {
-    "hashid": 9128581073021432014,
-    "names": []
-  },
-  "RS-07": {
-    "hashid": 1417165427619069597,
-    "names": []
-  },
-  "RS-21": {
-    "hashid": 6526456787020893198,
-    "names": []
-  },
-  "RS-15": {
-    "hashid": 1905351296954003983,
-    "names": []
-  },
-  "RS-05": {
-    "hashid": 3631238349781337952,
-    "names": []
-  },
-  "RS-16": {
-    "hashid": 7220701864527662704,
-    "names": []
-  },
-  "RS-12": {
-    "hashid": 4579568366761033391,
-    "names": []
-  },
-  "RU-ALT": {
-    "hashid": 3531762940270561972,
-    "names": []
-  },
-  "RU-AMU": {
-    "hashid": 3564877688652438496,
-    "names": []
-  },
-  "RU-AST": {
-    "hashid": 6314780441760680594,
-    "names": []
-  },
-  "RU-BEL": {
-    "hashid": 14395605944003923415,
-    "names": [
-      "Belgorodskaya oblast'"
-    ]
-  },
-  "RU-CE": {
-    "hashid": 6135301521273065306,
-    "names": [
-      "Čečenskaja Respublika"
-    ]
-  },
-  "RU-CHU": {
-    "hashid": 3994123895913893768,
-    "names": [
-      "Čukotskij avtonomnyj okrug"
-    ]
-  },
-  "RU-CU": {
-    "hashid": 3339917218039156100,
-    "names": [
-      "Čuvašskaja Respublika"
-    ]
-  },
-  "RU-YEV": {
-    "hashid": 4260619908015296724,
-    "names": []
-  },
-  "RU-KHM": {
-    "hashid": 3194177561074805616,
-    "names": []
-  },
-  "RU-IVA": {
-    "hashid": 11128394373667816732,
-    "names": []
-  },
-  "RU-YAN": {
-    "hashid": 18348616786859836010,
-    "names": []
-  },
-  "RU-YAR": {
-    "hashid": 6707544347066385912,
-    "names": []
-  },
-  "RU-KB": {
-    "hashid": 8087258748193626361,
-    "names": []
-  },
-  "RU-KLU": {
-    "hashid": 8412674840954211905,
-    "names": []
-  },
-  "RU-KC": {
-    "hashid": 18122531594846014721,
-    "names": []
-  },
-  "RU-KEM": {
-    "hashid": 9605658618877195787,
-    "names": []
-  },
-  "RU-KIR": {
-    "hashid": 4148273271217966559,
-    "names": []
-  },
-  "RU-KDA": {
-    "hashid": 12348863572666823891,
-    "names": []
-  },
-  "RU-KYA": {
-    "hashid": 3619997478595510165,
-    "names": []
-  },
-  "RU-KGN": {
-    "hashid": 2338786785431311076,
-    "names": []
-  },
-  "RU-MAG": {
-    "hashid": 17345291407026819566,
-    "names": []
-  },
-  "RU-MOS": {
-    "hashid": 13273641290265862893,
-    "names": []
-  },
-  "RU-MOW": {
-    "hashid": 3258581842110834080,
-    "names": []
-  },
-  "RU-NEN": {
-    "hashid": 17073748534712567087,
-    "names": []
-  },
-  "RU-NIZ": {
-    "hashid": 4852427441877561120,
-    "names": []
-  },
-  "RU-NGR": {
-    "hashid": 11995116326225485270,
-    "names": []
-  },
-  "RU-OMS": {
-    "hashid": 7500196554326312148,
-    "names": []
-  },
-  "RU-ORE": {
-    "hashid": 13478986573595297682,
-    "names": []
-  },
-  "RU-ORL": {
-    "hashid": 8979791915229015043,
-    "names": []
-  },
-  "RU-PNZ": {
-    "hashid": 14326089345810223908,
-    "names": []
-  },
-  "RU-PER": {
-    "hashid": 10261989690408291632,
-    "names": []
-  },
-  "RU-PRI": {
-    "hashid": 12858798995064529732,
-    "names": []
-  },
-  "RU-PSK": {
-    "hashid": 904561209121422179,
-    "names": []
-  },
-  "RU-ROS": {
-    "hashid": 18123819915664279978,
-    "names": []
-  },
-  "RU-SAK": {
-    "hashid": 9985823315474617372,
-    "names": []
-  },
-  "RU-SPE": {
-    "hashid": 4232461155050798759,
-    "names": []
-  },
-  "RU-SAR": {
-    "hashid": 4207071270551485698,
-    "names": []
-  },
-  "RU-SE": {
-    "hashid": 6143364267211636069,
-    "names": []
-  },
-  "RU-TAM": {
-    "hashid": 14913409514633786502,
-    "names": []
-  },
-  "RU-TYU": {
-    "hashid": 9699803483096959591,
-    "names": []
-  },
-  "RU-TVE": {
-    "hashid": 17399276939062637374,
-    "names": []
-  },
-  "RU-UD": {
-    "hashid": 14541944928783741036,
-    "names": []
-  },
-  "RU-VLA": {
-    "hashid": 13704586036058585340,
-    "names": []
-  },
-  "RU-VGG": {
-    "hashid": 3148723129214086681,
-    "names": []
-  },
-  "RU-VLG": {
-    "hashid": 10066477885342897583,
-    "names": []
-  },
-  "RU-VOR": {
-    "hashid": 544391547647517512,
-    "names": []
-  },
-  "SA-03": {
-    "hashid": 10931621330971892142,
-    "names": []
-  },
-  "SA-08": {
-    "hashid": 2231055105134844245,
-    "names": []
-  },
-  "SA-01": {
-    "hashid": 16192633577499773531,
-    "names": []
-  },
-  "SA-04": {
-    "hashid": 18318796420527814835,
-    "names": []
-  },
-  "SA-02": {
-    "hashid": 6502001067469570312,
-    "names": []
-  },
-  "SB-CT": {
-    "hashid": 12079778416417898316,
-    "names": []
-  },
-  "SD-DE": {
-    "hashid": 14676559362294609044,
-    "names": [
-      "Sharq Dārfūr"
-    ]
-  },
-  "SD-DW": {
-    "hashid": 16893600177064140760,
-    "names": [
-      "West Darfur"
-    ]
-  },
-  "SD-DS": {
-    "hashid": 17483507531817771289,
-    "names": [
-      "South Darfur"
-    ]
-  },
-  "SD-KS": {
-    "hashid": 357109493241392426,
-    "names": [
-      "South Kordofan"
-    ]
-  },
-  "SD-DN": {
-    "hashid": 9595482567314125562,
-    "names": [
-      "Shamāl Dārfūr"
-    ]
-  },
-  "SG-02": {
-    "added": true,
-    "names": []
-  },
-  "SG-03": {
-    "added": true,
-    "names": []
-  },
-  "SG-04": {
-    "added": true,
-    "names": []
-  },
-  "SG-05": {
-    "added": true,
-    "names": []
-  },
-  "SK-BC": {
-    "hashid": 8318502562947389166,
-    "names": []
-  },
-  "SK-NI": {
-    "hashid": 10968676926629682447,
-    "names": []
-  },
-  "SK-TC": {
-    "hashid": 1233010961031440010,
-    "names": []
-  },
-  "SK-TA": {
-    "hashid": 15679865993945834598,
-    "names": []
-  },
-  "SK-ZI": {
-    "hashid": 1123881341061186469,
-    "names": []
-  },
-  "SL-NW": {
-    "hashid": 8689589460541490510,
-    "names": [
-      "North Western Province"
-    ]
-  },
-  "SO-JD": {
-    "hashid": 330327119661260168,
-    "names": []
-  },
-  "SO-JH": {
-    "hashid": 5339680270721879838,
-    "names": []
-  },
-  "SO-SD": {
-    "hashid": 13086581652671860984,
-    "names": []
-  },
-  "SO-SH": {
-    "hashid": 9285378674561556716,
-    "names": []
-  },
-  "ST-02": {
-    "hashid": 6903917090929772929,
-    "names": []
-  },
-  "ST-03": {
-    "hashid": 14380395368623961072,
-    "names": []
-  },
-  "ST-04": {
-    "hashid": 17161923140038964170,
-    "names": []
-  },
-  "ST-05": {
-    "hashid": 9034195474857729183,
-    "names": []
-  },
-  "ST-06": {
-    "hashid": 12832038061278381934,
-    "names": []
-  },
-  "ST-01": {
-    "hashid": 6164812243096640456,
-    "names": []
-  },
-  "SY-LA": {
-    "hashid": 9802596479661505071,
-    "names": []
-  },
-  "SY-QU": {
-    "hashid": 9455971235664827594,
-    "names": []
-  },
-  "SY-RA": {
-    "hashid": 17019819270872856181,
-    "names": []
-  },
-  "SY-DY": {
-    "hashid": 10646026469075718082,
-    "names": []
-  },
-  "SY-HL": {
-    "hashid": 3762837242430182475,
-    "names": []
-  },
-  "TD-BG": {
-    "hashid": 14773675848620624815,
-    "names": []
-  },
-  "TH-16": {
-    "hashid": 17254591509274440040,
-    "names": []
-  },
-  "TH-82": {
-    "hashid": 7635688061410028324,
-    "names": []
-  },
-  "TH-S": {
-    "added": true,
-    "names": []
-  },
-  "TJ-GB": {
-    "hashid": 7086324121537645377,
-    "names": []
-  },
-  "TJ-RA": {
-    "hashid": 2534473934241277,
-    "names": []
-  },
-  "TN-12": {
-    "hashid": 2272176405179608317,
-    "names": []
-  },
-  "TN-33": {
-    "hashid": 3409237347529898038,
-    "names": []
-  },
-  "TW-CHA": {
-    "hashid": 10089794323390592764,
-    "names": []
-  },
-  "TW-CYI": {
-    "hashid": 18135050751418712371,
-    "names": []
-  },
-  "TW-CYQ": {
-    "hashid": 3561095530799283534,
-    "names": []
-  },
-  "TW-HSZ": {
-    "hashid": 887605648218148808,
-    "names": []
-  },
-  "TW-HSQ": {
-    "hashid": 4535628893126300721,
-    "names": []
-  },
-  "TW-HUA": {
-    "hashid": 7817759887835542787,
-    "names": []
-  },
-  "TW-KHH": {
-    "hashid": 12098964556828766862,
-    "names": []
-  },
-  "TW-KEE": {
-    "hashid": 16319559159705347008,
-    "names": []
-  },
-  "TW-KIN": {
-    "hashid": 10323338674234555792,
-    "names": []
-  },
-  "TW-LIE": {
-    "hashid": 3355114527669192124,
-    "names": []
-  },
-  "TW-MIA": {
-    "hashid": 1221008822157466508,
-    "names": []
-  },
-  "TW-NAN": {
-    "hashid": 298705129024327892,
-    "names": []
-  },
-  "TW-PEN": {
-    "hashid": 363837838745673513,
-    "names": []
-  },
-  "TW-PIF": {
-    "hashid": 5877591741094134784,
-    "names": []
-  },
-  "TW-TXG": {
-    "hashid": 9568831249387768967,
-    "names": []
-  },
-  "TW-TTT": {
-    "hashid": 10783698458031020514,
-    "names": []
-  },
-  "TW-TAO": {
-    "hashid": 17845494994606569298,
-    "names": []
-  },
-  "TW-ILA": {
-    "hashid": 2920371300561202902,
-    "names": []
-  },
-  "TW-YUN": {
-    "hashid": 5239111375752633916,
-    "names": []
-  },
-  "TZ-11": {
-    "hashid": 15915021927561266673,
-    "names": []
-  },
-  "UA-43": {
-    "hashid": 15630885013821227032,
-    "names": []
-  },
-  "UA-32": {
-    "hashid": 9096097503517650603,
-    "names": []
-  },
-  "UA-46": {
-    "hashid": 1434923756316575289,
-    "names": []
-  },
-  "UA-56": {
-    "hashid": 13537717136415986763,
-    "names": []
-  },
-  "UA-59": {
-    "hashid": 944476680999702972,
-    "names": []
-  },
-  "UA-23": {
-    "hashid": 1792139180078377873,
-    "names": []
-  },
-  "UG-236": {
-    "added": true,
-    "names": []
-  },
-  "UG-335": {
-    "added": true,
-    "names": []
-  },
-  "UG-126": {
-    "added": true,
-    "names": []
-  },
-  "UG-433": {
-    "added": true,
-    "names": []
-  },
-  "UG-432": {
-    "added": true,
-    "names": []
-  },
-  "UG-434": {
-    "added": true,
-    "names": []
-  },
-  "UG-333": {
-    "added": true,
-    "names": []
-  },
-  "UG-336": {
-    "added": true,
-    "names": []
-  },
-  "UG-334": {
-    "added": true,
-    "names": []
-  },
-  "UG-337": {
-    "added": true,
-    "names": []
-  },
-  "UG-435": {
-    "added": true,
-    "names": []
-  },
-  "US-AS": {
-    "added": true,
-    "names": []
-  },
-  "US-GU": {
-    "added": true,
-    "names": [
-      "Guåhan"
-    ]
-  },
-  "US-MP": {
-    "added": true,
-    "names": [
-      "Commonwealth of the Northern Mariana Islands",
-      "CNMI"
-    ]
-  },
-  "US-PR": {
-    "added": true,
-    "names": [
-      "Commonwealth of Puerto Rico"
-    ]
-  },
-  "US-UM": {
-    "added": true,
-    "names": []
-  },
-  "US-VI": {
-    "added": true,
-    "names": [
-      "U.S. Virgin Islands",
-      "United States Virgin Islands",
-      "USVI"
-    ]
-  },
-  "UZ-BU": {
-    "hashid": 1198137143814369282,
-    "names": []
-  },
-  "UZ-FA": {
-    "hashid": 12336418125108737453,
-    "names": []
-  },
-  "UZ-QR": {
-    "hashid": 12099354064887633246,
-    "names": []
-  },
-  "VE-A": {
-    "hashid": 31765546814182217,
-    "names": []
-  },
-  "VE-X": {
-    "hashid": 12011261348272810222,
-    "names": []
-  },
-  "VN-43": {
-    "added": true,
-    "names": []
-  },
-  "VN-57": {
-    "added": true,
-    "names": []
-  },
-  "VN-58": {
-    "added": true,
-    "names": []
-  },
-  "VN-40": {
-    "added": true,
-    "names": []
-  },
-  "VN-55": {
-    "added": true,
-    "names": []
-  },
-  "VN-54": {
-    "added": true,
-    "names": []
-  },
-  "VN-53": {
-    "added": true,
-    "names": [
-      "Bac Kan"
-    ]
-  },
-  "VN-50": {
-    "added": true,
-    "names": [
-      "Ben Tre"
-    ]
-  },
-  "VN-63": {
-    "added": true,
-    "names": []
-  },
-  "VN-14": {
-    "added": true,
-    "names": []
-  },
-  "VN-61": {
-    "added": true,
-    "names": []
-  },
-  "VN-47": {
-    "added": true,
-    "names": []
-  },
-  "VN-28": {
-    "added": true,
-    "names": []
-  },
-  "VN-41": {
-    "added": true,
-    "names": []
-  },
-  "VN-67": {
-    "added": true,
-    "names": []
-  },
-  "VN-36": {
-    "added": true,
-    "names": []
-  },
-  "VN-27": {
-    "added": true,
-    "names": []
-  },
-  "VN-52": {
-    "added": true,
-    "names": []
-  },
-  "VN-20": {
-    "added": true,
-    "names": []
-  },
-  "VN-46": {
-    "added": true,
-    "names": []
-  },
-  "VN-51": {
-    "added": true,
-    "names": []
-  },
-  "VN-70": {
-    "added": true,
-    "names": []
-  },
-  "VN-06": {
-    "added": true,
-    "names": []
-  },
-  "YE-SU": {
-    "hashid": 11737489094080405928,
-    "names": [
-      "Socotra"
-    ]
-  },
-  "YE-TA": {
-    "hashid": 16471307555714828150,
-    "names": []
-  },
-  "YE-SN": {
-    "hashid": 14709242116230691324,
-    "names": [
-      "Sana'a"
-    ]
-  },
-  "YE-SD": {
-    "hashid": 3164115982902117647,
-    "names": []
-  },
-  "YE-HD": {
-    "hashid": 7463794332468838244,
-    "names": [
-      "Hadhramaut"
-    ]
-  }
+  "AM-VD": 409315,
+  "AT-6": 2764581,
+  "AT-9": 2761367,
+  "AZ-NX": 147435,
+  "AZ-NV": 148412,
+  "AZ-XCI": 148449,
+  "AZ-XVD": 409423,
+  "BA-BIH": 3229999,
+  "BD-A": 1337229,
+  "BD-22": 1337207,
+  "BE-BRU": 2800867,
+  "BE-VLG": 3337388,
+  "BF-KMD": 2597259,
+  "BF-KOS": 2359027,
+  "BF-LOR": 2597264,
+  "BF-SMT": 2355914,
+  "BF-SOM": 2355248,
+  "BH-14": 7090972,
+  "BH-13": 7090954,
+  "BH-17": 7090974,
+  "BO-B": 3923172,
+  "BT-43": 1337287,
+  "BY-BR": 629631,
+  "BY-HO": 628281,
+  "BY-MA": 625073,
+  "BZ-SC": 3580975,
+  "CD-BC": 2317277,
+  "CD-NK": 206938,
+  "CD-SK": 205413,
+  "CH-BS": 2661602,
+  "CH-GR": 2660522,
+  "CN-NM": 2035607,
+  "CO-DC": 3688685,
+  "CU-03": 3564073,
+  "CV-BV": 3374855,
+  "CV-BR": 3374832,
+  "CV-MA": 3374487,
+  "CV-MO": 3411924,
+  "CV-PA": 3374391,
+  "CV-PN": 7602868,
+  "CV-PR": 3374332,
+  "CV-RB": 7602869,
+  "CV-RG": 3374274,
+  "CV-RS": 7603281,
+  "CV-SL": 3374249,
+  "CV-CR": 3411925,
+  "CV-SD": 3411926,
+  "CV-SF": 3411927,
+  "CV-SV": 3374198,
+  "CV-TA": 3374161,
+  "CV-TS": 7602872,
+  "CY-01": 146267,
+  "CY-02": 146383,
+  "CZ-64": 3339536,
+  "CZ-52": 3339540,
+  "CZ-80": 3339573,
+  "CZ-72": 3339578,
+  "CZ-42": 3339577,
+  "DE-NI": 2862926,
+  "DE-NW": 2861876,
+  "DE-SN": 2842566,
+  "DE-ST": 2842565,
+  "DE-TH": 2822542,
+  "DK-82": 6418539,
+  "DK-81": 6418540,
+  "DK-85": 6418541,
+  "DK-83": 6418542,
+  "DO-03": 3512050,
+  "DO-01": 3496024,
+  "DO-06": 3508718,
+  "DO-07": 3507269,
+  "DO-09": 3505867,
+  "DO-19": 3493282,
+  "DO-10": 3504326,
+  "DO-11": 3503706,
+  "DO-28": 3496274,
+  "DO-17": 3495015,
+  "DO-27": 3492112,
+  "EG-DK": 361849,
+  "EG-KB": 360621,
+  "EG-SHR": 360016,
+  "EG-BNS": 359171,
+  "EG-KFS": 354500,
+  "ES-C": 3119840,
+  "ES-CL": 3336900,
+  "ES-CT": 3336901,
+  "ES-PV": 3336903,
+  "ES-IB": 2521383,
+  "ET-SW": 12902784,
+  "FI-19": 830708,
+  "FI-02": 830699,
+  "FI-03": 830682,
+  "FI-04": 830695,
+  "FI-07": 830675,
+  "FI-08": 830685,
+  "FI-13": 830686,
+  "FI-15": 830690,
+  "FI-14": 830667,
+  "FI-12": 830676,
+  "FR-BRE": 3030293,
+  "FR-20R": 3023519,
+  "FR-31": 3013767,
+  "FR-NAQ": 11071620,
+  "GQ-BN": 2566978,
+  "GQ-BS": 2566979,
+  "GQ-CS": 2566980,
+  "GQ-DJ": 12168385,
+  "GQ-KN": 2566981,
+  "GQ-LI": 2566982,
+  "GQ-WN": 2566983,
+  "GR-A": 6697803,
+  "GR-I": 6692632,
+  "GR-C": 6697811,
+  "GR-F": 6697805,
+  "GR-B": 6697801,
+  "GR-J": 6697807,
+  "GR-K": 6697806,
+  "GR-D": 6697804,
+  "GW-BM": 2374820,
+  "GW-OI": 2371071,
+  "GW-QU": 2370360,
+  "GW-TO": 2368955,
+  "HN-IB": 3608814,
+  "HR-07": 3337511,
+  "HR-12": 3337512,
+  "HR-19": 3337513,
+  "HR-18": 3337514,
+  "HR-04": 3337515,
+  "HR-06": 3337518,
+  "HR-02": 3337519,
+  "HR-09": 3337520,
+  "HR-20": 3337521,
+  "HR-14": 3337522,
+  "HR-11": 3337523,
+  "HR-08": 3337524,
+  "HR-03": 3337526,
+  "HR-17": 3337527,
+  "HR-05": 3337528,
+  "HR-10": 3337533,
+  "HR-16": 3337529,
+  "HR-13": 3337530,
+  "HR-01": 3337531,
+  "HR-15": 3337525,
+  "ID-BA": 1650535,
+  "ID-BT": 1923045,
+  "ID-JK": 1642907,
+  "ID-KB": 1641900,
+  "ID-KS": 1641899,
+  "ID-KT": 1641898,
+  "ID-KI": 1641897,
+  "ID-KU": 8604684,
+  "ID-BB": 1923047,
+  "ID-KR": 1996551,
+  "ID-NB": 1633792,
+  "ID-NT": 1633791,
+  "ID-PA": 1643012,
+  "ID-PB": 1996549,
+  "ID-PE": 12503512,
+  "ID-PS": 12503513,
+  "ID-PT": 12503511,
+  "ID-RI": 1629652,
+  "ID-SR": 1996550,
+  "ID-SN": 1626232,
+  "ID-ST": 1626231,
+  "ID-SG": 1626230,
+  "ID-SA": 1626229,
+  "ID-SB": 1626197,
+  "ID-SS": 1626196,
+  "AT-2": null,
+  "AT-3": null,
+  "AT-4": null,
+  "BF-TAP": null,
+  "BI-KR": null,
+  "BI-MW": null,
+  "BW-SO": null,
+  "CF-KB": null,
+  "CN-MO": null,
+  "CN-HK": null,
+  "CN-TW": null,
+  "CN-XZ": null,
+  "CV-B": null,
+  "CV-S": null,
+  "CZ-31": null,
+  "CZ-41": null,
+  "CZ-10": null,
+  "CZ-20": null,
+  "DE-BY": null,
+  "DK-84": null,
+  "DO-33": null,
+  "DO-34": null,
+  "DO-35": null,
+  "DO-36": null,
+  "DO-37": null,
+  "DO-38": null,
+  "DO-39": null,
+  "DO-40": null,
+  "DO-41": null,
+  "DO-42": null,
+  "EG-BH": 361370,
+  "EG-FYM": 361323,
+  "EG-GH": 361294,
+  "EG-IS": 361056,
+  "EG-MNF": 360689,
+  "ER-SK": 448502,
+  "ET-SN": null,
+  "FI-01": null,
+  "FR-6AE": null,
+  "FR-CP": null,
+  "FR-2A": 3023514,
+  "FR-971": null,
+  "FR-973": null,
+  "FR-2B": 3013793,
+  "FR-974": null,
+  "FR-972": null,
+  "FR-976": null,
+  "FR-69M": null,
+  "FR-NC": null,
+  "FR-PF": null,
+  "FR-BL": null,
+  "FR-MF": null,
+  "FR-PM": null,
+  "FR-TF": null,
+  "FR-WF": null,
+  "GB-BDG": null,
+  "GB-BNE": null,
+  "GB-BEX": null,
+  "GB-BEN": null,
+  "GB-BRY": null,
+  "GB-CMD": null,
+  "GB-CRY": null,
+  "GB-GRE": null,
+  "GB-HCK": null,
+  "GB-HMF": null,
+  "GB-HRY": null,
+  "GB-HRW": null,
+  "GB-HAV": null,
+  "GB-HIL": null,
+  "GB-HNS": null,
+  "GB-ISL": null,
+  "GB-KEC": null,
+  "GB-KTT": null,
+  "GB-LBH": null,
+  "GB-LEW": null,
+  "GB-MRT": null,
+  "GB-NWM": null,
+  "GB-RDB": null,
+  "GB-RIC": null,
+  "GB-SWK": null,
+  "GB-STN": null,
+  "GB-TWH": null,
+  "GB-WFT": null,
+  "GB-WND": null,
+  "GB-WSM": null,
+  "GQ-C": null,
+  "GQ-I": null,
+  "GR-G": 6697810,
+  "GR-M": 6697802,
+  "GR-L": 6697808,
+  "GR-H": 6697800,
+  "GR-69": 736572,
+  "GW-L": null,
+  "GW-N": null,
+  "GW-S": null,
+  "HU-BC": 9644288,
+  "HU-DE": 9644292,
+  "HU-DU": 9644766,
+  "HU-EG": 9644334,
+  "HU-HV": 9644278,
+  "HU-KV": 9644180,
+  "HU-KM": 9644271,
+  "HU-MI": 9644324,
+  "HU-NK": 9644172,
+  "HU-NY": 9644303,
+  "HU-ST": 9644345,
+  "HU-SD": 9644275,
+  "HU-SS": 9644776,
+  "HU-SH": 9644155,
+  "HU-SF": 9644767,
+  "HU-TB": 9644745,
+  "HU-ZE": 9644167,
+  "HU-ER": 9644353,
+  "ID-JW": null,
+  "ID-JB": 1642672,
+  "ID-JT": 1642669,
+  "ID-JI": 1642668,
+  "ID-KA": null,
+  "ID-NU": null,
+  "ID-PD": 12503510,
+  "ID-SM": null,
+  "ID-SU": 1213642,
+  "IQ-BA": 89341,
+  "IQ-KR": null,
+  "IQ-NI": 92877,
+  "IR-14": 139677,
+  "IR-29": 6201374,
+  "IR-28": 6201376,
+  "IR-17": 126878,
+  "IR-04": 142550,
+  "IR-03": 142549,
+  "IS-AKU": 2633275,
+  "IS-7": 3337405,
+  "IS-1": 3426182,
+  "IS-6": 3337404,
+  "IS-5": 3337403,
+  "IS-SEL": 3413544,
+  "IS-STY": 12508725,
+  "IS-8": 3337406,
+  "IS-2": 3426183,
+  "IS-4": 3426185,
+  "IS-3": 3426184,
+  "IT-FI": 3176958,
+  "IT-AQ": 3175120,
+  "IT-57": 3174004,
+  "IT-52": 3165361,
+  "JM-11": 3488708,
+  "JO-AT": 250199,
+  "KE-30": 184742,
+  "KG-Y": 1528260,
+  "KH-22": 1822210,
+  "KN-01": 3575476,
+  "KN-N": null,
+  "KN-02": 3575183,
+  "KN-03": 3575180,
+  "KN-04": 3575179,
+  "KN-05": 3575177,
+  "KN-06": 3575176,
+  "KN-07": 3575175,
+  "KN-K": null,
+  "KN-08": 3575173,
+  "KN-09": 3575172,
+  "KN-10": 3575171,
+  "KN-11": 3575168,
+  "KN-12": 3575165,
+  "KN-13": 3575164,
+  "KN-15": 3575114,
+  "KP-09": 2044245,
+  "KP-08": 1877450,
+  "KP-06": 1876888,
+  "KP-05": 1876884,
+  "KP-02": 1871952,
+  "KR-43": 1845106,
+  "KZ-10": 12510143,
+  "KZ-15": 610688,
+  "KZ-23": 609862,
+  "KZ-27": 607847,
+  "KZ-35": 1523401,
+  "KZ-39": 1521671,
+  "KZ-43": 1521406,
+  "KZ-47": 608879,
+  "KZ-59": 1519367,
+  "KZ-63": 1517381,
+  "KZ-33": 12510144,
+  "LB-JA": 279894,
+  "LB-AS": 278297,
+  "LB-BA": 276780,
+  "LB-JL": 273607,
+  "LT-01": 601179,
+  "LT-AL": 864389,
+  "LT-02": 601086,
+  "LT-KU": 864477,
+  "LT-15": 598318,
+  "LT-17": 9610102,
+  "LT-KL": 864478,
+  "LT-20": 598099,
+  "LT-MR": 864479,
+  "LT-31": 596240,
+  "LT-PN": 864480,
+  "LT-32": 596132,
+  "LT-TA": 864482,
+  "LT-TE": 864483,
+  "LT-UT": 864484,
+  "LT-VL": 864485,
+  "LT-57": 593118,
+  "LT-SA": 864481,
+  "LT-43": 594743,
+  "LV-112": 12276857,
+  "LY-TB": 2210245,
+  "MC-FO": null,
+  "MC-JE": null,
+  "MC-CL": null,
+  "MC-CO": null,
+  "MC-GA": null,
+  "MC-SO": null,
+  "MC-LA": null,
+  "MC-MA": null,
+  "MC-MO": null,
+  "MC-MG": null,
+  "MC-MC": null,
+  "MC-MU": null,
+  "MC-PH": null,
+  "MC-SR": null,
+  "MC-SD": null,
+  "MC-SP": null,
+  "MC-VR": null,
+  "MD-SN": 858889,
+  "MG-T": null,
+  "MG-F": null,
+  "MG-M": null,
+  "MG-A": null,
+  "MG-U": null,
+  "MH-ALK": 7303493,
+  "MH-ALL": 7303492,
+  "MH-ARN": 7303494,
+  "MH-AUR": 7303495,
+  "MH-KIL": null,
+  "MH-EBO": 7303498,
+  "MH-LIB": 7303522,
+  "MH-ENI": null,
+  "MH-JAB": 7303519,
+  "MH-JAL": 7303501,
+  "MH-KWA": 7303502,
+  "MH-LAE": 7303503,
+  "MH-LIK": 7303504,
+  "MH-MAJ": 7303505,
+  "MH-MAL": 7303506,
+  "MH-MEJ": 7303523,
+  "MH-MIL": 7303507,
+  "MH-NMK": 7303508,
+  "MH-NMU": 7303509,
+  "MH-L": null,
+  "MH-T": null,
+  "MH-RON": 7303510,
+  "MH-UJA": 7303514,
+  "MH-UTI": 7303516,
+  "MH-WTH": 7303517,
+  "MH-WTJ": 7303518,
+  "MK-801": 7056266,
+  "MK-803": 7056269,
+  "MK-804": 863853,
+  "MK-805": 863850,
+  "MK-808": 863860,
+  "MK-809": 863863,
+  "MK-607": 863892,
+  "MK-811": 863894,
+  "MK-815": 863836,
+  "MK-817": 863904,
+  "MN-061": 2031799,
+  "MN-059": 2031740,
+  "MN-047": 2028849,
+  "MR-14": 11496392,
+  "MR-13": 11496391,
+  "MR-15": 11496393,
+  "MT-20": 8299724,
+  "MT-29": 8299719,
+  "MT-34": 8299722,
+  "MT-31": 8299720,
+  "MT-45": 8299745,
+  "MT-46": 8299744,
+  "MT-65": 8299764,
+  "MT-66": 8299763,
+  "MV-00": 10346475,
+  "MV-29": 1281945,
+  "MY-07": 1733047,
+  "NG-FC": 2352776,
+  "NI-AN": 3830307,
+  "NI-AS": 3830308,
+  "NL-AW": null,
+  "NL-BQ1": null,
+  "NL-CW": null,
+  "NL-NB": 2749990,
+  "NL-NH": 2749879,
+  "NL-BQ2": null,
+  "NL-BQ3": null,
+  "NL-SX": null,
+  "NL-ZH": 2743698,
+  "NO-22": null,
+  "NO-21": null,
+  "NO-30": null,
+  "OM-ZA": 411739,
+  "OM-BJ": 411736,
+  "OM-SJ": 411738,
+  "OM-BS": 8394434,
+  "OM-SS": 8394433,
+  "PA-NB": 7303688,
+  "PG-NPP": 2089478,
+  "PG-SAN": 2087246,
+  "PL-02": 3337492,
+  "PL-06": 858785,
+  "PL-08": 3337494,
+  "PL-14": 858787,
+  "PL-12": 858786,
+  "PL-18": 858788,
+  "PL-28": 858791,
+  "PL-30": 3337498,
+  "PL-32": 3337499,
+  "PL-10": 3337493,
+  "PS-HBN": 7870658,
+  "PS-JEM": 7870654,
+  "PS-JRH": 7870653,
+  "PS-BTH": 7870463,
+  "PS-DEB": 7870268,
+  "PS-JEN": 7828733,
+  "PS-KYS": 7871092,
+  "PS-NBS": 7870555,
+  "PS-QQA": 7870649,
+  "PS-RFH": 7870260,
+  "PS-RBH": 7870657,
+  "PS-SLT": 7870652,
+  "PS-TBS": 7870648,
+  "PS-TKM": 7870644,
+  "PT-20": 3411865,
+  "QA-KH": 389465,
+  "QA-SH": 11777514,
+  "QA-ZA": 8030540,
+  "RO-B": 683504,
+  "RS-00": 8199669,
+  "RS-14": 7581582,
+  "RS-11": 7581794,
+  "RS-23": 7581795,
+  "RS-04": 7581797,
+  "RS-06": 7581796,
+  "RS-09": 7581798,
+  "RS-KM": null,
+  "RS-25": null,
+  "RS-28": null,
+  "RS-29": null,
+  "RS-08": 7581799,
+  "RS-17": 7581800,
+  "RS-20": 7581801,
+  "RS-26": null,
+  "RS-22": 7581803,
+  "RS-10": 7581804,
+  "RS-13": 7581805,
+  "RS-27": null,
+  "RS-24": 7581802,
+  "RS-19": 7581806,
+  "RS-18": 7581807,
+  "RS-03": 7581905,
+  "RS-01": 7581808,
+  "RS-02": 7581906,
+  "RS-07": 7581907,
+  "RS-21": 7581909,
+  "RS-15": 7581910,
+  "RS-05": 7581911,
+  "RS-16": 7581912,
+  "RS-12": 7581908,
+  "RU-ALT": 1506272,
+  "RU-AMU": 2027748,
+  "RU-AST": 580491,
+  "RU-BEL": 578071,
+  "RU-CE": 569665,
+  "RU-CHU": 2126099,
+  "RU-CU": 567395,
+  "RU-YEV": 2026639,
+  "RU-KHM": 1503773,
+  "RU-IVA": 555235,
+  "RU-YAN": 1486462,
+  "RU-YAR": 468898,
+  "RU-KB": 554667,
+  "RU-KLU": 553899,
+  "RU-KC": 552927,
+  "RU-KEM": 1503900,
+  "RU-KIR": 548389,
+  "RU-KDA": 542415,
+  "RU-KYA": 1502020,
+  "RU-KGN": 1501312,
+  "RU-MAG": 2123627,
+  "RU-MOS": 524925,
+  "RU-MOW": 524894,
+  "RU-NEN": 522652,
+  "RU-NIZ": 559838,
+  "RU-NGR": 519324,
+  "RU-OMS": 1496152,
+  "RU-ORE": 515001,
+  "RU-ORL": 514801,
+  "RU-PNZ": 511555,
+  "RU-PER": 511180,
+  "RU-PRI": 2017623,
+  "RU-PSK": 504338,
+  "RU-ROS": 501165,
+  "RU-SAK": 2121529,
+  "RU-SPE": 536203,
+  "RU-SAR": 498671,
+  "RU-SE": 519969,
+  "RU-TAM": 484638,
+  "RU-TYU": 1488747,
+  "RU-TVE": 480041,
+  "RU-UD": 479613,
+  "RU-VLA": 826294,
+  "RU-VGG": 472755,
+  "RU-VLG": 472454,
+  "RU-VOR": 472039,
+  "SA-03": 109224,
+  "SA-08": 109579,
+  "SA-01": 108411,
+  "SA-04": 108241,
+  "SA-02": 104514,
+  "SB-CT": 9259067,
+  "SD-DE": 8394435,
+  "SD-DW": 408658,
+  "SD-DS": 408660,
+  "SD-KS": 408661,
+  "SD-DN": 408666,
+  "SG-02": null,
+  "SG-03": null,
+  "SG-04": null,
+  "SG-05": null,
+  "SK-BC": 3343954,
+  "SK-NI": 3343956,
+  "SK-TC": 3343957,
+  "SK-TA": 3343958,
+  "SK-ZI": 3056506,
+  "SL-NW": 11919533,
+  "SO-JD": 56084,
+  "SO-JH": 56083,
+  "SO-SD": 51967,
+  "SO-SH": 51966,
+  "ST-02": 11204213,
+  "ST-03": 11994811,
+  "ST-04": 8299560,
+  "ST-05": 8299561,
+  "ST-06": 11203894,
+  "ST-01": 11203920,
+  "SY-LA": 173578,
+  "SY-QU": 173336,
+  "SY-RA": 172957,
+  "SY-DY": 170792,
+  "SY-HL": 170062,
+  "TD-BG": 7603255,
+  "TH-16": 1609031,
+  "TH-82": 1151462,
+  "TH-S": null,
+  "TJ-GB": 1221692,
+  "TJ-RA": 6452615,
+  "TN-12": 2473245,
+  "TN-33": 2473637,
+  "TW-CHA": 1679134,
+  "TW-CYI": 1678834,
+  "TW-CYQ": 1678835,
+  "TW-HSZ": 1675103,
+  "TW-HSQ": 1675107,
+  "TW-HUA": 1674502,
+  "TW-KHH": 9613373,
+  "TW-KEE": 6724654,
+  "TW-KIN": 1676511,
+  "TW-LIE": 6724655,
+  "TW-MIA": 1671968,
+  "TW-NAN": 1671564,
+  "TW-PEN": 1670651,
+  "TW-PIF": 1670479,
+  "TW-TXG": 9613500,
+  "TW-TTT": 1668292,
+  "TW-TAO": 1667900,
+  "TW-ILA": 1674197,
+  "TW-YUN": 1665194,
+  "TZ-11": 148728,
+  "UA-43": 703883,
+  "UA-32": 703446,
+  "UA-46": 702549,
+  "UA-56": 695592,
+  "UA-59": 692196,
+  "UA-23": 687699,
+  "UG-236": null,
+  "UG-335": null,
+  "UG-126": null,
+  "UG-433": null,
+  "UG-432": null,
+  "UG-434": null,
+  "UG-333": null,
+  "UG-336": null,
+  "UG-334": null,
+  "UG-337": null,
+  "UG-435": null,
+  "US-AS": null,
+  "US-GU": null,
+  "US-MP": null,
+  "US-PR": null,
+  "US-UM": null,
+  "US-VI": null,
+  "UZ-BU": 1114929,
+  "UZ-FA": 1484845,
+  "UZ-QR": 453752,
+  "VE-A": 3640847,
+  "VE-X": 3830309,
+  "VN-43": null,
+  "VN-57": null,
+  "VN-58": null,
+  "VN-40": null,
+  "VN-55": null,
+  "VN-54": null,
+  "VN-53": null,
+  "VN-50": null,
+  "VN-63": null,
+  "VN-14": null,
+  "VN-61": null,
+  "VN-47": null,
+  "VN-28": null,
+  "VN-41": null,
+  "VN-67": null,
+  "VN-36": null,
+  "VN-27": null,
+  "VN-52": null,
+  "VN-20": null,
+  "VN-46": null,
+  "VN-51": null,
+  "VN-70": null,
+  "VN-06": null,
+  "YE-SU": 9645387,
+  "YE-TA": 70222,
+  "YE-SN": 71132,
+  "YE-SD": 71333,
+  "YE-HD": 75411
 }

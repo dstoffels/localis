@@ -7,6 +7,7 @@ class SubdivisionMap:
         self._by_id: dict[int, SubdivisionModel] = {}
         self._by_geo_code: dict[str, SubdivisionModel] = {}
         self._by_iso_code: dict[str, SubdivisionModel] = {}
+        self._by_geonames_id: dict[int, SubdivisionModel] = {}
 
     def add(self, sub: SubdivisionModel) -> None:
         country_map = self._subs.setdefault(sub.country.alpha2, {})
@@ -17,9 +18,15 @@ class SubdivisionMap:
             self._by_iso_code[sub.iso_code] = sub
         if sub.geonames_code:
             self._by_geo_code[sub.geonames_code] = sub
+        if sub.geonames_id is not None:
+            self._by_geonames_id[sub.geonames_id] = sub
 
     def get(
-        self, id: int = None, geo_code: str = None, iso_code: str = None
+        self,
+        id: int = None,
+        geo_code: str = None,
+        iso_code: str = None,
+        geonames_id: int = None,
     ) -> SubdivisionModel:
         if id is not None:
             return self._by_id.get(id)
@@ -27,6 +34,8 @@ class SubdivisionMap:
             return self._by_geo_code.get(geo_code)
         if iso_code is not None:
             return self._by_iso_code.get(iso_code)
+        if geonames_id is not None:
+            return self._by_geonames_id.get(geonames_id)
         return None
 
     def filter(
@@ -62,7 +71,12 @@ class SubdivisionMap:
         return all
 
     def refresh(self):
-        self._subs, self._by_geo_code, self._by_iso_code = {}, {}, {}
+        self._subs, self._by_geo_code, self._by_iso_code, self._by_geonames_id = (
+            {},
+            {},
+            {},
+            {},
+        )
         for sub in self._by_id.values():
             sub.admin_level = 2 if sub.parent else 1
             self.add(sub)
@@ -81,14 +95,3 @@ class SubdivisionMap:
     def to_geocode_map(self) -> dict[str, SubdivisionModel]:
         """Return a plain dict keyed by geonames_code, matching the shape load_subdivisions() reconstructs from disk."""
         return self._by_geo_code
-
-
-def get_geonames_candidates(
-    iso_sub: SubdivisionModel,
-    submap: SubdivisionMap,
-) -> list[SubdivisionModel]:
-    """Retrieve candidate GeoNames subdivisions for a given ISO subdivision and admin level."""
-    return sorted(
-        submap.filter(iso_sub.country.alpha2, iso_sub.admin_level),
-        key=lambda x: x.name,
-    )

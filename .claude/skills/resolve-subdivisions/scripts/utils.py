@@ -42,9 +42,10 @@ def read_orphaned() -> dict[str, dict]:
     return _read_json(ORPHANED_PATH) or {}
 
 
-def write_resolution(iso_code: str, entry: dict) -> None:
+def write_resolution(iso_code: str, geonames_id: int | None) -> None:
+    """geonames_id of None means "add as-is"."""
     resolution_map = _read_json(RESOLUTION_MAP_PATH) or {}
-    resolution_map[iso_code] = entry
+    resolution_map[iso_code] = geonames_id
     RESOLUTION_MAP_PATH.write_text(
         json.dumps(resolution_map, indent=2, ensure_ascii=False), encoding="utf-8"
     )
@@ -70,7 +71,7 @@ def _get_iso_subs() -> dict[str, SubdivisionModel]:
 def _format_candidate(candidate: SubdivisionModel) -> tuple[int, str]:
     names = ", ".join([candidate.name, *candidate.aliases])
     return (
-        candidate.hashid,
+        candidate.geonames_id,
         f"{names} - [{candidate.admin_level}]",
     )
 
@@ -130,14 +131,14 @@ def get_candidates(
     return dict(_format_candidate(c) for c in candidates)
 
 
-def is_valid_candidate(iso_code: str, geo_sub_hashid: int) -> tuple[bool, str]:
-    """(True, "") if geo_sub_hashid belongs to iso_code's own country's candidate pool and hasn't already been claimed by another orphan; otherwise (False, <error message>)."""
+def is_valid_candidate(iso_code: str, geo_sub_geonames_id: int) -> tuple[bool, str]:
+    """(True, "") if geo_sub_geonames_id belongs to iso_code's own country's candidate pool and hasn't already been claimed by another orphan; otherwise (False, <error message>)."""
 
     iso_sub = _get_iso_subs().get(iso_code)
     if iso_sub is None:
         return False, "ERROR: Invalid candidate: ISO subdivision not found"
 
-    candidate = get_geonames_submap().get(geo_sub_hashid)
+    candidate = get_geonames_submap().get(geonames_id=geo_sub_geonames_id)
     if candidate is None:
         return False, "ERROR: Invalid candidate: not found"
 

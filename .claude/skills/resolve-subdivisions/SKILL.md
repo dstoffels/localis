@@ -24,7 +24,7 @@ disallowed-tools: Bash Read Grep Glob Edit Write Agent WebFetch
 - If iterating over candidates of the same country as the previous orphan, you can use that previous context to inform your decision, especially with large numbers of subdivisions within that country.
 
 **IF** you have high confidence that this ISO subdivision and one specific candidate are the same place (a transliteration difference, an old vs. current name, a local vs. official form, etc.):
-  1. **CALL** the `merge` tool with `candidate_hashid` and any `aliases` if applicable.
+  1. **CALL** the `merge` tool with `candidate_geonames_id`.
   2. Return to Step 1.
 
 **IF** none of the candidates fit:
@@ -32,7 +32,7 @@ disallowed-tools: Bash Read Grep Glob Edit Write Agent WebFetch
 
 ### Step 3. Add a new entry
 **IF** none of the candidates fit, but you know for **certain** the orphaned subdivision is a valid, confirmed entity, current or historical:
-  1. **CALL** the `add` tool with any `aliases` if applicable.
+  1. **CALL** the `add` tool.
   2. Return to Step 1.
 
 **ELSE**: Proceed to Step 4.
@@ -41,11 +41,11 @@ disallowed-tools: Bash Read Grep Glob Edit Write Agent WebFetch
 **CALL** the `Websearch` tool with the only orphan's `name` and `iso_code` to gather additional information about the orphaned subdivision. DO NOT add additional search terms.
 
 **IF** the websearch reveals a certain match, that you have high confidence that this ISO subdivision and a specific candidate are the *same place*:
-  1. **CALL** the `merge` tool with `candidate_hashid` and any `aliases` if applicable.
+  1. **CALL** the `merge` tool with `candidate_geonames_id`.
   2. Return to Step 1.
 
 **IF** no confident match is found after the websearch, but the orphan is now a confirmed and valid entity:
-  1. **CALL** the `add` tool with any `aliases` if applicable.
+  1. **CALL** the `add` tool.
   2. Return to Step 1.
 
 **ELSE**: Proceed to Step 5.
@@ -53,9 +53,8 @@ disallowed-tools: Bash Read Grep Glob Edit Write Agent WebFetch
 ### Step 5. Escalate for human review
 **CALL** the `review` tool to dump the orphan to `review_output.json` for the user to manually review and make a decision. Offer the user the following two options along with a link to open `review_output.json` in the IDE and then STOP this turn and wait for the user to respond:
   1. `Add` the orphan as a new entry.
-  2. `Merge` the orphan with an existing candidate by inputting the hashid.
+  2. `Merge` the orphan with an existing candidate by inputting the geonames_id.
 
 ## Guardrails
-- Never fabricate a `hashid`, it must come from that specific entry's own `candidates` list
-- Never pass the orphan's own name in the names argument when calling `merge` or `add`
+- Never fabricate a `geonames_id`, it must come from that specific entry's own `candidates` list
 

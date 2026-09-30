@@ -1,0 +1,3102 @@
+{
+  "AM-VD": {
+    "names": [],
+    "geonames_id": 409315
+  },
+  "AT-6": {
+    "names": [],
+    "geonames_id": 2764581
+  },
+  "AT-9": {
+    "names": [],
+    "geonames_id": 2761367
+  },
+  "AZ-NX": {
+    "names": [],
+    "geonames_id": 147435
+  },
+  "AZ-NV": {
+    "names": [],
+    "geonames_id": 148412
+  },
+  "AZ-XCI": {
+    "names": [],
+    "geonames_id": 148449
+  },
+  "AZ-XVD": {
+    "names": [],
+    "geonames_id": 409423
+  },
+  "BA-BIH": {
+    "names": [],
+    "geonames_id": 3229999
+  },
+  "BD-A": {
+    "names": [],
+    "geonames_id": 1337229
+  },
+  "BD-22": {
+    "names": [],
+    "geonames_id": 1337207
+  },
+  "BE-BRU": {
+    "names": [],
+    "geonames_id": 2800867
+  },
+  "BE-VLG": {
+    "names": [],
+    "geonames_id": 3337388
+  },
+  "BF-KMD": {
+    "names": [],
+    "geonames_id": 2597259
+  },
+  "BF-KOS": {
+    "names": [
+      "Kossi"
+    ],
+    "geonames_id": 2359027
+  },
+  "BF-LOR": {
+    "names": [],
+    "geonames_id": 2597264
+  },
+  "BF-SMT": {
+    "names": [
+      "Sanmatenga"
+    ],
+    "geonames_id": 2355914
+  },
+  "BF-SOM": {
+    "names": [
+      "Soum"
+    ],
+    "geonames_id": 2355248
+  },
+  "BH-14": {
+    "names": [],
+    "geonames_id": 7090972
+  },
+  "BH-13": {
+    "names": [],
+    "geonames_id": 7090954
+  },
+  "BH-17": {
+    "names": [],
+    "geonames_id": 7090974
+  },
+  "BO-B": {
+    "names": [],
+    "geonames_id": 3923172
+  },
+  "BT-43": {
+    "names": [],
+    "geonames_id": 1337287
+  },
+  "BY-BR": {
+    "names": [],
+    "geonames_id": 629631
+  },
+  "BY-HO": {
+    "names": [],
+    "geonames_id": 628281
+  },
+  "BY-MA": {
+    "names": [],
+    "geonames_id": 625073
+  },
+  "BZ-SC": {
+    "names": [
+      "Stann Creek"
+    ],
+    "geonames_id": 3580975
+  },
+  "CD-BC": {
+    "names": [
+      "Bas-Congo"
+    ],
+    "geonames_id": 2317277
+  },
+  "CD-NK": {
+    "names": [],
+    "geonames_id": 206938
+  },
+  "CD-SK": {
+    "names": [],
+    "geonames_id": 205413
+  },
+  "CH-BS": {
+    "names": [],
+    "geonames_id": 2661602
+  },
+  "CH-GR": {
+    "names": [],
+    "geonames_id": 2660522
+  },
+  "CN-NM": {
+    "names": [],
+    "geonames_id": 2035607
+  },
+  "CO-DC": {
+    "names": [],
+    "geonames_id": 3688685
+  },
+  "CU-03": {
+    "names": [],
+    "geonames_id": 3564073
+  },
+  "CV-BV": {
+    "names": [],
+    "geonames_id": 3374855
+  },
+  "CV-BR": {
+    "names": [],
+    "geonames_id": 3374832
+  },
+  "CV-MA": {
+    "names": [],
+    "geonames_id": 3374487
+  },
+  "CV-MO": {
+    "names": [],
+    "geonames_id": 3411924
+  },
+  "CV-PA": {
+    "names": [],
+    "geonames_id": 3374391
+  },
+  "CV-PN": {
+    "names": [],
+    "geonames_id": 7602868
+  },
+  "CV-PR": {
+    "names": [],
+    "geonames_id": 3374332
+  },
+  "CV-RB": {
+    "names": [],
+    "geonames_id": 7602869
+  },
+  "CV-RG": {
+    "names": [],
+    "geonames_id": 3374274
+  },
+  "CV-RS": {
+    "names": [],
+    "geonames_id": 7603281
+  },
+  "CV-SL": {
+    "names": [],
+    "geonames_id": 3374249
+  },
+  "CV-CR": {
+    "names": [],
+    "geonames_id": 3411925
+  },
+  "CV-SD": {
+    "names": [],
+    "geonames_id": 3411926
+  },
+  "CV-SF": {
+    "names": [],
+    "geonames_id": 3411927
+  },
+  "CV-SV": {
+    "names": [],
+    "geonames_id": 3374198
+  },
+  "CV-TA": {
+    "names": [],
+    "geonames_id": 3374161
+  },
+  "CV-TS": {
+    "names": [],
+    "geonames_id": 7602872
+  },
+  "CY-01": {
+    "names": [
+      "Lefkoşa"
+    ],
+    "geonames_id": 146267
+  },
+  "CY-02": {
+    "names": [
+      "Leymasun"
+    ],
+    "geonames_id": 146383
+  },
+  "CZ-64": {
+    "names": [],
+    "geonames_id": 3339536
+  },
+  "CZ-52": {
+    "names": [],
+    "geonames_id": 3339540
+  },
+  "CZ-80": {
+    "names": [],
+    "geonames_id": 3339573
+  },
+  "CZ-72": {
+    "names": [],
+    "geonames_id": 3339578
+  },
+  "CZ-42": {
+    "names": [],
+    "geonames_id": 3339577
+  },
+  "DE-NI": {
+    "names": [],
+    "geonames_id": 2862926
+  },
+  "DE-NW": {
+    "names": [],
+    "geonames_id": 2861876
+  },
+  "DE-SN": {
+    "names": [],
+    "geonames_id": 2842566
+  },
+  "DE-ST": {
+    "names": [],
+    "geonames_id": 2842565
+  },
+  "DE-TH": {
+    "names": [],
+    "geonames_id": 2822542
+  },
+  "DK-82": {
+    "names": [],
+    "geonames_id": 6418539
+  },
+  "DK-81": {
+    "names": [],
+    "geonames_id": 6418540
+  },
+  "DK-85": {
+    "names": [],
+    "geonames_id": 6418541
+  },
+  "DK-83": {
+    "names": [],
+    "geonames_id": 6418542
+  },
+  "DO-03": {
+    "names": [],
+    "geonames_id": 3512050
+  },
+  "DO-01": {
+    "names": [],
+    "geonames_id": 3496024
+  },
+  "DO-06": {
+    "names": [],
+    "geonames_id": 3508718
+  },
+  "DO-07": {
+    "names": [],
+    "geonames_id": 3507269
+  },
+  "DO-09": {
+    "names": [],
+    "geonames_id": 3505867
+  },
+  "DO-19": {
+    "names": [],
+    "geonames_id": 3493282
+  },
+  "DO-10": {
+    "names": [],
+    "geonames_id": 3504326
+  },
+  "DO-11": {
+    "names": [],
+    "geonames_id": 3503706
+  },
+  "DO-28": {
+    "names": [],
+    "geonames_id": 3496274
+  },
+  "DO-17": {
+    "names": [],
+    "geonames_id": 3495015
+  },
+  "DO-27": {
+    "names": [],
+    "geonames_id": 3492112
+  },
+  "EG-DK": {
+    "names": [],
+    "geonames_id": 361849
+  },
+  "EG-KB": {
+    "names": [],
+    "geonames_id": 360621
+  },
+  "EG-SHR": {
+    "names": [],
+    "geonames_id": 360016
+  },
+  "EG-BNS": {
+    "names": [],
+    "geonames_id": 359171
+  },
+  "EG-KFS": {
+    "names": [],
+    "geonames_id": 354500
+  },
+  "ES-C": {
+    "names": [],
+    "geonames_id": 3119840
+  },
+  "ES-CL": {
+    "names": [],
+    "geonames_id": 3336900
+  },
+  "ES-CT": {
+    "names": [],
+    "geonames_id": 3336901
+  },
+  "ES-PV": {
+    "names": [],
+    "geonames_id": 3336903
+  },
+  "ES-IB": {
+    "names": [],
+    "geonames_id": 2521383
+  },
+  "ET-SW": {
+    "names": [],
+    "geonames_id": 12902784
+  },
+  "FI-19": {
+    "names": [],
+    "geonames_id": 830708
+  },
+  "FI-02": {
+    "names": [],
+    "geonames_id": 830699
+  },
+  "FI-03": {
+    "names": [],
+    "geonames_id": 830682
+  },
+  "FI-04": {
+    "names": [],
+    "geonames_id": 830695
+  },
+  "FI-07": {
+    "names": [],
+    "geonames_id": 830675
+  },
+  "FI-08": {
+    "names": [],
+    "geonames_id": 830685
+  },
+  "FI-13": {
+    "names": [],
+    "geonames_id": 830686
+  },
+  "FI-15": {
+    "names": [],
+    "geonames_id": 830690
+  },
+  "FI-14": {
+    "names": [],
+    "geonames_id": 830667
+  },
+  "FI-12": {
+    "names": [],
+    "geonames_id": 830676
+  },
+  "FR-BRE": {
+    "names": [],
+    "geonames_id": 3030293
+  },
+  "FR-20R": {
+    "names": [],
+    "geonames_id": 3023519
+  },
+  "FR-31": {
+    "names": [],
+    "geonames_id": 3013767
+  },
+  "FR-NAQ": {
+    "names": [],
+    "geonames_id": 11071620
+  },
+  "GQ-BN": {
+    "names": [],
+    "geonames_id": 2566978
+  },
+  "GQ-BS": {
+    "names": [],
+    "geonames_id": 2566979
+  },
+  "GQ-CS": {
+    "names": [],
+    "geonames_id": 2566980
+  },
+  "GQ-DJ": {
+    "names": [],
+    "geonames_id": 12168385
+  },
+  "GQ-KN": {
+    "names": [],
+    "geonames_id": 2566981
+  },
+  "GQ-LI": {
+    "names": [],
+    "geonames_id": 2566982
+  },
+  "GQ-WN": {
+    "names": [],
+    "geonames_id": 2566983
+  },
+  "GR-A": {
+    "names": [],
+    "geonames_id": 6697803
+  },
+  "GR-I": {
+    "names": [],
+    "geonames_id": 6692632
+  },
+  "GR-C": {
+    "names": [],
+    "geonames_id": 6697811
+  },
+  "GR-F": {
+    "names": [],
+    "geonames_id": 6697805
+  },
+  "GR-B": {
+    "names": [],
+    "geonames_id": 6697801
+  },
+  "GR-J": {
+    "names": [],
+    "geonames_id": 6697807
+  },
+  "GR-K": {
+    "names": [],
+    "geonames_id": 6697806
+  },
+  "GR-D": {
+    "names": [],
+    "geonames_id": 6697804
+  },
+  "GW-BM": {
+    "names": [],
+    "geonames_id": 2374820
+  },
+  "GW-OI": {
+    "names": [],
+    "geonames_id": 2371071
+  },
+  "GW-QU": {
+    "names": [],
+    "geonames_id": 2370360
+  },
+  "GW-TO": {
+    "names": [],
+    "geonames_id": 2368955
+  },
+  "HN-IB": {
+    "names": [
+      "Islas de la Bahía"
+    ],
+    "geonames_id": 3608814
+  },
+  "HR-07": {
+    "names": [
+      "Bjelovarsko-bilogorska županija"
+    ],
+    "geonames_id": 3337511
+  },
+  "HR-12": {
+    "names": [
+      "Brodsko-posavska županija"
+    ],
+    "geonames_id": 3337512
+  },
+  "HR-19": {
+    "names": [
+      "Dubrovačko-neretvanska županija"
+    ],
+    "geonames_id": 3337513
+  },
+  "HR-18": {
+    "names": [
+      "Istarska županija"
+    ],
+    "geonames_id": 3337514
+  },
+  "HR-04": {
+    "names": [
+      "Karlovačka županija"
+    ],
+    "geonames_id": 3337515
+  },
+  "HR-06": {
+    "names": [
+      "Koprivničko-križevačka županija"
+    ],
+    "geonames_id": 3337518
+  },
+  "HR-02": {
+    "names": [
+      "Krapinsko-zagorska županija"
+    ],
+    "geonames_id": 3337519
+  },
+  "HR-09": {
+    "names": [
+      "Ličko-senjska županija"
+    ],
+    "geonames_id": 3337520
+  },
+  "HR-20": {
+    "names": [
+      "Međimurska županija"
+    ],
+    "geonames_id": 3337521
+  },
+  "HR-14": {
+    "names": [
+      "Osječko-baranjska županija"
+    ],
+    "geonames_id": 3337522
+  },
+  "HR-11": {
+    "names": [
+      "Požeško-slavonska županija"
+    ],
+    "geonames_id": 3337523
+  },
+  "HR-08": {
+    "names": [
+      "Primorsko-goranska županija"
+    ],
+    "geonames_id": 3337524
+  },
+  "HR-03": {
+    "names": [
+      "Sisačko-moslavačka županija"
+    ],
+    "geonames_id": 3337526
+  },
+  "HR-17": {
+    "names": [
+      "Splitsko-dalmatinska županija"
+    ],
+    "geonames_id": 3337527
+  },
+  "HR-05": {
+    "names": [
+      "Varaždinska županija"
+    ],
+    "geonames_id": 3337528
+  },
+  "HR-10": {
+    "names": [
+      "Virovitičko-podravska županija"
+    ],
+    "geonames_id": 3337533
+  },
+  "HR-16": {
+    "names": [],
+    "geonames_id": 3337529
+  },
+  "HR-13": {
+    "names": [],
+    "geonames_id": 3337530
+  },
+  "HR-01": {
+    "names": [],
+    "geonames_id": 3337531
+  },
+  "HR-15": {
+    "names": [],
+    "geonames_id": 3337525
+  },
+  "ID-BA": {
+    "names": [],
+    "geonames_id": 1650535
+  },
+  "ID-BT": {
+    "names": [],
+    "geonames_id": 1923045
+  },
+  "ID-JK": {
+    "names": [],
+    "geonames_id": 1642907
+  },
+  "ID-KB": {
+    "names": [
+      "West Kalimantan"
+    ],
+    "geonames_id": 1641900
+  },
+  "ID-KS": {
+    "names": [
+      "South Kalimantan"
+    ],
+    "geonames_id": 1641899
+  },
+  "ID-KT": {
+    "names": [
+      "Central Kalimantan"
+    ],
+    "geonames_id": 1641898
+  },
+  "ID-KI": {
+    "names": [
+      "East Kalimantan"
+    ],
+    "geonames_id": 1641897
+  },
+  "ID-KU": {
+    "names": [
+      "North Kalimantan"
+    ],
+    "geonames_id": 8604684
+  },
+  "ID-BB": {
+    "names": [
+      "Bangka-Belitung Islands"
+    ],
+    "geonames_id": 1923047
+  },
+  "ID-KR": {
+    "names": [
+      "Riau Islands"
+    ],
+    "geonames_id": 1996551
+  },
+  "ID-NB": {
+    "names": [
+      "West Nusa Tenggara"
+    ],
+    "geonames_id": 1633792
+  },
+  "ID-NT": {
+    "names": [
+      "East Nusa Tenggara"
+    ],
+    "geonames_id": 1633791
+  },
+  "ID-PA": {
+    "names": [],
+    "geonames_id": 1643012
+  },
+  "ID-PB": {
+    "names": [
+      "West Papua"
+    ],
+    "geonames_id": 1996549
+  },
+  "ID-PE": {
+    "names": [
+      "Highland Papua"
+    ],
+    "geonames_id": 12503512
+  },
+  "ID-PS": {
+    "names": [
+      "South Papua"
+    ],
+    "geonames_id": 12503513
+  },
+  "ID-PT": {
+    "names": [
+      "Central Papua"
+    ],
+    "geonames_id": 12503511
+  },
+  "ID-RI": {
+    "names": [],
+    "geonames_id": 1629652
+  },
+  "ID-SR": {
+    "names": [
+      "West Sulawesi"
+    ],
+    "geonames_id": 1996550
+  },
+  "ID-SN": {
+    "names": [
+      "South Sulawesi"
+    ],
+    "geonames_id": 1626232
+  },
+  "ID-ST": {
+    "names": [
+      "Central Sulawesi"
+    ],
+    "geonames_id": 1626231
+  },
+  "ID-SG": {
+    "names": [
+      "Southeast Sulawesi"
+    ],
+    "geonames_id": 1626230
+  },
+  "ID-SA": {
+    "names": [
+      "North Sulawesi"
+    ],
+    "geonames_id": 1626229
+  },
+  "ID-SB": {
+    "names": [
+      "West Sumatra"
+    ],
+    "geonames_id": 1626197
+  },
+  "ID-SS": {
+    "names": [
+      "South Sumatra"
+    ],
+    "geonames_id": 1626196
+  },
+  "AT-2": {
+    "added": true,
+    "names": [
+      "Kärnten",
+      "Carinthia"
+    ]
+  },
+  "AT-3": {
+    "added": true,
+    "names": [
+      "Niederösterreich",
+      "Lower Austria"
+    ]
+  },
+  "AT-4": {
+    "added": true,
+    "names": [
+      "Oberösterreich",
+      "Upper Austria"
+    ]
+  },
+  "BF-TAP": {
+    "added": true,
+    "names": [
+      "Tapoa Province"
+    ]
+  },
+  "BI-KR": {
+    "added": true,
+    "names": [
+      "Karuzi Province"
+    ]
+  },
+  "BI-MW": {
+    "added": true,
+    "names": [
+      "Mwaro Province"
+    ]
+  },
+  "BW-SO": {
+    "added": true,
+    "names": [
+      "Southern District"
+    ]
+  },
+  "CF-KB": {
+    "added": true,
+    "names": [
+      "Gribingui",
+      "Nana-Grébizi"
+    ]
+  },
+  "CN-MO": {
+    "added": true,
+    "names": [
+      "Macao SAR",
+      "Macau SAR",
+      "Aomen Tebiexingzhengqu"
+    ]
+  },
+  "CN-HK": {
+    "added": true,
+    "names": [
+      "Hong Kong SAR",
+      "Xianggang Tebiexingzhengqu"
+    ]
+  },
+  "CN-TW": {
+    "added": true,
+    "names": [
+      "Taiwan Sheng",
+      "Taiwan Province"
+    ]
+  },
+  "CN-XZ": {
+    "added": true,
+    "names": [
+      "Xizang Zizhiqu",
+      "Tibet Autonomous Region"
+    ]
+  },
+  "CV-B": {
+    "added": true,
+    "names": [
+      "Ilhas de Barlavento",
+      "Barlavento Islands"
+    ]
+  },
+  "CV-S": {
+    "added": true,
+    "names": [
+      "Ilhas de Sotavento",
+      "Sotavento Islands"
+    ]
+  },
+  "CZ-31": {
+    "added": true,
+    "names": [
+      "Jihočeský kraj",
+      "South Bohemian Region"
+    ]
+  },
+  "CZ-41": {
+    "added": true,
+    "names": [
+      "Karlovarský kraj",
+      "Karlovy Vary Region"
+    ]
+  },
+  "CZ-10": {
+    "added": true,
+    "names": [
+      "Praha",
+      "Prague",
+      "Hlavní město Praha"
+    ]
+  },
+  "CZ-20": {
+    "added": true,
+    "names": [
+      "Středočeský kraj",
+      "Central Bohemian Region"
+    ]
+  },
+  "DE-BY": {
+    "added": true,
+    "names": [
+      "Bayern",
+      "Bavaria",
+      "Free State of Bavaria"
+    ]
+  },
+  "DK-84": {
+    "added": true,
+    "names": [
+      "Hovedstaden",
+      "Capital Region of Denmark"
+    ]
+  },
+  "DO-33": {
+    "added": true,
+    "names": [
+      "Cibao Nordeste"
+    ]
+  },
+  "DO-34": {
+    "added": true,
+    "names": [
+      "Cibao Noroeste"
+    ]
+  },
+  "DO-35": {
+    "added": true,
+    "names": [
+      "Cibao Norte"
+    ]
+  },
+  "DO-36": {
+    "added": true,
+    "names": [
+      "Cibao Sur"
+    ]
+  },
+  "DO-37": {
+    "added": true,
+    "names": [
+      "El Valle"
+    ]
+  },
+  "DO-38": {
+    "added": true,
+    "names": [
+      "Enriquillo"
+    ]
+  },
+  "DO-39": {
+    "added": true,
+    "names": []
+  },
+  "DO-40": {
+    "added": true,
+    "names": []
+  },
+  "DO-41": {
+    "added": true,
+    "names": []
+  },
+  "DO-42": {
+    "added": true,
+    "names": []
+  },
+  "EG-BH": {
+    "names": [],
+    "geonames_id": 361370
+  },
+  "EG-FYM": {
+    "names": [],
+    "geonames_id": 361323
+  },
+  "EG-GH": {
+    "names": [],
+    "geonames_id": 361294
+  },
+  "EG-IS": {
+    "names": [],
+    "geonames_id": 361056
+  },
+  "EG-MNF": {
+    "names": [],
+    "geonames_id": 360689
+  },
+  "ER-SK": {
+    "names": [],
+    "geonames_id": 448502
+  },
+  "ET-SN": {
+    "added": true,
+    "names": []
+  },
+  "FI-01": {
+    "added": true,
+    "names": [
+      "Åland",
+      "Åland Islands"
+    ]
+  },
+  "FR-6AE": {
+    "added": true,
+    "names": []
+  },
+  "FR-CP": {
+    "added": true,
+    "names": [
+      "Clipperton Island",
+      "Île de Clipperton"
+    ]
+  },
+  "FR-2A": {
+    "names": [
+      "Corse-du-Sud"
+    ],
+    "geonames_id": 3023514
+  },
+  "FR-971": {
+    "added": true,
+    "names": [
+      "Guadeloupe"
+    ]
+  },
+  "FR-973": {
+    "added": true,
+    "names": [
+      "French Guiana",
+      "Guyane"
+    ]
+  },
+  "FR-2B": {
+    "names": [
+      "Haute-Corse"
+    ],
+    "geonames_id": 3013793
+  },
+  "FR-974": {
+    "added": true,
+    "names": [
+      "Réunion",
+      "La Réunion"
+    ]
+  },
+  "FR-972": {
+    "added": true,
+    "names": [
+      "Martinique"
+    ]
+  },
+  "FR-976": {
+    "added": true,
+    "names": [
+      "Mayotte"
+    ]
+  },
+  "FR-69M": {
+    "added": true,
+    "names": [
+      "Métropole de Lyon",
+      "Lyon Metropolis"
+    ]
+  },
+  "FR-NC": {
+    "added": true,
+    "names": [
+      "New Caledonia",
+      "Nouvelle-Calédonie"
+    ]
+  },
+  "FR-PF": {
+    "added": true,
+    "names": [
+      "French Polynesia",
+      "Polynésie française"
+    ]
+  },
+  "FR-BL": {
+    "added": true,
+    "names": [
+      "Saint Barthélemy",
+      "Saint-Barthélemy"
+    ]
+  },
+  "FR-MF": {
+    "added": true,
+    "names": [
+      "Saint Martin",
+      "Saint-Martin"
+    ]
+  },
+  "FR-PM": {
+    "added": true,
+    "names": [
+      "Saint Pierre and Miquelon",
+      "Saint-Pierre-et-Miquelon"
+    ]
+  },
+  "FR-TF": {
+    "added": true,
+    "names": [
+      "French Southern and Antarctic Lands",
+      "Terres australes françaises"
+    ]
+  },
+  "FR-WF": {
+    "added": true,
+    "names": [
+      "Wallis and Futuna",
+      "Wallis-et-Futuna"
+    ]
+  },
+  "GB-BDG": {
+    "added": true,
+    "names": [
+      "Barking and Dagenham"
+    ]
+  },
+  "GB-BNE": {
+    "added": true,
+    "names": [
+      "Barnet"
+    ]
+  },
+  "GB-BEX": {
+    "added": true,
+    "names": [
+      "Bexley"
+    ]
+  },
+  "GB-BEN": {
+    "added": true,
+    "names": [
+      "Brent"
+    ]
+  },
+  "GB-BRY": {
+    "added": true,
+    "names": [
+      "Bromley"
+    ]
+  },
+  "GB-CMD": {
+    "added": true,
+    "names": [
+      "Camden"
+    ]
+  },
+  "GB-CRY": {
+    "added": true,
+    "names": [
+      "Croydon"
+    ]
+  },
+  "GB-GRE": {
+    "added": true,
+    "names": [
+      "Greenwich",
+      "Royal Borough of Greenwich"
+    ]
+  },
+  "GB-HCK": {
+    "added": true,
+    "names": [
+      "Hackney"
+    ]
+  },
+  "GB-HMF": {
+    "added": true,
+    "names": []
+  },
+  "GB-HRY": {
+    "added": true,
+    "names": []
+  },
+  "GB-HRW": {
+    "added": true,
+    "names": []
+  },
+  "GB-HAV": {
+    "added": true,
+    "names": []
+  },
+  "GB-HIL": {
+    "added": true,
+    "names": []
+  },
+  "GB-HNS": {
+    "added": true,
+    "names": []
+  },
+  "GB-ISL": {
+    "added": true,
+    "names": []
+  },
+  "GB-KEC": {
+    "added": true,
+    "names": []
+  },
+  "GB-KTT": {
+    "added": true,
+    "names": []
+  },
+  "GB-LBH": {
+    "added": true,
+    "names": []
+  },
+  "GB-LEW": {
+    "added": true,
+    "names": []
+  },
+  "GB-MRT": {
+    "added": true,
+    "names": []
+  },
+  "GB-NWM": {
+    "added": true,
+    "names": []
+  },
+  "GB-RDB": {
+    "added": true,
+    "names": []
+  },
+  "GB-RIC": {
+    "added": true,
+    "names": []
+  },
+  "GB-SWK": {
+    "added": true,
+    "names": []
+  },
+  "GB-STN": {
+    "added": true,
+    "names": []
+  },
+  "GB-TWH": {
+    "added": true,
+    "names": []
+  },
+  "GB-WFT": {
+    "added": true,
+    "names": []
+  },
+  "GB-WND": {
+    "added": true,
+    "names": []
+  },
+  "GB-WSM": {
+    "added": true,
+    "names": []
+  },
+  "GQ-C": {
+    "added": true,
+    "names": []
+  },
+  "GQ-I": {
+    "added": true,
+    "names": []
+  },
+  "GR-G": {
+    "names": [],
+    "geonames_id": 6697810
+  },
+  "GR-M": {
+    "names": [],
+    "geonames_id": 6697802
+  },
+  "GR-L": {
+    "names": [],
+    "geonames_id": 6697808
+  },
+  "GR-H": {
+    "names": [],
+    "geonames_id": 6697800
+  },
+  "GR-69": {
+    "names": [],
+    "geonames_id": 736572
+  },
+  "GW-L": {
+    "added": true,
+    "names": []
+  },
+  "GW-N": {
+    "added": true,
+    "names": []
+  },
+  "GW-S": {
+    "added": true,
+    "names": []
+  },
+  "HU-BC": {
+    "names": [],
+    "geonames_id": 9644288
+  },
+  "HU-DE": {
+    "names": [],
+    "geonames_id": 9644292
+  },
+  "HU-DU": {
+    "names": [],
+    "geonames_id": 9644766
+  },
+  "HU-EG": {
+    "names": [],
+    "geonames_id": 9644334
+  },
+  "HU-HV": {
+    "names": [],
+    "geonames_id": 9644278
+  },
+  "HU-KV": {
+    "names": [],
+    "geonames_id": 9644180
+  },
+  "HU-KM": {
+    "names": [],
+    "geonames_id": 9644271
+  },
+  "HU-MI": {
+    "names": [],
+    "geonames_id": 9644324
+  },
+  "HU-NK": {
+    "names": [],
+    "geonames_id": 9644172
+  },
+  "HU-NY": {
+    "names": [],
+    "geonames_id": 9644303
+  },
+  "HU-ST": {
+    "names": [],
+    "geonames_id": 9644345
+  },
+  "HU-SD": {
+    "names": [],
+    "geonames_id": 9644275
+  },
+  "HU-SS": {
+    "names": [],
+    "geonames_id": 9644776
+  },
+  "HU-SH": {
+    "names": [],
+    "geonames_id": 9644155
+  },
+  "HU-SF": {
+    "names": [],
+    "geonames_id": 9644767
+  },
+  "HU-TB": {
+    "names": [],
+    "geonames_id": 9644745
+  },
+  "HU-ZE": {
+    "names": [],
+    "geonames_id": 9644167
+  },
+  "HU-ER": {
+    "names": [],
+    "geonames_id": 9644353
+  },
+  "ID-JW": {
+    "added": true,
+    "names": []
+  },
+  "ID-JB": {
+    "names": [
+      "Jawa Barat"
+    ],
+    "geonames_id": 1642672
+  },
+  "ID-JT": {
+    "names": [
+      "Jawa Tengah"
+    ],
+    "geonames_id": 1642669
+  },
+  "ID-JI": {
+    "names": [],
+    "geonames_id": 1642668
+  },
+  "ID-KA": {
+    "added": true,
+    "names": []
+  },
+  "ID-NU": {
+    "added": true,
+    "names": []
+  },
+  "ID-PD": {
+    "names": [],
+    "geonames_id": 12503510
+  },
+  "ID-SM": {
+    "added": true,
+    "names": []
+  },
+  "ID-SU": {
+    "names": [],
+    "geonames_id": 1213642
+  },
+  "IQ-BA": {
+    "names": [],
+    "geonames_id": 89341
+  },
+  "IQ-KR": {
+    "added": true,
+    "names": [
+      "Iqlīm Kūrdistān"
+    ]
+  },
+  "IQ-NI": {
+    "names": [],
+    "geonames_id": 92877
+  },
+  "IR-14": {
+    "names": [],
+    "geonames_id": 139677
+  },
+  "IR-29": {
+    "names": [],
+    "geonames_id": 6201374
+  },
+  "IR-28": {
+    "names": [],
+    "geonames_id": 6201376
+  },
+  "IR-17": {
+    "names": [],
+    "geonames_id": 126878
+  },
+  "IR-04": {
+    "names": [],
+    "geonames_id": 142550
+  },
+  "IR-03": {
+    "names": [],
+    "geonames_id": 142549
+  },
+  "IS-AKU": {
+    "names": [],
+    "geonames_id": 2633275
+  },
+  "IS-7": {
+    "names": [],
+    "geonames_id": 3337405
+  },
+  "IS-1": {
+    "names": [],
+    "geonames_id": 3426182
+  },
+  "IS-6": {
+    "names": [],
+    "geonames_id": 3337404
+  },
+  "IS-5": {
+    "names": [],
+    "geonames_id": 3337403
+  },
+  "IS-SEL": {
+    "names": [],
+    "geonames_id": 3413544
+  },
+  "IS-STY": {
+    "names": [],
+    "geonames_id": 12508725
+  },
+  "IS-8": {
+    "names": [],
+    "geonames_id": 3337406
+  },
+  "IS-2": {
+    "names": [],
+    "geonames_id": 3426183
+  },
+  "IS-4": {
+    "names": [],
+    "geonames_id": 3426185
+  },
+  "IS-3": {
+    "names": [],
+    "geonames_id": 3426184
+  },
+  "IT-FI": {
+    "names": [],
+    "geonames_id": 3176958
+  },
+  "IT-AQ": {
+    "names": [],
+    "geonames_id": 3175120
+  },
+  "IT-57": {
+    "names": [],
+    "geonames_id": 3174004
+  },
+  "IT-52": {
+    "names": [],
+    "geonames_id": 3165361
+  },
+  "JM-11": {
+    "names": [],
+    "geonames_id": 3488708
+  },
+  "JO-AT": {
+    "names": [],
+    "geonames_id": 250199
+  },
+  "KE-30": {
+    "names": [],
+    "geonames_id": 184742
+  },
+  "KG-Y": {
+    "names": [],
+    "geonames_id": 1528260
+  },
+  "KH-22": {
+    "names": [],
+    "geonames_id": 1822210
+  },
+  "KN-01": {
+    "names": [],
+    "geonames_id": 3575476
+  },
+  "KN-N": {
+    "added": true,
+    "names": []
+  },
+  "KN-02": {
+    "names": [],
+    "geonames_id": 3575183
+  },
+  "KN-03": {
+    "names": [],
+    "geonames_id": 3575180
+  },
+  "KN-04": {
+    "names": [],
+    "geonames_id": 3575179
+  },
+  "KN-05": {
+    "names": [],
+    "geonames_id": 3575177
+  },
+  "KN-06": {
+    "names": [],
+    "geonames_id": 3575176
+  },
+  "KN-07": {
+    "names": [],
+    "geonames_id": 3575175
+  },
+  "KN-K": {
+    "added": true,
+    "names": []
+  },
+  "KN-08": {
+    "names": [],
+    "geonames_id": 3575173
+  },
+  "KN-09": {
+    "names": [],
+    "geonames_id": 3575172
+  },
+  "KN-10": {
+    "names": [],
+    "geonames_id": 3575171
+  },
+  "KN-11": {
+    "names": [],
+    "geonames_id": 3575168
+  },
+  "KN-12": {
+    "names": [],
+    "geonames_id": 3575165
+  },
+  "KN-13": {
+    "names": [],
+    "geonames_id": 3575164
+  },
+  "KN-15": {
+    "names": [],
+    "geonames_id": 3575114
+  },
+  "KP-09": {
+    "names": [],
+    "geonames_id": 2044245
+  },
+  "KP-08": {
+    "names": [],
+    "geonames_id": 1877450
+  },
+  "KP-06": {
+    "names": [],
+    "geonames_id": 1876888
+  },
+  "KP-05": {
+    "names": [],
+    "geonames_id": 1876884
+  },
+  "KP-02": {
+    "names": [],
+    "geonames_id": 1871952
+  },
+  "KR-43": {
+    "names": [],
+    "geonames_id": 1845106
+  },
+  "KZ-10": {
+    "names": [],
+    "geonames_id": 12510143
+  },
+  "KZ-15": {
+    "names": [],
+    "geonames_id": 610688
+  },
+  "KZ-23": {
+    "names": [],
+    "geonames_id": 609862
+  },
+  "KZ-27": {
+    "names": [],
+    "geonames_id": 607847
+  },
+  "KZ-35": {
+    "names": [],
+    "geonames_id": 1523401
+  },
+  "KZ-39": {
+    "names": [],
+    "geonames_id": 1521671
+  },
+  "KZ-43": {
+    "names": [],
+    "geonames_id": 1521406
+  },
+  "KZ-47": {
+    "names": [],
+    "geonames_id": 608879
+  },
+  "KZ-59": {
+    "names": [],
+    "geonames_id": 1519367
+  },
+  "KZ-63": {
+    "names": [],
+    "geonames_id": 1517381
+  },
+  "KZ-33": {
+    "names": [],
+    "geonames_id": 12510144
+  },
+  "LB-JA": {
+    "names": [],
+    "geonames_id": 279894
+  },
+  "LB-AS": {
+    "names": [],
+    "geonames_id": 278297
+  },
+  "LB-BA": {
+    "names": [],
+    "geonames_id": 276780
+  },
+  "LB-JL": {
+    "names": [],
+    "geonames_id": 273607
+  },
+  "LT-01": {
+    "names": [],
+    "geonames_id": 601179
+  },
+  "LT-AL": {
+    "names": [],
+    "geonames_id": 864389
+  },
+  "LT-02": {
+    "names": [],
+    "geonames_id": 601086
+  },
+  "LT-KU": {
+    "names": [],
+    "geonames_id": 864477
+  },
+  "LT-15": {
+    "names": [],
+    "geonames_id": 598318
+  },
+  "LT-17": {
+    "names": [],
+    "geonames_id": 9610102
+  },
+  "LT-KL": {
+    "names": [],
+    "geonames_id": 864478
+  },
+  "LT-20": {
+    "names": [],
+    "geonames_id": 598099
+  },
+  "LT-MR": {
+    "names": [],
+    "geonames_id": 864479
+  },
+  "LT-31": {
+    "names": [],
+    "geonames_id": 596240
+  },
+  "LT-PN": {
+    "names": [],
+    "geonames_id": 864480
+  },
+  "LT-32": {
+    "names": [],
+    "geonames_id": 596132
+  },
+  "LT-TA": {
+    "names": [],
+    "geonames_id": 864482
+  },
+  "LT-TE": {
+    "names": [],
+    "geonames_id": 864483
+  },
+  "LT-UT": {
+    "names": [],
+    "geonames_id": 864484
+  },
+  "LT-VL": {
+    "names": [],
+    "geonames_id": 864485
+  },
+  "LT-57": {
+    "names": [],
+    "geonames_id": 593118
+  },
+  "LT-SA": {
+    "names": [],
+    "geonames_id": 864481
+  },
+  "LT-43": {
+    "names": [],
+    "geonames_id": 594743
+  },
+  "LV-112": {
+    "names": [],
+    "geonames_id": 12276857
+  },
+  "LY-TB": {
+    "names": [],
+    "geonames_id": 2210245
+  },
+  "MC-FO": {
+    "added": true,
+    "names": []
+  },
+  "MC-JE": {
+    "added": true,
+    "names": []
+  },
+  "MC-CL": {
+    "added": true,
+    "names": []
+  },
+  "MC-CO": {
+    "added": true,
+    "names": []
+  },
+  "MC-GA": {
+    "added": true,
+    "names": []
+  },
+  "MC-SO": {
+    "added": true,
+    "names": []
+  },
+  "MC-LA": {
+    "added": true,
+    "names": []
+  },
+  "MC-MA": {
+    "added": true,
+    "names": []
+  },
+  "MC-MO": {
+    "added": true,
+    "names": []
+  },
+  "MC-MG": {
+    "added": true,
+    "names": []
+  },
+  "MC-MC": {
+    "added": true,
+    "names": []
+  },
+  "MC-MU": {
+    "added": true,
+    "names": []
+  },
+  "MC-PH": {
+    "added": true,
+    "names": []
+  },
+  "MC-SR": {
+    "added": true,
+    "names": []
+  },
+  "MC-SD": {
+    "added": true,
+    "names": []
+  },
+  "MC-SP": {
+    "added": true,
+    "names": []
+  },
+  "MC-VR": {
+    "added": true,
+    "names": []
+  },
+  "MD-SN": {
+    "names": [],
+    "geonames_id": 858889
+  },
+  "MG-T": {
+    "added": true,
+    "names": []
+  },
+  "MG-F": {
+    "added": true,
+    "names": []
+  },
+  "MG-M": {
+    "added": true,
+    "names": [
+      "Majunga"
+    ]
+  },
+  "MG-A": {
+    "added": true,
+    "names": [
+      "Tamatave"
+    ]
+  },
+  "MG-U": {
+    "added": true,
+    "names": [
+      "Tulear"
+    ]
+  },
+  "MH-ALK": {
+    "names": [],
+    "geonames_id": 7303493
+  },
+  "MH-ALL": {
+    "names": [],
+    "geonames_id": 7303492
+  },
+  "MH-ARN": {
+    "names": [],
+    "geonames_id": 7303494
+  },
+  "MH-AUR": {
+    "names": [],
+    "geonames_id": 7303495
+  },
+  "MH-KIL": {
+    "added": true,
+    "names": [
+      "Bikini Atoll",
+      "Kili Island"
+    ]
+  },
+  "MH-EBO": {
+    "names": [],
+    "geonames_id": 7303498
+  },
+  "MH-LIB": {
+    "names": [],
+    "geonames_id": 7303522
+  },
+  "MH-ENI": {
+    "added": true,
+    "names": [
+      "Enewetak Atoll",
+      "Ujelang"
+    ]
+  },
+  "MH-JAB": {
+    "names": [],
+    "geonames_id": 7303519
+  },
+  "MH-JAL": {
+    "names": [],
+    "geonames_id": 7303501
+  },
+  "MH-KWA": {
+    "names": [],
+    "geonames_id": 7303502
+  },
+  "MH-LAE": {
+    "names": [],
+    "geonames_id": 7303503
+  },
+  "MH-LIK": {
+    "names": [],
+    "geonames_id": 7303504
+  },
+  "MH-MAJ": {
+    "names": [],
+    "geonames_id": 7303505
+  },
+  "MH-MAL": {
+    "names": [],
+    "geonames_id": 7303506
+  },
+  "MH-MEJ": {
+    "names": [],
+    "geonames_id": 7303523
+  },
+  "MH-MIL": {
+    "names": [],
+    "geonames_id": 7303507
+  },
+  "MH-NMK": {
+    "names": [],
+    "geonames_id": 7303508
+  },
+  "MH-NMU": {
+    "names": [],
+    "geonames_id": 7303509
+  },
+  "MH-L": {
+    "added": true,
+    "names": []
+  },
+  "MH-T": {
+    "added": true,
+    "names": []
+  },
+  "MH-RON": {
+    "names": [],
+    "geonames_id": 7303510
+  },
+  "MH-UJA": {
+    "names": [],
+    "geonames_id": 7303514
+  },
+  "MH-UTI": {
+    "names": [],
+    "geonames_id": 7303516
+  },
+  "MH-WTH": {
+    "names": [],
+    "geonames_id": 7303517
+  },
+  "MH-WTJ": {
+    "names": [],
+    "geonames_id": 7303518
+  },
+  "MK-801": {
+    "names": [],
+    "geonames_id": 7056266
+  },
+  "MK-803": {
+    "names": [],
+    "geonames_id": 7056269
+  },
+  "MK-804": {
+    "names": [],
+    "geonames_id": 863853
+  },
+  "MK-805": {
+    "names": [],
+    "geonames_id": 863850
+  },
+  "MK-808": {
+    "names": [],
+    "geonames_id": 863860
+  },
+  "MK-809": {
+    "names": [],
+    "geonames_id": 863863
+  },
+  "MK-607": {
+    "names": [],
+    "geonames_id": 863892
+  },
+  "MK-811": {
+    "names": [],
+    "geonames_id": 863894
+  },
+  "MK-815": {
+    "names": [],
+    "geonames_id": 863836
+  },
+  "MK-817": {
+    "names": [],
+    "geonames_id": 863904
+  },
+  "MN-061": {
+    "names": [],
+    "geonames_id": 2031799
+  },
+  "MN-059": {
+    "names": [],
+    "geonames_id": 2031740
+  },
+  "MN-047": {
+    "names": [],
+    "geonames_id": 2028849
+  },
+  "MR-14": {
+    "names": [],
+    "geonames_id": 11496392
+  },
+  "MR-13": {
+    "names": [],
+    "geonames_id": 11496391
+  },
+  "MR-15": {
+    "names": [],
+    "geonames_id": 11496393
+  },
+  "MT-20": {
+    "names": [
+      "Senglea"
+    ],
+    "geonames_id": 8299724
+  },
+  "MT-29": {
+    "names": [],
+    "geonames_id": 8299719
+  },
+  "MT-34": {
+    "names": [],
+    "geonames_id": 8299722
+  },
+  "MT-31": {
+    "names": [],
+    "geonames_id": 8299720
+  },
+  "MT-45": {
+    "names": [
+      "Rabat Gozo",
+      "Rabat Għawdex"
+    ],
+    "geonames_id": 8299745
+  },
+  "MT-46": {
+    "names": [],
+    "geonames_id": 8299744
+  },
+  "MT-65": {
+    "names": [],
+    "geonames_id": 8299764
+  },
+  "MT-66": {
+    "names": [],
+    "geonames_id": 8299763
+  },
+  "MV-00": {
+    "names": [],
+    "geonames_id": 10346475
+  },
+  "MV-29": {
+    "names": [],
+    "geonames_id": 1281945
+  },
+  "MY-07": {
+    "names": [],
+    "geonames_id": 1733047
+  },
+  "NG-FC": {
+    "names": [],
+    "geonames_id": 2352776
+  },
+  "NI-AN": {
+    "names": [],
+    "geonames_id": 3830307
+  },
+  "NI-AS": {
+    "names": [],
+    "geonames_id": 3830308
+  },
+  "NL-AW": {
+    "added": true,
+    "names": []
+  },
+  "NL-BQ1": {
+    "added": true,
+    "names": []
+  },
+  "NL-CW": {
+    "added": true,
+    "names": []
+  },
+  "NL-NB": {
+    "names": [],
+    "geonames_id": 2749990
+  },
+  "NL-NH": {
+    "names": [],
+    "geonames_id": 2749879
+  },
+  "NL-BQ2": {
+    "added": true,
+    "names": []
+  },
+  "NL-BQ3": {
+    "added": true,
+    "names": []
+  },
+  "NL-SX": {
+    "added": true,
+    "names": []
+  },
+  "NL-ZH": {
+    "names": [],
+    "geonames_id": 2743698
+  },
+  "NO-22": {
+    "added": true,
+    "names": []
+  },
+  "NO-21": {
+    "added": true,
+    "names": []
+  },
+  "NO-30": {
+    "added": true,
+    "names": []
+  },
+  "OM-ZA": {
+    "names": [],
+    "geonames_id": 411739
+  },
+  "OM-BJ": {
+    "names": [],
+    "geonames_id": 411736
+  },
+  "OM-SJ": {
+    "names": [],
+    "geonames_id": 411738
+  },
+  "OM-BS": {
+    "names": [],
+    "geonames_id": 8394434
+  },
+  "OM-SS": {
+    "names": [],
+    "geonames_id": 8394433
+  },
+  "PA-NB": {
+    "names": [],
+    "geonames_id": 7303688
+  },
+  "PG-NPP": {
+    "names": [],
+    "geonames_id": 2089478
+  },
+  "PG-SAN": {
+    "names": [],
+    "geonames_id": 2087246
+  },
+  "PL-02": {
+    "names": [],
+    "geonames_id": 3337492
+  },
+  "PL-06": {
+    "names": [],
+    "geonames_id": 858785
+  },
+  "PL-08": {
+    "names": [],
+    "geonames_id": 3337494
+  },
+  "PL-14": {
+    "names": [],
+    "geonames_id": 858787
+  },
+  "PL-12": {
+    "names": [],
+    "geonames_id": 858786
+  },
+  "PL-18": {
+    "names": [],
+    "geonames_id": 858788
+  },
+  "PL-28": {
+    "names": [],
+    "geonames_id": 858791
+  },
+  "PL-30": {
+    "names": [],
+    "geonames_id": 3337498
+  },
+  "PL-32": {
+    "names": [],
+    "geonames_id": 3337499
+  },
+  "PL-10": {
+    "names": [],
+    "geonames_id": 3337493
+  },
+  "PS-HBN": {
+    "names": [],
+    "geonames_id": 7870658
+  },
+  "PS-JEM": {
+    "names": [],
+    "geonames_id": 7870654
+  },
+  "PS-JRH": {
+    "names": [],
+    "geonames_id": 7870653
+  },
+  "PS-BTH": {
+    "names": [],
+    "geonames_id": 7870463
+  },
+  "PS-DEB": {
+    "names": [],
+    "geonames_id": 7870268
+  },
+  "PS-JEN": {
+    "names": [],
+    "geonames_id": 7828733
+  },
+  "PS-KYS": {
+    "names": [],
+    "geonames_id": 7871092
+  },
+  "PS-NBS": {
+    "names": [],
+    "geonames_id": 7870555
+  },
+  "PS-QQA": {
+    "names": [],
+    "geonames_id": 7870649
+  },
+  "PS-RFH": {
+    "names": [],
+    "geonames_id": 7870260
+  },
+  "PS-RBH": {
+    "names": [
+      "Al-Bireh"
+    ],
+    "geonames_id": 7870657
+  },
+  "PS-SLT": {
+    "names": [],
+    "geonames_id": 7870652
+  },
+  "PS-TBS": {
+    "names": [],
+    "geonames_id": 7870648
+  },
+  "PS-TKM": {
+    "names": [],
+    "geonames_id": 7870644
+  },
+  "PT-20": {
+    "names": [],
+    "geonames_id": 3411865
+  },
+  "QA-KH": {
+    "names": [
+      "Al Thakhira"
+    ],
+    "geonames_id": 389465
+  },
+  "QA-SH": {
+    "names": [],
+    "geonames_id": 11777514
+  },
+  "QA-ZA": {
+    "names": [],
+    "geonames_id": 8030540
+  },
+  "RO-B": {
+    "names": [],
+    "geonames_id": 683504
+  },
+  "RS-00": {
+    "names": [],
+    "geonames_id": 8199669
+  },
+  "RS-14": {
+    "names": [],
+    "geonames_id": 7581582
+  },
+  "RS-11": {
+    "names": [],
+    "geonames_id": 7581794
+  },
+  "RS-23": {
+    "names": [],
+    "geonames_id": 7581795
+  },
+  "RS-04": {
+    "names": [],
+    "geonames_id": 7581797
+  },
+  "RS-06": {
+    "names": [],
+    "geonames_id": 7581796
+  },
+  "RS-09": {
+    "names": [],
+    "geonames_id": 7581798
+  },
+  "RS-KM": {
+    "added": true,
+    "names": []
+  },
+  "RS-25": {
+    "added": true,
+    "names": []
+  },
+  "RS-28": {
+    "added": true,
+    "names": []
+  },
+  "RS-29": {
+    "added": true,
+    "names": []
+  },
+  "RS-08": {
+    "names": [],
+    "geonames_id": 7581799
+  },
+  "RS-17": {
+    "names": [],
+    "geonames_id": 7581800
+  },
+  "RS-20": {
+    "names": [],
+    "geonames_id": 7581801
+  },
+  "RS-26": {
+    "added": true,
+    "names": []
+  },
+  "RS-22": {
+    "names": [],
+    "geonames_id": 7581803
+  },
+  "RS-10": {
+    "names": [],
+    "geonames_id": 7581804
+  },
+  "RS-13": {
+    "names": [],
+    "geonames_id": 7581805
+  },
+  "RS-27": {
+    "added": true,
+    "names": []
+  },
+  "RS-24": {
+    "names": [],
+    "geonames_id": 7581802
+  },
+  "RS-19": {
+    "names": [],
+    "geonames_id": 7581806
+  },
+  "RS-18": {
+    "names": [],
+    "geonames_id": 7581807
+  },
+  "RS-03": {
+    "names": [],
+    "geonames_id": 7581905
+  },
+  "RS-01": {
+    "names": [],
+    "geonames_id": 7581808
+  },
+  "RS-02": {
+    "names": [],
+    "geonames_id": 7581906
+  },
+  "RS-07": {
+    "names": [],
+    "geonames_id": 7581907
+  },
+  "RS-21": {
+    "names": [],
+    "geonames_id": 7581909
+  },
+  "RS-15": {
+    "names": [],
+    "geonames_id": 7581910
+  },
+  "RS-05": {
+    "names": [],
+    "geonames_id": 7581911
+  },
+  "RS-16": {
+    "names": [],
+    "geonames_id": 7581912
+  },
+  "RS-12": {
+    "names": [],
+    "geonames_id": 7581908
+  },
+  "RU-ALT": {
+    "names": [],
+    "geonames_id": 1506272
+  },
+  "RU-AMU": {
+    "names": [],
+    "geonames_id": 2027748
+  },
+  "RU-AST": {
+    "names": [],
+    "geonames_id": 580491
+  },
+  "RU-BEL": {
+    "names": [
+      "Belgorodskaya oblast'"
+    ],
+    "geonames_id": 578071
+  },
+  "RU-CE": {
+    "names": [
+      "Čečenskaja Respublika"
+    ],
+    "geonames_id": 569665
+  },
+  "RU-CHU": {
+    "names": [
+      "Čukotskij avtonomnyj okrug"
+    ],
+    "geonames_id": 2126099
+  },
+  "RU-CU": {
+    "names": [
+      "Čuvašskaja Respublika"
+    ],
+    "geonames_id": 567395
+  },
+  "RU-YEV": {
+    "names": [],
+    "geonames_id": 2026639
+  },
+  "RU-KHM": {
+    "names": [],
+    "geonames_id": 1503773
+  },
+  "RU-IVA": {
+    "names": [],
+    "geonames_id": 555235
+  },
+  "RU-YAN": {
+    "names": [],
+    "geonames_id": 1486462
+  },
+  "RU-YAR": {
+    "names": [],
+    "geonames_id": 468898
+  },
+  "RU-KB": {
+    "names": [],
+    "geonames_id": 554667
+  },
+  "RU-KLU": {
+    "names": [],
+    "geonames_id": 553899
+  },
+  "RU-KC": {
+    "names": [],
+    "geonames_id": 552927
+  },
+  "RU-KEM": {
+    "names": [],
+    "geonames_id": 1503900
+  },
+  "RU-KIR": {
+    "names": [],
+    "geonames_id": 548389
+  },
+  "RU-KDA": {
+    "names": [],
+    "geonames_id": 542415
+  },
+  "RU-KYA": {
+    "names": [],
+    "geonames_id": 1502020
+  },
+  "RU-KGN": {
+    "names": [],
+    "geonames_id": 1501312
+  },
+  "RU-MAG": {
+    "names": [],
+    "geonames_id": 2123627
+  },
+  "RU-MOS": {
+    "names": [],
+    "geonames_id": 524925
+  },
+  "RU-MOW": {
+    "names": [],
+    "geonames_id": 524894
+  },
+  "RU-NEN": {
+    "names": [],
+    "geonames_id": 522652
+  },
+  "RU-NIZ": {
+    "names": [],
+    "geonames_id": 559838
+  },
+  "RU-NGR": {
+    "names": [],
+    "geonames_id": 519324
+  },
+  "RU-OMS": {
+    "names": [],
+    "geonames_id": 1496152
+  },
+  "RU-ORE": {
+    "names": [],
+    "geonames_id": 515001
+  },
+  "RU-ORL": {
+    "names": [],
+    "geonames_id": 514801
+  },
+  "RU-PNZ": {
+    "names": [],
+    "geonames_id": 511555
+  },
+  "RU-PER": {
+    "names": [],
+    "geonames_id": 511180
+  },
+  "RU-PRI": {
+    "names": [],
+    "geonames_id": 2017623
+  },
+  "RU-PSK": {
+    "names": [],
+    "geonames_id": 504338
+  },
+  "RU-ROS": {
+    "names": [],
+    "geonames_id": 501165
+  },
+  "RU-SAK": {
+    "names": [],
+    "geonames_id": 2121529
+  },
+  "RU-SPE": {
+    "names": [],
+    "geonames_id": 536203
+  },
+  "RU-SAR": {
+    "names": [],
+    "geonames_id": 498671
+  },
+  "RU-SE": {
+    "names": [],
+    "geonames_id": 519969
+  },
+  "RU-TAM": {
+    "names": [],
+    "geonames_id": 484638
+  },
+  "RU-TYU": {
+    "names": [],
+    "geonames_id": 1488747
+  },
+  "RU-TVE": {
+    "names": [],
+    "geonames_id": 480041
+  },
+  "RU-UD": {
+    "names": [],
+    "geonames_id": 479613
+  },
+  "RU-VLA": {
+    "names": [],
+    "geonames_id": 826294
+  },
+  "RU-VGG": {
+    "names": [],
+    "geonames_id": 472755
+  },
+  "RU-VLG": {
+    "names": [],
+    "geonames_id": 472454
+  },
+  "RU-VOR": {
+    "names": [],
+    "geonames_id": 472039
+  },
+  "SA-03": {
+    "names": [],
+    "geonames_id": 109224
+  },
+  "SA-08": {
+    "names": [],
+    "geonames_id": 109579
+  },
+  "SA-01": {
+    "names": [],
+    "geonames_id": 108411
+  },
+  "SA-04": {
+    "names": [],
+    "geonames_id": 108241
+  },
+  "SA-02": {
+    "names": [],
+    "geonames_id": 104514
+  },
+  "SB-CT": {
+    "names": [],
+    "geonames_id": 9259067
+  },
+  "SD-DE": {
+    "names": [
+      "Sharq Dārfūr"
+    ],
+    "geonames_id": 8394435
+  },
+  "SD-DW": {
+    "names": [
+      "West Darfur"
+    ],
+    "geonames_id": 408658
+  },
+  "SD-DS": {
+    "names": [
+      "South Darfur"
+    ],
+    "geonames_id": 408660
+  },
+  "SD-KS": {
+    "names": [
+      "South Kordofan"
+    ],
+    "geonames_id": 408661
+  },
+  "SD-DN": {
+    "names": [
+      "Shamāl Dārfūr"
+    ],
+    "geonames_id": 408666
+  },
+  "SG-02": {
+    "added": true,
+    "names": []
+  },
+  "SG-03": {
+    "added": true,
+    "names": []
+  },
+  "SG-04": {
+    "added": true,
+    "names": []
+  },
+  "SG-05": {
+    "added": true,
+    "names": []
+  },
+  "SK-BC": {
+    "names": [],
+    "geonames_id": 3343954
+  },
+  "SK-NI": {
+    "names": [],
+    "geonames_id": 3343956
+  },
+  "SK-TC": {
+    "names": [],
+    "geonames_id": 3343957
+  },
+  "SK-TA": {
+    "names": [],
+    "geonames_id": 3343958
+  },
+  "SK-ZI": {
+    "names": [],
+    "geonames_id": 3056506
+  },
+  "SL-NW": {
+    "names": [
+      "North Western Province"
+    ],
+    "geonames_id": 11919533
+  },
+  "SO-JD": {
+    "names": [],
+    "geonames_id": 56084
+  },
+  "SO-JH": {
+    "names": [],
+    "geonames_id": 56083
+  },
+  "SO-SD": {
+    "names": [],
+    "geonames_id": 51967
+  },
+  "SO-SH": {
+    "names": [],
+    "geonames_id": 51966
+  },
+  "ST-02": {
+    "names": [],
+    "geonames_id": 11204213
+  },
+  "ST-03": {
+    "names": [],
+    "geonames_id": 11994811
+  },
+  "ST-04": {
+    "names": [],
+    "geonames_id": 8299560
+  },
+  "ST-05": {
+    "names": [],
+    "geonames_id": 8299561
+  },
+  "ST-06": {
+    "names": [],
+    "geonames_id": 11203894
+  },
+  "ST-01": {
+    "names": [],
+    "geonames_id": 11203920
+  },
+  "SY-LA": {
+    "names": [],
+    "geonames_id": 173578
+  },
+  "SY-QU": {
+    "names": [],
+    "geonames_id": 173336
+  },
+  "SY-RA": {
+    "names": [],
+    "geonames_id": 172957
+  },
+  "SY-DY": {
+    "names": [],
+    "geonames_id": 170792
+  },
+  "SY-HL": {
+    "names": [],
+    "geonames_id": 170062
+  },
+  "TD-BG": {
+    "names": [],
+    "geonames_id": 7603255
+  },
+  "TH-16": {
+    "names": [],
+    "geonames_id": 1609031
+  },
+  "TH-82": {
+    "names": [],
+    "geonames_id": 1151462
+  },
+  "TH-S": {
+    "added": true,
+    "names": []
+  },
+  "TJ-GB": {
+    "names": [],
+    "geonames_id": 1221692
+  },
+  "TJ-RA": {
+    "names": [],
+    "geonames_id": 6452615
+  },
+  "TN-12": {
+    "names": [],
+    "geonames_id": 2473245
+  },
+  "TN-33": {
+    "names": [],
+    "geonames_id": 2473637
+  },
+  "TW-CHA": {
+    "names": [],
+    "geonames_id": 1679134
+  },
+  "TW-CYI": {
+    "names": [],
+    "geonames_id": 1678834
+  },
+  "TW-CYQ": {
+    "names": [],
+    "geonames_id": 1678835
+  },
+  "TW-HSZ": {
+    "names": [],
+    "geonames_id": 1675103
+  },
+  "TW-HSQ": {
+    "names": [],
+    "geonames_id": 1675107
+  },
+  "TW-HUA": {
+    "names": [],
+    "geonames_id": 1674502
+  },
+  "TW-KHH": {
+    "names": [],
+    "geonames_id": 9613373
+  },
+  "TW-KEE": {
+    "names": [],
+    "geonames_id": 6724654
+  },
+  "TW-KIN": {
+    "names": [],
+    "geonames_id": 1676511
+  },
+  "TW-LIE": {
+    "names": [],
+    "geonames_id": 6724655
+  },
+  "TW-MIA": {
+    "names": [],
+    "geonames_id": 1671968
+  },
+  "TW-NAN": {
+    "names": [],
+    "geonames_id": 1671564
+  },
+  "TW-PEN": {
+    "names": [],
+    "geonames_id": 1670651
+  },
+  "TW-PIF": {
+    "names": [],
+    "geonames_id": 1670479
+  },
+  "TW-TXG": {
+    "names": [],
+    "geonames_id": 9613500
+  },
+  "TW-TTT": {
+    "names": [],
+    "geonames_id": 1668292
+  },
+  "TW-TAO": {
+    "names": [],
+    "geonames_id": 1667900
+  },
+  "TW-ILA": {
+    "names": [],
+    "geonames_id": 1674197
+  },
+  "TW-YUN": {
+    "names": [],
+    "geonames_id": 1665194
+  },
+  "TZ-11": {
+    "names": [],
+    "geonames_id": 148728
+  },
+  "UA-43": {
+    "names": [],
+    "geonames_id": 703883
+  },
+  "UA-32": {
+    "names": [],
+    "geonames_id": 703446
+  },
+  "UA-46": {
+    "names": [],
+    "geonames_id": 702549
+  },
+  "UA-56": {
+    "names": [],
+    "geonames_id": 695592
+  },
+  "UA-59": {
+    "names": [],
+    "geonames_id": 692196
+  },
+  "UA-23": {
+    "names": [],
+    "geonames_id": 687699
+  },
+  "UG-236": {
+    "added": true,
+    "names": []
+  },
+  "UG-335": {
+    "added": true,
+    "names": []
+  },
+  "UG-126": {
+    "added": true,
+    "names": []
+  },
+  "UG-433": {
+    "added": true,
+    "names": []
+  },
+  "UG-432": {
+    "added": true,
+    "names": []
+  },
+  "UG-434": {
+    "added": true,
+    "names": []
+  },
+  "UG-333": {
+    "added": true,
+    "names": []
+  },
+  "UG-336": {
+    "added": true,
+    "names": []
+  },
+  "UG-334": {
+    "added": true,
+    "names": []
+  },
+  "UG-337": {
+    "added": true,
+    "names": []
+  },
+  "UG-435": {
+    "added": true,
+    "names": []
+  },
+  "US-AS": {
+    "added": true,
+    "names": []
+  },
+  "US-GU": {
+    "added": true,
+    "names": [
+      "Guåhan"
+    ]
+  },
+  "US-MP": {
+    "added": true,
+    "names": [
+      "Commonwealth of the Northern Mariana Islands",
+      "CNMI"
+    ]
+  },
+  "US-PR": {
+    "added": true,
+    "names": [
+      "Commonwealth of Puerto Rico"
+    ]
+  },
+  "US-UM": {
+    "added": true,
+    "names": []
+  },
+  "US-VI": {
+    "added": true,
+    "names": [
+      "U.S. Virgin Islands",
+      "United States Virgin Islands",
+      "USVI"
+    ]
+  },
+  "UZ-BU": {
+    "names": [],
+    "geonames_id": 1114929
+  },
+  "UZ-FA": {
+    "names": [],
+    "geonames_id": 1484845
+  },
+  "UZ-QR": {
+    "names": [],
+    "geonames_id": 453752
+  },
+  "VE-A": {
+    "names": [],
+    "geonames_id": 3640847
+  },
+  "VE-X": {
+    "names": [],
+    "geonames_id": 3830309
+  },
+  "VN-43": {
+    "added": true,
+    "names": []
+  },
+  "VN-57": {
+    "added": true,
+    "names": []
+  },
+  "VN-58": {
+    "added": true,
+    "names": []
+  },
+  "VN-40": {
+    "added": true,
+    "names": []
+  },
+  "VN-55": {
+    "added": true,
+    "names": []
+  },
+  "VN-54": {
+    "added": true,
+    "names": []
+  },
+  "VN-53": {
+    "added": true,
+    "names": [
+      "Bac Kan"
+    ]
+  },
+  "VN-50": {
+    "added": true,
+    "names": [
+      "Ben Tre"
+    ]
+  },
+  "VN-63": {
+    "added": true,
+    "names": []
+  },
+  "VN-14": {
+    "added": true,
+    "names": []
+  },
+  "VN-61": {
+    "added": true,
+    "names": []
+  },
+  "VN-47": {
+    "added": true,
+    "names": []
+  },
+  "VN-28": {
+    "added": true,
+    "names": []
+  },
+  "VN-41": {
+    "added": true,
+    "names": []
+  },
+  "VN-67": {
+    "added": true,
+    "names": []
+  },
+  "VN-36": {
+    "added": true,
+    "names": []
+  },
+  "VN-27": {
+    "added": true,
+    "names": []
+  },
+  "VN-52": {
+    "added": true,
+    "names": []
+  },
+  "VN-20": {
+    "added": true,
+    "names": []
+  },
+  "VN-46": {
+    "added": true,
+    "names": []
+  },
+  "VN-51": {
+    "added": true,
+    "names": []
+  },
+  "VN-70": {
+    "added": true,
+    "names": []
+  },
+  "VN-06": {
+    "added": true,
+    "names": []
+  },
+  "YE-SU": {
+    "names": [
+      "Socotra"
+    ],
+    "geonames_id": 9645387
+  },
+  "YE-TA": {
+    "names": [],
+    "geonames_id": 70222
+  },
+  "YE-SN": {
+    "names": [
+      "Sana'a"
+    ],
+    "geonames_id": 71132
+  },
+  "YE-SD": {
+    "names": [],
+    "geonames_id": 71333
+  },
+  "YE-HD": {
+    "names": [
+      "Hadhramaut"
+    ],
+    "geonames_id": 75411
+  }
+}
