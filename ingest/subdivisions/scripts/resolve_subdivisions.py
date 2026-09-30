@@ -1,12 +1,12 @@
-from ingest.utils import SUBDIVISIONS_RAW_PATH
+from ingest.utils import SUBDIVISIONS_OUTPUTS_PATH
 from ingest.subdivisions.utils.subdivision_map import (
     SubdivisionMap,
     get_geonames_candidates,
 )
-from ingest.utils import log
+from ingest.utils import ingest_log
 import json
 from .merge_subdivisions import merge_matched_sub
-from ingest.subdivisions import SubdivisionModel
+from ingest.shared.models import SubdivisionModel
 
 
 def clear_terminal():
@@ -43,12 +43,19 @@ def _apply_cached_resolution(
 
     mapped_sub = submap.get(data.get("hashid"))
     if mapped_sub:
+        if mapped_sub.iso_code and mapped_sub.iso_code != iso_sub.iso_code:
+            ingest_log.writeline(
+                f"cached resolution conflict: {iso_sub.iso_code} '{iso_sub.name}'s target {mapped_sub.geonames_code} '{mapped_sub.name}' was already auto-merged with {mapped_sub.iso_code}, falling back to orphan resolution",
+                level="WARN",
+            )
+            return False
         mapped_sub.aliases.extend(data.get("names", []))
         merge_matched_sub(iso_sub, mapped_sub)
         return True
 
-    log.writeline(
-        f"stale hashid reference: {data.get('hashid')} (iso_code {iso_sub.iso_code}) not found in current subdivision map"
+    ingest_log.writeline(
+        f"stale hashid reference: {data.get('hashid')} (iso_code {iso_sub.iso_code} '{iso_sub.name}') not found in current subdivision map",
+        level="WARN",
     )
     return False
 
@@ -139,7 +146,7 @@ def dump_orphans(orphaned_subs: list[SubdivisionModel]) -> None:
                 "type": iso_sub.type,
             }
 
-        (SUBDIVISIONS_RAW_PATH / "orphaned_subdivisions.json").write_text(
+        (SUBDIVISIONS_OUTPUTS_PATH / "orphaned_subdivisions.json").write_text(
             json.dumps(payload, indent=2, ensure_ascii=False), encoding="utf-8"
         )
 
@@ -151,7 +158,7 @@ def resolve_unmerged_subs(
 ) -> None:
     orphaned: list[SubdivisionModel] = []
 
-    resolution_map_path = SUBDIVISIONS_RAW_PATH / "resolution_map.json"
+    resolution_map_path = SUBDIVISIONS_OUTPUTS_PATH / "resolution_map.json"
     if not resolution_map_path.exists():
         resolution_map_path.write_text("{}", encoding="utf-8")
 
@@ -161,8 +168,12 @@ def resolve_unmerged_subs(
             json.load(f) or {}
         )
 
+        before = len(unmerged_iso_subs)
         unmerged_iso_subs = _apply_cached_resolutions(
             unmerged_iso_subs, resolution_map, submap
+        )
+        ingest_log.writeline(
+            f"resolved {before - len(unmerged_iso_subs)}/{before} unmerged subdivisions from cached resolutions"
         )
 
         for num, iso_sub in enumerate(unmerged_iso_subs, start=1):
@@ -181,4 +192,5 @@ def resolve_unmerged_subs(
             f.truncate()
             print()
 
+    ingest_log.writeline(f"{len(orphaned)} subdivisions orphaned, pending manual resolution")
     dump_orphans(orphaned)

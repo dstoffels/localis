@@ -1,13 +1,12 @@
-from ingest.utils import DATA_PATH, log
-from ingest.countries import CountryModel
-from ingest.subdivisions import SubdivisionModel
+from ingest.utils import DATA_PATH, ingest_log
+from ingest.shared.models import CountryModel, SubdivisionModel
 import csv
 
 
 def load_subdivisions(
     countries: dict[str, CountryModel],
 ) -> dict[str, SubdivisionModel]:
-    log.writeline("Loading Subdivisions...")
+    ingest_log.writeline("Loading Subdivisions...")
     GEONAMES_CODE_INDEX = 1
     COUNTRY_INDEX = 7
     countries_by_id: dict[int, CountryModel] = {c.id: c for c in countries.values()}

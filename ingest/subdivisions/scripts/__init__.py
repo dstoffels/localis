@@ -5,5 +5,4 @@ from .merge_ipregistry import merge_ipregistry_aliases
 from .merge_subdivisions import prepare_names, try_merge, merge_matched_sub
 from .resolve_subdivisions import resolve_unmerged_subs
 from .dump_subdivisions import dump
-from .load_subdivisions import load_subdivisions
 from .ingest_subdivisions import ingest_subdivisions

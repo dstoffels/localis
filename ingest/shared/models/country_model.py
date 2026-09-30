@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from ingest.utils import Model
+from .model import Model
 
 
 @dataclass(slots=True)

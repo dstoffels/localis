@@ -2,8 +2,9 @@ from ingest.subdivisions.utils.subdivision_map import SubdivisionMap
 from ingest.subdivisions.utils.strings import dedupe
 import re
 from rapidfuzz import fuzz
-from ingest.subdivisions import SubdivisionModel
+from ingest.shared.models import SubdivisionModel
 from localis.utils.strings import normalize
+from ingest.utils import ingest_log
 
 DIRECTIONAL_TOKENS = {
     "north",
@@ -42,6 +43,51 @@ CATEGORICAL_TOKENS = {
     "state",
     "shi",
     "sheng",
+    "county",
+    "parish",
+    "barrio",
+    "lçesi",
+    "gun",
+    "pagasts",
+    "municipality",
+    "kommun",
+    "tumani",
+    "járás",
+    "department",
+    "raion",
+    "si",
+    "kommune",
+    "city",
+    "gu",
+    "division",
+    "municipio",
+    "provincia",
+    "di",
+    "kabupaten",
+    "departamento",
+    "shahrestān",
+    "powiat",
+    "gemeente",
+    "obshtina",
+    "okres",
+    "amphoe",
+    "huyện",
+    "gorodskoy",
+    "of",
+    "de",
+    "du",
+    "council",
+    "al",
+    "the",
+    "il",
+    "is",
+    "in",
+    "ta",
+    "ix",
+    "iz",
+    "iż",
+    "republic",
+    "respublika",
 }
 
 
@@ -110,45 +156,121 @@ def threshold(name_a: str, name_b: str) -> int:
     return threshold
 
 
+def best_match_score(iso_names: list[str], geo_names: list[str]) -> float | None:
+    """Return the highest score among name pairs clearing their own dynamic threshold, or None if no pair qualifies."""
+    best: float | None = None
+    for iso_name in iso_names:
+        for geo_name in geo_names:
+            if has_directional_mismatch(iso_name, geo_name):
+                continue
+            score = fuzz.token_sort_ratio(iso_name, geo_name)
+            if score >= threshold(iso_name, geo_name) and (
+                best is None or score > best
+            ):
+                best = score
+    return best
+
+
+def best_raw_candidate(
+    iso_sub: SubdivisionModel, geo_subs: list[SubdivisionModel]
+) -> tuple[SubdivisionModel, float, int] | None:
+    """Diagnostic only: find the single highest-scoring geo_sub for iso_sub, ignoring the qualifying threshold, so a true orphan's closest miss is visible. Returns (geo_sub, score, threshold_needed) or None if geo_subs is empty."""
+    iso_names = prepare_names(iso_sub)
+    best: tuple[SubdivisionModel, float, int] | None = None
+    for geo_sub in geo_subs:
+        for iso_name in iso_names:
+            for geo_name in prepare_names(geo_sub):
+                if has_directional_mismatch(iso_name, geo_name):
+                    continue
+                score = fuzz.token_sort_ratio(iso_name, geo_name)
+                if best is None or score > best[1]:
+                    best = (geo_sub, score, threshold(iso_name, geo_name))
+    return best
+
+
 def try_merge(
     iso_subs: dict[str, SubdivisionModel], sub_map: SubdivisionMap
 ) -> list[SubdivisionModel]:
 
     unmerged_iso_subs: list[SubdivisionModel] = []
+    buckets: dict[tuple[str, int], list[SubdivisionModel]] = {}
 
-    print("Attemping to merge ISO to GeoNames subdivisions...")
+    ingest_log.writeline("Attempting to merge ISO to GeoNames subdivisions...")
     for _, iso_sub in iso_subs.items():
         iso_sub.aliases = dedupe(iso_sub.aliases)
 
         # Add the country if it wasn't added when caching GeoNames subdivisions (for safety) and add the ISO subdivision as is
         country_map = sub_map.filter(iso_sub.country.alpha2)
         if not country_map:
-            print(f"Creating new country map for {iso_sub.country.name}")
+            ingest_log.writeline(f"Creating new country map for {iso_sub.country.name}")
             sub_map.add(iso_sub)
             continue
 
-        # extract geonames subdivisions in map by country and admin level
-        geo_subs = sub_map.filter(iso_sub.country.alpha2, iso_sub.admin_level)
+        bucket_key = (iso_sub.country.alpha2, iso_sub.admin_level)
+        buckets.setdefault(bucket_key, []).append(iso_sub)
 
-        iso_names = prepare_names(iso_sub)
+    # score every ISO/GeoNames pair within each country+admin_level bucket, then assign highest-scoring pairs first so a strong match can't be blocked by a weaker one claimed earlier merely because of iteration order.
+    for (alpha2, admin_level), bucket_iso_subs in buckets.items():
+        geo_subs = [
+            g for g in sub_map.filter(alpha2, admin_level) if g.iso_code is None
+        ]
 
-        # loop over each cached GeoNames subdivision and attempt to match with the ISO sub.
-        for geo_sub in geo_subs:
-            geo_names = prepare_names(geo_sub)
+        # snapshot each geo_sub's pre-merge name up front; merge_matched_sub() mutates geo_sub.name in place,
+        # and a geo_sub can appear against several iso_subs in scored_pairs before one of them claims it.
+        geo_names_at_scoring: dict[int, str] = {g.hashid: g.name for g in geo_subs}
 
-            if any(
-                fuzz.token_set_ratio(iso_name, geo_name)
-                >= threshold(iso_name, geo_name)
-                and not has_directional_mismatch(iso_name, geo_name)
-                for iso_name in iso_names
-                for geo_name in geo_names
-            ):
-                merge_matched_sub(iso_sub, geo_sub)
-                break
-        else:
-            unmerged_iso_subs.append(iso_sub)
+        scored_pairs: list[tuple[float, SubdivisionModel, SubdivisionModel]] = []
+        for iso_sub in bucket_iso_subs:
+            iso_names = prepare_names(iso_sub)
+            for geo_sub in geo_subs:
+                score = best_match_score(iso_names, prepare_names(geo_sub))
+                if score is not None:
+                    scored_pairs.append((score, iso_sub, geo_sub))
 
-    print(
+        scored_pairs.sort(key=lambda pair: pair[0], reverse=True)
+
+        claimed_iso: set[str] = set()
+        claimed_geo: set[int] = set()
+        for score, iso_sub, geo_sub in scored_pairs:
+            geo_name = geo_names_at_scoring[geo_sub.hashid]
+            if iso_sub.iso_code in claimed_iso:
+                continue
+            if geo_sub.hashid in claimed_geo:
+                ingest_log.writeline(
+                    f"{iso_sub.iso_code} '{iso_sub.name}' lost candidate {geo_sub.geonames_code} '{geo_name}' (score {score:.0f}) to a higher-scoring match",
+                    level="WARN",
+                )
+                continue
+            merge_matched_sub(iso_sub, geo_sub)
+            claimed_iso.add(iso_sub.iso_code)
+            claimed_geo.add(geo_sub.hashid)
+            if score < 90:
+                ingest_log.writeline(
+                    f"merged {iso_sub.iso_code} '{iso_sub.name}' -> {geo_sub.geonames_code} '{geo_name}' (score {score:.0f})"
+                )
+
+        bucket_unmerged = [
+            iso_sub
+            for iso_sub in bucket_iso_subs
+            if iso_sub.iso_code not in claimed_iso
+        ]
+        for iso_sub in bucket_unmerged:
+            candidate = best_raw_candidate(iso_sub, geo_subs)
+            if candidate is None:
+                ingest_log.writeline(
+                    f"{iso_sub.iso_code} '{iso_sub.name}' unmerged: no GeoNames candidates in this bucket",
+                    level="WARN",
+                )
+            else:
+                geo_sub, score, needed = candidate
+                geo_name = geo_names_at_scoring[geo_sub.hashid]
+                ingest_log.writeline(
+                    f"{iso_sub.iso_code} '{iso_sub.name}' unmerged: closest was {geo_sub.geonames_code} '{geo_name}' (score {score:.0f}, needed {needed})",
+                    level="WARN",
+                )
+        unmerged_iso_subs.extend(bucket_unmerged)
+
+    ingest_log.writeline(
         f"Merged {len(iso_subs) - len(unmerged_iso_subs)}/{len(iso_subs)} ISO subdivisions"
     )
     return unmerged_iso_subs

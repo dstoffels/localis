@@ -5,7 +5,7 @@ from pathlib import Path
 from rapidfuzz import fuzz
 from ingest.subdivisions.scripts import prepare_names, load_iso_subs, merge_ipregistry_aliases
 from ingest.subdivisions.utils.subdivision_map import SubdivisionMap
-from ingest.subdivisions import SubdivisionModel
+from ingest.shared.models import SubdivisionModel
 
 
 def _find_project_root(start: Path) -> Path:
@@ -19,14 +19,14 @@ def _find_project_root(start: Path) -> Path:
 
 sys.path.insert(0, str(_find_project_root(Path(__file__).resolve())))
 
-from ingest.utils import SUBDIVISIONS_RAW_PATH
-from ingest.countries.scripts import load_countries
+from ingest.utils import SUBDIVISIONS_OUTPUTS_PATH
+from ingest.shared.scripts import load_countries
 from ingest.subdivisions.scripts import map_geonames_subdivisions
 
-RESOLUTION_MAP_PATH = SUBDIVISIONS_RAW_PATH / "resolution_map.json"
-ORPHANED_PATH = SUBDIVISIONS_RAW_PATH / "orphaned_subdivisions.json"
-RESOLUTION_LOG_PATH = SUBDIVISIONS_RAW_PATH / "resolution_log.txt"
-REVIEW_OUTPUT_PATH = SUBDIVISIONS_RAW_PATH / "review_output.json"
+RESOLUTION_MAP_PATH = SUBDIVISIONS_OUTPUTS_PATH / "resolution_map.json"
+ORPHANED_PATH = SUBDIVISIONS_OUTPUTS_PATH / "orphaned_subdivisions.json"
+RESOLUTION_LOG_PATH = SUBDIVISIONS_OUTPUTS_PATH / "resolution_log.txt"
+REVIEW_OUTPUT_PATH = SUBDIVISIONS_OUTPUTS_PATH / "review_output.json"
 
 
 def _read_json(path: Path) -> dict | list:

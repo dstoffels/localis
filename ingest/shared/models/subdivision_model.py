@@ -1,14 +1,15 @@
 from dataclasses import dataclass
-from ingest.utils import Model
-from ingest.countries import CountryModel
+from .model import Model
+from .country_model import CountryModel
 from localis.utils.strings import normalize
 import hashlib
 
 
 @dataclass(slots=True)
 class SubdivisionModel(Model):
-    geonames_code: str | None
     iso_code: str | None
+    geonames_code: str | None
+    geonames_id: int | None
     type: str
     aliases: list[str]
     admin_level: int
@@ -60,10 +61,10 @@ class SubdivisionModel(Model):
         country_cache: dict[int, CountryModel],
         **kwargs,
     ) -> "SubdivisionModel":
-        ALIAS_IDX = 4
-        ADMIN_LEVEL_IDX = 5
-        PARENT_IDX = 6
-        COUNTRY_IDX = 7
+        ALIAS_IDX = 5
+        ADMIN_LEVEL_IDX = 6
+        PARENT_IDX = 7
+        COUNTRY_IDX = 8
 
         row[ALIAS_IDX] = [a for a in row[ALIAS_IDX].split("|") if a]
         row[ADMIN_LEVEL_IDX] = int(row[ADMIN_LEVEL_IDX])

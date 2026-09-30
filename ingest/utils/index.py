@@ -1,7 +1,7 @@
 import csv
 from pathlib import Path
 from collections import defaultdict
-from .model import Model
+from ingest.shared.models import Model
 from array import array
 import gzip
 

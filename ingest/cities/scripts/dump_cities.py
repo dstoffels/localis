@@ -5,21 +5,21 @@ from ingest.utils import (
     dump_filter_index,
     dump_search_index,
 )
-from ingest.cities import CityModel
-from ingest.utils import log
+from ingest.shared.models import CityModel
+from ingest.utils import ingest_log
 
 CITIES_DATA_PATH = DATA_PATH / "cities"
 
 
 def dump(cities: list[CityModel]) -> None:
-    log.writeline(f"Dumping {len(cities)} cities...")
+    ingest_log.writeline(f"Dumping {len(cities)} cities...")
     dump_data(cities, CITIES_DATA_PATH / "cities.tsv")
 
-    log.writeline("Dumping cities lookup indexes...")
+    ingest_log.writeline("Dumping cities lookup indexes...")
     dump_lookup_index(cities, CITIES_DATA_PATH)
 
-    log.writeline("Dumping cities filter index...")
+    ingest_log.writeline("Dumping cities filter index...")
     dump_filter_index(cities, CITIES_DATA_PATH)
 
-    log.writeline("Dumping cities search index...")
+    ingest_log.writeline("Dumping cities search index...")
     dump_search_index(cities, CITIES_DATA_PATH)

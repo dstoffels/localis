@@ -1,11 +1,11 @@
 # Reports on subdivisions the resolve-subdivisions skill hasn't resolved yet.
 # Used by the ingest CI workflow to decide whether to block the PR.
 
-from ingest.utils import SUBDIVISIONS_RAW_PATH
+from ingest.utils import SUBDIVISIONS_OUTPUTS_PATH
 import json
 import sys
 
-ORPHANED_PATH = SUBDIVISIONS_RAW_PATH / "orphaned_subdivisions.json"
+ORPHANED_PATH = SUBDIVISIONS_OUTPUTS_PATH / "orphaned_subdivisions.json"
 
 
 def load_orphans() -> dict:

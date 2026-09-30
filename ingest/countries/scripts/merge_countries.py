@@ -1,6 +1,6 @@
-from ingest.utils import COUNTRIES_RAW_PATH
+from ingest.utils import COUNTRIES_INPUTS_PATH, ingest_log
 import json
-from ingest.countries import CountryModel
+from ingest.shared.models import CountryModel
 
 
 def is_valid_name(alias: str, country: CountryModel):
@@ -22,7 +22,8 @@ def is_valid_name(alias: str, country: CountryModel):
 
 
 def merge_wikidata(countries: dict[str, CountryModel]):
-    with open(COUNTRIES_RAW_PATH / "wiki_countries.json", "r", encoding="utf-8") as f:
+    ingest_log.writeline("Merging Wikidata aliases...")
+    with open(COUNTRIES_INPUTS_PATH / "wiki_countries.json", "r", encoding="utf-8") as f:
         wiki_countries: list[dict[str, str]] = json.load(f)
 
         for row in wiki_countries:
@@ -46,8 +47,9 @@ def merge_wikidata(countries: dict[str, CountryModel]):
 
 
 def merge_geonames(countries: dict[str, CountryModel]):
+    ingest_log.writeline("Merging GeoNames countries...")
     with open(
-        COUNTRIES_RAW_PATH / "geonames_countries.txt", "r", encoding="utf-8"
+        COUNTRIES_INPUTS_PATH / "geonames_countries.txt", "r", encoding="utf-8"
     ) as f:
 
         for row in f:
@@ -60,6 +62,9 @@ def merge_geonames(countries: dict[str, CountryModel]):
             country: CountryModel = countries.get(alpha2)
 
             if not country:
+                ingest_log.writeline(
+                    f"country not in ISO 3166-1, added from GeoNames: {alpha2} ({name})"
+                )
                 country = CountryModel(
                     id=len(countries) + 1,
                     alpha2=alpha2,

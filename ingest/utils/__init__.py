@@ -1,17 +1,24 @@
 from .paths import (
     BASE_PATH,
     DATA_PATH,
-    COUNTRIES_RAW_PATH,
-    SUBDIVISIONS_RAW_PATH,
-    CITIES_RAW_PATH,
+    COUNTRIES_INPUTS_PATH,
+    SUBDIVISIONS_INPUTS_PATH,
+    CITIES_INPUTS_PATH,
+    SHARED_INPUTS_PATH,
+    COUNTRIES_OUTPUTS_PATH,
+    SUBDIVISIONS_OUTPUTS_PATH,
+    CITIES_OUTPUTS_PATH,
+    COUNTRIES_LOGS_PATH,
+    SUBDIVISIONS_LOGS_PATH,
+    CITIES_LOGS_PATH,
     COUNTRIES_MANIFEST_PATH,
     SUBDIVISIONS_MANIFEST_PATH,
     CITIES_MANIFEST_PATH,
+    SHARED_MANIFEST_PATH,
     GEONAMES_DUMP_URL,
 )
-from .logger import log
+from .logger import ingest_log
 from .download import has_changed, download
-from .model import Model
 from .index import (
     dump_data,
     dump_lookup_index,

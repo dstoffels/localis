@@ -5,9 +5,7 @@ from localis.registries import (
     CityRegistry,
 )
 from localis.entities import Entity
-from ingest.countries import CountryModel
-from ingest.subdivisions import SubdivisionModel
-from ingest.cities import CityModel
+from ingest.shared.models import CountryModel, SubdivisionModel, CityModel
 from utils import registry_param
 
 LOOKUP_FIELDS_BY_REGISTRY = {

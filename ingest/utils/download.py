@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 from urllib.request import urlopen, Request
 from typing import cast
-from .logger import log
+from .logger import ingest_log
 
 # Fetch URLs
 USER_AGENT = "localis-data-refresh (+https://github.com/dstoffels/localis)"
@@ -42,7 +42,7 @@ def has_changed(url: str, dest: Path, manifest_path: Path) -> bool:
     signals = _head_signals(url)
 
     if signals == manifest.get(dest.name):
-        log.writeline(f"No update needed for {dest.name}")
+        ingest_log.writeline(f"No update needed for {dest.name}")
         return False
 
     return True
@@ -54,14 +54,14 @@ def download(url: str, dest: Path, manifest_path: Path) -> None:
     tmp = dest.with_suffix(dest.suffix + ".part")
 
     request = Request(url, headers={"User-Agent": USER_AGENT})
-    log.writeline(f"Downloading {dest.name} from {url}")
+    ingest_log.writeline(f"Downloading {dest.name} from {url}")
     response = cast(HTTPResponse, urlopen(request, timeout=60))
     with response, open(tmp, "wb") as f:
         while chunk := response.read(1024 * 1024):
             f.write(chunk)
 
     tmp.replace(dest)
-    log.writeline(f"Downloaded and updated {dest.name}")
+    ingest_log.writeline(f"Downloaded and updated {dest.name}")
 
     manifest = _load_manifest(manifest_path)
     manifest[dest.name] = _head_signals(url)

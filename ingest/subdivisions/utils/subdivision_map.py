@@ -1,4 +1,4 @@
-from ingest.subdivisions import SubdivisionModel
+from ingest.shared.models import SubdivisionModel
 
 
 class SubdivisionMap:

@@ -8,12 +8,9 @@
 from .fetch_cities import fetch_cities_sources
 from .load_cities import load_cities
 from .dump_cities import dump
-from ingest.countries.scripts import load_countries
-from ingest.subdivisions.scripts import load_subdivisions
-from ingest.utils import log
-from ingest.subdivisions import SubdivisionModel
-from ingest.countries import CountryModel
-from ingest.cities import CityModel
+from ingest.shared.scripts import load_countries, load_subdivisions
+from ingest.utils import ingest_log
+from ingest.shared.models import SubdivisionModel, CountryModel, CityModel
 
 
 def ingest_cities(
@@ -21,21 +18,24 @@ def ingest_cities(
     subdivisions: dict[str, SubdivisionModel] = None,
     force: bool = False,
 ) -> None:
-    log.set_stage("CITIES")
+    ingest_log.set_stage("CITIES")
 
-    has_update = fetch_cities_sources(force=force)
-    if not has_update:
-        log.writeline("No updates for cities.")
-        return None
+    try:
+        has_update = fetch_cities_sources(force=force)
+        if not has_update:
+            ingest_log.writeline("No updates for cities.")
+            return None
 
-    if countries is None:
-        countries = load_countries()
-    if subdivisions is None:
-        subdivisions = load_subdivisions(countries)
+        if countries is None:
+            countries = load_countries()
+        if subdivisions is None:
+            subdivisions = load_subdivisions(countries)
 
-    cities: list[CityModel] = load_cities(subdivisions, countries)
-    dump(cities)
-    log.writeline(f"completed: {len(cities)} cities")
+        cities: list[CityModel] = load_cities(subdivisions, countries)
+        dump(cities)
+        ingest_log.writeline(f"completed: {len(cities)} cities")
+    finally:
+        ingest_log.dump()
 
 
 if __name__ == "__main__":

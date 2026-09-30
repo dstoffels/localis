@@ -26,6 +26,7 @@ Blocked on the above, needs a dedicated design pass before implementation starts
 - Set thread locks for concurrent access to registries
 - Implement autocomplete for registries and/or global interface.
 - Redevelop Wikidata SPARQL query and parsing logic for country alias enrichment.
+- No ISO source maps countries to their language(s) (639 and 3166 don't cross-reference); evaluate Unicode CLDR's territory-language data for this.
 
 ## Localization (gettext-based name translation)
 
@@ -55,3 +56,4 @@ Dependency: none. `gettext` is part of Python's standard library. The actual sco
 - Whether iso-codes' catalogs cover secondary fields (e.g. `Subdivision.type`) or only the primary name/official_name fields, not yet verified.
 - Semantics of a cross-registry filter kwarg under `language_code`, e.g. `subdivisions.filter(country="Deutschland", language_code="de")`, where `country` references a different registry's translatable field.
 - Actual size of the compiled `.mo` catalogs across all locales isn't confirmed yet, needs measuring before deciding to ship all of them.
+- Reconsider Unicode CLDR as the translation data source instead of iso-codes' gettext catalogs; CLDR is more actively maintained and broader-coverage for exactly this kind of translated display-name data. Decide before implementation starts, not after.

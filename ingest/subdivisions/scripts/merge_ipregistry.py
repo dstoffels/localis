@@ -1,14 +1,14 @@
-from ingest.utils import SUBDIVISIONS_RAW_PATH
+from ingest.utils import SUBDIVISIONS_INPUTS_PATH, ingest_log
 from ingest.subdivisions.utils.strings import dedupe
-from ingest.subdivisions import SubdivisionModel
+from ingest.shared.models import SubdivisionModel
 import csv
 
 
 def merge_ipregistry_aliases(iso_subs: dict[str, SubdivisionModel]) -> None:
     """Alias-only enrichment; iso-codes is the source of truth, Ipregistry's sourcing is unverifiable."""
-    print("Merging Ipregistry alias data...")
+    ingest_log.writeline("Merging Ipregistry alias data...")
     with open(
-        SUBDIVISIONS_RAW_PATH / "ipregistry_subdivisions.csv", "r", encoding="utf-8"
+        SUBDIVISIONS_INPUTS_PATH / "ipregistry_subdivisions.csv", "r", encoding="utf-8"
     ) as f:
         reader = csv.DictReader(f)
 

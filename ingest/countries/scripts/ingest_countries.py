@@ -5,22 +5,25 @@ from .load_iso_countries import init_iso_countries
 from .fetch_countries import fetch_countries_sources
 from .merge_countries import merge_wikidata, merge_geonames
 from .dump_countries import dump
-from ingest.utils import log
-from ingest.countries import CountryModel
+from ingest.utils import ingest_log
+from ingest.shared.models import CountryModel
 
 
 def ingest_countries(force: bool = False) -> dict[str, CountryModel] | None:
-    log.set_stage("COUNTRIES")
-    has_update = fetch_countries_sources(force=force)
-    if not has_update:
-        log.writeline("No updates for countries.")
-        return None
-    countries = init_iso_countries()
-    merge_geonames(countries)
-    merge_wikidata(countries)
-    dump(list(countries.values()))
-    log.writeline(f"completed: {len(countries)} countries")
-    return countries
+    ingest_log.set_stage("COUNTRIES")
+    try:
+        has_update = fetch_countries_sources(force=force)
+        if not has_update:
+            ingest_log.writeline("No updates for countries.")
+            return None
+        countries = init_iso_countries()
+        merge_geonames(countries)
+        merge_wikidata(countries)
+        dump(list(countries.values()))
+        ingest_log.writeline(f"completed: {len(countries)} countries")
+        return countries
+    finally:
+        ingest_log.dump()
 
 
 if __name__ == "__main__":

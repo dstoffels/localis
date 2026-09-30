@@ -84,11 +84,15 @@ sandbox.py
 !ingest/.gitkeep
 
 *.ps1
-ingest/*/raw/*
-!ingest/countries/raw/wiki_countries.json
-!ingest/subdivisions/raw/resolution_map.json
-!/ingest/subdivisions/raw/resolution_log.txt
-!ingest/subdivisions/raw/orphaned_subdivisions.json
-!ingest/countries/raw/countries.manifest.json
-!ingest/subdivisions/raw/subdivisions.manifest.json
-!ingest/cities/raw/cities.manifest.json
+ingest/*/inputs/*
+!ingest/countries/inputs/wiki_countries.json
+!ingest/countries/inputs/countries.manifest.json
+!ingest/subdivisions/inputs/subdivisions.manifest.json
+!ingest/cities/inputs/cities.manifest.json
+!ingest/shared/inputs/shared.manifest.json
+
+# ingest outputs: tracked by default (resolution decisions, orphan lists), except scratch files
+ingest/subdivisions/outputs/review_output.json
+
+# ingest logs: always regenerated, never tracked
+ingest/*/logs/*

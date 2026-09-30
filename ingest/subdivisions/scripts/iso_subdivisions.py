@@ -1,15 +1,15 @@
-from ingest.utils import SUBDIVISIONS_RAW_PATH
-from ingest.countries import CountryModel
-from ingest.subdivisions import SubdivisionModel
+from ingest.utils import SUBDIVISIONS_INPUTS_PATH, ingest_log
+from ingest.shared.models import CountryModel
+from ingest.shared.models import SubdivisionModel
 import json
 
 
 def load_iso_subs(countries: dict[str, CountryModel]) -> dict[str, SubdivisionModel]:
     """Parses ISO 3166-2 subdivisions from Debian's iso-codes, the authoritative source."""
-    print("Loading ISO subdivisions...")
+    ingest_log.writeline("Loading ISO subdivisions...")
     iso_subs: dict[str, SubdivisionModel] = {}
 
-    with open(SUBDIVISIONS_RAW_PATH / "iso_3166-2.json", "r", encoding="utf-8") as f:
+    with open(SUBDIVISIONS_INPUTS_PATH / "iso_3166-2.json", "r", encoding="utf-8") as f:
         entries: list[dict] = json.load(f)["3166-2"]
 
     for entry in entries:
@@ -31,6 +31,7 @@ def load_iso_subs(countries: dict[str, CountryModel]) -> dict[str, SubdivisionMo
             admin_level=admin_level,
             aliases=[],  # enriched separately, see merge_ipregistry.py
             geonames_code=None,  # may be set later if merged with GeoNames subdivision
+            geonames_id=None,  # may be set later if merged with GeoNames subdivision
             parent=parent_iso_code,  # temporarily set to iso_code string to map later once all iso subs are loaded
         )
 

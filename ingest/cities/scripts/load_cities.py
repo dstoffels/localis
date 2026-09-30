@@ -1,9 +1,7 @@
-from ingest.utils import CITIES_RAW_PATH
+from ingest.utils import CITIES_INPUTS_PATH
 from ingest.cities.utils.strings import normalize_name, is_latin
-from ingest.utils import log
-from ingest.subdivisions import SubdivisionModel
-from ingest.countries import CountryModel
-from ingest.cities import CityModel
+from ingest.utils import ingest_log
+from ingest.shared.models import SubdivisionModel, CountryModel, CityModel
 import csv
 
 HEADERS = [
@@ -85,8 +83,9 @@ def parse_row(
     country = countries.get(country_code, None)
 
     if not country:
-        log.writeline(
-            f"country not found: {country_code}, dropping city {name} ({geonames_id})"
+        ingest_log.writeline(
+            f"country not found: {country_code}, dropping city {name} ({geonames_id})",
+            level="WARN",
         )
         return None
 
@@ -114,8 +113,8 @@ def parse_row(
 def load_cities(
     subdivisions: dict[str, SubdivisionModel], countries: dict[str, CountryModel]
 ) -> list[CityModel]:
-    with open(CITIES_RAW_PATH / "cities500.txt", "r", encoding="utf-8") as f:
-        print(f"Parsing cities from cities500.txt...")
+    with open(CITIES_INPUTS_PATH / "cities500.txt", "r", encoding="utf-8") as f:
+        ingest_log.writeline("Parsing cities from cities500.txt...")
         rows = csv.DictReader(f, fieldnames=HEADERS, delimiter="\t")
         cities = []
         for row in rows:

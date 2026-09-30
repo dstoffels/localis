@@ -1,7 +1,7 @@
 from dataclasses import dataclass
-from ingest.utils import Model
-from ingest.countries import CountryModel
-from ingest.subdivisions import SubdivisionModel
+from .model import Model
+from .country_model import CountryModel
+from .subdivision_model import SubdivisionModel
 
 
 @dataclass(slots=True)
