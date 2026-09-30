@@ -91,6 +91,20 @@
     "country": "Burkina Faso",
     "type": "Province"
   },
+  "BG-22": {
+    "name": "Sofia",
+    "aliases": [
+      "stolitsa"
+    ],
+    "country": "Bulgaria",
+    "type": "District"
+  },
+  "BG-23": {
+    "name": "Sofia",
+    "aliases": [],
+    "country": "Bulgaria",
+    "type": "District"
+  },
   "BS-HT": {
     "name": "Hope Town",
     "aliases": [],
@@ -669,60 +683,6 @@
     "country": "Eritrea",
     "type": "Region"
   },
-  "ES-B": {
-    "name": "Barcelona [Barcelona]",
-    "aliases": [],
-    "country": "Spain",
-    "type": "Province"
-  },
-  "ES-GI": {
-    "name": "Girona [Gerona]",
-    "aliases": [],
-    "country": "Spain",
-    "type": "Province"
-  },
-  "ES-L": {
-    "name": "Lleida [Lérida]",
-    "aliases": [],
-    "country": "Spain",
-    "type": "Province"
-  },
-  "ES-LU": {
-    "name": "Lugo [Lugo]",
-    "aliases": [],
-    "country": "Spain",
-    "type": "Province"
-  },
-  "ES-OR": {
-    "name": "Ourense [Orense]",
-    "aliases": [],
-    "country": "Spain",
-    "type": "Province"
-  },
-  "ES-PM": {
-    "name": "Illes Balears [Islas Baleares]",
-    "aliases": [],
-    "country": "Spain",
-    "type": "Province"
-  },
-  "ES-PO": {
-    "name": "Pontevedra [Pontevedra]",
-    "aliases": [],
-    "country": "Spain",
-    "type": "Province"
-  },
-  "ES-T": {
-    "name": "Tarragona [Tarragona]",
-    "aliases": [],
-    "country": "Spain",
-    "type": "Province"
-  },
-  "ES-GA": {
-    "name": "Galicia [Galicia]",
-    "aliases": [],
-    "country": "Spain",
-    "type": "Autonomous community"
-  },
   "FR-42": {
     "name": "Loire",
     "aliases": [],
@@ -747,12 +707,6 @@
     "country": "United Kingdom",
     "type": "Council area"
   },
-  "GB-AGY": {
-    "name": "Isle of Anglesey [Sir Ynys Môn GB-YNM]",
-    "aliases": [],
-    "country": "United Kingdom",
-    "type": "Unitary authority"
-  },
   "GB-BFS": {
     "name": "Belfast City",
     "aliases": [],
@@ -760,8 +714,10 @@
     "type": "District"
   },
   "GB-BGE": {
-    "name": "Bridgend [Pen-y-bont ar Ogwr GB-POG]",
-    "aliases": [],
+    "name": "Bridgend",
+    "aliases": [
+      "Pen-y-bont ar Ogwr"
+    ],
     "country": "United Kingdom",
     "type": "Unitary authority"
   },
@@ -778,32 +734,10 @@
     "type": "Metropolitan district"
   },
   "GB-CAY": {
-    "name": "Caerphilly [Caerffili GB-CAF]",
-    "aliases": [],
-    "country": "United Kingdom",
-    "type": "Unitary authority"
-  },
-  "GB-CGN": {
-    "name": "Ceredigion [Sir Ceredigion]",
-    "aliases": [],
-    "country": "United Kingdom",
-    "type": "Unitary authority"
-  },
-  "GB-CMN": {
-    "name": "Carmarthenshire [Sir Gaerfyrddin GB-GFY]",
-    "aliases": [],
-    "country": "United Kingdom",
-    "type": "Unitary authority"
-  },
-  "GB-CRF": {
-    "name": "Cardiff [Caerdydd GB-CRD]",
-    "aliases": [],
-    "country": "United Kingdom",
-    "type": "Unitary authority"
-  },
-  "GB-DEN": {
-    "name": "Denbighshire [Sir Ddinbych GB-DDB]",
-    "aliases": [],
+    "name": "Caerphilly",
+    "aliases": [
+      "Caerffili"
+    ],
     "country": "United Kingdom",
     "type": "Unitary authority"
   },
@@ -830,12 +764,6 @@
     "aliases": [],
     "country": "United Kingdom",
     "type": "Council area"
-  },
-  "GB-FLN": {
-    "name": "Flintshire [Sir y Fflint GB-FFL]",
-    "aliases": [],
-    "country": "United Kingdom",
-    "type": "Unitary authority"
   },
   "GB-GLG": {
     "name": "Glasgow City",
@@ -867,63 +795,17 @@
     "country": "United Kingdom",
     "type": "City corporation"
   },
-  "GB-MON": {
-    "name": "Monmouthshire [Sir Fynwy GB-FYN]",
-    "aliases": [],
-    "country": "United Kingdom",
-    "type": "Unitary authority"
-  },
-  "GB-MTY": {
-    "name": "Merthyr Tydfil [Merthyr Tudful GB-MTU]",
-    "aliases": [],
-    "country": "United Kingdom",
-    "type": "Unitary authority"
-  },
-  "GB-NTL": {
-    "name": "Neath Port Talbot [Castell-nedd Port Talbot GB-CTL]",
-    "aliases": [],
-    "country": "United Kingdom",
-    "type": "Unitary authority"
-  },
-  "GB-NWP": {
-    "name": "Newport [Casnewydd GB-CNW]",
-    "aliases": [],
-    "country": "United Kingdom",
-    "type": "Unitary authority"
-  },
-  "GB-PEM": {
-    "name": "Pembrokeshire [Sir Benfro GB-BNF]",
-    "aliases": [],
-    "country": "United Kingdom",
-    "type": "Unitary authority"
-  },
-  "GB-RCT": {
-    "name": "Rhondda Cynon Taff [Rhondda CynonTaf]",
-    "aliases": [],
-    "country": "United Kingdom",
-    "type": "Unitary authority"
-  },
   "GB-SLF": {
     "name": "Salford",
     "aliases": [],
     "country": "United Kingdom",
     "type": "Metropolitan district"
   },
-  "GB-SWA": {
-    "name": "Swansea [Abertawe GB-ATA]",
-    "aliases": [],
-    "country": "United Kingdom",
-    "type": "Unitary authority"
-  },
   "GB-TOF": {
-    "name": "Torfaen [Tor-faen]",
-    "aliases": [],
-    "country": "United Kingdom",
-    "type": "Unitary authority"
-  },
-  "GB-VGL": {
-    "name": "Vale of Glamorgan, The [Bro Morgannwg GB-BMG]",
-    "aliases": [],
+    "name": "Torfaen",
+    "aliases": [
+      "Tor-faen"
+    ],
     "country": "United Kingdom",
     "type": "Unitary authority"
   },
@@ -932,18 +814,6 @@
     "aliases": [],
     "country": "United Kingdom",
     "type": "Metropolitan district"
-  },
-  "GB-WRX": {
-    "name": "Wrexham [Wrecsam GB-WRC]",
-    "aliases": [],
-    "country": "United Kingdom",
-    "type": "Unitary authority"
-  },
-  "GB-WLS": {
-    "name": "Wales [Cymru GB-CYM]",
-    "aliases": [],
-    "country": "United Kingdom",
-    "type": "Country"
   },
   "GD-10": {
     "name": "Southern Grenadine Islands",
@@ -1269,69 +1139,11 @@
     "country": "Latvia",
     "type": "State city"
   },
-  "MA-10": {
-    "name": "Guelmim-Oued Noun (EH-partial)",
-    "aliases": [],
-    "country": "Morocco",
-    "type": "Region"
-  },
-  "MA-11": {
-    "name": "Laâyoune-Sakia El Hamra (EH-partial)",
-    "aliases": [],
-    "country": "Morocco",
-    "type": "Region"
-  },
-  "MA-AOU": {
-    "name": "Aousserd (EH)",
-    "aliases": [],
-    "country": "Morocco",
-    "type": "Province"
-  },
-  "MA-ASZ": {
-    "name": "Assa-Zag (EH-partial)",
-    "aliases": [],
-    "country": "Morocco",
-    "type": "Province"
-  },
-  "MA-BOD": {
-    "name": "Boujdour (EH)",
-    "aliases": [],
-    "country": "Morocco",
-    "type": "Province"
-  },
-  "MA-ESM": {
-    "name": "Es-Semara (EH-partial)",
-    "aliases": [],
-    "country": "Morocco",
-    "type": "Province"
-  },
-  "MA-LAA": {
-    "name": "Laâyoune (EH)",
-    "aliases": [],
-    "country": "Morocco",
-    "type": "Province"
-  },
-  "MA-OUD": {
-    "name": "Oued Ed-Dahab (EH)",
-    "aliases": [],
-    "country": "Morocco",
-    "type": "Province"
-  },
-  "MA-TAF": {
-    "name": "Tarfaya (EH-partial)",
-    "aliases": [],
-    "country": "Morocco",
-    "type": "Province"
-  },
-  "MA-TNT": {
-    "name": "Tan-Tan (EH-partial)",
-    "aliases": [],
-    "country": "Morocco",
-    "type": "Province"
-  },
   "MD-BD": {
-    "name": "Bender [Tighina]",
-    "aliases": [],
+    "name": "Bender",
+    "aliases": [
+      "Tighina"
+    ],
     "country": "Moldova",
     "type": "City"
   },
@@ -1557,60 +1369,6 @@
     "country": "Peru",
     "type": "Municipality"
   },
-  "PG-NCD": {
-    "name": "National Capital District (Port Moresby)",
-    "aliases": [],
-    "country": "Papua New Guinea",
-    "type": "District"
-  },
-  "PH-03": {
-    "name": "Central Luzon (Region III)",
-    "aliases": [],
-    "country": "Philippines",
-    "type": "Region"
-  },
-  "PH-07": {
-    "name": "Central Visayas (Region VII)",
-    "aliases": [],
-    "country": "Philippines",
-    "type": "Region"
-  },
-  "PH-08": {
-    "name": "Eastern Visayas (Region VIII)",
-    "aliases": [],
-    "country": "Philippines",
-    "type": "Region"
-  },
-  "PH-11": {
-    "name": "Davao (Region XI)",
-    "aliases": [],
-    "country": "Philippines",
-    "type": "Region"
-  },
-  "PH-12": {
-    "name": "Soccsksargen (Region XII)",
-    "aliases": [],
-    "country": "Philippines",
-    "type": "Region"
-  },
-  "PH-13": {
-    "name": "Caraga (Region XIII)",
-    "aliases": [],
-    "country": "Philippines",
-    "type": "Region"
-  },
-  "PH-40": {
-    "name": "Calabarzon (Region IV-A)",
-    "aliases": [],
-    "country": "Philippines",
-    "type": "Region"
-  },
-  "PH-41": {
-    "name": "Mimaropa (Region IV-B)",
-    "aliases": [],
-    "country": "Philippines",
-    "type": "Region"
-  },
   "PL-16": {
     "name": "Opolskie",
     "aliases": [],
@@ -1707,132 +1465,6 @@
     "country": "Sudan",
     "type": "State"
   },
-  "SE-AB": {
-    "name": "Stockholms län [SE-01]",
-    "aliases": [],
-    "country": "Sweden",
-    "type": "County"
-  },
-  "SE-AC": {
-    "name": "Västerbottens län [SE-24]",
-    "aliases": [],
-    "country": "Sweden",
-    "type": "County"
-  },
-  "SE-BD": {
-    "name": "Norrbottens län [SE-25]",
-    "aliases": [],
-    "country": "Sweden",
-    "type": "County"
-  },
-  "SE-C": {
-    "name": "Uppsala län [SE-03]",
-    "aliases": [],
-    "country": "Sweden",
-    "type": "County"
-  },
-  "SE-D": {
-    "name": "Södermanlands län [SE-04]",
-    "aliases": [],
-    "country": "Sweden",
-    "type": "County"
-  },
-  "SE-E": {
-    "name": "Östergötlands län [SE-05]",
-    "aliases": [],
-    "country": "Sweden",
-    "type": "County"
-  },
-  "SE-F": {
-    "name": "Jönköpings län [SE-06]",
-    "aliases": [],
-    "country": "Sweden",
-    "type": "County"
-  },
-  "SE-G": {
-    "name": "Kronobergs län [SE-07]",
-    "aliases": [],
-    "country": "Sweden",
-    "type": "County"
-  },
-  "SE-H": {
-    "name": "Kalmar län [SE-08]",
-    "aliases": [],
-    "country": "Sweden",
-    "type": "County"
-  },
-  "SE-I": {
-    "name": "Gotlands län [SE-09]",
-    "aliases": [],
-    "country": "Sweden",
-    "type": "County"
-  },
-  "SE-K": {
-    "name": "Blekinge län [SE-10]",
-    "aliases": [],
-    "country": "Sweden",
-    "type": "County"
-  },
-  "SE-M": {
-    "name": "Skåne län [SE-12]",
-    "aliases": [],
-    "country": "Sweden",
-    "type": "County"
-  },
-  "SE-N": {
-    "name": "Hallands län [SE-13]",
-    "aliases": [],
-    "country": "Sweden",
-    "type": "County"
-  },
-  "SE-O": {
-    "name": "Västra Götalands län [SE-14]",
-    "aliases": [],
-    "country": "Sweden",
-    "type": "County"
-  },
-  "SE-S": {
-    "name": "Värmlands län [SE-17]",
-    "aliases": [],
-    "country": "Sweden",
-    "type": "County"
-  },
-  "SE-T": {
-    "name": "Örebro län [SE-18]",
-    "aliases": [],
-    "country": "Sweden",
-    "type": "County"
-  },
-  "SE-U": {
-    "name": "Västmanlands län [SE-19]",
-    "aliases": [],
-    "country": "Sweden",
-    "type": "County"
-  },
-  "SE-W": {
-    "name": "Dalarnas län [SE-20]",
-    "aliases": [],
-    "country": "Sweden",
-    "type": "County"
-  },
-  "SE-X": {
-    "name": "Gävleborgs län [SE-21]",
-    "aliases": [],
-    "country": "Sweden",
-    "type": "County"
-  },
-  "SE-Y": {
-    "name": "Västernorrlands län [SE-22]",
-    "aliases": [],
-    "country": "Sweden",
-    "type": "County"
-  },
-  "SE-Z": {
-    "name": "Jämtlands län [SE-23]",
-    "aliases": [],
-    "country": "Sweden",
-    "type": "County"
-  },
   "SI-011": {
     "name": "Celje",
     "aliases": [],
@@ -1892,12 +1524,6 @@
     "aliases": [],
     "country": "Slovenia",
     "type": "Urban municipality"
-  },
-  "SL-W": {
-    "name": "Western Area (Freetown)",
-    "aliases": [],
-    "country": "Sierra Leone",
-    "type": "Area"
   },
   "SY-SU": {
     "name": "As Suwaydā'",
@@ -2070,7 +1696,7 @@
     "type": "Municipality"
   },
   "YE-SA": {
-    "name": "Amānat al ‘Āşimah [city]",
+    "name": "Amānat al ‘Āşimah",
     "aliases": [],
     "country": "Yemen",
     "type": "Municipality"

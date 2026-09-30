@@ -2358,7 +2358,7 @@ Montana	BG-12	BG.47	453753	District	Монтана|Област Монтана	1
 Vratsa	BG-06	BG.64	725713	District	Враца|Област Враца	1		22
 Varna	BG-03	BG.61	726051	District	Варна|Област Варна	1		22
 Dobrich	BG-08	BG.40	726419	District	Добрич|Област Добрич	1		22
-Sofia	BG-23	BG.58	727012	District	Oblast Sofia|Sofia Province|Област София|Софийска област|София	1		22
+Sofia		BG.58	727012		Oblast Sofia|Sofia Province|Област София|Софийска област|София	1		22
 Ruse	BG-18	BG.53	727524	District	Област Русе|Русе	1		22
 Plovdiv	BG-16	BG.51	728194	District	Област Пловдив|Пловдив|Пловдивска област|Пловдивски окръг	1		22
 Pleven	BG-15	BG.50	728204	District	Област Плевен|Плевен	1		22
@@ -2366,7 +2366,7 @@ Pernik	BG-14	BG.49	728331	District	Област Перник|Перник	1		22
 Pazardzhik	BG-13	BG.48	728379	District	Област Пазарджик|Пазарджик	1		22
 Lovech	BG-11	BG.46	729560	District	Ловеч|Област Ловеч	1		22
 Haskovo	BG-26	BG.43	730436	District	Oblast Haskovo|Област Хасково|Хасково	1		22
-Sofia (stolitsa)	BG-22	BG.42	731061	District	Oblast Sofia-Grad|Okrŭg Grad Sofiya|Sofia-Capital|Sofia-Grad|Област София град|Област София-Град|София (столица)|София-Град	1		22
+Sofia-Capital		BG.42	731061		Oblast Sofia-Grad|Okrŭg Grad Sofiya|Sofia-Grad|Област София град|Област София-Град|София (столица)|София-Град	1		22
 Burgas	BG-02	BG.39	732771	District	Бургас|Област Бугас|Област Бургас	1		22
 Blagoevgrad	BG-01	BG.38	733192	District	Благоевград|Област Благоевград	1		22
 Gabrovo	BG-07	BG.41	864552	District	Габрово|Област Габрово	1		22
@@ -14176,7 +14176,7 @@ Hermanas Mirabal	DO-19	DO.19	3493282	Province		1		61
 Puerto Plata		DO.18	3494267		Provincia Puerto Plata	1		61
 Peravia	DO-17	DO.35	3495015	Province	Provincia Peravia	1		61
 Pedernales Province		DO.16	3495136		Pedernales|Provincia Pedernales	1		61
-Distrito Nacional (Santo Domingo)	DO-01	DO.34	3496024	District	Distrito de Santo Domingo|Nacional	1		61
+Distrito Nacional	DO-01	DO.34	3496024	District	Distrito de Santo Domingo|Nacional|Santo Domingo	1		61
 Monte Plata Province		DO.32	3496132		Monte Plata|Provincia Monte Plata	1		61
 Monte Cristi Province		DO.15	3496200		Monte Cristi|Provincia Monte Cristi	1		61
 Monseñor Nouel	DO-28	DO.31	3496274	Province	Provincia Monseñor Nouel	1		61
@@ -15537,7 +15537,7 @@ Segeneity		ER.02.605	12217620			2	15475	67
 Semienawi Mibrak		ER.05.204	12217621			2	15478	67
 Murcia, Región de	ES-MC	ES.31	2513413	Autonomous community	Comunidad Autónoma de la Región de Murcia|Murcia|Murtziako Eskualdea|Múrcia|Region de Múrcia|Region of Murcia|Región de Murcia|Rexión de Murcia|Rexón de Murcia	1		68
 Ceuta	ES-CE	ES.CE	2519582	Autonomous city in north africa	Ciudad Autónoma de Ceuta|Ciudad de Ceuta|Zeuta	1		68
-Illes Balears [Islas Baleares]	ES-IB	ES.07	2521383	Autonomous community	Balear Uharteak|Baleares|Balearic Islands|Comunidad Autónoma de las Islas Baleares|Comunitat Autònoma de les Illes Balears|Illas Baleares|Illes Balears|Islas Baleares|Islles Baleares|ses Illes	1		68
+Illes Balears	ES-IB	ES.07	2521383	Autonomous community	Balear Uharteak|Baleares|Balearic Islands|Comunidad Autónoma de las Islas Baleares|Comunitat Autònoma de les Illes Balears|Illas Baleares|Islas Baleares|Islles Baleares|ses Illes	1		68
 Andalucía	ES-AN	ES.51	2593109	Autonomous community	Andalosia|Andalusia|Andaluzia|Comunidad Autónoma de Andalucía	1		68
 Canarias	ES-CN	ES.53	2593110	Autonomous community	Canaries|Canary Islands|Comunidad Autónoma de Canarias|Comunidad Canaria|Illas Canarias|Illas Canàrias|Illes Canàries|Islas Canarias|Kanariak	1		68
 Castilla-La Mancha	ES-CM	ES.54	2593111	Autonomous community	Castela-A Mancha|Castelha-La Mancha|Castella - la Manxa|Castella i la Manxa|Castiella-La Mancha|Castile-La Mancha|Castille-La Mancha|Comunidad Autónoma de Castilla-La Mancha|Gaztela-Mantxa	1		68
@@ -15550,8 +15550,8 @@ La Rioja	ES-RI	ES.27	3336897	Autonomous community	A Rioxa|Comunidad Autónoma de
 Cantabria	ES-CB	ES.39	3336898	Autonomous community	Cantàbria|Comunidad Autónoma de Cantabria|Kantabria|La Montaña|Provincia de Santander|Santander	1		68
 Aragón	ES-AR	ES.52	3336899	Autonomous community	Aragon|Aragó|Comunidad Autónoma de Aragón	1		68
 Castilla y León	ES-CL	ES.55	3336900	Autonomous community	Castela e León|Castelha e Leon|Castella i Lleó|Castiella y Lleón|Castiella y Llión|Castile and León|Castille and León|Comunidad Autónoma de Castilla y León|Gaztela eta Leon	1		68
-Catalunya [Cataluña]	ES-CT	ES.56	3336901	Autonomous community	Catalonha|Catalonia|Catalunya|Cataluña|Comunidad Autónoma de Cataluña|Principat de Catalunya|el Principat	1		68
-Galicia		ES.58	3336902		Comunidad Autónoma de Galicia|Galiza|Galizia|Galícia	1		68
+Catalunya	ES-CT	ES.56	3336901	Autonomous community	Catalonha|Catalonia|Cataluña|Comunidad Autónoma de Cataluña|Principat de Catalunya|el Principat	1		68
+Galicia	ES-GA	ES.58	3336902	Autonomous community	Comunidad Autónoma de Galicia|Galiza|Galizia|Galícia	1		68
 País Vasco	ES-PV	ES.59	3336903	Autonomous community	Basque Country|Comunidad Autónoma Vasca|Comunidad Autónoma del País Vasco|Euskadi|Euskal Autonomia Erkidegoa|Euskal Herria|Euzkadi|País Basc|Provincias Vascongadas|Vascongadas	1		68
 Melilla	ES-ML	ES.ML	6362988	Autonomous city in north africa	Ciudad Autónoma de Melilla|Ciudad de Melilla	1		68
 Valencia	ES-V	ES.60.V	2509951	Province	Provincia de Valencia|Província de València|Valentzia|València Province	2	15545	68
@@ -15577,33 +15577,33 @@ Zamora	ES-ZA	ES.55.ZA	3104341	Province	Provincia de Zamora|Zamora Province	2	155
 Bizkaia	ES-BI	ES.59.BI	3104469	Province	Biscaia|Biscay|Biscay Province|Província de Biscaia|Vizcaya	2	15555	68
 Valladolid	ES-VA	ES.55.VA	3106671	Province	Provincia de Valladolid|Província de Valladolid|Valladolid Province	2	15552	68
 Teruel	ES-TE	ES.52.TE	3108125	Province	Province of Teruel|Provincia de Teruel|Província de Terol|Teruel Province	2	15551	68
-Província de Tarragona		ES.56.T	3108287		Province of Tarragona|Provincia de Tarragona|Tarragona|Tarragona Province	2	15553	68
+Tarragona	ES-T	ES.56.T	3108287	Province	Province of Tarragona|Provincia de Tarragona|Província de Tarragona|Tarragona Province	2	15553	68
 Soria	ES-SO	ES.55.SO	3108680	Province	Provincia de Soria|Província de Sòria|Soria Province	2	15552	68
 Segovia	ES-SG	ES.55.SG	3109254	Province	Provincia de Segovia|Província de Segòvia|Segovia Province	2	15552	68
 Cantabria	ES-S	ES.39.S	3109716	Province	Cantabria Province|Province of Cantabria|Provincia de Cantabria|Província de Cantabria	2	15550	68
 Salamanca	ES-SA	ES.55.SA	3111107	Province	Provincia de Salamanca|Salamanca Province	2	15552	68
-Provincia de Pontevedra		ES.58.PO	3113208		Pontevedra|Pontevedra Province|Província de Pontevedra	2	15554	68
+Pontevedra	ES-PO	ES.58.PO	3113208	Province	Pontevedra Province|Provincia de Pontevedra|Província de Pontevedra	2	15554	68
 Palencia	ES-P	ES.55.P	3114530	Province	Palencia Province|Palentzia|Provincia de Palencia|Província de Palència	2	15552	68
-Provincia de Ourense		ES.58.OR	3114964		Orense|Ourense|Ourense Province|Provincia de Orense|Província d'Ourense	2	15554	68
-Provincia de Lugo		ES.58.LU	3117813		Lugo|Lugo Province|Província de Lugo	2	15554	68
+Ourense	ES-OR	ES.58.OR	3114964	Province	Orense|Ourense Province|Provincia de Orense|Provincia de Ourense|Província d'Ourense	2	15554	68
+Lugo	ES-LU	ES.58.LU	3117813	Province	Lugo Province|Provincia de Lugo|Província de Lugo	2	15554	68
 León	ES-LE	ES.55.LE	3118528	Province	Leon|León Province|Llión|Provincia de León|Província de Lleó	2	15552	68
-A Coruña [La Coruña]	ES-C	ES.58.C	3119840	Province	A Coruña|A Coruña Province|La Coruña|Provincia da Coruña|Provincia de La Coruña|Província d'A Coruña	2	15554	68
+A Coruña	ES-C	ES.58.C	3119840	Province	A Coruña Province|La Coruña|Provincia da Coruña|Provincia de La Coruña|Província d'A Coruña	2	15554	68
 Huesca	ES-HU	ES.52.HU	3120513	Province	Huesca Province|Osca|Province of Huesca|Provincia de Huesca|Província d'Osca	2	15551	68
 Gipuzkoa	ES-SS	ES.59.SS	3120935	Province	Gipuzkoa Province|Guipuscoa|Guipúscoa|Guipúzcoa|Provincia de Guipúzcoa|Província de Guipúscoa	2	15555	68
 Guadalajara	ES-GU	ES.54.GU	3121069	Province	Guadalajara Province|Guadalaxara|Provincia de Guadalajara	2	15543	68
 Castellón	ES-CS	ES.60.CS	3125881	Province	Castello|Castellon|Castelló|Castellón Province|Provincia de Castellón|Provincia de Castellón de la Plana|Província de Castelló	2	15545	68
 Burgos	ES-BU	ES.55.BU	3127460	Province	Burgos Province|Province of Burgos|Provincia de Burgos	2	15552	68
-Província de Barcelona		ES.56.B	3128759		Barcelona|Barcelona Province|Bartzelona|Province of Barcelona|Provincia de Barcelona	2	15553	68
+Barcelona	ES-B	ES.56.B	3128759	Province	Barcelona Province|Bartzelona|Province of Barcelona|Provincia de Barcelona|Província de Barcelona	2	15553	68
 Ávila	ES-AV	ES.55.AV	3129138	Province	Avila|Provincia de Ávila|Província d'Àvila|Ávila Province	2	15552	68
 Álava	ES-VI	ES.59.VI	3130717	Province	Araba|Araba / Álava|Provincia de Álava|Província d'Àlaba|Álava Province	2	15555	68
-Província de Girona		ES.56.GI	6355230		Gerona|Girona|Girona Province|Province of Girona|Provincia de Gerona|Xerona|Xirona	2	15553	68
-Província de Lleida		ES.56.L	6355231		Lleida|Lleida Province|Lérida|Province of Lleida|Província de Lérida	2	15553	68
+Girona	ES-GI	ES.56.GI	6355230	Province	Gerona|Girona Province|Province of Girona|Provincia de Gerona|Província de Girona|Xerona|Xirona	2	15553	68
+Lleida	ES-L	ES.56.L	6355231	Province	Lleida Province|Lérida|Province of Lleida|Província de Lleida|Província de Lérida	2	15553	68
 La Rioja	ES-LO	ES.27.LO	6355232	Province	A Rioxa|Errioxa|La Rioja Province|La Rioxa|Province of La Rioja|Provincia de La Rioja|Província de La Rioja	2	15549	68
 Madrid	ES-M	ES.29.M	6355233	Province	Comunidad de Madrid|Madrid Province|Madril|Province of Madrid|Provincia de Madrid|Província de Madrid	2	15548	68
 Murcia	ES-MU	ES.31.MU	6355234	Province	Murcia Province|Murtzia|Province of Murcia|Provincia de Murcia|Província de Múrcia	2	15538	68
 Navarra	ES-NA	ES.32.NA	6355235	Province	Nafarroa|Navarra Province|Navarre|Province of Navarre|Provincia de Navarra|Província de Navarra	2	15547	68
 Asturias	ES-O	ES.34.O	6355236	Province	Asturias Province|Asturies|Principado de Asturias|Province of Asturias|Provincia de Asturias|Província d'Astúries	2	15546	68
-Illes Balears		ES.07.PM	6424360		Baleares|Balearic Islands|Islas Baleares|Province of Balearic Islands|Provincia de las Islas Baleares|Província de les Illes Balears|ses Illes	2	15540	68
+Illes Balears	ES-PM	ES.07.PM	6424360	Province	Baleares|Balearic Islands|Islas Baleares|Province of Balearic Islands|Provincia de las Islas Baleares|Província de les Illes Balears|ses Illes	2	15540	68
 Ceuta		ES.CE.CE	8335119		Ciudad Autónoma de Ceuta	2	15539	68
 Melilla		ES.ML.ME	8335120		Ciudad Autónoma de Melilla	2	15556	68
 Addis Ababa	ET-AA	ET.44	444178	Administration	Ādīs Ābeba|Ādīs Ābeba Āstedader	1		69
@@ -15982,7 +15982,7 @@ Hauts-de-France	FR-HDF	FR.32	11071624	Metropolitan region		1		75
 Auvergne-Rhône-Alpes	FR-ARA	FR.84	11071625	Metropolitan region		1		75
 Guadeloupe	FR-971			Overseas departmental collectivity		1		75
 Martinique	FR-972			Overseas unique territorial collectivity		1		75
-Guyane (française)	FR-973			Overseas unique territorial collectivity		1		75
+Guyane	FR-973			Overseas unique territorial collectivity	française	1		75
 La Réunion	FR-974			Overseas departmental collectivity		1		75
 Mayotte	FR-976			Overseas departmental collectivity		1		75
 Saint-Barthélemy	FR-BL			Overseas collectivity		1		75
@@ -16148,12 +16148,12 @@ Doutsila		GA.05.11996077	11996077			2	16098	76
 Sebe-Brikolo		GA.02.11996078	11996078			2	16101	76
 Noya		GA.01.11996079	11996079			2	16102	76
 Ivindo		GA.06.11996080	11996080			2	16097	76
-Wales		GB.WLS	2634895		A' Chuimrigh|Cymru|an Bhreatain Bheag	1		77
+Wales	GB-WLS	GB.WLS	2634895	Country	A' Chuimrigh|Cymru|an Bhreatain Bheag	1		77
 Scotland	GB-SCT	GB.SCT	2638360	Country	Alba|Albain|Yr Alban	1		77
 Northern Ireland	GB-NIR	GB.NIR	2641364	Province	Gogledd Iwerddon|N Ireland|Tuaisceart Éireann|Èirinn a Tuath	1		77
 England	GB-ENG	GB.ENG	6269131	Country	Lloegr|Sasainn|Sasana	1		77
 York	GB-YOR	GB.ENG.Q5	2633351	Unitary authority	City of York|York City	2	16154	77
-Wrexham		GB.WLS.Z4	2633484		Bwrdeistref Sirol Wrecsam|County Borough of Wrexham|Wrecsam|Wrexham County Borough	2	16151	77
+Wrexham	GB-WRX	GB.WLS.Z4	2633484	Unitary authority	Bwrdeistref Sirol Wrecsam|County Borough of Wrexham|Wrecsam|Wrexham County Borough	2	16151	77
 Worcestershire	GB-WOR	GB.ENG.Q4	2633560	Two-tier county		2	16154	77
 Windsor and Maidenhead	GB-WNM	GB.ENG.P9	2633840	Unitary authority	Royal Borough of Windsor and Maidenhead	2	16154	77
 Wiltshire	GB-WIL	GB.ENG.P8	2633868	Unitary authority		2	16154	77
@@ -16161,7 +16161,7 @@ West Sussex	GB-WSX	GB.ENG.P6	2634258	Two-tier county		2	16154	77
 West Lothian	GB-WLN	GB.SCT.W9	2634354	Council area	Gorllewin Lothian|Labhaidh Thoir|Lodainn an Iar	2	16152	77
 Eilean Siar	GB-ELS	GB.SCT.W8	2634428	Council area	Western Isles|Ynysoedd Allanol Heledd|na hOileáin Thiar	2	16152	77
 Warwickshire	GB-WAR	GB.ENG.P3	2634723	Two-tier county		2	16154	77
-Vale of Glamorgan		GB.WLS.Z3	2635028		Bro Morgannwg|The Vale of Glamorgan	2	16151	77
+Vale of Glamorgan, The	GB-VGL	GB.WLS.Z3	2635028	Unitary authority	Bro Morgannwg|The Vale of Glamorgan|Vale of Glamorgan	2	16151	77
 Thurrock	GB-THR	GB.ENG.O3	2635885	Unitary authority	Borough of Thurrock	2	16154	77
 Surrey	GB-SRY	GB.ENG.N7	2636512	Two-tier county		2	16154	77
 Suffolk	GB-SFK	GB.ENG.N5	2636561	Two-tier county		2	16154	77
@@ -16174,7 +16174,7 @@ Shropshire	GB-SHR	GB.ENG.L6	2638655	Unitary authority		2	16154	77
 Rutland	GB-RUT	GB.ENG.L4	2638918	Unitary authority	District of Rutland	2	16154	77
 Renfrewshire	GB-RFW	GB.SCT.W2	2639494	Council area	Comhairle Siorrachd Rinn Friù|Swydd Renfrew	2	16152	77
 Powys	GB-POW	GB.WLS.Y8	2639944	Unitary authority	County of Powys|Sir Powys	2	16151	77
-Pembrokeshire		GB.WLS.Y7	2640500		County of Pembroke|County of Pembrokeshire|Sir Benfro	2	16151	77
+Pembrokeshire	GB-PEM	GB.WLS.Y7	2640500	Unitary authority	County of Pembroke|County of Pembrokeshire|Sir Benfro	2	16151	77
 Oxfordshire	GB-OXF	GB.ENG.K2	2640726	Two-tier county		2	16154	77
 Orkney Islands	GB-ORK	GB.SCT.V9	2640923	Council area	Arcaibh|Orkney|Àrcaibh	2	16152	77
 Nottinghamshire	GB-NTT	GB.ENG.J9	2641169	Two-tier county		2	16154	77
@@ -16198,7 +16198,7 @@ Gwynedd	GB-GWN	GB.WLS.Y2	2647716	Unitary authority		2	16151	77
 Greater London		GB.ENG.GLA	2648110			2	16154	77
 Gloucestershire	GB-GLS	GB.ENG.E6	2648402	Two-tier county	Swydd Gaerloyw	2	16154	77
 Gateshead	GB-GAT	GB.ENG.E5	2648772	Metropolitan district	Gateshead District|Metropolitan Borough of Gateshead	2	16154	77
-County of Flintshire		GB.WLS.Y1	2649298		Flintshire|Flintshire principal area|Sir y Fflint	2	16151	77
+Flintshire	GB-FLN	GB.WLS.Y1	2649298	Unitary authority	County of Flintshire|Flintshire principal area|Sir y Fflint	2	16151	77
 Fife	GB-FIF	GB.SCT.V1	2649469	Council area	Foibhe|Fìobha	2	16152	77
 Essex	GB-ESS	GB.ENG.E4	2649889	Two-tier county		2	16154	77
 East Sussex	GB-ESX	GB.ENG.E2	2650328	Two-tier county		2	16154	77
@@ -16209,17 +16209,17 @@ Dumfries and Galloway	GB-DGY	GB.SCT.U2	2650797	Council area	Dùn Phrìs is Gall-
 Dorset	GB-DOR	GB.ENG.D6	2651079	Two-tier county		2	16154	77
 Devon	GB-DEV	GB.ENG.D4	2651292	Two-tier county		2	16154	77
 Derbyshire	GB-DBY	GB.ENG.D3	2651346	Two-tier county	Swydd Derby	2	16154	77
-Denbighshire		GB.WLS.X9	2651385		County of Denbighshire|Denbighshire principal area|Sir Ddinbych	2	16151	77
+Denbighshire	GB-DEN	GB.WLS.X9	2651385	Unitary authority	County of Denbighshire|Denbighshire principal area|Sir Ddinbych	2	16151	77
 Cumbria	GB-CMA	GB.ENG.C9	2651712	Two-tier county		2	16154	77
 Cornwall	GB-CON	GB.ENG.C6	2652355	Unitary authority		2	16154	77
 Clackmannanshire	GB-CLK	GB.SCT.U1	2652975	Council area	Clach Mhanainn|Siorrachd Chlach Mhanainn|Siorrachd Chlach Mhannainn|Swydd Clackmannan	2	16152	77
-Carmarthenshire		GB.WLS.X7	2653753		County of Carmarthenshire|Sir Gaerfyrddin|Sir Gâr	2	16151	77
-County of Ceredigion		GB.WLS.X6	2653814		Cardiganshire|Ceredigion|County of Cardigan|Sir Ceredigion	2	16151	77
+Carmarthenshire	GB-CMN	GB.WLS.X7	2653753	Unitary authority	County of Carmarthenshire|Sir Gaerfyrddin|Sir Gâr	2	16151	77
+Ceredigion	GB-CGN	GB.WLS.X6	2653814	Unitary authority	Cardiganshire|County of Cardigan|County of Ceredigion|Sir Ceredigion	2	16151	77
 Cambridgeshire	GB-CAM	GB.ENG.C3	2653940	Two-tier county	Caergrawnt	2	16154	77
 Buckinghamshire	GB-BKM	GB.ENG.B9	2654408	Unitary authority		2	16154	77
 Scottish Borders	GB-SCB	GB.SCT.T9	2655192	Council area	The Scottish Borders	2	16152	77
 Angus	GB-ANS	GB.SCT.T7	2657306	Council area	Aonghas|Comhairle Aonghais	2	16152	77
-Anglesey		GB.WLS.X1	2657311		Angleseyshire|Isle of Anglesey|Môn|Sir Ynys Môn|Ynys Môn	2	16151	77
+Isle of Anglesey	GB-AGY	GB.WLS.X1	2657311	Unitary authority	Anglesey|Angleseyshire|Môn|Sir Ynys Môn|Ynys Môn	2	16151	77
 Aberdeenshire	GB-ABD	GB.SCT.T6	2657830	Council area	Contae Obar Deathain|Siorrachd Obar Dheathain|Swydd Aberdeen	2	16152	77
 Barnsley	GB-BNS	GB.ENG.A3	3333122	Metropolitan district		2	16154	77
 Bath and North East Somerset	GB-BAS	GB.ENG.A4	3333123	Unitary authority		2	16154	77
@@ -16310,14 +16310,14 @@ West Dunbartonshire	GB-WDU	GB.SCT.W7	3333237	Council area	Comhairle Dhùn Bhreat
 Blaenau Gwent	GB-BGW	GB.WLS.X2	3333238	Unitary authority	Bwrdeistref Sirol Blaenau Gwent|County Borough of Blaenau Gwent	2	16151	77
 Bridgend county borough		GB.WLS.X3	3333239		Bwrdeistref Sirol Pen-y-bont ar Ogwr|County Borough of Bridgend	2	16151	77
 Caerphilly County Borough		GB.WLS.X4	3333240		Bwrdeistref Sirol Caerffili	2	16151	77
-Cardiff		GB.WLS.X5	3333241		City and County of Cardiff|Dinas a Sir Caerdydd	2	16151	77
+Cardiff	GB-CRF	GB.WLS.X5	3333241	Unitary authority	Caerdydd|City and County of Cardiff|Dinas a Sir Caerdydd	2	16151	77
 Conwy	GB-CWY	GB.WLS.X8	3333242	Unitary authority	Bwrdeistref Sirol Conwy|Conwy County Borough|County Borough of Conwy	2	16151	77
-Merthyr Tydfil County Borough		GB.WLS.Y3	3333243		Bwrdeistref Sirol Merthyr Tudful|Merthyr Tydfil	2	16151	77
-Monmouthshire		GB.WLS.Y4	3333244		County of Monmouthshire|Monmouthshire principal area|Sir Fynwy	2	16151	77
-Neath Port Talbot		GB.WLS.Y5	3333245		Bwrdeistref Sirol Castell-nedd Port Talbot|Castell-nedd Port Talbot|County Borough of Neath Port Talbot|Neath and Port Talbot	2	16151	77
-Newport		GB.WLS.Y6	3333246		Casnewydd|City of Newport|County Borough of Newport|Dinas Casnewydd	2	16151	77
-Rhondda Cynon Taf		GB.WLS.Y9	3333247		Bwrdeistref Sirol Rhondda Cynon Taf|County Borough of Rhondda Cynon Taf	2	16151	77
-City and County of Swansea		GB.WLS.Z1	3333248		Abertawe|Dinas a Sir Abertawe	2	16151	77
+Merthyr Tydfil	GB-MTY	GB.WLS.Y3	3333243	Unitary authority	Bwrdeistref Sirol Merthyr Tudful|Merthyr Tudful|Merthyr Tydfil County Borough	2	16151	77
+Monmouthshire	GB-MON	GB.WLS.Y4	3333244	Unitary authority	County of Monmouthshire|Monmouthshire principal area|Sir Fynwy	2	16151	77
+Neath Port Talbot	GB-NTL	GB.WLS.Y5	3333245	Unitary authority	Bwrdeistref Sirol Castell-nedd Port Talbot|Castell-nedd Port Talbot|County Borough of Neath Port Talbot|Neath and Port Talbot	2	16151	77
+Newport	GB-NWP	GB.WLS.Y6	3333246	Unitary authority	Casnewydd|City of Newport|County Borough of Newport|Dinas Casnewydd	2	16151	77
+Rhondda Cynon Taff	GB-RCT	GB.WLS.Y9	3333247	Unitary authority	Bwrdeistref Sirol Rhondda Cynon Taf|County Borough of Rhondda Cynon Taf|Rhondda Cynon Taf|Rhondda CynonTaf	2	16151	77
+Swansea	GB-SWA	GB.WLS.Z1	3333248	Unitary authority	Abertawe|City and County of Swansea|Dinas a Sir Abertawe	2	16151	77
 Torfaen County Borough		GB.WLS.Z2	3333249		Bwrdeistref Sirol Tor-faen	2	16151	77
 Argyll and Bute	GB-AGB	GB.SCT.T8	6457407	Council area		2	16152	77
 Bedford	GB-BDF	GB.ENG.Z5	7290534	Unitary authority		2	16154	77
@@ -26216,16 +26216,16 @@ Casablanca-Settat	MA-06	MA.06	11281879	Region	الدار البيضاء - سطا
 Marrakech-Safi	MA-07	MA.07	11281880	Region	Marrakesh-Safi|مراكش آسفي	1		137
 Drâa-Tafilalet	MA-08	MA.08	11281881	Region		1		137
 Souss-Massa	MA-09	MA.09	11281882	Region	سوس ماسة	1		137
-Guelmim-Oued Noun		MA.10	11281884		جهة كلميم واد نون|جهة كلميم وادي نون|كلميم واد نون|كلميم وادي نون	1		137
-Laayoune-Sakia El Hamra		MA.11	11281885		Laâyoune-Sakia El Hamra|العيون - الساقية الحمراء	1		137
-Dakhla-Oued Ed-Dahab (EH)	MA-12	MA.12	11281886	Region	Dakhla-Oued Ed-Dahab	1		137
+Guelmim-Oued Noun	MA-10	MA.10	11281884	Region	جهة كلميم واد نون|جهة كلميم وادي نون|كلميم واد نون|كلميم وادي نون	1		137
+Laâyoune-Sakia El Hamra	MA-11	MA.11	11281885	Region	Laayoune-Sakia El Hamra|العيون - الساقية الحمراء	1		137
+Dakhla-Oued Ed-Dahab	MA-12	MA.12	11281886	Region		1		137
 Tiznit	MA-TIZ	MA.09.581	2527087	Province	Province de Tiznit|Tiznit Province|إقليم تيزنيت	2	26218	137
 Tétouan	MA-TET	MA.01.571	2528907	Province	Province de Tetouan|Tetouan|إقليم تطوان	2	26210	137
 Taza	MA-TAZ	MA.03.561	2529313	Province	Province de Taza|إقليم تازة	2	26212	137
 Tata	MA-TAT	MA.09.551	2529360	Province	Province de Tata|Tata Province|إقليم طاطا	2	26218	137
 Taroudannt	MA-TAR	MA.09.541	2529647	Province	Province de Taroudannt|Taroudant Province|إقليم تارودانت	2	26218	137
 Taounate	MA-TAO	MA.03.531	2530153	Province	Province de Taounate|Taounate Province|إقليم تاونات	2	26212	137
-Tan-Tan		MA.10.521	2530240		Province de Tan-Tan|إقليم طانطان	2	26219	137
+Tan-Tan	MA-TNT	MA.10.521	2530240	Province	Province de Tan-Tan|إقليم طانطان	2	26219	137
 Tanger-Assilah	MA-TNG	MA.01.511	2530333	Prefecture	Province de Tanger-Assilah|إقليم طنجة - أصيلا	2	26210	137
 Sidi Kacem	MA-SIK	MA.04.481	2534445	Province	Province de Sidi-Kacem|Sidi Kacem Province|Sidi-Kacem|إقليم سيدي قاسم	2	26213	137
 Settat	MA-SET	MA.06.461	2537405	Province	Province de Settat|Settat Province|إقليم سطات	2	26215	137
@@ -26236,7 +26236,7 @@ Oujda-Angad	MA-OUJ	MA.02.411	2540482	Prefecture	Province de Oujda-Angad|إقلي
 Ouarzazate	MA-OUA	MA.08.401	2540846	Province	Ouarzazate Province|Province de Ouarzazate|إقليم ورزازات|إقليم ورززات	2	26217	137
 Nador	MA-NAD	MA.02.381	2541472	Province	Nador Province|Province de Nador|إقليم الناضور|إقليم الناظور	2	26211	137
 Larache	MA-LAR	MA.01.331	2543546	Province	Larache Province|Province de Larache|إقليم العرائش	2	26210	137
-Laayoune		MA.11.321	2543878		Laâyoune|Province de  Laâyoune|Province de Laayoune|إقليم العيون	2	26220	137
+Laâyoune	MA-LAA	MA.11.321	2543878	Province	Laayoune|Province de  Laâyoune|Province de Laayoune|إقليم العيون	2	26220	137
 Khouribga	MA-KHO	MA.05.311	2544246	Province	Khouribga Province|Province de Khouribga|إقليم خريبكة	2	26214	137
 Khénifra	MA-KHN	MA.05.301	2544331	Province	Khenifra|Khénifra Province|Province de Khenifra|إقليم خنيفرة	2	26214	137
 Khémisset	MA-KHE	MA.04.291	2544363	Province	Khemisset|Khémisset Province|Province de Khemisset|إقليم الخميسات	2	26213	137
@@ -26257,8 +26257,8 @@ Azilal	MA-AZI	MA.05.081	2556569	Province	Azilal Province|Province d'Azilal|إق�
 Al Hoceïma	MA-HOC	MA.01.051	2558543	Province	Al-Hoceima|Province d'Al-Hoceima|إقليم الحسيمة	2	26210	137
 Agadir-Ida-Ou-Tanane	MA-AGD	MA.09.001	2561655	Prefecture	Agadir-Ida-ou-Tnan|Province d'Agadir-Ida-ou-Tnan|إقليم أكادير إدا وتنان	2	26218	137
 Skhirate-Témara	MA-SKH	MA.04.501	2562053	Prefecture	Province de Skhirate-Temara|Skhirate-Temara|إقليم الصخيرات - تمارة	2	26213	137
-Assa-Zag		MA.10.071	2595329		Assa-Zag Province|Province de Assa-Zag|إقليم أسا - الزاك	2	26219	137
-Es-Semara		MA.11.221	2595330		Es Semara Province|Province d'Es-Semara|إقليم السمارة	2	26220	137
+Assa-Zag	MA-ASZ	MA.10.071	2595329	Province	Assa-Zag Province|Province de Assa-Zag|إقليم أسا - الزاك	2	26219	137
+Es-Semara	MA-ESM	MA.11.221	2595330	Province	Es Semara Province|Province d'Es-Semara|إقليم السمارة	2	26220	137
 Meknès	MA-MEK	MA.03.061	6547283	Prefecture	Meknes|Meknès Prefecture|Province de Meknes|إقليم مكناس	2	26212	137
 Chichaoua	MA-CHI	MA.07.161	6547284	Province	Chichaoua Province|Province de Chichaoua|إقليم شيشاوة	2	26216	137
 Marrakech	MA-MAR	MA.07.351	6547285	Prefecture	Marrakesh|Province de Marrakech|إقليم مراكش|مراكش	2	26216	137
@@ -26266,15 +26266,15 @@ Sefrou	MA-SEF	MA.03.451	6547286	Province	Province de Sefrou|إقليم صفرو	
 Berkane	MA-BER	MA.02.113	6547287	Province	Berkane Province|Province de Berkane|إقليم بركان	2	26211	137
 Jerada	MA-JRA	MA.02.275	6547288	Province	Jerada Province|Province de Jerada|إقليم جرادة	2	26211	137
 Taourirt	MA-TAI	MA.02.533	6547289	Province	Province de Taourirt|Taourirt Province|إقليم تاوريرت	2	26211	137
-Boujdour		MA.11.121	6547290		Boujdour Province|Province de Boujdour|إقليم بوجدور	2	26220	137
+Boujdour	MA-BOD	MA.11.121	6547290	Province	Boujdour Province|Province de Boujdour|إقليم بوجدور	2	26220	137
 Chtouka-Ait Baha	MA-CHT	MA.09.163	6547291	Province	Chtouka-Ait-Baha|Province de Chtouka-Ait-Baha|إقليم شتوكة أيت باها	2	26218	137
 Al Haouz	MA-HAO	MA.07.041	6547292	Province	Al Haouz Province|Al-Haouz|Province d'Al-Haouz|إقليم الحوز	2	26216	137
 Fahs-Anjra	MA-FAH	MA.01.227	6547293	Province	Province de Fahs-Anjra|إقليم فحص - انجرة	2	26210	137
 Casablanca	MA-CAS	MA.06.141	6547294	Prefecture	Dar el Beïda|Province de Casablanca|إقليم الدار البيضاء	2	26215	137
 Moulay Yacoub	MA-MOU	MA.03.591	6547295	Province	Moulay-Yacoub|Province de Moulay-Yacoub|إقليم مولاي يعقوب	2	26212	137
 El Hajeb	MA-HAJ	MA.03.171	6547296	Province	El-Hajeb|Province d'El-Hajeb|إقليم الحاجب	2	26212	137
-Aousserd		MA.12.066	6547297		Aousserd Province|Province de Aousserd|إقليم أوسرد	2	26221	137
-Oued-Ed-Dahab		MA.12.391	6547298		Province de Oued-Ed-Dahab|إقليم وادي الذهب	2	26221	137
+Aousserd	MA-AOU	MA.12.066	6547297	Province	Aousserd Province|Province de Aousserd|إقليم أوسرد	2	26221	137
+Oued Ed-Dahab	MA-OUD	MA.12.391	6547298	Province	Oued-Ed-Dahab|Province de Oued-Ed-Dahab|إقليم وادي الذهب	2	26221	137
 Nouaceur	MA-NOU	MA.06.385	6547299	Province	Nouaceur Province|Province de Nouaceur|إقليم النواصر	2	26215	137
 Fès	MA-FES	MA.03.231	6547300	Prefecture	Fes|Fez|Province de Fes|إقليم فاس|فاس	2	26212	137
 Mohammadia	MA-MOH	MA.06.371	6547301	Prefecture	Mohammedia|Province de Mohammedia|إقليم المحمدية	2	26215	137
@@ -26291,7 +26291,7 @@ Sidi Bennour	MA-SIB	MA.06.467	11282168	Province	Sidi Bennour Province	2	26215	13
 Youssoufia	MA-YUS	MA.07.585	11282170	Province	Youssoufia Province	2	26216	137
 Midelt	MA-MID	MA.08.363	11282171	Province	Midelt Province	2	26217	137
 Rehamna	MA-REH	MA.07.427	11282172	Province	Rehamna Province	2	26216	137
-Tarfaya		MA.11.537	11282173		Tarfaya Province	2	26220	137
+Tarfaya	MA-TAF	MA.11.537	11282173	Province	Tarfaya Province	2	26220	137
 Sidi Ifni	MA-SIF	MA.10.473	11282174	Province		2	26219	137
 Fquih Ben Salah	MA-FQH	MA.05.255	11282175	Province	Fquih Ben Salah Province|إقليم الفقيه بن صالح	2	26214	137
 Municipality of Monaco		MC.00	3319178		Monaco	1		138
@@ -26346,7 +26346,7 @@ Basarabeasca	MD-BS	MD.61	618565	District	Basarabeasca District|raionul Basarabea
 Hîncești	MD-HI	MD.77	858803	District	Hînceşti|Hîncești District|Raionul Hîncești|Районул Хынчешть	1		139
 Șoldănești	MD-SD	MD.86	858808	District	Raionul Şoldănești|Raionul Șoldănești|Şoldăneşti|Șoldănești District	1		139
 Stînga Nistrului, unitatea teritorială din	MD-SN	MD.58	858889	Territorial unit	Administrative-Territorial Units of the Left Bank of the Dniester|Stînga Nistrului|Transitria|Transnistria|Unitățile Administrativ-Teritoriale din stînga Nistrului	1		139
-Găgăuzia, Unitatea teritorială autonomă (UTAG)	MD-GA	MD.51	858895	Autonomous territorial unit	Autonomous Territorial Unit of Gagauzia|Gagauzia|Găgăuzia|Unitatea Teritorială Autonomă Găgăuzia	1		139
+Găgăuzia, Unitatea teritorială autonomă	MD-GA	MD.51	858895	Autonomous territorial unit	Autonomous Territorial Unit of Gagauzia|Gagauzia|Găgăuzia|UTAG|Unitatea Teritorială Autonomă Găgăuzia	1		139
 Bender Municipality		MD.62	861487		Municipiul Bender	1		139
 Bălți	MD-BA	MD.60	873909	City	Bălţi	1		139
 Rožaje	ME-17	ME.17	786233	Municipality	Rožaje Municipality|Рожаје	1		140
@@ -31805,8 +31805,8 @@ Trøndelag	NO-50	NO.21	11862827	County	Trøndelag fylke|Trøndelága	1		167
 Agder	NO-42	NO.42	12110596	County	Agder fylke	1		167
 Innlandet	NO-34	NO.34	12110598	County	Innlandet fylke	1		167
 Vestland	NO-46	NO.46	12110600	County	Vestland fylke	1		167
-Svalbard (Arctic Region)	NO-21			Arctic region		1		167
-Jan Mayen (Arctic Region)	NO-22			Arctic region		1		167
+Svalbard	NO-21			Arctic region	Arctic Region	1		167
+Jan Mayen	NO-22			Arctic region	Arctic Region	1		167
 Viken	NO-30			County		1		167
 Tana		NO.05.5628	777197		Deanu gielda|Deatnu|Tana kommune	2	31793	167
 Storfjord		NO.18.5538	777394		Omasvuotna	2	31795	167
@@ -32797,7 +32797,7 @@ West Sepik	PG-SAN	PG.18	2087246	Province	Sandaun|Sandaun Province	1		176
 Bougainville	PG-NSB	PG.07	2089470	Autonomous region		1		176
 Northern	PG-NPP	PG.04	2089478	Province	Oro|Oro Province	1		176
 New Ireland	PG-NIK	PG.15	2089693	Province	New Ireland Province|Niu Ailan	1		176
-National Capital		PG.20	2089856			1		176
+National Capital District	PG-NCD	PG.20	2089856	District	National Capital|Port Moresby	1		176
 Morobe	PG-MPL	PG.14	2090468	Province	Morobe Province	1		176
 Manus	PG-MRL	PG.13	2091495	Province	Manus Province	1		176
 Madang	PG-MPM	PG.12	2091993	Province	Madang Province	1		176
@@ -32898,22 +32898,22 @@ Obura Wonenara		PG.09.9855501	9855501		Obura-Wonenara District	2	32808	176
 Rai Coast		PG.12.9855506	9855506		Rai Coast District	2	32803	176
 Markham		PG.14.9855507	9855507		Markham District	2	32801	176
 National Capital District		PG.20.9855526	9855526			2	32800	176
-Autonomous Region in Muslim Mindanao (ARMM)	PH-14	PH.14	7115989	Region	Agwaywayas a Rehion iti Muslim a Mindanao|Autonomo nga Rehiyon ha Muslim Mindanao|Autonomous Region in Muslim Mindanao|Mindanawng Muslim	1		177
-Northern Mindanao (Region X)	PH-10	PH.10	7521295	Region	Amianan a Mindanao|Amihanan nga Mindanao|Amihanang Mindanao|Northern Mindanao	1		177
-Mimaropa		PH.41	7521296		MIMAROPA	1		177
-Cagayan Valley (Region II)	PH-02	PH.02	7521297	Region	Cagayan Valley|Durog sg Cagayán|Lupot sa Cagayan|Siong han Cagayan|Tanap ti Cagayan|Valley na Cagayan	1		177
-Soccsksargen		PH.12	7521298			1		177
-Caraga		PH.13	7521299			1		177
-Cordillera Administrative Region (CAR)	PH-15	PH.15	7521300	Region	Administratibo nga Rehiyon han Cordillera|Administratibong Rehiyon sa Cordillera|Cordillera|Cordillera Administrative Region|Kakordilyerahan|Rehion Administratibo ti Kordiliera	1		177
-Ilocos (Region I)	PH-01	PH.01	7521301	Region	Ilocos|Ilocos Region|Ilocos nga Rehiyon|Rehion ti Ilocos|Rehiyon sa Ilocos	1		177
-Calabarzon		PH.40	7521303			1		177
-Western Visayas (Region VI)	PH-06	PH.06	7521304	Region	Kasadpang Kabisay-an|Katundan nga Kabisay-an|Lumaud a Visayas|Western Visayas	1		177
-Central Luzon		PH.03	7521305		Butnga nga Luzon|Pegley na Luzon|Tengnga a Luzon|Tunga-tungang Luzon	1		177
-Central Visayas		PH.07	7521306		Butnga nga Kabisay-an|Tengnga a Visayas|Tunga-tungang Kabisay-an	1		177
-Eastern Visayas		PH.08	7521307		Daya a Visayas|Region VIII|Sidlakang Kabisay-an|Sinirangan nga Kabisay-an	1		177
-Zamboanga Peninsula (Region IX)	PH-09	PH.09	7521308	Region	Peninsula han Zamboanga|Peninsula ti Zamboanga|Zamboanga|Zamboanga Peninsula	1		177
-Davao Region		PH.11	7521309		Davao nga Rehiyon|Kadabawan|Rehion ti Davao	1		177
-Bicol (Region V)	PH-05	PH.05	7521310	Region	Bicol|Bicol Region|Bicol nga Rehiyon|Bikol|Rehion ti Bicol	1		177
+Autonomous Region in Muslim Mindanao	PH-14	PH.14	7115989	Region	ARMM|Agwaywayas a Rehion iti Muslim a Mindanao|Autonomo nga Rehiyon ha Muslim Mindanao|Mindanawng Muslim	1		177
+Northern Mindanao	PH-10	PH.10	7521295	Region	Amianan a Mindanao|Amihanan nga Mindanao|Amihanang Mindanao|Region X	1		177
+Mimaropa	PH-41	PH.41	7521296	Region	MIMAROPA|Region	1		177
+Cagayan Valley	PH-02	PH.02	7521297	Region	Durog sg Cagayán|Lupot sa Cagayan|Region II|Siong han Cagayan|Tanap ti Cagayan|Valley na Cagayan	1		177
+Soccsksargen	PH-12	PH.12	7521298	Region	Region XII	1		177
+Caraga	PH-13	PH.13	7521299	Region	Region XIII	1		177
+Cordillera Administrative Region	PH-15	PH.15	7521300	Region	Administratibo nga Rehiyon han Cordillera|Administratibong Rehiyon sa Cordillera|CAR|Cordillera|Kakordilyerahan|Rehion Administratibo ti Kordiliera	1		177
+Ilocos	PH-01	PH.01	7521301	Region	Ilocos Region|Ilocos nga Rehiyon|Region I|Rehion ti Ilocos|Rehiyon sa Ilocos	1		177
+Calabarzon	PH-40	PH.40	7521303	Region	Region	1		177
+Western Visayas	PH-06	PH.06	7521304	Region	Kasadpang Kabisay-an|Katundan nga Kabisay-an|Lumaud a Visayas|Region VI	1		177
+Central Luzon	PH-03	PH.03	7521305	Region	Butnga nga Luzon|Pegley na Luzon|Region III|Tengnga a Luzon|Tunga-tungang Luzon	1		177
+Central Visayas	PH-07	PH.07	7521306	Region	Butnga nga Kabisay-an|Region VII|Tengnga a Visayas|Tunga-tungang Kabisay-an	1		177
+Eastern Visayas	PH-08	PH.08	7521307	Region	Daya a Visayas|Region VIII|Sidlakang Kabisay-an|Sinirangan nga Kabisay-an	1		177
+Zamboanga Peninsula	PH-09	PH.09	7521308	Region	Peninsula han Zamboanga|Peninsula ti Zamboanga|Region IX|Zamboanga	1		177
+Davao	PH-11	PH.11	7521309	Region	Davao Region|Davao nga Rehiyon|Kadabawan|Region XI|Rehion ti Davao	1		177
+Bicol	PH-05	PH.05	7521310	Region	Bicol Region|Bicol nga Rehiyon|Bikol|Region V|Rehion ti Bicol	1		177
 National Capital Region	PH-00	PH.NCR	7521311	Region		1		177
 Zamboanga del Sur	PH-ZAS	PH.09.66	1679428	Province	Habagatang Zamboanga|Pagabatan Sambuanga|Province of Zamboanga del Sur	2	32914	177
 Zamboanga del Norte	PH-ZAN	PH.09.65	1679429	Province	Amihanang Zamboanga|Province of Zamboanga del Norte	2	32914	177
@@ -41347,7 +41347,7 @@ Temotu	SB-TE	SB.09	2178472	Province	Temotu Province	1		194
 Makira-Ulawa	SB-MK	SB.08	2178730	Province	Makira-Ulawa Province	1		194
 Choiseul	SB-CH	SB.12	7280292	Province	Choiseul Province	1		194
 Rennell and Bellona	SB-RB	SB.13	7280293	Province	Rennell and Bellona Province	1		194
-Capital Territory (Honiara)	SB-CT	SB.14	9259067	Capital territory	Honiara	1		194
+Capital Territory	SB-CT	SB.14	9259067	Capital territory	Honiara	1		194
 Munda		SB.11.0215	8987088			2	41341	194
 Noro		SB.11.0225	9035073			2	41341	194
 Nggosi		SB.14.1001	12041744			2	41350	194
@@ -41667,27 +41667,27 @@ Abyei		SD.50.13711230	13711230		أبيي	2	41572	196
 Al Fao		SD.39.13711231	13711231		الفاو	2	41566	196
 Al Firdous		SD.60.13711232	13711232		الفردوس	2	41578	196
 Al Idia		SD.56.13711233	13711233		الأضية	2	41576	196
-Norrbotten		SE.14	604010		Norrbotten County|Norrbottenin lääni|Norrbottens län	1		197
-Västmanland		SE.25	2664179		Västmanland County|Västmanlandin lääni|Västmanlands län	1		197
-Västernorrland		SE.24	2664292		Västernorrland County|Västernorrlandin lääni|Västernorrlands län	1		197
-Västerbotten		SE.23	2664415		Västerbotten County|Västerbottenin lääni|Västerbottens län	1		197
-Värmland		SE.22	2664870		Värmland County|Värmlands län|Värmlannin lääni	1		197
-Uppsala		SE.21	2666218		Uppsala County|Uppsala län|Uppsalan lääni	1		197
-Stockholm		SE.26	2673722		Stockholm County|Stockholms län|Tukholma	1		197
-Södermanland		SE.18	2676207		Södermanland County|Södermanlandin lääni|Södermanlands län	1		197
-Östergötland		SE.16	2685867		Itä-Götanmaan lääni|Östergötland County|Östergötlands län	1		197
-Örebro		SE.15	2686655		Örebro County|Örebro län|Örebron lääni	1		197
-Kronoberg		SE.12	2699050		Kronoberg County|Kronobergin lääni|Kronobergs län	1		197
-Dalarna		SE.10	2699767		Dalarna County|Dalarnas län|Taalainmaan lääni	1		197
-Kalmar		SE.09	2702259		Kalmar County|Kalmar län|Kalmarin lääni	1		197
-Jönköping		SE.08	2702976		Jönköping County|Jönköpingin lääni|Jönköpings län	1		197
-Jämtland		SE.07	2703330		Jämtland County|Jämtlandin lääni|Jämtlands län	1		197
-Halland		SE.06	2708794		Halland County|Hallandin lääni|Hallands län	1		197
-Gotland		SE.05	2711508		Gotland County|Gotlands län|Gotlannin lääni	1		197
-Gävleborg		SE.03	2712411		Gävleborg County|Gävleborgin lääni|Gävleborgs län	1		197
-Blekinge		SE.02	2721357		Blekinge County|Blekinge län|Blekingen lääni	1		197
-Skåne		SE.27	3337385		Scania|Skoone|Skåne County|Skåne län	1		197
-Västra Götaland		SE.28	3337386		Länsi-Götanmaan lääni|Västra Götaland County|Västra Götalands län	1		197
+Norrbottens län	SE-BD	SE.14	604010	County	Norrbotten|Norrbotten County|Norrbottenin lääni	1		197
+Västmanlands län	SE-U	SE.25	2664179	County	Västmanland|Västmanland County|Västmanlandin lääni	1		197
+Västernorrlands län	SE-Y	SE.24	2664292	County	Västernorrland|Västernorrland County|Västernorrlandin lääni	1		197
+Västerbottens län	SE-AC	SE.23	2664415	County	Västerbotten|Västerbotten County|Västerbottenin lääni	1		197
+Värmlands län	SE-S	SE.22	2664870	County	Värmland|Värmland County|Värmlannin lääni	1		197
+Uppsala län	SE-C	SE.21	2666218	County	Uppsala|Uppsala County|Uppsalan lääni	1		197
+Stockholms län	SE-AB	SE.26	2673722	County	Stockholm|Stockholm County|Tukholma	1		197
+Södermanlands län	SE-D	SE.18	2676207	County	Södermanland|Södermanland County|Södermanlandin lääni	1		197
+Östergötlands län	SE-E	SE.16	2685867	County	Itä-Götanmaan lääni|Östergötland|Östergötland County	1		197
+Örebro län	SE-T	SE.15	2686655	County	Örebro|Örebro County|Örebron lääni	1		197
+Kronobergs län	SE-G	SE.12	2699050	County	Kronoberg|Kronoberg County|Kronobergin lääni	1		197
+Dalarnas län	SE-W	SE.10	2699767	County	Dalarna|Dalarna County|Taalainmaan lääni	1		197
+Kalmar län	SE-H	SE.09	2702259	County	Kalmar|Kalmar County|Kalmarin lääni	1		197
+Jönköpings län	SE-F	SE.08	2702976	County	Jönköping|Jönköping County|Jönköpingin lääni	1		197
+Jämtlands län	SE-Z	SE.07	2703330	County	Jämtland|Jämtland County|Jämtlandin lääni	1		197
+Hallands län	SE-N	SE.06	2708794	County	Halland|Halland County|Hallandin lääni	1		197
+Gotlands län	SE-I	SE.05	2711508	County	Gotland|Gotland County|Gotlannin lääni	1		197
+Gävleborgs län	SE-X	SE.03	2712411	County	Gävleborg|Gävleborg County|Gävleborgin lääni	1		197
+Blekinge län	SE-K	SE.02	2721357	County	Blekinge|Blekinge County|Blekingen lääni	1		197
+Skåne län	SE-M	SE.27	3337385	County	Scania|Skoone|Skåne|Skåne County	1		197
+Västra Götalands län	SE-O	SE.28	3337386	County	Länsi-Götanmaan lääni|Västra Götaland|Västra Götaland County	1		197
 Umeå Kommun		SE.23.2480	602149		Uumaja	2	41673	197
 Skellefteå Kommun		SE.23.2482	602912			2	41673	197
 Robertsfors Kommun		SE.23.2409	603302			2	41673	197
@@ -42311,7 +42311,7 @@ Okres Bratislava IV		SK.02.104	8986341			2	42231	202
 Okres Bratislava V		SK.02.105	8986342			2	42231	202
 Okres Kosice-okolie		SK.03.806	8986343		Košice-okolie District|Okres Košice–okolie	2	42227	202
 Okres Levoča		SK.05.704	8989441		Levoča District	2	42228	202
-Western Area		SL.04	2403068			1		203
+Western Area	SL-W	SL.04	2403068	Area	Freetown	1		203
 Southern	SL-S	SL.03	2403745	Province	Southern Province	1		203
 Northern	SL-N	SL.02	2404798	Province	Northern Province	1		203
 Eastern	SL-E	SL.01	2409543	Province	Eastern Province	1		203
@@ -42973,7 +42973,7 @@ Juan de Nova Island		TF.05.JU	1024029			2	42967	216
 Glorioso Islands		TF.05.GO	1024037			2	42967	216
 Savanes	TG-S	TG.26	2364205	Region	Région des Savanes|Savanes Region	1		217
 Plateaux	TG-P	TG.25	2364370	Region	Plateaux Region|Région des plateaux	1		217
-Maritime (Région)	TG-M	TG.24	2365173	Region	Maritime|Maritime Region|Région maritime	1		217
+Maritime	TG-M	TG.24	2365173	Region	Maritime Region|Région|Région maritime	1		217
 Centrale	TG-C	TG.22	2367237	Region	Centrale Region|Région centrale	1		217
 Kara	TG-K	TG.23	2597439	Region	Kara Region|Région de la Kara	1		217
 Vo Prefecture		TG.24.2363489	2363489		Vo	2	42976	217

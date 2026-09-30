@@ -2359,7 +2359,7 @@ montana|oblast montana	district	100|bg|bgr|bulgaria	1
 oblast vratsa|vratsa	district	100|bg|bgr|bulgaria	1
 oblast varna|varna	district	100|bg|bgr|bulgaria	1
 dobrich|oblast dobrich	district	100|bg|bgr|bulgaria	1
-oblast sofia|oblast sofiia|sofia|sofia province|sofiia|sofiiska oblast	district	100|bg|bgr|bulgaria	1
+oblast sofia|oblast sofiia|sofia|sofia province|sofiia|sofiiska oblast		100|bg|bgr|bulgaria	1
 oblast ruse|ruse	district	100|bg|bgr|bulgaria	1
 oblast plovdiv|plovdiv|plovdivska oblast|plovdivski okr'g	district	100|bg|bgr|bulgaria	1
 oblast pleven|pleven	district	100|bg|bgr|bulgaria	1
@@ -2367,7 +2367,7 @@ oblast pernik|pernik	district	100|bg|bgr|bulgaria	1
 oblast pazardzhik|pazardzhik	district	100|bg|bgr|bulgaria	1
 lovech|oblast lovech	district	100|bg|bgr|bulgaria	1
 haskovo|khaskovo|oblast haskovo|oblast khaskovo	district	100|bg|bgr|bulgaria	1
-oblast sofia-grad|oblast sofiia grad|oblast sofiia-grad|okrug grad sofiya|sofia (stolitsa)|sofia-capital|sofia-grad|sofiia (stolitsa)|sofiia-grad	district	100|bg|bgr|bulgaria	1
+oblast sofia-grad|oblast sofiia grad|oblast sofiia-grad|okrug grad sofiya|sofia-capital|sofia-grad|sofiia (stolitsa)|sofiia-grad		100|bg|bgr|bulgaria	1
 burgas|oblast bugas|oblast burgas	district	100|bg|bgr|bulgaria	1
 blagoevgrad|oblast blagoevgrad	district	100|bg|bgr|bulgaria	1
 gabrovo|oblast gabrovo	district	100|bg|bgr|bulgaria	1
@@ -14177,7 +14177,7 @@ hermanas mirabal	province	214|do|dom|dominican republic	1
 provincia puerto plata|puerto plata		214|do|dom|dominican republic	1
 peravia|provincia peravia	province	214|do|dom|dominican republic	1
 pedernales|pedernales province|provincia pedernales		214|do|dom|dominican republic	1
-distrito de santo domingo|distrito nacional (santo domingo)|nacional	district	214|do|dom|dominican republic	1
+distrito de santo domingo|distrito nacional|nacional|santo domingo	district	214|do|dom|dominican republic	1
 monte plata|monte plata province|provincia monte plata		214|do|dom|dominican republic	1
 monte cristi|monte cristi province|provincia monte cristi		214|do|dom|dominican republic	1
 monsenor nouel|provincia monsenor nouel	province	214|do|dom|dominican republic	1
@@ -15538,7 +15538,7 @@ segeneity		232|er|eri|eritrea	2
 semienawi mibrak		232|er|eri|eritrea	2
 comunidad autonoma de la region de murcia|murcia|murcia, region de|murtziako eskualdea|region de murcia|region of murcia|rexion de murcia|rexon de murcia	autonomous community	724|es|esp|spain	1
 ceuta|ciudad autonoma de ceuta|ciudad de ceuta|zeuta	autonomous city in north africa	724|es|esp|spain	1
-balear uharteak|baleares|balearic islands|comunidad autonoma de las islas baleares|comunitat autonoma de les illes balears|illas baleares|illes balears|illes balears [islas baleares]|islas baleares|islles baleares|ses illes	autonomous community	724|es|esp|spain	1
+balear uharteak|baleares|balearic islands|comunidad autonoma de las islas baleares|comunitat autonoma de les illes balears|illas baleares|illes balears|islas baleares|islles baleares|ses illes	autonomous community	724|es|esp|spain	1
 andalosia|andalucia|andalusia|andaluzia|comunidad autonoma de andalucia	autonomous community	724|es|esp|spain	1
 canarias|canaries|canary islands|comunidad autonoma de canarias|comunidad canaria|illas canarias|illes canaries|islas canarias|kanariak	autonomous community	724|es|esp|spain	1
 castela-a mancha|castelha-la mancha|castella - la manxa|castella i la manxa|castiella-la mancha|castile-la mancha|castilla-la mancha|castille-la mancha|comunidad autonoma de castilla-la mancha|gaztela-mantxa	autonomous community	724|es|esp|spain	1
@@ -15551,8 +15551,8 @@ a rioxa|comunidad autonoma de la rioja|errioxa|errioxako autonomia erkidegoa|la 
 cantabria|comunidad autonoma de cantabria|kantabria|la montana|provincia de santander|santander	autonomous community	724|es|esp|spain	1
 arago|aragon|comunidad autonoma de aragon	autonomous community	724|es|esp|spain	1
 castela e leon|castelha e leon|castella i lleo|castiella y lleon|castiella y llion|castile and leon|castilla y leon|castille and leon|comunidad autonoma de castilla y leon|gaztela eta leon	autonomous community	724|es|esp|spain	1
-catalonha|catalonia|cataluna|catalunya|catalunya [cataluna]|comunidad autonoma de cataluna|el principat|principat de catalunya	autonomous community	724|es|esp|spain	1
-comunidad autonoma de galicia|galicia|galiza|galizia		724|es|esp|spain	1
+catalonha|catalonia|cataluna|catalunya|comunidad autonoma de cataluna|el principat|principat de catalunya	autonomous community	724|es|esp|spain	1
+comunidad autonoma de galicia|galicia|galiza|galizia	autonomous community	724|es|esp|spain	1
 basque country|comunidad autonoma del pais vasco|comunidad autonoma vasca|euskadi|euskal autonomia erkidegoa|euskal herria|euzkadi|pais basc|pais vasco|provincias vascongadas|vascongadas	autonomous community	724|es|esp|spain	1
 ciudad autonoma de melilla|ciudad de melilla|melilla	autonomous city in north africa	724|es|esp|spain	1
 provincia de valencia|valencia|valencia province|valentzia	province	724|es|esp|spain	2
@@ -15578,33 +15578,33 @@ provincia de zamora|zamora|zamora province	province	724|es|esp|spain	2
 biscaia|biscay|biscay province|bizkaia|provincia de biscaia|vizcaya	province	724|es|esp|spain	2
 provincia de valladolid|valladolid|valladolid province	province	724|es|esp|spain	2
 province of teruel|provincia de terol|provincia de teruel|teruel|teruel province	province	724|es|esp|spain	2
-province of tarragona|provincia de tarragona|tarragona|tarragona province		724|es|esp|spain	2
+province of tarragona|provincia de tarragona|tarragona|tarragona province	province	724|es|esp|spain	2
 provincia de soria|soria|soria province	province	724|es|esp|spain	2
 provincia de segovia|segovia|segovia province	province	724|es|esp|spain	2
 cantabria|cantabria province|province of cantabria|provincia de cantabria	province	724|es|esp|spain	2
 provincia de salamanca|salamanca|salamanca province	province	724|es|esp|spain	2
-pontevedra|pontevedra province|provincia de pontevedra		724|es|esp|spain	2
+pontevedra|pontevedra province|provincia de pontevedra	province	724|es|esp|spain	2
 palencia|palencia province|palentzia|provincia de palencia	province	724|es|esp|spain	2
-orense|ourense|ourense province|provincia d'ourense|provincia de orense|provincia de ourense		724|es|esp|spain	2
-lugo|lugo province|provincia de lugo		724|es|esp|spain	2
+orense|ourense|ourense province|provincia d'ourense|provincia de orense|provincia de ourense	province	724|es|esp|spain	2
+lugo|lugo province|provincia de lugo	province	724|es|esp|spain	2
 leon|leon province|llion|provincia de leon|provincia de lleo	province	724|es|esp|spain	2
-a coruna|a coruna [la coruna]|a coruna province|la coruna|provincia d'a coruna|provincia da coruna|provincia de la coruna	province	724|es|esp|spain	2
+a coruna|a coruna province|la coruna|provincia d'a coruna|provincia da coruna|provincia de la coruna	province	724|es|esp|spain	2
 huesca|huesca province|osca|province of huesca|provincia d'osca|provincia de huesca	province	724|es|esp|spain	2
 gipuzkoa|gipuzkoa province|guipuscoa|guipuzcoa|provincia de guipuscoa|provincia de guipuzcoa	province	724|es|esp|spain	2
 guadalajara|guadalajara province|guadalaxara|provincia de guadalajara	province	724|es|esp|spain	2
 castello|castellon|castellon province|provincia de castello|provincia de castellon|provincia de castellon de la plana	province	724|es|esp|spain	2
 burgos|burgos province|province of burgos|provincia de burgos	province	724|es|esp|spain	2
-barcelona|barcelona province|bartzelona|province of barcelona|provincia de barcelona		724|es|esp|spain	2
+barcelona|barcelona province|bartzelona|province of barcelona|provincia de barcelona	province	724|es|esp|spain	2
 avila|avila province|provincia d'avila|provincia de avila	province	724|es|esp|spain	2
 alava|alava province|araba|araba / alava|provincia d'alaba|provincia de alava	province	724|es|esp|spain	2
-gerona|girona|girona province|province of girona|provincia de gerona|provincia de girona|xerona|xirona		724|es|esp|spain	2
-lerida|lleida|lleida province|province of lleida|provincia de lerida|provincia de lleida		724|es|esp|spain	2
+gerona|girona|girona province|province of girona|provincia de gerona|provincia de girona|xerona|xirona	province	724|es|esp|spain	2
+lerida|lleida|lleida province|province of lleida|provincia de lerida|provincia de lleida	province	724|es|esp|spain	2
 a rioxa|errioxa|la rioja|la rioja province|la rioxa|province of la rioja|provincia de la rioja	province	724|es|esp|spain	2
 comunidad de madrid|madrid|madrid province|madril|province of madrid|provincia de madrid	province	724|es|esp|spain	2
 murcia|murcia province|murtzia|province of murcia|provincia de murcia	province	724|es|esp|spain	2
 nafarroa|navarra|navarra province|navarre|province of navarre|provincia de navarra	province	724|es|esp|spain	2
 asturias|asturias province|asturies|principado de asturias|province of asturias|provincia d'asturies|provincia de asturias	province	724|es|esp|spain	2
-baleares|balearic islands|illes balears|islas baleares|province of balearic islands|provincia de las islas baleares|provincia de les illes balears|ses illes		724|es|esp|spain	2
+baleares|balearic islands|illes balears|islas baleares|province of balearic islands|provincia de las islas baleares|provincia de les illes balears|ses illes	province	724|es|esp|spain	2
 ceuta|ciudad autonoma de ceuta		724|es|esp|spain	2
 ciudad autonoma de melilla|melilla		724|es|esp|spain	2
 addis ababa|adis abeba|adis abeba astedader	administration	231|et|eth|ethiopia	1
@@ -15983,7 +15983,7 @@ hauts-de-france	metropolitan region	250|fr|fra|france	1
 auvergne-rhone-alpes	metropolitan region	250|fr|fra|france	1
 guadeloupe	overseas departmental collectivity	250|fr|fra|france	1
 martinique	overseas unique territorial collectivity	250|fr|fra|france	1
-guyane (francaise)	overseas unique territorial collectivity	250|fr|fra|france	1
+francaise|guyane	overseas unique territorial collectivity	250|fr|fra|france	1
 la reunion	overseas departmental collectivity	250|fr|fra|france	1
 mayotte	overseas departmental collectivity	250|fr|fra|france	1
 saint-barthelemy	overseas collectivity	250|fr|fra|france	1
@@ -16149,12 +16149,12 @@ doutsila		266|ga|gab|gabon	2
 sebe-brikolo		266|ga|gab|gabon	2
 noya		266|ga|gab|gabon	2
 ivindo		266|ga|gab|gabon	2
-a' chuimrigh|an bhreatain bheag|cymru|wales		826|gb|gbr|united kingdom	1
+a' chuimrigh|an bhreatain bheag|cymru|wales	country	826|gb|gbr|united kingdom	1
 alba|albain|scotland|yr alban	country	826|gb|gbr|united kingdom	1
 eirinn a tuath|gogledd iwerddon|n ireland|northern ireland|tuaisceart eireann	province	826|gb|gbr|united kingdom	1
 england|lloegr|sasainn|sasana	country	826|gb|gbr|united kingdom	1
 city of york|york|york city	unitary authority	826|gb|gbr|united kingdom	2
-bwrdeistref sirol wrecsam|county borough of wrexham|wrecsam|wrexham|wrexham county borough		826|gb|gbr|united kingdom	2
+bwrdeistref sirol wrecsam|county borough of wrexham|wrecsam|wrexham|wrexham county borough	unitary authority	826|gb|gbr|united kingdom	2
 worcestershire	two-tier county	826|gb|gbr|united kingdom	2
 royal borough of windsor and maidenhead|windsor and maidenhead	unitary authority	826|gb|gbr|united kingdom	2
 wiltshire	unitary authority	826|gb|gbr|united kingdom	2
@@ -16162,7 +16162,7 @@ west sussex	two-tier county	826|gb|gbr|united kingdom	2
 gorllewin lothian|labhaidh thoir|lodainn an iar|west lothian	council area	826|gb|gbr|united kingdom	2
 eilean siar|na hoileain thiar|western isles|ynysoedd allanol heledd	council area	826|gb|gbr|united kingdom	2
 warwickshire	two-tier county	826|gb|gbr|united kingdom	2
-bro morgannwg|the vale of glamorgan|vale of glamorgan		826|gb|gbr|united kingdom	2
+bro morgannwg|the vale of glamorgan|vale of glamorgan|vale of glamorgan, the	unitary authority	826|gb|gbr|united kingdom	2
 borough of thurrock|thurrock	unitary authority	826|gb|gbr|united kingdom	2
 surrey	two-tier county	826|gb|gbr|united kingdom	2
 suffolk	two-tier county	826|gb|gbr|united kingdom	2
@@ -16175,7 +16175,7 @@ shropshire	unitary authority	826|gb|gbr|united kingdom	2
 district of rutland|rutland	unitary authority	826|gb|gbr|united kingdom	2
 comhairle siorrachd rinn friu|renfrewshire|swydd renfrew	council area	826|gb|gbr|united kingdom	2
 county of powys|powys|sir powys	unitary authority	826|gb|gbr|united kingdom	2
-county of pembroke|county of pembrokeshire|pembrokeshire|sir benfro		826|gb|gbr|united kingdom	2
+county of pembroke|county of pembrokeshire|pembrokeshire|sir benfro	unitary authority	826|gb|gbr|united kingdom	2
 oxfordshire	two-tier county	826|gb|gbr|united kingdom	2
 arcaibh|orkney|orkney islands	council area	826|gb|gbr|united kingdom	2
 nottinghamshire	two-tier county	826|gb|gbr|united kingdom	2
@@ -16199,7 +16199,7 @@ gwynedd	unitary authority	826|gb|gbr|united kingdom	2
 greater london		826|gb|gbr|united kingdom	2
 gloucestershire|swydd gaerloyw	two-tier county	826|gb|gbr|united kingdom	2
 gateshead|gateshead district|metropolitan borough of gateshead	metropolitan district	826|gb|gbr|united kingdom	2
-county of flintshire|flintshire|flintshire principal area|sir y fflint		826|gb|gbr|united kingdom	2
+county of flintshire|flintshire|flintshire principal area|sir y fflint	unitary authority	826|gb|gbr|united kingdom	2
 fife|fiobha|foibhe	council area	826|gb|gbr|united kingdom	2
 essex	two-tier county	826|gb|gbr|united kingdom	2
 east sussex	two-tier county	826|gb|gbr|united kingdom	2
@@ -16210,17 +16210,17 @@ dumfries and galloway|dun phris is gall-ghaidhealaibh	council area	826|gb|gbr|un
 dorset	two-tier county	826|gb|gbr|united kingdom	2
 devon	two-tier county	826|gb|gbr|united kingdom	2
 derbyshire|swydd derby	two-tier county	826|gb|gbr|united kingdom	2
-county of denbighshire|denbighshire|denbighshire principal area|sir ddinbych		826|gb|gbr|united kingdom	2
+county of denbighshire|denbighshire|denbighshire principal area|sir ddinbych	unitary authority	826|gb|gbr|united kingdom	2
 cumbria	two-tier county	826|gb|gbr|united kingdom	2
 cornwall	unitary authority	826|gb|gbr|united kingdom	2
 clach mhanainn|clackmannanshire|siorrachd chlach mhanainn|siorrachd chlach mhannainn|swydd clackmannan	council area	826|gb|gbr|united kingdom	2
-carmarthenshire|county of carmarthenshire|sir gaerfyrddin|sir gar		826|gb|gbr|united kingdom	2
-cardiganshire|ceredigion|county of cardigan|county of ceredigion|sir ceredigion		826|gb|gbr|united kingdom	2
+carmarthenshire|county of carmarthenshire|sir gaerfyrddin|sir gar	unitary authority	826|gb|gbr|united kingdom	2
+cardiganshire|ceredigion|county of cardigan|county of ceredigion|sir ceredigion	unitary authority	826|gb|gbr|united kingdom	2
 caergrawnt|cambridgeshire	two-tier county	826|gb|gbr|united kingdom	2
 buckinghamshire	unitary authority	826|gb|gbr|united kingdom	2
 scottish borders|the scottish borders	council area	826|gb|gbr|united kingdom	2
 angus|aonghas|comhairle aonghais	council area	826|gb|gbr|united kingdom	2
-anglesey|angleseyshire|isle of anglesey|mon|sir ynys mon|ynys mon		826|gb|gbr|united kingdom	2
+anglesey|angleseyshire|isle of anglesey|mon|sir ynys mon|ynys mon	unitary authority	826|gb|gbr|united kingdom	2
 aberdeenshire|contae obar deathain|siorrachd obar dheathain|swydd aberdeen	council area	826|gb|gbr|united kingdom	2
 barnsley	metropolitan district	826|gb|gbr|united kingdom	2
 bath and north east somerset	unitary authority	826|gb|gbr|united kingdom	2
@@ -16311,14 +16311,14 @@ comhairle dhun bhreatainn an iar|comhairle dhun breatainn an iar|gorllewin swydd
 blaenau gwent|bwrdeistref sirol blaenau gwent|county borough of blaenau gwent	unitary authority	826|gb|gbr|united kingdom	2
 bridgend county borough|bwrdeistref sirol pen-y-bont ar ogwr|county borough of bridgend		826|gb|gbr|united kingdom	2
 bwrdeistref sirol caerffili|caerphilly county borough		826|gb|gbr|united kingdom	2
-cardiff|city and county of cardiff|dinas a sir caerdydd		826|gb|gbr|united kingdom	2
+caerdydd|cardiff|city and county of cardiff|dinas a sir caerdydd	unitary authority	826|gb|gbr|united kingdom	2
 bwrdeistref sirol conwy|conwy|conwy county borough|county borough of conwy	unitary authority	826|gb|gbr|united kingdom	2
-bwrdeistref sirol merthyr tudful|merthyr tydfil|merthyr tydfil county borough		826|gb|gbr|united kingdom	2
-county of monmouthshire|monmouthshire|monmouthshire principal area|sir fynwy		826|gb|gbr|united kingdom	2
-bwrdeistref sirol castell-nedd port talbot|castell-nedd port talbot|county borough of neath port talbot|neath and port talbot|neath port talbot		826|gb|gbr|united kingdom	2
-casnewydd|city of newport|county borough of newport|dinas casnewydd|newport		826|gb|gbr|united kingdom	2
-bwrdeistref sirol rhondda cynon taf|county borough of rhondda cynon taf|rhondda cynon taf		826|gb|gbr|united kingdom	2
-abertawe|city and county of swansea|dinas a sir abertawe		826|gb|gbr|united kingdom	2
+bwrdeistref sirol merthyr tudful|merthyr tudful|merthyr tydfil|merthyr tydfil county borough	unitary authority	826|gb|gbr|united kingdom	2
+county of monmouthshire|monmouthshire|monmouthshire principal area|sir fynwy	unitary authority	826|gb|gbr|united kingdom	2
+bwrdeistref sirol castell-nedd port talbot|castell-nedd port talbot|county borough of neath port talbot|neath and port talbot|neath port talbot	unitary authority	826|gb|gbr|united kingdom	2
+casnewydd|city of newport|county borough of newport|dinas casnewydd|newport	unitary authority	826|gb|gbr|united kingdom	2
+bwrdeistref sirol rhondda cynon taf|county borough of rhondda cynon taf|rhondda cynon taf|rhondda cynon taff|rhondda cynontaf	unitary authority	826|gb|gbr|united kingdom	2
+abertawe|city and county of swansea|dinas a sir abertawe|swansea	unitary authority	826|gb|gbr|united kingdom	2
 bwrdeistref sirol tor-faen|torfaen county borough		826|gb|gbr|united kingdom	2
 argyll and bute	council area	826|gb|gbr|united kingdom	2
 bedford	unitary authority	826|gb|gbr|united kingdom	2
@@ -26217,16 +26217,16 @@ casablanca-settat|ldr lbyd - stt	region	504|ma|mar|morocco	1
 marrakech-safi|marrakesh-safi|mrksh sfy	region	504|ma|mar|morocco	1
 draa-tafilalet	region	504|ma|mar|morocco	1
 souss-massa|sws ms@	region	504|ma|mar|morocco	1
-guelmim-oued noun|jh@ klmym wd nwn|jh@ klmym wdy nwn|klmym wd nwn|klmym wdy nwn		504|ma|mar|morocco	1
-l`ywn - lsqy@ lhmr|laayoune-sakia el hamra		504|ma|mar|morocco	1
-dakhla-oued ed-dahab|dakhla-oued ed-dahab (eh)	region	504|ma|mar|morocco	1
+guelmim-oued noun|jh@ klmym wd nwn|jh@ klmym wdy nwn|klmym wd nwn|klmym wdy nwn	region	504|ma|mar|morocco	1
+l`ywn - lsqy@ lhmr|laayoune-sakia el hamra	region	504|ma|mar|morocco	1
+dakhla-oued ed-dahab	region	504|ma|mar|morocco	1
 province de tiznit|qlym tyznyt|tiznit|tiznit province	province	504|ma|mar|morocco	2
 province de tetouan|qlym ttwn|tetouan	province	504|ma|mar|morocco	2
 province de taza|qlym tz@|taza	province	504|ma|mar|morocco	2
 province de tata|qlym tt|tata|tata province	province	504|ma|mar|morocco	2
 province de taroudannt|qlym trwdnt|taroudannt|taroudant province	province	504|ma|mar|morocco	2
 province de taounate|qlym twnt|taounate|taounate province	province	504|ma|mar|morocco	2
-province de tan-tan|qlym tntn|tan-tan		504|ma|mar|morocco	2
+province de tan-tan|qlym tntn|tan-tan	province	504|ma|mar|morocco	2
 province de tanger-assilah|qlym tnj@ - syl|tanger-assilah	prefecture	504|ma|mar|morocco	2
 province de sidi-kacem|qlym sydy qsm|sidi kacem|sidi kacem province|sidi-kacem	province	504|ma|mar|morocco	2
 province de settat|qlym stt|settat|settat province	province	504|ma|mar|morocco	2
@@ -26237,7 +26237,7 @@ oujda-angad|province de oujda-angad|qlym wjd@ - nkd	prefecture	504|ma|mar|morocc
 ouarzazate|ouarzazate province|province de ouarzazate|qlym wrzzt	province	504|ma|mar|morocco	2
 nador|nador province|province de nador|qlym lndwr|qlym lnzwr	province	504|ma|mar|morocco	2
 larache|larache province|province de larache|qlym l`rysh	province	504|ma|mar|morocco	2
-laayoune|province de laayoune|qlym l`ywn		504|ma|mar|morocco	2
+laayoune|province de laayoune|qlym l`ywn	province	504|ma|mar|morocco	2
 khouribga|khouribga province|province de khouribga|qlym khrybk@	province	504|ma|mar|morocco	2
 khenifra|khenifra province|province de khenifra|qlym khnyfr@	province	504|ma|mar|morocco	2
 khemisset|khemisset province|province de khemisset|qlym lkhmyst	province	504|ma|mar|morocco	2
@@ -26258,8 +26258,8 @@ azilal|azilal province|province d'azilal|qlym zyll	province	504|ma|mar|morocco	2
 al hoceima|al-hoceima|province d'al-hoceima|qlym lhsym@	province	504|ma|mar|morocco	2
 agadir-ida-ou-tanane|agadir-ida-ou-tnan|province d'agadir-ida-ou-tnan|qlym kdyr d wtnn	prefecture	504|ma|mar|morocco	2
 province de skhirate-temara|qlym lskhyrt - tmr@|skhirate-temara	prefecture	504|ma|mar|morocco	2
-assa-zag|assa-zag province|province de assa-zag|qlym s - lzk		504|ma|mar|morocco	2
-es semara province|es-semara|province d'es-semara|qlym lsmr@		504|ma|mar|morocco	2
+assa-zag|assa-zag province|province de assa-zag|qlym s - lzk	province	504|ma|mar|morocco	2
+es semara province|es-semara|province d'es-semara|qlym lsmr@	province	504|ma|mar|morocco	2
 meknes|meknes prefecture|province de meknes|qlym mkns	prefecture	504|ma|mar|morocco	2
 chichaoua|chichaoua province|province de chichaoua|qlym shyshw@	province	504|ma|mar|morocco	2
 marrakech|marrakesh|mrksh|province de marrakech|qlym mrksh	prefecture	504|ma|mar|morocco	2
@@ -26267,15 +26267,15 @@ province de sefrou|qlym sfrw|sefrou	province	504|ma|mar|morocco	2
 berkane|berkane province|province de berkane|qlym brkn	province	504|ma|mar|morocco	2
 jerada|jerada province|province de jerada|qlym jrd@	province	504|ma|mar|morocco	2
 province de taourirt|qlym twryrt|taourirt|taourirt province	province	504|ma|mar|morocco	2
-boujdour|boujdour province|province de boujdour|qlym bwjdwr		504|ma|mar|morocco	2
+boujdour|boujdour province|province de boujdour|qlym bwjdwr	province	504|ma|mar|morocco	2
 chtouka-ait baha|chtouka-ait-baha|province de chtouka-ait-baha|qlym shtwk@ yt bh	province	504|ma|mar|morocco	2
 al haouz|al haouz province|al-haouz|province d'al-haouz|qlym lhwz	province	504|ma|mar|morocco	2
 fahs-anjra|province de fahs-anjra|qlym fhs - njr@	province	504|ma|mar|morocco	2
 casablanca|dar el beida|province de casablanca|qlym ldr lbyd	prefecture	504|ma|mar|morocco	2
 moulay yacoub|moulay-yacoub|province de moulay-yacoub|qlym mwly y`qwb	province	504|ma|mar|morocco	2
 el hajeb|el-hajeb|province d'el-hajeb|qlym lhjb	province	504|ma|mar|morocco	2
-aousserd|aousserd province|province de aousserd|qlym wsrd		504|ma|mar|morocco	2
-oued-ed-dahab|province de oued-ed-dahab|qlym wdy ldhhb		504|ma|mar|morocco	2
+aousserd|aousserd province|province de aousserd|qlym wsrd	province	504|ma|mar|morocco	2
+oued ed-dahab|oued-ed-dahab|province de oued-ed-dahab|qlym wdy ldhhb	province	504|ma|mar|morocco	2
 nouaceur|nouaceur province|province de nouaceur|qlym lnwsr	province	504|ma|mar|morocco	2
 fes|fez|fs|province de fes|qlym fs	prefecture	504|ma|mar|morocco	2
 mohammadia|mohammedia|province de mohammedia|qlym lmhmdy@	prefecture	504|ma|mar|morocco	2
@@ -26292,7 +26292,7 @@ sidi bennour|sidi bennour province	province	504|ma|mar|morocco	2
 youssoufia|youssoufia province	province	504|ma|mar|morocco	2
 midelt|midelt province	province	504|ma|mar|morocco	2
 rehamna|rehamna province	province	504|ma|mar|morocco	2
-tarfaya|tarfaya province		504|ma|mar|morocco	2
+tarfaya|tarfaya province	province	504|ma|mar|morocco	2
 sidi ifni	province	504|ma|mar|morocco	2
 fquih ben salah|fquih ben salah province|qlym lfqyh bn slh	province	504|ma|mar|morocco	2
 monaco|municipality of monaco		492|mc|mco|monaco	1
@@ -26347,7 +26347,7 @@ basarabeasca|basarabeasca district|raionul basarabeasca|raionul basarabiaska	dis
 hincesti|hincesti district|raionul hincesti|raionul khynchesht'	district	498|md|mda|moldova	1
 raionul soldanesti|soldanesti|soldanesti district	district	498|md|mda|moldova	1
 administrative-territorial units of the left bank of the dniester|stinga nistrului|stinga nistrului, unitatea teritoriala din|transitria|transnistria|unitatile administrativ-teritoriale din stinga nistrului	territorial unit	498|md|mda|moldova	1
-autonomous territorial unit of gagauzia|gagauzia|gagauzia, unitatea teritoriala autonoma (utag)|unitatea teritoriala autonoma gagauzia	autonomous territorial unit	498|md|mda|moldova	1
+autonomous territorial unit of gagauzia|gagauzia|gagauzia, unitatea teritoriala autonoma|unitatea teritoriala autonoma gagauzia|utag	autonomous territorial unit	498|md|mda|moldova	1
 bender municipality|municipiul bender		498|md|mda|moldova	1
 balti	city	498|md|mda|moldova	1
 rozaje|rozaje municipality|rozhaje	municipality	499|me|mne|montenegro	1
@@ -31806,8 +31806,8 @@ trondelag|trondelag fylke|trondelaga	county	578|no|nor|norway	1
 agder|agder fylke	county	578|no|nor|norway	1
 innlandet|innlandet fylke	county	578|no|nor|norway	1
 vestland|vestland fylke	county	578|no|nor|norway	1
-svalbard (arctic region)	arctic region	578|no|nor|norway	1
-jan mayen (arctic region)	arctic region	578|no|nor|norway	1
+arctic region|svalbard	arctic region	578|no|nor|norway	1
+arctic region|jan mayen	arctic region	578|no|nor|norway	1
 viken	county	578|no|nor|norway	1
 deanu gielda|deatnu|tana|tana kommune		578|no|nor|norway	2
 omasvuotna|storfjord		578|no|nor|norway	2
@@ -32798,7 +32798,7 @@ sandaun|sandaun province|west sepik	province	598|papua new guinea|pg|png	1
 bougainville	autonomous region	598|papua new guinea|pg|png	1
 northern|oro|oro province	province	598|papua new guinea|pg|png	1
 new ireland|new ireland province|niu ailan	province	598|papua new guinea|pg|png	1
-national capital		598|papua new guinea|pg|png	1
+national capital|national capital district|port moresby	district	598|papua new guinea|pg|png	1
 morobe|morobe province	province	598|papua new guinea|pg|png	1
 manus|manus province	province	598|papua new guinea|pg|png	1
 madang|madang province	province	598|papua new guinea|pg|png	1
@@ -32899,22 +32899,22 @@ obura wonenara|obura-wonenara district		598|papua new guinea|pg|png	2
 rai coast|rai coast district		598|papua new guinea|pg|png	2
 markham|markham district		598|papua new guinea|pg|png	2
 national capital district		598|papua new guinea|pg|png	2
-agwaywayas a rehion iti muslim a mindanao|autonomo nga rehiyon ha muslim mindanao|autonomous region in muslim mindanao|autonomous region in muslim mindanao (armm)|mindanawng muslim	region	608|ph|philippines|phl	1
-amianan a mindanao|amihanan nga mindanao|amihanang mindanao|northern mindanao|northern mindanao (region x)	region	608|ph|philippines|phl	1
-mimaropa		608|ph|philippines|phl	1
-cagayan valley|cagayan valley (region ii)|durog sg cagayan|lupot sa cagayan|siong han cagayan|tanap ti cagayan|valley na cagayan	region	608|ph|philippines|phl	1
-soccsksargen		608|ph|philippines|phl	1
-caraga		608|ph|philippines|phl	1
-administratibo nga rehiyon han cordillera|administratibong rehiyon sa cordillera|cordillera|cordillera administrative region|cordillera administrative region (car)|kakordilyerahan|rehion administratibo ti kordiliera	region	608|ph|philippines|phl	1
-ilocos|ilocos (region i)|ilocos nga rehiyon|ilocos region|rehion ti ilocos|rehiyon sa ilocos	region	608|ph|philippines|phl	1
-calabarzon		608|ph|philippines|phl	1
-kasadpang kabisay-an|katundan nga kabisay-an|lumaud a visayas|western visayas|western visayas (region vi)	region	608|ph|philippines|phl	1
-butnga nga luzon|central luzon|pegley na luzon|tengnga a luzon|tunga-tungang luzon		608|ph|philippines|phl	1
-butnga nga kabisay-an|central visayas|tengnga a visayas|tunga-tungang kabisay-an		608|ph|philippines|phl	1
-daya a visayas|eastern visayas|region viii|sidlakang kabisay-an|sinirangan nga kabisay-an		608|ph|philippines|phl	1
-peninsula han zamboanga|peninsula ti zamboanga|zamboanga|zamboanga peninsula|zamboanga peninsula (region ix)	region	608|ph|philippines|phl	1
-davao nga rehiyon|davao region|kadabawan|rehion ti davao		608|ph|philippines|phl	1
-bicol|bicol (region v)|bicol nga rehiyon|bicol region|bikol|rehion ti bicol	region	608|ph|philippines|phl	1
+agwaywayas a rehion iti muslim a mindanao|armm|autonomo nga rehiyon ha muslim mindanao|autonomous region in muslim mindanao|mindanawng muslim	region	608|ph|philippines|phl	1
+amianan a mindanao|amihanan nga mindanao|amihanang mindanao|northern mindanao|region x	region	608|ph|philippines|phl	1
+mimaropa|region	region	608|ph|philippines|phl	1
+cagayan valley|durog sg cagayan|lupot sa cagayan|region ii|siong han cagayan|tanap ti cagayan|valley na cagayan	region	608|ph|philippines|phl	1
+region xii|soccsksargen	region	608|ph|philippines|phl	1
+caraga|region xiii	region	608|ph|philippines|phl	1
+administratibo nga rehiyon han cordillera|administratibong rehiyon sa cordillera|car|cordillera|cordillera administrative region|kakordilyerahan|rehion administratibo ti kordiliera	region	608|ph|philippines|phl	1
+ilocos|ilocos nga rehiyon|ilocos region|region i|rehion ti ilocos|rehiyon sa ilocos	region	608|ph|philippines|phl	1
+calabarzon|region	region	608|ph|philippines|phl	1
+kasadpang kabisay-an|katundan nga kabisay-an|lumaud a visayas|region vi|western visayas	region	608|ph|philippines|phl	1
+butnga nga luzon|central luzon|pegley na luzon|region iii|tengnga a luzon|tunga-tungang luzon	region	608|ph|philippines|phl	1
+butnga nga kabisay-an|central visayas|region vii|tengnga a visayas|tunga-tungang kabisay-an	region	608|ph|philippines|phl	1
+daya a visayas|eastern visayas|region viii|sidlakang kabisay-an|sinirangan nga kabisay-an	region	608|ph|philippines|phl	1
+peninsula han zamboanga|peninsula ti zamboanga|region ix|zamboanga|zamboanga peninsula	region	608|ph|philippines|phl	1
+davao|davao nga rehiyon|davao region|kadabawan|region xi|rehion ti davao	region	608|ph|philippines|phl	1
+bicol|bicol nga rehiyon|bicol region|bikol|region v|rehion ti bicol	region	608|ph|philippines|phl	1
 national capital region	region	608|ph|philippines|phl	1
 habagatang zamboanga|pagabatan sambuanga|province of zamboanga del sur|zamboanga del sur	province	608|ph|philippines|phl	2
 amihanang zamboanga|province of zamboanga del norte|zamboanga del norte	province	608|ph|philippines|phl	2
@@ -41348,7 +41348,7 @@ temotu|temotu province	province	090|sb|slb|solomon islands	1
 makira-ulawa|makira-ulawa province	province	090|sb|slb|solomon islands	1
 choiseul|choiseul province	province	090|sb|slb|solomon islands	1
 rennell and bellona|rennell and bellona province	province	090|sb|slb|solomon islands	1
-capital territory (honiara)|honiara	capital territory	090|sb|slb|solomon islands	1
+capital territory|honiara	capital territory	090|sb|slb|solomon islands	1
 munda		090|sb|slb|solomon islands	2
 noro		090|sb|slb|solomon islands	2
 nggosi		090|sb|slb|solomon islands	2
@@ -41668,27 +41668,27 @@ abyei|byy		729|sd|sdn|sudan	2
 al fao|lfw		729|sd|sdn|sudan	2
 al firdous|lfrdws		729|sd|sdn|sudan	2
 al idia|ldy@		729|sd|sdn|sudan	2
-norrbotten|norrbotten county|norrbottenin laani|norrbottens lan		752|se|swe|sweden	1
-vastmanland|vastmanland county|vastmanlandin laani|vastmanlands lan		752|se|swe|sweden	1
-vasternorrland|vasternorrland county|vasternorrlandin laani|vasternorrlands lan		752|se|swe|sweden	1
-vasterbotten|vasterbotten county|vasterbottenin laani|vasterbottens lan		752|se|swe|sweden	1
-varmland|varmland county|varmlands lan|varmlannin laani		752|se|swe|sweden	1
-uppsala|uppsala county|uppsala lan|uppsalan laani		752|se|swe|sweden	1
-stockholm|stockholm county|stockholms lan|tukholma		752|se|swe|sweden	1
-sodermanland|sodermanland county|sodermanlandin laani|sodermanlands lan		752|se|swe|sweden	1
-ita-gotanmaan laani|ostergotland|ostergotland county|ostergotlands lan		752|se|swe|sweden	1
-orebro|orebro county|orebro lan|orebron laani		752|se|swe|sweden	1
-kronoberg|kronoberg county|kronobergin laani|kronobergs lan		752|se|swe|sweden	1
-dalarna|dalarna county|dalarnas lan|taalainmaan laani		752|se|swe|sweden	1
-kalmar|kalmar county|kalmar lan|kalmarin laani		752|se|swe|sweden	1
-jonkoping|jonkoping county|jonkopingin laani|jonkopings lan		752|se|swe|sweden	1
-jamtland|jamtland county|jamtlandin laani|jamtlands lan		752|se|swe|sweden	1
-halland|halland county|hallandin laani|hallands lan		752|se|swe|sweden	1
-gotland|gotland county|gotlands lan|gotlannin laani		752|se|swe|sweden	1
-gavleborg|gavleborg county|gavleborgin laani|gavleborgs lan		752|se|swe|sweden	1
-blekinge|blekinge county|blekinge lan|blekingen laani		752|se|swe|sweden	1
-scania|skane|skane county|skane lan|skoone		752|se|swe|sweden	1
-lansi-gotanmaan laani|vastra gotaland|vastra gotaland county|vastra gotalands lan		752|se|swe|sweden	1
+norrbotten|norrbotten county|norrbottenin laani|norrbottens lan	county	752|se|swe|sweden	1
+vastmanland|vastmanland county|vastmanlandin laani|vastmanlands lan	county	752|se|swe|sweden	1
+vasternorrland|vasternorrland county|vasternorrlandin laani|vasternorrlands lan	county	752|se|swe|sweden	1
+vasterbotten|vasterbotten county|vasterbottenin laani|vasterbottens lan	county	752|se|swe|sweden	1
+varmland|varmland county|varmlands lan|varmlannin laani	county	752|se|swe|sweden	1
+uppsala|uppsala county|uppsala lan|uppsalan laani	county	752|se|swe|sweden	1
+stockholm|stockholm county|stockholms lan|tukholma	county	752|se|swe|sweden	1
+sodermanland|sodermanland county|sodermanlandin laani|sodermanlands lan	county	752|se|swe|sweden	1
+ita-gotanmaan laani|ostergotland|ostergotland county|ostergotlands lan	county	752|se|swe|sweden	1
+orebro|orebro county|orebro lan|orebron laani	county	752|se|swe|sweden	1
+kronoberg|kronoberg county|kronobergin laani|kronobergs lan	county	752|se|swe|sweden	1
+dalarna|dalarna county|dalarnas lan|taalainmaan laani	county	752|se|swe|sweden	1
+kalmar|kalmar county|kalmar lan|kalmarin laani	county	752|se|swe|sweden	1
+jonkoping|jonkoping county|jonkopingin laani|jonkopings lan	county	752|se|swe|sweden	1
+jamtland|jamtland county|jamtlandin laani|jamtlands lan	county	752|se|swe|sweden	1
+halland|halland county|hallandin laani|hallands lan	county	752|se|swe|sweden	1
+gotland|gotland county|gotlands lan|gotlannin laani	county	752|se|swe|sweden	1
+gavleborg|gavleborg county|gavleborgin laani|gavleborgs lan	county	752|se|swe|sweden	1
+blekinge|blekinge county|blekinge lan|blekingen laani	county	752|se|swe|sweden	1
+scania|skane|skane county|skane lan|skoone	county	752|se|swe|sweden	1
+lansi-gotanmaan laani|vastra gotaland|vastra gotaland county|vastra gotalands lan	county	752|se|swe|sweden	1
 umea kommun|uumaja		752|se|swe|sweden	2
 skelleftea kommun		752|se|swe|sweden	2
 robertsfors kommun		752|se|swe|sweden	2
@@ -42312,7 +42312,7 @@ okres bratislava iv		703|sk|slovakia|svk	2
 okres bratislava v		703|sk|slovakia|svk	2
 kosice-okolie district|okres kosice-okolie		703|sk|slovakia|svk	2
 levoca district|okres levoca		703|sk|slovakia|svk	2
-western area		694|sierra leone|sl|sle	1
+freetown|western area	area	694|sierra leone|sl|sle	1
 southern|southern province	province	694|sierra leone|sl|sle	1
 northern|northern province	province	694|sierra leone|sl|sle	1
 eastern|eastern province	province	694|sierra leone|sl|sle	1
@@ -42974,7 +42974,7 @@ juan de nova island		260|atf|french southern territories|tf	2
 glorioso islands		260|atf|french southern territories|tf	2
 region des savanes|savanes|savanes region	region	768|tg|tgo|togo	1
 plateaux|plateaux region|region des plateaux	region	768|tg|tgo|togo	1
-maritime|maritime (region)|maritime region|region maritime	region	768|tg|tgo|togo	1
+maritime|maritime region|region|region maritime	region	768|tg|tgo|togo	1
 centrale|centrale region|region centrale	region	768|tg|tgo|togo	1
 kara|kara region|region de la kara	region	768|tg|tgo|togo	1
 vo|vo prefecture		768|tg|tgo|togo	2
