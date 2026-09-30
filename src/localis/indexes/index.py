@@ -1,4 +1,3 @@
-from array import array
 from pathlib import Path
 
 
@@ -8,8 +7,7 @@ class Index:
         filepath: Path,
         **kwargs,
     ):
-        self.index: dict[str, int | array] = {}
         self.load(filepath, **kwargs)
 
-    def load(self, filepath: Path, **kwargs):
+    def load(self, *args, **kwargs) -> None:
         pass

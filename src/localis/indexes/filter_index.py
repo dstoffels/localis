@@ -1,23 +1,28 @@
 import csv
 from array import array
+from pathlib import Path
 from localis.indexes.index import Index
 from localis.utils import normalize
 from collections import defaultdict
 
 
 class FilterIndex(Index):
-    def load(self, filepath):
+    def load(self, filepath: Path):
         with open(filepath, "r", encoding="utf-8") as f:
             reader = csv.reader(f, delimiter="\t")
             params = next(reader)
-            self.index = {p: defaultdict(lambda: array("I")) for p in params}
+            index: dict[str, dict[str, array]] = {
+                p: defaultdict(lambda: array("I")) for p in params
+            }
 
             for id, row in enumerate(reader, start=1):
                 for i, cell in enumerate(row):
                     param = params[i]
                     values = cell.split("|")
                     for value in values:
-                        self.index[param][value].append(id)
+                        index[param][value].append(id)
+
+            self.index = index
 
     def get(self, filter_kw: str, field_value: str) -> set[int]:
         if isinstance(field_value, str):

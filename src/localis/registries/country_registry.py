@@ -1,3 +1,4 @@
+from typing import Mapping
 from localis.entities import Country
 from localis.views import CountryView
 from localis.registries import Registry
@@ -6,7 +7,7 @@ from localis.registries import Registry
 class CountryRegistry(Registry[Country]):
     REGISTRY_NAME = "countries"
 
-    def build_cache(self) -> dict[int, CountryView]:
+    def build_cache(self) -> Mapping[int, CountryView]:
         return CountryView.load(self._data_filepath)
 
     def lookup(self, identifier: str | int) -> Country | None:

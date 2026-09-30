@@ -1,9 +1,10 @@
 from functools import cached_property
-from typing import Iterator, Generic, TypeVar
+from typing import Iterator, Generic, Mapping, TypeVar
 from pathlib import Path
 from abc import ABC
 from localis.entities import Entity
 from localis.views import View
+from localis.stores import Store
 from localis.indexes import FilterIndex, SearchIndex, LookupIndex
 
 T = TypeVar("T", bound=Entity)
@@ -56,13 +57,13 @@ class Registry(Generic[T], ABC):
         return self.__len__()
 
     @cached_property
-    def _cache(self) -> dict[int, View[T]]:
+    def _cache(self) -> Mapping[int, View[T, Store]]:
         if not self._data_filepath.exists():
             raise FileNotFoundError(f"Data file not found: {self._data_filepath}")
 
         return self.build_cache()
 
-    def build_cache(self) -> dict[int, View[T]]:
+    def build_cache(self) -> Mapping[int, View[T, Store]]:
         """Build the id -> view mapping for this registry. Overridden per registry to
         supply whatever cross-referenced caches its view class needs."""
         raise NotImplementedError

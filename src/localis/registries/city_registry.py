@@ -1,5 +1,6 @@
+from typing import Mapping, cast
 from localis.entities import City
-from localis.views import CityView
+from localis.views import CountryView, CityView, SubdivisionView
 from localis.registries import Registry, CountryRegistry, SubdivisionRegistry
 
 
@@ -14,10 +15,12 @@ class CityRegistry(Registry[City]):
         self._subdivisions = subdivisions
         super().__init__(**kwargs)
 
-    def build_cache(self) -> dict[int, CityView]:
-        return CityView.load(
-            self._data_filepath, self._countries._cache, self._subdivisions._cache
+    def build_cache(self) -> Mapping[int, CityView]:
+        country_views = cast(Mapping[int, CountryView], self._countries._cache)
+        subdivision_views = cast(
+            Mapping[int, SubdivisionView], self._subdivisions._cache
         )
+        return CityView.load(self._data_filepath, country_views, subdivision_views)
 
     def get(self, id: int) -> City | None:
         """Get a city by its localis ID."""

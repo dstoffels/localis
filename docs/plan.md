@@ -9,19 +9,20 @@ This document outlines the project plan for the Localis project, detailing the o
 - Ship comprehensive datasets by default, and let the API narrow them ad hoc (population floors, locales) at query time rather than shipping multiple hard-tiered dataset variants.
 
 ## Features
-Features currently in development
+Features currently in development, in priority order:
 
-- Add `Currency` entity + `Country.currency` (ISO 4217, sourced from iso-codes' `iso_4217.json`, not GeoNames' embedded currency fields, since iso-codes is the authoritative source and already the same upstream `countries` data comes from)
-- Add `Language` entity + `Country.languages` (ISO 639, sourced from iso-codes' `iso_639-3.json`, same reasoning as currency; supersedes the old "implement native languages in countries" idea)
-- Add standalone `Script` reference table (ISO 15924, code → name only). Low priority: a language can be written in more than one script, so it isn't 1:1 with `Language` or `Country`; mostly used for font rendering and BCP-47 locale tags, not something to wire into other entities.
-- Gettext-based name translation across `Country`/`Subdivision` (and `Currency`/`Language`/`Script` once they exist), including `language_code` support on `filter()`/`search()`. See Localization section below for the full design.
-- Population-floor filtering on `CityRegistry`. See Population Floor section below.
+1. Patch missing flags for countries. Small, contained data gap.
+2. Population-floor filtering on `CityRegistry`. See Population Floor section below. This is the direct answer to geonamescache's one real advantage (hard-tiered population datasets), worth shipping before leaning on that comparison publicly.
+3. Add `Currency` entity + `Country.currency` (ISO 4217, sourced from iso-codes' `iso_4217.json`, not GeoNames' embedded currency fields, since iso-codes is the authoritative source and already the same upstream `countries` data comes from)
+4. Add `Language` entity + `Country.languages` (ISO 639, sourced from iso-codes' `iso_639-3.json`, same reasoning as currency; supersedes the old "implement native languages in countries" idea). Currency and Language close the honest gap identified against pycountry (which also covers ISO 4217/639), so both should ship before that comparison gets used as marketing material.
+5. Add standalone `Script` reference table (ISO 15924, code → name only). Lowest priority of this batch: a language can be written in more than one script, so it isn't 1:1 with `Language` or `Country`; mostly used for font rendering and BCP-47 locale tags, not something to wire into other entities.
+
+Blocked on the above, needs a dedicated design pass before implementation starts (see Localization section below for the open questions):
+- Gettext-based name translation across `Country`/`Subdivision` (and `Currency`/`Language`/`Script` once they exist), including `language_code` support on `filter()`/`search()`.
 
 ## Backlog
-- Patch missing flags for countries
 - City radius feature using lat/lng to return nearby cities within a specified distance
 - Add filter() kwarg error handling for invalid arguments
-- Add py.typed marker (PEP 561)
 - Implement custom exceptions (localis.exceptions module)?
 - Set thread locks for concurrent access to registries
 - Implement autocomplete for registries and/or global interface.

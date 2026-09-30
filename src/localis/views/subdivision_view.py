@@ -1,11 +1,14 @@
 from pathlib import Path
+from typing import Mapping
 from localis.entities import CountryBase, SubdivisionBase, Subdivision
 from localis.stores import SubdivisionStore
 from .view import CrossReferencedView
 from .country_view import CountryView
 
 
-class SubdivisionView(CrossReferencedView[Subdivision]):
+class SubdivisionView(
+    CrossReferencedView[Subdivision, SubdivisionStore, CountryView, "SubdivisionView"]
+):
     """Runtime view over SubdivisionStore, used by Registry._cache."""
 
     __slots__ = ()
@@ -15,12 +18,14 @@ class SubdivisionView(CrossReferencedView[Subdivision]):
         return self._store.names[self._idx]
 
     @property
-    def geonames_code(self) -> str:
-        return self._store.geonames_codes[self._idx]
+    def geonames_code(self) -> str | None:
+        v = self._store.geonames_codes[self._idx]
+        return v if v else None
 
     @property
-    def iso_code(self) -> str:
-        return self._store.iso_codes[self._idx]
+    def iso_code(self) -> str | None:
+        v = self._store.iso_codes[self._idx]
+        return v if v else None
 
     @property
     def type(self) -> str:
@@ -41,7 +46,9 @@ class SubdivisionView(CrossReferencedView[Subdivision]):
 
     @property
     def country(self) -> CountryView:
-        return self._country_views.get(self._store.country_ids[self._idx])
+        country = self._country_views.get(self._store.country_ids[self._idx])
+        assert country is not None, "subdivision has no country, violates ingest invariant"
+        return country
 
     @property
     def iso_suffix(self) -> str:
@@ -79,7 +86,7 @@ class SubdivisionView(CrossReferencedView[Subdivision]):
 
     @classmethod
     def load(
-        cls, filepath: Path, country_views: dict[int, CountryView]
+        cls, filepath: Path, country_views: Mapping[int, CountryView]
     ) -> dict[int, "SubdivisionView"]:
         store = SubdivisionStore()
         views: dict[int, SubdivisionView] = {}

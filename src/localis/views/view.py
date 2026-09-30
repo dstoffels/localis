@@ -1,21 +1,18 @@
 from abc import ABC, abstractmethod
-from typing import Generic, TypeVar, TYPE_CHECKING
+from typing import Generic, Mapping, TypeVar
 from localis.entities import Entity
 from localis.stores import Store
 
-if TYPE_CHECKING:
-    from .country_view import CountryView
-    from .subdivision_view import SubdivisionView
-
 T = TypeVar("T", bound=Entity)
+S = TypeVar("S", bound=Store, covariant=True)
 
 
-class View(ABC, Generic[T]):
+class View(ABC, Generic[T, S]):
     """Base runtime view: owns id and a Store reference; other fields read from Store by (id - 1)."""
 
     __slots__ = ("id", "_store")
 
-    def __init__(self, id: int, store: Store):
+    def __init__(self, id: int, store: S):
         self.id = id
         self._store = store
 
@@ -31,7 +28,11 @@ class View(ABC, Generic[T]):
     def to_entity(self) -> T: ...
 
 
-class CrossReferencedView(View[T]):
+CV = TypeVar("CV", bound=View, covariant=True)
+SV = TypeVar("SV", bound=View, covariant=True)
+
+
+class CrossReferencedView(View[T, S], Generic[T, S, CV, SV]):
     """Shared by SubdivisionView/CityView; resolves references lazily against already-loaded view dicts."""
 
     __slots__ = ("_country_views", "_subdivision_views")
@@ -39,9 +40,9 @@ class CrossReferencedView(View[T]):
     def __init__(
         self,
         id: int,
-        store: Store,
-        country_views: dict[int, "CountryView"],
-        subdivision_views: dict[int, "SubdivisionView"],
+        store: S,
+        country_views: Mapping[int, CV],
+        subdivision_views: Mapping[int, SV],
     ):
         super().__init__(id, store)
         self._country_views = country_views

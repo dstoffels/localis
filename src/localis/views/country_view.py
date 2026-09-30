@@ -4,7 +4,7 @@ from localis.stores import CountryStore
 from .view import View
 
 
-class CountryView(View[Country]):
+class CountryView(View[Country, CountryStore]):
     """Runtime view over CountryStore, used by Registry._cache."""
 
     __slots__ = ()
@@ -18,8 +18,9 @@ class CountryView(View[Country]):
         return self._store.alpha2s[self._idx]
 
     @property
-    def alpha3(self) -> str:
-        return self._store.alpha3s[self._idx]
+    def alpha3(self) -> str | None:
+        v = self._store.alpha3s[self._idx]
+        return v if v else None
 
     @property
     def official_name(self) -> str:
@@ -35,8 +36,9 @@ class CountryView(View[Country]):
         return v if v != -1 else None
 
     @property
-    def flag(self) -> str:
-        return self._store.flags[self._idx]
+    def flag(self) -> str | None:
+        v = self._store.flags[self._idx]
+        return v if v else None
 
     def to_entity(self) -> Country:
         return Country(

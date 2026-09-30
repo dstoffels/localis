@@ -2,11 +2,12 @@ from array import array
 import csv
 import gzip
 from pathlib import Path
-from typing import Generic, TypeVar
+from typing import Generic, Mapping, TypeVar
 from rapidfuzz import fuzz, process
 from localis.indexes.index import Index
 from localis.entities import Entity
 from localis.views import View
+from localis.stores import Store
 from localis.utils import normalize, generate_trigrams
 from collections import defaultdict
 
@@ -16,8 +17,8 @@ T = TypeVar("T", bound=Entity)
 class SearchIndex(Index, Generic[T]):
     def __init__(
         self,
-        cache: dict[int, View[T]],
-        filepath,
+        cache: Mapping[int, View[T, Store]],
+        filepath: Path,
         **kwargs,
     ):
         self.cache = cache
@@ -26,7 +27,8 @@ class SearchIndex(Index, Generic[T]):
         self.CANDIDATE_CNT_THRESHOLD = 2000
         super().__init__(filepath, **kwargs)
 
-    def load(self, filepath, offsets_filepath: Path, fields_filepath: Path):
+    def load(self, filepath: Path, offsets_filepath: Path, fields_filepath: Path):
+        self.index: dict[str, array] = {}
         self.SEARCH_FIELDS: dict[str, float] = {}
         with open(fields_filepath, "r", encoding="utf-8") as f:
             reader = csv.reader(f, delimiter="\t")
@@ -48,7 +50,7 @@ class SearchIndex(Index, Generic[T]):
         for trigram, (offset, count) in offsets.items():
             self.index[trigram] = full_array[offset : offset + count]
 
-    def search(self, query: str, limit: int) -> list[tuple[View[T], float]]:
+    def search(self, query: str, limit: int) -> list[tuple[View[T, Store], float]]:
         if not query:
             return []
 
@@ -58,7 +60,7 @@ class SearchIndex(Index, Generic[T]):
         self.trigram_count = 0
 
         self._build_match_counts()
-        all_results: dict[int, tuple[View[T], float]] = {}
+        all_results: dict[int, tuple[View[T, Store], float]] = {}
         scored_ids: set[int] = set()
 
         candidate_count = len(self.match_counts)
@@ -127,7 +129,7 @@ class SearchIndex(Index, Generic[T]):
             if count >= min_matches
         }
 
-    def _get_search_values(self, candidate: View[T]):
+    def _get_search_values(self, candidate: View[T, Store]):
         for field_name, weight in self.SEARCH_FIELDS.items():
             obj = candidate
             value = None
@@ -139,7 +141,7 @@ class SearchIndex(Index, Generic[T]):
             if value is not None:
                 yield (value, weight)
 
-    def _score_candidate(self, candidate: View[T]) -> float:
+    def _score_candidate(self, candidate: View[T, Store]) -> float:
         score = 0.0
         total_weight = 0.0
 

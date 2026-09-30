@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import Mapping
 from localis.entities import CountryBase, SubdivisionBase, City
 from localis.stores import CityStore
 from .view import CrossReferencedView
@@ -6,7 +7,7 @@ from .country_view import CountryView
 from .subdivision_view import SubdivisionView
 
 
-class CityView(CrossReferencedView[City]):
+class CityView(CrossReferencedView[City, CityStore, CountryView, SubdivisionView]):
     """Runtime view over CityStore, used by Registry._cache."""
 
     __slots__ = ()
@@ -30,8 +31,10 @@ class CityView(CrossReferencedView[City]):
         return self._subdivision_views.get(aid) if aid != -1 else None
 
     @property
-    def country(self) -> CountryView | None:
-        return self._country_views.get(self._store.country_ids[self._idx])
+    def country(self) -> CountryView:
+        country = self._country_views.get(self._store.country_ids[self._idx])
+        assert country is not None, "city has no country, violates ingest invariant"
+        return country
 
     @property
     def population(self) -> int:
@@ -75,15 +78,11 @@ class CityView(CrossReferencedView[City]):
                 if admin2
                 else None
             ),
-            country=(
-                CountryBase(
-                    id=country.id,
-                    name=country.name,
-                    alpha2=country.alpha2,
-                    alpha3=country.alpha3,
-                )
-                if country
-                else None
+            country=CountryBase(
+                id=country.id,
+                name=country.name,
+                alpha2=country.alpha2,
+                alpha3=country.alpha3,
             ),
             population=self.population,
             lat=self.lat,
@@ -94,8 +93,8 @@ class CityView(CrossReferencedView[City]):
     def load(
         cls,
         filepath: Path,
-        country_views: dict[int, CountryView],
-        subdivision_views: dict[int, SubdivisionView],
+        country_views: Mapping[int, CountryView],
+        subdivision_views: Mapping[int, SubdivisionView],
     ) -> dict[int, "CityView"]:
         store = CityStore()
         views: dict[int, CityView] = {}
