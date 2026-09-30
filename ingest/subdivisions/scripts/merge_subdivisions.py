@@ -28,74 +28,122 @@ def has_directional_mismatch(name1: str, name2: str) -> bool:
     return any(t in tokens1 ^ tokens2 for t in DIRECTIONAL_TOKENS)
 
 
-CATEGORICAL_TOKENS = {
-    "okrug",
-    "oblast",
-    "kray",
-    "kraj",
-    "lan",
-    "län",
-    "rayon",
-    "comuna",
-    "district",
-    "province",
-    "region",
-    "state",
-    "shi",
-    "sheng",
-    "county",
-    "parish",
-    "barrio",
-    "lçesi",
-    "gun",
-    "pagasts",
-    "municipality",
-    "kommun",
-    "tumani",
-    "járás",
-    "department",
-    "raion",
-    "si",
-    "kommune",
-    "city",
-    "gu",
-    "division",
-    "municipio",
-    "provincia",
-    "di",
-    "kabupaten",
-    "departamento",
-    "shahrestān",
-    "powiat",
-    "gemeente",
-    "obshtina",
-    "okres",
-    "amphoe",
-    "huyện",
-    "gorodskoy",
-    "of",
-    "de",
-    "du",
-    "council",
-    "al",
-    "the",
-    "il",
-    "is",
-    "in",
-    "ta",
-    "ix",
-    "iz",
-    "iż",
-    "republic",
-    "respublika",
+# type-qualifier words, grouped by administrative concept; also used as a flat strip-set below
+TYPE_FAMILIES = {
+    "province": {"province", "provincia", "sheng"},
+    "district": {
+        "district",
+        "rayon",
+        "raion",
+        "okrug",
+        "tumani",
+        "járás",
+        "okres",
+        "amphoe",
+        "huyện",
+        "lçesi",
+        "gu",
+    },
+    "municipality": {
+        "municipality",
+        "comuna",
+        "municipio",
+        "kommun",
+        "kommune",
+        "gemeente",
+        "obshtina",
+        "commune",
+    },
+    "region": {"region", "oblast", "kray", "kraj", "lan", "län"},
+    "state": {"state", "land"},
+    "department": {"department", "departamento"},
+    "county": {"county", "powiat", "shahrestān", "kabupaten", "gun"},
+    "governorate": {"governorate"},
+    "prefecture": {"prefecture"},
+    "parish": {"parish", "pagasts"},
+    "council": {"council"},
+    "city": {"city", "shi", "si", "gorodskoy"},
+    "republic": {"republic", "respublika"},
+    "division": {"division"},
+    "canton": {"canton"},
+    "voivodship": {"voivodship"},
+}
+
+# prepositions/articles that carry no administrative meaning; noise for fuzzy matching but never a type qualifier
+NON_TYPE_NOISE_TOKENS = {"of", "de", "du", "al", "the", "il", "is", "in", "ta", "ix", "iz", "iż", "di", "barrio"}
+
+NOISE_TOKENS = set.union(*TYPE_FAMILIES.values()) | NON_TYPE_NOISE_TOKENS
+
+TOKEN_TO_FAMILY = {
+    token: family for family, tokens in TYPE_FAMILIES.items() for token in tokens
+}
+
+# maps an ISO subdivision's own `type` field (lowercased) to the type family its GeoNames
+# counterpart's raw qualifier words should belong to; types left unmapped are ambiguous/hybrid/rare and stay neutral
+ISO_TYPE_FAMILIES = {
+    "province": "province",
+    "district": "district",
+    "municipality": "municipality",
+    "region": "region",
+    "state": "state",
+    "department": "department",
+    "county": "county",
+    "governorate": "governorate",
+    "prefecture": "prefecture",
+    "metropolitan department": "department",
+    "parish": "parish",
+    "local council": "council",
+    "rayon": "district",
+    "administrative region": "region",
+    "rural municipality": "municipality",
+    "canton": "canton",
+    "metropolitan district": "district",
+    "city": "city",
+    "council area": "council",
+    "urban municipality": "municipality",
+    "two-tier county": "county",
+    "republic": "republic",
+    "division": "division",
+    "metropolitan city": "city",
+    "autonomous region": "region",
+    "land": "state",
+    "voivodship": "voivodship",
+    "special municipality": "municipality",
+    "commune": "municipality",
+    "metropolitan region": "region",
+    "regional state": "region",
+    "island council": "council",
+    "oblast": "region",
+    "autonomous district": "district",
+    "free municipal consortium": "municipality",
 }
 
 
-def strip_cat_tokens(s: str) -> str:
-    """Remove common categorical tokens from a subdivision name for better fuzzy matching."""
+def strip_noise_tokens(s: str) -> str:
+    """Remove common noise tokens from a subdivision name for better fuzzy matching."""
     tokens = re.split(r"\W+", s.lower())
-    filtered = [t for t in tokens if t and t not in CATEGORICAL_TOKENS]
+    filtered = [t for t in tokens if t and t not in NOISE_TOKENS]
     return " ".join(filtered)
+
+
+def raw_type_families(sub: SubdivisionModel) -> set[str]:
+    """Return the set of type families whose qualifier tokens appear in sub's raw, unstripped name/aliases."""
+    families = set()
+    for text in [sub.name] + sub.aliases:
+        for token in re.split(r"\W+", text.lower()):
+            family = TOKEN_TO_FAMILY.get(token)
+            if family:
+                families.add(family)
+    return families
+
+
+def is_type_disqualified(iso_sub: SubdivisionModel, geo_sub: SubdivisionModel) -> bool:
+    """True if geo_sub's raw qualifier words indicate a different administrative type than iso_sub's own ISO type (e.g. iso_sub is a City but geo_sub's raw aliases are all Oblast-qualified), and so should never be matched regardless of name similarity."""
+    iso_family = ISO_TYPE_FAMILIES.get((iso_sub.type or "").lower())
+    if iso_family is None:
+        return False
+    geo_families = raw_type_families(geo_sub)
+    return bool(geo_families) and iso_family not in geo_families
 
 
 def prepare_names(sub: SubdivisionModel) -> list[str]:
@@ -105,7 +153,7 @@ def prepare_names(sub: SubdivisionModel) -> list[str]:
         s = normalize(s)
         s = s.replace("-", " ").replace("_", " ")
         s = re.sub(r"[,\(\)\[\]\"']", "", s).strip()
-        return strip_cat_tokens(s)
+        return strip_noise_tokens(s)
 
     return [clean(sub.name)] + [clean(n) for n in sub.aliases]
 
@@ -178,6 +226,8 @@ def best_raw_candidate(
     iso_names = prepare_names(iso_sub)
     best: tuple[SubdivisionModel, float, int] | None = None
     for geo_sub in geo_subs:
+        if is_type_disqualified(iso_sub, geo_sub):
+            continue
         for iso_name in iso_names:
             for geo_name in prepare_names(geo_sub):
                 if has_directional_mismatch(iso_name, geo_name):
@@ -223,6 +273,8 @@ def try_merge(
         for iso_sub in bucket_iso_subs:
             iso_names = prepare_names(iso_sub)
             for geo_sub in geo_subs:
+                if is_type_disqualified(iso_sub, geo_sub):
+                    continue
                 score = best_match_score(iso_names, prepare_names(geo_sub))
                 if score is not None:
                     scored_pairs.append((score, iso_sub, geo_sub))

@@ -18,6 +18,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Rewrote subdivision auto-merge: excludes already-claimed candidates, assigns globally by best score instead of first match, excludes targets where multiple ISO subs both score highly (namesake collisions), switched `token_set_ratio` to `token_sort_ratio` to stop subset-match false positives, expanded categorical token stripping
 - `resolve-subdivisions` skill and `resolution_map.json` now key on `geonames_id` instead of an unstable per-run hash; `resolution_map.json` simplified to a flat `dict[str, int | None]`
 - Overhauled ingest logging: per-domain log files, log levels, per-merge/orphan diagnostics
+- Subdivision aliases enriched from GeoNames' `alternateNamesV2` dump (English + each country's CLDR official language(s) only, historic/colloquial/bidi-control names excluded), feeding into fuzzy matching
+- Subdivision auto-merge now disqualifies candidate pairs whose GeoNames raw qualifier words (e.g. "Oblast", "Misto") belong to a different administrative type family than the ISO subdivision's own `type`, preventing confident-but-wrong string matches (e.g. a city ISO code stealing its containing oblast's GeoNames entry); renamed `CATEGORICAL_TOKENS` to `NOISE_TOKENS` and grouped into named type families
 
 ### Removed
 - Manual alias/name contribution during subdivision resolution (CLI and skill); resolutions are now source-data only
@@ -26,6 +28,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Type hint discrepancies across `entities`/`views`/`stores`/`registries`/`indexes` (nullable fields, `View`/`Store` generics, `Mapping` covariance); `src/localis` now passes `pyright` with zero errors
 - Cities' documented search index memory was measured via `ru_maxrss` (peak, not retained); corrected to post-GC `VmRSS`, dropping the documented figure from 96.8MB to 33.5MB
+- Ingest source change detection (`has_changed()`) falsely flagged unchanged files as changed due to unreliable `Last-Modified`/`Content-Length` HEAD headers; now compares `ETag` only
+- `has_changed()` no longer trusts the manifest when the tracked file is actually missing on disk
 
 ## [1.1.2] - 2026-09-29
 

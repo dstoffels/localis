@@ -12,6 +12,7 @@ from ingest.shared.models import CountryModel, SubdivisionModel
 from .geonames_subdivisions import map_geonames_subdivisions
 from .iso_subdivisions import load_iso_subs
 from .merge_ipregistry import merge_ipregistry_aliases
+from .merge_alternate_names import merge_alternate_name_aliases
 from .merge_subdivisions import try_merge
 from .resolve_subdivisions import resolve_unmerged_subs
 from .dump_subdivisions import dump
@@ -35,6 +36,9 @@ def ingest_subdivisions(
         # Initialize subdivision cache with geonames subdivisions into a mapping of country_alpha2 > admin_level > id.
         # SubdivisionMap also flat maps by id, geoname code and iso code
         sub_map: SubdivisionMap = map_geonames_subdivisions(countries)
+
+        # Enrich GeoNames subdivisions with alternate names before merging, so the extra name variants are also available to fuzzy matching
+        merge_alternate_name_aliases(sub_map)
 
         # Cache and dedupe iso subs by id
         iso_subs: dict[int, SubdivisionModel] = load_iso_subs(countries)
