@@ -78,7 +78,9 @@ class SubdivisionMap:
             {},
         )
         for sub in self._by_id.values():
-            sub.admin_level = 2 if sub.parent else 1
+            # a merged sub's admin_level is already ISO-authoritative; only pure GeoNames subs need it re-derived from parent presence
+            if sub.iso_code is None:
+                sub.admin_level = 2 if sub.parent else 1
             self.add(sub)
 
         # parent may still be a raw iso_code string (see load_iso_subs) if it was

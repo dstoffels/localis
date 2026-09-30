@@ -15,6 +15,7 @@ from .merge_ipregistry import merge_ipregistry_aliases
 from .merge_alternate_names import merge_alternate_name_aliases
 from .merge_subdivisions import try_merge
 from .resolve_subdivisions import resolve_unmerged_subs
+from .audit_unclaimed import audit_unclaimed_geonames_subs
 from .dump_subdivisions import dump
 
 
@@ -41,7 +42,11 @@ def ingest_subdivisions(
         merge_alternate_name_aliases(sub_map)
 
         # Cache and dedupe iso subs by id
-        iso_subs: dict[int, SubdivisionModel] = load_iso_subs(countries)
+        iso_subs, non_administrative_subs = load_iso_subs(countries)
+
+        # ISO-listed entries known upfront to have no GeoNames counterpart (documentation/statistical groupings, not real administrative divisions); add directly, bypassing merge entirely
+        for sub in non_administrative_subs:
+            sub_map.add(sub)
 
         # Enrich with Ipregistry's localVariant aliases; iso-codes has no alias field of its own
         merge_ipregistry_aliases(iso_subs)
@@ -54,6 +59,8 @@ def ingest_subdivisions(
 
         # rebuild cache with complete data, update parents
         sub_map.refresh()
+
+        audit_unclaimed_geonames_subs(sub_map)
 
         dump(sub_map)
         ingest_log.writeline(f"completed: {len(sub_map)} subdivisions")

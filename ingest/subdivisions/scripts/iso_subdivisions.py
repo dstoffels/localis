@@ -9,6 +9,17 @@ _TRAILING_CODE_RE = re.compile(r"\s+[A-Z]{2,3}-[A-Z0-9]{1,6}$")
 _BARE_CODE_RE = re.compile(r"^[A-Z]{2,3}-[A-Z0-9]{1,6}$")
 _NON_NAME_BRACKET_CONTENT = {"city", "partial", "eh", "eh-partial"}
 
+# (alpha2, type) pairs confirmed to be ISO documentation/statistical groupings with no governing function (e.g. Indonesia's island-grouping "Geographical unit" tier, the Dominican Republic's planning "Region" tier); these never merge with a GeoNames counterpart and get admin_level 0, and a parent of this type doesn't make its child a real second admin level either. Scoped per-country since e.g. "Region" is a genuine top-level admin type elsewhere (Peru).
+_NON_ADMINISTRATIVE_TYPES = {
+    ("ID", "geographical unit"),
+    ("DO", "region"),
+    ("CV", "geographical region"),
+}
+
+
+def _is_non_administrative(alpha2: str, entry_type: str) -> bool:
+    return (alpha2, entry_type.lower()) in _NON_ADMINISTRATIVE_TYPES
+
 
 def _split_bracketed_name(raw_name: str) -> tuple[str, str | None]:
     """iso-codes suffixes some names with "[Content]"/"(Content)": a genuine alternate name (kept as an alias), a bare subdivision code, or a territory-dispute annotation (both discarded)."""
@@ -29,19 +40,30 @@ def _split_bracketed_name(raw_name: str) -> tuple[str, str | None]:
     return primary, content
 
 
-def load_iso_subs(countries: dict[str, CountryModel]) -> dict[str, SubdivisionModel]:
-    """Parses ISO 3166-2 subdivisions from Debian's iso-codes, the authoritative source."""
+def load_iso_subs(
+    countries: dict[str, CountryModel],
+) -> tuple[dict[str, SubdivisionModel], list[SubdivisionModel]]:
+    """Parses ISO 3166-2 subdivisions from Debian's iso-codes, the authoritative source. Returns (iso_subs, non_administrative_subs): the latter are known upfront to never have a GeoNames counterpart, so they bypass merging entirely."""
     ingest_log.writeline("Loading ISO subdivisions...")
     iso_subs: dict[str, SubdivisionModel] = {}
+    non_administrative_subs: list[SubdivisionModel] = []
 
     with open(SUBDIVISIONS_INPUTS_PATH / "iso_3166-2.json", "r", encoding="utf-8") as f:
         entries: list[dict] = json.load(f)["3166-2"]
+
+    entries_by_code = {entry["code"]: entry for entry in entries}
 
     for entry in entries:
         iso_code = entry["code"]
         alpha2 = iso_code.split("-")[0]
         parent_iso_code = entry.get("parent")
-        admin_level = 1 if not parent_iso_code else 2
+        parent_entry = entries_by_code.get(parent_iso_code) if parent_iso_code else None
+
+        if _is_non_administrative(alpha2, entry["type"]):
+            admin_level = 0
+        else:
+            has_real_parent = parent_entry and not _is_non_administrative(alpha2, parent_entry["type"])
+            admin_level = 2 if has_real_parent else 1
 
         country = countries.get(alpha2)
         if not country:
@@ -66,9 +88,12 @@ def load_iso_subs(countries: dict[str, CountryModel]) -> dict[str, SubdivisionMo
         subdivision.set_hashid()
         subdivision.id = subdivision.hashid
 
-        iso_subs[iso_code] = subdivision
+        if admin_level == 0:
+            non_administrative_subs.append(subdivision)
+        else:
+            iso_subs[iso_code] = subdivision
 
     # parent stays as the raw iso_code string here; SubdivisionMap.refresh()
     # resolves it to the actual object once merging/resolution has settled,
     # since the object it should point to may be discarded during merge.
-    return iso_subs
+    return iso_subs, non_administrative_subs

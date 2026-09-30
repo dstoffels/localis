@@ -185,41 +185,11 @@
     "country": "Colombia",
     "type": "Department"
   },
-  "CV-SM": {
-    "name": "São Miguel",
-    "aliases": [],
-    "country": "Cabo Verde",
-    "type": "Municipality"
-  },
   "DE-HH": {
     "name": "Hamburg",
     "aliases": [],
     "country": "Germany",
     "type": "Land"
-  },
-  "DO-14": {
-    "name": "María Trinidad Sánchez",
-    "aliases": [],
-    "country": "Dominican Republic",
-    "type": "Province"
-  },
-  "DO-24": {
-    "name": "Sánchez Ramírez",
-    "aliases": [],
-    "country": "Dominican Republic",
-    "type": "Province"
-  },
-  "DO-25": {
-    "name": "Santiago",
-    "aliases": [],
-    "country": "Dominican Republic",
-    "type": "Province"
-  },
-  "DO-26": {
-    "name": "Santiago Rodríguez",
-    "aliases": [],
-    "country": "Dominican Republic",
-    "type": "Province"
   },
   "DO-32": {
     "name": "Santo Domingo",
@@ -882,62 +852,6 @@
     "aliases": [],
     "country": "Hungary",
     "type": "City with county rights"
-  },
-  "ID-AC": {
-    "name": "Aceh",
-    "aliases": [],
-    "country": "Indonesia",
-    "type": "Province"
-  },
-  "ID-BE": {
-    "name": "Bengkulu",
-    "aliases": [],
-    "country": "Indonesia",
-    "type": "Province"
-  },
-  "ID-JA": {
-    "name": "Jambi",
-    "aliases": [],
-    "country": "Indonesia",
-    "type": "Province"
-  },
-  "ID-LA": {
-    "name": "Lampung",
-    "aliases": [],
-    "country": "Indonesia",
-    "type": "Province"
-  },
-  "ID-MA": {
-    "name": "Maluku",
-    "aliases": [],
-    "country": "Indonesia",
-    "type": "Province"
-  },
-  "ID-MU": {
-    "name": "Maluku Utara",
-    "aliases": [],
-    "country": "Indonesia",
-    "type": "Province"
-  },
-  "ID-PA": {
-    "name": "Papua",
-    "aliases": [],
-    "country": "Indonesia",
-    "type": "Province"
-  },
-  "ID-YO": {
-    "name": "Yogyakarta",
-    "aliases": [
-      "DI Yogya; DIY"
-    ],
-    "country": "Indonesia",
-    "type": "Special region"
-  },
-  "ID-SL": {
-    "name": "Sulawesi",
-    "aliases": [],
-    "country": "Indonesia",
-    "type": "Geographical unit"
   },
   "IE-D": {
     "name": "Dublin",
