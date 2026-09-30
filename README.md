@@ -339,7 +339,7 @@ nested_sub.type
 
 ### Caching
 
-**Countries** and **Subdivisions** registries are eager-loaded on import, **Cities** are lazy-loaded due to its large dataset. All registry methods lazy load their respective *indexes* on first use, incurring a cold start cost. Indexes (and cities) can be pre-loaded with the registry's `.force_cache()` to avoid this during queries.
+All registries (**Countries**, **Subdivisions**, **Cities**) and their indexes are lazy-loaded on first use, incurring a cold start cost on whichever call touches them first. Any registry's dataset and indexes can be pre-loaded with `.force_cache()` to avoid this during queries.
 
 #### Countries (254)
 | Component | Load Time | Memory |

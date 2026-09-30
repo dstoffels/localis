@@ -7,7 +7,6 @@ from localis.registries import Registry, CountryRegistry, SubdivisionRegistry
 
 class CityRegistry(Registry[City]):
     REGISTRY_NAME = "cities"
-    LAZY_LOAD = True
 
     def __init__(
         self, countries: CountryRegistry, subdivisions: SubdivisionRegistry, **kwargs

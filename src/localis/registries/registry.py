@@ -14,12 +14,9 @@ class Registry(Generic[T], ABC):
     """Base API surface (get/lookup/filter/search) backed by a lazily-cached View dict and its indexes."""
 
     REGISTRY_NAME: str = ""
-    LAZY_LOAD = False
 
     def __init__(self, **kwargs):
         self._allowed_ids: set[int] | None = None
-        if not self.LAZY_LOAD:
-            _ = self._cache
 
     @staticmethod
     def _is_id_allowed(id: int, allowed_ids: set[int]) -> bool:
