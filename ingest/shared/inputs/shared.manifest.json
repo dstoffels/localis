@@ -1,7 +1,4 @@
 {
-  "alternateNamesV2.zip": {
-    "etag": "\"c350658-65ca9b8cc0c93\"",
-    "last_modified": "Wed, 30 Sep 2026 02:04:39 GMT",
-    "content_length": "204801624"
-  }
+  "alternateNamesV2.zip": "\"c350658-65ca9b8cc0c93\"",
+  "cldr_territory_info.json": "\"8c6146cae002a8b99dabd61010f70745716edd940dba4a9b90758ea597dbeff1\""
 }

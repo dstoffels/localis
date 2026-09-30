@@ -1,27 +1,11 @@
 {
-  "admin1CodesASCII.txt": {
-    "etag": "\"2501f-65ca9a7189b3a\"",
-    "last_modified": "Wed, 30 Sep 2026 01:59:42 GMT",
-    "content_length": "151583"
-  },
-  "admin2Codes.txt": {
-    "etag": "\"243e03-65ca9a7189b3a\"",
-    "last_modified": "Wed, 30 Sep 2026 01:59:42 GMT",
-    "content_length": "2375171"
-  },
+  "admin1CodesASCII.txt": "\"2501f-65ca9a7189b3a\"",
+  "admin2Codes.txt": "\"243e03-65ca9a7189b3a\"",
   "iso-3166-2.csv": {
     "etag": "\"49c35edaaa2ce17d6e833b84b496ecaa83dea6027e9639c5bc6ec70880e4e992\"",
     "last_modified": null,
     "content_length": "237562"
   },
-  "iso_3166-2.json": {
-    "etag": "W/\"fbffbe3c69b915ad1093545358650827-gzip\"",
-    "last_modified": null,
-    "content_length": "498028"
-  },
-  "ipregistry_subdivisions.csv": {
-    "etag": "\"49c35edaaa2ce17d6e833b84b496ecaa83dea6027e9639c5bc6ec70880e4e992\"",
-    "last_modified": null,
-    "content_length": "237562"
-  }
+  "iso_3166-2.json": "W/\"fbffbe3c69b915ad1093545358650827-gzip\"",
+  "ipregistry_subdivisions.csv": "\"49c35edaaa2ce17d6e833b84b496ecaa83dea6027e9639c5bc6ec70880e4e992\""
 }

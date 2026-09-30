@@ -1425,9 +1425,9 @@ upper austria		040|at|austria|aut	1
 lower austria		040|at|austria|aut	1
 carinthia		040|at|austria|aut	1
 burgenland	state	040|at|austria|aut	1
-carinthia|karnten	state	040|at|austria|aut	1
-lower austria|niederosterreich	state	040|at|austria|aut	1
-oberosterreich|upper austria	state	040|at|austria|aut	1
+karnten	state	040|at|austria|aut	1
+niederosterreich	state	040|at|austria|aut	1
+oberosterreich	state	040|at|austria|aut	1
 politischer bezirk zwettl		040|at|austria|aut	2
 politischer bezirk zell am see		040|at|austria|aut	2
 politischer bezirk wolfsberg		040|at|austria|aut	2
@@ -2357,7 +2357,7 @@ province du tuy|tuy	province	854|bf|bfa|burkina faso	2
 province du yagha|yagha	province	854|bf|bfa|burkina faso	2
 province du ziro|ziro	province	854|bf|bfa|burkina faso	2
 province du zondoma|zondoma	province	854|bf|bfa|burkina faso	2
-tapoa|tapoa province	province	854|bf|bfa|burkina faso	2
+tapoa	province	854|bf|bfa|burkina faso	2
 razgrad	district	100|bg|bgr|bulgaria	1
 montana	district	100|bg|bgr|bulgaria	1
 vratsa	district	100|bg|bgr|bulgaria	1
@@ -2671,8 +2671,8 @@ rutana	province	108|bdi|bi|burundi	1
 bujumbura mairie	province	108|bdi|bi|burundi	1
 bujumbura rural	province	108|bdi|bi|burundi	1
 rumonge	province	108|bdi|bi|burundi	1
-karuzi|karuzi province	province	108|bdi|bi|burundi	1
-mwaro|mwaro province	province	108|bdi|bi|burundi	1
+karuzi	province	108|bdi|bi|burundi	1
+mwaro	province	108|bdi|bi|burundi	1
 makebuko		108|bdi|bi|burundi	2
 bubanza		108|bdi|bi|burundi	2
 bukinanyana		108|bdi|bi|burundi	2
@@ -8752,7 +8752,7 @@ jwaneng	town	072|botswana|bw|bwa	1
 lobatse	town	072|botswana|bw|bwa	1
 selibe phikwe	town	072|botswana|bw|bwa	1
 sowa town	town	072|botswana|bw|bwa	1
-southern|southern district	district	072|botswana|bw|bwa	1
+southern	district	072|botswana|bw|bwa	1
 gaborone		072|botswana|bw|bwa	2
 kgatleng		072|botswana|bw|bwa	2
 mahalapye		072|botswana|bw|bwa	2
@@ -10626,7 +10626,7 @@ mai-ndombe	province	180|cd|cod|democratic republic of the congo	1
 kwilu	province	180|cd|cod|democratic republic of the congo	1
 kwango	province	180|cd|cod|democratic republic of the congo	1
 kinshasa	city	180|cd|cod|democratic republic of the congo	1
-bas-congo	province	180|cd|cod|democratic republic of the congo	1
+bas-congo|kongo central	province	180|cd|cod|democratic republic of the congo	1
 haut-katanga	province	180|cd|cod|democratic republic of the congo	1
 lomami	province	180|cd|cod|democratic republic of the congo	1
 nord-ubangi	province	180|cd|cod|democratic republic of the congo	1
@@ -10846,7 +10846,7 @@ bangui	commune	140|caf|central african republic|cf	1
 mambere		140|caf|central african republic|cf	1
 ouham-fafa		140|caf|central african republic|cf	1
 lim-pende		140|caf|central african republic|cf	1
-gribingui|nana-grebizi	economic prefecture	140|caf|central african republic|cf	1
+gribingui	economic prefecture	140|caf|central african republic|cf	1
 carnot		140|caf|central african republic|cf	2
 baboua sub-prefecture		140|caf|central african republic|cf	2
 ouango		140|caf|central african republic|cf	2
@@ -11431,10 +11431,10 @@ liaoning|liaoning sheng	province	156|china|chn|cn	1
 jilin|jilin sheng	province	156|china|chn|cn	1
 heilongjiang|heilongjiang sheng	province	156|china|chn|cn	1
 beijing|beijing shi	municipality	156|china|chn|cn	1
-hong kong sar|xianggang tebiexingzhengqu	special administrative region	156|china|chn|cn	1
-aomen tebiexingzhengqu|macao sar|macau sar	special administrative region	156|china|chn|cn	1
-taiwan province|taiwan sheng	province	156|china|chn|cn	1
-tibet autonomous region|xizang zizhiqu	autonomous region	156|china|chn|cn	1
+hong kong sar	special administrative region	156|china|chn|cn	1
+macao sar	special administrative region	156|china|chn|cn	1
+taiwan sheng	province	156|china|chn|cn	1
+xizang zizhiqu	autonomous region	156|china|chn|cn	1
 yushu zangzu zizhizhou		156|china|chn|cn	2
 rikaze diqu		156|china|chn|cn	2
 shannan diqu		156|china|chn|cn	2
@@ -13244,8 +13244,8 @@ sao salvador do mundo		132|cabo verde|cpv|cv	1
 tarrafal de sao nicolau	municipality	132|cabo verde|cpv|cv	1
 sao lourenco dos orgaos		132|cabo verde|cpv|cv	1
 ribeira grande de santiago	municipality	132|cabo verde|cpv|cv	1
-barlavento islands|ilhas de barlavento	geographical region	132|cabo verde|cpv|cv	1
-ilhas de sotavento|sotavento islands	geographical region	132|cabo verde|cpv|cv	1
+ilhas de barlavento	geographical region	132|cabo verde|cpv|cv	1
+ilhas de sotavento	geographical region	132|cabo verde|cpv|cv	1
 nossa senhora da luz		132|cabo verde|cpv|cv	2
 nossa senhora da conceicao		132|cabo verde|cpv|cv	2
 sao joao baptista		132|cabo verde|cpv|cv	2
@@ -13279,8 +13279,8 @@ nossa senhora da graca		132|cabo verde|cpv|cv	2
 santissimo nome de jesus		132|cabo verde|cpv|cv	2
 sao joao baptista		132|cabo verde|cpv|cv	2
 pafos	district	196|cy|cyp|cyprus	1
-lefkosa|lefkosia|nicosia	district	196|cy|cyp|cyprus	1
-lemesos|leymasun|limassol	district	196|cy|cyp|cyprus	1
+lefkosia|nicosia	district	196|cy|cyp|cyprus	1
+lemesos|limassol	district	196|cy|cyp|cyprus	1
 larnaka	district	196|cy|cyp|cyprus	1
 keryneia	district	196|cy|cyp|cyprus	1
 ammochostos	district	196|cy|cyp|cyprus	1
@@ -13913,10 +13913,10 @@ plzen region|plzensky kraj	region	203|cz|cze|czechia	1
 central bohemia		203|cz|cze|czechia	1
 ustecky kraj|usti nad labem region	region	203|cz|cze|czechia	1
 zlin|zlinsky kraj	region	203|cz|cze|czechia	1
-hlavni mesto praha|prague|praha|praha, hlavni mesto	capital city	203|cz|cze|czechia	1
-central bohemian region|stredocesky kraj	region	203|cz|cze|czechia	1
-jihocesky kraj|south bohemian region	region	203|cz|cze|czechia	1
-karlovarsky kraj|karlovy vary region	region	203|cz|cze|czechia	1
+praha, hlavni mesto	capital city	203|cz|cze|czechia	1
+stredocesky kraj	region	203|cz|cze|czechia	1
+jihocesky kraj	region	203|cz|cze|czechia	1
+karlovarsky kraj	region	203|cz|cze|czechia	1
 okres znojmo|znojmo	district	203|cz|cze|czechia	2
 okres zdar nad sazavou|zdar nad sazavou	district	203|cz|cze|czechia	2
 okres vyskov|vyskov	district	203|cz|cze|czechia	2
@@ -14031,7 +14031,7 @@ brandenburg	land	276|de|deu|germany	1
 berlin|state of berlin	land	276|de|deu|germany	1
 bavaria		276|de|deu|germany	1
 baden-wurttemberg	land	276|de|deu|germany	1
-bavaria|bayern|free state of bavaria	land	276|de|deu|germany	1
+bayern	land	276|de|deu|germany	1
 regierungsbezirk unterfranken		276|de|deu|germany	2
 swabia		276|de|deu|germany	2
 upper palatinate		276|de|deu|germany	2
@@ -14065,7 +14065,7 @@ central jutland|midtjylland	region	208|denmark|dk|dnk	1
 nordjylland|north denmark	region	208|denmark|dk|dnk	1
 sjaelland|zealand	region	208|denmark|dk|dnk	1
 south denmark|syddanmark	region	208|denmark|dk|dnk	1
-capital region of denmark|hovedstaden	region	208|denmark|dk|dnk	1
+hovedstaden	region	208|denmark|dk|dnk	1
 vordingborg kommune		208|denmark|dk|dnk	2
 viborg kommune		208|denmark|dk|dnk	2
 vejle kommune		208|denmark|dk|dnk	2
@@ -15774,7 +15774,7 @@ southwest finland|varsinais-suomi	region	246|fi|fin|finland	1
 uusimaa	region	246|fi|fin|finland	1
 paijat-hame	region	246|fi|fin|finland	1
 satakunta	region	246|fi|fin|finland	1
-aland|aland islands|landskapet aland	region	246|fi|fin|finland	1
+landskapet aland	region	246|fi|fin|finland	1
 sydosterbotten		246|fi|fin|finland	2
 aboland-turunmaa		246|fi|fin|finland	2
 salo		246|fi|fin|finland	2
@@ -15993,17 +15993,17 @@ hauts-de-france	metropolitan region	250|fr|fra|france	1
 auvergne-rhone-alpes	metropolitan region	250|fr|fra|france	1
 guadeloupe	overseas departmental collectivity	250|fr|fra|france	1
 martinique	overseas unique territorial collectivity	250|fr|fra|france	1
-french guiana|guyane|guyane (francaise)	overseas unique territorial collectivity	250|fr|fra|france	1
-la reunion|reunion	overseas departmental collectivity	250|fr|fra|france	1
+guyane (francaise)	overseas unique territorial collectivity	250|fr|fra|france	1
+la reunion	overseas departmental collectivity	250|fr|fra|france	1
 mayotte	overseas departmental collectivity	250|fr|fra|france	1
-saint barthelemy|saint-barthelemy	overseas collectivity	250|fr|fra|france	1
-clipperton|clipperton island|ile de clipperton	dependency	250|fr|fra|france	1
-saint martin|saint-martin	overseas collectivity	250|fr|fra|france	1
-new caledonia|nouvelle-caledonie	overseas collectivity with special status	250|fr|fra|france	1
-french polynesia|polynesie francaise	overseas collectivity	250|fr|fra|france	1
-saint pierre and miquelon|saint-pierre-et-miquelon	overseas collectivity	250|fr|fra|france	1
-french southern and antarctic lands|terres australes francaises	overseas territory	250|fr|fra|france	1
-wallis and futuna|wallis-et-futuna	overseas collectivity	250|fr|fra|france	1
+saint-barthelemy	overseas collectivity	250|fr|fra|france	1
+clipperton	dependency	250|fr|fra|france	1
+saint-martin	overseas collectivity	250|fr|fra|france	1
+nouvelle-caledonie	overseas collectivity with special status	250|fr|fra|france	1
+polynesie francaise	overseas collectivity	250|fr|fra|france	1
+saint-pierre-et-miquelon	overseas collectivity	250|fr|fra|france	1
+terres australes francaises	overseas territory	250|fr|fra|france	1
+wallis-et-futuna	overseas collectivity	250|fr|fra|france	1
 yvelines	metropolitan department	250|fr|fra|france	2
 yonne	metropolitan department	250|fr|fra|france	2
 vosges	metropolitan department	250|fr|fra|france	2
@@ -16100,7 +16100,7 @@ alpes-de-haute-provence	metropolitan department	250|fr|fra|france	2
 allier	metropolitan department	250|fr|fra|france	2
 aisne	metropolitan department	250|fr|fra|france	2
 ain	metropolitan department	250|fr|fra|france	2
-lyon metropolis|metropole de lyon	metropolitan collectivity with special status	250|fr|fra|france	2
+metropole de lyon	metropolitan collectivity with special status	250|fr|fra|france	2
 alsace	european collectivity	250|fr|fra|france	2
 woleu-ntem	province	266|ga|gab|gabon	1
 ogooue-maritime	province	266|ga|gab|gabon	1
@@ -16355,7 +16355,7 @@ barnet	london borough	826|gb|gbr|united kingdom	2
 bromley	london borough	826|gb|gbr|united kingdom	2
 camden	london borough	826|gb|gbr|united kingdom	2
 croydon	london borough	826|gb|gbr|united kingdom	2
-greenwich|royal borough of greenwich	london borough	826|gb|gbr|united kingdom	2
+greenwich	london borough	826|gb|gbr|united kingdom	2
 havering	london borough	826|gb|gbr|united kingdom	2
 hackney	london borough	826|gb|gbr|united kingdom	2
 hillingdon	london borough	826|gb|gbr|united kingdom	2
@@ -18621,21 +18621,21 @@ budapest ix.		348|hu|hun|hungary	2
 north sumatra|sumatera utara	province	360|id|idn|indonesia	1
 aceh		360|id|idn|indonesia	1
 yogyakarta		360|id|idn|indonesia	1
-south sumatra	province	360|id|idn|indonesia	1
-west sumatra	province	360|id|idn|indonesia	1
-north sulawesi	province	360|id|idn|indonesia	1
-southeast sulawesi	province	360|id|idn|indonesia	1
-central sulawesi	province	360|id|idn|indonesia	1
-south sulawesi	province	360|id|idn|indonesia	1
+south sumatra|sumatera selatan	province	360|id|idn|indonesia	1
+sumatera barat|west sumatra	province	360|id|idn|indonesia	1
+north sulawesi|sulawesi utara	province	360|id|idn|indonesia	1
+southeast sulawesi|sulawesi tenggara	province	360|id|idn|indonesia	1
+central sulawesi|sulawesi tengah	province	360|id|idn|indonesia	1
+south sulawesi|sulawesi selatan	province	360|id|idn|indonesia	1
 riau	province	360|id|idn|indonesia	1
-east nusa tenggara	province	360|id|idn|indonesia	1
-west nusa tenggara	province	360|id|idn|indonesia	1
+east nusa tenggara|nusa tenggara timur	province	360|id|idn|indonesia	1
+nusa tenggara barat|west nusa tenggara	province	360|id|idn|indonesia	1
 maluku	geographical unit	360|id|idn|indonesia	1
 lampung		360|id|idn|indonesia	1
-east kalimantan	province	360|id|idn|indonesia	1
-central kalimantan	province	360|id|idn|indonesia	1
-south kalimantan	province	360|id|idn|indonesia	1
-west kalimantan	province	360|id|idn|indonesia	1
+east kalimantan|kalimantan timur	province	360|id|idn|indonesia	1
+central kalimantan|kalimantan tengah	province	360|id|idn|indonesia	1
+kalimantan selatan|south kalimantan	province	360|id|idn|indonesia	1
+kalimantan barat|west kalimantan	province	360|id|idn|indonesia	1
 east java|jawa timur	province	360|id|idn|indonesia	1
 central java|jawa tengah	province	360|id|idn|indonesia	1
 jawa barat|west java	province	360|id|idn|indonesia	1
@@ -18648,14 +18648,14 @@ banten		360|id|idn|indonesia	1
 gorontalo		360|id|idn|indonesia	1
 bangka-belitung islands|kepulauan bangka belitung	province	360|id|idn|indonesia	1
 north maluku		360|id|idn|indonesia	1
-west papua	province	360|id|idn|indonesia	1
-west sulawesi	province	360|id|idn|indonesia	1
-riau islands	province	360|id|idn|indonesia	1
-north kalimantan	province	360|id|idn|indonesia	1
+papua barat|west papua	province	360|id|idn|indonesia	1
+sulawesi barat|west sulawesi	province	360|id|idn|indonesia	1
+kepulauan riau|riau islands	province	360|id|idn|indonesia	1
+kalimantan utara|north kalimantan	province	360|id|idn|indonesia	1
 papua barat daya|southwest papua	province	360|id|idn|indonesia	1
-central papua	province	360|id|idn|indonesia	1
-highland papua	province	360|id|idn|indonesia	1
-south papua	province	360|id|idn|indonesia	1
+central papua|papua tengah	province	360|id|idn|indonesia	1
+highland papua|papua pengunungan	province	360|id|idn|indonesia	1
+papua selatan|south papua	province	360|id|idn|indonesia	1
 jawa	geographical unit	360|id|idn|indonesia	1
 kalimantan	geographical unit	360|id|idn|indonesia	1
 nusa tenggara	geographical unit	360|id|idn|indonesia	1
@@ -26408,11 +26408,11 @@ androy		450|madagascar|mdg|mg	1
 atsimo-andrefana		450|madagascar|mdg|mg	1
 fitovinany region		450|madagascar|mdg|mg	1
 vatovavy region		450|madagascar|mdg|mg	1
-tamatave|toamasina	province	450|madagascar|mdg|mg	1
+toamasina	province	450|madagascar|mdg|mg	1
 fianarantsoa	province	450|madagascar|mdg|mg	1
-mahajanga|majunga	province	450|madagascar|mdg|mg	1
+mahajanga	province	450|madagascar|mdg|mg	1
 antananarivo	province	450|madagascar|mdg|mg	1
-toliara|tulear	province	450|madagascar|mdg|mg	1
+toliara	province	450|madagascar|mdg|mg	1
 ambatondrazaka district		450|madagascar|mdg|mg	2
 amparafaravola district		450|madagascar|mdg|mg	2
 brickaville		450|madagascar|mdg|mg	2
@@ -26567,8 +26567,8 @@ lib|lib island	municipality	584|marshall islands|mh|mhl	1
 mejit|mejit island	municipality	584|marshall islands|mh|mhl	1
 ralik chain	chain (of islands)	584|marshall islands|mh|mhl	1
 ratak chain	chain (of islands)	584|marshall islands|mh|mhl	1
-enewetak & ujelang|enewetak atoll|ujelang	municipality	584|marshall islands|mh|mhl	2
-bikini & kili|bikini atoll|kili island	municipality	584|marshall islands|mh|mhl	2
+enewetak & ujelang	municipality	584|marshall islands|mh|mhl	2
+bikini & kili	municipality	584|marshall islands|mh|mhl	2
 valandovo	municipality	807|mk|mkd|north macedonia	1
 resen	municipality	807|mk|mkd|north macedonia	1
 kratovo	municipality	807|mk|mkd|north macedonia	1
@@ -27331,7 +27331,7 @@ l-imgarr|mgarr	local council	470|malta|mlt|mt	1
 l-imqabba|mqabba	local council	470|malta|mlt|mt	1
 l-imsida|msida	local council	470|malta|mlt|mt	1
 mtarfa	local council	470|malta|mlt|mt	1
-senglea	local council	470|malta|mlt|mt	1
+isla|senglea	local council	470|malta|mlt|mt	1
 il-kalkara|kalkara	local council	470|malta|mlt|mt	1
 kercem|ta' kercem	local council	470|malta|mlt|mt	1
 kirkop	local council	470|malta|mlt|mt	1
@@ -27352,7 +27352,7 @@ il-qala|qala	local council	470|malta|mlt|mt	1
 qormi	local council	470|malta|mlt|mt	1
 il-qrendi|qrendi	local council	470|malta|mlt|mt	1
 ir-rabat|rabat malta	local council	470|malta|mlt|mt	1
-rabat ghawdex|rabat gozo|victoria	local council	470|malta|mlt|mt	1
+rabat gozo|victoria	local council	470|malta|mlt|mt	1
 safi	local council	470|malta|mlt|mt	1
 saint john	local council	470|malta|mlt|mt	1
 saint julian|saint julian's	local council	470|malta|mlt|mt	1
@@ -34569,7 +34569,7 @@ qalqilya	governorate	275|palestine|ps|pse	2
 salfit	governorate	275|palestine|ps|pse	2
 jericho|jericho and al aghwar	governorate	275|palestine|ps|pse	2
 al quds|jerusalem	governorate	275|palestine|ps|pse	2
-al-bireh|ramallah	governorate	275|palestine|ps|pse	2
+ramallah	governorate	275|palestine|ps|pse	2
 al khalil|hebron	governorate	275|palestine|ps|pse	2
 khan yunis|khan yunis governorate	governorate	275|palestine|ps|pse	2
 gaza		275|palestine|ps|pse	2
@@ -35183,7 +35183,7 @@ itacurubi de la cordillera		600|paraguay|pry|py	2
 itaugua		600|paraguay|pry|py	2
 general delgado		600|paraguay|pry|py	2
 madinat ash shamal		634|qa|qat|qatar	1
-al khawr wa adh dhakhirah|al khor|al thakhira	municipality	634|qa|qat|qatar	1
+al khawr wa adh dhakhirah|al khor	municipality	634|qa|qat|qatar	1
 umm salal	municipality	634|qa|qat|qatar	1
 baladiyat ar rayyan		634|qa|qat|qatar	1
 baladiyat ad dawhah		634|qa|qat|qatar	1
@@ -38495,7 +38495,7 @@ ivanovo oblast|ivanovskaya oblast'	administrative region	643|ru|rus|russian fede
 ingushetiya republic|ingushetiya, respublika	republic	643|ru|rus|russian federation	1
 nizhegorodskaya oblast'|nizhny novgorod oblast	administrative region	643|ru|rus|russian federation	1
 dagestan|dagestan, respublika	republic	643|ru|rus|russian federation	1
-chuvash republic|chuvashskaya respublika|cuvasskaja respublika	republic	643|ru|rus|russian federation	1
+chuvash republic|chuvashskaya respublika	republic	643|ru|rus|russian federation	1
 chechenskaya respublika|chechnya	republic	643|ru|rus|russian federation	1
 bryansk oblast|bryanskaya oblast'	administrative region	643|ru|rus|russian federation	1
 belgorod oblast|belgorodskaya oblast'	administrative region	643|ru|rus|russian federation	1
@@ -38529,7 +38529,7 @@ buryatiya republic|buryatiya, respublika	republic	643|ru|rus|russian federation	
 sakhalin oblast|sakhalinskaya oblast'	administrative region	643|ru|rus|russian federation	1
 magadan oblast|magadanskaya oblast'	administrative region	643|ru|rus|russian federation	1
 kamchatka|kamchatskiy kray	administrative territory	643|ru|rus|russian federation	1
-chukotka|chukotskiy avtonomnyy okrug|cukotskij avtonomnyj okrug	autonomous district	643|ru|rus|russian federation	1
+chukotka|chukotskiy avtonomnyy okrug	autonomous district	643|ru|rus|russian federation	1
 zabaykalskiy (transbaikal) kray		643|ru|rus|russian federation	1
 sortaval'skiy rayon		643|ru|rus|russian federation	2
 zvenigovskiy rayon		643|ru|rus|russian federation	2
@@ -41583,10 +41583,10 @@ south darfur|southern darfur	state	729|sd|sdn|sudan	1
 south kordofan|southern kordofan	state	729|sd|sdn|sudan	1
 kassala	state	729|sd|sdn|sudan	1
 river nile	state	729|sd|sdn|sudan	1
-north darfur|northern darfur|shamal darfur	state	729|sd|sdn|sudan	1
+north darfur|northern darfur	state	729|sd|sdn|sudan	1
 north kordofan	state	729|sd|sdn|sudan	1
 sennar	state	729|sd|sdn|sudan	1
-east darfur|eastern darfur|sharq darfur	state	729|sd|sdn|sudan	1
+east darfur|eastern darfur	state	729|sd|sdn|sudan	1
 central darfur|zalingei|zalinjay	state	729|sd|sdn|sudan	1
 al mudiriyah ash shamaliyah		729|sd|sdn|sudan	2
 omdurman		729|sd|sdn|sudan	2
@@ -42326,7 +42326,7 @@ western area		694|sierra leone|sl|sle	1
 southern|southern province	province	694|sierra leone|sl|sle	1
 northern|northern province	province	694|sierra leone|sl|sle	1
 eastern|eastern province	province	694|sierra leone|sl|sle	1
-north west|north western|north western province	province	694|sierra leone|sl|sle	1
+north west|north western	province	694|sierra leone|sl|sle	1
 tonkolili district		694|sierra leone|sl|sle	2
 pujehun district		694|sierra leone|sl|sle	2
 port loko district		694|sierra leone|sl|sle	2
@@ -46276,11 +46276,11 @@ massachusetts	state	840|united states|us|usa	1
 pennsylvania	state	840|united states|us|usa	1
 virginia	state	840|united states|us|usa	1
 american samoa	outlying area	840|united states|us|usa	1
-guahan|guam	outlying area	840|united states|us|usa	1
-cnmi|commonwealth of the northern mariana islands|northern mariana islands	outlying area	840|united states|us|usa	1
-commonwealth of puerto rico|puerto rico	outlying area	840|united states|us|usa	1
+guam	outlying area	840|united states|us|usa	1
+northern mariana islands	outlying area	840|united states|us|usa	1
+puerto rico	outlying area	840|united states|us|usa	1
 united states minor outlying islands	outlying area	840|united states|us|usa	1
-u.s. virgin islands|united states virgin islands|usvi|virgin islands, u.s.	outlying area	840|united states|us|usa	1
+virgin islands, u.s.	outlying area	840|united states|us|usa	1
 russell county		840|united states|us|usa	2
 long county		840|united states|us|usa	2
 boone county		840|united states|us|usa	2
@@ -51057,13 +51057,13 @@ komuna e ranillugut		kosovo|xk|xkx	2
 mitrovica veriore		kosovo|xk|xkx	2
 ta'izz|ta`izz	governorate	887|ye|yem|yemen	1
 shabwah	governorate	887|ye|yem|yemen	1
-san`a'|sana'a|sanaa governorate	governorate	887|ye|yem|yemen	1
+san`a'|sanaa governorate	governorate	887|ye|yem|yemen	1
 sa'dah|sa`dah	governorate	887|ye|yem|yemen	1
 raymah	governorate	887|ye|yem|yemen	1
 ma'rib	governorate	887|ye|yem|yemen	1
 al mahwit governorate		887|ye|yem|yemen	1
 al jawf	governorate	887|ye|yem|yemen	1
-hadhramaut|hadramawt|muhafazat hadramaout	governorate	887|ye|yem|yemen	1
+hadramawt|muhafazat hadramaout	governorate	887|ye|yem|yemen	1
 dhamar	governorate	887|ye|yem|yemen	1
 al mahrah governorate		887|ye|yem|yemen	1
 al hudaydah	governorate	887|ye|yem|yemen	1
@@ -51076,7 +51076,7 @@ hajjah	governorate	887|ye|yem|yemen	1
 ibb governorate		887|ye|yem|yemen	1
 lahij	governorate	887|ye|yem|yemen	1
 amanat alasimah		887|ye|yem|yemen	1
-arkhabil suqutra|socotra|soqatra	governorate	887|ye|yem|yemen	1
+arkhabil suqutra|soqatra	governorate	887|ye|yem|yemen	1
 az zaydiyah		887|ye|yem|yemen	2
 zabid		887|ye|yem|yemen	2
 yarim		887|ye|yem|yemen	2

@@ -9,7 +9,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - `py.typed` marker (PEP 561)
-- `CityRegistry.set_population_threshold(n)` / `get_population_threshold()`, narrowing the cities cache and all three indexes to population >= n, w E2E tests.
+- `CityRegistry.set_population_threshold(n)` / `population_threshold` property, narrowing the cities cache and all three indexes to population >= n, w E2E tests.
+- `geonames_id` on `SubdivisionModel` (ingestion-side)
+
+### Changed
+- All registries (`Country`, `Subdivision`, `City`) are now lazy-loaded on first access; `Country`/`Subdivision` previously eager-loaded on import
+- Restructured `ingest/`: per-domain `raw/` split into `inputs/`/`outputs/`/`logs/`; new `ingest/shared/` package for cross-domain models, loaders, and fetch (GeoNames alternate names, CLDR)
+- Rewrote subdivision auto-merge: excludes already-claimed candidates, assigns globally by best score instead of first match, excludes targets where multiple ISO subs both score highly (namesake collisions), switched `token_set_ratio` to `token_sort_ratio` to stop subset-match false positives, expanded categorical token stripping
+- `resolve-subdivisions` skill and `resolution_map.json` now key on `geonames_id` instead of an unstable per-run hash; `resolution_map.json` simplified to a flat `dict[str, int | None]`
+- Overhauled ingest logging: per-domain log files, log levels, per-merge/orphan diagnostics
+
+### Removed
+- Manual alias/name contribution during subdivision resolution (CLI and skill); resolutions are now source-data only
+- Deprecated interactive CLI subdivision resolver, fully superseded by the resolve-subdivisions skill
 
 ### Fixed
 - Type hint discrepancies across `entities`/`views`/`stores`/`registries`/`indexes` (nullable fields, `View`/`Store` generics, `Mapping` covariance); `src/localis` now passes `pyright` with zero errors

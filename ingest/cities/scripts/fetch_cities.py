@@ -6,8 +6,11 @@ import zipfile
 def fetch_cities_sources(force: bool = False) -> bool:
     cities_url = f"{GEONAMES_DUMP_URL}/cities500.zip"
     zip_dest = CITIES_INPUTS_PATH / "cities500.zip"
+    txt_dest = CITIES_INPUTS_PATH / "cities500.txt"
 
-    should_download = has_changed(cities_url, zip_dest, CITIES_MANIFEST_PATH)
+    should_download = has_changed(
+        cities_url, zip_dest, CITIES_MANIFEST_PATH, exists_path=txt_dest
+    )
 
     if not should_download and not force:
         return False

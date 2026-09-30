@@ -1,7 +1,3 @@
 {
-  "cities500.zip": {
-    "etag": "\"d38717-65ca9a7189752\"",
-    "last_modified": "Wed, 30 Sep 2026 01:59:42 GMT",
-    "content_length": "13862679"
-  }
+  "cities500.zip": "\"d38717-65ca9a7189752\""
 }

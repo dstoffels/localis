@@ -8,8 +8,7 @@ from .logger import ingest_log
 # Fetch URLs
 USER_AGENT = "localis-data-refresh (+https://github.com/dstoffels/localis)"
 
-_ManifestEntry = dict[str, str | None]
-_Manifest = dict[str, _ManifestEntry]
+_Manifest = dict[str, str | None]
 
 
 def _load_manifest(path: Path) -> _Manifest:
@@ -25,23 +24,24 @@ def _save_manifest(path: Path, manifest: _Manifest) -> None:
         json.dump(manifest, f, indent=2)
 
 
-def _head_signals(url: str) -> _ManifestEntry:
+def _etag(url: str) -> str | None:
     head_request = Request(url, method="HEAD", headers={"User-Agent": USER_AGENT})
     head_response = cast(HTTPResponse, urlopen(head_request, timeout=60))
     with head_response:
-        return {
-            "etag": head_response.headers.get("ETag"),
-            "last_modified": head_response.headers.get("Last-Modified"),
-            "content_length": head_response.headers.get("Content-Length"),
-        }
+        return head_response.headers.get("ETag")
 
 
-def has_changed(url: str, dest: Path, manifest_path: Path) -> bool:
+def has_changed(
+    url: str, dest: Path, manifest_path: Path, exists_path: Path | None = None
+) -> bool:
     """Read-only HEAD check against manifest_path; never downloads or writes."""
-    manifest = _load_manifest(manifest_path)
-    signals = _head_signals(url)
+    if not (exists_path or dest).exists():
+        return True
 
-    if signals == manifest.get(dest.name):
+    manifest = _load_manifest(manifest_path)
+    etag = _etag(url)
+
+    if etag == manifest.get(dest.name):
         ingest_log.writeline(f"No update needed for {dest.name}")
         return False
 
@@ -64,5 +64,5 @@ def download(url: str, dest: Path, manifest_path: Path) -> None:
     ingest_log.writeline(f"Downloaded and updated {dest.name}")
 
     manifest = _load_manifest(manifest_path)
-    manifest[dest.name] = _head_signals(url)
+    manifest[dest.name] = _etag(url)
     _save_manifest(manifest_path, manifest)
