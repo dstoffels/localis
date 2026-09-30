@@ -11,60 +11,6 @@
     "country": "Afghanistan",
     "type": "Province"
   },
-  "AM-AG": {
-    "name": "Aragac̣otn",
-    "aliases": [],
-    "country": "Armenia",
-    "type": "Region"
-  },
-  "AM-AR": {
-    "name": "Ararat",
-    "aliases": [],
-    "country": "Armenia",
-    "type": "Region"
-  },
-  "AM-AV": {
-    "name": "Armavir",
-    "aliases": [],
-    "country": "Armenia",
-    "type": "Region"
-  },
-  "AM-GR": {
-    "name": "Geġark'unik'",
-    "aliases": [],
-    "country": "Armenia",
-    "type": "Region"
-  },
-  "AM-KT": {
-    "name": "Kotayk'",
-    "aliases": [],
-    "country": "Armenia",
-    "type": "Region"
-  },
-  "AM-LO": {
-    "name": "Loṙi",
-    "aliases": [],
-    "country": "Armenia",
-    "type": "Region"
-  },
-  "AM-SH": {
-    "name": "Širak",
-    "aliases": [],
-    "country": "Armenia",
-    "type": "Region"
-  },
-  "AM-SU": {
-    "name": "Syunik'",
-    "aliases": [],
-    "country": "Armenia",
-    "type": "Region"
-  },
-  "AM-TV": {
-    "name": "Tavuš",
-    "aliases": [],
-    "country": "Armenia",
-    "type": "Region"
-  },
   "AO-CCU": {
     "name": "Cuando Cubango",
     "aliases": [
@@ -145,40 +91,10 @@
     "country": "Burkina Faso",
     "type": "Province"
   },
-  "BG-04": {
-    "name": "Veliko Tarnovo",
+  "BS-HT": {
+    "name": "Hope Town",
     "aliases": [],
-    "country": "Bulgaria",
-    "type": "District"
-  },
-  "BG-09": {
-    "name": "Kardzhali",
-    "aliases": [],
-    "country": "Bulgaria",
-    "type": "District"
-  },
-  "BG-22": {
-    "name": "Sofia (stolitsa)",
-    "aliases": [],
-    "country": "Bulgaria",
-    "type": "District"
-  },
-  "BG-23": {
-    "name": "Sofia",
-    "aliases": [],
-    "country": "Bulgaria",
-    "type": "District"
-  },
-  "BG-25": {
-    "name": "Targovishte",
-    "aliases": [],
-    "country": "Bulgaria",
-    "type": "District"
-  },
-  "BG-26": {
-    "name": "Haskovo",
-    "aliases": [],
-    "country": "Bulgaria",
+    "country": "Bahamas",
     "type": "District"
   },
   "BY-HR": {
@@ -199,24 +115,6 @@
     "country": "Belarus",
     "type": "Oblast"
   },
-  "CD-MO": {
-    "name": "Mongala",
-    "aliases": [],
-    "country": "Democratic Republic of the Congo",
-    "type": "Province"
-  },
-  "CD-TO": {
-    "name": "Tshopo",
-    "aliases": [],
-    "country": "Democratic Republic of the Congo",
-    "type": "Province"
-  },
-  "CF-BGF": {
-    "name": "Bangui",
-    "aliases": [],
-    "country": "Central African Republic",
-    "type": "Commune"
-  },
   "CF-HS": {
     "name": "Haute-Sangha / Mambéré-Kadéï",
     "aliases": [],
@@ -234,12 +132,6 @@
     "aliases": [],
     "country": "Central African Republic",
     "type": "Economic prefecture"
-  },
-  "CG-9": {
-    "name": "Niari",
-    "aliases": [],
-    "country": "Republic of the Congo",
-    "type": "Department"
   },
   "CI-AB": {
     "name": "Abidjan",
@@ -285,12 +177,6 @@
     "country": "Cabo Verde",
     "type": "Municipality"
   },
-  "DE-BW": {
-    "name": "Baden-Württemberg",
-    "aliases": [],
-    "country": "Germany",
-    "type": "Land"
-  },
   "DE-HH": {
     "name": "Hamburg",
     "aliases": [],
@@ -299,12 +185,6 @@
   },
   "DO-14": {
     "name": "María Trinidad Sánchez",
-    "aliases": [],
-    "country": "Dominican Republic",
-    "type": "Province"
-  },
-  "DO-20": {
-    "name": "Samaná",
     "aliases": [],
     "country": "Dominican Republic",
     "type": "Province"
@@ -387,12 +267,6 @@
     "country": "Estonia",
     "type": "Rural municipality"
   },
-  "EE-245": {
-    "name": "Jõelähtme",
-    "aliases": [],
-    "country": "Estonia",
-    "type": "Rural municipality"
-  },
   "EE-247": {
     "name": "Jõgeva",
     "aliases": [],
@@ -446,12 +320,6 @@
     "aliases": [],
     "country": "Estonia",
     "type": "Urban municipality"
-  },
-  "EE-303": {
-    "name": "Kihnu",
-    "aliases": [],
-    "country": "Estonia",
-    "type": "Rural municipality"
   },
   "EE-305": {
     "name": "Kiili",
@@ -597,12 +465,6 @@
     "country": "Estonia",
     "type": "Rural municipality"
   },
-  "EE-622": {
-    "name": "Põlva",
-    "aliases": [],
-    "country": "Estonia",
-    "type": "Rural municipality"
-  },
   "EE-624": {
     "name": "Pärnu",
     "aliases": [],
@@ -741,12 +603,6 @@
     "country": "Estonia",
     "type": "Rural municipality"
   },
-  "EE-890": {
-    "name": "Viimsi",
-    "aliases": [],
-    "country": "Estonia",
-    "type": "Rural municipality"
-  },
   "EE-897": {
     "name": "Viljandi",
     "aliases": [],
@@ -866,30 +722,6 @@
     "aliases": [],
     "country": "Spain",
     "type": "Autonomous community"
-  },
-  "ET-AM": {
-    "name": "Amara",
-    "aliases": [],
-    "country": "Ethiopia",
-    "type": "Regional state"
-  },
-  "ET-OR": {
-    "name": "Oromia",
-    "aliases": [],
-    "country": "Ethiopia",
-    "type": "Regional state"
-  },
-  "ET-SO": {
-    "name": "Somali",
-    "aliases": [],
-    "country": "Ethiopia",
-    "type": "Regional state"
-  },
-  "ET-TI": {
-    "name": "Tigrai",
-    "aliases": [],
-    "country": "Ethiopia",
-    "type": "Regional state"
   },
   "FR-42": {
     "name": "Loire",
@@ -1041,12 +873,6 @@
     "country": "United Kingdom",
     "type": "Unitary authority"
   },
-  "GB-MRY": {
-    "name": "Moray",
-    "aliases": [],
-    "country": "United Kingdom",
-    "type": "Council area"
-  },
   "GB-MTY": {
     "name": "Merthyr Tydfil [Merthyr Tudful GB-MTU]",
     "aliases": [],
@@ -1082,12 +908,6 @@
     "aliases": [],
     "country": "United Kingdom",
     "type": "Metropolitan district"
-  },
-  "GB-STG": {
-    "name": "Stirling",
-    "aliases": [],
-    "country": "United Kingdom",
-    "type": "Council area"
   },
   "GB-SWA": {
     "name": "Swansea [Abertawe GB-ATA]",
@@ -1205,12 +1025,6 @@
     "country": "Indonesia",
     "type": "Province"
   },
-  "ID-GO": {
-    "name": "Gorontalo",
-    "aliases": [],
-    "country": "Indonesia",
-    "type": "Province"
-  },
   "ID-JA": {
     "name": "Jambi",
     "aliases": [],
@@ -1275,12 +1089,6 @@
     "country": "Iraq",
     "type": "Governorate"
   },
-  "IQ-DA": {
-    "name": "Dahūk",
-    "aliases": [],
-    "country": "Iraq",
-    "type": "Governorate"
-  },
   "IQ-SU": {
     "name": "As Sulaymānīyah",
     "aliases": [],
@@ -1298,12 +1106,6 @@
     "aliases": [],
     "country": "Iceland",
     "type": "Municipality"
-  },
-  "IT-AG": {
-    "name": "Agrigento",
-    "aliases": [],
-    "country": "Italy",
-    "type": "Free municipal consortium"
   },
   "IT-BA": {
     "name": "Bari",
@@ -1323,23 +1125,11 @@
     "country": "Italy",
     "type": "Metropolitan city"
   },
-  "IT-CL": {
-    "name": "Caltanissetta",
-    "aliases": [],
-    "country": "Italy",
-    "type": "Free municipal consortium"
-  },
   "IT-CT": {
     "name": "Catania",
     "aliases": [],
     "country": "Italy",
     "type": "Metropolitan city"
-  },
-  "IT-EN": {
-    "name": "Enna",
-    "aliases": [],
-    "country": "Italy",
-    "type": "Free municipal consortium"
   },
   "IT-GE": {
     "name": "Genova",
@@ -1371,35 +1161,17 @@
     "country": "Italy",
     "type": "Metropolitan city"
   },
-  "IT-RG": {
-    "name": "Ragusa",
-    "aliases": [],
-    "country": "Italy",
-    "type": "Free municipal consortium"
-  },
   "IT-RM": {
     "name": "Roma",
     "aliases": [],
     "country": "Italy",
     "type": "Metropolitan city"
   },
-  "IT-SR": {
-    "name": "Siracusa",
-    "aliases": [],
-    "country": "Italy",
-    "type": "Free municipal consortium"
-  },
   "IT-TO": {
     "name": "Torino",
     "aliases": [],
     "country": "Italy",
     "type": "Metropolitan city"
-  },
-  "IT-TP": {
-    "name": "Trapani",
-    "aliases": [],
-    "country": "Italy",
-    "type": "Free municipal consortium"
   },
   "IT-VE": {
     "name": "Venezia",
@@ -1409,12 +1181,6 @@
   },
   "JO-AZ": {
     "name": "Az Zarqā’",
-    "aliases": [],
-    "country": "Jordan",
-    "type": "Governorate"
-  },
-  "JO-KA": {
-    "name": "Al Karak",
     "aliases": [],
     "country": "Jordan",
     "type": "Governorate"
@@ -1438,6 +1204,22 @@
     ],
     "country": "South Korea",
     "type": "Metropolitan city"
+  },
+  "LA-VI": {
+    "name": "Viangchan",
+    "aliases": [
+      "Vientiane"
+    ],
+    "country": "Laos",
+    "type": "Province"
+  },
+  "LA-VT": {
+    "name": "Viangchan",
+    "aliases": [
+      "Vientiane"
+    ],
+    "country": "Laos",
+    "type": "Prefecture"
   },
   "LB-BH": {
     "name": "B‘alabak-Al Hirmil",
@@ -1469,30 +1251,6 @@
     "country": "Lithuania",
     "type": "City municipality"
   },
-  "LV-041": {
-    "name": "Jelgavas novads",
-    "aliases": [
-      "Jelgava"
-    ],
-    "country": "Latvia",
-    "type": "Municipality"
-  },
-  "LV-077": {
-    "name": "Rēzeknes novads",
-    "aliases": [
-      "Rēzekne"
-    ],
-    "country": "Latvia",
-    "type": "Municipality"
-  },
-  "LV-106": {
-    "name": "Ventspils novads",
-    "aliases": [
-      "Ventspils"
-    ],
-    "country": "Latvia",
-    "type": "Municipality"
-  },
   "LV-JEL": {
     "name": "Jelgava",
     "aliases": [],
@@ -1523,12 +1281,6 @@
     "country": "Morocco",
     "type": "Region"
   },
-  "MA-AGD": {
-    "name": "Agadir-Ida-Ou-Tanane",
-    "aliases": [],
-    "country": "Morocco",
-    "type": "Prefecture"
-  },
   "MA-AOU": {
     "name": "Aousserd (EH)",
     "aliases": [],
@@ -1547,31 +1299,11 @@
     "country": "Morocco",
     "type": "Province"
   },
-  "MA-CAS": {
-    "name": "Casablanca",
-    "aliases": [
-      "Dar el Beïda"
-    ],
-    "country": "Morocco",
-    "type": "Prefecture"
-  },
   "MA-ESM": {
     "name": "Es-Semara (EH-partial)",
     "aliases": [],
     "country": "Morocco",
     "type": "Province"
-  },
-  "MA-FES": {
-    "name": "Fès",
-    "aliases": [],
-    "country": "Morocco",
-    "type": "Prefecture"
-  },
-  "MA-INE": {
-    "name": "Inezgane-Ait Melloul",
-    "aliases": [],
-    "country": "Morocco",
-    "type": "Prefecture"
   },
   "MA-LAA": {
     "name": "Laâyoune (EH)",
@@ -1579,59 +1311,17 @@
     "country": "Morocco",
     "type": "Province"
   },
-  "MA-MAR": {
-    "name": "Marrakech",
-    "aliases": [],
-    "country": "Morocco",
-    "type": "Prefecture"
-  },
-  "MA-MOH": {
-    "name": "Mohammadia",
-    "aliases": [],
-    "country": "Morocco",
-    "type": "Prefecture"
-  },
   "MA-OUD": {
     "name": "Oued Ed-Dahab (EH)",
     "aliases": [],
     "country": "Morocco",
     "type": "Province"
   },
-  "MA-OUJ": {
-    "name": "Oujda-Angad",
-    "aliases": [],
-    "country": "Morocco",
-    "type": "Prefecture"
-  },
-  "MA-RAB": {
-    "name": "Rabat",
-    "aliases": [],
-    "country": "Morocco",
-    "type": "Prefecture"
-  },
-  "MA-SAL": {
-    "name": "Salé",
-    "aliases": [],
-    "country": "Morocco",
-    "type": "Prefecture"
-  },
-  "MA-SKH": {
-    "name": "Skhirate-Témara",
-    "aliases": [],
-    "country": "Morocco",
-    "type": "Prefecture"
-  },
   "MA-TAF": {
     "name": "Tarfaya (EH-partial)",
     "aliases": [],
     "country": "Morocco",
     "type": "Province"
-  },
-  "MA-TNG": {
-    "name": "Tanger-Assilah",
-    "aliases": [],
-    "country": "Morocco",
-    "type": "Prefecture"
   },
   "MA-TNT": {
     "name": "Tan-Tan (EH-partial)",
@@ -1855,84 +1545,10 @@
     "country": "New Zealand",
     "type": "Special island authority"
   },
-  "NZ-TAS": {
-    "name": "Tasman",
-    "aliases": [],
-    "country": "New Zealand",
-    "type": "Region"
-  },
   "NZ-WGN": {
     "name": "Greater Wellington",
     "aliases": [],
     "country": "New Zealand",
-    "type": "Region"
-  },
-  "PE-ANC": {
-    "name": "Ancash",
-    "aliases": [],
-    "country": "Peru",
-    "type": "Region"
-  },
-  "PE-APU": {
-    "name": "Apurímac",
-    "aliases": [],
-    "country": "Peru",
-    "type": "Region"
-  },
-  "PE-ARE": {
-    "name": "Arequipa",
-    "aliases": [],
-    "country": "Peru",
-    "type": "Region"
-  },
-  "PE-AYA": {
-    "name": "Ayacucho",
-    "aliases": [],
-    "country": "Peru",
-    "type": "Region"
-  },
-  "PE-CAJ": {
-    "name": "Cajamarca",
-    "aliases": [],
-    "country": "Peru",
-    "type": "Region"
-  },
-  "PE-CUS": {
-    "name": "Cusco",
-    "aliases": [
-      "Cuzco"
-    ],
-    "country": "Peru",
-    "type": "Region"
-  },
-  "PE-HUC": {
-    "name": "Huánuco",
-    "aliases": [],
-    "country": "Peru",
-    "type": "Region"
-  },
-  "PE-HUV": {
-    "name": "Huancavelica",
-    "aliases": [],
-    "country": "Peru",
-    "type": "Region"
-  },
-  "PE-ICA": {
-    "name": "Ica",
-    "aliases": [],
-    "country": "Peru",
-    "type": "Region"
-  },
-  "PE-LAL": {
-    "name": "La Libertad",
-    "aliases": [],
-    "country": "Peru",
-    "type": "Region"
-  },
-  "PE-LAM": {
-    "name": "Lambayeque",
-    "aliases": [],
-    "country": "Peru",
     "type": "Region"
   },
   "PE-LMA": {
@@ -1940,48 +1556,6 @@
     "aliases": [],
     "country": "Peru",
     "type": "Municipality"
-  },
-  "PE-LOR": {
-    "name": "Loreto",
-    "aliases": [],
-    "country": "Peru",
-    "type": "Region"
-  },
-  "PE-MOQ": {
-    "name": "Moquegua",
-    "aliases": [],
-    "country": "Peru",
-    "type": "Region"
-  },
-  "PE-PIU": {
-    "name": "Piura",
-    "aliases": [],
-    "country": "Peru",
-    "type": "Region"
-  },
-  "PE-PUN": {
-    "name": "Puno",
-    "aliases": [],
-    "country": "Peru",
-    "type": "Region"
-  },
-  "PE-SAM": {
-    "name": "San Martín",
-    "aliases": [],
-    "country": "Peru",
-    "type": "Region"
-  },
-  "PE-TAC": {
-    "name": "Tacna",
-    "aliases": [],
-    "country": "Peru",
-    "type": "Region"
-  },
-  "PE-UCA": {
-    "name": "Ucayali",
-    "aliases": [],
-    "country": "Peru",
-    "type": "Region"
   },
   "PG-NCD": {
     "name": "National Capital District (Port Moresby)",
@@ -2084,252 +1658,6 @@
     "aliases": [],
     "country": "Qatar",
     "type": "Municipality"
-  },
-  "RO-AB": {
-    "name": "Alba",
-    "aliases": [],
-    "country": "Romania",
-    "type": "Department"
-  },
-  "RO-AG": {
-    "name": "Argeș",
-    "aliases": [],
-    "country": "Romania",
-    "type": "Department"
-  },
-  "RO-AR": {
-    "name": "Arad",
-    "aliases": [],
-    "country": "Romania",
-    "type": "Department"
-  },
-  "RO-BC": {
-    "name": "Bacău",
-    "aliases": [],
-    "country": "Romania",
-    "type": "Department"
-  },
-  "RO-BH": {
-    "name": "Bihor",
-    "aliases": [],
-    "country": "Romania",
-    "type": "Department"
-  },
-  "RO-BN": {
-    "name": "Bistrița-Năsăud",
-    "aliases": [],
-    "country": "Romania",
-    "type": "Department"
-  },
-  "RO-BR": {
-    "name": "Brăila",
-    "aliases": [],
-    "country": "Romania",
-    "type": "Department"
-  },
-  "RO-BT": {
-    "name": "Botoșani",
-    "aliases": [],
-    "country": "Romania",
-    "type": "Department"
-  },
-  "RO-BV": {
-    "name": "Brașov",
-    "aliases": [],
-    "country": "Romania",
-    "type": "Department"
-  },
-  "RO-BZ": {
-    "name": "Buzău",
-    "aliases": [],
-    "country": "Romania",
-    "type": "Department"
-  },
-  "RO-CJ": {
-    "name": "Cluj",
-    "aliases": [],
-    "country": "Romania",
-    "type": "Department"
-  },
-  "RO-CL": {
-    "name": "Călărași",
-    "aliases": [],
-    "country": "Romania",
-    "type": "Department"
-  },
-  "RO-CS": {
-    "name": "Caraș-Severin",
-    "aliases": [],
-    "country": "Romania",
-    "type": "Department"
-  },
-  "RO-CT": {
-    "name": "Constanța",
-    "aliases": [],
-    "country": "Romania",
-    "type": "Department"
-  },
-  "RO-CV": {
-    "name": "Covasna",
-    "aliases": [],
-    "country": "Romania",
-    "type": "Department"
-  },
-  "RO-DB": {
-    "name": "Dâmbovița",
-    "aliases": [],
-    "country": "Romania",
-    "type": "Department"
-  },
-  "RO-DJ": {
-    "name": "Dolj",
-    "aliases": [],
-    "country": "Romania",
-    "type": "Department"
-  },
-  "RO-GJ": {
-    "name": "Gorj",
-    "aliases": [],
-    "country": "Romania",
-    "type": "Department"
-  },
-  "RO-GL": {
-    "name": "Galați",
-    "aliases": [],
-    "country": "Romania",
-    "type": "Department"
-  },
-  "RO-GR": {
-    "name": "Giurgiu",
-    "aliases": [],
-    "country": "Romania",
-    "type": "Department"
-  },
-  "RO-HD": {
-    "name": "Hunedoara",
-    "aliases": [],
-    "country": "Romania",
-    "type": "Department"
-  },
-  "RO-HR": {
-    "name": "Harghita",
-    "aliases": [],
-    "country": "Romania",
-    "type": "Department"
-  },
-  "RO-IF": {
-    "name": "Ilfov",
-    "aliases": [],
-    "country": "Romania",
-    "type": "Department"
-  },
-  "RO-IL": {
-    "name": "Ialomița",
-    "aliases": [],
-    "country": "Romania",
-    "type": "Department"
-  },
-  "RO-IS": {
-    "name": "Iași",
-    "aliases": [],
-    "country": "Romania",
-    "type": "Department"
-  },
-  "RO-MH": {
-    "name": "Mehedinți",
-    "aliases": [],
-    "country": "Romania",
-    "type": "Department"
-  },
-  "RO-MM": {
-    "name": "Maramureș",
-    "aliases": [],
-    "country": "Romania",
-    "type": "Department"
-  },
-  "RO-MS": {
-    "name": "Mureș",
-    "aliases": [],
-    "country": "Romania",
-    "type": "Department"
-  },
-  "RO-NT": {
-    "name": "Neamț",
-    "aliases": [],
-    "country": "Romania",
-    "type": "Department"
-  },
-  "RO-OT": {
-    "name": "Olt",
-    "aliases": [],
-    "country": "Romania",
-    "type": "Department"
-  },
-  "RO-PH": {
-    "name": "Prahova",
-    "aliases": [],
-    "country": "Romania",
-    "type": "Department"
-  },
-  "RO-SB": {
-    "name": "Sibiu",
-    "aliases": [],
-    "country": "Romania",
-    "type": "Department"
-  },
-  "RO-SJ": {
-    "name": "Sălaj",
-    "aliases": [],
-    "country": "Romania",
-    "type": "Department"
-  },
-  "RO-SM": {
-    "name": "Satu Mare",
-    "aliases": [],
-    "country": "Romania",
-    "type": "Department"
-  },
-  "RO-SV": {
-    "name": "Suceava",
-    "aliases": [],
-    "country": "Romania",
-    "type": "Department"
-  },
-  "RO-TL": {
-    "name": "Tulcea",
-    "aliases": [],
-    "country": "Romania",
-    "type": "Department"
-  },
-  "RO-TM": {
-    "name": "Timiș",
-    "aliases": [],
-    "country": "Romania",
-    "type": "Department"
-  },
-  "RO-TR": {
-    "name": "Teleorman",
-    "aliases": [],
-    "country": "Romania",
-    "type": "Department"
-  },
-  "RO-VL": {
-    "name": "Vâlcea",
-    "aliases": [],
-    "country": "Romania",
-    "type": "Department"
-  },
-  "RO-VN": {
-    "name": "Vrancea",
-    "aliases": [],
-    "country": "Romania",
-    "type": "Department"
-  },
-  "RO-VS": {
-    "name": "Vaslui",
-    "aliases": [],
-    "country": "Romania",
-    "type": "Department"
   },
   "RU-ALT": {
     "name": "Altayskiy kray",
@@ -2571,76 +1899,10 @@
     "country": "Sierra Leone",
     "type": "Area"
   },
-  "SY-DI": {
-    "name": "Dimashq",
-    "aliases": [],
-    "country": "Syria",
-    "type": "Province"
-  },
-  "SY-DR": {
-    "name": "Dar'ā",
-    "aliases": [],
-    "country": "Syria",
-    "type": "Province"
-  },
-  "SY-HA": {
-    "name": "Al Ḩasakah",
-    "aliases": [],
-    "country": "Syria",
-    "type": "Province"
-  },
-  "SY-HI": {
-    "name": "Ḩimş",
-    "aliases": [],
-    "country": "Syria",
-    "type": "Province"
-  },
-  "SY-HM": {
-    "name": "Ḩamāh",
-    "aliases": [],
-    "country": "Syria",
-    "type": "Province"
-  },
-  "SY-ID": {
-    "name": "Idlib",
-    "aliases": [],
-    "country": "Syria",
-    "type": "Province"
-  },
-  "SY-RD": {
-    "name": "Rīf Dimashq",
-    "aliases": [],
-    "country": "Syria",
-    "type": "Province"
-  },
   "SY-SU": {
     "name": "As Suwaydā'",
     "aliases": [],
     "country": "Syria",
-    "type": "Province"
-  },
-  "SY-TA": {
-    "name": "Ţarţūs",
-    "aliases": [],
-    "country": "Syria",
-    "type": "Province"
-  },
-  "TD-BA": {
-    "name": "Batha",
-    "aliases": [],
-    "country": "Chad",
-    "type": "Province"
-  },
-  "TD-BO": {
-    "name": "Borkou",
-    "aliases": [],
-    "country": "Chad",
-    "type": "Province"
-  },
-  "TD-CB": {
-    "name": "Chari-Baguirmi",
-    "aliases": [],
-    "country": "Chad",
     "type": "Province"
   },
   "TD-EE": {
@@ -2651,90 +1913,6 @@
   },
   "TD-EO": {
     "name": "Ennedi-Ouest",
-    "aliases": [],
-    "country": "Chad",
-    "type": "Province"
-  },
-  "TD-GR": {
-    "name": "Guéra",
-    "aliases": [],
-    "country": "Chad",
-    "type": "Province"
-  },
-  "TD-KA": {
-    "name": "Kanem",
-    "aliases": [],
-    "country": "Chad",
-    "type": "Province"
-  },
-  "TD-LC": {
-    "name": "Lac",
-    "aliases": [],
-    "country": "Chad",
-    "type": "Province"
-  },
-  "TD-LO": {
-    "name": "Logone-Occidental",
-    "aliases": [],
-    "country": "Chad",
-    "type": "Province"
-  },
-  "TD-LR": {
-    "name": "Logone-Oriental",
-    "aliases": [],
-    "country": "Chad",
-    "type": "Province"
-  },
-  "TD-MC": {
-    "name": "Moyen-Chari",
-    "aliases": [],
-    "country": "Chad",
-    "type": "Province"
-  },
-  "TD-ME": {
-    "name": "Mayo-Kebbi-Est",
-    "aliases": [],
-    "country": "Chad",
-    "type": "Province"
-  },
-  "TD-MO": {
-    "name": "Mayo-Kebbi-Ouest",
-    "aliases": [],
-    "country": "Chad",
-    "type": "Province"
-  },
-  "TD-ND": {
-    "name": "Ville de Ndjamena",
-    "aliases": [],
-    "country": "Chad",
-    "type": "Province"
-  },
-  "TD-OD": {
-    "name": "Ouaddaï",
-    "aliases": [],
-    "country": "Chad",
-    "type": "Province"
-  },
-  "TD-SA": {
-    "name": "Salamat",
-    "aliases": [],
-    "country": "Chad",
-    "type": "Province"
-  },
-  "TD-TA": {
-    "name": "Tandjilé",
-    "aliases": [],
-    "country": "Chad",
-    "type": "Province"
-  },
-  "TD-TI": {
-    "name": "Tibesti",
-    "aliases": [],
-    "country": "Chad",
-    "type": "Province"
-  },
-  "TD-WF": {
-    "name": "Wadi Fira",
     "aliases": [],
     "country": "Chad",
     "type": "Province"
@@ -2757,42 +1935,6 @@
     "country": "Thailand",
     "type": "Province"
   },
-  "TJ-KT": {
-    "name": "Khatlon",
-    "aliases": [],
-    "country": "Tajikistan",
-    "type": "Region"
-  },
-  "TL-ER": {
-    "name": "Ermera",
-    "aliases": [],
-    "country": "Timor-Leste",
-    "type": "Municipality"
-  },
-  "TL-VI": {
-    "name": "Viqueque",
-    "aliases": [],
-    "country": "Timor-Leste",
-    "type": "Municipality"
-  },
-  "TM-A": {
-    "name": "Ahal",
-    "aliases": [],
-    "country": "Turkmenistan",
-    "type": "Region"
-  },
-  "TM-B": {
-    "name": "Balkan",
-    "aliases": [],
-    "country": "Turkmenistan",
-    "type": "Region"
-  },
-  "TM-M": {
-    "name": "Mary",
-    "aliases": [],
-    "country": "Turkmenistan",
-    "type": "Region"
-  },
   "TN-14": {
     "name": "La Manouba",
     "aliases": [],
@@ -2813,6 +1955,12 @@
   },
   "TT-MRC": {
     "name": "Mayaro-Rio Claro",
+    "aliases": [],
+    "country": "Trinidad and Tobago",
+    "type": "Region"
+  },
+  "TT-PRT": {
+    "name": "Princes Town",
     "aliases": [],
     "country": "Trinidad and Tobago",
     "type": "Region"
@@ -2858,12 +2006,6 @@
     "aliases": [],
     "country": "Uganda",
     "type": "District"
-  },
-  "UZ-QA": {
-    "name": "Qashqadaryo",
-    "aliases": [],
-    "country": "Uzbekistan",
-    "type": "Region"
   },
   "VN-03": {
     "name": "Hà Giang",
@@ -2932,14 +2074,5 @@
     "aliases": [],
     "country": "Yemen",
     "type": "Municipality"
-  },
-  "ZA-FS": {
-    "name": "Free State",
-    "aliases": [
-      "Foreisetata",
-      "Freyisitata"
-    ],
-    "country": "South Africa",
-    "type": "Province"
   }
 }

@@ -568,17 +568,17 @@ bashkia konispol		008|al|alb|albania	2
 bashkia sarande		008|al|alb|albania	2
 bashkia selenice		008|al|alb|albania	2
 bashkia vlore		008|al|alb|albania	2
-ararat|ararat province|ararati marz		051|am|arm|armenia	1
-syownik`|syownik`i marz|syunik|syunik province|syunik'|syunik'i marz		051|am|arm|armenia	1
+ararat|ararat province|ararati marz	region	051|am|arm|armenia	1
+syownik`|syownik`i marz|syunik|syunik province|syunik'|syunik'i marz	region	051|am|arm|armenia	1
 vayoc jor|vayots dzor|vayots dzor province|vayots' dzori marz|vayots` dzor|vayots` dzori marz	region	051|am|arm|armenia	1
 erevan|k`aghak` erevan|yerevan	city	051|am|arm|armenia	1
-aragatsotn|aragatsotn province|aragatsotni marz		051|am|arm|armenia	1
-armavir|armavir province|armaviri marz		051|am|arm|armenia	1
-geghark`ownik`|geghark`ownik`i marz|gegharkunik|gegharkunik province		051|am|arm|armenia	1
-kotayk|kotayk province|kotayk`|kotayk`i marz		051|am|arm|armenia	1
-lorhi|lorhow marz|lori|lori province		051|am|arm|armenia	1
-shirak|shirak province|shiraki marz		051|am|arm|armenia	1
-tavowsh|tavowshi|tavowshi marz|tavush|tavush province		051|am|arm|armenia	1
+aragacotn|aragatsotn|aragatsotn province|aragatsotni marz	region	051|am|arm|armenia	1
+armavir|armavir province|armaviri marz	region	051|am|arm|armenia	1
+gegark'unik'|geghark`ownik`|geghark`ownik`i marz|gegharkunik|gegharkunik province	region	051|am|arm|armenia	1
+kotayk|kotayk province|kotayk'|kotayk`|kotayk`i marz	region	051|am|arm|armenia	1
+lorhi|lorhow marz|lori|lori province	region	051|am|arm|armenia	1
+shirak|shirak province|shiraki marz|sirak	region	051|am|arm|armenia	1
+tavowsh|tavowshi|tavowshi marz|tavus|tavush|tavush province	region	051|am|arm|armenia	1
 arabkir|arabkir varch'akan shrjan|arabkir varch`akan shrjan		051|am|arm|armenia	2
 kapan|kapan community|kapan hamaynk`|kapan municipality		051|am|arm|armenia	2
 goris|goris community|goris hamaynk`|goris municipality		051|am|arm|armenia	2
@@ -2359,27 +2359,27 @@ montana|oblast montana	district	100|bg|bgr|bulgaria	1
 oblast vratsa|vratsa	district	100|bg|bgr|bulgaria	1
 oblast varna|varna	district	100|bg|bgr|bulgaria	1
 dobrich|oblast dobrich	district	100|bg|bgr|bulgaria	1
-oblast sofia|oblast sofiia|sofia|sofia province|sofiia|sofiiska oblast		100|bg|bgr|bulgaria	1
+oblast sofia|oblast sofiia|sofia|sofia province|sofiia|sofiiska oblast	district	100|bg|bgr|bulgaria	1
 oblast ruse|ruse	district	100|bg|bgr|bulgaria	1
 oblast plovdiv|plovdiv|plovdivska oblast|plovdivski okr'g	district	100|bg|bgr|bulgaria	1
 oblast pleven|pleven	district	100|bg|bgr|bulgaria	1
 oblast pernik|pernik	district	100|bg|bgr|bulgaria	1
 oblast pazardzhik|pazardzhik	district	100|bg|bgr|bulgaria	1
 lovech|oblast lovech	district	100|bg|bgr|bulgaria	1
-haskovo|khaskovo|oblast haskovo|oblast khaskovo		100|bg|bgr|bulgaria	1
-oblast sofia-grad|oblast sofiia grad|oblast sofiia-grad|okrug grad sofiya|sofia-capital|sofia-grad|sofiia (stolitsa)|sofiia-grad		100|bg|bgr|bulgaria	1
+haskovo|khaskovo|oblast haskovo|oblast khaskovo	district	100|bg|bgr|bulgaria	1
+oblast sofia-grad|oblast sofiia grad|oblast sofiia-grad|okrug grad sofiya|sofia (stolitsa)|sofia-capital|sofia-grad|sofiia (stolitsa)|sofiia-grad	district	100|bg|bgr|bulgaria	1
 burgas|oblast bugas|oblast burgas	district	100|bg|bgr|bulgaria	1
 blagoevgrad|oblast blagoevgrad	district	100|bg|bgr|bulgaria	1
 gabrovo|oblast gabrovo	district	100|bg|bgr|bulgaria	1
-k'rdzhali|kardzhali|oblast k'rdzhali|oblast kardzhali		100|bg|bgr|bulgaria	1
+k'rdzhali|kardzhali|oblast k'rdzhali|oblast kardzhali	district	100|bg|bgr|bulgaria	1
 kiustendil|kyustendil|oblast kiustendil	district	100|bg|bgr|bulgaria	1
 oblast shumen|shumen	district	100|bg|bgr|bulgaria	1
 oblast silistra|silistra	district	100|bg|bgr|bulgaria	1
 oblast sliven|sliven	district	100|bg|bgr|bulgaria	1
 oblast smolian|smolian|smolyan	district	100|bg|bgr|bulgaria	1
 oblast stara zagora|stara zagora	district	100|bg|bgr|bulgaria	1
-oblast t'rgovishche|oblast targovishte|t'rgovishche|targovishte		100|bg|bgr|bulgaria	1
-oblast veliko t'rnovo|oblast veliko tarnovo|veliko t'rnovo|veliko tarnovo		100|bg|bgr|bulgaria	1
+oblast t'rgovishche|oblast targovishte|t'rgovishche|targovishte	district	100|bg|bgr|bulgaria	1
+oblast veliko t'rnovo|oblast veliko tarnovo|veliko t'rnovo|veliko tarnovo	district	100|bg|bgr|bulgaria	1
 oblast vidin|vidin	district	100|bg|bgr|bulgaria	1
 iambol|oblast iambol|yambol	district	100|bg|bgr|bulgaria	1
 obshchina zlatograd|obshina zlatograd|obshtina zlatograd|zlatograd		100|bg|bgr|bulgaria	2
@@ -8673,7 +8673,7 @@ central eleuthera	district	044|bahamas|bhs|bs	1
 crooked island and long cay	district	044|bahamas|bhs|bs	1
 east grand bahama	district	044|bahamas|bhs|bs	1
 grand cay	district	044|bahamas|bhs|bs	1
-hope town	district	044|bahamas|bhs|bs	1
+hope town		044|bahamas|bhs|bs	1
 mangrove cay|mangrove cay district	district	044|bahamas|bhs|bs	1
 moore's island	district	044|bahamas|bhs|bs	1
 north abaco	district	044|bahamas|bhs|bs	1
@@ -10602,12 +10602,12 @@ deline		124|ca|can|canada	2
 enterprise		124|ca|can|canada	2
 fort smith		124|ca|can|canada	2
 mkoa wa tshuapa|tshuapa|tshuapa province	province	180|cd|cod|democratic republic of the congo	1
-mkoa wa tshopo|tshopo|tshopo district		180|cd|cod|democratic republic of the congo	1
+mkoa wa tshopo|tshopo|tshopo district	province	180|cd|cod|democratic republic of the congo	1
 mkoa wa tanganyika|tanganyika	province	180|cd|cod|democratic republic of the congo	1
 kivu ya sidi|kivu ya sudi|mkoa wa kivu kusini|south kivu|south kivu province|sud-kivu	province	180|cd|cod|democratic republic of the congo	1
 kizunga sankuru|mkoa wa sankuru|sankuru	province	180|cd|cod|democratic republic of the congo	1
 kivu ya node|kivu ya nole|mkoa wa kivu kaskazini|nord-kivu|north kivu	province	180|cd|cod|democratic republic of the congo	1
-kizunga mongala|mkoa wa mongala|mongala|mongala district		180|cd|cod|democratic republic of the congo	1
+kizunga mongala|mkoa wa mongala|mongala|mongala district	province	180|cd|cod|democratic republic of the congo	1
 maniema|maniema province|mkoa wa maniema	province	180|cd|cod|democratic republic of the congo	1
 kasai central|kasai-central|kizunga luluwa|mkoa wa lulua	province	180|cd|cod|democratic republic of the congo	1
 east kasai|kasai oriental|kasai ya monyele|kasai-mashariki|kasai-oriental|kasayi ya esete	province	180|cd|cod|democratic republic of the congo	1
@@ -10838,7 +10838,7 @@ lobaye|lobaye prefecture|sese ti komanda-kota ti lobaye	prefecture	140|caf|centr
 kemo|kemo prefecture|sese ti komanda-kota ti kemo		140|caf|central african republic|cf	1
 mambere-kadei|mambere-kadei prefecture|sese ti komanda-kota ti mambere-kadei		140|caf|central african republic|cf	1
 nana-grebizi|nana-grebizi prefecture		140|caf|central african republic|cf	1
-bangui|bangui prefecture		140|caf|central african republic|cf	1
+bangui|bangui prefecture	commune	140|caf|central african republic|cf	1
 mambere		140|caf|central african republic|cf	1
 ouham-fafa		140|caf|central african republic|cf	1
 lim-pende		140|caf|central african republic|cf	1
@@ -10917,7 +10917,7 @@ ouanda-djalle		140|caf|central african republic|cf	2
 departement de la sangha|sangha|sangha department	department	178|cg|cog|republic of the congo	1
 departement du pool|pool|pool department	department	178|cg|cog|republic of the congo	1
 departement des plateaux|plateaux|plateaux department	department	178|cg|cog|republic of the congo	1
-niari|niari region		178|cg|cog|republic of the congo	1
+niari|niari region	department	178|cg|cog|republic of the congo	1
 likouala|likouala department	department	178|cg|cog|republic of the congo	1
 lekoumou|lekoumou department	department	178|cg|cog|republic of the congo	1
 kouilou|kouilou department	department	178|cg|cog|republic of the congo	1
@@ -14022,7 +14022,7 @@ bremen|free hanseatic city of bremen|freie hansestadt bremen|land bremen	land	27
 brandenborj|brandenburg	land	276|de|deu|germany	1
 berlin|land berlin|state of berlin	land	276|de|deu|germany	1
 bavaria|bayern|free state of bavaria	land	276|de|deu|germany	1
-baden-wurttemberg|baden-wurttemberg region		276|de|deu|germany	1
+baden-wurttemberg|baden-wurttemberg region	land	276|de|deu|germany	1
 lower franconia|regierungsbezirk unterfranken|unterfranken		276|de|deu|germany	2
 regierungsbezirk schwaben|schwaben|swabia		276|de|deu|germany	2
 oberpfalz|regierungsbezirk oberpfalz|upper palatinate		276|de|deu|germany	2
@@ -14231,7 +14231,7 @@ san jose de las matas		214|do|dom|dominican republic	2
 san francisco de macoris		214|do|dom|dominican republic	2
 san cristobal	province	214|do|dom|dominican republic	2
 sanchez		214|do|dom|dominican republic	2
-samana municipality|santa barbara de samana		214|do|dom|dominican republic	2
+samana|samana municipality|santa barbara de samana	province	214|do|dom|dominican republic	2
 salcedo		214|do|dom|dominican republic	2
 san ignacio de sabaneta		214|do|dom|dominican republic	2
 sabana grande de boya		214|do|dom|dominican republic	2
@@ -15237,7 +15237,7 @@ haapsalu linn		233|ee|est|estonia	2
 haljala vald		233|ee|est|estonia	2
 harku vald		233|ee|est|estonia	2
 haademeeste vald		233|ee|est|estonia	2
-joelahtme parish|joelahtme vald		233|ee|est|estonia	2
+joelahtme|joelahtme parish|joelahtme vald	rural municipality	233|ee|est|estonia	2
 jogeva vald		233|ee|est|estonia	2
 johvi vald		233|ee|est|estonia	2
 kadrina vald		233|ee|est|estonia	2
@@ -15245,7 +15245,7 @@ kambja vald		233|ee|est|estonia	2
 kanepi vald		233|ee|est|estonia	2
 kehtna vald		233|ee|est|estonia	2
 keila linn		233|ee|est|estonia	2
-kihnu parish|kihnu vald		233|ee|est|estonia	2
+kihnu|kihnu parish|kihnu vald	rural municipality	233|ee|est|estonia	2
 kiili vald		233|ee|est|estonia	2
 kohila vald		233|ee|est|estonia	2
 kose vald		233|ee|est|estonia	2
@@ -15279,8 +15279,8 @@ kuusalu vald		233|ee|est|estonia	2
 tartu linn		233|ee|est|estonia	2
 anija vald		233|ee|est|estonia	2
 antsla vald		233|ee|est|estonia	2
-viimsi parish|viimsi vald		233|ee|est|estonia	2
-polva parish|polva vald		233|ee|est|estonia	2
+viimsi|viimsi parish|viimsi vald	rural municipality	233|ee|est|estonia	2
+polva|polva parish|polva vald	rural municipality	233|ee|est|estonia	2
 toila vald		233|ee|est|estonia	2
 turi vald		233|ee|est|estonia	2
 viljandi linn		233|ee|est|estonia	2
@@ -15609,14 +15609,14 @@ ceuta|ciudad autonoma de ceuta		724|es|esp|spain	2
 ciudad autonoma de melilla|melilla		724|es|esp|spain	2
 addis ababa|adis abeba|adis abeba astedader	administration	231|et|eth|ethiopia	1
 afar|afar kilil|afar region|afar regional state|the state of afar	regional state	231|et|eth|ethiopia	1
-amara kilil|amhara|the state of amhara		231|et|eth|ethiopia	1
+amara|amara kilil|amhara|the state of amhara	regional state	231|et|eth|ethiopia	1
 beneshangual gumz regional state|benishangul-gumuz region|benshangul-gumaz|binshangul gumuz|binshangul gumuz kilil|the state of benshangul/gumuz	regional state	231|et|eth|ethiopia	1
 dire dawa|dire dawa astedader	administration	231|et|eth|ethiopia	1
 gambela|gambela hizboch kilil|gambela peoples|gambela regional state|gambella region|the state of gambela peoples	regional state	231|et|eth|ethiopia	1
 harari|harari people|harari region|harari regional state|hareri hizb kilil|the state of harari people	regional state	231|et|eth|ethiopia	1
-oromia regional state|oromiya|oromiya kilil|the state of oromia		231|et|eth|ethiopia	1
-somali|somalia regional state|sumale kilil|the state of somalia		231|et|eth|ethiopia	1
-the state of tigray|tigray|tigray kilil|tigray regional state		231|et|eth|ethiopia	1
+oromia|oromia regional state|oromiya|oromiya kilil|the state of oromia	regional state	231|et|eth|ethiopia	1
+somali|somalia regional state|sumale kilil|the state of somalia	regional state	231|et|eth|ethiopia	1
+the state of tigray|tigrai|tigray|tigray kilil|tigray regional state	regional state	231|et|eth|ethiopia	1
 sidama|sidama region	regional state	231|et|eth|ethiopia	1
 central ethiopia regional state|maa`ekalaawi teyopheyaa kelelaawi manegesete		231|et|eth|ethiopia	1
 south ethiopia regional state		231|et|eth|ethiopia	1
@@ -16166,7 +16166,7 @@ bro morgannwg|the vale of glamorgan|vale of glamorgan		826|gb|gbr|united kingdom
 borough of thurrock|thurrock	unitary authority	826|gb|gbr|united kingdom	2
 surrey	two-tier county	826|gb|gbr|united kingdom	2
 suffolk	two-tier county	826|gb|gbr|united kingdom	2
-county of stirling|sruighlea|stirling|stirling county|stirlingshire		826|gb|gbr|united kingdom	2
+county of stirling|sruighlea|stirling|stirling county|stirlingshire	council area	826|gb|gbr|united kingdom	2
 staffordshire	two-tier county	826|gb|gbr|united kingdom	2
 gwlad yr haf|somerset	two-tier county	826|gb|gbr|united kingdom	2
 inse shealtainn|sealtainn|shetland|shetland islands	council area	826|gb|gbr|united kingdom	2
@@ -16183,7 +16183,7 @@ north yorkshire	two-tier county	826|gb|gbr|united kingdom	2
 northumberland	unitary authority	826|gb|gbr|united kingdom	2
 north tyneside	metropolitan district	826|gb|gbr|united kingdom	2
 norfolk	two-tier county	826|gb|gbr|united kingdom	2
-comhairle mhoireibh|moray|moray district|morayshire		826|gb|gbr|united kingdom	2
+comhairle mhoireibh|moray|moray district|morayshire	council area	826|gb|gbr|united kingdom	2
 labhaidh lair|labhdaidh mheadhanach|meadhan lodainn|midlothian	council area	826|gb|gbr|united kingdom	2
 lincolnshire|swydd lincoln	two-tier county	826|gb|gbr|united kingdom	2
 leicestershire|swydd gaerlyr	two-tier county	826|gb|gbr|united kingdom	2
@@ -18633,8 +18633,8 @@ jambi|provinsi jambi		360|id|idn|indonesia	1
 daerah khusus ibukota jakarta|dki jakarta; dki|jakarta|jakarta raya|jakarta special capital region	capital district	360|id|idn|indonesia	1
 papua|special region of papua	geographical unit	360|id|idn|indonesia	1
 bengkulu		360|id|idn|indonesia	1
-bali|provinsi bali|pulau bali	province	360|id|idn|indonesia	1
-banten|provinsi banten	province	360|id|idn|indonesia	1
+bali|provinsi bali|pulau bali		360|id|idn|indonesia	1
+banten|provinsi banten		360|id|idn|indonesia	1
 gorontalo|propinsi gorontalo		360|id|idn|indonesia	1
 bangka-belitung islands|kepulauan bangka belitung|provinsi kepulauan bangka belitung	province	360|id|idn|indonesia	1
 maluku utara|north malaku province|north maluku|provinsi maluku utara		360|id|idn|indonesia	1
@@ -18877,11 +18877,11 @@ barito kuala regency|kabupaten barito kuala		360|id|idn|indonesia	2
 banyuwangi regency|kabupaten banyuwangi		360|id|idn|indonesia	2
 banyumas regency|kabupaten banyumas		360|id|idn|indonesia	2
 kabupaten bantul		360|id|idn|indonesia	2
-bantaeng regency|kabupaten bantaeng		360|id|idn|indonesia	2
+bantaeng regency|banten|kabupaten bantaeng	province	360|id|idn|indonesia	2
 kota banjarmasin		360|id|idn|indonesia	2
 kota banjar baru		360|id|idn|indonesia	2
 banjar regency|kabupaten banjar		360|id|idn|indonesia	2
-bangli regency|kabupaten bangli		360|id|idn|indonesia	2
+bali|bangli regency|kabupaten bangli	province	360|id|idn|indonesia	2
 kabupaten bangkalan		360|id|idn|indonesia	2
 bangka regency|kabupaten bangka		360|id|idn|indonesia	2
 kabupaten bandung		360|id|idn|indonesia	2
@@ -18934,7 +18934,7 @@ kota tegal|kotamadya tegal		360|id|idn|indonesia	2
 gresik regency|kabupaten gresik		360|id|idn|indonesia	2
 kabupaten pekalongan|pekalongan regency		360|id|idn|indonesia	2
 kabupaten bondowoso		360|id|idn|indonesia	2
-gorontalo regency|kabupaten gorontalo		360|id|idn|indonesia	2
+gorontalo|gorontalo regency|kabupaten gorontalo	province	360|id|idn|indonesia	2
 kabupaten luwu|luwu regency		360|id|idn|indonesia	2
 kota administratip baubau|kota baubau		360|id|idn|indonesia	2
 banggai regency|kabupaten banggai		360|id|idn|indonesia	2
@@ -20082,7 +20082,7 @@ kirkuk district		368|iq|iraq|irq	2
 kerbala district|krbl|qd krbl		368|iq|iraq|irq	2
 arbil|haewlyr|rbl	governorate	368|iq|iraq|irq	2
 qada' halabchah|qd hlbch@		368|iq|iraq|irq	2
-dohuk district|duhok district|mhfz@ dhwk		368|iq|iraq|irq	2
+dahuk|dohuk district|duhok district|mhfz@ dhwk	governorate	368|iq|iraq|irq	2
 chamchamal district		368|iq|iraq|irq	2
 ba'quba district		368|iq|iraq|irq	2
 baghdad		368|iq|iraq|irq	2
@@ -20746,20 +20746,20 @@ emilia-romagna|emilie-romagne|regione emilia-romagna	region	380|it|ita|italy	1
 campania|campanie|canpania	region	380|it|ita|italy	1
 basilicata|basilicate|baxilicata	region	380|it|ita|italy	1
 abruso|abruzzes|abruzzi|abruzzo|regione abruzzo	region	380|it|ita|italy	1
-libero consorzio comunale di trapani|province de trapani|province of trapani|provincia de trapani|trapani		380|it|ita|italy	2
-province de syracuse|province of syracuse|provincia di siracusa		380|it|ita|italy	2
+libero consorzio comunale di trapani|province de trapani|province of trapani|provincia de trapani|trapani	free municipal consortium	380|it|ita|italy	2
+province de syracuse|province of syracuse|provincia di siracusa|siracusa	free municipal consortium	380|it|ita|italy	2
 province de reggio de calabre|province of reggio calabria|provincia di reggio calabria		380|it|ita|italy	2
-libero consorzio comunale di ragusa|province de raguse|province of ragusa|provincia de raguxa|ragusa|raguse		380|it|ita|italy	2
+libero consorzio comunale di ragusa|province de raguse|province of ragusa|provincia de raguxa|ragusa|raguse	free municipal consortium	380|it|ita|italy	2
 citta metropolitana di palermo|palerme|palermo|province de palerme|province of palermo|provincia de palermo|provincia di palermo		380|it|ita|italy	2
 oristano|province d'oristano|province of oristano|provincia di oristano	province	380|it|ita|italy	2
 citta metropolitana di messina|messina|messine|province de messine|province of messina|provincia de mesina|provincia di messina		380|it|ita|italy	2
-enna|libero consorzio comunale di enna|province d'enna|province of enna|provincia de ena|provincia di enna		380|it|ita|italy	2
+enna|libero consorzio comunale di enna|province d'enna|province of enna|provincia de ena|provincia di enna	free municipal consortium	380|it|ita|italy	2
 cosenza|province de cosenza|province of cosenza|provincia di cosenza	province	380|it|ita|italy	2
 catanzaro|province de catanzaro|province of catanzaro|provincia di catanzaro	province	380|it|ita|italy	2
 catane|catania|citta metropolitana di catania|province de catane|province of catania|provincia di catania		380|it|ita|italy	2
-province de caltanissetta|province of caltanissetta|provincia di caltanissetta		380|it|ita|italy	2
+caltanissetta|province de caltanissetta|province of caltanissetta|provincia di caltanissetta	free municipal consortium	380|it|ita|italy	2
 cagliari|province de cagliari|province of cagliari|provincia di cagliari		380|it|ita|italy	2
-agrigento|libero consorzio comunale di agrigento|province d'agrigente|province of agrigento		380|it|ita|italy	2
+agrigento|libero consorzio comunale di agrigento|province d'agrigente|province of agrigento	free municipal consortium	380|it|ita|italy	2
 province de viterbo|province of viterbo|provincia di viterbo|viterbo	province	380|it|ita|italy	2
 province de vicence|province of vicenza|provincia di vicenza|vicenza	province	380|it|ita|italy	2
 province de verone|province of verona|provincia di verona|verona	province	380|it|ita|italy	2
@@ -21710,7 +21710,7 @@ mhfz@ lzrq|zarqa|zarqa governorate		400|jo|jor|jordan	1
 at tafilah|mhfz@ ltfyl@|tafielah|tafilah governorate	governorate	400|jo|jor|jordan	1
 'amman|al 'asimah|amman|amman governorate|mhfz@ `mn	governorate	400|jo|jor|jordan	1
 al mafraq|mafraq|mafraq governorate|mhfz@ lmfrq	governorate	400|jo|jor|jordan	1
-district of karak|karak|lkrk|mhfz@ lkrk		400|jo|jor|jordan	1
+al karak|district of karak|karak|lkrk|mhfz@ lkrk	governorate	400|jo|jor|jordan	1
 al balqa'|balqa|balqa governorate|mhfz@ lblq	governorate	400|jo|jor|jordan	1
 'ajlun|ajloun|ajloun governorate|mhfz@ `jlwn	governorate	400|jo|jor|jordan	1
 jarash|jerash|jerash governorate|jrsh	governorate	400|jo|jor|jordan	1
@@ -24301,7 +24301,7 @@ k'arasai audany|karasaiskii raion|karasayskiy rayon|qarasay audany		398|kaz|kaza
 k'osshy k'alalyk' @kimshiligi|kosshy gorodskaia administratsiia|kosshy gorodskaya administratsiya|qosshy qalalyq akimshiligi		398|kaz|kazakhstan|kz	2
 xiangkhoang|xiangkhouang|xiengkhuang	province	418|la|lao|laos	1
 xaignabouli|xayabury|xiagnabouli	province	418|la|lao|laos	1
-eikhwngwnyngchn|viangchan|vientiane|vientiane province	province	418|la|lao|laos	1
+eikhwngwnyngchn|vientiane|vientiane province		418|la|lao|laos	1
 eikhwngsahwnnaekhd|savannakhet|savannakhet province	province	418|la|lao|laos	1
 eikhwngsaalawn|salavan|salavan province|saravane	province	418|la|lao|laos	1
 phongsali|phongsaly	province	418|la|lao|laos	1
@@ -24315,7 +24315,7 @@ champasack|champasak|champasak province|chmaapaask	province	418|la|lao|laos	1
 sekong|xekong	province	418|la|lao|laos	1
 bmeikw|bokeo|bokeo province|eikhwngbmeikw	province	418|la|lao|laos	1
 bolikhamsai|bolikhamsai province|bolikhamxai|borikhamxay|eikhwngbmlikhmaaais|likhmaaais	province	418|la|lao|laos	1
-nakh`nhlwngwnyngchn|viangchan|vientiane|vientiane prefecture	prefecture	418|la|lao|laos	1
+nakh`nhlwngwnyngchn|vientiane|vientiane prefecture		418|la|lao|laos	1
 xaisomboun|xaysomboon	province	418|la|lao|laos	1
 muang houayxay		418|la|lao|laos	2
 muang ngeun		418|la|lao|laos	2
@@ -25555,7 +25555,7 @@ commune de bettborn|commune de preizerdaul|gemeinde preizerdaul|gemeng preizerda
 aerenzdallgemeng|arenzdallgemeng|commune de la vallee de l'ernz|ernztalgemeinde|vallee de l'ernz		442|lu|lux|luxembourg	2
 commune de kaerjeng|gemeinde kaerjeng|gemeng kaerjeng|kaerjeng		442|lu|lux|luxembourg	2
 parc hosingen|parc housen		442|lu|lux|luxembourg	2
-ventspils municipality|ventspils novads		428|latvia|lv|lva	1
+ventspils|ventspils municipality|ventspils novads	municipality	428|latvia|lv|lva	1
 ventspils		428|latvia|lv|lva	1
 valmiera|valmiera municipality|valmieras novads	municipality	428|latvia|lv|lva	1
 valka|valka municipality|valkas novads	municipality	428|latvia|lv|lva	1
@@ -25563,7 +25563,7 @@ tukuma novads|tukums|tukums municipality	municipality	428|latvia|lv|lva	1
 talsi|talsu novads	municipality	428|latvia|lv|lva	1
 saldus|saldus novads|saldus rajons	municipality	428|latvia|lv|lva	1
 riga	state city	428|latvia|lv|lva	1
-rezekne municipality|rezeknes novads		428|latvia|lv|lva	1
+rezekne|rezekne municipality|rezeknes novads	municipality	428|latvia|lv|lva	1
 rezekne		428|latvia|lv|lva	1
 preili|preilu novads	municipality	428|latvia|lv|lva	1
 ogre|ogre municipality|ogres novads	municipality	428|latvia|lv|lva	1
@@ -25574,7 +25574,7 @@ liepaja	state city	428|latvia|lv|lva	1
 kuldiga|kuldiga municipality|kuldigas novads	municipality	428|latvia|lv|lva	1
 kraslava|kraslava municipality|kraslavas novads	municipality	428|latvia|lv|lva	1
 jurmala	state city	428|latvia|lv|lva	1
-jelgava municipality|jelgavas novads		428|latvia|lv|lva	1
+jelgava|jelgava municipality|jelgavas novads	municipality	428|latvia|lv|lva	1
 jelgava		428|latvia|lv|lva	1
 jekabpils|jekabpils municipality|jekabpils novads	municipality	428|latvia|lv|lva	1
 gulbene|gulbene municipality|gulbenes novads	municipality	428|latvia|lv|lva	1
@@ -26227,13 +26227,13 @@ province de tata|qlym tt|tata|tata province	province	504|ma|mar|morocco	2
 province de taroudannt|qlym trwdnt|taroudannt|taroudant province	province	504|ma|mar|morocco	2
 province de taounate|qlym twnt|taounate|taounate province	province	504|ma|mar|morocco	2
 province de tan-tan|qlym tntn|tan-tan		504|ma|mar|morocco	2
-province de tanger-assilah|qlym tnj@ - syl|tanger-assilah		504|ma|mar|morocco	2
+province de tanger-assilah|qlym tnj@ - syl|tanger-assilah	prefecture	504|ma|mar|morocco	2
 province de sidi-kacem|qlym sydy qsm|sidi kacem|sidi kacem province|sidi-kacem	province	504|ma|mar|morocco	2
 province de settat|qlym stt|settat|settat province	province	504|ma|mar|morocco	2
-province de sale|qlym sl|sale		504|ma|mar|morocco	2
+province de sale|qlym sl|sale	prefecture	504|ma|mar|morocco	2
 province de safi|qlym sfy|safi|safi province	province	504|ma|mar|morocco	2
-province de rabat|qlym lrbt|rabat		504|ma|mar|morocco	2
-oujda-angad|province de oujda-angad|qlym wjd@ - nkd		504|ma|mar|morocco	2
+province de rabat|qlym lrbt|rabat	prefecture	504|ma|mar|morocco	2
+oujda-angad|province de oujda-angad|qlym wjd@ - nkd	prefecture	504|ma|mar|morocco	2
 ouarzazate|ouarzazate province|province de ouarzazate|qlym wrzzt	province	504|ma|mar|morocco	2
 nador|nador province|province de nador|qlym lndwr|qlym lnzwr	province	504|ma|mar|morocco	2
 larache|larache province|province de larache|qlym l`rysh	province	504|ma|mar|morocco	2
@@ -26242,7 +26242,7 @@ khouribga|khouribga province|province de khouribga|qlym khrybk@	province	504|ma|
 khenifra|khenifra province|province de khenifra|qlym khnyfr@	province	504|ma|mar|morocco	2
 khemisset|khemisset province|province de khemisset|qlym lkhmyst	province	504|ma|mar|morocco	2
 kenitra|kenitra province|province de kenitra|qlym lqnytr@	province	504|ma|mar|morocco	2
-inezgane-ait melloul|province de inezgane-ait melloul|qlym nzkn yt mlwl		504|ma|mar|morocco	2
+inezgane-ait melloul|province de inezgane-ait melloul|qlym nzkn yt mlwl	prefecture	504|ma|mar|morocco	2
 ifrane|ifrane province|province de ifrane|qlym frn	province	504|ma|mar|morocco	2
 guelmim|guelmim province|province de guelmim|qlym klmym	province	504|ma|mar|morocco	2
 figuig|figuig province|fkyk|province de figuig|qlym fjyj|qlym fkyk	province	504|ma|mar|morocco	2
@@ -26256,13 +26256,13 @@ benslimane|benslimane province|province de benslimane|qlym bnslymn	province	504|
 beni mellal|beni-mellal|province de beni-mellal|qlym bny mll	province	504|ma|mar|morocco	2
 azilal|azilal province|province d'azilal|qlym zyll	province	504|ma|mar|morocco	2
 al hoceima|al-hoceima|province d'al-hoceima|qlym lhsym@	province	504|ma|mar|morocco	2
-agadir-ida-ou-tnan|province d'agadir-ida-ou-tnan|qlym kdyr d wtnn		504|ma|mar|morocco	2
-province de skhirate-temara|qlym lskhyrt - tmr@|skhirate-temara		504|ma|mar|morocco	2
+agadir-ida-ou-tanane|agadir-ida-ou-tnan|province d'agadir-ida-ou-tnan|qlym kdyr d wtnn	prefecture	504|ma|mar|morocco	2
+province de skhirate-temara|qlym lskhyrt - tmr@|skhirate-temara	prefecture	504|ma|mar|morocco	2
 assa-zag|assa-zag province|province de assa-zag|qlym s - lzk		504|ma|mar|morocco	2
 es semara province|es-semara|province d'es-semara|qlym lsmr@		504|ma|mar|morocco	2
 meknes|meknes prefecture|province de meknes|qlym mkns	prefecture	504|ma|mar|morocco	2
 chichaoua|chichaoua province|province de chichaoua|qlym shyshw@	province	504|ma|mar|morocco	2
-marrakech|marrakesh|mrksh|province de marrakech|qlym mrksh		504|ma|mar|morocco	2
+marrakech|marrakesh|mrksh|province de marrakech|qlym mrksh	prefecture	504|ma|mar|morocco	2
 province de sefrou|qlym sfrw|sefrou	province	504|ma|mar|morocco	2
 berkane|berkane province|province de berkane|qlym brkn	province	504|ma|mar|morocco	2
 jerada|jerada province|province de jerada|qlym jrd@	province	504|ma|mar|morocco	2
@@ -26271,14 +26271,14 @@ boujdour|boujdour province|province de boujdour|qlym bwjdwr		504|ma|mar|morocco	
 chtouka-ait baha|chtouka-ait-baha|province de chtouka-ait-baha|qlym shtwk@ yt bh	province	504|ma|mar|morocco	2
 al haouz|al haouz province|al-haouz|province d'al-haouz|qlym lhwz	province	504|ma|mar|morocco	2
 fahs-anjra|province de fahs-anjra|qlym fhs - njr@	province	504|ma|mar|morocco	2
-casablanca|province de casablanca|qlym ldr lbyd		504|ma|mar|morocco	2
+casablanca|dar el beida|province de casablanca|qlym ldr lbyd	prefecture	504|ma|mar|morocco	2
 moulay yacoub|moulay-yacoub|province de moulay-yacoub|qlym mwly y`qwb	province	504|ma|mar|morocco	2
 el hajeb|el-hajeb|province d'el-hajeb|qlym lhjb	province	504|ma|mar|morocco	2
 aousserd|aousserd province|province de aousserd|qlym wsrd		504|ma|mar|morocco	2
 oued-ed-dahab|province de oued-ed-dahab|qlym wdy ldhhb		504|ma|mar|morocco	2
 nouaceur|nouaceur province|province de nouaceur|qlym lnwsr	province	504|ma|mar|morocco	2
-fes|fez|fs|province de fes|qlym fs		504|ma|mar|morocco	2
-mohammedia|province de mohammedia|qlym lmhmdy@		504|ma|mar|morocco	2
+fes|fez|fs|province de fes|qlym fs	prefecture	504|ma|mar|morocco	2
+mohammadia|mohammedia|province de mohammedia|qlym lmhmdy@	prefecture	504|ma|mar|morocco	2
 province de zagora|qlym zkwr@|zagora|zagora province	province	504|ma|mar|morocco	2
 mediouna|mediouna province|province de mediouna|qlym mdywn@	province	504|ma|mar|morocco	2
 guercif|guercif province|qlym jrsyf	province	504|ma|mar|morocco	2
@@ -32267,7 +32267,7 @@ aiwo|aiwo district	district	520|nauru|nr|nru	1
 te whanga-nui-a-tara|wellington region|whanganui-a-tara		554|new zealand|nz|nzl	1
 manawatu-wanganui|manawatu-whanganui	region	554|new zealand|nz|nzl	1
 waikato|waikato region	region	554|new zealand|nz|nzl	1
-tasman district|te tai-o-aorere		554|new zealand|nz|nzl	1
+tasman|tasman district|te tai-o-aorere	region	554|new zealand|nz|nzl	1
 taranaki|taranaki region	region	554|new zealand|nz|nzl	1
 murihiku|southland	region	554|new zealand|nz|nzl	1
 bay of plenty|bay of plenty region|te moana-a-toi	region	554|new zealand|nz|nzl	1
@@ -32515,32 +32515,32 @@ omar torrijos herrera		591|pa|pan|panama	2
 tierras altas		591|pa|pan|panama	2
 almirante		591|pa|pan|panama	2
 jirondai|jirondai district		591|pa|pan|panama	2
-ucayali|ucayali department|ukayali suyu		604|pe|per|peru	1
+ucayali|ucayali department|ukayali suyu	region	604|pe|per|peru	1
 departamento de tumbes|tumbes|tumbes department|tumbes region|tumpis suyu	region	604|pe|per|peru	1
-departamento de san martin|san martin department|san martin suyu		604|pe|per|peru	1
-departamento de piura|piura|piura department|piwra suyu		604|pe|per|peru	1
-departamento de loreto|loreto|loreto department|luritu suyu		604|pe|per|peru	1
-departamento de lambayeque|lambayeque|lambayeque department|lampalliqi suyu		604|pe|per|peru	1
-departamento de la libertad|la libertad|la libertad department|qispi kay suyu		604|pe|per|peru	1
-departamento de huanuco|huanuco department|wanuku suyu		604|pe|per|peru	1
-cajamarca department|departamento de cajamarca|kashamarka suyu		604|pe|per|peru	1
-ancash|anqash suyu|departamento de ancash		604|pe|per|peru	1
+departamento de san martin|san martin|san martin department|san martin suyu	region	604|pe|per|peru	1
+departamento de piura|piura|piura department|piwra suyu	region	604|pe|per|peru	1
+departamento de loreto|loreto|loreto department|luritu suyu	region	604|pe|per|peru	1
+departamento de lambayeque|lambayeque|lambayeque department|lampalliqi suyu	region	604|pe|per|peru	1
+departamento de la libertad|la libertad|la libertad department|qispi kay suyu	region	604|pe|per|peru	1
+departamento de huanuco|huanuco|huanuco department|wanuku suyu	region	604|pe|per|peru	1
+cajamarca|cajamarca department|departamento de cajamarca|kashamarka suyu	region	604|pe|per|peru	1
+ancash|anqash suyu|departamento de ancash	region	604|pe|per|peru	1
 amarumayu suyu|amazonas|amazonas department|amazonas region|departamento de amazonas	region	604|pe|per|peru	1
-departamento de tacna|tacna|tacna department|taqna suyu		604|pe|per|peru	1
-puno|puno department|punu suyu		604|pe|per|peru	1
+departamento de tacna|tacna|tacna department|taqna suyu	region	604|pe|per|peru	1
+puno|puno department|punu suyu	region	604|pe|per|peru	1
 departamento de pasco|pasco|pasco department|pasco region|pasqu suyu	region	604|pe|per|peru	1
-departamento de moquegua|moquegua department|muqiwa suyu		604|pe|per|peru	1
+departamento de moquegua|moquegua|moquegua department|muqiwa suyu	region	604|pe|per|peru	1
 departamento de madre de dios|madre de dios|madre de dios department|madre de dios region|mayutata suyu	region	604|pe|per|peru	1
-lima|lima province|lima pruwinsya|provincia de lima		604|pe|per|peru	1
-departamento de lima|lima|lima department|lima region|lima suyu	region	604|pe|per|peru	1
+lima|lima province|lima pruwinsya|provincia de lima	region	604|pe|per|peru	1
+departamento de lima|lima department|lima region|lima suyu		604|pe|per|peru	1
 departamento de junin|hunin suyu|junin|junin department|junin region|sunin suyu	region	604|pe|per|peru	1
-departamento de ica|ica|ica department|ika suyu		604|pe|per|peru	1
-departamento de huancavelica|huancavelica|huancavelica department|wankawillka suyu		604|pe|per|peru	1
-cuzco department|departamento de cusco|qusqu suyu		604|pe|per|peru	1
+departamento de ica|ica|ica department|ika suyu	region	604|pe|per|peru	1
+departamento de huancavelica|huancavelica|huancavelica department|wankawillka suyu	region	604|pe|per|peru	1
+cusco|cuzco|cuzco department|departamento de cusco|qusqu suyu	region	604|pe|per|peru	1
 callao|el callao|qallaw suyu	region	604|pe|per|peru	1
-ayacucho|ayacucho department|ayakuchu suyu|departamento de ayacucho		604|pe|per|peru	1
-arequipa|ariqipa suyu|departamento de arequipa		604|pe|per|peru	1
-apurimac|apurimac department|apurimaq suyu		604|pe|per|peru	1
+ayacucho|ayacucho department|ayakuchu suyu|departamento de ayacucho	region	604|pe|per|peru	1
+arequipa|ariqipa suyu|departamento de arequipa	region	604|pe|per|peru	1
+apurimac|apurimac department|apurimaq suyu	region	604|pe|per|peru	1
 provincia de zarumilla		604|pe|per|peru	2
 provincia de yungay|yungay province		604|pe|per|peru	2
 provincia de ucayali|ucayali province		604|pe|per|peru	2
@@ -35182,48 +35182,48 @@ al daayen|az za'ayin|bldy@ lz`yn|lz`yn	municipality	634|qa|qat|qatar	1
 al-shahaniya|ash shihaniyah	municipality	634|qa|qat|qatar	1
 reunion		638|re|reu|reunion	1
 la reunion|reunion		638|re|reu|reunion	2
-judetul vrancea|vrancea|vrancea county		642|ro|romania|rou	1
-judetul valcea|valcea county		642|ro|romania|rou	1
-judetul vaslui|vaslui county		642|ro|romania|rou	1
-judetul tulcea|tulcea county		642|ro|romania|rou	1
-judetul timis|timis|timis county		642|ro|romania|rou	1
-judetul teleorman|teleorman county		642|ro|romania|rou	1
-judetul suceava|suceava|suceava county		642|ro|romania|rou	1
-judetul sibiu|sibiu county		642|ro|romania|rou	1
-judetul satu mare|satu mare county		642|ro|romania|rou	1
-judetul salaj|salaj county		642|ro|romania|rou	1
-judetul prahova|prahova|prahova county		642|ro|romania|rou	1
-judetul olt|olt|olt county		642|ro|romania|rou	1
-judetul neamt|neamt county		642|ro|romania|rou	1
-judetul mures|mures county		642|ro|romania|rou	1
-judetul mehedinti|mehedinti county		642|ro|romania|rou	1
-judetul maramures|maramures|maramures county		642|ro|romania|rou	1
-iasi county|judetul iasi		642|ro|romania|rou	1
-ialomita county|judetul ialomita		642|ro|romania|rou	1
-hunedoara county|judetul hunedoara		642|ro|romania|rou	1
-harghita county|judetul harghita		642|ro|romania|rou	1
-gorj county|judetul gorj		642|ro|romania|rou	1
-giurgiu county|judetul giurgiu		642|ro|romania|rou	1
-galati county|judetul galati		642|ro|romania|rou	1
-dolj|dolj county|judetul dolj		642|ro|romania|rou	1
-dambovita|dambovita county		642|ro|romania|rou	1
-covasna county|judetul covasna		642|ro|romania|rou	1
-constanta|constanta county|judetul constanta		642|ro|romania|rou	1
-cluj county|judetul cluj		642|ro|romania|rou	1
-caras-severin county|judetul caras-severin		642|ro|romania|rou	1
-calarasi county|judetul calarasi		642|ro|romania|rou	1
-buzau county|judetul buzau		642|ro|romania|rou	1
+judetul vrancea|vrancea|vrancea county	department	642|ro|romania|rou	1
+judetul valcea|valcea|valcea county	department	642|ro|romania|rou	1
+judetul vaslui|vaslui|vaslui county	department	642|ro|romania|rou	1
+judetul tulcea|tulcea|tulcea county	department	642|ro|romania|rou	1
+judetul timis|timis|timis county	department	642|ro|romania|rou	1
+judetul teleorman|teleorman|teleorman county	department	642|ro|romania|rou	1
+judetul suceava|suceava|suceava county	department	642|ro|romania|rou	1
+judetul sibiu|sibiu|sibiu county	department	642|ro|romania|rou	1
+judetul satu mare|satu mare|satu mare county	department	642|ro|romania|rou	1
+judetul salaj|salaj|salaj county	department	642|ro|romania|rou	1
+judetul prahova|prahova|prahova county	department	642|ro|romania|rou	1
+judetul olt|olt|olt county	department	642|ro|romania|rou	1
+judetul neamt|neamt|neamt county	department	642|ro|romania|rou	1
+judetul mures|mures|mures county	department	642|ro|romania|rou	1
+judetul mehedinti|mehedinti|mehedinti county	department	642|ro|romania|rou	1
+judetul maramures|maramures|maramures county	department	642|ro|romania|rou	1
+iasi|iasi county|judetul iasi	department	642|ro|romania|rou	1
+ialomita|ialomita county|judetul ialomita	department	642|ro|romania|rou	1
+hunedoara|hunedoara county|judetul hunedoara	department	642|ro|romania|rou	1
+harghita|harghita county|judetul harghita	department	642|ro|romania|rou	1
+gorj|gorj county|judetul gorj	department	642|ro|romania|rou	1
+giurgiu|giurgiu county|judetul giurgiu	department	642|ro|romania|rou	1
+galati|galati county|judetul galati	department	642|ro|romania|rou	1
+dolj|dolj county|judetul dolj	department	642|ro|romania|rou	1
+dambovita|dambovita county	department	642|ro|romania|rou	1
+covasna|covasna county|judetul covasna	department	642|ro|romania|rou	1
+constanta|constanta county|judetul constanta	department	642|ro|romania|rou	1
+cluj|cluj county|judetul cluj	department	642|ro|romania|rou	1
+caras-severin|caras-severin county|judetul caras-severin	department	642|ro|romania|rou	1
+calarasi|calarasi county|judetul calarasi	department	642|ro|romania|rou	1
+buzau|buzau county|judetul buzau	department	642|ro|romania|rou	1
 bucharest|bucuresti	municipality	642|ro|romania|rou	1
-brasov county|judetul brasov		642|ro|romania|rou	1
-braila county|judetul braila		642|ro|romania|rou	1
-botosani county|judetul botosani		642|ro|romania|rou	1
-bistrita-nasaud county|judetul bistrita-nasaud		642|ro|romania|rou	1
-bihor|bihor county|judetul bihor		642|ro|romania|rou	1
-bacau county|judetul bacau		642|ro|romania|rou	1
-arges|arges county|judetul arges		642|ro|romania|rou	1
-arad county|judetul arad		642|ro|romania|rou	1
-alba county|judetul alba		642|ro|romania|rou	1
-ilfov|ilfov county		642|ro|romania|rou	1
+brasov|brasov county|judetul brasov	department	642|ro|romania|rou	1
+braila|braila county|judetul braila	department	642|ro|romania|rou	1
+botosani|botosani county|judetul botosani	department	642|ro|romania|rou	1
+bistrita-nasaud|bistrita-nasaud county|judetul bistrita-nasaud	department	642|ro|romania|rou	1
+bihor|bihor county|judetul bihor	department	642|ro|romania|rou	1
+bacau|bacau county|judetul bacau	department	642|ro|romania|rou	1
+arges|arges county|judetul arges	department	642|ro|romania|rou	1
+arad|arad county|judetul arad	department	642|ro|romania|rou	1
+alba|alba county|judetul alba	department	642|ro|romania|rou	1
+ilfov|ilfov county	department	642|ro|romania|rou	1
 comuna zvoristea		642|ro|romania|rou	2
 comuna zorlentu mare		642|ro|romania|rou	2
 comuna zorleni		642|ro|romania|rou	2
@@ -42689,20 +42689,20 @@ municipio de san vicente sur		222|el salvador|slv|sv	2
 municipio de sonsonate centro		222|el salvador|slv|sv	2
 municipio de sonsonate oeste		222|el salvador|slv|sv	2
 municipio de usulutan este		222|el salvador|slv|sv	2
-mhfz@ trtws|tartus|tartus governorate		760|sy|syr|syria	1
-damascus city|damascus governorate|dmshq|mhfz@ dmshq		760|sy|syr|syria	1
-dlb|idlib|idlib governorate|mhfz@ dlb		760|sy|syr|syria	1
-hims|hms|homs|homs governorate|mhfz@ hms		760|sy|syr|syria	1
-hama|hama governorate|hamah governorate|hm@|mhfz@ hm@		760|sy|syr|syria	1
+mhfz@ trtws|tartus|tartus governorate	province	760|sy|syr|syria	1
+damascus city|damascus governorate|dimashq|dmshq|mhfz@ dmshq	province	760|sy|syr|syria	1
+dlb|idlib|idlib governorate|mhfz@ dlb	province	760|sy|syr|syria	1
+hims|hms|homs|homs governorate|mhfz@ hms	province	760|sy|syr|syria	1
+hama|hama governorate|hamah|hamah governorate|hm@|mhfz@ hm@	province	760|sy|syr|syria	1
 aleppo|aleppo governorate|halab|hlb|mhfz@ hlb	province	760|sy|syr|syria	1
-damascus countryside|mhfz@ ryf dmshq|rif-dimashq|rif-dimashq governorate|ryf dmshq		760|sy|syr|syria	1
+damascus countryside|mhfz@ ryf dmshq|rif dimashq|rif-dimashq|rif-dimashq governorate|ryf dmshq	province	760|sy|syr|syria	1
 dayr az zawr|deir ez-zor|deir ez-zor governorate|dyr lzwr|mhfz@ dyr lzwr	province	760|sy|syr|syria	1
-daraa|daraa governorate|dr`|mhfz@ dr`		760|sy|syr|syria	1
+dar'a|daraa|daraa governorate|dr`|mhfz@ dr`	province	760|sy|syr|syria	1
 lswyd|mhfz@ lswyd|suwayda|suwayda governorate|sweida governorate		760|sy|syr|syria	1
 ar raqqah|lrq@|mhfz@ lrq@|raqqa|raqqa governorate	province	760|sy|syr|syria	1
 al qunaytirah|lqnytr@|mhfz@ lqnytr@|quneitra|quneitra governorate	province	760|sy|syr|syria	1
 al ladhiqiyah|latakia|latakia governorate|lldhqy@|mhfz@ lldhqy@	province	760|sy|syr|syria	1
-al-hasakah|al-hasakah governorate|lhsk@|mhfz@ lhsk@		760|sy|syr|syria	1
+al hasakah|al-hasakah|al-hasakah governorate|lhsk@|mhfz@ lhsk@	province	760|sy|syr|syria	1
 mntq@ mrkz trtws|mntq@ trtws|tartus district		760|sy|syr|syria	2
 mntq@ tl klkh|mntq@ tlklkh|talkalakh district		760|sy|syr|syria	2
 mntq@ shhb|shahba district		760|sy|syr|syria	2
@@ -42806,27 +42806,27 @@ ntfonjeni		748|eswatini|swz|sz	2
 maphalaleni		748|eswatini|swz|sz	2
 matsanjeni north		748|eswatini|swz|sz	2
 mangcongco		748|eswatini|swz|sz	2
-qlym slmt|region du salamat|salamat|salamat region		148|chad|tcd|td	1
-ouadai|ouadai region|ouaddai|qlym wdy|region du ouaddai		148|chad|tcd|td	1
-qlym wdy fyr|region du wadi fira|wadi fira|wadi fira region		148|chad|tcd|td	1
-qlym tnjyly|region du tandjile|tandjile|tandjile region		148|chad|tcd|td	1
-moyen-chari|moyen-chari region|qlym shry lwst|region du moyen-chari		148|chad|tcd|td	1
-mayo kebbi est|mayo-kebbi est|mayo-kebbi est region|qlym myw kyby lshrqy		148|chad|tcd|td	1
-logone oriental|logone oriental region|qlym lwqwn lshrqy|region du logone oriental		148|chad|tcd|td	1
-logone occidental|logone occidental region|qlym lwqwn lgrby|region du logone occidental		148|chad|tcd|td	1
-lac|lac region|qlym lbhyr@|region du lac		148|chad|tcd|td	1
-kanem|kanem region|mntq@ knm|region du kanem		148|chad|tcd|td	1
-guera|guera region|qlym qyr|region du guera		148|chad|tcd|td	1
-chari-baguirmi|chari-baguirmi region|region du chari-baguirmi|shry bqrmy		148|chad|tcd|td	1
-batha|batha region|qlym lbth@|region du batha		148|chad|tcd|td	1
-borkou|borkou region|qlym bwrkw|region du borkou		148|chad|tcd|td	1
+qlym slmt|region du salamat|salamat|salamat region	province	148|chad|tcd|td	1
+ouadai|ouadai region|ouaddai|qlym wdy|region du ouaddai	province	148|chad|tcd|td	1
+qlym wdy fyr|region du wadi fira|wadi fira|wadi fira region	province	148|chad|tcd|td	1
+qlym tnjyly|region du tandjile|tandjile|tandjile region	province	148|chad|tcd|td	1
+moyen-chari|moyen-chari region|qlym shry lwst|region du moyen-chari	province	148|chad|tcd|td	1
+mayo kebbi est|mayo-kebbi est|mayo-kebbi est region|mayo-kebbi-est|qlym myw kyby lshrqy	province	148|chad|tcd|td	1
+logone oriental|logone oriental region|logone-oriental|qlym lwqwn lshrqy|region du logone oriental	province	148|chad|tcd|td	1
+logone occidental|logone occidental region|logone-occidental|qlym lwqwn lgrby|region du logone occidental	province	148|chad|tcd|td	1
+lac|lac region|qlym lbhyr@|region du lac	province	148|chad|tcd|td	1
+kanem|kanem region|mntq@ knm|region du kanem	province	148|chad|tcd|td	1
+guera|guera region|qlym qyr|region du guera	province	148|chad|tcd|td	1
+chari-baguirmi|chari-baguirmi region|region du chari-baguirmi|shry bqrmy	province	148|chad|tcd|td	1
+batha|batha region|qlym lbth@|region du batha	province	148|chad|tcd|td	1
+borkou|borkou region|qlym bwrkw|region du borkou	province	148|chad|tcd|td	1
 hadjer lamis|hadjer-lamis|hadjer-lamis region|hjr lmys|province de hadjer-lamis|region de hadjer-lamis|region du hadjer-lamis|wly@ hjr lmys	province	148|chad|tcd|td	1
 mandoul|mandoul region|mndwl|province du mandoul|region du mandoul|wly@ mndwl	province	148|chad|tcd|td	1
-mayo-kebbi ouest|mayo-kebbi ouest region|qlym myw kyby lgrby|region du mayo-kebbi ouest		148|chad|tcd|td	1
-mdyn@ njmyn|n'djamena|n'djamena region|ndjmlyn|njmyn|region de la ville de n'djamena|ville de n'djamena		148|chad|tcd|td	1
+mayo-kebbi ouest|mayo-kebbi ouest region|mayo-kebbi-ouest|qlym myw kyby lgrby|region du mayo-kebbi ouest	province	148|chad|tcd|td	1
+mdyn@ njmyn|n'djamena|n'djamena region|ndjmlyn|njmyn|region de la ville de n'djamena|ville de n'djamena|ville de ndjamena	province	148|chad|tcd|td	1
 bahr el ghazal|barh el gazel|barh el gazel region|barh-el-gazel|barh-el-ghazal|bhr lgzl|province du barh-el-gazel|region du barh el gazel|wly@ bhr lgzl	province	148|chad|tcd|td	1
 province du sila|region du sila|sila|sila region|syl|wly@ syl	province	148|chad|tcd|td	1
-qlym tbsty|region du tibesti|tibesti|tibesti region		148|chad|tcd|td	1
+qlym tbsty|region du tibesti|tibesti|tibesti region	province	148|chad|tcd|td	1
 ennedi ouest|ennedi-ouest|ennedi-ouest region|nydy lgrby|province de l'ennedi-ouest|region de l'ennedi-ouest|wly@ nydy lgrby		148|chad|tcd|td	1
 ennedi est|ennedi-est|ennedi-est region|nydy lshrqy|province de l'ennedi-est|region de l'ennedi-est|wly@ nydy lshrqy		148|chad|tcd|td	1
 haraze|haraze mangueigne		148|chad|tcd|td	2
@@ -44015,7 +44015,7 @@ baangb`n|bang bon|ekhtbaangb`n		764|th|tha|thailand	2
 `maaeph`siekaa|amphoe sikao|siekaa|sikao		764|th|tha|thailand	2
 sughd|viloiati sug'd	region	762|tajikistan|tj|tjk	1
 gorno-badakhshan|kuhistoni badakhshon|viloiati mukhtori kukh'istoni badakhshon	autonomous region	762|tajikistan|tj|tjk	1
-khatlon province|viloiati khatlon		762|tajikistan|tj|tjk	1
+khatlon|khatlon province|viloiati khatlon	region	762|tajikistan|tj|tjk	1
 nohiyahoi tobei jumhuri|nokh'iiakh'oi tobei ch'umkh'uri|region of republican subordination|republican subordination	districts under republic administration	762|tajikistan|tj|tjk	1
 dushanbe	capital territory	762|tajikistan|tj|tjk	1
 tursunzoda|tursunzoda district		762|tajikistan|tj|tjk	2
@@ -44096,13 +44096,13 @@ faizobod district		762|tajikistan|tj|tjk	2
 nukunonu		772|tk|tkl|tokelau	1
 fakaofo		772|tk|tkl|tokelau	1
 atafu		772|tk|tkl|tokelau	1
-distrito viqueque|distritu viqueque|municipio de viqueque|munisipiu vikeke|vikeke|viqueque|viqueque district		626|timor-leste|tl|tls	1
+distrito viqueque|distritu viqueque|municipio de viqueque|munisipiu vikeke|vikeke|viqueque|viqueque district	municipality	626|timor-leste|tl|tls	1
 distrito manufahi|distritu manufahi|manufahi|manufahi municipality|municipio de manufahi|munisipiu manufahi	municipality	626|timor-leste|tl|tls	1
 distrito manatuto|distritu manatuto|manatuto|manatuto district|manatuto municipality|manatutu|municipio de manatuto|munisipiu manatutu	municipality	626|timor-leste|tl|tls	1
 circunscricao civil de liquica|distrito liquica|distritu liquica|likisa|liquica|liquica district|liquica municipality|municipio de liquica|munisipiu likisa	municipality	626|timor-leste|tl|tls	1
 circunscricao civil de lautem|distrito lautem|distritu lautem|lautein|lautem|lautem district|lautem municipality|municipio de lautem|munisipiu lautein	municipality	626|timor-leste|tl|tls	1
 cova lima|cova lima district|cova lima municipality|covalima|distrito cova lima|distritu cova lima|kovalima|municipio de covalima|munisipiu kovalima	municipality	626|timor-leste|tl|tls	1
-distrito ermera|distritu ermera|ermera|ermera district|municipio de ermera|munisipiu ermera		626|timor-leste|tl|tls	1
+distrito ermera|distritu ermera|ermera|ermera district|municipio de ermera|munisipiu ermera	municipality	626|timor-leste|tl|tls	1
 dili|dili municipality|distrito dili|distritu dili|municipio de dili|munisipiu dili	municipality	626|timor-leste|tl|tls	1
 bobonaro|bobonaro municipality|bobonaru|distrito bobonaro|distritu bobonaro|municipio de bobonaro|munisipiu bobonaru	municipality	626|timor-leste|tl|tls	1
 baucau|baucau district|baucau municipality|baukau|distrito baucau|distritu baucau|municipio de baucau|munisipiu baukau	municipality	626|timor-leste|tl|tls	1
@@ -44174,11 +44174,11 @@ uatolari		626|timor-leste|tl|tls	2
 uatocarabau		626|timor-leste|tl|tls	2
 nain feto		626|timor-leste|tl|tls	2
 fohorem		626|timor-leste|tl|tls	2
-balkan|balkan province|balkan welayaty		795|tkm|tm|turkmenistan	1
-ahal|ahal province|ahal welayaty		795|tkm|tm|turkmenistan	1
+balkan|balkan province|balkan welayaty	region	795|tkm|tm|turkmenistan	1
+ahal|ahal province|ahal welayaty	region	795|tkm|tm|turkmenistan	1
 asgabat|ashgabat	city	795|tkm|tm|turkmenistan	1
 dasoguz	region	795|tkm|tm|turkmenistan	1
-mary|mary province|mary welayaty		795|tkm|tm|turkmenistan	1
+mary|mary province|mary welayaty	region	795|tkm|tm|turkmenistan	1
 lebap|lebap welayaty	region	795|tkm|tm|turkmenistan	1
 baherden district|baherden etraby		795|tkm|tm|turkmenistan	2
 tagtabazar etrap		795|tkm|tm|turkmenistan	2
@@ -45617,7 +45617,7 @@ chaguanas	borough	780|trinidad and tobago|tt|tto	1
 couva-tabaquite-talparo	region	780|trinidad and tobago|tt|tto	1
 diego martin regional corporation		780|trinidad and tobago|tt|tto	1
 penal-debe|penal/debe	region	780|trinidad and tobago|tt|tto	1
-princes town	region	780|trinidad and tobago|tt|tto	1
+princes town		780|trinidad and tobago|tt|tto	1
 point fortin	borough	780|trinidad and tobago|tt|tto	1
 sangre grande regional corporation		780|trinidad and tobago|tt|tto	1
 siparia regional corporation		780|trinidad and tobago|tt|tto	1
@@ -49560,7 +49560,7 @@ municipio de tres islas|tres islas		858|uruguay|ury|uy	2
 karakalpakstan|qoraqalpog'iston respublikasi|qoraqalpog`iston	republic	860|uz|uzb|uzbekistan	1
 surxondaryo|surxondaryo region|surxondaryo viloyati	region	860|uz|uzb|uzbekistan	1
 samarqand|samarqand region|samarqand viloyati	region	860|uz|uzb|uzbekistan	1
-kashkadarya province|qashqadaryo|qashqadaryo viloyati		860|uz|uzb|uzbekistan	1
+kashkadarya province|qashqadaryo|qashqadaryo viloyati	region	860|uz|uzb|uzbekistan	1
 bukhara|buxoro|buxoro viloyati	region	860|uz|uzb|uzbekistan	1
 tashkent region|toshkent|toshkent viloyati	region	860|uz|uzb|uzbekistan	1
 tashkent|toshkent|toshkent shahri	city	860|uz|uzb|uzbekistan	1
@@ -51417,7 +51417,7 @@ ouangani		175|mayotte|myt|yt	1
 pamandzi		175|mayotte|myt|yt	1
 sada		175|mayotte|myt|yt	1
 tsingoni		175|mayotte|myt|yt	1
-foreistata|free state|freistata|fuleyistata|ifleyistata|iphondo yafreyistata|vrystaat		710|south africa|za|zaf	1
+foreisetata|foreistata|free state|freistata|freyisitata|fuleyistata|ifleyistata|iphondo yafreyistata|vrystaat	province	710|south africa|za|zaf	1
 hazolo-natala|hazulu-natal|ikwazulu-natal|kwazulu natala|kwazulu-natal|kwazulu-natala|kwazulu-natali	province	710|south africa|za|zaf	1
 eastern cape|impumalanga kapa|iphondo yampuma-koloni|kapa bohlabela|kapa botjhabela|kapa vhubvaduvha|mpumalanga-koloni|oos-kaap|province of eastern cape	province	710|south africa|za|zaf	1
 gauteng|igauteng|iphondo yarhawuti|kgauteng	province	710|south africa|za|zaf	1

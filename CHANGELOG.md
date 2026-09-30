@@ -19,7 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `resolve-subdivisions` skill and `resolution_map.json` now key on `geonames_id` instead of an unstable per-run hash; `resolution_map.json` simplified to a flat `dict[str, int | None]`
 - Overhauled ingest logging: per-domain log files, log levels, per-merge/orphan diagnostics
 - Subdivision aliases enriched from GeoNames' `alternateNamesV2` dump (English + each country's CLDR official language(s) only, historic/colloquial/bidi-control names excluded), feeding into fuzzy matching
-- Subdivision auto-merge now disqualifies candidate pairs whose GeoNames raw qualifier words (e.g. "Oblast", "Misto") belong to a different administrative type family than the ISO subdivision's own `type`, preventing confident-but-wrong string matches (e.g. a city ISO code stealing its containing oblast's GeoNames entry); renamed `CATEGORICAL_TOKENS` to `NOISE_TOKENS` and grouped into named type families
+- Subdivision auto-merge now disqualifies candidate pairs where the GeoNames side's raw qualifier words mark it as a city but the ISO side's `type` isn't (or vice versa), preventing confident-but-wrong string matches (e.g. a city ISO code stealing its containing oblast/county/department's GeoNames entry); renamed `CATEGORICAL_TOKENS` to `NOISE_TOKENS`, grouped into two families (`city` vs `area`) rather than granular ones, since finer administrative-type distinctions aren't reliable across sources/translations
 
 ### Removed
 - Manual alias/name contribution during subdivision resolution (CLI and skill); resolutions are now source-data only
