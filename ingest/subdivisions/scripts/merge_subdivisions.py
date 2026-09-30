@@ -229,11 +229,33 @@ def try_merge(
 
         scored_pairs.sort(key=lambda pair: pair[0], reverse=True)
 
+        # a geo_sub that multiple distinct ISO subs both score >=95 against is a likely namesake
+        # collision (e.g. a city and its own containing rayon sharing an identical name) that
+        # string similarity can't safely break the tie on; exclude it entirely rather than let
+        # the highest scorer quietly win what might be the wrong one.
+        AMBIGUITY_THRESHOLD = 90
+        high_scorers: dict[int, set[str]] = {}
+        for score, iso_sub, geo_sub in scored_pairs:
+            if score >= AMBIGUITY_THRESHOLD:
+                high_scorers.setdefault(geo_sub.hashid, set()).add(iso_sub.iso_code)
+        ambiguous_geo_ids = {
+            hashid for hashid, iso_codes in high_scorers.items() if len(iso_codes) > 1
+        }
+        for hashid in ambiguous_geo_ids:
+            geo_name = geo_names_at_scoring[hashid]
+            iso_codes = ", ".join(sorted(high_scorers[hashid]))
+            ingest_log.writeline(
+                f"ambiguous target '{geo_name}': {iso_codes} all scored >= {AMBIGUITY_THRESHOLD}, excluding from auto-merge",
+                level="WARN",
+            )
+
         claimed_iso: set[str] = set()
         claimed_geo: set[int] = set()
         for score, iso_sub, geo_sub in scored_pairs:
             geo_name = geo_names_at_scoring[geo_sub.hashid]
             if iso_sub.iso_code in claimed_iso:
+                continue
+            if geo_sub.hashid in ambiguous_geo_ids:
                 continue
             if geo_sub.hashid in claimed_geo:
                 ingest_log.writeline(
@@ -261,11 +283,13 @@ def try_merge(
                     f"{iso_sub.iso_code} '{iso_sub.name}' unmerged: no GeoNames candidates in this bucket",
                     level="WARN",
                 )
-            else:
+            elif candidate[1] < candidate[2]:
+                # only log a genuine near-miss (never qualified); a candidate that did
+                # qualify but lost the competition was already reported as "lost candidate" above
                 geo_sub, score, needed = candidate
                 geo_name = geo_names_at_scoring[geo_sub.hashid]
                 ingest_log.writeline(
-                    f"{iso_sub.iso_code} '{iso_sub.name}' unmerged: closest was {geo_sub.geonames_code} '{geo_name}' (score {score:.0f}, needed {needed})",
+                    f"{iso_sub.iso_code} '{iso_sub.name}' unmerged: closest was {geo_sub.geonames_code} '{geo_name}' ({score:.0f}/{needed})",
                     level="WARN",
                 )
         unmerged_iso_subs.extend(bucket_unmerged)

@@ -48,7 +48,7 @@ sar-e pol province|sar-e pul	province	004|af|afg|afghanistan	1
 samangan	province	004|af|afg|afghanistan	1
 parwan	province	004|af|afg|afghanistan	1
 paktika	province	004|af|afg|afghanistan	1
-paktia|paktiya	province	004|af|afg|afghanistan	1
+paktia		004|af|afg|afghanistan	1
 oruzgan|uruzgan	province	004|af|afg|afghanistan	1
 nimroz	province	004|af|afg|afghanistan	1
 nangarhar	province	004|af|afg|afghanistan	1
@@ -2101,7 +2101,7 @@ neftcala	rayon	031|az|aze|azerbaijan	1
 nakhchivan|naxcivan	autonomous republic	031|az|aze|azerbaijan	1
 masalli|masally	rayon	031|az|aze|azerbaijan	1
 lerik|lerik district	rayon	031|az|aze|azerbaijan	1
-lankaran	municipality	031|az|aze|azerbaijan	1
+lankaran		031|az|aze|azerbaijan	1
 lachin rayon|lacin	rayon	031|az|aze|azerbaijan	1
 qubadli	rayon	031|az|aze|azerbaijan	1
 imisli	rayon	031|az|aze|azerbaijan	1
@@ -2120,7 +2120,7 @@ xankandi	municipality	031|az|aze|azerbaijan	1
 khojavend|xocavand	rayon	031|az|aze|azerbaijan	1
 zardab	rayon	031|az|aze|azerbaijan	1
 zaqatala|zaqatala district	rayon	031|az|aze|azerbaijan	1
-yevlax	municipality	031|az|aze|azerbaijan	1
+yevlax		031|az|aze|azerbaijan	1
 oguz	rayon	031|az|aze|azerbaijan	1
 ucar	rayon	031|az|aze|azerbaijan	1
 tovuz|tovuz district	rayon	031|az|aze|azerbaijan	1
@@ -2158,7 +2158,7 @@ saki|shaki city	rayon	031|az|aze|azerbaijan	1
 siyazan	rayon	031|az|aze|azerbaijan	1
 sumqayit	municipality	031|az|aze|azerbaijan	1
 xizi	rayon	031|az|aze|azerbaijan	1
-yevlax|yevlax city	rayon	031|az|aze|azerbaijan	1
+yevlax city		031|az|aze|azerbaijan	1
 haciqabul	rayon	031|az|aze|azerbaijan	1
 sahbuz|shahbuz rayon	rayon	031|az|aze|azerbaijan	2
 ordubad|ordubad rayon	rayon	031|az|aze|azerbaijan	2
@@ -2302,9 +2302,9 @@ bruxelles-capitale		056|be|bel|belgium	2
 boucle du mouhoun	region	854|bf|bfa|burkina faso	1
 cascades|cascades region	region	854|bf|bfa|burkina faso	1
 centre	region	854|bf|bfa|burkina faso	1
-centre-est	region	854|bf|bfa|burkina faso	1
+centre-est		854|bf|bfa|burkina faso	1
 centre-nord	region	854|bf|bfa|burkina faso	1
-centre-ouest	region	854|bf|bfa|burkina faso	1
+centre-ouest		854|bf|bfa|burkina faso	1
 centre-sud	region	854|bf|bfa|burkina faso	1
 est	region	854|bf|bfa|burkina faso	1
 hauts-bassins	region	854|bf|bfa|burkina faso	1
@@ -2328,7 +2328,7 @@ province du bassitenga		854|bf|bfa|burkina faso	2
 nahouri|nahouri province	province	854|bf|bfa|burkina faso	2
 namentenga|province du namentenga	province	854|bf|bfa|burkina faso	2
 mouhoun|province du mouhoun	province	854|bf|bfa|burkina faso	2
-kouritenga|kouritenga province	province	854|bf|bfa|burkina faso	2
+kouritenga province		854|bf|bfa|burkina faso	2
 kossi|province de la koosin	province	854|bf|bfa|burkina faso	2
 province de la comoe		854|bf|bfa|burkina faso	2
 kenedougou|province du kenedougou	province	854|bf|bfa|burkina faso	2
@@ -11407,10 +11407,10 @@ zhejiang|zhejiang sheng	province	156|china|chn|cn	1
 yunnan|yunnan sheng	province	156|china|chn|cn	1
 tianjin|tianjin shi	municipality	156|china|chn|cn	1
 sichuan|sichuan sheng	province	156|china|chn|cn	1
-shanxi|shanxi sheng	province	156|china|chn|cn	1
+shanxi		156|china|chn|cn	1
 shanghai|shanghai shi	municipality	156|china|chn|cn	1
 shandong|shandong sheng	province	156|china|chn|cn	1
-shaanxi|shaanxi sheng	province	156|china|chn|cn	1
+shaanxi		156|china|chn|cn	1
 ningxia		156|china|chn|cn	1
 jiangxi|jiangxi sheng	province	156|china|chn|cn	1
 jiangsu|jiangsu sheng	province	156|china|chn|cn	1
@@ -16044,9 +16044,9 @@ lozere	metropolitan department	250|fr|fra|france	2
 lot-et-garonne	metropolitan department	250|fr|fra|france	2
 lot	metropolitan department	250|fr|fra|france	2
 loir-et-cher|loire-et-cher	metropolitan department	250|fr|fra|france	2
-loiret	metropolitan department	250|fr|fra|france	2
+loiret		250|fr|fra|france	2
 loire-atlantique	metropolitan department	250|fr|fra|france	2
-loire	metropolitan department	250|fr|fra|france	2
+loire		250|fr|fra|france	2
 landes	metropolitan department	250|fr|fra|france	2
 jura	metropolitan department	250|fr|fra|france	2
 isere	metropolitan department	250|fr|fra|france	2
@@ -16201,8 +16201,8 @@ lancashire	two-tier county	826|gb|gbr|united kingdom	2
 isle of wight	unitary authority	826|gb|gbr|united kingdom	2
 inverclyde	council area	826|gb|gbr|united kingdom	2
 highland	council area	826|gb|gbr|united kingdom	2
-hertfordshire	two-tier county	826|gb|gbr|united kingdom	2
-herefordshire	unitary authority	826|gb|gbr|united kingdom	2
+hertfordshire		826|gb|gbr|united kingdom	2
+herefordshire		826|gb|gbr|united kingdom	2
 hampshire	two-tier county	826|gb|gbr|united kingdom	2
 borough of halton		826|gb|gbr|united kingdom	2
 gwynedd	unitary authority	826|gb|gbr|united kingdom	2
@@ -18409,7 +18409,7 @@ csongrad		348|hu|hun|hungary	1
 borsod-abauj-zemplen	county	348|hu|hun|hungary	1
 bekes|bekes county	county	348|hu|hun|hungary	1
 zala|zala county	county	348|hu|hun|hungary	1
-veszprem	county	348|hu|hun|hungary	1
+veszprem		348|hu|hun|hungary	1
 vas|vas county	county	348|hu|hun|hungary	1
 tolna|tolna county	county	348|hu|hun|hungary	1
 somogy|somogy county	county	348|hu|hun|hungary	1
@@ -24311,7 +24311,7 @@ karasayskiy rayon		398|kaz|kazakhstan|kz	2
 kosshy gorodskaya administratsiya		398|kaz|kazakhstan|kz	2
 xiangkhoang|xiangkhouang|xiengkhuang	province	418|la|lao|laos	1
 xaignabouli|xayabury|xiagnabouli	province	418|la|lao|laos	1
-viangchan|vientiane	province	418|la|lao|laos	1
+vientiane		418|la|lao|laos	1
 savannakhet|savannakhet province	province	418|la|lao|laos	1
 salavan|salavan province|saravane	province	418|la|lao|laos	1
 phongsali|phongsaly	province	418|la|lao|laos	1
@@ -25565,16 +25565,16 @@ commune de preizerdaul		442|lu|lux|luxembourg	2
 commune de la vallee de l'ernz		442|lu|lux|luxembourg	2
 kaerjeng		442|lu|lux|luxembourg	2
 parc hosingen		442|lu|lux|luxembourg	2
-ventspils|ventspils municipality|ventspils novads	municipality	428|latvia|lv|lva	1
-ventspils	state city	428|latvia|lv|lva	1
+ventspils municipality		428|latvia|lv|lva	1
+ventspils		428|latvia|lv|lva	1
 valmiera|valmieras novads	municipality	428|latvia|lv|lva	1
 valka|valkas novads	municipality	428|latvia|lv|lva	1
 tukuma novads|tukums|tukums municipality	municipality	428|latvia|lv|lva	1
 talsi|talsu novads	municipality	428|latvia|lv|lva	1
 saldus rajons		428|latvia|lv|lva	1
 riga	state city	428|latvia|lv|lva	1
-rezekne|rezekne municipality|rezeknes novads	municipality	428|latvia|lv|lva	1
-rezekne	state city	428|latvia|lv|lva	1
+rezekne municipality		428|latvia|lv|lva	1
+rezekne		428|latvia|lv|lva	1
 preili|preilu novads	municipality	428|latvia|lv|lva	1
 ogre|ogres novads	municipality	428|latvia|lv|lva	1
 madona|madonas novads	municipality	428|latvia|lv|lva	1
@@ -25584,8 +25584,8 @@ liepaja	state city	428|latvia|lv|lva	1
 kuldiga|kuldiga municipality|kuldigas novads	municipality	428|latvia|lv|lva	1
 kraslava|kraslava municipality|kraslavas novads	municipality	428|latvia|lv|lva	1
 jurmala	state city	428|latvia|lv|lva	1
-jelgava|jelgava municipality|jelgavas novads	municipality	428|latvia|lv|lva	1
-jelgava	state city	428|latvia|lv|lva	1
+jelgava municipality		428|latvia|lv|lva	1
+jelgava		428|latvia|lv|lva	1
 jekabpils|jekabpils municipality|jekabpils novads	municipality	428|latvia|lv|lva	1
 gulbene|gulbene municipality|gulbenes novads	municipality	428|latvia|lv|lva	1
 dobele|dobele municipality|dobeles novads	municipality	428|latvia|lv|lva	1
@@ -30107,12 +30107,12 @@ tete	province	508|moz|mozambique|mz	1
 sofala	province	508|moz|mozambique|mz	1
 niassa|niassa province	province	508|moz|mozambique|mz	1
 nampula	province	508|moz|mozambique|mz	1
-maputo|maputo province	province	508|moz|mozambique|mz	1
+maputo province		508|moz|mozambique|mz	1
 manica	province	508|moz|mozambique|mz	1
 inhambane|inhambane province	province	508|moz|mozambique|mz	1
 gaza|gaza province	province	508|moz|mozambique|mz	1
 cabo delgado|cabo delgado province	province	508|moz|mozambique|mz	1
-maputo|maputo city	city	508|moz|mozambique|mz	1
+maputo city		508|moz|mozambique|mz	1
 circunscricao de sanga		508|moz|mozambique|mz	2
 circunscricao da quissanga		508|moz|mozambique|mz	2
 concelho de quelimane		508|moz|mozambique|mz	2
@@ -41568,8 +41568,8 @@ les mamelles	district	690|sc|seychelles|syc	1
 roche caiman	district	690|sc|seychelles|syc	1
 au cap	district	690|sc|seychelles|syc	1
 outer islands		690|sc|seychelles|syc	1
-ile perseverance i	district	690|sc|seychelles|syc	1
-ile perseverance ii	district	690|sc|seychelles|syc	1
+ile perseverance i		690|sc|seychelles|syc	1
+ile perseverance ii		690|sc|seychelles|syc	1
 northern|northern state	state	729|sd|sdn|sudan	1
 khartoum	state	729|sd|sdn|sudan	1
 red sea	state	729|sd|sdn|sudan	1
@@ -42837,8 +42837,8 @@ n'djamena		148|chad|tcd|td	1
 bahr el ghazal|barh el gazel|barh-el-ghazal	province	148|chad|tcd|td	1
 sila	province	148|chad|tcd|td	1
 tibesti	province	148|chad|tcd|td	1
-ennedi-ouest	province	148|chad|tcd|td	1
-ennedi-est	province	148|chad|tcd|td	1
+ennedi-ouest		148|chad|tcd|td	1
+ennedi-est		148|chad|tcd|td	1
 haraze mangueigne		148|chad|tcd|td	2
 baguirmi		148|chad|tcd|td	2
 dababa		148|chad|tcd|td	2
@@ -43035,8 +43035,8 @@ krabi	province	764|th|tha|thailand	1
 kanchanaburi	province	764|th|tha|thailand	1
 kamphaeng phet	province	764|th|tha|thailand	1
 chumphon	province	764|th|tha|thailand	1
-chiang rai	province	764|th|tha|thailand	1
-chiang mai	province	764|th|tha|thailand	1
+chiang rai		764|th|tha|thailand	1
+chiang mai		764|th|tha|thailand	1
 yasothon	province	764|th|tha|thailand	1
 yala	province	764|th|tha|thailand	1
 uttaradit	province	764|th|tha|thailand	1
@@ -50195,7 +50195,7 @@ nghe an|nghe an province	province	704|vietnam|vn|vnm	1
 thua thien hue province|thua thien-hue	province	704|vietnam|vn|vnm	1
 thanh hoa|thanh hoa province	province	704|vietnam|vn|vnm	1
 son la|son la province	province	704|vietnam|vn|vnm	1
-quang ninh	province	704|vietnam|vn|vnm	1
+quang ninh		704|vietnam|vn|vnm	1
 lang son|lang son province	province	704|vietnam|vn|vnm	1
 lai chau|lai chau province	province	704|vietnam|vn|vnm	1
 ha tinh|ha tinh province	province	704|vietnam|vn|vnm	1

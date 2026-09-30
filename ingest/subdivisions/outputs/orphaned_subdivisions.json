@@ -1,4 +1,10 @@
 {
+  "AF-PIA": {
+    "name": "Paktiyā",
+    "aliases": [],
+    "country": "Afghanistan",
+    "type": "Province"
+  },
   "AF-WAR": {
     "name": "Wardak",
     "aliases": [],
@@ -19,8 +25,26 @@
     "country": "Argentina",
     "type": "City"
   },
+  "AZ-LA": {
+    "name": "Lənkəran",
+    "aliases": [],
+    "country": "Azerbaijan",
+    "type": "Municipality"
+  },
   "AZ-LAN": {
     "name": "Lənkəran",
+    "aliases": [],
+    "country": "Azerbaijan",
+    "type": "Rayon"
+  },
+  "AZ-YE": {
+    "name": "Yevlax",
+    "aliases": [],
+    "country": "Azerbaijan",
+    "type": "Municipality"
+  },
+  "AZ-YEV": {
+    "name": "Yevlax",
     "aliases": [],
     "country": "Azerbaijan",
     "type": "Rayon"
@@ -73,6 +97,18 @@
     "country": "Belgium",
     "type": "Province"
   },
+  "BF-04": {
+    "name": "Centre-Est",
+    "aliases": [],
+    "country": "Burkina Faso",
+    "type": "Region"
+  },
+  "BF-06": {
+    "name": "Centre-Ouest",
+    "aliases": [],
+    "country": "Burkina Faso",
+    "type": "Region"
+  },
   "BF-BAL": {
     "name": "Balé",
     "aliases": [],
@@ -87,6 +123,12 @@
   },
   "BF-COM": {
     "name": "Comoé",
+    "aliases": [],
+    "country": "Burkina Faso",
+    "type": "Province"
+  },
+  "BF-KOT": {
+    "name": "Kouritenga",
     "aliases": [],
     "country": "Burkina Faso",
     "type": "Province"
@@ -188,6 +230,18 @@
     "aliases": [],
     "country": "China",
     "type": "Autonomous region"
+  },
+  "CN-SN": {
+    "name": "Shaanxi Sheng",
+    "aliases": [],
+    "country": "China",
+    "type": "Province"
+  },
+  "CN-SX": {
+    "name": "Shanxi Sheng",
+    "aliases": [],
+    "country": "China",
+    "type": "Province"
   },
   "CN-XJ": {
     "name": "Xinjiang Uygur Zizhiqu",
@@ -845,6 +899,18 @@
     "country": "Finland",
     "type": "Region"
   },
+  "FR-42": {
+    "name": "Loire",
+    "aliases": [],
+    "country": "France",
+    "type": "Metropolitan department"
+  },
+  "FR-45": {
+    "name": "Loiret",
+    "aliases": [],
+    "country": "France",
+    "type": "Metropolitan department"
+  },
   "FR-59": {
     "name": "Nord",
     "aliases": [],
@@ -940,6 +1006,18 @@
     "aliases": [],
     "country": "United Kingdom",
     "type": "Unitary authority"
+  },
+  "GB-HEF": {
+    "name": "Herefordshire",
+    "aliases": [],
+    "country": "United Kingdom",
+    "type": "Unitary authority"
+  },
+  "GB-HRT": {
+    "name": "Hertfordshire",
+    "aliases": [],
+    "country": "United Kingdom",
+    "type": "Two-tier county"
   },
   "GB-LDS": {
     "name": "Leeds",
@@ -1303,6 +1381,12 @@
     "country": "Hungary",
     "type": "City with county rights"
   },
+  "HU-VE": {
+    "name": "Veszprém",
+    "aliases": [],
+    "country": "Hungary",
+    "type": "County"
+  },
   "HU-VM": {
     "name": "Veszprém",
     "aliases": [],
@@ -1563,6 +1647,14 @@
     "country": "Kazakhstan",
     "type": "Region"
   },
+  "LA-VI": {
+    "name": "Viangchan",
+    "aliases": [
+      "Vientiane"
+    ],
+    "country": "Laos",
+    "type": "Province"
+  },
   "LA-VT": {
     "name": "Viangchan",
     "aliases": [
@@ -1619,6 +1711,22 @@
     "country": "Lithuania",
     "type": "City municipality"
   },
+  "LV-041": {
+    "name": "Jelgavas novads",
+    "aliases": [
+      "Jelgava"
+    ],
+    "country": "Latvia",
+    "type": "Municipality"
+  },
+  "LV-077": {
+    "name": "Rēzeknes novads",
+    "aliases": [
+      "Rēzekne"
+    ],
+    "country": "Latvia",
+    "type": "Municipality"
+  },
   "LV-088": {
     "name": "Saldus novads",
     "aliases": [
@@ -1626,6 +1734,32 @@
     ],
     "country": "Latvia",
     "type": "Municipality"
+  },
+  "LV-106": {
+    "name": "Ventspils novads",
+    "aliases": [
+      "Ventspils"
+    ],
+    "country": "Latvia",
+    "type": "Municipality"
+  },
+  "LV-JEL": {
+    "name": "Jelgava",
+    "aliases": [],
+    "country": "Latvia",
+    "type": "State city"
+  },
+  "LV-REZ": {
+    "name": "Rēzekne",
+    "aliases": [],
+    "country": "Latvia",
+    "type": "State city"
+  },
+  "LV-VEN": {
+    "name": "Ventspils",
+    "aliases": [],
+    "country": "Latvia",
+    "type": "State city"
   },
   "MA-10": {
     "name": "Guelmim-Oued Noun (EH-partial)",
@@ -1955,6 +2089,18 @@
     "country": "Malaysia",
     "type": "Federal territory"
   },
+  "MZ-L": {
+    "name": "Maputo",
+    "aliases": [],
+    "country": "Mozambique",
+    "type": "Province"
+  },
+  "MZ-MPM": {
+    "name": "Maputo",
+    "aliases": [],
+    "country": "Mozambique",
+    "type": "City"
+  },
   "NO-38": {
     "name": "Vestfold og Telemark",
     "aliases": [],
@@ -2194,6 +2340,18 @@
     "country": "Seychelles",
     "type": "District"
   },
+  "SC-26": {
+    "name": "Ile Perseverance I",
+    "aliases": [],
+    "country": "Seychelles",
+    "type": "District"
+  },
+  "SC-27": {
+    "name": "Ile Perseverance II",
+    "aliases": [],
+    "country": "Seychelles",
+    "type": "District"
+  },
   "SD-GD": {
     "name": "Gedaref",
     "aliases": [],
@@ -2418,6 +2576,18 @@
     "country": "Syria",
     "type": "Province"
   },
+  "TD-EE": {
+    "name": "Ennedi-Est",
+    "aliases": [],
+    "country": "Chad",
+    "type": "Province"
+  },
+  "TD-EO": {
+    "name": "Ennedi-Ouest",
+    "aliases": [],
+    "country": "Chad",
+    "type": "Province"
+  },
   "TD-ND": {
     "name": "Ville de Ndjamena",
     "aliases": [],
@@ -2426,6 +2596,18 @@
   },
   "TH-39": {
     "name": "Nong Bua Lam Phu",
+    "aliases": [],
+    "country": "Thailand",
+    "type": "Province"
+  },
+  "TH-50": {
+    "name": "Chiang Mai",
+    "aliases": [],
+    "country": "Thailand",
+    "type": "Province"
+  },
+  "TH-57": {
+    "name": "Chiang Rai",
     "aliases": [],
     "country": "Thailand",
     "type": "Province"
@@ -2612,6 +2794,12 @@
   },
   "VN-03": {
     "name": "Hà Giang",
+    "aliases": [],
+    "country": "Vietnam",
+    "type": "Province"
+  },
+  "VN-13": {
+    "name": "Quảng Ninh",
     "aliases": [],
     "country": "Vietnam",
     "type": "Province"

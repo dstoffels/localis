@@ -47,7 +47,7 @@ Sar-e Pul	AF-SAR	AF.33	1127106	Province	Sar-e Pol Province	1		3
 Samangān	AF-SAM	AF.32	1127766	Province	Samangan	1		3
 Parwān	AF-PAR	AF.40	1131054	Province	Parwan	1		3
 Paktīkā	AF-PKA	AF.29	1131256	Province	Paktika	1		3
-Paktiyā	AF-PIA	AF.36	1131257	Province	Paktia	1		3
+Paktia		AF.36	1131257			1		3
 Uruzgān	AF-URU	AF.39	1131461	Province	Oruzgan	1		3
 Nīmrōz	AF-NIM	AF.19	1131821	Province	Nimroz	1		3
 Nangarhār	AF-NAN	AF.18	1132366	Province	Nangarhar	1		3
@@ -2100,7 +2100,7 @@ Neftçala	AZ-NEF	AZ.36	147422	Rayon		1		16
 Naxçıvan	AZ-NX	AZ.35	147435	Autonomous republic	Nakhchivan	1		16
 Masallı	AZ-MAS	AZ.32	147551	Rayon	Masally	1		16
 Lerik	AZ-LER	AZ.31	147610	Rayon	Lerik District	1		16
-Lənkəran	AZ-LA	AZ.29	147613	Municipality		1		16
+Lənkəran		AZ.29	147613			1		16
 Laçın	AZ-LAC	AZ.28	147626	Rayon	Lachin Rayon	1		16
 Qubadlı	AZ-QBI	AZ.43	147694	Rayon		1		16
 İmişli	AZ-IMI	AZ.24	147983	Rayon		1		16
@@ -2119,7 +2119,7 @@ Xankəndi	AZ-XA	AZ.61	409421	Municipality	Xankǝndi	1		16
 Xocavənd	AZ-XVD	AZ.65	409423	Rayon	Khojavend	1		16
 Zərdab	AZ-ZAR	AZ.71	584583	Rayon	Zardab	1		16
 Zaqatala	AZ-ZAQ	AZ.70	584604	Rayon	Zaqatala District	1		16
-Yevlax	AZ-YE	AZ.67	584650	Municipality		1		16
+Yevlax		AZ.67	584650			1		16
 Oğuz	AZ-OGU	AZ.37	584742	Rayon		1		16
 Ucar	AZ-UCA	AZ.59	584783	Rayon		1		16
 Tovuz	AZ-TOV	AZ.58	584861	Rayon	Tovuz District	1		16
@@ -2157,7 +2157,7 @@ Samux	AZ-SMX	AZ.52	828302	Rayon		1		16
 Siyəzən	AZ-SIY	AZ.53	828304	Rayon	Siyǝzǝn	1		16
 Sumqayıt	AZ-SM	AZ.54	828305	Municipality	Sumqayit	1		16
 Xızı	AZ-XIZ	AZ.63	828306	Rayon		1		16
-Yevlax	AZ-YEV	AZ.68	828307	Rayon	Yevlax City	1		16
+Yevlax City		AZ.68	828307			1		16
 Hacıqabul	AZ-HAC	AZ.23	828315	Rayon		1		16
 Şahbuz	AZ-SAH	AZ.35.147212	147212	Rayon	Shahbuz Rayon	2	2100	16
 Ordubad	AZ-ORD	AZ.35.147365	147365	Rayon	Ordubad Rayon	2	2100	16
@@ -2301,9 +2301,9 @@ Bruxelles-Capitale		BE.BRU.BRU	6693370			2	2287	20
 Boucle du Mouhoun	BF-01	BF.01	6930701	Region		1		21
 Cascades	BF-02	BF.02	6930703	Region	Cascades Region	1		21
 Centre	BF-03	BF.03	6930704	Region		1		21
-Centre-Est	BF-04	BF.04	6930705	Region		1		21
+Centre-Est		BF.04	6930705			1		21
 Centre-Nord	BF-05	BF.05	6930706	Region		1		21
-Centre-Ouest	BF-06	BF.06	6930707	Region		1		21
+Centre-Ouest		BF.06	6930707			1		21
 Centre-Sud	BF-07	BF.07	6930708	Region		1		21
 Est	BF-08	BF.08	6930709	Region		1		21
 Hauts-Bassins	BF-09	BF.09	6930710	Region		1		21
@@ -2327,7 +2327,7 @@ Province du Bassitenga		BF.11.68	2356983			2	2311	21
 Nahouri	BF-NAO	BF.07.65	2357548	Province	Nahouri Province	2	2307	21
 Namentenga	BF-NAM	BF.05.64	2357611	Province	Province du Namentenga	2	2305	21
 Mouhoun	BF-MOU	BF.01.63	2357858	Province	Province du Mouhoun	2	2301	21
-Kouritenga	BF-KOT	BF.04.28	2358700	Province	Kouritenga Province	2	2304	21
+Kouritenga Province		BF.04.28	2358700			2	2304	21
 Kossi	BF-KOS	BF.01.58	2359027	Province	Province de la Koosin	2	2301	21
 Province de la Comoé		BF.02.55	2359209			2	2302	21
 Kénédougou	BF-KEN	BF.09.54	2359569	Province	Province du Kénédougou	2	2309	21
@@ -11406,10 +11406,10 @@ Zhejiang Sheng	CN-ZJ	CN.02	1784764	Province	Zhejiang	1		48
 Yunnan Sheng	CN-YN	CN.29	1785694	Province	Yunnan	1		48
 Tianjin Shi	CN-TJ	CN.28	1792943	Municipality	Tianjin	1		48
 Sichuan Sheng	CN-SC	CN.32	1794299	Province	Sichuan	1		48
-Shanxi Sheng	CN-SX	CN.24	1795912	Province	Shanxi	1		48
+Shanxi		CN.24	1795912			1		48
 Shanghai Shi	CN-SH	CN.23	1796231	Municipality	Shanghai	1		48
 Shandong Sheng	CN-SD	CN.25	1796328	Province	Shandong	1		48
-Shaanxi Sheng	CN-SN	CN.26	1796480	Province	Shaanxi	1		48
+Shaanxi		CN.26	1796480			1		48
 Ningxia		CN.21	1799355			1		48
 Jiangxi Sheng	CN-JX	CN.03	1806222	Province	Jiangxi	1		48
 Jiangsu Sheng	CN-JS	CN.04	1806260	Province	Jiangsu	1		48
@@ -16043,9 +16043,9 @@ Lozère	FR-48	FR.76.48	2997288	Metropolitan department		2	15990	75
 Lot-et-Garonne	FR-47	FR.75.47	2997523	Metropolitan department		2	15987	75
 Lot	FR-46	FR.76.46	2997524	Metropolitan department		2	15990	75
 Loir-et-Cher	FR-41	FR.24.41	2997856	Metropolitan department	Loire-et-Cher	2	15984	75
-Loiret	FR-45	FR.24.45	2997857	Metropolitan department		2	15984	75
+Loiret		FR.24.45	2997857			2	15984	75
 Loire-Atlantique	FR-44	FR.52.44	2997861	Metropolitan department		2	15981	75
-Loire	FR-42	FR.84.42	2997870	Metropolitan department		2	15992	75
+Loire		FR.84.42	2997870			2	15992	75
 Landes	FR-40	FR.75.40	3007866	Metropolitan department		2	15987	75
 Jura	FR-39	FR.27.39	3012051	Metropolitan department		2	15986	75
 Isère	FR-38	FR.84.38	3012715	Metropolitan department		2	15992	75
@@ -16200,8 +16200,8 @@ Lancashire	GB-LAN	GB.ENG.H2	2644974	Two-tier county		2	16164	77
 Isle of Wight	GB-IOW	GB.ENG.G2	2646007	Unitary authority		2	16164	77
 Inverclyde	GB-IVC	GB.SCT.V4	2646127	Council area		2	16162	77
 Highland	GB-HLD	GB.SCT.V3	2646944	Council area		2	16162	77
-Hertfordshire	GB-HRT	GB.ENG.F8	2647043	Two-tier county		2	16164	77
-Herefordshire	GB-HEF	GB.ENG.F7	2647071	Unitary authority		2	16164	77
+Hertfordshire		GB.ENG.F8	2647043			2	16164	77
+Herefordshire		GB.ENG.F7	2647071			2	16164	77
 Hampshire	GB-HAM	GB.ENG.F2	2647554	Two-tier county		2	16164	77
 Borough of Halton		GB.ENG.E9	2647601			2	16164	77
 Gwynedd	GB-GWN	GB.WLS.Y2	2647716	Unitary authority		2	16161	77
@@ -18408,7 +18408,7 @@ Csongrád		HU.06	721589			1		100
 Borsod-Abaúj-Zemplén	HU-BZ	HU.04	722064	County		1		100
 Békés	HU-BE	HU.03	722433	County	Bekes County	1		100
 Zala	HU-ZA	HU.24	3042613	County	Zala County	1		100
-Veszprém	HU-VE	HU.23	3042925	County		1		100
+Veszprém		HU.23	3042925			1		100
 Vas	HU-VA	HU.22	3043047	County	Vas County	1		100
 Tolna	HU-TO	HU.21	3043845	County	Tolna County	1		100
 Somogy	HU-SO	HU.17	3045226	County	Somogy County	1		100
@@ -24310,7 +24310,7 @@ Karasayskiy Rayon		KZ.01.12533979	12533979			2	24025	125
 Kosshy Gorodskaya Administratsiya		KZ.03.12539745	12539745			2	24016	125
 Xiangkhouang	LA-XI	LA.14	1652077	Province	Xiangkhoang|Xiengkhuang	1		126
 Xaignabouli	LA-XA	LA.13	1652210	Province	Xayabury|Xiagnabouli	1		126
-Viangchan	LA-VI	LA.27	1652238	Province	Vientiane	1		126
+Vientiane		LA.27	1652238			1		126
 Savannakhét	LA-SV	LA.20	1653315	Province	Savannakhet|Savannakhet Province	1		126
 Salavan	LA-SL	LA.19	1653333	Province	Salavan Province|Saravane	1		126
 Phôngsali	LA-PH	LA.18	1653893	Province	Phongsaly	1		126
@@ -25564,16 +25564,16 @@ Commune de Préizerdaul		LU.RD.8641291	8641291			2	25453	134
 Commune de la Vallée de l'Ernz		LU.DI.8641526	8641526			2	25459	134
 Käerjeng		LU.CA.8641865	8641865			2	25461	134
 Parc Hosingen		LU.CL.63	11353099			2	25460	134
-Ventspils novads	LV-106	LV.33	454307	Municipality	Ventspils|Ventspils Municipality	1		135
-Ventspils	LV-VEN	LV.32	454311	State city		1		135
+Ventspils Municipality		LV.33	454307			1		135
+Ventspils		LV.32	454311			1		135
 Valmieras Novads	LV-113	LV.31	454564	Municipality	Valmiera	1		135
 Valkas novads	LV-101	LV.30	454571	Municipality	Valka	1		135
 Tukuma novads	LV-099	LV.29	454771	Municipality	Tukums|Tukums Municipality	1		135
 Talsu novads	LV-097	LV.28	454968	Municipality	Talsi	1		135
 Saldus Rajons		LV.27	455888			1		135
 Rīga	LV-RIX	LV.25	456173	State city	Riga	1		135
-Rēzeknes novads	LV-077	LV.24	456197	Municipality	Rēzekne|Rēzekne Municipality	1		135
-Rēzekne	LV-REZ	LV.23	456203	State city		1		135
+Rēzekne Municipality		LV.24	456197			1		135
+Rēzekne		LV.23	456203			1		135
 Preiļu novads	LV-073	LV.22	456528	Municipality	Preiļi	1		135
 Ogres novads	LV-067	LV.21	457061	Municipality	Ogre	1		135
 Madonas novads	LV-059	LV.20	457712	Municipality	Madona	1		135
@@ -25583,8 +25583,8 @@ Liepāja	LV-LPX	LV.16	457955	State city	Liepaja	1		135
 Kuldīgas novads	LV-050	LV.15	458459	Municipality	Kuldīga|Kuldīga Municipality	1		135
 Krāslavas novads	LV-047	LV.14	458621	Municipality	Krāslava|Krāslava Municipality	1		135
 Jūrmala	LV-JUR	LV.13	459202	State city		1		135
-Jelgavas novads	LV-041	LV.12	459278	Municipality	Jelgava|Jelgava Municipality	1		135
-Jelgava	LV-JEL	LV.11	459281	State city		1		135
+Jelgava Municipality		LV.12	459278			1		135
+Jelgava		LV.11	459281			1		135
 Jēkabpils novads	LV-042	LV.10	459282	Municipality	Jēkabpils|Jēkabpils Municipality	1		135
 Gulbenes novads	LV-033	LV.09	459664	Municipality	Gulbene|Gulbene Municipality	1		135
 Dobeles novads	LV-026	LV.08	460311	Municipality	Dobele|Dobele Municipality	1		135
@@ -30106,12 +30106,12 @@ Tete	MZ-T	MZ.08	1026010	Province		1		159
 Sofala	MZ-S	MZ.05	1026804	Province		1		159
 Niassa	MZ-A	MZ.07	1030006	Province	Niassa Province	1		159
 Nampula	MZ-N	MZ.06	1033354	Province		1		159
-Maputo	MZ-L	MZ.04	1040649	Province	Maputo Province	1		159
+Maputo Province		MZ.04	1040649			1		159
 Manica	MZ-B	MZ.10	1040947	Province		1		159
 Inhambane	MZ-I	MZ.03	1045110	Province	Inhambane Province	1		159
 Gaza	MZ-G	MZ.02	1046058	Province	Gaza Province	1		159
 Cabo Delgado	MZ-P	MZ.01	1051823	Province	Cabo Delgado Province	1		159
-Maputo	MZ-MPM	MZ.11	1105845	City	Maputo City	1		159
+Maputo City		MZ.11	1105845			1		159
 Circunscrição de Sanga		MZ.07.1027397	1027397			2	30107	159
 Circunscrição da Quissanga		MZ.01.1028315	1028315			2	30113	159
 Concelho de Quelimane		MZ.09.1028433	1028433			2	30104	159
@@ -41567,8 +41567,8 @@ Les Mamelles	SC-24	SC.29	448408	District		1		195
 Roche Caiman	SC-25	SC.30	448409	District		1		195
 Au Cap	SC-04	SC.28	448410	District		1		195
 Outer Islands		SC.11876017	11876017			1		195
-Ile Perseverance I	SC-26	SC.12200079	12200079	District		1		195
-Ile Perseverance II	SC-27	SC.12200080	12200080	District		1		195
+Ile Perseverance I		SC.12200079	12200079			1		195
+Ile Perseverance II		SC.12200080	12200080			1		195
 Northern	SD-NO	SD.43	378389	State	Northern State	1		196
 Khartoum	SD-KH	SD.29	379253	State		1		196
 Red Sea	SD-RS	SD.36	408646	State		1		196
@@ -42836,8 +42836,8 @@ N’Djaména		TD.21	7603254			1		215
 Bahr el Ghazal	TD-BG	TD.22	7603255	Province	Barh el Gazel|Barh-el-Ghazal	1		215
 Sila	TD-SI	TD.25	7603257	Province		1		215
 Tibesti	TD-TI	TD.26	7603258	Province		1		215
-Ennedi-Ouest	TD-EO	TD.28	8604857	Province		1		215
-Ennedi-Est	TD-EE	TD.27	8604858	Province		1		215
+Ennedi-Ouest		TD.28	8604857			1		215
+Ennedi-Est		TD.27	8604858			1		215
 Harazé Mangueigne		TD.13.243701	243701			2	42818	215
 Baguirmi		TD.15.7670580	7670580			2	42829	215
 Dababa		TD.15.7670581	7670581			2	42829	215
@@ -43034,8 +43034,8 @@ Krabi	TH-81	TH.63	1152631	Province		1		218
 Kanchanaburi	TH-71	TH.50	1153080	Province		1		218
 Kamphaeng Phet	TH-62	TH.11	1153089	Province		1		218
 Chumphon	TH-86	TH.58	1153555	Province		1		218
-Chiang Rai	TH-57	TH.03	1153668	Province		1		218
-Chiang Mai	TH-50	TH.02	1153670	Province		1		218
+Chiang Rai		TH.03	1153668			1		218
+Chiang Mai		TH.02	1153670			1		218
 Yasothon	TH-35	TH.72	1604767	Province		1		218
 Yala	TH-95	TH.70	1604869	Province		1		218
 Uttaradit	TH-53	TH.10	1605214	Province		1		218
@@ -50194,7 +50194,7 @@ Nghệ An	VN-22	VN.40	1559969	Province	Nghệ An Province	1		241
 Thừa Thiên-Huế	VN-26	VN.46	1565033	Province	Thừa Thiên Huế Province	1		241
 Thanh Hóa	VN-21	VN.38	1566165	Province	Thanh Hóa Province	1		241
 Sơn La	VN-05	VN.14	1567643	Province	Sơn La Province	1		241
-Quảng Ninh	VN-13	VN.22	1568758	Province		1		241
+Quảng Ninh		VN.22	1568758			1		241
 Lạng Sơn	VN-09	VN.20	1576632	Province	Lạng Sơn Province	1		241
 Lai Châu	VN-01	VN.12	1577954	Province	Lai Châu Province	1		241
 Hà Tĩnh	VN-23	VN.42	1580700	Province	Hà Tĩnh Province	1		241
