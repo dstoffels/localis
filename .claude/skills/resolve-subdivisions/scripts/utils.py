@@ -5,6 +5,7 @@ from pathlib import Path
 from rapidfuzz import fuzz
 from ingest.subdivisions.scripts import prepare_names, load_iso_subs, merge_ipregistry_aliases
 from ingest.subdivisions.utils.subdivision_map import SubdivisionMap
+from ingest.subdivisions.utils.resolution_map import ResolutionMap
 from ingest.shared.models import SubdivisionModel
 
 
@@ -24,31 +25,20 @@ from ingest.shared.scripts import load_countries
 from ingest.subdivisions.scripts import map_geonames_subdivisions
 
 RESOLUTION_MAP_PATH = SUBDIVISIONS_OUTPUTS_PATH / "resolution_map.json"
-ORPHANED_PATH = SUBDIVISIONS_OUTPUTS_PATH / "orphaned_subdivisions.json"
 RESOLUTION_LOG_PATH = SUBDIVISIONS_OUTPUTS_PATH / "resolution_log.txt"
 REVIEW_OUTPUT_PATH = SUBDIVISIONS_OUTPUTS_PATH / "review_output.json"
 
 
-def _read_json(path: Path) -> dict | list:
-    return json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
-
-
-def read_resolution() -> dict:
-    return _read_json(RESOLUTION_MAP_PATH) or {}
-
-
-def read_orphaned() -> dict[str, dict]:
-    """Keyed by iso_code, matching the shape resolve_subdivisions.py's handle_orphans() writes."""
-    return _read_json(ORPHANED_PATH) or {}
+@functools.cache
+def _resolution_map() -> ResolutionMap:
+    return ResolutionMap.load(RESOLUTION_MAP_PATH)
 
 
 def write_resolution(iso_code: str, geonames_id: int | None) -> None:
     """geonames_id of None means "add as-is"."""
-    resolution_map = _read_json(RESOLUTION_MAP_PATH) or {}
-    resolution_map[iso_code] = geonames_id
-    RESOLUTION_MAP_PATH.write_text(
-        json.dumps(resolution_map, indent=2, ensure_ascii=False), encoding="utf-8"
-    )
+    resolution_map = _resolution_map()
+    resolution_map.skill_resolved[iso_code] = geonames_id
+    resolution_map.save(RESOLUTION_MAP_PATH)
 
 
 @functools.cache
@@ -63,7 +53,7 @@ def get_geonames_submap() -> SubdivisionMap:
 
 @functools.cache
 def _get_iso_subs() -> dict[str, SubdivisionModel]:
-    iso_subs = load_iso_subs(_countries())
+    iso_subs, _ = load_iso_subs(_countries(), _resolution_map())
     merge_ipregistry_aliases(iso_subs)
     return iso_subs
 
@@ -154,13 +144,22 @@ def is_valid_candidate(iso_code: str, geo_sub_geonames_id: int) -> tuple[bool, s
     return True, ""
 
 
-def get_next_orphan() -> dict:
-    orphans = read_orphaned()
-    if not orphans:
+def get_next_orphan() -> dict | None:
+    orphans = _resolution_map().auto_merge.orphans
+    iso_code = next(
+        iter(orphans.no_candidates + orphans.no_matches + orphans.ambiguity), None
+    )
+    if iso_code is None:
         return None
 
-    iso_code, entry = next(iter(orphans.items()))
-    return {"iso_code": iso_code, **entry}
+    iso_sub = _get_iso_subs()[iso_code]
+    return {
+        "iso_code": iso_code,
+        "name": iso_sub.name,
+        "aliases": iso_sub.aliases,
+        "country": iso_sub.country.name,
+        "type": iso_sub.type,
+    }
 
 
 def write_orphan_for_review(orphan: dict) -> None:
@@ -175,11 +174,11 @@ def log_decision(line: str) -> None:
 
 
 def pop_orphan(iso_code: str) -> None:
-    """Removes an orphan from orphaned_subdivisions.json by iso_code"""
-    orphaned = read_orphaned()
-    if iso_code not in orphaned:
-        raise ValueError(f"{iso_code} is not in orphaned_subdivisions.json")
-    del orphaned[iso_code]
-    ORPHANED_PATH.write_text(
-        json.dumps(orphaned, indent=2, ensure_ascii=False), encoding="utf-8"
-    )
+    """Removes an orphan from resolution_map's auto_merge.orphans by iso_code."""
+    orphans = _resolution_map().auto_merge.orphans
+    for bucket in (orphans.no_candidates, orphans.no_matches, orphans.ambiguity):
+        if iso_code in bucket:
+            bucket.remove(iso_code)
+            _resolution_map().save(RESOLUTION_MAP_PATH)
+            return
+    raise ValueError(f"{iso_code} is not in resolution_map's orphans")

@@ -20,6 +20,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `resolve-subdivisions` skill and `resolution_map.json` now key on `geonames_id` instead of an unstable per-run hash; `resolution_map.json` simplified to a flat `dict[str, int | None]`
 - Overhauled ingest logging: per-domain log files, log levels, per-merge/orphan diagnostics
 - Subdivision aliases enriched from GeoNames' `alternateNamesV2` dump (English + each country's CLDR official language(s) only, historic/colloquial/bidi-control names excluded), feeding into fuzzy matching
+- `resolution_map.json` restructured from a flat per-code cache into the single source of truth for every subdivision's resolution, not just the ones needing human help: nested by how each was decided (`auto_merge`, `skill_resolved`, `wikidata_merge`, `bypassed`), with `auto_merge` results self-reconciling against a durable `audited` record on every run so a stale decision is automatically recomputed, no manual cache-invalidation step required; `orphaned_subdivisions.json` is retired, orphans (`no_candidates`/`no_matches`/`ambiguity`) now live in this same file
+- Subdivision fuzzy-match threshold no longer gives single-token names an extra discount on top of the length-based one; it was stacking with short-name leniency to let coincidental shared suffixes (e.g. "Enfield"/"Wakefield", both ending in "-field") clear threshold despite sharing no real resemblance
+- Ingest log files renamed from `*_ingest_log.txt` to `*_ingest.log`
 - Subdivision auto-merge now disqualifies candidate pairs where the GeoNames side's raw qualifier words mark it as a city but the ISO side's `type` isn't (or vice versa), preventing confident-but-wrong string matches (e.g. a city ISO code stealing its containing oblast/county/department's GeoNames entry); renamed `CATEGORICAL_TOKENS` to `NOISE_TOKENS`, grouped into two families (`city` vs `area`) rather than granular ones, since finer administrative-type distinctions aren't reliable across sources/translations
 - ISO subdivision names with trailing `[...]`/`(...)` content (alternate-language names, embedded codes, territory-dispute annotations) are now split at load time: genuine alternate names become aliases, codes/annotations/duplicates are dropped, instead of polluting fuzzy-match comparisons inline
 
@@ -34,6 +37,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `has_changed()` no longer trusts the manifest when the tracked file is actually missing on disk
 - `SubdivisionMap.refresh()` no longer overwrites a merged subdivision's ISO-derived `admin_level` with one re-derived from GeoNames' own parent nesting, which could silently corrupt it after merge
 - ISO subdivisions whose real admin_level-1 parent was misidentified as a real second admin tier (e.g. Indonesia's provinces nested under a non-administrative grouping) now compute the correct level
+- `ResolutionMap.reconcile()` couldn't represent "verified: this should not auto-merge"; an audited no-match decision would have silently been overwritten by the next run's fresh (and still wrong) auto-merge result
 
 ## [1.1.2] - 2026-09-29
 

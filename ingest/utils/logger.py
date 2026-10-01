@@ -8,9 +8,9 @@ Stage = Literal["COUNTRIES", "SUBDIVISIONS", "CITIES"]
 Level = Literal["INFO", "WARN"]
 
 STAGE_FILES: dict[Stage, Path] = {
-    "COUNTRIES": BASE_PATH / "countries" / "logs" / "countries_ingest_log.txt",
-    "SUBDIVISIONS": BASE_PATH / "subdivisions" / "logs" / "subdivisions_ingest_log.txt",
-    "CITIES": BASE_PATH / "cities" / "logs" / "cities_ingest_log.txt",
+    "COUNTRIES": BASE_PATH / "countries" / "logs" / "countries_ingest.log",
+    "SUBDIVISIONS": BASE_PATH / "subdivisions" / "logs" / "subdivisions_ingest.log",
+    "CITIES": BASE_PATH / "cities" / "logs" / "cities_ingest.log",
 }
 
 

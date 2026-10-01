@@ -8,34 +8,34 @@ Whatever's left unmatched after fuzzy merging is an "orphan". Forcing a low-conf
 
 ### Pipeline integration
 
-`resolve_unmerged_subs()` (`ingest/subdivisions/scripts/resolve_subdivisions.py`) is the seam between fuzzy matching and manual resolution:
+`ingest/subdivisions/outputs/resolution_map.json` is the single source of truth for every ISO subdivision's resolution, not just the ones that needed human help. It's loaded once into a `ResolutionMap` (`ingest/subdivisions/utils/resolution_map.py`) at the start of `ingest_subdivisions()` and threaded through every stage:
 
-1. It first re-applies any previously recorded decisions from `resolution_map.json` (see below) to the unmerged list, this is what makes resolutions durable across ingest runs.
-2. Otherwise, remaining orphans are dumped to `orphaned_subdivisions.json` keyed by ISO code via `dump_orphans()`, and the pipeline runs to completion regardless, including cities. It used to hard-stop with `sys.exit(10)` the moment an orphan was found, but that made a run all-or-nothing: a single unresolved orphan meant nothing else from that run, including subdivisions that resolved cleanly, ever landed. Now any remaining orphans are just a known, tracked gap, and everything else still merges. CI treats orphan state as a fact to check after the run, reading `orphaned_subdivisions.json` directly (`ingest/subdivisions/scripts/check_orphans.py`, exposed as `poetry run check-orphans`), rather than relying on an exit code.
+1. `apply_skill_resolved()` (`ingest/subdivisions/scripts/resolve_subdivisions.py`) applies every entry in `resolution_map.skill_resolved` directly, before fuzzy matching ever runs, so a human-verified decision can never lose its target to a fresh auto-merge.
+2. `try_merge()` (`ingest/subdivisions/scripts/merge_subdivisions.py`) auto-merges whatever's left and writes the result straight into `resolution_map.auto_merge`: a successful match (with its score margin over threshold) into `resolutions`, an unmatched one into `orphans.no_candidates`/`no_matches`/`ambiguity` depending on why. This recomputes fully on every run; a previously-recorded `audited` entry is only kept if the fresh result still matches it exactly (`ResolutionMap.reconcile()`), otherwise it's evicted and replaced, which is how an algorithm improvement self-corrects a stale decision without any manual cache-invalidation step to forget.
+3. `resolution_map.save()` persists the whole file at the end of the run, regardless of whether orphans remain, the pipeline runs to completion including cities either way. CI checks orphan state as a fact after the run (`ingest/subdivisions/scripts/check_orphans.py`, exposed as `poetry run check-orphans`), rather than relying on an exit code.
 
 ### Resolving Orphans
 
-The skill (`.claude/skills/resolve-subdivisions/SKILL.md`) is a Claude Code skill backed by a local MCP server (`.claude/skills/resolve-subdivisions/scripts/server.py`, can be launched manually via `poetry run python ...`). It drains `orphaned_subdivisions.json` one entry at a time.
+The skill (`.claude/skills/resolve-subdivisions/SKILL.md`) is a Claude Code skill backed by a local MCP server (`.claude/skills/resolve-subdivisions/scripts/server.py`, can be launched manually via `poetry run python ...`). It drains `resolution_map.json`'s `auto_merge.orphans` lists one entry at a time.
 
 **Tools**
 
-- **`next()`**: Returns the next orphan from `orphaned_subdivisions.json` and a batch of its GeoNames candidates of the same country, ranked by fuzzy score (`rapidfuzz` against every name/alias combo). Geonames candidates are paginated into batches. The first batch is a "top tier" slice (~10% of the pool, ~75% of matches are found in this batch), subsequent batches are fixed 200-candidate chunks, this keeps a country with thousands of subdivisions from blowing out the tool result payload. Repeated `next()` calls page through the same orphan until its candidates run out. Each session has a 1000-candidate soft cap, forcing a session `/clear` to keep agent context from drifting over a long run.
-- **`merge(candidate_hashid, aliases=[])`**: Resolves the current orphan into a selected GeoNames candidate by hashid. 
-- **`add(aliases=[])`**: Adds the orphan as its own new entry, for subdivisions that are real but have no GeoNames counterpart to merge into.
+- **`next()`**: Returns the next orphan and a batch of its GeoNames candidates of the same country, ranked by fuzzy score (`rapidfuzz` against every name/alias combo). Geonames candidates are paginated into batches. The first batch is a "top tier" slice (~10% of the pool, ~75% of matches are found in this batch), subsequent batches are fixed 200-candidate chunks, this keeps a country with thousands of subdivisions from blowing out the tool result payload. Repeated `next()` calls page through the same orphan until its candidates run out. Each session has a 1000-candidate soft cap, forcing a session `/clear` to keep agent context from drifting over a long run.
+- **`merge(candidate_geonames_id)`**: Resolves the current orphan into a selected GeoNames candidate by its `geonames_id`.
+- **`add()`**: Adds the orphan as its own new entry, for subdivisions that are real but have no GeoNames counterpart to merge into.
 - **`review()`**: An escalation valve for unresolvable cases. `review` dumps the orphan and its full candidate list to `review_output.json` for a human to inspect and decide manually. The orphan must be resolved with `merge` or `add` before the session can continue.
 
-Both `merge` and `add` write to `resolution_map.json`, remove the orphan from `orphaned_subdivisions.json`, and append a one-line audit entry to `resolution_log.txt`.
+Both `merge` and `add` write into `resolution_map.skill_resolved`, remove the orphan from whichever `auto_merge.orphans` bucket it was in, and append a one-line audit entry to `resolution_log.txt`.
 
 **Decision funnel** (`SKILL.md` Steps 1–5): try a high-confidence `merge` against the current candidate batch → if none fit, page to the next batch and repeat → if no candidate ever fits but the orphan is a real, confirmed entity, `add` it → if still uncertain, websearch the orphan → if that still doesn't resolve it, `review()` and defer to human intervention.
 
 ### State files
 
-All under `ingest/subdivisions/raw/` (gitignored except these, per `.gitignore`'s whitelist):
+Under `ingest/subdivisions/outputs/`:
 
 | File | Written by | Purpose |
 |---|---|---|
-| `orphaned_subdivisions.json` | `resolve_subdivisions.py` (produced), skill / `pop_orphan()` (drained) | Queue of unresolved ISO subdivisions, keyed by ISO code |
-| `resolution_map.json` | skill's `merge`/`add` | Durable decision cache, keyed by ISO code; re-applied automatically on every ingest run |
+| `resolution_map.json` | every pipeline run (`auto_merge`, `bypassed`), skill's `merge`/`add` (`skill_resolved`) | Single source of truth for every ISO subdivision's resolution: auto-merged, skill-resolved, non-administrative bypass, or orphaned, by reason |
 | `resolution_log.txt` | `log_decision()` | Append-only, human-readable audit trail of every merge/add decision |
 | `review_output.json` | skill's `review()` | One-off dump of an escalated orphan + full candidate list for manual human review |
 

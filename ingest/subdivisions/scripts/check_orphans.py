@@ -2,24 +2,26 @@
 # Used by the ingest CI workflow to decide whether to block the PR.
 
 from ingest.utils import SUBDIVISIONS_OUTPUTS_PATH
-import json
+from ingest.subdivisions.utils.resolution_map import ResolutionMap, Orphans
 import sys
 
-ORPHANED_PATH = SUBDIVISIONS_OUTPUTS_PATH / "orphaned_subdivisions.json"
+RESOLUTION_MAP_PATH = SUBDIVISIONS_OUTPUTS_PATH / "resolution_map.json"
 
 
-def load_orphans() -> dict:
-    if not ORPHANED_PATH.exists():
-        return {}
-    return json.loads(ORPHANED_PATH.read_text(encoding="utf-8")) or {}
+def load_orphans() -> Orphans:
+    return ResolutionMap.load(RESOLUTION_MAP_PATH).auto_merge.orphans
 
 
-def summarize(orphans: dict) -> str:
-    lines = [f"**{len(orphans)} orphaned subdivision(s) need manual resolution:**", ""]
-    lines += [
-        f"- `{iso_code}`: {entry['name']} ({entry['country']})"
-        for iso_code, entry in orphans.items()
-    ]
+def summarize(orphans: Orphans) -> str:
+    total = len(orphans.no_candidates) + len(orphans.no_matches) + len(orphans.ambiguity)
+    lines = [f"**{total} orphaned subdivision(s) need manual resolution:**", ""]
+    for reason, codes in (
+        ("no candidates", orphans.no_candidates),
+        ("no matches", orphans.no_matches),
+        ("ambiguous", orphans.ambiguity),
+    ):
+        if codes:
+            lines.append(f"- {reason}: {', '.join(codes)}")
     lines += [
         "",
         "Pull the `ingest` branch, run the resolve-subdivisions skill to resolve these, "
@@ -30,7 +32,8 @@ def summarize(orphans: dict) -> str:
 
 def main() -> None:
     orphans = load_orphans()
-    if not orphans:
+    total = len(orphans.no_candidates) + len(orphans.no_matches) + len(orphans.ambiguity)
+    if not total:
         sys.exit(0)
     print(summarize(orphans))
     sys.exit(1)

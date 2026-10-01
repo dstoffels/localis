@@ -20,6 +20,28 @@
     "country": "Afghanistan",
     "admin_level": 1
   },
+  "AF.42": {
+    "name": "Panjshir",
+    "aliases": [
+      "Panjsher viloyati",
+      "Panjshir Province",
+      "ولایت پنجشیر",
+      "پنجشېر ولايت"
+    ],
+    "country": "Afghanistan",
+    "admin_level": 1
+  },
+  "AM.01": {
+    "name": "Aragatsotn",
+    "aliases": [
+      "Aragatsotn Province",
+      "Aragatsotni Marz",
+      "Արագածոտն",
+      "Արագածոտնի Մարզ"
+    ],
+    "country": "Armenia",
+    "admin_level": 1
+  },
   "AO.CBG": {
     "name": "Cubango",
     "aliases": [],
@@ -42,6 +64,41 @@
     "name": "Cuando Province",
     "aliases": [],
     "country": "Angola",
+    "admin_level": 1
+  },
+  "AT.04": {
+    "name": "Upper Austria",
+    "aliases": [
+      "Felső-Ausztria",
+      "Gornja Austrija",
+      "Oberösterreich",
+      "Zgornja Avstrija"
+    ],
+    "country": "Austria",
+    "admin_level": 1
+  },
+  "AT.03": {
+    "name": "Lower Austria",
+    "aliases": [
+      "Alsó-Ausztria",
+      "Donja Austrija",
+      "Nideristaraich",
+      "Niederösterreich",
+      "Spodnja Avstrija"
+    ],
+    "country": "Austria",
+    "admin_level": 1
+  },
+  "AT.02": {
+    "name": "Carinthia",
+    "aliases": [
+      "Kaernten",
+      "Karintia",
+      "Koroška",
+      "Koruška",
+      "Kärnten"
+    ],
+    "country": "Austria",
     "admin_level": 1
   },
   "AZ.29": {
@@ -104,12 +161,6 @@
     ],
     "country": "Azerbaijan",
     "admin_level": 1
-  },
-  "AZ.35.148412": {
-    "name": "Nakhchivan City",
-    "aliases": [],
-    "country": "Azerbaijan",
-    "admin_level": 2
   },
   "AZ.21.585038": {
     "name": "Shaumyan Rayon",
@@ -181,10 +232,27 @@
     "country": "Azerbaijan",
     "admin_level": 2
   },
+  "AZ.35.8411069": {
+    "name": "Nakhchivan",
+    "aliases": [
+      "Naxçıvan",
+      "Naxçıvan Şəhəri"
+    ],
+    "country": "Azerbaijan",
+    "admin_level": 2
+  },
   "AZ.09.8572651": {
     "name": "Nizami Rayonu",
     "aliases": [],
     "country": "Azerbaijan",
+    "admin_level": 2
+  },
+  "BD.85.1042": {
+    "name": "Jhalokati",
+    "aliases": [
+      "Jhalokati District"
+    ],
+    "country": "Bangladesh",
     "admin_level": 2
   },
   "BE.BRU.BRU": {
@@ -210,6 +278,16 @@
     ],
     "country": "Burkina Faso",
     "admin_level": 1
+  },
+  "BF.08.42": {
+    "name": "Province du Gobnangou",
+    "aliases": [
+      "Gobnangou",
+      "Tapoa",
+      "Tapoa Province"
+    ],
+    "country": "Burkina Faso",
+    "admin_level": 2
   },
   "BF.11.68": {
     "name": "Province du Bassitenga",
@@ -440,6 +518,43 @@
     "country": "Colombia",
     "admin_level": 1
   },
+  "CZ.52": {
+    "name": "Prague",
+    "aliases": [
+      "Hlavní město Praha",
+      "Praha"
+    ],
+    "country": "Czechia",
+    "admin_level": 1
+  },
+  "CZ.79": {
+    "name": "South Bohemian Region",
+    "aliases": [
+      "Jihočeský",
+      "Jihočeský kraj"
+    ],
+    "country": "Czechia",
+    "admin_level": 1
+  },
+  "CZ.81": {
+    "name": "Carlsbad Region",
+    "aliases": [
+      "Karlovarský",
+      "Karlovarský kraj"
+    ],
+    "country": "Czechia",
+    "admin_level": 1
+  },
+  "CZ.88": {
+    "name": "Central Bohemia",
+    "aliases": [
+      "Central Bohemian Region",
+      "Středočeský",
+      "Středočeský kraj"
+    ],
+    "country": "Czechia",
+    "admin_level": 1
+  },
   "CZ.52.8378769": {
     "name": "Praha 1",
     "aliases": [],
@@ -582,12 +697,39 @@
     "country": "Germany",
     "admin_level": 1
   },
-  "DO.37": {
-    "name": "Santo Domingo Province",
+  "DE.02": {
+    "name": "Bavaria",
     "aliases": [
-      "Provincia Santo Domingo"
+      "Bayern",
+      "Free State of Bavaria"
     ],
-    "country": "Dominican Republic",
+    "country": "Germany",
+    "admin_level": 1
+  },
+  "DK.17": {
+    "name": "Capital Region",
+    "aliases": [
+      "Hauptstadtregion",
+      "Hovedstaden",
+      "Region Hovedstaden"
+    ],
+    "country": "Denmark",
+    "admin_level": 1
+  },
+  "EE.18": {
+    "name": "Tartu",
+    "aliases": [
+      "Tartu maakond"
+    ],
+    "country": "Estonia",
+    "admin_level": 1
+  },
+  "EE.07": {
+    "name": "Lääne",
+    "aliases": [
+      "Lääne maakond"
+    ],
+    "country": "Estonia",
     "admin_level": 1
   },
   "EE.03.0321": {
@@ -1160,6 +1302,14 @@
     "name": "City and Borough of Salford",
     "aliases": [
       "Salford"
+    ],
+    "country": "United Kingdom",
+    "admin_level": 2
+  },
+  "GB.ENG.O7": {
+    "name": "City and Borough of Wakefield",
+    "aliases": [
+      "Wakefield"
     ],
     "country": "United Kingdom",
     "admin_level": 2
@@ -1768,6 +1918,15 @@
     "name": "Veszprém",
     "aliases": [],
     "country": "Hungary",
+    "admin_level": 1
+  },
+  "IE.C": {
+    "name": "Connacht",
+    "aliases": [
+      "Connachta",
+      "Cúige Chonnacht"
+    ],
+    "country": "Ireland",
     "admin_level": 1
   },
   "IE.L.35": {
@@ -2759,6 +2918,18 @@
     "country": "Iraq",
     "admin_level": 2
   },
+  "IR.16": {
+    "name": "Kurdistan Province",
+    "aliases": [
+      "استان کردستان",
+      "اُستانِ كُردِستان",
+      "اُستَن اُف كُردِستَن",
+      "فَرماندارئ كُلِّ كُردِستان",
+      "کردستان"
+    ],
+    "country": "Iran",
+    "admin_level": 1
+  },
   "IR.04": {
     "name": "Sistan and Baluchestan",
     "aliases": [
@@ -2945,6 +3116,39 @@
     "country": "North Korea",
     "admin_level": 1
   },
+  "KP.09": {
+    "name": "Kangwŏn-do",
+    "aliases": [
+      "Kangwŏn",
+      "江原",
+      "江原道",
+      "강원",
+      "강원도"
+    ],
+    "country": "North Korea",
+    "admin_level": 1
+  },
+  "KP.13": {
+    "name": "Yanggang-do",
+    "aliases": [
+      "兩江",
+      "兩江道",
+      "량강도"
+    ],
+    "country": "North Korea",
+    "admin_level": 1
+  },
+  "KP.01": {
+    "name": "Chagang",
+    "aliases": [
+      "慈江",
+      "慈江道",
+      "자강",
+      "자강도"
+    ],
+    "country": "North Korea",
+    "admin_level": 1
+  },
   "KR.10": {
     "name": "Busan",
     "aliases": [
@@ -3013,25 +3217,6 @@
     ],
     "country": "Lebanon",
     "admin_level": 1
-  },
-  "LT.65.41": {
-    "name": "Vilnius District Municipality",
-    "aliases": [
-      "Vilniaus rajonas",
-      "Vilniaus rajono savivaldybė",
-      "Vilnius"
-    ],
-    "country": "Lithuania",
-    "admin_level": 2
-  },
-  "LT.56.33": {
-    "name": "Alytaus rajonas",
-    "aliases": [
-      "Alytaus rajono savivaldybė",
-      "Alytus District Municipality"
-    ],
-    "country": "Lithuania",
-    "admin_level": 2
   },
   "LV.32": {
     "name": "Ventspils",
@@ -3669,19 +3854,90 @@
     "country": "Serbia",
     "admin_level": 1
   },
-  "RU.04": {
-    "name": "Altai Krai",
+  "RU.70": {
+    "name": "Stavropol Kray",
     "aliases": [
-      "Altay Kray",
-      "Altay diyarı",
-      "Алтаень край",
-      "Алтай крае",
-      "Алтай край",
-      "Алтай крайы",
-      "Алтай кыраайа",
-      "Алтай шаер",
-      "Алтайн мохк",
-      "Алтайский Край"
+      "Stavropol diyarı",
+      "Stavropol’ Kray",
+      "Ставропол Къэрал",
+      "Ставропол улка",
+      "Ставрополан мохк",
+      "Ставрополень край",
+      "Ставрополь крае",
+      "Ставрополь край",
+      "Ставрополь крайы",
+      "Ставрополь кыраайа",
+      "Ставрополь ладор",
+      "Ставрополь шаер",
+      "Ставропольдин край",
+      "Ставрополье",
+      "Ставропольский Край"
+    ],
+    "country": "Russian Federation",
+    "admin_level": 1
+  },
+  "RU.62": {
+    "name": "Ryazan Oblast",
+    "aliases": [
+      "Ryazan vilayəti",
+      "Разан област",
+      "Рязанан область",
+      "Рязанень аймак",
+      "Рязанень ёнкс",
+      "Рязанская Область",
+      "Рязань обласьт",
+      "Рязань улос",
+      "Рязань уобалаһа",
+      "Рязань өлкәсе",
+      "Рязань өлкәһе"
+    ],
+    "country": "Russian Federation",
+    "admin_level": 1
+  },
+  "RU.10": {
+    "name": "Bryansk Oblast",
+    "aliases": [
+      "Bryansk vilayəti",
+      "Бранск област",
+      "Брянск обласьт",
+      "Брянск улос",
+      "Брянск өлкәһе",
+      "Брянскай уобалас",
+      "Брянскан область",
+      "Брянская Область",
+      "Брянскоень ёнкс",
+      "Брянсконь аймак",
+      "Брәнск өлкәсе"
+    ],
+    "country": "Russian Federation",
+    "admin_level": 1
+  },
+  "RU.13": {
+    "name": "Chelyabinsk",
+    "aliases": [
+      "Chelyabinsk Oblast",
+      "Çelyabinsk vilayəti",
+      "Силәбе өлкәһе",
+      "Челябань аймак",
+      "Челябань ёнкс",
+      "Челябинск обласьт",
+      "Челябинск улос",
+      "Челябинскай уобалас",
+      "Челябинскан область",
+      "Челябинская",
+      "Челябинская Область",
+      "Чиләбе өлкәсе"
+    ],
+    "country": "Russian Federation",
+    "admin_level": 1
+  },
+  "RU.92": {
+    "name": "Kamchatka",
+    "aliases": [
+      "Kamchatka Krai",
+      "Kamçatka",
+      "Камчатка",
+      "Камчатский край"
     ],
     "country": "Russian Federation",
     "admin_level": 1
@@ -3979,6 +4235,14 @@
     ],
     "country": "Uganda",
     "admin_level": 2
+  },
+  "UZ.15": {
+    "name": "Jizzakh Region",
+    "aliases": [
+      "Jizzax viloyati"
+    ],
+    "country": "Uzbekistan",
+    "admin_level": 1
   },
   "VN.22": {
     "name": "Quảng Ninh",

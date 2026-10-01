@@ -1,6 +1,7 @@
 from ingest.utils import SUBDIVISIONS_INPUTS_PATH, ingest_log
 from ingest.shared.models import CountryModel
 from ingest.shared.models import SubdivisionModel
+from ingest.subdivisions.utils.resolution_map import ResolutionMap
 import json
 import re
 
@@ -8,17 +9,6 @@ _TRAILING_BRACKET_RE = re.compile(r"^(.*?)\s*[\[\(]([^\[\]\(\)]+)[\]\)]\s*$")
 _TRAILING_CODE_RE = re.compile(r"\s+[A-Z]{2,3}-[A-Z0-9]{1,6}$")
 _BARE_CODE_RE = re.compile(r"^[A-Z]{2,3}-[A-Z0-9]{1,6}$")
 _NON_NAME_BRACKET_CONTENT = {"city", "partial", "eh", "eh-partial"}
-
-# (alpha2, type) pairs confirmed to be ISO documentation/statistical groupings with no governing function (e.g. Indonesia's island-grouping "Geographical unit" tier, the Dominican Republic's planning "Region" tier); these never merge with a GeoNames counterpart and get admin_level 0, and a parent of this type doesn't make its child a real second admin level either. Scoped per-country since e.g. "Region" is a genuine top-level admin type elsewhere (Peru).
-_NON_ADMINISTRATIVE_TYPES = {
-    ("ID", "geographical unit"),
-    ("DO", "region"),
-    ("CV", "geographical region"),
-}
-
-
-def _is_non_administrative(alpha2: str, entry_type: str) -> bool:
-    return (alpha2, entry_type.lower()) in _NON_ADMINISTRATIVE_TYPES
 
 
 def _split_bracketed_name(raw_name: str) -> tuple[str, str | None]:
@@ -42,6 +32,7 @@ def _split_bracketed_name(raw_name: str) -> tuple[str, str | None]:
 
 def load_iso_subs(
     countries: dict[str, CountryModel],
+    resolution_map: ResolutionMap,
 ) -> tuple[dict[str, SubdivisionModel], list[SubdivisionModel]]:
     """Parses ISO 3166-2 subdivisions from Debian's iso-codes, the authoritative source. Returns (iso_subs, non_administrative_subs): the latter are known upfront to never have a GeoNames counterpart, so they bypass merging entirely."""
     ingest_log.writeline("Loading ISO subdivisions...")
@@ -59,10 +50,12 @@ def load_iso_subs(
         parent_iso_code = entry.get("parent")
         parent_entry = entries_by_code.get(parent_iso_code) if parent_iso_code else None
 
-        if _is_non_administrative(alpha2, entry["type"]):
+        if resolution_map.is_non_administrative(alpha2, entry["type"]):
             admin_level = 0
         else:
-            has_real_parent = parent_entry and not _is_non_administrative(alpha2, parent_entry["type"])
+            has_real_parent = parent_entry and not resolution_map.is_non_administrative(
+                alpha2, parent_entry["type"]
+            )
             admin_level = 2 if has_real_parent else 1
 
         country = countries.get(alpha2)
