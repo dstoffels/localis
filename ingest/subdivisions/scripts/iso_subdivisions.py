@@ -30,6 +30,25 @@ def _split_bracketed_name(raw_name: str) -> tuple[str, str | None]:
     return primary, content
 
 
+def _admin_level(entry: dict, entries_by_code: dict[str, dict], resolution_map: ResolutionMap) -> int:
+    """Depth of `entry` in its real (non-bypassed) ISO parent chain: 0 if non-administrative itself, otherwise 1 plus one for every ancestor up the chain that isn't non-administrative. A non-administrative ancestor is transparent: it neither counts toward depth nor stops the climb from continuing past it."""
+    alpha2 = entry["code"].split("-")[0]
+    if resolution_map.is_non_administrative(alpha2, entry["type"]):
+        return 0
+
+    depth = 1
+    parent_code = entry.get("parent")
+    while parent_code:
+        parent_entry = entries_by_code.get(parent_code)
+        if parent_entry is None:
+            break
+        if not resolution_map.is_non_administrative(alpha2, parent_entry["type"]):
+            depth += 1
+        parent_code = parent_entry.get("parent")
+
+    return depth
+
+
 def load_iso_subs(
     countries: dict[str, CountryModel],
     resolution_map: ResolutionMap,
@@ -48,15 +67,7 @@ def load_iso_subs(
         iso_code = entry["code"]
         alpha2 = iso_code.split("-")[0]
         parent_iso_code = entry.get("parent")
-        parent_entry = entries_by_code.get(parent_iso_code) if parent_iso_code else None
-
-        if resolution_map.is_non_administrative(alpha2, entry["type"]):
-            admin_level = 0
-        else:
-            has_real_parent = parent_entry and not resolution_map.is_non_administrative(
-                alpha2, parent_entry["type"]
-            )
-            admin_level = 2 if has_real_parent else 1
+        admin_level = _admin_level(entry, entries_by_code, resolution_map)
 
         country = countries.get(alpha2)
         if not country:

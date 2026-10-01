@@ -26,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Ingest log files renamed from `*_ingest_log.txt` to `*_ingest.log`
 - Subdivision auto-merge now disqualifies candidate pairs where the GeoNames side's raw qualifier words mark it as a city but the ISO side's `type` isn't (or vice versa), preventing confident-but-wrong string matches (e.g. a city ISO code stealing its containing oblast/county/department's GeoNames entry); renamed `CATEGORICAL_TOKENS` to `NOISE_TOKENS`, grouped into two families (`city` vs `area`) rather than granular ones, since finer administrative-type distinctions aren't reliable across sources/translations
 - ISO subdivision names with trailing `[...]`/`(...)` content (alternate-language names, embedded codes, territory-dispute annotations) are now split at load time: genuine alternate names become aliases, codes/annotations/duplicates are dropped, instead of polluting fuzzy-match comparisons inline
+- `admin_level` is now computed by walking the full ISO parent chain instead of a one-level-deep check capped at 2, so a genuine 3rd+ generation (so far only France's régions → collectivités → départements) gets its own level instead of colliding with its parent's; non-administrative ancestors stay transparent and don't count toward depth
 
 ### Removed
 - Manual alias/name contribution during subdivision resolution (CLI and skill); resolutions are now source-data only

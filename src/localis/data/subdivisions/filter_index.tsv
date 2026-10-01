@@ -16055,7 +16055,6 @@ indre	metropolitan department	250|fr|fra|france	2
 departement d'ille-et-vilaine|ille-et-vilaine	metropolitan department	250|fr|fra|france	2
 herault	metropolitan department	250|fr|fra|france	2
 departement des hauts-de-seine|hauts-de-seine	metropolitan department	250|fr|fra|france	2
-departement du haut-rhin|haut-rhin	metropolitan department	250|fr|fra|france	2
 departement de la haute-vienne|haute-vienne	metropolitan department	250|fr|fra|france	2
 hautes-pyrenees	metropolitan department	250|fr|fra|france	2
 departement de la haute-vienne|haute-savoie|upper savoy	metropolitan department	250|fr|fra|france	2
@@ -16088,7 +16087,6 @@ cantal|departement du cantal	metropolitan department	250|fr|fra|france	2
 calvados|departement du calvados	metropolitan department	250|fr|fra|france	2
 bouches-du-rhone	metropolitan department	250|fr|fra|france	2
 territoire de belfort	metropolitan department	250|fr|fra|france	2
-bas-rhin|departement du bas-rhin	metropolitan department	250|fr|fra|france	2
 aveyron	metropolitan department	250|fr|fra|france	2
 aude	metropolitan department	250|fr|fra|france	2
 aube	metropolitan department	250|fr|fra|france	2
@@ -16102,6 +16100,8 @@ aisne	metropolitan department	250|fr|fra|france	2
 ain	metropolitan department	250|fr|fra|france	2
 metropole de lyon	metropolitan collectivity with special status	250|fr|fra|france	2
 alsace	european collectivity	250|fr|fra|france	2
+departement du haut-rhin|haut-rhin	metropolitan department	250|fr|fra|france	3
+bas-rhin|departement du bas-rhin	metropolitan department	250|fr|fra|france	3
 woleu-ntem|woleu-ntem province	province	266|ga|gab|gabon	1
 ogooue-maritime|ogooue-maritime province	province	266|ga|gab|gabon	1
 ogooue-lol province|ogooue-lolo	province	266|ga|gab|gabon	1
@@ -19177,41 +19177,45 @@ nusa tenggara	geographical unit	360|id|idn|indonesia
 papua	geographical unit	360|id|idn|indonesia	
 sulawesi	geographical unit	360|id|idn|indonesia	
 sumatera	geographical unit	360|id|idn|indonesia	
-connacht|connachta|connaught|cuige chonnacht	province	372|ie|ireland|irl	1
-cuige laighean|leinster	province	372|ie|ireland|irl	1
-cuige mumhan|munster	province	372|ie|ireland|irl	1
-cuige uladh|ulster	province	372|ie|ireland|irl	1
-cill mhantain|county wicklow|wicklow	county	372|ie|ireland|irl	2
-county wexford|wexford	county	372|ie|ireland|irl	2
-contae na hiarmhi|county westmeath|westmeath	county	372|ie|ireland|irl	2
-contae thiobraid arann|county tipperary|tiobraid arann|tipperary	county	372|ie|ireland|irl	2
-county sligo|sligeach|sligo	county	372|ie|ireland|irl	2
-county roscommon|ros comain|roscommon	county	372|ie|ireland|irl	2
-county offaly|offaly|uibh fhaili	county	372|ie|ireland|irl	2
-county monaghan|monaghan|muineachan	county	372|ie|ireland|irl	2
-co meath|county meath|meath	county	372|ie|ireland|irl	2
-contae mhaigh eo|county mayo|mayo|mayo county	county	372|ie|ireland|irl	2
-co louth|county louth|louth	county	372|ie|ireland|irl	2
-an longfort|co longford|county longford|longford	county	372|ie|ireland|irl	2
-county leitrim|leitrim|liatroim	county	372|ie|ireland|irl	2
-contae laoighise|contae laoise|county laois|laoighis|laois|queen's county	county	372|ie|ireland|irl	2
-cill chainnigh|county kilkenny|kilkenny	county	372|ie|ireland|irl	2
-cill dara|co kildare|county kildare|kildare	county	372|ie|ireland|irl	2
-co kerry|county kerry|kerry	county	372|ie|ireland|irl	2
-contae na gaillimhe|county galway|gaillimh|galway	county	372|ie|ireland|irl	2
-county donegal|donegal|dun na ngall	county	372|ie|ireland|irl	2
-contae chorcai|corcaigh|cork|cork county|county cork	county	372|ie|ireland|irl	2
-clare|co clare|county clare	county	372|ie|ireland|irl	2
-an cabhan|cavan|co cavan|county cavan	county	372|ie|ireland|irl	2
-carlow|ceatharlach|county carlow	county	372|ie|ireland|irl	2
+connacht|connachta|cuige chonnacht		372|ie|ireland|irl	1
+cuige laighean|leinster		372|ie|ireland|irl	1
+cuige mumhan|munster		372|ie|ireland|irl	1
+cuige uladh|ulster		372|ie|ireland|irl	1
+cill mhantain|county wicklow|wicklow	county	372|ie|ireland|irl	1
+county wexford|wexford	county	372|ie|ireland|irl	1
+contae na hiarmhi|county westmeath|westmeath	county	372|ie|ireland|irl	1
+contae thiobraid arann|county tipperary|tiobraid arann|tipperary	county	372|ie|ireland|irl	1
+county sligo|sligeach|sligo	county	372|ie|ireland|irl	1
+county roscommon|ros comain|roscommon	county	372|ie|ireland|irl	1
+county offaly|offaly|uibh fhaili	county	372|ie|ireland|irl	1
+county monaghan|monaghan|muineachan	county	372|ie|ireland|irl	1
+co meath|county meath|meath	county	372|ie|ireland|irl	1
+contae mhaigh eo|county mayo|mayo|mayo county	county	372|ie|ireland|irl	1
+co louth|county louth|louth	county	372|ie|ireland|irl	1
+an longfort|co longford|county longford|longford	county	372|ie|ireland|irl	1
+county leitrim|leitrim|liatroim	county	372|ie|ireland|irl	1
+contae laoighise|contae laoise|county laois|laoighis|laois|queen's county	county	372|ie|ireland|irl	1
+cill chainnigh|county kilkenny|kilkenny	county	372|ie|ireland|irl	1
+cill dara|co kildare|county kildare|kildare	county	372|ie|ireland|irl	1
+co kerry|county kerry|kerry	county	372|ie|ireland|irl	1
+contae na gaillimhe|county galway|gaillimh|galway	county	372|ie|ireland|irl	1
+county donegal|donegal|dun na ngall	county	372|ie|ireland|irl	1
+contae chorcai|corcaigh|cork|cork county|county cork	county	372|ie|ireland|irl	1
+clare|co clare|county clare	county	372|ie|ireland|irl	1
+an cabhan|cavan|co cavan|county cavan	county	372|ie|ireland|irl	1
+carlow|ceatharlach|county carlow	county	372|ie|ireland|irl	1
 fingal|fingal county		372|ie|ireland|irl	2
 dun laoghaire-rathdown		372|ie|ireland|irl	2
 south dublin		372|ie|ireland|irl	2
 cathair na gaillimhe|gaillimh|galway city		372|ie|ireland|irl	2
 baile atha cliath|dublin city		372|ie|ireland|irl	2
 corcaigh|cork city		372|ie|ireland|irl	2
-limerick|limerick city and county council	county	372|ie|ireland|irl	2
-county waterford|waterford	county	372|ie|ireland|irl	2
+limerick|limerick city and county council		372|ie|ireland|irl	2
+county waterford|waterford		372|ie|ireland|irl	2
+connaught	province	372|ie|ireland|irl	
+leinster	province	372|ie|ireland|irl	
+munster	province	372|ie|ireland|irl	
+ulster	province	372|ie|ireland|irl	
 al quds|el quds|jerusalem|jerusalem district|mehoz yerushalayim|mhvz yrvshlym|mntq@ lqds|yrvshlym	district	376|il|isr|israel	1
 mehoz tel aviv|mhvz tl abyb|mntq@ tl byb|tall abib|tel aviv|tel aviv district|tell abib|tl abyb	district	376|il|isr|israel	1
 haifa|haifa district|hayfa|heifa|hyph|mehoz hefa|mhvz hyph|mntq@ hyf	district	376|il|isr|israel	1
@@ -20667,78 +20671,86 @@ qsr qnd|shahrestan-e qasr-e qand|shhrstn qsr qnd		364|ir|iran|irn	2
 chardaval|chrdwl|shhrstn chrdwl		364|ir|iran|irn	2
 hamun|hmwn|shhrstn hmwn		364|ir|iran|irn	2
 nymrwz|shahrestan-e nimruz|shhrstn nymrwz		364|ir|iran|irn	2
-nordurland vestra|northwest	region	352|iceland|is|isl	1
-nordurland eystra|northeast	region	352|iceland|is|isl	1
-austurland|east	region	352|iceland|is|isl	1
-south|sudurland	region	352|iceland|is|isl	1
-capital region|hofudborgarsvaedi	region	352|iceland|is|isl	1
-southern peninsula|sudurnes	region	352|iceland|is|isl	1
-vesturland|west	region	352|iceland|is|isl	1
-vestfirdir|westfjords	region	352|iceland|is|isl	1
-vopnafjardarhreppur	municipality	352|iceland|is|isl	2
-tjorneshreppur	municipality	352|iceland|is|isl	2
-svalbardsstrandarhreppur	municipality	352|iceland|is|isl	2
-skaftarhreppur	municipality	352|iceland|is|isl	2
-grytubakkahreppur	municipality	352|iceland|is|isl	2
-fljotsdalshreppur	municipality	352|iceland|is|isl	2
-dalvikurbyggd	municipality	352|iceland|is|isl	2
-akureyrarbaer|akureyrarkaupstadur	municipality	352|iceland|is|isl	2
-skagafjordur|sveitarfelagid skagafjordur	municipality	352|iceland|is|isl	2
-eyjafjardarsveit	municipality	352|iceland|is|isl	2
-thingeyjarsveit	municipality	352|iceland|is|isl	2
-fjardabyggd	municipality	352|iceland|is|isl	2
-sveitarfelagid hornafjordur	municipality	352|iceland|is|isl	2
-myrdalshreppur	municipality	352|iceland|is|isl	2
-rangarthing eystra	municipality	352|iceland|is|isl	2
-rangarthing ytra	municipality	352|iceland|is|isl	2
-skeida- og gnupverjahreppur	municipality	352|iceland|is|isl	2
-vestmannaeyjabaer|vestmannaeyjar	municipality	352|iceland|is|isl	2
-talknafjardarhreppur	municipality	352|iceland|is|isl	2
-sudavikurhreppur	municipality	352|iceland|is|isl	2
-skorradalshreppur	municipality	352|iceland|is|isl	2
-skagabyggd	municipality	352|iceland|is|isl	2
-seltjarnarnesbaer|seltjarnarneskaupstadur	municipality	352|iceland|is|isl	2
-reykjavikurborg	municipality	352|iceland|is|isl	2
-reykholahreppur	municipality	352|iceland|is|isl	2
-sveitarfelagid olfus	municipality	352|iceland|is|isl	2
-mosfellsbaer	municipality	352|iceland|is|isl	2
-kopavogsbaer|kopavogur	municipality	352|iceland|is|isl	2
-kjosarhreppur	municipality	352|iceland|is|isl	2
-kaldrananeshreppur	municipality	352|iceland|is|isl	2
-isafjardarbaer	municipality	352|iceland|is|isl	2
-hveragerdisbaer	municipality	352|iceland|is|isl	2
-hrunamannahreppur	municipality	352|iceland|is|isl	2
-hafnarfjardarkaupstadur	municipality	352|iceland|is|isl	2
-gardabaer	municipality	352|iceland|is|isl	2
-eyja- og miklaholtshreppur	municipality	352|iceland|is|isl	2
-borgarbyggd	municipality	352|iceland|is|isl	2
-asahreppur	municipality	352|iceland|is|isl	2
-arneshreppur	municipality	352|iceland|is|isl	2
-akraneskaupstadur	municipality	352|iceland|is|isl	2
-bolungarvikurkaupstadur	municipality	352|iceland|is|isl	2
-dalabyggd	municipality	352|iceland|is|isl	2
-grundarfjardarbaer	municipality	352|iceland|is|isl	2
-snaefellsbaer	municipality	352|iceland|is|isl	2
-hunathing vestra	municipality	352|iceland|is|isl	2
-reykjanesbaer	municipality	352|iceland|is|isl	2
-vesturbyggd	municipality	352|iceland|is|isl	2
-blaskogabyggd	municipality	352|iceland|is|isl	2
-grimsnes- og grafningshreppur	municipality	352|iceland|is|isl	2
-sveitarfelagid arborg	municipality	352|iceland|is|isl	2
-langanesbyggd	municipality	352|iceland|is|isl	2
-nordurthing	municipality	352|iceland|is|isl	2
-horgarsveit	municipality	352|iceland|is|isl	2
-fjallabyggd	municipality	352|iceland|is|isl	2
-sveitarfelagid skagastrond	municipality	352|iceland|is|isl	2
-strandabyggd	municipality	352|iceland|is|isl	2
-hvalfjardarsveit	municipality	352|iceland|is|isl	2
-sveitarfelagid vogar	municipality	352|iceland|is|isl	2
-grindavikurbaer	municipality	352|iceland|is|isl	2
-floahreppur	municipality	352|iceland|is|isl	2
-sudurnesjabaer	municipality	352|iceland|is|isl	2
-hunabyggd	municipality	352|iceland|is|isl	2
-mulathing	municipality	352|iceland|is|isl	2
-stykkisholmsbaer|stykkisholmur-helgafellssveit	municipality	352|iceland|is|isl	2
+nordurland vestra|northwest		352|iceland|is|isl	1
+nordurland eystra|northeast		352|iceland|is|isl	1
+austurland|east		352|iceland|is|isl	1
+south|sudurland		352|iceland|is|isl	1
+capital region|hofudborgarsvaedi		352|iceland|is|isl	1
+southern peninsula|sudurnes		352|iceland|is|isl	1
+vesturland|west		352|iceland|is|isl	1
+vestfirdir|westfjords		352|iceland|is|isl	1
+tjorneshreppur	municipality	352|iceland|is|isl	1
+fljotsdalshreppur	municipality	352|iceland|is|isl	1
+dalvikurbyggd	municipality	352|iceland|is|isl	1
+akureyrarbaer|akureyrarkaupstadur	municipality	352|iceland|is|isl	1
+skagafjordur|sveitarfelagid skagafjordur	municipality	352|iceland|is|isl	1
+eyjafjardarsveit	municipality	352|iceland|is|isl	1
+fjardabyggd	municipality	352|iceland|is|isl	1
+rangarthing eystra	municipality	352|iceland|is|isl	1
+rangarthing ytra	municipality	352|iceland|is|isl	1
+seltjarnarnesbaer|seltjarnarneskaupstadur	municipality	352|iceland|is|isl	1
+hveragerdisbaer	municipality	352|iceland|is|isl	1
+eyja- og miklaholtshreppur	municipality	352|iceland|is|isl	1
+borgarbyggd	municipality	352|iceland|is|isl	1
+asahreppur	municipality	352|iceland|is|isl	1
+akraneskaupstadur	municipality	352|iceland|is|isl	1
+bolungarvikurkaupstadur	municipality	352|iceland|is|isl	1
+dalabyggd	municipality	352|iceland|is|isl	1
+grundarfjardarbaer	municipality	352|iceland|is|isl	1
+hunathing vestra	municipality	352|iceland|is|isl	1
+blaskogabyggd	municipality	352|iceland|is|isl	1
+sveitarfelagid arborg	municipality	352|iceland|is|isl	1
+fjallabyggd	municipality	352|iceland|is|isl	1
+sveitarfelagid skagastrond	municipality	352|iceland|is|isl	1
+strandabyggd	municipality	352|iceland|is|isl	1
+sveitarfelagid vogar	municipality	352|iceland|is|isl	1
+grindavikurbaer	municipality	352|iceland|is|isl	1
+floahreppur	municipality	352|iceland|is|isl	1
+sudurnesjabaer	municipality	352|iceland|is|isl	1
+stykkisholmsbaer|stykkisholmur-helgafellssveit	municipality	352|iceland|is|isl	1
+vopnafjardarhreppur		352|iceland|is|isl	2
+svalbardsstrandarhreppur		352|iceland|is|isl	2
+skaftarhreppur		352|iceland|is|isl	2
+grytubakkahreppur		352|iceland|is|isl	2
+thingeyjarsveit		352|iceland|is|isl	2
+sveitarfelagid hornafjordur		352|iceland|is|isl	2
+myrdalshreppur		352|iceland|is|isl	2
+skeida- og gnupverjahreppur		352|iceland|is|isl	2
+vestmannaeyjabaer|vestmannaeyjar		352|iceland|is|isl	2
+talknafjardarhreppur		352|iceland|is|isl	2
+sudavikurhreppur		352|iceland|is|isl	2
+skorradalshreppur		352|iceland|is|isl	2
+skagabyggd		352|iceland|is|isl	2
+reykjavikurborg		352|iceland|is|isl	2
+reykholahreppur		352|iceland|is|isl	2
+sveitarfelagid olfus		352|iceland|is|isl	2
+mosfellsbaer		352|iceland|is|isl	2
+kopavogsbaer|kopavogur		352|iceland|is|isl	2
+kjosarhreppur		352|iceland|is|isl	2
+kaldrananeshreppur		352|iceland|is|isl	2
+isafjardarbaer		352|iceland|is|isl	2
+hrunamannahreppur		352|iceland|is|isl	2
+hafnarfjardarkaupstadur		352|iceland|is|isl	2
+gardabaer		352|iceland|is|isl	2
+arneshreppur		352|iceland|is|isl	2
+snaefellsbaer		352|iceland|is|isl	2
+reykjanesbaer		352|iceland|is|isl	2
+vesturbyggd		352|iceland|is|isl	2
+grimsnes- og grafningshreppur		352|iceland|is|isl	2
+langanesbyggd		352|iceland|is|isl	2
+nordurthing		352|iceland|is|isl	2
+horgarsveit		352|iceland|is|isl	2
+hvalfjardarsveit		352|iceland|is|isl	2
+hunabyggd		352|iceland|is|isl	2
+mulathing		352|iceland|is|isl	2
+hofudborgarsvaedi	region	352|iceland|is|isl	
+sudurnes	region	352|iceland|is|isl	
+vesturland	region	352|iceland|is|isl	
+vestfirdir	region	352|iceland|is|isl	
+nordurland vestra	region	352|iceland|is|isl	
+nordurland eystra	region	352|iceland|is|isl	
+austurland	region	352|iceland|is|isl	
+sudurland	region	352|iceland|is|isl	
 regione siciliana|sicile|sicilia|sicily	autonomous region	380|it|ita|italy	1
 sardaigne|sardegna|sardinia	autonomous region	380|it|ita|italy	1
 calabre|calabria	region	380|it|ita|italy	1
@@ -25381,76 +25393,86 @@ rothe		426|lesotho|ls|lso	2
 motete		426|lesotho|ls|lso	2
 qalo		426|lesotho|ls|lso	2
 maseru central		426|lesotho|ls|lso	2
-alytaus apskritis|alytus|alytus county	county	440|lithuania|lt|ltu	1
-kaunas|kaunas county|kauno apskritis	county	440|lithuania|lt|ltu	1
-klaipeda county|klaipedos apskritis	county	440|lithuania|lt|ltu	1
-marijampole county|marijampoles apskritis	county	440|lithuania|lt|ltu	1
-panevezio apskritis|panevezys|panevezys county	county	440|lithuania|lt|ltu	1
-siauliai|siauliai county|siauliu apskritis	county	440|lithuania|lt|ltu	1
-taurage county|taurages apskritis	county	440|lithuania|lt|ltu	1
-telsiai|telsiai county|telsiu apskritis	county	440|lithuania|lt|ltu	1
-utena|utena county|utenos apskritis	county	440|lithuania|lt|ltu	1
-vilniaus apskritis|vilnius|vilnius county	county	440|lithuania|lt|ltu	1
-vilniaus miestas|vilnius|vilnius city municipality	city municipality	440|lithuania|lt|ltu	2
-vilniaus rajonas|vilniaus rajono savivaldybe|vilnius|vilnius district municipality	district municipality	440|lithuania|lt|ltu	2
-siauliai|siauliai district municipality|siauliu rajonas	district municipality	440|lithuania|lt|ltu	2
-siauliai|siauliai city municipality|siauliu miestas	city municipality	440|lithuania|lt|ltu	2
-panevezio rajono savivaldybe|panevezys|panevezys district municipality	district municipality	440|lithuania|lt|ltu	2
-panevezio miestas|panevezys|panevezys city	city municipality	440|lithuania|lt|ltu	2
-palanga|palanga city municipality|palangos miestas	city municipality	440|lithuania|lt|ltu	2
-neringa|neringa municipality	municipality	440|lithuania|lt|ltu	2
-marijampole|marijampole municipality	district municipality	440|lithuania|lt|ltu	2
-klaipeda|klaipeda district municipality|klaipedos rajonas|klaipedos rajono savivaldybe	district municipality	440|lithuania|lt|ltu	2
-klaipeda|klaipeda city municipality|klaipedos miestas	city municipality	440|lithuania|lt|ltu	2
-kaunas|kaunas district municipality|kauno rajonas	district municipality	440|lithuania|lt|ltu	2
-kaunas|kauno miestas|kauno miesto savivaldybe	city municipality	440|lithuania|lt|ltu	2
-druskininkai|druskininkai municipality	municipality	440|lithuania|lt|ltu	2
-birstonas|birstonas municipality	municipality	440|lithuania|lt|ltu	2
-alytaus miestas|alytaus miesto savivaldybe|alytus|alytus city municipality	city municipality	440|lithuania|lt|ltu	2
-alytaus rajonas|alytaus rajono savivaldybe|alytus|alytus district municipality	district municipality	440|lithuania|lt|ltu	2
-akmene|akmene district municipality|akmenes rajonas|akmenes rajono savivaldybe	district municipality	440|lithuania|lt|ltu	2
-lazdijai|lazdijai district municipality|lazdiju rajono savivaldybe	district municipality	440|lithuania|lt|ltu	2
-varena|varena district municipality|varenos rajono savivaldybe	district municipality	440|lithuania|lt|ltu	2
-jonava|jonava district municipality	district municipality	440|lithuania|lt|ltu	2
-kaisiadorys|kaisiadorys district municipality	district municipality	440|lithuania|lt|ltu	2
-kedainiai|kedainiai district municipality	district municipality	440|lithuania|lt|ltu	2
-prienai|prienai district municipality|prienu rajono savivaldybe	district municipality	440|lithuania|lt|ltu	2
-raseiniai|raseiniai district municipality	district municipality	440|lithuania|lt|ltu	2
-kretinga|kretinga district municipality|kretingos rajono savivaldybe	district municipality	440|lithuania|lt|ltu	2
-skuodas|skuodas district municipality	district municipality	440|lithuania|lt|ltu	2
-silute|silute district municipality	district municipality	440|lithuania|lt|ltu	2
-sakiai|sakiai district municipality	district municipality	440|lithuania|lt|ltu	2
-vilkaviskis|vilkaviskis district municipality	district municipality	440|lithuania|lt|ltu	2
-birzai|birzai district municipality	district municipality	440|lithuania|lt|ltu	2
-kupiskio rajono savivaldybe|kupiskis|kupiskis district municipality	district municipality	440|lithuania|lt|ltu	2
-pasvalys|pasvalys district municipality	district municipality	440|lithuania|lt|ltu	2
-rokiskis|rokiskis district municipality	district municipality	440|lithuania|lt|ltu	2
-joniskio rajono savivaldybe|joniskis|joniskis district municipality	district municipality	440|lithuania|lt|ltu	2
-kelme|kelme district municipality|kelmes rajono savivaldybe	district municipality	440|lithuania|lt|ltu	2
-pakruojis|pakruojis district municipality	district municipality	440|lithuania|lt|ltu	2
-radviliskis|radviliskis district municipality	district municipality	440|lithuania|lt|ltu	2
-taurage|taurage district municipality	district municipality	440|lithuania|lt|ltu	2
-jurbarkas|jurbarkas district municipality	district municipality	440|lithuania|lt|ltu	2
-silale|silale district municipality|silales rajono savivaldybe	district municipality	440|lithuania|lt|ltu	2
-telsiai|telsiai district municipality	district municipality	440|lithuania|lt|ltu	2
-mazeikiai|mazeikiai district municipality|mazeikiu rajono savivaldybe	district municipality	440|lithuania|lt|ltu	2
-plunge|plunge district municipality	district municipality	440|lithuania|lt|ltu	2
-utena|utena district municipality	district municipality	440|lithuania|lt|ltu	2
-visaginas|visaginas municipality	municipality	440|lithuania|lt|ltu	2
-anyksciai|anyksciai district municipality	district municipality	440|lithuania|lt|ltu	2
-ignalina|ignalina district municipality	district municipality	440|lithuania|lt|ltu	2
-moletai|moletai district municipality	district municipality	440|lithuania|lt|ltu	2
-zarasai|zarasai district municipality	district municipality	440|lithuania|lt|ltu	2
-salcininkai|salcininkai district municipality	district municipality	440|lithuania|lt|ltu	2
-sirvintos|sirvintos district municipality	district municipality	440|lithuania|lt|ltu	2
-svencionys|svencionys district municipality	district municipality	440|lithuania|lt|ltu	2
-trakai|trakai district municipality	district municipality	440|lithuania|lt|ltu	2
-ukmerge|ukmerge district municipality	district municipality	440|lithuania|lt|ltu	2
-kalvarija|kalvarija municipality|kalvarijos savivaldybe	municipality	440|lithuania|lt|ltu	2
-kazlu ruda municipality|kazlu rudos	municipality	440|lithuania|lt|ltu	2
-pagegiai|pagegiai municipality|pagegiu savivaldybe	municipality	440|lithuania|lt|ltu	2
-rietavas|rietavas municipality	municipality	440|lithuania|lt|ltu	2
-elektrenai|elektrenai municipality	municipality	440|lithuania|lt|ltu	2
+alytaus apskritis|alytus|alytus county		440|lithuania|lt|ltu	1
+kaunas|kaunas county|kauno apskritis		440|lithuania|lt|ltu	1
+klaipeda county|klaipedos apskritis		440|lithuania|lt|ltu	1
+marijampole county|marijampoles apskritis		440|lithuania|lt|ltu	1
+panevezio apskritis|panevezys|panevezys county		440|lithuania|lt|ltu	1
+siauliai|siauliai county|siauliu apskritis		440|lithuania|lt|ltu	1
+taurage county|taurages apskritis		440|lithuania|lt|ltu	1
+telsiai|telsiai county|telsiu apskritis		440|lithuania|lt|ltu	1
+utena|utena county|utenos apskritis	district municipality	440|lithuania|lt|ltu	1
+vilniaus apskritis|vilnius|vilnius county		440|lithuania|lt|ltu	1
+vilniaus miestas|vilnius|vilnius city municipality	city municipality	440|lithuania|lt|ltu	1
+vilniaus rajonas|vilniaus rajono savivaldybe|vilnius|vilnius district municipality	district municipality	440|lithuania|lt|ltu	1
+siauliai|siauliai district municipality|siauliu rajonas	district municipality	440|lithuania|lt|ltu	1
+siauliai|siauliai city municipality|siauliu miestas	city municipality	440|lithuania|lt|ltu	1
+panevezio rajono savivaldybe|panevezys|panevezys district municipality	district municipality	440|lithuania|lt|ltu	1
+panevezio miestas|panevezys|panevezys city	city municipality	440|lithuania|lt|ltu	1
+palanga|palanga city municipality|palangos miestas	city municipality	440|lithuania|lt|ltu	1
+neringa|neringa municipality	municipality	440|lithuania|lt|ltu	1
+marijampole|marijampole municipality	district municipality	440|lithuania|lt|ltu	1
+klaipeda|klaipeda district municipality|klaipedos rajonas|klaipedos rajono savivaldybe	district municipality	440|lithuania|lt|ltu	1
+klaipeda|klaipeda city municipality|klaipedos miestas	city municipality	440|lithuania|lt|ltu	1
+kaunas|kaunas district municipality|kauno rajonas	district municipality	440|lithuania|lt|ltu	1
+kaunas|kauno miestas|kauno miesto savivaldybe	city municipality	440|lithuania|lt|ltu	1
+druskininkai|druskininkai municipality	municipality	440|lithuania|lt|ltu	1
+alytaus miestas|alytaus miesto savivaldybe|alytus|alytus city municipality	city municipality	440|lithuania|lt|ltu	1
+alytaus rajonas|alytaus rajono savivaldybe|alytus|alytus district municipality	district municipality	440|lithuania|lt|ltu	1
+akmene|akmene district municipality|akmenes rajonas|akmenes rajono savivaldybe	district municipality	440|lithuania|lt|ltu	1
+lazdijai|lazdijai district municipality|lazdiju rajono savivaldybe	district municipality	440|lithuania|lt|ltu	1
+varena|varena district municipality|varenos rajono savivaldybe	district municipality	440|lithuania|lt|ltu	1
+jonava|jonava district municipality	district municipality	440|lithuania|lt|ltu	1
+kaisiadorys|kaisiadorys district municipality	district municipality	440|lithuania|lt|ltu	1
+kedainiai|kedainiai district municipality	district municipality	440|lithuania|lt|ltu	1
+silute|silute district municipality	district municipality	440|lithuania|lt|ltu	1
+sakiai|sakiai district municipality	district municipality	440|lithuania|lt|ltu	1
+vilkaviskis|vilkaviskis district municipality	district municipality	440|lithuania|lt|ltu	1
+birzai|birzai district municipality	district municipality	440|lithuania|lt|ltu	1
+pakruojis|pakruojis district municipality	district municipality	440|lithuania|lt|ltu	1
+radviliskis|radviliskis district municipality	district municipality	440|lithuania|lt|ltu	1
+taurage|taurage district municipality	district municipality	440|lithuania|lt|ltu	1
+jurbarkas|jurbarkas district municipality	district municipality	440|lithuania|lt|ltu	1
+telsiai|telsiai district municipality	district municipality	440|lithuania|lt|ltu	1
+plunge|plunge district municipality	district municipality	440|lithuania|lt|ltu	1
+moletai|moletai district municipality	district municipality	440|lithuania|lt|ltu	1
+ukmerge|ukmerge district municipality	district municipality	440|lithuania|lt|ltu	1
+kalvarija|kalvarija municipality|kalvarijos savivaldybe	municipality	440|lithuania|lt|ltu	1
+kazlu ruda municipality|kazlu rudos	municipality	440|lithuania|lt|ltu	1
+pagegiai|pagegiai municipality|pagegiu savivaldybe	municipality	440|lithuania|lt|ltu	1
+rietavas|rietavas municipality	municipality	440|lithuania|lt|ltu	1
+elektrenai|elektrenai municipality	municipality	440|lithuania|lt|ltu	1
+birstonas|birstonas municipality		440|lithuania|lt|ltu	2
+prienai|prienai district municipality|prienu rajono savivaldybe		440|lithuania|lt|ltu	2
+raseiniai|raseiniai district municipality		440|lithuania|lt|ltu	2
+kretinga|kretinga district municipality|kretingos rajono savivaldybe		440|lithuania|lt|ltu	2
+skuodas|skuodas district municipality		440|lithuania|lt|ltu	2
+kupiskio rajono savivaldybe|kupiskis|kupiskis district municipality		440|lithuania|lt|ltu	2
+pasvalys|pasvalys district municipality		440|lithuania|lt|ltu	2
+rokiskis|rokiskis district municipality		440|lithuania|lt|ltu	2
+joniskio rajono savivaldybe|joniskis|joniskis district municipality		440|lithuania|lt|ltu	2
+kelme|kelme district municipality|kelmes rajono savivaldybe		440|lithuania|lt|ltu	2
+silale|silale district municipality|silales rajono savivaldybe		440|lithuania|lt|ltu	2
+mazeikiai|mazeikiai district municipality|mazeikiu rajono savivaldybe		440|lithuania|lt|ltu	2
+utena|utena district municipality		440|lithuania|lt|ltu	2
+visaginas|visaginas municipality		440|lithuania|lt|ltu	2
+anyksciai|anyksciai district municipality		440|lithuania|lt|ltu	2
+ignalina|ignalina district municipality		440|lithuania|lt|ltu	2
+zarasai|zarasai district municipality		440|lithuania|lt|ltu	2
+salcininkai|salcininkai district municipality		440|lithuania|lt|ltu	2
+sirvintos|sirvintos district municipality		440|lithuania|lt|ltu	2
+svencionys|svencionys district municipality		440|lithuania|lt|ltu	2
+trakai|trakai district municipality		440|lithuania|lt|ltu	2
+alytaus apskritis	county	440|lithuania|lt|ltu	
+klaipedos apskritis	county	440|lithuania|lt|ltu	
+kauno apskritis	county	440|lithuania|lt|ltu	
+marijampoles apskritis	county	440|lithuania|lt|ltu	
+panevezio apskritis	county	440|lithuania|lt|ltu	
+siauliu apskritis	county	440|lithuania|lt|ltu	
+taurages apskritis	county	440|lithuania|lt|ltu	
+telsiu apskritis	county	440|lithuania|lt|ltu	
+utenos apskritis	county	440|lithuania|lt|ltu	
+vilniaus apskritis	county	440|lithuania|lt|ltu	
 kanton wiltz|kanton wolz|wiltz|wolz	canton	442|lu|lux|luxembourg	1
 kanton veianen|kanton vianden|veianen|vianden	canton	442|lu|lux|luxembourg	1
 kanton reimech|kanton remich|reimech|remich	canton	442|lu|lux|luxembourg	1
@@ -27411,37 +27433,40 @@ baa|baa atholhu|south maalhosmadulu	administrative atoll	462|maldives|mdv|mv	1
 alif alif atoll|alifu alifu|ari atholhu uthuruburi|north ari atoll|northern ari atoll	administrative atoll	462|maldives|mdv|mv	1
 maale|male	city	462|maldives|mdv|mv	1
 alifu dhaalu|south ari atoll|southern ari atoll	administrative atoll	462|maldives|mdv|mv	1
-southern region	region	454|malawi|mw|mwi	1
-northern region	region	454|malawi|mw|mwi	1
-central region	region	454|malawi|mw|mwi	1
-chitipa|chitipa district	district	454|malawi|mw|mwi	2
-zomba|zomba district	district	454|malawi|mw|mwi	2
-salima|salima district	district	454|malawi|mw|mwi	2
-rumphi|rumphi district	district	454|malawi|mw|mwi	2
-ntchisi|ntchisi district	district	454|malawi|mw|mwi	2
-nsanje|nsanje district	district	454|malawi|mw|mwi	2
-nkhotakota|nkhotakota district	district	454|malawi|mw|mwi	2
-nkhata bay|nkhata bay district	district	454|malawi|mw|mwi	2
-ntcheu|ntcheu district	district	454|malawi|mw|mwi	2
-boma la mzimba|mzimba|mzimba district	district	454|malawi|mw|mwi	2
-mwanza|mwanza district	district	454|malawi|mw|mwi	2
-mulanje|mulanje district	district	454|malawi|mw|mwi	2
-mchinji|mchinji district	district	454|malawi|mw|mwi	2
-mangochi|mangochi district	district	454|malawi|mw|mwi	2
-machinga|machinga district	district	454|malawi|mw|mwi	2
-lilongwe|lilongwe district	district	454|malawi|mw|mwi	2
-kasungu|kasungu district	district	454|malawi|mw|mwi	2
-karonga|karonga district	district	454|malawi|mw|mwi	2
-dowa|dowa district	district	454|malawi|mw|mwi	2
-dedza|dedza district	district	454|malawi|mw|mwi	2
-thyolo|thyolo district	district	454|malawi|mw|mwi	2
-chiradzulu|chiradzulu district	district	454|malawi|mw|mwi	2
-chikwawa|chikwawa district	district	454|malawi|mw|mwi	2
-blantyre|blantyre district	district	454|malawi|mw|mwi	2
-balaka|balaka district	district	454|malawi|mw|mwi	2
-likoma|likoma district	district	454|malawi|mw|mwi	2
-phalombe|phalombe district	district	454|malawi|mw|mwi	2
-neno|neno district	district	454|malawi|mw|mwi	2
+southern region		454|malawi|mw|mwi	1
+northern region		454|malawi|mw|mwi	1
+central region		454|malawi|mw|mwi	1
+chitipa|chitipa district	district	454|malawi|mw|mwi	1
+zomba|zomba district	district	454|malawi|mw|mwi	1
+salima|salima district	district	454|malawi|mw|mwi	1
+rumphi|rumphi district	district	454|malawi|mw|mwi	1
+ntchisi|ntchisi district	district	454|malawi|mw|mwi	1
+nsanje|nsanje district	district	454|malawi|mw|mwi	1
+nkhotakota|nkhotakota district	district	454|malawi|mw|mwi	1
+nkhata bay|nkhata bay district	district	454|malawi|mw|mwi	1
+ntcheu|ntcheu district	district	454|malawi|mw|mwi	1
+boma la mzimba|mzimba|mzimba district	district	454|malawi|mw|mwi	1
+mwanza|mwanza district	district	454|malawi|mw|mwi	1
+mulanje|mulanje district	district	454|malawi|mw|mwi	1
+mchinji|mchinji district	district	454|malawi|mw|mwi	1
+mangochi|mangochi district	district	454|malawi|mw|mwi	1
+machinga|machinga district	district	454|malawi|mw|mwi	1
+lilongwe|lilongwe district	district	454|malawi|mw|mwi	1
+kasungu|kasungu district	district	454|malawi|mw|mwi	1
+karonga|karonga district	district	454|malawi|mw|mwi	1
+dowa|dowa district	district	454|malawi|mw|mwi	1
+dedza|dedza district	district	454|malawi|mw|mwi	1
+thyolo|thyolo district	district	454|malawi|mw|mwi	1
+chiradzulu|chiradzulu district	district	454|malawi|mw|mwi	1
+chikwawa|chikwawa district	district	454|malawi|mw|mwi	1
+blantyre|blantyre district	district	454|malawi|mw|mwi	1
+balaka|balaka district	district	454|malawi|mw|mwi	1
+likoma|likoma district	district	454|malawi|mw|mwi	1
+phalombe|phalombe district	district	454|malawi|mw|mwi	1
+neno|neno district	district	454|malawi|mw|mwi	1
+central region	region	454|malawi|mw|mwi	
+northern region	region	454|malawi|mw|mwi	
+southern region	region	454|malawi|mw|mwi	
 estado de yucatan|yucatan	state	484|mex|mexico|mx	1
 estado de veracruz-llave|estado libre y soberano de veracruz de ignacio de la llave|veracruz|veracruz de ignacio de la llave|veracruz-llave	state	484|mex|mexico|mx	1
 estado de tlaxcala|tlaxcala	state	484|mex|mexico|mx	1

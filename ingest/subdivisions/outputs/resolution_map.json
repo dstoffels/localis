@@ -6,6 +6,18 @@
     "DO": [
       "region"
     ],
+    "IE": [
+      "province"
+    ],
+    "IS": [
+      "region"
+    ],
+    "LT": [
+      "county"
+    ],
+    "MW": [
+      "region"
+    ],
     "ID": [
       "geographical unit"
     ]
@@ -2189,7 +2201,6 @@
       "ID-MA": 1636627,
       "ID-MU": 1958070,
       "ID-YO": 1621176,
-      "IE-C": 7521313,
       "IE-CE": 2965479,
       "IE-CN": 2965534,
       "IE-CO": 2965139,
@@ -2199,12 +2210,10 @@
       "IE-KE": 2963435,
       "IE-KK": 2963397,
       "IE-KY": 2963517,
-      "IE-L": 7521314,
       "IE-LD": 2962839,
       "IE-LH": 2962793,
       "IE-LM": 2962975,
       "IE-LS": 2963031,
-      "IE-M": 7521315,
       "IE-MH": 2962661,
       "IE-MN": 2962567,
       "IE-MO": 2962666,
@@ -2212,7 +2221,6 @@
       "IE-RN": 2961731,
       "IE-SO": 2961422,
       "IE-TA": 2961191,
-      "IE-U": 7521316,
       "IE-WH": 2960972,
       "IE-WW": 2960935,
       "IE-WX": 2960963,
@@ -3128,7 +3136,6 @@
       "MV-28": 1282328,
       "MW-BA": 1105840,
       "MW-BL": 931754,
-      "MW-C": 931597,
       "MW-CK": 931067,
       "MW-CR": 930579,
       "MW-CT": 235749,
@@ -3144,7 +3151,6 @@
       "MW-MU": 925788,
       "MW-MW": 925595,
       "MW-MZ": 925496,
-      "MW-N": 924591,
       "MW-NB": 924730,
       "MW-NE": 7628385,
       "MW-NI": 924490,
@@ -3153,7 +3159,6 @@
       "MW-NU": 925072,
       "MW-PH": 1105842,
       "MW-RU": 924100,
-      "MW-S": 923817,
       "MW-SA": 924053,
       "MW-TH": 930283,
       "MW-ZO": 923292,
@@ -4593,7 +4598,32 @@
       "ID-NU": null,
       "ID-PP": null,
       "ID-SL": null,
-      "ID-SM": null
+      "ID-SM": null,
+      "IE-C": null,
+      "IE-L": null,
+      "IE-M": null,
+      "IE-U": null,
+      "IS-1": null,
+      "IS-2": null,
+      "IS-3": null,
+      "IS-4": null,
+      "IS-5": null,
+      "IS-6": null,
+      "IS-7": null,
+      "IS-8": null,
+      "LT-AL": null,
+      "LT-KL": null,
+      "LT-KU": null,
+      "LT-MR": null,
+      "LT-PN": null,
+      "LT-SA": null,
+      "LT-TA": null,
+      "LT-TE": null,
+      "LT-UT": null,
+      "LT-VL": null,
+      "MW-C": null,
+      "MW-N": null,
+      "MW-S": null
     },
     "resolutions": {
       "AD-07": {
@@ -5004,160 +5034,12 @@
         "id": 3054638,
         "margin": 20
       },
-      "IE-LK": {
-        "id": 11611445,
-        "margin": 20
-      },
-      "IE-WD": {
-        "id": 11611446,
-        "margin": 15
-      },
       "IN-DH": {
         "id": 12165662,
         "margin": 10
       },
       "IN-JK": {
         "id": 1269320,
-        "margin": 10
-      },
-      "IS-ARN": {
-        "id": 3418510,
-        "margin": 15
-      },
-      "IS-GAR": {
-        "id": 3417190,
-        "margin": 15
-      },
-      "IS-GOG": {
-        "id": 3426217,
-        "margin": 10
-      },
-      "IS-GRY": {
-        "id": 2631018,
-        "margin": 10
-      },
-      "IS-HAF": {
-        "id": 3416708,
-        "margin": 10
-      },
-      "IS-HRG": {
-        "id": 9192070,
-        "margin": 15
-      },
-      "IS-HRU": {
-        "id": 3415916,
-        "margin": 10
-      },
-      "IS-HUG": {
-        "id": 12504066,
-        "margin": 15
-      },
-      "IS-HVA": {
-        "id": 9192471,
-        "margin": 10
-      },
-      "IS-ISA": {
-        "id": 3415669,
-        "margin": 10
-      },
-      "IS-KAL": {
-        "id": 3415588,
-        "margin": 10
-      },
-      "IS-KJO": {
-        "id": 3415359,
-        "margin": 10
-      },
-      "IS-KOP": {
-        "id": 3415215,
-        "margin": 15
-      },
-      "IS-LAN": {
-        "id": 9192036,
-        "margin": 10
-      },
-      "IS-MOS": {
-        "id": 3414383,
-        "margin": 15
-      },
-      "IS-MUL": {
-        "id": 12504084,
-        "margin": 15
-      },
-      "IS-MYR": {
-        "id": 3345273,
-        "margin": 10
-      },
-      "IS-NOR": {
-        "id": 9192054,
-        "margin": 15
-      },
-      "IS-RHH": {
-        "id": 3413878,
-        "margin": 10
-      },
-      "IS-RKN": {
-        "id": 3426211,
-        "margin": 10
-      },
-      "IS-RKV": {
-        "id": 3413831,
-        "margin": 10
-      },
-      "IS-SBT": {
-        "id": 2626312,
-        "margin": 10
-      },
-      "IS-SDV": {
-        "id": 3412885,
-        "margin": 10
-      },
-      "IS-SHF": {
-        "id": 3345272,
-        "margin": 10
-      },
-      "IS-SKF": {
-        "id": 2627072,
-        "margin": 10
-      },
-      "IS-SKG": {
-        "id": 3413488,
-        "margin": 15
-      },
-      "IS-SKO": {
-        "id": 3413282,
-        "margin": 10
-      },
-      "IS-SNF": {
-        "id": 3426209,
-        "margin": 10
-      },
-      "IS-SOG": {
-        "id": 3345276,
-        "margin": 10
-      },
-      "IS-SOL": {
-        "id": 3414073,
-        "margin": 10
-      },
-      "IS-TAL": {
-        "id": 3412697,
-        "margin": 10
-      },
-      "IS-THG": {
-        "id": 3345266,
-        "margin": 10
-      },
-      "IS-VEM": {
-        "id": 3412095,
-        "margin": 10
-      },
-      "IS-VER": {
-        "id": 3426215,
-        "margin": 15
-      },
-      "IS-VOP": {
-        "id": 2625192,
         "margin": 10
       },
       "IT-AG": {
@@ -5268,89 +5150,9 @@
         "id": 3042031,
         "margin": 25
       },
-      "LT-04": {
-        "id": 864516,
-        "margin": 15
-      },
-      "LT-05": {
-        "id": 600444,
-        "margin": 15
-      },
-      "LT-09": {
-        "id": 864517,
-        "margin": 20
-      },
-      "LT-11": {
-        "id": 864504,
-        "margin": 20
-      },
-      "LT-19": {
-        "id": 864505,
-        "margin": 25
-      },
-      "LT-22": {
-        "id": 864494,
-        "margin": 20
-      },
-      "LT-23": {
-        "id": 864500,
-        "margin": 20
-      },
-      "LT-26": {
-        "id": 864512,
-        "margin": 15
-      },
-      "LT-34": {
-        "id": 864501,
-        "margin": 20
-      },
-      "LT-36": {
-        "id": 864491,
-        "margin": 20
-      },
-      "LT-38": {
-        "id": 864492,
-        "margin": 15
-      },
-      "LT-40": {
-        "id": 864502,
-        "margin": 20
-      },
-      "LT-42": {
-        "id": 864520,
-        "margin": 15
-      },
-      "LT-45": {
-        "id": 864510,
-        "margin": 20
-      },
-      "LT-47": {
-        "id": 864521,
-        "margin": 15
-      },
-      "LT-48": {
-        "id": 864495,
-        "margin": 20
-      },
-      "LT-49": {
-        "id": 864522,
-        "margin": 15
-      },
-      "LT-52": {
-        "id": 864523,
-        "margin": 20
-      },
       "LT-54": {
-        "id": 864514,
+        "id": 864484,
         "margin": 25
-      },
-      "LT-59": {
-        "id": 864515,
-        "margin": 15
-      },
-      "LT-60": {
-        "id": 864519,
-        "margin": 20
       },
       "LU-WI": {
         "id": 2959975,
@@ -6132,7 +5934,64 @@
         "HU-SN",
         "HU-VM",
         "IE-D",
+        "IE-LK",
+        "IE-WD",
+        "IS-ARN",
+        "IS-GAR",
+        "IS-GOG",
+        "IS-GRY",
+        "IS-HAF",
+        "IS-HRG",
+        "IS-HRU",
+        "IS-HUG",
+        "IS-HVA",
+        "IS-ISA",
+        "IS-KAL",
+        "IS-KJO",
+        "IS-KOP",
+        "IS-LAN",
+        "IS-MOS",
+        "IS-MUL",
+        "IS-MYR",
+        "IS-NOR",
+        "IS-RHH",
+        "IS-RKN",
+        "IS-RKV",
+        "IS-SBT",
+        "IS-SDV",
+        "IS-SHF",
+        "IS-SKF",
+        "IS-SKG",
+        "IS-SKO",
+        "IS-SNF",
+        "IS-SOG",
+        "IS-SOL",
+        "IS-TAL",
+        "IS-THG",
+        "IS-VEM",
+        "IS-VER",
+        "IS-VOP",
         "KG-GO",
+        "LT-04",
+        "LT-05",
+        "LT-09",
+        "LT-11",
+        "LT-19",
+        "LT-22",
+        "LT-23",
+        "LT-26",
+        "LT-34",
+        "LT-36",
+        "LT-38",
+        "LT-40",
+        "LT-42",
+        "LT-45",
+        "LT-47",
+        "LT-48",
+        "LT-49",
+        "LT-52",
+        "LT-59",
+        "LT-60",
         "MU-CC",
         "MY-14",
         "NO-38",
