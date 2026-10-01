@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `CityRegistry.set_population_threshold(n)` / `population_threshold` property, narrowing the cities cache and all three indexes to population >= n, w E2E tests.
 - `geonames_id` on `SubdivisionModel` (ingestion-side)
 - `admin_level=0` for ISO subdivision entries that are documentation/statistical groupings rather than real administrative divisions (Indonesia's island-grouping "Geographical unit" tier, the Dominican Republic's planning "Region" tier, Cabo Verde's "Geographical region"); these bypass GeoNames merging entirely and their real `parent` reference is preserved
+- Wikidata crosswalk (P300 ISO code ↔ P1566 GeoNames id) as a subdivision resolution source, applied ahead of auto-merge; resolved ~3900 subdivisions unambiguously on its own in its first run, cutting auto-merge's workload by ~90% and orphans by ~60%
 
 ### Changed
 - All registries (`Country`, `Subdivision`, `City`) are now lazy-loaded on first access; `Country`/`Subdivision` previously eager-loaded on import

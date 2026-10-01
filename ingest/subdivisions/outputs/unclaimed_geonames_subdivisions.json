@@ -1,47 +1,4 @@
 {
-  "AF.27": {
-    "name": "Maidan Wardak Province",
-    "aliases": [
-      "Maidan Vardak viloyati",
-      "د میدان وردک ولایت",
-      "ولایت میدان وردک"
-    ],
-    "country": "Afghanistan",
-    "admin_level": 1
-  },
-  "AF.36": {
-    "name": "Paktia",
-    "aliases": [
-      "Paktia Province",
-      "Paktiya",
-      "ولایت پکتیا",
-      "پکتيا ولايت"
-    ],
-    "country": "Afghanistan",
-    "admin_level": 1
-  },
-  "AF.42": {
-    "name": "Panjshir",
-    "aliases": [
-      "Panjsher viloyati",
-      "Panjshir Province",
-      "ولایت پنجشیر",
-      "پنجشېر ولايت"
-    ],
-    "country": "Afghanistan",
-    "admin_level": 1
-  },
-  "AM.01": {
-    "name": "Aragatsotn",
-    "aliases": [
-      "Aragatsotn Province",
-      "Aragatsotni Marz",
-      "Արագածոտն",
-      "Արագածոտնի Մարզ"
-    ],
-    "country": "Armenia",
-    "admin_level": 1
-  },
   "AO.CBG": {
     "name": "Cubango",
     "aliases": [],
@@ -119,20 +76,6 @@
     "name": "Shusha City",
     "aliases": [
       "Şuşa Şəhəri"
-    ],
-    "country": "Azerbaijan",
-    "admin_level": 1
-  },
-  "AZ.67": {
-    "name": "Yevlax",
-    "aliases": [],
-    "country": "Azerbaijan",
-    "admin_level": 1
-  },
-  "AZ.47": {
-    "name": "Shaki",
-    "aliases": [
-      "Şəki"
     ],
     "country": "Azerbaijan",
     "admin_level": 1
@@ -247,14 +190,6 @@
     "country": "Azerbaijan",
     "admin_level": 2
   },
-  "BD.85.1042": {
-    "name": "Jhalokati",
-    "aliases": [
-      "Jhalokati District"
-    ],
-    "country": "Bangladesh",
-    "admin_level": 2
-  },
   "BE.BRU.BRU": {
     "name": "Bruxelles-Capitale",
     "aliases": [
@@ -262,22 +197,6 @@
     ],
     "country": "Belgium",
     "admin_level": 2
-  },
-  "BF.04": {
-    "name": "Centre-Est",
-    "aliases": [
-      "Centre-Est Region"
-    ],
-    "country": "Burkina Faso",
-    "admin_level": 1
-  },
-  "BF.06": {
-    "name": "Centre-Ouest",
-    "aliases": [
-      "Centre-Ouest Region"
-    ],
-    "country": "Burkina Faso",
-    "admin_level": 1
   },
   "BF.08.42": {
     "name": "Province du Gobnangou",
@@ -289,60 +208,6 @@
     "country": "Burkina Faso",
     "admin_level": 2
   },
-  "BF.11.68": {
-    "name": "Province du Bassitenga",
-    "aliases": [
-      "Bassitenga"
-    ],
-    "country": "Burkina Faso",
-    "admin_level": 2
-  },
-  "BF.04.28": {
-    "name": "Kouritenga Province",
-    "aliases": [
-      "Kouritenga"
-    ],
-    "country": "Burkina Faso",
-    "admin_level": 2
-  },
-  "BF.01.45": {
-    "name": "Province des Balé",
-    "aliases": [],
-    "country": "Burkina Faso",
-    "admin_level": 2
-  },
-  "BG.58": {
-    "name": "Sofia",
-    "aliases": [
-      "Oblast Sofia",
-      "Sofia Province",
-      "Област София",
-      "Софийска област",
-      "София"
-    ],
-    "country": "Bulgaria",
-    "admin_level": 1
-  },
-  "BG.42": {
-    "name": "Sofia-Capital",
-    "aliases": [
-      "Oblast Sofia-Grad",
-      "Okrŭg Grad Sofiya",
-      "Sofia-Grad",
-      "Област София град",
-      "Област София-Град",
-      "София (столица)",
-      "София-Град"
-    ],
-    "country": "Bulgaria",
-    "admin_level": 1
-  },
-  "BS.43": {
-    "name": "Hope Town",
-    "aliases": [],
-    "country": "Bahamas",
-    "admin_level": 1
-  },
   "BW.10": {
     "name": "Ngwaketsi",
     "aliases": [
@@ -350,67 +215,6 @@
       "Ngwaketsi District"
     ],
     "country": "Botswana",
-    "admin_level": 1
-  },
-  "BY.07": {
-    "name": "Vitebsk",
-    "aliases": [
-      "Vitebsk Region",
-      "Витебская Область",
-      "Віцебская Вобласць"
-    ],
-    "country": "Belarus",
-    "admin_level": 1
-  },
-  "BY.05": {
-    "name": "Minsk",
-    "aliases": [
-      "Minsk Oblast",
-      "Minsk Region",
-      "Minskaya Oblast’",
-      "Минская Область",
-      "Мінская Вобласць"
-    ],
-    "country": "Belarus",
-    "admin_level": 1
-  },
-  "BY.03": {
-    "name": "Grodnenskaya",
-    "aliases": [
-      "Grodnenskaya Oblast’",
-      "Grodno",
-      "Гродзенская Вобласць",
-      "Гродненская Oбласть",
-      "Гродненская Область"
-    ],
-    "country": "Belarus",
-    "admin_level": 1
-  },
-  "CF.16": {
-    "name": "Sangha-Mbaéré",
-    "aliases": [
-      "Sangha-Mbaéré Prefecture",
-      "Sêse tî kömändâ-kötä tî Sangä-Mbaere"
-    ],
-    "country": "Central African Republic",
-    "admin_level": 1
-  },
-  "CF.06": {
-    "name": "Kémo",
-    "aliases": [
-      "Kémo Prefecture",
-      "Sêse tî kömändâ-kötä tî Kemö"
-    ],
-    "country": "Central African Republic",
-    "admin_level": 1
-  },
-  "CF.04": {
-    "name": "Mambéré-Kadéï",
-    "aliases": [
-      "Mambéré-Kadéï Prefecture",
-      "Sêse tî kömändâ-kötä tî Mambere-Kadei"
-    ],
-    "country": "Central African Republic",
     "admin_level": 1
   },
   "CF.15": {
@@ -439,6 +243,14 @@
     "country": "Central African Republic",
     "admin_level": 1
   },
+  "CG.15": {
+    "name": "Pointe-Noire",
+    "aliases": [
+      "Pointe-Noire Department"
+    ],
+    "country": "Republic of the Congo",
+    "admin_level": 1
+  },
   "CI.93": {
     "name": "Abidjan Autonomous District",
     "aliases": [],
@@ -460,62 +272,6 @@
       "西藏自治区"
     ],
     "country": "China",
-    "admin_level": 1
-  },
-  "CN.24": {
-    "name": "Shanxi",
-    "aliases": [
-      "Shanxi Province",
-      "Шаньси муж",
-      "ཧྲན་ཞི་ཞིང་ཆེན།",
-      "山西",
-      "山西省"
-    ],
-    "country": "China",
-    "admin_level": 1
-  },
-  "CN.26": {
-    "name": "Shaanxi",
-    "aliases": [
-      "Sanjsih",
-      "Shaanxi Province",
-      "Шэньси муж",
-      "شېنشى ئۆلكىسى",
-      "ཧྲའན་ཞི་ཞིང་ཆེན།",
-      "陕西",
-      "산시 성"
-    ],
-    "country": "China",
-    "admin_level": 1
-  },
-  "CN.21": {
-    "name": "Ningxia",
-    "aliases": [
-      "Ningxia Hui Autonomous Region",
-      "宁夏",
-      "宁夏回族自治区"
-    ],
-    "country": "China",
-    "admin_level": 1
-  },
-  "CN.16": {
-    "name": "Guangxi",
-    "aliases": [
-      "Guangxi Zhuang Autonomous Region",
-      "Gvangjsih",
-      "Gvangjsih Bouxcuengh Swcigih",
-      "广西",
-      "广西壮族自治区"
-    ],
-    "country": "China",
-    "admin_level": 1
-  },
-  "CO.25": {
-    "name": "San Andres y Providencia",
-    "aliases": [
-      "San Andrés y Providencia"
-    ],
-    "country": "Colombia",
     "admin_level": 1
   },
   "CZ.52": {
@@ -716,22 +472,6 @@
     "country": "Denmark",
     "admin_level": 1
   },
-  "EE.18": {
-    "name": "Tartu",
-    "aliases": [
-      "Tartu maakond"
-    ],
-    "country": "Estonia",
-    "admin_level": 1
-  },
-  "EE.07": {
-    "name": "Lääne",
-    "aliases": [
-      "Lääne maakond"
-    ],
-    "country": "Estonia",
-    "admin_level": 1
-  },
   "EE.03.0321": {
     "name": "Kohtla-Järve linn",
     "aliases": [],
@@ -770,24 +510,6 @@
   },
   "EE.01.0198": {
     "name": "Harku vald",
-    "aliases": [],
-    "country": "Estonia",
-    "admin_level": 2
-  },
-  "EE.11.0214": {
-    "name": "Häädemeeste vald",
-    "aliases": [],
-    "country": "Estonia",
-    "admin_level": 2
-  },
-  "EE.05.0247": {
-    "name": "Jõgeva vald",
-    "aliases": [],
-    "country": "Estonia",
-    "admin_level": 2
-  },
-  "EE.03.0251": {
-    "name": "Jõhvi vald",
     "aliases": [],
     "country": "Estonia",
     "admin_level": 2
@@ -852,12 +574,6 @@
     "country": "Estonia",
     "admin_level": 2
   },
-  "EE.03.0442": {
-    "name": "Lüganuse vald",
-    "aliases": [],
-    "country": "Estonia",
-    "admin_level": 2
-  },
   "EE.01.0446": {
     "name": "Maardu linn",
     "aliases": [],
@@ -876,12 +592,6 @@
     "country": "Estonia",
     "admin_level": 2
   },
-  "EE.03.0514": {
-    "name": "Narva-Jõesuu linn",
-    "aliases": [],
-    "country": "Estonia",
-    "admin_level": 2
-  },
   "EE.18.0528": {
     "name": "Nõo vald",
     "aliases": [],
@@ -894,32 +604,8 @@
     "country": "Estonia",
     "admin_level": 2
   },
-  "EE.18.0586": {
-    "name": "Peipsiääre vald",
-    "aliases": [],
-    "country": "Estonia",
-    "admin_level": 2
-  },
-  "EE.05.0618": {
-    "name": "Põltsamaa vald",
-    "aliases": [],
-    "country": "Estonia",
-    "admin_level": 2
-  },
-  "EE.19.0557": {
-    "name": "Otepää vald",
-    "aliases": [],
-    "country": "Estonia",
-    "admin_level": 2
-  },
   "EE.18.0796": {
     "name": "Tartu vald",
-    "aliases": [],
-    "country": "Estonia",
-    "admin_level": 2
-  },
-  "EE.11.0809": {
-    "name": "Tori vald",
     "aliases": [],
     "country": "Estonia",
     "admin_level": 2
@@ -932,12 +618,6 @@
   },
   "EE.14.0689": {
     "name": "Ruhnu vald",
-    "aliases": [],
-    "country": "Estonia",
-    "admin_level": 2
-  },
-  "EE.21.0698": {
-    "name": "Rõuge vald",
     "aliases": [],
     "country": "Estonia",
     "admin_level": 2
@@ -1002,26 +682,8 @@
     "country": "Estonia",
     "admin_level": 2
   },
-  "EE.01.0141": {
-    "name": "Anija vald",
-    "aliases": [],
-    "country": "Estonia",
-    "admin_level": 2
-  },
-  "EE.21.0142": {
-    "name": "Antsla vald",
-    "aliases": [],
-    "country": "Estonia",
-    "admin_level": 2
-  },
   "EE.03.0803": {
     "name": "Toila vald",
-    "aliases": [],
-    "country": "Estonia",
-    "admin_level": 2
-  },
-  "EE.04.0834": {
-    "name": "Türi vald",
     "aliases": [],
     "country": "Estonia",
     "admin_level": 2
@@ -1064,20 +726,8 @@
     "country": "Estonia",
     "admin_level": 2
   },
-  "EE.08.0928": {
-    "name": "Väike-Maarja vald",
-    "aliases": [],
-    "country": "Estonia",
-    "admin_level": 2
-  },
   "EE.20.0899": {
     "name": "Viljandi vald",
-    "aliases": [],
-    "country": "Estonia",
-    "admin_level": 2
-  },
-  "EE.07.0441": {
-    "name": "Lääne-Nigula vald",
     "aliases": [],
     "country": "Estonia",
     "admin_level": 2
@@ -1174,36 +824,6 @@
     "country": "Estonia",
     "admin_level": 2
   },
-  "ER.02": {
-    "name": "Debub",
-    "aliases": [
-      "Debub Region",
-      "منطقة الجنوب",
-      "ዞባ ደቡብ"
-    ],
-    "country": "Eritrea",
-    "admin_level": 1
-  },
-  "ER.03": {
-    "name": "Southern Red Sea",
-    "aliases": [
-      "Southern Red Sea Region",
-      "إقليم البحر الأحمر الجنوبي",
-      "ዞባ ደቡባዊ ቀይሕ ባሕሪ"
-    ],
-    "country": "Eritrea",
-    "admin_level": 1
-  },
-  "ER.05": {
-    "name": "Maekel",
-    "aliases": [
-      "Maekel Region",
-      "المنطقة المركزية",
-      "ዞባ ማእከል"
-    ],
-    "country": "Eritrea",
-    "admin_level": 1
-  },
   "ES.CE.CE": {
     "name": "Ceuta",
     "aliases": [
@@ -1240,22 +860,6 @@
     "country": "Fiji",
     "admin_level": 2
   },
-  "FR.24.45": {
-    "name": "Loiret",
-    "aliases": [
-      "Département du Loiret"
-    ],
-    "country": "France",
-    "admin_level": 2
-  },
-  "FR.84.42": {
-    "name": "Loire",
-    "aliases": [
-      "Département de la Loire"
-    ],
-    "country": "France",
-    "admin_level": 2
-  },
   "GB.ENG.F8": {
     "name": "Hertfordshire",
     "aliases": [
@@ -1276,60 +880,8 @@
     "country": "United Kingdom",
     "admin_level": 2
   },
-  "GB.ENG.A7": {
-    "name": "City and Borough of Birmingham",
-    "aliases": [
-      "Birmingham"
-    ],
-    "country": "United Kingdom",
-    "admin_level": 2
-  },
-  "GB.ENG.C1": {
-    "name": "Borough of Bury",
-    "aliases": [],
-    "country": "United Kingdom",
-    "admin_level": 2
-  },
-  "GB.ENG.H3": {
-    "name": "City and Borough of Leeds",
-    "aliases": [
-      "Leeds"
-    ],
-    "country": "United Kingdom",
-    "admin_level": 2
-  },
-  "GB.ENG.L5": {
-    "name": "City and Borough of Salford",
-    "aliases": [
-      "Salford"
-    ],
-    "country": "United Kingdom",
-    "admin_level": 2
-  },
-  "GB.ENG.O7": {
-    "name": "City and Borough of Wakefield",
-    "aliases": [
-      "Wakefield"
-    ],
-    "country": "United Kingdom",
-    "admin_level": 2
-  },
-  "GB.NIR.N09000003": {
-    "name": "City of Belfast",
-    "aliases": [
-      "Belfast"
-    ],
-    "country": "United Kingdom",
-    "admin_level": 2
-  },
   "GB.SCT.T5": {
     "name": "Aberdeen City",
-    "aliases": [],
-    "country": "United Kingdom",
-    "admin_level": 2
-  },
-  "GB.SCT.U3": {
-    "name": "Dundee City",
     "aliases": [],
     "country": "United Kingdom",
     "admin_level": 2
@@ -1350,53 +902,10 @@
     "country": "United Kingdom",
     "admin_level": 2
   },
-  "GB.WLS.X3": {
-    "name": "Bridgend county borough",
-    "aliases": [
-      "Bwrdeistref Sirol Pen-y-bont ar Ogwr",
-      "County Borough of Bridgend"
-    ],
-    "country": "United Kingdom",
-    "admin_level": 2
-  },
-  "GB.WLS.X4": {
-    "name": "Caerphilly County Borough",
-    "aliases": [
-      "Bwrdeistref Sirol Caerffili"
-    ],
-    "country": "United Kingdom",
-    "admin_level": 2
-  },
-  "GB.WLS.Z2": {
-    "name": "Torfaen County Borough",
-    "aliases": [
-      "Bwrdeistref Sirol Tor-faen"
-    ],
-    "country": "United Kingdom",
-    "admin_level": 2
-  },
-  "GB.NIR.N09000005": {
-    "name": "Derry City and Strabane",
-    "aliases": [],
-    "country": "United Kingdom",
-    "admin_level": 2
-  },
-  "GB.NIR.N09000002": {
-    "name": "Armagh City Banbridge and Craigavon",
-    "aliases": [],
-    "country": "United Kingdom",
-    "admin_level": 2
-  },
   "GD.10": {
     "name": "Carriacou and Petite Martinique",
     "aliases": [],
     "country": "Grenada",
-    "admin_level": 1
-  },
-  "GL.11839537": {
-    "name": "Avannaata",
-    "aliases": [],
-    "country": "Greenland",
     "admin_level": 1
   },
   "GN.04.8335012": {
@@ -1406,14 +915,6 @@
     ],
     "country": "Guinea",
     "admin_level": 2
-  },
-  "GQ.03": {
-    "name": "Annobon",
-    "aliases": [
-      "Annobón Province"
-    ],
-    "country": "Equatorial Guinea",
-    "admin_level": 1
   },
   "GQ.09.2306544": {
     "name": "Añisoc",
@@ -1623,6 +1124,14 @@
     "country": "Equatorial Guinea",
     "admin_level": 2
   },
+  "GQ.03.13448381": {
+    "name": "Annobón",
+    "aliases": [
+      "Distrito de Annobón"
+    ],
+    "country": "Equatorial Guinea",
+    "admin_level": 2
+  },
   "GW.06.7909700": {
     "name": "Sao Domingos",
     "aliases": [],
@@ -1797,6 +1306,22 @@
     "country": "Guinea-Bissau",
     "admin_level": 2
   },
+  "GW.01.8335074": {
+    "name": "Bafata Sector",
+    "aliases": [
+      "Bafata"
+    ],
+    "country": "Guinea-Bissau",
+    "admin_level": 2
+  },
+  "GW.10.8335075": {
+    "name": "Gabu Sector",
+    "aliases": [
+      "Gabu"
+    ],
+    "country": "Guinea-Bissau",
+    "admin_level": 2
+  },
   "GW.01.8335076": {
     "name": "Contuboel Sector",
     "aliases": [
@@ -1877,58 +1402,6 @@
     "country": "Guinea-Bissau",
     "admin_level": 2
   },
-  "GW.10": {
-    "name": "Gabú",
-    "aliases": [],
-    "country": "Guinea-Bissau",
-    "admin_level": 1
-  },
-  "GW.06": {
-    "name": "Cacheu",
-    "aliases": [],
-    "country": "Guinea-Bissau",
-    "admin_level": 1
-  },
-  "GW.05": {
-    "name": "Bolama",
-    "aliases": [
-      "Bijagîs",
-      "Bijagós",
-      "Bolama Region",
-      "Bolama and Bijagos",
-      "Bolama/Bijagîs",
-      "Região de Bolama"
-    ],
-    "country": "Guinea-Bissau",
-    "admin_level": 1
-  },
-  "GW.01": {
-    "name": "Bafatá",
-    "aliases": [],
-    "country": "Guinea-Bissau",
-    "admin_level": 1
-  },
-  "HU.06": {
-    "name": "Csongrád",
-    "aliases": [],
-    "country": "Hungary",
-    "admin_level": 1
-  },
-  "HU.23": {
-    "name": "Veszprém",
-    "aliases": [],
-    "country": "Hungary",
-    "admin_level": 1
-  },
-  "IE.C": {
-    "name": "Connacht",
-    "aliases": [
-      "Connachta",
-      "Cúige Chonnacht"
-    ],
-    "country": "Ireland",
-    "admin_level": 1
-  },
   "IE.L.35": {
     "name": "Fingal County",
     "aliases": [
@@ -1974,18 +1447,6 @@
     "country": "Ireland",
     "admin_level": 2
   },
-  "IL.05": {
-    "name": "Tel Aviv",
-    "aliases": [
-      "Meẖoz Tel Aviv",
-      "Tel Aviv District",
-      "מחוז תל אביב",
-      "תל אביב",
-      "منطقة تل أبيب"
-    ],
-    "country": "Israel",
-    "admin_level": 1
-  },
   "IL.WE": {
     "name": "Judea and Samaria Area",
     "aliases": [
@@ -1994,55 +1455,23 @@
     "country": "Israel",
     "admin_level": 1
   },
-  "IQ.11": {
-    "name": "Erbil",
+  "IN.41": {
+    "name": "Ladakh",
     "aliases": [
-      "Erbil Governorate",
-      "Hewler Governorate",
-      "Ərbil mühafəzəsi",
-      "إربل",
-      "محافظة إربل",
-      "پارێزگای ھەولێر"
+      "लडाख",
+      "लदाख",
+      "लदाख सम्पादन",
+      "लद्दाख़",
+      "লাডাখ",
+      "লাদাখ",
+      "ਲਦਾਖ",
+      "લડાખ",
+      "லடாக்",
+      "లడఖ్",
+      "ಲಡಾಖ್",
+      "ലഡാക്"
     ],
-    "country": "Iraq",
-    "admin_level": 1
-  },
-  "IQ.08": {
-    "name": "Duhok",
-    "aliases": [
-      "Duhok Governorate",
-      "Duhok Province",
-      "Dəhuk mühafəzəsi",
-      "دهوك",
-      "دهۆک",
-      "محافظة دهوك",
-      "پارێزگای دھۆک"
-    ],
-    "country": "Iraq",
-    "admin_level": 1
-  },
-  "IQ.05": {
-    "name": "Sulaymaniyah",
-    "aliases": [
-      "Sulaymaniyah Governorate",
-      "Süleymaniyyə mühafəzəsi",
-      "السليمانية",
-      "سلێمانی",
-      "محافظة السليمانية",
-      "پارێزگای سلێمانی"
-    ],
-    "country": "Iraq",
-    "admin_level": 1
-  },
-  "IQ.17": {
-    "name": "Najaf",
-    "aliases": [
-      "Necef",
-      "النجف",
-      "النجف الأشرف",
-      "محافظة النجف الأشرف"
-    ],
-    "country": "Iraq",
+    "country": "India",
     "admin_level": 1
   },
   "IQ.19": {
@@ -2152,10 +1581,28 @@
     "country": "Iraq",
     "admin_level": 2
   },
+  "IQ.11.95444": {
+    "name": "Arbil",
+    "aliases": [
+      "إربل",
+      "هەولێر"
+    ],
+    "country": "Iraq",
+    "admin_level": 2
+  },
   "IQ.19.96204": {
     "name": "Qaḑā’ Ḩalabchah",
     "aliases": [
       "قضاء حلبچة"
+    ],
+    "country": "Iraq",
+    "admin_level": 2
+  },
+  "IQ.08.97269": {
+    "name": "Dohuk District",
+    "aliases": [
+      "Duhok District",
+      "محافظة دهوك"
     ],
     "country": "Iraq",
     "admin_level": 2
@@ -2918,82 +2365,6 @@
     "country": "Iraq",
     "admin_level": 2
   },
-  "IR.16": {
-    "name": "Kurdistan Province",
-    "aliases": [
-      "استان کردستان",
-      "اُستانِ كُردِستان",
-      "اُستَن اُف كُردِستَن",
-      "فَرماندارئ كُلِّ كُردِستان",
-      "کردستان"
-    ],
-    "country": "Iran",
-    "admin_level": 1
-  },
-  "IR.04": {
-    "name": "Sistan and Baluchestan",
-    "aliases": [
-      "Sistan and Baluchestan Province",
-      "the 11th Ostan",
-      "استان سیستان و بلوچستان",
-      "سیستان و بلوچستان"
-    ],
-    "country": "Iran",
-    "admin_level": 1
-  },
-  "IS.41.5200": {
-    "name": "Sveitarfélagið Skagafjörður",
-    "aliases": [],
-    "country": "Iceland",
-    "admin_level": 2
-  },
-  "IT.03.RC": {
-    "name": "Provincia di Reggio Calabria",
-    "aliases": [
-      "Province de Reggio de Calabre",
-      "Province of Reggio Calabria"
-    ],
-    "country": "Italy",
-    "admin_level": 2
-  },
-  "IT.15.PA": {
-    "name": "Palermo",
-    "aliases": [
-      "Città Metropolitana di Palermo",
-      "Palerme",
-      "Province de Palerme",
-      "Province of Palermo",
-      "Provincia de Pałermo",
-      "Provincia di Palermo"
-    ],
-    "country": "Italy",
-    "admin_level": 2
-  },
-  "IT.15.ME": {
-    "name": "Messina",
-    "aliases": [
-      "Città Metropolitana di Messina",
-      "Messine",
-      "Province de Messine",
-      "Province of Messina",
-      "Provincia de Mesina",
-      "Provincia di Messina"
-    ],
-    "country": "Italy",
-    "admin_level": 2
-  },
-  "IT.15.CT": {
-    "name": "Catania",
-    "aliases": [
-      "Catane",
-      "Città Metropolitana di Catania",
-      "Province de Catane",
-      "Province of Catania",
-      "Provincia di Catania"
-    ],
-    "country": "Italy",
-    "admin_level": 2
-  },
   "IT.14.CA": {
     "name": "Provincia di Cagliari",
     "aliases": [
@@ -3015,67 +2386,12 @@
     "country": "Italy",
     "admin_level": 2
   },
-  "IT.12.TO": {
-    "name": "Torino",
-    "aliases": [
-      "Città Metropolitana di Torino",
-      "Province de Turin",
-      "Province of Turin",
-      "Provincia di Torino",
-      "Turin"
-    ],
-    "country": "Italy",
-    "admin_level": 2
-  },
-  "IT.07.RM": {
-    "name": "Città metropolitana di Roma Capitale",
-    "aliases": [
-      "Province de Rome",
-      "Province of Rome",
-      "Provincia di Roma",
-      "Roma",
-      "Rome"
-    ],
-    "country": "Italy",
-    "admin_level": 2
-  },
-  "IT.04.NA": {
-    "name": "Napoli",
-    "aliases": [
-      "Città Metropolitana di Napoli",
-      "Province de Naples",
-      "Province of Naples",
-      "Provincia di Napoli"
-    ],
-    "country": "Italy",
-    "admin_level": 2
-  },
   "IT.08.GE": {
     "name": "Provincia di Genova",
     "aliases": [
       "Genova",
       "Province de Gênes",
       "Province of Genoa"
-    ],
-    "country": "Italy",
-    "admin_level": 2
-  },
-  "IT.05.BO": {
-    "name": "Bologna",
-    "aliases": [
-      "Città Metropolitana di Bologna",
-      "Province de Bologne",
-      "Province of Bologna"
-    ],
-    "country": "Italy",
-    "admin_level": 2
-  },
-  "IT.13.BA": {
-    "name": "Bari",
-    "aliases": [
-      "Città Metropolitana di Bari",
-      "Province de Bari",
-      "Province of Bari"
     ],
     "country": "Italy",
     "admin_level": 2
@@ -3090,77 +2406,22 @@
     "country": "Italy",
     "admin_level": 2
   },
-  "JO.17": {
-    "name": "Zarqa",
-    "aliases": [
-      "Zarqa Governorate",
-      "محافظة الزرقاء"
-    ],
-    "country": "Jordan",
+  "KE.30": {
+    "name": "Lamu",
+    "aliases": [],
+    "country": "Kenya",
+    "admin_level": 1
+  },
+  "KE.40": {
+    "name": "Nandi",
+    "aliases": [],
+    "country": "Kenya",
     "admin_level": 1
   },
   "KG.10": {
     "name": "Osh City",
     "aliases": [],
     "country": "Kyrgyzstan",
-    "admin_level": 1
-  },
-  "KP.11": {
-    "name": "P'yŏngan-bukto",
-    "aliases": [
-      "P’yŏngan-bukto",
-      "平北",
-      "平安北道",
-      "평안북도"
-    ],
-    "country": "North Korea",
-    "admin_level": 1
-  },
-  "KP.09": {
-    "name": "Kangwŏn-do",
-    "aliases": [
-      "Kangwŏn",
-      "江原",
-      "江原道",
-      "강원",
-      "강원도"
-    ],
-    "country": "North Korea",
-    "admin_level": 1
-  },
-  "KP.13": {
-    "name": "Yanggang-do",
-    "aliases": [
-      "兩江",
-      "兩江道",
-      "량강도"
-    ],
-    "country": "North Korea",
-    "admin_level": 1
-  },
-  "KP.01": {
-    "name": "Chagang",
-    "aliases": [
-      "慈江",
-      "慈江道",
-      "자강",
-      "자강도"
-    ],
-    "country": "North Korea",
-    "admin_level": 1
-  },
-  "KR.10": {
-    "name": "Busan",
-    "aliases": [
-      "Busan-si",
-      "Pusan-gwangyŏksi",
-      "釜山",
-      "釜山廣域市",
-      "부산",
-      "부산광역시",
-      "부산시"
-    ],
-    "country": "South Korea",
     "admin_level": 1
   },
   "KZ.08": {
@@ -3176,122 +2437,12 @@
     "country": "Kazakhstan",
     "admin_level": 1
   },
-  "LA.27": {
-    "name": "Vientiane",
-    "aliases": [
-      "Vientiane Province",
-      "ແຂວງວຽງຈັນ"
-    ],
-    "country": "Laos",
-    "admin_level": 1
-  },
-  "LA.24": {
-    "name": "Vientiane Prefecture",
-    "aliases": [
-      "Vientiane",
-      "ນະຄອນຫຼວງວຽງຈັນ"
-    ],
-    "country": "Laos",
-    "admin_level": 1
-  },
-  "LB.08": {
-    "name": "Bekaa",
-    "aliases": [
-      "محافظة البقاع"
-    ],
-    "country": "Lebanon",
-    "admin_level": 1
-  },
-  "LB.07": {
-    "name": "Nabatieh",
-    "aliases": [
-      "محافظة النبطية"
-    ],
-    "country": "Lebanon",
-    "admin_level": 1
-  },
-  "LB.11": {
-    "name": "Baalbek-Hermel Governorate",
-    "aliases": [
-      "محافظة بعلبك - الهرمل"
-    ],
-    "country": "Lebanon",
-    "admin_level": 1
-  },
-  "LV.32": {
-    "name": "Ventspils",
-    "aliases": [],
-    "country": "Latvia",
-    "admin_level": 1
-  },
-  "LV.23": {
-    "name": "Rēzekne",
-    "aliases": [],
-    "country": "Latvia",
-    "admin_level": 1
-  },
-  "LV.11": {
-    "name": "Jelgava",
-    "aliases": [],
-    "country": "Latvia",
-    "admin_level": 1
-  },
   "MC.00": {
     "name": "Municipality of Monaco",
     "aliases": [
       "Monaco"
     ],
     "country": "Monaco",
-    "admin_level": 1
-  },
-  "MD.73": {
-    "name": "Raionul Edineţ",
-    "aliases": [
-      "Raionul Edineț",
-      "Районул Единец"
-    ],
-    "country": "Moldova",
-    "admin_level": 1
-  },
-  "MD.81": {
-    "name": "Raionul Ocniţa",
-    "aliases": [
-      "Raionul Ocnița",
-      "Районул Окниця"
-    ],
-    "country": "Moldova",
-    "admin_level": 1
-  },
-  "MD.57": {
-    "name": "Chișinău Municipality",
-    "aliases": [
-      "Municipiul Chişinău",
-      "Municipiul Chișinău"
-    ],
-    "country": "Moldova",
-    "admin_level": 1
-  },
-  "MD.62": {
-    "name": "Bender Municipality",
-    "aliases": [
-      "Municipiul Bender"
-    ],
-    "country": "Moldova",
-    "admin_level": 1
-  },
-  "ME.13": {
-    "name": "Opština Plav",
-    "aliases": [],
-    "country": "Montenegro",
-    "admin_level": 1
-  },
-  "ME.12": {
-    "name": "Opština Nikšić",
-    "aliases": [
-      "Никшић",
-      "Општина Никшић"
-    ],
-    "country": "Montenegro",
     "admin_level": 1
   },
   "MG.71": {
@@ -3520,114 +2671,9 @@
     "country": "Mauritius",
     "admin_level": 1
   },
-  "MU.23": {
-    "name": "Rodrigues",
-    "aliases": [
-      "Île Rodrigues"
-    ],
-    "country": "Mauritius",
-    "admin_level": 1
-  },
-  "MV.47": {
-    "name": "Vaavu Atholhu",
-    "aliases": [],
-    "country": "Maldives",
-    "admin_level": 1
-  },
-  "MV.46": {
-    "name": "Thaa Atholhu",
-    "aliases": [],
-    "country": "Maldives",
-    "admin_level": 1
-  },
-  "MV.45": {
-    "name": "Shaviyani Atholhu",
-    "aliases": [],
-    "country": "Maldives",
-    "admin_level": 1
-  },
-  "MV.44": {
-    "name": "Raa Atoll",
-    "aliases": [],
-    "country": "Maldives",
-    "admin_level": 1
-  },
-  "MV.43": {
-    "name": "Noonu Atoll",
-    "aliases": [
-      "Noonu Atholhu"
-    ],
-    "country": "Maldives",
-    "admin_level": 1
-  },
-  "MV.41": {
-    "name": "Meemu Atholhu",
-    "aliases": [],
-    "country": "Maldives",
-    "admin_level": 1
-  },
-  "MV.39": {
-    "name": "Faadhippolhu Atoll",
-    "aliases": [],
-    "country": "Maldives",
-    "admin_level": 1
-  },
-  "MV.38": {
-    "name": "Kaafu Atoll",
-    "aliases": [],
-    "country": "Maldives",
-    "admin_level": 1
-  },
-  "MV.37": {
-    "name": "Haa Dhaalu Atholhu",
-    "aliases": [],
-    "country": "Maldives",
-    "admin_level": 1
-  },
-  "MV.36": {
-    "name": "Haa Alifu Atholhu",
-    "aliases": [],
-    "country": "Maldives",
-    "admin_level": 1
-  },
-  "MV.33": {
-    "name": "Faafu Atholhu",
-    "aliases": [],
-    "country": "Maldives",
-    "admin_level": 1
-  },
-  "MV.32": {
-    "name": "Dhaalu Atholhu",
-    "aliases": [],
-    "country": "Maldives",
-    "admin_level": 1
-  },
-  "MV.31": {
-    "name": "Baa Atholhu",
-    "aliases": [],
-    "country": "Maldives",
-    "admin_level": 1
-  },
-  "MV.30": {
-    "name": "Northern Ari Atoll",
-    "aliases": [
-      "Alif Alif Atoll",
-      "Ari Atholhu Uthuruburi"
-    ],
-    "country": "Maldives",
-    "admin_level": 1
-  },
   "MY.14": {
     "name": "Kuala Lumpur",
     "aliases": [],
-    "country": "Malaysia",
-    "admin_level": 1
-  },
-  "MY.15": {
-    "name": "Labuan",
-    "aliases": [
-      "Federal Territory of Labuan"
-    ],
     "country": "Malaysia",
     "admin_level": 1
   },
@@ -3704,31 +2750,12 @@
     "country": "Nepal",
     "admin_level": 1
   },
-  "NZ.G2": {
-    "name": "Wellington Region",
-    "aliases": [
-      "Te Whanga-nui-a-Tara",
-      "Whanganui-a-Tara"
-    ],
-    "country": "New Zealand",
-    "admin_level": 1
-  },
   "NZ.10": {
     "name": "Chatham Islands",
     "aliases": [
       "Wharekauri"
     ],
     "country": "New Zealand",
-    "admin_level": 1
-  },
-  "PE.15": {
-    "name": "Lima region",
-    "aliases": [
-      "Departamento de Lima",
-      "Lima Department",
-      "Lima Suyu"
-    ],
-    "country": "Peru",
     "admin_level": 1
   },
   "PH.12.B8": {
@@ -3763,42 +2790,6 @@
     "aliases": [],
     "country": "Philippines",
     "admin_level": 2
-  },
-  "PL.79": {
-    "name": "Opole Voivodeship",
-    "aliases": [
-      "Opolės vaivadija",
-      "Woiwodschaft Oppeln",
-      "Województwo opolskie",
-      "Òpòlsczé wòjewództwò"
-    ],
-    "country": "Poland",
-    "admin_level": 1
-  },
-  "PL.82": {
-    "name": "Pomerania",
-    "aliases": [
-      "Pamario vaivadija",
-      "Pomerania Province",
-      "Pomeranian Voivodeship",
-      "Pòmòrsczé wòjewództwò",
-      "Woiwodschaft Pommern",
-      "Województwo pomorskie"
-    ],
-    "country": "Poland",
-    "admin_level": 1
-  },
-  "PL.83": {
-    "name": "Silesia",
-    "aliases": [
-      "Schlesien",
-      "Silesian Voivodeship",
-      "Silezijos vaivadija",
-      "Woiwodschaft Schlesien",
-      "Województwo śląskie"
-    ],
-    "country": "Poland",
-    "admin_level": 1
   },
   "PS.GZ": {
     "name": "Gaza Strip",
@@ -3854,214 +2845,16 @@
     "country": "Serbia",
     "admin_level": 1
   },
-  "RU.70": {
-    "name": "Stavropol Kray",
-    "aliases": [
-      "Stavropol diyarı",
-      "Stavropol’ Kray",
-      "Ставропол Къэрал",
-      "Ставропол улка",
-      "Ставрополан мохк",
-      "Ставрополень край",
-      "Ставрополь крае",
-      "Ставрополь край",
-      "Ставрополь крайы",
-      "Ставрополь кыраайа",
-      "Ставрополь ладор",
-      "Ставрополь шаер",
-      "Ставропольдин край",
-      "Ставрополье",
-      "Ставропольский Край"
-    ],
-    "country": "Russian Federation",
-    "admin_level": 1
-  },
-  "RU.62": {
-    "name": "Ryazan Oblast",
-    "aliases": [
-      "Ryazan vilayəti",
-      "Разан област",
-      "Рязанан область",
-      "Рязанень аймак",
-      "Рязанень ёнкс",
-      "Рязанская Область",
-      "Рязань обласьт",
-      "Рязань улос",
-      "Рязань уобалаһа",
-      "Рязань өлкәсе",
-      "Рязань өлкәһе"
-    ],
-    "country": "Russian Federation",
-    "admin_level": 1
-  },
-  "RU.10": {
-    "name": "Bryansk Oblast",
-    "aliases": [
-      "Bryansk vilayəti",
-      "Бранск област",
-      "Брянск обласьт",
-      "Брянск улос",
-      "Брянск өлкәһе",
-      "Брянскай уобалас",
-      "Брянскан область",
-      "Брянская Область",
-      "Брянскоень ёнкс",
-      "Брянсконь аймак",
-      "Брәнск өлкәсе"
-    ],
-    "country": "Russian Federation",
-    "admin_level": 1
-  },
-  "RU.13": {
-    "name": "Chelyabinsk",
-    "aliases": [
-      "Chelyabinsk Oblast",
-      "Çelyabinsk vilayəti",
-      "Силәбе өлкәһе",
-      "Челябань аймак",
-      "Челябань ёнкс",
-      "Челябинск обласьт",
-      "Челябинск улос",
-      "Челябинскай уобалас",
-      "Челябинскан область",
-      "Челябинская",
-      "Челябинская Область",
-      "Чиләбе өлкәсе"
-    ],
-    "country": "Russian Federation",
-    "admin_level": 1
-  },
-  "RU.92": {
-    "name": "Kamchatka",
-    "aliases": [
-      "Kamchatka Krai",
-      "Kamçatka",
-      "Камчатка",
-      "Камчатский край"
-    ],
-    "country": "Russian Federation",
-    "admin_level": 1
-  },
-  "RU.93": {
-    "name": "Zabaykalskiy (Transbaikal) Kray",
-    "aliases": [
-      "Transbaikal Territory",
-      "Zabaykalskiy (Transbaikal) Krayı",
-      "Zabaykal’skiy (Transbaikal) Kray",
-      "Забайкальск (Трансбайкал) Край",
-      "Забайкальский Край"
-    ],
-    "country": "Russian Federation",
-    "admin_level": 1
-  },
-  "SC.20": {
-    "name": "Pointe La Rue",
-    "aliases": [],
-    "country": "Seychelles",
-    "admin_level": 1
-  },
-  "SC.26": {
-    "name": "La Rivière Anglaise",
-    "aliases": [],
-    "country": "Seychelles",
-    "admin_level": 1
-  },
-  "SC.25": {
-    "name": "La Digue and Inner Islands",
-    "aliases": [
-      "district de La Digue and Inner Islands"
-    ],
-    "country": "Seychelles",
-    "admin_level": 1
-  },
   "SC.11876017": {
     "name": "Outer Islands",
     "aliases": [],
     "country": "Seychelles",
     "admin_level": 1
   },
-  "SC.12200079": {
-    "name": "Ile Perseverance I",
-    "aliases": [],
-    "country": "Seychelles",
-    "admin_level": 1
-  },
-  "SC.12200080": {
-    "name": "Ile Perseverance II",
-    "aliases": [],
-    "country": "Seychelles",
-    "admin_level": 1
-  },
-  "SD.39": {
-    "name": "Al Qaḑārif",
-    "aliases": [
-      "Al Qadarif State",
-      "القضارف"
-    ],
-    "country": "Sudan",
-    "admin_level": 1
-  },
-  "SI.D7": {
-    "name": "Urban Municipality of Velenje",
-    "aliases": [
-      "Mestna občina Velenje"
-    ],
-    "country": "Slovenia",
-    "admin_level": 1
-  },
-  "SI.C2": {
-    "name": "Urban Municipality of Slovenj Gradec",
-    "aliases": [
-      "Mestna Občina Slovenj Gradec"
-    ],
-    "country": "Slovenia",
-    "admin_level": 1
-  },
   "SI.K7": {
     "name": "Urban Municipality of Ptuj",
     "aliases": [
       "Mestna občina Ptuj"
-    ],
-    "country": "Slovenia",
-    "admin_level": 1
-  },
-  "SI.J7": {
-    "name": "Urban Municipality of Novo Mesto",
-    "aliases": [
-      "Mestna občina Novo mesto"
-    ],
-    "country": "Slovenia",
-    "admin_level": 1
-  },
-  "SI.84": {
-    "name": "Urban Municipality of Nova Gorica",
-    "aliases": [
-      "Mestna občina Nova Gorica"
-    ],
-    "country": "Slovenia",
-    "admin_level": 1
-  },
-  "SI.80": {
-    "name": "Urban Municipality of Murska Sobota",
-    "aliases": [
-      "Mestna občina Murska Sobota"
-    ],
-    "country": "Slovenia",
-    "admin_level": 1
-  },
-  "SI.J2": {
-    "name": "Urban Municipality of Maribor",
-    "aliases": [
-      "Marburgo",
-      "Mestna občina Maribor"
-    ],
-    "country": "Slovenia",
-    "admin_level": 1
-  },
-  "SI.54": {
-    "name": "Urban Municipality of Krško",
-    "aliases": [
-      "Mestna občina Krško"
     ],
     "country": "Slovenia",
     "admin_level": 1
@@ -4074,14 +2867,6 @@
     "country": "Slovenia",
     "admin_level": 1
   },
-  "SI.11": {
-    "name": "Urban Municipality of Celje",
-    "aliases": [
-      "Mestna občina Celje"
-    ],
-    "country": "Slovenia",
-    "admin_level": 1
-  },
   "ST.02": {
     "name": "São Tomé Island",
     "aliases": [
@@ -4090,116 +2875,12 @@
     "country": "Sao Tome and Principe",
     "admin_level": 1
   },
-  "SY.05": {
-    "name": "Suwayda",
+  "TJ.04": {
+    "name": "Dushanbe",
     "aliases": [
-      "Suwayda Governorate",
-      "Sweida Governorate",
-      "السويداء",
-      "محافظة السويداء"
+      "Душанбе"
     ],
-    "country": "Syria",
-    "admin_level": 1
-  },
-  "TD.28": {
-    "name": "Ennedi-Ouest",
-    "aliases": [
-      "Ennedi Ouest",
-      "Ennedi-Ouest Region",
-      "Province de l'Ennedi-Ouest",
-      "Région de l'Ennedi-Ouest",
-      "إنيدي الغربي",
-      "ولاية إنيدي الغربي"
-    ],
-    "country": "Chad",
-    "admin_level": 1
-  },
-  "TD.27": {
-    "name": "Ennedi-Est",
-    "aliases": [
-      "Ennedi Est",
-      "Ennedi-Est Region",
-      "Province de l'Ennedi-Est",
-      "Région de l'Ennedi-Est",
-      "إنيدي الشرقي",
-      "ولاية إنيدي الشرقي"
-    ],
-    "country": "Chad",
-    "admin_level": 1
-  },
-  "TH.03": {
-    "name": "Chiang Rai",
-    "aliases": [
-      "Chiang Rai Province",
-      "จังหวัดเชียงราย",
-      "เชียงราย"
-    ],
-    "country": "Thailand",
-    "admin_level": 1
-  },
-  "TH.02": {
-    "name": "Chiang Mai",
-    "aliases": [
-      "จังหวัดเชียงใหม่",
-      "เชียงใหม่"
-    ],
-    "country": "Thailand",
-    "admin_level": 1
-  },
-  "TH.79": {
-    "name": "Nong Bua Lamphu",
-    "aliases": [
-      "Nong Bua Lamphu Province",
-      "จังหวัดหนองบัวลำภู",
-      "หนองบัวลำภู"
-    ],
-    "country": "Thailand",
-    "admin_level": 1
-  },
-  "TN.39": {
-    "name": "Manouba",
-    "aliases": [
-      "Manouba Governorate",
-      "منوبة",
-      "ولاية منوبة"
-    ],
-    "country": "Tunisia",
-    "admin_level": 1
-  },
-  "TT.03": {
-    "name": "Mayaro",
-    "aliases": [],
-    "country": "Trinidad and Tobago",
-    "admin_level": 1
-  },
-  "TT.01": {
-    "name": "Borough of Arima",
-    "aliases": [],
-    "country": "Trinidad and Tobago",
-    "admin_level": 1
-  },
-  "TT.DMN": {
-    "name": "Diego Martin Regional Corporation",
-    "aliases": [],
-    "country": "Trinidad and Tobago",
-    "admin_level": 1
-  },
-  "TT.PRT": {
-    "name": "Princes Town",
-    "aliases": [],
-    "country": "Trinidad and Tobago",
-    "admin_level": 1
-  },
-  "TT.SGE": {
-    "name": "Sangre Grande Regional Corporation",
-    "aliases": [],
-    "country": "Trinidad and Tobago",
-    "admin_level": 1
-  },
-  "TT.SIP": {
-    "name": "Siparia Regional Corporation",
-    "aliases": [],
-    "country": "Trinidad and Tobago",
+    "country": "Tajikistan",
     "admin_level": 1
   },
   "TW.01": {
@@ -4217,37 +2898,6 @@
       "高雄市"
     ],
     "country": "Taiwan",
-    "admin_level": 1
-  },
-  "TZ.25": {
-    "name": "Zanzibar Urban/West",
-    "aliases": [
-      "Mjini Magharibi",
-      "Mkoa wa Mjini Magharibi"
-    ],
-    "country": "Tanzania",
-    "admin_level": 1
-  },
-  "UG.C.37": {
-    "name": "Kampala District",
-    "aliases": [
-      "Wilaya ya Kampala"
-    ],
-    "country": "Uganda",
-    "admin_level": 2
-  },
-  "UZ.15": {
-    "name": "Jizzakh Region",
-    "aliases": [
-      "Jizzax viloyati"
-    ],
-    "country": "Uzbekistan",
-    "admin_level": 1
-  },
-  "VN.22": {
-    "name": "Quảng Ninh",
-    "aliases": [],
-    "country": "Vietnam",
     "admin_level": 1
   },
   "VN.48": {
@@ -4272,18 +2922,6 @@
       "Cần Thơ"
     ],
     "country": "Vietnam",
-    "admin_level": 1
-  },
-  "YE.26": {
-    "name": "Amanat Alasimah",
-    "aliases": [
-      "الامانة",
-      "العاصمة",
-      "العاصمة صنعاء",
-      "امانه العاصمه",
-      "صنعاء"
-    ],
-    "country": "Yemen",
     "admin_level": 1
   }
 }

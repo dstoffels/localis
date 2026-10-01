@@ -86,13 +86,12 @@ class ResolutionMap:
         types = self.non_administrative_types.get(alpha2, [])
         return entry_type.lower() in {t.lower() for t in types}
 
-    def reconcile(self, iso_code: str, result: AutoMergeMatch | None) -> bool:
-        """True if a fresh result matches what's already in `audited` (caller discards it, nothing to write); evicts the stale audited entry otherwise, since the audit decision no longer reflects reality. An audited `id` of None means "verified: should not merge", which matches a fresh orphan result (also None)."""
+    def reconcile(self, iso_code: str, geonames_id: int | None) -> bool:
+        """True if a fresh geonames_id (or None, meaning no match) agrees with what's already in `audited` (caller discards it, nothing to write); evicts the stale audited entry otherwise, since the audit decision no longer reflects reality. An audited id of None means "verified: should not merge", which matches a fresh orphan result (also None). Shared by any recomputed-every-run source (auto_merge, wikidata_merge), not just AutoMergeMatch."""
         audited_entry = self.audited.get(iso_code)
         if audited_entry is None:
             return False
-        fresh_id = result.id if result is not None else None
-        if audited_entry.id == fresh_id:
+        if audited_entry.id == geonames_id:
             return True
         del self.audited[iso_code]
         return False

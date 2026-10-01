@@ -364,7 +364,7 @@ def try_merge(
             claimed_iso.add(iso_sub.iso_code)
             claimed_geo.add(geo_sub.geonames_id)
             match = AutoMergeMatch(id=geo_sub.geonames_id, margin=round(score - needed))
-            if not resolution_map.reconcile(iso_sub.iso_code, match):
+            if not resolution_map.reconcile(iso_sub.iso_code, match.id):
                 resolution_map.auto_merge.resolutions[iso_sub.iso_code] = match
             if score < 90:
                 ingest_log.writeline(

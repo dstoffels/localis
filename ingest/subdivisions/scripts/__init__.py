@@ -5,6 +5,7 @@ from .merge_ipregistry import merge_ipregistry_aliases
 from .merge_alternate_names import merge_alternate_name_aliases
 from .merge_subdivisions import prepare_names, try_merge, merge_matched_sub
 from .resolve_subdivisions import apply_skill_resolved
+from .wikidata_subdivisions import apply_wikidata_matches, fetch_wikidata_crosswalk
 from .audit_unclaimed import audit_unclaimed_geonames_subs
 from .dump_subdivisions import dump
 from .ingest_subdivisions import ingest_subdivisions

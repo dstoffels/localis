@@ -16,6 +16,7 @@ from .merge_ipregistry import merge_ipregistry_aliases
 from .merge_alternate_names import merge_alternate_name_aliases
 from .merge_subdivisions import try_merge
 from .resolve_subdivisions import apply_skill_resolved
+from .wikidata_subdivisions import apply_wikidata_matches
 from .audit_unclaimed import audit_unclaimed_geonames_subs
 from .dump_subdivisions import dump
 
@@ -63,6 +64,9 @@ def ingest_subdivisions(
 
         # Apply skill-resolved decisions directly, before auto-merge ever sees these iso_subs, so a verified decision can never lose its target to a fresh auto-merge
         remaining_iso_subs = apply_skill_resolved(iso_subs, resolution_map, sub_map)
+
+        # Apply unambiguous Wikidata crosswalk matches next, a stronger signal than fuzzy string matching, still ahead of auto-merge
+        remaining_iso_subs = apply_wikidata_matches(remaining_iso_subs, resolution_map, sub_map)
 
         # Auto-merge whatever's left with fuzzy matching; writes resolutions/orphans directly into resolution_map
         try_merge(remaining_iso_subs, sub_map, resolution_map)

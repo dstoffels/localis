@@ -401,7 +401,8 @@ Data in this project is kept current monthly from the following sources:
 - **Subdivisions**
   - **Canonical**: [ISO 3166-2](https://www.iso.org/iso-3166-country-codes.html) data via [Debian's iso-codes project](https://salsa.debian.org/iso-codes-team/iso-codes)
   - **Merged**: [GeoNames](https://www.geonames.org/) `admin1CodesASCII.txt` and `admin2Codes.txt`
-  - **Merged**: Additional subdivision aliases from [Ipregistry](https://ipregistry.co)
+  - **Merged**: [Wikidata](https://www.wikidata.org/) crosswalk (ISO 3166-2 code ↔ GeoNames id) for unambiguous resolution ahead of fuzzy matching
+  - **Merged**: Additional subdivision aliases from [Ipregistry](https://ipregistry.co) and GeoNames' `alternateNamesV2` dump (filtered by [Unicode CLDR](https://cldr.unicode.org/)'s official-language data per country)
 - **Cities**
   - [GeoNames](https://www.geonames.org/) `cities500.txt` dataset
 

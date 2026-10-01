@@ -41,13 +41,13 @@ Sector 4		AE.03.400	13060550		North Central	2	10	2
 Sector 7		AE.03.700	13060551		Northeast	2	10	2
 Sector 3		AE.03.300	13060552		West	2	10	2
 Zābul	AF-ZAB	AF.28	1121143	Province	Zabul|Zabul Province|Zobul viloyati|زابل ولايت|ولایت زابل	1		3
-Maidan Wardak Province		AF.27	1121863		Maidan Vardak viloyati|د میدان وردک ولایت|ولایت میدان وردک	1		3
+Wardak	AF-WAR	AF.27	1121863	Province	Maidan Vardak viloyati|Maidan Wardak Province|د میدان وردک ولایت|ولایت میدان وردک	1		3
 Takhār	AF-TAK	AF.26	1123230	Province	Takhar|Takhar Province|Taxor viloyati|تخار ولايت|ولایت تخار	1		3
 Sar-e Pul	AF-SAR	AF.33	1127106	Province	Sar-e Pol Province|Sarupul viloyati|سرپل ولايت|ولایت سرپل	1		3
 Samangān	AF-SAM	AF.32	1127766	Province	Samangan|سمنګان ولايت|ولایت سمنگان	1		3
 Parwān	AF-PAR	AF.40	1131054	Province	Parvan|Parwan|ولایت پروان|پروان	1		3
 Paktīkā	AF-PKA	AF.29	1131256	Province	Paktika|Paktika Province|ولایت پکتیکا|پکتيکا ولايت	1		3
-Paktia		AF.36	1131257		Paktia Province|Paktiya|ولایت پکتیا|پکتيا ولايت	1		3
+Paktiyā	AF-PIA	AF.36	1131257	Province	Paktia|Paktia Province|Paktiya|ولایت پکتیا|پکتيا ولايت	1		3
 Uruzgān	AF-URU	AF.39	1131461	Province	Oruzgan|Orūzgān|Orūzgān Province|Uroʻzgon viloyati|اروزگان ولايت|ولایت اروزگان	1		3
 Nīmrōz	AF-NIM	AF.19	1131821	Province	Nimroz|Nimruz Province|Nimruz viloyati|نیمروز	1		3
 Nangarhār	AF-NAN	AF.18	1132366	Province	Nangarhar|Nangarhor|د ننګرهار ولايت|ولایت ننگرهار	1		3
@@ -73,7 +73,7 @@ Badakhshān	AF-BDS	AF.01	1147745	Province	Badakhshan|Badakhshan Province|Badaxsh
 Khōst	AF-KHO	AF.37	1444362	Province	Khost|Khost Province|Khowst|Xust viloyati|خوست ولايت|ولایت خوست	1		3
 Nūristān	AF-NUR	AF.38	1444363	Province	Nuristan|Nuristan Province|Nuriston|نورستان ولايت|ولایت نورستان	1		3
 Dāykundī	AF-DAY	AF.41	6957553	Province	Daykundi|Daykundi Province|دايکندي|دایکندی	1		3
-Panjshir		AF.42	6957555		Panjsher viloyati|Panjshir Province|ولایت پنجشیر|پنجشېر ولايت	1		3
+Panjshayr	AF-PAN	AF.42	6957555	Province	Panjsher viloyati|Panjshir|Panjshir Province|ولایت پنجشیر|پنجشېر ولايت	1		3
 Shighnan District		AF.01.1109	1125426		Shighnan	2	72	3
 Gēlān		AF.08.609	1140918		Gelan District	2	65	3
 Arghanj Khwāh		AF.01.1114	7052641		Arghanj Khwa District	2	72	3
@@ -571,7 +571,7 @@ Ararat	AM-AR	AM.02	409313	Region	Ararat Province|Արարատ|Արարատի Մ�
 Syunik'	AM-SU	AM.08	409314	Region	Syunik|Syunik Province|Syunik’|Syunik’i Marz|Սյունիք|Սյունիքի Մարզ	1		7
 Vayoć Jor	AM-VD	AM.10	409315	Region	Vayots Dzor|Vayots Dzor Province|Vayots’ Dzori Marz|Վայոց Ձոր|Վայոց Ձորի Մարզ	1		7
 Erevan	AM-ER	AM.11	616051	City	Yerevan|Երէվան|Քաղաք Երէվան	1		7
-Aragatsotn		AM.01	828259		Aragatsotn Province|Aragatsotni Marz|Արագածոտն|Արագածոտնի Մարզ	1		7
+Aragac̣otn	AM-AG	AM.01	828259	Region	Aragatsotn|Aragatsotn Province|Aragatsotni Marz|Արագածոտն|Արագածոտնի Մարզ	1		7
 Armavir	AM-AV	AM.03	828260	Region	Armavir Province|Արմավիր|Արմավիրի Մարզ	1		7
 Geġark'unik'	AM-GR	AM.04	828261	Region	Gegharkunik|Gegharkunik Province|Գեղարքունիք|Գեղարքունիքի Մարզ	1		7
 Kotayk'	AM-KT	AM.05	828262	Region	Kotayk|Kotayk Province|Կոտայք|Կոտայքի Մարզ	1		7
@@ -2119,12 +2119,12 @@ Xankəndi	AZ-XA	AZ.61	409421	Municipality	Xankǝndi|Xankəndi Şəhəri	1		16
 Xocavənd	AZ-XVD	AZ.65	409423	Rayon	Khojavend|Khojavend District|Xocavənd Rayonu	1		16
 Zərdab	AZ-ZAR	AZ.71	584583	Rayon	Zardab	1		16
 Zaqatala	AZ-ZAQ	AZ.70	584604	Rayon	Zaqatala District|Zaqatala rayonu	1		16
-Yevlax		AZ.67	584650			1		16
+Yevlax	AZ-YEV	AZ.67	584650	Rayon		1		16
 Oğuz	AZ-OGU	AZ.37	584742	Rayon		1		16
 Ucar	AZ-UCA	AZ.59	584783	Rayon		1		16
 Tovuz	AZ-TOV	AZ.58	584861	Rayon	Tovuz District|Tovuz rayonu	1		16
 Şamaxı	AZ-SMI	AZ.50	585030	Rayon		1		16
-Shaki		AZ.47	585031		Şəki	1		16
+Şəki	AZ-SAK	AZ.47	585031	Rayon	Shaki	1		16
 Şəmkir	AZ-SKR	AZ.51	585059	Rayon	Şǝmkir	1		16
 Kürdəmir	AZ-KUR	AZ.27	585686	Rayon	Kurdamir District|Kürdəmir rayonu	1		16
 Qəbələ	AZ-QAB	AZ.38	585738	Rayon	Qabala District|Qəbələ rayonu	1		16
@@ -2277,7 +2277,7 @@ Narail	BD-43	BD.82.4065	1337208	District	Narail District|নড়াইল	2	22
 Bagerhat	BD-05	BD.82.4001	1337209	District	Bagerhat District	2	2218	19
 Khulna	BD-27	BD.82.4047	1337211	District	Khulna District|খুলনা জেলা	2	2218	19
 Satkhira	BD-58	BD.82.4087	1337212	District	Satkhira District|সাতক্ষীরা জেলা	2	2218	19
-Jhalokati		BD.85.1042	1337214		Jhalokati District	2	2219	19
+Jhalakathi	BD-25	BD.85.1042	1337214	District	Jhalokati|Jhalokati District	2	2219	19
 Bhola	BD-07	BD.85.1009	1337215	District	Bhola District|ভোলা	2	2219	19
 Patuakhali	BD-51	BD.85.1078	1337216	District	Patuakhali District	2	2219	19
 Barguna	BD-02	BD.85.1004	1337217	District	Barguna District|বরগুনা জেলা	2	2219	19
@@ -2301,9 +2301,9 @@ Bruxelles-Capitale		BE.BRU.BRU	6693370		Brussel-Hoofdstad	2	2287	20
 Boucle du Mouhoun	BF-01	BF.01	6930701	Region	Boucle du Mouhoun Region	1		21
 Cascades	BF-02	BF.02	6930703	Region	Cascades Region	1		21
 Centre	BF-03	BF.03	6930704	Region	Centre Region	1		21
-Centre-Est		BF.04	6930705		Centre-Est Region	1		21
+Centre-Est	BF-04	BF.04	6930705	Region	Centre-Est Region	1		21
 Centre-Nord	BF-05	BF.05	6930706	Region	Centre-Nord Region	1		21
-Centre-Ouest		BF.06	6930707		Centre-Ouest Region	1		21
+Centre-Ouest	BF-06	BF.06	6930707	Region	Centre-Ouest Region	1		21
 Centre-Sud	BF-07	BF.07	6930708	Region	Centre-Sud Region	1		21
 Est	BF-08	BF.08	6930709	Region	Est Region	1		21
 Hauts-Bassins	BF-09	BF.09	6930710	Region	Hauts-Bassins Region	1		21
@@ -2323,11 +2323,11 @@ Sanguié	BF-SNG	BF.06.36	2355930	Province	Province du Sanguié|Sanguié Province
 Poni	BF-PON	BF.13.69	2356386	Province	Province du Poni	2	2313	21
 Passoré	BF-PAS	BF.10.34	2356667	Province	Passoré Province|Province du Passoré	2	2310	21
 Oudalan	BF-OUD	BF.12.33	2356982	Province	Oudalan Province|Province de l'Oudalan	2	2312	21
-Province du Bassitenga		BF.11.68	2356983		Bassitenga	2	2311	21
+Oubritenga	BF-OUB	BF.11.68	2356983	Province	Bassitenga|Province du Bassitenga	2	2311	21
 Nahouri	BF-NAO	BF.07.65	2357548	Province	Nahouri Province	2	2307	21
 Namentenga	BF-NAM	BF.05.64	2357611	Province	Namentenga Province|Province du Namentenga	2	2305	21
 Mouhoun	BF-MOU	BF.01.63	2357858	Province	Province du Mouhoun	2	2301	21
-Kouritenga Province		BF.04.28	2358700		Kouritenga	2	2304	21
+Kouritenga	BF-KOT	BF.04.28	2358700	Province	Kouritenga Province	2	2304	21
 Kossi	BF-KOS	BF.01.58	2359027	Province	Koosin|Kossi Province|Kossin|Province de la Koosin	2	2301	21
 Comoé	BF-COM	BF.02.55	2359209	Province	Comoé Province|Province de la Comoé	2	2302	21
 Kénédougou	BF-KEN	BF.09.54	2359569	Province	Kénédougou Province|Province du Kénédougou	2	2309	21
@@ -2341,7 +2341,7 @@ Boulgou	BF-BLG	BF.04.49	2362006	Province	Province du Boulgou	2	2304	21
 Bougouriba	BF-BGR	BF.13.48	2362047	Province	Bougouriba Province|Province de la Bougouriba	2	2313	21
 Bazèga	BF-BAZ	BF.07.47	2362644	Province	Bazega Province	2	2307	21
 Bam	BF-BAM	BF.05.15	2362973	Province	Bam Province|Province du Bam	2	2305	21
-Province des Balé		BF.01.45	2597248			2	2301	21
+Balé	BF-BAL	BF.01.45	2597248	Province	Province des Balé	2	2301	21
 Banwa	BF-BAN	BF.01.46	2597250	Province	Banwa Province|Province des Banwa	2	2301	21
 Ioba	BF-IOB	BF.13.52	2597251	Province	Province du Ioba	2	2313	21
 Komondjari	BF-KMD	BF.08.56	2597259	Province	Komondjari Province|Province de la Komandjoari	2	2308	21
@@ -2362,7 +2362,7 @@ Montana	BG-12	BG.47	453753	District	Монтана|Област Монтана	1
 Vratsa	BG-06	BG.64	725713	District	Враца|Област Враца	1		22
 Varna	BG-03	BG.61	726051	District	Варна|Област Варна	1		22
 Dobrich	BG-08	BG.40	726419	District	Добрич|Област Добрич	1		22
-Sofia		BG.58	727012		Oblast Sofia|Sofia Province|Област София|Софийска област|София	1		22
+Sofia	BG-23	BG.58	727012	District	Oblast Sofia|Sofia Province|Област София|Софийска област|София	1		22
 Ruse	BG-18	BG.53	727524	District	Област Русе|Русе	1		22
 Plovdiv	BG-16	BG.51	728194	District	Област Пловдив|Пловдив|Пловдивска област|Пловдивски окръг	1		22
 Pleven	BG-15	BG.50	728204	District	Област Плевен|Плевен	1		22
@@ -2370,7 +2370,7 @@ Pernik	BG-14	BG.49	728331	District	Област Перник|Перник	1		22
 Pazardzhik	BG-13	BG.48	728379	District	Област Пазарджик|Пазарджик	1		22
 Lovech	BG-11	BG.46	729560	District	Ловеч|Област Ловеч	1		22
 Haskovo	BG-26	BG.43	730436	District	Oblast Haskovo|Област Хасково|Хасково	1		22
-Sofia-Capital		BG.42	731061		Oblast Sofia-Grad|Okrŭg Grad Sofiya|Sofia-Grad|Област София град|Област София-Град|София (столица)|София-Град	1		22
+Sofia	BG-22	BG.42	731061	District	Oblast Sofia-Grad|Okrŭg Grad Sofiya|Sofia-Capital|Sofia-Grad|stolitsa|Област София град|Област София-Град|София (столица)|София-Град	1		22
 Burgas	BG-02	BG.39	732771	District	Бургас|Област Бугас|Област Бургас	1		22
 Blagoevgrad	BG-01	BG.38	733192	District	Благоевград|Област Благоевград	1		22
 Gabrovo	BG-07	BG.41	864552	District	Габрово|Област Габрово	1		22
@@ -8676,7 +8676,7 @@ Central Eleuthera	BS-CE	BS.39	8030544	District		1		32
 Crooked Island and Long Cay	BS-CK	BS.40	8030545	District		1		32
 East Grand Bahama	BS-EG	BS.41	8030546	District		1		32
 Grand Cay	BS-GC	BS.42	8030547	District		1		32
-Hope Town		BS.43	8030548			1		32
+Hope Town	BS-HT	BS.43	8030548	District		1		32
 Mangrove Cay	BS-MC	BS.44	8030549	District	Mangrove Cay District	1		32
 Moore's Island	BS-MI	BS.45	8030550	District	Moore’s Island	1		32
 North Abaco	BS-NO	BS.46	8030551	District		1		32
@@ -8777,11 +8777,11 @@ Ngwaketse North		BW.10.11819297	11819297			2	8738	35
 Kweneng South		BW.06.11819298	11819298			2	8742	35
 Masungu		BW.08.11819299	11819299			2	8740	35
 Ghanzi		BW.03.11819300	11819300			2	8745	35
-Vitebsk		BY.07	620134		Vitebsk Region|Витебская Область|Віцебская Вобласць	1		36
+Viciebskaja voblasć	BY-VI	BY.07	620134	Oblast	Vitebsk|Vitebsk Region|Витебская Область|Віцебская Вобласць	1		36
 Mahilioŭskaja voblasć	BY-MA	BY.06	625073	Oblast	Mogilev|Mogilev Region|Магілёўская Вобласць|Могилевская область|Могилёвская Oбласть	1		36
-Minsk		BY.05	625142		Minsk Oblast|Minsk Region|Minskaya Oblast’|Минская Область|Мінская Вобласць	1		36
+Minskaja voblasć	BY-MI	BY.05	625142	Oblast	Minsk|Minsk Oblast|Minsk Region|Minskaya Oblast’|Минская Область|Мінская Вобласць	1		36
 Horad Minsk	BY-HM	BY.04	625143	City	Minsk City|Горад Мінск|Минск|Мінск	1		36
-Grodnenskaya		BY.03	628035		Grodnenskaya Oblast’|Grodno|Гродзенская Вобласць|Гродненская Oбласть|Гродненская Область	1		36
+Hrodzienskaja voblasć	BY-HR	BY.03	628035	Oblast	Grodnenskaya|Grodnenskaya Oblast’|Grodno|Гродзенская Вобласць|Гродненская Oбласть|Гродненская Область	1		36
 Homieĺskaja voblasć	BY-HO	BY.02	628281	Oblast	Gomelskaya Oblast|Homyelskaya Voblasts|Homyel’ Voblasc’|Гомельская Oбласть|Гомельская Область|Гомельская вобласць	1		36
 Bresckaja voblasć	BY-BR	BY.01	629631	Oblast	Brest|Brest Oblast|Brestskaya Oblast’|Брестская Oбласть|Брестская Область|Брэстская Вобластсь|Брэсцкая Вобласць	1		36
 Zhlobinskiy Rayon		BY.02.618803	618803		Zhlobin District|Жлобинский Район|Жлобінскі Раён	2	8785	36
@@ -10832,14 +10832,14 @@ Haut-Mbomou	CF-HM	CF.05	238639	Prefecture	Haut-Mbomou Prefecture|Sêse tî köm�
 Haute-Kotto	CF-HK	CF.03	238640	Prefecture	Haute-Kotto Prefecture|Sêse tî kömändâ-kötä tî Tö-Kötö	1		41
 Basse-Kotto	CF-BK	CF.02	240396	Prefecture	Basse-Kotto Prefecture|Sêse tî kömändâ-kötä tî Do-Kötö	1		41
 Bamingui-Bangoran	CF-BB	CF.01	240591	Prefecture	Bamingui-Bangoran Prefecture|Sêse tî kömändâ-kötä tî Bamïngï-Bangoran	1		41
-Sangha-Mbaéré		CF.16	2383204		Sangha-Mbaéré Prefecture|Sêse tî kömändâ-kötä tî Sangä-Mbaere	1		41
+Sangha	CF-SE	CF.16	2383204	Economic prefecture	Sangha-Mbaéré|Sangha-Mbaéré Prefecture|Sêse tî kömändâ-kötä tî Sangä-Mbaere	1		41
 Ouham-Pendé	CF-OP	CF.13	2383650	Prefecture	Ouham-Pendé Prefecture|Sêse tî kömändâ-kötä tî Wâmo-Pendë	1		41
 Ouham	CF-AC	CF.12	2383653	Prefecture	Ouham Prefecture|Sêse tî kömändâ-kötä tî Wâmo	1		41
 Ombella-Mpoko	CF-MP	CF.17	2383765	Prefecture	Ombella-M'Poko|Ombella-M'Poko Prefecture|Sêse tî kömändâ-kötä tî Ömbëlä-Pökö	1		41
 Nana-Mambéré	CF-NM	CF.09	2384205	Prefecture	Nana-Mambéré Prefecture|Sêse tî kömändâ-kötä tî Nanä-Mambere	1		41
 Lobaye	CF-LB	CF.07	2385105	Prefecture	Lobaye Prefecture|Sêse tî kömändâ-kötä tî Lobâye	1		41
-Kémo		CF.06	2385836		Kémo Prefecture|Sêse tî kömändâ-kötä tî Kemö	1		41
-Mambéré-Kadéï		CF.04	2386161		Mambéré-Kadéï Prefecture|Sêse tî kömändâ-kötä tî Mambere-Kadei	1		41
+Kémo-Gribingui	CF-KG	CF.06	2385836	Prefecture	Kémo|Kémo Prefecture|Sêse tî kömändâ-kötä tî Kemö	1		41
+Haute-Sangha / Mambéré-Kadéï	CF-HS	CF.04	2386161	Prefecture	Mambéré-Kadéï|Mambéré-Kadéï Prefecture|Sêse tî kömändâ-kötä tî Mambere-Kadei	1		41
 Nana-Grébizi		CF.15	2386243		Nana-Grébizi Prefecture	1		41
 Bangui	CF-BGF	CF.18	2596686	Commune	Bangui Prefecture	1		41
 Mambéré		CF.19	12902745			1		41
@@ -10928,7 +10928,8 @@ Cuvette	CG-8	CG.13	2260487	Department	Cuvette Department	1		42
 Bouenza	CG-11	CG.01	2260668	Department	Bouenza Department	1		42
 Brazzaville	CG-BZV	CG.12	2572183	Department	Brazzavile Department	1		42
 Cuvette-Ouest	CG-15	CG.14	2593118	Department	Cuvette-Ouest Department	1		42
-Pointe-Noire	CG-16	CG.15	7280295	Department	Pointe-Noire Department	1		42
+Pointe-Noire		CG.15	7280295		Pointe-Noire Department	1		42
+Pointe-Noire	CG-16	CG.15.8051169	8051169	Department		1	10931	42
 Mindouli		CG.11.2257174	2257174			2	10921	42
 Mayama		CG.11.2257531	2257531			2	10921	42
 Souanke		CG.10.7731851	7731851			2	10920	42
@@ -10966,7 +10967,6 @@ Mouyondzi		CG.01.8051158	8051158			2	10928	42
 Madingou		CG.01.8051166	8051166			2	10928	42
 Nkayi		CG.01.8051167	8051167			2	10928	42
 Loudima		CG.01.8051168	8051168			2	10928	42
-Pointe-Noire		CG.15.8051169	8051169			2	10931	42
 Enyelle		CG.06.11996188	11996188			2	10924	42
 Bouanila		CG.06.11996189	11996189			2	10924	42
 Mbon		CG.08.11996190	11996190			2	10922	42
@@ -11406,11 +11406,11 @@ Zhejiang Sheng	CN-ZJ	CN.02	1784764	Province	Zhejiang|Zhejiang Province|Жөжя�
 Yunnan Sheng	CN-YN	CN.29	1785694	Province	Yinznanz|Yunnan|Yunnan Province|Юньнань муж|ཡུན་ནན་|云南|云南省|윈난성	1		48
 Tianjin Shi	CN-TJ	CN.28	1792943	Municipality	Tianjin|Tianjin Municipality|天津|天津市	1		48
 Sichuan Sheng	CN-SC	CN.32	1794299	Province	Province of Sichuan|Sichuan|Сычуань муж|སི་ཁྲོན་ཞིང་ཆེན།|四川|四川省|사천성|쓰촨 성	1		48
-Shanxi		CN.24	1795912		Shanxi Province|Шаньси муж|ཧྲན་ཞི་ཞིང་ཆེན།|山西|山西省	1		48
+Shanxi Sheng	CN-SX	CN.24	1795912	Province	Shanxi|Shanxi Province|Шаньси муж|ཧྲན་ཞི་ཞིང་ཆེན།|山西|山西省	1		48
 Shanghai Shi	CN-SH	CN.23	1796231	Municipality	Shanghai|Shanghai Municipality|上海|上海市	1		48
 Shandong Sheng	CN-SD	CN.25	1796328	Province	Shandong|Shandong Province|Шаньдун муж|ཧྲན་ཏུང་ཞིང་ཆེན།|山东|山东省	1		48
-Shaanxi		CN.26	1796480		Sanjsih|Shaanxi Province|Шэньси муж|شېنشى ئۆلكىسى|ཧྲའན་ཞི་ཞིང་ཆེན།|陕西|산시 성	1		48
-Ningxia		CN.21	1799355		Ningxia Hui Autonomous Region|宁夏|宁夏回族自治区	1		48
+Shaanxi Sheng	CN-SN	CN.26	1796480	Province	Sanjsih|Shaanxi|Shaanxi Province|Шэньси муж|شېنشى ئۆلكىسى|ཧྲའན་ཞི་ཞིང་ཆེན།|陕西|산시 성	1		48
+Ningxia Huizu Zizhiqu	CN-NX	CN.21	1799355	Autonomous region	Ningxia|Ningxia Hui Autonomous Region|宁夏|宁夏回族自治区	1		48
 Jiangxi Sheng	CN-JX	CN.03	1806222	Province	Jiangxi|Jiangxi Province|Жянши муж|ཅང་ཤིའི་ཞིང་ཆེན།|江西|江西省|장시성	1		48
 Jiangsu Sheng	CN-JS	CN.04	1806260	Province	Jiangsu|Jiangsu Province|Жянсү муж|ཅང་སུའུ་ཞིང་ཆེན།|江苏|江苏省	1		48
 Hunan Sheng	CN-HN	CN.11	1806691	Province	Hunan|Hunan Province|Хүнань муж|ཧུའུ་ནན་ཞིང་ཆེན།|湖南|湖南省|후난성	1		48
@@ -11419,7 +11419,7 @@ Henan Sheng	CN-HA	CN.09	1808520	Province	Henan|Henan Province|Хэнань му�
 Hebei Sheng	CN-HE	CN.10	1808773	Province	Hebei|河北|河北省	1		48
 Hainan Sheng	CN-HI	CN.31	1809054	Province	Hainan|Hainan Province|海南|海南省	1		48
 Guizhou Sheng	CN-GZ	CN.18	1809445	Province	Guizhou|Guizhou Province|Gveicouh|Гуйжоу муж|ཀུད་ཀྲོའུ་ཞིང་ཆེན།|贵州|贵州省|구이저우성	1		48
-Guangxi		CN.16	1809867		Guangxi Zhuang Autonomous Region|Gvangjsih|Gvangjsih Bouxcuengh Swcigih|广西|广西壮族自治区	1		48
+Guangxi Zhuangzu Zizhiqu	CN-GX	CN.16	1809867	Autonomous region	Guangxi|Guangxi Zhuang Autonomous Region|Gvangjsih|Gvangjsih Bouxcuengh Swcigih|广西|广西壮族自治区	1		48
 Guangdong Sheng	CN-GD	CN.30	1809935	Province	Guangdong|Guangdong Province|广东|广东省	1		48
 Gansu Sheng	CN-GS	CN.15	1810676	Province	Gansu|Gansu Province|گەنسۇ ئۆلكىسى|ཀན་སུའུ་ཞིང་ཆེན།|ᠭᠠᠨᠰᠤ ᠮᠤᠵᠢ|甘肃|甘肃省|간쑤성	1		48
 Fujian Sheng	CN-FJ	CN.07	1811017	Province	Fujian|Фужянь муж|فۇجيەن ئۆلكىسى|ཧྥུའུ་ཅན་ཞིང་ཆེན།|福建|福建省|푸젠 성	1		48
@@ -11800,7 +11800,7 @@ Valle del Cauca	CO-VAC	CO.29	3666313	Department	Valle|Valle del Cauca Department
 Tolima	CO-TOL	CO.28	3666951	Department	Tolima Department	1		49
 Sucre	CO-SUC	CO.27	3667725	Department	Sucre Department	1		49
 Santander	CO-SAN	CO.26	3668578	Department	Santander Department	1		49
-San Andres y Providencia		CO.25	3670205		San Andrés y Providencia	1		49
+San Andrés, Providencia y Santa Catalina	CO-SAP	CO.25	3670205	Department	San Andres y Providencia|San Andrés|San Andrés y Providencia	1		49
 Risaralda	CO-RIS	CO.24	3670698	Department	Risaralda Department	1		49
 Quindío	CO-QUI	CO.23	3671087	Department	Departamento del Quindío|Quindío Department	1		49
 Putumayo	CO-PUT	CO.22	3671178	Department	Putumayo Department	1		49
@@ -15225,13 +15225,13 @@ La Concordia		EC.26.2302	10792565			2	15002	63
 Võrumaa	EE-87	EE.21	587448	County	Võru County|Võru maakond	1		64
 Viljandimaa	EE-84	EE.20	587590	County	Viljandi County|Viljandi maakond	1		64
 Valgamaa	EE-81	EE.19	587875	County	Valga County|Valga maakond	1		64
-Tartu		EE.18	588334		Tartu maakond	1		64
+Tartumaa	EE-79	EE.18	588334	County	Tartu|Tartu maakond	1		64
 Saaremaa	EE-74	EE.14	588879	County	Saare|Saare County|Saare maakond	1		64
 Raplamaa	EE-71	EE.13	589115	County	Rapla County|Rapla maakond	1		64
 Põlvamaa	EE-64	EE.12	589373	County	Põlva County|Põlva maakond	1		64
 Pärnumaa	EE-68	EE.11	589576	County	Pärnu County|Pärnu maakond	1		64
 Lääne-Virumaa	EE-60	EE.08	590854	County	Lääne-Viru County|Lääne-Viru maakond	1		64
-Lääne		EE.07	590856		Lääne maakond	1		64
+Läänemaa	EE-56	EE.07	590856	County	Lääne|Lääne maakond	1		64
 Jõgevamaa	EE-50	EE.05	591901	County	Jõgeva County|Jõgeva maakond	1		64
 Järvamaa	EE-52	EE.04	591961	County	Järva County|Järva maakond	1		64
 Ida-Virumaa	EE-45	EE.03	592075	County	Ida-Viru County|Ida-Viru maakond	1		64
@@ -15245,10 +15245,10 @@ Tallinn	EE-784	EE.01.0784	862995	Urban municipality		2	15239	64
 Haapsalu linn		EE.07.0184	7522269			2	15234	64
 Haljala vald		EE.08.0191	7522272			2	15233	64
 Harku vald		EE.01.0198	7522275			2	15239	64
-Häädemeeste vald		EE.11.0214	7522278			2	15232	64
+Häädemeeste	EE-214	EE.11.0214	7522278	Rural municipality	Häädemeeste vald	2	15232	64
 Jõelähtme	EE-245	EE.01.0245	7522283	Rural municipality	Jõelähtme Parish|Jõelähtme vald	2	15239	64
-Jõgeva vald		EE.05.0247	7522284			2	15235	64
-Jõhvi vald		EE.03.0251	7522286			2	15237	64
+Jõgeva	EE-247	EE.05.0247	7522284	Rural municipality	Jõgeva vald	2	15235	64
+Jõhvi	EE-251	EE.03.0251	7522286	Rural municipality	Jõhvi vald	2	15237	64
 Kadrina vald		EE.08.0272	7522290			2	15233	64
 Kambja vald		EE.18.0283	7522294			2	15228	64
 Kanepi vald		EE.12.0284	7522295			2	15231	64
@@ -15260,22 +15260,22 @@ Kohila vald		EE.13.0317	7522307			2	15230	64
 Kose vald		EE.01.0338	7522317			2	15239	64
 Loksa linn		EE.01.0424	7522333			2	15239	64
 Luunja vald		EE.18.0432	7522334			2	15228	64
-Lüganuse vald		EE.03.0442	7522335			2	15237	64
+Lüganuse	EE-442	EE.03.0442	7522335	Rural municipality	Lüganuse vald	2	15237	64
 Maardu linn		EE.01.0446	7522337			2	15239	64
 Muhu vald		EE.14.0478	7522345			2	15229	64
 Märjamaa vald		EE.13.0503	7522357			2	15230	64
-Narva-Jõesuu linn		EE.03.0514	7522358			2	15237	64
+Narva-Jõesuu	EE-514	EE.03.0514	7522358	Urban municipality	Narva-Jõesuu linn	2	15237	64
 Nõo vald		EE.18.0528	7522361			2	15228	64
 Paide linn		EE.04.0567	7522368			2	15236	64
-Peipsiääre vald		EE.18.0586	7522376			2	15228	64
-Põltsamaa vald		EE.05.0618	7522384			2	15235	64
-Otepää vald		EE.19.0557	7522388			2	15227	64
+Peipsiääre	EE-586	EE.18.0586	7522376	Rural municipality	Peipsiääre vald	2	15228	64
+Põltsamaa	EE-618	EE.05.0618	7522384	Rural municipality	Põltsamaa vald	2	15235	64
+Otepää	EE-557	EE.19.0557	7522388	Rural municipality	Otepää vald	2	15227	64
 Tapa	EE-792	EE.08.0792	7522390	Rural municipality	Tapa vald	2	15233	64
 Tartu vald		EE.18.0796	7522391			2	15228	64
-Tori vald		EE.11.0809	7522394			2	15232	64
+Tori	EE-809	EE.11.0809	7522394	Rural municipality	Tori vald	2	15232	64
 Rapla vald		EE.13.0668	7522401			2	15230	64
 Ruhnu vald		EE.14.0689	7522405			2	15229	64
-Rõuge vald		EE.21.0698	7522407			2	15225	64
+Rõuge	EE-698	EE.21.0698	7522407	Rural municipality	Rõuge vald	2	15225	64
 Räpina vald		EE.12.0708	7522409			2	15231	64
 Saarde vald		EE.11.0712	7522410			2	15232	64
 Saku vald		EE.01.0718	7522413			2	15239	64
@@ -15286,21 +15286,21 @@ Rakvere linn		EE.08.0663	7522423			2	15233	64
 Saue vald		EE.01.0726	7522425			2	15239	64
 Kuusalu vald		EE.01.0353	7522428			2	15239	64
 Tartu linn		EE.18.0793	7522434			2	15228	64
-Anija vald		EE.01.0141	7522443			2	15239	64
-Antsla vald		EE.21.0142	7522444			2	15225	64
+Anija	EE-141	EE.01.0141	7522443	Rural municipality	Anija vald	2	15239	64
+Antsla	EE-142	EE.21.0142	7522444	Rural municipality	Antsla vald	2	15225	64
 Viimsi	EE-890	EE.01.0890	7522460	Rural municipality	Viimsi Parish|Viimsi vald	2	15239	64
 Põlva	EE-622	EE.12.0622	7522467	Rural municipality	Põlva Parish|Põlva vald	2	15231	64
 Toila vald		EE.03.0803	7522469			2	15237	64
-Türi vald		EE.04.0834	7522474			2	15236	64
+Türi	EE-834	EE.04.0834	7522474	Rural municipality	Türi vald	2	15236	64
 Viljandi linn		EE.20.0897	7522477			2	15226	64
 Vinni vald		EE.08.0901	7522478			2	15233	64
 Viru-Nigula vald		EE.08.0903	7522479			2	15233	64
 Vormsi vald		EE.07.0907	7522480			2	15234	64
 Võru vald		EE.21.0917	7522483		Võru Parish	2	15225	64
 Võru linn		EE.21.0919	7522484			2	15225	64
-Väike-Maarja vald		EE.08.0928	7522485			2	15233	64
+Väike-Maarja	EE-928	EE.08.0928	7522485	Rural municipality	Väike-Maarja vald	2	15233	64
 Viljandi vald		EE.20.0899	11054708			2	15226	64
-Lääne-Nigula vald		EE.07.0441	11054712			2	15234	64
+Lääne-Nigula	EE-441	EE.07.0441	11054712	Rural municipality	Lääne-Nigula vald	2	15234	64
 Mulgi vald		EE.20.0480	11776869			2	15226	64
 Valga vald		EE.19.0855	11776870			2	15227	64
 Setomaa vald		EE.21.0732	11776871			2	15225	64
@@ -15482,10 +15482,10 @@ Shurtah al-Farafirah		EG.13.12060332	12060332			2	15332	65
 Baris Shurtah		EG.13.12060333	12060333			2	15332	65
 Markaz Dumyāţ		EG.20.13427561	13427561		دمياط|مركز دمياط	2	15325	65
 Ansabā	ER-AN	ER.01	448497	Region	Anseba|Anseba Region|Zoba Ānseba|إقليم أنسبا|ዞባ ኣንሰባ|ዞባ ዓንስባ	1		67
-Debub		ER.02	448498		Debub Region|منطقة الجنوب|ዞባ ደቡብ	1		67
-Southern Red Sea		ER.03	448499		Southern Red Sea Region|إقليم البحر الأحمر الجنوبي|ዞባ ደቡባዊ ቀይሕ ባሕሪ	1		67
+Al Janūbī	ER-DU	ER.02	448498	Region	Debub|Debub Region|منطقة الجنوب|ዞባ ደቡብ	1		67
+Janūbī al Baḩrī al Aḩmar	ER-DK	ER.03	448499	Region	Southern Red Sea|Southern Red Sea Region|إقليم البحر الأحمر الجنوبي|ዞባ ደቡባዊ ቀይሕ ባሕሪ	1		67
 Qāsh-Barkah	ER-GB	ER.04	448500	Region	Gash-Barka|Gash-Barka Region|Zoba Gash-Barka|القاش وبركة|ዞባ ጋሽ ባርካ	1		67
-Maekel		ER.05	448501		Maekel Region|المنطقة المركزية|ዞባ ማእከል	1		67
+Al Awsaţ	ER-MA	ER.05	448501	Region	Maekel|Maekel Region|المنطقة المركزية|ዞባ ማእከል	1		67
 Shimālī al Baḩrī al Aḩmar	ER-SK	ER.06	448502	Region	Northern Red Sea|Northern Red Sea Region|إقليم شمال البحر الأحمر|ዞባ ሰሜናዊ ቀይሕ ባሕሪ	1		67
 Af'abet		ER.06.307	9165816			2	15489	67
 Dghe		ER.04.504	9165822			2	15487	67
@@ -16043,9 +16043,9 @@ Lozère	FR-48	FR.76.48	2997288	Metropolitan department		2	15990	75
 Lot-et-Garonne	FR-47	FR.75.47	2997523	Metropolitan department		2	15987	75
 Lot	FR-46	FR.76.46	2997524	Metropolitan department		2	15990	75
 Loir-et-Cher	FR-41	FR.24.41	2997856	Metropolitan department	Loire-et-Cher	2	15984	75
-Loiret		FR.24.45	2997857		Département du Loiret	2	15984	75
+Loiret	FR-45	FR.24.45	2997857	Metropolitan department	Département du Loiret	2	15984	75
 Loire-Atlantique	FR-44	FR.52.44	2997861	Metropolitan department	Département de la Loire-Atlantique	2	15981	75
-Loire		FR.84.42	2997870		Département de la Loire	2	15992	75
+Loire	FR-42	FR.84.42	2997870	Metropolitan department	Département de la Loire	2	15992	75
 Landes	FR-40	FR.75.40	3007866	Metropolitan department	Département des Landes	2	15987	75
 Jura	FR-39	FR.27.39	3012051	Metropolitan department	Département du Jura	2	15986	75
 Isère	FR-38	FR.84.38	3012715	Metropolitan department		2	15992	75
@@ -16233,7 +16233,7 @@ Isle of Anglesey	GB-AGY	GB.WLS.X1	2657311	Unitary authority	Anglesey|Angleseyshi
 Aberdeenshire	GB-ABD	GB.SCT.T6	2657830	Council area	Contae Obar Deathain|Siorrachd Obar Dheathain|Swydd Aberdeen	2	16162	77
 Barnsley	GB-BNS	GB.ENG.A3	3333122	Metropolitan district		2	16164	77
 Bath and North East Somerset	GB-BAS	GB.ENG.A4	3333123	Unitary authority		2	16164	77
-City and Borough of Birmingham		GB.ENG.A7	3333125		Birmingham	2	16164	77
+Birmingham	GB-BIR	GB.ENG.A7	3333125	Metropolitan district	City and Borough of Birmingham	2	16164	77
 Blackburn with Darwen	GB-BBD	GB.ENG.A8	3333126	Unitary authority		2	16164	77
 Blackpool	GB-BPL	GB.ENG.A9	3333127	Unitary authority		2	16164	77
 Bolton	GB-BOL	GB.ENG.B1	3333128	Metropolitan district	Borough of Bolton	2	16164	77
@@ -16241,7 +16241,7 @@ Bracknell Forest	GB-BRC	GB.ENG.B3	3333130	Unitary authority		2	16164	77
 Bradford	GB-BRD	GB.ENG.B4	3333131	Metropolitan district		2	16164	77
 Brighton and Hove	GB-BNH	GB.ENG.B6	3333133	Unitary authority	Brighton	2	16164	77
 Bristol, City of	GB-BST	GB.ENG.B7	3333134	Unitary authority	Briostó|Bristol|Bryste|City of Bristol	2	16164	77
-Borough of Bury		GB.ENG.C1	3333136			2	16164	77
+Bury	GB-BUR	GB.ENG.C1	3333136	Metropolitan district	Borough of Bury	2	16164	77
 Calderdale	GB-CLD	GB.ENG.C2	3333137	Metropolitan district		2	16164	77
 Coventry	GB-COV	GB.ENG.C7	3333139	Metropolitan district		2	16164	77
 Darlington	GB-DAL	GB.ENG.D1	3333141	Unitary authority		2	16164	77
@@ -16253,7 +16253,7 @@ Kent	GB-KEN	GB.ENG.G5	3333158	Two-tier county	Caint	2	16164	77
 Kingston upon Hull	GB-KHL	GB.ENG.G6	3333159	Unitary authority	City of Kingston upon Hull	2	16164	77
 Kirklees	GB-KIR	GB.ENG.G8	3333161	Metropolitan district		2	16164	77
 Knowsley	GB-KWL	GB.ENG.G9	3333162	Metropolitan district	Metropolitan Borough of Knowsley	2	16164	77
-City and Borough of Leeds		GB.ENG.H3	3333164		Leeds	2	16164	77
+Leeds	GB-LDS	GB.ENG.H3	3333164	Metropolitan district	City and Borough of Leeds	2	16164	77
 Leicester	GB-LCE	GB.ENG.H4	3333165	Unitary authority	City of Leicester	2	16164	77
 Liverpool	GB-LIV	GB.ENG.H8	3333167	Metropolitan district	Learpholl|Lerpwl|Poll a Ghrùthain	2	16164	77
 Luton	GB-LUT	GB.ENG.I1	3333168	Unitary authority		2	16164	77
@@ -16274,7 +16274,7 @@ Reading	GB-RDG	GB.ENG.K7	3333184	Unitary authority		2	16164	77
 Redcar and Cleveland	GB-RCC	GB.ENG.K9	3333186	Unitary authority		2	16164	77
 Rochdale	GB-RCH	GB.ENG.L2	3333188	Metropolitan district	Borough of Rochdale	2	16164	77
 Rotherham	GB-ROT	GB.ENG.L3	3333189	Metropolitan district		2	16164	77
-City and Borough of Salford		GB.ENG.L5	3333190		Salford	2	16164	77
+Salford	GB-SLF	GB.ENG.L5	3333190	Metropolitan district	City and Borough of Salford	2	16164	77
 Sandwell	GB-SAW	GB.ENG.L7	3333191	Metropolitan district		2	16164	77
 Sefton	GB-SFT	GB.ENG.L8	3333192	Metropolitan district	Metropolitan Borough of Sefton	2	16164	77
 Sheffield	GB-SHF	GB.ENG.L9	3333193	Metropolitan district		2	16164	77
@@ -16294,7 +16294,7 @@ Tameside	GB-TAM	GB.ENG.O1	3333208	Metropolitan district	Borough of Tameside	2	16
 Telford and Wrekin	GB-TFW	GB.ENG.O2	3333209	Unitary authority	Telford a Wrekin	2	16164	77
 Torbay	GB-TOB	GB.ENG.O4	3333210	Unitary authority	Borough of Torbay	2	16164	77
 Trafford	GB-TRF	GB.ENG.O6	3333211	Metropolitan district		2	16164	77
-City and Borough of Wakefield		GB.ENG.O7	3333212		Wakefield	2	16164	77
+Wakefield	GB-WKF	GB.ENG.O7	3333212	Metropolitan district	City and Borough of Wakefield	2	16164	77
 Walsall	GB-WLL	GB.ENG.O8	3333213	Metropolitan district		2	16164	77
 Warrington	GB-WRT	GB.ENG.P2	3333216	Unitary authority		2	16164	77
 West Berkshire	GB-WBK	GB.ENG.P4	3333217	Unitary authority		2	16164	77
@@ -16302,9 +16302,9 @@ Wigan	GB-WGN	GB.ENG.P7	3333219	Metropolitan district	Borough of Wigan	2	16164	77
 Wirral	GB-WRL	GB.ENG.Q1	3333220	Metropolitan district	Metropolitan Borough of Wirral	2	16164	77
 Wokingham	GB-WOK	GB.ENG.Q2	3333221	Unitary authority		2	16164	77
 Wolverhampton	GB-WLV	GB.ENG.Q3	3333222	Metropolitan district		2	16164	77
-City of Belfast		GB.NIR.N09000003	3333223		Belfast	2	16163	77
+Belfast City	GB-BFS	GB.NIR.N09000003	3333223	District	Belfast|City of Belfast	2	16163	77
 Aberdeen City		GB.SCT.T5	3333224			2	16162	77
-Dundee City		GB.SCT.U3	3333225			2	16162	77
+Dundee City	GB-DND	GB.SCT.U3	3333225	Council area		2	16162	77
 East Ayrshire	GB-EAY	GB.SCT.U4	3333226	Council area	Comhairle Shiorrachd Áir an Ear|Comhairle Siorrachd Àir an Ear|Dwyrain Swydd Ayr	2	16162	77
 East Dunbartonshire	GB-EDU	GB.SCT.U5	3333227	Council area	Comhairle Dhùn Bhreatainn an Ear|Dwyrain Swydd Dunbarton|Siorrachd Dhún Bhreatainn an Ear	2	16162	77
 East Renfrewshire	GB-ERW	GB.SCT.U7	3333228	Council area	Comhairle Siorrachd Rinn Friù an Ear|Dwyrain Swydd Renfrew	2	16162	77
@@ -16318,8 +16318,8 @@ South Ayrshire	GB-SAY	GB.SCT.W4	3333235	Council area	Comhairle Shiorrachd Áir a
 South Lanarkshire	GB-SLK	GB.SCT.W5	3333236	Council area	Comhairle Shiorrachd Lannraig a Deas|Comhairle Siorrachd Lannraig a Deas|De Swydd Lanark	2	16162	77
 West Dunbartonshire	GB-WDU	GB.SCT.W7	3333237	Council area	Comhairle Dhùn Bhreatainn an Iar|Comhairle Dhún Breatainn an Iar|Gorllewin Swydd Dunbarton	2	16162	77
 Blaenau Gwent	GB-BGW	GB.WLS.X2	3333238	Unitary authority	Bwrdeistref Sirol Blaenau Gwent|County Borough of Blaenau Gwent	2	16161	77
-Bridgend county borough		GB.WLS.X3	3333239		Bwrdeistref Sirol Pen-y-bont ar Ogwr|County Borough of Bridgend	2	16161	77
-Caerphilly County Borough		GB.WLS.X4	3333240		Bwrdeistref Sirol Caerffili	2	16161	77
+Bridgend	GB-BGE	GB.WLS.X3	3333239	Unitary authority	Bridgend county borough|Bwrdeistref Sirol Pen-y-bont ar Ogwr|County Borough of Bridgend|Pen-y-bont ar Ogwr	2	16161	77
+Caerphilly	GB-CAY	GB.WLS.X4	3333240	Unitary authority	Bwrdeistref Sirol Caerffili|Caerffili|Caerphilly County Borough	2	16161	77
 Cardiff	GB-CRF	GB.WLS.X5	3333241	Unitary authority	Caerdydd|City and County of Cardiff|Dinas a Sir Caerdydd	2	16161	77
 Conwy	GB-CWY	GB.WLS.X8	3333242	Unitary authority	Bwrdeistref Sirol Conwy|Conwy County Borough|County Borough of Conwy	2	16161	77
 Merthyr Tydfil	GB-MTY	GB.WLS.Y3	3333243	Unitary authority	Bwrdeistref Sirol Merthyr Tudful|Merthyr Tudful|Merthyr Tydfil County Borough	2	16161	77
@@ -16328,7 +16328,7 @@ Neath Port Talbot	GB-NTL	GB.WLS.Y5	3333245	Unitary authority	Bwrdeistref Sirol C
 Newport	GB-NWP	GB.WLS.Y6	3333246	Unitary authority	Casnewydd|City of Newport|County Borough of Newport|Dinas Casnewydd	2	16161	77
 Rhondda Cynon Taff	GB-RCT	GB.WLS.Y9	3333247	Unitary authority	Bwrdeistref Sirol Rhondda Cynon Taf|County Borough of Rhondda Cynon Taf|Rhondda Cynon Taf|Rhondda CynonTaf	2	16161	77
 Swansea	GB-SWA	GB.WLS.Z1	3333248	Unitary authority	Abertawe|City and County of Swansea|Dinas a Sir Abertawe	2	16161	77
-Torfaen County Borough		GB.WLS.Z2	3333249		Bwrdeistref Sirol Tor-faen	2	16161	77
+Torfaen	GB-TOF	GB.WLS.Z2	3333249	Unitary authority	Bwrdeistref Sirol Tor-faen|Tor-faen|Torfaen County Borough	2	16161	77
 Argyll and Bute	GB-AGB	GB.SCT.T8	6457407	Council area		2	16162	77
 Bedford	GB-BDF	GB.ENG.Z5	7290534	Unitary authority		2	16164	77
 Central Bedfordshire	GB-CBF	GB.ENG.Z6	7290535	Unitary authority		2	16164	77
@@ -16339,9 +16339,9 @@ Antrim and Newtownabbey	GB-ANN	GB.NIR.N09000001	11353069	District		2	16163	77
 Causeway Coast and Glens	GB-CCG	GB.NIR.N09000004	11353070	District	Cósta an Chlocháin agus na Gleannta	2	16163	77
 Fermanagh and Omagh	GB-FMO	GB.NIR.N09000006	11353071	District	Comhairle Ceantair Fhear Manach agus na hÓmaí	2	16163	77
 Lisburn and Castlereagh	GB-LBC	GB.NIR.N09000007	11353072	District		2	16163	77
-Derry City and Strabane		GB.NIR.N09000005	11353073			2	16163	77
+Derry and Strabane	GB-DRS	GB.NIR.N09000005	11353073	District	Derry City and Strabane	2	16163	77
 Ards and North Down	GB-AND	GB.NIR.N09000011	11353074	District		2	16163	77
-Armagh City Banbridge and Craigavon		GB.NIR.N09000002	11353076			2	16163	77
+Armagh City, Banbridge and Craigavon	GB-ABC	GB.NIR.N09000002	11353076	District	Armagh City Banbridge and Craigavon	2	16163	77
 Newry, Mourne and Down	GB-NMD	GB.NIR.N09000010	11353077	District	Newry Mourne and Down	2	16163	77
 Mid and East Antrim	GB-MEA	GB.NIR.N09000008	11353078	District		2	16163	77
 Bournemouth, Christchurch and Poole	GB-BCP	GB.ENG.AA	12165737	Unitary authority	Bournemouth, Christchurch and Poole Council	2	16164	77
@@ -16778,7 +16778,7 @@ Kommune Kujalleq	GL-KU	GL.04	7602005	Municipality	Kujalleq	1		84
 Qeqqata Kommunia	GL-QE	GL.06	7602006	Municipality	Qeqqata	1		84
 Kommuneqarfik Sermersooq	GL-SM	GL.07	7602007	Municipality	Sermersooq	1		84
 Kommune Qeqertalik	GL-QT	GL.11839534	11839534	Municipality	Qeqertalik	1		84
-Avannaata		GL.11839537	11839537			1		84
+Avannaata Kommunia	GL-AV	GL.11839537	11839537	Municipality	Avannaata	1		84
 Qaqortoq Municipality		GL.04.3420847	3420847		Qaqortup Kommunia	2	16777	84
 Narsaq Municipality		GL.04.3421723	3421723		Narsap Kommunia	2	16777	84
 Nanortalik Municipality		GL.04.3421767	3421767			2	16777	84
@@ -16869,9 +16869,7 @@ Mandiana	GN-MD	GN.K.37	2595305	Prefecture	Mandiana Prefecture|Préfecture de man
 Conakry Special Zone		GN.04.8335012	8335012		Conakry	2	16828	86
 Guadeloupe		GP.GP	6690363			1		87
 Guadeloupe		GP.GP.971	6690364			2	16870	87
-Annobon		GQ.03	2310307		Annobón Province	1		88
-Région Continentale	GQ-C			Region		1		88
-Région Insulaire	GQ-I			Region		1		88
+Annobon	GQ-AN	GQ.03	2310307	Province	Annobón Province	2		88
 Bioko Nord	GQ-BN	GQ.04	2566978	Province	Bioko Norte|Bioko Norte Province	2		88
 Bioko Sud	GQ-BS	GQ.05	2566979	Province	Bioko Sul|Bioko Sur|Bioko Sur Province	2		88
 Centro Sud	GQ-CS	GQ.06	2566980	Province	Centro Sul|Centro Sur|Centro Sur Province	2		88
@@ -16879,38 +16877,40 @@ Kié-Ntem	GQ-KN	GQ.07	2566981	Province	Kie-Ntem|Kié-Ntem Province	2		88
 Littoral	GQ-LI	GQ.08	2566982	Province	Litoral|Litoral Province	2		88
 Wele-Nzas	GQ-WN	GQ.09	2566983	Province	Wele-Nzas Province	2		88
 Djibloho	GQ-DJ	GQ.10	12168385	Province	Distrito de Djibloho	2		88
-Añisoc		GQ.09.2306544	2306544			2	16880	88
-Niefang		GQ.06.2306702	2306702		Distrito de Niefang	2	16877	88
-Cogo		GQ.08.2306841	2306841		Distrito de Cogo	2	16879	88
-Distrito de Nsork		GQ.09.2307161	2307161		Nsork	2	16880	88
-Mongomo		GQ.09.2307796	2307796		Distrito de Mongomo	2	16880	88
-Micomiseng		GQ.07.2308017	2308017		Distrito de Micomiseng	2	16878	88
-Distrito de Mbini		GQ.08.2308276	2308276		Mbini	2	16879	88
-Evinayong		GQ.06.2308997	2308997		Distrito de Evinayong	2	16877	88
-Distrito de Ebebiyin		GQ.07.2309335	2309335		Ebebiyin	2	16878	88
-Bata		GQ.08.2310047	2310047		Distrito de Bata	2	16879	88
-Acurenam		GQ.06.2310534	2310534		Distrito de Acurenam	2	16877	88
-Ayene		GQ.09.11237860	11237860			2	16880	88
-Mengomeyén		GQ.09.11237861	11237861			2	16880	88
-Aconibe		GQ.09.11237862	11237862			2	16880	88
-Río Campo		GQ.08.11237864	11237864			2	16879	88
-Corisco		GQ.08.11237865	11237865			2	16879	88
-Bitica		GQ.08.11237866	11237866			2	16879	88
-Machinda		GQ.08.11237867	11237867			2	16879	88
-Nsang		GQ.07.11237868	11237868			2	16878	88
-Ncue		GQ.07.11237869	11237869			2	16878	88
-Bicurga		GQ.06.11237870	11237870			2	16877	88
-Riaba		GQ.05.11237871	11237871			2	16876	88
-Luba		GQ.05.11237872	11237872			2	16876	88
-Rebola		GQ.04.11237873	11237873			2	16875	88
-Malabo		GQ.04.11237874	11237874			2	16875	88
+Añisoc		GQ.09.2306544	2306544			2	16878	88
+Niefang		GQ.06.2306702	2306702		Distrito de Niefang	2	16875	88
+Cogo		GQ.08.2306841	2306841		Distrito de Cogo	2	16877	88
+Distrito de Nsork		GQ.09.2307161	2307161		Nsork	2	16878	88
+Mongomo		GQ.09.2307796	2307796		Distrito de Mongomo	2	16878	88
+Micomiseng		GQ.07.2308017	2308017		Distrito de Micomiseng	2	16876	88
+Distrito de Mbini		GQ.08.2308276	2308276		Mbini	2	16877	88
+Evinayong		GQ.06.2308997	2308997		Distrito de Evinayong	2	16875	88
+Distrito de Ebebiyin		GQ.07.2309335	2309335		Ebebiyin	2	16876	88
+Bata		GQ.08.2310047	2310047		Distrito de Bata	2	16877	88
+Acurenam		GQ.06.2310534	2310534		Distrito de Acurenam	2	16875	88
+Ayene		GQ.09.11237860	11237860			2	16878	88
+Mengomeyén		GQ.09.11237861	11237861			2	16878	88
+Aconibe		GQ.09.11237862	11237862			2	16878	88
+Río Campo		GQ.08.11237864	11237864			2	16877	88
+Corisco		GQ.08.11237865	11237865			2	16877	88
+Bitica		GQ.08.11237866	11237866			2	16877	88
+Machinda		GQ.08.11237867	11237867			2	16877	88
+Nsang		GQ.07.11237868	11237868			2	16876	88
+Ncue		GQ.07.11237869	11237869			2	16876	88
+Bicurga		GQ.06.11237870	11237870			2	16875	88
+Riaba		GQ.05.11237871	11237871			2	16874	88
+Luba		GQ.05.11237872	11237872			2	16874	88
+Rebola		GQ.04.11237873	11237873			2	16873	88
+Malabo		GQ.04.11237874	11237874			2	16873	88
 Mabana		GQ.03.11237875	11237875			2	16872	88
 San Antonio de Palé		GQ.03.11237876	11237876			2	16872	88
-Bidjabidjan		GQ.07.11237877	11237877			2	16878	88
-Baney		GQ.04.11237879	11237879			2	16875	88
-Nkimi		GQ.06.11237880	11237880			2	16877	88
-Nsok-Nsomo		GQ.07.12168386	12168386		Distrito de Nsok-Nsomo	2	16878	88
-Annobon	GQ-AN	GQ.03.13448381	13448381	Province	Annobón|Distrito de Annobón	2	16872	88
+Bidjabidjan		GQ.07.11237877	11237877			2	16876	88
+Baney		GQ.04.11237879	11237879			2	16873	88
+Nkimi		GQ.06.11237880	11237880			2	16875	88
+Nsok-Nsomo		GQ.07.12168386	12168386		Distrito de Nsok-Nsomo	2	16876	88
+Annobón		GQ.03.13448381	13448381		Distrito de Annobón	2	16872	88
+Région Continentale	GQ-C			Region		1		88
+Région Insulaire	GQ-I			Region		1		88
 Ágion Óros	GR-69	GR.736572	736572	Self-governed part	Autonomous Monastic State of the Holy Mountain|Mount Athos|Αυτόνομη Μοναστική Πολιτεία Αγίου Όρους	1		89
 Attikí	GR-I	GR.ESYE31	6692632	Administrative region	Attica|Αττική	1		89
 Stereá Elláda	GR-H	GR.ESYE24	6697800	Administrative region	Central Greece|Κεντρική Ελλάδα|Στερεά Ελλάδα	1		89
@@ -17363,51 +17363,51 @@ Mongmong-Toto-Maite		GU.MT	4044148			1		92
 Tombali	GW-TO	GW.07	2368955	Region	Tombali Region	2		93
 Quinara	GW-QU	GW.02	2370360	Region	Quinara Region	2		93
 Oio	GW-OI	GW.04	2371071	Region	Região de Oio	2		93
+Gabú	GW-GA	GW.10	2372533	Region		2		93
+Cacheu	GW-CA	GW.06	2374312	Region		2		93
+Bolama / Bijagós	GW-BL	GW.05	2374689	Region	Bijagîs|Bijagós|Bolama|Bolama Region|Bolama and Bijagos|Bolama/Bijagîs|Região de Bolama	2		93
 Biombo	GW-BM	GW.12	2374820	Region	Biombo Region	2		93
-Sao Domingos		GW.06.7909700	7909700			2	17407	93
-Cacheu Sector		GW.06.7909702	7909702		Cacheu/Calequisse	2	17407	93
+Bafatá	GW-BA	GW.01	2375255	Region		2		93
+Sao Domingos		GW.06.7909700	7909700			2	17367	93
+Cacheu Sector		GW.06.7909702	7909702		Cacheu/Calequisse	2	17367	93
 Bedanda		GW.07.7909706	7909706		Badanda	2	17363	93
 Fulacunda		GW.02.7909708	7909708			2	17364	93
 Buba		GW.02.7909709	7909709			2	17364	93
-Bubaque		GW.05.7909710	7909710			2	17408	93
+Bubaque		GW.05.7909710	7909710			2	17368	93
 Quebo		GW.07.7909713	7909713			2	17363	93
 Cacine		GW.07.7911001	7911001			2	17363	93
-Caravela		GW.05.7911005	7911005			2	17408	93
-Bigene Sector		GW.06.7932380	7932380		Bigene	2	17407	93
-Prabis Sector		GW.12.8335038	8335038		Prabis	2	17366	93
-Quinhamel Sector		GW.12.8335043	8335043		Quinhamel	2	17366	93
+Caravela		GW.05.7911005	7911005			2	17368	93
+Bigene Sector		GW.06.7932380	7932380		Bigene	2	17367	93
+Prabis Sector		GW.12.8335038	8335038		Prabis	2	17369	93
+Quinhamel Sector		GW.12.8335043	8335043		Quinhamel	2	17369	93
 Mansaba Sector		GW.04.8335049	8335049		Mansaba	2	17365	93
 Bissora Sector		GW.04.8335050	8335050		Bissora	2	17365	93
 Nhacra Sector		GW.04.8335051	8335051		Nhacra	2	17365	93
 Farim Sector		GW.04.8335052	8335052		Farim	2	17365	93
-Sonaco Sector		GW.10.8335053	8335053		Sonaco	2	17406	93
-Xitole Sector		GW.01.8335054	8335054		Xitole	2	17410	93
-Caio Sector		GW.06.8335055	8335055		Caio	2	17407	93
-Canchungo Sector		GW.06.8335068	8335068		Canchungo	2	17407	93
-Bula		GW.06.8335069	8335069			2	17407	93
+Sonaco Sector		GW.10.8335053	8335053		Sonaco	2	17366	93
+Xitole Sector		GW.01.8335054	8335054		Xitole	2	17370	93
+Caio Sector		GW.06.8335055	8335055		Caio	2	17367	93
+Canchungo Sector		GW.06.8335068	8335068		Canchungo	2	17367	93
+Bula		GW.06.8335069	8335069			2	17367	93
 Mansoa		GW.04.8335070	8335070			2	17365	93
-Gamamundo Sector		GW.01.8335071	8335071		Gamamudo/Ganadu	2	17410	93
-Galomaro Sector		GW.01.8335072	8335072		Galomaro/Cosse	2	17410	93
-Bafatá	GW-BA	GW.01.8335074	8335074	Region	Bafata|Bafata Sector	2	17410	93
-Gabú	GW-GA	GW.10.8335075	8335075	Region	Gabu|Gabu Sector	2	17406	93
-Contuboel Sector		GW.01.8335076	8335076		Contuboel	2	17410	93
+Gamamundo Sector		GW.01.8335071	8335071		Gamamudo/Ganadu	2	17370	93
+Galomaro Sector		GW.01.8335072	8335072		Galomaro/Cosse	2	17370	93
+Bafata Sector		GW.01.8335074	8335074		Bafata	2	17370	93
+Gabu Sector		GW.10.8335075	8335075		Gabu	2	17366	93
+Contuboel Sector		GW.01.8335076	8335076		Contuboel	2	17370	93
 Empada		GW.02.10376583	10376583			2	17364	93
 Tite		GW.02.10376960	10376960			2	17364	93
-Bambadinca		GW.01.11995994	11995994			2	17410	93
-Bolama		GW.05.11995995	11995995			2	17408	93
-Safim		GW.12.11995996	11995996			2	17366	93
-Pirada		GW.10.11995997	11995997			2	17406	93
-Pitche		GW.10.11995998	11995998			2	17406	93
-Boe		GW.10.11995999	11995999			2	17406	93
-Uno		GW.05.11996000	11996000			2	17408	93
+Bambadinca		GW.01.11995994	11995994			2	17370	93
+Bolama		GW.05.11995995	11995995			2	17368	93
+Safim		GW.12.11995996	11995996			2	17369	93
+Pirada		GW.10.11995997	11995997			2	17366	93
+Pitche		GW.10.11995998	11995998			2	17366	93
+Boe		GW.10.11995999	11995999			2	17366	93
+Uno		GW.05.11996000	11996000			2	17368	93
 Catio		GW.07.11996001	11996001			2	17363	93
 Komo		GW.07.11996002	11996002			2	17363	93
-Sector Autonomo de Bissau		GW.11.11996003	11996003			2	17409	93
-Gabú		GW.10	2372533			1		93
-Cacheu		GW.06	2374312			1		93
-Bolama		GW.05	2374689		Bijagîs|Bijagós|Bolama Region|Bolama and Bijagos|Bolama/Bijagîs|Região de Bolama	1		93
+Sector Autonomo de Bissau		GW.11.11996003	11996003			2	17410	93
 Bissau	GW-BS	GW.11	2374776	Autonomous sector	Bissau Autonomous Region|SAB	1		93
-Bafatá		GW.01	2375255			1		93
 Leste	GW-L			Province		1		93
 Norte	GW-N			Province		1		93
 Sul	GW-S			Province		1		93
@@ -18404,11 +18404,11 @@ Szabolcs-Szatmár-Bereg	HU-SZ	HU.18	715593	County	Szabolcs-Szatmár-Bereg megye	
 Jász-Nagykun-Szolnok	HU-JN	HU.20	719637	County	Jász-Nagykun-Szolnok County|Jász-Nagykun-Szolnok vármegye	1		100
 Heves	HU-HE	HU.11	720002	County	Heves County|Heves vármegye	1		100
 Hajdú-Bihar	HU-HB	HU.10	720293	County	Hajdú-Bihar County|Hajdú-Bihar vármegye	1		100
-Csongrád		HU.06	721589			1		100
+Csongrád-Csanád	HU-CS	HU.06	721589	County	Csongrád	1		100
 Borsod-Abaúj-Zemplén	HU-BZ	HU.04	722064	County	Borsod-Abauj Zemplen county|Borsod-Abaúj-Zemplén megye	1		100
 Békés	HU-BE	HU.03	722433	County	Bekes County|Békés megye	1		100
 Zala	HU-ZA	HU.24	3042613	County	Zala County|Zala megye	1		100
-Veszprém		HU.23	3042925			1		100
+Veszprém	HU-VE	HU.23	3042925	County		1		100
 Vas	HU-VA	HU.22	3043047	County	Vas County|Vas megye	1		100
 Tolna	HU-TO	HU.21	3043845	County	Tolna County|Tolna vármegye	1		100
 Somogy	HU-SO	HU.17	3045226	County	Somogy County|Somogy vármegye	1		100
@@ -19176,7 +19176,7 @@ Nusa Tenggara	ID-NU			Geographical unit		0		101
 Papua	ID-PP			Geographical unit		0		101
 Sulawesi	ID-SL			Geographical unit		0		101
 Sumatera	ID-SM			Geographical unit		0		101
-Connacht		IE.C	7521313		Connachta|Cúige Chonnacht	1		102
+Connaught	IE-C	IE.C	7521313	Province	Connacht|Connachta|Cúige Chonnacht	1		102
 Leinster	IE-L	IE.L	7521314	Province	Cúige Laighean	1		102
 Munster	IE-M	IE.M	7521315	Province	Cúige Mumhan	1		102
 Ulster	IE-U	IE.U	7521316	Province	Cúige Uladh	1		102
@@ -19212,7 +19212,7 @@ Cork City		IE.M.32	7778678		Corcaigh	2	19181	102
 Limerick	IE-LK	IE.M.42	11611445	County	Limerick City and County Council	2	19181	102
 Waterford	IE-WD	IE.M.44	11611446	County	County Waterford	2	19181	102
 Al Quds	IL-JM	IL.06	293198	District	El Quds|Jerusalem|Jerusalem District|Meẖoz Yerushalayim|ירושלים|מחוז ירושלים|منطقة القدس	1		103
-Tel Aviv		IL.05	293396		Meẖoz Tel Aviv|Tel Aviv District|מחוז תל אביב|תל אביב|منطقة تل أبيب	1		103
+Tall Abīb	IL-TA	IL.05	293396	District	Meẖoz Tel Aviv|Tel Aviv|Tel Aviv District|Tell Abīb|מחוז תל אביב|תל אביב|منطقة تل أبيب	1		103
 Ḩayfā	IL-HA	IL.04	294800	District	Haifa|Haifa District|Meẖoz H̱efa|חיפה|מחוז חיפה|منطقة حيفا|Ḥeifa	1		103
 Ash Shamālī	IL-Z	IL.03	294824	District	Esh Shamālī|Meẖoz HaTsafon|Meẖoz HaẔafon|Northern|Northern District|הצפון|מחוז הצפון|المنطقة الشمالية	1		103
 Al Awsaţ	IL-M	IL.02	294904	District	Central|Central District|El Awsaṭ|Meẖoz HaMerkaz|המרכז|מחוז המרכז|المنطقة الوسطى	1		103
@@ -19293,8 +19293,9 @@ Andaman and Nicobar Islands	IN-AN	IN.01	1278647	Union territory	Andaman and Nico
 Chhattīsgarh	IN-CG	IN.37	1444364	State	Chhattisgarh|چھتیس گڑھ|छत्तीसगढ|छत्तीसगढराज्यम्|छत्तीसगढ़|ছত্তীছগঢ়|ছত্তীসগঢ়|ਛੱਤੀਸਗੜ੍ਹ|છત્તીસગઢ|ଛତିଶଗଡ଼|சத்தீசுகர்|ఛత్తీస్గఢ్|ಛತ್ತೀಸ್ಘಡ್|ഛത്തീസ്ഗഢ്	1		105
 Jhārkhand	IN-JH	IN.38	1444365	State	Jharkhand|جھارکھنڈ|झारखंड|झारखण्ड|झारखण्डराज्यम्|ঝাড়খণ্ড|ਝਾਰਖੰਡ|ઝારખંડ|ଝାଡ଼ଖଣ୍ଡ|சார்க்கண்ட்|జార్ఖండ్|ಝಾರ್ಖಂಡ್|ഝാർഖണ്ഡ്	1		105
 Uttarākhand	IN-UK	IN.39	1444366	State	Uttarakhand|उत्तराखंड|উত্তরাখণ্ড|ਉੱਤਰਾਖੰਡ	1		105
-Ladākh	IN-LA	IN.41	12096464	Union territory	Ladakh|लडाख|लदाख|लदाख सम्पादन|लद्दाख़|লাডাখ|লাদাখ|ਲਦਾਖ|લડાખ|லடாக்|లడఖ్|ಲಡಾಖ್|ലഡാക്	1		105
+Ladakh		IN.41	12096464		लडाख|लदाख|लदाख सम्पादन|लद्दाख़|লাডাখ|লাদাখ|ਲਦਾਖ|લડાખ|லடாக்|లడఖ్|ಲಡಾಖ್|ലഡാക്	1		105
 Dādra and Nagar Haveli and Damān and Diu	IN-DH	IN.52	12165662	Union territory	Dadra and Nagar Haveli and Daman and Diu	1		105
+Ladākh	IN-LA	IN.41.003	1265343	Union territory	Leh|Leh Ladakh|Leh district	1	19296	105
 Zunheboto		IN.20.263	1252654			2	19272	105
 Yavatmal		IN.16.510	1252771		Yavatmal District|یوٹمل ضلع|यवतमाल जिला|यवतमाळ|यवतमाळ जिल्ला|यवतमाळ जिल्हा|यवतमाळमण्डलम्|યવતમાળ જિલ્લો|ଯବତମାଲ ଜିଲ୍ଲା|யவத்மாள் மாவட்டம்|యావత్మల్ జిల్లా	2	19276	105
 Yanam		IN.22.634	1252796			2	19270	105
@@ -19455,7 +19456,6 @@ Lohit District		IN.30.259	1264818		Lohit	2	19290	105
 Lalitpur		IN.36.167	1265158		District Lalitpur|जनपद ललितपुर|ललितपुर	2	19263	105
 Lakhimpur		IN.03.307	1265243		Lakhimpur district|लखिमपुर जिल्ला|लखिमपुरमण्डलम्|लखीमपुर जिला|लखीमपुर जिल्हा|লখিমপুর জেলা|লখিমপুৰ জিলা|લખિમપુર જિલ્લો|லக்கீம்பூர் மாவட்டம்|లఖింపూర్	2	19289	105
 Lāhul and Spiti		IN.11.025	1265292		Lahaul and Spiti District|Lahul and Spiti	2	19282	105
-Leh		IN.41.003	1265343		Leh Ladakh|Leh district	2	19296	105
 Kurukshetra		IN.10.072	1265468		कुरुक्षेत्र|कुरुक्षेत्रम्|কুরুক্ষেত্র|કુરુક્ષેત્ર|குருச்சேத்திரம்|కురుక్షేత్రం|കുരുക്ഷേത്രം	2	19283	105
 Kurnool		IN.02.552	1265492		Kurnool district|کرنول ضلع|कर्नूलुमण्डलम्|कुर्नूल जिला|कुर्नूल जिल्ला|कुर्नूल जिल्हा|ਕੁਰਨੂਲ ਜ਼ਿਲਾ|કુર્નૂલ|କୁର୍ନୂଲ ଜିଲ୍ଲା|கர்நூல் மாவட்டம்|కర్నూలు జిల్లా	2	19291	105
 Kulu		IN.11.026	1265710		Kullu	2	19282	105
@@ -20064,142 +20064,142 @@ Wāsiţ	IQ-WA	IQ.16	89693	Governorate	Vasit|Wasit|Wasit Governorate|محافظة
 Nīnawá	IQ-NI	IQ.15	92877	Governorate	Neynəvə mühafəzəsi|Nineveh|Nineveh Governorate|محافظة نينوى|نينوى|نەینەوا|پارێزگای نەینەوا	1		107
 Maysān	IQ-MA	IQ.14	93540	Governorate	Maysan|Maysan Governorate|Meysan mühafəzəsi|محافظة ميسان|ميسان|پارێزگای میسان	1		107
 Karbalā’	IQ-KA	IQ.12	94823	Governorate	Karbala|Karbala Governorate|Kərbəla mühafəzəsi|كربلاء|محافظة كربلاء|پارێزگای کەربەلا	1		107
-Erbil		IQ.11	95445		Erbil Governorate|Hewler Governorate|Ərbil mühafəzəsi|إربل|محافظة إربل|پارێزگای ھەولێر	1		107
 Diyālá	IQ-DI	IQ.10	96965	Governorate	Diyala|Diyala Governorate|Diyalə mühafəzəsi|ديالى|محافظة ديالى|پارێزگای دیالە	1		107
 Dhī Qār	IQ-DQ	IQ.09	97019	Governorate	Dhi Qar|Ziqar mühafəzəsi|الناصرية|ذي قار|پارێزگای زیقار	1		107
-Duhok		IQ.08	97270		Duhok Governorate|Duhok Province|Dəhuk mühafəzəsi|دهوك|دهۆک|محافظة دهوك|پارێزگای دھۆک	1		107
 Baghdād	IQ-BG	IQ.07	98180	Governorate	Baghdad|Baghdad Governorate|Bağdad mühafəzəsi|أمانة العاصمة|بغداد|پارێزگای بەغدا	1		107
 Bābil	IQ-BB	IQ.06	98227	Governorate	Babil|Babil Governorate|Babil mühafəzəsi|Babylon Governorate|بابل|محافظة بابل|پارێزگای بابل	1		107
 Kirkūk	IQ-KI	IQ.13	98410	Governorate	Kirkuk|Kirkuk Governorate|Kirkuk Province|Kərkük mühafəzəsi|كركوك|محافظة كركوك|پارێزگای کەرکووک|کەرکووک	1		107
-Sulaymaniyah		IQ.05	98465		Sulaymaniyah Governorate|Süleymaniyyə mühafəzəsi|السليمانية|سلێمانی|محافظة السليمانية|پارێزگای سلێمانی	1		107
-Najaf		IQ.17	98862		Necef|النجف|النجف الأشرف|محافظة النجف الأشرف	1		107
+An Najaf	IQ-NA	IQ.17	98862	Governorate	Najaf|Necef|النجف|النجف الأشرف|محافظة النجف الأشرف	1		107
 Al Qādisīyah	IQ-QA	IQ.04	99022	Governorate	Al-Diwaniyah Governorate|Al-Qadisiyah|Al-Qadisiyah Governorate|Qədisiyyə mühafəzəsi|الديوانية|محافظة القادسية|پارێزگای قادسیە	1		107
 Al Muthanná	IQ-MU	IQ.03	99032	Governorate	Muthanna|Muthanna Governorate|Müsənnə mühafəzəsi|المثنى|محافظة المثنى|پارێزگای موسەنا	1		107
 Al Anbār	IQ-AN	IQ.01	99592	Governorate	Al Anbar|Al-Anbar Governorate|Anbar|Anbar Governorate|Anbar Province|Ənbar mühafəzəsi|الانبار|محافظة الأنبار|پارێزگای ئەنبار	1		107
 Halabja		IQ.19	12218240		Halabja Governorate|Hələbcə mühafəzəsi|محافظة حلبجة|پارێزگای ھەڵەبجە	1		107
 Iqlīm Kūrdistān	IQ-KR			Region		1		107
-Zakho District		IQ.08.89569	89569		Zakho|شارۆچکەی زاخۆ|قضاء زاخو	2	20070	107
+Arbīl	IQ-AR	IQ.11	95445	Governorate	Erbil|Erbil Governorate|Hewler Governorate|Ərbil mühafəzəsi|إربل|محافظة إربل|پارێزگای ھەولێر	2		107
+Dahūk	IQ-DA	IQ.08	97270	Governorate	Duhok|Duhok Governorate|Duhok Province|Dəhuk mühafəzəsi|دهوك|دهۆک|محافظة دهوك|پارێزگای دھۆک	2		107
+As Sulaymānīyah	IQ-SU	IQ.05	98465	Governorate	Sulaymaniyah|Sulaymaniyah Governorate|Süleymaniyyə mühafəzəsi|السليمانية|سلێمانی|محافظة السليمانية|پارێزگای سلێمانی	2		107
+Zakho District		IQ.08.89569	89569		Zakho|شارۆچکەی زاخۆ|قضاء زاخو	2	20079	107
 Tikrit District		IQ.18.90148	90148		قضاء تكريت|قەزای تکریت	2	20063	107
 Tel Afar District		IQ.15.90392	90392			2	20064	107
-Suq Al-Shoyokh District		IQ.09.90509	90509			2	20069	107
-Sharbazher District		IQ.05.91176	91176			2	20074	107
+Suq Al-Shoyokh District		IQ.09.90509	90509			2	20068	107
+Sharbazher District		IQ.05.91176	91176			2	20080	107
 Qaḑā’ Sāmarrā’		IQ.18.91594	91594			2	20063	107
-Rania District		IQ.05.92051	92051			2	20074	107
+Rania District		IQ.05.92051	92051			2	20080	107
 Qaḑā’ Qal‘at Şāliḩ		IQ.14.92536	92536			2	20065	107
-Pshdar District		IQ.05.92743	92743			2	20074	107
-Makhmūr District		IQ.11.93817	93817			2	20067	107
-Qaḑā’ Kifrī		IQ.10.94296	94296			2	20068	107
-Khanaqin District		IQ.10.94590	94590		قەزای خانەقین	2	20068	107
-Kirkuk District		IQ.13.94786	94786			2	20073	107
+Pshdar District		IQ.05.92743	92743			2	20080	107
+Makhmūr District		IQ.11.93817	93817			2	20078	107
+Qaḑā’ Kifrī		IQ.10.94296	94296			2	20067	107
+Khanaqin District		IQ.10.94590	94590		قەزای خانەقین	2	20067	107
+Kirkuk District		IQ.13.94786	94786			2	20071	107
 Kerbala District		IQ.12.94822	94822		قضاء كربلاء|كربلاء	2	20066	107
-Arbīl	IQ-AR	IQ.11.95444	95444	Governorate	Arbil|إربل|هەولێر	2	20067	107
-Qaḑā’ Ḩalabchah		IQ.19.96204	96204		قضاء حلبچة	2	20079	107
-Dahūk	IQ-DA	IQ.08.97269	97269	Governorate	Dohuk District|Duhok District|محافظة دهوك	2	20070	107
-Chamchamal District		IQ.05.97416	97416			2	20074	107
-Ba'quba District		IQ.10.97988	97988			2	20068	107
-Baghdad		IQ.07.98179	98179			2	20071	107
+Arbil		IQ.11.95444	95444		إربل|هەولێر	2	20078	107
+Qaḑā’ Ḩalabchah		IQ.19.96204	96204		قضاء حلبچة	2	20076	107
+Dohuk District		IQ.08.97269	97269		Duhok District|محافظة دهوك	2	20079	107
+Chamchamal District		IQ.05.97416	97416			2	20080	107
+Ba'quba District		IQ.10.97988	97988			2	20067	107
+Baghdad		IQ.07.98179	98179			2	20069	107
 Badra District		IQ.16.98197	98197			2	20062	107
 Al-Zubair District		IQ.02.98247	98247			2	20061	107
 Al-Suwaira District		IQ.16.98460	98460			2	20062	107
-Qaḑā’ as Sulaymānīyah		IQ.05.98464	98464		قضاء السليمانية	2	20074	107
-Al-Samawa District		IQ.03.98532	98532			2	20077	107
-Al-Salman District		IQ.03.98534	98534		قضاء السلمان	2	20077	107
+Qaḑā’ as Sulaymānīyah		IQ.05.98464	98464		قضاء السليمانية	2	20080	107
+Al-Samawa District		IQ.03.98532	98532			2	20074	107
+Al-Salman District		IQ.03.98534	98534		قضاء السلمان	2	20074	107
 Shekhan District		IQ.15.98612	98612			2	20064	107
-Al-Shatra District		IQ.09.98623	98623			2	20069	107
-Qada Al-Shamiya		IQ.04.98634	98634			2	20076	107
-Al-Rutba District		IQ.01.98678	98678			2	20078	107
-Al-Rifa'i District		IQ.09.98700	98700			2	20069	107
-Ramadi District		IQ.01.98718	98718		قضاء الرمادي	2	20078	107
+Al-Shatra District		IQ.09.98623	98623			2	20068	107
+Qada Al-Shamiya		IQ.04.98634	98634			2	20073	107
+Al-Rutba District		IQ.01.98678	98678			2	20075	107
+Al-Rifa'i District		IQ.09.98700	98700			2	20068	107
+Ramadi District		IQ.01.98718	98718		قضاء الرمادي	2	20075	107
 Akre District		IQ.15.98820	98820		Akre|عقره	2	20064	107
-Nassriya District		IQ.09.98855	98855			2	20069	107
-Najaf District		IQ.17.98861	98861			2	20075	107
-Anah District		IQ.01.98884	98884			2	20078	107
+Nassriya District		IQ.09.98855	98855			2	20068	107
+Najaf District		IQ.17.98861	98861			2	20072	107
+Anah District		IQ.01.98884	98884			2	20075	107
 Al-Qurna District		IQ.02.98994	98994			2	20061	107
-Al-Musayab District		IQ.06.99040	99040			2	20072	107
-Al-Muqdadiya District		IQ.10.99063	99063		قضاء المقدادية	2	20068	107
+Al-Musayab District		IQ.06.99040	99040			2	20070	107
+Al-Muqdadiya District		IQ.10.99063	99063		قضاء المقدادية	2	20067	107
 Al-Mejar Al-Kabi District		IQ.14.99097	99097		المجر الكبير|قضاء المجر الكبير	2	20065	107
-Mahmudiya District		IQ.07.99101	99101			2	20071	107
+Mahmudiya District		IQ.07.99101	99101			2	20069	107
 Kut District		IQ.16.99132	99132			2	20062	107
-Al-Khalis District		IQ.10.99170	99170			2	20068	107
-Al-Kāżimiyyah		IQ.07.99173	99173			2	20071	107
-Al-Chibayish District		IQ.09.99185	99185		قضاء الجبايش|قەزای ئەلچیبەیش	2	20069	107
+Al-Khalis District		IQ.10.99170	99170			2	20067	107
+Al-Kāżimiyyah		IQ.07.99173	99173			2	20069	107
+Al-Chibayish District		IQ.09.99185	99185		قضاء الجبايش|قەزای ئەلچیبەیش	2	20068	107
 Ali Al-Gharbi District		IQ.14.99305	99305		قضاء علي الغربي	2	20065	107
 Al-Hindiya District		IQ.12.99345	99345		قضاء الهنديه	2	20066	107
-Al-Hilla District		IQ.06.99348	99348			2	20072	107
+Al-Hilla District		IQ.06.99348	99348			2	20070	107
 Al-Hai District		IQ.16.99351	99351			2	20062	107
-Hashimiya District		IQ.06.99358	99358			2	20072	107
+Hashimiya District		IQ.06.99358	99358			2	20070	107
 Hatra District		IQ.15.99414	99414			2	20064	107
-Falluja District		IQ.01.99455	99455			2	20078	107
+Falluja District		IQ.01.99455	99455			2	20075	107
 Basrah District		IQ.02.99534	99534			2	20061	107
 Amara District		IQ.14.99610	99610		قضاء العمارة	2	20065	107
-Adhamiyah		IQ.08.99612	99612		Amedi|العمادية	2	20070	107
-Afaq District		IQ.04.99737	99737			2	20076	107
-Qada Diwaniya		IQ.04.99763	99763			2	20076	107
+Adhamiyah		IQ.08.99612	99612		Amedi|العمادية	2	20079	107
+Afaq District		IQ.04.99737	99737			2	20073	107
+Qada Diwaniya		IQ.04.99763	99763			2	20073	107
 Abu Al-Khaseeb District		IQ.02.100049	100049			2	20061	107
-Haditha District		IQ.01.6765480	6765480		قضاء حديثة	2	20078	107
-Al-Hawija District		IQ.13.6770659	6770659		قضاء الحويجة	2	20073	107
+Haditha District		IQ.01.6765480	6765480		قضاء حديثة	2	20075	107
+Al-Hawija District		IQ.13.6770659	6770659		قضاء الحويجة	2	20071	107
 Al-Daur District		IQ.18.6783103	6783103		قضاء الدور|قەزای دۆر	2	20063	107
 Al-Shirqat District		IQ.18.6804454	6804454		شەرقات|قضاء الشرقاط	2	20063	107
 Balad District		IQ.18.6805736	6805736		قضاء بلد	2	20063	107
-Al-Mahawil District		IQ.06.6818313	6818313		قضاء المحاويل	2	20072	107
-Hamza District		IQ.04.6850588	6850588		قضاء الحمزة	2	20076	107
+Al-Mahawil District		IQ.06.6818313	6818313		قضاء المحاويل	2	20070	107
+Hamza District		IQ.04.6850588	6850588		قضاء الحمزة	2	20073	107
 Baiji District		IQ.18.6872046	6872046		قضاء بيجي|قەزای بێجی	2	20063	107
-Mergasur District		IQ.11.9166534	9166534			2	20067	107
+Mergasur District		IQ.11.9166534	9166534			2	20078	107
 Al-Hamdaniya District		IQ.15.9166541	9166541			2	20064	107
-Abu Ghraib District		IQ.07.9166542	9166542		قضاء أبي غريب	2	20071	107
-Karkh		IQ.07.9166545	9166545			2	20071	107
+Abu Ghraib District		IQ.07.9166542	9166542		قضاء أبي غريب	2	20069	107
+Karkh		IQ.07.9166545	9166545			2	20069	107
 Al-Faw District		IQ.02.9166549	9166549			2	20061	107
-Al-Manathera District		IQ.17.9166552	9166552			2	20075	107
+Al-Manathera District		IQ.17.9166552	9166552			2	20072	107
 Al Kahla District		IQ.14.9166557	9166557			2	20065	107
-Sadr		IQ.07.9166561	9166561			2	20071	107
+Sadr		IQ.07.9166561	9166561			2	20069	107
 Al-Maimouna District		IQ.14.9166562	9166562		قضاء الميمونة	2	20065	107
 Al-Midaina District		IQ.02.9166563	9166563		قضاء المدينة	2	20061	107
-Taji District		IQ.07.9166564	9166564			2	20071	107
-Al-Rumaitha District		IQ.03.9166568	9166568		قضاء الرميثة	2	20077	107
-Al Tarmia District		IQ.07.9166569	9166569		قضاء الطارمية	2	20071	107
-Al-Ka'im District		IQ.01.9166576	9166576		قضاء القائم	2	20078	107
-Hīt District		IQ.01.9166579	9166579			2	20078	107
-Daquq District		IQ.13.9166581	9166581			2	20073	107
-Choman District		IQ.11.9166586	9166586			2	20067	107
-Koisnjaq district		IQ.11.9166588	9166588			2	20067	107
-Shaqlawa		IQ.11.9166591	9166591		قضاء شقلاوة	2	20067	107
-Soran District		IQ.11.9166592	9166592			2	20067	107
-Darbandokeh District		IQ.05.9166594	9166594		قضاء دربندخان|قضاء دربنديخان	2	20074	107
-Dokan District		IQ.05.9166596	9166596			2	20074	107
+Taji District		IQ.07.9166564	9166564			2	20069	107
+Al-Rumaitha District		IQ.03.9166568	9166568		قضاء الرميثة	2	20074	107
+Al Tarmia District		IQ.07.9166569	9166569		قضاء الطارمية	2	20069	107
+Al-Ka'im District		IQ.01.9166576	9166576		قضاء القائم	2	20075	107
+Hīt District		IQ.01.9166579	9166579			2	20075	107
+Daquq District		IQ.13.9166581	9166581			2	20071	107
+Choman District		IQ.11.9166586	9166586			2	20078	107
+Koisnjaq district		IQ.11.9166588	9166588			2	20078	107
+Shaqlawa		IQ.11.9166591	9166591		قضاء شقلاوة	2	20078	107
+Soran District		IQ.11.9166592	9166592			2	20078	107
+Darbandokeh District		IQ.05.9166594	9166594		قضاء دربندخان|قضاء دربنديخان	2	20080	107
+Dokan District		IQ.05.9166596	9166596			2	20080	107
 Tooz District		IQ.18.9166598	9166598		Tuzxurmatu qəzası|قضاء طوز|قەزای دووزخورماتوو	2	20063	107
-Kalar District		IQ.05.9166600	9166600			2	20074	107
+Kalar District		IQ.05.9166600	9166600			2	20080	107
 Ain Al-Tamur District		IQ.12.9166603	9166603		قضاء عين تمر	2	20066	107
 Al-Na'maniya District		IQ.16.9166606	9166606		قضاء النعمانية	2	20062	107
-Semel District		IQ.08.9166607	9166607		سميل|سيميل|قضاء سميل|قضاء سيميل	2	20070	107
+Semel District		IQ.08.9166607	9166607		سميل|سيميل|قضاء سميل|قضاء سيميل	2	20079	107
 Al-Ba'aj District		IQ.15.9166608	9166608		قضاء بعاج	2	20064	107
 Al-Faris		IQ.18.9166616	9166616			2	20063	107
 Tel Keppe District		IQ.15.9166618	9166618		قضاء تل كيف|قضاء تلكيف	2	20064	107
 Sinjar		IQ.15.9166620	9166620			2	20064	107
-Al-Khidir District		IQ.03.9166626	9166626		قضاء الخضر	2	20077	107
-Kufa		IQ.17.9166629	9166629			2	20075	107
+Al-Khidir District		IQ.03.9166626	9166626		قضاء الخضر	2	20074	107
+Kufa		IQ.17.9166629	9166629			2	20072	107
 Mosul		IQ.15.9166649	9166649			2	20064	107
-Rawah District		IQ.01.9166650	9166650		قضاء راوة	2	20078	107
-Al Rusafa		IQ.07.9166668	9166668		قضاء الرصافة	2	20071	107
-Qada Balad Ruz		IQ.10.9166680	9166680			2	20068	107
-Penjwin District		IQ.05.9166684	9166684		قضاء بنجوين|قضاء بينجوين	2	20074	107
+Rawah District		IQ.01.9166650	9166650		قضاء راوة	2	20075	107
+Al Rusafa		IQ.07.9166668	9166668		قضاء الرصافة	2	20069	107
+Qada Balad Ruz		IQ.10.9166680	9166680			2	20067	107
+Penjwin District		IQ.05.9166684	9166684		قضاء بنجوين|قضاء بينجوين	2	20080	107
 Qada Al-Azezia		IQ.16.9166961	9166961		قضاء العزيزية	2	20062	107
 Al-Thethar District		IQ.18.9167093	9167093		Qada Al-Thethar	2	20063	107
-Thawra		IQ.07.9167771	9167771			2	20071	107
-Dabes		IQ.13.9171727	9171727		قضاء دبس	2	20073	107
-Al-Mada'in District		IQ.07.9179819	9179819		قضاء المدائن	2	20071	107
-Qaḑā’ Jawmān		IQ.11.9873235	9873235		قضاء جومان	2	20067	107
-Qaḑā’ Sawrān		IQ.11.9873236	9873236		قضاء سوران	2	20067	107
-Qeza-î Sharezûr		IQ.05.9873303	9873303		قضاء شارزور|قضاء شهرزور	2	20074	107
-Qaḑā’ al A‘z̧amīyah		IQ.07.9873561	9873561		قضاء الأعظمية	2	20071	107
-Qaḑā’ Abū Ghurayb		IQ.07.9874049	9874049		قضاء أبو غريب	2	20071	107
-Qaḑā’ Khabāt		IQ.11.9874070	9874070		قضاء خبات	2	20067	107
-Qeza-î Mêrgasur		IQ.11.9874079	9874079		قضاء ميركسور|قضاء ميركه سور	2	20067	107
-Qeza-î Qeredagh		IQ.05.9877732	9877732		قضاء قرةداغ|قضاء قرداغ	2	20074	107
-Qaḑā’ Sayyid Şādiq		IQ.05.9877795	9877795		قضاء سيد صادق	2	20074	107
-Mawat District		IQ.05.9877798	9877798		قضاء ماوت	2	20074	107
-Qaḑā’ Dashtī Hawlayr		IQ.11.9877799	9877799		قضاء دشتي هولير|قضاء سھل أربيل	2	20067	107
-Qeza-î Ṟuwandiz		IQ.11.9878719	9878719		راوندوز|قضاء رواندز	2	20067	107
-Batifa district		IQ.08.13405730	13405730		قضاء باطوفا	2	20070	107
+Thawra		IQ.07.9167771	9167771			2	20069	107
+Dabes		IQ.13.9171727	9171727		قضاء دبس	2	20071	107
+Al-Mada'in District		IQ.07.9179819	9179819		قضاء المدائن	2	20069	107
+Qaḑā’ Jawmān		IQ.11.9873235	9873235		قضاء جومان	2	20078	107
+Qaḑā’ Sawrān		IQ.11.9873236	9873236		قضاء سوران	2	20078	107
+Qeza-î Sharezûr		IQ.05.9873303	9873303		قضاء شارزور|قضاء شهرزور	2	20080	107
+Qaḑā’ al A‘z̧amīyah		IQ.07.9873561	9873561		قضاء الأعظمية	2	20069	107
+Qaḑā’ Abū Ghurayb		IQ.07.9874049	9874049		قضاء أبو غريب	2	20069	107
+Qaḑā’ Khabāt		IQ.11.9874070	9874070		قضاء خبات	2	20078	107
+Qeza-î Mêrgasur		IQ.11.9874079	9874079		قضاء ميركسور|قضاء ميركه سور	2	20078	107
+Qeza-î Qeredagh		IQ.05.9877732	9877732		قضاء قرةداغ|قضاء قرداغ	2	20080	107
+Qaḑā’ Sayyid Şādiq		IQ.05.9877795	9877795		قضاء سيد صادق	2	20080	107
+Mawat District		IQ.05.9877798	9877798		قضاء ماوت	2	20080	107
+Qaḑā’ Dashtī Hawlayr		IQ.11.9877799	9877799		قضاء دشتي هولير|قضاء سھل أربيل	2	20078	107
+Qeza-î Ṟuwandiz		IQ.11.9878719	9878719		راوندوز|قضاء رواندز	2	20078	107
+Batifa district		IQ.08.13405730	13405730		قضاء باطوفا	2	20079	107
 Tehrān	IR-23	IR.26	110791	Province	Tehran|Tehran Province|استان تهران|تهران	1		108
 Zanjān	IR-19	IR.36	111452	Province	Zanjan|Zanjan Province|استان زنجان|استانِ زنجان|زنجان|فَرماندارئ مُستَقِلِّ زَنجان	1		108
 Yazd	IR-21	IR.40	111821	Province	Yazd Province|اُستانِ يَزد|فَرماندارئ مُستَقِلِّ يَزد|یزد	1		108
@@ -20207,7 +20207,7 @@ Semnān	IR-20	IR.25	116401	Province	Governorship of Semnan|Semnan|Semnan Provinc
 Māzandarān	IR-02	IR.35	124544	Province	Mazandaran|Mazandaran Province|استان مازندران|اُستانِ دُوُّم|اُستانِ مازَندَران|مازَندَران|مَزَندِرَن|مَزِندرَن	1		108
 Markazī	IR-00	IR.34	124763	Province	Markazi|Markazi Province|استان مرکزی|مرکزی	1		108
 Lorestān	IR-15	IR.23	125605	Province	Lorestan Province|استان لرستان|فَرماندارئ كُلِّ لُرِستان|لرستان	1		108
-Kurdistan Province		IR.16	126584		استان کردستان|اُستانِ كُردِستان|اُستَن اُف كُردِستَن|فَرماندارئ كُلِّ كُردِستان|کردستان	1		108
+Kordestān	IR-12	IR.16	126584	Province	Kurdistan Province|استان کردستان|اُستانِ كُردِستان|اُستَن اُف كُردِستَن|فَرماندارئ كُلِّ كُردِستان|کردستان	1		108
 Kohgīlūyeh va Bowyer Aḩmad	IR-17	IR.05	126878	Province	Kohgiluyeh and Boyer-Ahmad|Kohgiluyeh and Boyer-Ahmad Province|اُستانِ بُوير اَحمَدی وَ كُهكيلويِه|اُستانِ كُهكيلويِه وَ بويِر اَحمَدی|اُستانِ كُهگيلويِه وَ بويِر اَحمَد|كُهكيلويِه وَ بويِر اَحمَدی|كُهگيلويِه وَ بُويِر اَهمَدی|کهگیلویه و بویراحمد	1		108
 Khūzestān	IR-06	IR.15	127082	Province	Khuzestan|Khuzestan Province|The 6th Province|استان خوزستان|خوزستان	1		108
 Kermānshāh	IR-05	IR.13	128222	Province	Kermanshah Province|استان كرمانشاه|كرمانشاه	1		108
@@ -20226,7 +20226,7 @@ Eşfahān	IR-10	IR.28	418862	Province	Isfahan|Isfahan Province|The 10th Province
 Golestān	IR-27	IR.37	443792	Province	Golestan|Golestan Province|اُستانِ گُلِستان|گلستان	1		108
 Qazvīn	IR-26	IR.38	443793	Province	Qazvin Province|اُستانِ قَزوين|قزوین	1		108
 Qom	IR-25	IR.39	443794	Province	Qom Province|اُستانِ قُم|قم	1		108
-Sistan and Baluchestan		IR.04	1159456		Sistan and Baluchestan Province|the 11th Ostan|استان سیستان و بلوچستان|سیستان و بلوچستان	1		108
+Sīstān va Balūchestān	IR-11	IR.04	1159456	Province	Sistan and Baluchestan|Sistan and Baluchestan Province|the 11th Ostan|استان سیستان و بلوچستان|سیستان و بلوچستان	1		108
 Khorāsān-e Jonūbī	IR-29	IR.41	6201374	Province	South Khorasan Province|اُستانِ خُراسانِ جُنوبی|خراسان جنوبی	1		108
 Khorāsān-e Raẕavī	IR-09	IR.42	6201375	Province	Razavi Khorasan|Razavi Khorasan Province|استان خراسان رضوی|خراسان رضوی	1		108
 Khorāsān-e Shomālī	IR-28	IR.43	6201376	Province	North Khorasan|استان خراسان شمالی|خراسان شمالی	1		108
@@ -20682,7 +20682,7 @@ Grýtubakkahreppur	IS-GRY	IS.40.6602	2631018	Municipality		2	20670	109
 Fljótsdalshreppur	IS-FLR	IS.38.7505	2631712	Municipality		2	20671	109
 Dalvíkurbyggð	IS-DAV	IS.40.6400	2632286	Municipality		2	20670	109
 Akureyrarbær	IS-AKU	IS.40.6000	2633275	Municipality	Akureyrarkaupstaður	2	20670	109
-Sveitarfélagið Skagafjörður		IS.41.5200	3345263			2	20669	109
+Skagafjörður	IS-SKR	IS.41.5200	3345263	Municipality	Sveitarfélagið Skagafjörður	2	20669	109
 Eyjafjarðarsveit	IS-EYF	IS.40.6513	3345264	Municipality		2	20670	109
 Þingeyjarsveit	IS-THG	IS.40.6612	3345266	Municipality		2	20670	109
 Fjarðabyggð	IS-FJD	IS.38.7300	3345270	Municipality		2	20671	109
@@ -20760,15 +20760,15 @@ Basilicata	IT-77	IT.02	3182306	Region	Basilicate|Baxiłicata	1		110
 Abruzzo	IT-65	IT.01	3183560	Region	Abruso|Abruzzes|Abruzzi|Regione Abruzzo	1		110
 Trapani	IT-TP	IT.15.TP	2522875	Free municipal consortium	Libero Consorzio Comunale di Trapani|Province de Trapani|Province of Trapani|Provincia de Trapani	2	20741	110
 Siracusa	IT-SR	IT.15.SR	2523082	Free municipal consortium	Province de Syracuse|Province of Syracuse|Provincia di Siracusa	2	20741	110
-Provincia di Reggio Calabria		IT.03.RC	2523629		Province de Reggio de Calabre|Province of Reggio Calabria	2	20743	110
+Reggio Calabria	IT-RC	IT.03.RC	2523629	Metropolitan city	Province de Reggio de Calabre|Province of Reggio Calabria|Provincia di Reggio Calabria	2	20743	110
 Ragusa	IT-RG	IT.15.RG	2523649	Free municipal consortium	Libero Consorzio Comunale di Ragusa|Province de Raguse|Province of Ragusa|Provincia de Raguxa|Raguse	2	20741	110
-Palermo		IT.15.PA	2523918		Città Metropolitana di Palermo|Palerme|Province de Palerme|Province of Palermo|Provincia de Pałermo|Provincia di Palermo	2	20741	110
+Palermo	IT-PA	IT.15.PA	2523918	Metropolitan city	Città Metropolitana di Palermo|Palerme|Province de Palerme|Province of Palermo|Provincia de Pałermo|Provincia di Palermo	2	20741	110
 Oristano	IT-OR	IT.14.OR	2523962	Province	Province d'Oristano|Province of Oristano|Provincia di Oristano	2	20742	110
-Messina		IT.15.ME	2524169		Città Metropolitana di Messina|Messine|Province de Messine|Province of Messina|Provincia de Mesina|Provincia di Messina	2	20741	110
+Messina	IT-ME	IT.15.ME	2524169	Metropolitan city	Città Metropolitana di Messina|Messine|Province de Messine|Province of Messina|Provincia de Mesina|Provincia di Messina	2	20741	110
 Enna	IT-EN	IT.15.EN	2524818	Free municipal consortium	Libero Consorzio Comunale di Enna|Province d'Enna|Province of Enna|Provincia de Ena|Provincia di Enna	2	20741	110
 Cosenza	IT-CS	IT.03.CS	2524906	Province	Province de Cosenza|Province of Cosenza|Provincia di Cosenza	2	20743	110
 Catanzaro	IT-CZ	IT.03.CZ	2525058	Province	Province de Catanzaro|Province of Catanzaro|Provincia di Catanzaro	2	20743	110
-Catania		IT.15.CT	2525065		Catane|Città Metropolitana di Catania|Province de Catane|Province of Catania|Provincia di Catania	2	20741	110
+Catania	IT-CT	IT.15.CT	2525065	Metropolitan city	Catane|Città Metropolitana di Catania|Province de Catane|Province of Catania|Provincia di Catania	2	20741	110
 Caltanissetta	IT-CL	IT.15.CL	2525447	Free municipal consortium	Province de Caltanissetta|Province of Caltanissetta|Provincia di Caltanissetta	2	20741	110
 Provincia di Cagliari		IT.14.CA	2525471		Cagliari|Province de Cagliari|Province of Cagliari	2	20742	110
 Agrigento	IT-AG	IT.15.AG	2525763	Free municipal consortium	Libero Consorzio Comunale di Agrigento|Province d'Agrigente|Province of Agrigento	2	20741	110
@@ -20783,7 +20783,7 @@ Udine	IT-UD	IT.06.UD	3165071	Decentralized regional entity	Ente di Decentramento
 Trieste	IT-TS	IT.06.TS	3165184	Decentralized regional entity	Ente di Decentramento Regionale di Trieste|Province de Trieste|Province of Trieste|Provincia di Trieste	2	20756	110
 Treviso	IT-TV	IT.20.TV	3165200	Province	Province de Trévise|Province of Treviso|Provincia di Treviso	2	20744	110
 Trento	IT-TN	IT.17.TN	3165241	Autonomous province	Province of Trente|Provincia autonoma di Trento|Provincia di Trento	2	20747	110
-Torino		IT.12.TO	3165523		Città Metropolitana di Torino|Province de Turin|Province of Turin|Provincia di Torino|Turin	2	20750	110
+Torino	IT-TO	IT.12.TO	3165523	Metropolitan city	Città Metropolitana di Torino|Province de Turin|Province of Turin|Provincia di Torino|Turin	2	20750	110
 Terni	IT-TR	IT.18.TR	3165770	Province	Province de Terni|Province of Terni|Provincia di Terni	2	20746	110
 Teramo	IT-TE	IT.01.TE	3165802	Province	Province de Teramo|Province of Teramo|Provincia di Teramo	2	20760	110
 Taranto	IT-TA	IT.13.TA	3165924	Province	Province de Tarente|Province of Taranto|Provincia di Taranto	2	20749	110
@@ -20793,7 +20793,7 @@ Savona	IT-SV	IT.08.SV	3167021	Province	Province de Savone|Province of Savona|Pro
 Sassari	IT-SS	IT.14.SS	3167094	Province	Province de Sassari|Province of Sassari|Provincia di Sassari	2	20742	110
 Salerno	IT-SA	IT.04.SA	3168670	Province	Province de Salerne|Province of Salerno|Provincia di Salerno	2	20758	110
 Rovigo	IT-RO	IT.20.RO	3168842	Province	Province de Rovigo|Province of Rovigo|Provincia di Rovigo	2	20744	110
-Città metropolitana di Roma Capitale		IT.07.RM	3169069		Province de Rome|Province of Rome|Provincia di Roma|Roma|Rome	2	20755	110
+Roma	IT-RM	IT.07.RM	3169069	Metropolitan city	Città metropolitana di Roma Capitale|Province de Rome|Province of Rome|Provincia di Roma|Rome	2	20755	110
 Rieti	IT-RI	IT.07.RI	3169411	Province	Province de Rieti|Province of Rieti|Provincia di Rieti	2	20755	110
 Reggio Emilia	IT-RE	IT.05.RE	3169524	Province	Province de Reggio d'Émilie|Province of Reggio Emilia|Provincia di Reggio Emilia	2	20757	110
 Ravenna	IT-RA	IT.05.RA	3169560	Province	Province de Ravenne|Province of Ravenna|Provincia di Ravenna	2	20757	110
@@ -20810,7 +20810,7 @@ Parma	IT-PR	IT.05.PR	3171456	Province	Province de Parme|Province of Parma|Provin
 Padova	IT-PD	IT.20.PD	3171727	Province	Province de Padoue|Province of Padua|Provincia di Padova	2	20744	110
 Nuoro	IT-NU	IT.14.NU	3172153	Province	Province de Nuoro|Province of Nuoro|Provincia di Nuoro	2	20742	110
 Novara	IT-NO	IT.12.NO	3172188	Province	Province de Novare|Province of Novara|Provincia di Novara	2	20750	110
-Napoli		IT.04.NA	3172391		Città Metropolitana di Napoli|Province de Naples|Province of Naples|Provincia di Napoli	2	20758	110
+Napoli	IT-NA	IT.04.NA	3172391	Metropolitan city	Città Metropolitana di Napoli|Province de Naples|Province of Naples|Provincia di Napoli	2	20758	110
 Modena	IT-MO	IT.05.MO	3173330	Province	Province de Modène|Province of Modena|Provincia di Modena	2	20757	110
 Milano	IT-MI	IT.09.MI	3173434	Metropolitan city	Città metropolitana di Milano|Metropolitan City of Milan|Province de Milan|Province of Milan|Provincia di Milano	2	20753	110
 Matera	IT-MT	IT.02.MT	3173718	Province	Province de Matera|Province of Matera|Provincia di Matera	2	20759	110
@@ -20842,11 +20842,11 @@ Campobasso	IT-CB	IT.11.CB	3180990	Province	Province de Campobasso|Province of Ca
 Brindisi	IT-BR	IT.13.BR	3181526	Province	Province de Brindisi|Province of Brindisi|Provincia di Brindisi	2	20749	110
 Brescia	IT-BS	IT.09.BS	3181553	Province	Province de Brescia|Province of Brescia|Provincia di Brescia	2	20753	110
 Bolzano	IT-BZ	IT.17.BZ	3181912	Autonomous province	Alto Adige|Autonomous Province of Bolzano|Haut-Adige|Province autonome de Bolzano|Provincia Autonoma di Bolzano|Provincia di Bolzano|South Tyrol|Sud-Tyrol|Tyrol du Sud	2	20747	110
-Bologna		IT.05.BO	3181927		Città Metropolitana di Bologna|Province de Bologne|Province of Bologna	2	20757	110
+Bologna	IT-BO	IT.05.BO	3181927	Metropolitan city	Città Metropolitana di Bologna|Province de Bologne|Province of Bologna	2	20757	110
 Bergamo	IT-BG	IT.09.BG	3182163	Province	Province de Bergame|Province of Bergamo|Provincia di Bergamo	2	20753	110
 Benevento	IT-BN	IT.04.BN	3182178	Province	Province de Benevento|Province of Benevento|Provincia di Benevento	2	20758	110
 Belluno	IT-BL	IT.20.BL	3182209	Province	Province de Belluno|Province of Belluno|Provincia di Belluno	2	20744	110
-Bari		IT.13.BA	3182350		Città Metropolitana di Bari|Province de Bari|Province of Bari	2	20749	110
+Bari	IT-BA	IT.13.BA	3182350	Metropolitan city	Città Metropolitana di Bari|Province de Bari|Province of Bari	2	20749	110
 Avellino	IT-AV	IT.04.AV	3182649	Province	Province d'Avellino|Province of Avellino|Provincia di Avellino	2	20758	110
 Asti	IT-AT	IT.12.AT	3182712	Province	Province d'Asti|Province of Asti|Provincia di Asti	2	20750	110
 Ascoli Piceno	IT-AP	IT.10.AP	3182748	Province	Province d'Ascoli Piceno|Province of Ascoli Piceno|Provincia di Ascoli Piceno	2	20752	110
@@ -21718,7 +21718,7 @@ Brainerd		JM.13.540	11495713			2	20883	112
 Albert Town		JM.15.732	11495714			2	20881	112
 Ma‘ān	JO-MN	JO.19	248380	Governorate	Ma'an Governorate|Ma’an|محافظة معان	1		113
 Irbid	JO-IR	JO.18	248944	Governorate	Irbid Governorate|اربد|محافظة إربد	1		113
-Zarqa		JO.17	250092		Zarqa Governorate|محافظة الزرقاء	1		113
+Az Zarqā’	JO-AZ	JO.17	250092	Governorate	Zarqa|Zarqa Governorate|محافظة الزرقاء	1		113
 Aţ Ţafīlah	JO-AT	JO.12	250199	Governorate	Tafielah|Tafilah Governorate|محافظة الطفيلة	1		113
 Al ‘A̅şimah	JO-AM	JO.16	250439	Governorate	Amman|Amman Governorate|محافظة عمّان|‘Ammān	1		113
 Al Mafraq	JO-MA	JO.15	250583	Governorate	Mafraq|Mafraq Governorate|محافظة المفرق	1		113
@@ -23051,7 +23051,7 @@ Bungoma	KE-03	KE.12	200066	County	Bungoma County|Wilaya ya Bungoma	1		115
 Baringo	KE-01	KE.10	200573	County	Wilaya ya Baringo	1		115
 Nyandarua	KE-35	KE.43	7603036	County	Kaunti ya Nyandarua|Nyandarua County	1		115
 Vihiga	KE-45	KE.53	7667638	County	Kaunti ya Vihiga|Vihiga County	1		115
-Lamu	KE-21	KE.30	7667643	County		1		115
+Lamu		KE.30	7667643			1		115
 Machakos	KE-22	KE.31	7667644	County	Kaunti ya Machakos|Machakos County	1		115
 Makueni	KE-23	KE.32	7667645	County	Kaunti ya Makueni|Makueni County	1		115
 Elgeyo/Marakwet	KE-05	KE.14	7667646	County	Elegeyo-Marakwet	1		115
@@ -23064,13 +23064,13 @@ Migori	KE-27	KE.36	7667678	County	Migori County|Wilaya ya Migori	1		115
 Nakuru	KE-31	KE.39	7668902	County	Nakuru County|Wilaya ya Nakuru	1		115
 Narok	KE-33	KE.41	7668904	County	Kaunti ya Narok|Narok County	1		115
 Nyamira	KE-34	KE.42	7806857	County	Nyamira county|Wilaya ya Nyamira	1		115
-Nandi	KE-32	KE.40	8051212	County		1		115
+Nandi		KE.40	8051212			1		115
+Lamu	KE-21	KE.30.189739	189739	County	Lamu District	1	23054	115
+Nandi	KE-32	KE.40.7602644	7602644	County	Nandi North District	1	23067	115
 Thika District		KE.22.179328	179328			2	23043	115
 Matungulu Location		KE.31.187246	187246			2	23055	115
-Lamu District		KE.30.189739	189739			2	23054	115
 Nyando District		KE.26.7602531	7602531			2	23039	115
 Teso District		KE.13.7602535	7602535			2	23049	115
-Nandi North District		KE.40.7602644	7602644			2	23067	115
 Butere/Mumias District		KE.20.7667626	7667626			2	23045	115
 Lugari District		KE.20.7667629	7667629			2	23045	115
 Malindi District		KE.23.7667639	7667639			2	23042	115
@@ -23432,14 +23432,14 @@ Saint Kitts	KN-K			State		1		120
 Nevis	KN-N			State		1		120
 Phyeongyang	KP-01	KP.12	1871856	Capital city	P'yŏngyang-si|Pyongyang|Pyongyang-si|平壤|平壤直轄市|평양|평양시|평양직할시	1		121
 Phyeongannamto	KP-02	KP.15	1871952	Province	P’yŏngan-namdo|South Pyongan|South P’yŏngan Province|平南|平安南道|평안남도	1		121
-P'yŏngan-bukto		KP.11	1871954		P’yŏngan-bukto|平北|平安北道|평안북도	1		121
-Kangwŏn-do		KP.09	1876101		Kangwŏn|江原|江原道|강원|강원도	1		121
+Phyeonganpukto	KP-03	KP.11	1871954	Province	P'yŏngan-bukto|P’yŏngan-bukto|平北|平安北道|평안북도	1		121
+Kangweonto	KP-07	KP.09	1876101	Province	Kangwŏn|Kangwŏn-do|江原|江原道|강원|강원도	1		121
 Hwanghainamto	KP-05	KP.06	1876884	Province	South Hwanghae|黃南|黃海南道|황해남도	1		121
 Hwanghaipukto	KP-06	KP.07	1876888	Province	North Hwanghae|黃北|黃海北道|황해북도	1		121
 Hamkyeongnamto	KP-08	KP.03	1877450	Province	Hamgyŏng-namdo|South Hamgyong|咸南|咸鏡南道|함경남도	1		121
-Yanggang-do		KP.13	2039332		兩江|兩江道|량강도	1		121
+Ryangkangto	KP-10	KP.13	2039332	Province	Yanggang-do|兩江|兩江道|량강도	1		121
 Hamkyeongpukto	KP-09	KP.17	2044245	Province	North Hamgyong|咸北|咸鏡北道|함경북도	1		121
-Chagang		KP.01	2045265		慈江|慈江道|자강|자강도	1		121
+Jakangto	KP-04	KP.01	2045265	Province	Chagang|慈江|慈江道|자강|자강도	1		121
 Raseon	KP-13	KP.18	2054927	Special city	Najin Sǒnbong|Rason|Rason-si|Rasŏn|Rasŏn-si|라선|라선시|라선특별시	1		121
 Nampho	KP-14	KP.14	12902702	Metropolitan city	Nampo	1		121
 Kaeseong	KP-15	KP.19	12902703	Metropolitan city	Kaesong	1		121
@@ -23648,7 +23648,7 @@ Ulsan-gwangyeoksi	KR-31	KR.21	1833742	Metropolitan city	Ulsan|Ulsan-gwangyŏksi|
 Daejeon-gwangyeoksi	KR-30	KR.19	1835224	Metropolitan city	Daejeon|Taejŏn-gwangyŏksi|大田|大田廣域市|대전|대전광역시	1		122
 Daegu-gwangyeoksi	KR-27	KR.15	1835327	Metropolitan city	Daegu|Daegu-si|Taegu-gwangyŏksi|大邱|大邱廣域市|대구|대구광역시|대구시	1		122
 Seoul-teukbyeolsi	KR-11	KR.11	1835847	Special city	Seoul|Seoul-si|서울|서울시|서울특별시	1		122
-Busan		KR.10	1838519		Busan-si|Pusan-gwangyŏksi|釜山|釜山廣域市|부산|부산광역시|부산시	1		122
+Busan-gwangyeoksi	KR-26	KR.10	1838519	Metropolitan city	Busan|Busan-si|Pusan-gwangyŏksi|釜山|釜山廣域市|부산|부산광역시|부산시	1		122
 Gyeongsangbuk-do	KR-47	KR.14	1841597	Province	Gyeongbuk|Kyŏngbuk|Kyŏngsang-bukto|慶北|慶尙北道|경북|경상북도	1		122
 Gyeonggi-do	KR-41	KR.13	1841610	Province	Gyeonggi|경기|경기도	1		122
 Gwangju-gwangyeoksi	KR-29	KR.18	1841808	Metropolitan city	Gwangju|Gwangju-si|Kwangju-gwangyŏksi|光州|光州廣域市|광주|광주광역시|광주시	1		122
@@ -24313,7 +24313,7 @@ Karasayskiy Rayon		KZ.01.12533979	12533979		Qarasay Aūdany|Карасайски
 Kosshy Gorodskaya Administratsiya		KZ.03.12539745	12539745		Qosshy Qalalyq Äkimshiligi|Косшы Городская Администрация|Қосшы Қалалық Әкімшілігі	2	24019	125
 Xiangkhouang	LA-XI	LA.14	1652077	Province	Xiangkhoang|Xiengkhuang	1		126
 Xaignabouli	LA-XA	LA.13	1652210	Province	Xayabury|Xiagnabouli	1		126
-Vientiane		LA.27	1652238		Vientiane Province|ແຂວງວຽງຈັນ	1		126
+Viangchan	LA-VI	LA.27	1652238	Province	Vientiane|Vientiane Province|ແຂວງວຽງຈັນ	1		126
 Savannakhét	LA-SV	LA.20	1653315	Province	Savannakhet|Savannakhet Province|ແຂວງສະຫວັນນະເຂດ	1		126
 Salavan	LA-SL	LA.19	1653333	Province	Salavan Province|Saravane|ແຂວງສາລະວັນ	1		126
 Phôngsali	LA-PH	LA.18	1653893	Province	Phongsaly	1		126
@@ -24327,7 +24327,7 @@ Attapu	LA-AT	LA.01	1665045	Province	Attapeu|ອັດຕະປື|ແຂວງ�
 Xékong	LA-XE	LA.26	1904615	Province	Sekong	1		126
 Bokèo	LA-BK	LA.22	1904616	Province	Bokeo|Bokeo Province|ບໍ່ແກ້ວ|ແຂວງບໍ່ແກ້ວ	1		126
 Bolikhamxai	LA-BL	LA.23	1904617	Province	Bolikhamsai|Bolikhamsai Province|Borikhamxay|ລິຄຳໄຊ|ແຂວງບໍລິຄໍາໄຊ	1		126
-Vientiane Prefecture		LA.24	1904618		Vientiane|ນະຄອນຫຼວງວຽງຈັນ	1		126
+Viangchan	LA-VT	LA.24	1904618	Prefecture	Vientiane|Vientiane Prefecture|ນະຄອນຫຼວງວຽງຈັນ	1		126
 Xaisômboun	LA-XS	LA.28	11395958	Province	Xaisomboun|Xaysomboon	1		126
 Muang Houayxay		LA.22.0501	1651946			2	24328	126
 Muang Ngeun		LA.13.0804	1652070			2	24315	126
@@ -24481,10 +24481,10 @@ Jabal Lubnān	LB-JL	LB.05	273607	Governorate	Mount Lebanon|محافظة جبل �
 Bayrūt	LB-BA	LB.04	276780	Governorate	Beirut|محافظة بيروت	1		127
 Ash Shimāl	LB-AS	LB.09	278297	Governorate	North Lebanon|محافظة لبنان الشمالي	1		127
 Al Janūb	LB-JA	LB.06	279894	Governorate	South Governorate|محافظة الجنوب|محافظة لبنان الجنوبي	1		127
-Bekaa		LB.08	280282		محافظة البقاع	1		127
-Nabatieh		LB.07	444191		محافظة النبطية	1		127
+Al Biqā‘	LB-BI	LB.08	280282	Governorate	Bekaa|محافظة البقاع	1		127
+An Nabaţīyah	LB-NA	LB.07	444191	Governorate	Nabatieh|محافظة النبطية	1		127
 ‘Akkār	LB-AK	LB.10	6201370	Governorate	Akkar|محافظة عكار	1		127
-Baalbek-Hermel Governorate		LB.11	6201371		محافظة بعلبك - الهرمل	1		127
+B‘alabak-Al Hirmil	LB-BH	LB.11	6201371	Governorate	Baalbek-Hermel Governorate|محافظة بعلبك - الهرمل	1		127
 Caza de Zgharta		LB.09.265845	265845		Zgharta|قضاء زغرتا	2	24482	127
 Caza de Zahleh		LB.08.266042	266042		Zahle|قضاء زحلة	2	24484	127
 Tripoli District		LB.09.266825	266825		Tripoli|قضاء طرابلس	2	24482	127
@@ -25568,7 +25568,7 @@ Commune de la Vallée de l'Ernz		LU.DI.8641526	8641526		Aerenzdallgemeng|Ernztal
 Käerjeng		LU.CA.8641865	8641865		Commune de Käerjeng|Gemeinde Käerjeng|Gemeng Käerjeng	2	25464	134
 Parc Hosingen		LU.CL.63	11353099		Parc Housen	2	25463	134
 Ventspils novads	LV-106	LV.33	454307	Municipality	Ventspils|Ventspils Municipality	1		135
-Ventspils		LV.32	454311			1		135
+Ventspils	LV-VEN	LV.32	454311	State city		1		135
 Valmieras Novads	LV-113	LV.31	454564	Municipality	Valmiera|Valmiera Municipality	1		135
 Valkas novads	LV-101	LV.30	454571	Municipality	Valka|Valka Municipality	1		135
 Tukuma novads	LV-099	LV.29	454771	Municipality	Tukums|Tukums Municipality	1		135
@@ -25576,7 +25576,7 @@ Talsu novads	LV-097	LV.28	454968	Municipality	Talsi	1		135
 Saldus novads	LV-088	LV.27	455888	Municipality	Saldus|Saldus Rajons	1		135
 Rīga	LV-RIX	LV.25	456173	State city	Riga	1		135
 Rēzeknes novads	LV-077	LV.24	456197	Municipality	Rēzekne|Rēzekne Municipality	1		135
-Rēzekne		LV.23	456203			1		135
+Rēzekne	LV-REZ	LV.23	456203	State city		1		135
 Preiļu novads	LV-073	LV.22	456528	Municipality	Preiļi	1		135
 Ogres novads	LV-067	LV.21	457061	Municipality	Ogre|Ogre Municipality	1		135
 Madonas novads	LV-059	LV.20	457712	Municipality	Madona	1		135
@@ -25587,7 +25587,7 @@ Kuldīgas novads	LV-050	LV.15	458459	Municipality	Kuldīga|Kuldīga Municipality
 Krāslavas novads	LV-047	LV.14	458621	Municipality	Krāslava|Krāslava Municipality	1		135
 Jūrmala	LV-JUR	LV.13	459202	State city		1		135
 Jelgavas novads	LV-041	LV.12	459278	Municipality	Jelgava|Jelgava Municipality	1		135
-Jelgava		LV.11	459281			1		135
+Jelgava	LV-JEL	LV.11	459281	State city		1		135
 Jēkabpils novads	LV-042	LV.10	459282	Municipality	Jēkabpils|Jēkabpils Municipality	1		135
 Gulbenes novads	LV-033	LV.09	459664	Municipality	Gulbene|Gulbene Municipality	1		135
 Dobeles novads	LV-026	LV.08	460311	Municipality	Dobele|Dobele Municipality	1		135
@@ -26325,7 +26325,7 @@ La Source	MC-SO			Quarter		1		138
 Spélugues	MC-SP			Quarter		1		138
 Saint-Roman	MC-SR			Quarter		1		138
 Vallon de la Rousse	MC-VR			Quarter		1		138
-Raionul Edineţ		MD.73	617077		Raionul Edineț|Районул Единец	1		139
+Edineț	MD-ED	MD.73	617077	District	Raionul Edineţ|Raionul Edineț|Районул Единец	1		139
 Ungheni	MD-UN	MD.92	617181	District	Raionul Ungheni|Районул Унгень	1		139
 Telenești	MD-TE	MD.91	617255	District	Raionul Telenești|Teleneşti|Telenești District|Районул Теленешть	1		139
 Taraclia	MD-TA	MD.90	617264	District	Taraclia District|raionul Taraclia|Районул Тараклия	1		139
@@ -26335,14 +26335,14 @@ Soroca	MD-SO	MD.87	617366	District	Soroca District|raionul Soroca|Районул
 Rîșcani	MD-RI	MD.84	617483	District	Raionul Rîșcani|Rîşcani|Rîșcani District|Районул Рышкань	1		139
 Rezina	MD-RE	MD.83	617501	District	Raionul Rezina|Rezina District|Районул Резина	1		139
 Orhei	MD-OR	MD.82	617639	District	Orhei District|Raionul Orhei|Районул Орхей	1		139
-Raionul Ocniţa		MD.81	617656		Raionul Ocnița|Районул Окниця	1		139
+Ocnița	MD-OC	MD.81	617656	District	Raionul Ocniţa|Raionul Ocnița|Районул Окниця	1		139
 Anenii Noi	MD-AN	MD.59	617715	District	Anenii Noi District|raionul Anenii Noi|АнеНий-Ной	1		139
 Nisporeni	MD-NI	MD.80	617754	District	Nisporeni District|raionul Nisporeni|Районул Ниспорень	1		139
 Leova	MD-LE	MD.79	617903	District	Leova District|raionul Leova|Районул Леова	1		139
 Sîngerei	MD-SI	MD.85	617913	District	Sîngerei District|raionul Sîngerei|Районул Сынӂерей	1		139
 Criuleni	MD-CR	MD.69	617962	District	Criuleni District|Raionul Criuleni	1		139
 Ialoveni	MD-IA	MD.78	617991	District	Ialoveni District|Raionul Ialoveni|Районул Яловень	1		139
-Chișinău Municipality		MD.57	618069		Municipiul Chişinău|Municipiul Chișinău	1		139
+Chișinău	MD-CU	MD.57	618069	City	Chișinău Municipality|Municipiul Chişinău|Municipiul Chișinău	1		139
 Căușeni	MD-CS	MD.67	618119	District	Căuşeni	1		139
 Cantemir	MD-CT	MD.65	618142	District	Cantemir District|Raionul Cantemir|Районул Кантемир	1		139
 Călărași	MD-CL	MD.66	618162	District	Călăraşi	1		139
@@ -26360,7 +26360,7 @@ Hîncești	MD-HI	MD.77	858803	District	Hînceşti|Hîncești District|Raionul H�
 Șoldănești	MD-SD	MD.86	858808	District	Raionul Şoldănești|Raionul Șoldănești|Şoldăneşti|Șoldănești District	1		139
 Stînga Nistrului, unitatea teritorială din	MD-SN	MD.58	858889	Territorial unit	Administrative-Territorial Units of the Left Bank of the Dniester|Stînga Nistrului|Transitria|Transnistria|Unitățile Administrativ-Teritoriale din stînga Nistrului	1		139
 Găgăuzia, Unitatea teritorială autonomă	MD-GA	MD.51	858895	Autonomous territorial unit	Autonomous Territorial Unit of Gagauzia|Gagauzia|Găgăuzia|UTAG|Unitatea Teritorială Autonomă Găgăuzia	1		139
-Bender Municipality		MD.62	861487		Municipiul Bender	1		139
+Bender	MD-BD	MD.62	861487	City	Bender Municipality|Municipiul Bender|Tighina	1		139
 Bălți	MD-BA	MD.60	873909	City	Bălţi	1		139
 Rožaje	ME-17	ME.17	786233	Municipality	Rožaje Municipality|Рожаје	1		140
 Žabljak	ME-21	ME.21	3186995	Municipality	Opština Žabljak|Жабљак|Општина Жабљак	1		140
@@ -26370,8 +26370,8 @@ Podgorica	ME-16	ME.16	3189077	Municipality	Glavni Grad Podgorica|Главни Г
 Šavnik	ME-18	ME.18	3191221	Municipality	Opština Šavnik|Општина Шавник|Шавник	1		140
 Plužine	ME-15	ME.15	3193129	Municipality	Opština Plužine|Општина Плужине|Плужине	1		140
 Pljevlja	ME-14	ME.14	3193160	Municipality	Општина Пљевља|Пљевља	1		140
-Opština Plav		ME.13	3193227			1		140
-Opština Nikšić		ME.12	3194493		Никшић|Општина Никшић	1		140
+Plav	ME-13	ME.13	3193227	Municipality	Opština Plav	1		140
+Nikšić	ME-12	ME.12	3194493	Municipality	Opština Nikšić|Никшић|Општина Никшић	1		140
 Mojkovac	ME-11	ME.11	3194925	Municipality	Мојковац|Општина Мојковац	1		140
 Kotor	ME-10	ME.10	3197537	Municipality	Котор|Општина Котор	1		140
 Kolašin	ME-09	ME.09	3197895	Municipality	Opština Kolašin|Колашин|Општина Колашин	1		140
@@ -26643,6 +26643,7 @@ Zelenikovo	MK-806	MK.C2	863918	Municipality	Зелениково|Општина 
 Debrca	MK-304	MK.F5	7056271	Municipality	Debarca|Debarca Municipality|Komuna e Debarcës|Opština Debarca|Дебарца|Дебрца|Општина Дебарца|Општина Дебрца	1		144
 Grad Skopje		MK.F6	11398357		Skopje|Град Скопје|Скопје	1		144
 Čair †	MK-815	MK.F6.C8	863836	Municipality	Komuna e Çairit|Municipality of Čair|Čair|Општина Чаир	1	26644	144
+Centar †	MK-814	MK.F6.D1	863840	Municipality	Opština Centar|Општина Центар	1	26644	144
 Gjorče Petrov †	MK-805	MK.F6.29	863850	Municipality	Gjorche Petrov|Opstina Gjorce Petrov|Општина Ѓорче Петров	1	26644	144
 Gazi Baba †	MK-804	MK.F6.32	863853	Municipality	Gazi Baba|Gazi Baba Municipality|Komuna e Gazi Babës|Гази Баба|Општина Гази Баба	1	26644	144
 Karpoš †	MK-808	MK.F6.41	863860	Municipality	Karposh|Opština Karpoš|Карпош|Општина Карпош	1	26644	144
@@ -26651,7 +26652,6 @@ Saraj †	MK-811	MK.F6.90	863894	Municipality	Komuna e Sarajit|Saraj|Saraj Munic
 Šuto Orizari †	MK-817	MK.F6.A3	863904	Municipality	Komuna e Shutkës|Šuto Orizari|Šuto Orizari Municipality|Општина Шуто Оризари	1	26644	144
 Aerodrom †	MK-801	MK.F6.F3	7056266	Municipality	Aerodrom|Aerodrom Municipality|Komuna e Aeorodromit|Opština Aerodrom|Аеродром|Општина Аеродром	1	26644	144
 Butel †	MK-803	MK.F6.F4	7056269	Municipality	Butel|Butel Municipality|Komuna e Butelit|Opština Butel|Бутел|Општина Бутел	1	26644	144
-Opština Centar		MK.F6.D1	863840		Општина Центар	2	26644	144
 Tombouctou	ML-6	ML.08	2449066	Region		1		145
 Sikasso	ML-3	ML.06	2451184	Region	Sikasso Region	1		145
 Ségou	ML-4	ML.05	2451477	Region		1		145
@@ -27388,26 +27388,26 @@ Grand Port	MU-GP	MU.14	934466	District		1		154
 Flacq	MU-FL	MU.13	934522	District		1		154
 Black River	MU-BL	MU.12	934718	District		1		154
 Cargados Carajos		MU.22	1106583		Écueils des Cargados Carajos	1		154
-Rodrigues		MU.23	1547449		Île Rodrigues	1		154
-Vaavu Atholhu		MV.47	1281843			1		155
-Thaa Atholhu		MV.46	1281881			1		155
-Shaviyani Atholhu		MV.45	1281892			1		155
+Rodrigues Island	MU-RO	MU.23	1547449	Dependency	Rodrigues|Île Rodrigues	1		154
+Felidhu Atoll	MV-04	MV.47	1281843	Administrative atoll	Vaavu|Vaavu Atholhu	1		155
+Kolhumadulu	MV-08	MV.46	1281881	Administrative atoll	Thaa|Thaa Atholhu	1		155
+North Miladhunmadulu	MV-24	MV.45	1281892	Administrative atoll	Shaviyani|Shaviyani Atholhu	1		155
 Addu City	MV-01	MV.01	1281893	City	Seenu	1		155
-Raa Atoll		MV.44	1281918			1		155
-Noonu Atoll		MV.43	1281937		Noonu Atholhu	1		155
+North Maalhosmadulu	MV-13	MV.44	1281918	Administrative atoll	Raa|Raa Atoll	1		155
+South Miladhunmadulu	MV-25	MV.43	1281937	Administrative atoll	Noonu|Noonu Atholhu|Noonu Atoll	1		155
 Fuvammulah	MV-29	MV.42	1281945	Administrative atoll	Gnaviyani|Gnyaviyani Atoll	1		155
-Meemu Atholhu		MV.41	1281985			1		155
-Faadhippolhu Atoll		MV.39	1282096			1		155
+Mulaku Atoll	MV-12	MV.41	1281985	Administrative atoll	Meemu|Meemu Atholhu	1		155
+Faadhippolhu	MV-03	MV.39	1282096	Administrative atoll	Faadhippolhu Atoll|Lhaviyani	1		155
 Hahdhunmathi	MV-05	MV.05	1282101	Administrative atoll	Laamu	1		155
-Kaafu Atoll		MV.38	1282208			1		155
-Haa Dhaalu Atholhu		MV.37	1282293			1		155
-Haa Alifu Atholhu		MV.36	1282294			1		155
+Male Atoll	MV-26	MV.38	1282208	Administrative atoll	Kaafu|Kaafu Atoll	1		155
+South Thiladhunmathi	MV-23	MV.37	1282293	Administrative atoll	Haa Dhaalu|Haa Dhaalu Atholhu	1		155
+North Thiladhunmathi	MV-07	MV.36	1282294	Administrative atoll	Haa Alifu|Haa Alifu Atholhu	1		155
 South Huvadhu Atoll	MV-28	MV.35	1282328	Administrative atoll	Gaafu Daalu Atoll|Gaafu Dhaalu|Gaafu Dhaalu Atoll|Huvadu South|Suvadiva South	1		155
 North Huvadhu Atoll	MV-27	MV.34	1282329	Administrative atoll	Gaafu Alif Atoll|Gaafu Aliff Atoll|Gaafu Alifu|Gaafu Alifu Atoll|Huvadu North|North Huvadhoo|Suvadiva Atoll|Suvadiva North	1		155
-Faafu Atholhu		MV.33	1282393			1		155
-Dhaalu Atholhu		MV.32	1282447			1		155
-Baa Atholhu		MV.31	1282478			1		155
-Northern Ari Atoll		MV.30	1282497		Alif Alif Atoll|Ari Atholhu Uthuruburi	1		155
+North Nilandhe Atoll	MV-14	MV.33	1282393	Administrative atoll	Faafu|Faafu Atholhu	1		155
+South Nilandhe Atoll	MV-17	MV.32	1282447	Administrative atoll	Dhaalu|Dhaalu Atholhu	1		155
+South Maalhosmadulu	MV-20	MV.31	1282478	Administrative atoll	Baa|Baa Atholhu	1		155
+North Ari Atoll	MV-02	MV.30	1282497	Administrative atoll	Alif Alif Atoll|Alifu Alifu|Ari Atholhu Uthuruburi|Northern Ari Atoll	1		155
 Male	MV-MLE	MV.40	1337624	City	Maale|މާލެ	1		155
 South Ari Atoll	MV-00	MV.10346475	10346475	Administrative atoll	Alifu Dhaalu|Southern Ari Atoll	1		155
 Southern Region	MW-S	MW.S	923817	Region		1		156
@@ -29958,7 +29958,7 @@ Kuala Lumpur		MY.14	1733046			1		158
 Pulau Pinang	MY-07	MY.09	1733047	State	Penang	1		158
 Kedah	MY-02	MY.02	1733048	State		1		158
 Johor	MY-01	MY.01	1733049	State		1		158
-Labuan		MY.15	1734240		Federal Territory of Labuan	1		158
+Wilayah Persekutuan Labuan	MY-15	MY.15	1734240	Federal territory	Federal Territory of Labuan|Labuan	1		158
 Wilayah Persekutuan Putrajaya	MY-16	MY.17	1996552	Federal territory	Putrajaya	1		158
 Langkawi		MY.02.0207	1222381			2	29959	158
 Temerluh		MY.06.0811	1732585			2	29954	158
@@ -32276,7 +32276,7 @@ Anibare	NR-04	NR.04	2110445	District	Anibare District	1		169
 Anetan	NR-03	NR.03	2110448	District	Anetan District	1		169
 Anabar	NR-02	NR.02	2110449	District	Anabar District	1		169
 Aiwo	NR-01	NR.01	2110451	District	Aiwo District	1		169
-Wellington Region		NZ.G2	2179538		Te Whanga-nui-a-Tara|Whanganui-a-Tara	1		171
+Greater Wellington	NZ-WGN	NZ.G2	2179538	Region	Te Whanga-nui-a-Tara|Wellington Region|Whanganui-a-Tara	1		171
 Manawatū-Whanganui	NZ-MWT	NZ.F3	2179671	Region	Manawatu-Wanganui	1		171
 Waikato	NZ-WKO	NZ.G1	2180293	Region	Waikato Region	1		171
 Tasman	NZ-TAS	NZ.TAS	2181818	Region	Tasman District|Te Tai-o-Aorere	1		171
@@ -32543,8 +32543,8 @@ Puno	PE-PUN	PE.21	3931275	Region	Puno Department|Punu Suyu	1		174
 Pasco	PE-PAS	PE.19	3932834	Region	Departamento de Pasco|Pasco Department|Pasco Region|Pasqu Suyu	1		174
 Moquegua	PE-MOQ	PE.18	3934607	Region	Departamento de Moquegua|Moquegua Department|Muqiwa suyu	1		174
 Madre de Dios	PE-MDD	PE.17	3935619	Region	Departamento de Madre de Dios|Madre de Dios Department|Madre de Dios Region|Mayutata Suyu	1		174
-Lima	PE-LIM	PE.LMA	3936451	Region	Lima Province|Lima pruwinsya|Provincia de Lima	1		174
-Lima region		PE.15	3936452		Departamento de Lima|Lima Department|Lima Suyu	1		174
+Municipalidad Metropolitana de Lima	PE-LMA	PE.LMA	3936451	Municipality	Lima|Lima Province|Lima pruwinsya|Provincia de Lima	1		174
+Lima	PE-LIM	PE.15	3936452	Region	Departamento de Lima|Lima Department|Lima Suyu|Lima region	1		174
 Junín	PE-JUN	PE.12	3937485	Region	Departamento de Junín|Hunin Suyu|Junin|Junín Department|Junín Region|Sunin suyu	1		174
 Ica	PE-ICA	PE.11	3938526	Region	Departamento de Ica|Ica Department|Ika Suyu	1		174
 Huancavelica	PE-HUV	PE.09	3939467	Region	Departamento de Huancavelica|Huancavelica Department|Wankawillka Suyu	1		174
@@ -33189,9 +33189,9 @@ Warmińsko-Mazurskie	PL-28	PL.85	858791	Voivodship	Varmijos Mozūrų vaivadija|W
 Dolnośląskie	PL-02	PL.72	3337492	Voivodship	Dólnoszląsczé wòjewództwò|Lower Silesia|Lower Silesian|Lower Silesian Voivodeship|Niederschlesien|Województwo dolnośląskie|Žemutinės Silezijos vaivadija	1		179
 Łódzkie	PL-10	PL.74	3337493	Voivodship	Lodzės vaivadija|Woiwodschaft Łódź|Województwo łódzkie|Łódzczé wòjewództwò|Łódź Voivodeship	1		179
 Lubuskie	PL-08	PL.76	3337494	Voivodship	Liubušo vaivadija|Lubusz|Lubusz Voivodeship|Lubusz Voivodship|Lubùsczé wòjewództwò|Woiwodschaft Lebus|województwo lubuskie	1		179
-Opole Voivodeship		PL.79	3337495		Opolės vaivadija|Woiwodschaft Oppeln|Województwo opolskie|Òpòlsczé wòjewództwò	1		179
-Pomerania		PL.82	3337496		Pamario vaivadija|Pomerania Province|Pomeranian Voivodeship|Pòmòrsczé wòjewództwò|Woiwodschaft Pommern|Województwo pomorskie	1		179
-Silesia		PL.83	3337497		Schlesien|Silesian Voivodeship|Silezijos vaivadija|Woiwodschaft Schlesien|Województwo śląskie	1		179
+Opolskie	PL-16	PL.79	3337495	Voivodship	Opole Voivodeship|Opolės vaivadija|Woiwodschaft Oppeln|Województwo opolskie|Òpòlsczé wòjewództwò	1		179
+Pomorskie	PL-22	PL.82	3337496	Voivodship	Pamario vaivadija|Pomerania|Pomerania Province|Pomeranian Voivodeship|Pòmòrsczé wòjewództwò|Woiwodschaft Pommern|Województwo pomorskie	1		179
+Śląskie	PL-24	PL.83	3337497	Voivodship	Schlesien|Silesia|Silesian Voivodeship|Silezijos vaivadija|Woiwodschaft Schlesien|Województwo śląskie	1		179
 Wielkopolskie	PL-30	PL.86	3337498	Voivodship	Didžiosios Lenkijos vaivadija|Greater Poland|Greater Poland Voivodeship|Wiôlgòpòlsczé Wòjewództwò|Woiwodschaft Großpolen|województwo wielkopolskie	1		179
 Zachodniopomorskie	PL-32	PL.87	3337499	Voivodship	Vakarų Pamario vaivadija|West Pomerania|West Pomerania Province|West Pomeranian|West Pomeranian Voivodeship|Woiwodschaft Westpommern|Zôpadnopòmòrsczé wòjewództwò|województwo zachodniopomorskie	1		179
 Kujawsko-Pomorskie	PL-04	PL.73	3337500	Voivodship	Kujavijos Pamario vaivadija|Kujawsko-Pomorskie Voivodship|Kuyavian-Pomeranian|Kuyavian-Pomeranian Voivodeship|Woiwodschaft Kujawien-Pommern|Województwo kujawsko-pomorskie	1		179
@@ -34561,6 +34561,7 @@ Gaza Strip		PS.GZ	281132		قطاع غزة	1		183
 West Bank		PS.WE	285153		الضفة الغربية	1		183
 Jenin	PS-JEN	PS.WE.7828733	7828733	Governorate	Jenin Governorate|محافظة جنين	1	34561	183
 Rafah	PS-RFH	PS.GZ.7870260	7870260	Governorate	Rafah Governorate	1	34560	183
+North Gaza	PS-NGZ	PS.GZ.7870263	7870263	Governorate	North Gaza Governorate|محافظة شمال غزة	1	34560	183
 Deir El Balah	PS-DEB	PS.GZ.7870268	7870268	Governorate	Deir Al Balah|Deir al-Balah Governorate	1	34560	183
 Bethlehem	PS-BTH	PS.WE.7870463	7870463	Governorate	Bethlehem Governorate	1	34561	183
 Nablus	PS-NBS	PS.WE.7870555	7870555	Governorate	Nablus Governorate|محافظة نابلس	1	34561	183
@@ -34573,7 +34574,6 @@ Jerusalem	PS-JEM	PS.WE.7870654	7870654	Governorate	Al Quds|Quds Governorate	1	34
 Ramallah	PS-RBH	PS.WE.7870657	7870657	Governorate	Ramallah and al-Bireh Governorate	1	34561	183
 Hebron	PS-HBN	PS.WE.7870658	7870658	Governorate	Al Khalil|Hebron Governorate|الخليل|محافظة الخليل	1	34561	183
 Khan Yunis	PS-KYS	PS.GZ.7871092	7871092	Governorate	Khan Yunis Governorate	1	34560	183
-North Gaza		PS.GZ.7870263	7870263		North Gaza Governorate|محافظة شمال غزة	2	34560	183
 Gaza		PS.GZ.11184609	11184609		Gaza Governorate	2	34560	183
 Setúbal	PT-15	PT.19	2262961	District	District of Setúbal|Distrito de Setúbal|Setúbal District	1		184
 Santarém	PT-14	PT.18	2263478	District	District of Santarém|Distrito de Santarém|Santarém District	1		184
@@ -38460,11 +38460,11 @@ Tverskaya oblast'	RU-TVE	RU.77	480041	Administrative region	Tver Oblast|Tver vil
 Tul'skaya oblast'	RU-TUL	RU.76	480508	Administrative region	Tula Oblast|Tula vilayəti|Тула област|Тула обласьт|Тула улос|Тула өлкәсе|Тула өлкәһе|Тулань аймак|Тулань ёнкс|Тулийн область|Тульская Область|Туула уобалаһа	1		191
 Tatarstan, Respublika	RU-TA	RU.73	484048	Republic	Tatarstan Republic|Tatarstan Respublikası|Республика Татарстан|Татарстан	1		191
 Tambovskaya oblast'	RU-TAM	RU.72	484638	Administrative region	Tambov Oblast|Tambov vilayəti|Тамбов област|Тамбов обласьт|Тамбов улос|Тамбов уобалаһа|Тамбов өлкәсе|Тамбов өлкәһе|Тамбован область|Тамбовская Область|Томбамонь ёнкс|Томбунь аймак	1		191
-Stavropol Kray		RU.70	487839		Stavropol diyarı|Stavropol’ Kray|Ставропол Къэрал|Ставропол улка|Ставрополан мохк|Ставрополень край|Ставрополь крае|Ставрополь край|Ставрополь крайы|Ставрополь кыраайа|Ставрополь ладор|Ставрополь шаер|Ставропольдин край|Ставрополье|Ставропольский Край	1		191
+Stavropol'skiy kray	RU-STA	RU.70	487839	Administrative territory	Stavropol Kray|Stavropol diyarı|Stavropol’ Kray|Ставропол Къэрал|Ставропол улка|Ставрополан мохк|Ставрополень край|Ставрополь крае|Ставрополь край|Ставрополь крайы|Ставрополь кыраайа|Ставрополь ладор|Ставрополь шаер|Ставропольдин край|Ставрополье|Ставропольский Край	1		191
 Smolenskaya oblast'	RU-SMO	RU.69	491684	Administrative region	Smolensk Oblast|Smolensk vilayəti|Smolenskaya Oblast’|Смоленск област|Смоленск обласьт|Смоленск улос|Смоленск өлкәсе|Смоленск өлкәһе|Смоленскай уобалас|Смоленскан область|Смоленская Область|Смоленэнь ёнкс	1		191
 Saratovskaya oblast'	RU-SAR	RU.67	498671	Administrative region	Saratov Oblast|Saratov vilayəti|Саратов обласьт|Саратов улос|Саратов уобалаһа|Саратов ёнкс|Саратован область|Саратовонь аймак|Саратовская Область|Сарытау өлкәсе|Һарытау өлкәһе	1		191
 Samarskaya oblast'	RU-SAM	RU.65	499068	Administrative region	Samara Oblast|Samara vilayəti|Самаара уобалаһа|Самар өлкәсе|Самара обласьт|Самара улос|Самара ёнкс|Самарань аймак|Самарин область|Самарская Область|Һамар өлкәһе	1		191
-Ryazan Oblast		RU.62	500059		Ryazan vilayəti|Разан област|Рязанан область|Рязанень аймак|Рязанень ёнкс|Рязанская Область|Рязань обласьт|Рязань улос|Рязань уобалаһа|Рязань өлкәсе|Рязань өлкәһе	1		191
+Ryazanskaya oblast'	RU-RYA	RU.62	500059	Administrative region	Ryazan Oblast|Ryazan vilayəti|Разан област|Рязанан область|Рязанень аймак|Рязанень ёнкс|Рязанская Область|Рязань обласьт|Рязань улос|Рязань уобалаһа|Рязань өлкәсе|Рязань өлкәһе	1		191
 Rostovskaya oblast'	RU-ROS	RU.61	501165	Administrative region	Rostov|Rostov Oblast|Rostov vilayəti|Rostovskaya Oblast|Ростов вилаят|Ростов лапӧв|Ростов област|Ростов обласьт|Ростов улос|Ростов уобалаһа|Ростов өлкәсе|Ростов өлкәһе|Ростован область|Ростовонь аймак|Ростовонь ёнкс|Ростовская Область	1		191
 Pskovskaya oblast'	RU-PSK	RU.60	504338	Administrative region	Pskov Oblast|Pskov vilayəti|Псков област|Псков обласьт|Псков улос|Псков уобалаһа|Псков өлкәсе|Псков өлкәһе|Псковонь аймак|Псковонь ёнкс|Псковскан область|Псковская Область	1		191
 Permskiy kray	RU-PER	RU.90	511180	Administrative territory	Perm Krai|Perm diyarı|Перем ладор|Пермень край|Пермский край|Пермь крае|Пермь шаер|Перым край	1		191
@@ -38499,7 +38499,7 @@ Nizhegorodskaya oblast'	RU-NIZ	RU.51	559838	Administrative region	Nijeqorod vila
 Dagestan, Respublika	RU-DA	RU.17	567293	Republic	Dagestan|Dagestan Republic|Dağıstan|Дагестаан|Дагестан|Дагестан Республикась|Дагстан|Дагъистан|Дагъустан|Дагъусттан|Дагъыстан|Дагъыстан Джумгьурият|ДаьгIасте|Дағстан|ДегӀаста|Республика Дагестан|Республикэ Дагъыстэн	1		191
 Chuvashskaya Respublika	RU-CU	RU.16	567395	Republic	Chuvash Republic|Chuvashiya Republic|Çuvaşıstan|Ветькень Республикась|Республика Чувашия|Сыуашстан|Чуашстан|Чуваши|Чувашия|Чувашмастор|Чувашму|Чувашская Республика	1		191
 Chechenskaya Respublika	RU-CE	RU.12	569665	Republic	Chechen Republic|Chechnya|Chechnya Republic|Çeçenistan|Буртиялъ жумхӀурият|Мычгыш Республикэ|Нохчийчо республика|Нохчийчоь|Нохчиче|Чечен Республика|Чечен Республикаһы|Чеченская Республика|Чеченэнь Республикась|Чечня	1		191
-Bryansk Oblast		RU.10	571473		Bryansk vilayəti|Бранск област|Брянск обласьт|Брянск улос|Брянск өлкәһе|Брянскай уобалас|Брянскан область|Брянская Область|Брянскоень ёнкс|Брянсконь аймак|Брәнск өлкәсе	1		191
+Bryanskaya oblast'	RU-BRY	RU.10	571473	Administrative region	Bryansk Oblast|Bryansk vilayəti|Бранск област|Брянск обласьт|Брянск улос|Брянск өлкәһе|Брянскай уобалас|Брянскан область|Брянская Область|Брянскоень ёнкс|Брянсконь аймак|Брәнск өлкәсе	1		191
 Belgorodskaya oblast'	RU-BEL	RU.09	578071	Administrative region	Belgorod Oblast|Belqorod vilayəti|Белгород област|Белгород обласьт|Белгород улос|Белгород уобалаhа|Белгород өлкәсе|Белгород өлкәһе|Белгородан область|Белгородонь ёнкс|Белгородская Область	1		191
 Bashkortostan, Respublika	RU-BA	RU.08	578853	Republic	Bashkortostan Republic|Başqırdıstan|Башкирийчоь|Башкирия|Башкирия Республикась|Башкортостан|Башкортстан|Башкъортостан|Башкырму|Башҡортостан|Республика Башкортостан	1		191
 Astrakhanskaya oblast'	RU-AST	RU.07	580491	Administrative region	Astrakhan Oblast|Həştərxan vilayəti|Астархаан уобалаһа|Астраханан область|Астраханонь ёнкс|Астраханская Область|Астрахань лапӧв|Астрахань обласьт|Астрахань улос|Астрэхъан област|Әстерхан өлкәсе|Әстрәхән өлкәһе	1		191
@@ -38519,7 +38519,7 @@ Khanty-Mansiyskiy avtonomnyy okrug	RU-KHM	RU.32	1503773	Autonomous district	Jugr
 Khakasiya, Respublika	RU-KK	RU.31	1503834	Republic	Khakasiya Republic|Xakasiya|Республика Хакасия|Хакас Республикаһы|Хакасийн Республика|Хакасия|Хакасия Республикась|Хакасму|Хакасская республика	1		191
 Kemerovskaya oblast'	RU-KEM	RU.29	1503900	Administrative region	Kemerovo Oblast|Kemerovo Oblast-Kuzbass|Kemerovskaya Oblast’-Kuzbass|Kuzbass|Кемеровская Область|Кемеровская Область-Кузбасс|Кузба́сс|Кузбасс	1		191
 Altayskiy kray	RU-ALT	RU.03	1506272	Administrative territory	Altai|Altai Republic|Altay Republic|Altay Respublikası|Алтай|Алтай Республикасы|Алтай Республикась|Алтай Республикаһы|Алтай республика|Алтай Өрөспүүбүлүкэтэ|Республика Алтай	1		191
-Chelyabinsk		RU.13	1508290		Chelyabinsk Oblast|Çelyabinsk vilayəti|Силәбе өлкәһе|Челябань аймак|Челябань ёнкс|Челябинск обласьт|Челябинск улос|Челябинскай уобалас|Челябинскан область|Челябинская|Челябинская Область|Чиләбе өлкәсе	1		191
+Chelyabinskaya oblast'	RU-CHE	RU.13	1508290	Administrative region	Chelyabinsk|Chelyabinsk Oblast|Çelyabinsk vilayəti|Силәбе өлкәһе|Челябань аймак|Челябань ёнкс|Челябинск обласьт|Челябинск улос|Челябинскай уобалас|Челябинскан область|Челябинская|Челябинская Область|Чиләбе өлкәсе	1		191
 Altay, Respublika	RU-AL	RU.04	1511732	Republic	Altai Krai|Altay Kray|Altay diyarı|Алтаень край|Алтай крае|Алтай край|Алтай крайы|Алтай кыраайа|Алтай шаер|Алтайн мохк|Алтайский Край	1		191
 Saha, Respublika	RU-SA	RU.63	2013162	Republic	Jakutija|Sakha|Sakha (Yakutiya) Republic|Yakutiya|Республика Саха (Якутия)|Саха|Саха (Якутия)|Саха Сирэ	1		191
 Primorskiy kray	RU-PRI	RU.59	2017623	Administrative territory	Primorsk diyarı|Primorskiy (Maritime) Kray|Primorye|Диңгез буе крае|Иневедьвакссонь край|Приморский Край|Приморской шаер|Приморье крайы|Приморье кыраайа|Приморьен мохк|Саридздор край|Саридздын ладор	1		191
@@ -38530,9 +38530,9 @@ Amurskaya oblast'	RU-AMU	RU.05	2027748	Administrative region	Amur Oblast|Amur vi
 Buryatiya, Respublika	RU-BU	RU.11	2050915	Republic	Buryatiya Republic|Buryatiya Respublikası|Буряад Улас|Бурятия|Бурятия Республикасы|Республика Бурятия	1		191
 Sakhalinskaya oblast'	RU-SAK	RU.64	2121529	Administrative region	Sakhalin Oblast|Saxalin vilayəti|Сахалин|Сахалин лапӧв|Сахалин обласьт|Сахалин улос|Сахалин уобалаһа|Сахалин өлкәсе|Сахалин өлкәһе|Сахалинан область|Сахалинская Область|Сахалинэнь ёнкс	1		191
 Magadanskaya oblast'	RU-MAG	RU.44	2123627	Administrative region	Magadan Oblast|Maqadan vilayəti|Магадаан уобалаһа|Магадан лапӧв|Магадан обласьт|Магадан улос|Магадан өлкәсе|Магадан өлкәһе|Магаданан область|Магаданонь аймак|Магаданонь ёнкс|Магаданская Область	1		191
-Kamchatka		RU.92	2125072		Kamchatka Krai|Kamçatka|Камчатка|Камчатский край	1		191
+Kamchatskiy kray	RU-KAM	RU.92	2125072	Administrative territory	Kamchatka|Kamchatka Krai|Kamçatka|Камчатка|Камчатский край	1		191
 Chukotskiy avtonomnyy okrug	RU-CHU	RU.15	2126099	Autonomous district	Chukotka|Chukotka Autonomous Okrug|Çukotka Muxtar Dairəsi|Чукотийн автономни гуо|Чукотка автономиялаах уокуруга|Чукотка автономияле округы|Чукотка автономиялы округы|Чукотка автономной округ|Чукотка кытш|Чукотонь автономонь округ|Чукотонь аулькедьало кужомасторось|Чукотский АО|Чукотский Автономный Округ	1		191
-Zabaykalskiy (Transbaikal) Kray		RU.93	7779061		Transbaikal Territory|Zabaykalskiy (Transbaikal) Krayı|Zabaykal’skiy (Transbaikal) Kray|Забайкальск (Трансбайкал) Край|Забайкальский Край	1		191
+Zabaykal'skiy kray	RU-ZAB	RU.93	7779061	Administrative territory	Transbaikal Territory|Zabaykalskiy (Transbaikal) Kray|Zabaykalskiy (Transbaikal) Krayı|Zabaykal’skiy (Transbaikal) Kray|Забайкальск (Трансбайкал) Край|Забайкальский Край	1		191
 Sortaval’skiy Rayon		RU.28.461703	461703		Сортавальский Район	2	38490	191
 Zvenigovskiy Rayon		RU.45.461915	461915		Звениговский Район	2	38481	191
 Zuyevskiy Rayon		RU.33.461940	461940		Zuyevsky District|Зуевский Район	2	38489	191
@@ -41547,12 +41547,12 @@ West Baegu - Fatale		SB.03.0705	12041924			2	41355	194
 Takamaka	SC-23	SC.23	241151	District		1		195
 Saint Louis	SC-22	SC.22	241181	District		1		195
 Port Glaud	SC-21	SC.27	241215	District		1		195
-Pointe La Rue		SC.20	241221			1		195
+Pointe Larue	SC-20	SC.20	241221	District	Pointe La Rue	1		195
 Plaisance	SC-19	SC.19	241224	District		1		195
 Mont Fleuri	SC-18	SC.18	241251	District		1		195
 Mont Buxton	SC-17	SC.17	241252	District		1		195
-La Rivière Anglaise		SC.26	241302			1		195
-La Digue and Inner Islands		SC.25	241311		district de La Digue and Inner Islands	1		195
+English River	SC-16	SC.26	241302	District	La Rivière Anglaise	1		195
+La Digue	SC-15	SC.25	241311	District	La Digue and Inner Islands|district de La Digue and Inner Islands	1		195
 Grand Anse Mahe	SC-13	SC.24	241330	District		1		195
 Grand Anse Praslin	SC-14	SC.14	241331	District		1		195
 Glacis	SC-12	SC.12	241336	District		1		195
@@ -41570,13 +41570,13 @@ Les Mamelles	SC-24	SC.29	448408	District		1		195
 Roche Caiman	SC-25	SC.30	448409	District	Roche Caïman	1		195
 Au Cap	SC-04	SC.28	448410	District		1		195
 Outer Islands		SC.11876017	11876017			1		195
-Ile Perseverance I		SC.12200079	12200079			1		195
-Ile Perseverance II		SC.12200080	12200080			1		195
+Ile Perseverance I	SC-26	SC.12200079	12200079	District		1		195
+Ile Perseverance II	SC-27	SC.12200080	12200080	District		1		195
 Northern	SD-NO	SD.43	378389	State	Northern State|The Northern State|الشمالية|الولاية الشمالية	1		196
 Khartoum	SD-KH	SD.29	379253	State	Khartoum State|الخرطوم|ولاية الخرطوم	1		196
 Red Sea	SD-RS	SD.36	408646	State	Red Sea State|البحر الاحمر|ولاية البحر الاحمر	1		196
 Gezira	SD-GZ	SD.38	408648	State	Al Jazirah|Al Jazirah State|Gezira State|ولاية الجزيرة	1		196
-Al Qaḑārif		SD.39	408649		Al Qadarif State|القضارف	1		196
+Gedaref	SD-GD	SD.39	408649	State	Al Qadarif State|Al Qaḑārif|القضارف	1		196
 White Nile	SD-NW	SD.41	408653	State	White Nile State|النيل الأبيض|النيل الابيض|ولاية النيل الابيض	1		196
 Blue Nile	SD-NB	SD.42	408654	State	Blue Nile State|النيل الازرق|ولاية النيل الازرق	1		196
 West Darfur	SD-DW	SD.47	408658	State	West Darfur State|Western Darfur|Western Darfur State|غرب دارفور|ولاية غرب دارفور	1		196
@@ -42009,11 +42009,11 @@ Tržič	SI-131	SI.D5	3188687	Municipality	Municipality of Tržič|Občina Trži�
 Trebnje	SI-130	SI.D4	3188885	Municipality	Municipality of Trebnje|Občina Trebnje	1		200
 Trbovlje	SI-129	SI.D3	3188914	Municipality	Municipality of Trbovlje|Občina Trbovlje	1		200
 Tolmin	SI-128	SI.D2	3189037	Municipality	Municipality of Tolmin|Občina Tolmin	1		200
-Urban Municipality of Velenje		SI.D7	3189074		Mestna občina Velenje	1		200
+Velenje	SI-133	SI.D7	3189074	Urban municipality	Mestna občina Velenje|Urban Municipality of Velenje	1		200
 Šmarje pri Jelšah	SI-124	SI.C5	3190509	Municipality	Municipality of Šmarje pri Jelšah|Občina Šmarje pri Jelšah	1		200
 Slovenske Konjice	SI-114	SI.C4	3190529	Municipality	Municipality of Slovenske Konjice|Občina Slovenske Konjice	1		200
 Slovenska Bistrica	SI-113	SI.L8	3190533	Municipality	Municipality of Slovenska Bistrica|Občina Slovenska Bistrica	1		200
-Urban Municipality of Slovenj Gradec		SI.C2	3190535		Mestna Občina Slovenj Gradec	1		200
+Slovenj Gradec	SI-112	SI.C2	3190535	Urban municipality	Mestna Občina Slovenj Gradec|Urban Municipality of Slovenj Gradec	1		200
 Škofja Loka	SI-122	SI.B9	3190716	Municipality	Municipality of Škofja Loka|Občina Škofja Loka	1		200
 Sežana	SI-111	SI.B7	3190944	Municipality	Municipality of Sežana|Občina Sežana	1		200
 Sevnica	SI-110	SI.B6	3190949	Municipality	Municipality of Sevnica|Občina Sevnica	1		200
@@ -42025,18 +42025,18 @@ Urban Municipality of Ptuj		SI.K7	3192240		Mestna občina Ptuj	1		200
 Postojna	SI-094	SI.94	3192672	Municipality	Municipality of Postojna|Občina Postojna	1		200
 Piran	SI-090	SI.J9	3193340	Municipality	Municipality of Piran|Občina Piran|Pirano	1		200
 Ormož	SI-087	SI.87	3193964	Municipality	Municipality of Ormož|Občina Ormož	1		200
-Urban Municipality of Novo Mesto		SI.J7	3194350		Mestna občina Novo mesto	1		200
-Urban Municipality of Nova Gorica		SI.84	3194451		Mestna občina Nova Gorica	1		200
-Urban Municipality of Murska Sobota		SI.80	3194647		Mestna občina Murska Sobota	1		200
+Novo Mesto	SI-085	SI.J7	3194350	Urban municipality	Mestna občina Novo mesto|Urban Municipality of Novo Mesto	1		200
+Nova Gorica	SI-084	SI.84	3194451	Urban municipality	Mestna občina Nova Gorica|Urban Municipality of Nova Gorica	1		200
+Murska Sobota	SI-080	SI.80	3194647	Urban municipality	Mestna občina Murska Sobota|Urban Municipality of Murska Sobota	1		200
 Mozirje	SI-079	SI.79	3194791	Municipality	Municipality of Mozirje|Občina Mozirje	1		200
 Metlika	SI-073	SI.73	3195213	Municipality	Municipality of Metlika|Občina Metlika	1		200
-Urban Municipality of Maribor		SI.J2	3195505		Marburgo|Mestna občina Maribor	1		200
+Maribor	SI-070	SI.J2	3195505	Urban municipality	Marburgo|Mestna občina Maribor|Urban Municipality of Maribor	1		200
 Logatec	SI-064	SI.64	3196288	Municipality	Longatico|Municipality of Logatec|Občina Logatec	1		200
 Ljutomer	SI-063	SI.I6	3196306	Municipality	Municipality of Ljutomer|Občina Ljutomer	1		200
 Litija	SI-060	SI.I5	3196424	Municipality	Municipality of Litija|Občina Litija	1		200
 Lenart	SI-058	SI.I3	3196684	Municipality	Municipality of Lenart|Občina Lenart	1		200
 Laško	SI-057	SI.57	3196759	Municipality	Municipality of Laško|Občina Laško	1		200
-Urban Municipality of Krško		SI.54	3197146		Mestna občina Krško	1		200
+Krško	SI-054	SI.54	3197146	Urban municipality	Mestna občina Krško|Urban Municipality of Krško	1		200
 Urban Municipality of Kranj		SI.52	3197377		Mestna občina Kranj	1		200
 Koper	SI-050	SI.50	3197752	Urban municipality	Capodistria|Mestna občina Koper|Urban Municipality of Koper	1		200
 Kočevje	SI-048	SI.H7	3197942	Municipality	Municipality of Kočevje|Občina Kočevje	1		200
@@ -42052,7 +42052,7 @@ Dravograd	SI-025	SI.25	3201252	Municipality	Municipality of Dravograd|Občina Dr
 Domžale	SI-023	SI.G7	3201729	Municipality	Municipality of Domžale|Občina Domžale	1		200
 Črnomelj	SI-017	SI.17	3202332	Municipality	Municipality of Črnomelj|Občina Črnomelj|Črnomelj Municipality	1		200
 Cerknica	SI-013	SI.13	3202707	Municipality	Municipality of Cerknica|Občina Cerknica	1		200
-Urban Municipality of Celje		SI.11	3202780		Mestna občina Celje	1		200
+Celje	SI-011	SI.11	3202780	Urban municipality	Mestna občina Celje|Urban Municipality of Celje	1		200
 Brežice	SI-009	SI.08	3203411	Municipality	Municipality of Brežice|Občina Brežice	1		200
 Ajdovščina	SI-001	SI.01	3204853	Municipality	Aidussina|Municipality of Ajdovščina|Občina Ajdovščina	1		200
 Hrpelje-Kozina	SI-035	SI.35	3239050	Municipality	Municipality of Hrpelje–Kozina|Občina Hrpelje - Kozina	1		200
@@ -42710,7 +42710,7 @@ Idlib	SY-ID	SY.12	169387	Province	Idlib Governorate|ادلب|محافظة ادل
 Rīf Dimashq	SY-RD	SY.08	170652	Province	Damascus Countryside|Rif-dimashq|Rif-dimashq Governorate|ريف دمشق|محافظة ريف دمشق	1		212
 Dayr az Zawr	SY-DY	SY.07	170792	Province	Deir ez-Zor|Deir ez-Zor Governorate|دير الزور|محافظة دير الزور	1		212
 Dar'ā	SY-DR	SY.06	170903	Province	Daraa|Daraa Governorate|درعا|محافظة درعا	1		212
-Suwayda		SY.05	172410		Suwayda Governorate|Sweida Governorate|السويداء|محافظة السويداء	1		212
+As Suwaydā'	SY-SU	SY.05	172410	Province	Suwayda|Suwayda Governorate|Sweida Governorate|السويداء|محافظة السويداء	1		212
 Ar Raqqah	SY-RA	SY.04	172957	Province	Raqqa|Raqqa Governorate|الرقة|محافظة الرقة	1		212
 Al Qunayţirah	SY-QU	SY.03	173336	Province	Quneitra|Quneitra Governorate|القنيطرة|محافظة القنيطرة	1		212
 Al Lādhiqīyah	SY-LA	SY.02	173578	Province	Latakia|Latakia Governorate|اللاذقية|محافظة اللاذقية	1		212
@@ -42839,8 +42839,8 @@ Ville de Ndjamena	TD-ND	TD.21	7603254	Province	N'Djamena|N’Djaména|N’Djamé
 Bahr el Ghazal	TD-BG	TD.22	7603255	Province	Barh el Gazel|Barh el Gazel Region|Barh-El-Gazel|Barh-el-Ghazal|Province du Barh-El-Gazel|Région du Barh el Gazel|بحر الغزال|ولاية بحر الغزال	1		215
 Sila	TD-SI	TD.25	7603257	Province	Province du Sila|Région du Sila|Sila Region|سيلا|ولاية سيلا	1		215
 Tibesti	TD-TI	TD.26	7603258	Province	Région du Tibesti|Tibesti Region|إقليم تبستي	1		215
-Ennedi-Ouest		TD.28	8604857		Ennedi Ouest|Ennedi-Ouest Region|Province de l'Ennedi-Ouest|Région de l'Ennedi-Ouest|إنيدي الغربي|ولاية إنيدي الغربي	1		215
-Ennedi-Est		TD.27	8604858		Ennedi Est|Ennedi-Est Region|Province de l'Ennedi-Est|Région de l'Ennedi-Est|إنيدي الشرقي|ولاية إنيدي الشرقي	1		215
+Ennedi-Ouest	TD-EO	TD.28	8604857	Province	Ennedi Ouest|Ennedi-Ouest Region|Province de l'Ennedi-Ouest|Région de l'Ennedi-Ouest|إنيدي الغربي|ولاية إنيدي الغربي	1		215
+Ennedi-Est	TD-EE	TD.27	8604858	Province	Ennedi Est|Ennedi-Est Region|Province de l'Ennedi-Est|Région de l'Ennedi-Est|إنيدي الشرقي|ولاية إنيدي الشرقي	1		215
 Harazé Mangueigne		TD.13.243701	243701		Haraze	2	42821	215
 Baguirmi		TD.15.7670580	7670580			2	42832	215
 Dababa		TD.15.7670581	7670581			2	42832	215
@@ -43037,8 +43037,8 @@ Krabi	TH-81	TH.63	1152631	Province	Krabi Province|กระบี่|จัง�
 Kanchanaburi	TH-71	TH.50	1153080	Province	กาญจนบุรี|จังหวัดกาญจนบุรี	1		218
 Kamphaeng Phet	TH-62	TH.11	1153089	Province	Kamphaeng Phet Province|กำแพงเพชร|จังหวัดกำแพงเพชร	1		218
 Chumphon	TH-86	TH.58	1153555	Province	Chumphon Province|จังหวัดชุมพร|ชุมพร	1		218
-Chiang Rai		TH.03	1153668		Chiang Rai Province|จังหวัดเชียงราย|เชียงราย	1		218
-Chiang Mai		TH.02	1153670		จังหวัดเชียงใหม่|เชียงใหม่	1		218
+Chiang Rai	TH-57	TH.03	1153668	Province	Chiang Rai Province|จังหวัดเชียงราย|เชียงราย	1		218
+Chiang Mai	TH-50	TH.02	1153670	Province	จังหวัดเชียงใหม่|เชียงใหม่	1		218
 Yasothon	TH-35	TH.72	1604767	Province	จังหวัดยโสธร|ยโสธร	1		218
 Yala	TH-95	TH.70	1604869	Province	Yala Province|จังหวัดยะลา|ยะลา	1		218
 Uttaradit	TH-53	TH.10	1605214	Province	Uttaradit Province|จังหวัดอุตรดิตถ์|อุตรดิตถ์	1		218
@@ -43093,7 +43093,7 @@ Udon Thani	TH-41	TH.76	1906686	Province	Udon Thani Province|จังหวั�
 Prachin Buri	TH-25	TH.74	1906687	Province	Prachinburi Province|จังหวัดปราจีนบุรี|ปราจีนบุรี	1		218
 Ubon Ratchathani	TH-34	TH.75	1906688	Province	Ubon Ratchathani Province|จังหวัดอุบลราชธานี|อุบล|อุบลราชธานี	1		218
 Amnat Charoen	TH-37	TH.77	1906689	Province	Amnat Charoen Province|จังหวัดอำนาจเจริญ|อำนาจเจริญ	1		218
-Nong Bua Lamphu		TH.79	1906690		Nong Bua Lamphu Province|จังหวัดหนองบัวลำภู|หนองบัวลำภู	1		218
+Nong Bua Lam Phu	TH-39	TH.79	1906690	Province	Nong Bua Lamphu|Nong Bua Lamphu Province|จังหวัดหนองบัวลำภู|หนองบัวลำภู	1		218
 Sa Kaeo	TH-27	TH.80	1906691	Province	Sa Kaeo Province|จังหวัดสระแก้ว|สระแก้ว	1		218
 Bueng Kan	TH-38	TH.81	8133594	Province	Bueng Kan Province|Changwat Bueng Kan|จังหวัดบึงกาฬ|บึงกาฬ	1		218
 Phatthaya	TH-S			Special administrative city		1		218
@@ -44029,7 +44029,8 @@ Sughd	TJ-SU	TJ.03	1221092	Region	Вилояти Суғд	1		219
 Kŭhistoni Badakhshon	TJ-GB	TJ.01	1221692	Autonomous region	Gorno-Badakhshan|Вилояти Мухтори Кӯҳистони Бадахшон	1		219
 Khatlon	TJ-KT	TJ.02	1347488	Region	Khatlon Province|Вилояти Хатлон	1		219
 nohiyahoi tobei jumhurí	TJ-RA	TJ.RR	6452615	Districts under republic administration	Region of Republican Subordination|Republican Subordination|Ноҳияҳои тобеи ҷумҳурӣ	1		219
-Dushanbe	TJ-DU	TJ.04	7280679	Capital territory	Душанбе	1		219
+Dushanbe		TJ.04	7280679		Душанбе	1		219
+Dushanbe	TJ-DU	TJ.04.1221873	1221873	Capital territory		1	44032	219
 Tursunzoda District		TJ.RR.1220012	1220012		Турсунзода	2	44031	219
 Shohmansur Region		TJ.04.1220048	1220048		Ноҳияи Шоҳмансур	2	44032	219
 Yavanskiy Rayon		TJ.02.1220107	1220107			2	44030	219
@@ -44046,7 +44047,6 @@ Bokhtarskiy Rayon		TJ.02.1221253	1221253			2	44030	219
 Khovalingskiy Rayon		TJ.02.1221320	1221320			2	44030	219
 Darvozskiy Rayon		TJ.01.1221558	1221558			2	44029	219
 Gozimalikskiy Rayon		TJ.02.1221646	1221646			2	44030	219
-Dushanbe		TJ.04.1221873	1221873			2	44032	219
 Ayninskiy Rayon		TJ.03.1222220	1222220			2	44028	219
 Nohiyai Zafarobod		TJ.03.1514816	1514816		Zafarobod District|Ноҳияи Зафаробод	2	44028	219
 Khodzhentskiy Rayon		TJ.03.1514880	1514880			2	44028	219
@@ -44272,7 +44272,7 @@ Kasserine	TN-42	TN.02	2473460	Governorate	Kasserine Governorate|القصرين|�
 Monastir	TN-52	TN.16	2473495	Governorate	Monastir Governorate|المنستير|ولاية المنستير	1		223
 Mahdia	TN-53	TN.15	2473574	Governorate	Mahdia Governorate|المهدية|ولاية المهدية	1		223
 Le Kef	TN-33	TN.14	2473637	Governorate	Kef|Kef Governorate|الكاف|ولاية الكاف	1		223
-Manouba		TN.39	6201192		Manouba Governorate|منوبة|ولاية منوبة	1		223
+La Manouba	TN-14	TN.39	6201192	Governorate	Manouba|Manouba Governorate|منوبة|ولاية منوبة	1		223
 Zaghouan		TN.37.1651	2464039		زغوان|معتمدية زغوان|ناوغز	2	44252	223
 Délégation de la Médina		TN.36.1152	2464465		La Medina|المدينة|ةنيدملا|معتمدية المدينة	2	44253	223
 Tozeur		TN.35.6251	2464646		توزر|رزوت|معتمدية توزر	2	44254	223
@@ -45623,16 +45623,16 @@ Yozgat		TR.66.13308792	13308792			2	44568	225
 Tobago	TT-TOB	TT.11	3573606	Ward		1		226
 San Fernando	TT-SFO	TT.10	3573739	City	City of San Fernando	1		226
 Port of Spain	TT-POS	TT.05	3573891	City	City of Port of Spain	1		226
-Mayaro		TT.03	3574155			1		226
-Borough of Arima		TT.01	3575052			1		226
+Mayaro-Rio Claro	TT-MRC	TT.03	3574155	Region	Mayaro	1		226
+Arima	TT-ARI	TT.01	3575052	Borough	Borough of Arima	1		226
 Chaguanas	TT-CHA	TT.CHA	7521937	Borough		1		226
 Couva-Tabaquite-Talparo	TT-CTT	TT.CTT	7521938	Region		1		226
-Diego Martin Regional Corporation		TT.DMN	7521939			1		226
+Diego Martin	TT-DMN	TT.DMN	7521939	Region	Diego Martin Regional Corporation	1		226
 Penal-Debe	TT-PED	TT.PED	7521941	Region	Penal/Debe	1		226
-Princes Town		TT.PRT	7521942			1		226
+Princes Town	TT-PRT	TT.PRT	7521942	Region		1		226
 Point Fortin	TT-PTF	TT.PTF	7521943	Borough		1		226
-Sangre Grande Regional Corporation		TT.SGE	7521944			1		226
-Siparia Regional Corporation		TT.SIP	7521945			1		226
+Sangre Grande	TT-SGE	TT.SGE	7521944	Region	Sangre Grande Regional Corporation	1		226
+Siparia	TT-SIP	TT.SIP	7521945	Region	Siparia Regional Corporation	1		226
 San Juan-Laventille	TT-SJL	TT.SJL	7521946	Region	San Juan/Laventille	1		226
 Tunapuna-Piarco	TT-TUP	TT.TUP	7521947	Region	Tunapuna/Piarco	1		226
 Ward of Valencia		TT.SGE.3573559	3573559			2	45634	226
@@ -45684,6 +45684,7 @@ Fukien		TW.01	7280288		福建省	1		228
 Takao		TW.02	7280289		Kô-hiùng-sṳ|高雄市	1		228
 Taipei	TW-TPE	TW.03	7280290	Special municipality	Thòi-pet-sṳ|臺北市	1		228
 Tainan	TW-TNN	TW.04	7280291	Special municipality	Taiwan|臺灣省 or 台灣省	1		228
+New Taipei	TW-NWT	TW.03.TPQ	1665148	Special municipality	New Taipei City|新北市|臺灣省	1	45685	228
 Yunlin	TW-YUN	TW.04.YUN	1665194	County	Hûn-lîm-koān|Yunlin County|Yùn-lìm-yen|雲林縣	1	45686	228
 Taoyuan	TW-TAO	TW.04.TAO	1667900	Special municipality	桃園市	1	45686	228
 Taitung	TW-TTT	TW.04.TTT	1668292	County	台東縣|臺東縣	1	45686	228
@@ -45703,11 +45704,10 @@ Keelung	TW-KEE	TW.04.KEE	6724654	City	Keelung City|基隆市	1	45686	228
 Lienchiang	TW-LIE	TW.01.LIE	6724655	County	Lienchiang County|連江縣	1	45683	228
 Kaohsiung	TW-KHH	TW.02.KHH	9613373	Special municipality	高雄市	1	45684	228
 Taichung	TW-TXG	TW.04.TXG	9613500	Special municipality	Taichung City	1	45686	228
-New Taipei City		TW.03.TPQ	1665148		New Taipei|新北市|臺灣省	2	45685	228
 Taipei City		TW.04.TPE	1668338		台北市|臺北市	2	45686	228
 Tainan		TW.04.TNN	1668352		台南市|臺南市	2	45686	228
 Kagera	TZ-05	TZ.19	148679	Region	Mkoa wa Kagera	1		229
-Zanzibar Urban/West		TZ.25	148724		Mjini Magharibi|Mkoa wa Mjini Magharibi	1		229
+Zanzibar West	TZ-15	TZ.25	148724	Region	Mjini Magharibi|Mkoa wa Mjini Magharibi|Zanzibar Urban/West	1		229
 Zanzibar North	TZ-07	TZ.22	148725	Region	Kaskazini Unguja|Mkoa wa Kaskazini Unguja	1		229
 Zanzibar South	TZ-11	TZ.21	148728	Region	Kusini Unguja|Mkoa wa Kusini Unguja|Zanzibar Central/South	1		229
 Tanga	TZ-25	TZ.18	149595	Region	Mkoa wa Tanga	1		229
@@ -46098,7 +46098,7 @@ Jinja	UG-204	UG.E.33	443335	District	Jinja District|Wilaya ya Jinja	2	46084	231
 Kabale	UG-404	UG.W.34	443336	District	Kabale District|Wilaya ya Kabale	2	46086	231
 Kabarole	UG-405	UG.W.79	443337	District	Kabarole District|Wilaya ya Kabarole	2	46086	231
 Kalangala	UG-101	UG.C.36	443338	District	Kalangala District|Wilaya ya Kalangala	2	46083	231
-Kampala District		UG.C.37	443339		Wilaya ya Kampala	2	46083	231
+Kampala	UG-102	UG.C.37	443339	City	Kampala District|Wilaya ya Kampala	2	46083	231
 Kamuli	UG-205	UG.E.38	443340	District	Kamuli District|Wilaya ya Kamuli	2	46084	231
 Kapchorwa	UG-206	UG.E.39	443341	District	Kapchorwa District|Wilaya ya Kapchorwa	2	46084	231
 Kasese	UG-406	UG.W.40	443342	District	Kasese District|Wilaya ya Kasese	2	46086	231
@@ -49580,7 +49580,7 @@ Sirdaryo	UZ-SI	UZ.16	1484840	Region	Sirdaryo Region|Sirdaryo viloyati	1		235
 Navoiy	UZ-NW	UZ.07	1484841	Region	Navoiy Region|Navoiy viloyati	1		235
 Namangan	UZ-NG	UZ.06	1484842	Region	Namangan viloyati	1		235
 Xorazm	UZ-XO	UZ.05	1484843	Region	Xorazm Region|Xorazm viloyati	1		235
-Jizzakh Region		UZ.15	1484844		Jizzax viloyati	1		235
+Jizzax	UZ-JI	UZ.15	1484844	Region	Jizzakh Region|Jizzax viloyati	1		235
 Farg‘ona	UZ-FA	UZ.03	1484845	Region	Farg‘ona viloyati|Fergana	1		235
 Andijon	UZ-AN	UZ.01	1484846	Region	Andijan Region|Andijon viloyati|Андижон|Андижон вилояти	1		235
 Shumanay Tumani		UZ.09.601276	601276		Shomanay district	2	49572	235
@@ -50197,7 +50197,7 @@ Nghệ An	VN-22	VN.40	1559969	Province	Nghệ An Province	1		241
 Thừa Thiên-Huế	VN-26	VN.46	1565033	Province	Thừa Thiên Huế Province	1		241
 Thanh Hóa	VN-21	VN.38	1566165	Province	Thanh Hóa Province	1		241
 Sơn La	VN-05	VN.14	1567643	Province	Sơn La Province	1		241
-Quảng Ninh		VN.22	1568758			1		241
+Quảng Ninh	VN-13	VN.22	1568758	Province		1		241
 Lạng Sơn	VN-09	VN.20	1576632	Province	Lạng Sơn Province	1		241
 Lai Châu	VN-01	VN.12	1577954	Province	Lai Châu Province	1		241
 Hà Tĩnh	VN-23	VN.42	1580700	Province	Hà Tĩnh Province	1		241
@@ -51077,7 +51077,7 @@ Aḑ Ḑāli‘	YE-DA	YE.18	6201193	Governorate	Dhale Governorate|محافظة �
 Ḩajjah	YE-HJ	YE.22	6201195	Governorate	Hajjah Governorate|حجة|محافظة حجة	1		245
 Ibb	YE-IB	YE.23	6201196	Governorate	Ibb Governorate|إب|محافظة إب	1		245
 Laḩij	YE-LA	YE.24	6201197	Governorate	Lahij Governorate|لحج|محافظة لحج	1		245
-Amanat Alasimah		YE.26	6940571		الامانة|العاصمة|العاصمة صنعاء|امانه العاصمه|صنعاء	1		245
+Amānat al ‘Āşimah	YE-SA	YE.26	6940571	Municipality	Amanat Alasimah|الامانة|العاصمة|العاصمة صنعاء|امانه العاصمه|صنعاء	1		245
 Arkhabīl Suquţrá	YE-SU	YE.28	9645387	Governorate	Soqatra|Soqatra Governorate|سقطرى	1		245
 Az Zaydīyah		YE.08.1807	69440		Az Zaydiyah District|الزيدية	2	51071	245
 Zabīd		YE.08.1824	69499		Zabid District|زبيد	2	51071	245
