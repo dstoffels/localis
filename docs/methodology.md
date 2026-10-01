@@ -1,0 +1,71 @@
+# Subdivision Merge Methodology
+
+## Purpose and scope
+
+`localis`'s subdivision dataset reconciles two independent sources that don't share a common identifier: ISO 3166-2 (via Debian's iso-codes project) and GeoNames' `admin1CodesASCII.txt`/`admin2Codes.txt`. Neither is trusted blindly, and the reconciliation isn't a black box. This document is a complete, falsifiable account of how a raw ISO entry and a raw GeoNames entry become one shipped `Subdivision` record. Every gate the pipeline runs a candidate pair through, the specific failure mode each gate exists to prevent, the real example that surfaced that failure mode, and the exact rule in force. Anyone who finds a result they don't trust should be able to trace it back to the reasoning that produced it, here.
+
+## Source provenance
+
+ISO 3166-2 is the authority for which subdivisions exist, their official name, their administrative type, and their real hierarchy. GeoNames is the authority for a stable numeric identifier (`geonames_id`), the `geonames_code` (its own admin1/admin2 code string), and a large alternate-name corpus. Where the two sources disagree, ISO's structure wins and GeoNames supplies enrichment. Ipregistry's `iso3166` repository contributes one field, `localVariant` aliases.
+
+Aliases are additionally enriched from GeoNames' `alternateNamesV2` dump, filtered to English plus each subdivision's country's official language(s) (from Unicode CLDR's `territoryInfo.json`), excluding any alternate name flagged historic or colloquial, and stripping bidi/zero-width control characters that sometimes appear literally embedded in RTL-script names pulled from Wikipedia/Wikidata (`ingest/subdivisions/scripts/merge_alternate_names.py`). This runs before matching, not after, so the extra name variants are also available for fuzzy comparison when merging, not just to the final shipped alias list.
+
+## The merge pipeline
+
+Candidates are compared in buckets of `(country, admin_level)`: an ISO entry is only ever compared against GeoNames entries of the same country and the same administrative level. A pair has to clear every gate below, in order, before it's eligible to merge.
+
+### 1. Bracket/parenthetical splitting (source hygiene, before matching)
+
+ISO-codes sometimes suffixes a name with bracketed or parenthetical content. That content is one of three things: a genuine alternate name (`"Girona [Gerona]"`, `"National Capital District (Port Moresby)"`), a bare subdivision code (`"Stockholms län [SE-01]"`), or a territory-dispute/type annotation (`"Aousserd (EH)"`, `"Amānat al 'Āşimah [city]"`). Left inline, this actively broke matching: `"Stockholms län [SE-01]"` normalized to `"stockholms lan se 01"`, three junk tokens away from GeoNames' bare `"Stockholms"`, comfortably below threshold. The same pattern affected Spanish provinces (`"Girona [Gerona]"`, `"Barcelona [Barcelona]"`) and the UK's Welsh unitary authorities (`"Isle of Anglesey [Sir Ynys Môn GB-YNM]"`). `ingest/subdivisions/scripts/iso_subdivisions.py`'s `_split_bracketed_name()` splits the primary name from the bracket content at load time: a genuine alternate name becomes an alias, everything else (a bare code, a duplicate of the primary name, a known non-name annotation) is discarded.
+
+### 2. Name normalization and noise-token stripping
+
+Both sides' names and aliases are lowercased, diacritics-normalized, and stripped of a fixed set of administrative qualifier words (`NOISE_TOKENS` in `merge_subdivisions.py`) before comparison, so a match isn't penalized just because one side spells out "Province" and the other doesn't. The set spans dozens of languages' equivalent words (province/provincia/sheng, district/rayon/raion/okrug, municipality/comuna/municipio/kommun/gemeente, region/oblast/kray/kraj/län, department/departamento, county/powiat/kabupaten, and more), built empirically by inspecting GeoNames' actual raw admin1/admin2 name text for recurring trailing/leading qualifier words, not from a theoretical list.
+
+### 3. Type-family disqualification
+
+A pair can pass every other gate and still be wrong if the two sides disagree on the most basic distinction: is this the settlement itself, or the area around it? `UA-30` (ISO: "Kyiv", the city) auto-merged with GeoNames' `UA.13`, whose own alternate names are exclusively `Kyiv Oblast`/`Kyivshchyna`/etc.: the surrounding oblast, not the city. It won purely on string score, "Kyiv" against bare "Kyiv" is a near-perfect match, while `UA-32` ("Kyivska oblast", the actual oblast) never scored well enough against the same bare name to even compete. The same shape recurred for Vilnius (`LT-58` grabbing the GeoNames entry whose own alias literally says "Vilnius City Municipality") and, per a cached-resolution conflict the pipeline logged, for Altai (`RU-ALT` vs. `RU-AL`).
+
+The fix disqualifies a candidate pair before scoring if GeoNames' raw, unstripped name or aliases carry a qualifier word from a different family than the ISO side's own `type`. The families are deliberately coarse: just `city` (city/shi/si/gorodskoy/town) against everything else (`area`). An earlier, finer-grained version (separate families for province/department/county/region/etc.) was tried and reverted after it broke real matches: GeoNames' raw name for Romanian counties is literally `"Vâlcea County"` while ISO types them `"Department"`, and Sweden's `"län"` had been miscategorized into the wrong family entirely. These are the same real-world administrative tier described by different translation conventions, not genuinely different tiers, so treating them as mutually exclusive produced false disqualifications across nearly all of Romania and Sweden. Collapsing back to just city-vs-area eliminated that regression (a drop of 150 wrongly-orphaned entries on the run this was fixed). Settlement-vs-area is the one distinction that held up under scrutiny; finer administrative-type distinctions did not.
+
+### 4. Fuzzy match scoring
+
+Score is `rapidfuzz.fuzz.token_sort_ratio` (sorts tokens before comparing, so word order doesn't matter) against a dynamic threshold (`threshold()` in `merge_subdivisions.py`): base 90, reduced 15 points for names averaging ≤5 characters, 10 points for ≤8, 5 points for ≤12, and a further 5 points for single-token names, since short names need proportionally more tolerance for the same absolute edit distance to matter less. `token_sort_ratio` replaced `token_set_ratio` this cycle specifically because `token_set_ratio` treats a full token-subset relationship as automatically near-100% similar, which is correct for a genuine noise-word difference but wrong for administrative qualifiers naming genuinely different real places ("Val-de-Marne" is not "Marne"). A directional-token check (`has_directional_mismatch`) separately vetoes any pair split only by north/south/east/west/upper/lower/central, preventing "East Germany" from ever matching "West Germany" regardless of score.
+
+### 5. Global best-score assignment
+
+Every candidate pair in a bucket is scored before any assignment happens, then claimed in descending score order (`scored_pairs.sort(...)`), so a strong match can never be blocked by a weaker one that happened to get claimed first due to iteration order.
+
+### 6. Ambiguity threshold
+
+If two or more distinct ISO subdivisions both score at or above 90 against the same GeoNames target, that target is excluded from auto-merge entirely rather than handed to whichever one scored marginally higher. This catches namesake collisions, most often a city and its own containing district sharing an identical bare name, where string similarity genuinely cannot break the tie without an external signal. Excluded targets are logged (`"ambiguous target '...': ... all scored >= 90, excluding from auto-merge"`) and their ISO subdivisions fall through to the human resolution path below.
+
+### 7. Admin-level classification and non-administrative exceptions
+
+`admin_level` is computed independently for ISO-sourced and GeoNames-sourced entries: GeoNames' own code structure (`country.admin1` = 1, `country.admin1.admin2` = 2) for the latter, ISO's own parent-code structure for the former. The naive version of the ISO-side rule, "level 1 if no parent, level 2 otherwise," breaks for a handful of countries where ISO nests real administrative divisions beneath a parent that carries a code and a name but has no governing function at all: Indonesia's ISO table groups its 38 real provinces under 7 "Geographical unit" entries, a pure island-based organizing category with its own government precisely nowhere; the Dominican Republic groups its 31 provinces plus the Distrito Nacional (32 total) under 10 "Region" entries that are a statistical/regional-planning construct (no governor, no budget, no elected body); Cabo Verde's 22 municipalities are similarly grouped under two "Geographical region" entries (the Barlavento/Sotavento island groups).
+
+These three, `("ID", "geographical unit")`, `("DO", "region")`, `("CV", "geographical region")`, are enumerated in `_NON_ADMINISTRATIVE_TYPES` in `iso_subdivisions.py`. An entry matching this list gets `admin_level=0`: it is loaded, keeps its true ISO `parent` reference (the relationship is real and documented, even though the parent isn't a government), and is added to the dataset directly, bypassing GeoNames matching entirely, since by construction nothing in GeoNames' admin1/admin2 files could ever represent "Sumatera" or "Ozama" as a governed place. Its real children (Aceh, Azua Province, etc.) are unaffected by the exclusion and correctly compute `admin_level=1`.
+
+The standard for adding a country here is deliberately two-part, structural signal and an independently verifiable governing-function fact, and two structurally similar candidates were checked and rejected to demonstrate the bar isn't rubber-stamped. Guinea-Bissau's `Province → Region` nesting (3 provinces, `GW-L`/`GW-N`/`GW-S`, each genuinely parenting several `Region`-type entries) and Iraq's `Region` (the Kurdistan Region, `IQ-KR`, containing 3 real governorates) both looked like the same shape from the raw parent-usage data alone, but both tiers are real, separately governed administrative bodies in those countries, not documentation categories, so no exception was made.
+
+### 8. Human resolution fallback
+
+Whatever survives every automated gate unmerged is an orphan, handed to the resolve-subdivisions skill (documented in `docs/dev.md`), which resolves each one with real-world geographic research and writes a durable decision to `resolution_map.json`, re-applied automatically on every future ingest run. `resolution_log.txt` is the append-only, human-readable record of every one of those decisions; its full ~700-entry history was independently audited on 2026-09-27 with zero mismatches found.
+
+## Evidentiary standard
+
+Concretely, what it takes to clear the two judgment-call gates:
+
+- **Ambiguity threshold (§6)**: an automated merge only proceeds when no competing ISO subdivision scores within range of the winner against the same GeoNames target. A close-but-not-tied score is not treated as ambiguous; a genuine tie at or above 90 is.
+- **Non-administrative exception (§7)**: requires a structural signal from the data itself (a type name that reads as a category rather than a government, or an entry count matching the country's known real division count) and a specific, checkable fact about that country's actual administrative law (not "this seems unlikely to be real" but "this tier has no governor/budget/elected body, and here's why"). Showing rejected candidates (Guinea-Bissau, Iraq) alongside accepted ones is part of the standard, not an afterthought; a document that only shows accepted exceptions is indistinguishable from cherry-picking.
+
+## Known limitations
+
+- **Ireland (`Province`), Iceland (`Region`), and Lithuania (`County`)** show the same structural shape as the confirmed non-administrative cases (Irish provinces are historical/ceremonial with no government since independence; Icelandic regions are EU-style statistical constructs; Lithuania abolished county government outright in 2010) but have not yet been added to `_NON_ADMINISTRATIVE_TYPES`, pending the same individual confirmation given to the three confirmed cases.
+- **The Philippines and Malawi** were deliberately left unresolved. Most Philippine regions are national-government coordination groupings with no elected regional government, but the Bangsamoro Autonomous Region (BARMM) genuinely has one, so no single country-wide rule is correct. Malawi's regions have some administrative role that wasn't confident enough to classify either way.
+- **France's ISO data contains a genuine 3-generation chain**: `Metropolitan region → European collectivity/Metropolitan collectivity with special status (Alsace, Corsica) → Metropolitan department`. The current 2-level `admin_level` model cannot represent all three without collapsing one. Whether this matters in practice, versus the middle "collectivity" tier simply never having a GeoNames counterpart to merge with and remaining a standalone, correctly-orphaned entry, hasn't been determined. Logged in `docs/plan.md` under "Subdivision admin-level model" as an open design question.
+- **No statistically-sampled audit of successful auto-merges exists yet.** Every fix documented above was found reactively, by noticing an anomaly in orphan counts or log output, not by drawing a random sample of already-merged subdivisions and independently verifying correctness. The resolve-subdivisions skill's decisions have been fully audited (§8); the much larger set of automated high-score merges has only been spot-checked.
+
+## Change history
+
+- **2026-09-30**: Initial methodology documented, covering the alt-name enrichment pipeline, the `token_set_ratio` → `token_sort_ratio` switch, the ambiguity threshold, the city/area type-family disqualification (and the reverted finer-grained version), bracket/parenthetical name splitting, and the admin_level=0 non-administrative exception mechanism (Indonesia, Dominican Republic, Cabo Verde confirmed; Ireland/Iceland/Lithuania flagged pending; Philippines/Malawi/France's 3-generation case left open).
