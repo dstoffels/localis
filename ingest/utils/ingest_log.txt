@@ -1,11 +1,8 @@
-[COUNTRIES] No update needed for geonames_countries.txt
 [COUNTRIES] Downloading iso_3166-1.json from https://salsa.debian.org/iso-codes-team/iso-codes/-/raw/main/data/iso_3166-1.json
 [COUNTRIES] Downloaded and updated iso_3166-1.json
 [COUNTRIES] Downloading geonames_countries.txt from https://download.geonames.org/export/dump/countryInfo.txt
 [COUNTRIES] Downloaded and updated geonames_countries.txt
 [COUNTRIES] completed: 254 countries
-[SUBDIVISIONS] No update needed for admin1CodesASCII.txt
-[SUBDIVISIONS] No update needed for admin2Codes.txt
 [SUBDIVISIONS] No update needed for ipregistry_subdivisions.csv
 [SUBDIVISIONS] Downloading admin1CodesASCII.txt from https://download.geonames.org/export/dump/admin1CodesASCII.txt
 [SUBDIVISIONS] Downloaded and updated admin1CodesASCII.txt
@@ -21,9 +18,10 @@
 [SUBDIVISIONS] Dumping subdivision filter index...
 [SUBDIVISIONS] Dumping subdivision search index...
 [SUBDIVISIONS] completed: 51684 subdivisions
-[CITIES] No update needed for cities500.zip
-[CITIES] Dumping 235895 cities...
+[CITIES] Downloading cities500.zip from https://download.geonames.org/export/dump/cities500.zip
+[CITIES] Downloaded and updated cities500.zip
+[CITIES] Dumping 235902 cities...
 [CITIES] Dumping cities lookup indexes...
 [CITIES] Dumping cities filter index...
 [CITIES] Dumping cities search index...
-[CITIES] completed: 235895 cities
+[CITIES] completed: 235902 cities

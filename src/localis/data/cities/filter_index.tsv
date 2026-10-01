@@ -22780,7 +22780,7 @@ leblanc	ca|can|canada	ca-qc|ca.10|ca.10.04|mauricie|qc|quebec
 leduc	ca|can|canada	ab|alberta|ca-ab|ca.01|ca.01.4811016|leduc
 lee ridge	ca|can|canada	ab|alberta|ca-ab|ca.01|ca.01.4811061|edmonton
 lefebvre	ca|can|canada	ca-qc|ca.10|ca.10.17|centre-du-quebec|qc|quebec
-lemoyne	ca|can|canada	ca-qc|ca.10|ca.10.16|monteregie|qc|quebec
+le moyne	ca|can|canada	ca-qc|ca.10|ca.10.16|monteregie|qc|quebec
 lendrum place	ca|can|canada	ab|alberta|ca-ab|ca.01|ca.01.4811061|edmonton
 l'epiphanie	ca|can|canada	ca-qc|ca.10|ca.10.14|lanaudiere|qc|quebec
 lepreau	ca|can|canada	ca-nb|ca.04|ca.04.1302|charlotte county|nb|new brunswick
@@ -23187,7 +23187,7 @@ pointe-calumet	ca|can|canada	ca-qc|ca.10|ca.10.15|laurentides|qc|quebec
 pointe-claire	ca|can|canada	ca-qc|ca.10|ca.10.06|montreal|qc|quebec
 pointe-du-chene	ca|can|canada	ca-nb|ca.04|ca.04.1307|nb|new brunswick|westmorland county
 pointe-du-lac	ca|can|canada	ca-qc|ca.10|ca.10.02|qc|quebec|saguenay/lac-saint-jean
-point leamington	ca|can|canada	ca-nl|ca.05|newfoundland and labrador|nl
+point leamington	ca|can|canada	ca-nl|ca.05|ca.05.1008049|newfoundland and labrador|nl|point leamington
 point mckay	ca|can|canada	ab|alberta|ca-ab|ca.01|ca.01.4806016|calgary
 pollard meadows	ca|can|canada	ab|alberta|ca-ab|ca.01|ca.01.4811061|edmonton
 polson park	ca|can|canada	ca-on|ca.08|ca.08.3510|frontenac county|on|ontario
@@ -25023,6 +25023,8 @@ sutton mills	ca|can|canada	ca-on|ca.08|ca.08.3510|frontenac county|on|ontario
 saint-ignace-de-loyola	ca|can|canada	ca-qc|ca.10|ca.10.14|lanaudiere|qc|quebec
 ferland-et-boilleau	ca|can|canada	ca-qc|ca.10|ca.10.02|qc|quebec|saguenay/lac-saint-jean
 winfield	ca|can|canada	bc|british columbia|ca-bc|ca.02|ca.02.5935|regional district of central okanagan
+sainte-foy-sillery-cap-rouge	ca|can|canada	ca-qc|ca.10|ca.10.03|capitale-nationale|qc|quebec
+cap-rouge	ca|can|canada	ca-qc|ca.10|ca.10.03|capitale-nationale|qc|quebec
 west island	cc|cck|cocos (keeling) islands	
 yangambi	cd|cod|democratic republic of the congo	cd-to|cd.30|cd.30.05|isangi|to|tshopo
 watsa	cd|cod|democratic republic of the congo	cd-hu|cd.16|cd.16.09|haut-uele|hu|watsa
@@ -65567,6 +65569,7 @@ slangerup	denmark|dk|dnk	capital region|dk.17|dk.17.250|frederikssund kommune
 slagelse	denmark|dk|dnk	85|dk-85|dk.20|dk.20.330|sjaelland|slagelse kommune
 skaevinge	denmark|dk|dnk	capital region|dk.17|dk.17.219|hillerod kommune
 skaerbaek	denmark|dk|dnk	83|dk-83|dk.21|dk.21.550|syddanmark|tonder kommune
+skovlunde	denmark|dk|dnk	ballerup kommune|capital region|dk.17|dk.17.151
 skovby	denmark|dk|dnk	82|dk-82|dk.18|dk.18.746|midtjylland|skanderborg kommune
 skorping	denmark|dk|dnk	81|dk-81|dk.19|dk.19.840|nordjylland|rebild kommune
 skodstrup	denmark|dk|dnk	82|aarhus kommune|dk-82|dk.18|dk.18.751|midtjylland
@@ -65659,6 +65662,7 @@ neder holluf	denmark|dk|dnk	83|dk-83|dk.21|dk.21.461|odense kommune|syddanmark
 nakskov	denmark|dk|dnk	85|dk-85|dk.20|dk.20.360|lolland kommune|sjaelland
 nagelsti	denmark|dk|dnk	85|dk-85|dk.20|dk.20.376|guldborgsund kommune|sjaelland
 munkebo	denmark|dk|dnk	83|dk-83|dk.21|dk.21.440|kerteminde kommune|syddanmark
+morud	denmark|dk|dnk	83|dk-83|dk.21|dk.21.480|nordfyns kommune|syddanmark
 morkov	denmark|dk|dnk	85|dk-85|dk.20|dk.20.316|holbaek kommune|sjaelland
 morkhoj	denmark|dk|dnk	capital region|dk.17|dk.17.159|gladsaxe municipality
 middelfart	denmark|dk|dnk	83|dk-83|dk.21|dk.21.410|middelfart kommune|syddanmark
@@ -97897,6 +97901,7 @@ kourou	french guiana|gf|guf	gf.gf|gf.gf.973|guyane
 iracoubo	french guiana|gf|guf	gf.gf|gf.gf.973|guyane
 grand-santi	french guiana|gf|guf	gf.gf|gf.gf.973|guyane
 cayenne	french guiana|gf|guf	gf.gf|gf.gf.973|guyane
+bellevue	french guiana|gf|guf	gf.gf|gf.gf.973|guyane
 apatou	french guiana|gf|guf	gf.gf|gf.gf.973|guyane
 awala-yalimapo	french guiana|gf|guf	gf.gf|gf.gf.973|guyane
 residence arc-en-ciel	french guiana|gf|guf	
@@ -98372,6 +98377,7 @@ ayene	equatorial guinea|gnq|gq	gq-wn|gq.09|wele-nzas|wn
 anisoc	equatorial guinea|gnq|gq	gq-wn|gq.09|wele-nzas|wn
 acurenam	equatorial guinea|gnq|gq	centro sud|cs|gq-cs|gq.06
 aconibe	equatorial guinea|gnq|gq	gq-wn|gq.09|wele-nzas|wn
+abaamang	equatorial guinea|gnq|gq	
 ciudad de la paz	equatorial guinea|gnq|gq	dj|djibloho|gq-dj|gq.10
 zoodochos	gr|grc|greece	d|gr-d|gr.esye21|gr.esye21.17|ipeiros|nomos ioanninon
 zoniana	gr|grc|greece	gr-m|gr.esye43|gr.esye43.44|kriti|m|nomos rethymnis
@@ -205184,6 +205190,7 @@ stara yahilnytsia	ua|ukr|ukraine	61|chortkiv raion|ternopilska oblast|ua-61|ua.2
 yahilnytsia	ua|ukr|ukraine	61|chortkiv raion|ternopilska oblast|ua-61|ua.22|ua.22.6106
 yakhnyky	ua|ukr|ukraine	53|myrhorod raion|poltavska oblast|ua-53|ua.18|ua.18.5306
 yablunivka	ua|ukr|ukraine	74|chernihivska oblast|prylutskyi raion|ua-74|ua.02|ua.02.7408
+uhersko	ua|ukr|ukraine	46|lvivska oblast|stryys'ka mis'krada|ua-46|ua.15|ua.15.4610
 yazlovets	ua|ukr|ukraine	61|chortkiv raion|ternopilska oblast|ua-61|ua.22|ua.22.6106
 yabluniv	ua|ukr|ukraine	26|ivano-frankivska oblast|kosiv raion|ua-26|ua.06|ua.06.2610
 yabluniv	ua|ukr|ukraine	21|mukachevo raion|ua-21|ua.25|ua.25.2104|zakarpatska oblast
@@ -210192,7 +210199,7 @@ hermanivka	ua|ukr|ukraine	32|kyivska oblast|obukhiv raion|ua-32|ua.13|ua.13.3212
 sofiivska borschahivka	ua|ukr|ukraine	32|buchanskyi raion|kyivska oblast|ua-32|ua.13|ua.13.3208
 helmiaziv	ua|ukr|ukraine	71|cherkaska oblast|ua-71|ua.01|ua.01.7104|zolotonosha raion
 darnytsya car repair plant microdistrict	ua|ukr|ukraine	kyiv city|ua.12
-troyeshchyna	ua|ukr|ukraine	kyiv city|ua.12
+troyeshchyna	ua|ukr|ukraine	desnianskyi raion|kyiv city|ua.12|ua.12.8520167
 cherepanova hora	ua|ukr|ukraine	kyiv city|ua.12
 khreshchatyi yar	ua|ukr|ukraine	kyiv city|ua.12
 lazurnyi	ua|ukr|ukraine	14|donetska oblast|pokrovsk raion|ua-14|ua.05|ua.05.1416

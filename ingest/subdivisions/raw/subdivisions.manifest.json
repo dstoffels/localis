@@ -1,12 +1,12 @@
 {
   "admin1CodesASCII.txt": {
-    "etag": "\"2501f-65c958405d8e6\"",
-    "last_modified": "Tue, 29 Sep 2026 01:58:15 GMT",
+    "etag": "\"2501f-65cbde5a07909\"",
+    "last_modified": "Thu, 01 Oct 2026 02:08:51 GMT",
     "content_length": "151583"
   },
   "admin2Codes.txt": {
-    "etag": "\"243e03-65c958405d8e6\"",
-    "last_modified": "Tue, 29 Sep 2026 01:58:15 GMT",
+    "etag": "\"243e03-65cbde5a07909\"",
+    "last_modified": "Thu, 01 Oct 2026 02:08:51 GMT",
     "content_length": "2375171"
   },
   "iso-3166-2.csv": {
