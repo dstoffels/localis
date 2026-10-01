@@ -1,6 +1,7 @@
 from .paths import (
     BASE_PATH,
     DATA_PATH,
+    DOCS_PATH,
     COUNTRIES_INPUTS_PATH,
     SUBDIVISIONS_INPUTS_PATH,
     CITIES_INPUTS_PATH,

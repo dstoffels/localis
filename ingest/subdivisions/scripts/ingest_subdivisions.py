@@ -2,7 +2,8 @@
 # layered in only for alias enrichment. We initialize from GeoNames and merge in the
 # ISO data, prompting to resolve ambiguities. Manual intervention is required for some
 # entries, which is mapped in ingest/subdivisions/outputs/resolution_map.json.
-# villager only supports administrative levels 1 and 2, which covers most cases.
+# GeoNames itself never nests beyond admin_level 2; ISO subs deeper than that (so far
+# only France) still merge against GeoNames' level-2 data, see automerge/scoring.py.
 
 from ingest.shared.scripts import load_countries
 from .fetch_subdivisions import fetch_subdivisions_sources
@@ -14,10 +15,11 @@ from .geonames_subdivisions import map_geonames_subdivisions
 from .iso_subdivisions import load_iso_subs
 from .merge_ipregistry import merge_ipregistry_aliases
 from .merge_alternate_names import merge_alternate_name_aliases
-from .merge_subdivisions import try_merge
+from .automerge import try_merge
 from .resolve_subdivisions import apply_skill_resolved
 from .wikidata_subdivisions import apply_wikidata_matches
 from .dump_subdivisions import dump
+from .dump_unmerged import write as write_unmerged_doc
 
 RESOLUTION_MAP_PATH = SUBDIVISIONS_OUTPUTS_PATH / "resolution_map.json"
 
@@ -74,6 +76,7 @@ def ingest_subdivisions(
         sub_map.refresh()
 
         dump(sub_map)
+        write_unmerged_doc(sub_map)
         resolution_map.save(RESOLUTION_MAP_PATH)
         ingest_log.writeline(f"completed: {len(sub_map)} subdivisions")
         return sub_map.to_geocode_map()

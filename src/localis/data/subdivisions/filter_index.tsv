@@ -682,6 +682,7 @@ cubango		024|ago|angola|ao	1
 icolo e bengo province		024|ago|angola|ao	1
 moxico leste province		024|ago|angola|ao	1
 cuando province		024|ago|angola|ao	1
+cuando cubango|kuando kubango	province	024|ago|angola|ao	1
 saurimo		024|ago|angola|ao	2
 lucapa		024|ago|angola|ao	2
 chitato		024|ago|angola|ao	2
@@ -2101,7 +2102,7 @@ neftcala	rayon	031|az|aze|azerbaijan	1
 nakhchivan|nakhchivan autonomous republic|naxcivan|naxcivan muxtar respublikasi	autonomous republic	031|az|aze|azerbaijan	1
 masalli|masalli rayonu|masally	rayon	031|az|aze|azerbaijan	1
 lerik|lerik district|lerik rayonu	rayon	031|az|aze|azerbaijan	1
-lankaran		031|az|aze|azerbaijan	1
+lankaran	rayon	031|az|aze|azerbaijan	1
 lachin|lachin rayon|lacin|lacin rayonu	rayon	031|az|aze|azerbaijan	1
 qubadli	rayon	031|az|aze|azerbaijan	1
 imisli	rayon	031|az|aze|azerbaijan	1
@@ -2113,7 +2114,7 @@ khojaly|khojaly rayon|xocali|xocali rayonu	rayon	031|az|aze|azerbaijan	1
 agcabadi	rayon	031|az|aze|azerbaijan	1
 agdam|agdam rayonu	rayon	031|az|aze|azerbaijan	1
 shirvan|sirvan	municipality	031|az|aze|azerbaijan	1
-lankaran|lankaran sahari		031|az|aze|azerbaijan	1
+lankaran|lankaran sahari	municipality	031|az|aze|azerbaijan	1
 shusha city|susa sahari		031|az|aze|azerbaijan	1
 tartar|tartar district|tartar rayonu	rayon	031|az|aze|azerbaijan	1
 xankandi|xankandi sahari	municipality	031|az|aze|azerbaijan	1
@@ -2160,6 +2161,9 @@ sumqayit	municipality	031|az|aze|azerbaijan	1
 xizi	rayon	031|az|aze|azerbaijan	1
 avlakh|yevlax city|yevlax sahari		031|az|aze|azerbaijan	1
 haciqabul	rayon	031|az|aze|azerbaijan	1
+mingacevir	municipality	031|az|aze|azerbaijan	1
+saki	municipality	031|az|aze|azerbaijan	1
+yevlax	municipality	031|az|aze|azerbaijan	1
 sahbuz|shahbuz rayon	rayon	031|az|aze|azerbaijan	2
 ordubad|ordubad rayon|ordubad rayonu	rayon	031|az|aze|azerbaijan	2
 sarur|sharur rayon	rayon	031|az|aze|azerbaijan	2
@@ -11207,7 +11211,7 @@ district des savanes|savanes|savanes district	district	384|ci|civ|cote d'ivoire	
 district de la vallee du bandama|vallee du bandama|vallee du bandama district	district	384|ci|civ|cote d'ivoire	1
 district du woroba|woroba	district	384|ci|civ|cote d'ivoire	1
 district du zanzan|zanzan|zanzan district	district	384|ci|civ|cote d'ivoire	1
-abidjan autonomous district		384|ci|civ|cote d'ivoire	1
+abidjan|abidjan autonomous district	autonomous district	384|ci|civ|cote d'ivoire	1
 bafing|bafing region		384|ci|civ|cote d'ivoire	2
 gbokle		384|ci|civ|cote d'ivoire	2
 nawa		384|ci|civ|cote d'ivoire	2
@@ -14032,6 +14036,7 @@ berlin|land berlin|state of berlin	land	276|de|deu|germany	1
 bavaria|bayern|free state of bavaria		276|de|deu|germany	1
 baden-wurttemberg|baden-wurttemberg region	land	276|de|deu|germany	1
 bayern	land	276|de|deu|germany	1
+hamburg	land	276|de|deu|germany	1
 lower franconia|regierungsbezirk unterfranken|unterfranken		276|de|deu|germany	2
 regierungsbezirk schwaben|schwaben|swabia		276|de|deu|germany	2
 oberpfalz|regierungsbezirk oberpfalz|upper palatinate		276|de|deu|germany	2
@@ -15238,85 +15243,85 @@ jarva county|jarva maakond|jarvamaa	county	233|ee|est|estonia	1
 ida-viru county|ida-viru maakond|ida-virumaa	county	233|ee|est|estonia	1
 hiiu county|hiiu maakond|hiiumaa	county	233|ee|est|estonia	1
 harju|harju county|harju maakond|harjumaa	county	233|ee|est|estonia	1
-kohtla-jarve linn		233|ee|est|estonia	2
-narva linn		233|ee|est|estonia	2
-parnu linn		233|ee|est|estonia	2
-sillamae linn		233|ee|est|estonia	2
+kohtla-jarve|kohtla-jarve linn	urban municipality	233|ee|est|estonia	2
+narva|narva linn	urban municipality	233|ee|est|estonia	2
+parnu|parnu linn	urban municipality	233|ee|est|estonia	2
+sillamae|sillamae linn	urban municipality	233|ee|est|estonia	2
 tallinn	urban municipality	233|ee|est|estonia	2
-haapsalu linn		233|ee|est|estonia	2
-haljala vald		233|ee|est|estonia	2
-harku vald		233|ee|est|estonia	2
+haapsalu|haapsalu linn	urban municipality	233|ee|est|estonia	2
+haljala|haljala vald	rural municipality	233|ee|est|estonia	2
+harku|harku vald	rural municipality	233|ee|est|estonia	2
 haademeeste|haademeeste vald	rural municipality	233|ee|est|estonia	2
 joelahtme|joelahtme parish|joelahtme vald	rural municipality	233|ee|est|estonia	2
 jogeva|jogeva vald	rural municipality	233|ee|est|estonia	2
 johvi|johvi vald	rural municipality	233|ee|est|estonia	2
-kadrina vald		233|ee|est|estonia	2
-kambja vald		233|ee|est|estonia	2
-kanepi vald		233|ee|est|estonia	2
-kehtna vald		233|ee|est|estonia	2
-keila linn		233|ee|est|estonia	2
+kadrina|kadrina vald	rural municipality	233|ee|est|estonia	2
+kambja|kambja vald	rural municipality	233|ee|est|estonia	2
+kanepi|kanepi vald	rural municipality	233|ee|est|estonia	2
+kehtna|kehtna vald	rural municipality	233|ee|est|estonia	2
+keila|keila linn	urban municipality	233|ee|est|estonia	2
 kihnu|kihnu parish|kihnu vald	rural municipality	233|ee|est|estonia	2
-kiili vald		233|ee|est|estonia	2
-kohila vald		233|ee|est|estonia	2
-kose vald		233|ee|est|estonia	2
-loksa linn		233|ee|est|estonia	2
-luunja vald		233|ee|est|estonia	2
+kiili|kiili vald	rural municipality	233|ee|est|estonia	2
+kohila|kohila vald	rural municipality	233|ee|est|estonia	2
+kose|kose vald	rural municipality	233|ee|est|estonia	2
+loksa|loksa linn	urban municipality	233|ee|est|estonia	2
+luunja|luunja vald	rural municipality	233|ee|est|estonia	2
 luganuse|luganuse vald	rural municipality	233|ee|est|estonia	2
-maardu linn		233|ee|est|estonia	2
-muhu vald		233|ee|est|estonia	2
-marjamaa vald		233|ee|est|estonia	2
+maardu|maardu linn	urban municipality	233|ee|est|estonia	2
+muhu|muhu vald	rural municipality	233|ee|est|estonia	2
+marjamaa|marjamaa vald	rural municipality	233|ee|est|estonia	2
 narva-joesuu|narva-joesuu linn	urban municipality	233|ee|est|estonia	2
-noo vald		233|ee|est|estonia	2
-paide linn		233|ee|est|estonia	2
+noo|noo vald	rural municipality	233|ee|est|estonia	2
+paide|paide linn	urban municipality	233|ee|est|estonia	2
 peipsiaare|peipsiaare vald	rural municipality	233|ee|est|estonia	2
 poltsamaa|poltsamaa vald	rural municipality	233|ee|est|estonia	2
 otepaa|otepaa vald	rural municipality	233|ee|est|estonia	2
 tapa|tapa vald	rural municipality	233|ee|est|estonia	2
-tartu vald		233|ee|est|estonia	2
+tartu|tartu vald	rural municipality	233|ee|est|estonia	2
 tori|tori vald	rural municipality	233|ee|est|estonia	2
-rapla vald		233|ee|est|estonia	2
-ruhnu vald		233|ee|est|estonia	2
+rapla|rapla vald	rural municipality	233|ee|est|estonia	2
+ruhnu|ruhnu vald	rural municipality	233|ee|est|estonia	2
 rouge|rouge vald	rural municipality	233|ee|est|estonia	2
-rapina vald		233|ee|est|estonia	2
-saarde vald		233|ee|est|estonia	2
-saku vald		233|ee|est|estonia	2
-raasiku vald		233|ee|est|estonia	2
-rae vald		233|ee|est|estonia	2
-rakvere vald		233|ee|est|estonia	2
-rakvere linn		233|ee|est|estonia	2
-saue vald		233|ee|est|estonia	2
-kuusalu vald		233|ee|est|estonia	2
-tartu linn		233|ee|est|estonia	2
+rapina|rapina vald	rural municipality	233|ee|est|estonia	2
+saarde|saarde vald	rural municipality	233|ee|est|estonia	2
+saku|saku vald	rural municipality	233|ee|est|estonia	2
+raasiku|raasiku vald	rural municipality	233|ee|est|estonia	2
+rae|rae vald	rural municipality	233|ee|est|estonia	2
+rakvere|rakvere vald	rural municipality	233|ee|est|estonia	2
+rakvere|rakvere linn	urban municipality	233|ee|est|estonia	2
+saue|saue vald	rural municipality	233|ee|est|estonia	2
+kuusalu|kuusalu vald	rural municipality	233|ee|est|estonia	2
+tartu|tartu linn	urban municipality	233|ee|est|estonia	2
 anija|anija vald	rural municipality	233|ee|est|estonia	2
 antsla|antsla vald	rural municipality	233|ee|est|estonia	2
 viimsi|viimsi parish|viimsi vald	rural municipality	233|ee|est|estonia	2
 polva|polva parish|polva vald	rural municipality	233|ee|est|estonia	2
-toila vald		233|ee|est|estonia	2
+toila|toila vald	rural municipality	233|ee|est|estonia	2
 turi|turi vald	rural municipality	233|ee|est|estonia	2
-viljandi linn		233|ee|est|estonia	2
-vinni vald		233|ee|est|estonia	2
-viru-nigula vald		233|ee|est|estonia	2
-vormsi vald		233|ee|est|estonia	2
-voru parish|voru vald		233|ee|est|estonia	2
-voru linn		233|ee|est|estonia	2
+viljandi|viljandi linn	urban municipality	233|ee|est|estonia	2
+vinni|vinni vald	rural municipality	233|ee|est|estonia	2
+viru-nigula|viru-nigula vald	rural municipality	233|ee|est|estonia	2
+vormsi|vormsi vald	rural municipality	233|ee|est|estonia	2
+voru|voru parish|voru vald	rural municipality	233|ee|est|estonia	2
+voru|voru linn	urban municipality	233|ee|est|estonia	2
 vaike-maarja|vaike-maarja vald	rural municipality	233|ee|est|estonia	2
-viljandi vald		233|ee|est|estonia	2
+viljandi|viljandi vald	rural municipality	233|ee|est|estonia	2
 laane-nigula|laane-nigula vald	rural municipality	233|ee|est|estonia	2
-mulgi vald		233|ee|est|estonia	2
-valga vald		233|ee|est|estonia	2
-setomaa vald		233|ee|est|estonia	2
-hiiumaa vald		233|ee|est|estonia	2
-elva vald		233|ee|est|estonia	2
-saaremaa vald		233|ee|est|estonia	2
-jarva vald		233|ee|est|estonia	2
-mustvee vald		233|ee|est|estonia	2
-kastre vald		233|ee|est|estonia	2
-torma vald|torva vald		233|ee|est|estonia	2
-alutaguse vald		233|ee|est|estonia	2
-laaneranna vald		233|ee|est|estonia	2
-laane-harju vald		233|ee|est|estonia	2
-pohja-sakala vald		233|ee|est|estonia	2
-pohja-parnumaa vald		233|ee|est|estonia	2
+mulgi|mulgi vald	rural municipality	233|ee|est|estonia	2
+valga|valga vald	rural municipality	233|ee|est|estonia	2
+setomaa|setomaa vald	rural municipality	233|ee|est|estonia	2
+hiiumaa|hiiumaa vald	rural municipality	233|ee|est|estonia	2
+elva|elva vald	rural municipality	233|ee|est|estonia	2
+saaremaa|saaremaa vald	rural municipality	233|ee|est|estonia	2
+jarva|jarva vald	rural municipality	233|ee|est|estonia	2
+mustvee|mustvee vald	rural municipality	233|ee|est|estonia	2
+kastre|kastre vald	rural municipality	233|ee|est|estonia	2
+torma vald|torva|torva vald	rural municipality	233|ee|est|estonia	2
+alutaguse|alutaguse vald	rural municipality	233|ee|est|estonia	2
+laaneranna|laaneranna vald	rural municipality	233|ee|est|estonia	2
+laane-harju|laane-harju vald	rural municipality	233|ee|est|estonia	2
+pohja-sakala|pohja-sakala vald	rural municipality	233|ee|est|estonia	2
+pohja-parnumaa|pohja-parnumaa vald	rural municipality	233|ee|est|estonia	2
 mhfz@ swhj|sohag|sohag governorate|suhaj|swhj	governorate	818|eg|egy|egypt	1
 mhfz@ shml syn|north sinai|north sinai governorate|shamal sina'|shml syn	governorate	818|eg|egy|egypt	1
 mhfz@ qn|qena|qena governorate|qina|qn	governorate	818|eg|egy|egypt	1
@@ -16201,8 +16206,8 @@ lancashire	two-tier county	826|gb|gbr|united kingdom	2
 isle of wight|wight	unitary authority	826|gb|gbr|united kingdom	2
 comhairle inbhir chluaidh|inverclyde	council area	826|gb|gbr|united kingdom	2
 comhairle na gaidhealtachd|cyngor yr ucheldir|highland|highland council	council area	826|gb|gbr|united kingdom	2
-hertfordshire|swydd hertford		826|gb|gbr|united kingdom	2
-herefordshire		826|gb|gbr|united kingdom	2
+hertfordshire|swydd hertford	two-tier county	826|gb|gbr|united kingdom	2
+herefordshire	unitary authority	826|gb|gbr|united kingdom	2
 hampshire	two-tier county	826|gb|gbr|united kingdom	2
 borough of halton|halton	unitary authority	826|gb|gbr|united kingdom	2
 gwynedd	unitary authority	826|gb|gbr|united kingdom	2
@@ -16348,6 +16353,7 @@ mid and east antrim	district	826|gb|gbr|united kingdom	2
 bournemouth, christchurch and poole|bournemouth, christchurch and poole council	unitary authority	826|gb|gbr|united kingdom	2
 west northamptonshire	unitary authority	826|gb|gbr|united kingdom	2
 north northamptonshire	unitary authority	826|gb|gbr|united kingdom	2
+aberdeen city	council area	826|gb|gbr|united kingdom	2
 barking and dagenham	london borough	826|gb|gbr|united kingdom	2
 brent	london borough	826|gb|gbr|united kingdom	2
 bexley	london borough	826|gb|gbr|united kingdom	2
@@ -16355,6 +16361,10 @@ barnet	london borough	826|gb|gbr|united kingdom	2
 bromley	london borough	826|gb|gbr|united kingdom	2
 camden	london borough	826|gb|gbr|united kingdom	2
 croydon	london borough	826|gb|gbr|united kingdom	2
+ealing	london borough	826|gb|gbr|united kingdom	2
+edinburgh, city of	council area	826|gb|gbr|united kingdom	2
+enfield	london borough	826|gb|gbr|united kingdom	2
+glasgow city	council area	826|gb|gbr|united kingdom	2
 greenwich	london borough	826|gb|gbr|united kingdom	2
 havering	london borough	826|gb|gbr|united kingdom	2
 hackney	london borough	826|gb|gbr|united kingdom	2
@@ -16368,6 +16378,7 @@ kensington and chelsea	london borough	826|gb|gbr|united kingdom	2
 kingston upon thames	london borough	826|gb|gbr|united kingdom	2
 lambeth	london borough	826|gb|gbr|united kingdom	2
 lewisham	london borough	826|gb|gbr|united kingdom	2
+london, city of	city corporation	826|gb|gbr|united kingdom	2
 merton	london borough	826|gb|gbr|united kingdom	2
 newham	london borough	826|gb|gbr|united kingdom	2
 redbridge	london borough	826|gb|gbr|united kingdom	2
@@ -16384,7 +16395,7 @@ saint john|saint john parish	parish	308|gd|grd|grenada	1
 saint george|saint george parish	parish	308|gd|grd|grenada	1
 saint david|saint david parish	parish	308|gd|grd|grenada	1
 saint andrew|saint andrew parish	parish	308|gd|grd|grenada	1
-carriacou and petite martinique		308|gd|grd|grenada	1
+carriacou|carriacou and petite martinique|southern grenadine islands	dependency	308|gd|grd|grenada	1
 k'art'|k`alak`i t`bilisi|tbilis|tbilisi	city	268|ge|geo|georgia	1
 ach'ar|ach'ara|ach'art@ylat@i avtonomt@ respublika|achara|acharis avtonomiuri respublika|adjara|ajaria|autonomous republic of adjara	autonomous republic	268|ge|geo|georgia	1
 daellag kartli|k`vemo k`art`lis mxare|kvemo kartli|ttsak'at@i k'art'li	region	268|ge|geo|georgia	1
@@ -18439,6 +18450,11 @@ tatabanya|tatabanyai jaras	city with county rights	348|hu|hun|hungary	1
 dunaujvaros|dunaujvarosi jaras	city with county rights	348|hu|hun|hungary	1
 szekesfehervar|szekesfehervari jaras	city with county rights	348|hu|hun|hungary	1
 szekszard|szekszardi jaras	city with county rights	348|hu|hun|hungary	1
+gyor	city with county rights	348|hu|hun|hungary	1
+pecs	city with county rights	348|hu|hun|hungary	1
+szolnok	city with county rights	348|hu|hun|hungary	1
+sopron	city with county rights	348|hu|hun|hungary	1
+veszprem	city with county rights	348|hu|hun|hungary	1
 soproni jaras		348|hu|hun|hungary	2
 kapuvari jaras		348|hu|hun|hungary	2
 csornai jaras		348|hu|hun|hungary	2
@@ -19204,6 +19220,9 @@ contae chorcai|corcaigh|cork|cork county|county cork	county	372|ie|ireland|irl	1
 clare|co clare|county clare	county	372|ie|ireland|irl	1
 an cabhan|cavan|co cavan|county cavan	county	372|ie|ireland|irl	1
 carlow|ceatharlach|county carlow	county	372|ie|ireland|irl	1
+dublin	county	372|ie|ireland|irl	1
+limerick	county	372|ie|ireland|irl	1
+waterford	county	372|ie|ireland|irl	1
 fingal|fingal county		372|ie|ireland|irl	2
 dun laoghaire-rathdown		372|ie|ireland|irl	2
 south dublin		372|ie|ireland|irl	2
@@ -20708,6 +20727,41 @@ grindavikurbaer	municipality	352|iceland|is|isl	1
 floahreppur	municipality	352|iceland|is|isl	1
 sudurnesjabaer	municipality	352|iceland|is|isl	1
 stykkisholmsbaer|stykkisholmur-helgafellssveit	municipality	352|iceland|is|isl	1
+arneshreppur	municipality	352|iceland|is|isl	1
+gardabaer	municipality	352|iceland|is|isl	1
+grimsnes- og grafningshreppur	municipality	352|iceland|is|isl	1
+grytubakkahreppur	municipality	352|iceland|is|isl	1
+hafnarfjardarkaupstadur	municipality	352|iceland|is|isl	1
+horgarsveit	municipality	352|iceland|is|isl	1
+hrunamannahreppur	municipality	352|iceland|is|isl	1
+hunabyggd	municipality	352|iceland|is|isl	1
+hvalfjardarsveit	municipality	352|iceland|is|isl	1
+isafjardarbaer	municipality	352|iceland|is|isl	1
+kaldrananeshreppur	municipality	352|iceland|is|isl	1
+kjosarhreppur	municipality	352|iceland|is|isl	1
+kopavogsbaer	municipality	352|iceland|is|isl	1
+langanesbyggd	municipality	352|iceland|is|isl	1
+mosfellsbaer	municipality	352|iceland|is|isl	1
+mulathing	municipality	352|iceland|is|isl	1
+myrdalshreppur	municipality	352|iceland|is|isl	1
+nordurthing	municipality	352|iceland|is|isl	1
+reykholahreppur	municipality	352|iceland|is|isl	1
+reykjanesbaer	municipality	352|iceland|is|isl	1
+reykjavikurborg	municipality	352|iceland|is|isl	1
+svalbardsstrandarhreppur	municipality	352|iceland|is|isl	1
+sudavikurhreppur	municipality	352|iceland|is|isl	1
+sveitarfelagid hornafjordur	municipality	352|iceland|is|isl	1
+skaftarhreppur	municipality	352|iceland|is|isl	1
+skagabyggd	municipality	352|iceland|is|isl	1
+skorradalshreppur	municipality	352|iceland|is|isl	1
+snaefellsbaer	municipality	352|iceland|is|isl	1
+skeida- og gnupverjahreppur	municipality	352|iceland|is|isl	1
+sveitarfelagid olfus	municipality	352|iceland|is|isl	1
+talknafjardarhreppur	municipality	352|iceland|is|isl	1
+thingeyjarsveit	municipality	352|iceland|is|isl	1
+vestmannaeyjabaer	municipality	352|iceland|is|isl	1
+vesturbyggd	municipality	352|iceland|is|isl	1
+vopnafjardarhreppur	municipality	352|iceland|is|isl	1
 vopnafjardarhreppur		352|iceland|is|isl	2
 svalbardsstrandarhreppur		352|iceland|is|isl	2
 skaftarhreppur		352|iceland|is|isl	2
@@ -20878,6 +20932,9 @@ fermo|province of fermo|provincia di fermo	province	380|it|ita|italy	2
 barletta - andria - trani|barletta-andria-trani|province of barletta-andria-trani|provincia di barletta - andria - trani	province	380|it|ita|italy	2
 monza brianza|monza e brianza|monza e della brianza|province of monza and brianza|provincia di monza|provincia di monza e brianza|provincia di monza e della brianza	province	380|it|ita|italy	2
 province du sud-sardaigne|province of south sardinia|provincia del sud sardegna|south sardinia|sud sardegna	province	380|it|ita|italy	2
+cagliari	metropolitan city	380|it|ita|italy	2
+genova	metropolitan city	380|it|ita|italy	2
+venezia	metropolitan city	380|it|ita|italy	2
 st clement		832|je|jersey|jey	1
 st saviour		832|je|jersey|jey	1
 saint brelade|st. brelade		832|je|jersey|jey	1
@@ -23118,7 +23175,7 @@ issyk-kul|issyk-kul region|issyk-kul'skaia oblast'|issyk-kul'skaya oblast'|ysyk-
 bishkek|bishkek shaary|gorod bishkek	city	417|kg|kgz|kyrgyzstan	1
 dzhalal-abadskaia oblast'|dzhalal-abadskaya oblast'|jalal-abad|jalal-abad oblasty|jalal-abad oblusu|jalal-abad region|zhalal-abad|zhalal-abad oblusu	region	417|kg|kgz|kyrgyzstan	1
 chui|chui oblusu|chuiskaia oblast'|chuy|chuy oblasty|chuy oblusu|chuy region|chuyskaya oblast'	region	417|kg|kgz|kyrgyzstan	1
-osh city		417|kg|kgz|kyrgyzstan	1
+osh city|osh shaary	city	417|kg|kgz|kyrgyzstan	1
 leilekskii|leilekskii raion|leylek rayon|leylekskiy rayon		417|kg|kgz|kyrgyzstan	2
 kadamjaiskiy raion|kadamzhai raionu|kadamzhaiskii		417|kg|kgz|kyrgyzstan	2
 batken rayon|batkenskii|batkenskii raion|batkenskiy rayon		417|kg|kgz|kyrgyzstan	2
@@ -25442,6 +25499,26 @@ kazlu ruda municipality|kazlu rudos	municipality	440|lithuania|lt|ltu	1
 pagegiai|pagegiai municipality|pagegiu savivaldybe	municipality	440|lithuania|lt|ltu	1
 rietavas|rietavas municipality	municipality	440|lithuania|lt|ltu	1
 elektrenai|elektrenai municipality	municipality	440|lithuania|lt|ltu	1
+anyksciai	district municipality	440|lithuania|lt|ltu	1
+birstonas	municipality	440|lithuania|lt|ltu	1
+ignalina	district municipality	440|lithuania|lt|ltu	1
+joniskis	district municipality	440|lithuania|lt|ltu	1
+kelme	district municipality	440|lithuania|lt|ltu	1
+kretinga	district municipality	440|lithuania|lt|ltu	1
+kupiskis	district municipality	440|lithuania|lt|ltu	1
+mazeikiai	district municipality	440|lithuania|lt|ltu	1
+pasvalys	district municipality	440|lithuania|lt|ltu	1
+prienai	district municipality	440|lithuania|lt|ltu	1
+raseiniai	district municipality	440|lithuania|lt|ltu	1
+rokiskis	district municipality	440|lithuania|lt|ltu	1
+salcininkai	district municipality	440|lithuania|lt|ltu	1
+silale	district municipality	440|lithuania|lt|ltu	1
+sirvintos	district municipality	440|lithuania|lt|ltu	1
+skuodas	district municipality	440|lithuania|lt|ltu	1
+svencionys	district municipality	440|lithuania|lt|ltu	1
+trakai	district municipality	440|lithuania|lt|ltu	1
+visaginas	municipality	440|lithuania|lt|ltu	1
+zarasai	district municipality	440|lithuania|lt|ltu	1
 birstonas|birstonas municipality		440|lithuania|lt|ltu	2
 prienai|prienai district municipality|prienu rajono savivaldybe		440|lithuania|lt|ltu	2
 raseiniai|raseiniai district municipality		440|lithuania|lt|ltu	2
@@ -27410,7 +27487,7 @@ moka	district	480|mauritius|mu|mus	1
 grand port	district	480|mauritius|mu|mus	1
 flacq	district	480|mauritius|mu|mus	1
 black river	district	480|mauritius|mu|mus	1
-cargados carajos|ecueils des cargados carajos		480|mauritius|mu|mus	1
+cargados carajos|cargados carajos shoals|ecueils des cargados carajos|saint brandon islands	dependency	480|mauritius|mu|mus	1
 ile rodrigues|rodrigues|rodrigues island	dependency	480|mauritius|mu|mus	1
 felidhu atoll|vaavu|vaavu atholhu	administrative atoll	462|maldives|mdv|mv	1
 kolhumadulu|thaa|thaa atholhu	administrative atoll	462|maldives|mdv|mv	1
@@ -29980,7 +30057,7 @@ perak	state	458|malaysia|my|mys	1
 pahang	state	458|malaysia|my|mys	1
 negeri sembilan	state	458|malaysia|my|mys	1
 kelantan	state	458|malaysia|my|mys	1
-kuala lumpur		458|malaysia|my|mys	1
+kuala lumpur|wilayah persekutuan kuala lumpur	federal territory	458|malaysia|my|mys	1
 penang|pulau pinang	state	458|malaysia|my|mys	1
 kedah	state	458|malaysia|my|mys	1
 johor	state	458|malaysia|my|mys	1
@@ -31847,6 +31924,8 @@ vestland|vestland fylke	county	578|no|nor|norway	1
 arctic region|svalbard	arctic region	578|no|nor|norway	1
 arctic region|jan mayen	arctic region	578|no|nor|norway	1
 viken	county	578|no|nor|norway	1
+vestfold og telemark	county	578|no|nor|norway	1
+troms og finnmark	county	578|no|nor|norway	1
 deanu gielda|deatnu|tana|tana kommune		578|no|nor|norway	2
 omasvuotna|storfjord		578|no|nor|norway	2
 matta-varjjat|sor-varanger		578|no|nor|norway	2
@@ -32207,10 +32286,10 @@ hustadvika		578|no|nor|norway	2
 koshi|koshi province|pradesh 1|province 1	province	524|nepal|np|npl	1
 madhesh|madhesh province|pradesh 2|province 2	province	524|nepal|np|npl	1
 bagmati|bagmati province|pradesh 3|province 3	province	524|nepal|np|npl	1
-gandaki pradesh		524|nepal|np|npl	1
+gandaki|gandaki pradesh|pradesh 4|province 4	province	524|nepal|np|npl	1
 lumbini|lumbini province|pradesh 5|province 5	province	524|nepal|np|npl	1
 karnali|karnali pradesh|pradesh 6|province 6	province	524|nepal|np|npl	1
-sudurpashchim pradesh		524|nepal|np|npl	1
+sudur pashchim; pradesh 7|sudur pashchim; province 7|sudurpashchim|sudurpashchim pradesh	province	524|nepal|np|npl	1
 banke		524|nepal|np|npl	2
 bara		524|nepal|np|npl	2
 bardiya		524|nepal|np|npl	2
@@ -32315,7 +32394,7 @@ hawke's bay|hawke's bay region|te matau-a-maui	region	554|new zealand|nz|nzl	1
 gisborne|te tairawhiti	region	554|new zealand|nz|nzl	1
 canterbury|canterbury region|waitaha	region	554|new zealand|nz|nzl	1
 auckland|tamaki makaurau|tamaki-makau-rau	region	554|new zealand|nz|nzl	1
-chatham islands|wharekauri		554|new zealand|nz|nzl	1
+chatham islands|chatham islands territory|wharekauri	special island authority	554|new zealand|nz|nzl	1
 nelson|nelson region|whakatu	region	554|new zealand|nz|nzl	1
 otago|otakou	region	554|new zealand|nz|nzl	1
 te tai-poutini|west coast	region	554|new zealand|nz|nzl	1
@@ -34600,6 +34679,7 @@ al quds|jerusalem|quds governorate	governorate	275|palestine|ps|pse	1
 ramallah|ramallah and al-bireh governorate	governorate	275|palestine|ps|pse	1
 al khalil|hebron|hebron governorate|lkhlyl|mhfz@ lkhlyl	governorate	275|palestine|ps|pse	1
 khan yunis|khan yunis governorate	governorate	275|palestine|ps|pse	1
+gaza	governorate	275|palestine|ps|pse	1
 gaza|gaza governorate		275|palestine|ps|pse	2
 district of setubal|distrito de setubal|setubal|setubal district	district	620|portugal|prt|pt	1
 district of santarem|distrito de santarem|santarem|santarem district	district	620|portugal|prt|pt	1
@@ -35210,11 +35290,11 @@ iturbe		600|paraguay|pry|py	2
 itacurubi de la cordillera		600|paraguay|pry|py	2
 itaugua		600|paraguay|pry|py	2
 general delgado		600|paraguay|pry|py	2
-bldy@ lshml|bldy@ mdyn@ lshml|lshml|madinat ash shamal		634|qa|qat|qatar	1
+ash shamal|bldy@ lshml|bldy@ mdyn@ lshml|lshml|madinat ash shamal	municipality	634|qa|qat|qatar	1
 al khawr wa adh dhakhirah|al khor|bldy@ lkhwr|bldy@ lkhwr wldhkhyr@|lkhwr wldhkhyr@	municipality	634|qa|qat|qatar	1
 bldy@ m sll|m sll|umm salal|umm salal municipality	municipality	634|qa|qat|qatar	1
-baladiyat ar rayyan|bldy@ lryn|lryn		634|qa|qat|qatar	1
-baladiyat ad dawhah|bldy@ ldwh@|ldwh@		634|qa|qat|qatar	1
+ar rayyan|baladiyat ar rayyan|bldy@ lryn|lryn	municipality	634|qa|qat|qatar	1
+ad dawhah|baladiyat ad dawhah|bldy@ ldwh@|ldwh@	municipality	634|qa|qat|qatar	1
 al wakrah|bldy@ lwkr@|lwkr@	municipality	634|qa|qat|qatar	1
 al daayen|az za'ayin|bldy@ lz`yn|lz`yn	municipality	634|qa|qat|qatar	1
 al-shahaniya|ash shihaniyah	municipality	634|qa|qat|qatar	1
@@ -42047,7 +42127,7 @@ municipality of sentjur|obcina sentjur|sentjur	municipality	705|si|slovenia|svn	
 municipality of ribnica|obcina ribnica|ribnica	municipality	705|si|slovenia|svn	1
 municipality of radovljica|obcina radovljica|radovljica	municipality	705|si|slovenia|svn	1
 municipality of radlje ob dravi|obcina radlje ob dravi|radlje ob dravi	municipality	705|si|slovenia|svn	1
-mestna obcina ptuj|urban municipality of ptuj		705|si|slovenia|svn	1
+mestna obcina ptuj|ptuj|urban municipality of ptuj	urban municipality	705|si|slovenia|svn	1
 municipality of postojna|obcina postojna|postojna	municipality	705|si|slovenia|svn	1
 municipality of piran|obcina piran|piran|pirano	municipality	705|si|slovenia|svn	1
 municipality of ormoz|obcina ormoz|ormoz	municipality	705|si|slovenia|svn	1
@@ -42063,7 +42143,7 @@ litija|municipality of litija|obcina litija	municipality	705|si|slovenia|svn	1
 lenart|municipality of lenart|obcina lenart	municipality	705|si|slovenia|svn	1
 lasko|municipality of lasko|obcina lasko	municipality	705|si|slovenia|svn	1
 krsko|mestna obcina krsko|urban municipality of krsko	urban municipality	705|si|slovenia|svn	1
-mestna obcina kranj|urban municipality of kranj		705|si|slovenia|svn	1
+kranj|mestna obcina kranj|urban municipality of kranj	urban municipality	705|si|slovenia|svn	1
 capodistria|koper|mestna obcina koper|urban municipality of koper	urban municipality	705|si|slovenia|svn	1
 kocevje|municipality of kocevje|obcina kocevje	municipality	705|si|slovenia|svn	1
 kamnik|municipality of kamnik|obcina kamnik	municipality	705|si|slovenia|svn	1
@@ -46233,7 +46313,9 @@ rubanda|rubanda district	district	800|ug|uga|uganda	2
 bunyangabu|bunyangabu district	district	800|ug|uga|uganda	2
 rukiga|rukiga district	district	800|ug|uga|uganda	2
 kasanda	district	800|ug|uga|uganda	2
+bugweri	district	800|ug|uga|uganda	2
 kapelebyong	district	800|ug|uga|uganda	2
+kalaki	district	800|ug|uga|uganda	2
 kwania	district	800|ug|uga|uganda	2
 nabilatuk	district	800|ug|uga|uganda	2
 karenga	district	800|ug|uga|uganda	2
@@ -50253,11 +50335,15 @@ an giang	province	704|vietnam|vn|vnm	1
 can tho|can tho city		704|vietnam|vn|vnm	1
 ca mau	province	704|vietnam|vn|vnm	1
 tuyen quang	province	704|vietnam|vn|vnm	1
+ha giang	province	704|vietnam|vn|vnm	1
 yen bai	province	704|vietnam|vn|vnm	1
 hoa binh	province	704|vietnam|vn|vnm	1
 thai binh	province	704|vietnam|vn|vnm	1
+quang binh	province	704|vietnam|vn|vnm	1
 quang nam	province	704|vietnam|vn|vnm	1
 kon tum	province	704|vietnam|vn|vnm	1
+binh dinh	province	704|vietnam|vn|vnm	1
+phu yen	province	704|vietnam|vn|vnm	1
 ninh thuan	province	704|vietnam|vn|vnm	1
 binh thuan	province	704|vietnam|vn|vnm	1
 long an	province	704|vietnam|vn|vnm	1
@@ -50276,6 +50362,11 @@ hai duong	province	704|vietnam|vn|vnm	1
 ha nam	province	704|vietnam|vn|vnm	1
 nam dinh	province	704|vietnam|vn|vnm	1
 vinh phuc	province	704|vietnam|vn|vnm	1
+dak nong	province	704|vietnam|vn|vnm	1
+hau giang	province	704|vietnam|vn|vnm	1
+can tho	municipality	704|vietnam|vn|vnm	1
+da nang	municipality	704|vietnam|vn|vnm	1
+ho chi minh|sai gon	municipality	704|vietnam|vn|vnm	1
 tan uyen		704|vietnam|vn|vnm	2
 xa my an hung		704|vietnam|vn|vnm	2
 xa lai vung		704|vietnam|vn|vnm	2
@@ -51706,6 +51797,7 @@ zvimba district		716|zimbabwe|zw|zwe	2
 uzumba-maramba-pfungwe district		716|zimbabwe|zw|zwe	2
 umguza district		716|zimbabwe|zw|zwe	2
 mossurize district		716|zimbabwe|zw|zwe	2
+central singapore	district	702|sg|sgp|singapore	1
 north east	district	702|sg|sgp|singapore	1
 north west	district	702|sg|sgp|singapore	1
 south east	district	702|sg|sgp|singapore	1

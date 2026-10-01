@@ -5,6 +5,9 @@ BASE_PATH = Path(__file__).parent.parent
 # localis data
 DATA_PATH = BASE_PATH.parent / "src" / "localis" / "data"
 
+# Published docs
+DOCS_PATH = BASE_PATH.parent / "docs"
+
 # Inputs (fetched sources only)
 COUNTRIES_INPUTS_PATH = BASE_PATH / "countries" / "inputs"
 SUBDIVISIONS_INPUTS_PATH = BASE_PATH / "subdivisions" / "inputs"

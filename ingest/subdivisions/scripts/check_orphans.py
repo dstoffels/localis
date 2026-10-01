@@ -13,12 +13,13 @@ def load_orphans() -> Orphans:
 
 
 def summarize(orphans: Orphans) -> str:
-    total = len(orphans.no_candidates) + len(orphans.no_matches) + len(orphans.ambiguity)
+    ambiguity_codes = [orphan.iso_code for orphan in orphans.ambiguity]
+    total = len(orphans.no_candidates) + len(orphans.no_matches) + len(ambiguity_codes)
     lines = [f"**{total} orphaned subdivision(s) need manual resolution:**", ""]
     for reason, codes in (
         ("no candidates", orphans.no_candidates),
         ("no matches", orphans.no_matches),
-        ("ambiguous", orphans.ambiguity),
+        ("ambiguous", ambiguity_codes),
     ):
         if codes:
             lines.append(f"- {reason}: {', '.join(codes)}")

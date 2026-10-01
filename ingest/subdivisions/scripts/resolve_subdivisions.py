@@ -1,7 +1,7 @@
 from ingest.subdivisions.utils.subdivision_map import SubdivisionMap
 from ingest.subdivisions.utils.resolution_map import ResolutionMap
 from ingest.utils import ingest_log
-from .merge_subdivisions import merge_matched_sub
+from .automerge import merge_matched_sub
 from ingest.shared.models import SubdivisionModel
 
 

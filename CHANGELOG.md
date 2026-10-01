@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `geonames_id` on `SubdivisionModel` (ingestion-side)
 - `admin_level=0` for ISO subdivision entries that are documentation/statistical groupings rather than real administrative divisions (Indonesia's island-grouping "Geographical unit" tier, the Dominican Republic's planning "Region" tier, Cabo Verde's "Geographical region"); these bypass GeoNames merging entirely and their real `parent` reference is preserved
 - Wikidata crosswalk (P300 ISO code ↔ P1566 GeoNames id) as a subdivision resolution source, applied ahead of auto-merge; resolved ~3900 subdivisions unambiguously on its own in its first run, cutting auto-merge's workload by ~90% and orphans by ~60%
+- `docs/unmerged_subdivisions.md`, regenerated from the final dataset on every ingest run: every ISO 3166-2 subdivision with no `geonames_id`. 295 of 5,046 currently unmerged after a full skill + ingest run
 
 ### Changed
 - All registries (`Country`, `Subdivision`, `City`) are now lazy-loaded on first access; `Country`/`Subdivision` previously eager-loaded on import
@@ -27,6 +28,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Subdivision auto-merge now disqualifies candidate pairs where the GeoNames side's raw qualifier words mark it as a city but the ISO side's `type` isn't (or vice versa), preventing confident-but-wrong string matches (e.g. a city ISO code stealing its containing oblast/county/department's GeoNames entry); renamed `CATEGORICAL_TOKENS` to `NOISE_TOKENS`, grouped into two families (`city` vs `area`) rather than granular ones, since finer administrative-type distinctions aren't reliable across sources/translations
 - ISO subdivision names with trailing `[...]`/`(...)` content (alternate-language names, embedded codes, territory-dispute annotations) are now split at load time: genuine alternate names become aliases, codes/annotations/duplicates are dropped, instead of polluting fuzzy-match comparisons inline
 - `admin_level` is now computed by walking the full ISO parent chain instead of a one-level-deep check capped at 2, so a genuine 3rd+ generation (so far only France's régions → collectivités → départements) gets its own level instead of colliding with its parent's; non-administrative ancestors stay transparent and don't count toward depth
+- Split `merge_subdivisions.py` into `ingest/subdivisions/scripts/automerge/` (`type_families`, `directional`, `names`, `merge`, `scoring`, `try_merge`); extracted `candidate_pool()`/`score_candidates()` as shared primitives now used identically by `try_merge` and the resolve-subdivisions skill
+- `try_merge` now buckets ISO entries at admin_level 2 and 3+ together, since both draw from GeoNames' same level-2-capped data; previously they competed in separate buckets, leaving any 3rd-generation entry (France's départements) permanently unmatchable even against a valid target
+- `Orphans.ambiguity` now stores `AmbiguousOrphan(iso_code, candidate_geonames_ids)` per orphan instead of a flat iso_code list, so the specific contested GeoNames targets survive past the run that found them
+- resolve-subdivisions skill candidate provisioning is now bucket-aware: `no_candidates` orphans fall back to the whole country instead of just the matching admin_level; `ambiguity` orphans see only the flagged close-calls first, falling through to the normal pool (those excluded) only if rejected; `no_matches` unchanged
+- resolve-subdivisions `SKILL.md`: merged the self-certified "add without searching" step into the websearch step, so an orphan with no fitting candidate is always researched before merge/add/escalate is decided
+- Estonian `vald`/`linn` qualifier words added to the type-family token sets (`vald`→area, `linn`→city); GeoNames' raw Estonian names append these and they weren't being stripped before fuzzy comparison
 
 ### Removed
 - Manual alias/name contribution during subdivision resolution (CLI and skill); resolutions are now source-data only
@@ -40,6 +47,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `SubdivisionMap.refresh()` no longer overwrites a merged subdivision's ISO-derived `admin_level` with one re-derived from GeoNames' own parent nesting, which could silently corrupt it after merge
 - ISO subdivisions whose real admin_level-1 parent was misidentified as a real second admin tier (e.g. Indonesia's provinces nested under a non-administrative grouping) now compute the correct level
 - `ResolutionMap.reconcile()` couldn't represent "verified: this should not auto-merge"; an audited no-match decision would have silently been overwritten by the next run's fresh (and still wrong) auto-merge result
+- resolve-subdivisions skill's `get_geonames_submap()` never replayed already-recorded resolutions (`skill_resolved`/`wikidata_merge`/`auto_merge.resolutions`) onto its own fresh GeoNames map, so an already-claimed target could still appear as a valid, unclaimed candidate and pass `is_valid_candidate()`
+- resolve-subdivisions skill was missing GeoNames alternate-name enrichment on its candidate pool, showing weaker name variants than auto-merge itself uses
 
 ## [1.1.2] - 2026-09-29
 

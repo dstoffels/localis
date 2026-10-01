@@ -1,28 +1,18 @@
 import functools
 import json
-import sys
-from pathlib import Path
-from rapidfuzz import fuzz
-from ingest.subdivisions.scripts import prepare_names, load_iso_subs, merge_ipregistry_aliases
 from ingest.subdivisions.utils.subdivision_map import SubdivisionMap
 from ingest.subdivisions.utils.resolution_map import ResolutionMap
 from ingest.shared.models import SubdivisionModel
-
-
-def _find_project_root(start: Path) -> Path:
-    for parent in (start, *start.parents):
-        if (parent / "pyproject.toml").exists():
-            return parent
-    raise RuntimeError(
-        f"Could not locate project root (no pyproject.toml above {start})"
-    )
-
-
-sys.path.insert(0, str(_find_project_root(Path(__file__).resolve())))
-
 from ingest.utils import SUBDIVISIONS_OUTPUTS_PATH
 from ingest.shared.scripts import load_countries
-from ingest.subdivisions.scripts import map_geonames_subdivisions
+from ingest.subdivisions.scripts import (
+    load_iso_subs,
+    merge_ipregistry_aliases,
+    map_geonames_subdivisions,
+    merge_alternate_name_aliases,
+    candidate_pool,
+    score_candidates,
+)
 
 RESOLUTION_MAP_PATH = SUBDIVISIONS_OUTPUTS_PATH / "resolution_map.json"
 RESOLUTION_LOG_PATH = SUBDIVISIONS_OUTPUTS_PATH / "resolution_log.txt"
@@ -46,9 +36,27 @@ def _countries():
     return load_countries()
 
 
+def _apply_resolved_claims(sub_map: SubdivisionMap, resolution_map: ResolutionMap) -> None:
+    """Marks every GeoNames sub already claimed by a recorded resolution, so a target another iso_code already has doesn't look unclaimed."""
+    for source in (resolution_map.skill_resolved, resolution_map.wikidata_merge):
+        for iso_code, geonames_id in source.items():
+            if geonames_id is None:
+                continue
+            sub = sub_map.get(geonames_id=geonames_id)
+            if sub is not None:
+                sub.iso_code = iso_code
+    for iso_code, match in resolution_map.auto_merge.resolutions.items():
+        sub = sub_map.get(geonames_id=match.id)
+        if sub is not None:
+            sub.iso_code = iso_code
+
+
 @functools.cache
 def get_geonames_submap() -> SubdivisionMap:
-    return map_geonames_subdivisions(_countries())
+    sub_map = map_geonames_subdivisions(_countries())
+    merge_alternate_name_aliases(sub_map)
+    _apply_resolved_claims(sub_map, _resolution_map())
+    return sub_map
 
 
 @functools.cache
@@ -66,20 +74,6 @@ def _format_candidate(candidate: SubdivisionModel) -> tuple[int, str]:
     )
 
 
-def _rank_candidates(
-    iso_sub: SubdivisionModel, candidates: list[SubdivisionModel]
-) -> list[SubdivisionModel]:
-    """Orders candidates by their best name/alias match against any of the ISO names"""
-    iso_names = prepare_names(iso_sub)
-
-    def score_candidate(candidate: SubdivisionModel) -> float:
-        return max(
-            fuzz.WRatio(i, n) for i in iso_names for n in prepare_names(candidate)
-        )
-
-    return sorted(candidates, key=score_candidate, reverse=True)
-
-
 TOP_TIER_MIN = 10
 TOP_TIER_MAX = 100
 TOP_TIER_FRACTION = 0.1
@@ -90,27 +84,50 @@ def _get_top_tier_batch_size(pool_size: int) -> int:
     return min(max(TOP_TIER_MIN, round(pool_size * TOP_TIER_FRACTION)), TOP_TIER_MAX)
 
 
+def _orphan_reason(iso_code: str) -> tuple[str, list[int] | None]:
+    """Which orphan bucket iso_code is in, plus its stored close-call candidates if ambiguity."""
+    orphans = _resolution_map().auto_merge.orphans
+    if iso_code in orphans.no_candidates:
+        return "no_candidates", None
+    if iso_code in orphans.no_matches:
+        return "no_matches", None
+    for orphan in orphans.ambiguity:
+        if orphan.iso_code == iso_code:
+            return "ambiguity", orphan.candidate_geonames_ids
+    raise ValueError(f"{iso_code} is not in resolution_map's orphans")
+
+
 def get_candidates(
     iso_code: str, batch_num: int = 0, return_all: bool = False
 ) -> dict[int, str]:
-    # Look up iso_sub
     iso_sub: SubdivisionModel | None = _get_iso_subs().get(iso_code, None)
     if not iso_sub:
         raise ValueError(f"{iso_code} is not found in ISO subdivisions")
 
-    # Map subdivisions, excluding candidates already claimed by another ISO subdivision
+    reason, candidate_geonames_ids = _orphan_reason(iso_code)
     sub_map = get_geonames_submap()
-    geo_subs = [c for c in sub_map.filter(iso_sub.country.alpha2) if c.iso_code is None]
 
-    candidates = _rank_candidates(iso_sub, geo_subs)
+    # ambiguity's first batch is just try_merge's flagged close-calls, not the full pool
+    if reason == "ambiguity" and batch_num == 0 and not return_all:
+        close_calls = [sub_map.get(geonames_id=gid) for gid in candidate_geonames_ids]
+        return dict(_format_candidate(c) for c in close_calls if c is not None)
+
+    # no_candidates means same-level had nothing; fall back to the whole country
+    level = None if reason == "no_candidates" else iso_sub.admin_level
+    geo_subs = candidate_pool(sub_map, iso_sub.country.alpha2, level)
+    if reason == "ambiguity":
+        geo_subs = [g for g in geo_subs if g.geonames_id not in candidate_geonames_ids]
+    candidates = [geo_sub for geo_sub, score, needed in score_candidates(iso_sub, geo_subs)]
 
     if not return_all:
+        # ambiguity already used batch 0 for close-calls, so normal pagination restarts at batch 1
+        effective_batch_num = batch_num - 1 if reason == "ambiguity" else batch_num
         top_tier_batch_size = _get_top_tier_batch_size(len(candidates))
 
-        if batch_num == 0:
+        if effective_batch_num == 0:
             batch_start, batch_end = 0, top_tier_batch_size
         else:
-            batch_start = top_tier_batch_size + (batch_num - 1) * BATCH_SIZE
+            batch_start = top_tier_batch_size + (effective_batch_num - 1) * BATCH_SIZE
             batch_end = min(batch_start + BATCH_SIZE, len(candidates))
 
         if batch_start >= len(candidates):
@@ -146,8 +163,9 @@ def is_valid_candidate(iso_code: str, geo_sub_geonames_id: int) -> tuple[bool, s
 
 def get_next_orphan() -> dict | None:
     orphans = _resolution_map().auto_merge.orphans
+    ambiguity_codes = [orphan.iso_code for orphan in orphans.ambiguity]
     iso_code = next(
-        iter(orphans.no_candidates + orphans.no_matches + orphans.ambiguity), None
+        iter(orphans.no_candidates + orphans.no_matches + ambiguity_codes), None
     )
     if iso_code is None:
         return None
@@ -176,9 +194,14 @@ def log_decision(line: str) -> None:
 def pop_orphan(iso_code: str) -> None:
     """Removes an orphan from resolution_map's auto_merge.orphans by iso_code."""
     orphans = _resolution_map().auto_merge.orphans
-    for bucket in (orphans.no_candidates, orphans.no_matches, orphans.ambiguity):
+    for bucket in (orphans.no_candidates, orphans.no_matches):
         if iso_code in bucket:
             bucket.remove(iso_code)
+            _resolution_map().save(RESOLUTION_MAP_PATH)
+            return
+    for orphan in orphans.ambiguity:
+        if orphan.iso_code == iso_code:
+            orphans.ambiguity.remove(orphan)
             _resolution_map().save(RESOLUTION_MAP_PATH)
             return
     raise ValueError(f"{iso_code} is not in resolution_map's orphans")

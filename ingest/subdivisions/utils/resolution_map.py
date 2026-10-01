@@ -16,10 +16,16 @@ class AuditEntry:
 
 
 @dataclass
+class AmbiguousOrphan:
+    iso_code: str
+    candidate_geonames_ids: list[int]
+
+
+@dataclass
 class Orphans:
     no_candidates: list[str] = field(default_factory=list)
     no_matches: list[str] = field(default_factory=list)
-    ambiguity: list[str] = field(default_factory=list)
+    ambiguity: list[AmbiguousOrphan] = field(default_factory=list)
 
 
 @dataclass
@@ -59,7 +65,14 @@ class ResolutionMap:
                     code: AutoMergeMatch(**match)
                     for code, match in auto_merge_data.get("resolutions", {}).items()
                 },
-                orphans=Orphans(**auto_merge_data.get("orphans", {})),
+                orphans=Orphans(
+                    no_candidates=auto_merge_data.get("orphans", {}).get("no_candidates", []),
+                    no_matches=auto_merge_data.get("orphans", {}).get("no_matches", []),
+                    ambiguity=[
+                        AmbiguousOrphan(**orphan)
+                        for orphan in auto_merge_data.get("orphans", {}).get("ambiguity", [])
+                    ],
+                ),
             ),
         )
 

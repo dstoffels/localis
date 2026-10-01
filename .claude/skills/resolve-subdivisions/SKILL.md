@@ -30,27 +30,20 @@ disallowed-tools: Bash Read Grep Glob Edit Write Agent WebFetch
 **IF** none of the candidates fit:
   1. Return to Step 1 to retrieve the next batch of candidates for the orphan.
 
-### Step 3. Add a new entry
-**IF** none of the candidates fit, but you know for **certain** the orphaned subdivision is a valid, confirmed entity, current or historical:
+### Step 3. Research, then decide
+**IF** none of the candidates fit, **CALL** the `Websearch` tool using only the orphan's `name` and `iso_code` before deciding anything. DO NOT add additional search terms. Never `add` without searching first, no matter how confident you feel.
+
+**IF** the websearch reveals a certain match, that you have high confidence this ISO subdivision and a specific candidate are the *same place*:
+  1. **CALL** the `merge` tool with `candidate_geonames_id`.
+  2. Return to Step 1.
+
+**IF** no confident match is found, but the websearch confirms the orphan is a valid, current or historical entity:
   1. **CALL** the `add` tool.
   2. Return to Step 1.
 
 **ELSE**: Proceed to Step 4.
 
-### Step 4. Escalate to Websearch
-**CALL** the `Websearch` tool with the only orphan's `name` and `iso_code` to gather additional information about the orphaned subdivision. DO NOT add additional search terms.
-
-**IF** the websearch reveals a certain match, that you have high confidence that this ISO subdivision and a specific candidate are the *same place*:
-  1. **CALL** the `merge` tool with `candidate_geonames_id`.
-  2. Return to Step 1.
-
-**IF** no confident match is found after the websearch, but the orphan is now a confirmed and valid entity:
-  1. **CALL** the `add` tool.
-  2. Return to Step 1.
-
-**ELSE**: Proceed to Step 5.
-
-### Step 5. Escalate for human review
+### Step 4. Escalate for human review
 **CALL** the `review` tool to dump the orphan to `review_output.json` for the user to manually review and make a decision. Offer the user the following two options along with a link to open `review_output.json` in the IDE and then STOP this turn and wait for the user to respond:
   1. `Add` the orphan as a new entry.
   2. `Merge` the orphan with an existing candidate by inputting the geonames_id.

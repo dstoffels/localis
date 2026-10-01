@@ -5,7 +5,7 @@ from ingest.utils import SUBDIVISIONS_INPUTS_PATH, ingest_log
 from ingest.subdivisions.utils.subdivision_map import SubdivisionMap
 from ingest.subdivisions.utils.resolution_map import ResolutionMap
 from ingest.shared.models import SubdivisionModel
-from .merge_subdivisions import merge_matched_sub
+from .automerge import merge_matched_sub
 
 SPARQL_ENDPOINT = "https://query.wikidata.org/sparql"
 SPARQL_QUERY = """
