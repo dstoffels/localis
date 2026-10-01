@@ -406,7 +406,7 @@ Data in this project is kept current monthly from the following sources:
 - **Cities**
   - [GeoNames](https://www.geonames.org/) `cities500.txt` dataset
 
-Subdivisions in particular require reconciling two sources that disagree in nontrivial ways; see [`docs/methodology.md`](docs/methodology.md) for a complete, falsifiable account of how that reconciliation works, the thresholds and exceptions involved, and their evidentiary basis. [`docs/unmerged_subdivisions.md`](docs/unmerged_subdivisions.md) lists every ISO subdivision currently without a GeoNames counterpart, regenerated on every ingest run.
+Subdivisions in particular require reconciling two sources that disagree in nontrivial ways; see [`docs/methodology.md`](docs/methodology.md) for a complete, falsifiable account of how that reconciliation works, the thresholds and exceptions involved, and their evidentiary basis. [`unmerged_subdivisions.md`](docs/unmerged_subdivisions.md) lists every ISO subdivision currently without a GeoNames counterpart, regenerated on every ingest run.
 
 ---
 

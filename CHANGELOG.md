@@ -34,10 +34,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - resolve-subdivisions skill candidate provisioning is now bucket-aware: `no_candidates` orphans fall back to the whole country instead of just the matching admin_level; `ambiguity` orphans see only the flagged close-calls first, falling through to the normal pool (those excluded) only if rejected; `no_matches` unchanged
 - resolve-subdivisions `SKILL.md`: merged the self-certified "add without searching" step into the websearch step, so an orphan with no fitting candidate is always researched before merge/add/escalate is decided
 - Estonian `vald`/`linn` qualifier words added to the type-family token sets (`vald`→area, `linn`→city); GeoNames' raw Estonian names append these and they weren't being stripped before fuzzy comparison
+- `ingest_subdivisions()` now hard-fails (logs the orphan counts, `sys.exit(10)`) if any subdivision orphans remain after a run, before dumping subdivisions or handing its geocode map to cities ingestion; `.github/workflows/ingest.yaml` simplified accordingly, the `ingest` step itself now fails the job on orphans and nothing downstream (commit/push/PR) runs, so the automated `ingest` → `main` PR is now created ready for review directly instead of as a draft that needed a separate orphan check to mark ready
 
 ### Removed
 - Manual alias/name contribution during subdivision resolution (CLI and skill); resolutions are now source-data only
 - Deprecated interactive CLI subdivision resolver, fully superseded by the resolve-subdivisions skill
+- `ingest/subdivisions/scripts/check_orphans.py` and the `check-orphans` poetry script, superseded by `ingest_subdivisions()`'s own hard exit-10 gate on active orphans
 
 ### Fixed
 - Type hint discrepancies across `entities`/`views`/`stores`/`registries`/`indexes` (nullable fields, `View`/`Store` generics, `Mapping` covariance); `src/localis` now passes `pyright` with zero errors

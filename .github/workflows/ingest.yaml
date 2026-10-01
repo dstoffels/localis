@@ -88,15 +88,6 @@ jobs:
       - name: Push ingest branch
         run: git push origin ingest
 
-      - name: Check for orphaned subdivisions
-        id: orphans
-        run: |
-          if poetry run check-orphans > orphan_summary.md; then
-            echo "found=false" >> "$GITHUB_OUTPUT"
-          else
-            echo "found=true" >> "$GITHUB_OUTPUT"
-          fi
-
       - name: Ensure PR exists
         if: steps.stage.outputs.changed == 'true'
         env:
@@ -104,7 +95,7 @@ jobs:
         run: |
           existing=$(gh pr list --head ingest --base main --json number --jq '.[0].number')
           if [ -z "$existing" ]; then
-            gh pr create --draft --head ingest --base main \
+            gh pr create --head ingest --base main \
               --title "Automated data ingest" \
               --body "This PR is maintained automatically by the ingest workflow and always reflects the current state of the \`ingest\` branch. Each run comments below with what changed."
           fi
@@ -128,19 +119,3 @@ jobs:
             echo '```'
           } > run_summary.md
           gh pr comment ingest --body-file run_summary.md
-
-      - name: Comment on PR with orphan details
-        if: steps.orphans.outputs.found == 'true'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh pr comment ingest --body-file orphan_summary.md
-
-      - name: Mark PR ready if clean
-        if: steps.orphans.outputs.found == 'false'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh pr ready ingest || true
-
-      - name: Fail if orphaned subdivisions need resolution
-        if: steps.orphans.outputs.found == 'true'
-        run: exit 1

@@ -5,6 +5,7 @@
 # GeoNames itself never nests beyond admin_level 2; ISO subs deeper than that (so far
 # only France) still merge against GeoNames' level-2 data, see automerge/scoring.py.
 
+import sys
 from ingest.shared.scripts import load_countries
 from .fetch_subdivisions import fetch_subdivisions_sources
 from ingest.subdivisions.utils.subdivision_map import SubdivisionMap
@@ -75,9 +76,23 @@ def ingest_subdivisions(
         # rebuild cache with complete data, update parents
         sub_map.refresh()
 
+        resolution_map.save(RESOLUTION_MAP_PATH)
+
+        # hard gate: active orphans mean the dataset is incomplete; refuse to dump subdivisions
+        # or hand off to cities (which depends on this run's geocode map) until resolved
+        orphans = resolution_map.auto_merge.orphans
+        orphan_count = len(orphans.no_candidates) + len(orphans.no_matches) + len(orphans.ambiguity)
+        if orphan_count:
+            ingest_log.writeline(
+                f"BLOCKED: {orphan_count} active orphan(s) in resolution_map.json "
+                f"(no_candidates={len(orphans.no_candidates)}, no_matches={len(orphans.no_matches)}, ambiguity={len(orphans.ambiguity)}); "
+                "run the resolve-subdivisions skill before dumping",
+                level="WARN",
+            )
+            sys.exit(10)
+
         dump(sub_map)
         write_unmerged_doc(sub_map)
-        resolution_map.save(RESOLUTION_MAP_PATH)
         ingest_log.writeline(f"completed: {len(sub_map)} subdivisions")
         return sub_map.to_geocode_map()
     finally:
