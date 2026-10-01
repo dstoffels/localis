@@ -17,7 +17,6 @@ from .merge_alternate_names import merge_alternate_name_aliases
 from .merge_subdivisions import try_merge
 from .resolve_subdivisions import apply_skill_resolved
 from .wikidata_subdivisions import apply_wikidata_matches
-from .audit_unclaimed import audit_unclaimed_geonames_subs
 from .dump_subdivisions import dump
 
 RESOLUTION_MAP_PATH = SUBDIVISIONS_OUTPUTS_PATH / "resolution_map.json"
@@ -73,8 +72,6 @@ def ingest_subdivisions(
 
         # rebuild cache with complete data, update parents
         sub_map.refresh()
-
-        audit_unclaimed_geonames_subs(sub_map)
 
         dump(sub_map)
         resolution_map.save(RESOLUTION_MAP_PATH)
