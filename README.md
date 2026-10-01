@@ -339,7 +339,7 @@ nested_sub.type
 
 ### Caching
 
-All registries (**Countries**, **Subdivisions**, **Cities**) and their indexes are lazy-loaded on first use, incurring a cold start cost on whichever call touches them first. Any registry's dataset and indexes can be pre-loaded with `.force_cache()` to avoid this during queries.
+All registries (**Countries**, **Subdivisions**, **Cities**) and their indexes are lazy-loaded on first use, incurring a cold start cost on whichever call touches them first. Any registry's dataset and indexes can be pre-loaded with `.force_cache()` to avoid this during queries, or you can simply access the registry/method to trigger the lazy loading upfront.
 
 #### Countries (254)
 | Component | Load Time | Memory |
@@ -404,6 +404,8 @@ Data in this project is kept current monthly from the following sources:
   - **Merged**: Additional subdivision aliases from [Ipregistry](https://ipregistry.co)
 - **Cities**
   - [GeoNames](https://www.geonames.org/) `cities500.txt` dataset
+
+Subdivisions in particular require reconciling two sources that disagree in nontrivial ways; see [`docs/methodology.md`](docs/methodology.md) for a complete, falsifiable account of how that reconciliation works, the thresholds and exceptions involved, and their evidentiary basis.
 
 ---
 
