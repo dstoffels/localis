@@ -124,7 +124,6 @@ Remaining pairs are claimed in descending score order across the whole bucket, s
 #### 6. Margin floor
 
 A pair that wins assignment but scores less than 5 points over its threshold is not merged. It becomes a `low_margin` orphan carrying that candidate, so the skill can confirm or reject the specific pair. Every confirmed false positive found so far sat within 3 points of its threshold, while a correct near-threshold match such as `PE-CAL` El Callao to Callao is only delayed for one review, not lost.
-
 ## Cities
 
 Cities come from GeoNames' `cities500.txt`, GeoNames' own export of every populated place with a population of 500 or more, plus administrative seats of any size. No further population or feature filtering is applied. A city without a country code, or whose country isn't in localis's country data, is dropped and logged. A missing population is recorded as 0.

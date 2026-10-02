@@ -1,11 +1,16 @@
+import json
 from typing import Literal
 from utils import *
 from mcp.server import MCPServer
 
 mcp = MCPServer(name="resolve-subdivisions")
 
-MAX_CANDIDATES = 1000
-processed_candidates = 0
+# Session context budget, in estimated tokens. The server only sees its own output, so the estimate adds fixed allowances for the agent's reasoning and web searches; calibrated from a 44-orphan session that used ~1.1k tokens per mostly-easy orphan.
+TOKEN_BUDGET = 150_000
+CHARS_PER_TOKEN = 4
+ORPHAN_ALLOWANCE = 1_000
+SEARCH_ALLOWANCE = 3_000
+estimated_tokens = 0
 batch_num = 0
 escalated_iso_code: str | None = None
 escalation_findings: str | None = None
@@ -31,30 +36,29 @@ def _finish_orphan() -> None:
 def next() -> dict | str | None:
     """Returns the next orphaned subdivision and its candidates. Repeated calls paginate through the candidates until all candidates have been processed.
 
-    Candidates are flat formatted: { geonames_id: "name1, name2 - [admin_level] CLAIMED BY <iso_code> (note)", ... }, where "CLAIMED BY" and the note appear only when they apply.
+    Candidates are a list, best match first, each formatted "geonames_id: name1, name2 - [admin_level] CLAIMED BY <iso_code> (note)", where "CLAIMED BY" and the note appear only when they apply.
     """
-    global processed_candidates, batch_num
+    global estimated_tokens, batch_num
 
-    # We cannot reset the session while there are still unprocessed candidates for an orphan.
-    # The first batch is 10-100 candidates, subsequent batches are fixed at 200, so processed_candidates will never be > MAX_CANDIDATES after the first batch (batch_num=0).
-    # processed_candidates can only reach MAX_CANDIDATES after a minimum of 6 repeated next calls for orphans with over 1000 candidates.
-    # An orphan is finished processing after calling merge or add, and batch_num is reset to 0. After which, if more than 1000 candidates have been processed, the next orphan will trigger the MAX_CANDIDATES check, forcing the user to reset the session context.
-
-    # Reset session context and counters to reduce agent context drift.
-    if processed_candidates >= MAX_CANDIDATES and batch_num == 0:
-        processed_candidates = 0
-        return "MAX CANDIDATES REACHED: Tell the user to call /clear to reset session context and then cease all further processing in this session."
+    # only checked between orphans (batch_num == 0), never mid-orphan, so a reset never splits an orphan's candidates across sessions
+    if estimated_tokens >= TOKEN_BUDGET and batch_num == 0:
+        estimated_tokens = 0
+        return "CONTEXT BUDGET REACHED: Tell the user to call /clear to reset session context and then cease all further processing in this session."
 
     orphan = get_next_orphan()
     if orphan is None:
         return None
 
-    candidates = get_candidates(orphan["iso_code"], batch_num)
+    orphan["candidates"] = get_candidates(orphan["iso_code"], batch_num)
 
-    orphan["candidates"] = candidates
+    estimated_tokens += len(json.dumps(orphan, ensure_ascii=False)) // CHARS_PER_TOKEN
+    if batch_num == 0:
+        estimated_tokens += ORPHAN_ALLOWANCE
+    elif batch_num == 1:
+        # paging past the first batch means the top tier didn't settle it, so the agent searched
+        estimated_tokens += SEARCH_ALLOWANCE
 
     batch_num += 1
-    processed_candidates += len(orphan["candidates"])
     return orphan
 
 

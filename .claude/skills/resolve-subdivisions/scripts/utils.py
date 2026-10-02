@@ -90,14 +90,14 @@ def _get_iso_subs() -> dict[str, SubdivisionModel]:
     return iso_subs
 
 
-def _format_candidate(candidate: SubdivisionModel, note: str = "") -> tuple[int, str]:
+def _format_candidate(candidate: SubdivisionModel, note: str = "") -> str:
     names = ", ".join([candidate.name, *candidate.aliases])
-    label = f"{names} - [{candidate.admin_level}]"
+    label = f"{candidate.geonames_id}: {names} - [{candidate.admin_level}]"
     if candidate.iso_code is not None:
         label += f" CLAIMED BY {candidate.iso_code}"
     if note:
         label += f" ({note})"
-    return candidate.geonames_id, label
+    return label
 
 
 TOP_TIER_MIN = 10
@@ -130,7 +130,8 @@ def _flagged_candidates(iso_code: str) -> list[tuple[int, str]]:
     raise ValueError(f"{iso_code} is not in resolution_map's orphans")
 
 
-def get_candidates(iso_code: str, batch_num: int = 0) -> dict[int, str]:
+def get_candidates(iso_code: str, batch_num: int = 0) -> list[str]:
+    """A batch of candidates, best first. A list rather than an id-keyed dict, since serialization sorts dict keys and would lose the ranking."""
     iso_sub: SubdivisionModel | None = _get_iso_subs().get(iso_code, None)
     if not iso_sub:
         raise ValueError(f"{iso_code} is not found in ISO subdivisions")
@@ -142,7 +143,7 @@ def get_candidates(iso_code: str, batch_num: int = 0) -> dict[int, str]:
     # ambiguity, low_margin and wikidata_conflict orphans see the specific records the pipeline flagged first, before the full pool
     if flagged and batch_num == 0:
         records = [(sub_map.get(geonames_id=gid), note) for gid, note in flagged]
-        return dict(_format_candidate(c, note) for c, note in records if c is not None)
+        return [_format_candidate(c, note) for c, note in records if c is not None]
 
     # the whole country, claimed and type-mismatched records included (marked), since ISO and GeoNames can disagree on a subdivision's level or describe the same place with different type words; on score ties, clean candidates come before type-mismatched ones and same-level before other levels
     same_level = min(iso_sub.admin_level, 2)
@@ -167,10 +168,10 @@ def get_candidates(iso_code: str, batch_num: int = 0) -> dict[int, str]:
 
     candidates = candidates[batch_start:batch_end]
 
-    return dict(
+    return [
         _format_candidate(c, _type_mismatch_note(iso_sub, c) if c.geonames_id in mismatched else "")
         for c in candidates
-    )
+    ]
 
 
 def _type_mismatch_note(iso_sub: SubdivisionModel, candidate: SubdivisionModel) -> str:

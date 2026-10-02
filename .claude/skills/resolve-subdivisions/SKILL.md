@@ -10,7 +10,7 @@ disallowed-tools: Bash Read Grep Glob Edit Write Agent WebFetch
 
 `next` returns the orphan's `iso_code`, `name`, `aliases`, `country`, `type` and `admin_level`, plus a batch of `candidates`.
 
-Candidates come from every GeoNames subdivision in the orphan's country, sorted by name similarity, with candidates at the orphan's own level first on ties. Each is formatted `geonames_id: "name, aliases - [admin_level]"`, for example `1668352: "Tainan, 台南市, 臺南市 - [2]"`, with two optional suffixes:
+Candidates come from every GeoNames subdivision in the orphan's country, as a list ordered best match first, with candidates at the orphan's own level first on ties. Each is formatted `"geonames_id: name, aliases - [admin_level]"`, for example `"1668352: Tainan, 台南市, 臺南市 - [2]"`, with two optional suffixes:
 - `CLAIMED BY <iso_code>`: another ISO subdivision already holds this record. You can never merge into it.
 - `(note)`: for some orphans, the first batch holds only the specific records automerge flagged, either "automerge's pick" (a match just over the threshold that needs confirming) or "automerge's contested target" (a record several ISO subdivisions matched equally well). The batch after it is the regular top-tier batch. A note can also read "type mismatch": the GeoNames name contains a word like "City" that suggests a different kind of place than the ISO type. That is sometimes a real difference (a city vs. the region around it) and sometimes just naming (Hamburg is both a city and a German state), so judge which before merging.
 
@@ -25,7 +25,7 @@ Call the `next` tool to retrieve the queued orphaned ISO subdivision and its fir
 
 If `next` returns `null`, stop. We've reached the end of the orphaned subdivisions list.
 
-If `next` returns "MAX CANDIDATES REACHED...", follow the instructions in that message verbatim. Do not report session progress.
+If `next` returns "CONTEXT BUDGET REACHED...", follow the instructions in that message verbatim. Do not report session progress.
 
 If `next` returns an empty candidates array, proceed to Step 3.
 
