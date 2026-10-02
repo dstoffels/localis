@@ -87,7 +87,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `RU-AL`/`RU-ALT` swapped by a stale skill decision; Wikidata's mapping now applies
 - Merged subdivisions kept GeoNames' parent instead of ISO's
 - Kosovo's `numeric` was `0` instead of `None`
-- `search_index.bin.gz` changed bytes on every dump even with identical data (gzip embeds the current time), which made CI's dataset-change check fire on every run
+- `search_index.bin.gz` changed bytes on every dump even with identical data (gzip embeds the current time, and its OS header byte differs between Python 3.11 and later versions), which made CI's dataset-change check fire whenever CI and the committing machine ran different Python versions; both are now fixed values. Source manifests are written with a trailing newline, so opening one in an editor no longer changes it
 - Country ingest crashed on Python versions before 3.14 (a bare `super()` call inside a slotted dataclass), and the ingest logger crashed when its `logs/` folder didn't exist yet
 
 ## [1.1.2] - 2026-09-29

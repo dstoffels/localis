@@ -79,8 +79,10 @@ def dump_search_index(data: Sequence[Model], datadir_path: Path) -> None:
         offset += len(ids)
 
     # Write the compressed blob to disk
-    # mtime=0: gzip otherwise embeds the current time, so identical data would produce different bytes on every dump
-    blob_path.write_bytes(gzip.compress(buf, compresslevel=6, mtime=0))
+    # mtime=0: gzip otherwise embeds the current time, so identical data would produce different bytes on every dump. The OS header byte (index 9) also varies by Python version (3.11 writes the host OS, later versions 255), so it's pinned to 255 ("unknown")
+    blob = bytearray(gzip.compress(buf, compresslevel=6, mtime=0))
+    blob[9] = 255
+    blob_path.write_bytes(blob)
 
     # Write the offsets to TSV
     with open(offsets_path, "w", newline="", encoding="utf-8") as f:

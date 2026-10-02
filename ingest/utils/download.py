@@ -22,6 +22,8 @@ def _save_manifest(path: Path, manifest: _Manifest) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with open(path, "w", encoding="utf-8") as f:
         json.dump(manifest, f, indent=2)
+        # a trailing newline, as editors add on save, so a hand-opened manifest doesn't show as changed
+        f.write("\n")
 
 
 def _etag(url: str) -> str | None:
