@@ -1,4 +1,3 @@
-from datetime import datetime, timezone
 from pathlib import Path
 from typing import Literal
 
@@ -29,12 +28,12 @@ class IngestLog:
         self._lines.append(line)
 
     def dump(self) -> None:
-        timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
         """Write this stage's buffered lines to its own file, replacing whatever that file held from the previous run."""
         if self._stage is None:
             return
         path = STAGE_FILES[self._stage]
-        text = f"[{self._stage}] {timestamp}\n"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        text = f"[{self._stage}]\n"
         text += "\n".join(self._lines)
         path.write_text(text + "\n" if text else "", encoding="utf-8")
 

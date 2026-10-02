@@ -94,5 +94,5 @@ ingest/*/inputs/*
 # ingest outputs: tracked by default (resolution decisions, orphan lists), except scratch files
 ingest/subdivisions/outputs/review_output.json
 
-# ingest logs: always regenerated, never tracked
-ingest/*/logs/*
+# ingest logs: tracked so each run's diagnostics are reviewable in the ingest PR
+!ingest/*/logs/*.log

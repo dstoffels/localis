@@ -29,7 +29,7 @@ class CountryModel(Model):
             # only the unique alpha_4 withdrawal code is used for historic entries
             yield normalize(self.historic.split("|", 1)[0])
             return
-        yield from super().extract_lookup_values()
+        yield from Model.extract_lookup_values(self)
 
     def to_row(self) -> tuple[str | int | None]:
         data = self.to_dict()
