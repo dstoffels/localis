@@ -450,7 +450,15 @@ MIT
 
 ---
 
-## Contributing
+## Why localis
+localis began with some database cleanup. I found myself writing mountains of bespoke code to parse inconsistent, dirty data with pycountry, GeoNames and Wikidata to name a few (Google Places was not in the budget). When the pipeline was complete and the data cleaned, I realized this mountain of code could be useful for others who might need a reliable offline geo-data solution, so here we are! I hope you find it useful and please don't hesitate to contribute or report any issues.
 
-Pull requests welcome at [github.com/dstoffels/localis](https://github.com/dstoffels/localis)
-Report issues: https://github.com/dstoffels/localis/issues
+---
+
+## Contributing
+[Pull requests welcome](https://github.com/dstoffels/localis)
+[Report issues](https://github.com/dstoffels/localis/issues)
+
+Support this project: 
+- [GitHub Sponsors](https://github.com/sponsors/dstoffels)
+- [PayPal](https://www.paypal.biz/danOstoffels)

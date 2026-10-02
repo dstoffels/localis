@@ -11,6 +11,10 @@ permissions:
   contents: write
   pull-requests: write
 
+concurrency:
+  group: ingest
+  cancel-in-progress: false
+
 jobs:
   ingest:
     runs-on: ubuntu-latest
@@ -26,7 +30,7 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-          
+
       - name: Configure git identity
         run: |
           git config user.name "github-actions[bot]"
@@ -36,15 +40,26 @@ jobs:
         run: |
           git fetch origin dev
           if ! git merge --no-edit origin/dev; then
-            echo "::error::Merge conflict pulling dev into ingest. Resolve locally: git checkout ingest && git pull && git merge dev, then push."
-            exit 1
+            for f in $(git diff --name-only --diff-filter=U); do
+              case "$f" in
+                src/localis/data/*|ingest/*/inputs/*.manifest.json|pyproject.toml)
+                  git checkout --theirs -- "$f"
+                  git add -- "$f"
+                  ;;
+                *)
+                  echo "::error::Merge conflict in $f pulling dev into ingest. Resolve locally: git checkout ingest && git pull && git merge dev, then push."
+                  exit 1
+                  ;;
+              esac
+            done
+            git commit --no-edit
           fi
 
       - name: Install Poetry
         uses: snok/install-poetry@v1
 
       - name: Cache deps
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/.cache/pypoetry
           key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
@@ -55,16 +70,28 @@ jobs:
       - name: Run full ingest pipeline
         run: poetry run ingest
 
+      - name: Type Check
+        run: poetry run pyright
+
+      - name: Run Tests
+        run: poetry run pytest
+
       - name: Bump version if the published dataset changed
         id: version
         run: |
-          if git diff --quiet -- src/localis/data; then
+          current="$(poetry version -s)"
+          if [ -z "$(git status --porcelain -- src/localis/data)" ]; then
+            echo "data_changed=false" >> "$GITHUB_OUTPUT"
             echo "bumped=false" >> "$GITHUB_OUTPUT"
-          else
+          elif git rev-parse -q --verify "refs/tags/v$current" >/dev/null; then
             poetry version patch
+            echo "data_changed=true" >> "$GITHUB_OUTPUT"
             echo "bumped=true" >> "$GITHUB_OUTPUT"
-            echo "version=$(poetry version -s)" >> "$GITHUB_OUTPUT"
+          else
+            echo "data_changed=true" >> "$GITHUB_OUTPUT"
+            echo "bumped=false" >> "$GITHUB_OUTPUT"
           fi
+          echo "version=$(poetry version -s)" >> "$GITHUB_OUTPUT"
 
       - name: Stage changes
         id: stage
@@ -97,7 +124,7 @@ jobs:
           if [ -z "$existing" ]; then
             gh pr create --head ingest --base dev \
               --title "Automated data ingest" \
-              --body "This PR is maintained automatically by the ingest workflow and always reflects the current state of the \`ingest\` branch. Each run comments below with what changed."
+              --body "This PR is maintained automatically by the ingest workflow and always reflects the current state of the \`ingest\` branch. Each run comments below with what changed. Type check and tests ran in the ingest workflow itself before this was pushed, since bot-opened PRs don't trigger the Test workflow."
           fi
 
       - name: Comment on PR with this run's changes
@@ -110,6 +137,8 @@ jobs:
             echo
             if [ "${{ steps.version.outputs.bumped }}" == "true" ]; then
               echo "Dataset changed, version bumped to \`${{ steps.version.outputs.version }}\`."
+            elif [ "${{ steps.version.outputs.data_changed }}" == "true" ]; then
+              echo "Dataset changed; rides along with unreleased version \`${{ steps.version.outputs.version }}\`, no bump."
             else
               echo "Only bookkeeping files changed; no dataset version bump."
             fi

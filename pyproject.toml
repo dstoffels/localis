@@ -27,6 +27,7 @@ dependencies = [
 [project.urls]
 homepage = "https://pypi.org/project/localis/"
 repository = "https://github.com/dstoffels/localis"
+funding = "https://github.com/sponsors/dstoffels"
 
 [project.scripts]
 test = "pytest:console_main"

@@ -2,11 +2,19 @@ name: Test
 
 on:
   push:
+    branches:
+      - dev
+      - main
   pull_request:
-    types:
-      - closed
     branches:
       - main
+
+permissions:
+  contents: write
+
+concurrency:
+  group: test-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   test:
@@ -24,13 +32,34 @@ jobs:
         uses: snok/install-poetry@v1
 
       - name: Cache deps
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/.cache/pypoetry
           key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
 
       - name: Install Deps
         run: poetry install
+
+      - name: Configure git identity
+        if: github.event_name == 'push' && github.ref == 'refs/heads/dev'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Run ingest
+        if: github.event_name == 'push' && github.ref == 'refs/heads/dev'
+        run: poetry run ingest
+
+      - name: Check for unexpected dataset changes
+        if: github.event_name == 'push' && github.ref == 'refs/heads/dev'
+        run: |
+          if [ -n "$(git status --porcelain -- src/localis/data)" ]; then
+            git add -A
+            git commit -m "chore: automated data ingest"
+            git push origin HEAD:dev
+            echo "::error::Dataset changed during ingest validation and was committed to dev. That commit has not been tested; review the diff and push again before merging to main."
+            exit 1
+          fi
 
       - name: Type Check
         run: poetry run pyright
