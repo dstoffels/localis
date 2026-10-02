@@ -48,12 +48,19 @@ class WikidataConflictOrphan:
 
 
 @dataclass
+class GroupingTwinOrphan:
+    iso_code: str
+    candidate_geonames_id: int
+
+
+@dataclass
 class Orphans:
     no_candidates: list[str] = field(default_factory=list)
     no_matches: list[str] = field(default_factory=list)
     ambiguity: list[AmbiguousOrphan] = field(default_factory=list)
     low_margin: list[LowMarginOrphan] = field(default_factory=list)
     wikidata_conflict: list[WikidataConflictOrphan] = field(default_factory=list)
+    grouping_twin: list[GroupingTwinOrphan] = field(default_factory=list)
 
     def count(self) -> int:
         return (
@@ -62,12 +69,13 @@ class Orphans:
             + len(self.ambiguity)
             + len(self.low_margin)
             + len(self.wikidata_conflict)
+            + len(self.grouping_twin)
         )
 
     def summary(self) -> str:
         return (
             f"no_candidates={len(self.no_candidates)}, no_matches={len(self.no_matches)}, ambiguity={len(self.ambiguity)}, "
-            f"low_margin={len(self.low_margin)}, wikidata_conflict={len(self.wikidata_conflict)}"
+            f"low_margin={len(self.low_margin)}, wikidata_conflict={len(self.wikidata_conflict)}, grouping_twin={len(self.grouping_twin)}"
         )
 
 
@@ -127,6 +135,10 @@ class ResolutionMap:
                     wikidata_conflict=[
                         WikidataConflictOrphan(**orphan)
                         for orphan in automerge_data.get("orphans", {}).get("wikidata_conflict", [])
+                    ],
+                    grouping_twin=[
+                        GroupingTwinOrphan(**orphan)
+                        for orphan in automerge_data.get("orphans", {}).get("grouping_twin", [])
                     ],
                 ),
             ),

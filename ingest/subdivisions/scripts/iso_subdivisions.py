@@ -53,7 +53,7 @@ def load_iso_subs(
     countries: dict[str, CountryModel],
     resolution_map: ResolutionMap,
 ) -> tuple[dict[str, SubdivisionModel], list[SubdivisionModel]]:
-    """Parses ISO 3166-2 subdivisions from Debian's iso-codes, the authoritative source. Returns (iso_subs, non_administrative_subs): the latter are known upfront to never have a GeoNames counterpart, so they bypass merging entirely."""
+    """Parses ISO 3166-2 subdivisions from Debian's iso-codes, the authoritative source. Returns (iso_subs, non_administrative_subs), the latter resolved separately by apply_non_administrative()."""
     ingest_log.writeline("Loading ISO subdivisions...")
     iso_subs: dict[str, SubdivisionModel] = {}
     non_administrative_subs: list[SubdivisionModel] = []

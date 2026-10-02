@@ -34,26 +34,34 @@ def candidate_pool(
     return [g for g in sub_map.filter(alpha2, geonames_level) if g.iso_code is None]
 
 
+def is_directional_mismatch(iso_sub: SubdivisionModel, geo_sub: SubdivisionModel) -> bool:
+    """True if every name pair differs by a directional word."""
+    return all(has_directional_mismatch(i, g) for i in prepare_names(iso_sub) for g in prepare_names(geo_sub))
+
+
 def score_candidates(
     iso_sub: SubdivisionModel,
     geo_subs: list[SubdivisionModel],
     include_type_disqualified: bool = False,
+    include_directional_mismatch: bool = False,
 ) -> list[tuple[SubdivisionModel, float, int]]:
-    """Score every geo_sub candidate against iso_sub with the same rules auto-merge itself uses to decide a match: type-family disqualification, directional-mismatch exclusion, then the best-scoring name pair and its dynamic threshold. Returns (geo_sub, score, threshold_needed) for every non-disqualified candidate, best-first; include_type_disqualified keeps type-disqualified candidates too, for manual review where a type mismatch can be a naming difference rather than a different place. A caller filters `score >= threshold_needed` for "would qualify for auto-merge"; the full ranked list is also what should be shown for manual review, since a sub-threshold entry is a near-miss, not a refusal."""
+    """Scores each geo_sub against iso_sub as (geo_sub, score, threshold_needed), best first."""
     iso_names = prepare_names(iso_sub)
     scored: list[tuple[SubdivisionModel, float, int]] = []
     for geo_sub in geo_subs:
         if not include_type_disqualified and is_type_disqualified(iso_sub, geo_sub):
             continue
+        geo_names = prepare_names(geo_sub)
+        pairs = [(i, g) for i in iso_names for g in geo_names if not has_directional_mismatch(i, g)]
+        # score directional-mismatched pairs only when the record has no clean pair
+        if not pairs and include_directional_mismatch:
+            pairs = [(i, g) for i in iso_names for g in geo_names]
         best: tuple[float, int] | None = None
-        for iso_name in iso_names:
-            for geo_name in prepare_names(geo_sub):
-                if has_directional_mismatch(iso_name, geo_name):
-                    continue
-                score = fuzz.token_sort_ratio(iso_name, geo_name)
-                needed = threshold(iso_name, geo_name)
-                if best is None or score > best[0]:
-                    best = (score, needed)
+        for iso_name, geo_name in pairs:
+            score = fuzz.token_sort_ratio(iso_name, geo_name)
+            needed = threshold(iso_name, geo_name)
+            if best is None or score > best[0]:
+                best = (score, needed)
         if best is not None:
             scored.append((geo_sub, best[0], best[1]))
     scored.sort(key=lambda t: t[1], reverse=True)

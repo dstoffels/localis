@@ -17,6 +17,7 @@ from .merge_alternate_names import merge_alternate_name_aliases
 from .automerge import try_merge
 from .resolve_subdivisions import apply_skill_decisions
 from .wikidata_subdivisions import fetch_wikidata_crosswalk, flag_wikidata_conflicts, apply_wikidata_matches
+from .non_administrative import apply_non_administrative, flag_grouping_twin_merges
 from .dump_subdivisions import dump
 from .dump_unmerged import write as write_unmerged_doc
 
@@ -66,16 +67,6 @@ def ingest_subdivisions(
         # Cache and dedupe iso subs by id
         iso_subs, non_administrative_subs = load_iso_subs(countries, resolution_map)
 
-        # ISO-listed entries known upfront to have no GeoNames counterpart (documentation/statistical groupings, not real administrative divisions); add directly, bypassing merge entirely
-        resolution_map.automerge.bypassed = {}
-        for sub in non_administrative_subs:
-            sub_map.add(sub)
-            assert sub.iso_code is not None
-            resolution_map.automerge.bypassed[sub.iso_code] = None
-        ingest_log.writeline(
-            f"bypassed {len(resolution_map.automerge.bypassed)}/{len(iso_subs) + len(non_administrative_subs)} subdivisions as non-administrative"
-        )
-
         # Apply skill-resolved decisions directly, before auto-merge ever sees these iso_subs, so a verified decision can never lose its target to a fresh auto-merge
         remaining_iso_subs = apply_skill_decisions(iso_subs, resolution_map, sub_map)
 
@@ -86,8 +77,14 @@ def ingest_subdivisions(
         # Apply unambiguous Wikidata crosswalk matches next, a stronger signal than fuzzy string matching, still ahead of auto-merge
         remaining_iso_subs = apply_wikidata_matches(remaining_iso_subs, resolution_map, sub_map, crosswalk)
 
+        # Non-administrative groupings take their GeoNames twin, if any, once their children have merged and before auto-merge, so a child can't match the twin
+        apply_non_administrative(non_administrative_subs, sub_map, resolution_map)
+
         # Auto-merge whatever's left with fuzzy matching; writes resolutions/orphans directly into resolution_map
         try_merge(remaining_iso_subs, sub_map, resolution_map)
+
+        # Catch an automerge into a grouping's twin that apply_non_administrative() couldn't identify in time
+        flag_grouping_twin_merges(non_administrative_subs, sub_map, resolution_map)
 
         # rebuild cache with complete data, update parents
         sub_map.refresh()

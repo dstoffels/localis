@@ -8,325 +8,43 @@
 [INFO] Merging GeoNames alternate names into subdivision aliases...
 [INFO] Enriched 25789 GeoNames subdivisions with alternate names
 [INFO] Loading ISO subdivisions...
-[INFO] bypassed 44/5046 subdivisions as non-administrative
-[INFO] resolved 31/5002 subdivisions from skill-resolved decisions
+[INFO] resolved 342/4997 subdivisions from skill-resolved decisions
 [INFO] Querying Wikidata for ISO/GeoNames crosswalk...
-[INFO] resolved 4295/4971 subdivisions from Wikidata crosswalk
+[INFO] resolved 4295/4655 subdivisions from Wikidata crosswalk
+[INFO] bypassed IE-C 'Connaught' merged into its GeoNames twin IE.C 'Connacht'
+[INFO] bypassed IE-L 'Leinster' merged into its GeoNames twin IE.L 'Leinster'
+[INFO] bypassed IE-M 'Munster' merged into its GeoNames twin IE.M 'Munster'
+[INFO] bypassed IE-U 'Ulster' merged into its GeoNames twin IE.U 'Ulster'
+[INFO] bypassed IS-1 'Höfuðborgarsvæði' merged into its GeoNames twin IS.39 'Capital Region'
+[INFO] bypassed IS-2 'Suðurnes' merged into its GeoNames twin IS.43 'Southern Peninsula'
+[INFO] bypassed IS-3 'Vesturland' merged into its GeoNames twin IS.45 'West'
+[INFO] bypassed IS-4 'Vestfirðir' merged into its GeoNames twin IS.44 'Westfjords'
+[INFO] bypassed IS-5 'Norðurland vestra' merged into its GeoNames twin IS.41 'Northwest'
+[INFO] bypassed IS-6 'Norðurland eystra' merged into its GeoNames twin IS.40 'Northeast'
+[INFO] bypassed IS-7 'Austurland' merged into its GeoNames twin IS.38 'East'
+[INFO] bypassed IS-8 'Suðurland' merged into its GeoNames twin IS.42 'South'
+[INFO] bypassed LT-AL 'Alytaus apskritis' merged into its GeoNames twin LT.56 'Alytus'
+[INFO] bypassed LT-KL 'Klaipėdos apskritis' merged into its GeoNames twin LT.58 'Klaipėda County'
+[INFO] bypassed LT-KU 'Kauno apskritis' merged into its GeoNames twin LT.57 'Kaunas'
+[INFO] bypassed LT-MR 'Marijampolės apskritis' merged into its GeoNames twin LT.59 'Marijampolė County'
+[INFO] bypassed LT-PN 'Panevėžio apskritis' merged into its GeoNames twin LT.60 'Panevėžys'
+[INFO] bypassed LT-SA 'Šiaulių apskritis' merged into its GeoNames twin LT.61 'Siauliai'
+[INFO] bypassed LT-TA 'Tauragės apskritis' merged into its GeoNames twin LT.62 'Tauragė County'
+[INFO] bypassed LT-TE 'Telšių apskritis' merged into its GeoNames twin LT.63 'Telsiai'
+[INFO] bypassed LT-UT 'Utenos apskritis' merged into its GeoNames twin LT.64 'Utena'
+[INFO] bypassed LT-VL 'Vilniaus apskritis' merged into its GeoNames twin LT.65 'Vilnius'
+[INFO] bypassed MW-C 'Central Region' merged into its GeoNames twin MW.C 'Central Region'
+[INFO] bypassed MW-N 'Northern Region' merged into its GeoNames twin MW.N 'Northern Region'
+[INFO] bypassed MW-S 'Southern Region' merged into its GeoNames twin MW.S 'Southern Region'
+[INFO] bypassed 49 subdivisions as non-administrative, 25 merged into a GeoNames twin
 [INFO] Attempting to merge ISO to GeoNames subdivisions...
-[WARN] AO-CCU 'Cuando Cubango' unmerged: closest was AO.CBG 'Cubango' (67/85)
-[WARN] ambiguous target 'Lankaran Sahari': AZ-LA, AZ-LAN all scored >= 90, excluding from auto-merge
-[WARN] ambiguous target 'Lənkəran': AZ-LA, AZ-LAN all scored >= 90, excluding from auto-merge
-[WARN] AZ-MI 'Mingəçevir' unmerged: closest was AZ.20 'Gǝncǝ' (40/80)
-[WARN] AZ-SA 'Şəki' unmerged: closest was AZ.55 'Shusha' (50/75)
-[WARN] AZ-YE 'Yevlax' unmerged: closest was AZ.07 'Shirvan' (33/80)
-[WARN] BI-KR 'Karuzi' unmerged: no GeoNames candidates in this bucket
-[WARN] BI-MW 'Mwaro' unmerged: no GeoNames candidates in this bucket
-[WARN] CI-AB 'Abidjan' unmerged: closest was CI.93 'Abidjan Autonomous District' (56/90)
-[WARN] CN-HK 'Hong Kong SAR' unmerged: closest was CN.23 'Shanghai' (38/85)
-[WARN] CN-MO 'Macao SAR' unmerged: closest was CN.23 'Shanghai' (44/85)
-[WARN] CN-TW 'Taiwan Sheng' unmerged: closest was CN.23 'Shanghai' (53/80)
-[WARN] DE-HH 'Hamburg' unmerged: closest was DE.16 'State of Berlin' (31/80)
-[WARN] ambiguous target 'Võru vald': EE-917, EE-919 all scored >= 90, excluding from auto-merge
-[WARN] ambiguous target 'Viljandi vald': EE-897, EE-899 all scored >= 90, excluding from auto-merge
-[WARN] ambiguous target 'Rakvere vald': EE-661, EE-663 all scored >= 90, excluding from auto-merge
-[WARN] ambiguous target 'Tartu vald': EE-793, EE-796 all scored >= 90, excluding from auto-merge
-[WARN] EE-511 'Narva' lost candidate EE.04.0255 'Järva vald' (score 80) to a higher-scoring match
-[WARN] EE-184 'Haapsalu' unmerged: closest was EE.08.0191 'Haljala vald' (53/80)
-[WARN] EE-296 'Keila' unmerged: closest was EE.13.0317 'Kohila vald' (73/80)
-[WARN] EE-321 'Kohtla-Järve' unmerged: closest was EE.04.0255 'Järva vald' (59/85)
-[WARN] EE-424 'Loksa' unmerged: closest was EE.01.0353 'Kuusalu vald' (50/80)
-[WARN] EE-446 'Maardu' unmerged: closest was EE.11.0712 'Saarde vald' (67/80)
-[WARN] EE-567 'Paide' unmerged: closest was EE.11.0712 'Saarde vald' (55/80)
-[WARN] EE-624 'Pärnu' unmerged: closest was EE.01.0198 'Harku vald' (60/75)
-[WARN] EE-735 'Sillamäe' unmerged: closest was EE.11.0712 'Saarde vald' (57/80)
-[WARN] ET-SN 'Southern Nations, Nationalities and Peoples' unmerged: no GeoNames candidates in this bucket
-[WARN] ET-SW 'Southwest Ethiopia Peoples' unmerged: closest was ET.44 'Addis Ababa' (35/90)
-[WARN] FI-01 'Landskapet Åland' unmerged: no GeoNames candidates in this bucket
-[WARN] FR-971 'Guadeloupe' unmerged: closest was FR.94 'Corsica' (27/80)
-[WARN] FR-972 'Martinique' unmerged: closest was FR.94 'Corsica' (27/80)
-[WARN] FR-973 'Guyane' unmerged: closest was FR.94 'Corsica' (43/80)
-[WARN] FR-974 'La Réunion' unmerged: closest was FR.94 'Corsica' (29/90)
-[WARN] FR-976 'Mayotte' unmerged: closest was FR.94 'Corsica' (33/80)
-[WARN] FR-BL 'Saint-Barthélemy' unmerged: closest was FR.94 'Corsica' (33/90)
-[WARN] FR-CP 'Clipperton' unmerged: closest was FR.94 'Corsica' (34/90)
-[WARN] FR-MF 'Saint-Martin' unmerged: closest was FR.94 'Corsica' (32/90)
-[WARN] FR-NC 'Nouvelle-Calédonie' unmerged: closest was FR.94 'Corsica' (41/90)
-[WARN] FR-PF 'Polynésie française' unmerged: closest was FR.94 'Corsica' (33/85)
-[WARN] FR-PM 'Saint-Pierre-et-Miquelon' unmerged: closest was FR.94 'Corsica' (40/90)
-[WARN] FR-TF 'Terres australes françaises' unmerged: closest was FR.94 'Corsica' (41/90)
-[WARN] FR-WF 'Wallis-et-Futuna' unmerged: closest was FR.94 'Corsica' (29/90)
-[WARN] FR-69M 'Métropole de Lyon' unmerged: closest was FR.11.75 'Paris' (26/90)
-[WARN] FR-6AE 'Alsace' unmerged: closest was FR.11.75 'Paris' (36/80)
-[WARN] ambiguous target 'Hertfordshire': GB-HEF, GB-HRT all scored >= 90, excluding from auto-merge
-[WARN] ambiguous target 'Herefordshire': GB-HEF, GB-HRT all scored >= 90, excluding from auto-merge
-[WARN] GB-ABE 'Aberdeen City' unmerged: closest was GB.ENG.C3 'Cambridgeshire' (55/85)
-[WARN] GB-BDG 'Barking and Dagenham' unmerged: closest was GB.ENG.B6 'Brighton and Hove' (54/90)
-[WARN] GB-BEN 'Brent' unmerged: closest was GB.ENG.G5 'Kent' (67/75)
-[WARN] GB-BEX 'Bexley' unmerged: closest was GB.WLS.X1 'Anglesey' (43/80)
-[WARN] GB-BNE 'Barnet' unmerged: closest was GB.ENG.G5 'Kent' (55/80)
-[WARN] GB-BRY 'Bromley' unmerged: closest was GB.ENG.B7 'City of Bristol' (57/80)
-[WARN] GB-CMD 'Camden' unmerged: closest was GB.SCT.T5 'Aberdeen City' (57/80)
-[WARN] GB-CRY 'Croydon' unmerged: closest was GB.SCT.U8 'City of Edinburgh' (53/80)
-[WARN] GB-EAL 'Ealing' unmerged: closest was GB.SCT.W3 'Shetland Islands' (67/80)
-[WARN] GB-EDH 'Edinburgh, City of' unmerged: closest was GB.ENG.B6 'Brighton and Hove' (47/85)
-[WARN] GB-ENF 'Enfield' unmerged: closest was GB.SCT.V1 'Fife' (55/80)
-[WARN] GB-GLG 'Glasgow City' unmerged: closest was GB.ENG.H5 'Leicestershire' (40/85)
-[WARN] GB-GRE 'Greenwich' unmerged: closest was GB.ENG.P3 'Warwickshire' (48/85)
-[WARN] GB-HAV 'Havering' unmerged: closest was GB.SCT.U8 'City of Edinburgh' (62/80)
-[WARN] GB-HCK 'Hackney' unmerged: closest was GB.SCT.V9 'Orkney Islands' (62/80)
-[WARN] GB-HIL 'Hillingdon' unmerged: closest was GB.ENG.N9 'Borough of Swindon' (59/85)
-[WARN] GB-HMF 'Hammersmith and Fulham' unmerged: closest was GB.SCT.W8 'Eilean Siar' (41/90)
-[WARN] GB-HNS 'Hounslow' unmerged: closest was GB.ENG.B7 'City of Bristol' (40/80)
-[WARN] GB-HRW 'Harrow' unmerged: closest was GB.ENG.C3 'Cambridgeshire' (50/80)
-[WARN] GB-HRY 'Haringey' unmerged: closest was GB.WLS.X1 'Anglesey' (62/80)
-[WARN] GB-ISL 'Islington' unmerged: closest was GB.ENG.G2 'Isle of Wight' (63/85)
-[WARN] GB-KEC 'Kensington and Chelsea' unmerged: closest was GB.SCT.W8 'Eilean Siar' (49/90)
-[WARN] GB-KTT 'Kingston upon Thames' unmerged: closest was GB.ENG.B6 'Brighton and Hove' (43/90)
-[WARN] GB-LBH 'Lambeth' unmerged: closest was GB.ENG.C3 'Cambridgeshire' (48/85)
-[WARN] GB-LEW 'Lewisham' unmerged: closest was GB.ENG.G2 'Isle of Wight' (56/85)
-[WARN] GB-LND 'London, City of' unmerged: closest was GB.ENG.N9 'Borough of Swindon' (62/80)
-[WARN] GB-MRT 'Merton' unmerged: closest was GB.WLS.X1 'Anglesey' (67/75)
-[WARN] GB-NWM 'Newham' unmerged: closest was GB.ENG.F2 'Hampshire' (40/80)
-[WARN] GB-RDB 'Redbridge' unmerged: closest was GB.SCT.U8 'City of Edinburgh' (56/85)
-[WARN] GB-RIC 'Richmond upon Thames' unmerged: closest was GB.WLS.X1 'Anglesey' (44/90)
-[WARN] GB-STN 'Sutton' unmerged: closest was GB.ENG.N5 'Suffolk' (46/80)
-[WARN] GB-SWK 'Southwark' unmerged: closest was GB.ENG.J9 'Nottinghamshire' (42/85)
-[WARN] GB-TWH 'Tower Hamlets' unmerged: closest was GB.WLS.X1 'Anglesey' (48/85)
-[WARN] GB-WFT 'Waltham Forest' unmerged: closest was GB.SCT.W8 'Eilean Siar' (45/90)
-[WARN] GB-WND 'Wandsworth' unmerged: closest was GB.SCT.V9 'Orkney Islands' (50/85)
-[WARN] GB-WSM 'Westminster' unmerged: closest was GB.ENG.Q4 'Worcestershire' (48/90)
-[WARN] GD-10 'Southern Grenadine Islands' unmerged: no GeoNames candidates in this bucket
-[WARN] GQ-C 'Région Continentale' unmerged: closest was GQ.10 'Djibloho' (28/90)
-[WARN] GQ-I 'Région Insulaire' unmerged: closest was GQ.10 'Djibloho' (24/85)
-[WARN] GQ-DJ 'Djibloho' unmerged: closest was GQ.09.2307161 'Distrito de Nsork' (36/85)
-[WARN] GW-L 'Leste' unmerged: closest was GW.11 'Bissau' (18/80)
-[WARN] GW-N 'Norte' unmerged: closest was GW.11 'Bissau' (18/85)
-[WARN] GW-S 'Sul' unmerged: closest was GW.11 'Bissau' (44/75)
-[WARN] ID-JK 'Jakarta Raya' unmerged: closest was ID.04 'Jakarta' (74/85)
-[WARN] ID-PT 'Papua Tengah' unmerged: closest was ID.PT 'Central Papua' (73/90)
-[WARN] IE-WD 'Waterford' unmerged: closest was IE.U 'Ulster' (40/80)
-[WARN] IS-AKU 'Akureyrarbær' unmerged: closest was IS.40 'Northeast' (40/90)
-[WARN] IS-ARN 'Árneshreppur' unmerged: closest was IS.43 'Southern Peninsula' (40/85)
-[WARN] IS-GAR 'Garðabær' unmerged: closest was IS.41 'Northwest' (38/90)
-[WARN] IS-GOG 'Grímsnes- og Grafningshreppur' unmerged: closest was IS.43 'Southern Peninsula' (33/90)
-[WARN] IS-GRY 'Grýtubakkahreppur' unmerged: closest was IS.40 'Northeast' (35/90)
-[WARN] IS-HAF 'Hafnarfjarðarkaupstaður' unmerged: closest was IS.41 'Northwest' (40/90)
-[WARN] IS-HRG 'Hörgársveit' unmerged: closest was IS.39 'Capital Region' (71/90)
-[WARN] IS-HRU 'Hrunamannahreppur' unmerged: closest was IS.41 'Northwest' (35/90)
-[WARN] IS-HUG 'Húnabyggð' unmerged: closest was IS.39 'Capital Region' (38/90)
-[WARN] IS-HVA 'Hvalfjarðarsveit' unmerged: closest was IS.39 'Capital Region' (55/90)
-[WARN] IS-ISA 'Ísafjarðarbær' unmerged: closest was IS.44 'Westfjords' (42/85)
-[WARN] IS-KAL 'Kaldrananeshreppur' unmerged: closest was IS.41 'Northwest' (40/90)
-[WARN] IS-KJO 'Kjósarhreppur' unmerged: closest was IS.41 'Northwest' (36/85)
-[WARN] IS-KOP 'Kópavogsbær' unmerged: closest was IS.39 'Capital Region' (41/90)
-[WARN] IS-LAN 'Langanesbyggð' unmerged: closest was IS.42 'South' (36/85)
-[WARN] IS-MOS 'Mosfellsbær' unmerged: closest was IS.41 'Northwest' (34/90)
-[WARN] IS-MUL 'Múlaþing' unmerged: closest was IS.42 'South' (44/85)
-[WARN] IS-MYR 'Mýrdalshreppur' unmerged: closest was IS.40 'Northeast' (39/90)
-[WARN] IS-NOR 'Norðurþing' unmerged: closest was IS.41 'Northwest' (50/85)
-[WARN] IS-RHH 'Reykhólahreppur' unmerged: closest was IS.40 'Northeast' (38/90)
-[WARN] IS-RKN 'Reykjanesbær' unmerged: closest was IS.41 'Northwest' (40/90)
-[WARN] IS-RKV 'Reykjavíkurborg' unmerged: closest was IS.44 'Westfjords' (32/90)
-[WARN] IS-SBT 'Svalbarðsstrandarhreppur' unmerged: closest was IS.38 'East' (41/90)
-[WARN] IS-SDV 'Súðavíkurhreppur' unmerged: closest was IS.43 'Southern Peninsula' (50/85)
-[WARN] IS-SEL 'Seltjarnarnesbær' unmerged: closest was IS.43 'Southern Peninsula' (40/90)
-[WARN] IS-SHF 'Sveitarfélagið Hornafjörður' unmerged: closest was IS.41 'Northwest' (55/90)
-[WARN] IS-SKF 'Skaftárhreppur' unmerged: closest was IS.40 'Northeast' (39/90)
-[WARN] IS-SKG 'Skagabyggð' unmerged: closest was IS.42 'South' (32/85)
-[WARN] IS-SKO 'Skorradalshreppur' unmerged: closest was IS.41 'Northwest' (41/90)
-[WARN] IS-SNF 'Snæfellsbær' unmerged: closest was IS.43 'Southern Peninsula' (38/85)
-[WARN] IS-SOG 'Skeiða- og Gnúpverjahreppur' unmerged: closest was IS.41 'Northwest' (33/90)
-[WARN] IS-SOL 'Sveitarfélagið Ölfus' unmerged: closest was IS.38 'East' (47/90)
-[WARN] IS-STY 'Stykkishólmsbær' unmerged: closest was IS.38 'East' (31/90)
-[WARN] IS-TAL 'Tálknafjarðarhreppur' unmerged: closest was IS.40 'Northeast' (38/90)
-[WARN] IS-THG 'Þingeyjarsveit' unmerged: closest was IS.40 'Northeast' (50/85)
-[WARN] IS-VEM 'Vestmannaeyjabær' unmerged: closest was IS.45 'West' (44/90)
-[WARN] IS-VER 'Vesturbyggð' unmerged: closest was IS.45 'West' (67/85)
-[WARN] IS-VOP 'Vopnafjarðarhreppur' unmerged: closest was IS.44 'Westfjords' (34/90)
-[WARN] IT-CA 'Cagliari' unmerged: no GeoNames candidates in this bucket
-[WARN] IT-GE 'Genova' unmerged: no GeoNames candidates in this bucket
-[WARN] IT-VE 'Venezia' unmerged: no GeoNames candidates in this bucket
-[WARN] KG-GO 'Osh Shaary' unmerged: closest was KG.10 'Osh City' (46/80)
-[WARN] KN-K 'Saint Kitts' unmerged: no GeoNames candidates in this bucket
-[WARN] KN-N 'Nevis' unmerged: no GeoNames candidates in this bucket
-[WARN] KR-29 'Gwangju-gwangyeoksi' -> KR.18 'Gwangju' (92/90) below margin floor, sent for review
-[WARN] KR-11 'Seoul-teukbyeolsi' -> KR.11 'Seoul' (91/90) below margin floor, sent for review
-[WARN] KR-26 'Busan-gwangyeoksi' -> KR.10 'Busan' (91/90) below margin floor, sent for review
-[WARN] LT-04 'Anykščiai' unmerged: closest was LT.63 'Telsiai' (50/80)
-[WARN] LT-05 'Birštonas' unmerged: closest was LT.64 'Utena' (43/80)
-[WARN] LT-09 'Ignalina' unmerged: closest was LT.61 'Siauliai' (62/80)
-[WARN] LT-11 'Joniškis' unmerged: closest was LT.65 'Vilnius' (40/80)
-[WARN] LT-19 'Kelmė' unmerged: closest was LT.58 'Klaipėda County' (46/80)
-[WARN] LT-20 'Klaipėdos miestas' unmerged: no GeoNames candidates in this bucket
-[WARN] LT-22 'Kretinga' unmerged: closest was LT.64 'Utena' (46/80)
-[WARN] LT-23 'Kupiškis' unmerged: closest was LT.56 'Alytus' (48/90)
-[WARN] LT-26 'Mažeikiai' unmerged: closest was LT.63 'Telsiai' (50/80)
-[WARN] LT-34 'Pasvalys' unmerged: closest was LT.60 'Panevėžys' (59/85)
-[WARN] LT-36 'Prienai' unmerged: closest was LT.64 'Utena' (50/80)
-[WARN] LT-38 'Raseiniai' unmerged: closest was LT.61 'Siauliai' (59/85)
-[WARN] LT-40 'Rokiškis' unmerged: closest was LT.58 'Klaipėda County' (44/90)
-[WARN] LT-42 'Šalčininkai' unmerged: closest was LT.61 'Siauliai' (63/85)
-[WARN] LT-45 'Šilalė' unmerged: closest was LT.61 'Siauliai' (57/80)
-[WARN] LT-47 'Širvintos' unmerged: closest was LT.65 'Vilnius' (50/80)
-[WARN] LT-48 'Skuodas' unmerged: closest was LT.57 'Kaunas' (62/80)
-[WARN] LT-49 'Švenčionys' unmerged: closest was LT.65 'Vilnius' (47/85)
-[WARN] LT-52 'Trakai' unmerged: closest was LT.62 'Tauragė County' (46/80)
-[WARN] LT-59 'Visaginas' unmerged: closest was LT.57 'Kaunas' (53/80)
-[WARN] LT-60 'Zarasai' unmerged: closest was LT.57 'Kaunas' (46/80)
-[WARN] MC-LA 'Larvotto' unmerged: closest was MC.00 'Municipality of Monaco' (29/80)
-[WARN] MC-MA 'Malbousquet' unmerged: closest was MC.00 'Municipality of Monaco' (35/85)
-[WARN] MC-MC 'Monte-Carlo' unmerged: closest was MC.00 'Municipality of Monaco' (35/85)
-[WARN] MC-MG 'Moneghetti' unmerged: closest was MC.00 'Municipality of Monaco' (38/80)
-[WARN] MC-MO 'Monaco-Ville' unmerged: closest was MC.00 'Municipality of Monaco' (67/85)
-[WARN] MC-MU 'Moulins' unmerged: closest was MC.00 'Municipality of Monaco' (46/80)
-[WARN] MC-PH 'Port-Hercule' unmerged: closest was MC.00 'Municipality of Monaco' (22/85)
-[WARN] MC-SD 'Sainte-Dévote' unmerged: closest was MC.00 'Municipality of Monaco' (21/85)
-[WARN] MC-SO 'La Source' unmerged: closest was MC.00 'Municipality of Monaco' (27/80)
-[WARN] MC-SP 'Spélugues' unmerged: closest was MC.00 'Municipality of Monaco' (0/80)
-[WARN] MC-SR 'Saint-Roman' unmerged: closest was MC.00 'Municipality of Monaco' (35/85)
-[WARN] MC-VR 'Vallon de la Rousse' unmerged: closest was MC.00 'Municipality of Monaco' (27/85)
-[WARN] MG-D 'Antsiranana' -> MG.31 'Atsinanana' (86/85) below margin floor, sent for review
-[WARN] MG-A 'Toamasina' unmerged: closest was MG.25 'Atsimo-Atsinanana' (54/90)
-[WARN] MG-F 'Fianarantsoa' unmerged: closest was MG.12 'Vakinankaratra' (62/90)
-[WARN] MG-M 'Mahajanga' unmerged: closest was MG.11 'Analamanga' (63/85)
-[WARN] MG-T 'Antananarivo' unmerged: closest was MG.31 'Atsinanana' (64/85)
-[WARN] MG-U 'Toliara' unmerged: closest was MG.71 'Diana' (50/80)
-[WARN] MH-AUR 'Aur' unmerged: no GeoNames candidates in this bucket
-[WARN] MH-ENI 'Enewetak & Ujelang' unmerged: no GeoNames candidates in this bucket
-[WARN] MH-JAB 'Jabat' unmerged: no GeoNames candidates in this bucket
-[WARN] MH-LIK 'Likiep' unmerged: no GeoNames candidates in this bucket
-[WARN] MH-MAJ 'Majuro' unmerged: no GeoNames candidates in this bucket
-[WARN] MH-MEJ 'Mejit' unmerged: no GeoNames candidates in this bucket
-[WARN] MH-NMU 'Namu' unmerged: no GeoNames candidates in this bucket
-[WARN] MH-RON 'Rongelap' unmerged: no GeoNames candidates in this bucket
-[WARN] MH-UTI 'Utrik' unmerged: no GeoNames candidates in this bucket
-[WARN] MH-WTH 'Wotho' unmerged: no GeoNames candidates in this bucket
-[WARN] MH-WTJ 'Wotje' unmerged: no GeoNames candidates in this bucket
-[WARN] MH-L 'Ralik chain' unmerged: closest was MH.007 'Ailinginae Atoll' (48/85)
-[WARN] MH-T 'Ratak chain' unmerged: closest was MH.385 'Taka Atoll' (48/85)
 [INFO] merged MK-211 'Štip' -> MK.98 'Shtip' (89/75)
-[WARN] MK-803 'Butel †' unmerged: closest was MK.F1 'Veles' (40/75)
-[WARN] MK-815 'Čair †' unmerged: closest was MK.98 'Shtip' (25/75)
-[WARN] MR-13 'Nouakchott Ouest' unmerged: closest was MR.13 'Nouakchott West' (37/90)
-[WARN] MR-14 'Nouakchott Nord' unmerged: closest was MR.13 'Nouakchott West' (43/90)
-[WARN] MU-CC 'Cargados Carajos Shoals' unmerged: closest was MU.22 'Cargados Carajos' (82/90)
-[WARN] MY-14 'Wilayah Persekutuan Kuala Lumpur' unmerged: closest was MY.14 'Kuala Lumpur' (55/90)
-[WARN] NL-AW 'Aruba' unmerged: no GeoNames candidates in this bucket
-[WARN] NL-BQ1 'Bonaire' unmerged: no GeoNames candidates in this bucket
-[WARN] NL-BQ2 'Saba' unmerged: no GeoNames candidates in this bucket
-[WARN] NL-BQ3 'Sint Eustatius' unmerged: no GeoNames candidates in this bucket
-[WARN] NL-CW 'Curaçao' unmerged: no GeoNames candidates in this bucket
-[WARN] NL-SX 'Sint Maarten' unmerged: no GeoNames candidates in this bucket
-[WARN] NO-21 'Svalbard' unmerged: closest was NO.13 'Østfold' (40/80)
-[WARN] NO-22 'Jan Mayen' unmerged: closest was NO.05 'Finnmark' (43/85)
-[WARN] NO-30 'Viken' unmerged: closest was NO.05 'Finnmark' (32/85)
-[WARN] NO-38 'Vestfold og Telemark' unmerged: closest was NO.20 'Vestfold' (65/90)
-[WARN] NO-54 'Troms og Finnmark' unmerged: closest was NO.05 'Finnmark' (64/90)
-[WARN] NP-P4 'Gandaki' unmerged: closest was NP.4 'Gandaki Pradesh' (64/85)
-[WARN] NP-P6 'Karnali' unmerged: closest was NP.6 'Karnali Pradesh' (64/85)
-[WARN] NP-P7 'Sudurpashchim' unmerged: closest was NP.7 'Sudurpashchim Pradesh' (76/90)
-[WARN] NZ-CIT 'Chatham Islands Territory' unmerged: closest was NZ.10 'Chatham Islands' (75/90)
-[WARN] PE-CAL 'El Callao' -> PE.07 'Callao' (80/80) below margin floor, sent for review
-[WARN] PS-GZA 'Gaza' unmerged: closest was PS.GZ 'Gaza Strip' (57/80)
-[WARN] PS-HBN 'Hebron' unmerged: closest was PS.WE 'West Bank' (13/80)
-[WARN] PS-JEM 'Jerusalem' unmerged: closest was PS.WE 'West Bank' (11/85)
-[WARN] PS-JEN 'Jenin' unmerged: closest was PS.GZ 'Gaza Strip' (13/80)
-[WARN] PS-NBS 'Nablus' unmerged: closest was PS.GZ 'Gaza Strip' (25/80)
-[WARN] PS-RBH 'Ramallah' unmerged: closest was PS.WE 'West Bank' (24/85)
-[WARN] PS-RFH 'Rafah' unmerged: closest was PS.GZ 'Gaza Strip' (27/80)
-[WARN] PS-SLT 'Salfit' unmerged: closest was PS.WE 'West Bank' (27/80)
-[WARN] PS-TKM 'Tulkarm' unmerged: closest was PS.WE 'West Bank' (25/80)
-[WARN] QA-DA 'Ad Dawḩah' unmerged: closest was QA.01 'Baladiyat ad Dawhah' (64/90)
-[WARN] QA-MS 'Ash Shamāl' unmerged: closest was QA.08 'Madinat ash Shamal' (71/90)
-[WARN] QA-RA 'Ar Rayyān' unmerged: closest was QA.06 'Baladiyat ar Rayyan' (64/90)
-[WARN] QA-SH 'Ash Shīḩānīyah' unmerged: closest was QA.14 'Al-Shahaniya' (70/85)
-[WARN] RO-B 'București' unmerged: closest was RO.10 'Bucharest' (78/85)
-[WARN] RS-25 'Kosovski okrug' unmerged: closest was RS.SE.13 'Pomoravlje' (67/85)
-[WARN] RS-26 'Pećki okrug' unmerged: closest was RS.SE.24 'Pčinja' (62/80)
-[WARN] RS-27 'Prizrenski okrug' unmerged: closest was RS.SE.24 'Pčinja' (67/85)
-[WARN] RS-28 'Kosovsko-Mitrovački okrug' unmerged: closest was RS.VO.1 'North Bačka' (52/90)
-[WARN] RS-29 'Kosovsko-Pomoravski okrug' unmerged: closest was RS.SE.13 'Pomoravlje' (69/90)
-[WARN] RS-08 'Mačvanski okrug' unmerged: closest was RS.SE 'Central Serbia' (23/90)
-[WARN] RS-09 'Kolubarski okrug' unmerged: closest was RS.SE 'Central Serbia' (22/90)
-[WARN] RS-10 'Podunavski okrug' unmerged: closest was RS.SE 'Central Serbia' (15/90)
-[WARN] RS-12 'Šumadijski okrug' unmerged: closest was RS.SE 'Central Serbia' (30/90)
-[WARN] RS-13 'Pomoravski okrug' unmerged: closest was RS.SE 'Central Serbia' (22/90)
-[WARN] RS-15 'Zaječarski okrug' unmerged: closest was RS.SE 'Central Serbia' (22/90)
-[WARN] RS-16 'Zlatiborski okrug' unmerged: closest was RS.SE 'Central Serbia' (21/90)
-[WARN] RS-17 'Moravički okrug' unmerged: closest was RS.SE 'Central Serbia' (15/90)
-[WARN] RS-18 'Raški okrug' unmerged: closest was RS.SE 'Central Serbia' (27/85)
-[WARN] RS-19 'Rasinski okrug' unmerged: closest was RS.SE 'Central Serbia' (32/90)
-[WARN] RS-21 'Toplički okrug' unmerged: closest was RS.SE 'Central Serbia' (16/90)
-[WARN] RS-22 'Pirotski okrug' unmerged: closest was RS.SE 'Central Serbia' (24/90)
-[WARN] RS-23 'Jablanički okrug' unmerged: closest was RS.SE 'Central Serbia' (30/90)
-[WARN] RS-24 'Pčinjski okrug' unmerged: closest was RS.SE 'Central Serbia' (24/90)
-[WARN] RS-KM 'Kosovo-Metohija' unmerged: closest was RS.SE 'Central Serbia' (31/90)
-[WARN] SI-052 'Kranj' unmerged: closest was SI.52 'Urban Municipality of Kranj' (62/80)
-[WARN] SI-096 'Ptuj' unmerged: closest was SI.K7 'Urban Municipality of Ptuj' (57/80)
-[WARN] SM-07 'Città di San Marino' unmerged: closest was SM.07 'San Marino' (77/90)
-[WARN] ST-01 'Água Grande' unmerged: closest was ST.02 'São Tomé Island' (33/85)
-[WARN] ST-02 'Cantagalo' unmerged: closest was ST.02 'São Tomé Island' (33/85)
-[WARN] ST-03 'Caué' unmerged: closest was ST.02 'São Tomé Island' (24/85)
-[WARN] TH-10 'Krung Thep Maha Nakhon' unmerged: closest was TH.40 'Bangkok' (51/90)
-[WARN] TH-S 'Phatthaya' unmerged: closest was TH.40 'Bangkok' (38/90)
-[WARN] TW-TNN 'Tainan' -> TW.04 'Taiwan' (83/80) below margin floor, sent for review
-[WARN] TW-HSZ 'Hsinchu' unmerged: closest was TW.02 'Takao' (44/85)
-[WARN] TW-KHH 'Kaohsiung' unmerged: closest was TW.02 'Takao' (56/85)
-[WARN] TW-TXG 'Taichung' unmerged: closest was TW.04 'Taiwan' (57/80)
-[WARN] UA-43 'Avtonomna Respublika Krym' -> UA.11 'Crimea' (93/90) below margin floor, sent for review
-[WARN] UG-126 'Kasanda' unmerged: closest was UG.W.I1 'Kagadi District' (62/80)
-[WARN] UG-235 'Bugweri' unmerged: closest was UG.E.H9 'Butebo District' (46/80)
-[WARN] UG-236 'Kapelebyong' unmerged: closest was UG.W.H8 'Bunyangabu District' (38/85)
-[WARN] UG-237 'Kalaki' unmerged: closest was UG.W.I1 'Kagadi District' (67/80)
-[WARN] UG-333 'Kwania' unmerged: closest was UG.W.I1 'Kagadi District' (50/80)
-[WARN] UG-334 'Nabilatuk' unmerged: closest was UG.E.I4 'Namisindwa District' (42/85)
-[WARN] UG-335 'Karenga' unmerged: closest was UG.W.I1 'Kagadi District' (62/80)
-[WARN] UG-336 'Madi-Okollo' unmerged: closest was UG.N.I5 'Omoro District' (38/80)
-[WARN] UG-337 'Obongi' unmerged: closest was UG.C.E8 'Bukomansimbi District' (47/85)
-[WARN] UG-432 'Kikuube' unmerged: closest was UG.W.I2 'Kakumiro District' (40/80)
-[WARN] UG-433 'Kazo' unmerged: closest was UG.W.I2 'Kakumiro District' (50/80)
-[WARN] UG-434 'Kitagwenda' unmerged: closest was UG.W.I1 'Kagadi District' (50/80)
-[WARN] UG-435 'Rwampara' unmerged: closest was UG.N.I6 'Pakwach District' (40/80)
-[WARN] US-AS 'American Samoa' unmerged: no GeoNames candidates in this bucket
-[WARN] US-GU 'Guam' unmerged: no GeoNames candidates in this bucket
-[WARN] US-MP 'Northern Mariana Islands' unmerged: no GeoNames candidates in this bucket
-[WARN] US-PR 'Puerto Rico' unmerged: no GeoNames candidates in this bucket
-[WARN] US-UM 'United States Minor Outlying Islands' unmerged: no GeoNames candidates in this bucket
-[WARN] US-VI 'Virgin Islands, U.S.' unmerged: no GeoNames candidates in this bucket
 [INFO] merged UZ-TK 'Toshkent' -> UZ.13 'Tashkent' (88/80)
-[WARN] VN-31 'Bình Định' lost candidate VN.37 'Ninh Binh' (score 89) to a higher-scoring match
-[WARN] VN-32 'Phú Yên' lost candidate VN.33 'Hưng Yên Province' (score 80) to a higher-scoring match
-[WARN] VN-03 'Hà Giang' unmerged: closest was VN.52 'Gia Lai' (67/80)
-[WARN] VN-06 'Yên Bái' unmerged: closest was VN.08 'Tuyen Quang' (56/85)
-[WARN] VN-14 'Hòa Bình' unmerged: closest was VN.37 'Ninh Binh' (71/85)
-[WARN] VN-20 'Thái Bình' unmerged: closest was VN.80 'Tay Ninh' (71/85)
-[WARN] VN-24 'Quảng Bình' unmerged: closest was VN.51 'Quang Ngai' (70/85)
-[WARN] VN-27 'Quảng Nam' unmerged: closest was VN.51 'Quang Ngai' (84/85)
-[WARN] VN-28 'Kon Tum' unmerged: closest was VN.68 'Lam Dong' (53/80)
-[WARN] VN-36 'Ninh Thuận' unmerged: closest was VN.80 'Tay Ninh' (78/85)
-[WARN] VN-40 'Bình Thuận' unmerged: closest was VN.80 'Tay Ninh' (67/85)
-[WARN] VN-41 'Long An' unmerged: closest was VN.91 'An Giang' (67/80)
-[WARN] VN-43 'Bà Rịa - Vũng Tàu' unmerged: closest was VN.91 'An Giang' (52/85)
-[WARN] VN-46 'Tiền Giang' unmerged: closest was VN.08 'Tuyen Quang' (67/85)
-[WARN] VN-47 'Kiến Giang' unmerged: closest was VN.52 'Gia Lai' (59/85)
-[WARN] VN-50 'Bến Tre' unmerged: closest was VN.44 'Quang Tri' (50/80)
-[WARN] VN-51 'Trà Vinh' unmerged: closest was VN.24 'Bac Ninh' (62/80)
-[WARN] VN-52 'Sóc Trăng' unmerged: closest was VN.91 'An Giang' (47/85)
-[WARN] VN-53 'Bắc Kạn' unmerged: closest was VN.24 'Bac Ninh' (67/80)
-[WARN] VN-54 'Bắc Giang' unmerged: closest was VN.91 'An Giang' (82/85)
-[WARN] VN-55 'Bạc Liêu' unmerged: closest was VN.24 'Bac Ninh' (62/80)
-[WARN] VN-57 'Bình Dương' unmerged: closest was VN.37 'Ninh Binh' (63/85)
-[WARN] VN-58 'Bình Phước' unmerged: closest was VN.37 'Ninh Binh' (63/85)
-[WARN] VN-61 'Hải Dương' unmerged: closest was VN.75 'Dong Nai' (82/85)
-[WARN] VN-63 'Hà Nam' unmerged: closest was VN.01 'Hanoi' (67/80)
-[WARN] VN-67 'Nam Định' unmerged: closest was VN.68 'Lam Dong' (62/80)
-[WARN] VN-70 'Vĩnh Phúc' unmerged: closest was VN.25 'Phu Tho' (62/80)
-[WARN] VN-72 'Đắk Nông' unmerged: closest was VN.31 'Hai Phong' (59/85)
-[WARN] VN-73 'Hậu Giang' unmerged: closest was VN.52 'Gia Lai' (62/80)
-[WARN] VN-CT 'Cần Thơ' unmerged: closest was VN.15 'Lao Cai' (57/80)
-[WARN] VN-DN 'Đà Nẵng' unmerged: closest was VN.91 'An Giang' (67/80)
-[WARN] VN-SG 'Hồ Chí Minh' unmerged: closest was VN.31 'Hai Phong' (60/85)
-[INFO] Merged 356/676 ISO subdivisions
+[INFO] Merged 355/360 ISO subdivisions
 [INFO] 5 added as-is, their countries have no GeoNames subdivisions: SG-01, SG-02, SG-03, SG-04, SG-05
-[INFO] 315 subdivisions orphaned (no_candidates=34, no_matches=262, ambiguity=12, low_margin=7, wikidata_conflict=0)
-[WARN] BLOCKED: 315 active orphan(s) in resolution_map.json (no_candidates=34, no_matches=262, ambiguity=12, low_margin=7, wikidata_conflict=0); run the resolve-subdivisions skill first
+[INFO] 0 subdivisions orphaned (no_candidates=0, no_matches=0, ambiguity=0, low_margin=0, wikidata_conflict=0, grouping_twin=0)
+[INFO] Dumping 51711 subdivisions...
+[INFO] Dumping subdivision lookup indexes...
+[INFO] Dumping subdivision filter index...
+[INFO] Dumping subdivision search index...
+[INFO] completed: 51711 subdivisions

@@ -14,6 +14,7 @@ from ingest.subdivisions.scripts import (
     score_candidates,
 )
 from ingest.subdivisions.scripts.wikidata_subdivisions import CROSSWALK_PATH
+from ingest.subdivisions.scripts.automerge.scoring import is_directional_mismatch
 
 RESOLUTION_MAP_PATH = SUBDIVISIONS_OUTPUTS_PATH / "resolution_map.json"
 
@@ -63,7 +64,7 @@ def _apply_resolved_claims(sub_map: SubdivisionMap, resolution_map: ResolutionMa
         for code, decision in resolution_map.skill_decisions.items()
         if code not in under_review
     }
-    for source in (claims, resolution_map.wikidata_merge):
+    for source in (claims, resolution_map.wikidata_merge, resolution_map.automerge.bypassed):
         for iso_code, geonames_id in source.items():
             if geonames_id is None:
                 continue
@@ -111,7 +112,7 @@ def _get_top_tier_batch_size(pool_size: int) -> int:
 
 
 def _flagged_candidates(iso_code: str) -> list[tuple[int, str]]:
-    """The specific records the pipeline flagged for this orphan, with a note saying why, shown as its first batch: ambiguity close-calls, the low_margin pick, or both sides of a wikidata_conflict. Empty for no_candidates/no_matches; raises if iso_code isn't an orphan."""
+    """The specific records the pipeline flagged for this orphan, with a note saying why, shown as its first batch: ambiguity close-calls, the low_margin or grouping_twin pick, or both sides of a wikidata_conflict. Empty for no_candidates/no_matches; raises if iso_code isn't an orphan."""
     orphans = _resolution_map().automerge.orphans
     if iso_code in orphans.no_candidates or iso_code in orphans.no_matches:
         return []
@@ -121,6 +122,9 @@ def _flagged_candidates(iso_code: str) -> list[tuple[int, str]]:
     for orphan in orphans.low_margin:
         if orphan.iso_code == iso_code:
             return [(orphan.candidate_geonames_id, f"automerge's pick, {orphan.margin} points over threshold")]
+    for orphan in orphans.grouping_twin:
+        if orphan.iso_code == iso_code:
+            return [(orphan.candidate_geonames_id, "automerge's pick, likely the record for this subdivision's non-administrative grouping")]
     for orphan in orphans.wikidata_conflict:
         if orphan.iso_code == iso_code:
             flagged = [(orphan.wikidata_geonames_id, "Wikidata's mapping")]
@@ -145,12 +149,20 @@ def get_candidates(iso_code: str, batch_num: int = 0) -> list[str]:
         records = [(sub_map.get(geonames_id=gid), note) for gid, note in flagged]
         return [_format_candidate(c, note) for c, note in records if c is not None]
 
-    # the whole country, claimed and type-mismatched records included (marked), since ISO and GeoNames can disagree on a subdivision's level or describe the same place with different type words; on score ties, clean candidates come before type-mismatched ones and same-level before other levels
+    # the whole country, claimed, type-mismatched and directional-mismatched records included (marked), since ISO and GeoNames can disagree on a subdivision's level or name the same place differently; on score ties, clean candidates come before mismatched ones and same-level before other levels
     same_level = min(iso_sub.admin_level, 2)
     geo_subs = [g for g in sub_map.filter(iso_sub.country.alpha2) if g.geonames_id not in flagged_ids]
-    scored = score_candidates(iso_sub, geo_subs, include_type_disqualified=True)
-    mismatched = {g.geonames_id for g, _, _ in scored if is_type_disqualified(iso_sub, g)}
-    scored.sort(key=lambda t: (-t[1], t[0].geonames_id in mismatched, t[0].admin_level != same_level))
+    scored = score_candidates(iso_sub, geo_subs, include_type_disqualified=True, include_directional_mismatch=True)
+    notes: dict[int | None, str] = {}
+    for g, _, _ in scored:
+        note = []
+        if is_type_disqualified(iso_sub, g):
+            note.append(_type_mismatch_note(iso_sub, g))
+        if is_directional_mismatch(iso_sub, g):
+            note.append("directional mismatch")
+        if note:
+            notes[g.geonames_id] = "; ".join(note)
+    scored.sort(key=lambda t: (-t[1], t[0].geonames_id in notes, t[0].admin_level != same_level))
     candidates = [geo_sub for geo_sub, score, needed in scored]
 
     # a flagged first batch shifts normal pagination to start at batch 1
@@ -168,10 +180,7 @@ def get_candidates(iso_code: str, batch_num: int = 0) -> list[str]:
 
     candidates = candidates[batch_start:batch_end]
 
-    return [
-        _format_candidate(c, _type_mismatch_note(iso_sub, c) if c.geonames_id in mismatched else "")
-        for c in candidates
-    ]
+    return [_format_candidate(c, notes.get(c.geonames_id, "")) for c in candidates]
 
 
 def _type_mismatch_note(iso_sub: SubdivisionModel, candidate: SubdivisionModel) -> str:
@@ -208,8 +217,9 @@ def get_next_orphan() -> dict | None:
     ambiguity_codes = [orphan.iso_code for orphan in orphans.ambiguity]
     low_margin_codes = [orphan.iso_code for orphan in orphans.low_margin]
     conflict_codes = [orphan.iso_code for orphan in orphans.wikidata_conflict]
+    twin_codes = [orphan.iso_code for orphan in orphans.grouping_twin]
     iso_code = next(
-        iter(orphans.no_candidates + orphans.no_matches + ambiguity_codes + low_margin_codes + conflict_codes),
+        iter(orphans.no_candidates + orphans.no_matches + ambiguity_codes + low_margin_codes + conflict_codes + twin_codes),
         None,
     )
     if iso_code is None:
@@ -241,7 +251,7 @@ def pop_orphan(iso_code: str) -> None:
             bucket.remove(iso_code)
             _resolution_map().save(RESOLUTION_MAP_PATH)
             return
-    for flagged_bucket in (orphans.ambiguity, orphans.low_margin, orphans.wikidata_conflict):
+    for flagged_bucket in (orphans.ambiguity, orphans.low_margin, orphans.wikidata_conflict, orphans.grouping_twin):
         for orphan in flagged_bucket:
             if orphan.iso_code == iso_code:
                 flagged_bucket.remove(orphan)

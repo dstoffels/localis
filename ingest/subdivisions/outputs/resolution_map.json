@@ -18,6 +18,12 @@
     "MW": [
       "region"
     ],
+    "GW": [
+      "province"
+    ],
+    "MH": [
+      "chain (of islands)"
+    ],
     "ID": [
       "geographical unit"
     ]
@@ -240,6 +246,2183 @@
       "decided_by": "agent",
       "escalation": null,
       "wikidata_seen": null
+    },
+    "BI-KR": {
+      "id": null,
+      "reason": "GeoNames has no record for Karuzi Province, only its level-2 communes, and none of them is the province. BI-KR is a real province in ISO, so it's added as-is.",
+      "decided_by": "human",
+      "escalation": "No candidate matches Karuzi Province and none of Step 5's reasons cleanly explains the absence: the web search confirms Karuzi was one of Burundi's 18 provinces (capital Karuzi, 2008 pop. 436,443) and was merged into the new Gitega Province in the 2025 reorganization, which would suggest reason 3 (retired by reorganization), but GeoNames still keeps other pre-2025 provinces that the same reform also retired (Muramvya, Kayanza, Cankuzo, Ngozi, etc., all claimed by their ISO codes), so it hasn't adopted the new scheme and the missing Karuzi province record looks like a gap rather than a consequence of the reform; its communes (Buhiga, Bugenyuzi, Gihogazi, Gitaramuka, Mutumba, Nyabikere, Shombo) are present at level 2, but there is no level-1 Karuzi/Karusi record to merge into.",
+      "wikidata_seen": 428218
+    },
+    "BI-MW": {
+      "id": null,
+      "reason": "Mwaro Province was retired when Burundi's 2025 reform merged 18 provinces into 5, and GeoNames has no record of the retired province itself.",
+      "decided_by": "human",
+      "escalation": "No candidate matches and none of Step 5's reasons explains why. The web search confirms BI-MW is Mwaro Province in central Burundi (capital Mwaro, about 840 km²). GeoNames has level-1 records for the other old Burundi provinces, all already claimed, but none for Mwaro. Mwaro's communes (Bisoro, Gisozi, Kayokwe, Ndava, Nyabihanga, Rusaka) appear only as unclaimed level-2 records, and no single record covers the whole province. Burundi's 2025 reform merged its 18 provinces into 5, which may be why the record is missing, but the search didn't confirm that, and GeoNames still keeps the other pre-2025 provinces.",
+      "wikidata_seen": 434386
+    },
+    "ET-SN": {
+      "id": null,
+      "reason": "A reorganization retired the subdivision: SNNPR was dissolved in 2023 into the Sidama, South West Ethiopia, South Ethiopia and Central Ethiopia regions, and GeoNames has no record of the retired region itself (the only candidate, Southern Tigray Zone, is an unrelated zone in Tigray).",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 444188
+    },
+    "FI-01": {
+      "id": null,
+      "reason": "GeoNames treats Åland as its own country (ISO 3166-1 AX), so it has no subdivision record under Finland.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 661882
+    },
+    "GD-10": {
+      "id": 7303836,
+      "reason": "Southern Grenadine Islands is the alternate name for Grenada's dependency of Carriacou and Petite Martinique; the \"Southern\" is part of the name, not a direction.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "IT-CA": {
+      "id": 2525471,
+      "reason": "The Metropolitan City of Cagliari replaced the Province of Cagliari in 2016 as its legal successor with the same seat and IT-CA code, and 2525471 is GeoNames' only level-2 Cagliari record, matching how other Italian metropolitan cities (Bari, Catania) map to their former province records.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "IT-GE": {
+      "id": 3176217,
+      "reason": "The Metropolitan City of Genoa replaced the Province of Genoa in 2015 with the same territory, so GeoNames' Provincia di Genova record is the same place.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "IT-VE": {
+      "id": 3164600,
+      "reason": "The Metropolitan City of Venice replaced the Province of Venice in 2015 with the same territory, so GeoNames' Provincia di Venezia record is the same place.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "KN-K": {
+      "id": null,
+      "reason": "GeoNames uses only Saint Kitts and Nevis's 14 parishes at level 1 and has no record for ISO's two island states (Saint Kitts, Nevis), which sit above the parishes.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 3575181
+    },
+    "KN-N": {
+      "id": null,
+      "reason": "GeoNames uses only Saint Kitts and Nevis's 14 parishes at level 1 and has no record for ISO's two island states (Saint Kitts, Nevis), which sit above the parishes.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 3575263
+    },
+    "LT-20": {
+      "id": 598099,
+      "reason": "Klaipėdos miestas is the Lithuanian name of Klaipėda City Municipality, which GeoNames lists under that alias at level 2.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 598098
+    },
+    "MH-AUR": {
+      "id": 7303495,
+      "reason": "Aur municipality is coextensive with Aur Atoll, which GeoNames lists at level 1 like the other Marshallese atoll municipalities (Arno, Ailuk).",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 2080917
+    },
+    "MH-ENI": {
+      "id": 7303499,
+      "reason": "Enewetak Atoll is the municipality's main, inhabited atoll and seat; Ujelang is a secondary, essentially uninhabited atoll within the same municipality.",
+      "decided_by": "human",
+      "escalation": "The orphan, a current municipality, maps to two GeoNames records: the Enewetak & Ujelang municipality covers both Enewetak Atoll (7303499) and Ujelang (7303515), both unclaimed at level 1; the web search confirmed the two atolls are linked because Enewetak's people were relocated to Ujelang in 1947 and mostly returned in 1980, and Enewetak is the inhabited, primary atoll. None of Step 5's reasons explains it.",
+      "wikidata_seen": null
+    },
+    "MH-JAB": {
+      "id": 7303519,
+      "reason": "Jabat municipality is coextensive with Jabat Island, which GeoNames lists at level 1 like the other Marshallese island municipalities.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "MH-LIK": {
+      "id": 7303504,
+      "reason": "Likiep municipality is coextensive with Likiep Atoll, which GeoNames lists at level 1 like the other Marshallese atoll municipalities.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 2080251
+    },
+    "MH-MAJ": {
+      "id": 7303505,
+      "reason": "Majuro municipality is coextensive with Majuro Atoll, which GeoNames lists at level 1 like the other Marshallese atoll municipalities.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 2113779
+    },
+    "MH-MEJ": {
+      "id": 7303523,
+      "reason": "Mejit municipality is coextensive with Mejit Island, which GeoNames lists at level 1 like the other Marshallese island municipalities.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 2080167
+    },
+    "MH-NMU": {
+      "id": 7303509,
+      "reason": "Namu municipality is coextensive with Namu Atoll, which GeoNames lists at level 1 like the other Marshallese atoll municipalities.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "MH-RON": {
+      "id": 7303510,
+      "reason": "Rongelap municipality is named for and seated on Rongelap Atoll, which GeoNames lists at level 1 like the other Marshallese atoll municipalities.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 2079981
+    },
+    "MH-UTI": {
+      "id": 7303516,
+      "reason": "Utrik municipality is named for and seated on Utrik Atoll, which GeoNames lists at level 1 like the other Marshallese atoll municipalities.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 2079871
+    },
+    "MH-WTH": {
+      "id": 7303517,
+      "reason": "Wotho municipality is coextensive with Wotho Atoll, which GeoNames lists at level 1 like the other Marshallese atoll municipalities.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 2079845
+    },
+    "MH-WTJ": {
+      "id": 7303518,
+      "reason": "Wotje municipality is named for and seated on Wotje Atoll, which GeoNames lists at level 1 like the other Marshallese atoll municipalities.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 2079843
+    },
+    "NL-AW": {
+      "id": null,
+      "reason": "GeoNames files Aruba only as its own country (ISO 3166-1 AW), not as a subdivision of the Netherlands, so it has no subdivision record.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 3577279
+    },
+    "NL-BQ1": {
+      "id": null,
+      "reason": "GeoNames files Bonaire under its own country entry, Bonaire, Sint Eustatius and Saba (ISO 3166-1 BQ), not as a subdivision of the Netherlands, so it has no Netherlands subdivision record.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 7609816
+    },
+    "NL-BQ2": {
+      "id": null,
+      "reason": "GeoNames files Saba under its own country entry, Bonaire, Sint Eustatius and Saba (ISO 3166-1 BQ), not as a subdivision of the Netherlands, so it has no Netherlands subdivision record.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "NL-BQ3": {
+      "id": null,
+      "reason": "GeoNames files Sint Eustatius under its own country entry, Bonaire, Sint Eustatius and Saba (ISO 3166-1 BQ), not as a subdivision of the Netherlands, so it has no Netherlands subdivision record.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "NL-CW": {
+      "id": null,
+      "reason": "GeoNames files Curaçao only as its own country (ISO 3166-1 CW), not as a subdivision of the Netherlands, so it has no subdivision record.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 7626836
+    },
+    "NL-SX": {
+      "id": null,
+      "reason": "GeoNames files Sint Maarten only as its own country (ISO 3166-1 SX), not as a subdivision of the Netherlands, so it has no subdivision record.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 7609695
+    },
+    "US-AS": {
+      "id": null,
+      "reason": "GeoNames files American Samoa only as its own country (ISO 3166-1 AS), not as a subdivision of the United States, so it has no subdivision record.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 5880801
+    },
+    "US-GU": {
+      "id": null,
+      "reason": "GeoNames files Guam only as its own country (ISO 3166-1 GU), not as a subdivision of the United States, so it has no subdivision record.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "US-MP": {
+      "id": null,
+      "reason": "GeoNames files the Northern Mariana Islands only as its own country (ISO 3166-1 MP), not as a subdivision of the United States, so it has no subdivision record.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 4041468
+    },
+    "US-PR": {
+      "id": null,
+      "reason": "GeoNames files Puerto Rico only as its own country (ISO 3166-1 PR), not as a subdivision of the United States, so it has no subdivision record.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 4566966
+    },
+    "US-UM": {
+      "id": null,
+      "reason": "GeoNames files the United States Minor Outlying Islands only as their own country (ISO 3166-1 UM), not as a subdivision of the United States, so they have no subdivision record.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 5854968
+    },
+    "US-VI": {
+      "id": null,
+      "reason": "GeoNames files the U.S. Virgin Islands only as their own country (ISO 3166-1 VI), not as a subdivision of the United States, so they have no subdivision record.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "AO-CCU": {
+      "id": null,
+      "reason": "Angola's 2024 reorganization split Cuando Cubango into the Cuando and Cubango provinces; ISO still lists the retired province, but GeoNames has only its successors (13645452 Cuando Province, 13645449 Cubango) and no record for Cuando Cubango itself.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 876337
+    },
+    "AZ-MI": {
+      "id": 828299,
+      "reason": "Mingəçevir şəhəri is Azerbaijan's city-level municipality of Mingəçevir; \"City\" is just its naming, as with Gəncə's level-1 record.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "AZ-SA": {
+      "id": 828303,
+      "reason": "AZ-SA is the city municipality of Şəki, matching GeoNames' Shaki City record, while the surrounding Şəki district (585031) is already held by AZ-SAK.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "AZ-YE": {
+      "id": 828307,
+      "reason": "AZ-YE is the city municipality of Yevlax, matching GeoNames' Yevlax City (Yevlax Şəhəri) record, while the surrounding Yevlax district (584650) is already held by AZ-YEV.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "CI-AB": {
+      "id": 11153151,
+      "reason": "CI-AB is the Abidjan Autonomous District, which matches GeoNames' level-1 record of the same name, not the level-2 Abidjan record below it.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 2293538
+    },
+    "CN-HK": {
+      "id": null,
+      "reason": "GeoNames files Hong Kong only as its own country (ISO 3166-1 HK), not as a subdivision of China, so it has no subdivision record.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 1819730
+    },
+    "CN-MO": {
+      "id": null,
+      "reason": "GeoNames files Macao only as its own country (ISO 3166-1 MO), not as a subdivision of China, so it has no subdivision record.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "CN-TW": {
+      "id": null,
+      "reason": "GeoNames files Taiwan only as its own country (ISO 3166-1 TW), not as a subdivision of China, so it has no Chinese subdivision record; added as ISO lists it without taking a side on the dispute.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "DE-HH": {
+      "id": 2911297,
+      "reason": "The Free and Hanseatic City of Hamburg is both a city and a German Land, so GeoNames' level-1 Hamburg record is the state ISO lists.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 2911298
+    },
+    "EE-184": {
+      "id": 7522269,
+      "reason": "Haapsalu linn is the Estonian name of Haapsalu urban municipality; \"linn\" is how Estonian urban municipalities are named, not a different kind of place.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "EE-296": {
+      "id": 7522300,
+      "reason": "Keila linn is the Estonian name of Keila urban municipality; \"linn\" is how Estonian urban municipalities are named, not a different kind of place.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "EE-321": {
+      "id": 862989,
+      "reason": "Kohtla-Järve linn is the Estonian name of Kohtla-Järve urban municipality; \"linn\" is how Estonian urban municipalities are named, not a different kind of place.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 591260
+    },
+    "EE-424": {
+      "id": 7522333,
+      "reason": "Loksa linn is the Estonian name of Loksa urban municipality; \"linn\" is how Estonian urban municipalities are named, not a different kind of place.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "EE-446": {
+      "id": 7522337,
+      "reason": "Maardu linn is the Estonian name of Maardu urban municipality; \"linn\" is how Estonian urban municipalities are named, not a different kind of place.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "EE-511": {
+      "id": 862990,
+      "reason": "Narva linn is the Estonian name of Narva urban municipality; \"linn\" is how Estonian urban municipalities are named, not a different kind of place.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "EE-567": {
+      "id": 7522368,
+      "reason": "Paide linn is the Estonian name of Paide urban municipality; \"linn\" is how Estonian urban municipalities are named, not a different kind of place.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "EE-624": {
+      "id": 862993,
+      "reason": "Pärnu linn is the Estonian name of Pärnu urban municipality; \"linn\" is how Estonian urban municipalities are named, not a different kind of place.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "EE-735": {
+      "id": 862994,
+      "reason": "Sillamäe linn is the Estonian name of Sillamäe urban municipality; \"linn\" is how Estonian urban municipalities are named, not a different kind of place.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 588686
+    },
+    "ET-SW": {
+      "id": 12902784,
+      "reason": "GeoNames' South West Ethiopia Peoples' Region is the regional state split from SNNPR in 2021 (capital Bonga) that ISO lists as ET-SW; South Ethiopia Regional State is a different region created in 2023.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "FR-971": {
+      "id": null,
+      "reason": "GeoNames files Guadeloupe only as its own country (ISO 3166-1 GP), not as a subdivision of France, so it has no subdivision record.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 3579143
+    },
+    "FR-972": {
+      "id": null,
+      "reason": "GeoNames files Martinique only as its own country (ISO 3166-1 MQ), not as a subdivision of France, so it has no subdivision record.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 3570311
+    },
+    "FR-973": {
+      "id": null,
+      "reason": "GeoNames files French Guiana only as its own country (ISO 3166-1 GF), not as a subdivision of France, so it has no subdivision record.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "FR-974": {
+      "id": null,
+      "reason": "GeoNames files Réunion only as its own country (ISO 3166-1 RE), not as a subdivision of France, so it has no subdivision record.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 935317
+    },
+    "FR-976": {
+      "id": null,
+      "reason": "GeoNames files Mayotte only as its own country (ISO 3166-1 YT), not as a subdivision of France, so it has no subdivision record.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 1024031
+    },
+    "FR-BL": {
+      "id": null,
+      "reason": "GeoNames files Saint-Barthélemy only as its own country (ISO 3166-1 BL), not as a subdivision of France, so it has no subdivision record.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 3578476
+    },
+    "FR-CP": {
+      "id": null,
+      "reason": "GeoNames records Clipperton Island as its own country, so no admin-level-1 matches exist.",
+      "decided_by": "human",
+      "escalation": "No candidate matches, and it's unclear whether one of Step 5's reasons explains the absence: the search confirmed Clipperton is an uninhabited French Pacific atoll (Île de la Passion) under the direct authority of the Minister of Overseas France. Unlike France's other overseas territories it has no ISO 3166-1 code of its own, so reason 2 (GeoNames treats it as its own country) can't be confirmed, and GeoNames' French level-1/2 records cover only the regions and departments, all claimed.",
+      "wikidata_seen": 4020095
+    },
+    "FR-MF": {
+      "id": null,
+      "reason": "GeoNames files Saint-Martin only as its own country (ISO 3166-1 MF), not as a subdivision of France, so it has no subdivision record.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 3578421
+    },
+    "FR-NC": {
+      "id": null,
+      "reason": "GeoNames files New Caledonia only as its own country (ISO 3166-1 NC), not as a subdivision of France, so it has no subdivision record.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 2139685
+    },
+    "FR-PF": {
+      "id": null,
+      "reason": "GeoNames files French Polynesia only as its own country (ISO 3166-1 PF), not as a subdivision of France, so it has no subdivision record.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 4030656
+    },
+    "FR-PM": {
+      "id": null,
+      "reason": "GeoNames files Saint-Pierre-et-Miquelon only as its own country (ISO 3166-1 PM), not as a subdivision of France, so it has no subdivision record.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 3424932
+    },
+    "FR-TF": {
+      "id": null,
+      "reason": "GeoNames files the French Southern Territories only as their own country (ISO 3166-1 TF), not as a subdivision of France, so they have no subdivision record.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 1546748
+    },
+    "FR-WF": {
+      "id": null,
+      "reason": "GeoNames files Wallis and Futuna only as its own country (ISO 3166-1 WF), not as a subdivision of France, so it has no subdivision record.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "FR-69M": {
+      "id": null,
+      "reason": "GeoNames has no separate record for the Métropole de Lyon, created in 2015 as a collectivity outside any department; it keeps the metropolis's territory inside its Rhône department record (2987410, held by FR-69).",
+      "decided_by": "human",
+      "escalation": "The orphan, a current subdivision, maps to only part of a GeoNames record: the search confirmed the Métropole de Lyon (58 communes, created 1 January 2015) took over the Rhône department's powers on its territory and is a collectivity outside any department. GeoNames has no separate record for it, and its only overlapping record, 2987410 Rhône (aliased \"Nouveau-Rhône\"), is claimed by FR-69. Possibly a Step 5 reason 1 case (GeoNames doesn't split the metropolis out from Rhône), but that's uncertain.",
+      "wikidata_seen": null
+    },
+    "FR-6AE": {
+      "id": null,
+      "reason": "GeoNames has no record for the European Collectivity of Alsace, created in 2021 from the Bas-Rhin and Haut-Rhin departments; it keeps only those two departments (3034720, 3013663, held by FR-67 and FR-68).",
+      "decided_by": "human",
+      "escalation": "The orphan, a current subdivision, maps to several GeoNames records: FR-6AE is the European Collectivity of Alsace, created 1 January 2021 by merging the Bas-Rhin and Haut-Rhin departmental councils, and its territory equals GeoNames' Bas-Rhin (3034720, claimed by FR-67) plus Haut-Rhin (3013663, claimed by FR-68). The search only returned the former Alsace region (merged into Grand Est in 2016, GeoNames 3038033, not among the candidates), and none of Step 5's reasons clearly applies. It resembles the FR-69M decision (a French collectivity GeoNames folds into department records).",
+      "wikidata_seen": 3038033
+    },
+    "GB-ABE": {
+      "id": 3333224,
+      "reason": "Aberdeen City is the official name of the council area itself, so GeoNames' level-2 Aberdeen City record is the same unit; \"City\" is part of the name.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "GB-BDG": {
+      "id": null,
+      "reason": "GeoNames keeps London's boroughs, including Barking and Dagenham, at admin level 3 below Greater London, and localis only ingests levels 1 and 2.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 3333120
+    },
+    "GB-BEN": {
+      "id": null,
+      "reason": "GeoNames keeps London's boroughs, including Brent, at admin level 3 below Greater London, and localis only ingests levels 1 and 2.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "GB-BEX": {
+      "id": null,
+      "reason": "GeoNames keeps London's boroughs, including Bexley, at admin level 3 below Greater London, and localis only ingests levels 1 and 2.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 3333124
+    },
+    "GB-BNE": {
+      "id": null,
+      "reason": "GeoNames keeps London's boroughs, including Barnet, at admin level 3 below Greater London, and localis only ingests levels 1 and 2.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 3333121
+    },
+    "GB-BRY": {
+      "id": null,
+      "reason": "Bromley is a London borough, and GeoNames keeps London's boroughs at admin level 3 below Greater London, which localis does not ingest.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 3333135
+    },
+    "GB-CMD": {
+      "id": null,
+      "reason": "Camden is a London borough, and GeoNames keeps London's boroughs at admin level 3 below Greater London, which localis does not ingest.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 3333138
+    },
+    "GB-CRY": {
+      "id": null,
+      "reason": "Croydon is a London borough, and GeoNames keeps London's boroughs at admin level 3 below Greater London, which localis does not ingest.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 3333140
+    },
+    "GB-EAL": {
+      "id": null,
+      "reason": "Ealing is a London borough, and GeoNames keeps London's boroughs at admin level 3 below Greater London, which localis does not ingest.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 3333145
+    },
+    "GB-EDH": {
+      "id": 3333229,
+      "reason": "\"City of Edinburgh\" is the official name of the Scottish council area itself, so the \"City\" in the GeoNames level-2 record is naming, not a different kind of place.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "GB-ENF": {
+      "id": null,
+      "reason": "Enfield is a London borough, and GeoNames keeps London's boroughs at admin level 3 below Greater London, which localis does not ingest.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 3333146
+    },
+    "GB-GLG": {
+      "id": 3333231,
+      "reason": "\"Glasgow City\" is the official name of the Scottish council area itself, and the GeoNames level-2 record has the identical name, so the \"City\" is naming, not a different kind of place.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "GB-GRE": {
+      "id": null,
+      "reason": "Greenwich is a London borough, and GeoNames keeps London's boroughs at admin level 3 below Greater London, which localis does not ingest.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 3333147
+    },
+    "GB-HAV": {
+      "id": null,
+      "reason": "Havering is a London borough, and GeoNames keeps London's boroughs at admin level 3 below Greater London, which localis does not ingest.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 3333153
+    },
+    "GB-HCK": {
+      "id": null,
+      "reason": "Hackney is a London borough, and GeoNames keeps London's boroughs at admin level 3 below Greater London, which localis does not ingest.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 3333148
+    },
+    "GB-HIL": {
+      "id": null,
+      "reason": "Hillingdon is a London borough, and GeoNames keeps London's boroughs at admin level 3 below Greater London, which localis does not ingest.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 3333154
+    },
+    "GB-HMF": {
+      "id": null,
+      "reason": "Hammersmith and Fulham is a London borough, and GeoNames keeps London's boroughs at admin level 3 below Greater London, which localis does not ingest.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 3333149
+    },
+    "GB-HNS": {
+      "id": null,
+      "reason": "Hounslow is a London borough, and GeoNames keeps London's boroughs at admin level 3 below Greater London, which localis does not ingest.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 3333155
+    },
+    "GB-HRW": {
+      "id": null,
+      "reason": "Harrow is a London borough, and GeoNames keeps London's boroughs at admin level 3 below Greater London, which localis does not ingest.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 3333151
+    },
+    "GB-HRY": {
+      "id": null,
+      "reason": "Haringey is a London borough, and GeoNames keeps London's boroughs at admin level 3 below Greater London, which localis does not ingest.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 3333150
+    },
+    "GB-ISL": {
+      "id": null,
+      "reason": "Islington is a London borough, and GeoNames keeps London's boroughs at admin level 3 below Greater London, which localis does not ingest.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 3333156
+    },
+    "GB-KEC": {
+      "id": null,
+      "reason": "Kensington and Chelsea is a London borough, and GeoNames keeps London's boroughs at admin level 3 below Greater London, which localis does not ingest.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 3333157
+    },
+    "GB-KTT": {
+      "id": null,
+      "reason": "Kingston upon Thames is a London borough, and GeoNames keeps London's boroughs at admin level 3 below Greater London, which localis does not ingest.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 3333160
+    },
+    "GB-LBH": {
+      "id": null,
+      "reason": "Lambeth is a London borough, and GeoNames keeps London's boroughs at admin level 3 below Greater London, which localis does not ingest.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 3333163
+    },
+    "GB-LEW": {
+      "id": null,
+      "reason": "Lewisham is a London borough, and GeoNames keeps London's boroughs at admin level 3 below Greater London, which localis does not ingest.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 3333166
+    },
+    "GB-LND": {
+      "id": null,
+      "reason": "The City of London is a city corporation that GeoNames keeps at admin level 3 alongside the London boroughs below Greater London, which localis does not ingest; Greater London itself is the much larger region containing it.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "GB-MRT": {
+      "id": null,
+      "reason": "Merton is a London borough, and GeoNames keeps London's boroughs at admin level 3 below Greater London, which localis does not ingest.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 3333171
+    },
+    "GB-NWM": {
+      "id": null,
+      "reason": "Newham is a London borough, and GeoNames keeps London's boroughs at admin level 3 below Greater London, which localis doesn't ingest.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 2641639
+    },
+    "GB-RDB": {
+      "id": null,
+      "reason": "Redbridge is a London borough. GeoNames keeps London's boroughs at admin level 3 below Greater London, and localis only ingests levels 1 and 2.",
+      "decided_by": "human",
+      "escalation": "No candidate matches. ISO lists Redbridge as a London borough, so Step 5 reason 1 would normally apply: GeoNames keeps London boroughs at admin level 3, below Greater London. But the required search (\"Redbridge GB-RDB\") only turned up Redbridge in Southampton, Hampshire (a ward and former village), so it didn't confirm the London Borough of Redbridge, as Step 5 requires before an add. This resembles Newham (GB-NWM), which was just added as a London borough.",
+      "wikidata_seen": 3333185
+    },
+    "GB-RIC": {
+      "id": null,
+      "reason": "Richmond upon Thames is a London borough. GeoNames keeps London's boroughs at admin level 3 below Greater London, and localis only ingests levels 1 and 2.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 3333187
+    },
+    "GB-STN": {
+      "id": null,
+      "reason": "Sutton is a London borough. GeoNames keeps London's boroughs at admin level 3 below Greater London, and localis only ingests levels 1 and 2.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 3333206
+    },
+    "GB-SWK": {
+      "id": null,
+      "reason": "Southwark is a London borough. GeoNames keeps London's boroughs at admin level 3 below Greater London, and localis only ingests levels 1 and 2.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 3333200
+    },
+    "GB-TWH": {
+      "id": null,
+      "reason": "Tower Hamlets is a London borough. GeoNames keeps London's boroughs at admin level 3 below Greater London, and localis only ingests levels 1 and 2.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 2635594
+    },
+    "GB-WFT": {
+      "id": null,
+      "reason": "Waltham Forest is a London borough. GeoNames keeps London's boroughs at admin level 3 below Greater London, and localis only ingests levels 1 and 2.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 3333214
+    },
+    "GB-WND": {
+      "id": null,
+      "reason": "Wandsworth is a London borough. GeoNames keeps London's boroughs at admin level 3 below Greater London, and localis only ingests levels 1 and 2.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 3333215
+    },
+    "GB-WSM": {
+      "id": null,
+      "reason": "Westminster (City of Westminster) is a London borough. GeoNames keeps London's boroughs at admin level 3 below Greater London, and localis only ingests levels 1 and 2.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 3333218
+    },
+    "GQ-C": {
+      "id": null,
+      "reason": "ISO lists Equatorial Guinea's two regions (Continental and Insular) above its provinces, but GeoNames uses only the provinces (Litoral, Centro Sur, Kié-Ntem, Wele-Nzas, etc.) at level 1, with no record for the mainland Río Muni region.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 2308277
+    },
+    "GQ-I": {
+      "id": null,
+      "reason": "ISO lists Equatorial Guinea's two regions (Continental and Insular) above its provinces, but GeoNames uses only the provinces at level 1; the Insular Region's provinces (Annobón, Bioko Norte, Bioko Sur) are present but the region itself has no record.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "GQ-DJ": {
+      "id": 12168385,
+      "reason": "Same name: Djibloho, the province carved out of Wele-Nzas in 2017 around Ciudad de la Paz, which GeoNames lists as a first-level division.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "ID-JK": {
+      "id": 1642907,
+      "reason": "Jakarta Raya (\"Greater Jakarta\") is the older name for the Daerah Khusus Ibukota Jakarta province-level capital region.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "ID-PT": {
+      "id": 12503511,
+      "reason": "Papua Tengah is the Indonesian name of Central Papua province, listed in GeoNames as Provinsi Papua Tengah.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "IE-WD": {
+      "id": 11611446,
+      "reason": "Waterford is County Waterford; ISO lists it at level 1 while GeoNames places counties at level 2 under the provinces.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 2960991
+    },
+    "IS-AKU": {
+      "id": 2633275,
+      "reason": "Akureyrarbær and Akureyrarkaupstaður are the current and former official names of the Akureyri municipality.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 2633274
+    },
+    "IS-ARN": {
+      "id": 3418510,
+      "reason": "Identical name; same Árneshreppur municipality, listed at level 2 in GeoNames under its region.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 3418515
+    },
+    "IS-GAR": {
+      "id": 3417190,
+      "reason": "Identical name; same Garðabær municipality in the Capital Region, listed at level 2 in GeoNames.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 3417195
+    },
+    "IS-GOG": {
+      "id": 3426217,
+      "reason": "Identical name; same Grímsnes- og Grafningshreppur municipality in South Iceland, listed at level 2 in GeoNames.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "IS-GRY": {
+      "id": 2631018,
+      "reason": "Identical name; same Grýtubakkahreppur municipality in Northeast Iceland, listed at level 2 in GeoNames.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "IS-HAF": {
+      "id": 3416708,
+      "reason": "Identical name; same Hafnarfjörður municipality, listed at level 2 in GeoNames.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "IS-HRG": {
+      "id": 9192070,
+      "reason": "Identical name; same Hörgársveit municipality in Northeast Iceland, listed at level 2 in GeoNames.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "IS-HRU": {
+      "id": 3415916,
+      "reason": "Identical name; same Hrunamannahreppur municipality in South Iceland, listed at level 2 in GeoNames.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "IS-HUG": {
+      "id": 12504066,
+      "reason": "Identical name; same Húnabyggð municipality in Northwest Iceland, listed at level 2 in GeoNames.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "IS-HVA": {
+      "id": 9192471,
+      "reason": "Identical name; same Hvalfjarðarsveit municipality in West Iceland, listed at level 2 in GeoNames.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "IS-ISA": {
+      "id": 3415669,
+      "reason": "Identical name; same Ísafjarðarbær municipality in the Westfjords, listed at level 2 in GeoNames.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "IS-KAL": {
+      "id": 3415588,
+      "reason": "Identical name; same Kaldrananeshreppur municipality in the Westfjords, listed at level 2 in GeoNames.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "IS-KJO": {
+      "id": 3415359,
+      "reason": "Identical name; same Kjósarhreppur municipality in the Capital Region, listed at level 2 in GeoNames.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "IS-KOP": {
+      "id": 3415215,
+      "reason": "Identical name; same Kópavogur municipality in the Capital Region, listed at level 2 in GeoNames.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 3415212
+    },
+    "IS-LAN": {
+      "id": 9192036,
+      "reason": "Identical name; same Langanesbyggð municipality in Northeast Iceland, listed at level 2 in GeoNames.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "IS-MOS": {
+      "id": 3414383,
+      "reason": "Identical name; same Mosfellsbær municipality in the Capital Region, listed at level 2 in GeoNames.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "IS-MUL": {
+      "id": 12504084,
+      "reason": "Identical name; same Múlaþing municipality in East Iceland, listed at level 2 in GeoNames.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "IS-MYR": {
+      "id": 3345273,
+      "reason": "Identical name; same Mýrdalshreppur municipality in South Iceland, listed at level 2 in GeoNames.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "IS-NOR": {
+      "id": 9192054,
+      "reason": "Identical name; same Norðurþing municipality in Northeast Iceland, listed at level 2 in GeoNames.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "IS-RHH": {
+      "id": 3413878,
+      "reason": "Identical name; same Reykhólahreppur municipality in the Westfjords, listed at level 2 in GeoNames.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "IS-RKN": {
+      "id": 3426211,
+      "reason": "Identical name; same Reykjanesbær municipality in the Southern Peninsula, listed at level 2 in GeoNames.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "IS-RKV": {
+      "id": 3413831,
+      "reason": "Identical name; same Reykjavík city municipality in the Capital Region, listed at level 2 in GeoNames.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "IS-SBT": {
+      "id": 2626312,
+      "reason": "Identical name; same Svalbarðsstrandarhreppur municipality in Northeast Iceland, listed at level 2 in GeoNames.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "IS-SDV": {
+      "id": 3412885,
+      "reason": "Identical name; same Súðavíkurhreppur municipality in the Westfjords, listed at level 2 in GeoNames.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "IS-SEL": {
+      "id": 3413544,
+      "reason": "Seltjarnarnesbær and Seltjarnarneskaupstaður are the current and former official names of the Seltjarnarnes municipality.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "IS-SHF": {
+      "id": 3345272,
+      "reason": "Identical name; same Hornafjörður municipality in Southeast Iceland, listed at level 2 in GeoNames.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "IS-SKF": {
+      "id": 2627072,
+      "reason": "Identical name; same Skaftárhreppur municipality in South Iceland, listed at level 2 in GeoNames.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "IS-SKG": {
+      "id": 3413488,
+      "reason": "Identical name; same Skagabyggð municipality in Northwest Iceland, which GeoNames still holds at level 2.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "IS-SKO": {
+      "id": 3413282,
+      "reason": "Identical name; same Skorradalshreppur municipality in West Iceland, listed at level 2 in GeoNames.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "IS-SNF": {
+      "id": 3426209,
+      "reason": "Identical name; same Snæfellsbær municipality in West Iceland, listed at level 2 in GeoNames.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "IS-SOG": {
+      "id": 3345276,
+      "reason": "Identical name; same Skeiða- og Gnúpverjahreppur municipality in South Iceland, listed at level 2 in GeoNames.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "IS-SOL": {
+      "id": 3414073,
+      "reason": "Identical name; same Ölfus municipality in South Iceland, listed at level 2 in GeoNames.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 3414074
+    },
+    "IS-STY": {
+      "id": 12508725,
+      "reason": "Stykkishólmsbær merged with Helgafellssveit in 2022. ISO dropped Helgafellssveit's code and kept IS-STY, so IS-STY now covers the merged municipality, which GeoNames records as 12508725 Stykkishólmur-Helgafellssveit.",
+      "decided_by": "human",
+      "escalation": "The only plausible candidate, 12508725 Stykkishólmur-Helgafellssveit, appears to be the municipality formed in 2022 when Stykkishólmsbær merged with Helgafellssveit, so the orphan maps to only part of that record. The web search (name + ISO code) only described Stykkishólmur as a town and municipality in West Iceland and did not mention the merger or a separate ISO entry for Helgafellssveit. No other unclaimed candidate fits, and none of Step 5's reasons is confirmed: a retirement would need the merger confirmed, and ISO may be using IS-STY for the merged municipality.",
+      "wikidata_seen": null
+    },
+    "IS-TAL": {
+      "id": 3412697,
+      "reason": "Identical name; same Tálknafjarðarhreppur municipality in the Westfjords, which GeoNames still holds at level 2.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "IS-THG": {
+      "id": 3345266,
+      "reason": "Identical name; same Þingeyjarsveit municipality in Northeast Iceland, listed at level 2 in GeoNames.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "IS-VEM": {
+      "id": 3412095,
+      "reason": "Identical name; same Vestmannaeyjar (Westman Islands) municipality, listed at level 2 in GeoNames.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 3412094
+    },
+    "IS-VER": {
+      "id": 3426215,
+      "reason": "Identical name; same Vesturbyggð municipality in the Westfjords, listed at level 2 in GeoNames.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "IS-VOP": {
+      "id": 2625192,
+      "reason": "Identical name; same Vopnafjarðarhreppur municipality in East Iceland, listed at level 2 in GeoNames.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "KG-GO": {
+      "id": 10300944,
+      "reason": "Osh Shaary is Kyrgyz for Osh City, the city of republican significance that GeoNames lists at level 1 apart from Osh Region.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 1527534
+    },
+    "LT-04": {
+      "id": 864516,
+      "reason": "Identical name; same Anykščiai District Municipality, listed at level 2 in GeoNames under Utena County.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "LT-05": {
+      "id": 600444,
+      "reason": "Identical name; same Birštonas Municipality, listed at level 2 in GeoNames under Kaunas County.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "LT-09": {
+      "id": 864517,
+      "reason": "Identical name; same Ignalina District Municipality, listed at level 2 in GeoNames under Utena County.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "LT-11": {
+      "id": 864504,
+      "reason": "Identical name; same Joniškis District Municipality, listed at level 2 in GeoNames under Šiauliai County.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "LT-19": {
+      "id": 864505,
+      "reason": "Identical name; same Kelmė District Municipality, listed at level 2 in GeoNames under Šiauliai County.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 598257
+    },
+    "LT-22": {
+      "id": 864494,
+      "reason": "Identical name; same Kretinga District Municipality, listed at level 2 in GeoNames under Klaipėda County.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 597989
+    },
+    "LT-23": {
+      "id": 864500,
+      "reason": "Identical name; same Kupiškis District Municipality, listed at level 2 in GeoNames under Panevėžys County.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "LT-26": {
+      "id": 864512,
+      "reason": "Identical name; same Mažeikiai District Municipality, listed at level 2 in GeoNames under Telšiai County.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "LT-34": {
+      "id": 864501,
+      "reason": "Identical name; same Pasvalys District Municipality, listed at level 2 in GeoNames under Panevėžys County.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 595996
+    },
+    "LT-36": {
+      "id": 864491,
+      "reason": "Identical name; same Prienai District Municipality, listed at level 2 in GeoNames under Kaunas County.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "LT-38": {
+      "id": 864492,
+      "reason": "Identical name; same Raseiniai District Municipality, listed at level 2 in GeoNames under Kaunas County.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "LT-40": {
+      "id": 864502,
+      "reason": "Identical name; same Rokiškis District Municipality, listed at level 2 in GeoNames under Panevėžys County.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "LT-42": {
+      "id": 864520,
+      "reason": "Identical name; same Šalčininkai District Municipality, listed at level 2 in GeoNames under Vilnius County.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "LT-45": {
+      "id": 864510,
+      "reason": "Identical name; same Šilalė District Municipality, listed at level 2 in GeoNames under Tauragė County.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "LT-47": {
+      "id": 864521,
+      "reason": "Same Širvintos District Municipality (GeoNames spells it Sirvintos without the diacritic), listed at level 2 under Vilnius County.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "LT-48": {
+      "id": 864495,
+      "reason": "Identical name; same Skuodas District Municipality, listed at level 2 in GeoNames under Klaipėda County.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "LT-49": {
+      "id": 864522,
+      "reason": "Same Švenčionys District Municipality (GeoNames spells it Svencionys without diacritics), listed at level 2 under Vilnius County.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "LT-52": {
+      "id": 864523,
+      "reason": "Identical name; same Trakai District Municipality, listed at level 2 in GeoNames under Vilnius County.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "LT-59": {
+      "id": 864515,
+      "reason": "Identical name; same Visaginas Municipality, listed at level 2 in GeoNames under Utena County.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "LT-60": {
+      "id": 864519,
+      "reason": "Identical name; same Zarasai District Municipality, listed at level 2 in GeoNames under Utena County.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "MC-LA": {
+      "id": null,
+      "reason": "GeoNames records Monaco only as the single Municipality of Monaco (3319178) and has no records for ISO's quarters/wards; Larvotto is a current ward in Monaco's east, part of the Monte Carlo quarter.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 3319163
+    },
+    "MC-MA": {
+      "id": null,
+      "reason": "GeoNames records Monaco only as the single Municipality of Monaco (3319178) and has no records for ISO's quarters/wards; Malbousquet is a current Monaco ward.",
+      "decided_by": "human",
+      "escalation": "No candidate matches: GeoNames' only Monaco record is the single Municipality of Monaco (3319178), with no records for ISO's quarters/wards. That would justify an add under the different-administrative-scheme reason, as was just done for MC-LA Larvotto. However, the web search (name + ISO code) returned only unrelated results (Malbuisson, Malbosc, Domaine Bousquet wine), so it did not confirm that Malbousquet is a real ward, which an add requires.",
+      "wikidata_seen": null
+    },
+    "MC-MC": {
+      "id": null,
+      "reason": "GeoNames records Monaco only as the single Municipality of Monaco (3319178) and has no records for ISO's quarters/wards; Monte-Carlo (Monte Carlo/Spélugues ward) is a current official administrative area of Monaco.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 2992741
+    },
+    "MC-MG": {
+      "id": null,
+      "reason": "GeoNames records Monaco only as the single Municipality of Monaco (3319178) and has no records for ISO's quarters/wards; Les Moneghetti is a current north-central ward of Monaco.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 3319177
+    },
+    "MC-MO": {
+      "id": null,
+      "reason": "GeoNames records Monaco only as the single Municipality of Monaco (3319178), which covers the whole country, and has no records for ISO's quarters/wards; Monaco-Ville (\"The Rock\") is a current south-central ward of Monaco.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 8504785
+    },
+    "MC-MU": {
+      "id": null,
+      "reason": "GeoNames records Monaco only as the single Municipality of Monaco (3319178) and has no records for ISO's quarters/wards; Moulins is a current Monaco ward.",
+      "decided_by": "human",
+      "escalation": "No candidate matches: GeoNames' only Monaco record is the single Municipality of Monaco (3319178), with no records for ISO's quarters/wards, which would justify an add under the different-administrative-scheme reason as for MC-LA, MC-MC, MC-MG and MC-MO. However, the web search (name + ISO code) returned only Moulins, Allier (France) and unrelated results, so it did not confirm that Moulins is a real Monaco ward, which an add requires. The case resembles MC-MA Malbousquet, which the user ruled to add.",
+      "wikidata_seen": null
+    },
+    "MC-PH": {
+      "id": null,
+      "reason": "GeoNames records Monaco only as the single Municipality of Monaco (3319178) and has no records for ISO's quarters/wards; Port-Hercule is a current Monaco ward.",
+      "decided_by": "human",
+      "escalation": "No candidate matches: GeoNames' only Monaco record is the single Municipality of Monaco (3319178), with no records for ISO's quarters/wards, which would justify an add under the different-administrative-scheme reason as for the other Monaco wards. However, the web search (name + ISO code) described Port Hercule only as Monaco's main harbour, located in the La Condamine district, and did not confirm it as an administrative ward, so it's unclear whether it is a distinct ward or part of La Condamine. Resembles MC-MA and MC-MU, which the user ruled to add.",
+      "wikidata_seen": 3225759
+    },
+    "MC-SD": {
+      "id": null,
+      "reason": "GeoNames records Monaco only as the single Municipality of Monaco (3319178) and has no records for ISO's quarters/wards; Sainte-Dévote is a current Monaco ward.",
+      "decided_by": "human",
+      "escalation": "No candidate matches: GeoNames' only Monaco record is the single Municipality of Monaco (3319178), with no records for ISO's quarters/wards, which would justify an add under the different-administrative-scheme reason as for the other Monaco wards. However, the web search (name + ISO code) returned only pages about Saint Devota and Monaco's annual Sainte-Dévote festival (and the Sainte-Dévote church in the Gaumates valley), not the ward, so it did not confirm Sainte-Dévote as an administrative ward. Resembles MC-MA, MC-MU and MC-PH, which the user ruled to add.",
+      "wikidata_seen": null
+    },
+    "MC-SO": {
+      "id": null,
+      "reason": "GeoNames records Monaco only as the single Municipality of Monaco (3319178) and has no records for ISO's quarters/wards; La Source is a current Monaco ward.",
+      "decided_by": "human",
+      "escalation": "No candidate matches: GeoNames' only Monaco record is the single Municipality of Monaco (3319178), with no records for ISO's quarters/wards, which would justify an add under the different-administrative-scheme reason as for the other Monaco wards. However, the web search (name + ISO code) returned only unrelated results (a water-bottling company in Niederbronn-les-Bains, France, an album, a Canadian retailer), so it did not confirm La Source as a real Monaco ward. Resembles MC-MA, MC-MU, MC-PH and MC-SD, which the user ruled to add.",
+      "wikidata_seen": null
+    },
+    "MC-SP": {
+      "id": null,
+      "reason": "GeoNames records Monaco only as the single Municipality of Monaco (3319178) and has no records for ISO's quarters/wards; Spélugues is a current Monaco ward.",
+      "decided_by": "human",
+      "escalation": "No candidate matches: GeoNames' only Monaco record is the single Municipality of Monaco (3319178), with no records for ISO's quarters/wards. However, the web search (name + ISO code) returned only unrelated results, so it did not confirm Spélugues as a real ward. In addition, the earlier search for MC-MC Monte-Carlo described the official ward as \"Monte Carlo/Spélugues\", so Spélugues may overlap with or be part of MC-MC, which was already added as its own record. Resembles MC-MA, MC-MU, MC-PH, MC-SD and MC-SO, which the user ruled to add.",
+      "wikidata_seen": null
+    },
+    "MC-SR": {
+      "id": null,
+      "reason": "GeoNames has only one record for Monaco, the whole Municipality of Monaco (3319178), so ISO's quarter Saint-Roman has no GeoNames counterpart.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "MC-VR": {
+      "id": null,
+      "reason": "GeoNames has only one record for Monaco, the whole Municipality of Monaco (3319178), so ISO's quarter Vallon de la Rousse has no GeoNames counterpart.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "MG-A": {
+      "id": null,
+      "reason": "GeoNames uses Madagascar's 22 regions, not ISO's 6 provinces, so Toamasina province has no GeoNames counterpart; Toamasina I/II are districts covering only the city and its surroundings.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "MG-F": {
+      "id": null,
+      "reason": "GeoNames uses Madagascar's 22 regions, not ISO's 6 provinces, so Fianarantsoa province has no GeoNames counterpart; Fianarantsoa I is only the city's district.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "MG-M": {
+      "id": null,
+      "reason": "GeoNames uses Madagascar's 22 regions, not ISO's 6 provinces, so Mahajanga province has no GeoNames counterpart; Mahajanga I/II are only districts around the city.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "MG-T": {
+      "id": null,
+      "reason": "GeoNames uses Madagascar's 22 regions, not ISO's 6 provinces, so Antananarivo province has no GeoNames counterpart; the Antananarivo-named records are only districts and the capital's arrondissements.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 10229484
+    },
+    "MG-U": {
+      "id": null,
+      "reason": "GeoNames uses Madagascar's 22 regions, not ISO's 6 provinces, so Toliara province has no GeoNames counterpart; Toliara I/II are only districts around the city.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 10229493
+    },
+    "MK-803": {
+      "id": 7056269,
+      "reason": "Butel Municipality, one of Skopje's municipalities, which GeoNames keeps at level 2 under the City of Skopje.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 833260
+    },
+    "MK-815": {
+      "id": 863836,
+      "reason": "Čair Municipality, one of Skopje's municipalities, which GeoNames keeps at level 2 under the City of Skopje.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 833262
+    },
+    "MR-13": {
+      "id": 11496391,
+      "reason": "Nouakchott West is the English form of Nouakchott Ouest, one of the three regions Nouakchott was split into in 2014.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "MR-14": {
+      "id": 11496392,
+      "reason": "Nouakchott North is the English form of Nouakchott Nord, the region created in the 2014 split of Nouakchott, with Dar Naim as its capital.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "MU-CC": {
+      "id": 1106583,
+      "reason": "Cargados Carajos is the same Mauritian outer-island dependency (Saint Brandon), listed by GeoNames at level 1.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 934647
+    },
+    "MY-14": {
+      "id": 1733046,
+      "reason": "GeoNames' level-1 Kuala Lumpur is the Federal Territory itself, matching how Putrajaya's level-1 record holds MY-16, while WP. Kuala Lumpur at level 2 is the district inside it.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 1735161
+    },
+    "NO-21": {
+      "id": null,
+      "reason": "Svalbard has its own ISO 3166-1 code (SJ, Svalbard and Jan Mayen) and GeoNames files it only as a country, not as a Norwegian subdivision.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 7521757
+    },
+    "NO-22": {
+      "id": null,
+      "reason": "Jan Mayen falls under ISO 3166-1 code SJ (Svalbard and Jan Mayen), and GeoNames files it only within that country, not as a Norwegian subdivision.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 3041963
+    },
+    "NO-30": {
+      "id": null,
+      "reason": "Viken existed 2020-2023 and was split back into Akershus, Buskerud and Østfold on 1 January 2024; GeoNames has only those successor counties (3163480, 3159665, 3143188) and no record of Viken itself.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 12110595
+    },
+    "NO-38": {
+      "id": null,
+      "reason": "Vestfold og Telemark existed 2020-2023 and was split back into Vestfold and Telemark on 1 January 2024; GeoNames has only those successor counties (3132015, 3134723) and no record of the merged county itself.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 12110599
+    },
+    "NO-54": {
+      "id": null,
+      "reason": "Troms og Finnmark existed 2020-2023 and was split back into Troms and Finnmark on 1 January 2024; GeoNames has only those successor counties (3133897, 780166) and no record of the merged county itself.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 12110597
+    },
+    "NP-P4": {
+      "id": 12095450,
+      "reason": "Gandaki Pradesh is Gandaki Province, \"Pradesh\" being the Nepali word for province.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "NP-P6": {
+      "id": 12095452,
+      "reason": "Karnali Pradesh (formerly Province 6) is Karnali Province, \"Pradesh\" being the Nepali word for province.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "NP-P7": {
+      "id": 12095453,
+      "reason": "Sudurpashchim Pradesh is Sudurpashchim Province, \"Pradesh\" being the Nepali word for province.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "NZ-CIT": {
+      "id": 4033013,
+      "reason": "GeoNames' level-1 Chatham Islands (Wharekauri) is the Chatham Islands Territory, New Zealand's special island authority.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 4033014
+    },
+    "PS-GZA": {
+      "id": 11184609,
+      "reason": "Gaza Governorate is the ISO governorate, held at level 2 like the already-matched North Gaza and Deir al-Balah governorates, while the level-1 Gaza Strip is the whole territory containing five governorates.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "PS-HBN": {
+      "id": 7870658,
+      "reason": "Hebron Governorate, also known by its Arabic name Al Khalil.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "PS-JEM": {
+      "id": 7870654,
+      "reason": "Quds Governorate is the Jerusalem Governorate, al-Quds being the Arabic name for Jerusalem.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "PS-JEN": {
+      "id": 7828733,
+      "reason": "Jenin Governorate, same name in GeoNames.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "PS-NBS": {
+      "id": 7870555,
+      "reason": "Nablus Governorate, same name in GeoNames.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "PS-RBH": {
+      "id": 7870657,
+      "reason": "Ramallah and al-Bireh Governorate is the full name of the Ramallah Governorate.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "PS-RFH": {
+      "id": 7870260,
+      "reason": "Rafah Governorate, same name in GeoNames.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "PS-SLT": {
+      "id": 7870652,
+      "reason": "Salfit Governorate, same name in GeoNames.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "PS-TKM": {
+      "id": 7870644,
+      "reason": "Tulkarm Governorate, same name in GeoNames.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "QA-DA": {
+      "id": 389470,
+      "reason": "Baladiyat ad Dawhah is Doha Municipality, \"baladiyat\" meaning municipality.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 290030
+    },
+    "QA-MS": {
+      "id": 389462,
+      "reason": "Madinat ash Shamal is the seat of and alternate name for Al Shamal Municipality (بلدية الشمال), at level 1 like the other Qatari municipalities.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 289739
+    },
+    "QA-RA": {
+      "id": 389469,
+      "reason": "Baladiyat ar Rayyan is Al Rayyan Municipality, \"baladiyat\" meaning municipality.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 289888
+    },
+    "QA-SH": {
+      "id": 11777514,
+      "reason": "Al-Shahaniya is a transliteration of Ash Shīḩānīyah, the Qatari municipality created in 2014.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "RO-B": {
+      "id": 683504,
+      "reason": "Bucharest is the English name of București, the municipality held by GeoNames at level 1 alongside Romania's counties.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 683506
+    },
+    "RS-25": {
+      "id": null,
+      "reason": "Disputed territory: ISO lists Kosovski okrug (centred on Pristina) as a district of Serbia, while GeoNames files that land under Kosovo, so Serbia has no GeoNames record for it.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "RS-26": {
+      "id": null,
+      "reason": "Disputed territory: ISO lists Pećki okrug (seat Peć) as a district of Serbia, while GeoNames files that land under Kosovo as the District of Peja, so Serbia has no GeoNames record for it.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "RS-27": {
+      "id": null,
+      "reason": "Disputed territory: ISO lists Prizrenski okrug (seat Prizren) as a district of Serbia, while GeoNames files that land under Kosovo as the District of Prizren, so Serbia has no GeoNames record for it.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "RS-28": {
+      "id": null,
+      "reason": "Disputed territory: ISO lists Kosovsko-Mitrovački okrug (seat Kosovska Mitrovica) as a district of Serbia, while GeoNames files that land under Kosovo as the District of Mitrovica, so Serbia has no GeoNames record for it.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "RS-29": {
+      "id": null,
+      "reason": "Disputed territory: ISO lists Kosovsko-Pomoravski okrug (seat Gnjilane/Gjilan) as a district of Serbia, while GeoNames files that land under Kosovo as the District of Gjilan; it is unrelated to central Serbia's Pomoravski okrug.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "RS-08": {
+      "id": 7581799,
+      "reason": "Mačvanski Okrug is the Mačva District, same name in GeoNames.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "RS-09": {
+      "id": 7581798,
+      "reason": "Kolubarski Okrug is the Kolubara District, same name in GeoNames.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 7910477
+    },
+    "RS-10": {
+      "id": 7581804,
+      "reason": "Podunavski Okrug is the Podunavlje District, same name in GeoNames.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "RS-12": {
+      "id": 7581908,
+      "reason": "Šumadijski okrug is the Šumadija District, listed in GeoNames with the other Serbian okrugs.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "RS-13": {
+      "id": 7581805,
+      "reason": "Pomoravski Okrug is the Pomoravlje District, same name in GeoNames.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "RS-15": {
+      "id": 7581910,
+      "reason": "Zaječarski Okrug is the Zaječar District, same name in GeoNames.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "RS-16": {
+      "id": 7581912,
+      "reason": "Zlatiborski Okrug is the Zlatibor District, same name in GeoNames.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "RS-17": {
+      "id": 7581800,
+      "reason": "Moravički Okrug is the Moravica District (GeoNames \"Morava\"), same alternate name in GeoNames.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "RS-18": {
+      "id": 7581807,
+      "reason": "Raški Okrug is the Raška District, same name in GeoNames.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "RS-19": {
+      "id": 7581806,
+      "reason": "Rasinski Okrug is the Rasina District, same name in GeoNames.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "RS-21": {
+      "id": 7581909,
+      "reason": "Toplički Okrug is the Toplica District, same name in GeoNames.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "RS-22": {
+      "id": 7581803,
+      "reason": "Pirotski Okrug is the Pirot District, same name in GeoNames.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "RS-23": {
+      "id": 7581795,
+      "reason": "Jablanički Okrug is the Jablanica District, same name in GeoNames.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "RS-24": {
+      "id": 7581802,
+      "reason": "Pčinjski Okrug is the Pčinja District, same name in GeoNames.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "RS-KM": {
+      "id": null,
+      "reason": "Disputed territory: ISO lists Kosovo-Metohija as an autonomous province of Serbia, while GeoNames files that land as the separate country of Kosovo, so Serbia has no GeoNames record for it.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "SI-052": {
+      "id": 3197377,
+      "reason": "Urban Municipality of Kranj (Mestna občina Kranj), same urban municipality.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "SI-096": {
+      "id": 3192240,
+      "reason": "Urban Municipality of Ptuj (Mestna občina Ptuj), same urban municipality.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "SM-07": {
+      "id": 3345302,
+      "reason": "GeoNames' level-1 San Marino is the castello of the City of San Marino, the only castello not already matched among the other eight.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "ST-01": {
+      "id": 11203920,
+      "reason": "Água Grande District, held at level 2 under São Tomé Island like the already-matched Lobata, Lemba and Mé-Zóchi districts.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "ST-02": {
+      "id": 11204213,
+      "reason": "Cantagalo District, same district in GeoNames at level 2 under São Tomé Island.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "ST-03": {
+      "id": 11994811,
+      "reason": "Caué District, same district in GeoNames at level 2 under São Tomé Island.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "TH-10": {
+      "id": 1609348,
+      "reason": "Krung Thep Maha Nakhon (กรุงเทพมหานคร) is the Thai name of Bangkok, held by GeoNames at level 1 as the special administrative area.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "TH-S": {
+      "id": null,
+      "reason": "Pattaya is a self-governing special administrative city. GeoNames has no administrative record for it, only Bang Lamung District, a larger district that contains it, so it's added as-is.",
+      "decided_by": "human",
+      "escalation": "No candidate matches and none of Step 5's reasons clearly explains why. The search shows Phatthaya (Pattaya, TH-S) is a special administrative city in Chon Buri province. GeoNames has no level-1 or level-2 record for it, only Bang Lamung District (1619422), a larger amphoe that contains Pattaya, so Pattaya covers only part of that record. This looks like Step 5's Hungarian case (a city with special status that GeoNames records only as a populated place, which must not be merged into the larger district around it), but SKILL.md doesn't cover Thailand.",
+      "wikidata_seen": 1614295
+    },
+    "TW-HSZ": {
+      "id": 1675103,
+      "reason": "Hsinchu City (新竹市), the provincial city, distinct from Hsinchu County which TW-HSQ already holds.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 1675151
+    },
+    "TW-KHH": {
+      "id": 7280289,
+      "reason": "GeoNames has two records for Kaohsiung with identical metadata: Chinese name 高雄市, linked to the Kaohsiung Wikipedia article. 7280289 sits at level 1, the same level as ISO's TW-KHH, and its English label \"Takao\" is flagged historic by GeoNames itself. 9613373 is its only child, at level 2. Neither record says whether it covers the pre-2010 city or the merged municipality, so the level-1 record is chosen for structural consistency, matching TW-TPE's merge into Taipei's level-1 record (7280290). 9613373 remains a GeoNames-only duplicate.",
+      "decided_by": "human",
+      "escalation": "Two candidates plausibly fit and level, type and the web search can't decide between them. Both are named 高雄市: 9613373 \"Kaohsiung\" at level 2 and 7280289 \"Takao\" (the Japanese-era name, Kô-hiùng-sṳ) at level 1. The search only confirmed TW-KHH is Kaohsiung, with nothing on GeoNames' records. Taoyuan, another special municipality, is already matched to a level-2 record (1667900), which points to 9613373. The level-1 Takao record may be a leftover from when Kaohsiung sat directly under the national government, or a historical record.",
+      "wikidata_seen": null
+    },
+    "TW-TXG": {
+      "id": 9613500,
+      "reason": "Taichung City is the official name of the Taichung special municipality, so \"City\" here is only naming. GeoNames holds it at level 2, like New Taipei City for TW-NWT and Taoyuan for TW-TAO.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "UG-126": {
+      "id": null,
+      "reason": "Kassanda District was created in 2019 from part of Mubende District, and GeoNames has no record of it yet. Mubende's record belongs to UG-107 and covers a different district. If GeoNames adds Kassanda and Wikidata links it, the conflict check will send this decision back for review.",
+      "decided_by": "human",
+      "escalation": "No candidate matches and none of Step 5's reasons explains why. The search shows Kasanda (Kassanda, UG-126) is a current district in Uganda's Central Region, carved out of Mubende District (443358, already held by UG-107). GeoNames has no Kassanda record at any level, so this looks like a district too new for GeoNames, which SKILL.md says isn't a reason to add. Mubende is the parent district, not the same place, and is already claimed anyway.",
+      "wikidata_seen": null
+    },
+    "UG-235": {
+      "id": null,
+      "reason": "Bugweri District was created in 2018 from part of Iganga District, and GeoNames has no record of it yet. Iganga's record (443334) covers the remaining Iganga District, so it isn't a match. If GeoNames adds Bugweri, the planned new-candidate check will send this decision back for review.",
+      "decided_by": "human",
+      "escalation": "No candidate matches and none of Step 5's reasons explains why. The search shows Bugweri (UG-235) is a current district in Busoga, carved out of Iganga District (443334, already held by UG-203) in FY 2018/19. GeoNames has no Bugweri record at any level, so it looks too new for GeoNames. This matches the earlier Kasanda (UG-126) ruling, where the user chose add for a 2019 district split from Mubende, but that ruling covered only Kasanda.",
+      "wikidata_seen": null
+    },
+    "UG-236": {
+      "id": null,
+      "reason": "Kapelebyong District was created in 2018 from part of Amuria District, and GeoNames has no record of it yet. Amuria's record belongs to UG-216 and covers the remaining Amuria District, so it isn't a match.",
+      "decided_by": "human",
+      "escalation": "No candidate matches and none of Step 5's reasons explains the absence: the web search confirms Kapelebyong (UG-236) is a current district in Uganda's Teso sub-region, bordering Napak (2024 population 143,536). It was carved out of Amuria District (GeoNames 7056276, claimed by UG-216), which still exists, so this is a newer split that GeoNames hasn't added yet, not a retirement. Every one of the country's GeoNames districts is already claimed by another ISO code.",
+      "wikidata_seen": null
+    },
+    "UG-237": {
+      "id": null,
+      "reason": "Kalaki District was created in 2019 from Kalaki County of Kaberamaido District, and GeoNames has no record of it yet. Kaberamaido's record belongs to UG-213 and covers the remaining Kaberamaido District, so it isn't a match.",
+      "decided_by": "human",
+      "escalation": "No candidate matches and none of Step 5's reasons explains the absence: the web search confirms Kalaki (UG-237) is a current district in Uganda's Eastern Region (Teso), created in July 2019 from Kalaki County of Kaberamaido District, with a 2024 population of 149,736. Kaberamaido District still exists in GeoNames (448215, claimed by UG-213), so this is a split, not a retirement, and every GeoNames district in Uganda is already claimed. This resembles the earlier UG-236 Kapelebyong ruling (2018 split from Amuria, added).",
+      "wikidata_seen": null
+    },
+    "UG-333": {
+      "id": null,
+      "reason": "Kwania District was created in 2018 from part of Apac District, and GeoNames has no record of it yet. Apac's record belongs to UG-302 and covers the remaining Apac District, so it isn't a match.",
+      "decided_by": "human",
+      "escalation": "No candidate matches and none of Step 5's reasons explains the absence: the web search confirms Kwania (UG-333) is a current district in Northern Uganda, carved out of Apac District on 1 July 2018. Apac District still exists in GeoNames (443327, claimed by UG-302), so this is a split, not a retirement, and every GeoNames district in Uganda is already claimed. This resembles the earlier UG-236 Kapelebyong and UG-237 Kalaki rulings (post-2018 splits, both added).",
+      "wikidata_seen": null
+    },
+    "UG-334": {
+      "id": null,
+      "reason": "Nabilatuk District was created in 2018 from part of Nakapiripirit District, and GeoNames has no record of it yet. Nakapiripirit's record belongs to UG-311 and covers the remaining Nakapiripirit District, so it isn't a match.",
+      "decided_by": "human",
+      "escalation": "No candidate matches and none of Step 5's reasons explains the absence: the web search confirms Nabilatuk (UG-334) is a current district in Northern Uganda's Karamoja sub-region, established 1 July 2018 (carved from Nakapiripirit District). Nakapiripirit still exists in GeoNames (448221, claimed by UG-311), so this is a split, not a retirement, and every GeoNames district in Uganda is already claimed. This resembles the earlier UG-236, UG-237 and UG-333 rulings (post-2018 splits, all added).",
+      "wikidata_seen": null
+    },
+    "UG-335": {
+      "id": null,
+      "reason": "Karenga District was created in 2019 from part of Kaabong District, and GeoNames has no record of it yet. Kaabong's record belongs to UG-318 and covers the remaining Kaabong District, so it isn't a match.",
+      "decided_by": "human",
+      "escalation": "No candidate matches and none of Step 5's reasons explains the absence: the web search confirms Karenga (UG-335) is a current district in Uganda's Karamoja sub-region, created out of Kaabong District by Act of Parliament on 15 June 2019 and operational from 1 July 2019. Kaabong District still exists in GeoNames (7056286, claimed by UG-318), so this is a split, not a retirement, and every GeoNames district in Uganda is already claimed. This resembles the earlier UG-236, UG-237, UG-333 and UG-334 rulings (post-2018 splits, all added).",
+      "wikidata_seen": null
+    },
+    "UG-336": {
+      "id": null,
+      "reason": "Madi-Okollo District was created in 2019 from part of Arua District, and GeoNames has no record of it yet. Arua's record belongs to UG-303 and covers the remaining Arua District, so it isn't a match.",
+      "decided_by": "human",
+      "escalation": "No candidate matches and none of Step 5's reasons explains the absence: the web search confirms Madi-Okollo (UG-336) is a current district in Uganda's West Nile region, carved out of Arua District and operational from 1 July 2019 (2024 population 178,051). Arua District still exists in GeoNames (443328, claimed by UG-303), so this is a split, not a retirement, and every GeoNames district in Uganda is already claimed. This resembles the earlier UG-236, UG-237, UG-333, UG-334 and UG-335 rulings (post-2018 splits, all added).",
+      "wikidata_seen": null
+    },
+    "UG-337": {
+      "id": null,
+      "reason": "Obongi District was created in 2019 from part of Moyo District, and GeoNames has no record of it yet. Moyo's record belongs to UG-309 and covers the remaining Moyo District, so it isn't a match.",
+      "decided_by": "human",
+      "escalation": "No candidate matches and none of Step 5's reasons explains the absence: the web search confirms Obongi (UG-337) is a current district in Uganda's West Nile region, carved out of Moyo District and established 1 July 2019. Moyo District still exists in GeoNames (443357, claimed by UG-309), so this is a split, not a retirement, and every GeoNames district in Uganda is already claimed. This resembles the earlier UG-236, UG-237, UG-333, UG-334, UG-335 and UG-336 rulings (post-2018 splits, all added).",
+      "wikidata_seen": null
+    },
+    "UG-432": {
+      "id": null,
+      "reason": "Kikuube District was created in 2018 from part of Hoima District, and GeoNames has no record of it yet. Hoima's record belongs to UG-403 and covers the remaining Hoima District, so it isn't a match.",
+      "decided_by": "human",
+      "escalation": "No candidate matches and none of Step 5's reasons explains the absence: the web search confirms Kikuube (UG-432) is a current district in Uganda's Western Region (Bunyoro sub-region), headquartered at Kikuube town about 26 km southwest of Hoima, with a 2024 population of 379,547; it was carved out of Hoima District in 2018. Hoima District still exists in GeoNames (443332, claimed by UG-403), so this is a split, not a retirement, and every GeoNames district in Uganda is already claimed. This resembles the earlier UG-236, UG-237, UG-333 to UG-337 rulings (post-2018 splits, all added).",
+      "wikidata_seen": null
+    },
+    "UG-433": {
+      "id": null,
+      "reason": "Kazo District was created in 2019 from part of Kiruhura District, and GeoNames has no record of it yet. Kiruhura's record belongs to UG-419 and covers the remaining Kiruhura District, so it isn't a match.",
+      "decided_by": "human",
+      "escalation": "No candidate matches and none of Step 5's reasons explains the absence: the web search confirms Kazo (UG-433) is a current district in Uganda's Western Region covering 1,556 km²; it was carved out of Kiruhura District (operational from 1 July 2019). Kiruhura District still exists in GeoNames (7056288, claimed by UG-419), so this is a split, not a retirement, and every GeoNames district in Uganda is already claimed. This resembles the earlier UG-236, UG-237, UG-333 to UG-337 and UG-432 rulings (post-2018 splits, all added).",
+      "wikidata_seen": null
+    },
+    "UG-434": {
+      "id": null,
+      "reason": "Kitagwenda District was created in 2019 from part of Kamwenge District, and GeoNames has no record of it yet. Kamwenge's record belongs to UG-413 and covers the remaining Kamwenge District, so it isn't a match.",
+      "decided_by": "human",
+      "escalation": "No candidate matches and none of Step 5's reasons can be confirmed: the web search for Kitagwenda UG-434 returned no relevant results (only unrelated part numbers and gazettes), so the search did not confirm the entity. From general knowledge, Kitagwenda is a district in Uganda's Western Region carved out of Kamwenge District in 2019; Kamwenge still exists in GeoNames (448216, claimed by UG-413), so this would be a split, not a retirement, and every GeoNames district in Uganda is already claimed. This resembles the earlier UG-236, UG-237, UG-333 to UG-337, UG-432 and UG-433 rulings (post-2018 splits, all added).",
+      "wikidata_seen": null
+    },
+    "UG-435": {
+      "id": null,
+      "reason": "Rwampara District was created in 2019 from part of Mbarara District, and GeoNames has no record of it yet. Mbarara's record belongs to UG-410 and covers the remaining Mbarara District, so it isn't a match.",
+      "decided_by": "human",
+      "escalation": "No candidate matches and none of Step 5's reasons explains the absence: the web search confirms Rwampara is a district in Uganda's Western Region (Wikipedia \"Rwampara district\", recent coverage of presidential visits), though its summary focused on a conflict-database entry; from general knowledge it was carved out of Mbarara District in 2019. Mbarara District still exists in GeoNames (443355, claimed by UG-410), so this is a split, not a retirement, and every GeoNames district in Uganda is already claimed. This resembles the earlier UG-236, UG-237, UG-333 to UG-337 and UG-432 to UG-434 rulings (post-2018 splits, all added).",
+      "wikidata_seen": null
+    },
+    "VN-03": {
+      "id": null,
+      "reason": "Hà Giang Province was merged into Tuyên Quang Province in Vietnam's July 2025 provincial reorganization (63 to 34 provinces); GeoNames has only the successor Tuyên Quang record (13494365, claimed by VN-07) and no record of the retired Hà Giang province, only its former capital city (1905025) at level 2.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 1581030
+    },
+    "VN-06": {
+      "id": null,
+      "reason": "Yên Bái Province was merged into Lào Cai Province in Vietnam's July 2025 provincial reorganization (63 to 34 provinces); GeoNames has only the successor Lào Cai record (13494334, claimed by VN-02) and no record of the retired Yên Bái province, only its former capital city (1905660) at level 2.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 1559978
+    },
+    "VN-14": {
+      "id": null,
+      "reason": "Hòa Bình Province was merged with Vĩnh Phúc into Phú Thọ Province in Vietnam's July 2025 provincial reorganization (63 to 34 provinces); GeoNames has only the successor Phú Thọ record (13494345, claimed by VN-68) and no record of the retired Hòa Bình province, only its former capital city (1905015) at level 2.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 1572594
+    },
+    "VN-20": {
+      "id": null,
+      "reason": "Thái Bình Province was merged into Hưng Yên Province in Vietnam's July 2025 provincial reorganization (63 to 34 provinces); GeoNames has only the successor Hưng Yên record (13494347, claimed by VN-66) and no record of the retired Thái Bình province, only its former capital city (1905068) at level 2.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 1566338
+    },
+    "VN-24": {
+      "id": null,
+      "reason": "Quảng Bình Province was merged into Quảng Trị Province in Vietnam's July 2025 provincial reorganization (63 to 34 provinces); GeoNames has only the successor Quảng Trị record (13494350, claimed by VN-25) and no record of the retired Quảng Bình province (8473912 is the unrelated Quang Bình district of former Hà Giang).",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 1568839
+    },
+    "VN-27": {
+      "id": null,
+      "reason": "Quảng Nam Province was merged into Đà Nẵng City in Vietnam's July 2025 provincial reorganization (63 to 34 provinces); GeoNames has only the successor Đà Nẵng record (13494351, which covers old Đà Nẵng plus Quảng Nam and belongs with VN-DN) and no record of the retired Quảng Nam province itself.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 1905516
+    },
+    "VN-28": {
+      "id": null,
+      "reason": "Kon Tum Province was merged into Quảng Ngãi Province in Vietnam's July 2025 provincial reorganization (63 to 34 provinces); GeoNames has only the successor Quảng Ngãi record (13494352, claimed by VN-29) and no record of the retired Kon Tum province, only its former capital Kon Tum City (1905606) at level 2.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 1565088
+    },
+    "VN-31": {
+      "id": null,
+      "reason": "Retired by Vietnam's July 2025 provincial reorganization, which merged Bình Định into Gia Lai; GeoNames has only the successor Gia Lai province (13494353, claimed by VN-30) and no record for Bình Định itself.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 1587871
+    },
+    "VN-32": {
+      "id": null,
+      "reason": "Retired by Vietnam's 2025 provincial reorganization, which merged Phú Yên into Đắk Lắk (resolution of June 12, 2025); GeoNames has only the successor Đắk Lắk province (13494355, claimed by VN-33) and no record for Phú Yên itself.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 1569805
+    },
+    "VN-36": {
+      "id": null,
+      "reason": "Retired by Vietnam's July 2025 provincial reorganization, which merged Ninh Thuận into Khánh Hòa; GeoNames has only the successor Khánh Hòa province (13494354, claimed by VN-34) and no record for Ninh Thuận itself.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 1559971
+    },
+    "VN-40": {
+      "id": null,
+      "reason": "Retired by Vietnam's July 2025 provincial reorganization, which merged Bình Thuận (with Đắk Nông) into Lâm Đồng; GeoNames has only the successor Lâm Đồng province (13494356, claimed by VN-35) and no record for Bình Thuận itself.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 1581882
+    },
+    "VN-41": {
+      "id": null,
+      "reason": "Retired by Vietnam's July 2025 provincial reorganization, which merged Long An into Tây Ninh; GeoNames has only the successor Tây Ninh province (13494359, claimed by VN-37) and no record for Long An itself.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 1575788
+    },
+    "VN-43": {
+      "id": null,
+      "reason": "Retired by Vietnam's July 2025 provincial reorganization, which merged Bà Rịa–Vũng Tàu (with Bình Dương) into Ho Chi Minh City; GeoNames has only the enlarged successor Ho Chi Minh City (13494358) and no record for Bà Rịa–Vũng Tàu itself.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 1584534
+    },
+    "VN-46": {
+      "id": null,
+      "reason": "Retired by Vietnam's July 2025 provincial reorganization, which merged Tiền Giang into Đồng Tháp; GeoNames has only the successor Đồng Tháp province (13494360, claimed by VN-45) and no record for Tiền Giang itself.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 1564676
+    },
+    "VN-47": {
+      "id": null,
+      "reason": "Retired by Vietnam's July 2025 provincial reorganization, which merged Kiên Giang (ISO's \"Kiến Giang\") into An Giang; GeoNames has only the successor An Giang province (13494362, claimed by VN-44) and no record for Kiên Giang itself.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 1579008
+    },
+    "VN-50": {
+      "id": null,
+      "reason": "Retired by Vietnam's July 2025 provincial reorganization, which merged Bến Tre (with Trà Vinh) into Vĩnh Long; GeoNames has only the successor Vĩnh Long province (13494361, claimed by VN-49) and no record for Bến Tre itself.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 1587974
+    },
+    "VN-51": {
+      "id": null,
+      "reason": "Retired by Vietnam's 2025 provincial reorganization, which dissolved Trà Vinh and merged it into Vĩnh Long (resolution of June 12, 2025); GeoNames has only the successor Vĩnh Long province (13494361, claimed by VN-49) and Trà Vinh city (1904913, a level-2 unit), but no record for Trà Vinh province itself.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 1559975
+    },
+    "VN-52": {
+      "id": null,
+      "reason": "Retired by Vietnam's July 2025 provincial reorganization, which merged Sóc Trăng (with Hậu Giang) into Cần Thơ city; GeoNames has only the enlarged successor Cần Thơ (13494363) and Sóc Trăng city (1904921, a level-2 unit), but no record for Sóc Trăng province itself.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 1559972
+    },
+    "VN-53": {
+      "id": null,
+      "reason": "Retired by Vietnam's July 2025 provincial reorganization, which merged Bắc Kạn into Thái Nguyên; GeoNames has only the successor Thái Nguyên province (13494335, claimed by VN-69) and Bắc Kạn town (1905866, a level-2 unit), but no record for Bắc Kạn province itself.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 1905669
+    },
+    "VN-54": {
+      "id": null,
+      "reason": "Bắc Giang province was merged into Bắc Ninh province on 12 June 2025; ISO still lists VN-54, but GeoNames only has the successor Bac Ninh (13494344, claimed by VN-56) and no record for the retired province itself.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 1905419
+    },
+    "VN-55": {
+      "id": null,
+      "reason": "Bạc Liêu province was merged into Cà Mau province in June 2025 (Bạc Liêu is now a ward of Cà Mau); ISO still lists VN-55, but GeoNames only has the successor Ca Mau (13494364, claimed by VN-59) and no record for the retired province itself.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 1905675
+    },
+    "VN-57": {
+      "id": null,
+      "reason": "Bình Dương is a former province, merged into Ho Chi Minh City (together with Bà Rịa–Vũng Tàu) in June 2025; ISO still lists VN-57, but GeoNames only has the enlarged successor Ho Chi Minh City (13494358) and no record for the retired province itself.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 1905475
+    },
+    "VN-58": {
+      "id": null,
+      "reason": "Bình Phước province was incorporated into Đồng Nai province on 12 June 2025; ISO still lists VN-58, but GeoNames only has the successor Dong Nai (13494357, claimed by VN-39) and no record for the retired province itself.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 1905480
+    },
+    "VN-61": {
+      "id": null,
+      "reason": "Hải Dương province was merged into Hải Phòng city in June 2025; ISO still lists VN-61, but GeoNames only has the successor Hai Phong (13494346, claimed by VN-HP) and no record for the retired province itself.",
+      "decided_by": "human",
+      "escalation": "No candidate matches and the web search did not confirm a Step 5 reason: the search only described Hải Dương city (Thành Phố Hải Dương, 1905687, a level-2 city, not the province) and did not mention VN-61 or any reorganization. From general knowledge, Hải Dương province was merged into Hải Phòng city in June 2025 as part of Vietnam's 63→34 province consolidation (as with VN-54/55/57/58 this session), and GeoNames only has the new-series successor Hai Phong (13494346, claimed by VN-HP); if so, reason 3 (retired by reorganization) would apply, but the search did not show it.",
+      "wikidata_seen": 1905686
+    },
+    "VN-63": {
+      "id": null,
+      "reason": "Hà Nam province was dissolved and merged into Ninh Bình province on 12 June 2025; ISO still lists VN-63, but GeoNames only has the successor Ninh Binh (13494348, claimed by VN-18) and no record for the retired province itself.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 1905637
+    },
+    "VN-67": {
+      "id": null,
+      "reason": "Nam Định province was incorporated, together with Hà Nam, into Ninh Bình province on 12 June 2025; ISO still lists VN-67, but GeoNames only has the successor Ninh Binh (13494348, claimed by VN-18) and no record for the retired province itself.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 1905626
+    },
+    "VN-70": {
+      "id": null,
+      "reason": "Vĩnh Phúc province was merged into Phú Thọ province in June 2025; ISO still lists VN-70, but GeoNames only has the successor Phu Tho (13494345, claimed by VN-68) and no record for the retired province itself.",
+      "decided_by": "human",
+      "escalation": "No candidate matches and the web search did not confirm a Step 5 reason: the search described Vĩnh Phúc province (capital Vĩnh Yên, 2025 population 1,347,578) but did not mention any reorganization. From general knowledge, Vĩnh Phúc was merged into Phú Thọ province in June 2025 in Vietnam's 63→34 consolidation, and GeoNames only has the new-series successor Phu Tho (13494345, claimed by VN-68); if so, reason 3 (retired by reorganization) would apply, the same as VN-61 Hải Dương, which the user ruled on earlier this session.",
+      "wikidata_seen": 1905856
+    },
+    "VN-72": {
+      "id": null,
+      "reason": "Đắk Nông province was merged into Lâm Đồng province in June 2025; ISO still lists VN-72, but GeoNames only has the successor Lam Dong (13494356, claimed by VN-35) and no record for the retired province itself.",
+      "decided_by": "human",
+      "escalation": "No candidate matches and the web search did not confirm a Step 5 reason: the search described Đắk Nông province (Central Highlands, capital Gia Nghĩa, 6,509 km²) but did not mention any reorganization. The only related record is the capital city Thành Phố Gia Nghĩa (8746512, level 2). From general knowledge, Đắk Nông was merged into Lâm Đồng province (together with Bình Thuận) in June 2025 in Vietnam's 63→34 consolidation, and GeoNames only has the new-series successor Lam Dong (13494356, claimed by VN-35); if so, reason 3 (retired by reorganization) would apply, the same as VN-61 Hải Dương and VN-70 Vĩnh Phúc, which the user ruled on earlier this session.",
+      "wikidata_seen": 1904987
+    },
+    "VN-73": {
+      "id": null,
+      "reason": "Hậu Giang province was dissolved and merged into Cần Thơ on 12 June 2025; ISO still lists VN-73, but GeoNames only has the enlarged successor Can Tho City (13494363) and no record for the retired province itself.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 7506719
+    },
+    "VN-CT": {
+      "id": 13494363,
+      "reason": "Can Tho City (Cần Thơ) is the GeoNames level-1 record for the centrally governed municipality of Cần Thơ; \"City\" is its official form (thành phố trực thuộc trung ương), not a separate city, matching how Hanoi and Hai Phong map to VN-HN and VN-HP.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 1581188
+    },
+    "VN-DN": {
+      "id": 13494351,
+      "reason": "Da Nang City (Đà Nẵng) is the GeoNames level-1 record for the centrally governed municipality of Đà Nẵng; \"City\" is its official form (thành phố trực thuộc trung ương), not a separate city, matching how Hanoi and Hai Phong map to VN-HN and VN-HP.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 1905468
+    },
+    "VN-SG": {
+      "id": 13494358,
+      "reason": "Ho Chi Minh City (Thành phố Hồ Chí Minh) is the GeoNames level-1 record for the centrally governed municipality of Hồ Chí Minh; \"City\" is its official form (thành phố trực thuộc trung ương), not a separate city, matching how Hanoi and Hai Phong map to VN-HN and VN-HP.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 1566083
+    },
+    "AZ-LA": {
+      "id": 409418,
+      "reason": "AZ-LA is the city (municipality) of Lənkəran, and \"Lankaran Sahari\" is Lənkəran Şəhəri, literally \"Lənkəran City\"; the other record, 147613 Lənkəran, is the surrounding Lənkəran District (ISO AZ-LAN).",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "AZ-LAN": {
+      "id": 147613,
+      "reason": "AZ-LAN is Lənkəran District (rayon), and 147613 Lənkəran is the GeoNames rayon record; the city, Lankaran Sahari (409418), is already matched to AZ-LA.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "EE-917": {
+      "id": 7522483,
+      "reason": "EE-917 is the rural municipality of Võru, and 7522483 \"Võru vald, Võru Parish\" is that same rural municipality (vald = rural municipality/parish), distinct from Võru town (linn).",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "EE-919": {
+      "id": 7522484,
+      "reason": "EE-919 is the urban municipality of Võru, and 7522484 \"Võru linn\" is that same municipality; \"linn\" (town) is just the Estonian form of the urban municipality's name, not a different kind of place.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "EE-897": {
+      "id": 7522477,
+      "reason": "EE-897 is the urban municipality of Viljandi, and 7522477 \"Viljandi linn\" is that same municipality; \"linn\" (town) is the Estonian form of an urban municipality's name, while Viljandi vald (11054708) is the separate rural municipality.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "EE-899": {
+      "id": 11054708,
+      "reason": "EE-899 is the rural municipality of Viljandi, and 11054708 \"Viljandi vald\" is that same rural municipality (vald = rural municipality), distinct from Viljandi town (linn, EE-897).",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "EE-661": {
+      "id": 7522422,
+      "reason": "EE-661 is the rural municipality of Rakvere, and 7522422 \"Rakvere vald\" is that same rural municipality (vald = rural municipality), distinct from Rakvere town (linn).",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "EE-663": {
+      "id": 7522423,
+      "reason": "Rakvere linn is the official Estonian name of the Rakvere urban municipality (\"linn\" is the standard designation for Estonian urban municipalities), distinct from the surrounding Rakvere vald held by EE-661.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "EE-793": {
+      "id": 7522434,
+      "reason": "Tartu linn is the official Estonian name of the Tartu urban municipality, distinct from Tartu vald (the rural parish) and Tartu maakond (the county held by EE-79).",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "EE-796": {
+      "id": 7522391,
+      "reason": "Tartu vald is the official Estonian name of the Tartu rural municipality (\"vald\" designates Estonian rural municipalities); the urban Tartu linn went to EE-793.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "GB-HEF": {
+      "id": 2647071,
+      "reason": "Exact name match: Herefordshire is the unitary authority itself, while Hertfordshire is a different English county.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "GB-HRT": {
+      "id": 2647043,
+      "reason": "Exact name match: Hertfordshire (Welsh Swydd Hertford) is the two-tier county itself, distinct from Herefordshire.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "KR-29": {
+      "id": 1841808,
+      "reason": "Gwangju-gwangyeoksi is the romanization of 광주광역시 (Gwangju Metropolitan City), listed as an alias of this level-1 record, not the Gyeonggi-do city of Gwangju-si.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "KR-11": {
+      "id": 1835847,
+      "reason": "Seoul-teukbyeolsi is the romanization of 서울특별시 (Seoul Special City), listed as an alias of this level-1 record.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": 1835848
+    },
+    "KR-26": {
+      "id": 1838519,
+      "reason": "Busan-gwangyeoksi is the romanization of 부산광역시 (Busan Metropolitan City), listed as an alias of this level-1 record.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "MG-D": {
+      "id": null,
+      "reason": "GeoNames uses Madagascar's 22 regions (Antsiranana province's territory is split into Diana and Sava), not ISO's 6 provinces, so Antsiranana province has no GeoNames record; Antsiranana I/II are districts covering only the city.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "PE-CAL": {
+      "id": 3946080,
+      "reason": "El Callao is ISO's form of the Constitutional Province/Region of Callao (Quechua Qallaw Suyu), Peru's level-1 region around the port city.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "TW-TNN": {
+      "id": 1668352,
+      "reason": "Tainan (台南市/臺南市) is the special municipality itself; GeoNames places it at level 2 like New Taipei, Taoyuan and Taichung.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "UA-43": {
+      "id": 703883,
+      "reason": "Avtonomna Respublika Krym is the Ukrainian transliteration of Автономна Республіка Крим (Autonomous Republic of Crimea), listed as an alias of this record under Ukraine.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "LT-54": {
+      "id": 864514,
+      "reason": "Utena district municipality is GeoNames' level-2 Utena (LT.64.82), the municipality record under Utena County, not the level-1 Utena County record (864484) that automerge had matched by name.",
+      "decided_by": "human",
+      "escalation": "Found in an independent audit of the resolution map: bypassing Lithuania's counties moves its municipalities to level 1, where automerge's pool is GeoNames' county records, so LT-54 Utena exactly matched Utena County. The municipality's own record, 864514, was unclaimed.",
+      "wikidata_seen": 593670
     }
   },
   "wikidata_merge": {
@@ -4553,6 +6736,9 @@
       "DO-40": null,
       "DO-41": null,
       "DO-42": null,
+      "GW-L": null,
+      "GW-N": null,
+      "GW-S": null,
       "ID-JW": null,
       "ID-KA": null,
       "ID-ML": null,
@@ -4560,31 +6746,33 @@
       "ID-PP": null,
       "ID-SL": null,
       "ID-SM": null,
-      "IE-C": null,
-      "IE-L": null,
-      "IE-M": null,
-      "IE-U": null,
-      "IS-1": null,
-      "IS-2": null,
-      "IS-3": null,
-      "IS-4": null,
-      "IS-5": null,
-      "IS-6": null,
-      "IS-7": null,
-      "IS-8": null,
-      "LT-AL": null,
-      "LT-KL": null,
-      "LT-KU": null,
-      "LT-MR": null,
-      "LT-PN": null,
-      "LT-SA": null,
-      "LT-TA": null,
-      "LT-TE": null,
-      "LT-UT": null,
-      "LT-VL": null,
-      "MW-C": null,
-      "MW-N": null,
-      "MW-S": null
+      "IE-C": 7521313,
+      "IE-L": 7521314,
+      "IE-M": 7521315,
+      "IE-U": 7521316,
+      "IS-1": 3426182,
+      "IS-2": 3426183,
+      "IS-3": 3426184,
+      "IS-4": 3426185,
+      "IS-5": 3337403,
+      "IS-6": 3337404,
+      "IS-7": 3337405,
+      "IS-8": 3337406,
+      "LT-AL": 864389,
+      "LT-KL": 864478,
+      "LT-KU": 864477,
+      "LT-MR": 864479,
+      "LT-PN": 864480,
+      "LT-SA": 864481,
+      "LT-TA": 864482,
+      "LT-TE": 864483,
+      "LT-UT": 864484,
+      "LT-VL": 864485,
+      "MH-L": null,
+      "MH-T": null,
+      "MW-C": 931597,
+      "MW-N": 924591,
+      "MW-S": 923817
     },
     "resolutions": {
       "AD-07": {
@@ -5297,10 +7485,6 @@
       },
       "LI-11": {
         "id": 3042031,
-        "margin": 25
-      },
-      "LT-54": {
-        "id": 864484,
         "margin": 25
       },
       "LU-WI": {
@@ -6020,422 +8204,12 @@
       "SG-05"
     ],
     "orphans": {
-      "no_candidates": [
-        "BI-KR",
-        "BI-MW",
-        "ET-SN",
-        "FI-01",
-        "GD-10",
-        "IT-CA",
-        "IT-GE",
-        "IT-VE",
-        "KN-K",
-        "KN-N",
-        "LT-20",
-        "MH-AUR",
-        "MH-ENI",
-        "MH-JAB",
-        "MH-LIK",
-        "MH-MAJ",
-        "MH-MEJ",
-        "MH-NMU",
-        "MH-RON",
-        "MH-UTI",
-        "MH-WTH",
-        "MH-WTJ",
-        "NL-AW",
-        "NL-BQ1",
-        "NL-BQ2",
-        "NL-BQ3",
-        "NL-CW",
-        "NL-SX",
-        "US-AS",
-        "US-GU",
-        "US-MP",
-        "US-PR",
-        "US-UM",
-        "US-VI"
-      ],
-      "no_matches": [
-        "AO-CCU",
-        "AZ-MI",
-        "AZ-SA",
-        "AZ-YE",
-        "CI-AB",
-        "CN-HK",
-        "CN-MO",
-        "CN-TW",
-        "DE-HH",
-        "EE-184",
-        "EE-296",
-        "EE-321",
-        "EE-424",
-        "EE-446",
-        "EE-511",
-        "EE-567",
-        "EE-624",
-        "EE-735",
-        "ET-SW",
-        "FR-971",
-        "FR-972",
-        "FR-973",
-        "FR-974",
-        "FR-976",
-        "FR-BL",
-        "FR-CP",
-        "FR-MF",
-        "FR-NC",
-        "FR-PF",
-        "FR-PM",
-        "FR-TF",
-        "FR-WF",
-        "FR-69M",
-        "FR-6AE",
-        "GB-ABE",
-        "GB-BDG",
-        "GB-BEN",
-        "GB-BEX",
-        "GB-BNE",
-        "GB-BRY",
-        "GB-CMD",
-        "GB-CRY",
-        "GB-EAL",
-        "GB-EDH",
-        "GB-ENF",
-        "GB-GLG",
-        "GB-GRE",
-        "GB-HAV",
-        "GB-HCK",
-        "GB-HIL",
-        "GB-HMF",
-        "GB-HNS",
-        "GB-HRW",
-        "GB-HRY",
-        "GB-ISL",
-        "GB-KEC",
-        "GB-KTT",
-        "GB-LBH",
-        "GB-LEW",
-        "GB-LND",
-        "GB-MRT",
-        "GB-NWM",
-        "GB-RDB",
-        "GB-RIC",
-        "GB-STN",
-        "GB-SWK",
-        "GB-TWH",
-        "GB-WFT",
-        "GB-WND",
-        "GB-WSM",
-        "GQ-C",
-        "GQ-I",
-        "GQ-DJ",
-        "GW-L",
-        "GW-N",
-        "GW-S",
-        "ID-JK",
-        "ID-PT",
-        "IE-WD",
-        "IS-AKU",
-        "IS-ARN",
-        "IS-GAR",
-        "IS-GOG",
-        "IS-GRY",
-        "IS-HAF",
-        "IS-HRG",
-        "IS-HRU",
-        "IS-HUG",
-        "IS-HVA",
-        "IS-ISA",
-        "IS-KAL",
-        "IS-KJO",
-        "IS-KOP",
-        "IS-LAN",
-        "IS-MOS",
-        "IS-MUL",
-        "IS-MYR",
-        "IS-NOR",
-        "IS-RHH",
-        "IS-RKN",
-        "IS-RKV",
-        "IS-SBT",
-        "IS-SDV",
-        "IS-SEL",
-        "IS-SHF",
-        "IS-SKF",
-        "IS-SKG",
-        "IS-SKO",
-        "IS-SNF",
-        "IS-SOG",
-        "IS-SOL",
-        "IS-STY",
-        "IS-TAL",
-        "IS-THG",
-        "IS-VEM",
-        "IS-VER",
-        "IS-VOP",
-        "KG-GO",
-        "LT-04",
-        "LT-05",
-        "LT-09",
-        "LT-11",
-        "LT-19",
-        "LT-22",
-        "LT-23",
-        "LT-26",
-        "LT-34",
-        "LT-36",
-        "LT-38",
-        "LT-40",
-        "LT-42",
-        "LT-45",
-        "LT-47",
-        "LT-48",
-        "LT-49",
-        "LT-52",
-        "LT-59",
-        "LT-60",
-        "MC-LA",
-        "MC-MA",
-        "MC-MC",
-        "MC-MG",
-        "MC-MO",
-        "MC-MU",
-        "MC-PH",
-        "MC-SD",
-        "MC-SO",
-        "MC-SP",
-        "MC-SR",
-        "MC-VR",
-        "MG-A",
-        "MG-F",
-        "MG-M",
-        "MG-T",
-        "MG-U",
-        "MH-L",
-        "MH-T",
-        "MK-803",
-        "MK-815",
-        "MR-13",
-        "MR-14",
-        "MU-CC",
-        "MY-14",
-        "NO-21",
-        "NO-22",
-        "NO-30",
-        "NO-38",
-        "NO-54",
-        "NP-P4",
-        "NP-P6",
-        "NP-P7",
-        "NZ-CIT",
-        "PS-GZA",
-        "PS-HBN",
-        "PS-JEM",
-        "PS-JEN",
-        "PS-NBS",
-        "PS-RBH",
-        "PS-RFH",
-        "PS-SLT",
-        "PS-TKM",
-        "QA-DA",
-        "QA-MS",
-        "QA-RA",
-        "QA-SH",
-        "RO-B",
-        "RS-25",
-        "RS-26",
-        "RS-27",
-        "RS-28",
-        "RS-29",
-        "RS-08",
-        "RS-09",
-        "RS-10",
-        "RS-12",
-        "RS-13",
-        "RS-15",
-        "RS-16",
-        "RS-17",
-        "RS-18",
-        "RS-19",
-        "RS-21",
-        "RS-22",
-        "RS-23",
-        "RS-24",
-        "RS-KM",
-        "SI-052",
-        "SI-096",
-        "SM-07",
-        "ST-01",
-        "ST-02",
-        "ST-03",
-        "TH-10",
-        "TH-S",
-        "TW-HSZ",
-        "TW-KHH",
-        "TW-TXG",
-        "UG-126",
-        "UG-235",
-        "UG-236",
-        "UG-237",
-        "UG-333",
-        "UG-334",
-        "UG-335",
-        "UG-336",
-        "UG-337",
-        "UG-432",
-        "UG-433",
-        "UG-434",
-        "UG-435",
-        "VN-03",
-        "VN-06",
-        "VN-14",
-        "VN-20",
-        "VN-24",
-        "VN-27",
-        "VN-28",
-        "VN-31",
-        "VN-32",
-        "VN-36",
-        "VN-40",
-        "VN-41",
-        "VN-43",
-        "VN-46",
-        "VN-47",
-        "VN-50",
-        "VN-51",
-        "VN-52",
-        "VN-53",
-        "VN-54",
-        "VN-55",
-        "VN-57",
-        "VN-58",
-        "VN-61",
-        "VN-63",
-        "VN-67",
-        "VN-70",
-        "VN-72",
-        "VN-73",
-        "VN-CT",
-        "VN-DN",
-        "VN-SG"
-      ],
-      "ambiguity": [
-        {
-          "iso_code": "AZ-LA",
-          "candidate_geonames_ids": [
-            409418,
-            147613
-          ]
-        },
-        {
-          "iso_code": "AZ-LAN",
-          "candidate_geonames_ids": [
-            409418,
-            147613
-          ]
-        },
-        {
-          "iso_code": "EE-917",
-          "candidate_geonames_ids": [
-            7522483
-          ]
-        },
-        {
-          "iso_code": "EE-919",
-          "candidate_geonames_ids": [
-            7522483
-          ]
-        },
-        {
-          "iso_code": "EE-897",
-          "candidate_geonames_ids": [
-            11054708
-          ]
-        },
-        {
-          "iso_code": "EE-899",
-          "candidate_geonames_ids": [
-            11054708
-          ]
-        },
-        {
-          "iso_code": "EE-661",
-          "candidate_geonames_ids": [
-            7522422
-          ]
-        },
-        {
-          "iso_code": "EE-663",
-          "candidate_geonames_ids": [
-            7522422
-          ]
-        },
-        {
-          "iso_code": "EE-793",
-          "candidate_geonames_ids": [
-            7522391
-          ]
-        },
-        {
-          "iso_code": "EE-796",
-          "candidate_geonames_ids": [
-            7522391
-          ]
-        },
-        {
-          "iso_code": "GB-HEF",
-          "candidate_geonames_ids": [
-            2647043,
-            2647071
-          ]
-        },
-        {
-          "iso_code": "GB-HRT",
-          "candidate_geonames_ids": [
-            2647043,
-            2647071
-          ]
-        }
-      ],
-      "low_margin": [
-        {
-          "iso_code": "KR-29",
-          "candidate_geonames_id": 1841808,
-          "margin": 2
-        },
-        {
-          "iso_code": "KR-11",
-          "candidate_geonames_id": 1835847,
-          "margin": 1
-        },
-        {
-          "iso_code": "KR-26",
-          "candidate_geonames_id": 1838519,
-          "margin": 1
-        },
-        {
-          "iso_code": "MG-D",
-          "candidate_geonames_id": 7670857,
-          "margin": 1
-        },
-        {
-          "iso_code": "PE-CAL",
-          "candidate_geonames_id": 3946080,
-          "margin": 0
-        },
-        {
-          "iso_code": "TW-TNN",
-          "candidate_geonames_id": 7280291,
-          "margin": 3
-        },
-        {
-          "iso_code": "UA-43",
-          "candidate_geonames_id": 703883,
-          "margin": 3
-        }
-      ],
-      "wikidata_conflict": []
+      "no_candidates": [],
+      "no_matches": [],
+      "ambiguity": [],
+      "low_margin": [],
+      "wikidata_conflict": [],
+      "grouping_twin": []
     }
   }
 }

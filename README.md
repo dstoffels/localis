@@ -5,7 +5,7 @@ Fast, offline access to comprehensive data for **countries**, **subdivisions**, 
 ## Features
 
 - 🌍 **281 countries** (31 historic) sourced and merged from ISO 3166-1, ISO 3166-3, and GeoNames
-- 🗺️ **51,803 subdivisions** sourced and merged from ISO 3166-2 and GeoNames
+- 🗺️ **51,711 subdivisions** sourced and merged from ISO 3166-2 and GeoNames
 - 🏙️ **235,914 cities** sourced from GeoNames cities500.txt
 - 🔍 **Search Engine** for typo-tolerant lookups with 99%+ accuracy
 - 📌 **Aliases** - support for colloquial, historic and alternate names
@@ -375,7 +375,7 @@ All registries and their indexes are lazy-loaded on first use, incurring a cold 
 | Search index | ~2ms | ~700KB |
 | **Combined** | **~4ms** | **~1.4MB** |
 
-#### Subdivisions (51,803)
+#### Subdivisions (51,711)
 | Component | Load Time | Memory |
 |---|---|---|
 | Dataset | ~102ms | 27.0MB |
