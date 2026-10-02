@@ -7,8 +7,8 @@ import localis
 from tests.utils import mangle
 import random
 
-ITERATIONS = 50
-SAMPLE_SIZE = 50
+ITERATIONS = 10
+SAMPLE_SIZE = 5000
 
 FAILURES_LOG_PATH = "tests/analysis/search_failures.log"
 
@@ -83,8 +83,10 @@ def benchmark():
 
                 for entry in sample:
                     q = entry.name
-                    if isinstance(entry, localis.City) and entry.admin1:
-                        q += f" {entry.admin1.name}"
+                    if isinstance(entry, localis.City):
+                        admin1 = next((s for s in entry.subdivisions if s.admin_level == 1), None)
+                        if admin1:
+                            q += f" {admin1.name}"
                     search(q, entry, "name")
 
                     aliases = getattr(entry, "aliases", None)

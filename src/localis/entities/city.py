@@ -7,8 +7,7 @@ from .subdivision import SubdivisionBase
 @dataclass(slots=True)
 class City(Entity):
     geonames_id: int
-    admin1: SubdivisionBase | None
-    admin2: SubdivisionBase | None
+    subdivisions: list[SubdivisionBase]
     country: CountryBase
     population: int
     lat: float

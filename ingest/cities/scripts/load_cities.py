@@ -61,6 +61,19 @@ def filter_names(row: dict[str, str]) -> tuple[str, str]:
     return name, "|".join(result)
 
 
+def resolve_subdivision_chain(
+    admin1: SubdivisionModel | None, admin2: SubdivisionModel | None
+) -> list[SubdivisionModel]:
+    """Walks the parent chain from the deepest resolved subdivision up to its root, ascending-admin_level ordered."""
+    chain: list[SubdivisionModel] = []
+    sub = admin2 or admin1
+    while sub is not None:
+        chain.append(sub)
+        sub = sub.parent
+    chain.reverse()
+    return chain
+
+
 def parse_row(
     row: dict[str, str],
     subdivisions: dict[str, SubdivisionModel],
@@ -101,8 +114,7 @@ def parse_row(
         id=0,  # to be set before dump
         geonames_id=int(geonames_id),
         name=name,
-        admin1=admin1,
-        admin2=admin2,
+        subdivisions=resolve_subdivision_chain(admin1, admin2),
         country=country,
         population=int(population),
         lat=float(lat),

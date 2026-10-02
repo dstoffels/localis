@@ -22,14 +22,11 @@ class CityView(CrossReferencedView[City, CityStore, CountryView, SubdivisionView
         return self._store.geonames_ids[self._idx]
 
     @property
-    def admin1(self) -> SubdivisionView | None:
-        aid = self._store.admin1_ids[self._idx]
-        return self._subdivision_views.get(aid) if aid != -1 else None
-
-    @property
-    def admin2(self) -> SubdivisionView | None:
-        aid = self._store.admin2_ids[self._idx]
-        return self._subdivision_views.get(aid) if aid != -1 else None
+    def subdivisions(self) -> list[SubdivisionView]:
+        offset = self._store.subdivision_offsets[self._idx]
+        count = self._store.subdivision_counts[self._idx]
+        blob = self._store.subdivision_id_blob
+        return [self._subdivision_views[sid] for sid in blob[offset : offset + count]]
 
     @property
     def country(self) -> CountryView:
@@ -50,37 +47,23 @@ class CityView(CrossReferencedView[City, CityStore, CountryView, SubdivisionView
         return self._store.lngs[self._idx]
 
     def to_entity(self) -> City:
-        admin1 = self.admin1
-        admin2 = self.admin2
         country = self.country
         return City(
             id=self.id,
             name=self.name,
             geonames_id=self.geonames_id,
-            admin1=(
+            subdivisions=[
                 SubdivisionBase(
-                    id=admin1.id,
-                    name=admin1.name,
-                    geonames_code=admin1.geonames_code,
-                    geonames_id=admin1.geonames_id,
-                    iso_code=admin1.iso_code,
-                    type=admin1.type,
+                    id=s.id,
+                    name=s.name,
+                    geonames_code=s.geonames_code,
+                    geonames_id=s.geonames_id,
+                    iso_code=s.iso_code,
+                    type=s.type,
+                    admin_level=s.admin_level,
                 )
-                if admin1
-                else None
-            ),
-            admin2=(
-                SubdivisionBase(
-                    id=admin2.id,
-                    name=admin2.name,
-                    geonames_code=admin2.geonames_code,
-                    geonames_id=admin2.geonames_id,
-                    iso_code=admin2.iso_code,
-                    type=admin2.type,
-                )
-                if admin2
-                else None
-            ),
+                for s in self.subdivisions
+            ],
             country=CountryBase(
                 id=country.id,
                 name=country.name,
@@ -103,6 +86,7 @@ class CityView(CrossReferencedView[City, CityStore, CountryView, SubdivisionView
     ) -> dict[int, "CityView"]:
         store = CityStore()
         views: dict[int, CityView] = {}
+        idx = 0
 
         with open(filepath, "r", encoding="utf-8") as f:
             for id, line in enumerate(f, start=1):
@@ -115,23 +99,22 @@ class CityView(CrossReferencedView[City, CityStore, CountryView, SubdivisionView
                 (
                     name,
                     geonames_id,
-                    admin1,
-                    admin2,
+                    subdivisions,
                     country,
                     pop,
                     lat,
                     lng,
                 ) = row
-                store.id_to_idx.append(len(store))
+                store.id_to_idx.append(idx)
                 store.append(
                     name,
                     int(geonames_id),
-                    int(admin1) if admin1 else None,
-                    int(admin2) if admin2 else None,
+                    [int(sid) for sid in subdivisions.split("|") if sid],
                     int(country),
                     int(pop),
                     float(lat),
                     float(lng),
                 )
                 views[id] = cls(id, store, country_views, subdivision_views)
+                idx += 1
         return views

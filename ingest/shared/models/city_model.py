@@ -7,8 +7,7 @@ from .subdivision_model import SubdivisionModel
 @dataclass(slots=True)
 class CityModel(Model):
     geonames_id: int
-    admin1: SubdivisionModel | None
-    admin2: SubdivisionModel | None
+    subdivisions: list[SubdivisionModel]
     country: CountryModel | None
     population: int
     lat: float
@@ -23,13 +22,10 @@ class CityModel(Model):
             "country.alpha3",
         ),
         "subdivision": (
-            "admin1.name",
-            "admin1.iso_suffix",
-            "admin1.iso_code",
-            "admin1.geonames_code",
-            "admin2.name",
-            "admin2.iso_code",
-            "admin2.geonames_code",
+            "subdivision_names",
+            "subdivision_iso_suffixes",
+            "subdivision_iso_codes",
+            "subdivision_geonames_codes",
         ),
     }
     SEARCH_FIELDS = {
@@ -41,10 +37,30 @@ class CityModel(Model):
         "country.alpha3": 0.3,
     }
 
+    @property
+    def admin1(self) -> SubdivisionModel | None:
+        """The city's admin_level=1 subdivision (state/province), the only level weighted in SEARCH_FIELDS; the rest of the chain is too noisy/bloating for the trigram index."""
+        return next((s for s in self.subdivisions if s.admin_level == 1), None)
+
+    @property
+    def subdivision_names(self) -> list[str]:
+        return [s.name for s in self.subdivisions]
+
+    @property
+    def subdivision_iso_suffixes(self) -> list[str]:
+        return [s.iso_suffix for s in self.subdivisions if s.iso_suffix]
+
+    @property
+    def subdivision_iso_codes(self) -> list[str]:
+        return [s.iso_code for s in self.subdivisions if s.iso_code]
+
+    @property
+    def subdivision_geonames_codes(self) -> list[str]:
+        return [s.geonames_code for s in self.subdivisions if s.geonames_code]
+
     def to_row(self) -> tuple[str | int | None]:
         data = self.to_dict()
-        data["admin1"] = self.admin1.id if self.admin1 else None
-        data["admin2"] = self.admin2.id if self.admin2 else None
+        data["subdivisions"] = "|".join(str(s.id) for s in self.subdivisions)
         data["country"] = self.country.id if self.country else None
         data.pop("id")
         return tuple(data.values())

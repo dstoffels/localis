@@ -67,6 +67,7 @@ class CountryView(View[Country, CountryStore]):
     def load(cls, filepath: Path) -> dict[int, "CountryView"]:
         store = CountryStore()
         views: dict[int, CountryView] = {}
+        idx = 0
         with open(filepath, "r", encoding="utf-8") as f:
             for id, line in enumerate(f, start=1):
                 row = line.rstrip("\r\n").split("\t")
@@ -85,7 +86,7 @@ class CountryView(View[Country, CountryStore]):
                 geonames_id = int(geonames_id_s) if geonames_id_s else None
                 numeric = int(numeric_s) if numeric_s else None
                 historic = cls._parse_historic(historic_s)
-                store.id_to_idx.append(len(store))
+                store.id_to_idx.append(idx)
                 store.append(
                     name,
                     alpha2,
@@ -98,6 +99,7 @@ class CountryView(View[Country, CountryStore]):
                     historic,
                 )
                 views[id] = cls(id, store)
+                idx += 1
         return views
 
     @staticmethod

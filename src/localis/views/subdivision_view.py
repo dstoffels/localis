@@ -69,8 +69,8 @@ class SubdivisionView(
             geonames_id=self.geonames_id,
             iso_code=self.iso_code,
             type=self.type,
-            aliases=self.aliases,
             admin_level=self.admin_level,
+            aliases=self.aliases,
             parent=(
                 SubdivisionBase(
                     id=parent.id,
@@ -79,6 +79,7 @@ class SubdivisionView(
                     geonames_id=parent.geonames_id,
                     iso_code=parent.iso_code,
                     type=parent.type,
+                    admin_level=parent.admin_level,
                 )
                 if parent
                 else None
@@ -98,6 +99,7 @@ class SubdivisionView(
     ) -> dict[int, "SubdivisionView"]:
         store = SubdivisionStore()
         views: dict[int, SubdivisionView] = {}
+        idx = 0
         with open(filepath, "r", encoding="utf-8") as f:
             for id, line in enumerate(f, start=1):
                 row = line.rstrip("\r\n").split("\t")
@@ -117,7 +119,7 @@ class SubdivisionView(
                 admin_level = int(admin_level_s)
                 parent_id = int(parent_s) if parent_s else None
                 country_id = int(country_s)
-                store.id_to_idx.append(len(store))
+                store.id_to_idx.append(idx)
                 store.append(
                     name,
                     geonames_code,
@@ -130,4 +132,5 @@ class SubdivisionView(
                     country_id,
                 )
                 views[id] = cls(id, store, country_views, views)
+                idx += 1
         return views

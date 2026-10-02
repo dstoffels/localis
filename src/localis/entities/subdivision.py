@@ -9,11 +9,11 @@ class SubdivisionBase(Entity):
     geonames_id: int | None
     iso_code: str | None
     type: str
+    admin_level: int
 
 
 @dataclass(slots=True)
 class Subdivision(SubdivisionBase):
     aliases: list[str]
-    admin_level: int
     parent: SubdivisionBase | None
     country: CountryBase

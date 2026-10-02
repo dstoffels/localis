@@ -74,7 +74,7 @@ class CityRegistry(Registry[City]):
     def set_population_threshold(self, threshold: int | None) -> None:
         self._population_threshold = threshold
         if threshold is not None:
-            self._population_filter = lambda row: int(row[5]) >= threshold
+            self._population_filter = lambda row: int(row[4]) >= threshold
         else:
             self._population_filter = None
             self._allowed_ids = None
