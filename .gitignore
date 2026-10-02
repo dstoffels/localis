@@ -91,8 +91,7 @@ ingest/*/inputs/*
 !ingest/cities/inputs/cities.manifest.json
 !ingest/shared/inputs/shared.manifest.json
 
-# ingest outputs: tracked by default (resolution decisions, orphan lists), except scratch files
-ingest/subdivisions/outputs/review_output.json
+# ingest outputs: tracked by default (resolution decisions, orphan lists)
 
 # ingest logs: tracked so each run's diagnostics are reviewable in the ingest PR
 !ingest/*/logs/*.log

@@ -35,13 +35,15 @@ def candidate_pool(
 
 
 def score_candidates(
-    iso_sub: SubdivisionModel, geo_subs: list[SubdivisionModel]
+    iso_sub: SubdivisionModel,
+    geo_subs: list[SubdivisionModel],
+    include_type_disqualified: bool = False,
 ) -> list[tuple[SubdivisionModel, float, int]]:
-    """Score every geo_sub candidate against iso_sub with the same rules auto-merge itself uses to decide a match: type-family disqualification, directional-mismatch exclusion, then the best-scoring name pair and its dynamic threshold. Returns (geo_sub, score, threshold_needed) for every non-disqualified candidate, best-first. A caller filters `score >= threshold_needed` for "would qualify for auto-merge"; the full ranked list is also what should be shown for manual review, since a sub-threshold entry is a near-miss, not a refusal."""
+    """Score every geo_sub candidate against iso_sub with the same rules auto-merge itself uses to decide a match: type-family disqualification, directional-mismatch exclusion, then the best-scoring name pair and its dynamic threshold. Returns (geo_sub, score, threshold_needed) for every non-disqualified candidate, best-first; include_type_disqualified keeps type-disqualified candidates too, for manual review where a type mismatch can be a naming difference rather than a different place. A caller filters `score >= threshold_needed` for "would qualify for auto-merge"; the full ranked list is also what should be shown for manual review, since a sub-threshold entry is a near-miss, not a refusal."""
     iso_names = prepare_names(iso_sub)
     scored: list[tuple[SubdivisionModel, float, int]] = []
     for geo_sub in geo_subs:
-        if is_type_disqualified(iso_sub, geo_sub):
+        if not include_type_disqualified and is_type_disqualified(iso_sub, geo_sub):
             continue
         best: tuple[float, int] | None = None
         for iso_name in iso_names:

@@ -1,3 +1,4 @@
+from typing import Literal
 from utils import *
 from mcp.server import MCPServer
 
@@ -6,13 +7,31 @@ mcp = MCPServer(name="resolve-subdivisions")
 MAX_CANDIDATES = 1000
 processed_candidates = 0
 batch_num = 0
+escalated_iso_code: str | None = None
+escalation_findings: str | None = None
+
+
+def _decided_by(iso_code: str) -> Literal["agent", "human"]:
+    """An orphan resolved after `review` escalated it was decided by the human."""
+    return "human" if iso_code == escalated_iso_code else "agent"
+
+
+def _escalation(iso_code: str) -> str | None:
+    return escalation_findings if iso_code == escalated_iso_code else None
+
+
+def _finish_orphan() -> None:
+    global batch_num, escalated_iso_code, escalation_findings
+    batch_num = 0
+    escalated_iso_code = None
+    escalation_findings = None
 
 
 @mcp.tool(name="next")
 def next() -> dict | str | None:
     """Returns the next orphaned subdivision and its candidates. Repeated calls paginate through the candidates until all candidates have been processed.
 
-    Candidates are flat formatted: { geonames_id: "name1, name2 - [admin_level]", ... }
+    Candidates are flat formatted: { geonames_id: "name1, name2 - [admin_level] CLAIMED BY <iso_code> (note)", ... }, where "CLAIMED BY" and the note appear only when they apply.
     """
     global processed_candidates, batch_num
 
@@ -40,11 +59,12 @@ def next() -> dict | str | None:
 
 
 @mcp.tool(name="merge")
-def merge(candidate_geonames_id: str) -> str:
+def merge(candidate_geonames_id: str, reason: str | None = None) -> str:
     """Merges an orphaned subdivision into an existing country candidate.
 
     Args:
         candidate_geonames_id (str): The geonames_id of the geonames subdivision to merge into.
+        reason (str, optional): Why this candidate is the same place, when it isn't evident from the names alone (e.g. a former name, or the user's explanation after a review).
     """
     orphan = get_next_orphan()
     if orphan is None:
@@ -61,53 +81,49 @@ def merge(candidate_geonames_id: str) -> str:
     candidate = get_geonames_submap().get(geonames_id=geonames_id)
     candidate.iso_code = iso_code
 
-    write_resolution(iso_code, geonames_id)
+    write_resolution(iso_code, geonames_id, reason, _decided_by(iso_code), _escalation(iso_code))
     pop_orphan(iso_code)
-
-    log_decision(
-        f"MERGE  {iso_code}  {orphan['name']!r} -> {candidate_geonames_id} {candidate.name!r}"
-    )
-
-    global batch_num
-    batch_num = 0
+    _finish_orphan()
 
     return "SUCCESS"
 
 
 @mcp.tool(name="add")
-def add() -> str:
-    """Adds an orphaned subdivision as a new entry."""
+def add(reason: str) -> str:
+    """Adds an orphaned subdivision as a new entry with no GeoNames counterpart.
+
+    Args:
+        reason (str): The concrete reason GeoNames has no record for this place, e.g. "GeoNames uses Madagascar's 22 regions, not ISO's 6 provinces". "No candidate matched" is not a reason.
+    """
 
     orphan = get_next_orphan()
 
     if orphan is None:
         return "ERROR: NO ORPHAN TO ADD"
 
-    write_resolution(orphan["iso_code"], None)
+    write_resolution(orphan["iso_code"], None, reason, _decided_by(orphan["iso_code"]), _escalation(orphan["iso_code"]))
     pop_orphan(orphan["iso_code"])
-
-    log_decision(f"ADD    {orphan['iso_code']}  {orphan['name']!r}")
-
-    global batch_num
-    batch_num = 0
+    _finish_orphan()
 
     return "SUCCESS"
 
 
 @mcp.tool(name="review")
-def review() -> str:
-    """Dumps the next orphan and all its candidates to review_output.json for the user to manually review and decide on the resolution. Prompt the user to call add or merge (with the selected geonames_id)"""
+def review(reason: str) -> str:
+    """Escalates the current orphan to the user for a decision. The findings are stored with whatever decision the user makes, so report them in full to the user, then apply their decision with merge or add.
+
+    Args:
+        reason (str): Why this orphan needs a human decision, including what the web search found.
+    """
 
     orphan = get_next_orphan()
 
     if orphan is None:
         return "NO ORPHANS TO REVIEW"
 
-    orphan["top_candidates"] = get_candidates(
-        orphan["iso_code"], batch_num=batch_num, return_all=True
-    )
-
-    write_orphan_for_review(orphan)
+    global escalated_iso_code, escalation_findings
+    escalated_iso_code = orphan["iso_code"]
+    escalation_findings = reason
 
     return "SUCCESS"
 

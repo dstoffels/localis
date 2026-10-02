@@ -98,7 +98,7 @@ def merge_geonames(countries: dict[str, CountryModel]):
                     alpha2=alpha2,
                     alpha3=alpha3,
                     geonames_id=geonames_id,
-                    numeric=int(numeric),
+                    numeric=int(numeric) or None,
                     name=name,
                     official_name="",
                     aliases=[],

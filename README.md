@@ -428,7 +428,7 @@ Data in this project is kept current monthly from the following sources:
   - **Canonical**: [ISO 3166-2](https://www.iso.org/iso-3166-country-codes.html) data via [Debian's iso-codes project](https://salsa.debian.org/iso-codes-team/iso-codes)
   - **Merged**: [GeoNames](https://www.geonames.org/) `admin1CodesASCII.txt` and `admin2Codes.txt`
   - **Merged**: [Wikidata](https://www.wikidata.org/) crosswalk (ISO 3166-2 code ↔ GeoNames id) for unambiguous resolution ahead of fuzzy matching
-  - **Merged**: Additional subdivision aliases from [Ipregistry](https://ipregistry.co) and GeoNames' `alternateNamesV2` dump (filtered by [Unicode CLDR](https://cldr.unicode.org/)'s official-language data per country)
+  - **Merged**: Additional subdivision aliases from GeoNames' `alternateNamesV2` dump (filtered by [Unicode CLDR](https://cldr.unicode.org/)'s official-language data per country)
 - **Cities**
   - [GeoNames](https://www.geonames.org/) `cities500.txt` dataset
 
@@ -436,7 +436,7 @@ Data in this project is kept current monthly from the following sources:
 
 ### Data licensing
 
-The shipped data is derived from these sources and remains subject to their licenses: ISO 3166 data via iso-codes (LGPL-2.1-or-later), GeoNames (CC BY 4.0), Wikidata (CC0), Unicode CLDR (Unicode License v3), and Ipregistry's iso3166 (CC BY-SA 4.0).
+The shipped data is derived from these sources and remains subject to their licenses: ISO 3166 data via iso-codes (LGPL-2.1-or-later), GeoNames (CC BY 4.0), Wikidata (CC0), and Unicode CLDR (Unicode License v3).
 
 ---
 

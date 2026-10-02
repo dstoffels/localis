@@ -10,10 +10,6 @@ ISO_CODES_SUBDIVISIONS_URL = (
     "https://salsa.debian.org/iso-codes-team/iso-codes/-/raw/main/data/iso_3166-2.json"
 )
 
-IPREGISTRY_SUBDIVISIONS_URL = (
-    "https://raw.githubusercontent.com/ipregistry/iso3166/main/subdivisions.csv"
-)
-
 ADMIN1_URL = f"{GEONAMES_DUMP_URL}/admin1CodesASCII.txt"
 GEONAMES_ADMIN1_PATH = SUBDIVISIONS_INPUTS_PATH / "admin1CodesASCII.txt"
 
@@ -21,7 +17,6 @@ ADMIN2_URL = f"{GEONAMES_DUMP_URL}/admin2Codes.txt"
 GEONAMES_ADMIN2_PATH = SUBDIVISIONS_INPUTS_PATH / "admin2Codes.txt"
 
 ISO_CODES_SUBS_PATH = SUBDIVISIONS_INPUTS_PATH / "iso_3166-2.json"
-IPREGISTRY_SUBS_PATH = SUBDIVISIONS_INPUTS_PATH / "ipregistry_subdivisions.csv"
 
 
 def fetch_subdivisions_sources(force: bool = False) -> bool:
@@ -37,9 +32,6 @@ def fetch_subdivisions_sources(force: bool = False) -> bool:
                 ISO_CODES_SUBS_PATH,
                 SUBDIVISIONS_MANIFEST_PATH,
             ),
-            # has_changed(
-            #     IPREGISTRY_SUBDIVISIONS_URL, IPREGISTRY_DEST, SUBDIVISIONS_MANIFEST_PATH
-            # ),
         ]
     )
 
@@ -53,11 +45,6 @@ def fetch_subdivisions_sources(force: bool = False) -> bool:
         download(ADMIN2_URL, GEONAMES_ADMIN2_PATH, SUBDIVISIONS_MANIFEST_PATH)
         download(
             ISO_CODES_SUBDIVISIONS_URL, ISO_CODES_SUBS_PATH, SUBDIVISIONS_MANIFEST_PATH
-        )
-        download(
-            IPREGISTRY_SUBDIVISIONS_URL,
-            IPREGISTRY_SUBS_PATH,
-            SUBDIVISIONS_MANIFEST_PATH,
         )
 
     return True

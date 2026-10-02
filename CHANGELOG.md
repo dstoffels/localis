@@ -25,6 +25,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `docs/unmerged_subdivisions.md`, regenerated from the final dataset on every ingest run: every ISO 3166-2 subdivision with no `geonames_id`. 295 of 5,046 currently unmerged after a full skill + ingest run
 
 ### Changed
+- Automerge margin floor: a winning pair less than 5 points over its threshold becomes a `low_margin` orphan for the skill to confirm instead of merging (`MG-D` and `TW-TNN` were wrong merges at margins 1 and 3)
+- Skill decisions can no longer overrule Wikidata silently: one that disagrees with a valid Wikidata mapping it wasn't made against becomes a `wikidata_conflict` orphan for review, and each decision records the mapping it saw (`wikidata_seen`) along with its `reason`, `decided_by` and escalation findings; the old `resolution_log.txt` and `review_output.json` are folded into `resolution_map.json`, whose `skill_resolved`/`auto_merge` keys are renamed `skill_decisions`/`automerge`, with `skill_decisions` and `wikidata_merge` flattened to plain code-keyed maps
+- resolve-subdivisions skill sees every subdivision in the orphan's country with claimed records and type mismatches marked rather than hidden, `add` requires a concrete reason, and explicit escalation criteria send claimed-record conflicts, ties, partial mappings and unexplained absences to a human
+- ISO subdivisions of a country with no GeoNames subdivisions at all (Singapore) are added as-is by automerge on every run (`automerge.geonames_absent`) instead of orphaned, so they merge automatically if GeoNames ever adds records
+- Ingest logs are tracked and no longer timestamped, so a log only changes when an ingest run's output does
 - `City.admin1`/`admin2` (fixed fields, admin levels 1-2 only) replaced with `City.subdivisions: list[SubdivisionBase]`, ordered by admin_level ascending, representing the full administrative chain including level 0 (documentation/statistical groupings) and any 3rd+ generation tiers GeoNames itself never nests to; `SubdivisionBase` gained `admin_level` so list entries are distinguishable by level. `CityModel.FILTER_FIELDS` flattens every level into the filter index; `SEARCH_FIELDS` keeps only the admin_level=1 entry, matching its prior footprint, to avoid bloating the trigram index with every level's name
 - `CityStore`'s subdivision ids are packed into a flat `array('I')` blob with parallel offset/count arrays, the same scheme the search index already uses for trigram postings, instead of a `list[list[int]]`, which at 235k+ rows added ~35MB (+59%) to cities' dataset memory from pure per-row Python object overhead
 - All registries (`Country`, `Subdivision`, `City`) are now lazy-loaded on first access; `Country`/`Subdivision` previously eager-loaded on import
@@ -33,7 +38,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `resolve-subdivisions` skill and `resolution_map.json` now key on `geonames_id` instead of an unstable per-run hash; `resolution_map.json` simplified to a flat `dict[str, int | None]`
 - Overhauled ingest logging: per-domain log files, log levels, per-merge/orphan diagnostics
 - Subdivision aliases enriched from GeoNames' `alternateNamesV2` dump (English + each country's CLDR official language(s) only, historic/colloquial/bidi-control names excluded), feeding into fuzzy matching
-- `resolution_map.json` restructured from a flat per-code cache into the single source of truth for every subdivision's resolution, not just the ones needing human help: nested by how each was decided (`auto_merge`, `skill_resolved`, `wikidata_merge`, `bypassed`), with `auto_merge` results self-reconciling against a durable `audited` record on every run so a stale decision is automatically recomputed, no manual cache-invalidation step required; `orphaned_subdivisions.json` is retired, orphans (`no_candidates`/`no_matches`/`ambiguity`) now live in this same file
+- `resolution_map.json` restructured from a flat per-code cache into the single source of truth for every subdivision's resolution, not just the ones needing human help: nested by how each was decided (`automerge`, `skill_decisions`, `wikidata_merge`, `bypassed`), with `automerge` results self-reconciling against a durable `audited` record on every run so a stale decision is automatically recomputed, no manual cache-invalidation step required; `orphaned_subdivisions.json` is retired, orphans (`no_candidates`/`no_matches`/`ambiguity`) now live in this same file
 - Subdivision fuzzy-match threshold no longer gives single-token names an extra discount on top of the length-based one; it was stacking with short-name leniency to let coincidental shared suffixes (e.g. "Enfield"/"Wakefield", both ending in "-field") clear threshold despite sharing no real resemblance
 - Ingest log files renamed from `*_ingest_log.txt` to `*_ingest.log`
 - Subdivision auto-merge now disqualifies candidate pairs where the GeoNames side's raw qualifier words mark it as a city but the ISO side's `type` isn't (or vice versa), preventing confident-but-wrong string matches (e.g. a city ISO code stealing its containing oblast/county/department's GeoNames entry); renamed `CATEGORICAL_TOKENS` to `NOISE_TOKENS`, grouped into two families (`city` vs `area`) rather than granular ones, since finer administrative-type distinctions aren't reliable across sources/translations
@@ -49,6 +54,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CI: ingest merges from and opens PRs against `dev` instead of `main`, runs pyright/pytest before opening its PR, and only patch-bumps when the current version is already released; Test runs pyright, runs ingest on `dev` pushes (failing on any uncommitted dataset change), and gates PRs to `main`; Release publishes the exact commit Test passed and skips versions that are already tagged
 
 ### Removed
+- Ipregistry as a data source; its 219 `localVariant` subdivision aliases carried CC BY-SA 4.0 share-alike terms for little gain over GeoNames' alternate names
 - Manual alias/name contribution during subdivision resolution (CLI and skill); resolutions are now source-data only
 - Deprecated interactive CLI subdivision resolver, fully superseded by the resolve-subdivisions skill
 - `ingest/subdivisions/scripts/check_orphans.py` and the `check-orphans` poetry script, superseded by `ingest_subdivisions()`'s own hard exit-10 gate on active orphans
@@ -61,10 +67,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `SubdivisionMap.refresh()` no longer overwrites a merged subdivision's ISO-derived `admin_level` with one re-derived from GeoNames' own parent nesting, which could silently corrupt it after merge
 - ISO subdivisions whose real admin_level-1 parent was misidentified as a real second admin tier (e.g. Indonesia's provinces nested under a non-administrative grouping) now compute the correct level
 - `ResolutionMap.reconcile()` couldn't represent "verified: this should not auto-merge"; an audited no-match decision would have silently been overwritten by the next run's fresh (and still wrong) auto-merge result
-- resolve-subdivisions skill's `get_geonames_submap()` never replayed already-recorded resolutions (`skill_resolved`/`wikidata_merge`/`auto_merge.resolutions`) onto its own fresh GeoNames map, so an already-claimed target could still appear as a valid, unclaimed candidate and pass `is_valid_candidate()`
+- resolve-subdivisions skill's `get_geonames_submap()` never replayed already-recorded resolutions (`skill_decisions`/`wikidata_merge`/`automerge.resolutions`) onto its own fresh GeoNames map, so an already-claimed target could still appear as a valid, unclaimed candidate and pass `is_valid_candidate()`
 - resolve-subdivisions skill was missing GeoNames alternate-name enrichment on its candidate pool, showing weaker name variants than auto-merge itself uses
 - `load_countries()`/`load_subdivisions()`, the fallback loaders used when subdivisions or cities ingest runs standalone, read the wrong columns and skipped type coercion; `load_subdivisions()` crashed on its first call
 - Type errors across `ingest/` and `tests/`; the whole repo now passes `pyright`, enforced in CI
+- 77 places shipped twice, an ISO-only record beside a GeoNames-only twin (Bayern/Bavaria, Hamburg, most Icelandic and Lithuanian municipalities); all 251 "no counterpart" skill decisions cleared for re-resolution
+- `RU-AL`/`RU-ALT` swapped by a stale skill decision; Wikidata's mapping now applies
+- Merged subdivisions kept GeoNames' parent instead of ISO's
+- Kosovo's `numeric` was `0` instead of `None`
+- Country ingest crashed on Python versions before 3.14 (a bare `super()` call inside a slotted dataclass), and the ingest logger crashed when its `logs/` folder didn't exist yet
 
 ## [1.1.2] - 2026-09-29
 

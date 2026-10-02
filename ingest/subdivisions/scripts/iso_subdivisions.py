@@ -82,7 +82,7 @@ def load_iso_subs(
             type=entry["type"],
             iso_code=iso_code,
             admin_level=admin_level,
-            aliases=[bracket_alias] if bracket_alias else [],  # further enriched separately, see merge_ipregistry.py
+            aliases=[bracket_alias] if bracket_alias else [],
             geonames_code=None,  # may be set later if merged with GeoNames subdivision
             geonames_id=None,  # may be set later if merged with GeoNames subdivision
             parent=parent_iso_code,  # temporarily set to iso_code string to map later once all iso subs are loaded

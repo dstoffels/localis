@@ -5,7 +5,7 @@ from .automerge import merge_matched_sub
 from ingest.shared.models import SubdivisionModel
 
 
-def apply_skill_resolved(
+def apply_skill_decisions(
     iso_subs: dict[str, SubdivisionModel],
     resolution_map: ResolutionMap,
     sub_map: SubdivisionMap,
@@ -13,7 +13,7 @@ def apply_skill_resolved(
     """Applies every skill-resolved decision directly, before try_merge ever sees these iso_subs, so a verified human decision can never lose its target to a fresh auto-merge. Returns the remaining iso_subs that still need auto-merging."""
     remaining: dict[str, SubdivisionModel] = {}
     for iso_code, iso_sub in iso_subs.items():
-        if iso_code not in resolution_map.skill_resolved:
+        if iso_code not in resolution_map.skill_decisions:
             remaining[iso_code] = iso_sub
             continue
         if not _apply_skill_resolution(iso_sub, resolution_map, sub_map):
@@ -33,7 +33,7 @@ def _apply_skill_resolution(
 ) -> bool:
     """Applies a single skill-resolved decision. Returns True if applied. A geonames_id of None means "add as-is"."""
     assert iso_sub.iso_code is not None
-    geonames_id = resolution_map.skill_resolved[iso_sub.iso_code]
+    geonames_id = resolution_map.skill_decisions[iso_sub.iso_code].id
 
     if geonames_id is None:
         sub_map.add(iso_sub)

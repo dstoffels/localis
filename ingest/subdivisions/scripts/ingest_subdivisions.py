@@ -1,6 +1,5 @@
-# This script merges subdivision data from GeoNames and ISO 3166-2, with Ipregistry
-# layered in only for alias enrichment. We initialize from GeoNames and merge in the
-# ISO data, prompting to resolve ambiguities. Manual intervention is required for some
+# This script merges subdivision data from GeoNames and ISO 3166-2. We initialize from
+# GeoNames and merge in the ISO data, prompting to resolve ambiguities. Manual intervention is required for some
 # entries, which is mapped in ingest/subdivisions/outputs/resolution_map.json.
 # GeoNames itself never nests beyond admin_level 2; ISO subs deeper than that (so far
 # only France) still merge against GeoNames' level-2 data, see automerge/scoring.py.
@@ -14,15 +13,30 @@ from ingest.utils import ingest_log, SUBDIVISIONS_OUTPUTS_PATH
 from ingest.shared.models import CountryModel, SubdivisionModel
 from .geonames_subdivisions import map_geonames_subdivisions
 from .iso_subdivisions import load_iso_subs
-from .merge_ipregistry import merge_ipregistry_aliases
 from .merge_alternate_names import merge_alternate_name_aliases
 from .automerge import try_merge
-from .resolve_subdivisions import apply_skill_resolved
-from .wikidata_subdivisions import apply_wikidata_matches
+from .resolve_subdivisions import apply_skill_decisions
+from .wikidata_subdivisions import fetch_wikidata_crosswalk, flag_wikidata_conflicts, apply_wikidata_matches
 from .dump_subdivisions import dump
 from .dump_unmerged import write as write_unmerged_doc
 
 RESOLUTION_MAP_PATH = SUBDIVISIONS_OUTPUTS_PATH / "resolution_map.json"
+
+
+def exit_if_orphans(resolution_map: ResolutionMap | None = None) -> None:
+    """Hard gate: active orphans mean the dataset is incomplete, so stop with exit code 10 until the resolve-subdivisions skill resolves them."""
+    if resolution_map is None:
+        resolution_map = ResolutionMap.load(RESOLUTION_MAP_PATH)
+    orphans = resolution_map.automerge.orphans
+    if not orphans.count():
+        return
+    ingest_log.writeline(
+        f"BLOCKED: {orphans.count()} active orphan(s) in resolution_map.json ({orphans.summary()}); "
+        "run the resolve-subdivisions skill first",
+        level="WARN",
+    )
+    ingest_log.dump()
+    sys.exit(10)
 
 
 def ingest_subdivisions(
@@ -53,23 +67,24 @@ def ingest_subdivisions(
         iso_subs, non_administrative_subs = load_iso_subs(countries, resolution_map)
 
         # ISO-listed entries known upfront to have no GeoNames counterpart (documentation/statistical groupings, not real administrative divisions); add directly, bypassing merge entirely
-        resolution_map.auto_merge.bypassed = {}
+        resolution_map.automerge.bypassed = {}
         for sub in non_administrative_subs:
             sub_map.add(sub)
             assert sub.iso_code is not None
-            resolution_map.auto_merge.bypassed[sub.iso_code] = None
+            resolution_map.automerge.bypassed[sub.iso_code] = None
         ingest_log.writeline(
-            f"bypassed {len(resolution_map.auto_merge.bypassed)}/{len(iso_subs) + len(non_administrative_subs)} subdivisions as non-administrative"
+            f"bypassed {len(resolution_map.automerge.bypassed)}/{len(iso_subs) + len(non_administrative_subs)} subdivisions as non-administrative"
         )
 
-        # Enrich with Ipregistry's localVariant aliases; iso-codes has no alias field of its own
-        merge_ipregistry_aliases(iso_subs)
-
         # Apply skill-resolved decisions directly, before auto-merge ever sees these iso_subs, so a verified decision can never lose its target to a fresh auto-merge
-        remaining_iso_subs = apply_skill_resolved(iso_subs, resolution_map, sub_map)
+        remaining_iso_subs = apply_skill_decisions(iso_subs, resolution_map, sub_map)
+
+        # Skill decisions win, but only knowingly: any that disagree with a valid Wikidata mapping they weren't made against go back to the skill
+        crosswalk = fetch_wikidata_crosswalk()
+        flag_wikidata_conflicts(crosswalk, resolution_map, sub_map)
 
         # Apply unambiguous Wikidata crosswalk matches next, a stronger signal than fuzzy string matching, still ahead of auto-merge
-        remaining_iso_subs = apply_wikidata_matches(remaining_iso_subs, resolution_map, sub_map)
+        remaining_iso_subs = apply_wikidata_matches(remaining_iso_subs, resolution_map, sub_map, crosswalk)
 
         # Auto-merge whatever's left with fuzzy matching; writes resolutions/orphans directly into resolution_map
         try_merge(remaining_iso_subs, sub_map, resolution_map)
@@ -79,18 +94,8 @@ def ingest_subdivisions(
 
         resolution_map.save(RESOLUTION_MAP_PATH)
 
-        # hard gate: active orphans mean the dataset is incomplete; refuse to dump subdivisions
-        # or hand off to cities (which depends on this run's geocode map) until resolved
-        orphans = resolution_map.auto_merge.orphans
-        orphan_count = len(orphans.no_candidates) + len(orphans.no_matches) + len(orphans.ambiguity)
-        if orphan_count:
-            ingest_log.writeline(
-                f"BLOCKED: {orphan_count} active orphan(s) in resolution_map.json "
-                f"(no_candidates={len(orphans.no_candidates)}, no_matches={len(orphans.no_matches)}, ambiguity={len(orphans.ambiguity)}); "
-                "run the resolve-subdivisions skill before dumping",
-                level="WARN",
-            )
-            sys.exit(10)
+        # refuse to dump subdivisions or hand off to cities (which depends on this run's geocode map) until resolved
+        exit_if_orphans(resolution_map)
 
         dump(sub_map)
         write_unmerged_doc(sub_map)

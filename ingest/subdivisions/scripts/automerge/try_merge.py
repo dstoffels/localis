@@ -1,12 +1,14 @@
 from ingest.subdivisions.utils.subdivision_map import SubdivisionMap
 from ingest.subdivisions.utils.strings import dedupe
-from ingest.subdivisions.utils.resolution_map import ResolutionMap, AutoMergeMatch, AmbiguousOrphan
+from ingest.subdivisions.utils.resolution_map import ResolutionMap, AutomergeMatch, AmbiguousOrphan, LowMarginOrphan
 from ingest.shared.models import SubdivisionModel
 from ingest.utils import ingest_log
 from .scoring import candidate_pool, score_candidates
 from .merge import merge_matched_sub
 
 AMBIGUITY_THRESHOLD = 90
+# a qualifying pair this close to its threshold is sent to the skill for review instead of merged
+MARGIN_FLOOR = 5
 
 
 def try_merge(
@@ -14,12 +16,14 @@ def try_merge(
     sub_map: SubdivisionMap,
     resolution_map: ResolutionMap,
 ) -> None:
-    """Auto-merges every iso_sub not already resolved by the resolve-subdivisions skill or bypassed as non-administrative. Writes directly into resolution_map.auto_merge: a fresh result that matches what's already in `audited` is discarded (the audited entry is left as the authoritative record), otherwise it's written as a new, unaudited resolution/orphan, evicting any stale audited entry it contradicts."""
+    """Auto-merges every iso_sub not already resolved by the resolve-subdivisions skill or bypassed as non-administrative. Writes directly into resolution_map.automerge: a fresh result that matches what's already in `audited` is discarded (the audited entry is left as the authoritative record), otherwise it's written as a new, unaudited resolution/orphan, evicting any stale audited entry it contradicts."""
 
-    resolution_map.auto_merge.resolutions = {}
-    resolution_map.auto_merge.orphans.no_candidates = []
-    resolution_map.auto_merge.orphans.no_matches = []
-    resolution_map.auto_merge.orphans.ambiguity = []
+    resolution_map.automerge.resolutions = {}
+    resolution_map.automerge.orphans.no_candidates = []
+    resolution_map.automerge.orphans.no_matches = []
+    resolution_map.automerge.orphans.ambiguity = []
+    resolution_map.automerge.orphans.low_margin = []
+    resolution_map.automerge.geonames_absent = []
 
     unmerged_count = 0
     buckets: dict[tuple[str, int], list[SubdivisionModel]] = {}
@@ -28,11 +32,12 @@ def try_merge(
     for _, iso_sub in iso_subs.items():
         iso_sub.aliases = dedupe(iso_sub.aliases)
 
-        # Add the country if it wasn't added when caching GeoNames subdivisions (for safety) and add the ISO subdivision as is
-        country_map = sub_map.filter(iso_sub.country.alpha2)
-        if not country_map:
-            ingest_log.writeline(f"Creating new country map for {iso_sub.country.name}")
+        # GeoNames has no subdivisions at all for this country (e.g. Singapore): nothing to merge with or review, so add as-is; recomputed every run, so it merges automatically if GeoNames ever adds records
+        if not any(g.geonames_id is not None for g in sub_map.filter(iso_sub.country.alpha2)):
+            assert iso_sub.iso_code is not None
             sub_map.add(iso_sub)
+            resolution_map.automerge.geonames_absent.append(iso_sub.iso_code)
+            unmerged_count += 1
             continue
 
         # GeoNames never nests beyond admin_level 2, so ISO subs at 2 and 3+ draw from the
@@ -99,17 +104,18 @@ def try_merge(
 
         for iso_code, candidate_geonames_ids in ambiguous_candidates.items():
             if not resolution_map.reconcile(iso_code, None):
-                resolution_map.auto_merge.orphans.ambiguity.append(
+                resolution_map.automerge.orphans.ambiguity.append(
                     AmbiguousOrphan(iso_code=iso_code, candidate_geonames_ids=candidate_geonames_ids)
                 )
 
         claimed_iso: set[str] = set()
         claimed_geo: set[int] = set()
+        low_margin_iso: set[str] = set()
         for score, needed, iso_sub, geo_sub in scored_pairs:
             assert geo_sub.geonames_id is not None
             assert iso_sub.iso_code is not None
             geo_name = geo_names_at_scoring[geo_sub.geonames_id]
-            if iso_sub.iso_code in claimed_iso:
+            if iso_sub.iso_code in claimed_iso or iso_sub.iso_code in low_margin_iso:
                 continue
             if geo_sub.geonames_id in ambiguous_geo_ids:
                 continue
@@ -119,12 +125,24 @@ def try_merge(
                     level="WARN",
                 )
                 continue
+            margin = round(score - needed)
+            if margin < MARGIN_FLOOR:
+                low_margin_iso.add(iso_sub.iso_code)
+                ingest_log.writeline(
+                    f"{iso_sub.iso_code} '{iso_sub.name}' -> {geo_sub.geonames_code} '{geo_name}' ({score:.0f}/{needed}) below margin floor, sent for review",
+                    level="WARN",
+                )
+                if not resolution_map.reconcile(iso_sub.iso_code, None):
+                    resolution_map.automerge.orphans.low_margin.append(
+                        LowMarginOrphan(iso_code=iso_sub.iso_code, candidate_geonames_id=geo_sub.geonames_id, margin=margin)
+                    )
+                continue
             merge_matched_sub(iso_sub, geo_sub)
             claimed_iso.add(iso_sub.iso_code)
             claimed_geo.add(geo_sub.geonames_id)
-            match = AutoMergeMatch(id=geo_sub.geonames_id, margin=round(score - needed))
+            match = AutomergeMatch(id=geo_sub.geonames_id, margin=margin)
             if not resolution_map.reconcile(iso_sub.iso_code, match.id):
-                resolution_map.auto_merge.resolutions[iso_sub.iso_code] = match
+                resolution_map.automerge.resolutions[iso_sub.iso_code] = match
             if score < 90:
                 ingest_log.writeline(
                     f"merged {iso_sub.iso_code} '{iso_sub.name}' -> {geo_sub.geonames_code} '{geo_name}' ({score:.0f}/{needed})"
@@ -135,6 +153,7 @@ def try_merge(
             for iso_sub in bucket_iso_subs
             if iso_sub.iso_code not in claimed_iso
             and iso_sub.iso_code not in ambiguous_iso_codes
+            and iso_sub.iso_code not in low_margin_iso
         ]
         for iso_sub in bucket_unmerged:
             candidates = score_candidates(iso_sub, geo_subs)
@@ -159,7 +178,7 @@ def try_merge(
                     )
             assert iso_sub.iso_code is not None
             if not resolution_map.reconcile(iso_sub.iso_code, None):
-                getattr(resolution_map.auto_merge.orphans, reason).append(
+                getattr(resolution_map.automerge.orphans, reason).append(
                     iso_sub.iso_code
                 )
         unmerged_count += len(bucket_iso_subs) - len(claimed_iso)
@@ -167,9 +186,8 @@ def try_merge(
     ingest_log.writeline(
         f"Merged {len(iso_subs) - unmerged_count}/{len(iso_subs)} ISO subdivisions"
     )
-    orphans = resolution_map.auto_merge.orphans
-    total_orphans = len(orphans.no_candidates) + len(orphans.no_matches) + len(orphans.ambiguity)
-    ingest_log.writeline(
-        f"{total_orphans} subdivisions orphaned "
-        f"(no_candidates={len(orphans.no_candidates)}, no_matches={len(orphans.no_matches)}, ambiguity={len(orphans.ambiguity)})"
-    )
+    absent = resolution_map.automerge.geonames_absent
+    if absent:
+        ingest_log.writeline(f"{len(absent)} added as-is, their countries have no GeoNames subdivisions: {', '.join(absent)}")
+    orphans = resolution_map.automerge.orphans
+    ingest_log.writeline(f"{orphans.count()} subdivisions orphaned ({orphans.summary()})")
