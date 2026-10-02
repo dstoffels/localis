@@ -50,7 +50,15 @@ Fetching is checksum-aware: nothing gets downloaded unless its remote source has
 
 The monthly refresh described above is implemented in `.github/workflows/ingest.yaml`, which runs end-to-end against a long-lived `ingest` branch, on a monthly cron (`0 6 1 * *`) and on every push to `ingest`.
 
-Each run merges the latest `main` into `ingest`, then runs `poetry run ingest`. If any subdivision orphans remain, `ingest_subdivisions()`'s hard gate (see Pipeline integration above) calls `sys.exit(10)` before anything is staged, so this step itself fails the job, visible as a red X in the Actions tab, with the exact orphan counts in its log output. Nothing downstream (version bump, commit, push, PR) runs in that case, and the `ingest` branch is left untouched; resolving it is a local step: pull `ingest`, run the resolve-subdivisions skill, commit, and push back to `origin/ingest`, which re-triggers this workflow through its push trigger.
+Each run merges the latest `dev` into `ingest`, then runs `poetry run ingest`. If any subdivision orphans remain, `ingest_subdivisions()`'s hard gate (see Pipeline integration above) saves `resolution_map.json` and calls `sys.exit(10)` before dumping anything. The workflow then commits only the orphan queue and the logs to `ingest` ("chore: ingest found N orphans awaiting resolution"), pushes, and fails the job, so the exact orphans the run found are on record in the branch rather than lost with the runner. It deliberately doesn't commit the source manifests: they'd mark sources as ingested that were never dumped, and the next run would skip subdivision ingest, and with it the orphan gate. Nothing downstream (stats, version bump, dataset commit, PR) runs. The push uses the workflow's own token, so it doesn't re-trigger the workflow.
+
+Resolving orphans is a local procedure:
+
+1. Pull `ingest`.
+2. `poetry run ingest --force`. The source files aren't tracked, so this downloads them fresh regardless of the manifests, reproduces the orphan queue, and stops with exit 10. Compare its orphans with the committed queue; a difference means a source (usually Wikidata) changed in between.
+3. Run the resolve-subdivisions skill until no orphans remain.
+4. `poetry run ingest`, which now runs clean and dumps the dataset, then `poetry run analysis --data-only`.
+5. Commit and push to `ingest`, which re-triggers this workflow through its push trigger.
 
 A clean run then regenerates `tests/analysis/data_stats.json` and fills the docs' stat markers from it (see Performance Profile), so the record counts and resolution breakdown in the README and `methodology.md` always describe the data being committed; the test suite's `render_docs.py --check` fails a run whose docs don't. Locally, `poetry run analysis --data-only` does the same after an ingest. Timing and memory figures aren't regenerated in CI, since they depend on the host: after a change that could move them, run the whole suite with `poetry run analysis --notes "what changed"`, which runs the data stats, footprint and benchmarks and then fills the markers. `poetry run analysis --check` only checks that the docs' deterministic markers are current.
 

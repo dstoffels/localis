@@ -68,7 +68,29 @@ jobs:
         run: poetry install
 
       - name: Run full ingest pipeline
-        run: poetry run ingest
+        id: ingest
+        run: |
+          set +e
+          poetry run ingest
+          code=$?
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          # exit 10 means orphans need resolving; the next step records them before failing
+          if [ "$code" -ne 0 ] && [ "$code" -ne 10 ]; then
+            exit "$code"
+          fi
+
+      # Only the orphan queue and logs are committed: committing manifests for sources that were fetched but never dumped would let the next run skip subdivision ingest, and with it the orphan gate
+      - name: Record orphans and fail
+        if: steps.ingest.outputs.exit_code == '10'
+        run: |
+          count=$(python -c "import json; m = json.load(open('ingest/subdivisions/outputs/resolution_map.json')); print(sum(len(b) for b in m['automerge']['orphans'].values()))")
+          git add ingest/subdivisions/outputs/resolution_map.json ingest/*/logs/*.log
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: ingest found $count orphans awaiting resolution"
+          fi
+          git push origin ingest
+          echo "::error::Ingest found $count subdivision orphans; the queue is committed to the ingest branch. Resolve locally: pull ingest, run 'poetry run ingest --force', run the resolve-subdivisions skill, run 'poetry run ingest', then commit and push to ingest."
+          exit 1
 
       - name: Regenerate data stats and docs
         run: poetry run analysis --data-only

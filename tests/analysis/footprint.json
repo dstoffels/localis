@@ -1,0 +1,93 @@
+{
+  "2026-10-02T19:30:19": {
+    "host": {
+      "os": "Linux 7.0.0-38-generic",
+      "machine": "x86_64",
+      "cpu": "11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz",
+      "cpu_count": 8,
+      "memory_total_bytes": 16015437824,
+      "python": "3.14.4",
+      "localis": "2.0.0"
+    },
+    "runs": 3,
+    "notes": null,
+    "registries": {
+      "countries": {
+        "dataset": {
+          "time_ms": 0.641,
+          "memory_bytes": 319488
+        },
+        "lookup_index": {
+          "time_ms": 0.293,
+          "memory_bytes": 28672
+        },
+        "filter_index": {
+          "time_ms": 0.471,
+          "memory_bytes": 167936
+        },
+        "search_index": {
+          "time_ms": 2.07,
+          "memory_bytes": 716800
+        },
+        "combined": {
+          "time_ms": 3.475,
+          "memory_bytes": 1232896
+        }
+      },
+      "subdivisions": {
+        "dataset": {
+          "time_ms": 84.548,
+          "memory_bytes": 28499968
+        },
+        "lookup_index": {
+          "time_ms": 14.162,
+          "memory_bytes": 3948544
+        },
+        "filter_index": {
+          "time_ms": 112.921,
+          "memory_bytes": 19812352
+        },
+        "search_index": {
+          "time_ms": 58.893,
+          "memory_bytes": 11698176
+        },
+        "combined": {
+          "time_ms": 270.524,
+          "memory_bytes": 63959040
+        }
+      },
+      "cities": {
+        "dataset": {
+          "time_ms": 434.97,
+          "memory_bytes": 64000000
+        },
+        "lookup_index": {
+          "time_ms": 60.642,
+          "memory_bytes": 4096
+        },
+        "filter_index": {
+          "time_ms": 560.021,
+          "memory_bytes": 59494400
+        },
+        "search_index": {
+          "time_ms": 176.328,
+          "memory_bytes": 34988032
+        },
+        "combined": {
+          "time_ms": 1231.961,
+          "memory_bytes": 158486528
+        }
+      }
+    },
+    "cities_threshold": {
+      "time_ms": 937.015,
+      "memory_bytes": 32661504,
+      "threshold": 15000,
+      "count": 34171
+    },
+    "full_cache": {
+      "time_ms": 1565.946,
+      "memory_bytes": 223645696
+    }
+  }
+}
