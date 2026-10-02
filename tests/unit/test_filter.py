@@ -17,7 +17,7 @@ class TestFilter:
         results = registry.filter(pid="1234")
         assert results == []
 
-    def test_limit(self, registry: Registry, select_random):
+    def test_limit(self, registry: Registry, select_random, include_historic):
         """should limit the number of results"""
 
         subject: Entity = select_random(registry)
@@ -25,7 +25,7 @@ class TestFilter:
         results = registry.filter(name=subject.name, limit=1)
         assert len(results) == 1
 
-    def test_by_name(self, registry: Registry, select_random):
+    def test_by_name(self, registry: Registry, select_random, include_historic):
         """should return a list of objects where the name field contains the name kwarg"""
         subject: Entity = select_random(registry)
         results: list[Entity] = registry.filter(name=subject.name)

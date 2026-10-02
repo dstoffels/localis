@@ -10,7 +10,7 @@ class SubdivisionModel(Model):
     iso_code: str | None
     geonames_code: str | None
     geonames_id: int | None
-    type: str
+    type: str | None
     aliases: list[str]
     admin_level: int
     parent: "SubdivisionModel | None"
@@ -51,31 +51,6 @@ class SubdivisionModel(Model):
         data["aliases"] = "|".join(self.aliases) if self.aliases else None
         data.pop("id")
         return tuple(data.values())
-
-    @classmethod
-    def from_row(
-        cls,
-        id: int,
-        row: tuple[str | int | None],
-        subdivision_cache: dict[int, "SubdivisionModel"],
-        country_cache: dict[int, CountryModel],
-        **kwargs,
-    ) -> "SubdivisionModel":
-        ALIAS_IDX = 5
-        ADMIN_LEVEL_IDX = 6
-        PARENT_IDX = 7
-        COUNTRY_IDX = 8
-
-        row[ALIAS_IDX] = [a for a in row[ALIAS_IDX].split("|") if a]
-        row[ADMIN_LEVEL_IDX] = int(row[ADMIN_LEVEL_IDX])
-        row[PARENT_IDX] = (
-            subdivision_cache.get(int(row[PARENT_IDX]))
-            if subdivision_cache and row[PARENT_IDX]
-            else None
-        )
-        row[COUNTRY_IDX] = country_cache.get(int(row[COUNTRY_IDX]))
-
-        return cls(id, *row)
 
     def set_hashid(self) -> None:
         if not isinstance(self.country, int):

@@ -4,11 +4,22 @@ from ingest.shared.models import CountryModel
 
 
 def load_countries() -> dict[str, CountryModel]:
-    ALPHA2_INDEX = 1
     ingest_log.writeline("Loading countries...")
     with open(DATA_PATH / "countries" / "countries.tsv", "r", encoding="utf-8") as f:
         reader = csv.reader(f, delimiter="\t")
-        return {
-            row[ALPHA2_INDEX]: CountryModel(id, *row)
-            for id, row in enumerate(reader, start=1)
-        }
+        countries: dict[str, CountryModel] = {}
+        for id, row in enumerate(reader, start=1):
+            name, alpha2, alpha3, geonames_id, official_name, aliases, numeric, flag, historic = row
+            countries[alpha2] = CountryModel(
+                id=id,
+                name=name,
+                alpha2=alpha2,
+                alpha3=alpha3,
+                geonames_id=int(geonames_id) if geonames_id else None,
+                official_name=official_name,
+                aliases=[a for a in aliases.split("|") if a],
+                numeric=int(numeric) if numeric else None,
+                flag=flag,
+                historic=historic,
+            )
+        return countries

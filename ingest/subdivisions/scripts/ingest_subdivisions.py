@@ -26,7 +26,7 @@ RESOLUTION_MAP_PATH = SUBDIVISIONS_OUTPUTS_PATH / "resolution_map.json"
 
 
 def ingest_subdivisions(
-    countries: dict[str, CountryModel] = None, force: bool = False
+    countries: dict[str, CountryModel] | None = None, force: bool = False
 ) -> dict[str, SubdivisionModel] | None:
     ingest_log.set_stage("SUBDIVISIONS")
     try:
@@ -56,6 +56,7 @@ def ingest_subdivisions(
         resolution_map.auto_merge.bypassed = {}
         for sub in non_administrative_subs:
             sub_map.add(sub)
+            assert sub.iso_code is not None
             resolution_map.auto_merge.bypassed[sub.iso_code] = None
         ingest_log.writeline(
             f"bypassed {len(resolution_map.auto_merge.bypassed)}/{len(iso_subs) + len(non_administrative_subs)} subdivisions as non-administrative"

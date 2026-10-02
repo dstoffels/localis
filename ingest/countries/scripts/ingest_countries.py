@@ -2,6 +2,7 @@
 # GeoNames' alternateNames.txt is not used since the names tend to be noisy and mainly historical.
 
 from .load_iso_countries import init_iso_countries
+from .load_historic_countries import init_historic_countries
 from .fetch_countries import fetch_countries_sources
 from .merge_countries import merge_wikidata, merge_geonames
 from .dump_countries import dump
@@ -17,6 +18,7 @@ def ingest_countries(force: bool = False) -> dict[str, CountryModel] | None:
             ingest_log.writeline("No updates for countries.")
             return None
         countries = init_iso_countries()
+        countries = init_historic_countries(countries)
         merge_geonames(countries)
         merge_wikidata(countries)
         dump(list(countries.values()))

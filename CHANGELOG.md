@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- `Country.historic: HistoricInfo | None` for ISO 3166-3 withdrawn/historic countries (Czechoslovakia, Serbia and Montenegro, Netherlands Antilles, and 28 others), adding 31 historic entries to the dataset (281 total countries, 250 active); `CountryRegistry.include_historic` toggle (default `False`) excludes them from `filter()`/`search()`/iteration, never from `get()`/`lookup()`. Since ISO reused alpha2/alpha3/numeric codes across different withdrawn countries over time (e.g. `CS`: Czechoslovakia, then later Serbia and Montenegro), `lookup()` only resolves a historic entry by its unique `alpha_4` withdrawal code
+- `geonames_id` on `CountryModel`/`Country` (ingestion-side and runtime)
 - `py.typed` marker (PEP 561)
 - `CityRegistry.set_population_threshold(n)` / `population_threshold` property, narrowing the cities cache and all three indexes to population >= n, w E2E tests.
 - `geonames_id` on `SubdivisionModel` (ingestion-side)

@@ -28,10 +28,6 @@ class Model:
     def to_row(self) -> tuple[str | int | None]:
         return tuple(self.to_dict().values())
 
-    @classmethod
-    def from_row(cls, id: int, row: list[str | int | None], **kwargs) -> "Model":
-        return cls(id, *row)
-
     # ----------- Indexing Methods ----------- #
 
     LOOKUP_FIELDS: ClassVar[tuple[str, ...]] = ()
@@ -47,7 +43,7 @@ class Model:
     FILTER_FIELDS: ClassVar[dict[str, tuple[str, ...]]] = defaultdict(tuple)
     """Fields that can be used for filtering. Key is the filter name, value is a tuple of field names to search on."""
 
-    def extract_filter_values(self) -> dict[str, set[str]]:
+    def extract_filter_values(self) -> dict[str, list[str]]:
         """Used in processing to produce a normalized filter index for each model from its FILTER_FIELDS."""
         filter_values: dict[str, set[str]] = {}
 
@@ -55,8 +51,9 @@ class Model:
             filter_values[param] = set()
             for field in field_names:
                 obj = self
+                value: str | list[str] | None = None
                 for nested in field.split("."):
-                    value: str | list[str] = getattr(obj, nested)
+                    value = getattr(obj, nested)
                     if value is None:
                         break
                     obj = value
@@ -82,8 +79,9 @@ class Model:
 
         for field in self.SEARCH_FIELDS.keys():
             obj = self
+            value: str | list[str] | None = None
             for nested in field.split("."):
-                value: str | list[str] = getattr(obj, nested, None)
+                value = getattr(obj, nested, None)
                 if value is None:
                     break
                 obj = value

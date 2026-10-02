@@ -1,19 +1,20 @@
 import csv
 from pathlib import Path
 from collections import defaultdict
+from typing import Sequence
 from ingest.shared.models import Model
 from array import array
 import gzip
 
 
-def dump_data(data: list[Model], file_path: Path) -> None:
+def dump_data(data: Sequence[Model], file_path: Path) -> None:
     with open(file_path, "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f, delimiter="\t", lineterminator="\n")
         for item in data:
             writer.writerow(item.to_row())
 
 
-def dump_lookup_index(data: list[Model], datadir_path: Path) -> None:
+def dump_lookup_index(data: Sequence[Model], datadir_path: Path) -> None:
     str_path = datadir_path / "lookup_index_str.tsv"
     int_path = datadir_path / "lookup_index_int.tsv"
 
@@ -40,7 +41,7 @@ def dump_lookup_index(data: list[Model], datadir_path: Path) -> None:
         writer.writerows(int_pairs)
 
 
-def dump_filter_index(data: list[Model], datadir_path: Path) -> None:
+def dump_filter_index(data: Sequence[Model], datadir_path: Path) -> None:
     path = datadir_path / "filter_index.tsv"
     with open(path, "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f, delimiter="\t", lineterminator="\n")
@@ -53,7 +54,7 @@ def dump_filter_index(data: list[Model], datadir_path: Path) -> None:
             writer.writerow(row)
 
 
-def dump_search_index(data: list[Model], datadir_path: Path) -> None:
+def dump_search_index(data: Sequence[Model], datadir_path: Path) -> None:
     blob_path = datadir_path / "search_index.bin.gz"
     offsets_path = datadir_path / "search_index_offsets.tsv"
     search_fields_path = datadir_path / "search_fields.tsv"

@@ -10,8 +10,12 @@ ISO_COUNTRIES_URL = (
     "https://salsa.debian.org/iso-codes-team/iso-codes/-/raw/main/data/iso_3166-1.json"
 )
 ISO_COUNTRIES_PATH = COUNTRIES_INPUTS_PATH / "iso_3166-1.json"
+ISO_HISTORIC_COUNTRIES_URL = (
+    "https://salsa.debian.org/iso-codes-team/iso-codes/-/raw/main/data/iso_3166-3.json"
+)
+ISO_HISTORIC_COUNTRIES_PATH = COUNTRIES_INPUTS_PATH / "iso_3166-3.json"
 GEONAMES_COUNTRIES_URL = f"{GEONAMES_DUMP_URL}/countryInfo.txt"
-GEONAMES_COUNTRIES_DEST = COUNTRIES_INPUTS_PATH / "geonames_countries.txt"
+GEONAMES_COUNTRIES_DEST = COUNTRIES_INPUTS_PATH / "geonamesInfo.txt"
 
 
 def _strip_comment_lines(path: Path) -> None:
@@ -29,6 +33,11 @@ def fetch_countries_sources(force: bool = False) -> bool:
         [
             has_changed(ISO_COUNTRIES_URL, ISO_COUNTRIES_PATH, COUNTRIES_MANIFEST_PATH),
             has_changed(
+                ISO_HISTORIC_COUNTRIES_URL,
+                ISO_HISTORIC_COUNTRIES_PATH,
+                COUNTRIES_MANIFEST_PATH,
+            ),
+            has_changed(
                 GEONAMES_COUNTRIES_URL, GEONAMES_COUNTRIES_DEST, COUNTRIES_MANIFEST_PATH
             ),
         ]
@@ -39,6 +48,12 @@ def fetch_countries_sources(force: bool = False) -> bool:
 
     if should_download:
         download(ISO_COUNTRIES_URL, ISO_COUNTRIES_PATH, COUNTRIES_MANIFEST_PATH)
+
+        download(
+            ISO_HISTORIC_COUNTRIES_URL,
+            ISO_HISTORIC_COUNTRIES_PATH,
+            COUNTRIES_MANIFEST_PATH,
+        )
 
         download(
             GEONAMES_COUNTRIES_URL, GEONAMES_COUNTRIES_DEST, COUNTRIES_MANIFEST_PATH

@@ -8,7 +8,7 @@ from ingest.shared.models import SubdivisionModel
 
 
 def load_geonames_file(
-    file_name: Path, countries: dict[str, CountryModel], sub_map: SubdivisionMap
+    file_name: str, countries: dict[str, CountryModel], sub_map: SubdivisionMap
 ) -> None:
     with open(SUBDIVISIONS_INPUTS_PATH / file_name, "r", encoding="utf-8") as f:
         HEADERS = ("code", "name", "name_ascii", "geonames_id")
@@ -35,6 +35,8 @@ def load_geonames_file(
                 parent_code = f"{country_alpha2}.{parent_code}"
                 parent = sub_map.get(geo_code=parent_code)
                 admin_level = 2
+            else:
+                raise ValueError(f"unexpected geonames code format: {geonames_code}")
 
             country = countries.get(country_alpha2)
             if not country:
@@ -57,6 +59,7 @@ def load_geonames_file(
                 aliases=[],  # may be set later if merged with ISO subdivision
             )
             subdivision.set_hashid()
+            assert subdivision.hashid is not None
             subdivision.id = subdivision.hashid  # set hashid for internal mapping
             sub_map.add(subdivision)
 

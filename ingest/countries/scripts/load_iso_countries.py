@@ -68,12 +68,12 @@ def init_iso_countries() -> dict[str, CountryModel]:
 
     with open(COUNTRIES_INPUTS_PATH / "iso_3166-1.json", "r", encoding="utf-8") as f:
         iso_countries: list[dict] = json.load(f).get("3166-1")
-        iso_countries.sort(key=lambda c: c.get("alpha_2"))
+        iso_countries.sort(key=lambda c: c.get("alpha_2") or "")
 
         for id, c in enumerate(iso_countries, 1):
             alpha2 = c["alpha_2"]
             # Prioritize name by mapping > common name field > name field
-            name = NAME_MAP.get(alpha2) or c.get("common_name") or c.get("name")
+            name: str = NAME_MAP.get(alpha2) or c.get("common_name") or c["name"]
 
             # Get official name from either mapping or field, otherwise null
             official_name = OFFICIAL_NAME_MAP.get(alpha2) or c.get("official_name", "")
@@ -85,9 +85,11 @@ def init_iso_countries() -> dict[str, CountryModel]:
                 official_name=official_name,
                 alpha2=alpha2,
                 alpha3=c["alpha_3"],
+                geonames_id=None,
                 numeric=c["numeric"],
                 aliases=ALIAS_MAP.get(alpha2, []),
                 flag=c["flag"],
+                historic=None,
             )
 
     return countries

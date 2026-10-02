@@ -124,5 +124,26 @@
             "avg_hit_score": 0.839
         },
         "report": "Larger sample size for greater precision (countries at 100!). Cities is a bit slow, but in a great spot. Subdivisions is in good shape too (uses mangled name only)."
+    },
+    "2026-10-01T23:20:57.928817": {
+        "iterations": 1,
+        "sample_size": 3000,
+        "notes": "2026-10-01",
+        "countries": {
+            "success_rate": 1.0,
+            "avg_time_ms": 1.612,
+            "avg_hit_score": 0.882
+        },
+        "subdivisions": {
+            "success_rate": 0.927,
+            "avg_time_ms": 3.752,
+            "avg_hit_score": 0.907
+        },
+        "cities": {
+            "success_rate": 0.981,
+            "avg_time_ms": 15.89,
+            "avg_hit_score": 0.854
+        },
+        "report": "Subdivisions down ~1pt, cities down ~1pt"
     }
 }

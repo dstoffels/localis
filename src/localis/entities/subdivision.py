@@ -6,6 +6,7 @@ from localis.entities.country import CountryBase
 @dataclass(slots=True)
 class SubdivisionBase(Entity):
     geonames_code: str | None
+    geonames_id: int | None
     iso_code: str | None
     type: str
 

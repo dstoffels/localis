@@ -58,6 +58,7 @@ def merge_alternate_name_aliases(sub_map: SubdivisionMap) -> None:
                 continue
 
             sub.aliases.append(name)
+            assert sub.geonames_id is not None
             touched[sub.geonames_id] = sub
 
     for sub in touched.values():

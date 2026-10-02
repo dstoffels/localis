@@ -32,6 +32,7 @@ def _apply_skill_resolution(
     sub_map: SubdivisionMap,
 ) -> bool:
     """Applies a single skill-resolved decision. Returns True if applied. A geonames_id of None means "add as-is"."""
+    assert iso_sub.iso_code is not None
     geonames_id = resolution_map.skill_resolved[iso_sub.iso_code]
 
     if geonames_id is None:

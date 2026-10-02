@@ -81,6 +81,35 @@ def city(select_random) -> localis.City:
     return select_random(localis.cities)
 
 
+@pytest.fixture
+def include_historic(registry: Registry):
+    """Includes historic entries for a test's duration, no-op if the registry has no such toggle."""
+    toggle = getattr(registry, "set_include_historic", None)
+    if toggle:
+        toggle(True)
+    try:
+        yield
+    finally:
+        if toggle:
+            toggle(False)
+
+
+@pytest.fixture(scope="session")
+def historic_countries() -> list[localis.Country]:
+    """All historic country entries, for tests needing the full set."""
+    try:
+        localis.countries.set_include_historic(True)
+        return [c for c in localis.countries if c.historic is not None]
+    finally:
+        localis.countries.set_include_historic(False)
+
+
+@pytest.fixture(scope="session")
+def historic_country(historic_countries: list[localis.Country]) -> localis.Country:
+    """A single historic country entry to be tested."""
+    return historic_countries[0]
+
+
 @pytest.hookimpl(hookwrapper=True)
 def pytest_runtest_makereport(item, call):
     """

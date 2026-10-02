@@ -23,6 +23,11 @@ class SubdivisionView(
         return v if v else None
 
     @property
+    def geonames_id(self) -> int | None:
+        v = self._store.geonames_ids[self._idx]
+        return v if v != -1 else None
+
+    @property
     def iso_code(self) -> str | None:
         v = self._store.iso_codes[self._idx]
         return v if v else None
@@ -61,6 +66,7 @@ class SubdivisionView(
             id=self.id,
             name=self.name,
             geonames_code=self.geonames_code,
+            geonames_id=self.geonames_id,
             iso_code=self.iso_code,
             type=self.type,
             aliases=self.aliases,
@@ -70,6 +76,7 @@ class SubdivisionView(
                     id=parent.id,
                     name=parent.name,
                     geonames_code=parent.geonames_code,
+                    geonames_id=parent.geonames_id,
                     iso_code=parent.iso_code,
                     type=parent.type,
                 )
@@ -81,6 +88,7 @@ class SubdivisionView(
                 name=country.name,
                 alpha2=country.alpha2,
                 alpha3=country.alpha3,
+                geonames_id=country.geonames_id,
             ),
         )
 
@@ -95,8 +103,9 @@ class SubdivisionView(
                 row = line.rstrip("\r\n").split("\t")
                 (
                     name,
-                    geonames_code,
                     iso_code,
+                    geonames_code,
+                    geonames_id_s,
                     type_,
                     alias_s,
                     admin_level_s,
@@ -104,6 +113,7 @@ class SubdivisionView(
                     country_s,
                 ) = row
                 alias_list = [a for a in alias_s.split("|") if a]
+                geonames_id = int(geonames_id_s) if geonames_id_s else None
                 admin_level = int(admin_level_s)
                 parent_id = int(parent_s) if parent_s else None
                 country_id = int(country_s)
@@ -111,6 +121,7 @@ class SubdivisionView(
                 store.append(
                     name,
                     geonames_code,
+                    geonames_id,
                     iso_code,
                     type_,
                     alias_list,

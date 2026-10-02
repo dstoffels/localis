@@ -47,7 +47,11 @@ def try_merge(
 
         # snapshot each geo_sub's pre-merge name up front; merge_matched_sub() mutates geo_sub.name in place,
         # and a geo_sub can appear against several iso_subs in scored_pairs before one of them claims it.
-        geo_names_at_scoring: dict[int, str] = {g.geonames_id: g.name for g in geo_subs}
+        # geonames_id is always set here: candidate_pool() only returns unmerged GeoNames-sourced subs.
+        geo_names_at_scoring: dict[int, str] = {}
+        for g in geo_subs:
+            assert g.geonames_id is not None
+            geo_names_at_scoring[g.geonames_id] = g.name
 
         scored_pairs: list[tuple[float, int, SubdivisionModel, SubdivisionModel]] = []
         for iso_sub in bucket_iso_subs:
@@ -64,6 +68,8 @@ def try_merge(
         high_scorers: dict[int, set[str]] = {}
         for score, needed, iso_sub, geo_sub in scored_pairs:
             if score >= AMBIGUITY_THRESHOLD:
+                assert geo_sub.geonames_id is not None
+                assert iso_sub.iso_code is not None
                 high_scorers.setdefault(geo_sub.geonames_id, set()).add(
                     iso_sub.iso_code
                 )
@@ -72,11 +78,11 @@ def try_merge(
             for geonames_id, iso_codes in high_scorers.items()
             if len(iso_codes) > 1
         }
-        ambiguous_iso_codes = {
-            iso_sub.iso_code
-            for score, needed, iso_sub, geo_sub in scored_pairs
-            if geo_sub.geonames_id in ambiguous_geo_ids
-        }
+        ambiguous_iso_codes: set[str] = set()
+        for score, needed, iso_sub, geo_sub in scored_pairs:
+            if geo_sub.geonames_id in ambiguous_geo_ids:
+                assert iso_sub.iso_code is not None
+                ambiguous_iso_codes.add(iso_sub.iso_code)
         # an iso_code can end up contesting more than one target (rare), so gather by iso_code
         # rather than writing one entry per target; orphans are ISO subs, so the orphan bucket
         # stays iso_code-primary like no_candidates/no_matches, just carrying multiple candidates.
@@ -100,6 +106,8 @@ def try_merge(
         claimed_iso: set[str] = set()
         claimed_geo: set[int] = set()
         for score, needed, iso_sub, geo_sub in scored_pairs:
+            assert geo_sub.geonames_id is not None
+            assert iso_sub.iso_code is not None
             geo_name = geo_names_at_scoring[geo_sub.geonames_id]
             if iso_sub.iso_code in claimed_iso:
                 continue
@@ -143,11 +151,13 @@ def try_merge(
                     # only log a genuine near-miss (never qualified); a candidate that did
                     # qualify but lost the competition was already reported as "lost candidate" above
                     geo_sub, score, needed = candidate
+                    assert geo_sub.geonames_id is not None
                     geo_name = geo_names_at_scoring[geo_sub.geonames_id]
                     ingest_log.writeline(
                         f"{iso_sub.iso_code} '{iso_sub.name}' unmerged: closest was {geo_sub.geonames_code} '{geo_name}' ({score:.0f}/{needed})",
                         level="WARN",
                     )
+            assert iso_sub.iso_code is not None
             if not resolution_map.reconcile(iso_sub.iso_code, None):
                 getattr(resolution_map.auto_merge.orphans, reason).append(
                     iso_sub.iso_code

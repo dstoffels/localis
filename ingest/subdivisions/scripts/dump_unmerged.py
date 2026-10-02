@@ -10,7 +10,7 @@ DOC_PATH = DOCS_PATH / "unmerged_subdivisions.md"
 def generate(sub_map: SubdivisionMap) -> str:
     unmerged = sorted(
         (s for s in sub_map.all() if s.iso_code is not None and s.geonames_id is None),
-        key=lambda s: s.iso_code,
+        key=lambda s: s.iso_code or "",
     )
     lines = [
         "# Unmerged subdivisions",

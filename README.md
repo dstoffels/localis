@@ -4,9 +4,9 @@ Fast, offline access to comprehensive data for **countries**, **subdivisions**, 
 
 ## Features
 
-- 🌍 **254 countries** sourced and merged from ISO 3166-1 and GeoNames
-- 🗺️ **51,684 subdivisions** sourced and merged from ISO 3166-2 and GeoNames
-- 🏙️ **235,895 cities** sourced from GeoNames cities500.txt
+- 🌍 **281 countries** (31 historic) sourced and merged from ISO 3166-1, ISO 3166-3, and GeoNames
+- 🗺️ **51,803 subdivisions** sourced and merged from ISO 3166-2 and GeoNames
+- 🏙️ **235,914 cities** sourced from GeoNames cities500.txt
 - 🔍 **Search Engine** for typo-tolerant lookups with 99%+ accuracy
 - 📌 **Aliases** - support for colloquial, historic and alternate names
 
@@ -107,6 +107,23 @@ for country in localis.countries:
 total = len(localis.countries)
 ```
 
+### Historic Countries
+
+ISO 3166-3 withdrawn countries (Czechoslovakia, Serbia and Montenegro, Netherlands Antilles, and 28 others) are included in the dataset but excluded from `filter()`, `search()`, and iteration by default.
+
+```python
+localis.countries.include_historic   # False
+len(list(localis.countries))         # 250
+
+# Include historic entries
+localis.countries.set_include_historic(True)
+len(list(localis.countries))         # 281
+
+localis.countries.set_include_historic(False)
+```
+
+`get()` and `lookup()` always resolve historic entries regardless of the toggle. ISO reused alpha2/alpha3/numeric codes across different withdrawn countries over time (e.g. `CS` was both Czechoslovakia and, decades later, Serbia and Montenegro), so `lookup()` only resolves a historic entry by its unique `alpha_4` withdrawal code, never by bare alpha2/alpha3/numeric:
+
 ### Country Object
 
 ```python
@@ -117,9 +134,16 @@ country.name          # "United States"
 country.official_name # "United States of America"
 country.alpha2        # "US"
 country.alpha3        # "USA"
+country.geonames_id   # 6252001
 country.numeric       # 840
 country.aliases       # list[str] - Alternate names
 country.flag          # "🇺🇸" - Unicode flag emoji
+country.historic      # HistoricInfo | None - set only for withdrawn ISO 3166-3 countries
+
+country = localis.countries.lookup("CSHH")  # Czechoslovakia
+country.historic.alpha_4            # "CSHH"
+country.historic.withdrawal_date    # "1993-01-01"
+country.historic.comment            # str | None
 
 # Utility methods
 country.to_dict()     # Convert to dictionary
@@ -321,6 +345,7 @@ nested_country.id
 nested_country.name
 nested_country.alpha2
 nested_country.alpha3
+nested_country.geonames_id
 ```
 
 ### SubdivisionBase Object
@@ -339,9 +364,9 @@ nested_sub.type
 
 ### Caching
 
-All registries (**Countries**, **Subdivisions**, **Cities**) and their indexes are lazy-loaded on first use, incurring a cold start cost on whichever call touches them first. Any registry's dataset and indexes can be pre-loaded with `.force_cache()` to avoid this during queries, or you can simply access the registry/method to trigger the lazy loading upfront.
+All registries and their indexes are lazy-loaded on first use, incurring a cold start cost on whichever call touches them first. Any registry's dataset and indexes can be pre-loaded with `.force_cache()` to avoid this during queries, or you can simply access the registry/method to trigger the lazy loading upfront.
 
-#### Countries (254)
+#### Countries (281)
 | Component | Load Time | Memory |
 |---|---|---|
 | Dataset | ~1ms | 140KB |
@@ -350,7 +375,7 @@ All registries (**Countries**, **Subdivisions**, **Cities**) and their indexes a
 | Search index | ~7ms | 548KB |
 | **Combined** | **~9ms** | **892KB** |
 
-#### Subdivisions (51,684)
+#### Subdivisions (51,803)
 | Component | Load Time | Memory |
 |---|---|---|
 | Dataset | ~68ms | 21.6MB |
@@ -359,7 +384,7 @@ All registries (**Countries**, **Subdivisions**, **Cities**) and their indexes a
 | Search index | ~38ms | 9.0MB |
 | **Combined** | **~207ms** | **44.6MB** |
 
-#### Cities (235,895)
+#### Cities (235,914)
 
 > ⚠️ **Memory-intensive.** Fully caching cities and its indexes adds 150.1MB of resident memory. Calling `localis.cities.force_cache()` loads all of it upfront. You can call `cities.set_population_threshold(n)` before first access as a lever to control the memory footprint.
 
@@ -371,7 +396,7 @@ All registries (**Countries**, **Subdivisions**, **Cities**) and their indexes a
 | Search index | ~144ms | 33.5MB |
 | **Combined** | **~1.14s** | **150.1MB** |
 
-At a threshold of 15,000 (the tier geonamescache ships as a separate bundled dataset), cities drops from 235,895 to 34,167 and memory drops from 150.1MB to 31.5MB.
+At a threshold of 15,000, cities drops from 235,895 to 34,167 and memory drops from 150.1MB to 31.5MB.
 
 **Full Cache**: ~1.4s load time, 195.6MB memory for all datasets and indexes
 
@@ -396,6 +421,7 @@ Data in this project is kept current monthly from the following sources:
 
 - **Countries**
   - **Canonical**: [ISO 3166-1](https://www.iso.org/iso-3166-country-codes.html) data via [Debian's iso-codes project](https://salsa.debian.org/iso-codes-team/iso-codes)
+  - **Merged**: [ISO 3166-3](https://www.iso.org/iso-3166-country-codes.html) withdrawn/historic country codes, also via Debian's iso-codes project
   - **Merged**: [Geonames](https://www.geonames.org/) `geonames_countries.txt`
   - **Merged**: Additional country aliases from Wikidata.
 - **Subdivisions**

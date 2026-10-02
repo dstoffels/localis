@@ -90,6 +90,7 @@ def load_iso_subs(
 
         # set temporary id to hashid for later mapping
         subdivision.set_hashid()
+        assert subdivision.hashid is not None
         subdivision.id = subdivision.hashid
 
         if admin_level == 0:

@@ -14,8 +14,8 @@ from ingest.shared.models import SubdivisionModel, CountryModel, CityModel
 
 
 def ingest_cities(
-    countries: dict[str, CountryModel] = None,
-    subdivisions: dict[str, SubdivisionModel] = None,
+    countries: dict[str, CountryModel] | None = None,
+    subdivisions: dict[str, SubdivisionModel] | None = None,
     force: bool = False,
 ) -> None:
     ingest_log.set_stage("CITIES")

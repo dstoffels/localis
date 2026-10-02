@@ -5,6 +5,7 @@ from .store import Store
 class SubdivisionStore(Store):
     __slots__ = (
         "geonames_codes",
+        "geonames_ids",
         "iso_codes",
         "types",
         "aliases",
@@ -16,6 +17,7 @@ class SubdivisionStore(Store):
     def __init__(self):
         super().__init__()
         self.geonames_codes: list[str] = []
+        self.geonames_ids = array("i")  # -1 sentinel for None
         self.iso_codes: list[str] = []
         self.types: list[str] = []
         self.aliases: list[list[str]] = []
@@ -27,6 +29,7 @@ class SubdivisionStore(Store):
         self,
         name: str,
         geonames_code: str,
+        geonames_id: int | None,
         iso_code: str,
         type_: str,
         alias_list: list[str],
@@ -36,6 +39,7 @@ class SubdivisionStore(Store):
     ) -> None:
         self.names.append(name)
         self.geonames_codes.append(geonames_code)
+        self.geonames_ids.append(geonames_id if geonames_id is not None else -1)
         self.iso_codes.append(iso_code)
         self.types.append(type_)
         self.aliases.append(alias_list)

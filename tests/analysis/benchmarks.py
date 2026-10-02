@@ -7,8 +7,10 @@ import localis
 from tests.utils import mangle
 import random
 
-ITERATIONS = 1
-SAMPLE_SIZE = 3000
+ITERATIONS = 50
+SAMPLE_SIZE = 50
+
+FAILURES_LOG_PATH = "tests/analysis/search_failures.log"
 
 
 def benchmark():
@@ -17,71 +19,95 @@ def benchmark():
         "subdivisions",
         "cities",
     ]
-    results: dict[str, str | set] = {
+    results: dict[str, object] = {
         "iterations": ITERATIONS,
         "sample_size": SAMPLE_SIZE,
     }
     results["notes"] = input("Notes: ")
 
-    for registry_name in registries:
-        print(f"Starting {registry_name}...")
-        registry: Registry = getattr(localis, registry_name)
-        entries: list[Entity] = list(registry)
+    with open(FAILURES_LOG_PATH, "w") as log:
+        log.write(f"# search failures - {datetime.now().isoformat()}\n")
 
-        total_queries = 0
-        num_hit = 0
-        num_miss = 0
-        avg_time = 0.0
-        top_scores = []
+        for registry_name in registries:
+            print(f"Starting {registry_name}...")
+            registry: Registry = getattr(localis, registry_name)
+            entries: list[Entity] = list(registry)
 
-        def search(q: str):
-            nonlocal total_queries, num_hit, num_miss, avg_time
+            total_queries = 0
+            num_hit = 0
+            num_miss = 0
+            avg_time = 0.0
+            top_scores = []
 
-            seed = hash((entry.id, i))
-            mangled_q = mangle(q, seed=seed)
-            start = time.perf_counter()
-            search_results = registry.search(mangled_q)
-            end = time.perf_counter()
-            elapsed = (end - start) * 1000
+            def search(q: str, entry: Entity, query_type: str):
+                nonlocal total_queries, num_hit, num_miss, avg_time
 
-            if total_queries == 0:
-                avg_time = elapsed
-            else:
-                avg_time = (avg_time * total_queries + elapsed) / (total_queries + 1)
+                seed = hash((entry.id, i, query_type))
+                mangled_q = mangle(q, seed=seed)
+                start = time.perf_counter()
+                search_results = registry.search(mangled_q)
+                end = time.perf_counter()
+                elapsed = (end - start) * 1000
 
-            total_queries += 1
+                if total_queries == 0:
+                    avg_time = elapsed
+                else:
+                    avg_time = (avg_time * total_queries + elapsed) / (
+                        total_queries + 1
+                    )
 
-            for r, score in search_results:
-                if entry.id == r.id:
+                total_queries += 1
+
+                match_score = next(
+                    (score for r, score in search_results if r.id == entry.id), None
+                )
+                if match_score is not None:
                     num_hit += 1
-                    top_scores.append(score)
+                    top_scores.append(match_score)
                 else:
                     num_miss += 1
+                    top = search_results[0] if search_results else None
+                    top_desc = (
+                        f'"{top[0].name}" ({top[1]:.2f})' if top else "no results"
+                    )
+                    log.write(
+                        f'[{registry_name}:{query_type}] "{mangled_q}" -> expected "{q}" (id={entry.id}), got {top_desc}\n'
+                    )
 
-        # BEGIN SEARCHES
-        for i in range(ITERATIONS):
-            print(f"Pass {i + 1}")
-            for entry in entries[:SAMPLE_SIZE]:
-                q = entry.name
-                if hasattr(entry, "admin1") and entry.admin1:
-                    q += f" {entry.admin1.name}"
-                search(q)
-                # if entry.aliases:
-                #     rand_alt_name = random.Random(42 + i).choice(entry.alt_names)
-                #     search(rand_alt_name)
+            # BEGIN SEARCHES
+            for i in range(ITERATIONS):
+                print(f"Pass {i + 1}")
+                sample_rng = random.Random(i)
+                sample_size = min(SAMPLE_SIZE, len(entries))
+                sample = sample_rng.sample(entries, sample_size)
 
-        success_rate = num_hit / total_queries if total_queries else 0.0
-        avg_hit_score = sum(top_scores) / num_hit
+                for entry in sample:
+                    q = entry.name
+                    if isinstance(entry, localis.City) and entry.admin1:
+                        q += f" {entry.admin1.name}"
+                    search(q, entry, "name")
 
-        results[registry_name] = {
-            "success_rate": round(success_rate, 3),
-            "avg_time_ms": round(avg_time, 3),
-            "avg_hit_score": round(avg_hit_score, 3),
-        }
+                    aliases = getattr(entry, "aliases", None)
+                    if aliases:
+                        alias_rng = random.Random(hash((entry.id, i)))
+                        alias = alias_rng.choice(aliases)
+                        search(alias, entry, "alias")
+
+            success_rate = num_hit / total_queries if total_queries else 0.0
+            avg_hit_score = sum(top_scores) / num_hit if num_hit else 0.0
+
+            results[registry_name] = {
+                "queries": total_queries,
+                "failures": num_miss,
+                "success_rate": round(success_rate, 3),
+                "avg_time_ms": round(avg_time, 3),
+                "avg_hit_score": round(avg_hit_score, 3),
+            }
+
     return results
 
 
-def write_file(results: dict):
+def write_file(results: dict[str, object]):
 
     file_path = "tests/analysis/search_benchmarks.json"
     now_key = datetime.now().isoformat()

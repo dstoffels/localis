@@ -62,6 +62,7 @@ class CityView(CrossReferencedView[City, CityStore, CountryView, SubdivisionView
                     id=admin1.id,
                     name=admin1.name,
                     geonames_code=admin1.geonames_code,
+                    geonames_id=admin1.geonames_id,
                     iso_code=admin1.iso_code,
                     type=admin1.type,
                 )
@@ -73,6 +74,7 @@ class CityView(CrossReferencedView[City, CityStore, CountryView, SubdivisionView
                     id=admin2.id,
                     name=admin2.name,
                     geonames_code=admin2.geonames_code,
+                    geonames_id=admin2.geonames_id,
                     iso_code=admin2.iso_code,
                     type=admin2.type,
                 )
@@ -84,6 +86,7 @@ class CityView(CrossReferencedView[City, CityStore, CountryView, SubdivisionView
                 name=country.name,
                 alpha2=country.alpha2,
                 alpha3=country.alpha3,
+                geonames_id=country.geonames_id,
             ),
             population=self.population,
             lat=self.lat,

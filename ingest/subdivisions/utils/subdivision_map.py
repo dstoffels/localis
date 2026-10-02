@@ -10,6 +10,7 @@ class SubdivisionMap:
         self._by_geonames_id: dict[int, SubdivisionModel] = {}
 
     def add(self, sub: SubdivisionModel) -> None:
+        assert sub.hashid is not None, "subdivision must have hashid set before being added to the map"
         country_map = self._subs.setdefault(sub.country.alpha2, {})
         level_map = country_map.setdefault(sub.admin_level, {})
         level_map[sub.hashid] = sub
@@ -23,11 +24,11 @@ class SubdivisionMap:
 
     def get(
         self,
-        id: int = None,
-        geo_code: str = None,
-        iso_code: str = None,
-        geonames_id: int = None,
-    ) -> SubdivisionModel:
+        id: int | None = None,
+        geo_code: str | None = None,
+        iso_code: str | None = None,
+        geonames_id: int | None = None,
+    ) -> SubdivisionModel | None:
         if id is not None:
             return self._by_id.get(id)
         if geo_code is not None:
@@ -39,7 +40,7 @@ class SubdivisionMap:
         return None
 
     def filter(
-        self, country_alpha2: str, admin_level: int = None
+        self, country_alpha2: str, admin_level: int | None = None
     ) -> list[SubdivisionModel]:
         """Filter subdivisions by country alpha2 code and optional admin level"""
         if admin_level is not None:

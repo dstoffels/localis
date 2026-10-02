@@ -18,7 +18,7 @@ class TestSearch:
             not results
         ), f"query: {bad_q} should yield [], instead returned {results}"
 
-    def test_exact(self, registry: Registry, select_random):
+    def test_exact(self, registry: Registry, select_random, include_historic):
         """should return results containing the input subject."""
 
         subject: Entity = select_random(registry)
@@ -28,7 +28,7 @@ class TestSearch:
             r.name for r, _ in results
         ], f"should find exact match for '{subject.name}'"
 
-    def test_mangled_name(self, registry: Registry, select_random, seed):
+    def test_mangled_name(self, registry: Registry, select_random, seed, include_historic):
         """should return results with a top score >= 50% (minimum return threshold)"""
         subject: Entity = select_random(registry)
         mangled_name = mangle(subject.name, seed=seed)

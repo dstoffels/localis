@@ -98377,7 +98377,7 @@ ayene	equatorial guinea|gnq|gq	gq-wn|gq.09|wele-nzas|wn
 anisoc	equatorial guinea|gnq|gq	gq-wn|gq.09|wele-nzas|wn
 acurenam	equatorial guinea|gnq|gq	centro sud|cs|gq-cs|gq.06
 aconibe	equatorial guinea|gnq|gq	gq-wn|gq.09|wele-nzas|wn
-abaamang	equatorial guinea|gnq|gq	
+abaamang	equatorial guinea|gnq|gq	gq-wn|gq.09|wele-nzas|wn
 ciudad de la paz	equatorial guinea|gnq|gq	dj|djibloho|gq-dj|gq.10
 zoodochos	gr|grc|greece	d|gr-d|gr.esye21|gr.esye21.17|ipeiros|nomos ioanninon
 zoniana	gr|grc|greece	gr-m|gr.esye43|gr.esye43.44|kriti|m|nomos rethymnis
@@ -141467,6 +141467,7 @@ kolo	lesotho|ls|lso	a|ls-a|ls.14|maseru
 makhakhe	lesotho|ls|lso	e|ls-e|ls.13|mafeteng
 mapholaneng	lesotho|ls|lso	j|ls-j|ls.16|mokhotlong
 rothe	lesotho|ls|lso	a|ls-a|ls.14|maseru
+nazareth	lesotho|ls|lso	a|ls-a|ls.14|maseru
 ziezmariai	lithuania|lt|ltu	kaisiadorys|kaunas|lt-13|lt.57|lt.57.49
 zemaiciu naumiestis	lithuania|lt|ltu	klaipeda county|lt-46|lt.58|lt.58.88|silute
 zarasai	lithuania|lt|ltu	54|lt-54|lt.64|lt.64.43|utena|zarasai
@@ -201646,6 +201647,7 @@ zey	tr|tur|turkiye	02|adiyaman|tr-02|tr.02|tr.02.7732069
 incirliova	tr|tur|turkiye	09|aydin|incirliova ilcesi|tr-09|tr.09|tr.09.8632403
 mebusevleri	tr|tur|turkiye	06|ankara|cankaya|tr-06|tr.68|tr.68.7732084
 incesu	tr|tur|turkiye	38|incesu|kayseri|tr-38|tr.38|tr.38.7910469
+incesu	tr|tur|turkiye	38|develi|kayseri|tr-38|tr.38|tr.38.7732925
 incesu	tr|tur|turkiye	68|aksaray|tr-68|tr.75|tr.75.7732073
 incesu	tr|tur|turkiye	47|derik ilcesi|mardin|tr-47|tr.72|tr.72.8630817
 incek	tr|tur|turkiye	06|ankara|golbasi|tr-06|tr.68|tr.68.7732107
@@ -204433,6 +204435,7 @@ yeni mahallesi	tr|tur|turkiye	76|igdir|igdir ilcesi|tr-76|tr.88|tr.88.13308774
 namik kemal mahallesi	tr|tur|turkiye	76|igdir|igdir ilcesi|tr-76|tr.88|tr.88.13308774
 faruktoka mahallesi	tr|tur|turkiye	76|igdir|igdir ilcesi|tr-76|tr.88|tr.88.13308774
 ozerli	tr|tur|turkiye	31|dortyol ilcesi|hatay|tr-31|tr.31|tr.31.436927
+bahcebasi	tr|tur|turkiye	38|develi|kayseri|tr-38|tr.38|tr.38.7732925
 tunapuna	trinidad and tobago|tt|tto	tt-tup|tt.tup|tunapuna-piarco|tup
 talparo	trinidad and tobago|tt|tto	couva-tabaquite-talparo|ctt|tt-ctt|tt.ctt
 tabaquite	trinidad and tobago|tt|tto	couva-tabaquite-talparo|ctt|tt-ctt|tt.ctt
@@ -205946,6 +205949,7 @@ stara sil	ua|ukr|ukraine	46|lvivska oblast|sambirs'ka mis'krada|ua-46|ua.15|ua.1
 stara synyava	ua|ukr|ukraine	68|khmelnytska oblast|khmelnytskyy raion|ua-68|ua.09|ua.09.6804
 stara nekrasivka	ua|ukr|ukraine	51|izmail raion|odeska oblast|ua-51|ua.17|ua.17.5108
 murafa	ua|ukr|ukraine	05|ua-05|ua.23|ua.23.0506|vinnytska oblast|zhmerynka raion
+starolaspa	ua|ukr|ukraine	14|donetska oblast|kalmiuskyi raion|ua-14|ua.05|ua.05.1410
 stara kulna	ua|ukr|ukraine	51|odeska oblast|podilsk raion|ua-51|ua.17|ua.17.5112
 stara darnytsya	ua|ukr|ukraine	30|kyiv|ua-30|ua.12
 stara bohdanivka	ua|ukr|ukraine	48|mykolaivska oblast|mykolayiv urban raion|ua-48|ua.16|ua.16.4806
@@ -205983,6 +205987,7 @@ sosnivka	ua|ukr|ukraine	46|lvivska oblast|sheptytskyi raion|ua-46|ua.15|ua.15.46
 sosnytsia	ua|ukr|ukraine	74|chernihivska oblast|koriukivskyi raion|ua-74|ua.02|ua.02.7402
 soshychne	ua|ukr|ukraine	07|kamin-kashyrskyi raion|ua-07|ua.24|ua.24.0704|volynska oblast
 soshe-ostrivske	ua|ukr|ukraine	51|odeska oblast|rozdilna raion|ua-51|ua.17|ua.17.5114
+sopachiv	ua|ukr|ukraine	56|rivnenska oblast|ua-56|ua.19|ua.19.5602|varaskyi raion
 nyzhnie solotvyno	ua|ukr|ukraine	21|ua-21|ua.25|ua.25.2110|uzhhorod raion|zakarpatska oblast
 solotvyno	ua|ukr|ukraine	21|tyachiv raion|ua-21|ua.25|ua.25.2108|zakarpatska oblast
 solotvyn	ua|ukr|ukraine	26|ivano-frankivska oblast|ivano-frankivskyi raion|ua-26|ua.06|ua.06.2604
@@ -206017,6 +206022,7 @@ sofiivka	ua|ukr|ukraine	51|bilhorod-dnistrovskyy raion|odeska oblast|ua-51|ua.17
 sofiivka	ua|ukr|ukraine	43|avtonomna respublika krym|simferopol raion|ua-43|ua.11|ua.11.0116
 sobolivka	ua|ukr|ukraine	05|haysyn raion|ua-05|ua.23|ua.23.0504|vinnytska oblast
 sobolivka	ua|ukr|ukraine	51|odeska oblast|podilsk raion|ua-51|ua.17|ua.17.5112
+sobishchytsi	ua|ukr|ukraine	56|rivnenska oblast|ua-56|ua.19|ua.19.5602|varaskyi raion
 sobatyn	ua|ukr|ukraine	21|khust raion|ua-21|ua.25|ua.25.2112|zakarpatska oblast
 sniatyn	ua|ukr|ukraine	26|ivano-frankivska oblast|kolomyya raion|ua-26|ua.06|ua.06.2608
 snyachiv	ua|ukr|ukraine	77|chernivetska oblast|chernivetskyi raion|ua-77|ua.03|ua.03.7306
@@ -206174,6 +206180,7 @@ shabo	ua|ukr|ukraine	51|bilhorod-dnistrovskyy raion|odeska oblast|ua-51|ua.17|ua
 shabelnyky	ua|ukr|ukraine	71|cherkaska oblast|ua-71|ua.01|ua.01.7104|zolotonosha raion
 shabelkivka	ua|ukr|ukraine	14|donetska oblast|kramatorskyi raion|ua-14|ua.05|ua.05.1412
 siversk	ua|ukr|ukraine	14|bakhmut raion|donetska oblast|ua-14|ua.05|ua.05.1402
+syeverne	ua|ukr|ukraine	14|donetska oblast|horlivskyi raion|ua-14|ua.05|ua.05.1406
 severynivka	ua|ukr|ukraine	05|ua-05|ua.23|ua.23.0506|vinnytska oblast|zhmerynka raion
 severynivka	ua|ukr|ukraine	51|berezivka raion|odeska oblast|ua-51|ua.17|ua.17.5102
 sevastopol	ua|ukr|ukraine	40|sevastopol|ua-40|ua.20
@@ -206684,6 +206691,7 @@ pischchana	ua|ukr|ukraine	51|odeska oblast|podilsk raion|ua-51|ua.17|ua.17.5112
 pershozvanivka	ua|ukr|ukraine	09|luhansk raion|luhanska oblast|ua-09|ua.14|ua.14.4406
 sosnove	ua|ukr|ukraine	71|cherkaska oblast|cherkasy raion|ua-71|ua.01|ua.01.7108
 avdiyivske	ua|ukr|ukraine	14|donetska oblast|pokrovsk raion|ua-14|ua.05|ua.05.1416
+pervomayske	ua|ukr|ukraine	14|donetska oblast|horlivskyi raion|ua-14|ua.05|ua.05.1406
 myrne	ua|ukr|ukraine	48|bashtanka raion|mykolaivska oblast|ua-48|ua.16|ua.16.4802
 pervomayske	ua|ukr|ukraine	43|avtonomna respublika krym|kurman raion|ua-43|ua.11|ua.11.0112
 zlatopil	ua|ukr|ukraine	63|kharkivska oblast|lozova city council|ua-63|ua.07|ua.07.6310
@@ -207633,6 +207641,7 @@ lymany	ua|ukr|ukraine	48|mykolaivska oblast|mykolayiv urban raion|ua-48|ua.16|ua
 lyman druhyi	ua|ukr|ukraine	53|poltava raion|poltavska oblast|ua-53|ua.18|ua.18.5308
 lymanske	ua|ukr|ukraine	51|odeska oblast|rozdilna raion|ua-51|ua.17|ua.17.5114
 lymans'ke	ua|ukr|ukraine	51|izmail raion|odeska oblast|ua-51|ua.17|ua.17.5108
+lymanchuk	ua|ukr|ukraine	14|donetska oblast|horlivskyi raion|ua-14|ua.05|ua.05.1406
 lyman	ua|ukr|ukraine	63|chuhuiv raion|kharkivska oblast|ua-63|ua.07|ua.07.6314
 lyman	ua|ukr|ukraine	51|bilhorod-dnistrovskyy raion|odeska oblast|ua-51|ua.17|ua.17.5104
 lykhivka	ua|ukr|ukraine	12|dnipropetrovska oblast|kamianskyi raion|ua-12|ua.04|ua.04.1204
@@ -207758,6 +207767,7 @@ krynky	ua|ukr|ukraine	65|khersonska oblast|khersonskyi raion|ua-65|ua.08|ua.08.6
 krymske	ua|ukr|ukraine	09|luhanska oblast|siverskodonetskyi raion|ua-09|ua.14|ua.14.4412
 krymskoye	ua|ukr|ukraine	43|avtonomna respublika krym|ua-43|ua.11|ua.11.0108|yevpatoriya raion
 krymne	ua|ukr|ukraine	07|kamin-kashyrskyi raion|ua-07|ua.24|ua.24.0704|volynska oblast
+krymne	ua|ukr|ukraine	07|kovel's'ka mis'krada|ua-07|ua.24|ua.24.0706|volynska oblast
 krymka	ua|ukr|ukraine	48|mykolaivska oblast|pervomaysk raion|ua-48|ua.16|ua.16.4808
 krymka	ua|ukr|ukraine	43|avtonomna respublika krym|dzhankoyskiy rayon|ua-43|ua.11|ua.11.0106
 kruty	ua|ukr|ukraine	74|chernihivska oblast|nizhyns'ka mis'krada|ua-74|ua.02|ua.02.7404
@@ -208480,6 +208490,7 @@ horodyshche	ua|ukr|ukraine	09|alchevskyi raion|luhanska oblast|ua-09|ua.14|ua.14
 horodeshchyne	ua|ukr|ukraine	14|donetska oblast|kramatorskyi raion|ua-14|ua.05|ua.05.1412
 horodenka	ua|ukr|ukraine	26|ivano-frankivska oblast|kolomyya raion|ua-26|ua.06|ua.06.2608
 horbanivka	ua|ukr|ukraine	53|poltava raion|poltavska oblast|ua-53|ua.18|ua.18.5308
+hirnytske	ua|ukr|ukraine	14|donetska oblast|horlivskyi raion|ua-14|ua.05|ua.05.1406
 hirnyk	ua|ukr|ukraine	46|lvivska oblast|sheptytskyi raion|ua-46|ua.15|ua.15.4612
 hirnyk	ua|ukr|ukraine	14|donetska oblast|pokrovsk raion|ua-14|ua.05|ua.05.1416
 hirne	ua|ukr|ukraine	14|donetsk raion|donetska oblast|ua-14|ua.05|ua.05.1408
@@ -209214,6 +209225,7 @@ bilyayivka	ua|ukr|ukraine	63|kharkivska oblast|lozova city council|ua-63|ua.07|u
 bilyayivka	ua|ukr|ukraine	51|odeska oblast|odeskyi raion|ua-51|ua.17|ua.17.5110
 biliaky	ua|ukr|ukraine	53|kremenchuk raion|poltavska oblast|ua-53|ua.18|ua.18.5302
 bilukhivka	ua|ukr|ukraine	53|poltava raion|poltavska oblast|ua-53|ua.18|ua.18.5308
+bilska volya	ua|ukr|ukraine	56|rivnenska oblast|ua-56|ua.19|ua.19.5602|varaskyi raion
 bilsk	ua|ukr|ukraine	53|poltava raion|poltavska oblast|ua-53|ua.18|ua.18.5308
 bilozirya	ua|ukr|ukraine	71|cherkaska oblast|cherkasy raion|ua-71|ua.01|ua.01.7108
 bilozerske	ua|ukr|ukraine	14|donetska oblast|pokrovsk raion|ua-14|ua.05|ua.05.1416

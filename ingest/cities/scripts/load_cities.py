@@ -31,7 +31,7 @@ def is_valid_city(row: dict[str, str]) -> bool:
     return bool(row["country code"])
 
 
-def filter_names(row: dict[str, str]) -> tuple[str]:
+def filter_names(row: dict[str, str]) -> tuple[str, str]:
     """Keep Latin-based alt names, filter junk and dedupe"""
     name = row["name"]
     alt_names = row["alternatenames"].split(",") if row["alternatenames"] else []
@@ -65,7 +65,7 @@ def parse_row(
     row: dict[str, str],
     subdivisions: dict[str, SubdivisionModel],
     countries: dict[str, CountryModel],
-) -> CityModel:
+) -> CityModel | None:
 
     geonames_id = row["geonameid"]
 
