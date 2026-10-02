@@ -79,7 +79,8 @@ def dump_search_index(data: Sequence[Model], datadir_path: Path) -> None:
         offset += len(ids)
 
     # Write the compressed blob to disk
-    blob_path.write_bytes(gzip.compress(buf, compresslevel=6))
+    # mtime=0: gzip otherwise embeds the current time, so identical data would produce different bytes on every dump
+    blob_path.write_bytes(gzip.compress(buf, compresslevel=6, mtime=0))
 
     # Write the offsets to TSV
     with open(offsets_path, "w", newline="", encoding="utf-8") as f:
