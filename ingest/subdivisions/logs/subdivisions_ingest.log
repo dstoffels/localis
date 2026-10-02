@@ -1,9 +1,14 @@
 [SUBDIVISIONS]
-[INFO] No update needed for admin1CodesASCII.txt
-[INFO] No update needed for admin2Codes.txt
-[INFO] No update needed for iso_3166-2.json
-[INFO] No update needed for alternateNamesV2.zip
-[INFO] No update needed for cldr_territory_info.json
+[INFO] Downloading alternateNamesV2.zip from https://download.geonames.org/export/dump/alternateNamesV2.zip
+[INFO] Downloaded and updated alternateNamesV2.zip
+[INFO] Downloading cldr_territory_info.json from https://raw.githubusercontent.com/unicode-org/cldr-json/main/cldr-json/cldr-core/supplemental/territoryInfo.json
+[INFO] Downloaded and updated cldr_territory_info.json
+[INFO] Downloading admin1CodesASCII.txt from https://download.geonames.org/export/dump/admin1CodesASCII.txt
+[INFO] Downloaded and updated admin1CodesASCII.txt
+[INFO] Downloading admin2Codes.txt from https://download.geonames.org/export/dump/admin2Codes.txt
+[INFO] Downloaded and updated admin2Codes.txt
+[INFO] Downloading iso_3166-2.json from https://salsa.debian.org/iso-codes-team/iso-codes/-/raw/main/data/iso_3166-2.json
+[INFO] Downloaded and updated iso_3166-2.json
 [INFO] Loading GeoNames subdivisions...
 [INFO] Merging GeoNames alternate names into subdivision aliases...
 [INFO] Enriched 25789 GeoNames subdivisions with alternate names
