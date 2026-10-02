@@ -11,12 +11,6 @@ class AutomergeMatch:
 
 
 @dataclass
-class AuditEntry:
-    id: int | None
-    findings: str | None = None
-
-
-@dataclass
 class SkillDecision:
     """A resolve-subdivisions decision: a GeoNames id to merge into, or None for "add as-is". escalation holds the agent's findings when it sent the orphan to a human. wikidata_seen is the Wikidata crosswalk's mapping when the decision was made, so a decision that disagrees with it is a known override rather than a silent one. reason and decided_by are None for decisions recorded before they were tracked."""
 
@@ -90,7 +84,6 @@ class Automerge:
 @dataclass
 class ResolutionMap:
     non_administrative_types: dict[str, list[str]] = field(default_factory=dict)
-    audited: dict[str, AuditEntry] = field(default_factory=dict)
     skill_decisions: dict[str, SkillDecision] = field(default_factory=dict)
     wikidata_merge: dict[str, int | None] = field(default_factory=dict)
     automerge: Automerge = field(default_factory=Automerge)
@@ -105,10 +98,6 @@ class ResolutionMap:
 
         return cls(
             non_administrative_types=data.get("NON_ADMINISTRATIVE_TYPES", {}),
-            audited={
-                code: AuditEntry(**entry)
-                for code, entry in data.get("audited", {}).items()
-            },
             skill_decisions={
                 code: SkillDecision(**decision)
                 for code, decision in data.get("skill_decisions", {}).items()
@@ -147,7 +136,6 @@ class ResolutionMap:
     def save(self, path: Path) -> None:
         data = {
             "NON_ADMINISTRATIVE_TYPES": self.non_administrative_types,
-            "audited": {code: asdict(entry) for code, entry in self.audited.items()},
             "skill_decisions": {code: asdict(decision) for code, decision in self.skill_decisions.items()},
             "wikidata_merge": self.wikidata_merge,
             "automerge": {
@@ -167,13 +155,3 @@ class ResolutionMap:
     def is_non_administrative(self, alpha2: str, entry_type: str) -> bool:
         types = self.non_administrative_types.get(alpha2, [])
         return entry_type.lower() in {t.lower() for t in types}
-
-    def reconcile(self, iso_code: str, geonames_id: int | None) -> bool:
-        """True if a fresh geonames_id (or None, meaning no match) agrees with what's already in `audited` (caller discards it, nothing to write); evicts the stale audited entry otherwise, since the audit decision no longer reflects reality. An audited id of None means "verified: should not merge", which matches a fresh orphan result (also None). Shared by any recomputed-every-run source (automerge, wikidata_merge), not just AutomergeMatch."""
-        audited_entry = self.audited.get(iso_code)
-        if audited_entry is None:
-            return False
-        if audited_entry.id == geonames_id:
-            return True
-        del self.audited[iso_code]
-        return False

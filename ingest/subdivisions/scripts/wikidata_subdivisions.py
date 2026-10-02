@@ -84,7 +84,7 @@ def apply_wikidata_matches(
     sub_map: SubdivisionMap,
     crosswalk: dict[str, int],
 ) -> dict[str, SubdivisionModel]:
-    """Applies unambiguous Wikidata crosswalk matches for whatever skill_decisions didn't already claim, before auto-merge ever sees these iso_subs. Recomputed fresh every run (external data we don't control, not a one-time human decision) and reconciled against `audited`."""
+    """Applies unambiguous Wikidata crosswalk matches for whatever skill_decisions didn't already claim, before auto-merge ever sees these iso_subs. Recomputed fresh every run (external data we don't control, not a one-time human decision)."""
     resolution_map.wikidata_merge = {}
     remaining: dict[str, SubdivisionModel] = {}
 
@@ -104,8 +104,7 @@ def apply_wikidata_matches(
             remaining[iso_code] = iso_sub
             continue
 
-        if not resolution_map.reconcile(iso_code, geonames_id):
-            resolution_map.wikidata_merge[iso_code] = geonames_id
+        resolution_map.wikidata_merge[iso_code] = geonames_id
         merge_matched_sub(iso_sub, mapped_sub)
 
     resolved_count = len(iso_subs) - len(remaining)

@@ -16,7 +16,7 @@ def try_merge(
     sub_map: SubdivisionMap,
     resolution_map: ResolutionMap,
 ) -> None:
-    """Auto-merges every iso_sub not already resolved by the resolve-subdivisions skill or bypassed as non-administrative. Writes directly into resolution_map.automerge: a fresh result that matches what's already in `audited` is discarded (the audited entry is left as the authoritative record), otherwise it's written as a new, unaudited resolution/orphan, evicting any stale audited entry it contradicts."""
+    """Auto-merges every iso_sub not already resolved by the resolve-subdivisions skill or bypassed as non-administrative. Writes every resolution and orphan directly into resolution_map.automerge, recomputed from scratch each run."""
 
     resolution_map.automerge.resolutions = {}
     resolution_map.automerge.orphans.no_candidates = []
@@ -103,10 +103,9 @@ def try_merge(
                 ambiguous_candidates.setdefault(iso_code, []).append(geonames_id)
 
         for iso_code, candidate_geonames_ids in ambiguous_candidates.items():
-            if not resolution_map.reconcile(iso_code, None):
-                resolution_map.automerge.orphans.ambiguity.append(
-                    AmbiguousOrphan(iso_code=iso_code, candidate_geonames_ids=candidate_geonames_ids)
-                )
+            resolution_map.automerge.orphans.ambiguity.append(
+                AmbiguousOrphan(iso_code=iso_code, candidate_geonames_ids=candidate_geonames_ids)
+            )
 
         claimed_iso: set[str] = set()
         claimed_geo: set[int] = set()
@@ -132,17 +131,14 @@ def try_merge(
                     f"{iso_sub.iso_code} '{iso_sub.name}' -> {geo_sub.geonames_code} '{geo_name}' ({score:.0f}/{needed}) below margin floor, sent for review",
                     level="WARN",
                 )
-                if not resolution_map.reconcile(iso_sub.iso_code, None):
-                    resolution_map.automerge.orphans.low_margin.append(
-                        LowMarginOrphan(iso_code=iso_sub.iso_code, candidate_geonames_id=geo_sub.geonames_id, margin=margin)
-                    )
+                resolution_map.automerge.orphans.low_margin.append(
+                    LowMarginOrphan(iso_code=iso_sub.iso_code, candidate_geonames_id=geo_sub.geonames_id, margin=margin)
+                )
                 continue
             merge_matched_sub(iso_sub, geo_sub)
             claimed_iso.add(iso_sub.iso_code)
             claimed_geo.add(geo_sub.geonames_id)
-            match = AutomergeMatch(id=geo_sub.geonames_id, margin=margin)
-            if not resolution_map.reconcile(iso_sub.iso_code, match.id):
-                resolution_map.automerge.resolutions[iso_sub.iso_code] = match
+            resolution_map.automerge.resolutions[iso_sub.iso_code] = AutomergeMatch(id=geo_sub.geonames_id, margin=margin)
             if score < 90:
                 ingest_log.writeline(
                     f"merged {iso_sub.iso_code} '{iso_sub.name}' -> {geo_sub.geonames_code} '{geo_name}' ({score:.0f}/{needed})"
@@ -177,10 +173,7 @@ def try_merge(
                         level="WARN",
                     )
             assert iso_sub.iso_code is not None
-            if not resolution_map.reconcile(iso_sub.iso_code, None):
-                getattr(resolution_map.automerge.orphans, reason).append(
-                    iso_sub.iso_code
-                )
+            getattr(resolution_map.automerge.orphans, reason).append(iso_sub.iso_code)
         unmerged_count += len(bucket_iso_subs) - len(claimed_iso)
 
     ingest_log.writeline(
