@@ -34,7 +34,7 @@ The top-tier batch is the first batch, or the second batch if the first held onl
 
 Use real-world knowledge, not string similarity. If iterating over candidates of the same country as the previous orphan, you can use that previous context to inform your decision.
 
-If you have high confidence that this ISO subdivision and one specific unclaimed candidate are the same place (a transliteration difference, an old vs. current name, a local vs. official form, etc.), call the `merge` tool with `candidate_geonames_id`, then return to Step 1.
+If you have high confidence that this ISO subdivision and one specific unclaimed candidate are the same place (a transliteration difference, an old vs. current name, a local vs. official form, etc.), call the `merge` tool with `candidate_geonames_id` and a `reason`, one sentence naming what makes them the same place, then return to Step 1. Every merge needs a reason: it's the record a later audit works from, and if you can't state one, you aren't confident enough to merge.
 
 Otherwise, including when the matching place is `CLAIMED BY` another ISO code or when two or more candidates plausibly fit, proceed to Step 3.
 
@@ -57,7 +57,12 @@ If you find the same place `CLAIMED BY` another ISO code, or two or more plausib
 If `next` returns an empty candidates array, proceed to Step 5.
 
 ### Step 5. Decide whether the place has no GeoNames counterpart
-If the search confirmed the orphan is a valid, current or historical entity, and GeoNames uses a different administrative scheme for this country so this kind of subdivision doesn't exist in GeoNames at all (for example, GeoNames lists Madagascar's 22 regions while ISO lists its 6 provinces), call the `add` tool with that scheme difference as the `reason`, then return to Step 1.
+Call the `add` tool only if the search confirmed the orphan is a real, current or historical entity and one of these reasons applies. Give the reason that applies, with the specifics, as the `reason`, then return to Step 1.
+
+1. **GeoNames uses a different administrative scheme for the country**, so this kind of subdivision doesn't exist in GeoNames at all. Examples: GeoNames lists Madagascar's 22 regions while ISO lists its 6 provinces. GeoNames keeps London's boroughs at admin level 3, below Greater London, and localis only ingests levels 1 and 2. GeoNames has no administrative record for Hungary's cities with county rights, only populated places; never merge such a city into its járás, which is a larger district.
+2. **GeoNames treats the place as its own country.** ISO lists some territories as a country's subdivisions while also giving them their own ISO 3166-1 code, and GeoNames files them only as countries: France's overseas departments and collectivities, the US's outlying areas (Guam, Puerto Rico, etc.), Curaçao, Aruba and Sint Maarten under the Netherlands. For these, check only the top-tier batch; if nothing matches, `add` without searching or paging further.
+3. **A real reorganization retired the subdivision.** It was merged into or split into other subdivisions, ISO still lists it, and GeoNames has no record of the retired subdivision itself (only its successors). If GeoNames still has a record for the retired subdivision, `merge` into that instead. A simple rename isn't a retirement: the renamed place is still there to merge with.
+4. **Disputed territory.** ISO lists the subdivision under one country, while GeoNames files that land under another (Serbia's Kosovo districts, which GeoNames places under Kosovo). Add it as ISO lists it, without taking a side.
 
 Otherwise, proceed to Step 6. "None of the candidates matched" is not a reason to `add`, and neither is a place being too new for GeoNames: an `add` is permanent and becomes a duplicate once GeoNames includes the place.
 
@@ -65,8 +70,8 @@ Otherwise, proceed to Step 6. "None of the candidates matched" is not a reason t
 Escalate whenever any of these is true:
 - The matching record exists but is `CLAIMED BY` another ISO code.
 - Two or more candidates plausibly fit, and level, type and the web search can't decide between them.
-- The web search shows the orphan maps to only part of a GeoNames record, or to several of them (a merger, split or reorganization).
-- No candidate matches, and the absence isn't explained by a different administrative scheme.
+- The web search shows the orphan, a current subdivision, maps to only part of a GeoNames record or to several of them, and none of Step 5's reasons explains it.
+- No candidate matches, and none of Step 5's reasons explains the absence.
 
 Call the `review` tool with a `reason` stating which of the above applies and what the web search found. That reason is stored with the user's eventual decision as its audit record, so make it complete. Report your findings to the user and offer them the following two options, then stop this turn and wait for the user to respond:
 1. `Add` the orphan as a new entry.
@@ -78,3 +83,4 @@ When the user decides, apply their decision: call `merge` with the `geonames_id`
 - **Never fabricate a `geonames_id`.** It must come from that specific entry's own `candidates` list.
 - **Never merge into a `CLAIMED BY` candidate.**
 - When unsure between `add` and escalating, escalate. A wrong `add` creates a duplicate record that ships silently; an escalation costs one human decision.
+- **This document is the only source of rules.** Don't apply decision rules remembered from earlier sessions, and don't save new ones to memory. A user's ruling on an escalation applies to that orphan; if the user says it covers similar orphans, it holds for the rest of this session only, and they'll add it here if it should last. When a case resembles an earlier decision but isn't covered here, escalate and mention the resemblance.

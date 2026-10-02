@@ -59,12 +59,12 @@ def next() -> dict | str | None:
 
 
 @mcp.tool(name="merge")
-def merge(candidate_geonames_id: str, reason: str | None = None) -> str:
+def merge(candidate_geonames_id: str, reason: str) -> str:
     """Merges an orphaned subdivision into an existing country candidate.
 
     Args:
         candidate_geonames_id (str): The geonames_id of the geonames subdivision to merge into.
-        reason (str, optional): Why this candidate is the same place, when it isn't evident from the names alone (e.g. a former name, or the user's explanation after a review).
+        reason (str): One sentence on why the candidate is the same place, e.g. "transliteration of Krasnodarskiy kray", "former name, renamed 2019", or the user's explanation after a review.
     """
     orphan = get_next_orphan()
     if orphan is None:
