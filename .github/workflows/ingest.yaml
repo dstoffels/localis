@@ -70,6 +70,9 @@ jobs:
       - name: Run full ingest pipeline
         run: poetry run ingest
 
+      - name: Regenerate data stats and docs
+        run: poetry run analysis --data-only
+
       - name: Type Check
         run: poetry run pyright
 

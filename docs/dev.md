@@ -52,13 +52,15 @@ The monthly refresh described above is implemented in `.github/workflows/ingest.
 
 Each run merges the latest `main` into `ingest`, then runs `poetry run ingest`. If any subdivision orphans remain, `ingest_subdivisions()`'s hard gate (see Pipeline integration above) calls `sys.exit(10)` before anything is staged, so this step itself fails the job, visible as a red X in the Actions tab, with the exact orphan counts in its log output. Nothing downstream (version bump, commit, push, PR) runs in that case, and the `ingest` branch is left untouched; resolving it is a local step: pull `ingest`, run the resolve-subdivisions skill, commit, and push back to `origin/ingest`, which re-triggers this workflow through its push trigger.
 
-A clean run stages whatever changed. If `src/localis/data` (the published dataset) changed, it bumps the **patch** version with `poetry version patch` before committing. A data refresh doesn't touch the public API, so minor is reserved for genuine backward-compatible additions; conflating the two would mean a consumer reading `1.4.0 → 1.5.0` couldn't tell "just fresher data" from "there's a new method worth checking out." Freshness is still visible, just through the CHANGELOG's per-release counts rather than the version number itself. Bookkeeping files (the per-domain `*.manifest.json`, `resolution_map.json`) can change independently of the dataset output and still get committed on a run where the dataset itself didn't move. Everything staged is committed and pushed back to `ingest`, then a single, persistent `ingest` → `main` pull request is created (ready for review, not draft, since reaching this point already guarantees a clean, orphan-free run) or, if it already exists, commented with that run's actual diff (`git diff --stat HEAD~1 HEAD -- src/localis/data`), so the PR reads as a log of real changes rather than a bare pointer at commit history.
+A clean run then regenerates `tests/analysis/data_stats.json` and fills the docs' stat markers from it (see Performance Profile), so the record counts and resolution breakdown in the README and `methodology.md` always describe the data being committed; the test suite's `render_docs.py --check` fails a run whose docs don't. Locally, `poetry run analysis --data-only` does the same after an ingest. Timing and memory figures aren't regenerated in CI, since they depend on the host: after a change that could move them, run the whole suite with `poetry run analysis --notes "what changed"`, which runs the data stats, footprint and benchmarks and then fills the markers. `poetry run analysis --check` only checks that the docs' deterministic markers are current.
+
+It stages whatever changed. If `src/localis/data` (the published dataset) changed, it bumps the **patch** version with `poetry version patch` before committing. A data refresh doesn't touch the public API, so minor is reserved for genuine backward-compatible additions; conflating the two would mean a consumer reading `1.4.0 → 1.5.0` couldn't tell "just fresher data" from "there's a new method worth checking out." Freshness is still visible, just through the CHANGELOG's per-release counts rather than the version number itself. Bookkeeping files (the per-domain `*.manifest.json`, `resolution_map.json`) can change independently of the dataset output and still get committed on a run where the dataset itself didn't move. Everything staged is committed and pushed back to `ingest`, then a single, persistent `ingest` → `main` pull request is created (ready for review, not draft, since reaching this point already guarantees a clean, orphan-free run) or, if it already exists, commented with that run's actual diff (`git diff --stat HEAD~1 HEAD -- src/localis/data`), so the PR reads as a log of real changes rather than a bare pointer at commit history.
 
 One bug this surfaced and fixed in passing: `release.yaml`'s checkout step never fetched tags, so its `git tag | sort --version-sort | tail -n1` always came back empty. The workflow believed no version had ever shipped and re-attempted publishing whatever version was already in `pyproject.toml`, which is what actually broke the most recent release (PyPI rejects re-uploading an already-used filename), not a PyPI API change as it first appeared. Fixed with `fetch-tags: true` on that checkout step, which matters here specifically because a merged `ingest` PR is exactly the kind of push to `main` that would retrigger this failure mode.
 
 ## Performance Profile
 
-Snapshot taken after the cities500 switch and the entities/views/stores refactor (254 countries, 51,684 subdivisions, 235,895 cities). These numbers move as the dataset grows through the ingest pipeline; re-measure before relying on them for a release decision. Memory figures are retained RSS deltas (`VmRSS` read from `/proc/self/status` after an explicit `gc.collect()`), not `ru_maxrss` peak; see Memory measurement methodology below for why that distinction matters.
+Every figure in this section and in the README's Performance section is generated, never transcribed by hand. `tests/analysis/data_stats.py` produces the deterministic numbers (record counts, the subdivision resolution breakdown, shipped file sizes) into `data_stats.json`, and asserts that they reconcile. `tests/analysis/footprint.py` measures load time and retained memory per registry component, each scenario in fresh subprocesses with the median kept, and `tests/analysis/benchmarks.py` measures per-call latency percentiles and search accuracy; both append to a history (`footprint.json`, `benchmarks.json`) with a fingerprint of the host they ran on. `tests/analysis/render_docs.py` fills each `stat:source.key|format` HTML-comment marker in the docs from those files, and `render_docs.py --check`, run by the test suite, fails if a deterministic marker is stale. Current figures were measured on <!-- stat:footprint.host.cpu|raw -->-<!-- /stat --> with Python <!-- stat:footprint.host.python|raw -->-<!-- /stat -->. Memory figures are retained RSS deltas (`VmRSS` read from `/proc/self/status` after an explicit `gc.collect()`), not `ru_maxrss` peak; see Memory measurement methodology below for why that distinction matters.
 
 ### Search and filter index architecture
 
@@ -78,35 +80,35 @@ Earlier benchmarks in this document used `resource.getrusage(resource.RUSAGE_SEL
 
 ### Shipped data size
 
-`src/localis/data/` is 54MB total (down from 98MB after the cities500 switch), almost entirely cities:
+`src/localis/data/` is <!-- stat:data.shipped_size.total|size -->57.0MB<!-- /stat --> total, almost entirely cities:
 
 | Domain | Size | Share |
 |---|---|---|
-| Countries | 84KB | 0.15% |
-| Subdivisions | 8.0MB | 14.8% |
-| Cities | 46MB | 85.1% |
+| Countries | <!-- stat:data.shipped_size.countries.total|size -->73KB<!-- /stat --> | <!-- stat:data.shipped_size.countries.share_pct|pct -->0.1%<!-- /stat --> |
+| Subdivisions | <!-- stat:data.shipped_size.subdivisions.total|size -->10.6MB<!-- /stat --> | <!-- stat:data.shipped_size.subdivisions.share_pct|pct -->18.5%<!-- /stat --> |
+| Cities | <!-- stat:data.shipped_size.cities.total|size -->46.4MB<!-- /stat --> | <!-- stat:data.shipped_size.cities.share_pct|pct -->81.4%<!-- /stat --> |
 
-Within cities: `cities.tsv` 13MB, `filter_index.tsv` 18MB, `search_index.bin.gz` 13MB, `search_index_offsets.tsv` 236KB, `lookup_index_int.tsv` 3.3MB.
+Within cities: `cities.tsv` <!-- stat:data.shipped_size.cities.files.cities.tsv|size -->12.6MB<!-- /stat -->, `filter_index.tsv` <!-- stat:data.shipped_size.cities.files.filter_index.tsv|size -->17.5MB<!-- /stat -->, `search_index.bin.gz` <!-- stat:data.shipped_size.cities.files.search_index.bin.gz|size -->12.8MB<!-- /stat -->, `search_index_offsets.tsv` <!-- stat:data.shipped_size.cities.files.search_index_offsets.tsv|size -->234KB<!-- /stat -->, `lookup_index_int.tsv` <!-- stat:data.shipped_size.cities.files.lookup_index_int.tsv|size -->3.2MB<!-- /stat -->.
 
 ### Memory footprint
 
 | Registry (`force_cache()`) | Retained memory |
 |---|---|
-| countries | 892KB |
-| subdivisions | 44.6MB |
-| cities | 150.1MB |
-| **total, all three fully cached** | **195.6MB** |
+| countries | <!-- stat:footprint.registries.countries.combined.memory_bytes|size -->-<!-- /stat --> |
+| subdivisions | <!-- stat:footprint.registries.subdivisions.combined.memory_bytes|size -->-<!-- /stat --> |
+| cities | <!-- stat:footprint.registries.cities.combined.memory_bytes|size -->-<!-- /stat --> |
+| **total, all three fully cached** | **<!-- stat:footprint.full_cache.memory_bytes|size -->-<!-- /stat -->** |
 
-Cities' 150.1MB breaks down further by structure:
+Cities' <!-- stat:footprint.registries.cities.combined.memory_bytes|size -->-<!-- /stat --> breaks down further by structure:
 
 | Cities component | Retained memory | Build time |
 |---|---|---|
-| `_cache` (235,895 views) | 59.9MB | 395ms |
-| `_lookup_index` | 4KB | 59ms |
-| `_filter_index` | 56.7MB | 543ms |
-| `_search_index` | 33.5MB | 144ms |
+| `_cache` | <!-- stat:footprint.registries.cities.dataset.memory_bytes|size -->-<!-- /stat --> | <!-- stat:footprint.registries.cities.dataset.time_ms|load -->-<!-- /stat --> |
+| `_lookup_index` | <!-- stat:footprint.registries.cities.lookup_index.memory_bytes|size -->-<!-- /stat --> | <!-- stat:footprint.registries.cities.lookup_index.time_ms|load -->-<!-- /stat --> |
+| `_filter_index` | <!-- stat:footprint.registries.cities.filter_index.memory_bytes|size -->-<!-- /stat --> | <!-- stat:footprint.registries.cities.filter_index.time_ms|load -->-<!-- /stat --> |
+| `_search_index` | <!-- stat:footprint.registries.cities.search_index.memory_bytes|size -->-<!-- /stat --> | <!-- stat:footprint.registries.cities.search_index.time_ms|load -->-<!-- /stat --> |
 
-**Total load time** (all three registries, `_cache` plus every index) is ~1.4s.
+**Total load time** (all three registries, `_cache` plus every index) is <!-- stat:footprint.full_cache.time_ms|load -->-<!-- /stat -->.
 
 ### Population floor
 
@@ -114,4 +116,4 @@ Cities' 150.1MB breaks down further by structure:
 
 Ids stay stable across thresholds. `Store.id_to_idx` (an `array.array("i")` sized to the full unfiltered id space, `-1` for an excluded id) decouples a View's physical position in its Store from its public `id`, so `View._idx` resolves through this array instead of assuming `id - 1`. That lets `CityStore` skip allocating rows for excluded cities entirely, a real memory saving rather than just fewer View wrapper objects, without ever renumbering an id a caller might already be holding.
 
-At a 15,000 threshold (the tier geonamescache ships as a separate bundled dataset), cities drops from 235,895 to 34,167 and retained memory drops from 150.1MB to 31.5MB.
+At a <!-- stat:data.cities.threshold|int -->15,000<!-- /stat --> threshold (the tier geonamescache ships as a separate bundled dataset), cities drops from <!-- stat:data.cities.total|int -->235,914<!-- /stat --> to <!-- stat:data.cities.above_threshold|int -->34,171<!-- /stat --> and retained memory drops from <!-- stat:footprint.registries.cities.combined.memory_bytes|size -->-<!-- /stat --> to <!-- stat:footprint.cities_threshold.memory_bytes|size -->-<!-- /stat -->.

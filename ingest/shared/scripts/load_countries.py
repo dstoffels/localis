@@ -10,7 +10,9 @@ def load_countries() -> dict[str, CountryModel]:
         countries: dict[str, CountryModel] = {}
         for id, row in enumerate(reader, start=1):
             name, alpha2, alpha3, geonames_id, official_name, aliases, numeric, flag, historic = row
-            countries[alpha2] = CountryModel(
+            # historic rows reuse active and each other's alpha2 codes, so key them by alpha_4 like ingest_countries() does
+            key = historic.split("|")[0] if historic else alpha2
+            countries[key] = CountryModel(
                 id=id,
                 name=name,
                 alpha2=alpha2,

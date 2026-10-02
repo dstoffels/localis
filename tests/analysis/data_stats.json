@@ -1,0 +1,83 @@
+{
+  "countries": {
+    "total": 281,
+    "current": 250,
+    "historic": 31
+  },
+  "subdivisions": {
+    "total": 51711,
+    "iso_total": 5046,
+    "iso_merged": 4843,
+    "iso_merged_pct": 96.0,
+    "iso_only": 203,
+    "geonames_total": 51508,
+    "geonames_only": 46665,
+    "by_level": {
+      "0": 49,
+      "1": 4199,
+      "2": 47398,
+      "3": 65
+    }
+  },
+  "resolution": {
+    "wikidata": 4295,
+    "automerge": 355,
+    "skill_merge": 168,
+    "skill_add": 174,
+    "bypass_twinned": 25,
+    "bypass_untwinned": 24,
+    "geonames_absent": 5,
+    "skill_by_agent": 289,
+    "skill_by_human": 53,
+    "orphans": 0,
+    "skill_decisions": 342,
+    "total": 5046
+  },
+  "cities": {
+    "total": 235914,
+    "threshold": 15000,
+    "above_threshold": 34171
+  },
+  "shipped_size": {
+    "total": 59798845,
+    "cities": {
+      "total": 48658183,
+      "share_pct": 81.4,
+      "files": {
+        "cities.tsv": 13251304,
+        "filter_index.tsv": 18379365,
+        "lookup_index_int.tsv": 3403983,
+        "lookup_index_str.tsv": 0,
+        "search_fields.tsv": 102,
+        "search_index.bin.gz": 13383908,
+        "search_index_offsets.tsv": 239521
+      }
+    },
+    "countries": {
+      "total": 75049,
+      "share_pct": 0.1,
+      "files": {
+        "countries.tsv": 23492,
+        "filter_index.tsv": 11747,
+        "lookup_index_int.tsv": 1852,
+        "lookup_index_str.tsv": 3813,
+        "search_fields.tsv": 39,
+        "search_index.bin.gz": 9559,
+        "search_index_offsets.tsv": 24547
+      }
+    },
+    "subdivisions": {
+      "total": 11065613,
+      "share_pct": 18.5,
+      "files": {
+        "filter_index.tsv": 2773481,
+        "lookup_index_int.tsv": 0,
+        "lookup_index_str.tsv": 969848,
+        "search_fields.tsv": 107,
+        "search_index.bin.gz": 3475358,
+        "search_index_offsets.tsv": 242943,
+        "subdivisions.tsv": 3603876
+      }
+    }
+  }
+}

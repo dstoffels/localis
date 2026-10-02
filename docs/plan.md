@@ -19,6 +19,7 @@ Blocked on the above, needs a dedicated design pass before implementation starts
 - Gettext-based name translation across `Country`/`Subdivision` (and `Currency`/`Language`/`Script` once they exist), including `language_code` support on `filter()`/`search()`.
 
 ## Backlog
+- Move dev commands (`ingest`, `analysis`, `test`, `test-watch`) out of `[project.scripts]`, which ships in the published package and installs them for every PyPI user even though they point at code the package doesn't include (`ingest/`, `tests/`, dev dependencies), so they crash. A task runner such as poethepoet (`[tool.poe.tasks]`) keeps them dev-only.
 - City radius feature using lat/lng to return nearby cities within a specified distance?
 - Add filter() kwarg error handling for invalid arguments
 - Implement custom exceptions (localis.exceptions module)?

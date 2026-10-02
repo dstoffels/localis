@@ -4,9 +4,9 @@ Fast, offline access to comprehensive data for **countries**, **subdivisions**, 
 
 ## Features
 
-- 🌍 **281 countries** (31 historic) sourced and merged from ISO 3166-1, ISO 3166-3, and GeoNames
-- 🗺️ **51,711 subdivisions** sourced and merged from ISO 3166-2 and GeoNames
-- 🏙️ **235,914 cities** sourced from GeoNames cities500.txt
+- 🌍 **<!-- stat:data.countries.total|int -->281<!-- /stat --> countries** (<!-- stat:data.countries.historic|int -->31<!-- /stat --> historic) sourced and merged from ISO 3166-1, ISO 3166-3, and GeoNames
+- 🗺️ **<!-- stat:data.subdivisions.total|int -->51,711<!-- /stat --> subdivisions** sourced and merged from ISO 3166-2 and GeoNames
+- 🏙️ **<!-- stat:data.cities.total|int -->235,914<!-- /stat --> cities** sourced from GeoNames cities500.txt
 - 🔍 **Search Engine** for typo-tolerant lookups with 99%+ accuracy
 - 📌 **Aliases** - support for colloquial, historic and alternate names
 
@@ -109,7 +109,7 @@ total = len(localis.countries)
 
 ### Historic Countries
 
-ISO 3166-3 withdrawn countries (Czechoslovakia, Serbia and Montenegro, Netherlands Antilles, and 28 others) are included in the dataset but excluded from `filter()`, `search()`, and iteration by default.
+ISO 3166-3 withdrawn countries (Czechoslovakia, Serbia and Montenegro, Netherlands Antilles, and others) are included in the dataset but excluded from `filter()`, `search()`, and iteration by default.
 
 ```python
 localis.countries.include_historic   # False
@@ -366,53 +366,53 @@ nested_sub.admin_level
 
 All registries and their indexes are lazy-loaded on first use, incurring a cold start cost on whichever call touches them first. Any registry's dataset and indexes can be pre-loaded with `.force_cache()` to avoid this during queries, or you can simply access the registry/method to trigger the lazy loading upfront.
 
-#### Countries (281)
+#### Countries (<!-- stat:data.countries.total|int -->281<!-- /stat -->)
 | Component | Load Time | Memory |
 |---|---|---|
-| Dataset | ~1ms | ~400KB |
-| Lookup index | < 1ms | ~0KB |
-| Filter index | ~1ms | ~200KB |
-| Search index | ~2ms | ~700KB |
-| **Combined** | **~4ms** | **~1.4MB** |
+| Dataset | <!-- stat:footprint.registries.countries.dataset.time_ms|load -->-<!-- /stat --> | <!-- stat:footprint.registries.countries.dataset.memory_bytes|size -->-<!-- /stat --> |
+| Lookup index | <!-- stat:footprint.registries.countries.lookup_index.time_ms|load -->-<!-- /stat --> | <!-- stat:footprint.registries.countries.lookup_index.memory_bytes|size -->-<!-- /stat --> |
+| Filter index | <!-- stat:footprint.registries.countries.filter_index.time_ms|load -->-<!-- /stat --> | <!-- stat:footprint.registries.countries.filter_index.memory_bytes|size -->-<!-- /stat --> |
+| Search index | <!-- stat:footprint.registries.countries.search_index.time_ms|load -->-<!-- /stat --> | <!-- stat:footprint.registries.countries.search_index.memory_bytes|size -->-<!-- /stat --> |
+| **Combined** | **<!-- stat:footprint.registries.countries.combined.time_ms|load -->-<!-- /stat -->** | **<!-- stat:footprint.registries.countries.combined.memory_bytes|size -->-<!-- /stat -->** |
 
-#### Subdivisions (51,711)
+#### Subdivisions (<!-- stat:data.subdivisions.total|int -->51,711<!-- /stat -->)
 | Component | Load Time | Memory |
 |---|---|---|
-| Dataset | ~102ms | 27.0MB |
-| Lookup index | ~14ms | 3.8MB |
-| Filter index | ~124ms | 19.4MB |
-| Search index | ~68ms | 11.4MB |
-| **Combined** | **~309ms** | **61.6MB** |
+| Dataset | <!-- stat:footprint.registries.subdivisions.dataset.time_ms|load -->-<!-- /stat --> | <!-- stat:footprint.registries.subdivisions.dataset.memory_bytes|size -->-<!-- /stat --> |
+| Lookup index | <!-- stat:footprint.registries.subdivisions.lookup_index.time_ms|load -->-<!-- /stat --> | <!-- stat:footprint.registries.subdivisions.lookup_index.memory_bytes|size -->-<!-- /stat --> |
+| Filter index | <!-- stat:footprint.registries.subdivisions.filter_index.time_ms|load -->-<!-- /stat --> | <!-- stat:footprint.registries.subdivisions.filter_index.memory_bytes|size -->-<!-- /stat --> |
+| Search index | <!-- stat:footprint.registries.subdivisions.search_index.time_ms|load -->-<!-- /stat --> | <!-- stat:footprint.registries.subdivisions.search_index.memory_bytes|size -->-<!-- /stat --> |
+| **Combined** | **<!-- stat:footprint.registries.subdivisions.combined.time_ms|load -->-<!-- /stat -->** | **<!-- stat:footprint.registries.subdivisions.combined.memory_bytes|size -->-<!-- /stat -->** |
 
-#### Cities (235,914)
+#### Cities (<!-- stat:data.cities.total|int -->235,914<!-- /stat -->)
 
-> ⚠️ **Memory-intensive.** Fully caching cities and its indexes adds 151.0MB of resident memory. Calling `localis.cities.force_cache()` loads all of it upfront. You can call `cities.set_population_threshold(n)` before first access as a lever to control the memory footprint.
+> ⚠️ **Memory-intensive.** Fully caching cities and its indexes adds <!-- stat:footprint.registries.cities.combined.memory_bytes|size -->-<!-- /stat --> of resident memory. Calling `localis.cities.force_cache()` loads all of it upfront. You can call `cities.set_population_threshold(n)` before first access as a lever to control the memory footprint.
 
 | Component | Load Time | Memory |
 |---|---|---|
-| Dataset | ~460ms | 61.1MB |
-| Lookup index | ~71ms | < 100KB |
-| Filter index | ~620ms | 57.2MB |
-| Search index | ~189ms | 32.7MB |
-| **Combined** | **~1.34s** | **151.0MB** |
+| Dataset | <!-- stat:footprint.registries.cities.dataset.time_ms|load -->-<!-- /stat --> | <!-- stat:footprint.registries.cities.dataset.memory_bytes|size -->-<!-- /stat --> |
+| Lookup index | <!-- stat:footprint.registries.cities.lookup_index.time_ms|load -->-<!-- /stat --> | <!-- stat:footprint.registries.cities.lookup_index.memory_bytes|size -->-<!-- /stat --> |
+| Filter index | <!-- stat:footprint.registries.cities.filter_index.time_ms|load -->-<!-- /stat --> | <!-- stat:footprint.registries.cities.filter_index.memory_bytes|size -->-<!-- /stat --> |
+| Search index | <!-- stat:footprint.registries.cities.search_index.time_ms|load -->-<!-- /stat --> | <!-- stat:footprint.registries.cities.search_index.memory_bytes|size -->-<!-- /stat --> |
+| **Combined** | **<!-- stat:footprint.registries.cities.combined.time_ms|load -->-<!-- /stat -->** | **<!-- stat:footprint.registries.cities.combined.memory_bytes|size -->-<!-- /stat -->** |
 
-At a threshold of 15,000, cities drops from 235,914 to 34,167 and memory drops from 151.0MB to 31.5MB.
+At a threshold of <!-- stat:data.cities.threshold|int -->15,000<!-- /stat -->, cities drops from <!-- stat:data.cities.total|int -->235,914<!-- /stat --> to <!-- stat:data.cities.above_threshold|int -->34,171<!-- /stat --> and memory drops from <!-- stat:footprint.registries.cities.combined.memory_bytes|size -->-<!-- /stat --> to <!-- stat:footprint.cities_threshold.memory_bytes|size -->-<!-- /stat -->.
 
-**Full Cache**: ~1.65s load time, 214.0MB memory for all datasets and indexes
+**Full Cache**: <!-- stat:footprint.full_cache.time_ms|load -->-<!-- /stat --> load time, <!-- stat:footprint.full_cache.memory_bytes|size -->-<!-- /stat --> memory for all datasets and indexes
 
 **Concurrency:** It is recommended to call `.force_cache()` on all registries if they will be accessed from multiple threads to avoid potential race conditions during the first access of any lazy-loaded caches and indexes.
 
 ### Benchmarks
 
-Per-call query latency, and fuzzy search accuracy on mangled/misspelled queries:
+Per-call query latency on warm caches, median (95th percentile), and fuzzy search accuracy on mangled/misspelled queries:
 
 | Registry | Get | Lookup | Filter | Search | Search Accuracy |
 |---|---|---|---|---|---|
-| Countries | 0.0009ms | 0.0029ms | 0.0054ms | 1.27ms | 100% |
-| Subdivisions | 0.002ms | 0.0059ms | 0.013ms | 3.28ms | 94% |
-| Cities | 0.0043ms | 0.0046ms | 0.0166ms | 4.94ms | 99%+ |
+| Countries | <!-- stat:bench.registries.countries.get.p50_ms|latency -->-<!-- /stat --> (<!-- stat:bench.registries.countries.get.p95_ms|latency -->-<!-- /stat -->) | <!-- stat:bench.registries.countries.lookup.p50_ms|latency -->-<!-- /stat --> (<!-- stat:bench.registries.countries.lookup.p95_ms|latency -->-<!-- /stat -->) | <!-- stat:bench.registries.countries.filter.p50_ms|latency -->-<!-- /stat --> (<!-- stat:bench.registries.countries.filter.p95_ms|latency -->-<!-- /stat -->) | <!-- stat:bench.registries.countries.search.p50_ms|latency -->-<!-- /stat --> (<!-- stat:bench.registries.countries.search.p95_ms|latency -->-<!-- /stat -->) | <!-- stat:bench.registries.countries.accuracy.success_pct|pct -->-<!-- /stat --> |
+| Subdivisions | <!-- stat:bench.registries.subdivisions.get.p50_ms|latency -->-<!-- /stat --> (<!-- stat:bench.registries.subdivisions.get.p95_ms|latency -->-<!-- /stat -->) | <!-- stat:bench.registries.subdivisions.lookup.p50_ms|latency -->-<!-- /stat --> (<!-- stat:bench.registries.subdivisions.lookup.p95_ms|latency -->-<!-- /stat -->) | <!-- stat:bench.registries.subdivisions.filter.p50_ms|latency -->-<!-- /stat --> (<!-- stat:bench.registries.subdivisions.filter.p95_ms|latency -->-<!-- /stat -->) | <!-- stat:bench.registries.subdivisions.search.p50_ms|latency -->-<!-- /stat --> (<!-- stat:bench.registries.subdivisions.search.p95_ms|latency -->-<!-- /stat -->) | <!-- stat:bench.registries.subdivisions.accuracy.success_pct|pct -->-<!-- /stat --> |
+| Cities | <!-- stat:bench.registries.cities.get.p50_ms|latency -->-<!-- /stat --> (<!-- stat:bench.registries.cities.get.p95_ms|latency -->-<!-- /stat -->) | <!-- stat:bench.registries.cities.lookup.p50_ms|latency -->-<!-- /stat --> (<!-- stat:bench.registries.cities.lookup.p95_ms|latency -->-<!-- /stat -->) | <!-- stat:bench.registries.cities.filter.p50_ms|latency -->-<!-- /stat --> (<!-- stat:bench.registries.cities.filter.p95_ms|latency -->-<!-- /stat -->) | <!-- stat:bench.registries.cities.search.p50_ms|latency -->-<!-- /stat --> (<!-- stat:bench.registries.cities.search.p95_ms|latency -->-<!-- /stat -->) | <!-- stat:bench.registries.cities.accuracy.success_pct|pct -->-<!-- /stat --> |
 
-Accuracy tested on 5,000 mangled-query samples per registry; cities' search additionally includes city + admin1 context.
+Accuracy tested on <!-- stat:bench.sample_size|int -->5,000<!-- /stat --> mangled-query samples per registry; cities' search additionally includes city + admin1 context. Load times, memory and latency are generated by `tests/analysis/footprint.py` and `tests/analysis/benchmarks.py`, last measured on <!-- stat:footprint.host.cpu -->-<!-- /stat --> with Python <!-- stat:footprint.host.python -->-<!-- /stat -->.
 
 ---
 

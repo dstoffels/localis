@@ -1,139 +1,143 @@
+import argparse
 import json
-from datetime import datetime
+import random
+import statistics
 import time
+import zlib
+from datetime import datetime
+from pathlib import Path
+from typing import Any, Callable
+import localis
 from localis.entities import Entity
 from localis.registries import Registry
-import localis
+from tests.analysis.host import host_fingerprint
 from tests.utils import mangle
-import random
 
-ITERATIONS = 10
+OUTPUT_PATH = Path(__file__).with_name("benchmarks.json")
+FAILURES_LOG_PATH = Path(__file__).with_name("search_failures.log")
+REGISTRIES = ("countries", "subdivisions", "cities")
 SAMPLE_SIZE = 5000
+SEED = 0
 
-FAILURES_LOG_PATH = "tests/analysis/search_failures.log"
+
+def _lookup_identifier(entry: Entity) -> str | int:
+    if isinstance(entry, localis.Country):
+        return entry.alpha2
+    if isinstance(entry, localis.Subdivision):
+        return entry.iso_code or entry.geonames_code or entry.id
+    assert isinstance(entry, localis.City)
+    return entry.geonames_id
 
 
-def benchmark():
-    registries: list[str] = [
-        "countries",
-        "subdivisions",
-        "cities",
-    ]
-    results: dict[str, object] = {
-        "iterations": ITERATIONS,
-        "sample_size": SAMPLE_SIZE,
+def _search_query(entry: Entity) -> str:
+    if isinstance(entry, localis.City):
+        admin1 = next((s for s in entry.subdivisions if s.admin_level == 1), None)
+        if admin1:
+            return f"{entry.name} {admin1.name}"
+    return entry.name
+
+
+def _stable_seed(*parts: object) -> int:
+    """A seed that's the same in every process, unlike hash() on strings."""
+    return zlib.crc32(":".join(map(str, parts)).encode())
+
+
+def _timed(call: Callable[[], Any], samples: list[float]) -> Any:
+    start = time.perf_counter()
+    result = call()
+    samples.append((time.perf_counter() - start) * 1000)
+    return result
+
+
+def _percentiles(samples: list[float]) -> dict[str, float]:
+    cuts = statistics.quantiles(samples, n=100, method="inclusive")
+    return {
+        "p50_ms": round(cuts[49], 4),
+        "p95_ms": round(cuts[94], 4),
+        "p99_ms": round(cuts[98], 4),
+        "max_ms": round(max(samples), 4),
     }
-    results["notes"] = input("Notes: ")
 
+
+def benchmark_registry(name: str, sample_size: int, iterations: int, log) -> dict[str, Any]:
+    """Per-call latency percentiles for get/lookup/filter/search on warm caches, and search accuracy on mangled names and aliases."""
+    registry: Registry = getattr(localis, name)
+    registry.force_cache()
+    entries: list[Entity] = list(registry)
+    latency: dict[str, list[float]] = {"get": [], "lookup": [], "filter": [], "search": []}
+    hits, misses, hit_scores = 0, 0, []
+
+    def search(query: str, entry: Entity, query_type: str, seed: int) -> None:
+        nonlocal hits, misses
+        mangled = mangle(query, seed=seed)
+        results = _timed(lambda: registry.search(mangled), latency["search"])
+        score = next((s for r, s in results if r.id == entry.id), None)
+        if score is not None:
+            hits += 1
+            hit_scores.append(score)
+            return
+        misses += 1
+        top = f'"{results[0][0].name}" ({results[0][1]:.2f})' if results else "no results"
+        log.write(f'[{name}:{query_type}] "{mangled}" -> expected "{query}" (id={entry.id}), got {top}\n')
+
+    for i in range(iterations):
+        rng = random.Random(SEED + i)
+        for entry in rng.sample(entries, min(sample_size, len(entries))):
+            _timed(lambda: registry.get(entry.id), latency["get"])
+            _timed(lambda: registry.lookup(_lookup_identifier(entry)), latency["lookup"])
+            _timed(lambda: registry.filter(name=entry.name), latency["filter"])
+            search(_search_query(entry), entry, "name", seed=_stable_seed(entry.id, i, "name"))
+            aliases = getattr(entry, "aliases", None)
+            if aliases:
+                alias = random.Random(_stable_seed(entry.id, i)).choice(aliases)
+                search(alias, entry, "alias", seed=_stable_seed(entry.id, i, "alias"))
+
+    queries = hits + misses
+    return {
+        **{op: _percentiles(samples) for op, samples in latency.items()},
+        "accuracy": {
+            "queries": queries,
+            "failures": misses,
+            "success_pct": round(100 * hits / queries, 1) if queries else 0.0,
+            "avg_hit_score": round(sum(hit_scores) / hits, 3) if hits else 0.0,
+        },
+    }
+
+
+def benchmark(sample_size: int, iterations: int, notes: str | None) -> dict[str, Any]:
     with open(FAILURES_LOG_PATH, "w") as log:
-        log.write(f"# search failures - {datetime.now().isoformat()}\n")
-
-        for registry_name in registries:
-            print(f"Starting {registry_name}...")
-            registry: Registry = getattr(localis, registry_name)
-            entries: list[Entity] = list(registry)
-
-            total_queries = 0
-            num_hit = 0
-            num_miss = 0
-            avg_time = 0.0
-            top_scores = []
-
-            def search(q: str, entry: Entity, query_type: str):
-                nonlocal total_queries, num_hit, num_miss, avg_time
-
-                seed = hash((entry.id, i, query_type))
-                mangled_q = mangle(q, seed=seed)
-                start = time.perf_counter()
-                search_results = registry.search(mangled_q)
-                end = time.perf_counter()
-                elapsed = (end - start) * 1000
-
-                if total_queries == 0:
-                    avg_time = elapsed
-                else:
-                    avg_time = (avg_time * total_queries + elapsed) / (
-                        total_queries + 1
-                    )
-
-                total_queries += 1
-
-                match_score = next(
-                    (score for r, score in search_results if r.id == entry.id), None
-                )
-                if match_score is not None:
-                    num_hit += 1
-                    top_scores.append(match_score)
-                else:
-                    num_miss += 1
-                    top = search_results[0] if search_results else None
-                    top_desc = (
-                        f'"{top[0].name}" ({top[1]:.2f})' if top else "no results"
-                    )
-                    log.write(
-                        f'[{registry_name}:{query_type}] "{mangled_q}" -> expected "{q}" (id={entry.id}), got {top_desc}\n'
-                    )
-
-            # BEGIN SEARCHES
-            for i in range(ITERATIONS):
-                print(f"Pass {i + 1}")
-                sample_rng = random.Random(i)
-                sample_size = min(SAMPLE_SIZE, len(entries))
-                sample = sample_rng.sample(entries, sample_size)
-
-                for entry in sample:
-                    q = entry.name
-                    if isinstance(entry, localis.City):
-                        admin1 = next((s for s in entry.subdivisions if s.admin_level == 1), None)
-                        if admin1:
-                            q += f" {admin1.name}"
-                    search(q, entry, "name")
-
-                    aliases = getattr(entry, "aliases", None)
-                    if aliases:
-                        alias_rng = random.Random(hash((entry.id, i)))
-                        alias = alias_rng.choice(aliases)
-                        search(alias, entry, "alias")
-
-            success_rate = num_hit / total_queries if total_queries else 0.0
-            avg_hit_score = sum(top_scores) / num_hit if num_hit else 0.0
-
-            results[registry_name] = {
-                "queries": total_queries,
-                "failures": num_miss,
-                "success_rate": round(success_rate, 3),
-                "avg_time_ms": round(avg_time, 3),
-                "avg_hit_score": round(avg_hit_score, 3),
-            }
-
-    return results
+        log.write(f"# search failures - sample {sample_size} x {iterations}, seed {SEED}\n")
+        registries = {}
+        for name in REGISTRIES:
+            print(f"Benchmarking {name}...")
+            registries[name] = benchmark_registry(name, sample_size, iterations, log)
+    return {
+        "host": host_fingerprint(),
+        "sample_size": sample_size,
+        "iterations": iterations,
+        "seed": SEED,
+        "notes": notes,
+        "registries": registries,
+    }
 
 
-def write_file(results: dict[str, object]):
+def main() -> None:
+    parser = argparse.ArgumentParser(description="Benchmarks query latency percentiles and search accuracy, appending to benchmarks.json.")
+    parser.add_argument("--sample-size", type=int, default=SAMPLE_SIZE)
+    parser.add_argument("--iterations", type=int, default=1)
+    parser.add_argument("--notes", help="what changed since the last benchmark")
+    args = parser.parse_args()
 
-    file_path = "tests/analysis/search_benchmarks.json"
-    now_key = datetime.now().isoformat()
-
-    # load existing data if file exists
-    try:
-        with open(file_path, "r") as f:
-            all_results = json.load(f)
-    except (FileNotFoundError, json.JSONDecodeError):
-        all_results = {}
-
-    # add the new benchmark under the current datetime key
-    all_results[now_key] = results
-
-    # write back the updated object
-    with open(file_path, "w") as f:
-        json.dump(all_results, f, indent=4)
+    print(json.dumps(run(args.sample_size, args.iterations, args.notes), indent=2))
 
 
-def main():
-    results = benchmark()
-    print(json.dumps(results, indent=4))
-    results["report"] = input("Report: ")
-    write_file(results)
+def run(sample_size: int = SAMPLE_SIZE, iterations: int = 1, notes: str | None = None) -> dict[str, Any]:
+    """Benchmarks every registry and appends the result to benchmarks.json."""
+    result = benchmark(sample_size, iterations, notes)
+    history = json.loads(OUTPUT_PATH.read_text()) if OUTPUT_PATH.exists() else {}
+    history[datetime.now().isoformat(timespec="seconds")] = result
+    OUTPUT_PATH.write_text(json.dumps(history, indent=2) + "\n")
+    return result
 
 
 if __name__ == "__main__":

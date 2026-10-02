@@ -35,6 +35,7 @@ funding = "https://github.com/sponsors/dstoffels"
 test = "pytest:console_main"
 test-watch = "pytest_watch.command:main"
 ingest = "ingest.__main__:main"
+analysis = "tests.analysis.__main__:main"
 
 [tool.poetry]
 packages = [
