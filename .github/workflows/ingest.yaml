@@ -32,11 +32,11 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Merge latest main
+      - name: Merge latest dev
         run: |
-          git fetch origin main
-          if ! git merge --no-edit origin/main; then
-            echo "::error::Merge conflict pulling main into ingest. Resolve locally: git checkout ingest && git pull && git merge main, then push."
+          git fetch origin dev
+          if ! git merge --no-edit origin/dev; then
+            echo "::error::Merge conflict pulling dev into ingest. Resolve locally: git checkout ingest && git pull && git merge dev, then push."
             exit 1
           fi
 
@@ -93,9 +93,9 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          existing=$(gh pr list --head ingest --base main --json number --jq '.[0].number')
+          existing=$(gh pr list --head ingest --base dev --json number --jq '.[0].number')
           if [ -z "$existing" ]; then
-            gh pr create --head ingest --base main \
+            gh pr create --head ingest --base dev \
               --title "Automated data ingest" \
               --body "This PR is maintained automatically by the ingest workflow and always reflects the current state of the \`ingest\` branch. Each run comments below with what changed."
           fi
