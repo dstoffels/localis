@@ -300,7 +300,7 @@ for city, score in results:
 localis.cities.set_population_threshold(15000)
 
 # Check the current threshold
-localis.cities.get_population_threshold()  # 15000
+localis.cities.population_threshold  # 15000
 
 # Reset back to the full dataset
 localis.cities.set_population_threshold(None)

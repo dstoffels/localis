@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.0] - 2026-10-02
+
+### Breaking
+- `City.admin1`/`City.admin2` removed; use `City.subdivisions`, ordered by `admin_level`
+- `SubdivisionBase` has a new required `admin_level` field
+- Historic (ISO 3166-3) countries are excluded from `filter()`/`search()`/iteration unless `include_historic` is set, and `lookup()` resolves them only by `alpha_4`
+
 ### Added
 - `Country.historic: HistoricInfo | None` for ISO 3166-3 withdrawn/historic countries (Czechoslovakia, Serbia and Montenegro, Netherlands Antilles, and 28 others), adding 31 historic entries to the dataset (281 total countries, 250 active); `CountryRegistry.include_historic` toggle (default `False`) excludes them from `filter()`/`search()`/iteration, never from `get()`/`lookup()`. Since ISO reused alpha2/alpha3/numeric codes across different withdrawn countries over time (e.g. `CS`: Czechoslovakia, then later Serbia and Montenegro), `lookup()` only resolves a historic entry by its unique `alpha_4` withdrawal code
 - `geonames_id` on `CountryModel`/`Country` (ingestion-side and runtime)
@@ -39,6 +46,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - resolve-subdivisions `SKILL.md`: merged the self-certified "add without searching" step into the websearch step, so an orphan with no fitting candidate is always researched before merge/add/escalate is decided
 - Estonian `vald`/`linn` qualifier words added to the type-family token sets (`vald`→area, `linn`→city); GeoNames' raw Estonian names append these and they weren't being stripped before fuzzy comparison
 - `ingest_subdivisions()` now hard-fails (logs the orphan counts, `sys.exit(10)`) if any subdivision orphans remain after a run, before dumping subdivisions or handing its geocode map to cities ingestion; `.github/workflows/ingest.yaml` simplified accordingly, the `ingest` step itself now fails the job on orphans and nothing downstream (commit/push/PR) runs, so the automated `ingest` → `main` PR is now created ready for review directly instead of as a draft that needed a separate orphan check to mark ready
+- CI: ingest merges from and opens PRs against `dev` instead of `main`, runs pyright/pytest before opening its PR, and only patch-bumps when the current version is already released; Test runs pyright, runs ingest on `dev` pushes (failing on any uncommitted dataset change), and gates PRs to `main`; Release publishes the exact commit Test passed and skips versions that are already tagged
 
 ### Removed
 - Manual alias/name contribution during subdivision resolution (CLI and skill); resolutions are now source-data only
@@ -55,6 +63,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `ResolutionMap.reconcile()` couldn't represent "verified: this should not auto-merge"; an audited no-match decision would have silently been overwritten by the next run's fresh (and still wrong) auto-merge result
 - resolve-subdivisions skill's `get_geonames_submap()` never replayed already-recorded resolutions (`skill_resolved`/`wikidata_merge`/`auto_merge.resolutions`) onto its own fresh GeoNames map, so an already-claimed target could still appear as a valid, unclaimed candidate and pass `is_valid_candidate()`
 - resolve-subdivisions skill was missing GeoNames alternate-name enrichment on its candidate pool, showing weaker name variants than auto-merge itself uses
+- `load_countries()`/`load_subdivisions()`, the fallback loaders used when subdivisions or cities ingest runs standalone, read the wrong columns and skipped type coercion; `load_subdivisions()` crashed on its first call
+- Type errors across `ingest/` and `tests/`; the whole repo now passes `pyright`, enforced in CI
 
 ## [1.1.2] - 2026-09-29
 
