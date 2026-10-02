@@ -1,131 +1,164 @@
-# Subdivision Pipeline
+# Data Methodology
 
-## Scope
+This document describes how every record `localis` ships is produced: which sources each dataset comes from, the rules that combine them, how the results were validated, and where they are known to be wrong. It is meant to be falsifiable. Anyone who finds a result they don't trust should be able to trace it to the rule that produced it here. The rules and evidence come first; how each rule was arrived at, including the failures that motivated it, is recorded separately in the change history at the end.
 
-`localis`'s subdivision dataset reconciles two independent sources that don't share a common identifier: ISO 3166-2 (via Debian's iso-codes project) and GeoNames' `admin1CodesASCII.txt`/`admin2Codes.txt`. This document is a complete, falsifiable account of how an matched ISO and GeoNames entries become one shipped `Subdivision` record, every gate the pair must pass, the specific failure mode each gate exists to prevent, with real examples that surfaced that failure mode. Anyone who finds a result they don't trust should be able to trace it back to the reasoning that produced it here. 
+## At a glance
 
-A list of currently unmerged subdivisions can be found in [unmerged_subdivisions.md](unmerged_subdivisions.md), some genuinely have no GeoNames counterpart, while others may simply not yet have been reconciled by the pipeline, resulting in the potential for duplicates entries in the `localis` dataset. We welcome contributions and corrections from users who identify discrepancies or missing matches.
+| Dataset | Records | Sources |
+|---|---|---|
+| Countries | 281 (250 current, 31 historic) | ISO 3166-1, ISO 3166-3, GeoNames `countryInfo.txt`, Wikidata aliases |
+| Subdivisions | 51,803 | ISO 3166-2, GeoNames `admin1CodesASCII.txt`/`admin2Codes.txt`, Wikidata crosswalk, GeoNames alternate names, Ipregistry |
+| Cities | 235,914 | GeoNames `cities500.txt` |
 
-## Source provenance
+How the 5,046 ISO 3166-2 subdivisions were resolved against GeoNames:
 
-ISO 3166-2 is the authority for a subdivision's official name, administrative type, and its real administrative hierarchy. GeoNames is the authority for a stable numeric identifier (`geonames_id`), the `geonames_code` (its own admin1/admin2 code string, e.g. `US.CA`, not FIPS), and a large alternate-name corpus. Where the two sources disagree, ISO's structure wins and GeoNames supplies enrichment. Ipregistry's `iso3166` repository contributes its `localVariant` column to aliases where available.
+| Resolution | Count |
+|---|---|
+| Wikidata crosswalk | 3,861 |
+| resolve-subdivisions skill, merged | 584 |
+| Automerge | 306 |
+| resolve-subdivisions skill, confirmed no GeoNames counterpart | 251 |
+| Non-administrative grouping, bypassed by rule | 44 |
+| **Total** | **5,046** |
 
+4,751 ISO subdivisions (94.2%) are merged with a GeoNames counterpart. The other 295 ship as ISO-only records, and the remaining 51,508 GeoNames subdivisions make up the rest of the 51,803.
 
-## Parsing GeoNames subdivisions
+Validation and known errors:
 
-GeoNames' `admin1CodesASCII.txt` and `admin2Codes.txt` are parsed first (51,508 in total), extracting the country code from the `geonames_code` and then alternate names are added to each subdivision's alias list. GeoNames already buckets the admin-level entries by file, so we assign the `admin_level` for GeoNames entries accordingly. If the entry is merged with an ISO counterpart downstream, the ISO `admin_level` will override the source value.
+| Check | Result |
+|---|---|
+| Wikidata crosswalk vs. the pipeline's own decisions, overlapping codes | 4,134 of 4,147 agree (99.7%) |
+| Random sample of codes only Wikidata could resolve | 25 of 25 correct |
+| resolve-subdivisions skill vs. Wikidata | 701 of 702 agree (99.9%) |
+| Wikidata disagreements explained by a known GeoNames pattern | 142 of 144 |
+| Confirmed wrong merges currently shipping | 2 (`MG-D`, `TW-TNN`) |
+| Disputed merges | 1 pair (`RU-AL`/`RU-ALT`) |
+| Records independently audited | 0 |
 
+## Sources and licensing
 
-### Alias enrichment
-Aliases are enriched from GeoNames' `alternateNamesV2.txt`, filtered to English plus the official language(s) of subdivision's country (from Unicode CLDR's `territoryInfo.json`), excluding any alternate name flagged historic or colloquial or duplicate. GeoNames' alt-names list is comprehensive, with dozens of multi-language names for many entries. Thus we filter in only the two language criteria to maintain a smaller storage footprint, but aim to provide translation/language support in future versions to bridge this gap.
+`localis`'s code is MIT licensed. The data it ships is derived from the sources below and remains subject to their terms.
 
-Alias enrichment is applied before attempting to merge with ISO counterparts, so the extra name variants are also available for fuzzy comparison, not just to provide them in the shipped dataset.
+ISO 3166-1, 3166-2 and 3166-3 data comes from Debian's [iso-codes](https://salsa.debian.org/iso-codes-team/iso-codes) project, licensed LGPL-2.1-or-later. [GeoNames](https://www.geonames.org/) supplies `countryInfo.txt`, `admin1CodesASCII.txt`, `admin2Codes.txt`, `alternateNamesV2.txt` and `cities500.txt`, licensed CC BY 4.0, which requires attribution. [Wikidata](https://www.wikidata.org/) supplies the subdivision crosswalk and country aliases under CC0. [Unicode CLDR](https://cldr.unicode.org/) supplies `territoryInfo.json`, used only to choose which alternate-name languages to keep, under the Unicode License v3. [Ipregistry's iso3166](https://github.com/ipregistry/iso3166) repository supplies subdivision `localVariant` aliases under CC BY-SA 4.0.
 
-## Parsing ISO subdivisions
+The monthly ingest re-fetches a source only when its ETag changes, and the ETag of every source file behind the shipped data is recorded in `ingest/<domain>/inputs/*.manifest.json`, committed alongside the data. The commit a release was built from therefore identifies its exact source snapshot. The one exception is the Wikidata country alias list, a static snapshot stored in the repository (last updated 2026-09-30) that the monthly ingest does not refresh.
 
-All 5046 ISO subdivisions are initially loaded alongside the parsed GeoNames dataset, where two things happen before any matching begins: bracket/parenthetical splitting, and admin-level classification.
+## Countries
 
-### Bracket/parenthetical splitting
-ISO entries occasionaly suffix their name with bracketed or parenthetical content. That content is one of three things: a genuine alternate name (`"Girona [Gerona]"`), a bare subdivision code (`"Stockholms län [SE-01]"`), or a territory-dispute/type annotation (`"Aousserd (EH)"`, `"Amānat al 'Āşimah [city]"`). Left inline, this actively broke fuzzy matching: `"Stockholms län [SE-01]"` normalizes to `"stockholms lan se 01"`, three junk tokens away from GeoNames' bare `"Stockholms"`. `_split_bracketed_name()` splits the primary name from the bracket content at load time: a genuine alternate name becomes an alias, everything else (a bare code, a duplicate of the primary name, a known non-name annotation) is discarded.
+ISO 3166-1 is the base for all 249 current ISO countries, and its codes (`alpha2`, `alpha3`, `numeric`) are never altered. A country's `name` is ISO's `common_name` where it has one, otherwise its `name`, except for a small set of deliberate overrides where ISO's short name isn't the one in common use: Republic of the Congo (CG), Democratic Republic of the Congo (CD), Falkland Islands (FK), Micronesia (FM), Saint-Martin (MF), Sint Maarten (SX), Palestine (PS), Saint Helena (SH), Holy See (VA), British Virgin Islands (VG), U.S. Virgin Islands (VI), and Vietnam (VN). `official_name` is likewise ISO's, overridden for Falkland Islands (Malvinas) (FK), Republic of Korea (KR), Lao People's Democratic Republic (LA), Collectivity of Saint Martin (MF), Country of Sint Maarten (SX), Saint Helena, Ascension and Tristan da Cunha (SH), Syrian Arab Republic (SY), Republic of China (TW), and Vatican City State (VA). A curated alias list adds well-established alternate names such as UK and Great Britain, Burma, Ivory Coast, Swaziland, and Zaire. These overrides are editorial choices, listed here in full so none of them are hidden.
 
-### Admin-level classification
- `admin_level` is computed independently for ISO-sourced entries using a recursive walk of ISO's own parent-code chain. Each entry's level is 1 plus the number of real (non-bypassed) ancestors above it, so depth isn't capped at 2; it falls out naturally from however deep a country's actual ISO nesting goes. 
- 
-`admin_level` is observed from 0-3 across the current dataset, though nothing caps it there, a deeper country would simply compute a higher level:
-- 0 represents **non-administrative exceptions**
-- 1 represents top-level administrative divisions under the country
-- 2 represents second-level divisions (e.g., counties or districts)
-- 3 is the deepest level observed so far, and exists within the ISO hierarchy (France)
+The 31 ISO 3166-3 withdrawn countries, such as Czechoslovakia, Serbia and Montenegro, and Southern Rhodesia, are loaded with a `historic` record holding their four-letter `alpha_4` withdrawal code, withdrawal date, and ISO's comment. ISO has reused codes across different withdrawn countries over time: `CS` meant Czechoslovakia and later Serbia and Montenegro, numeric 891 belongs to both Yugoslavia and Serbia and Montenegro, and numeric 716 belongs to both Zimbabwe and Southern Rhodesia. A historic entry is therefore resolvable by `lookup()` only through its unique `alpha_4`, never its bare alpha2, alpha3 or numeric code, and historic entries are excluded from `filter()`, `search()` and iteration unless `include_historic` is set.
 
-#### Non administrative exceptions
-- Indonesia's ISO table groups its 38 real provinces under 7 "Geographical unit" entries, a pure island-based organizing category with its own government precisely nowhere
-- The Dominican Republic groups its 31 provinces plus the Distrito Nacional (32 total) under 10 "Region" entries that are a statistical/regional-planning construct (no governor, no budget, no elected body)
-- Cabo Verde's 22 municipalities are similarly grouped under two "Geographical region" entries (the Barlavento/Sotavento island groups).
-- Ireland's ISO table groups its 26 counties under 4 "Provinces" entries, a purely ceremonial division with no government of its own.
-- Iceland's ISO table groups its 64 municipalities under 8 "Region" entries, a statistical construct with no government of its own.
-- Lithuania's ISO table groups its 60 municipalities under 10 "County" entries, which no longer have any governing authority since 2010.
-- Malawi's ISO table groups its 28 districts under 3 "Region" entries, a purely statistical division with no government of its own.
+GeoNames' `countryInfo.txt` is matched to ISO entries by alpha2, and to historic entries by their former alpha2. It contributes each country's `geonames_id`, plus its GeoNames name as an alias when that name differs from the ISO names. ISO stays authoritative for the name itself. A GeoNames country with no ISO 3166-1 or 3166-3 counterpart is added as a country in its own right; the only such entry is Kosovo (`XK`), which has no ISO assignment.
 
-These exceptions are enumerated in `resolution_map.json`'s `NON_ADMINISTRATIVE_TYPES` as a rule, rather than a per-code list, so it stays correct even as new entries matching that pattern are added to ISO's data in the future. An entry matching this rule is loaded with `admin_level=0`, keeping its true ISO `parent` reference (the relationship is real and documented, even though the parent isn't a government). They bypass GeoNames matching entirely, since by construction, nothing in GeoNames' admin1/admin2 files could ever represent "Sumatera" or "Ozama" as a governed place. 
+Wikidata aliases are added last. An alias is kept only if it is longer than three characters, doesn't contain "ISO 3166", and doesn't duplicate the country's codes, name or official name.
 
-Their real children (Irish counties, Icelandic municipalities, Lithuanian municipalities, etc.) are unaffected by the exclusion and correctly compute `admin_level=1`.
+## Subdivisions
 
-The standard for adding a country here is deliberately two-part, structural signal and an independently verifiable governing-function fact. Two structurally similar candidates were checked and rejected to demonstrate the bar isn't rubber-stamped. Guinea-Bissau's `Province → Region` nesting (3 provinces, `GW-L`/`GW-N`/`GW-S`, each genuinely parenting several `Region`-type entries) and Iraq's `Region` (the Kurdistan Region, `IQ-KR`, containing 3 real governorates) both carried the same shape from the raw parent-usage data alone, but both tiers are real, separately governed administrative bodies in those countries, not documentation categories, so no exception was made.
+ISO 3166-2 is the authority for a subdivision's official name, type and administrative hierarchy. GeoNames is the authority for its stable numeric `geonames_id`, its `geonames_code` (GeoNames' own admin code string such as `US.CA`, not a FIPS code), and a large corpus of alternate names. Where the two disagree, ISO's structure wins and GeoNames supplies enrichment.
 
-## The Merge Pipeline
-`resolution_map.json` is the single source of truth for every subdivision's merge resolution in the pipeline, merged in three sequential stages: `skill_resolved`, `wikidata_merge` and `automerge`. Only whatever's left after the first two stages goes through the `automerge` gates at all. An agentic, human or wikidata-based decision can never lose its merge target to a fresh automated merge, because automerge never gets the chance to compete for it in the first place.
+### GeoNames subdivisions
 
-Nothing in `resolution_map.json` needs a manual cache-invalidation step regardless of which bucket produced it: every run recomputes `auto_merge` and `wikidata_merge` fresh and reconciles each against `audited` (the record of entries an audit has independently verified), keeping an audited entry only if the fresh result still agrees with it and otherwise evicting the stale record and re-opening it for review. A methodology change like the one described in Fuzzy match scoring, or a change on Wikidata's own end, therefore surfaces its own affected entries automatically on the next run, rather than requiring something to remember which decisions need re-checking. `skill_resolved` decisions are the one exception: they're permanent until a human revisits them, since a human decision isn't a function of either algorithm and has nothing to "go stale" against.
+The 51,508 entries in `admin1CodesASCII.txt` and `admin2Codes.txt` are parsed first. Each takes its country from its `geonames_code` and its `admin_level` from the file it came from; a merged ISO counterpart's level replaces it downstream.
 
-### 1. resolve-subdivisions Skill
-The `resolve-subdivisions` skill is an MCP-backed Claude skill that assists in resolving orphaned subdivisions by agentic reasoning, websearch escalation and finally, human intervention.
+Aliases come from GeoNames' `alternateNamesV2.txt`, filtered to English plus the official language or languages of the subdivision's country according to CLDR. Names flagged historic or colloquial, non-name entries such as links and postal codes, and duplicates are excluded, and invisible bidirectional control characters are stripped. Enrichment happens before matching, so the extra name variants also take part in fuzzy comparison. Ipregistry's `localVariant` names are added to ISO subdivisions as aliases.
 
-`skill_resolved` holds decisions made by the `resolve-subdivisions` skill, which is actually a branch of the merge pipeline. Any attempted merges that do not pass the initial wikidata and automerge gates are "**orphaned**" and the pipeline exits before dumping to the final dataset. This signals the need for human intervention, where the `resolve-subdivisions` skill is invoked. The full ingest pipeline cannot complete until all orphans have been resolved.
+### ISO subdivisions
 
-#### Orphans
-Orphans are categorized in three different buckets and handled differently:
-- `ambiguity`: entries for which the pipeline found multiple, close-matching GeoNames candidates. Only the ambiguous GeoNames candidates discovered in automerge are presented to the agent initially. After which the country/admin-level-filtered GeoNames candidates are presented. This is typically resolved in the first round.
-- `no_candidates`: entries for which the pipeline could not find any GeoNames candidates at all. The agent is exposed to *all* of a country's GeoNames subdivisions, instead of filtering by admin level. These typically result in an unmerged ISO entry. 
-- `no_matches`: entries for which the pipeline could not find any matching GeoNames candidate. The agent is fed a batched list of fuzzy-sorted GeoNames candidates to choose from.
+Some ISO names carry trailing bracketed or parenthetical content, which is one of three things: a genuine alternate name (`"Girona [Gerona]"`), a bare subdivision code (`"Stockholms län [SE-01]"`), or a territory-dispute or type annotation (`"Aousserd (EH)"`, `"Amānat al 'Āşimah [city]"`). The content is split off at load time. A genuine alternate name becomes an alias and everything else is discarded, so it never pollutes matching.
 
-> An initial wikidata cross-check was performed to validate the consistency of the `resolve-subdivisions` skill and found 701/702 (99.9%) agreements in the iso_code-geonames_code mappings.
+`admin_level` is computed from ISO's own parent chain: 1 plus the number of administrative ancestors above the entry. Nothing caps the depth. The current data spans levels 0 to 3, where 1 is a top-level division, 2 a second-level division such as a county or district, 3 the deepest nesting observed so far (France's régions, collectivités and départements), and 0 a non-administrative grouping.
 
-### 2. Wikidata
+A grouping is non-administrative only if it passes two tests: structurally it exists only to group real divisions, and it has no administrative function at all, verified independently. Seven countries currently qualify. Indonesia groups its 38 provinces under 7 "Geographical unit" entries. The Dominican Republic groups its 31 provinces and the Distrito Nacional under 10 planning "Region" entries. Cabo Verde groups its 22 municipalities under two "Geographical region" island groups. Ireland groups its 26 counties under 4 ceremonial "Province" entries. Iceland groups its 64 municipalities under 8 statistical "Region" entries. Lithuania groups its 60 municipalities under 10 "County" entries that have had no governing authority since 2010. Malawi groups its 28 districts under 3 statistical "Region" entries. Groupings that look structurally identical but have real administrative function do not qualify: Guinea-Bissau's provinces, Iraq's Kurdistan Region, and the Philippines' regions, which have Regional Development Councils and national agency field operations, are all treated as real levels.
 
-`wikidata_subdivisions.py` queries Wikidata's SPARQL endpoint for every item carrying both P300 (ISO 3166-2 code) and P1566 (GeoNames id), keeping only ISO codes with exactly one claimed `geonames_id` (no ambiguous multi-claim codes). A merge is only applied if that `geonames_id` actually exists in our GeoNames-sourced data and belongs to the same country as the ISO code; anything else falls through to automerge instead. This source covers 4322 ISO codes unambiguously. 
+The rule is stored by country and type in `NON_ADMINISTRATIVE_TYPES` in `ingest/subdivisions/outputs/resolution_map.json`, so it covers new matching entries automatically. A matching entry gets `admin_level=0`, keeps its real ISO `parent` reference, and bypasses GeoNames matching entirely, since GeoNames' admin files never represent such groupings as places. Its children compute their own levels as if it weren't there.
 
-Before implementation, every unambiguous match was checked against the pipeline's existing decisions: 4134 of 4147 overlapping codes agreed (99.7%), and a 25-entry random sample of the net-new codes it could resolve came back 25/25 correct. Once live, it resolved roughly 3861 subdivisions on its own, cutting what automerge needs to handle and subsequently yielded far fewer orphans. The remaining disagreements between Wikidata and the rest of the pipeline are almost entirely one specific, already-understood pattern: GeoNames frequently has two separate records for the same place, typically an administrative-boundary record (what `admin1CodesASCII.txt`/`admin2Codes.txt` actually contain), and Wikidata's P1566 occasionally links to the latter. 
+### Merge precedence
 
-Checking every disagreement across the dataset, 142 of 144 were exactly this, a populated-place id that doesn't exist in our admin1/2 data at all and so is already rejected by the validation above, confirmed systematically for Hungary's "city with county rights" subdivisions and the Marshall Islands' municipalities, where every single entry in both groups showed this pattern. **Exactly one genuine competing claim remains in the entire dataset**: `RU-AL`/`RU-ALT` (Altai Republic/Altai Krai, two real, easily-confused Russian federal subjects), where both the pipeline's answer and Wikidata's answer are valid admin1 ids, just swapped relative to each other. This pair has now surfaced independently four separate times across unrelated checks this session (the original type-family disqualification work, the lowest-margin cusp audit, and this crosswalk check twice), which is a stronger signal than any single disagreement would be, and is the one open item for audit.
+`resolution_map.json` is the single record of how every ISO subdivision was resolved. Resolutions apply in a fixed order: resolve-subdivisions skill decisions first, then the Wikidata crosswalk, then automerge for whatever remains. An earlier stage's decision can never lose its GeoNames target to a later one, because the later stage never sees that subdivision.
 
-### 3. automerge
+Any ISO subdivision still unresolved after automerge is an orphan, sorted into one of three buckets: `ambiguity` (several close GeoNames candidates), `no_candidates` (none at all), and `no_matches` (candidates exist but none qualifies). If any orphan remains, ingest exits with code 10 before writing any data, so the shipped dataset never contains an unresolved subdivision. Orphans are resolved with the resolve-subdivisions skill.
 
-Whatever resolve-subdivisions and Wikidata didn't already resolve funnels into `automerge`. Geonames candidates are compared to ISO subdivisions in buckets filtered by `country` and `admin_level`, so an ISO entry is only ever compared against GeoNames entries of the same country and the same administrative level. The admin level is capped at 2 since GeoNames never nests deeper (so ISO's level-2 and level-3 entries draw from and compete over the same GeoNames pool). A pair has to clear every gate below, in order, before it's eligible to merge.
+Wikidata and automerge results are recomputed on every run. A separate `audited` record is meant to hold independently verified decisions. Each run compares fresh results against it, keeps an audited entry only while the fresh result agrees, and evicts it otherwise so it is reviewed again. `audited` confirms results; it cannot override them, so a correction has to go through a skill decision. No subdivision has been independently audited yet, and `audited` is currently empty.
 
-### 1. Type-family disqualification
+### The resolve-subdivisions skill
 
-A pair can pass every other gate and still be wrong if the two sides disagree on the most basic distinction: is this the settlement itself, or the area around it? `UA-30` (ISO: "Kyiv", the city) automerged with GeoNames' `UA.13`, whose own alternate names are exclusively `Kyiv Oblast`/`Kyivshchyna`, the surrounding oblast, not the city. It won purely on string score, "Kyiv" against bare "Kyiv" is a near-perfect match, while `UA-32` ("Kyivska oblast", the actual oblast) never scored well enough against the same bare name to even compete. The same shape recurred for Vilnius (`LT-58` grabbing the GeoNames entry whose own alias literally says "Vilnius City Municipality") and, per a cached-resolution conflict the pipeline logged, for Altai (`RU-ALT` vs. `RU-AL`).
+The resolve-subdivisions skill is an AI agent, run through Claude Code, that resolves orphans. It works under fixed constraints. It can only choose a GeoNames candidate supplied by the pipeline's own candidate pool, filtered by the same type and direction rules automerge uses, and it can never invent an ID. It must run a web search before declaring that an orphan has no GeoNames counterpart. When it is not confident, it escalates the orphan to a human, who decides to merge it or add it as-is. Every outcome is written to `skill_resolved` and stays permanent until a human revisits it; the record holds the outcome, not whether the agent or a human made the decision.
 
-The fix disqualifies a candidate pair before scoring if GeoNames' raw, unstripped name or aliases carry a qualifier word from a different family than the ISO side's own `type`. The families are deliberately coarse: just `city` (city/shi/si/gorodskoy/town) against everything else (`area`). An earlier, finer-grained version (separate families for province/department/county/region/etc.) was tried and reverted after it broke real matches: GeoNames' raw name for Romanian counties is literally `"Vâlcea County"` while ISO types them `"Department"`, and Sweden's `"län"` had been miscategorized into the wrong family entirely. These are the same real-world administrative tier described by different translation conventions, not genuinely different tiers, so treating them as mutually exclusive produced false disqualifications across nearly all of Romania and Sweden. Collapsing back to just city-vs-area eliminated that regression (a drop of 150 wrongly-orphaned entries on the run this was fixed). Settlement-vs-area is the one distinction that held up under scrutiny; finer administrative-type distinctions did not.
+The candidates shown depend on the orphan's bucket. An `ambiguity` orphan sees its specific contested candidates first, then the normal pool for its country and level. A `no_candidates` orphan sees every GeoNames subdivision in its country, regardless of level. A `no_matches` orphan sees batches of fuzzy-sorted candidates. Cross-checked against Wikidata, the skill's merges agree 701 of 702 times.
 
-### 2. Name normalization and noise-token stripping
+### Wikidata crosswalk
 
-A pair that survives type-family disqualification is then normalized for comparison: both sides' names and aliases are lowercased, diacritics-normalized, and stripped of a fixed set of administrative qualifier words (`NOISE_TOKENS`), so a match isn't penalized just because one side spells out "Province" and the other doesn't. The set spans dozens of languages' equivalent words by inspecting GeoNames' actual raw admin1/admin2 name text for recurring trailing/leading qualifier words. All names were dumped to a dict with their counts to identify the common patterns.
+Wikidata is queried for every item carrying both an ISO 3166-2 code (P300) and a GeoNames ID (P1566), keeping only codes that map to exactly one GeoNames ID; 4,322 codes qualify. A match is applied only if that ID exists in localis's GeoNames admin data and belongs to the same country as the ISO code. Anything else falls through to automerge.
 
-### 3. Fuzzy match scoring
+Most remaining disagreements with the rest of the pipeline come from one GeoNames pattern: a place often has two GeoNames records, an administrative-boundary record (the kind in `admin1CodesASCII.txt` and `admin2Codes.txt`) and a populated-place record, and Wikidata's P1566 sometimes points at the populated-place one. Such an ID doesn't exist in localis's admin data, so the validation above already rejects it. That pattern accounts for 142 of the 144 disagreements, and it holds for every Hungarian city with county rights and every Marshall Islands municipality.
 
-Scoring uses `token_sort_ratio` against a dynamic threshold: base 90, reduced 15 points for names averaging ≤5 characters, 10 points for ≤8, 5 points for ≤12. Short names need proportionally more tolerance, since the same absolute edit distance matters less as a fraction of a longer string. `token_sort_ratio` replaced `token_set_ratio` specifically because `token_set_ratio` treats a full token-subset relationship as automatically near-100% similar, which is correct for a genuine noise-word difference but wrong for administrative qualifiers naming genuinely different real places ("Val-de-Marne" is not "Marne"). A directional-token check (`has_directional_mismatch`) separately vetoes any pair split only by north/south/east/west/upper/lower/central, preventing "East Germany" from ever matching "West Germany" regardless of score.
+### Automerge
 
-An earlier version of this function also discounted single-token names a further 5 points, on top of the length discount. That stacked discount was removed after auditing the lowest-margin merges turned up confirmed false positives sitting exactly at the resulting threshold: `GB-ENF` "Enfield" matched GeoNames' alt-name-enriched short form "Wakefield" at a score of exactly 75 against a threshold of exactly 75, two unrelated English places sharing only a common "-field" suffix with zero overlap at the start of either word. The same audit found `GB-EAL` "Ealing"/"Reading", `PL-16` "Opolskie"/"Podlasie", and two Vietnamese province pairs (`VN-31`, `VN-32`) sitting in the same knife-edge pattern. Removing the discount pushed roughly 16 previously-correct transliteration/grammatical-variant matches (e.g. Panjshayr/Panjshir, Kordestān/Kurdistan, several Russian oblasts' grammatical-case endings) into orphan status in exchange for closing 5-7 confirmed false positives; given a false merge ships silently as fact while an orphan is a recoverable, flagged gap, that trade was taken deliberately.
+Automerge compares each remaining ISO subdivision only with unclaimed GeoNames subdivisions of the same country and administrative level. Level 3 is grouped with level 2, since GeoNames never nests deeper than 2. A pair must clear every gate below, in order.
 
-### 4. Ambiguity threshold
+#### 1. Type-family disqualification
 
-Once every pair in a bucket is scored, candidate targets are checked for collisions before any assignment happens: if two or more distinct ISO subdivisions both score at or above 90 against the same GeoNames target, that target is excluded from automerge entirely rather than handed to whichever one scored marginally higher. This catches namesake collisions, most often a city and its own containing district sharing an identical bare name, where string similarity genuinely cannot break the tie without an external signal. Excluded targets are logged (`"ambiguous target '...': ... all scored >= 90, excluding from automerge"`) and their ISO subdivisions fall through to the human resolution path below.
+A pair is rejected before scoring if GeoNames' raw, unstripped name or aliases carry a qualifier word from a different family than the ISO side's `type`. There are deliberately only two families: `city` (city, shi, si, gorodskoy, town, and equivalents) and `area` (everything else). This stops a city from taking its surrounding region's record on string similarity alone. `UA-30` Kyiv, the city, otherwise matches GeoNames' `UA.13`, which is Kyiv Oblast. Finer families such as province against county are not used, because sources describe the same tier with different translated words.
 
-### 5. Global best-score assignment
+#### 2. Name normalization and noise-token stripping
 
-With ambiguous targets already excluded, every remaining candidate pair is claimed in descending score order (`scored_pairs.sort(...)`), so a strong match can never be blocked by a weaker one that happened to get claimed first due to iteration order.
+Both sides' names and aliases are lowercased, diacritics-normalized, and stripped of administrative qualifier words (`NOISE_TOKENS`), so "Province" on one side and nothing on the other doesn't cost a match. The token list spans dozens of languages and was built by counting the recurring leading and trailing words in GeoNames' raw admin names.
 
-**Whatever survives all of the above unmerged** is an orphan, handed to the `resolve-subdivisions` skill, which reuses the exact same `candidate_pool()`/`score_candidates()` primitives (type/directional filtering included) so it never shows a candidate the pipeline's own rules would already refuse
+#### 3. Fuzzy match scoring
+
+Pairs are scored with `token_sort_ratio` against a threshold of 90, lowered by 15 for names averaging five characters or fewer, by 10 for eight or fewer, and by 5 for twelve or fewer, since a single edit matters more in a short name. `token_sort_ratio` is used instead of `token_set_ratio` because the latter rates a full token subset as a near-perfect match, which is wrong when the extra words name a different place: "Val-de-Marne" is not "Marne". A separate check vetoes any pair that differs only by a directional word such as north, south, east, west, upper, lower or central. Where a false merge and an unmerged record trade off, the threshold favors leaving the record unmerged, since a false merge ships silently as fact while an unmerged record is visible and recoverable.
+
+#### 4. Ambiguity threshold
+
+Before any assignment, a GeoNames target that two or more different ISO subdivisions each score 90 or higher against is excluded from automerge. This catches namesake collisions, most often a city and its surrounding district sharing a bare name, where string similarity cannot break the tie. Those ISO subdivisions become `ambiguity` orphans.
+
+#### 5. Global best-score assignment
+
+Remaining pairs are claimed in descending score order across the whole bucket, so a strong match is never blocked by a weaker one claimed earlier in iteration.
+
+## Cities
+
+Cities come from GeoNames' `cities500.txt`, GeoNames' own export of every populated place with a population of 500 or more, plus administrative seats of any size. No further population or feature filtering is applied. A city without a country code, or whose country isn't in localis's country data, is dropped and logged. A missing population is recorded as 0.
+
+A city's country is attached by its ISO alpha2 code. Its subdivisions are attached through its GeoNames admin1 and admin2 codes: the deepest one that resolves is taken, and its parent chain is walked to the top, so `City.subdivisions` holds the city's full administrative chain in ascending `admin_level` order. That includes ISO levels GeoNames itself doesn't have, such as France's third level or a non-administrative grouping. A city can only link to a subdivision that has a GeoNames code, so the 295 ISO-only subdivisions never appear directly as a city's subdivision. A city's `name` is GeoNames' primary name; alternate city names are not shipped.
 
 ## Known limitations
 
-- **The Philippines is not actually a non-administrative case, on reflection, and is noted here to record why it was ruled out rather than left ambiguous.** Its 17 `Region` entries parenting provinces look structurally identical to the confirmed cases, but the distinguishing test isn't "does this tier have its own separately-elected government," it's "does this tier have any administrative function at all." The confirmed cases (Indonesia, DR, Cabo Verde, Ireland, Iceland, Lithuania) are pure labels with zero governing apparatus. Philippine regions, including the ~14-15 without full autonomy, have real administrative function: Regional Development Councils, and national government agencies organizing field operations and budgets by region. That's the same shape as Guinea-Bissau's `Province → Region` or Iraq's Kurdistan Region, both already correctly excluded for the same reason, real governing apparatus, just not uniformly autonomous. Region=admin_level 1, Province=admin_level 2 is correct as-is for all 17 regions, ARMM and CAR included.
-- **`RU-AL`/`RU-ALT` is an open, unresolved discrepancy**: Wikidata and the pipeline disagree on which of two real GeoNames ids belongs to Altai Republic versus Altai Krai, and this is the only genuine competing claim found anywhere in the cross-validated dataset. Needs direct research, not another automated check, since both sources are self-consistent and the dispute is specifically about which one is right.
-- **`TW-TNN`/`MG-D` are confirmed false positives with no correcting patch applied yet**: `TW-TNN` (Tainan) merged to a GeoNames record reflecting an outdated 4-province Taiwan structure rather than the correct modern entry; `MG-D` (Antsiranana) merged to Atsinanana, two genuinely different Madagascar divisions sharing a coincidental naming resemblance. Both were found auditing the cusp right after the single-token threshold discount was removed (Fuzzy match scoring). The fix is a one-line `audited` correction in `resolution_map.json`, not yet written.
-- **No full, independently-verified audit of successful merges exists yet.** After a complete skill + ingest run, 295 of 5,046 ISO subdivisions remain unmerged (`docs/unmerged_subdivisions.md`, regenerated every ingest run); most are expected to be genuine no-counterpart cases, but some are likely pipeline/skill misses rather than true gaps, and nothing yet distinguishes the two systematically. Wikidata-covered merges are cross-validated against a second source; the rest has only been spot-checked by sampling the lowest-margin automerges. A dedicated audit skill is planned, separate from resolve-subdivisions, with a tiered, falsifiable verification process (structural parent-chain consistency as a free first-pass signal, then agent/websearch-driven checks) rather than a single accept/reject gate; not yet designed in detail.
+Two automerged subdivisions are confirmed wrong and still ship. `MG-D` (Antsiranana) merged with Atsinanana, a different Madagascar division with a similar name, at a margin of 1 over the threshold. `TW-TNN` (Tainan) merged with a GeoNames record from Taiwan's outdated four-province structure instead of the modern entry, at a margin of 3. Correcting either requires a `skill_resolved` decision, since `audited` cannot override an automerge result.
+
+`RU-AL` and `RU-ALT` (Altai Republic and Altai Krai, two real, easily confused Russian federal subjects) are disputed. Wikidata and the pipeline assign the same two valid GeoNames IDs the opposite way round, and since both sources are internally consistent, settling it needs direct research rather than another automated check.
+
+The 295 unmerged ISO subdivisions, listed in [unmerged_subdivisions.md](unmerged_subdivisions.md) and regenerated on every ingest, are expected to be mostly genuine no-counterpart cases. Some are likely missed matches, though, and each miss means a place may appear twice in the dataset, once as its ISO record and once as its GeoNames record.
+
+No independent audit of successful merges exists. Wikidata-resolved merges are cross-validated against a second source, and the rest have been spot-checked by sampling the lowest-margin automerges. A dedicated audit process is planned but not yet designed.
+
+The Wikidata country aliases are a static snapshot and aren't refreshed by the monthly ingest.
 
 ## Change history
 
+### 2026-10-02
+
+Restructured this document to cover all three datasets, not just subdivisions, and to separate the rules and evidence from the history of how they were reached. Added summary tables, source licensing, source snapshot provenance, country and city methodology, and the constraints on the resolve-subdivisions skill. Corrected an earlier claim that `MG-D` and `TW-TNN` could be fixed with an `audited` entry. `audited` only confirms results and evicts entries that disagree, so the fix has to be a `skill_resolved` decision.
+
 ### 2026-10-01
 
-- Reordered this document to match the pipeline's actual execution order (alias enrichment → ISO loading/admin-level classification → skill/Wikidata precedence → automerge gates), and swapped type-family disqualification and name normalization, and ambiguity detection and best-score assignment, to match the order each actually runs in. Corrected `geonames_code`'s description (not a FIPS code).
-- Fixed a bucketing bug where ISO entries at admin_level 2 and 3+ competed in separate buckets even though both draw from GeoNames' same (capped at 2) level, making any 3rd-generation entry permanently unmatchable; they now bucket together. resolve-subdivisions skill rewired to reuse the pipeline's own `candidate_pool()`/`score_candidates()` instead of a separately-maintained ranking, fixing two real gaps found in the process: missing alternate-name enrichment, and already-claimed GeoNames targets not being excluded from its candidate pool (the skill's own GeoNames map never replayed recorded resolutions onto itself). `ambiguity` orphans now carry their specific contested GeoNames targets (`AmbiguousOrphan`) instead of a bare iso_code list. Added Estonian `vald`/`linn` to the type-family token sets. After a full skill + ingest run: 295 of 5,046 ISO subdivisions remain unmerged, published at `docs/unmerged_subdivisions.md`.
-- `admin_level` for ISO-sourced entries is now a recursive walk of the full parent chain instead of a one-level-deep check capped at 2, resolving France's 3-generation chain (Parsing ISO subdivisions) without a special case.
-- Confirmed and added Ireland, Iceland, and Lithuania to `NON_ADMINISTRATIVE_TYPES`. Philippines ruled out on closer inspection, its regions have real administrative function (Regional Development Councils, national agency field operations), the same shape as the already-excluded Guinea-Bissau/Iraq cases, not a documentation label like the confirmed six. Malawi confirmed and added after direct research turned up an explicit statement that its regions have no administrative function and exist only to group districts.
-- Added the Wikidata crosswalk as a resolution source ahead of automerge (Wikidata), cutting automerge's workload by roughly 90% and orphans by 60% in one run. Cross-validating it against the existing pipeline surfaced the populated-place-vs-admin-boundary GeoNames id pattern (142 of 144 disagreements) and left exactly one genuine open discrepancy, `RU-AL`/`RU-ALT`, now corroborated independently four times.
+ISO entries at levels 2 and 3 previously competed in separate automerge buckets, even though both draw on GeoNames' level-2 data, which left every third-level entry unmatchable. They now share a bucket. The skill was rewired to use the pipeline's own `candidate_pool()` and `score_candidates()` instead of a separately maintained ranking, which fixed two gaps found in the process: its candidates lacked alternate-name enrichment, and GeoNames targets already claimed by recorded resolutions still appeared as candidates. `ambiguity` orphans now carry their contested GeoNames targets. Estonian `vald` and `linn` were added to the type-family word lists, since GeoNames' Estonian names append them.
+
+`admin_level` became a recursive walk of ISO's full parent chain instead of a one-level check capped at 2, resolving France's third level without a special case. Ireland, Iceland, Lithuania and Malawi were added to the non-administrative rule, Malawi after research found an explicit statement that its regions exist only to group districts. The Philippines was ruled out on closer inspection, because its regions have real administrative function.
+
+The Wikidata crosswalk was added ahead of automerge and resolved roughly 3,861 subdivisions in its first run, cutting automerge's workload by about 90% and orphans by about 60%. Before it went live, every match was checked against the pipeline's existing decisions (4,134 of 4,147 agreed), and a random sample of 25 resolutions only Wikidata could make came back 25 of 25 correct. Checking all 144 disagreements surfaced the populated-place pattern behind 142 of them. The remaining dispute, `RU-AL`/`RU-ALT`, had already surfaced independently in three earlier checks: the type-family disqualification work, the lowest-margin audit, and an earlier crosswalk comparison.
+
+After a full skill and ingest run, 295 of 5,046 ISO subdivisions remained unmerged. The list is published in `unmerged_subdivisions.md` and regenerated on every ingest.
 
 ### 2026-09-30
 
-- `resolution_map.json` redesigned into the single source of truth for every subdivision's resolution, with self-reconciling `audited` records (The Merge Pipeline); removed the single-token threshold discount after it produced a cluster of confirmed false positives (Fuzzy match scoring). Two further confirmed false positives found auditing the post-change cusp (`TW-TNN` Tainan/Taiwan, a GeoNames data-currency issue unrelated to thresholds; `MG-D` Antsiranana/Atsinanana, two genuinely different Madagascar divisions) are pending a correcting audit patch, not yet applied (see Known limitations).
-- Initial methodology documented, covering the alt-name enrichment pipeline, the `token_set_ratio` → `token_sort_ratio` switch, the ambiguity threshold, the city/area type-family disqualification (and the reverted finer-grained version), bracket/parenthetical name splitting, and the admin_level=0 non-administrative exception mechanism (Indonesia, Dominican Republic, Cabo Verde confirmed; Ireland/Iceland/Lithuania flagged pending; Philippines/Malawi/France's 3-generation case left open).
+`resolution_map.json` was redesigned into the single record of every subdivision's resolution, with self-reconciling `audited` entries.
+
+Fuzzy scoring previously gave single-token names an extra 5-point discount on top of the length discount. Auditing the lowest-margin merges found confirmed false positives sitting exactly on the resulting threshold: `GB-ENF` Enfield matched Wakefield at exactly 75 against a threshold of exactly 75, two unrelated places sharing only a "-field" suffix, and `GB-EAL` Ealing/Reading, `PL-16` Opolskie/Podlasie, `VN-31` and `VN-32` showed the same knife-edge pattern. Removing the discount pushed about 16 correct transliteration and grammatical-variant matches (Panjshayr/Panjshir, Kordestān/Kurdistan, several Russian oblasts' case endings) into orphan status in exchange for closing 5 to 7 confirmed false positives. The trade was taken deliberately. Auditing the new lowest-margin merges then found `TW-TNN` and `MG-D`, both still uncorrected.
+
+Type-family disqualification was introduced after `UA-30` Kyiv, the city, automerged with Kyiv Oblast's GeoNames record on a near-perfect bare-name score, while `UA-32`, the actual oblast, never scored well enough to compete. Vilnius (`LT-58`) and Altai showed the same pattern. A finer-grained version with separate province, department, county and region families was tried first and reverted, after it wrongly rejected nearly every Romanian and Swedish match: GeoNames names Romanian counties "Vâlcea County" while ISO types them "Department", and Sweden's "län" landed in the wrong family. Collapsing to city against area removed 150 wrongly orphaned entries.
+
+`token_sort_ratio` replaced `token_set_ratio` after subset matches merged different places, and ISO names with trailing bracketed content are now split at load time, after `"Stockholms län [SE-01]"` normalized three junk tokens away from GeoNames' "Stockholms".
+
+Initial methodology documented, covering alternate-name enrichment, the scorer change, the ambiguity threshold, type-family disqualification, bracket splitting, and the non-administrative exception for Indonesia, the Dominican Republic and Cabo Verde.

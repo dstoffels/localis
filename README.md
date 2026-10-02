@@ -422,8 +422,8 @@ Data in this project is kept current monthly from the following sources:
 - **Countries**
   - **Canonical**: [ISO 3166-1](https://www.iso.org/iso-3166-country-codes.html) data via [Debian's iso-codes project](https://salsa.debian.org/iso-codes-team/iso-codes)
   - **Merged**: [ISO 3166-3](https://www.iso.org/iso-3166-country-codes.html) withdrawn/historic country codes, also via Debian's iso-codes project
-  - **Merged**: [Geonames](https://www.geonames.org/) `geonames_countries.txt`
-  - **Merged**: Additional country aliases from Wikidata.
+  - **Merged**: [GeoNames](https://www.geonames.org/) `countryInfo.txt`
+  - **Merged**: Additional country aliases from a static [Wikidata](https://www.wikidata.org/) snapshot (not refreshed monthly)
 - **Subdivisions**
   - **Canonical**: [ISO 3166-2](https://www.iso.org/iso-3166-country-codes.html) data via [Debian's iso-codes project](https://salsa.debian.org/iso-codes-team/iso-codes)
   - **Merged**: [GeoNames](https://www.geonames.org/) `admin1CodesASCII.txt` and `admin2Codes.txt`
@@ -432,7 +432,11 @@ Data in this project is kept current monthly from the following sources:
 - **Cities**
   - [GeoNames](https://www.geonames.org/) `cities500.txt` dataset
 
-Subdivisions in particular require reconciling two sources that disagree in nontrivial ways; see [`docs/methodology.md`](docs/methodology.md) for a complete, falsifiable account of how that reconciliation works, the thresholds and exceptions involved, and their evidentiary basis. [`unmerged_subdivisions.md`](docs/unmerged_subdivisions.md) lists every ISO subdivision currently without a GeoNames counterpart, regenerated on every ingest run.
+[`docs/methodology.md`](docs/methodology.md) is a complete, falsifiable account of how each dataset is built: the rules that combine these sources, how the results were validated, and where they are known to be wrong. [`unmerged_subdivisions.md`](docs/unmerged_subdivisions.md) lists every ISO subdivision currently without a GeoNames counterpart, regenerated on every ingest run.
+
+### Data licensing
+
+The shipped data is derived from these sources and remains subject to their licenses: ISO 3166 data via iso-codes (LGPL-2.1-or-later), GeoNames (CC BY 4.0), Wikidata (CC0), Unicode CLDR (Unicode License v3), and Ipregistry's iso3166 (CC BY-SA 4.0).
 
 ---
 
@@ -446,7 +450,7 @@ Subdivisions in particular require reconciling two sources that disagree in nont
 
 ## License
 
-MIT
+Code: MIT. Data: subject to its sources' licenses, listed under [Data licensing](#data-licensing).
 
 ---
 
