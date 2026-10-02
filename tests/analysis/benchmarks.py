@@ -60,21 +60,23 @@ def _percentiles(samples: list[float]) -> dict[str, float]:
 
 
 def benchmark_registry(name: str, sample_size: int, iterations: int, log) -> dict[str, Any]:
-    """Per-call latency percentiles for get/lookup/filter/search on warm caches, and search accuracy on mangled names and aliases."""
+    """Per-call latency percentiles for get/lookup/filter/search on warm caches, and search accuracy (top-10 hit rate, top-1 rate, mean reciprocal rank) on mangled names and aliases."""
     registry: Registry = getattr(localis, name)
     registry.force_cache()
     entries: list[Entity] = list(registry)
     latency: dict[str, list[float]] = {"get": [], "lookup": [], "filter": [], "search": []}
-    hits, misses, hit_scores = 0, 0, []
+    hits, misses, top1, reciprocal_ranks, hit_scores = 0, 0, 0, 0.0, []
 
     def search(query: str, entry: Entity, query_type: str, seed: int) -> None:
-        nonlocal hits, misses
+        nonlocal hits, misses, top1, reciprocal_ranks
         mangled = mangle(query, seed=seed)
         results = _timed(lambda: registry.search(mangled), latency["search"])
-        score = next((s for r, s in results if r.id == entry.id), None)
-        if score is not None:
+        rank = next((i for i, (r, _) in enumerate(results, start=1) if r.id == entry.id), None)
+        if rank is not None:
             hits += 1
-            hit_scores.append(score)
+            top1 += rank == 1
+            reciprocal_ranks += 1 / rank
+            hit_scores.append(results[rank - 1][1])
             return
         misses += 1
         top = f'"{results[0][0].name}" ({results[0][1]:.2f})' if results else "no results"
@@ -99,6 +101,9 @@ def benchmark_registry(name: str, sample_size: int, iterations: int, log) -> dic
             "queries": queries,
             "failures": misses,
             "success_pct": round(100 * hits / queries, 1) if queries else 0.0,
+            # top-10 hits alone can't see a ranking regression, since candidate selection can still surface the right entry
+            "top1_pct": round(100 * top1 / queries, 1) if queries else 0.0,
+            "mrr": round(reciprocal_ranks / queries, 3) if queries else 0.0,
             "avg_hit_score": round(sum(hit_scores) / hits, 3) if hits else 0.0,
         },
     }

@@ -68,7 +68,7 @@ One bug this surfaced and fixed in passing: `release.yaml`'s checkout step never
 
 ## Performance Profile
 
-Every figure in this section and in the README's Performance section is generated, never transcribed by hand. `tests/analysis/data_stats.py` produces the deterministic numbers (record counts, the subdivision resolution breakdown, shipped file sizes) into `data_stats.json`, and asserts that they reconcile. `tests/analysis/footprint.py` measures load time and retained memory per registry component, each scenario in fresh subprocesses with the median kept, and `tests/analysis/benchmarks.py` measures per-call latency percentiles and search accuracy; both append to a history (`footprint.json`, `benchmarks.json`) with a fingerprint of the host they ran on. `tests/analysis/render_docs.py` fills each `stat:source.key|format` HTML-comment marker in the docs from those files, and `render_docs.py --check`, run by the test suite, fails if a deterministic marker is stale. Current figures were measured on <!-- stat:footprint.host.cpu|raw -->11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz<!-- /stat --> with Python <!-- stat:footprint.host.python|raw -->3.14.4<!-- /stat -->. Memory figures are retained RSS deltas (`VmRSS` read from `/proc/self/status` after an explicit `gc.collect()`), not `ru_maxrss` peak; see Memory measurement methodology below for why that distinction matters.
+Every figure in this section and in the README's Performance section is generated, never transcribed by hand. `tests/analysis/data_stats.py` produces the deterministic numbers (record counts, the subdivision resolution breakdown, shipped file sizes) into `data_stats.json`, and asserts that they reconcile. `tests/analysis/footprint.py` measures load time and retained memory per registry component, each scenario in fresh subprocesses with the median kept, and `tests/analysis/benchmarks.py` measures per-call latency percentiles and search accuracy; both append to a history (`footprint.json`, `benchmarks.json`) with a fingerprint of the host they ran on. `tests/analysis/render_docs.py` fills each `stat:source.key:format` HTML-comment marker in the docs from those files, and `render_docs.py --check`, run by the test suite, fails if a deterministic marker is stale. Current figures were measured on <!-- stat:footprint.host.cpu:raw -->11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz<!-- /stat --> with Python <!-- stat:footprint.host.python:raw -->3.14.4<!-- /stat -->. Memory figures are retained RSS deltas (`VmRSS` read from `/proc/self/status` after an explicit `gc.collect()`), not `ru_maxrss` peak; see Memory measurement methodology below for why that distinction matters.
 
 ### Search and filter index architecture
 
@@ -88,35 +88,35 @@ Earlier benchmarks in this document used `resource.getrusage(resource.RUSAGE_SEL
 
 ### Shipped data size
 
-`src/localis/data/` is <!-- stat:data.shipped_size.total|size -->57.0MB<!-- /stat --> total, almost entirely cities:
+`src/localis/data/` is <!-- stat:data.shipped_size.total:size -->57.0MB<!-- /stat --> total, almost entirely cities:
 
 | Domain | Size | Share |
 |---|---|---|
-| Countries | <!-- stat:data.shipped_size.countries.total|size -->73KB<!-- /stat --> | <!-- stat:data.shipped_size.countries.share_pct|pct -->0.1%<!-- /stat --> |
-| Subdivisions | <!-- stat:data.shipped_size.subdivisions.total|size -->10.6MB<!-- /stat --> | <!-- stat:data.shipped_size.subdivisions.share_pct|pct -->18.5%<!-- /stat --> |
-| Cities | <!-- stat:data.shipped_size.cities.total|size -->46.4MB<!-- /stat --> | <!-- stat:data.shipped_size.cities.share_pct|pct -->81.4%<!-- /stat --> |
+| Countries | <!-- stat:data.shipped_size.countries.total:size -->73KB<!-- /stat --> | <!-- stat:data.shipped_size.countries.share_pct:pct -->0.1%<!-- /stat --> |
+| Subdivisions | <!-- stat:data.shipped_size.subdivisions.total:size -->10.6MB<!-- /stat --> | <!-- stat:data.shipped_size.subdivisions.share_pct:pct -->18.5%<!-- /stat --> |
+| Cities | <!-- stat:data.shipped_size.cities.total:size -->46.4MB<!-- /stat --> | <!-- stat:data.shipped_size.cities.share_pct:pct -->81.4%<!-- /stat --> |
 
-Within cities: `cities.tsv` <!-- stat:data.shipped_size.cities.files.cities.tsv|size -->12.6MB<!-- /stat -->, `filter_index.tsv` <!-- stat:data.shipped_size.cities.files.filter_index.tsv|size -->17.5MB<!-- /stat -->, `search_index.bin.gz` <!-- stat:data.shipped_size.cities.files.search_index.bin.gz|size -->12.8MB<!-- /stat -->, `search_index_offsets.tsv` <!-- stat:data.shipped_size.cities.files.search_index_offsets.tsv|size -->234KB<!-- /stat -->, `lookup_index_int.tsv` <!-- stat:data.shipped_size.cities.files.lookup_index_int.tsv|size -->3.2MB<!-- /stat -->.
+Within cities: `cities.tsv` <!-- stat:data.shipped_size.cities.files.cities.tsv:size -->12.6MB<!-- /stat -->, `filter_index.tsv` <!-- stat:data.shipped_size.cities.files.filter_index.tsv:size -->17.5MB<!-- /stat -->, `search_index.bin.gz` <!-- stat:data.shipped_size.cities.files.search_index.bin.gz:size -->12.8MB<!-- /stat -->, `search_index_offsets.tsv` <!-- stat:data.shipped_size.cities.files.search_index_offsets.tsv:size -->234KB<!-- /stat -->, `lookup_index_int.tsv` <!-- stat:data.shipped_size.cities.files.lookup_index_int.tsv:size -->3.2MB<!-- /stat -->.
 
 ### Memory footprint
 
 | Registry (`force_cache()`) | Retained memory |
 |---|---|
-| countries | <!-- stat:footprint.registries.countries.combined.memory_bytes|size -->1.2MB<!-- /stat --> |
-| subdivisions | <!-- stat:footprint.registries.subdivisions.combined.memory_bytes|size -->61.0MB<!-- /stat --> |
-| cities | <!-- stat:footprint.registries.cities.combined.memory_bytes|size -->151.1MB<!-- /stat --> |
-| **total, all three fully cached** | **<!-- stat:footprint.full_cache.memory_bytes|size -->213.3MB<!-- /stat -->** |
+| countries | <!-- stat:footprint.registries.countries.combined.memory_bytes:size -->1.2MB<!-- /stat --> |
+| subdivisions | <!-- stat:footprint.registries.subdivisions.combined.memory_bytes:size -->61.0MB<!-- /stat --> |
+| cities | <!-- stat:footprint.registries.cities.combined.memory_bytes:size -->151.1MB<!-- /stat --> |
+| **total, all three fully cached** | **<!-- stat:footprint.full_cache.memory_bytes:size -->213.3MB<!-- /stat -->** |
 
-Cities' <!-- stat:footprint.registries.cities.combined.memory_bytes|size -->151.1MB<!-- /stat --> breaks down further by structure:
+Cities' <!-- stat:footprint.registries.cities.combined.memory_bytes:size -->151.1MB<!-- /stat --> breaks down further by structure:
 
 | Cities component | Retained memory | Build time |
 |---|---|---|
-| `_cache` | <!-- stat:footprint.registries.cities.dataset.memory_bytes|size -->61.0MB<!-- /stat --> | <!-- stat:footprint.registries.cities.dataset.time_ms|load -->~435ms<!-- /stat --> |
-| `_lookup_index` | <!-- stat:footprint.registries.cities.lookup_index.memory_bytes|size -->4KB<!-- /stat --> | <!-- stat:footprint.registries.cities.lookup_index.time_ms|load -->~61ms<!-- /stat --> |
-| `_filter_index` | <!-- stat:footprint.registries.cities.filter_index.memory_bytes|size -->56.7MB<!-- /stat --> | <!-- stat:footprint.registries.cities.filter_index.time_ms|load -->~560ms<!-- /stat --> |
-| `_search_index` | <!-- stat:footprint.registries.cities.search_index.memory_bytes|size -->33.4MB<!-- /stat --> | <!-- stat:footprint.registries.cities.search_index.time_ms|load -->~176ms<!-- /stat --> |
+| `_cache` | <!-- stat:footprint.registries.cities.dataset.memory_bytes:size -->61.0MB<!-- /stat --> | <!-- stat:footprint.registries.cities.dataset.time_ms:load -->~435ms<!-- /stat --> |
+| `_lookup_index` | <!-- stat:footprint.registries.cities.lookup_index.memory_bytes:size -->4KB<!-- /stat --> | <!-- stat:footprint.registries.cities.lookup_index.time_ms:load -->~61ms<!-- /stat --> |
+| `_filter_index` | <!-- stat:footprint.registries.cities.filter_index.memory_bytes:size -->56.7MB<!-- /stat --> | <!-- stat:footprint.registries.cities.filter_index.time_ms:load -->~560ms<!-- /stat --> |
+| `_search_index` | <!-- stat:footprint.registries.cities.search_index.memory_bytes:size -->33.4MB<!-- /stat --> | <!-- stat:footprint.registries.cities.search_index.time_ms:load -->~176ms<!-- /stat --> |
 
-**Total load time** (all three registries, `_cache` plus every index) is <!-- stat:footprint.full_cache.time_ms|load -->~1.57s<!-- /stat -->.
+**Total load time** (all three registries, `_cache` plus every index) is <!-- stat:footprint.full_cache.time_ms:load -->~1.57s<!-- /stat -->.
 
 ### Population floor
 
@@ -124,4 +124,4 @@ Cities' <!-- stat:footprint.registries.cities.combined.memory_bytes|size -->151.
 
 Ids stay stable across thresholds. `Store.id_to_idx` (an `array.array("i")` sized to the full unfiltered id space, `-1` for an excluded id) decouples a View's physical position in its Store from its public `id`, so `View._idx` resolves through this array instead of assuming `id - 1`. That lets `CityStore` skip allocating rows for excluded cities entirely, a real memory saving rather than just fewer View wrapper objects, without ever renumbering an id a caller might already be holding.
 
-At a <!-- stat:data.cities.threshold|int -->15,000<!-- /stat --> threshold (the tier geonamescache ships as a separate bundled dataset), cities drops from <!-- stat:data.cities.total|int -->235,914<!-- /stat --> to <!-- stat:data.cities.above_threshold|int -->34,171<!-- /stat --> and retained memory drops from <!-- stat:footprint.registries.cities.combined.memory_bytes|size -->151.1MB<!-- /stat --> to <!-- stat:footprint.cities_threshold.memory_bytes|size -->31.1MB<!-- /stat -->.
+At a <!-- stat:data.cities.threshold:int -->15,000<!-- /stat --> threshold (the tier geonamescache ships as a separate bundled dataset), cities drops from <!-- stat:data.cities.total:int -->235,914<!-- /stat --> to <!-- stat:data.cities.above_threshold:int -->34,171<!-- /stat --> and retained memory drops from <!-- stat:footprint.registries.cities.combined.memory_bytes:size -->151.1MB<!-- /stat --> to <!-- stat:footprint.cities_threshold.memory_bytes:size -->31.1MB<!-- /stat -->.

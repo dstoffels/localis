@@ -29,6 +29,11 @@ class CityView(CrossReferencedView[City, CityStore, CountryView, SubdivisionView
         return [self._subdivision_views[sid] for sid in blob[offset : offset + count]]
 
     @property
+    def admin1(self) -> SubdivisionView | None:
+        """The city's admin_level=1 subdivision, read by the search scorer's admin1.* fields."""
+        return next((s for s in self.subdivisions if s.admin_level == 1), None)
+
+    @property
     def country(self) -> CountryView:
         country = self._country_views.get(self._store.country_ids[self._idx])
         assert country is not None, "city has no country, violates ingest invariant"
