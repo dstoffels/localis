@@ -1,0 +1,68 @@
+{
+  "AU": {
+    "'Straya": "slang",
+    "Straya": "slang",
+    "Stralia": "slang",
+    "Stria": "slang",
+    "Aussieland": "slang",
+    "Down Under": "nickname"
+  },
+  "US": {
+    "Merica": "slang",
+    "Murica": "slang",
+    "States": "fragment, ambiguous on its own"
+  },
+  "MX": {
+    "US of M": "slang",
+    "MXN": "currency code (ISO 4217), not a name"
+  },
+  "JP": {
+    "Land of Rising Sun": "nickname",
+    "Land of the Rising Sun": "nickname"
+  },
+  "UG": { "Pearl of Africa": "nickname" },
+  "PY": { "Heart of South America": "nickname" },
+  "RW": { "Land of a Thousand Hills": "nickname" },
+  "FI": { "Land of Thousand Lakes": "nickname" },
+  "LS": { "Mountain Kingdom": "nickname" },
+  "PR": {
+    "Island of Enchantment": "nickname",
+    "Isle of Enchantment": "nickname"
+  },
+  "SG": {
+    "Garden City": "nickname",
+    "Lion City": "nickname",
+    "Singapore City": "the city, not the country"
+  },
+  "CH": { "Swiss": "demonym" },
+  "TH": { "Thai": "demonym" },
+  "IM": {
+    "Manx": "demonym",
+    "I. M.": "map-label abbreviation"
+  },
+  "AN": {
+    "Dutch Antillean": "demonym",
+    "Netherlands Antillean": "demonym",
+    "Netherlands Antilleans": "demonym",
+    "Netherland Antillies": "misspelling"
+  },
+  "CI": { "Cote d'lvoire": "misspelling (lowercase L for I)" },
+  "CO": { "Colombiá": "misspelling" },
+  "CW": {
+    "Curacau": "misspelling",
+    "Curocao": "misspelling"
+  },
+  "UA": { "Ukr.": "abbreviation fragment" },
+  "IS": { "Isl.": "abbreviation fragment" },
+  "PK": {
+    "Hồi Quốc": "Vietnamese, not English",
+    "Tây Hồi": "Vietnamese, not English"
+  },
+  "AL": { "Shqipërisë": "Albanian genitive form, not a name" },
+  "DK": { "TAN": "unexplained code, not a name" },
+  "MK": { "NM": "code, ambiguous (New Mexico)" },
+  "XK": { "KV": "code, not a name" },
+  "GG": { "GBG": "vehicle registration code" },
+  "JM": { "JA": "vehicle registration code" },
+  "LI": { "FL": "vehicle registration code, ambiguous (Florida)" }
+}

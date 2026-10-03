@@ -178,32 +178,32 @@
 | US-PR | Puerto Rico | United States | Outlying area |
 | US-UM | United States Minor Outlying Islands | United States | Outlying area |
 | US-VI | Virgin Islands, U.S. | United States | Outlying area |
-| VN-03 | Hà Giang | Vietnam | Province |
-| VN-06 | Yên Bái | Vietnam | Province |
-| VN-14 | Hòa Bình | Vietnam | Province |
-| VN-20 | Thái Bình | Vietnam | Province |
-| VN-24 | Quảng Bình | Vietnam | Province |
-| VN-27 | Quảng Nam | Vietnam | Province |
-| VN-28 | Kon Tum | Vietnam | Province |
-| VN-31 | Bình Định | Vietnam | Province |
-| VN-32 | Phú Yên | Vietnam | Province |
-| VN-36 | Ninh Thuận | Vietnam | Province |
-| VN-40 | Bình Thuận | Vietnam | Province |
-| VN-41 | Long An | Vietnam | Province |
-| VN-43 | Bà Rịa - Vũng Tàu | Vietnam | Province |
-| VN-46 | Tiền Giang | Vietnam | Province |
-| VN-47 | Kiến Giang | Vietnam | Province |
-| VN-50 | Bến Tre | Vietnam | Province |
-| VN-51 | Trà Vinh | Vietnam | Province |
-| VN-52 | Sóc Trăng | Vietnam | Province |
-| VN-53 | Bắc Kạn | Vietnam | Province |
-| VN-54 | Bắc Giang | Vietnam | Province |
-| VN-55 | Bạc Liêu | Vietnam | Province |
-| VN-57 | Bình Dương | Vietnam | Province |
-| VN-58 | Bình Phước | Vietnam | Province |
-| VN-61 | Hải Dương | Vietnam | Province |
-| VN-63 | Hà Nam | Vietnam | Province |
-| VN-67 | Nam Định | Vietnam | Province |
-| VN-70 | Vĩnh Phúc | Vietnam | Province |
-| VN-72 | Đắk Nông | Vietnam | Province |
-| VN-73 | Hậu Giang | Vietnam | Province |
+| VN-03 | Hà Giang | Viet Nam | Province |
+| VN-06 | Yên Bái | Viet Nam | Province |
+| VN-14 | Hòa Bình | Viet Nam | Province |
+| VN-20 | Thái Bình | Viet Nam | Province |
+| VN-24 | Quảng Bình | Viet Nam | Province |
+| VN-27 | Quảng Nam | Viet Nam | Province |
+| VN-28 | Kon Tum | Viet Nam | Province |
+| VN-31 | Bình Định | Viet Nam | Province |
+| VN-32 | Phú Yên | Viet Nam | Province |
+| VN-36 | Ninh Thuận | Viet Nam | Province |
+| VN-40 | Bình Thuận | Viet Nam | Province |
+| VN-41 | Long An | Viet Nam | Province |
+| VN-43 | Bà Rịa - Vũng Tàu | Viet Nam | Province |
+| VN-46 | Tiền Giang | Viet Nam | Province |
+| VN-47 | Kiến Giang | Viet Nam | Province |
+| VN-50 | Bến Tre | Viet Nam | Province |
+| VN-51 | Trà Vinh | Viet Nam | Province |
+| VN-52 | Sóc Trăng | Viet Nam | Province |
+| VN-53 | Bắc Kạn | Viet Nam | Province |
+| VN-54 | Bắc Giang | Viet Nam | Province |
+| VN-55 | Bạc Liêu | Viet Nam | Province |
+| VN-57 | Bình Dương | Viet Nam | Province |
+| VN-58 | Bình Phước | Viet Nam | Province |
+| VN-61 | Hải Dương | Viet Nam | Province |
+| VN-63 | Hà Nam | Viet Nam | Province |
+| VN-67 | Nam Định | Viet Nam | Province |
+| VN-70 | Vĩnh Phúc | Viet Nam | Province |
+| VN-72 | Đắk Nông | Viet Nam | Province |
+| VN-73 | Hậu Giang | Viet Nam | Province |

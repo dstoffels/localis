@@ -1,4 +1,7 @@
 from array import array
+from bisect import bisect_left
+import heapq
+import math
 import csv
 import gzip
 from pathlib import Path
@@ -9,8 +12,8 @@ from localis.indexes.index import Index
 from localis.entities import Entity
 from localis.views import View
 from localis.stores import Store
-from localis.utils.strings import normalize, generate_trigrams
-from collections import defaultdict
+from localis.utils.strings import search_text, search_trigrams, SHORT_NAME_MAX
+from collections import Counter
 
 T = TypeVar("T", bound=Entity)
 
@@ -24,37 +27,79 @@ class SearchIndex(Index, Generic[T]):
     ):
         self.cache = cache
         self.NOISE_THRESHOLD = 0.5
-        self.STRONG_MATCH_THRESHOLD = 0.8
-        self.CANDIDATE_CNT_THRESHOLD = 2000
+        # the share of a record's name score lost when none of the query outside its name fits its context
+        self.CONTEXT_PENALTY = 0.5
+        # how many of the best trigram matches go on to fuzzy scoring
+        self.TOP_K = 50
+        # how many records with the most canon and context hits get their exact weighted coverage computed, from which the TOP_K are taken
+        self.SHORTLIST_K = 200
+        # a trigram in more than this share of records (and more than STOP_MIN_DF of them) isn't counted when selecting, provided MIN_COUNTED rarer ones remain
+        self.STOP_SHARE = 0.02
+        self.STOP_MIN_DF = 1000
+        self.MIN_COUNTED = 3
+        # a one-word query this short has too few trigrams to find a typo'd name by, so it's also edit-distance matched against the shipped short names within one character of its length
+        self.SHORT_QUERY_LEN = SHORT_NAME_MAX - 1
+        # how many of those closest names, per length, join the candidates, and the least ratio they need
+        self.SHORT_MATCH_K = 20
+        self.SHORT_MATCH_CUTOFF = 70
         super().__init__(filepath, **kwargs)
 
     def load(
         self,
-        filepath: Path,
-        offsets_filepath: Path,
-        fields_filepath: Path,
+        data_path: Path,
+        name_fields: tuple[str, ...],
         predicate: IndexFilterPredicate | None = None,
         allowed_ids: set[int] | None = None,
     ):
-        ids_allowed = allowed_ids or set()
-        self.index: dict[str, array] = {}
-        self.SEARCH_FIELDS: dict[str, float] = {}
-        with open(fields_filepath, "r", encoding="utf-8") as f:
-            reader = csv.reader(f, delimiter="\t")
-            for field, weight in reader:
-                self.SEARCH_FIELDS[field] = float(weight)
+        self.NAME_FIELDS = name_fields
+        self.canon = self._load_trigram_index(
+            data_path / "canon_index", predicate, allowed_ids or set()
+        )
+        self.short_names = self._load_short_names(data_path / "short_names.tsv.gz", predicate, allowed_ids or set())
+        self.context = self._load_trigram_index(
+            data_path / "context_index", predicate, allowed_ids or set()
+        )
+
+    @staticmethod
+    def _load_short_names(
+        path: Path, predicate: IndexFilterPredicate | None, ids_allowed: set[int]
+    ) -> dict[int, tuple[list[str], array]]:
+        """The shipped short names and their record ids, by name length; empty for a registry that ships none."""
+        by_length: dict[int, tuple[list[str], array]] = {}
+        if not path.exists():
+            return by_length
+        with gzip.open(path, "rt", encoding="utf-8") as f:
+            for line in f:
+                name, id_s = line.rstrip("\n").split("\t")
+                id = int(id_s)
+                if predicate and not predicate(id, ids_allowed):
+                    continue
+                names, ids = by_length.setdefault(len(name), ([], array("I")))
+                names.append(name)
+                ids.append(id)
+        return by_length
+
+    @staticmethod
+    def _load_trigram_index(
+        prefix: Path, predicate: IndexFilterPredicate | None, ids_allowed: set[int]
+    ) -> dict[str, array]:
+        """One trigram index's posting lists by trigram; a missing index is empty."""
+        index: dict[str, array] = {}
+        blob_path = prefix.with_name(prefix.name + ".bin.gz")
+        if not blob_path.exists():
+            return index
 
         offsets: dict[str, tuple[int, int]] = {}
-        with open(offsets_filepath, "r", encoding="utf-8") as f:
+        with open(
+            prefix.with_name(prefix.name + "_offsets.tsv"), "r", encoding="utf-8"
+        ) as f:
             reader = csv.reader(f, delimiter="\t")
             for trigram, offset, count in reader:
                 offsets[trigram] = (int(offset), int(count))
 
-        with gzip.open(filepath, "rb") as f:
-            raw = f.read()
-
-        full_array = array("I")
-        full_array.frombytes(raw)
+        with gzip.open(blob_path, "rb") as f:
+            full_array = array("I")
+            full_array.frombytes(f.read())
 
         for trigram, (offset, count) in offsets.items():
             trigram_ids = full_array[offset : offset + count]
@@ -62,147 +107,142 @@ class SearchIndex(Index, Generic[T]):
                 trigram_ids = array(
                     "I", (id for id in trigram_ids if predicate(id, ids_allowed))
                 )
-            self.index[trigram] = trigram_ids
+            index[trigram] = trigram_ids
+        return index
 
     def search(self, query: str, limit: int) -> list[tuple[View[T, Store], float]]:
+        query = search_text(query)
         if not query:
             return []
 
-        self.query = self._normalize_query(query)
-        self.query_token_count = len(self.query.split())
-        self.match_counts: dict[int, int] = defaultdict(int)
-        self.trigram_count = 0
+        tokens = query.split()
+        token_trigrams = [search_trigrams(token) for token in tokens]
+        query_trigrams = set().union(*token_trigrams)
+        weights = self._weights(query_trigrams)
+        total_weight = sum(weights.values())
 
-        self._build_match_counts()
-        all_results: dict[int, tuple[View[T, Store], float]] = {}
-        scored_ids: set[int] = set()
+        # stage 1: count canon and context hits together in C over the query's rarer trigrams, and shortlist the records with the most
+        hits = self._count_hits(query_trigrams)
+        shortlist = [id for id, _ in hits.most_common(self.SHORTLIST_K)]
 
-        candidate_count = len(self.match_counts)
+        # stage 2: each shortlisted record's rarity-weighted coverage of the query, by its names alone and by its names and context together, averaged
+        trigram_scores: dict[int, float] = {}
+        for id in shortlist:
+            canon = context = 0.0
+            for trigram, weight in weights.items():
+                if self._contains(self.canon, trigram, id):
+                    canon += weight
+                elif self._contains(self.context, trigram, id):
+                    context += weight
+            # only records whose names share a trigram with the query qualify, so context alone (a city's state) never surfaces a record
+            if canon:
+                trigram_scores[id] = (2 * canon + context) / (2 * total_weight)
+        candidates = heapq.nlargest(max(self.TOP_K, limit), trigram_scores, key=trigram_scores.__getitem__)
+        # a short typo'd name shares only common edge trigrams with its record, so its edit-distance matches skip the trigram stages
+        if self.short_names and len(tokens) == 1 and len(tokens[0]) <= self.SHORT_QUERY_LEN:
+            candidates = list(dict.fromkeys([*candidates, *self._short_matches(tokens[0])]))
 
-        if candidate_count <= self.CANDIDATE_CNT_THRESHOLD:
-            for id in self.match_counts.keys():
-                candidate = self.cache[id]
-                score = self._score_candidate(candidate)
-                if score >= self.NOISE_THRESHOLD:
-                    all_results[id] = (candidate, score)
-                scored_ids.add(id)
-            return sorted(all_results.values(), key=lambda x: x[1], reverse=True)[
-                :limit
-            ]
+        # stage 3: fuzzy-score the candidates' names, with their context checked against the rest of the query
+        results: list[tuple[View[T, Store], float, float]] = []
+        for id in candidates:
+            candidate = self.cache[id]
+            score = self._score_candidate(id, candidate, tokens, token_trigrams, weights)
+            if score >= self.NOISE_THRESHOLD:
+                results.append((candidate, score, trigram_scores.get(id, 0.0)))
 
-        for min_trigram_matches in range(self.trigram_count, 1, -1):
-            candidates = self._get_candidates(min_trigram_matches)
+        # the candidate score ranks, the trigram score breaks its ties
+        results.sort(key=lambda r: (r[1], r[2]), reverse=True)
+        return [(candidate, score) for candidate, score, _ in results[:limit]]
 
-            new_candidates = candidates - scored_ids
+    def _weights(self, query_trigrams: set[str]) -> dict[str, float]:
+        """Each query trigram's rarity, log(records / records containing it) across canon and context; uniform if none carries any."""
+        records = len(self.cache)
+        weights: dict[str, float] = {}
+        for trigram in query_trigrams:
+            df = len(self.canon.get(trigram, ())) + len(self.context.get(trigram, ()))
+            # a trigram no record has can't tell records apart, and one in every record says nothing either
+            if df:
+                weights[trigram] = max(math.log(records / df), 0.0)
+        if not any(weights.values()):
+            return {trigram: 1.0 for trigram in query_trigrams}
+        return {trigram: weight for trigram, weight in weights.items() if weight}
 
-            if not new_candidates:
-                continue
+    def _count_hits(self, query_trigrams: set[str]) -> Counter[int]:
+        """Each record's count of the query's trigrams in its canon and its context, leaving out the most common trigrams (in canon only when enough rarer ones remain); Counter.update() counts an id array in C."""
+        # a trigram shared by a large share of records is the most expensive to count and says the least about which record matches, such as a country name's trigrams in the context of every city in it
+        common = max(self.STOP_SHARE * len(self.cache), self.STOP_MIN_DF)
+        canon = [ids for trigram in query_trigrams if (ids := self.canon.get(trigram)) is not None]
+        rarer_canon = [ids for ids in canon if len(ids) <= common]
+        rarer_context = [ids for trigram in query_trigrams if (ids := self.context.get(trigram)) is not None and len(ids) <= common]
+        hits: Counter[int] = Counter()
+        for ids in rarer_canon if len(rarer_canon) >= self.MIN_COUNTED else canon:
+            hits.update(ids)
+        for ids in rarer_context:
+            hits.update(ids)
+        return hits
 
-            for id in new_candidates:
-                candidate = self.cache[id]
-                score = self._score_candidate(candidate)
-                if score >= self.NOISE_THRESHOLD:
-                    all_results[id] = (candidate, score)
-                scored_ids.add(id)
-
-            if any(
-                score >= self.STRONG_MATCH_THRESHOLD
-                for _, score in all_results.values()
-            ):
-                break
-
-        sorted_results = sorted(all_results.values(), key=lambda x: x[1], reverse=True)
-        return sorted_results[:limit]
-
-    def _build_match_counts(self):
-        """Builds a mapping of document IDs to the count of matching trigrams with the query."""
-        index = self.index
-        match_counts = self.match_counts
-
-        # If the index is small, consider all entries as matches
-        if len(self.cache) < 300:
-            for doc_id in self.cache.keys():
-                match_counts[doc_id] = 1
-            self.trigram_count = 1
-            return
-
-        for trigram in generate_trigrams(self.query):
-            try:
-                ids = index[trigram]
-            except KeyError:
-                continue
-
-            self.trigram_count += 1
-            for doc_id in ids:
-                match_counts[doc_id] += 1
-
-    def _get_candidates(self, min_matches: int):
-        return {
-            doc_id
-            for doc_id, count in self.match_counts.items()
-            if count >= min_matches
-        }
-
-    def _get_search_values(self, candidate: View[T, Store]):
-        for field_name, weight in self.SEARCH_FIELDS.items():
-            obj = candidate
-            value = None
+    def _raw_names(self, candidate: View[T, Store]):
+        """Every value in the candidate's NAME_FIELDS, list fields such as aliases flattened."""
+        for field_name in self.NAME_FIELDS:
+            value = candidate
             for nested in field_name.split("."):
-                value = getattr(obj, nested, None)
+                value = getattr(value, nested, None)
                 if value is None:
                     break
-                obj = value
-            if value is not None:
-                yield (value, weight)
+            for name in value if isinstance(value, (list, tuple)) else (value,):
+                if isinstance(name, str) and name:
+                    yield name
 
-    def _score_candidate(self, candidate: View[T, Store]) -> float:
-        score = 0.0
-        total_weight = 0.0
+    def _names(self, candidate: View[T, Store]) -> list[str]:
+        """The search_text() of every name in the candidate's NAME_FIELDS."""
+        return [text for name in self._raw_names(candidate) if (text := search_text(name))]
 
-        score_values = self._get_search_values(candidate)
+    def _short_matches(self, token: str) -> list[int]:
+        """The records whose shipped short names, within one character of the token's length, are closest to it by ratio."""
+        matches: list[int] = []
+        for length in range(len(token) - 1, len(token) + 2):
+            if (bucket := self.short_names.get(length)) is None:
+                continue
+            names, ids = bucket
+            for _, _, i in process.extract(token, names, scorer=fuzz.ratio, limit=self.SHORT_MATCH_K, score_cutoff=self.SHORT_MATCH_CUTOFF):
+                matches.append(ids[i])
+        return matches
 
-        name, weight = next(score_values)  # name is always the first SEARCH_FIELD
-        name_score = fuzz.WRatio(self.query, self._normalize_query(name)) / 100.0
-        if name_score >= self.NOISE_THRESHOLD:
-            score += name_score * weight
-            total_weight += weight
-        else:
-            return 0.0
+    @staticmethod
+    def _contains(index: dict[str, array], trigram: str, id: int) -> bool:
+        ids = index.get(trigram)
+        if ids is None:
+            return False
+        # posting lists are sorted by id
+        i = bisect_left(ids, id)
+        return i < len(ids) and ids[i] == id
 
-        if self.query_token_count > 1:
-            for field_value, weight in score_values:
-                if not field_value:
+    def _explained(self, id: int, token_trigrams: list[set[str]], span: tuple[int, int], weights: dict[str, float]) -> float:
+        """The rarity-weighted share of the query's trigrams outside the name span found in the record's context; 1.0 when nothing weighted is left outside it."""
+        rest = set().union(*token_trigrams[: span[0]], *token_trigrams[span[1] :])
+        rest_weight = sum(weights.get(trigram, 0.0) for trigram in rest)
+        if not rest_weight:
+            return 1.0
+        return sum(weights.get(trigram, 0.0) for trigram in rest if self._contains(self.context, trigram, id)) / rest_weight
+
+    def _score_candidate(self, id: int, candidate: View[T, Store], tokens: list[str], token_trigrams: list[set[str]], weights: dict[str, float]) -> float:
+        """The best, over the candidate's names and the query spans each could fill, of the name match reduced by the share of the rest of the query its context doesn't explain."""
+        best = 0.0
+        explained: dict[tuple[int, int], float] = {}
+        # for each name, slide a window of its word count over the query, so the name is found wherever it sits ("springfield illinois", "illinois springfield")
+        for name in self._names(candidate):
+            size = min(len(name.split()), len(tokens))
+            for start in range(len(tokens) - size + 1):
+                span_text = " ".join(tokens[start : start + size])
+                name_score = fuzz.token_sort_ratio(span_text, name) / 100.0
+                # a typo can change the sorted word order ("alto alxgre" vs "alegre alto"), which plain ratio, comparing words as typed, doesn't suffer; two single words can't be reordered, so they need no second call
+                if size > 1 or " " in name:
+                    name_score = max(name_score, fuzz.ratio(span_text, name) / 100.0)
+                # the context factor never raises a score, so a span that can't beat the best on its name alone is skipped
+                if name_score <= best:
                     continue
-
-                if isinstance(field_value, (list, tuple)):
-                    matches = process.extract(
-                        self.query,
-                        [normalize(v) for v in field_value],
-                        scorer=fuzz.token_set_ratio,
-                        score_cutoff=60,
-                        limit=None,
-                    )
-
-                    field_score = (
-                        max(score for _, score, _ in matches) / 100.0
-                        if matches
-                        else 0.0
-                    )
-                else:
-                    field_score = (
-                        fuzz.token_set_ratio(self.query, normalize(field_value)) / 100.0
-                    )
-
-                if field_score >= self.NOISE_THRESHOLD:
-                    score += field_score * weight
-                    total_weight += weight
-
-        return score / total_weight if total_weight > 0 else 0.0
-
-    REMOVE_CHARS = (",", ".")
-
-    def _normalize_query(self, text: str) -> str:
-        norm = normalize(text)
-
-        trans_table = str.maketrans("", "", "".join(self.REMOVE_CHARS))
-        return norm.translate(trans_table)
+                span = (start, start + size)
+                if span not in explained:
+                    explained[span] = self._explained(id, token_trigrams, span, weights)
+                best = max(best, name_score * (1 - self.CONTEXT_PENALTY * (1 - explained[span])))
+        return best

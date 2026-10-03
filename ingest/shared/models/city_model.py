@@ -18,6 +18,7 @@ class CityModel(Model):
         "name": ("name",),
         "country": (
             "country.name",
+            "country.common_name",
             "country.alpha2",
             "country.alpha3",
         ),
@@ -28,18 +29,12 @@ class CityModel(Model):
             "subdivision_geonames_codes",
         ),
     }
-    SEARCH_FIELDS = {
-        "name": 1.0,
-        "admin1.name": 0.6,
-        "admin1.iso_suffix": 0.6,
-        "country.name": 0.3,
-        "country.alpha2": 0.3,
-        "country.alpha3": 0.3,
-    }
+    CANON_FIELDS = ("name",)
+    CONTEXT_FIELDS = ("admin1.name", "admin1.iso_suffix", "country.name", "country.alpha2", "country.alpha3")
 
     @property
     def admin1(self) -> SubdivisionModel | None:
-        """The city's admin_level=1 subdivision (state/province), the only level weighted in SEARCH_FIELDS; the rest of the chain is too noisy/bloating for the trigram index."""
+        """The city's admin_level=1 subdivision (state/province), the only level in CONTEXT_FIELDS; the rest of the chain is too noisy/bloating for the trigram index."""
         return next((s for s in self.subdivisions if s.admin_level == 1), None)
 
     @property

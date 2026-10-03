@@ -23,21 +23,16 @@ class SubdivisionModel(Model):
         "type": ("type",),
         "country": (
             "country.name",
+            "country.common_name",
             "country.alpha2",
             "country.alpha3",
             "country.numeric",
         ),
         "admin_level": ("admin_level",),
     }
-    SEARCH_FIELDS = {
-        "name": 1.0,
-        "iso_suffix": 0.5,
-        "aliases": 1.0,
-        "parent.name": 0.4,
-        "country.name": 0.4,
-        "country.alpha2": 0.4,
-        "country.alpha3": 0.4,
-    }
+    CANON_FIELDS = ("name", "aliases", "iso_suffix")
+    SHORT_NAMES = True
+    CONTEXT_FIELDS = ("parent.name", "country.name", "country.alpha2", "country.alpha3")
 
     @property
     def iso_suffix(self) -> str:

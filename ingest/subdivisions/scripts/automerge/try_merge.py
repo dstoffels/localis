@@ -1,5 +1,5 @@
 from ingest.subdivisions.utils.subdivision_map import SubdivisionMap
-from ingest.subdivisions.utils.strings import dedupe
+from ingest.utils.strings import dedupe
 from ingest.subdivisions.utils.resolution_map import ResolutionMap, AutomergeMatch, AmbiguousOrphan, LowMarginOrphan
 from ingest.shared.models import SubdivisionModel
 from ingest.utils import ingest_log

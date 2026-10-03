@@ -2,7 +2,7 @@ from dataclasses import dataclass, asdict
 import json
 from collections import defaultdict
 from typing import ClassVar
-from localis.utils.strings import generate_trigrams, normalize
+from localis.utils.strings import search_trigrams, search_text, normalize, SHORT_NAME_MAX
 
 
 @dataclass(slots=True)
@@ -31,6 +31,8 @@ class Model:
     # ----------- Indexing Methods ----------- #
 
     LOOKUP_FIELDS: ClassVar[tuple[str, ...]] = ()
+    # all-digit lookup values go to the integer lookup index; False keeps them as strings (codes with leading zeros, like M49's "009")
+    NUMERIC_LOOKUP: ClassVar[bool] = True
 
     def extract_lookup_values(self):
         """Used in processing to produce a normalized lookup index for each model from its LOOKUP_FIELDS."""
@@ -70,14 +72,18 @@ class Model:
             for filter_name, values in filter_values.items()
         }
 
-    SEARCH_FIELDS: ClassVar[dict[str, float]] = {}
-    """Fields that are used to identify the obj when searching. Key is the field name (can be nested fields using dot notation), value is the weight for search relevance."""
+    CANON_FIELDS: ClassVar[tuple[str, ...]] = ()
+    """Fields naming the record itself (its names, aliases and codes), indexed as its canon trigrams. Can be nested fields using dot notation."""
 
-    def extract_search_trigrams(self):
-        """Used in processing to produce a normalized, trigram search index for each model from its SEARCH_FIELDS keys."""
-        values = []
+    CONTEXT_FIELDS: ClassVar[tuple[str, ...]] = ()
+    """Fields locating the record (its parent, subdivision or country), indexed as its context trigrams. Can be nested fields using dot notation."""
 
-        for field in self.SEARCH_FIELDS.keys():
+    SHORT_NAMES: ClassVar[bool] = False
+    """Whether to ship the record's short one-word canon names for search's edit-distance fallback, where short names with typos are common and queries carry no context."""
+
+    def _field_values(self, fields: tuple[str, ...]) -> list[str]:
+        values: list[str] = []
+        for field in fields:
             obj = self
             value: str | list[str] | None = None
             for nested in field.split("."):
@@ -87,10 +93,23 @@ class Model:
                 obj = value
 
             if isinstance(value, list):
-                for v in value:
-                    values.append(v)
-
+                values.extend(value)
             elif value is not None:
                 values.append(value)
+        return values
 
-        return generate_trigrams(normalize(" ".join(values)))
+    def _field_text(self, fields: tuple[str, ...]) -> str:
+        return " ".join(self._field_values(fields))
+
+    def extract_canon_trigrams(self) -> set[str]:
+        """Used in processing to produce the canon trigram index from CANON_FIELDS."""
+        return search_trigrams(self._field_text(self.CANON_FIELDS))
+
+    def extract_short_names(self) -> set[str]:
+        """Used in processing to produce the short-name list: each canon name that is one word of at most SHORT_NAME_MAX characters in search_text() form."""
+        names = (search_text(value) for value in self._field_values(self.CANON_FIELDS))
+        return {name for name in names if name and len(name) <= SHORT_NAME_MAX and " " not in name}
+
+    def extract_context_trigrams(self) -> set[str]:
+        """Used in processing to produce the context trigram index from CONTEXT_FIELDS."""
+        return search_trigrams(self._field_text(self.CONTEXT_FIELDS))

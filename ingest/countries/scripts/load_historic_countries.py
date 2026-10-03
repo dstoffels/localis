@@ -25,7 +25,8 @@ def init_historic_countries(
             countries[alpha_4] = CountryModel(
                 id=len(countries) + 1,
                 name=c["name"],
-                official_name="",
+                official_name=c.get("official_name"),
+                common_name=None,
                 alpha2=c["alpha_2"],
                 alpha3=c["alpha_3"],
                 geonames_id=None,

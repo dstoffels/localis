@@ -2,11 +2,12 @@ from typing import Mapping, cast
 from localis.entities import City
 from localis.utils.data import CacheFilterPredicate
 from localis.views import CountryView, CityView, SubdivisionView
-from localis.registries import Registry, CountryRegistry, SubdivisionRegistry
+from localis.registries import QueryableRegistry, CountryRegistry, SubdivisionRegistry
 
 
-class CityRegistry(Registry[City]):
+class CityRegistry(QueryableRegistry[City]):
     REGISTRY_NAME = "cities"
+    NAME_FIELDS = ("name",)
 
     def __init__(
         self, countries: CountryRegistry, subdivisions: SubdivisionRegistry, **kwargs
@@ -53,10 +54,7 @@ class CityRegistry(Registry[City]):
         **kwargs,
     ) -> list[City]:
         """Filter cities by name, subdivision (name, iso/geonames code) or country (name, alpha2, alpha3). Multiple filters use logical AND."""
-        kwargs = {
-            "subdivision": subdivision,
-            "country": country,
-        }
+        kwargs.update(subdivision=subdivision, country=country)
         results = super().filter(name=name, limit=limit, **kwargs)
         return results
 

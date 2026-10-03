@@ -1,13 +1,14 @@
 # localis
 
-Fast, offline access to comprehensive data for **countries**, **subdivisions**, and **cities**. Built on ISO 3166 and GeoNames datasets (updated monthly) with support for exact lookups, filtering, and fuzzy search.
+Fast, offline access to comprehensive data for **countries**, **subdivisions**, **cities** and the **macroregions** countries sit in. Built on ISO 3166, GeoNames and Unicode CLDR datasets (updated monthly) with support for exact lookups, filtering, and fuzzy search.
 
 ## Features
 
 - 🌍 **<!-- stat:data.countries.total:int -->281<!-- /stat --> countries** (<!-- stat:data.countries.historic:int -->31<!-- /stat --> historic) sourced and merged from ISO 3166-1, ISO 3166-3, and GeoNames
 - 🗺️ **<!-- stat:data.subdivisions.total:int -->51,711<!-- /stat --> subdivisions** sourced and merged from ISO 3166-2 and GeoNames
-- 🏙️ **<!-- stat:data.cities.total:int -->235,914<!-- /stat --> cities** sourced from GeoNames cities500.txt
-- 🔍 **Search Engine** for typo-tolerant lookups with up to 89%+ accuracy
+- 🏙️ **<!-- stat:data.cities.total:int -->235,915<!-- /stat --> cities** sourced from GeoNames cities500.txt
+- 🌐 **<!-- stat:data.macroregions.total:int -->34<!-- /stat --> macroregions** (<!-- stat:data.macroregions.regions:int -->5<!-- /stat --> regions, <!-- stat:data.macroregions.subregions:int -->23<!-- /stat --> subregions, <!-- stat:data.macroregions.groupings:int -->6<!-- /stat --> groupings) sourced from Unicode CLDR, with every current country placed in them
+- 🔍 **Typo-tolerant search**: with a typo in the query, the intended record ranks first for <!-- stat:bench.registries.countries.accuracy.top1_pct:pct -->99.3%<!-- /stat --> of countries, <!-- stat:bench.registries.subdivisions.accuracy.top1_pct:pct -->85.2%<!-- /stat --> of subdivisions and <!-- stat:bench.registries.cities.accuracy.top1_pct:pct -->91.6%<!-- /stat --> of cities
 - 📌 **Aliases** - support for colloquial, historic and alternate names
 
 ---
@@ -40,7 +41,7 @@ print(results[0][0].name)  # "Australia"
 
 ---
 
-## Countries API
+## Countries
 
 ### Get
 
@@ -68,14 +69,20 @@ country = localis.countries.lookup(826)
 
 **Returns:** `Country` object or `None`
 
+`lookup()` matches codes only (alpha-2, alpha-3, numeric). Common abbreviations that aren't ISO codes, such as "UK" for the United Kingdom, are found by `filter(name=...)` and `search()`.
+
 ### Filter
 
 ```python
-# Exact name match (searches name, official_name, and aliases)
+# Exact name match (searches name, official_name, common_name, and aliases)
 results = localis.countries.filter(name="Canada")
 
 # General query across all fields
 results = localis.countries.filter(name="United", limit=5)
+
+# By macroregion: a region, subregion or grouping, by name or code
+results = localis.countries.filter(macroregion="Western Europe")
+results = localis.countries.filter(macroregion="EU")
 ```
 
 **Returns:** `list[Country]`
@@ -122,6 +129,8 @@ len(list(localis.countries))         # 281
 localis.countries.set_include_historic(False)
 ```
 
+The toggle applies to every thread using `localis.countries`, so set it before sharing the registry between threads (see Concurrency).
+
 `get()` and `lookup()` always resolve historic entries regardless of the toggle. ISO reused alpha2/alpha3/numeric codes across different withdrawn countries over time (e.g. `CS` was both Czechoslovakia and, decades later, Serbia and Montenegro), so `lookup()` only resolves a historic entry by its unique `alpha_4` withdrawal code, never by bare alpha2/alpha3/numeric:
 
 ### Country Object
@@ -130,8 +139,9 @@ localis.countries.set_include_historic(False)
 country = localis.countries.lookup("US")
 
 country.id            # Database ID
-country.name          # "United States"
-country.official_name # "United States of America"
+country.name          # "United States" - ISO 3166-1 name, as published
+country.official_name # "United States of America" - ISO 3166-1 official name, or None where ISO has none
+country.common_name   # None - common name from Debian iso-codes where it differs (e.g. "South Korea" for "Korea, Republic of"), otherwise None
 country.alpha2        # "US"
 country.alpha3        # "USA"
 country.geonames_id   # 6252001
@@ -139,6 +149,8 @@ country.numeric       # 840
 country.aliases       # tuple[str, ...] - Alternate names
 country.flag          # "🇺🇸" - Unicode flag emoji
 country.historic      # HistoricInfo | None - set only for withdrawn ISO 3166-3 countries
+country.macroregions  # tuple[MacroregionBase, ...] - CLDR path, region then subregion: (Americas, Northern America); () for most historic countries
+country.groupings     # tuple[MacroregionBase, ...] - CLDR groupings the country belongs to: (North America, United Nations)
 
 country = localis.countries.lookup("CSHH")  # Czechoslovakia
 country.historic.alpha_4            # "CSHH"
@@ -152,7 +164,7 @@ country.json()        # Convert to JSON string
 
 ---
 
-## Subdivisions API
+## Subdivisions
 
 ### Get by ID
 
@@ -238,7 +250,7 @@ subdivision.json()          # Convert to JSON string
 
 ---
 
-## Cities API
+## Cities
 
 ### Get by ID
 
@@ -306,7 +318,7 @@ localis.cities.population_threshold  # 15000
 localis.cities.set_population_threshold(None)
 ```
 
-`cities` is fully lazy-loaded, nothing is read from disk until first access. Call `set_population_threshold()` before that first access (before any `.get()`, `.lookup()`, `.filter()`, `.search()`, or `.force_cache()` call) so the registry only ever loads the narrowed dataset. Calling it after the cache or indexes are already built still works, but it invalidates them, so the next access rebuilds the caches from scratch at the new threshold.
+`cities` is fully lazy-loaded, nothing is read from disk until first access. Call `set_population_threshold()` before that first access (before any `.get()`, `.lookup()`, `.filter()`, `.search()`, or `.force_cache()` call) so the registry only ever loads the narrowed dataset. Calling it after the cache or indexes are already built still works, but it invalidates them, so the next access rebuilds the caches from scratch at the new threshold. The threshold applies to every thread using `localis.cities`, so set it before sharing the registry between threads (see Concurrency).
 
 **Returns:** `None`
 
@@ -331,8 +343,59 @@ city.json()          # Convert to JSON string
 
 ---
 
+## Macroregions
+
+### Get
+
+```python
+# By localis ID
+region = localis.macroregions.get(1)
+```
+
+**Returns:** `Macroregion` object or `None`
+
+### Lookup
+
+```python
+# By code: M49 numeric codes are zero-padded strings, so lookup(9) finds nothing
+oceania = localis.macroregions.lookup("009")
+eu = localis.macroregions.lookup("EU")
+
+# By name
+western_europe = localis.macroregions.lookup("Western Europe")
+```
+
+**Returns:** `Macroregion` object or `None`
+
+### Iteration
+
+```python
+for macroregion in localis.macroregions:
+    print(macroregion.name)
+
+total = len(localis.macroregions)
+```
+
+### Macroregion Object
+
+```python
+macroregion = localis.macroregions.lookup("155")
+
+macroregion.id        # Database ID
+macroregion.name      # "Western Europe" - CLDR English name
+macroregion.code      # "155" - M49 numeric code as a string, or CLDR's letter code ("QO", "EU")
+macroregion.type      # "region", "subregion" or "grouping"
+macroregion.parent    # MacroregionBase | None - a subregion's region, or the region CLDR files a grouping under
+
+# Utility methods
+macroregion.to_dict() # Convert to dictionary
+macroregion.json()    # Convert to JSON string
+```
+
+---
+
 ## Base Objects
-Basic versions of country and subdivision when nested.
+Basic versions of country, subdivision and macroregion when nested.
 
 ### CountryBase Object
 
@@ -360,59 +423,70 @@ nested_sub.type
 nested_sub.admin_level
 ```
 
+### MacroregionBase Object
+
+```python
+nested_macroregion = country.macroregions[0]
+
+nested_macroregion.id
+nested_macroregion.name
+nested_macroregion.code
+nested_macroregion.type
+```
+
 ## Performance
 
 ### Caching
 
 All registries and their indexes are lazy-loaded on first use, incurring a cold start cost on whichever call touches them first. Any registry's dataset and indexes can be pre-loaded with `.force_cache()` to avoid this during queries, or you can simply access the registry/method to trigger the lazy loading upfront.
 
+A registry's dataset also loads the datasets it references, if they aren't cached yet. Countries load macroregions, subdivisions load countries, and cities load subdivisions and countries. Only those datasets load, not their indexes. The subdivisions and cities tables below exclude them, so a cold first call on cities also pays for the subdivisions and countries datasets.
+
 #### Countries (<!-- stat:data.countries.total:int -->281<!-- /stat -->)
 | Component | Load Time | Memory |
 |---|---|---|
-| Dataset | <!-- stat:footprint.registries.countries.dataset.time_ms:load -->< 1ms<!-- /stat --> | <!-- stat:footprint.registries.countries.dataset.memory_bytes:size -->308KB<!-- /stat --> |
-| Lookup index | <!-- stat:footprint.registries.countries.lookup_index.time_ms:load -->< 1ms<!-- /stat --> | <!-- stat:footprint.registries.countries.lookup_index.memory_bytes:size -->28KB<!-- /stat --> |
-| Filter index | <!-- stat:footprint.registries.countries.filter_index.time_ms:load -->< 1ms<!-- /stat --> | <!-- stat:footprint.registries.countries.filter_index.memory_bytes:size -->164KB<!-- /stat --> |
-| Search index | <!-- stat:footprint.registries.countries.search_index.time_ms:load -->~2ms<!-- /stat --> | <!-- stat:footprint.registries.countries.search_index.memory_bytes:size -->700KB<!-- /stat --> |
-| **Combined** | **<!-- stat:footprint.registries.countries.combined.time_ms:load -->~4ms<!-- /stat -->** | **<!-- stat:footprint.registries.countries.combined.memory_bytes:size -->1.2MB<!-- /stat -->** |
+| Dataset | <!-- stat:footprint.registries.countries.dataset.time_ms:load -->~1ms<!-- /stat --> | <!-- stat:footprint.registries.countries.dataset.memory_bytes:size -->215KB<!-- /stat --> |
+| Lookup index | <!-- stat:footprint.registries.countries.lookup_index.time_ms:load -->< 1ms<!-- /stat --> | <!-- stat:footprint.registries.countries.lookup_index.memory_bytes:size -->41KB<!-- /stat --> |
+| Filter index | <!-- stat:footprint.registries.countries.filter_index.time_ms:load -->< 1ms<!-- /stat --> | <!-- stat:footprint.registries.countries.filter_index.memory_bytes:size -->119KB<!-- /stat --> |
+| Search index | <!-- stat:footprint.registries.countries.search_index.time_ms:load -->~4ms<!-- /stat --> | <!-- stat:footprint.registries.countries.search_index.memory_bytes:size -->381KB<!-- /stat --> |
+| **Combined** | **<!-- stat:footprint.registries.countries.combined.time_ms:load -->~6ms<!-- /stat -->** | **<!-- stat:footprint.registries.countries.combined.memory_bytes:size -->756KB<!-- /stat -->** |
 
 #### Subdivisions (<!-- stat:data.subdivisions.total:int -->51,711<!-- /stat -->)
 | Component | Load Time | Memory |
 |---|---|---|
-| Dataset | <!-- stat:footprint.registries.subdivisions.dataset.time_ms:load -->~88ms<!-- /stat --> | <!-- stat:footprint.registries.subdivisions.dataset.memory_bytes:size -->27.2MB<!-- /stat --> |
-| Lookup index | <!-- stat:footprint.registries.subdivisions.lookup_index.time_ms:load -->~13ms<!-- /stat --> | <!-- stat:footprint.registries.subdivisions.lookup_index.memory_bytes:size -->3.8MB<!-- /stat --> |
-| Filter index | <!-- stat:footprint.registries.subdivisions.filter_index.time_ms:load -->~125ms<!-- /stat --> | <!-- stat:footprint.registries.subdivisions.filter_index.memory_bytes:size -->18.9MB<!-- /stat --> |
-| Search index | <!-- stat:footprint.registries.subdivisions.search_index.time_ms:load -->~60ms<!-- /stat --> | <!-- stat:footprint.registries.subdivisions.search_index.memory_bytes:size -->11.2MB<!-- /stat --> |
-| **Combined** | **<!-- stat:footprint.registries.subdivisions.combined.time_ms:load -->~287ms<!-- /stat -->** | **<!-- stat:footprint.registries.subdivisions.combined.memory_bytes:size -->61.0MB<!-- /stat -->** |
+| Dataset | <!-- stat:footprint.registries.subdivisions.dataset.time_ms:load -->~85ms<!-- /stat --> | <!-- stat:footprint.registries.subdivisions.dataset.memory_bytes:size -->16.4MB<!-- /stat --> |
+| Lookup index | <!-- stat:footprint.registries.subdivisions.lookup_index.time_ms:load -->~16ms<!-- /stat --> | <!-- stat:footprint.registries.subdivisions.lookup_index.memory_bytes:size -->4.3MB<!-- /stat --> |
+| Filter index | <!-- stat:footprint.registries.subdivisions.filter_index.time_ms:load -->~120ms<!-- /stat --> | <!-- stat:footprint.registries.subdivisions.filter_index.memory_bytes:size -->13.8MB<!-- /stat --> |
+| Search index | <!-- stat:footprint.registries.subdivisions.search_index.time_ms:load -->~62ms<!-- /stat --> | <!-- stat:footprint.registries.subdivisions.search_index.memory_bytes:size -->12.8MB<!-- /stat --> |
+| **Combined** | **<!-- stat:footprint.registries.subdivisions.combined.time_ms:load -->~284ms<!-- /stat -->** | **<!-- stat:footprint.registries.subdivisions.combined.memory_bytes:size -->47.4MB<!-- /stat -->** |
 
-#### Cities (<!-- stat:data.cities.total:int -->235,914<!-- /stat -->)
+#### Cities (<!-- stat:data.cities.total:int -->235,915<!-- /stat -->)
 
-> ⚠️ **Memory-intensive.** Fully caching cities and its indexes adds <!-- stat:footprint.registries.cities.combined.memory_bytes:size -->151.1MB<!-- /stat --> of resident memory. Calling `localis.cities.force_cache()` loads all of it upfront. You can call `cities.set_population_threshold(n)` before first access as a lever to control the memory footprint.
+> ⚠️ **Memory-intensive.** Fully caching cities and its indexes adds <!-- stat:footprint.registries.cities.combined.memory_bytes:size -->114.4MB<!-- /stat --> of memory. Calling `localis.cities.force_cache()` loads all of it upfront. You can call `cities.set_population_threshold(n)` before first access as a lever to control the memory footprint.
 
 | Component | Load Time | Memory |
 |---|---|---|
-| Dataset | <!-- stat:footprint.registries.cities.dataset.time_ms:load -->~450ms<!-- /stat --> | <!-- stat:footprint.registries.cities.dataset.memory_bytes:size -->60.4MB<!-- /stat --> |
-| Lookup index | <!-- stat:footprint.registries.cities.lookup_index.time_ms:load -->~63ms<!-- /stat --> | <!-- stat:footprint.registries.cities.lookup_index.memory_bytes:size -->4KB<!-- /stat --> |
-| Filter index | <!-- stat:footprint.registries.cities.filter_index.time_ms:load -->~580ms<!-- /stat --> | <!-- stat:footprint.registries.cities.filter_index.memory_bytes:size -->57.6MB<!-- /stat --> |
-| Search index | <!-- stat:footprint.registries.cities.search_index.time_ms:load -->~178ms<!-- /stat --> | <!-- stat:footprint.registries.cities.search_index.memory_bytes:size -->33.1MB<!-- /stat --> |
-| **Combined** | **<!-- stat:footprint.registries.cities.combined.time_ms:load -->~1.27s<!-- /stat -->** | **<!-- stat:footprint.registries.cities.combined.memory_bytes:size -->151.1MB<!-- /stat -->** |
+| Dataset | <!-- stat:footprint.registries.cities.dataset.time_ms:load -->~341ms<!-- /stat --> | <!-- stat:footprint.registries.cities.dataset.memory_bytes:size -->28.1MB<!-- /stat --> |
+| Lookup index | <!-- stat:footprint.registries.cities.lookup_index.time_ms:load -->~74ms<!-- /stat --> | <!-- stat:footprint.registries.cities.lookup_index.memory_bytes:size -->1.8MB<!-- /stat --> |
+| Filter index | <!-- stat:footprint.registries.cities.filter_index.time_ms:load -->~737ms<!-- /stat --> | <!-- stat:footprint.registries.cities.filter_index.memory_bytes:size -->48.5MB<!-- /stat --> |
+| Search index | <!-- stat:footprint.registries.cities.search_index.time_ms:load -->~150ms<!-- /stat --> | <!-- stat:footprint.registries.cities.search_index.memory_bytes:size -->36.0MB<!-- /stat --> |
+| **Combined** | **<!-- stat:footprint.registries.cities.combined.time_ms:load -->~1.30s<!-- /stat -->** | **<!-- stat:footprint.registries.cities.combined.memory_bytes:size -->114.4MB<!-- /stat -->** |
 
-At a threshold of <!-- stat:data.cities.threshold:int -->15,000<!-- /stat -->, cities drops from <!-- stat:data.cities.total:int -->235,914<!-- /stat --> to <!-- stat:data.cities.above_threshold:int -->34,171<!-- /stat --> and memory drops from <!-- stat:footprint.registries.cities.combined.memory_bytes:size -->151.1MB<!-- /stat --> to <!-- stat:footprint.cities_threshold.memory_bytes:size -->31.1MB<!-- /stat -->.
+At a threshold of <!-- stat:data.cities.threshold:int -->15,000<!-- /stat -->, cities drops from <!-- stat:data.cities.total:int -->235,915<!-- /stat --> to <!-- stat:data.cities.above_threshold:int -->34,171<!-- /stat --> and memory drops from <!-- stat:footprint.registries.cities.combined.memory_bytes:size -->114.4MB<!-- /stat --> to <!-- stat:footprint.cities_threshold.memory_bytes:size -->26.5MB<!-- /stat -->.
 
-**Full Cache**: <!-- stat:footprint.full_cache.time_ms:load -->~1.50s<!-- /stat --> load time, <!-- stat:footprint.full_cache.memory_bytes:size -->213.2MB<!-- /stat --> memory for all datasets and indexes
-
-**Concurrency:** localis is not yet thread-safe. Lazy loading can race on first access, and `search()` keeps per-query state on the shared index, so concurrent searches on the same registry can interfere with each other even after `.force_cache()`. Until thread safety lands, call `.force_cache()` up front and serialize searches on a shared registry (or give each thread its own process).
+**Full Cache**: <!-- stat:footprint.full_cache.time_ms:load -->~1.58s<!-- /stat --> load time, <!-- stat:footprint.full_cache.memory_bytes:size -->162.5MB<!-- /stat --> memory for all datasets and indexes
 
 ### Benchmarks
 
 Per-call query latency on warm caches, median (95th percentile), and fuzzy search accuracy on mangled/misspelled queries: how often the right entry appears in the top 10 results, and how often it's the top result.
 
-| Registry | Get | Lookup | Filter | Search | Search Accuracy (top 10) | Top Result |
+| Registry | Get | Lookup | Filter | Search (p50/p95) | Search Accuracy (top 10) | Top Result |
 |---|---|---|---|---|---|---|
-| Countries | <!-- stat:bench.registries.countries.get.p50_ms:latency -->0.0021ms<!-- /stat --> (<!-- stat:bench.registries.countries.get.p95_ms:latency -->0.0028ms<!-- /stat -->) | <!-- stat:bench.registries.countries.lookup.p50_ms:latency -->0.0058ms<!-- /stat --> (<!-- stat:bench.registries.countries.lookup.p95_ms:latency -->0.0073ms<!-- /stat -->) | <!-- stat:bench.registries.countries.filter.p50_ms:latency -->0.0093ms<!-- /stat --> (<!-- stat:bench.registries.countries.filter.p95_ms:latency -->0.0131ms<!-- /stat -->) | <!-- stat:bench.registries.countries.search.p50_ms:latency -->1.35ms<!-- /stat --> (<!-- stat:bench.registries.countries.search.p95_ms:latency -->2.24ms<!-- /stat -->) | <!-- stat:bench.registries.countries.accuracy.success_pct:pct -->89.8%<!-- /stat --> | <!-- stat:bench.registries.countries.accuracy.top1_pct:pct -->83.8%<!-- /stat --> |
-| Subdivisions | <!-- stat:bench.registries.subdivisions.get.p50_ms:latency -->0.0075ms<!-- /stat --> (<!-- stat:bench.registries.subdivisions.get.p95_ms:latency -->0.0101ms<!-- /stat -->) | <!-- stat:bench.registries.subdivisions.lookup.p50_ms:latency -->0.012ms<!-- /stat --> (<!-- stat:bench.registries.subdivisions.lookup.p95_ms:latency -->0.0169ms<!-- /stat -->) | <!-- stat:bench.registries.subdivisions.filter.p50_ms:latency -->0.0153ms<!-- /stat --> (<!-- stat:bench.registries.subdivisions.filter.p95_ms:latency -->0.0297ms<!-- /stat -->) | <!-- stat:bench.registries.subdivisions.search.p50_ms:latency -->2.83ms<!-- /stat --> (<!-- stat:bench.registries.subdivisions.search.p95_ms:latency -->10.9ms<!-- /stat -->) | <!-- stat:bench.registries.subdivisions.accuracy.success_pct:pct -->87.5%<!-- /stat --> | <!-- stat:bench.registries.subdivisions.accuracy.top1_pct:pct -->70.1%<!-- /stat --> |
-| Cities | <!-- stat:bench.registries.cities.get.p50_ms:latency -->0.0142ms<!-- /stat --> (<!-- stat:bench.registries.cities.get.p95_ms:latency -->0.0199ms<!-- /stat -->) | <!-- stat:bench.registries.cities.lookup.p50_ms:latency -->0.0118ms<!-- /stat --> (<!-- stat:bench.registries.cities.lookup.p95_ms:latency -->0.0163ms<!-- /stat -->) | <!-- stat:bench.registries.cities.filter.p50_ms:latency -->0.0216ms<!-- /stat --> (<!-- stat:bench.registries.cities.filter.p95_ms:latency -->0.0724ms<!-- /stat -->) | <!-- stat:bench.registries.cities.search.p50_ms:latency -->15.9ms<!-- /stat --> (<!-- stat:bench.registries.cities.search.p95_ms:latency -->63.6ms<!-- /stat -->) | <!-- stat:bench.registries.cities.accuracy.success_pct:pct -->97.4%<!-- /stat --> | <!-- stat:bench.registries.cities.accuracy.top1_pct:pct -->68.1%<!-- /stat --> |
+| Countries | <!-- stat:bench.registries.countries.get.p50_ms:latency -->0.0091ms<!-- /stat --> (<!-- stat:bench.registries.countries.get.p95_ms:latency -->0.0125ms<!-- /stat -->) | <!-- stat:bench.registries.countries.lookup.p50_ms:latency -->0.0126ms<!-- /stat --> (<!-- stat:bench.registries.countries.lookup.p95_ms:latency -->0.0166ms<!-- /stat -->) | <!-- stat:bench.registries.countries.filter.p50_ms:latency -->0.018ms<!-- /stat --> (<!-- stat:bench.registries.countries.filter.p95_ms:latency -->0.0237ms<!-- /stat -->) | <!-- stat:bench.registries.countries.search.p50_ms:latency -->2.12ms<!-- /stat --> (<!-- stat:bench.registries.countries.search.p95_ms:latency -->4.92ms<!-- /stat -->) | <!-- stat:bench.registries.countries.accuracy.success_pct:pct -->100.0%<!-- /stat --> | <!-- stat:bench.registries.countries.accuracy.top1_pct:pct -->99.3%<!-- /stat --> |
+| Subdivisions | <!-- stat:bench.registries.subdivisions.get.p50_ms:latency -->0.0085ms<!-- /stat --> (<!-- stat:bench.registries.subdivisions.get.p95_ms:latency -->0.0105ms<!-- /stat -->) | <!-- stat:bench.registries.subdivisions.lookup.p50_ms:latency -->0.0136ms<!-- /stat --> (<!-- stat:bench.registries.subdivisions.lookup.p95_ms:latency -->0.0168ms<!-- /stat -->) | <!-- stat:bench.registries.subdivisions.filter.p50_ms:latency -->0.0185ms<!-- /stat --> (<!-- stat:bench.registries.subdivisions.filter.p95_ms:latency -->0.0363ms<!-- /stat -->) | <!-- stat:bench.registries.subdivisions.search.p50_ms:latency -->3.33ms<!-- /stat --> (<!-- stat:bench.registries.subdivisions.search.p95_ms:latency -->5.77ms<!-- /stat -->) | <!-- stat:bench.registries.subdivisions.accuracy.success_pct:pct -->97.0%<!-- /stat --> | <!-- stat:bench.registries.subdivisions.accuracy.top1_pct:pct -->85.2%<!-- /stat --> |
+| Cities | <!-- stat:bench.registries.cities.get.p50_ms:latency -->0.0142ms<!-- /stat --> (<!-- stat:bench.registries.cities.get.p95_ms:latency -->0.0181ms<!-- /stat -->) | <!-- stat:bench.registries.cities.lookup.p50_ms:latency -->0.012ms<!-- /stat --> (<!-- stat:bench.registries.cities.lookup.p95_ms:latency -->0.0146ms<!-- /stat -->) | <!-- stat:bench.registries.cities.filter.p50_ms:latency -->0.0238ms<!-- /stat --> (<!-- stat:bench.registries.cities.filter.p95_ms:latency -->0.0852ms<!-- /stat -->) | <!-- stat:bench.registries.cities.search.p50_ms:latency -->6.82ms<!-- /stat --> (<!-- stat:bench.registries.cities.search.p95_ms:latency -->11.8ms<!-- /stat -->) | <!-- stat:bench.registries.cities.accuracy.success_pct:pct -->98.7%<!-- /stat --> | <!-- stat:bench.registries.cities.accuracy.top1_pct:pct -->91.6%<!-- /stat --> |
 
-Accuracy tested on <!-- stat:bench.sample_size:int -->5,000<!-- /stat --> mangled-query samples per registry; cities' search additionally includes city + admin1 context. Load times, memory and latency are generated by `tests/analysis/footprint.py` and `tests/analysis/benchmarks.py`, last measured on <!-- stat:footprint.host.cpu -->11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz<!-- /stat --> with Python <!-- stat:footprint.host.python -->3.14.4<!-- /stat -->.
+Accuracy tested on <!-- stat:bench.sample_size:int -->5,000<!-- /stat --> mangled-query samples per registry; cities' search additionally includes city + admin1 context. Load times, memory and latency are generated by `tests/analysis/footprint.py` and `tests/analysis/benchmarks.py`, last measured on <!-- stat:footprint.host.cpu -->11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz<!-- /stat --> with Python <!-- stat:footprint.host.python -->3.14.7<!-- /stat -->.
 
 ---
 
@@ -423,16 +497,54 @@ Data in this project is kept current monthly from the following sources:
   - **Canonical**: [ISO 3166-1](https://www.iso.org/iso-3166-country-codes.html) data via [Debian's iso-codes project](https://salsa.debian.org/iso-codes-team/iso-codes)
   - **Merged**: [ISO 3166-3](https://www.iso.org/iso-3166-country-codes.html) withdrawn/historic country codes, also via Debian's iso-codes project
   - **Merged**: [GeoNames](https://www.geonames.org/) `countryInfo.txt`
-  - **Merged**: Additional country aliases from a static [Wikidata](https://www.wikidata.org/) snapshot (not refreshed monthly)
+  - **Merged**: Additional country aliases queried from [Wikidata](https://www.wikidata.org/): English labels, alternative labels and short names
 - **Subdivisions**
   - **Canonical**: [ISO 3166-2](https://www.iso.org/iso-3166-country-codes.html) data via [Debian's iso-codes project](https://salsa.debian.org/iso-codes-team/iso-codes)
   - **Merged**: [GeoNames](https://www.geonames.org/) `admin1CodesASCII.txt` and `admin2Codes.txt`
-  - **Merged**: [Wikidata](https://www.wikidata.org/) crosswalk (ISO 3166-2 code ↔ GeoNames id) for unambiguous resolution ahead of fuzzy matching
+  - **Merged**: [Wikidata](https://www.wikidata.org/) (ISO 3166-2 code ↔ GeoNames id)
   - **Merged**: Additional subdivision aliases from GeoNames' `alternateNamesV2` dump (filtered by [Unicode CLDR](https://cldr.unicode.org/)'s official-language data per country)
 - **Cities**
   - [GeoNames](https://www.geonames.org/) `cities500.txt` dataset
+- **Macroregions**
+  - [Unicode CLDR](https://cldr.unicode.org/) territory containment and English territory names
 
 [`docs/methodology.md`](docs/methodology.md) is a complete, falsifiable account of how each dataset is built: the rules that combine these sources, how the results were validated, and where they are known to be wrong. [`unmerged_subdivisions.md`](docs/unmerged_subdivisions.md) lists every ISO subdivision currently without a GeoNames counterpart, regenerated on every ingest run.
+
+### Concurrency
+Registries are safe to share across threads. `get()`, `lookup()`, `filter()`, `search()` and iteration only read shared data, and the first access that loads a dataset or index does so under the registry's lock, so threads reaching a cold registry together load it once.
+
+Two settings change shared state for every thread: `cities.set_population_threshold()` and `countries.set_include_historic()`. Configure them before the registry is shared between threads, never while other threads are querying it.
+
+#### Batch searching
+
+localis doesn't parallelize batches for you, since the right approach depends on your Python build, memory budget and surrounding executor. On free-threaded Python (3.14t), a thread pool searches in parallel:
+
+```python
+from concurrent.futures import ThreadPoolExecutor
+import localis
+
+localis.cities.force_cache()  # load once, before the threads start
+with ThreadPoolExecutor() as pool:
+    results = list(pool.map(localis.cities.search, queries))
+```
+
+On a standard Python build the same code is correct but runs one search at a time, because the GIL lets only one thread run Python code at once. To search in parallel there, use processes. Each worker loads its own copy of the data (up to <!-- stat:footprint.registries.cities.combined.memory_bytes:size -->114.4MB<!-- /stat --> for cities), so apply any settings in the worker's initializer, and search through a module-level function, since a registry itself can't be sent to a process:
+
+```python
+from concurrent.futures import ProcessPoolExecutor
+import localis
+
+def init_worker():
+    localis.cities.set_population_threshold(15000)  # repeat any setting the parent uses
+
+def search_city(query):
+    return localis.cities.search(query)
+
+if __name__ == "__main__":  # workers import this module, so the pool only starts in the parent
+    with ProcessPoolExecutor(initializer=init_worker) as pool:
+        results = list(pool.map(search_city, queries, chunksize=500))
+```
+
 
 ### Data licensing
 

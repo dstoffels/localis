@@ -4,7 +4,7 @@ from ingest.subdivisions.utils.resolution_map import ResolutionMap
 from ingest.subdivisions.utils.subdivision_map import SubdivisionMap
 
 COUNTRY = CountryModel(
-    id=1, name="Testland", alpha2="TL", alpha3="TLD", geonames_id=None, official_name="Testland",
+    id=1, name="Testland", alpha2="TL", alpha3="TLD", geonames_id=None, official_name="Testland", common_name=None,
     aliases=[], numeric=None, flag=None, historic=None,
 )
 
@@ -20,19 +20,22 @@ def _sub(name: str, aliases: list[str] | None = None, iso_code: str | None = Non
     return sub
 
 
-def test_ambiguous_iso_code_is_not_merged_elsewhere():
-    """an ISO code contesting an ambiguous GeoNames record stays an ambiguity orphan even when it also qualifies for another record"""
-    sub_map = SubdivisionMap()
-    sub_map.add(_sub("Alpha", geonames_id=1))
-    sub_map.add(_sub("Gamma", geonames_id=2))
-    iso_subs = {
-        # both score 100 against Alpha, making it ambiguous; TL-X also matches Gamma through its alias
-        "TL-X": _sub("Alpha", aliases=["Gamma"], iso_code="TL-X"),
-        "TL-Y": _sub("Alpha", iso_code="TL-Y"),
-    }
-    resolution_map = ResolutionMap()
+class TestTryMerge:
+    """TRY MERGE"""
 
-    try_merge(iso_subs, sub_map, resolution_map)
+    def test_ambiguous_iso_code(self):
+        """should keep an ISO code contesting an ambiguous GeoNames record as an ambiguity orphan, even when it also qualifies for another record"""
+        sub_map = SubdivisionMap()
+        sub_map.add(_sub("Alpha", geonames_id=1))
+        sub_map.add(_sub("Gamma", geonames_id=2))
+        iso_subs = {
+            # both score 100 against Alpha, making it ambiguous; TL-X also matches Gamma through its alias
+            "TL-X": _sub("Alpha", aliases=["Gamma"], iso_code="TL-X"),
+            "TL-Y": _sub("Alpha", iso_code="TL-Y"),
+        }
+        resolution_map = ResolutionMap()
 
-    assert "TL-X" not in resolution_map.automerge.resolutions
-    assert {o.iso_code for o in resolution_map.automerge.orphans.ambiguity} == {"TL-X", "TL-Y"}
+        try_merge(iso_subs, sub_map, resolution_map)
+
+        assert "TL-X" not in resolution_map.automerge.resolutions
+        assert {o.iso_code for o in resolution_map.automerge.orphans.ambiguity} == {"TL-X", "TL-Y"}

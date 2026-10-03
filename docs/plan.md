@@ -5,7 +5,7 @@ This document outlines the project plan for the Localis project, detailing the o
 
 ## Objectives
 
-- Reduce localis's shipped package size and runtime memory footprint, primarily driven by the cities dataset.
+- Keep localis's shipped package size and runtime memory footprint in check, primarily driven by the cities dataset. Runtime memory has reached the floor for the current data model (a full cache is about 147MB, down from about 207MB, after on-demand views and single-id filter postings; see dev.md's Memory footprint); the remaining lever is package size, through splitting cities from the core package (backlog), when adoption calls for it.
 - Ship comprehensive datasets by default, and let the API narrow them ad hoc (population floors, locales) at query time rather than shipping multiple hard-tiered dataset variants.
 
 ## Features
@@ -19,15 +19,15 @@ Blocked on the above, needs a dedicated design pass before implementation starts
 - Gettext-based name translation across `Country`/`Subdivision` (and `Currency`/`Language`/`Script` once they exist), including `language_code` support on `filter()`/`search()`.
 
 ## Backlog
-- Move dev commands (`ingest`, `analysis`, `test`, `test-watch`) out of `[project.scripts]`, which ships in the published package and installs them for every PyPI user even though they point at code the package doesn't include (`ingest/`, `tests/`, dev dependencies), so they crash. A task runner such as poethepoet (`[tool.poe.tasks]`) keeps them dev-only.
-- City radius feature using lat/lng to return nearby cities within a specified distance?
-- Add filter() kwarg error handling for invalid arguments
-- Implement custom exceptions (localis.exceptions module)?
-- Thread safety across the package: lazy cache/index loading races on first access, and `SearchIndex.search()` stores per-query state (`query`, `query_token_count`, `match_counts`, `trigram_count`) on the shared instance, so concurrent searches on one registry corrupt each other mid-scoring. Search state should live in locals passed to the helpers, plus locking around lazy loads. Documented as a known issue in the README for v2.
-- Implement autocomplete for registries and/or global interface.
-- Redevelop Wikidata SPARQL query and parsing logic for country alias enrichment.
-- No ISO source maps countries to their language(s) (639 and 3166 don't cross-reference); evaluate Unicode CLDR's territory-language data for this.
-- Alias search quality: short/foreign-language country aliases (`DPRK`, `Sverige`) are prone to colliding with unrelated countries once mangled, since countries' search bypasses trigram pre-filtering below 300 records; separately, `normalize()`'s `unidecode` transliteration of non-Latin aliases (Korean, Arabic) doesn't consistently match the same entity's own Latin name, so an exact alias query can miss entirely. Found via `tests/analysis/benchmarks.py`'s alias coverage; tabled as search-engine tuning, not urgent. A third cause underlies both: `SearchIndex._score_candidate()` returns 0 when the primary name scores under the noise threshold, before any alias is scored, and secondary fields (aliases included) are only scored for multi-token queries, so an alias can never rescue a candidate whose name doesn't match ("Golden State" can't find California, "Sverige" can't find Sweden).
+1. Batch throughput for large cleanups: registries are thread-safe, but on the standard (GIL) build threads don't parallelize search, which is mostly Python code, and rapidfuzz's single scorer calls don't release the GIL usefully (only `process.cdist(..., workers=N)` does, which doesn't fit localis's search). Free-threaded Python is the threaded route: rapidfuzz supports 3.14t since 3.14.2 (3.14.0 added support, 3.14.6 dropped the experimental 3.13t wheels). It requires no change to `requires-python = ">=3.11"`, since free threading is a property of the user's interpreter and localis is pure Python; GIL builds keep working as now. Adopting it is additive: a 3.14t job in the test matrix, optionally raising the `rapidfuzz` floor to 3.14.2 and adding the free-threading PyPI classifier, and a batch API such as `search_many(queries, workers=N)` on a thread pool (parallel on 3.14t, serial on GIL builds, with process pools as the GIL-build option: each worker loads its own cache, about 105MB for cities). Measure throughput on both builds.
+2. City radius feature using lat/lng to return nearby cities within a specified distance?
+3. Implement custom exceptions (localis.exceptions module)?
+4. Implement autocomplete for registries and/or global interface.
+5. No ISO source maps countries to their language(s) (639 and 3166 don't cross-reference); evaluate Unicode CLDR's territory-language data for this.
+6. Search, remaining limits: a subdivision query without context can't pick among same-name records (dozens of Washington Counties), which caps subdivisions' top-result accuracy; benchmarking subdivision queries with their country as context would measure that case the way cities' admin1 context does. `unidecode` transliteration of non-Latin aliases (Korean, Arabic) doesn't consistently match the record's own Latin name. The short-name fallback is off for cities (their queries usually carry context); enabling it is `SHORT_NAMES = True` on `CityModel`, at about 430KB shipped. Indexing each name separately (true per-name Dice) is parked until a failure trace shows alias dilution.
+7. Macroregion filters on subdivisions and cities (`cities.filter(macroregion="Europe")`), at the cost of another filter column on the largest dataset; deferred until there's demand. The macroregions design is recorded in `methodology.md` (sources, naming, placement rules) and `dev.md`.
+8. Pin the CLDR version shared by `cldr_territory_info.json` (shared stage) and the macroregions inputs, which each fetch CLDR's `main` and could land on different CLDR commits in one run.
+9. Split cities from the core package (`localis` with macroregions, countries and subdivisions, about 11MB installed; cities as an extra backed by a separate data package, about 49MB). Deferred until users report package size as a problem. City rows store country and subdivision ids that are only valid against the exact core data they were built with, so the two would release in lockstep from one ingest run with an exact-version pin, which removes most of the usual benefit of a split.
 
 ## Localization (gettext-based name translation)
 
@@ -59,6 +59,8 @@ Dependency: none. `gettext` is part of Python's standard library. The actual sco
 - Actual size of the compiled `.mo` catalogs across all locales isn't confirmed yet, needs measuring before deciding to ship all of them.
 - Reconsider Unicode CLDR as the translation data source instead of iso-codes' gettext catalogs; CLDR is more actively maintained and broader-coverage for exactly this kind of translated display-name data. Decide before implementation starts, not after.
 ## Skill decision lifecycle
+
+Status: designed, not started; to land as a patch before the next scheduled ingest run (the monthly cron, 1 November 2026), since that run is the first that can retire or reopen skill decisions.
 
 Goal: a skill decision is never silently ignored or replaced. Wikidata merges, automerge, `geonames_absent` and the non-administrative bypass are recomputed every run and already follow source updates. Skill decisions are permanent and applied first, and today only `flag_wikidata_conflicts()` ever re-examines them, so a GeoNames or ISO update can leave one wrong without anything failing.
 

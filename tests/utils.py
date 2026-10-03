@@ -1,14 +1,20 @@
 import random
 import string
-from localis import countries, subdivisions, cities
+from localis import macroregions, countries, subdivisions, cities
 import pytest
 
-REGISTRIES = [countries, subdivisions, cities]
+REGISTRIES = [macroregions, countries, subdivisions, cities]
+QUERYABLE_REGISTRIES = [countries, subdivisions, cities]
 
 registry_param = pytest.mark.parametrize(
     "registry", REGISTRIES, ids=lambda r: type(r).__name__
 )
 """Tests will loop over all registries and perform the same assertions."""
+
+queryable_registry_param = pytest.mark.parametrize(
+    "registry", QUERYABLE_REGISTRIES, ids=lambda r: type(r).__name__
+)
+"""Tests will loop over the registries with filter() and search() and perform the same assertions."""
 
 ALPHABET = string.ascii_lowercase
 

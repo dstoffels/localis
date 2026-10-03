@@ -1,18 +1,21 @@
 from typing import Iterator, Mapping, cast
 from localis.entities import Country
-from localis.views import CountryView
-from localis.registries import Registry
+from localis.views import CountryView, MacroregionView
+from localis.registries import QueryableRegistry, MacroregionRegistry
 
 
-class CountryRegistry(Registry[Country]):
+class CountryRegistry(QueryableRegistry[Country]):
     REGISTRY_NAME = "countries"
+    NAME_FIELDS = ("name", "official_name", "common_name", "aliases")
 
-    def __init__(self, **kwargs):
+    def __init__(self, macroregions: MacroregionRegistry, **kwargs):
         self._include_historic = False
+        self._macroregions = macroregions
         super().__init__(**kwargs)
 
     def build_cache(self) -> Mapping[int, CountryView]:
-        return CountryView.load(self._data_filepath)
+        macroregion_views = cast(Mapping[int, MacroregionView], self._macroregions._cache)
+        return CountryView.load(self._data_filepath, macroregion_views)
 
     def get(self, id: int) -> Country | None:
         """Get a country by its localis ID. Resolves historic entries regardless of include_historic."""
@@ -23,9 +26,15 @@ class CountryRegistry(Registry[Country]):
         return super().lookup(identifier)
 
     def filter(
-        self, *, name: str | None = None, limit: int | None = None, **kwargs
+        self,
+        *,
+        name: str | None = None,
+        limit: int | None = None,
+        macroregion: str | None = None,
+        **kwargs,
     ) -> list[Country]:
-        """Filter countries by any of its names (name, official_name, or aliases). Excludes historic entries unless include_historic is set."""
+        """Filter countries by any of its names (name, official_name, common_name, or aliases) or a macroregion (region, subregion or grouping, by name or code). Excludes historic entries unless include_historic is set."""
+        kwargs.update(macroregion=macroregion)
         results = super().filter(name=name, limit=None, **kwargs)
         if not self._include_historic:
             results = [c for c in results if not c.historic]
@@ -58,4 +67,6 @@ class CountryRegistry(Registry[Country]):
 
 
 # --------- Singleton --------- #
-countries = CountryRegistry()
+from localis.registries.macroregion_registry import macroregions
+
+countries = CountryRegistry(macroregions=macroregions)

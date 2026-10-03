@@ -3,7 +3,7 @@ from ingest.utils import ingest_log
 from ingest.shared.scripts.fetch_shared import ALT_NAMES_PATH
 from ingest.shared.scripts.cldr import load_cldr_territory_languages
 from ingest.subdivisions.utils.subdivision_map import SubdivisionMap
-from ingest.subdivisions.utils.strings import dedupe
+from ingest.utils.strings import dedupe
 from ingest.shared.models import SubdivisionModel
 
 # isolanguage values that aren't actual human-language name variants and should never be treated as candidate name text

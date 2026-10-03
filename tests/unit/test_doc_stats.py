@@ -3,12 +3,16 @@ import pytest
 from analysis import data_stats, render_docs
 
 
-@pytest.mark.slow
-def test_data_stats_current():
-    """data_stats.json matches the shipped data and reconciles."""
-    assert data_stats.compute() == json.loads(data_stats.OUTPUT_PATH.read_text(encoding="utf-8"))
+class TestDocStats:
+    """DOC STATS"""
 
+    @pytest.mark.slow
+    def test_data_stats_current(self):
+        """should match data_stats.json to the shipped data, reconciled"""
+        assert data_stats.compute() == json.loads(
+            data_stats.OUTPUT_PATH.read_text(encoding="utf-8")
+        ), "RUN: poe analysis"
 
-def test_doc_stat_markers_current():
-    """Every deterministic stat marker in the docs matches data_stats.json."""
-    assert render_docs.check() == []
+    def test_markers_current(self):
+        """should match every deterministic stat marker in the docs to data_stats.json"""
+        assert render_docs.check() == [], "RUN: poe analysis"

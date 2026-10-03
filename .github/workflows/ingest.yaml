@@ -26,10 +26,11 @@ jobs:
           ref: ingest
           fetch-depth: 0
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Set up uv and Python
+        uses: astral-sh/setup-uv@v6
         with:
           python-version: "3.11"
+          enable-cache: true
 
       - name: Configure git identity
         run: |
@@ -42,7 +43,7 @@ jobs:
           if ! git merge --no-edit origin/dev; then
             for f in $(git diff --name-only --diff-filter=U); do
               case "$f" in
-                src/localis/data/*|ingest/*/inputs/*.manifest.json|pyproject.toml)
+                src/localis/data/*|ingest/*/inputs/*.manifest.json|pyproject.toml|uv.lock)
                   git checkout --theirs -- "$f"
                   git add -- "$f"
                   ;;
@@ -55,23 +56,14 @@ jobs:
             git commit --no-edit
           fi
 
-      - name: Install Poetry
-        uses: snok/install-poetry@v1
-
-      - name: Cache deps
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/pypoetry
-          key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
-
       - name: Install deps
-        run: poetry install
+        run: uv sync --locked
 
       - name: Run full ingest pipeline
         id: ingest
         run: |
           set +e
-          poetry run ingest
+          uv run poe ingest
           code=$?
           echo "exit_code=$code" >> "$GITHUB_OUTPUT"
           # exit 10 means orphans need resolving; the next step records them before failing
@@ -89,34 +81,34 @@ jobs:
             git commit -m "chore: ingest found $count orphans awaiting resolution"
           fi
           git push origin ingest
-          echo "::error::Ingest found $count subdivision orphans; the queue is committed to the ingest branch. Resolve locally: pull ingest, run 'poetry run ingest --force', run the resolve-subdivisions skill, run 'poetry run ingest', then commit and push to ingest."
+          echo "::error::Ingest found $count subdivision orphans; the queue is committed to the ingest branch. Resolve locally: pull ingest, run 'poe ingest --force', run the resolve-subdivisions skill, run 'poe ingest', then commit and push to ingest."
           exit 1
 
       - name: Regenerate data stats and docs
-        run: poetry run analysis --data-only
+        run: uv run poe analysis --data-only
 
       - name: Type Check
-        run: poetry run pyright
+        run: uv run poe typecheck
 
       - name: Run Tests
-        run: poetry run pytest
+        run: uv run poe test
 
       - name: Bump version if the published dataset changed
         id: version
         run: |
-          current="$(poetry version -s)"
+          current="$(uv version --short)"
           if [ -z "$(git status --porcelain -- src/localis/data)" ]; then
             echo "data_changed=false" >> "$GITHUB_OUTPUT"
             echo "bumped=false" >> "$GITHUB_OUTPUT"
           elif git rev-parse -q --verify "refs/tags/v$current" >/dev/null; then
-            poetry version patch
+            uv version --bump patch
             echo "data_changed=true" >> "$GITHUB_OUTPUT"
             echo "bumped=true" >> "$GITHUB_OUTPUT"
           else
             echo "data_changed=true" >> "$GITHUB_OUTPUT"
             echo "bumped=false" >> "$GITHUB_OUTPUT"
           fi
-          echo "version=$(poetry version -s)" >> "$GITHUB_OUTPUT"
+          echo "version=$(uv version --short)" >> "$GITHUB_OUTPUT"
 
       - name: Stage changes
         id: stage

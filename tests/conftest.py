@@ -57,7 +57,7 @@ def seed(request: pytest.FixtureRequest):
 def select_random(seed):
     def callback(reg: Registry, seed_offset: int = 0):
         rng = random.Random(seed + seed_offset)
-        id = rng.choice(range(1, reg.count))
+        id = rng.randint(1, reg.count)
         return reg.get(id)
 
     return callback
