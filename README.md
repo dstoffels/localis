@@ -7,7 +7,7 @@ Fast, offline access to comprehensive data for **countries**, **subdivisions**, 
 - 🌍 **<!-- stat:data.countries.total:int -->281<!-- /stat --> countries** (<!-- stat:data.countries.historic:int -->31<!-- /stat --> historic) sourced and merged from ISO 3166-1, ISO 3166-3, and GeoNames
 - 🗺️ **<!-- stat:data.subdivisions.total:int -->51,711<!-- /stat --> subdivisions** sourced and merged from ISO 3166-2 and GeoNames
 - 🏙️ **<!-- stat:data.cities.total:int -->235,914<!-- /stat --> cities** sourced from GeoNames cities500.txt
-- 🔍 **Search Engine** for typo-tolerant lookups with 99%+ accuracy
+- 🔍 **Search Engine** for typo-tolerant lookups with up to 89%+ accuracy
 - 📌 **Aliases** - support for colloquial, historic and alternate names
 
 ---
