@@ -13270,8 +13270,8 @@ sao miguel arcanjo		132|cabo verde|cpv|cv	2
 nossa senhora da graca		132|cabo verde|cpv|cv	2
 santissimo nome de jesus		132|cabo verde|cpv|cv	2
 sao joao baptista		132|cabo verde|cpv|cv	2
-ilhas de barlavento	geographical region	132|cabo verde|cpv|cv	
-ilhas de sotavento	geographical region	132|cabo verde|cpv|cv	
+ilhas de barlavento	geographical region	132|cabo verde|cpv|cv	0
+ilhas de sotavento	geographical region	132|cabo verde|cpv|cv	0
 baf ilcesi|eparkhia paphou|pafos|pafos district|paphos|paphos district	district	196|cy|cyp|cyprus	1
 eparkhia leukosias|lefkosa ilcesi|lefkosia|lefkosia district|leukosia|nicosia|nicosia district	district	196|cy|cyp|cyprus	1
 eparkhia lemesou|lemesos|lemesos district|limasol ilcesi|limassol|limassol district	district	196|cy|cyp|cyprus	1
@@ -14350,16 +14350,16 @@ sabana larga		214|do|dom|dominican republic	2
 rancho arriba		214|do|dom|dominican republic	2
 los rios		214|do|dom|dominican republic	2
 fundacion		214|do|dom|dominican republic	2
-cibao nordeste	region	214|do|dom|dominican republic	
-cibao noroeste	region	214|do|dom|dominican republic	
-cibao norte	region	214|do|dom|dominican republic	
-cibao sur	region	214|do|dom|dominican republic	
-el valle	region	214|do|dom|dominican republic	
-enriquillo	region	214|do|dom|dominican republic	
-higuamo	region	214|do|dom|dominican republic	
-ozama	region	214|do|dom|dominican republic	
-valdesia	region	214|do|dom|dominican republic	
-yuma	region	214|do|dom|dominican republic	
+cibao nordeste	region	214|do|dom|dominican republic	0
+cibao noroeste	region	214|do|dom|dominican republic	0
+cibao norte	region	214|do|dom|dominican republic	0
+cibao sur	region	214|do|dom|dominican republic	0
+el valle	region	214|do|dom|dominican republic	0
+enriquillo	region	214|do|dom|dominican republic	0
+higuamo	region	214|do|dom|dominican republic	0
+ozama	region	214|do|dom|dominican republic	0
+valdesia	region	214|do|dom|dominican republic	0
+yuma	region	214|do|dom|dominican republic	0
 tlemcen|tlemcen province|tlmsn|wly@ tlmsn	province	012|algeria|dz|dza	1
 tizi ouzou|tizi ouzou province|tyzy wzw|wilaya de tizi ouzou|wly@ tyzy wzw	province	012|algeria|dz|dza	1
 tissemsilt|tissemsilt province|tsmsylt|tysmsylt|wly@ tsmsylt|wly@ tysmsylt	province	012|algeria|dz|dza	1
@@ -17400,9 +17400,9 @@ uno		624|gnb|guinea-bissau|gw	2
 catio		624|gnb|guinea-bissau|gw	2
 komo		624|gnb|guinea-bissau|gw	2
 sector autonomo de bissau		624|gnb|guinea-bissau|gw	2
-leste	province	624|gnb|guinea-bissau|gw	
-norte	province	624|gnb|guinea-bissau|gw	
-sul	province	624|gnb|guinea-bissau|gw	
+leste	province	624|gnb|guinea-bissau|gw	0
+norte	province	624|gnb|guinea-bissau|gw	0
+sul	province	624|gnb|guinea-bissau|gw	0
 upper takutu-upper essequibo	region	328|guy|guyana|gy	1
 upper demerara-berbice	region	328|guy|guyana|gy	1
 potaro-siparuni	region	328|guy|guyana|gy	1
@@ -19184,17 +19184,17 @@ banjar city|kota banjar		360|id|idn|indonesia	2
 kabupaten buton selatan|south buton regency		360|id|idn|indonesia	2
 central buton regency|kabupaten buton tengah		360|id|idn|indonesia	2
 kabupaten muna barat|west muna regency		360|id|idn|indonesia	2
-jawa	geographical unit	360|id|idn|indonesia	
-kalimantan	geographical unit	360|id|idn|indonesia	
-maluku	geographical unit	360|id|idn|indonesia	
-nusa tenggara	geographical unit	360|id|idn|indonesia	
-papua	geographical unit	360|id|idn|indonesia	
-sulawesi	geographical unit	360|id|idn|indonesia	
-sumatera	geographical unit	360|id|idn|indonesia	
-connacht|connachta|connaught|cuige chonnacht	province	372|ie|ireland|irl	
-cuige laighean|leinster	province	372|ie|ireland|irl	
-cuige mumhan|munster	province	372|ie|ireland|irl	
-cuige uladh|ulster	province	372|ie|ireland|irl	
+jawa	geographical unit	360|id|idn|indonesia	0
+kalimantan	geographical unit	360|id|idn|indonesia	0
+maluku	geographical unit	360|id|idn|indonesia	0
+nusa tenggara	geographical unit	360|id|idn|indonesia	0
+papua	geographical unit	360|id|idn|indonesia	0
+sulawesi	geographical unit	360|id|idn|indonesia	0
+sumatera	geographical unit	360|id|idn|indonesia	0
+connacht|connachta|connaught|cuige chonnacht	province	372|ie|ireland|irl	0
+cuige laighean|leinster	province	372|ie|ireland|irl	0
+cuige mumhan|munster	province	372|ie|ireland|irl	0
+cuige uladh|ulster	province	372|ie|ireland|irl	0
 cill mhantain|county wicklow|wicklow	county	372|ie|ireland|irl	1
 county wexford|wexford	county	372|ie|ireland|irl	1
 contae na hiarmhi|county westmeath|westmeath	county	372|ie|ireland|irl	1
@@ -20682,14 +20682,14 @@ qsr qnd|shahrestan-e qasr-e qand|shhrstn qsr qnd		364|ir|iran|irn	2
 chardaval|chrdwl|shhrstn chrdwl		364|ir|iran|irn	2
 hamun|hmwn|shhrstn hmwn		364|ir|iran|irn	2
 nymrwz|shahrestan-e nimruz|shhrstn nymrwz		364|ir|iran|irn	2
-nordurland vestra|northwest	region	352|iceland|is|isl	
-nordurland eystra|northeast	region	352|iceland|is|isl	
-austurland|east	region	352|iceland|is|isl	
-south|sudurland	region	352|iceland|is|isl	
-capital region|hofudborgarsvaedi	region	352|iceland|is|isl	
-southern peninsula|sudurnes	region	352|iceland|is|isl	
-vesturland|west	region	352|iceland|is|isl	
-vestfirdir|westfjords	region	352|iceland|is|isl	
+nordurland vestra|northwest	region	352|iceland|is|isl	0
+nordurland eystra|northeast	region	352|iceland|is|isl	0
+austurland|east	region	352|iceland|is|isl	0
+south|sudurland	region	352|iceland|is|isl	0
+capital region|hofudborgarsvaedi	region	352|iceland|is|isl	0
+southern peninsula|sudurnes	region	352|iceland|is|isl	0
+vesturland|west	region	352|iceland|is|isl	0
+vestfirdir|westfjords	region	352|iceland|is|isl	0
 vopnafjardarhreppur	municipality	352|iceland|is|isl	1
 tjorneshreppur	municipality	352|iceland|is|isl	1
 svalbardsstrandarhreppur	municipality	352|iceland|is|isl	1
@@ -25396,16 +25396,16 @@ rothe		426|lesotho|ls|lso	2
 motete		426|lesotho|ls|lso	2
 qalo		426|lesotho|ls|lso	2
 maseru central		426|lesotho|ls|lso	2
-alytaus apskritis|alytus|alytus county	county	440|lithuania|lt|ltu	
-kaunas|kaunas county|kauno apskritis	county	440|lithuania|lt|ltu	
-klaipeda county|klaipedos apskritis	county	440|lithuania|lt|ltu	
-marijampole county|marijampoles apskritis	county	440|lithuania|lt|ltu	
-panevezio apskritis|panevezys|panevezys county	county	440|lithuania|lt|ltu	
-siauliai|siauliai county|siauliu apskritis	county	440|lithuania|lt|ltu	
-taurage county|taurages apskritis	county	440|lithuania|lt|ltu	
-telsiai|telsiai county|telsiu apskritis	county	440|lithuania|lt|ltu	
-utena|utena county|utenos apskritis	county	440|lithuania|lt|ltu	
-vilniaus apskritis|vilnius|vilnius county	county	440|lithuania|lt|ltu	
+alytaus apskritis|alytus|alytus county	county	440|lithuania|lt|ltu	0
+kaunas|kaunas county|kauno apskritis	county	440|lithuania|lt|ltu	0
+klaipeda county|klaipedos apskritis	county	440|lithuania|lt|ltu	0
+marijampole county|marijampoles apskritis	county	440|lithuania|lt|ltu	0
+panevezio apskritis|panevezys|panevezys county	county	440|lithuania|lt|ltu	0
+siauliai|siauliai county|siauliu apskritis	county	440|lithuania|lt|ltu	0
+taurage county|taurages apskritis	county	440|lithuania|lt|ltu	0
+telsiai|telsiai county|telsiu apskritis	county	440|lithuania|lt|ltu	0
+utena|utena county|utenos apskritis	county	440|lithuania|lt|ltu	0
+vilniaus apskritis|vilnius|vilnius county	county	440|lithuania|lt|ltu	0
 vilniaus miestas|vilnius|vilnius city municipality	city municipality	440|lithuania|lt|ltu	1
 vilniaus rajonas|vilniaus rajono savivaldybe|vilnius|vilnius district municipality	district municipality	440|lithuania|lt|ltu	1
 siauliai|siauliai district municipality|siauliu rajonas	district municipality	440|lithuania|lt|ltu	1
@@ -26584,8 +26584,8 @@ jamo|jemo|jemo island		584|marshall islands|mh|mhl	1
 bikini & kili|kili island	municipality	584|marshall islands|mh|mhl	1
 lib|lib island	municipality	584|marshall islands|mh|mhl	1
 mejit|mejit island	municipality	584|marshall islands|mh|mhl	1
-ralik chain	chain (of islands)	584|marshall islands|mh|mhl	
-ratak chain	chain (of islands)	584|marshall islands|mh|mhl	
+ralik chain	chain (of islands)	584|marshall islands|mh|mhl	0
+ratak chain	chain (of islands)	584|marshall islands|mh|mhl	0
 komuna e vallandoves|opshtina valandovo|valandovo|valandovo municipality	municipality	807|mk|mkd|north macedonia	1
 komuna e resnjes|opshtina resen|resen|resen municipality	municipality	807|mk|mkd|north macedonia	1
 kratovo|opshtina kratovo	municipality	807|mk|mkd|north macedonia	1
@@ -27425,9 +27425,9 @@ baa atholhu|south maalhosmadulu	administrative atoll	462|maldives|mdv|mv	1
 alif alif atoll|ari atholhu uthuruburi|north ari atoll|northern ari atoll	administrative atoll	462|maldives|mdv|mv	1
 maale|male	city	462|maldives|mdv|mv	1
 south ari atoll|southern ari atoll	administrative atoll	462|maldives|mdv|mv	1
-southern region	region	454|malawi|mw|mwi	
-northern region	region	454|malawi|mw|mwi	
-central region	region	454|malawi|mw|mwi	
+southern region	region	454|malawi|mw|mwi	0
+northern region	region	454|malawi|mw|mwi	0
+central region	region	454|malawi|mw|mwi	0
 chitipa|chitipa district	district	454|malawi|mw|mwi	1
 zomba|zomba district	district	454|malawi|mw|mwi	1
 salima|salima district	district	454|malawi|mw|mwi	1

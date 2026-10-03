@@ -109,18 +109,18 @@ Within cities: `cities.tsv` <!-- stat:data.shipped_size.cities.files.cities.tsv:
 | countries | <!-- stat:footprint.registries.countries.combined.memory_bytes:size -->1.2MB<!-- /stat --> |
 | subdivisions | <!-- stat:footprint.registries.subdivisions.combined.memory_bytes:size -->61.0MB<!-- /stat --> |
 | cities | <!-- stat:footprint.registries.cities.combined.memory_bytes:size -->151.1MB<!-- /stat --> |
-| **total, all three fully cached** | **<!-- stat:footprint.full_cache.memory_bytes:size -->213.3MB<!-- /stat -->** |
+| **total, all three fully cached** | **<!-- stat:footprint.full_cache.memory_bytes:size -->213.2MB<!-- /stat -->** |
 
 Cities' <!-- stat:footprint.registries.cities.combined.memory_bytes:size -->151.1MB<!-- /stat --> breaks down further by structure:
 
 | Cities component | Retained memory | Build time |
 |---|---|---|
-| `_cache` | <!-- stat:footprint.registries.cities.dataset.memory_bytes:size -->61.0MB<!-- /stat --> | <!-- stat:footprint.registries.cities.dataset.time_ms:load -->~435ms<!-- /stat --> |
-| `_lookup_index` | <!-- stat:footprint.registries.cities.lookup_index.memory_bytes:size -->4KB<!-- /stat --> | <!-- stat:footprint.registries.cities.lookup_index.time_ms:load -->~61ms<!-- /stat --> |
-| `_filter_index` | <!-- stat:footprint.registries.cities.filter_index.memory_bytes:size -->56.7MB<!-- /stat --> | <!-- stat:footprint.registries.cities.filter_index.time_ms:load -->~560ms<!-- /stat --> |
-| `_search_index` | <!-- stat:footprint.registries.cities.search_index.memory_bytes:size -->33.4MB<!-- /stat --> | <!-- stat:footprint.registries.cities.search_index.time_ms:load -->~176ms<!-- /stat --> |
+| `_cache` | <!-- stat:footprint.registries.cities.dataset.memory_bytes:size -->60.4MB<!-- /stat --> | <!-- stat:footprint.registries.cities.dataset.time_ms:load -->~450ms<!-- /stat --> |
+| `_lookup_index` | <!-- stat:footprint.registries.cities.lookup_index.memory_bytes:size -->4KB<!-- /stat --> | <!-- stat:footprint.registries.cities.lookup_index.time_ms:load -->~63ms<!-- /stat --> |
+| `_filter_index` | <!-- stat:footprint.registries.cities.filter_index.memory_bytes:size -->57.6MB<!-- /stat --> | <!-- stat:footprint.registries.cities.filter_index.time_ms:load -->~580ms<!-- /stat --> |
+| `_search_index` | <!-- stat:footprint.registries.cities.search_index.memory_bytes:size -->33.1MB<!-- /stat --> | <!-- stat:footprint.registries.cities.search_index.time_ms:load -->~178ms<!-- /stat --> |
 
-**Total load time** (all three registries, `_cache` plus every index) is <!-- stat:footprint.full_cache.time_ms:load -->~1.57s<!-- /stat -->.
+**Total load time** (all three registries, `_cache` plus every index) is <!-- stat:footprint.full_cache.time_ms:load -->~1.50s<!-- /stat -->.
 
 ### Population floor
 

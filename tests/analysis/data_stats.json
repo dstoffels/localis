@@ -39,7 +39,7 @@
     "above_threshold": 34171
   },
   "shipped_size": {
-    "total": 59798845,
+    "total": 59798894,
     "cities": {
       "total": 48658183,
       "share_pct": 81.4,
@@ -67,10 +67,10 @@
       }
     },
     "subdivisions": {
-      "total": 11065613,
+      "total": 11065662,
       "share_pct": 18.5,
       "files": {
-        "filter_index.tsv": 2773481,
+        "filter_index.tsv": 2773530,
         "lookup_index_int.tsv": 0,
         "lookup_index_str.tsv": 969848,
         "search_fields.tsv": 107,
