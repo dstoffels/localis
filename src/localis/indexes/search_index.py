@@ -196,7 +196,11 @@ class SearchIndex(Index, Generic[T]):
         for name in self._names(candidate):
             size = min(len(name.split()), len(tokens))
             for start in range(len(tokens) - size + 1):
-                name_score = fuzz.token_sort_ratio(" ".join(tokens[start : start + size]), name) / 100.0
+                span_text = " ".join(tokens[start : start + size])
+                name_score = fuzz.token_sort_ratio(span_text, name) / 100.0
+                # a typo can change the sorted word order ("alto alxgre" vs "alegre alto"), which plain ratio, comparing words as typed, doesn't suffer; two single words can't be reordered, so they need no second call
+                if size > 1 or " " in name:
+                    name_score = max(name_score, fuzz.ratio(span_text, name) / 100.0)
                 # the context factor never raises a score, so a span that can't beat the best on its name alone is skipped
                 if name_score <= best:
                     continue

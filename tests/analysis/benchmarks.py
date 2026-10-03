@@ -37,6 +37,11 @@ def _search_query(entry: Entity) -> str:
     return entry.name
 
 
+def _latin(s: str) -> bool:
+    """Whether every letter is Latin script, accented Latin included; mangle() inserts Latin letters, so it can't simulate a typo in any other script."""
+    return all(ord(ch) <= 0x24F or not ch.isalpha() for ch in s)
+
+
 def _stable_seed(*parts: object) -> int:
     """A seed that's the same in every process, unlike hash() on strings."""
     return zlib.crc32(":".join(map(str, parts)).encode())
@@ -76,6 +81,8 @@ def benchmark_registry(
 
     def search(query: str, entry: Entity, query_type: str, seed: int) -> None:
         nonlocal hits, misses, top1, reciprocal_ranks
+        if not _latin(query):
+            return
         mangled = mangle(query, seed=seed)
         results = _timed(lambda: registry.search(mangled), latency["search"])
         rank = next(
@@ -109,7 +116,8 @@ def benchmark_registry(
                 "name",
                 seed=_stable_seed(entry.id, i, "name"),
             )
-            aliases = getattr(entry, "aliases", None)
+            # drawn from Latin-script aliases only, so a record with non-Latin aliases is still tested on one it can be typed by
+            aliases = [a for a in getattr(entry, "aliases", ()) if _latin(a)]
             if aliases:
                 alias = random.Random(_stable_seed(entry.id, i)).choice(aliases)
                 search(alias, entry, "alias", seed=_stable_seed(entry.id, i, "alias"))
