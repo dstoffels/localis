@@ -30,15 +30,8 @@ class SubdivisionModel(Model):
         ),
         "admin_level": ("admin_level",),
     }
-    SEARCH_FIELDS = {
-        "name": 1.0,
-        "iso_suffix": 0.5,
-        "aliases": 1.0,
-        "parent.name": 0.4,
-        "country.name": 0.4,
-        "country.alpha2": 0.4,
-        "country.alpha3": 0.4,
-    }
+    CANON_FIELDS = ("name", "aliases", "iso_suffix")
+    CONTEXT_FIELDS = ("parent.name", "country.name", "country.alpha2", "country.alpha3")
 
     @property
     def iso_suffix(self) -> str:

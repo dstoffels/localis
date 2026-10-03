@@ -6,6 +6,7 @@ from localis.registries import QueryableRegistry, CountryRegistry
 
 class SubdivisionRegistry(QueryableRegistry[Subdivision]):
     REGISTRY_NAME = "subdivisions"
+    NAME_FIELDS = ("name", "aliases", "iso_suffix")
 
     def __init__(self, countries: CountryRegistry, **kwargs):
         self._countries = countries

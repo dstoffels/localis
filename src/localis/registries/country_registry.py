@@ -6,6 +6,7 @@ from localis.registries import QueryableRegistry, MacroregionRegistry
 
 class CountryRegistry(QueryableRegistry[Country]):
     REGISTRY_NAME = "countries"
+    NAME_FIELDS = ("name", "official_name", "common_name", "aliases")
 
     def __init__(self, macroregions: MacroregionRegistry, **kwargs):
         self._include_historic = False

@@ -16,9 +16,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `localis.registries.Registry` is now the lookup-only base (`get()`, `lookup()`, iteration); `filter()` and `search()` moved to its new subclass `QueryableRegistry`, which the countries, subdivisions and cities registries extend
 - `filter()` raises `TypeError` for a keyword argument the registry can't filter by, instead of silently returning `[]`
 - Lookup index files with no entries are no longer shipped (cities' string index, subdivisions' integer index)
+- Search reworked around its trigram index: each record's names (name, aliases, codes) and its context (parent, admin1, country) are indexed separately, and query and index share one normalization (punctuation as spaces, padded word trigrams). Records are ranked by how much of the query their trigrams cover and the top 50 are scored: the best `token_sort_ratio` match of any name or alias against a span of the query (replacing `WRatio`), reduced when the rest of the query isn't found in the record's context trigrams. Name fields now live in the registries instead of the shipped `search_fields.tsv`. Search accuracy (top 10 / top result) and median latency: countries 90.9% / 83.0% → 94.9% / 89.8%, 3.3ms → 1.4ms; subdivisions 90.3% / 75.6% → 86.2% / 75.7%, 5.8ms → 6.0ms; cities 99.1% / 91.2% → 98.0% / 93.5%, 34.7ms → 24.4ms
 - Memory figures in the README and docs are measured with `tracemalloc` instead of the change in resident memory around each load, which undercounted components loaded after others (the cities lookup index read 4KB)
 
 ### Fixed
+- An exact name match could rank below unrelated results: search averaged weaker alias matches into a record's score, so "German Democratic Republic" scored 0.833 for its own name, below 15 countries scoring 0.855 on "Republic" in their official names
+- Search returned nothing for queries of one or two trigrams when they matched more than 2,000 records ("Rio")
 - The `country` filter on subdivisions never matched an ISO numeric code given as an int (`subdivisions.filter(country=76)`): ISO 3166-1 numerics were indexed as zero-padded strings ("076") while `Country.numeric` is an int
 
 ## [2.1.0] - 2026-10-02

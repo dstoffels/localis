@@ -25,12 +25,7 @@ class CountryModel(Model):
         "name": ("name", "official_name", "common_name", "aliases"),
         "macroregion": ("macroregion_names", "macroregion_codes"),
     }
-    SEARCH_FIELDS = {
-        "name": 1.0,
-        "official_name": 1.0,
-        "common_name": 1.0,
-        "aliases": 1.0,
-    }
+    CANON_FIELDS = ("name", "official_name", "common_name", "aliases")
 
     def extract_lookup_values(self):
         """Historic entries reuse alpha2/alpha3/numeric across different withdrawn countries (e.g. CS: Czechoslovakia vs. Serbia and Montenegro, both numeric 891), so only the unique alpha_4 withdrawal code is a safe lookup key for them."""

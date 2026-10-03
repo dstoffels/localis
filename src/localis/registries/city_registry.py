@@ -7,6 +7,7 @@ from localis.registries import QueryableRegistry, CountryRegistry, SubdivisionRe
 
 class CityRegistry(QueryableRegistry[City]):
     REGISTRY_NAME = "cities"
+    NAME_FIELDS = ("name",)
 
     def __init__(
         self, countries: CountryRegistry, subdivisions: SubdivisionRegistry, **kwargs

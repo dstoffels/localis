@@ -72,14 +72,15 @@ class Model:
             for filter_name, values in filter_values.items()
         }
 
-    SEARCH_FIELDS: ClassVar[dict[str, float]] = {}
-    """Fields that are used to identify the obj when searching. Key is the field name (can be nested fields using dot notation), value is the weight for search relevance."""
+    CANON_FIELDS: ClassVar[tuple[str, ...]] = ()
+    """Fields naming the record itself (its names, aliases and codes), indexed as its canon trigrams. Can be nested fields using dot notation."""
 
-    def extract_search_trigrams(self):
-        """Used in processing to produce a normalized, trigram search index for each model from its SEARCH_FIELDS keys."""
-        values = []
+    CONTEXT_FIELDS: ClassVar[tuple[str, ...]] = ()
+    """Fields locating the record (its parent, subdivision or country), indexed as its context trigrams. Can be nested fields using dot notation."""
 
-        for field in self.SEARCH_FIELDS.keys():
+    def _field_text(self, fields: tuple[str, ...]) -> str:
+        values: list[str] = []
+        for field in fields:
             obj = self
             value: str | list[str] | None = None
             for nested in field.split("."):
@@ -89,10 +90,15 @@ class Model:
                 obj = value
 
             if isinstance(value, list):
-                for v in value:
-                    values.append(v)
-
+                values.extend(value)
             elif value is not None:
                 values.append(value)
+        return " ".join(values)
 
-        return search_trigrams(" ".join(values))
+    def extract_canon_trigrams(self) -> set[str]:
+        """Used in processing to produce the canon trigram index from CANON_FIELDS."""
+        return search_trigrams(self._field_text(self.CANON_FIELDS))
+
+    def extract_context_trigrams(self) -> set[str]:
+        """Used in processing to produce the context trigram index from CONTEXT_FIELDS."""
+        return search_trigrams(self._field_text(self.CONTEXT_FIELDS))

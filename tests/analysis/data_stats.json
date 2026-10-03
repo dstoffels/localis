@@ -47,30 +47,33 @@
     "above_threshold": 34171
   },
   "shipped_size": {
-    "total": 59673771,
+    "total": 60391150,
     "cities": {
-      "total": 48689755,
-      "share_pct": 81.6,
+      "total": 49223667,
+      "share_pct": 81.5,
       "files": {
+        "canon_index.bin.gz": 4967995,
+        "canon_index_counts.bin.gz": 150475,
+        "canon_index_offsets.tsv": 166570,
         "cities.tsv": 13251308,
+        "context_index.bin.gz": 8565106,
+        "context_index_counts.bin.gz": 103690,
+        "context_index_offsets.tsv": 95270,
         "filter_index.tsv": 18519255,
-        "lookup_index_int.tsv": 3403998,
-        "search_fields.tsv": 102,
-        "search_index.bin.gz": 13333375,
-        "search_index_offsets.tsv": 181717
+        "lookup_index_int.tsv": 3403998
       }
     },
     "countries": {
-      "total": 96748,
+      "total": 97044,
       "share_pct": 0.2,
       "files": {
+        "canon_index.bin.gz": 9591,
+        "canon_index_counts.bin.gz": 351,
+        "canon_index_offsets.tsv": 21477,
         "countries.tsv": 28372,
         "filter_index.tsv": 31588,
         "lookup_index_int.tsv": 1852,
-        "lookup_index_str.tsv": 3813,
-        "search_fields.tsv": 55,
-        "search_index.bin.gz": 9591,
-        "search_index_offsets.tsv": 21477
+        "lookup_index_str.tsv": 3813
       }
     },
     "macroregions": {
@@ -82,14 +85,17 @@
       }
     },
     "subdivisions": {
-      "total": 10885533,
-      "share_pct": 18.2,
+      "total": 11068704,
+      "share_pct": 18.3,
       "files": {
+        "canon_index.bin.gz": 1880235,
+        "canon_index_counts.bin.gz": 41937,
+        "canon_index_offsets.tsv": 168784,
+        "context_index.bin.gz": 1526970,
+        "context_index_counts.bin.gz": 20042,
+        "context_index_offsets.tsv": 66955,
         "filter_index.tsv": 2825455,
         "lookup_index_str.tsv": 969848,
-        "search_fields.tsv": 107,
-        "search_index.bin.gz": 3343570,
-        "search_index_offsets.tsv": 178075,
         "subdivisions.tsv": 3568478
       }
     }

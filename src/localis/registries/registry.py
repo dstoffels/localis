@@ -104,21 +104,12 @@ class QueryableRegistry(Registry[T]):
 
     _CACHED_ATTRS = Registry._CACHED_ATTRS + ("_filter_index", "_search_index")
 
+    NAME_FIELDS: tuple[str, ...] = ()
+    """View fields holding the record's names, fuzzy-matched against a search query; context is matched through the context trigram index. Can be nested fields using dot notation."""
+
     @property
     def _filter_filepath(self) -> Path:
         return self._data_path / "filter_index.tsv"
-
-    @property
-    def _search_index_filepath(self) -> Path:
-        return self._data_path / "search_index.bin.gz"
-
-    @property
-    def _search_index_offsets_filepath(self) -> Path:
-        return self._data_path / "search_index_offsets.tsv"
-
-    @property
-    def _search_fields_filepath(self) -> Path:
-        return self._data_path / "search_fields.tsv"
 
     @cached_property
     def _filter_index(self) -> FilterIndex:
@@ -133,9 +124,8 @@ class QueryableRegistry(Registry[T]):
     def _search_index(self) -> SearchIndex[T]:
         return SearchIndex(
             cache=self._cache,
-            filepath=self._search_index_filepath,
-            offsets_filepath=self._search_index_offsets_filepath,
-            fields_filepath=self._search_fields_filepath,
+            filepath=self._data_path,
+            name_fields=self.NAME_FIELDS,
             predicate=self._is_id_allowed if self._allowed_ids is not None else None,
             allowed_ids=self._allowed_ids,
         )
