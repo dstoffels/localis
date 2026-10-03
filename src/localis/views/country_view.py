@@ -32,7 +32,7 @@ class CountryView(View[Country, CountryStore]):
         return self._store.official_names[self._idx]
 
     @property
-    def aliases(self) -> list[str]:
+    def aliases(self) -> tuple[str, ...]:
         return self._store.aliases[self._idx]
 
     @property
@@ -82,7 +82,7 @@ class CountryView(View[Country, CountryStore]):
                     flag,
                     historic_s,
                 ) = row
-                alias_list = [a for a in alias_s.split("|") if a]
+                alias_list = tuple(a for a in alias_s.split("|") if a)
                 geonames_id = int(geonames_id_s) if geonames_id_s else None
                 numeric = int(numeric_s) if numeric_s else None
                 historic = cls._parse_historic(historic_s)

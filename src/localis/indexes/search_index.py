@@ -174,7 +174,7 @@ class SearchIndex(Index, Generic[T]):
                 if not field_value:
                     continue
 
-                if isinstance(field_value, list):
+                if isinstance(field_value, (list, tuple)):
                     matches = process.extract(
                         self.query,
                         [normalize(v) for v in field_value],

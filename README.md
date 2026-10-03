@@ -136,7 +136,7 @@ country.alpha2        # "US"
 country.alpha3        # "USA"
 country.geonames_id   # 6252001
 country.numeric       # 840
-country.aliases       # list[str] - Alternate names
+country.aliases       # tuple[str, ...] - Alternate names
 country.flag          # "🇺🇸" - Unicode flag emoji
 country.historic      # HistoricInfo | None - set only for withdrawn ISO 3166-3 countries
 
@@ -229,7 +229,7 @@ subdivision.type            # "State"
 subdivision.admin_level     # 1
 subdivision.parent          # SubdivisionBase | None - Parent subdivision
 subdivision.country         # CountryBase object
-subdivision.aliases         # list[str] - Alternate names
+subdivision.aliases         # tuple[str, ...] - Alternate names
 
 # Utility methods
 subdivision.to_dict()       # Convert to dictionary
@@ -320,7 +320,7 @@ city.geonames_id     # 5128581
 city.name            # "New York"
 city.subdivisions    # list[SubdivisionBase] - ordered by admin_level ascending
 city.country         # CountryBase object
-city.population      # 8175133
+city.population      # 8804190
 city.lat             # 40.71427
 city.lng             # -74.00597
 
@@ -400,7 +400,7 @@ At a threshold of <!-- stat:data.cities.threshold:int -->15,000<!-- /stat -->, c
 
 **Full Cache**: <!-- stat:footprint.full_cache.time_ms:load -->~1.50s<!-- /stat --> load time, <!-- stat:footprint.full_cache.memory_bytes:size -->213.2MB<!-- /stat --> memory for all datasets and indexes
 
-**Concurrency:** It is recommended to call `.force_cache()` on all registries if they will be accessed from multiple threads to avoid potential race conditions during the first access of any lazy-loaded caches and indexes.
+**Concurrency:** localis is not yet thread-safe. Lazy loading can race on first access, and `search()` keeps per-query state on the shared index, so concurrent searches on the same registry can interfere with each other even after `.force_cache()`. Until thread safety lands, call `.force_cache()` up front and serialize searches on a shared registry (or give each thread its own process).
 
 ### Benchmarks
 

@@ -52,7 +52,7 @@ class CityRegistry(Registry[City]):
         # population__gt: int = None, # TODO: to be implemented
         **kwargs,
     ) -> list[City]:
-        """Filter cities by name, subdivision (name, iso/geonames code) or country (name, alpha2, alpha3) with additional filtering by population. Multiple filters use logical AND."""
+        """Filter cities by name, subdivision (name, iso/geonames code) or country (name, alpha2, alpha3). Multiple filters use logical AND."""
         kwargs = {
             "subdivision": subdivision,
             "country": country,

@@ -22,8 +22,9 @@ class CityStore(Store):
         self.subdivision_counts = array("B")
         self.country_ids = array("I")
         self.populations = array("I")
-        self.lats = array("f")
-        self.lngs = array("f")
+        # "d" (64-bit, a Python float), since "f" would round coordinates to 32-bit and read back as e.g. 40.714271545410156 for 40.71427
+        self.lats = array("d")
+        self.lngs = array("d")
 
     def append(
         self,

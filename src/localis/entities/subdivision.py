@@ -14,6 +14,6 @@ class SubdivisionBase(Entity):
 
 @dataclass(slots=True)
 class Subdivision(SubdivisionBase):
-    aliases: list[str]
+    aliases: tuple[str, ...]
     parent: SubdivisionBase | None
     country: CountryBase

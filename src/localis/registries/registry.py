@@ -115,7 +115,8 @@ class Registry(Generic[T], ABC):
         _ = self._search_index
 
     def __iter__(self) -> Iterator[T]:
-        return iter([m.to_entity() for m in self._cache.values()])
+        for view in self._cache.values():
+            yield view.to_entity()
 
     def __len__(self) -> int:
         return len(self._cache)

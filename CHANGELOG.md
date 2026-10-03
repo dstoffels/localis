@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `City.admin1`/`City.admin2` removed; use `City.subdivisions`, ordered by `admin_level`
 - `SubdivisionBase` has a new required `admin_level` field
 - Historic (ISO 3166-3) countries are excluded from `filter()`/`search()`/iteration unless `include_historic` is set, and `lookup()` resolves them only by `alpha_4`
+- `Country.aliases` and `Subdivision.aliases` are `tuple[str, ...]` instead of `list[str]`: returned entities shared their alias lists with the registry cache, so mutating one changed every later result and what search scored
 
 ### Added
 - `Country.historic: HistoricInfo | None` for ISO 3166-3 withdrawn/historic countries (Czechoslovakia, Serbia and Montenegro, Netherlands Antilles, and 28 others), adding 31 historic entries to the dataset (281 total countries, 250 active); `CountryRegistry.include_historic` toggle (default `False`) excludes them from `filter()`/`search()`/iteration, never from `get()`/`lookup()`. Since ISO reused alpha2/alpha3/numeric codes across different withdrawn countries over time (e.g. `CS`: Czechoslovakia, then later Serbia and Montenegro), `lookup()` only resolves a historic entry by its unique `alpha_4` withdrawal code
@@ -68,6 +69,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `ingest/subdivisions/scripts/check_orphans.py` and the `check-orphans` poetry script, superseded by `ingest_subdivisions()`'s own hard exit-10 gate on active orphans
 
 ### Fixed
+- City coordinates were stored as 32-bit floats, so `City.lat`/`lng` came back with float noise (40.714271545410156 for 40.71427); they're now 64-bit, exactly as shipped
+- Registry iteration is lazy again, yielding one entity at a time instead of building the full list (235k entities for cities) up front
+- `countries.lookup()` and `subdivisions.lookup()` docstrings claimed to accept the localis id; integers passed to `countries.lookup()` are ISO numeric codes, and ids go through `.get()`
 - An ISO code contesting an ambiguous GeoNames record could still be auto-merged into a different record it also qualified for, leaving it both merged and an `ambiguity` orphan: the hard gate blocked on a resolved code and the skill was handed a stale orphan. An ISO code in a namesake collision is now excluded from assignment and always goes to review, so a weaker look-alike can't claim it unreviewed
 - `subdivisions.filter(admin_level=1)` always returned nothing: filter index cells are stored as strings and `FilterIndex.get()` only normalized string values, so an integer never matched. Values are now stringified before lookup. The filter index writer also dropped `0` as if it were empty, so the 49 non-administrative groupings had no `admin_level` entry and `admin_level=0` matched nothing
 - Subdivision and city ingest skipped whenever their own sources were unchanged, even when an earlier stage had just rebuilt countries (or subdivisions), so their rows could keep stale country ids, subdivision chains and search/filter values. A stage now rebuilds when its sources or any upstream dataset changed. Source manifests were also written at download time, so a run that stopped on orphans (or crashed) marked its sources consumed and the next plain ingest skipped the stage entirely, never applying the skill's decisions; a stage now writes its manifest only after it dumps, and the subdivisions manifest tracks a hash of the map's bypass rules and skill decisions so editing them triggers a rebuild

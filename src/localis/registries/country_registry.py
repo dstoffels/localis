@@ -19,7 +19,7 @@ class CountryRegistry(Registry[Country]):
         return super().get(id)
 
     def lookup(self, identifier: str | int) -> Country | None:
-        """Get a country by its alpha2, alpha3, numeric code, alpha_4 withdrawal code (historic entries), or id. Resolves historic entries regardless of include_historic."""
+        """Get a country by its alpha2, alpha3, ISO numeric code (an int), or alpha_4 withdrawal code (historic entries); use .get() for the localis id. Resolves historic entries regardless of include_historic."""
         return super().lookup(identifier)
 
     def filter(

@@ -16,7 +16,7 @@ class SubdivisionRegistry(Registry[Subdivision]):
         return SubdivisionView.load(self._data_filepath, country_views)
 
     def lookup(self, identifier: str | int) -> Subdivision | None:
-        """Get a subdivision by its id, iso_code, or geonames_code."""
+        """Get a subdivision by its iso_code or geonames_code; use .get() for the localis id."""
         return super().lookup(identifier)
 
     def filter(

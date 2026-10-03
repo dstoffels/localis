@@ -21,7 +21,8 @@ class CountryStore(Store):
         self.alpha3s: list[str] = []
         self.geonames_ids = array("i")  # -1 sentinel for None
         self.official_names: list[str] = []
-        self.aliases: list[list[str]] = []
+        # tuples, so entities can share them without copying and callers can't mutate the cache through a returned entity
+        self.aliases: list[tuple[str, ...]] = []
         self.numerics = array("i")  # -1 sentinel for None
         self.flags: list[str] = []
         self.historics: list[HistoricInfo | None] = []
@@ -33,7 +34,7 @@ class CountryStore(Store):
         alpha3: str,
         geonames_id: int | None,
         official_name: str,
-        alias_list: list[str],
+        alias_list: tuple[str, ...],
         numeric: int | None,
         flag: str,
         historic: HistoricInfo | None,

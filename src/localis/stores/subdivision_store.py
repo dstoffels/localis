@@ -20,7 +20,8 @@ class SubdivisionStore(Store):
         self.geonames_ids = array("i")  # -1 sentinel for None
         self.iso_codes: list[str] = []
         self.types: list[str] = []
-        self.aliases: list[list[str]] = []
+        # tuples, so entities can share them without copying and callers can't mutate the cache through a returned entity
+        self.aliases: list[tuple[str, ...]] = []
         self.admin_levels = array("B")
         self.parent_ids = array("i")  # -1 sentinel for None
         self.country_ids = array("I")
@@ -32,7 +33,7 @@ class SubdivisionStore(Store):
         geonames_id: int | None,
         iso_code: str,
         type_: str,
-        alias_list: list[str],
+        alias_list: tuple[str, ...],
         admin_level: int,
         parent_id: int | None,
         country_id: int,

@@ -37,7 +37,7 @@ class SubdivisionView(
         return self._store.types[self._idx]
 
     @property
-    def aliases(self) -> list[str]:
+    def aliases(self) -> tuple[str, ...]:
         return self._store.aliases[self._idx]
 
     @property
@@ -114,7 +114,7 @@ class SubdivisionView(
                     parent_s,
                     country_s,
                 ) = row
-                alias_list = [a for a in alias_s.split("|") if a]
+                alias_list = tuple(a for a in alias_s.split("|") if a)
                 geonames_id = int(geonames_id_s) if geonames_id_s else None
                 admin_level = int(admin_level_s)
                 parent_id = int(parent_s) if parent_s else None

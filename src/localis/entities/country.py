@@ -19,7 +19,7 @@ class CountryBase(Entity):
 @dataclass(slots=True)
 class Country(CountryBase):
     official_name: str
-    aliases: list[str]
+    aliases: tuple[str, ...]
     numeric: int | None
     flag: str | None
     historic: HistoricInfo | None
