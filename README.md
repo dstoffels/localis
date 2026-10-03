@@ -513,6 +513,36 @@ Registries are safe to share across threads. `get()`, `lookup()`, `filter()`, `s
 
 Two settings change shared state for every thread: `cities.set_population_threshold()` and `countries.set_include_historic()`. Configure them before the registry is shared between threads, never while other threads are querying it.
 
+#### Batch searching
+
+localis doesn't parallelize batches for you, since the right approach depends on your Python build, memory budget and surrounding executor. On free-threaded Python (3.14t), a thread pool searches in parallel:
+
+```python
+from concurrent.futures import ThreadPoolExecutor
+import localis
+
+localis.cities.force_cache()  # load once, before the threads start
+with ThreadPoolExecutor() as pool:
+    results = list(pool.map(localis.cities.search, queries))
+```
+
+On a standard Python build the same code is correct but runs one search at a time, because the GIL lets only one thread run Python code at once. To search in parallel there, use processes. Each worker loads its own copy of the data (up to <!-- stat:footprint.registries.cities.combined.memory_bytes:size -->104.5MB<!-- /stat --> for cities), so apply any settings in the worker's initializer, and search through a module-level function, since a registry itself can't be sent to a process:
+
+```python
+from concurrent.futures import ProcessPoolExecutor
+import localis
+
+def init_worker():
+    localis.cities.set_population_threshold(15000)  # repeat any setting the parent uses
+
+def search_city(query):
+    return localis.cities.search(query)
+
+if __name__ == "__main__":  # workers import this module, so the pool only starts in the parent
+    with ProcessPoolExecutor(initializer=init_worker) as pool:
+        results = list(pool.map(search_city, queries, chunksize=500))
+```
+
 
 ### Data licensing
 
