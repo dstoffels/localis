@@ -151,34 +151,27 @@ class SearchIndex(Index, Generic[T]):
         i = bisect_left(ids, id)
         return i < len(ids) and ids[i] == id
 
-    def _score_candidate(
-        self,
-        id: int,
-        candidate: View[T, Store],
-        tokens: list[str],
-        token_trigrams: list[set[str]],
-    ) -> float:
-        """The candidate's best name match against any span of the query, reduced by the share of the rest of the query its context doesn't explain."""
+    def _explained(self, id: int, token_trigrams: list[set[str]], span: tuple[int, int]) -> float:
+        """The share of the query's trigrams outside the name span found in the record's context; 1.0 when the name spans the whole query."""
+        rest = set().union(*token_trigrams[: span[0]], *token_trigrams[span[1] :])
+        if not rest:
+            return 1.0
+        return sum(1 for trigram in rest if self._in_context(trigram, id)) / len(rest)
 
-        # the name span: for each name, slide a window of its word count over the query, so the name is found wherever it sits ("springfield illinois", "illinois springfield")
-        name_score, span = 0.0, (0, len(tokens))
+    def _score_candidate(self, id: int, candidate: View[T, Store], tokens: list[str], token_trigrams: list[set[str]]) -> float:
+        """The best, over the candidate's names and the query spans each could fill, of the name match reduced by the share of the rest of the query its context doesn't explain."""
+        best = 0.0
+        explained: dict[tuple[int, int], float] = {}
+        # for each name, slide a window of its word count over the query, so the name is found wherever it sits ("springfield illinois", "illinois springfield")
         for name in self._names(candidate):
             size = min(len(name.split()), len(tokens))
             for start in range(len(tokens) - size + 1):
-                score = (
-                    fuzz.token_sort_ratio(" ".join(tokens[start : start + size]), name)
-                    / 100.0
-                )
-                if score > name_score:
-                    name_score, span = score, (start, start + size)
-        if name_score < self.NOISE_THRESHOLD:
-            return 0.0
-
-        # the rest of the query should locate the record: the share of its trigrams found in the record's context
-        rest = set().union(*token_trigrams[: span[0]], *token_trigrams[span[1] :])
-        if not rest:
-            return name_score
-        explained = sum(1 for trigram in rest if self._in_context(trigram, id)) / len(
-            rest
-        )
-        return name_score * (1 - self.CONTEXT_PENALTY * (1 - explained))
+                name_score = fuzz.token_sort_ratio(" ".join(tokens[start : start + size]), name) / 100.0
+                # the context factor never raises a score, so a span that can't beat the best on its name alone is skipped
+                if name_score <= best:
+                    continue
+                span = (start, start + size)
+                if span not in explained:
+                    explained[span] = self._explained(id, token_trigrams, span)
+                best = max(best, name_score * (1 - self.CONTEXT_PENALTY * (1 - explained[span])))
+        return best
