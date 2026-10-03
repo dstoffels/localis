@@ -8,17 +8,23 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+
 jobs:
-  release:
+  # decides whether main's version is new; runs on every tested push to main and deploys nothing
+  check:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      id-token: write
 
     if: >-
       github.repository == 'dstoffels/localis' &&
       github.event.workflow_run.conclusion == 'success' &&
       github.event.workflow_run.event == 'push'
+
+    outputs:
+      version: ${{ steps.get_version.outputs.VERSION }}
+      should_release: ${{ steps.check_versions.outputs.SHOULD_RELEASE }}
+      is_prerelease: ${{ steps.check_prerelease.outputs.IS_PRERELEASE }}
 
     steps:
       - uses: actions/checkout@v4
@@ -30,55 +36,73 @@ jobs:
         uses: astral-sh/setup-uv@v6
         with:
           python-version: '3.11'
-          enable-cache: true
 
       - name: Get project version
         id: get_version
-        run: echo "VERSION=v$(uv version --short)" >> "$GITHUB_OUTPUT"
+        run: echo "VERSION=$(uv version --short)" >> "$GITHUB_OUTPUT"
 
       - name: Check if already released
         id: check_versions
         run: |
-          VERSION="${{ steps.get_version.outputs.VERSION }}"
-          if git rev-parse -q --verify "refs/tags/$VERSION" >/dev/null; then
-            echo "Tag $VERSION already exists. Nothing to release."
+          TAG="v${{ steps.get_version.outputs.VERSION }}"
+          if git rev-parse -q --verify "refs/tags/$TAG" >/dev/null; then
+            echo "Tag $TAG already exists. Nothing to release."
             echo "SHOULD_RELEASE=false" >> "$GITHUB_OUTPUT"
           else
-            echo "New version $VERSION. Generating new release."
+            echo "New version $TAG. Generating new release."
             echo "SHOULD_RELEASE=true" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Determine if pre-release (PEP 440).
-        if: steps.check_versions.outputs.SHOULD_RELEASE == 'true'
+      - name: Determine if pre-release (PEP 440)
         id: check_prerelease
         run: |
-          RAW_VERSION=$(uv version --short)
-
-          if [[ "$RAW_VERSION" =~ (a|alpha|b|beta|rc|.dev)[0-9]*$ ]]; then
+          if [[ "${{ steps.get_version.outputs.VERSION }}" =~ (a|alpha|b|beta|rc|.dev)[0-9]*$ ]]; then
             echo "Incoming version is a pre-release."
             echo "IS_PRERELEASE=true" >> "$GITHUB_OUTPUT"
           else
             echo "IS_PRERELEASE=false" >> "$GITHUB_OUTPUT"
           fi
 
+  # builds, tags and publishes a new version; the pypi environment records it under the repo's Deployments
+  publish:
+    needs: check
+    if: needs.check.outputs.should_release == 'true'
+    runs-on: ubuntu-latest
+
+    environment:
+      name: pypi
+      url: https://pypi.org/project/localis/${{ needs.check.outputs.version }}/
+
+    permissions:
+      contents: write
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+
+      - name: Set up uv and Python
+        uses: astral-sh/setup-uv@v6
+        with:
+          python-version: '3.11'
+          enable-cache: true
+
       - name: Build
-        if: steps.check_versions.outputs.SHOULD_RELEASE == 'true'
         run: uv build
 
       - name: Generate new release
-        if: steps.check_versions.outputs.SHOULD_RELEASE == 'true'
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ steps.get_version.outputs.VERSION }}
-          name: ${{ steps.get_version.outputs.VERSION }}
+          tag_name: v${{ needs.check.outputs.version }}
+          name: v${{ needs.check.outputs.version }}
           target_commitish: ${{ github.event.workflow_run.head_sha }}
           generate_release_notes: true
           draft: false
-          prerelease: ${{ steps.check_prerelease.outputs.IS_PRERELEASE }}
+          prerelease: ${{ needs.check.outputs.is_prerelease }}
           files: |
             dist/*.whl
             dist/*.tar.gz
 
       - name: Publish to PyPI
-        if: steps.check_versions.outputs.SHOULD_RELEASE == 'true'
         uses: pypa/gh-action-pypi-publish@release/v1
