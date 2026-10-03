@@ -11,7 +11,7 @@ T = TypeVar("T", bound=Entity)
 
 
 class Registry(Generic[T], ABC):
-    """Base API surface (get/lookup/filter/search) backed by a lazily-cached View dict and its indexes."""
+    """Base API surface (get/lookup/iteration) backed by a lazily-cached View dict and its lookup index."""
 
     REGISTRY_NAME: str = ""
 
@@ -39,22 +39,6 @@ class Registry(Generic[T], ABC):
         return self._data_path / "lookup_index_int.tsv"
 
     @property
-    def _filter_filepath(self) -> Path:
-        return self._data_path / "filter_index.tsv"
-
-    @property
-    def _search_index_filepath(self) -> Path:
-        return self._data_path / "search_index.bin.gz"
-
-    @property
-    def _search_index_offsets_filepath(self) -> Path:
-        return self._data_path / "search_index_offsets.tsv"
-
-    @property
-    def _search_fields_filepath(self) -> Path:
-        return self._data_path / "search_fields.tsv"
-
-    @property
     def count(self) -> int:
         return self.__len__()
 
@@ -80,28 +64,10 @@ class Registry(Generic[T], ABC):
             allowed_ids=self._allowed_ids,
         )
 
-    @cached_property
-    def _filter_index(self) -> FilterIndex:
-        _ = self._cache
-        return FilterIndex(
-            filepath=self._filter_filepath,
-            predicate=self._is_id_allowed if self._allowed_ids is not None else None,
-            allowed_ids=self._allowed_ids,
-        )
-
-    @cached_property
-    def _search_index(self) -> SearchIndex[T]:
-        return SearchIndex(
-            cache=self._cache,
-            filepath=self._search_index_filepath,
-            offsets_filepath=self._search_index_offsets_filepath,
-            fields_filepath=self._search_fields_filepath,
-            predicate=self._is_id_allowed if self._allowed_ids is not None else None,
-            allowed_ids=self._allowed_ids,
-        )
+    _CACHED_ATTRS: tuple[str, ...] = ("_cache", "_lookup_index")
 
     def invalidate_cache(self):
-        for attr in ("_cache", "_lookup_index", "_filter_index", "_search_index"):
+        for attr in self._CACHED_ATTRS:
             try:
                 delattr(self, attr)
             except AttributeError:
@@ -109,10 +75,8 @@ class Registry(Generic[T], ABC):
 
     def force_cache(self):
         """Force-cache all data and indexes that have not yet been loaded."""
-        _ = self._cache
-        _ = self._lookup_index
-        _ = self._filter_index
-        _ = self._search_index
+        for attr in self._CACHED_ATTRS:
+            getattr(self, attr)
 
     def __iter__(self) -> Iterator[T]:
         for view in self._cache.values():
@@ -134,11 +98,59 @@ class Registry(Generic[T], ABC):
         model = self._cache.get(model_id) if model_id is not None else None
         return model.to_entity() if model else None
 
+
+class QueryableRegistry(Registry[T]):
+    """Full API surface: LookupRegistry plus filter/search over the filter and search indexes."""
+
+    _CACHED_ATTRS = Registry._CACHED_ATTRS + ("_filter_index", "_search_index")
+
+    @property
+    def _filter_filepath(self) -> Path:
+        return self._data_path / "filter_index.tsv"
+
+    @property
+    def _search_index_filepath(self) -> Path:
+        return self._data_path / "search_index.bin.gz"
+
+    @property
+    def _search_index_offsets_filepath(self) -> Path:
+        return self._data_path / "search_index_offsets.tsv"
+
+    @property
+    def _search_fields_filepath(self) -> Path:
+        return self._data_path / "search_fields.tsv"
+
+    @cached_property
+    def _filter_index(self) -> FilterIndex:
+        _ = self._cache
+        return FilterIndex(
+            filepath=self._filter_filepath,
+            predicate=self._is_id_allowed if self._allowed_ids is not None else None,
+            allowed_ids=self._allowed_ids,
+        )
+
+    @cached_property
+    def _search_index(self) -> SearchIndex[T]:
+        return SearchIndex(
+            cache=self._cache,
+            filepath=self._search_index_filepath,
+            offsets_filepath=self._search_index_offsets_filepath,
+            fields_filepath=self._search_fields_filepath,
+            predicate=self._is_id_allowed if self._allowed_ids is not None else None,
+            allowed_ids=self._allowed_ids,
+        )
+
+    # ----------- API METHODS ----------- #
+
     def filter(
         self, *, name: str | None = None, limit: int | None = None, **kwargs
     ) -> list[T]:
-        """Filter by exact matches on specified fields with AND logic when filtering by multiple fields. Case insensitive."""
+        """Filter by exact matches on specified fields with AND logic when filtering by multiple fields. Case insensitive. Raises TypeError for a kwarg the registry can't filter by."""
         kwargs["name"] = name
+
+        unknown = [k for k in kwargs if k not in self._filter_index.index]
+        if unknown:
+            raise TypeError(f"{type(self).__name__}.filter() got an unexpected keyword argument '{unknown[0]}'")
 
         filter_kws = {k: v for k, v in kwargs.items() if v is not None}
 

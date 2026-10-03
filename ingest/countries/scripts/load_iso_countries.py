@@ -77,7 +77,7 @@ def init_iso_countries() -> dict[str, CountryModel]:
                 alpha2=alpha2,
                 alpha3=c["alpha_3"],
                 geonames_id=None,
-                numeric=c["numeric"],
+                numeric=int(c["numeric"]),
                 # ALIAS_MAP is no longer merged while its aliases are reviewed against what GeoNames and Wikidata already supply
                 aliases=[],
                 flag=c["flag"],

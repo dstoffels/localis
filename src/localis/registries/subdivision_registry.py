@@ -1,10 +1,10 @@
 from typing import Mapping, cast
 from localis.entities import Subdivision
 from localis.views import CountryView, SubdivisionView
-from localis.registries import Registry, CountryRegistry
+from localis.registries import QueryableRegistry, CountryRegistry
 
 
-class SubdivisionRegistry(Registry[Subdivision]):
+class SubdivisionRegistry(QueryableRegistry[Subdivision]):
     REGISTRY_NAME = "subdivisions"
 
     def __init__(self, countries: CountryRegistry, **kwargs):
@@ -30,11 +30,7 @@ class SubdivisionRegistry(Registry[Subdivision]):
         **kwargs,
     ) -> list[Subdivision]:
         """Filter subdivisions by exact matches on specified fields with AND logic when filtering by multiple fields. Case insensitive."""
-        kwargs = {
-            "type": type,
-            "admin_level": admin_level,
-            "country": country,
-        }
+        kwargs.update(type=type, admin_level=admin_level, country=country)
 
         return super().filter(name=name, limit=limit, **kwargs)
 

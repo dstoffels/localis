@@ -1,10 +1,10 @@
 from typing import Iterator, Mapping, cast
 from localis.entities import Country
 from localis.views import CountryView
-from localis.registries import Registry
+from localis.registries import QueryableRegistry
 
 
-class CountryRegistry(Registry[Country]):
+class CountryRegistry(QueryableRegistry[Country]):
     REGISTRY_NAME = "countries"
 
     def __init__(self, **kwargs):

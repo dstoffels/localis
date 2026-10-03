@@ -1,5 +1,6 @@
 from localis.registries import (
     Registry,
+    MacroregionRegistry,
     CountryRegistry,
     SubdivisionRegistry,
     CityRegistry,
@@ -11,7 +12,10 @@ from utils import registry_param
 # ingestion-side Model: a historic country has no alpha2/alpha3/numeric lookup (those collide
 # across historic entries), only its own historic.alpha_4 withdrawal code.
 LOOKUP_VALUES_BY_REGISTRY = {
-    CountryRegistry: lambda c: (c.historic.alpha_4,) if c.historic else (c.alpha2, c.alpha3, c.numeric),
+    MacroregionRegistry: lambda m: (m.code, m.name),
+    CountryRegistry: lambda c: (
+        (c.historic.alpha_4,) if c.historic else (c.alpha2, c.alpha3, c.numeric)
+    ),
     SubdivisionRegistry: lambda s: (s.iso_code, s.geonames_code),
     CityRegistry: lambda c: (c.geonames_id,),
 }

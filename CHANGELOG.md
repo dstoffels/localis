@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- `filter()` raises `TypeError` for a keyword argument the registry can't filter by, instead of silently returning `[]`
+
+### Fixed
+- The `country` filter on subdivisions never matched an ISO numeric code given as an int (`subdivisions.filter(country=76)`): ISO 3166-1 numerics were indexed as zero-padded strings ("076") while `Country.numeric` is an int
+
 ## [2.1.0] - 2026-10-02
 
 ### Added
