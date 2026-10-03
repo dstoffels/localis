@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.0] - 2026-10-03
+
 ### Upgrading from 2.0.0
 - `Country.name` is now ISO 3166-1's name as published ("Korea, Republic of"); use `Country.common_name` for the everyday name ("South Korea")
 - `filter()` raises `TypeError` for a keyword argument the registry can't filter by, where it returned `[]`

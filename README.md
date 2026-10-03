@@ -69,6 +69,8 @@ country = localis.countries.lookup(826)
 
 **Returns:** `Country` object or `None`
 
+`lookup()` matches codes only (alpha-2, alpha-3, numeric). Common abbreviations that aren't ISO codes, such as "UK" for the United Kingdom, are found by `filter(name=...)` and `search()`.
+
 ### Filter
 
 ```python

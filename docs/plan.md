@@ -5,7 +5,7 @@ This document outlines the project plan for the Localis project, detailing the o
 
 ## Objectives
 
-- Reduce localis's shipped package size and runtime memory footprint, primarily driven by the cities dataset.
+- Keep localis's shipped package size and runtime memory footprint in check, primarily driven by the cities dataset. Runtime memory has reached the floor for the current data model (a full cache is about 147MB, down from about 207MB, after on-demand views and single-id filter postings; see dev.md's Memory footprint); the remaining lever is package size, through splitting cities from the core package (backlog), when adoption calls for it.
 - Ship comprehensive datasets by default, and let the API narrow them ad hoc (population floors, locales) at query time rather than shipping multiple hard-tiered dataset variants.
 
 ## Features
@@ -25,6 +25,9 @@ Blocked on the above, needs a dedicated design pass before implementation starts
 4. Implement autocomplete for registries and/or global interface.
 5. No ISO source maps countries to their language(s) (639 and 3166 don't cross-reference); evaluate Unicode CLDR's territory-language data for this.
 6. Search, remaining limits: a subdivision query without context can't pick among same-name records (dozens of Washington Counties), which caps subdivisions' top-result accuracy; benchmarking subdivision queries with their country as context would measure that case the way cities' admin1 context does. `unidecode` transliteration of non-Latin aliases (Korean, Arabic) doesn't consistently match the record's own Latin name. The short-name fallback is off for cities (their queries usually carry context); enabling it is `SHORT_NAMES = True` on `CityModel`, at about 430KB shipped. Indexing each name separately (true per-name Dice) is parked until a failure trace shows alias dilution.
+7. Macroregion filters on subdivisions and cities (`cities.filter(macroregion="Europe")`), at the cost of another filter column on the largest dataset; deferred until there's demand. The macroregions design is recorded in `methodology.md` (sources, naming, placement rules) and `dev.md`.
+8. Pin the CLDR version shared by `cldr_territory_info.json` (shared stage) and the macroregions inputs, which each fetch CLDR's `main` and could land on different CLDR commits in one run.
+9. Split cities from the core package (`localis` with macroregions, countries and subdivisions, about 11MB installed; cities as an extra backed by a separate data package, about 49MB). Deferred until users report package size as a problem. City rows store country and subdivision ids that are only valid against the exact core data they were built with, so the two would release in lockstep from one ingest run with an exact-version pin, which removes most of the usual benefit of a split.
 
 ## Localization (gettext-based name translation)
 
@@ -56,6 +59,8 @@ Dependency: none. `gettext` is part of Python's standard library. The actual sco
 - Actual size of the compiled `.mo` catalogs across all locales isn't confirmed yet, needs measuring before deciding to ship all of them.
 - Reconsider Unicode CLDR as the translation data source instead of iso-codes' gettext catalogs; CLDR is more actively maintained and broader-coverage for exactly this kind of translated display-name data. Decide before implementation starts, not after.
 ## Skill decision lifecycle
+
+Status: designed, not started; to land as a patch before the next scheduled ingest run (the monthly cron, 1 November 2026), since that run is the first that can retire or reopen skill decisions.
 
 Goal: a skill decision is never silently ignored or replaced. Wikidata merges, automerge, `geonames_absent` and the non-administrative bypass are recomputed every run and already follow source updates. Skill decisions are permanent and applied first, and today only `flag_wikidata_conflicts()` ever re-examines them, so a GeoNames or ISO update can leave one wrong without anything failing.
 
@@ -151,47 +156,3 @@ Blind re-derivation runs on Fable 5.1, a different and more capable model than t
 ### Open questions
 
 - Whether corroboration counts as verified on its own, or only lowers the sampling rate: Wikidata and automerge are independent in method but could share a GeoNames naming quirk.
-
-## Macroregions
-
-Goal: place every country in its world region, from an attributable source, the way pycountry users currently need `pycountry-convert` for. Done: the ingest stage, `localis.macroregions`, and countries' `macroregions`/`groupings` fields and `macroregion` filter, documented in the README, `methodology.md` and `dev.md`. The open questions below remain.
-
-### Source
-
-CLDR territory containment (`cldr-core/supplemental/territoryContainment.json`) and CLDR's English territory names (`cldr-localenames-full/main/en/territories.json`), both in `ingest/macroregions/inputs/` (CLDR 48 at the time of writing). CLDR was chosen over UNSD's M49 table: it is already a pipeline source, versioned and machine-readable, and its containment is documented as an extension of M49. The two differ, and localis claims CLDR, not M49: CLDR flattens M49's intermediate level (Mexico is Americas → Central America, with no "Latin America and the Caribbean" between), labels 419 "Latin America", and adds groupings M49 doesn't have.
-
-### Naming
-
-Following the sources' own terms. CLDR calls the whole set macroregions; M49 names the levels region and sub-region. "Continent" is not used, since neither source uses it as a term and CLDR's regions (Americas, Outlying Oceania) aren't the seven classroom continents. "Regions" alone was rejected for the registry because "Region" is one of the most common ISO 3166-2 subdivision types.
-
-### Model
-
-`MacroregionModel` (`ingest/shared/models/macroregion_model.py`): `id`, `name` (CLDR English), `code` (M49 numeric string such as "150" or "009", or CLDR's "QO", "EU", "EZ", "UN"), `type` (`region`, `subregion` or `grouping`), and `parent` (a subregion's region, or the region CLDR files a grouping under through its `<region>-status-grouping` entry; `None` for regions and for the groupings CLDR files under World). Codes are zero-padded strings, so the model sets `NUMERIC_LOOKUP = False` to keep them out of the integer lookup index; `lookup("009")` resolves Oceania and `lookup(9)` doesn't.
-
-Contents: CLDR's 5 regions (Africa, Americas, Asia, Europe, Oceania), its 23 subregions including Outlying Oceania (QO), and all 6 groupings. North America (003), Latin America (419) and Sub-Saharan Africa (202) contain subregions; European Union (EU), Eurozone (EZ) and United Nations (UN) contain countries directly, span regions and are filed under World, so their parent is `None`. Groupings were included rather than filtered out because CLDR is the authority and excluding some of its data would be editorial filtering; their membership changes are tracked by CLDR and picked up by the live fetch.
-
-### Ingest
-
-`ingest/macroregions/`, run first by `ingest_all`. `fetch_macroregions_sources()` re-fetches both CLDR files when either ETag changes, since the build needs them in step. `load_macroregions()` builds the macroregions with ids in a fixed order (regions by code, then each region's subregions by code, then groupings by code) and returns them with three territory maps for the country wiring: `subregion_of` (the main tree), `deprecated_subregions_of` (withdrawn codes under a subregion's `-status-deprecated` entry; World's `QU` is skipped) and `groupings_of` (expanded through subregions for 003, 419 and 202). It raises if a region's child isn't a subregion, a macroregion has no English name, or a territory sits in two subregions. `dump()` writes `src/localis/data/macroregions/macroregions.tsv` and the lookup index only; the integer lookup file isn't written, since `dump_lookup_index` now skips an index with no keys and `LookupIndex` treats a missing file as empty. `ingest_all` passes its result to `ingest_countries`, so a macroregions rebuild forces a countries rebuild; a countries rebuild on its own rebuilds the macroregions from the inputs on disk. `place_macroregions()` (`ingest/countries/scripts/`) applies the placements and raises if CLDR leaves a current country unplaced.
-
-### Registry
-
-`localis.macroregions`, lookup-only: `get`, `lookup` by code or name, iteration and `len`, with no filter or search (about 34 entries). Built on the registry base split: `Registry` (cache, `get`, `lookup`, iteration) and `QueryableRegistry`, which adds filter and search, so small datasets don't load or ship search and filter indexes.
-
-### On `Country`
-
-- `country.macroregions`: the CLDR containment path, top-down, `(region, subregion)`, e.g. `(Europe, Western Europe)`; `()` where there is none. A tuple rather than named `region`/`subregion` fields for the same reason `City.admin1`/`admin2` became `City.subdivisions`: fixed named levels break when the depth changes (a CLDR revision, or a move to M49's intermediate regions), and an ordered path is the one pattern localis uses for hierarchy.
-- `country.groupings`: the groupings the country belongs to, e.g. `(European Union, Eurozone, United Nations)`. Unordered (sorted only for deterministic output), since groupings overlap without nesting: North America and Latin America share Central America and the Caribbean, and CLDR doesn't record the Eurozone as part of the EU. Kept out of `macroregions` so that field stays a pure path.
-
-Filtering: one `countries.filter(macroregion=...)` kwarg matching any macroregion, path or grouping, by name or code, which is unambiguous since names and codes are unique. `CountryModel` flattens both tuples into list properties (`macroregion_names`, `macroregion_codes`) for `FILTER_FIELDS`, the way `CityModel` flattens its subdivision chain, so `extract_filter_values()` needs no change.
-
-All 250 current countries map cleanly: each sits in exactly one CLDR subregion, Kosovo included (Southern Europe). Antarctica's path is Oceania → Outlying Oceania, CLDR's own extension.
-
-### Historic countries
-
-A historic country takes only CLDR's deprecated placements, never the main tree, because five historic entries reuse a current country's alpha-2 (AI, BQ, BY, GE, SK) and would inherit its regions. A deprecated placement is used only when its code sits in exactly one subregion and belongs to exactly one historic entry, with the region taken from that subregion's parent. That maps 10 of 31; the other 21 get `()`, including both CS entries (CLDR's Southern Europe is right for Serbia and Montenegro, wrong for Czechoslovakia). Documented in `methodology.md` Known limitations.
-
-### Open questions
-
-- Whether the `country` filters on subdivisions and cities should also accept a macroregion (`cities.filter(macroregion="Europe")`), at the cost of another filter column on the largest dataset; deferred until there's demand.
-- Pinning the CLDR version shared by `cldr_territory_info.json` (shared stage) and the macroregions inputs, which currently each fetch CLDR's `main`.
