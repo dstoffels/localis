@@ -9,7 +9,7 @@ from localis.indexes.index import Index
 from localis.entities import Entity
 from localis.views import View
 from localis.stores import Store
-from localis.utils.strings import normalize, generate_trigrams
+from localis.utils.strings import search_text, search_trigrams
 from collections import defaultdict
 
 T = TypeVar("T", bound=Entity)
@@ -66,10 +66,10 @@ class SearchIndex(Index, Generic[T]):
             self.index[trigram] = trigram_ids
 
     def search(self, query: str, limit: int) -> list[tuple[View[T, Store], float]]:
-        if not query:
+        self.query = search_text(query)
+        if not self.query:
             return []
 
-        self.query = self._normalize_query(query)
         self.query_token_count = len(self.query.split())
         self.match_counts: dict[int, int] = defaultdict(int)
         self.trigram_count = 0
@@ -127,7 +127,7 @@ class SearchIndex(Index, Generic[T]):
             self.trigram_count = 1
             return
 
-        for trigram in generate_trigrams(self.query):
+        for trigram in search_trigrams(self.query):
             try:
                 ids = index[trigram]
             except KeyError:
@@ -160,9 +160,13 @@ class SearchIndex(Index, Generic[T]):
         score_values = list(self._get_search_values(candidate))
 
         # the primary score is the best of the single-valued, full-weight name fields (a country's ISO name, official name and common name), so a candidate matching by any of its names passes the noise gate
-        primary = [(v, w) for v, w in score_values if w >= self.PRIMARY_WEIGHT and isinstance(v, str)]
+        primary = [
+            (v, w)
+            for v, w in score_values
+            if w >= self.PRIMARY_WEIGHT and isinstance(v, str)
+        ]
         name_score, weight = max(
-            (fuzz.WRatio(self.query, self._normalize_query(v)) / 100.0, w) for v, w in primary
+            (fuzz.WRatio(self.query, search_text(v)) / 100.0, w) for v, w in primary
         )
         if name_score < self.NOISE_THRESHOLD:
             return 0.0
@@ -171,13 +175,15 @@ class SearchIndex(Index, Generic[T]):
 
         if self.query_token_count > 1:
             for field_value, weight in score_values:
-                if not field_value or (weight >= self.PRIMARY_WEIGHT and isinstance(field_value, str)):
+                if not field_value or (
+                    weight >= self.PRIMARY_WEIGHT and isinstance(field_value, str)
+                ):
                     continue
 
                 if isinstance(field_value, (list, tuple)):
                     matches = process.extract(
                         self.query,
-                        [normalize(v) for v in field_value],
+                        [search_text(v) for v in field_value],
                         scorer=fuzz.token_set_ratio,
                         score_cutoff=60,
                         limit=None,
@@ -190,7 +196,8 @@ class SearchIndex(Index, Generic[T]):
                     )
                 else:
                     field_score = (
-                        fuzz.token_set_ratio(self.query, normalize(field_value)) / 100.0
+                        fuzz.token_set_ratio(self.query, search_text(field_value))
+                        / 100.0
                     )
 
                 if field_score >= self.NOISE_THRESHOLD:
@@ -199,11 +206,3 @@ class SearchIndex(Index, Generic[T]):
 
         # secondary fields corroborate a match but never weaken it, so an exact name match isn't averaged down by its aliases
         return max(name_score, score / total_weight)
-
-    REMOVE_CHARS = (",", ".")
-
-    def _normalize_query(self, text: str) -> str:
-        norm = normalize(text)
-
-        trans_table = str.maketrans("", "", "".join(self.REMOVE_CHARS))
-        return norm.translate(trans_table)
