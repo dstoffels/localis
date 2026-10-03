@@ -1,6 +1,7 @@
 from array import array
 from bisect import bisect_left
 import heapq
+import math
 import csv
 import gzip
 from pathlib import Path
@@ -30,6 +31,12 @@ class SearchIndex(Index, Generic[T]):
         self.CONTEXT_PENALTY = 0.5
         # how many of the best trigram matches go on to fuzzy scoring
         self.TOP_K = 50
+        # how many records with the most canon and context hits get their exact weighted coverage computed, from which the TOP_K are taken
+        self.SHORTLIST_K = 200
+        # a trigram in more than this share of records (and more than STOP_MIN_DF of them) isn't counted when selecting, provided MIN_COUNTED rarer ones remain
+        self.STOP_SHARE = 0.02
+        self.STOP_MIN_DF = 1000
+        self.MIN_COUNTED = 3
         super().__init__(filepath, **kwargs)
 
     def load(
@@ -90,44 +97,65 @@ class SearchIndex(Index, Generic[T]):
         tokens = self.query.split()
         token_trigrams = [search_trigrams(token) for token in tokens]
         query_trigrams = set().union(*token_trigrams)
-        canon_hits, context_hits = self._count_hits(query_trigrams)
-        query_size = len(query_trigrams)
+        weights = self._weights(query_trigrams)
+        total_weight = sum(weights.values())
 
-        def trigram_score(id: int) -> float:
-            # the mean of how much of the query the record's names cover, and how much its names and context cover together
-            canon = canon_hits[id]
-            return (min(canon + context_hits[id], query_size) + canon) / (
-                2 * query_size
-            )
+        # stage 1: count canon and context hits together in C over the query's rarer trigrams, and shortlist the records with the most
+        hits = self._count_hits(query_trigrams)
+        shortlist = [id for id, _ in hits.most_common(self.SHORTLIST_K)]
 
-        # only records whose names share a trigram with the query qualify, so context alone (a city's state) never surfaces a record
-        candidates = heapq.nlargest(
-            max(self.TOP_K, limit), canon_hits, key=trigram_score
-        )
+        # stage 2: each shortlisted record's rarity-weighted coverage of the query, by its names alone and by its names and context together, averaged
+        trigram_scores: dict[int, float] = {}
+        for id in shortlist:
+            canon = context = 0.0
+            for trigram, weight in weights.items():
+                if self._contains(self.canon, trigram, id):
+                    canon += weight
+                elif self._contains(self.context, trigram, id):
+                    context += weight
+            # only records whose names share a trigram with the query qualify, so context alone (a city's state) never surfaces a record
+            if canon:
+                trigram_scores[id] = (2 * canon + context) / (2 * total_weight)
+        candidates = heapq.nlargest(max(self.TOP_K, limit), trigram_scores, key=trigram_scores.__getitem__)
 
+        # stage 3: fuzzy-score the candidates' names, with their context checked against the rest of the query
         results: list[tuple[View[T, Store], float, float]] = []
         for id in candidates:
             candidate = self.cache[id]
-            score = self._score_candidate(id, candidate, tokens, token_trigrams)
+            score = self._score_candidate(id, candidate, tokens, token_trigrams, weights)
             if score >= self.NOISE_THRESHOLD:
-                results.append((candidate, score, trigram_score(id)))
+                results.append((candidate, score, trigram_scores[id]))
 
         # the candidate score ranks, the trigram score breaks its ties
         results.sort(key=lambda r: (r[1], r[2]), reverse=True)
         return [(candidate, score) for candidate, score, _ in results[:limit]]
 
-    def _count_hits(
-        self, query_trigrams: set[str]
-    ) -> tuple[Counter[int], Counter[int]]:
-        """Each record's count of the query's trigrams in its canon and in its context; Counter.update() counts an id array in C."""
-        canon_hits: Counter[int] = Counter()
-        context_hits: Counter[int] = Counter()
+    def _weights(self, query_trigrams: set[str]) -> dict[str, float]:
+        """Each query trigram's rarity, log(records / records containing it) across canon and context; uniform if none carries any."""
+        records = len(self.cache)
+        weights: dict[str, float] = {}
         for trigram in query_trigrams:
-            if (ids := self.canon.get(trigram)) is not None:
-                canon_hits.update(ids)
-            if (ids := self.context.get(trigram)) is not None:
-                context_hits.update(ids)
-        return canon_hits, context_hits
+            df = len(self.canon.get(trigram, ())) + len(self.context.get(trigram, ()))
+            # a trigram no record has can't tell records apart, and one in every record says nothing either
+            if df:
+                weights[trigram] = max(math.log(records / df), 0.0)
+        if not any(weights.values()):
+            return {trigram: 1.0 for trigram in query_trigrams}
+        return {trigram: weight for trigram, weight in weights.items() if weight}
+
+    def _count_hits(self, query_trigrams: set[str]) -> Counter[int]:
+        """Each record's count of the query's trigrams in its canon and its context, leaving out the most common trigrams (in canon only when enough rarer ones remain); Counter.update() counts an id array in C."""
+        # a trigram shared by a large share of records is the most expensive to count and says the least about which record matches, such as a country name's trigrams in the context of every city in it
+        common = max(self.STOP_SHARE * len(self.cache), self.STOP_MIN_DF)
+        canon = [ids for trigram in query_trigrams if (ids := self.canon.get(trigram)) is not None]
+        rarer_canon = [ids for ids in canon if len(ids) <= common]
+        rarer_context = [ids for trigram in query_trigrams if (ids := self.context.get(trigram)) is not None and len(ids) <= common]
+        hits: Counter[int] = Counter()
+        for ids in rarer_canon if len(rarer_canon) >= self.MIN_COUNTED else canon:
+            hits.update(ids)
+        for ids in rarer_context:
+            hits.update(ids)
+        return hits
 
     def _names(self, candidate: View[T, Store]) -> list[str]:
         """The search_text() of every value in the candidate's NAME_FIELDS, list fields such as aliases flattened."""
@@ -143,22 +171,24 @@ class SearchIndex(Index, Generic[T]):
                     names.append(text)
         return names
 
-    def _in_context(self, trigram: str, id: int) -> bool:
-        ids = self.context.get(trigram)
+    @staticmethod
+    def _contains(index: dict[str, array], trigram: str, id: int) -> bool:
+        ids = index.get(trigram)
         if ids is None:
             return False
         # posting lists are sorted by id
         i = bisect_left(ids, id)
         return i < len(ids) and ids[i] == id
 
-    def _explained(self, id: int, token_trigrams: list[set[str]], span: tuple[int, int]) -> float:
-        """The share of the query's trigrams outside the name span found in the record's context; 1.0 when the name spans the whole query."""
+    def _explained(self, id: int, token_trigrams: list[set[str]], span: tuple[int, int], weights: dict[str, float]) -> float:
+        """The rarity-weighted share of the query's trigrams outside the name span found in the record's context; 1.0 when nothing weighted is left outside it."""
         rest = set().union(*token_trigrams[: span[0]], *token_trigrams[span[1] :])
-        if not rest:
+        rest_weight = sum(weights.get(trigram, 0.0) for trigram in rest)
+        if not rest_weight:
             return 1.0
-        return sum(1 for trigram in rest if self._in_context(trigram, id)) / len(rest)
+        return sum(weights.get(trigram, 0.0) for trigram in rest if self._contains(self.context, trigram, id)) / rest_weight
 
-    def _score_candidate(self, id: int, candidate: View[T, Store], tokens: list[str], token_trigrams: list[set[str]]) -> float:
+    def _score_candidate(self, id: int, candidate: View[T, Store], tokens: list[str], token_trigrams: list[set[str]], weights: dict[str, float]) -> float:
         """The best, over the candidate's names and the query spans each could fill, of the name match reduced by the share of the rest of the query its context doesn't explain."""
         best = 0.0
         explained: dict[tuple[int, int], float] = {}
@@ -172,6 +202,6 @@ class SearchIndex(Index, Generic[T]):
                     continue
                 span = (start, start + size)
                 if span not in explained:
-                    explained[span] = self._explained(id, token_trigrams, span)
+                    explained[span] = self._explained(id, token_trigrams, span, weights)
                 best = max(best, name_score * (1 - self.CONTEXT_PENALTY * (1 - explained[span])))
         return best
