@@ -4,7 +4,7 @@ from ingest.subdivisions.utils.resolution_map import ResolutionMap
 from ingest.subdivisions.utils.subdivision_map import SubdivisionMap
 
 COUNTRY = CountryModel(
-    id=1, name="Testland", alpha2="TL", alpha3="TLD", geonames_id=None, official_name="Testland",
+    id=1, name="Testland", alpha2="TL", alpha3="TLD", geonames_id=None, official_name="Testland", common_name=None,
     aliases=[], numeric=None, flag=None, historic=None,
 )
 

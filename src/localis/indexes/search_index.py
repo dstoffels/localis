@@ -23,6 +23,7 @@ class SearchIndex(Index, Generic[T]):
         **kwargs,
     ):
         self.cache = cache
+        self.PRIMARY_WEIGHT = 1.0
         self.NOISE_THRESHOLD = 0.5
         self.STRONG_MATCH_THRESHOLD = 0.8
         self.CANDIDATE_CNT_THRESHOLD = 2000
@@ -156,22 +157,21 @@ class SearchIndex(Index, Generic[T]):
                 yield (value, weight)
 
     def _score_candidate(self, candidate: View[T, Store]) -> float:
-        score = 0.0
-        total_weight = 0.0
+        score_values = list(self._get_search_values(candidate))
 
-        score_values = self._get_search_values(candidate)
-
-        name, weight = next(score_values)  # name is always the first SEARCH_FIELD
-        name_score = fuzz.WRatio(self.query, self._normalize_query(name)) / 100.0
-        if name_score >= self.NOISE_THRESHOLD:
-            score += name_score * weight
-            total_weight += weight
-        else:
+        # the primary score is the best of the single-valued, full-weight name fields (a country's ISO name, official name and common name), so a candidate matching by any of its names passes the noise gate
+        primary = [(v, w) for v, w in score_values if w >= self.PRIMARY_WEIGHT and isinstance(v, str)]
+        name_score, weight = max(
+            (fuzz.WRatio(self.query, self._normalize_query(v)) / 100.0, w) for v, w in primary
+        )
+        if name_score < self.NOISE_THRESHOLD:
             return 0.0
+        score = name_score * weight
+        total_weight = weight
 
         if self.query_token_count > 1:
             for field_value, weight in score_values:
-                if not field_value:
+                if not field_value or (weight >= self.PRIMARY_WEIGHT and isinstance(field_value, str)):
                     continue
 
                 if isinstance(field_value, (list, tuple)):

@@ -18,7 +18,8 @@ class CountryBase(Entity):
 
 @dataclass(slots=True)
 class Country(CountryBase):
-    official_name: str
+    official_name: str | None
+    common_name: str | None
     aliases: tuple[str, ...]
     numeric: int | None
     flag: str | None

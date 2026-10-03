@@ -9,17 +9,19 @@ class CountryModel(Model):
     alpha2: str
     alpha3: str | None
     geonames_id: int | None
-    official_name: str
+    official_name: str | None
+    common_name: str | None
     aliases: list[str]
     numeric: int | None
     flag: str | None
     historic: str | None
 
     LOOKUP_FIELDS = ("alpha2", "alpha3", "numeric")
-    FILTER_FIELDS = {"name": ("name", "official_name", "aliases")}
+    FILTER_FIELDS = {"name": ("name", "official_name", "common_name", "aliases")}
     SEARCH_FIELDS = {
         "name": 1.0,
         "official_name": 1.0,
+        "common_name": 1.0,
         "aliases": 1.0,
     }
 

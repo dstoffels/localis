@@ -23,6 +23,7 @@ class SubdivisionModel(Model):
         "type": ("type",),
         "country": (
             "country.name",
+            "country.common_name",
             "country.alpha2",
             "country.alpha3",
             "country.numeric",

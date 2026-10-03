@@ -18,6 +18,7 @@ class CityModel(Model):
         "name": ("name",),
         "country": (
             "country.name",
+            "country.common_name",
             "country.alpha2",
             "country.alpha3",
         ),

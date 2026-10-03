@@ -1,4 +1,4 @@
-# This script initializes the dataset from ISO 3166-1, with a few contemporary naming updates and aliases.
+# This script initializes the dataset from ISO 3166-1, whose names are shipped exactly as published, plus curated aliases.
 # These will be merged with data from their GeoNames and Wikipedia counterparts.
 
 from ingest.utils import COUNTRIES_INPUTS_PATH, ingest_log
@@ -11,34 +11,7 @@ def init_iso_countries() -> dict[str, CountryModel]:
     ingest_log.writeline("Loading ISO countries...")
     countries: dict[str, CountryModel] = {}
 
-    # contemporary name mappings
-    NAME_MAP = {
-        "CG": "Republic of the Congo",
-        "CD": "Democratic Republic of the Congo",
-        "FK": "Falkland Islands",
-        "FM": "Micronesia",
-        "MF": "Saint-Martin",
-        "SX": "Sint Maarten",
-        "PS": "Palestine",
-        "SH": "Saint Helena",
-        "VA": "Holy See",
-        "VG": "British Virgin Islands",
-        "VI": "U.S. Virgin Islands",
-        "VN": "Vietnam",
-    }
-
-    OFFICIAL_NAME_MAP = {
-        "FK": "Falkland Islands (Malvinas)",
-        "KR": "Republic of Korea",
-        "LA": "Lao People's Democratic Republic",
-        "MF": "Collectivity of Saint Martin",
-        "SX": "Country of Sint Maarten",
-        "SH": "Saint Helena, Ascension and Tristan da Cunha",
-        "SY": "Syrian Arab Republic",
-        "TW": "Republic of China",
-        "VA": "Vatican City State",
-    }
-
+    # curated alternate names, not merged (see aliases below); kept for review until each is either sourced or dropped
     ALIAS_MAP = {
         "GB": [
             "Great Britain",
@@ -54,16 +27,39 @@ def init_iso_countries() -> dict[str, CountryModel]:
         "CV": ["Cape Verde"],
         "SY": ["Syria"],
         "RU": ["Russia"],
-        "VN": ["Viet Nam"],
-        "CG": ["Congo-Brazzaville", "Congo Republic"],
-        "CD": ["DRC", "Congo-Kinshasa", "DR Congo", "Zaire"],
+        "VN": ["Vietnam", "Viet Nam"],
+        "CG": ["Republic of the Congo", "Congo-Brazzaville", "Congo Republic"],
+        "CD": [
+            "Democratic Republic of the Congo",
+            "DRC",
+            "Congo-Kinshasa",
+            "DR Congo",
+            "Zaire",
+        ],
         "BN": ["Brunei"],
         "ST": ["São Tomé and Príncipe"],
         "TL": ["East Timor"],
-        "BQ": ["Netherlands Antilles", "Dutch Antilles", "Caribbean Netherlands"],
-        "SX": ["Land Sint Maarten", "Dutch Sint Maarten"],
-        "MF": ["Collectivité de Saint-Martin"],
-        "TW": ["ROC"],
+        "BQ": ["Caribbean Netherlands"],
+        "SX": [
+            "Sint Maarten",
+            "Country of Sint Maarten",
+            "Land Sint Maarten",
+            "Dutch Sint Maarten",
+        ],
+        "MF": [
+            "Saint-Martin",
+            "Collectivity of Saint Martin",
+            "Collectivité de Saint-Martin",
+        ],
+        "TW": ["Republic of China", "ROC"],
+        "FK": ["Falkland Islands"],
+        "FM": ["Micronesia"],
+        "PS": ["Palestine"],
+        "SH": ["Saint Helena"],
+        "VA": ["Holy See", "Vatican City State"],
+        "VG": ["British Virgin Islands"],
+        "VI": ["U.S. Virgin Islands"],
+        "KR": ["Republic of Korea"],
     }
 
     with open(COUNTRIES_INPUTS_PATH / "iso_3166-1.json", "r", encoding="utf-8") as f:
@@ -72,22 +68,18 @@ def init_iso_countries() -> dict[str, CountryModel]:
 
         for id, c in enumerate(iso_countries, 1):
             alpha2 = c["alpha_2"]
-            # Prioritize name by mapping > common name field > name field
-            name: str = NAME_MAP.get(alpha2) or c.get("common_name") or c["name"]
-
-            # Get official name from either mapping or field, otherwise null
-            official_name = OFFICIAL_NAME_MAP.get(alpha2) or c.get("official_name", "")
-
-            # Create and cache
             countries[alpha2] = CountryModel(
                 id=id,
-                name=name,
-                official_name=official_name,
+                name=c["name"],
+                official_name=c.get("official_name"),
+                # common_name is iso-codes' addition, not part of ISO 3166-1, so it's kept in its own field
+                common_name=c.get("common_name"),
                 alpha2=alpha2,
                 alpha3=c["alpha_3"],
                 geonames_id=None,
                 numeric=c["numeric"],
-                aliases=ALIAS_MAP.get(alpha2, []),
+                # ALIAS_MAP is no longer merged while its aliases are reviewed against what GeoNames and Wikidata already supply
+                aliases=[],
                 flag=c["flag"],
                 historic=None,
             )

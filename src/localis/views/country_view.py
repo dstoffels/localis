@@ -28,8 +28,14 @@ class CountryView(View[Country, CountryStore]):
         return v if v != -1 else None
 
     @property
-    def official_name(self) -> str:
-        return self._store.official_names[self._idx]
+    def official_name(self) -> str | None:
+        v = self._store.official_names[self._idx]
+        return v if v else None
+
+    @property
+    def common_name(self) -> str | None:
+        v = self._store.common_names[self._idx]
+        return v if v else None
 
     @property
     def aliases(self) -> tuple[str, ...]:
@@ -56,6 +62,7 @@ class CountryView(View[Country, CountryStore]):
             alpha2=self.alpha2,
             alpha3=self.alpha3,
             official_name=self.official_name,
+            common_name=self.common_name,
             aliases=self.aliases,
             numeric=self.numeric,
             flag=self.flag,
@@ -77,6 +84,7 @@ class CountryView(View[Country, CountryStore]):
                     alpha3,
                     geonames_id_s,
                     official_name,
+                    common_name,
                     alias_s,
                     numeric_s,
                     flag,
@@ -93,6 +101,7 @@ class CountryView(View[Country, CountryStore]):
                     alpha3,
                     geonames_id,
                     official_name,
+                    common_name,
                     alias_list,
                     numeric,
                     flag,

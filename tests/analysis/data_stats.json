@@ -34,49 +34,49 @@
     "total": 5046
   },
   "cities": {
-    "total": 235914,
+    "total": 235915,
     "threshold": 15000,
     "above_threshold": 34171
   },
   "shipped_size": {
-    "total": 59798894,
+    "total": 60181094,
     "cities": {
-      "total": 48658183,
-      "share_pct": 81.4,
+      "total": 48927789,
+      "share_pct": 81.3,
       "files": {
-        "cities.tsv": 13251304,
-        "filter_index.tsv": 18379365,
-        "lookup_index_int.tsv": 3403983,
+        "cities.tsv": 13251308,
+        "filter_index.tsv": 18519255,
+        "lookup_index_int.tsv": 3403998,
         "lookup_index_str.tsv": 0,
         "search_fields.tsv": 102,
-        "search_index.bin.gz": 13383908,
-        "search_index_offsets.tsv": 239521
+        "search_index.bin.gz": 13513456,
+        "search_index_offsets.tsv": 239670
       }
     },
     "countries": {
-      "total": 75049,
+      "total": 73169,
       "share_pct": 0.1,
       "files": {
-        "countries.tsv": 23492,
-        "filter_index.tsv": 11747,
+        "countries.tsv": 21390,
+        "filter_index.tsv": 12102,
         "lookup_index_int.tsv": 1852,
         "lookup_index_str.tsv": 3813,
-        "search_fields.tsv": 39,
-        "search_index.bin.gz": 9559,
-        "search_index_offsets.tsv": 24547
+        "search_fields.tsv": 55,
+        "search_index.bin.gz": 9361,
+        "search_index_offsets.tsv": 24596
       }
     },
     "subdivisions": {
-      "total": 11065662,
-      "share_pct": 18.5,
+      "total": 11180136,
+      "share_pct": 18.6,
       "files": {
-        "filter_index.tsv": 2773530,
+        "filter_index.tsv": 2837962,
         "lookup_index_int.tsv": 0,
         "lookup_index_str.tsv": 969848,
         "search_fields.tsv": 107,
-        "search_index.bin.gz": 3475358,
-        "search_index_offsets.tsv": 242943,
-        "subdivisions.tsv": 3603876
+        "search_index.bin.gz": 3526402,
+        "search_index_offsets.tsv": 243124,
+        "subdivisions.tsv": 3602693
       }
     }
   }

@@ -1,52 +1,78 @@
-from ingest.utils import COUNTRIES_INPUTS_PATH, ingest_log
 import json
+import re
+import unicodedata
+from ingest.utils import COUNTRIES_INPUTS_PATH, ingest_log
+from ingest.utils.strings import name_key
 from ingest.shared.models import CountryModel
 from .fetch_countries import GEONAMES_COUNTRIES_DEST
 
-
-def is_valid_name(alias: str, country: CountryModel):
-    if "ISO 3166" in alias:
-        return False
-
-    if len(alias) <= 3:
-        return False
-
-    if alias.lower().strip() in [
-        country.alpha2.lower(),
-        (country.alpha3 or "").lower(),
-        country.name.lower(),
-        country.official_name.lower(),
-        str(country.numeric).lower(),
-    ]:
-        return False
-    return True
+_LEADING_THE_RE = re.compile(r"^the\s+", re.IGNORECASE)
+_SUBDIVISION_CODE_RE = re.compile(r"^[A-Z]{2}-[A-Z0-9]{1,3}$")
+NAME_BLOCKLIST_PATH = COUNTRIES_INPUTS_PATH / "name_blocklist.json"
 
 
-def merge_wikidata(countries: dict[str, CountryModel]):
-    ingest_log.writeline("Merging Wikidata aliases...")
-    with open(
-        COUNTRIES_INPUTS_PATH / "wiki_countries.json", "r", encoding="utf-8"
-    ) as f:
-        wiki_countries: list[dict[str, str]] = json.load(f)
+def _wikidata_alias(raw: str, iso_codes: set[str], item_codes: frozenset[str] | set[str] = frozenset()) -> str | None:
+    """The alias a Wikidata name contributes, or None if it isn't a usable name."""
+    alias = _LEADING_THE_RE.sub("", " ".join(raw.split()))
+    # digits, slashes and symbols mark identifiers rather than names: "ISO 3166-1:BH", "+256", "Atlantic/Faroe", flag emoji
+    if not alias or any(ch.isdigit() or ch == "/" or unicodedata.category(ch).startswith("S") for ch in alias):
+        return None
+    # the item's own IOC/FIFA codes and ISO 3166-2-shaped codes ("GB-GSY", "US-GU") are codes, not names
+    if alias in item_codes or _SUBDIVISION_CODE_RE.match(alias):
+        return None
+    # the query asks for English, so a letter outside Latin script marks a mislabelled name (Armenian, Cyrillic, Greek)
+    if any(unicodedata.category(ch) in ("Lu", "Ll", "Lt", "Lo") and not unicodedata.name(ch, "").startswith("LATIN") for ch in alias):
+        return None
+    # a short entry is kept only as an uppercase abbreviation that isn't itself an ISO code: "UK", "DRC" and "ROC" stay; language and domain codes ("el", "zaf") and ISO codes ("CAN", "TWN") go
+    if len(alias) <= 3 and not (alias.isalpha() and alias.isupper() and alias not in iso_codes):
+        return None
+    return alias
 
-        for row in wiki_countries:
-            alpha2: str = row["alpha2"]
 
-            country: CountryModel | None = countries.get(alpha2, None)
+def _load_blocklist() -> dict[str, set[str]]:
+    """Names that pass the filters but aren't names of the country (nicknames, demonyms, misspellings, stray codes), keyed by alpha-2; each entry's reason is recorded in the file."""
+    blocklist: dict[str, dict[str, str]] = json.loads(NAME_BLOCKLIST_PATH.read_text(encoding="utf-8"))
+    return {alpha2: {name_key(name) for name in names} for alpha2, names in blocklist.items()}
 
-            if not country:
-                continue
 
-            # merge name
-            name: str = row.get("name", "")
-            if name and name.lower() not in [n.lower() for n in country.aliases]:
-                country.aliases.append(name)
+def merge_wikidata(countries: dict[str, CountryModel], country_names: dict[str, dict[str, list[str]]]) -> None:
+    """Adds each country's Wikidata names as aliases."""
+    ingest_log.writeline("Merging Wikidata country names...")
+    iso_codes = {code for c in countries.values() for code in (c.alpha2, c.alpha3) if code}
+    blocklist = _load_blocklist()
+    # historic entries are keyed by alpha_4; one is matched by its former alpha-2 only where no current country or other historic entry shares it
+    historic_by_alpha2: dict[str, list[CountryModel]] = {}
+    for c in countries.values():
+        if c.historic:
+            historic_by_alpha2.setdefault(c.alpha2, []).append(c)
 
-            # merge validated alt names
-            aliases: list[str] = row.get("aliases", "").split("|")
-            for a in aliases:
-                if is_valid_name(a, country):
-                    country.aliases.append(a)
+    for alpha2, entry in country_names.items():
+        country = countries.get(alpha2)
+        if country is None:
+            historic = historic_by_alpha2.get(alpha2, [])
+            country = historic[0] if len(historic) == 1 else None
+        if country is None:
+            continue
+        blocked = blocklist.get(alpha2, set())
+        for name in entry["names"]:
+            alias = _wikidata_alias(name, iso_codes, set(entry["codes"]))
+            if alias and name_key(alias) not in blocked:
+                country.aliases.append(alias)
+
+
+def drop_ambiguous_aliases(countries: dict[str, CountryModel]) -> None:
+    """Removes a current country's alias when another current country has it as a name or alias, so it can't resolve to the wrong country."""
+    current = [c for c in countries.values() if not c.historic]
+    owners: dict[str, set[str]] = {}
+    for c in current:
+        for name in (c.name, c.official_name, c.common_name, *c.aliases):
+            if name:
+                owners.setdefault(name_key(name), set()).add(c.alpha2)
+    for c in current:
+        ambiguous = [a for a in c.aliases if len(owners[name_key(a)]) > 1]
+        if ambiguous:
+            ingest_log.writeline(f"{c.alpha2}: dropped aliases shared with another country: {', '.join(sorted(ambiguous))}")
+            c.aliases = [a for a in c.aliases if a not in ambiguous]
 
 
 # GeoNames countries file format: tab-separated values with the following columns:
@@ -100,7 +126,8 @@ def merge_geonames(countries: dict[str, CountryModel]):
                     geonames_id=geonames_id,
                     numeric=int(numeric) or None,
                     name=name,
-                    official_name="",
+                    official_name=None,
+                    common_name=None,
                     aliases=[],
                     flag=None,
                     historic=None,
@@ -113,7 +140,8 @@ def merge_geonames(countries: dict[str, CountryModel]):
             # add name if not duplicate
             if name and name.lower() not in [
                 country.name.lower(),
-                country.official_name.lower(),
+                (country.official_name or "").lower(),
+                (country.common_name or "").lower(),
                 *[n.lower() for n in country.aliases],
             ]:
                 country.aliases.append(name)
