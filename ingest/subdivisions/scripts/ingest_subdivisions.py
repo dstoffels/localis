@@ -9,7 +9,15 @@ from ingest.shared.scripts import load_countries
 from .fetch_subdivisions import fetch_subdivisions_sources
 from ingest.subdivisions.utils.subdivision_map import SubdivisionMap
 from ingest.subdivisions.utils.resolution_map import ResolutionMap
-from ingest.utils import ingest_log, SUBDIVISIONS_OUTPUTS_PATH
+from ingest.utils import (
+    ingest_log,
+    SUBDIVISIONS_OUTPUTS_PATH,
+    SUBDIVISIONS_MANIFEST_PATH,
+    SHARED_MANIFEST_PATH,
+    record_pending,
+    committed_value,
+    commit_manifest,
+)
 from ingest.shared.models import CountryModel, SubdivisionModel
 from .geonames_subdivisions import map_geonames_subdivisions
 from .iso_subdivisions import load_iso_subs
@@ -22,6 +30,7 @@ from .dump_subdivisions import dump
 from .dump_unmerged import write as write_unmerged_doc
 
 RESOLUTION_MAP_PATH = SUBDIVISIONS_OUTPUTS_PATH / "resolution_map.json"
+DECISIONS_MANIFEST_KEY = "resolution_map"
 
 
 def exit_if_orphans(resolution_map: ResolutionMap | None = None) -> None:
@@ -47,15 +56,20 @@ def ingest_subdivisions(
     try:
         has_update = fetch_subdivisions_sources(force=force)
 
-        if not has_update:
-            ingest_log.writeline("No updates for subdivisions.")
+        # the map's bypass rules and skill decisions are tracked like a source, so editing them triggers a rebuild without --force
+        resolution_map = ResolutionMap.load(RESOLUTION_MAP_PATH)
+        decisions = resolution_map.decisions_fingerprint()
+        decisions_changed = decisions != committed_value(SUBDIVISIONS_MANIFEST_PATH, DECISIONS_MANIFEST_KEY)
+
+        # rows store country ids, so a countries rebuilt upstream (passed in) forces a rebuild even when subdivision sources are unchanged
+        if not has_update and not decisions_changed and countries is None:
+            ingest_log.writeline("No updates for subdivisions, their resolution decisions or countries.")
             return None
+        record_pending(SUBDIVISIONS_MANIFEST_PATH, DECISIONS_MANIFEST_KEY, decisions)
 
         # Cache countries by alpha2 code, unless already provided by a prior ingest stage
         if countries is None:
             countries = load_countries()
-
-        resolution_map = ResolutionMap.load(RESOLUTION_MAP_PATH)
 
         # Initialize subdivision cache with geonames subdivisions into a mapping of country_alpha2 > admin_level > id.
         # SubdivisionMap also flat maps by id, geoname code and iso code
@@ -96,6 +110,9 @@ def ingest_subdivisions(
 
         dump(sub_map)
         write_unmerged_doc(sub_map)
+        # only now are this run's sources consumed; a run stopped by orphans leaves them pending, so the next run reprocesses them
+        commit_manifest(SUBDIVISIONS_MANIFEST_PATH)
+        commit_manifest(SHARED_MANIFEST_PATH)
         ingest_log.writeline(f"completed: {len(sub_map)} subdivisions")
         return sub_map.to_geocode_map()
     finally:

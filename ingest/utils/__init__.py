@@ -19,7 +19,7 @@ from .paths import (
     GEONAMES_DUMP_URL,
 )
 from .logger import ingest_log
-from .download import has_changed, download
+from .download import has_changed, download, record_pending, committed_value, commit_manifest
 from .index import (
     dump_data,
     dump_lookup_index,

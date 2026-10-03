@@ -26,6 +26,30 @@ def _save_manifest(path: Path, manifest: _Manifest) -> None:
         f.write("\n")
 
 
+# entries fetched this run, written to their manifest only once the stage that consumes them dumps successfully
+_pending: dict[Path, _Manifest] = {}
+
+
+def record_pending(manifest_path: Path, name: str, value: str | None) -> None:
+    """Stages a manifest entry to be written by commit_manifest()."""
+    _pending.setdefault(manifest_path, {})[name] = value
+
+
+def committed_value(manifest_path: Path, name: str) -> str | None:
+    """The manifest entry as of the last successful dump."""
+    return _load_manifest(manifest_path).get(name)
+
+
+def commit_manifest(manifest_path: Path) -> None:
+    """Writes this run's pending entries to the manifest; call only after the consuming stage has dumped, so a failed run leaves its sources marked unconsumed."""
+    pending = _pending.pop(manifest_path, None)
+    if not pending:
+        return
+    manifest = _load_manifest(manifest_path)
+    manifest.update(pending)
+    _save_manifest(manifest_path, manifest)
+
+
 def _etag(url: str) -> str | None:
     head_request = Request(url, method="HEAD", headers={"User-Agent": USER_AGENT})
     head_response = cast(HTTPResponse, urlopen(head_request, timeout=60))
@@ -64,7 +88,4 @@ def download(url: str, dest: Path, manifest_path: Path) -> None:
 
     tmp.replace(dest)
     ingest_log.writeline(f"Downloaded and updated {dest.name}")
-
-    manifest = _load_manifest(manifest_path)
-    manifest[dest.name] = _etag(url)
-    _save_manifest(manifest_path, manifest)
+    record_pending(manifest_path, dest.name, _etag(url))

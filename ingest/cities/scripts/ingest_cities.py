@@ -9,7 +9,7 @@ from .fetch_cities import fetch_cities_sources
 from .load_cities import load_cities
 from .dump_cities import dump
 from ingest.shared.scripts import load_countries, load_subdivisions
-from ingest.utils import ingest_log
+from ingest.utils import ingest_log, commit_manifest, CITIES_MANIFEST_PATH
 from ingest.shared.models import SubdivisionModel, CountryModel, CityModel
 
 
@@ -22,8 +22,9 @@ def ingest_cities(
 
     try:
         has_update = fetch_cities_sources(force=force)
-        if not has_update:
-            ingest_log.writeline("No updates for cities.")
+        # rows and indexes store country ids and the full subdivision chain, so countries or subdivisions rebuilt upstream (passed in) force a rebuild even when cities500 is unchanged
+        if not has_update and countries is None and subdivisions is None:
+            ingest_log.writeline("No updates for cities, subdivisions or countries.")
             return None
 
         if countries is None:
@@ -33,6 +34,7 @@ def ingest_cities(
 
         cities: list[CityModel] = load_cities(subdivisions, countries)
         dump(cities)
+        commit_manifest(CITIES_MANIFEST_PATH)
         ingest_log.writeline(f"completed: {len(cities)} cities")
     finally:
         ingest_log.dump()

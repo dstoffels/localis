@@ -6,7 +6,7 @@ from .load_historic_countries import init_historic_countries
 from .fetch_countries import fetch_countries_sources
 from .merge_countries import merge_wikidata, merge_geonames
 from .dump_countries import dump
-from ingest.utils import ingest_log
+from ingest.utils import ingest_log, commit_manifest, COUNTRIES_MANIFEST_PATH
 from ingest.shared.models import CountryModel
 
 
@@ -22,6 +22,7 @@ def ingest_countries(force: bool = False) -> dict[str, CountryModel] | None:
         merge_geonames(countries)
         merge_wikidata(countries)
         dump(list(countries.values()))
+        commit_manifest(COUNTRIES_MANIFEST_PATH)
         ingest_log.writeline(f"completed: {len(countries)} countries")
         return countries
     finally:

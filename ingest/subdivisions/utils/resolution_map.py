@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field, asdict
 from pathlib import Path
 from typing import Literal
+import hashlib
 import json
 
 
@@ -151,6 +152,14 @@ class ResolutionMap:
         path.write_text(
             json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8"
         )
+
+    def decisions_fingerprint(self) -> str:
+        """A hash of the human-maintained inputs to subdivision ingest (bypass rules and skill decisions), so editing them counts as a changed source."""
+        inputs = {
+            "NON_ADMINISTRATIVE_TYPES": self.non_administrative_types,
+            "skill_decisions": {code: asdict(decision) for code, decision in self.skill_decisions.items()},
+        }
+        return hashlib.sha256(json.dumps(inputs, sort_keys=True).encode()).hexdigest()
 
     def is_non_administrative(self, alpha2: str, entry_type: str) -> bool:
         types = self.non_administrative_types.get(alpha2, [])

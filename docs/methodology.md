@@ -42,7 +42,7 @@ Validation and known errors:
 
 ISO 3166-1, 3166-2 and 3166-3 data comes from Debian's [iso-codes](https://salsa.debian.org/iso-codes-team/iso-codes) project, licensed LGPL-2.1-or-later. [GeoNames](https://www.geonames.org/) supplies `countryInfo.txt`, `admin1CodesASCII.txt`, `admin2Codes.txt`, `alternateNamesV2.txt` and `cities500.txt`, licensed CC BY 4.0, which requires attribution. [Wikidata](https://www.wikidata.org/) supplies the subdivision crosswalk and country aliases under CC0. [Unicode CLDR](https://cldr.unicode.org/) supplies `territoryInfo.json`, used only to choose which alternate-name languages to keep, under the Unicode License v3.
 
-The monthly ingest re-fetches a source only when its ETag changes, and the ETag of every source file behind the shipped data is recorded in `ingest/<domain>/inputs/*.manifest.json`, committed alongside the data. The commit a release was built from therefore identifies its exact source snapshot. The one exception is the Wikidata country alias list, a static snapshot stored in the repository (last updated 2026-09-30) that the monthly ingest does not refresh.
+The monthly ingest re-fetches a source only when its ETag changes, and the ETag of every source file behind the shipped data is recorded in `ingest/<domain>/inputs/*.manifest.json`, committed alongside the data. A manifest is written only after its dataset is dumped, so it never records a source that didn't make it into the shipped data. The commit a release was built from therefore identifies its exact source snapshot. The one exception is the Wikidata country alias list, a static snapshot stored in the repository (last updated 2026-09-30) that the monthly ingest does not refresh.
 
 ## Countries
 

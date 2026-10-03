@@ -79,7 +79,7 @@ jobs:
             exit "$code"
           fi
 
-      # Only the orphan queue and logs are committed: committing manifests for sources that were fetched but never dumped would let the next run skip subdivision ingest, and with it the orphan gate
+      # Only the orphan queue and logs are committed; manifests are written only after a stage dumps, so an orphan-blocked run leaves them unchanged
       - name: Record orphans and fail
         if: steps.ingest.outputs.exit_code == '10'
         run: |
