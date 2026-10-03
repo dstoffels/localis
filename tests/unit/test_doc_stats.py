@@ -11,8 +11,8 @@ class TestDocStats:
         """should match data_stats.json to the shipped data, reconciled"""
         assert data_stats.compute() == json.loads(
             data_stats.OUTPUT_PATH.read_text(encoding="utf-8")
-        ), "RUN: poetry run analysis"
+        ), "RUN: poe analysis"
 
     def test_markers_current(self):
         """should match every deterministic stat marker in the docs to data_stats.json"""
-        assert render_docs.check() == [], "RUN: poetry run analysis"
+        assert render_docs.check() == [], "RUN: poe analysis"

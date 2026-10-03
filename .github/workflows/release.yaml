@@ -26,17 +26,15 @@ jobs:
           ref: ${{ github.event.workflow_run.head_sha }}
           fetch-depth: 0
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Set up uv and Python
+        uses: astral-sh/setup-uv@v6
         with:
           python-version: '3.11'
-
-      - name: Install Poetry
-        uses: snok/install-poetry@v1
+          enable-cache: true
 
       - name: Get project version
         id: get_version
-        run: echo "VERSION=v$(poetry version -s)" >> "$GITHUB_OUTPUT"
+        run: echo "VERSION=v$(uv version --short)" >> "$GITHUB_OUTPUT"
 
       - name: Check if already released
         id: check_versions
@@ -54,7 +52,7 @@ jobs:
         if: steps.check_versions.outputs.SHOULD_RELEASE == 'true'
         id: check_prerelease
         run: |
-          RAW_VERSION=$(poetry version -s)
+          RAW_VERSION=$(uv version --short)
 
           if [[ "$RAW_VERSION" =~ (a|alpha|b|beta|rc|.dev)[0-9]*$ ]]; then
             echo "Incoming version is a pre-release."
@@ -65,7 +63,7 @@ jobs:
 
       - name: Build
         if: steps.check_versions.outputs.SHOULD_RELEASE == 'true'
-        run: poetry build
+        run: uv build
 
       - name: Generate new release
         if: steps.check_versions.outputs.SHOULD_RELEASE == 'true'

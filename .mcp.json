@@ -1,7 +1,7 @@
 {
 	"mcpServers": {
 		"resolve-subdivisions": {
-			"command": "poetry",
+			"command": "uv",
 			"args": ["run", "python", ".claude/skills/resolve-subdivisions/scripts/server.py"]
 		}
 	}
