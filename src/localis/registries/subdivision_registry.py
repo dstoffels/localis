@@ -1,5 +1,6 @@
+from typing import Mapping, cast
 from localis.entities import Subdivision
-from localis.views import SubdivisionView
+from localis.views import CountryView, SubdivisionView
 from localis.registries import Registry, CountryRegistry
 
 
@@ -10,21 +11,22 @@ class SubdivisionRegistry(Registry[Subdivision]):
         self._countries = countries
         super().__init__(**kwargs)
 
-    def build_cache(self) -> dict[int, SubdivisionView]:
-        return SubdivisionView.load(self._data_filepath, self._countries._cache)
+    def build_cache(self) -> Mapping[int, SubdivisionView]:
+        country_views = cast(Mapping[int, CountryView], self._countries._cache)
+        return SubdivisionView.load(self._data_filepath, country_views)
 
-    def lookup(self, identifier) -> Subdivision | None:
-        """Get a subdivision by its id, iso_code, or geonames_code."""
+    def lookup(self, identifier: str | int) -> Subdivision | None:
+        """Get a subdivision by its iso_code or geonames_code; use .get() for the localis id."""
         return super().lookup(identifier)
 
     def filter(
         self,
         *,
-        name: str = None,
-        limit: int = None,
-        type: str = None,
-        admin_level: int = None,
-        country: str = None,
+        name: str | None = None,
+        limit: int | None = None,
+        type: str | None = None,
+        admin_level: int | None = None,
+        country: str | None = None,
         **kwargs,
     ) -> list[Subdivision]:
         """Filter subdivisions by exact matches on specified fields with AND logic when filtering by multiple fields. Case insensitive."""
@@ -36,7 +38,9 @@ class SubdivisionRegistry(Registry[Subdivision]):
 
         return super().filter(name=name, limit=limit, **kwargs)
 
-    def search(self, query, limit=10, **kwargs) -> list[tuple[Subdivision, float]]:
+    def search(
+        self, query: str, limit: int = 10, **kwargs
+    ) -> list[tuple[Subdivision, float]]:
         """Fuzzy search for subdivisions by name, aliases, parent name, or country name"""
         return super().search(query, limit, **kwargs)
 

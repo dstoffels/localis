@@ -5,15 +5,15 @@ from localis.registries import (
     CityRegistry,
 )
 from localis.entities import Entity
-from ingest.countries import CountryModel
-from ingest.subdivisions import SubdivisionModel
-from ingest.cities import CityModel
 from utils import registry_param
 
-LOOKUP_FIELDS_BY_REGISTRY = {
-    CountryRegistry: CountryModel.LOOKUP_FIELDS,
-    SubdivisionRegistry: SubdivisionModel.LOOKUP_FIELDS,
-    CityRegistry: CityModel.LOOKUP_FIELDS,
+# Explicit per-registry callbacks over the runtime Entity's own shape, not derived from the
+# ingestion-side Model: a historic country has no alpha2/alpha3/numeric lookup (those collide
+# across historic entries), only its own historic.alpha_4 withdrawal code.
+LOOKUP_VALUES_BY_REGISTRY = {
+    CountryRegistry: lambda c: (c.historic.alpha_4,) if c.historic else (c.alpha2, c.alpha3, c.numeric),
+    SubdivisionRegistry: lambda s: (s.iso_code, s.geonames_code),
+    CityRegistry: lambda c: (c.geonames_id,),
 }
 
 
@@ -31,26 +31,27 @@ class TestLookup:
         ), f"expected None, got {result} from lookup [{invalid_value}]"
 
     def test_valid(self, registry: Registry, select_random):
-        """should return a DTO with a valid lookup value from each lookup field"""
+        """should resolve any randomly selected entity via each of its own valid lookup values"""
 
-        lookup_fields = LOOKUP_FIELDS_BY_REGISTRY[type(registry)]
+        get_values = LOOKUP_VALUES_BY_REGISTRY[type(registry)]
 
         subject: Entity = select_random(registry)
+        values = [v for v in get_values(subject) if v]
 
-        for field in lookup_fields:
-            lookup_value = getattr(subject, field)
+        offset = 1
+        while not values:
+            subject = select_random(registry, offset)
+            offset += 1
+            values = [v for v in get_values(subject) if v]
 
-            while not lookup_value:
-                subject = select_random(registry, subject.id + 1)
-                lookup_value = getattr(subject, field)
-
-            result = registry.lookup(lookup_value)
+        for value in values:
+            result = registry.lookup(value)
             assert (
                 result is not None
-            ), f"expected a result, got None for lookup field [{field}] with value [{lookup_value}]"
+            ), f"expected a result, got None for lookup value [{value}]"
             assert isinstance(
                 result, Entity
-            ), f"expected a DTO, got {type(result)} for lookup field {field}"
+            ), f"expected an Entity, got {type(result)} for lookup value [{value}]"
             assert (
-                getattr(result, field) == lookup_value
-            ), f"expected [{field}: {lookup_value}], got [{getattr(result, field)}]"
+                result.id == subject.id
+            ), f"expected id [{subject.id}], got [{result.id}] for lookup value [{value}]"

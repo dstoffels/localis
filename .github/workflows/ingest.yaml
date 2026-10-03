@@ -11,6 +11,10 @@ permissions:
   contents: write
   pull-requests: write
 
+concurrency:
+  group: ingest
+  cancel-in-progress: false
+
 jobs:
   ingest:
     runs-on: ubuntu-latest
@@ -26,25 +30,36 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-          
+
       - name: Configure git identity
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Merge latest main
+      - name: Merge latest dev
         run: |
-          git fetch origin main
-          if ! git merge --no-edit origin/main; then
-            echo "::error::Merge conflict pulling main into ingest. Resolve locally: git checkout ingest && git pull && git merge main, then push."
-            exit 1
+          git fetch origin dev
+          if ! git merge --no-edit origin/dev; then
+            for f in $(git diff --name-only --diff-filter=U); do
+              case "$f" in
+                src/localis/data/*|ingest/*/inputs/*.manifest.json|pyproject.toml)
+                  git checkout --theirs -- "$f"
+                  git add -- "$f"
+                  ;;
+                *)
+                  echo "::error::Merge conflict in $f pulling dev into ingest. Resolve locally: git checkout ingest && git pull && git merge dev, then push."
+                  exit 1
+                  ;;
+              esac
+            done
+            git commit --no-edit
           fi
 
       - name: Install Poetry
         uses: snok/install-poetry@v1
 
       - name: Cache deps
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/.cache/pypoetry
           key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
@@ -53,18 +68,55 @@ jobs:
         run: poetry install
 
       - name: Run full ingest pipeline
-        run: poetry run ingest
+        id: ingest
+        run: |
+          set +e
+          poetry run ingest
+          code=$?
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          # exit 10 means orphans need resolving; the next step records them before failing
+          if [ "$code" -ne 0 ] && [ "$code" -ne 10 ]; then
+            exit "$code"
+          fi
+
+      # Only the orphan queue and logs are committed; manifests are written only after a stage dumps, so an orphan-blocked run leaves them unchanged
+      - name: Record orphans and fail
+        if: steps.ingest.outputs.exit_code == '10'
+        run: |
+          count=$(python -c "import json; m = json.load(open('ingest/subdivisions/outputs/resolution_map.json')); print(sum(len(b) for b in m['automerge']['orphans'].values()))")
+          git add ingest/subdivisions/outputs/resolution_map.json ingest/*/logs/*.log
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: ingest found $count orphans awaiting resolution"
+          fi
+          git push origin ingest
+          echo "::error::Ingest found $count subdivision orphans; the queue is committed to the ingest branch. Resolve locally: pull ingest, run 'poetry run ingest --force', run the resolve-subdivisions skill, run 'poetry run ingest', then commit and push to ingest."
+          exit 1
+
+      - name: Regenerate data stats and docs
+        run: poetry run analysis --data-only
+
+      - name: Type Check
+        run: poetry run pyright
+
+      - name: Run Tests
+        run: poetry run pytest
 
       - name: Bump version if the published dataset changed
         id: version
         run: |
-          if git diff --quiet -- src/localis/data; then
+          current="$(poetry version -s)"
+          if [ -z "$(git status --porcelain -- src/localis/data)" ]; then
+            echo "data_changed=false" >> "$GITHUB_OUTPUT"
             echo "bumped=false" >> "$GITHUB_OUTPUT"
-          else
+          elif git rev-parse -q --verify "refs/tags/v$current" >/dev/null; then
             poetry version patch
+            echo "data_changed=true" >> "$GITHUB_OUTPUT"
             echo "bumped=true" >> "$GITHUB_OUTPUT"
-            echo "version=$(poetry version -s)" >> "$GITHUB_OUTPUT"
+          else
+            echo "data_changed=true" >> "$GITHUB_OUTPUT"
+            echo "bumped=false" >> "$GITHUB_OUTPUT"
           fi
+          echo "version=$(poetry version -s)" >> "$GITHUB_OUTPUT"
 
       - name: Stage changes
         id: stage
@@ -88,25 +140,16 @@ jobs:
       - name: Push ingest branch
         run: git push origin ingest
 
-      - name: Check for orphaned subdivisions
-        id: orphans
-        run: |
-          if poetry run check-orphans > orphan_summary.md; then
-            echo "found=false" >> "$GITHUB_OUTPUT"
-          else
-            echo "found=true" >> "$GITHUB_OUTPUT"
-          fi
-
       - name: Ensure PR exists
         if: steps.stage.outputs.changed == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          existing=$(gh pr list --head ingest --base main --json number --jq '.[0].number')
+          existing=$(gh pr list --head ingest --base dev --json number --jq '.[0].number')
           if [ -z "$existing" ]; then
-            gh pr create --draft --head ingest --base main \
+            gh pr create --head ingest --base dev \
               --title "Automated data ingest" \
-              --body "This PR is maintained automatically by the ingest workflow and always reflects the current state of the \`ingest\` branch. Each run comments below with what changed."
+              --body "This PR is maintained automatically by the ingest workflow and always reflects the current state of the \`ingest\` branch. Each run comments below with what changed. Type check and tests ran in the ingest workflow itself before this was pushed, since bot-opened PRs don't trigger the Test workflow."
           fi
 
       - name: Comment on PR with this run's changes
@@ -119,6 +162,8 @@ jobs:
             echo
             if [ "${{ steps.version.outputs.bumped }}" == "true" ]; then
               echo "Dataset changed, version bumped to \`${{ steps.version.outputs.version }}\`."
+            elif [ "${{ steps.version.outputs.data_changed }}" == "true" ]; then
+              echo "Dataset changed; rides along with unreleased version \`${{ steps.version.outputs.version }}\`, no bump."
             else
               echo "Only bookkeeping files changed; no dataset version bump."
             fi
@@ -128,19 +173,3 @@ jobs:
             echo '```'
           } > run_summary.md
           gh pr comment ingest --body-file run_summary.md
-
-      - name: Comment on PR with orphan details
-        if: steps.orphans.outputs.found == 'true'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh pr comment ingest --body-file orphan_summary.md
-
-      - name: Mark PR ready if clean
-        if: steps.orphans.outputs.found == 'false'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh pr ready ingest || true
-
-      - name: Fail if orphaned subdivisions need resolution
-        if: steps.orphans.outputs.found == 'true'
-        run: exit 1

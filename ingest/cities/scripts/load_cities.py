@@ -1,9 +1,7 @@
-from ingest.utils import CITIES_RAW_PATH
+from ingest.utils import CITIES_INPUTS_PATH
 from ingest.cities.utils.strings import normalize_name, is_latin
-from ingest.utils import log
-from ingest.subdivisions import SubdivisionModel
-from ingest.countries import CountryModel
-from ingest.cities import CityModel
+from ingest.utils import ingest_log
+from ingest.shared.models import SubdivisionModel, CountryModel, CityModel
 import csv
 
 HEADERS = [
@@ -33,7 +31,7 @@ def is_valid_city(row: dict[str, str]) -> bool:
     return bool(row["country code"])
 
 
-def filter_names(row: dict[str, str]) -> tuple[str]:
+def filter_names(row: dict[str, str]) -> tuple[str, str]:
     """Keep Latin-based alt names, filter junk and dedupe"""
     name = row["name"]
     alt_names = row["alternatenames"].split(",") if row["alternatenames"] else []
@@ -63,11 +61,24 @@ def filter_names(row: dict[str, str]) -> tuple[str]:
     return name, "|".join(result)
 
 
+def resolve_subdivision_chain(
+    admin1: SubdivisionModel | None, admin2: SubdivisionModel | None
+) -> list[SubdivisionModel]:
+    """Walks the parent chain from the deepest resolved subdivision up to its root, ascending-admin_level ordered."""
+    chain: list[SubdivisionModel] = []
+    sub = admin2 or admin1
+    while sub is not None:
+        chain.append(sub)
+        sub = sub.parent
+    chain.reverse()
+    return chain
+
+
 def parse_row(
     row: dict[str, str],
     subdivisions: dict[str, SubdivisionModel],
     countries: dict[str, CountryModel],
-) -> CityModel:
+) -> CityModel | None:
 
     geonames_id = row["geonameid"]
 
@@ -85,8 +96,9 @@ def parse_row(
     country = countries.get(country_code, None)
 
     if not country:
-        log.writeline(
-            f"country not found: {country_code}, dropping city {name} ({geonames_id})"
+        ingest_log.writeline(
+            f"country not found: {country_code}, dropping city {name} ({geonames_id})",
+            level="WARN",
         )
         return None
 
@@ -102,8 +114,7 @@ def parse_row(
         id=0,  # to be set before dump
         geonames_id=int(geonames_id),
         name=name,
-        admin1=admin1,
-        admin2=admin2,
+        subdivisions=resolve_subdivision_chain(admin1, admin2),
         country=country,
         population=int(population),
         lat=float(lat),
@@ -114,8 +125,8 @@ def parse_row(
 def load_cities(
     subdivisions: dict[str, SubdivisionModel], countries: dict[str, CountryModel]
 ) -> list[CityModel]:
-    with open(CITIES_RAW_PATH / "cities500.txt", "r", encoding="utf-8") as f:
-        print(f"Parsing cities from cities500.txt...")
+    with open(CITIES_INPUTS_PATH / "cities500.txt", "r", encoding="utf-8") as f:
+        ingest_log.writeline("Parsing cities from cities500.txt...")
         rows = csv.DictReader(f, fieldnames=HEADERS, delimiter="\t")
         cities = []
         for row in rows:

@@ -1,12 +1,14 @@
 from pathlib import Path
+from typing import Mapping
 from localis.entities import CountryBase, SubdivisionBase, City
 from localis.stores import CityStore
+from localis.utils.data import CacheFilterPredicate
 from .view import CrossReferencedView
 from .country_view import CountryView
 from .subdivision_view import SubdivisionView
 
 
-class CityView(CrossReferencedView[City]):
+class CityView(CrossReferencedView[City, CityStore, CountryView, SubdivisionView]):
     """Runtime view over CityStore, used by Registry._cache."""
 
     __slots__ = ()
@@ -20,18 +22,22 @@ class CityView(CrossReferencedView[City]):
         return self._store.geonames_ids[self._idx]
 
     @property
+    def subdivisions(self) -> list[SubdivisionView]:
+        offset = self._store.subdivision_offsets[self._idx]
+        count = self._store.subdivision_counts[self._idx]
+        blob = self._store.subdivision_id_blob
+        return [self._subdivision_views[sid] for sid in blob[offset : offset + count]]
+
+    @property
     def admin1(self) -> SubdivisionView | None:
-        aid = self._store.admin1_ids[self._idx]
-        return self._subdivision_views.get(aid) if aid != -1 else None
+        """The city's admin_level=1 subdivision, read by the search scorer's admin1.* fields."""
+        return next((s for s in self.subdivisions if s.admin_level == 1), None)
 
     @property
-    def admin2(self) -> SubdivisionView | None:
-        aid = self._store.admin2_ids[self._idx]
-        return self._subdivision_views.get(aid) if aid != -1 else None
-
-    @property
-    def country(self) -> CountryView | None:
-        return self._country_views.get(self._store.country_ids[self._idx])
+    def country(self) -> CountryView:
+        country = self._country_views.get(self._store.country_ids[self._idx])
+        assert country is not None, "city has no country, violates ingest invariant"
+        return country
 
     @property
     def population(self) -> int:
@@ -46,44 +52,29 @@ class CityView(CrossReferencedView[City]):
         return self._store.lngs[self._idx]
 
     def to_entity(self) -> City:
-        admin1 = self.admin1
-        admin2 = self.admin2
         country = self.country
         return City(
             id=self.id,
             name=self.name,
             geonames_id=self.geonames_id,
-            admin1=(
+            subdivisions=[
                 SubdivisionBase(
-                    id=admin1.id,
-                    name=admin1.name,
-                    geonames_code=admin1.geonames_code,
-                    iso_code=admin1.iso_code,
-                    type=admin1.type,
+                    id=s.id,
+                    name=s.name,
+                    geonames_code=s.geonames_code,
+                    geonames_id=s.geonames_id,
+                    iso_code=s.iso_code,
+                    type=s.type,
+                    admin_level=s.admin_level,
                 )
-                if admin1
-                else None
-            ),
-            admin2=(
-                SubdivisionBase(
-                    id=admin2.id,
-                    name=admin2.name,
-                    geonames_code=admin2.geonames_code,
-                    iso_code=admin2.iso_code,
-                    type=admin2.type,
-                )
-                if admin2
-                else None
-            ),
-            country=(
-                CountryBase(
-                    id=country.id,
-                    name=country.name,
-                    alpha2=country.alpha2,
-                    alpha3=country.alpha3,
-                )
-                if country
-                else None
+                for s in self.subdivisions
+            ],
+            country=CountryBase(
+                id=country.id,
+                name=country.name,
+                alpha2=country.alpha2,
+                alpha3=country.alpha3,
+                geonames_id=country.geonames_id,
             ),
             population=self.population,
             lat=self.lat,
@@ -94,40 +85,41 @@ class CityView(CrossReferencedView[City]):
     def load(
         cls,
         filepath: Path,
-        country_views: dict[int, CountryView],
-        subdivision_views: dict[int, SubdivisionView],
+        country_views: Mapping[int, CountryView],
+        subdivision_views: Mapping[int, SubdivisionView],
+        predicate: CacheFilterPredicate | None = None,
     ) -> dict[int, "CityView"]:
         store = CityStore()
         views: dict[int, CityView] = {}
+        idx = 0
+
         with open(filepath, "r", encoding="utf-8") as f:
             for id, line in enumerate(f, start=1):
+
                 row = line.rstrip("\r\n").split("\t")
+
+                if predicate and not predicate(row):
+                    store.id_to_idx.append(-1)
+                    continue
                 (
                     name,
-                    geonames_id_s,
-                    admin1_s,
-                    admin2_s,
-                    country_s,
-                    pop_s,
-                    lat_s,
-                    lng_s,
-                ) = row
-                geonames_id = int(geonames_id_s)
-                admin1_id = int(admin1_s) if admin1_s else None
-                admin2_id = int(admin2_s) if admin2_s else None
-                country_id = int(country_s)
-                population = int(pop_s)
-                lat = float(lat_s)
-                lng = float(lng_s)
-                store.append(
-                    name,
                     geonames_id,
-                    admin1_id,
-                    admin2_id,
-                    country_id,
-                    population,
+                    subdivisions,
+                    country,
+                    pop,
                     lat,
                     lng,
+                ) = row
+                store.id_to_idx.append(idx)
+                store.append(
+                    name,
+                    int(geonames_id),
+                    [int(sid) for sid in subdivisions.split("|") if sid],
+                    int(country),
+                    int(pop),
+                    float(lat),
+                    float(lng),
                 )
                 views[id] = cls(id, store, country_views, subdivision_views)
+                idx += 1
         return views

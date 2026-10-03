@@ -1,16 +1,16 @@
 from pathlib import Path
 from ingest.subdivisions.utils.subdivision_map import SubdivisionMap
-from ingest.utils import SUBDIVISIONS_RAW_PATH
-from ingest.utils import log
+from ingest.utils import SUBDIVISIONS_INPUTS_PATH
+from ingest.utils import ingest_log
 import csv
-from ingest.countries import CountryModel
-from ingest.subdivisions import SubdivisionModel
+from ingest.shared.models import CountryModel
+from ingest.shared.models import SubdivisionModel
 
 
 def load_geonames_file(
-    file_name: Path, countries: dict[str, CountryModel], sub_map: SubdivisionMap
+    file_name: str, countries: dict[str, CountryModel], sub_map: SubdivisionMap
 ) -> None:
-    with open(SUBDIVISIONS_RAW_PATH / file_name, "r", encoding="utf-8") as f:
+    with open(SUBDIVISIONS_INPUTS_PATH / file_name, "r", encoding="utf-8") as f:
         HEADERS = ("code", "name", "name_ascii", "geonames_id")
         reader = csv.DictReader(
             f,
@@ -21,6 +21,7 @@ def load_geonames_file(
             # code, name, name_ascii, geonames_id
             name: str = row["name"]
             geonames_code: str = row["code"]
+            geonames_id: int = int(row["geonames_id"])
 
             # determine parent code and set admin level
             code_parts = geonames_code.split(".")
@@ -34,10 +35,15 @@ def load_geonames_file(
                 parent_code = f"{country_alpha2}.{parent_code}"
                 parent = sub_map.get(geo_code=parent_code)
                 admin_level = 2
+            else:
+                raise ValueError(f"unexpected geonames code format: {geonames_code}")
 
             country = countries.get(country_alpha2)
             if not country:
-                log.writeline(f"country not found: {country_alpha2}, skipping {name}")
+                ingest_log.writeline(
+                    f"country not found: {country_alpha2}, skipping {name}",
+                    level="WARN",
+                )
                 continue
 
             subdivision = SubdivisionModel(
@@ -45,6 +51,7 @@ def load_geonames_file(
                 name=name,
                 country=country,
                 geonames_code=geonames_code,
+                geonames_id=geonames_id,
                 parent=parent,
                 admin_level=admin_level,
                 iso_code=None,  # may be set later if merged with ISO subdivision
@@ -52,6 +59,7 @@ def load_geonames_file(
                 aliases=[],  # may be set later if merged with ISO subdivision
             )
             subdivision.set_hashid()
+            assert subdivision.hashid is not None
             subdivision.id = subdivision.hashid  # set hashid for internal mapping
             sub_map.add(subdivision)
 
@@ -59,7 +67,7 @@ def load_geonames_file(
 def map_geonames_subdivisions(
     countries: dict[str, CountryModel],
 ) -> SubdivisionMap:
-    log.writeline("Loading GeoNames subdivisions...")
+    ingest_log.writeline("Loading GeoNames subdivisions...")
     sub_map = SubdivisionMap()
     load_geonames_file("admin1CodesASCII.txt", countries, sub_map)
     load_geonames_file("admin2Codes.txt", countries, sub_map)

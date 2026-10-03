@@ -1,53 +1,54 @@
 import functools
 import json
-import sys
-from pathlib import Path
-from rapidfuzz import fuzz
-from ingest.subdivisions.scripts import prepare_names, load_iso_subs, merge_ipregistry_aliases
 from ingest.subdivisions.utils.subdivision_map import SubdivisionMap
-from ingest.subdivisions import SubdivisionModel
+from typing import Literal
+from ingest.subdivisions.utils.resolution_map import ResolutionMap, SkillDecision
+from ingest.shared.models import SubdivisionModel
+from ingest.utils import SUBDIVISIONS_OUTPUTS_PATH
+from ingest.shared.scripts import load_countries
+from ingest.subdivisions.scripts.automerge.type_families import is_type_disqualified, raw_type_families
+from ingest.subdivisions.scripts import (
+    load_iso_subs,
+    map_geonames_subdivisions,
+    merge_alternate_name_aliases,
+    score_candidates,
+)
+from ingest.subdivisions.scripts.wikidata_subdivisions import CROSSWALK_PATH
+from ingest.subdivisions.scripts.automerge.scoring import is_directional_mismatch
+
+RESOLUTION_MAP_PATH = SUBDIVISIONS_OUTPUTS_PATH / "resolution_map.json"
 
 
-def _find_project_root(start: Path) -> Path:
-    for parent in (start, *start.parents):
-        if (parent / "pyproject.toml").exists():
-            return parent
-    raise RuntimeError(
-        f"Could not locate project root (no pyproject.toml above {start})"
+@functools.cache
+def _resolution_map() -> ResolutionMap:
+    return ResolutionMap.load(RESOLUTION_MAP_PATH)
+
+
+@functools.cache
+def _crosswalk() -> dict[str, int]:
+    """The Wikidata crosswalk the last ingest run fetched."""
+    if not CROSSWALK_PATH.exists():
+        return {}
+    return json.loads(CROSSWALK_PATH.read_text(encoding="utf-8"))
+
+
+def write_resolution(
+    iso_code: str,
+    geonames_id: int | None,
+    reason: str | None,
+    decided_by: Literal["agent", "human"],
+    escalation: str | None,
+) -> None:
+    """geonames_id of None means "add as-is"."""
+    resolution_map = _resolution_map()
+    resolution_map.skill_decisions[iso_code] = SkillDecision(
+        id=geonames_id,
+        reason=reason,
+        decided_by=decided_by,
+        escalation=escalation,
+        wikidata_seen=_crosswalk().get(iso_code),
     )
-
-
-sys.path.insert(0, str(_find_project_root(Path(__file__).resolve())))
-
-from ingest.utils import SUBDIVISIONS_RAW_PATH
-from ingest.countries.scripts import load_countries
-from ingest.subdivisions.scripts import map_geonames_subdivisions
-
-RESOLUTION_MAP_PATH = SUBDIVISIONS_RAW_PATH / "resolution_map.json"
-ORPHANED_PATH = SUBDIVISIONS_RAW_PATH / "orphaned_subdivisions.json"
-RESOLUTION_LOG_PATH = SUBDIVISIONS_RAW_PATH / "resolution_log.txt"
-REVIEW_OUTPUT_PATH = SUBDIVISIONS_RAW_PATH / "review_output.json"
-
-
-def _read_json(path: Path) -> dict | list:
-    return json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
-
-
-def read_resolution() -> dict:
-    return _read_json(RESOLUTION_MAP_PATH) or {}
-
-
-def read_orphaned() -> dict[str, dict]:
-    """Keyed by iso_code, matching the shape resolve_subdivisions.py's handle_orphans() writes."""
-    return _read_json(ORPHANED_PATH) or {}
-
-
-def write_resolution(iso_code: str, entry: dict) -> None:
-    resolution_map = _read_json(RESOLUTION_MAP_PATH) or {}
-    resolution_map[iso_code] = entry
-    RESOLUTION_MAP_PATH.write_text(
-        json.dumps(resolution_map, indent=2, ensure_ascii=False), encoding="utf-8"
-    )
+    resolution_map.save(RESOLUTION_MAP_PATH)
 
 
 @functools.cache
@@ -55,38 +56,49 @@ def _countries():
     return load_countries()
 
 
+def _apply_resolved_claims(sub_map: SubdivisionMap, resolution_map: ResolutionMap) -> None:
+    """Marks every GeoNames sub already claimed by a recorded resolution, so a target another iso_code already has doesn't look unclaimed. A decision under review as a wikidata_conflict doesn't count as a claim, so keeping it stays possible."""
+    under_review = {orphan.iso_code for orphan in resolution_map.automerge.orphans.wikidata_conflict}
+    claims = {
+        code: decision.id
+        for code, decision in resolution_map.skill_decisions.items()
+        if code not in under_review
+    }
+    for source in (claims, resolution_map.wikidata_merge, resolution_map.automerge.bypassed):
+        for iso_code, geonames_id in source.items():
+            if geonames_id is None:
+                continue
+            sub = sub_map.get(geonames_id=geonames_id)
+            if sub is not None:
+                sub.iso_code = iso_code
+    for iso_code, match in resolution_map.automerge.resolutions.items():
+        sub = sub_map.get(geonames_id=match.id)
+        if sub is not None:
+            sub.iso_code = iso_code
+
+
 @functools.cache
 def get_geonames_submap() -> SubdivisionMap:
-    return map_geonames_subdivisions(_countries())
+    sub_map = map_geonames_subdivisions(_countries())
+    merge_alternate_name_aliases(sub_map)
+    _apply_resolved_claims(sub_map, _resolution_map())
+    return sub_map
 
 
 @functools.cache
 def _get_iso_subs() -> dict[str, SubdivisionModel]:
-    iso_subs = load_iso_subs(_countries())
-    merge_ipregistry_aliases(iso_subs)
+    iso_subs, _ = load_iso_subs(_countries(), _resolution_map())
     return iso_subs
 
 
-def _format_candidate(candidate: SubdivisionModel) -> tuple[int, str]:
+def _format_candidate(candidate: SubdivisionModel, note: str = "") -> str:
     names = ", ".join([candidate.name, *candidate.aliases])
-    return (
-        candidate.hashid,
-        f"{names} - [{candidate.admin_level}]",
-    )
-
-
-def _rank_candidates(
-    iso_sub: SubdivisionModel, candidates: list[SubdivisionModel]
-) -> list[SubdivisionModel]:
-    """Orders candidates by their best name/alias match against any of the ISO names"""
-    iso_names = prepare_names(iso_sub)
-
-    def score_candidate(candidate: SubdivisionModel) -> float:
-        return max(
-            fuzz.WRatio(i, n) for i in iso_names for n in prepare_names(candidate)
-        )
-
-    return sorted(candidates, key=score_candidate, reverse=True)
+    label = f"{candidate.geonames_id}: {names} - [{candidate.admin_level}]"
+    if candidate.iso_code is not None:
+        label += f" CLAIMED BY {candidate.iso_code}"
+    if note:
+        label += f" ({note})"
+    return label
 
 
 TOP_TIER_MIN = 10
@@ -99,45 +111,91 @@ def _get_top_tier_batch_size(pool_size: int) -> int:
     return min(max(TOP_TIER_MIN, round(pool_size * TOP_TIER_FRACTION)), TOP_TIER_MAX)
 
 
-def get_candidates(
-    iso_code: str, batch_num: int = 0, return_all: bool = False
-) -> dict[int, str]:
-    # Look up iso_sub
+def _flagged_candidates(iso_code: str) -> list[tuple[int, str]]:
+    """The specific records the pipeline flagged for this orphan, with a note saying why, shown as its first batch: ambiguity close-calls, the low_margin or grouping_twin pick, or both sides of a wikidata_conflict. Empty for no_candidates/no_matches; raises if iso_code isn't an orphan."""
+    orphans = _resolution_map().automerge.orphans
+    if iso_code in orphans.no_candidates or iso_code in orphans.no_matches:
+        return []
+    for orphan in orphans.ambiguity:
+        if orphan.iso_code == iso_code:
+            return [(gid, "automerge's contested target") for gid in orphan.candidate_geonames_ids]
+    for orphan in orphans.low_margin:
+        if orphan.iso_code == iso_code:
+            return [(orphan.candidate_geonames_id, f"automerge's pick, {orphan.margin} points over threshold")]
+    for orphan in orphans.grouping_twin:
+        if orphan.iso_code == iso_code:
+            return [(orphan.candidate_geonames_id, "automerge's pick, likely the record for this subdivision's non-administrative grouping")]
+    for orphan in orphans.wikidata_conflict:
+        if orphan.iso_code == iso_code:
+            flagged = [(orphan.wikidata_geonames_id, "Wikidata's mapping")]
+            if orphan.decision_geonames_id is not None:
+                flagged.append((orphan.decision_geonames_id, "current skill decision"))
+            return flagged
+    raise ValueError(f"{iso_code} is not in resolution_map's orphans")
+
+
+def get_candidates(iso_code: str, batch_num: int = 0) -> list[str]:
+    """A batch of candidates, best first. A list rather than an id-keyed dict, since serialization sorts dict keys and would lose the ranking."""
     iso_sub: SubdivisionModel | None = _get_iso_subs().get(iso_code, None)
     if not iso_sub:
         raise ValueError(f"{iso_code} is not found in ISO subdivisions")
 
-    # Map subdivisions, excluding candidates already claimed by another ISO subdivision
+    flagged = _flagged_candidates(iso_code)
+    flagged_ids = [gid for gid, _ in flagged]
     sub_map = get_geonames_submap()
-    geo_subs = [c for c in sub_map.filter(iso_sub.country.alpha2) if c.iso_code is None]
 
-    candidates = _rank_candidates(iso_sub, geo_subs)
+    # ambiguity, low_margin and wikidata_conflict orphans see the specific records the pipeline flagged first, before the full pool
+    if flagged and batch_num == 0:
+        records = [(sub_map.get(geonames_id=gid), note) for gid, note in flagged]
+        return [_format_candidate(c, note) for c, note in records if c is not None]
 
-    if not return_all:
-        top_tier_batch_size = _get_top_tier_batch_size(len(candidates))
+    # the whole country, claimed, type-mismatched and directional-mismatched records included (marked), since ISO and GeoNames can disagree on a subdivision's level or name the same place differently; on score ties, clean candidates come before mismatched ones and same-level before other levels
+    same_level = min(iso_sub.admin_level, 2)
+    geo_subs = [g for g in sub_map.filter(iso_sub.country.alpha2) if g.geonames_id not in flagged_ids]
+    scored = score_candidates(iso_sub, geo_subs, include_type_disqualified=True, include_directional_mismatch=True)
+    notes: dict[int | None, str] = {}
+    for g, _, _ in scored:
+        note = []
+        if is_type_disqualified(iso_sub, g):
+            note.append(_type_mismatch_note(iso_sub, g))
+        if is_directional_mismatch(iso_sub, g):
+            note.append("directional mismatch")
+        if note:
+            notes[g.geonames_id] = "; ".join(note)
+    scored.sort(key=lambda t: (-t[1], t[0].geonames_id in notes, t[0].admin_level != same_level))
+    candidates = [geo_sub for geo_sub, score, needed in scored]
 
-        if batch_num == 0:
-            batch_start, batch_end = 0, top_tier_batch_size
-        else:
-            batch_start = top_tier_batch_size + (batch_num - 1) * BATCH_SIZE
-            batch_end = min(batch_start + BATCH_SIZE, len(candidates))
+    # a flagged first batch shifts normal pagination to start at batch 1
+    effective_batch_num = batch_num - 1 if flagged_ids else batch_num
+    top_tier_batch_size = _get_top_tier_batch_size(len(candidates))
 
-        if batch_start >= len(candidates):
-            return []
+    if effective_batch_num == 0:
+        batch_start, batch_end = 0, top_tier_batch_size
+    else:
+        batch_start = top_tier_batch_size + (effective_batch_num - 1) * BATCH_SIZE
+        batch_end = min(batch_start + BATCH_SIZE, len(candidates))
 
-        candidates = candidates[batch_start:batch_end]
+    if batch_start >= len(candidates):
+        return []
 
-    return dict(_format_candidate(c) for c in candidates)
+    candidates = candidates[batch_start:batch_end]
+
+    return [_format_candidate(c, notes.get(c.geonames_id, "")) for c in candidates]
 
 
-def is_valid_candidate(iso_code: str, geo_sub_hashid: int) -> tuple[bool, str]:
-    """(True, "") if geo_sub_hashid belongs to iso_code's own country's candidate pool and hasn't already been claimed by another orphan; otherwise (False, <error message>)."""
+def _type_mismatch_note(iso_sub: SubdivisionModel, candidate: SubdivisionModel) -> str:
+    families = "/".join(sorted(raw_type_families(candidate)))
+    return f"type mismatch: GeoNames name reads as {families}, ISO type is {iso_sub.type}"
+
+
+def is_valid_candidate(iso_code: str, geo_sub_geonames_id: int) -> tuple[bool, str]:
+    """(True, "") if geo_sub_geonames_id belongs to iso_code's own country's candidate pool and hasn't already been claimed by another orphan; otherwise (False, <error message>)."""
 
     iso_sub = _get_iso_subs().get(iso_code)
     if iso_sub is None:
         return False, "ERROR: Invalid candidate: ISO subdivision not found"
 
-    candidate = get_geonames_submap().get(geo_sub_hashid)
+    candidate = get_geonames_submap().get(geonames_id=geo_sub_geonames_id)
     if candidate is None:
         return False, "ERROR: Invalid candidate: not found"
 
@@ -153,32 +211,50 @@ def is_valid_candidate(iso_code: str, geo_sub_hashid: int) -> tuple[bool, str]:
     return True, ""
 
 
-def get_next_orphan() -> dict:
-    orphans = read_orphaned()
-    if not orphans:
+def get_next_orphan() -> dict | None:
+    resolution_map = _resolution_map()
+    orphans = resolution_map.automerge.orphans
+    ambiguity_codes = [orphan.iso_code for orphan in orphans.ambiguity]
+    low_margin_codes = [orphan.iso_code for orphan in orphans.low_margin]
+    conflict_codes = [orphan.iso_code for orphan in orphans.wikidata_conflict]
+    twin_codes = [orphan.iso_code for orphan in orphans.grouping_twin]
+    iso_code = next(
+        iter(orphans.no_candidates + orphans.no_matches + ambiguity_codes + low_margin_codes + conflict_codes + twin_codes),
+        None,
+    )
+    if iso_code is None:
         return None
 
-    iso_code, entry = next(iter(orphans.items()))
-    return {"iso_code": iso_code, **entry}
-
-
-def write_orphan_for_review(orphan: dict) -> None:
-    """Writes the given orphan to the review output."""
-    with open(REVIEW_OUTPUT_PATH, "w", encoding="utf-8") as f:
-        json.dump(orphan, f, indent=2, ensure_ascii=False)
-
-
-def log_decision(line: str) -> None:
-    with open(RESOLUTION_LOG_PATH, "a", encoding="utf-8") as f:
-        f.write(line + "\n")
+    iso_sub = _get_iso_subs()[iso_code]
+    orphan = {
+        "iso_code": iso_code,
+        "name": iso_sub.name,
+        "aliases": iso_sub.aliases,
+        "country": iso_sub.country.name,
+        "type": iso_sub.type,
+        "admin_level": iso_sub.admin_level,
+    }
+    if iso_code in conflict_codes:
+        decision = resolution_map.skill_decisions[iso_code]
+        orphan["current_decision"] = {
+            "geonames_id": decision.id if decision.id is not None else "add as-is (no GeoNames counterpart)",
+            "reason": decision.reason,
+        }
+    return orphan
 
 
 def pop_orphan(iso_code: str) -> None:
-    """Removes an orphan from orphaned_subdivisions.json by iso_code"""
-    orphaned = read_orphaned()
-    if iso_code not in orphaned:
-        raise ValueError(f"{iso_code} is not in orphaned_subdivisions.json")
-    del orphaned[iso_code]
-    ORPHANED_PATH.write_text(
-        json.dumps(orphaned, indent=2, ensure_ascii=False), encoding="utf-8"
-    )
+    """Removes an orphan from resolution_map's automerge.orphans by iso_code."""
+    orphans = _resolution_map().automerge.orphans
+    for bucket in (orphans.no_candidates, orphans.no_matches):
+        if iso_code in bucket:
+            bucket.remove(iso_code)
+            _resolution_map().save(RESOLUTION_MAP_PATH)
+            return
+    for flagged_bucket in (orphans.ambiguity, orphans.low_margin, orphans.wikidata_conflict, orphans.grouping_twin):
+        for orphan in flagged_bucket:
+            if orphan.iso_code == iso_code:
+                flagged_bucket.remove(orphan)
+                _resolution_map().save(RESOLUTION_MAP_PATH)
+                return
+    raise ValueError(f"{iso_code} is not in resolution_map's orphans")

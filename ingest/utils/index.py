@@ -1,19 +1,20 @@
 import csv
 from pathlib import Path
 from collections import defaultdict
-from .model import Model
+from typing import Sequence
+from ingest.shared.models import Model
 from array import array
 import gzip
 
 
-def dump_data(data: list[Model], file_path: Path) -> None:
+def dump_data(data: Sequence[Model], file_path: Path) -> None:
     with open(file_path, "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f, delimiter="\t", lineterminator="\n")
         for item in data:
             writer.writerow(item.to_row())
 
 
-def dump_lookup_index(data: list[Model], datadir_path: Path) -> None:
+def dump_lookup_index(data: Sequence[Model], datadir_path: Path) -> None:
     str_path = datadir_path / "lookup_index_str.tsv"
     int_path = datadir_path / "lookup_index_int.tsv"
 
@@ -40,7 +41,7 @@ def dump_lookup_index(data: list[Model], datadir_path: Path) -> None:
         writer.writerows(int_pairs)
 
 
-def dump_filter_index(data: list[Model], datadir_path: Path) -> None:
+def dump_filter_index(data: Sequence[Model], datadir_path: Path) -> None:
     path = datadir_path / "filter_index.tsv"
     with open(path, "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f, delimiter="\t", lineterminator="\n")
@@ -49,11 +50,12 @@ def dump_filter_index(data: list[Model], datadir_path: Path) -> None:
         for item in data:
             row = []
             for _, values in item.extract_filter_values().items():
-                row.append("|".join([str(v) for v in values if v]))
+                # skip only missing values: a plain truthiness check would drop a real 0, such as admin_level=0
+                row.append("|".join([str(v) for v in values if v is not None and v != ""]))
             writer.writerow(row)
 
 
-def dump_search_index(data: list[Model], datadir_path: Path) -> None:
+def dump_search_index(data: Sequence[Model], datadir_path: Path) -> None:
     blob_path = datadir_path / "search_index.bin.gz"
     offsets_path = datadir_path / "search_index_offsets.tsv"
     search_fields_path = datadir_path / "search_fields.tsv"
@@ -78,7 +80,10 @@ def dump_search_index(data: list[Model], datadir_path: Path) -> None:
         offset += len(ids)
 
     # Write the compressed blob to disk
-    blob_path.write_bytes(gzip.compress(buf, compresslevel=6))
+    # mtime=0: gzip otherwise embeds the current time, so identical data would produce different bytes on every dump. The OS header byte (index 9) also varies by Python version (3.11 writes the host OS, later versions 255), so it's pinned to 255 ("unknown")
+    blob = bytearray(gzip.compress(buf, compresslevel=6, mtime=0))
+    blob[9] = 255
+    blob_path.write_bytes(blob)
 
     # Write the offsets to TSV
     with open(offsets_path, "w", newline="", encoding="utf-8") as f:

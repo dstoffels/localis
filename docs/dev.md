@@ -2,47 +2,47 @@
 
 ## resolve-subdivisions (Claude Skill)
 
-`ingest_subdivisions()` builds its subdivision set from GeoNames (`admin1CodesASCII.txt`, `admin2Codes.txt`) and merges in ISO 3166-2 as the source of truth, using fuzzy matching (`ingest/subdivisions/scripts/merge_subdivisions.py`) to pair each ISO subdivision with its GeoNames counterpart. Fuzzy matching alone can't confidently resolve every pair, GeoNames and ISO frequently disagree on transliteration, use different eras' names for the same region, or one side uses a colloquial/local form the other doesn't. Others may not have a Geonames counterpart and are added as new entries. 
+`ingest_subdivisions()` builds its subdivision set from GeoNames (`admin1CodesASCII.txt`, `admin2Codes.txt`) and merges in ISO 3166-2 as the source of truth, using fuzzy matching (`ingest/subdivisions/scripts/automerge/`) to pair each ISO subdivision with its GeoNames counterpart. Fuzzy matching alone can't confidently resolve every pair, GeoNames and ISO frequently disagree on transliteration, use different eras' names for the same region, or one side uses a colloquial/local form the other doesn't. Others may not have a Geonames counterpart and are added as new entries. 
 
 Whatever's left unmatched after fuzzy merging is an "orphan". Forcing a low-confidence match would silently corrupt the dataset, so orphans are instead handed off for resolution with real-world geographic knowledge using the resolve-subdivisions skill, which is almost entirely automated.
 
 ### Pipeline integration
 
-`resolve_unmerged_subs()` (`ingest/subdivisions/scripts/resolve_subdivisions.py`) is the seam between fuzzy matching and manual resolution:
+`ingest/subdivisions/outputs/resolution_map.json` is the single source of truth for every ISO subdivision's resolution, not just the ones that needed human help. It's loaded once into a `ResolutionMap` (`ingest/subdivisions/utils/resolution_map.py`) at the start of `ingest_subdivisions()` and threaded through every stage:
 
-1. It first re-applies any previously recorded decisions from `resolution_map.json` (see below) to the unmerged list, this is what makes resolutions durable across ingest runs.
-2. Otherwise, remaining orphans are dumped to `orphaned_subdivisions.json` keyed by ISO code via `dump_orphans()`, and the pipeline runs to completion regardless, including cities. It used to hard-stop with `sys.exit(10)` the moment an orphan was found, but that made a run all-or-nothing: a single unresolved orphan meant nothing else from that run, including subdivisions that resolved cleanly, ever landed. Now any remaining orphans are just a known, tracked gap, and everything else still merges. CI treats orphan state as a fact to check after the run, reading `orphaned_subdivisions.json` directly (`ingest/subdivisions/scripts/check_orphans.py`, exposed as `poetry run check-orphans`), rather than relying on an exit code.
+1. `apply_skill_decisions()` (`ingest/subdivisions/scripts/resolve_subdivisions.py`) applies every entry in `resolution_map.skill_decisions` directly, before fuzzy matching ever runs, so a human-verified decision can never lose its target to a fresh auto-merge.
+2. `try_merge()` (`ingest/subdivisions/scripts/automerge/try_merge.py`) auto-merges whatever's left and writes the result straight into `resolution_map.automerge`: a successful match (with its score margin over threshold) into `resolutions`, an unmatched one into `orphans.no_candidates`/`no_matches`/`ambiguity` depending on why, and a winning match less than `MARGIN_FLOOR` (5) points over its threshold into `orphans.low_margin` with its candidate, for the skill to confirm or reject. ISO subdivisions of a country with no GeoNames subdivisions at all are added as-is and listed in `geonames_absent` instead of orphaned, since there is nothing for the skill to decide. This recomputes fully on every run, so an algorithm improvement reaches every automerge result without any manual cache-invalidation step to forget.
+3. `resolution_map.save()` persists the whole file immediately after merging, regardless of whether orphans remain, so the skill always has the current state to work from. Then a hard gate: if any orphans remain in any of the six buckets (the four from `try_merge()`; `wikidata_conflict`, from `flag_wikidata_conflicts()`, which re-sends any skill decision that disagrees with a valid Wikidata mapping it didn't record in `wikidata_seen`; and `grouping_twin`, from `flag_grouping_twin_merges()`, which re-sends an automerge result that went into a non-administrative grouping's GeoNames twin because `apply_non_administrative()` couldn't identify the twin before automerge ran), `ingest_subdivisions()` logs the exact counts and calls `sys.exit(10)` before `dump()` or the handoff to `ingest_cities()` ever runs, refusing to ship an incomplete dataset. The gate runs only after merging, on freshly recomputed orphans, never at the start of a run: a rerun is how a pipeline fix reaches orphans left by an earlier run, and skill decisions already made persist in `skill_decisions` across reruns. A clean run (no orphans) proceeds to dump subdivisions, regenerate `docs/unmerged_subdivisions.md`, and hand its geocode map to cities ingestion.
 
 ### Resolving Orphans
 
-The skill (`.claude/skills/resolve-subdivisions/SKILL.md`) is a Claude Code skill backed by a local MCP server (`.claude/skills/resolve-subdivisions/scripts/server.py`, can be launched manually via `poetry run python ...`). It drains `orphaned_subdivisions.json` one entry at a time.
+The skill (`.claude/skills/resolve-subdivisions/SKILL.md`) is a Claude Code skill backed by a local MCP server (`.claude/skills/resolve-subdivisions/scripts/server.py`, can be launched manually via `poetry run python ...`). It drains `resolution_map.json`'s `automerge.orphans` lists one entry at a time.
+
+Run the skill with Opus 5.5 or a stronger model. Earlier runs with Sonnet 5 produced enough wrong merges and unjustified adds to leave dirty data and duplicate records, while an audit of 107 Opus 5.5 decisions found none.
 
 **Tools**
 
-- **`next()`**: Returns the next orphan from `orphaned_subdivisions.json` and a batch of its GeoNames candidates of the same country, ranked by fuzzy score (`rapidfuzz` against every name/alias combo). Geonames candidates are paginated into batches. The first batch is a "top tier" slice (~10% of the pool, ~75% of matches are found in this batch), subsequent batches are fixed 200-candidate chunks, this keeps a country with thousands of subdivisions from blowing out the tool result payload. Repeated `next()` calls page through the same orphan until its candidates run out. Each session has a 1000-candidate soft cap, forcing a session `/clear` to keep agent context from drifting over a long run.
-- **`merge(candidate_hashid, aliases=[])`**: Resolves the current orphan into a selected GeoNames candidate by hashid. 
-- **`add(aliases=[])`**: Adds the orphan as its own new entry, for subdivisions that are real but have no GeoNames counterpart to merge into.
-- **`review()`**: An escalation valve for unresolvable cases. `review` dumps the orphan and its full candidate list to `review_output.json` for a human to inspect and decide manually. The orphan must be resolved with `merge` or `add` before the session can continue.
+- **`next()`**: Returns the next orphan and a batch of candidates drawn from every GeoNames subdivision in its country, regardless of level, since ISO and GeoNames can file the same place at different levels. Candidates are ranked by the same `score_candidates()`/type-family-filtered scoring auto-merge uses, with same-level candidates first on ties, and paginated: a "top tier" first batch (~10% of the pool, ~75% of matches are found here), then fixed 200-candidate chunks. Records already claimed by another ISO code are included but marked `CLAIMED BY <iso_code>`, so a wrong earlier claim is visible; `merge` rejects them. Records the type-family rule would disqualify are included too (`score_candidates(..., include_type_disqualified=True)`), marked as a type mismatch, since that rule misfires on cases like city-states. `ambiguity` and `low_margin` orphans get the specific GeoNames records `try_merge` flagged as their first batch (contested targets, or the near-threshold pick), and fall through to the full pool, those records excluded, only if the agent rejects them. Candidates come back as a list ordered best first, not an ID-keyed dict, since serialization sorts dict keys and loses the ranking. Repeated `next()` calls page through the same orphan until its candidates run out. Each session has a context budget of about 150k estimated tokens (`TOKEN_BUDGET` in `server.py`): the server counts its own output and adds fixed allowances per orphan and per web search, since it can't see the agent's reasoning or search results. Once the budget is reached, the next `next()` call between orphans asks the user to `/clear`. The budget exists mainly for cost, since every call resends the whole context.
+- **`merge(candidate_geonames_id)`**: Resolves the current orphan into a selected, unclaimed GeoNames candidate by its `geonames_id`.
+- **`add(reason)`**: Adds the orphan as its own new entry, for subdivisions that are real but have no GeoNames counterpart. `reason` must say concretely why GeoNames lacks the place.
+- **`review(reason)`**: An escalation valve for unresolvable cases. The agent reports its findings to the user in the session and asks for the decision, then the reason, with `AskUserQuestion`, and the server holds `reason` until the user's decision comes back through `merge` or `add`, which stores it as the decision's `escalation`. The candidate list isn't persisted, since it can be regenerated from the data. The orphan must be resolved with `merge` or `add` before the session can continue.
 
-Both `merge` and `add` write to `resolution_map.json`, remove the orphan from `orphaned_subdivisions.json`, and append a one-line audit entry to `resolution_log.txt`.
+Both `merge` and `add` write a `SkillDecision` into `resolution_map.skill_decisions` (`id`, `reason`, `decided_by`, which is `"human"` when the orphan was escalated with `review` first and `"agent"` otherwise, and `escalation`, the agent's findings for a human decision) and remove the orphan from whichever `automerge.orphans` bucket it was in. Both require a `reason`: for `merge`, one sentence on why the candidate is the same place.
 
-**Decision funnel** (`SKILL.md` Steps 1–5): try a high-confidence `merge` against the current candidate batch → if none fit, page to the next batch and repeat → if no candidate ever fits but the orphan is a real, confirmed entity, `add` it → if still uncertain, websearch the orphan → if that still doesn't resolve it, `review()` and defer to human intervention.
+**Decision funnel** (`SKILL.md` Steps 1–4): try a high-confidence `merge` against the current candidate batch → if none fit, page to the next batch and repeat → once `next()` returns no candidates at all, websearch the orphan first, always, before deciding anything (merge if the search reveals a confident match, `add` if it confirms the orphan is real but has no GeoNames counterpart) → if the search still doesn't resolve it, `review()` and defer to human intervention. The old path that allowed a self-certified `add` without searching first was removed after it produced reckless, unverified adds; websearch is now mandatory, not a last resort.
 
 ### State files
 
-All under `ingest/subdivisions/raw/` (gitignored except these, per `.gitignore`'s whitelist):
+Under `ingest/subdivisions/outputs/`:
 
 | File | Written by | Purpose |
 |---|---|---|
-| `orphaned_subdivisions.json` | `resolve_subdivisions.py` (produced), skill / `pop_orphan()` (drained) | Queue of unresolved ISO subdivisions, keyed by ISO code |
-| `resolution_map.json` | skill's `merge`/`add` | Durable decision cache, keyed by ISO code; re-applied automatically on every ingest run |
-| `resolution_log.txt` | `log_decision()` | Append-only, human-readable audit trail of every merge/add decision |
-| `review_output.json` | skill's `review()` | One-off dump of an escalated orphan + full candidate list for manual human review |
+| `resolution_map.json` | every pipeline run (`automerge`, `bypassed`), skill's `merge`/`add` (`skill_decisions`) | Single source of truth for every ISO subdivision's resolution: auto-merged, skill-resolved, non-administrative bypass, or orphaned, by reason |
 
 
 ## Data Sourcing
 
-Countries pull ISO 3166-1 codes and names from Debian's iso-codes project, country metadata from GeoNames' `countryInfo.txt`, and additional aliases from a committed Wikidata snapshot (`wiki_countries.json`) that isn't part of the automated fetch. Subdivisions pull ISO 3166-2 codes and names from the same iso-codes project (`iso_3166-2.json`) and admin boundaries from GeoNames' `admin1CodesASCII.txt` and `admin2Codes.txt`; Ipregistry's `iso3166` repository is used only to enrich aliases with its `localVariant` field, iso-codes' own subdivision data has none, the same supplementary role Wikidata plays for countries. Ipregistry's own upstream sourcing is opaque (its data-generation pipeline lives in a private repo), which is exactly why it's kept out of the authoritative path. Cities pull from GeoNames' `cities500.txt`, GeoNames' own pre-filtered export (population ≥ 500, or a seat of an administrative division regardless of population), so `ingest/cities/scripts/load_cities.py` no longer applies its own feature-code or population filtering on top, GeoNames already made that call, and re-filtering on population would wrongly drop the low/no-population admin seats `cities500` specifically includes on purpose.
+Countries pull ISO 3166-1 codes and names from Debian's iso-codes project, country metadata from GeoNames' `countryInfo.txt`, and additional aliases from a committed Wikidata snapshot (`wiki_countries.json`) that isn't part of the automated fetch. Subdivisions pull ISO 3166-2 codes and names from the same iso-codes project (`iso_3166-2.json`) and admin boundaries from GeoNames' `admin1CodesASCII.txt` and `admin2Codes.txt`, with aliases from GeoNames' alternate names. Cities pull from GeoNames' `cities500.txt`, GeoNames' own pre-filtered export (population ≥ 500, or a seat of an administrative division regardless of population), so `ingest/cities/scripts/load_cities.py` no longer applies its own feature-code or population filtering on top, GeoNames already made that call, and re-filtering on population would wrongly drop the low/no-population admin seats `cities500` specifically includes on purpose.
 
 Fetching is checksum-aware: nothing gets downloaded unless its remote source has actually changed since the last successful fetch. A domain only ever re-fetches all of its sources together, never a subset, since merging needs the complete raw set on disk rather than whatever piece happened to change. That same check gates the rest of the pipeline too, skipping parsing and merging entirely for a domain with nothing new.
 
@@ -50,17 +50,29 @@ Fetching is checksum-aware: nothing gets downloaded unless its remote source has
 
 The monthly refresh described above is implemented in `.github/workflows/ingest.yaml`, which runs end-to-end against a long-lived `ingest` branch, on a monthly cron (`0 6 1 * *`) and on every push to `ingest`.
 
-Each run merges the latest `main` into `ingest`, runs `poetry run ingest`, and stages whatever changed. If `src/localis/data` (the published dataset) changed, it bumps the **patch** version with `poetry version patch` before committing. A data refresh doesn't touch the public API, so minor is reserved for genuine backward-compatible additions; conflating the two would mean a consumer reading `1.4.0 → 1.5.0` couldn't tell "just fresher data" from "there's a new method worth checking out." Freshness is still visible, just through the CHANGELOG's per-release counts rather than the version number itself. Bookkeeping files (the per-domain `*.manifest.json`, `resolution_map.json`, `orphaned_subdivisions.json`) can change independently of the dataset output and still get committed on a run where the dataset itself didn't move. Everything staged is committed and pushed back to `ingest`.
+Each run merges the latest `dev` into `ingest`, then runs `poetry run ingest`. If any subdivision orphans remain, `ingest_subdivisions()`'s hard gate (see Pipeline integration above) saves `resolution_map.json` and calls `sys.exit(10)` before dumping anything. The workflow then commits only the orphan queue and the logs to `ingest` ("chore: ingest found N orphans awaiting resolution"), pushes, and fails the job, so the exact orphans the run found are on record in the branch rather than lost with the runner. The source manifests stay unchanged in that case anyway: a stage writes its manifest only after it dumps (see Source manifests below), so a run stopped by orphans leaves its sources marked unconsumed and the next run reprocesses them. Nothing downstream (stats, version bump, dataset commit, PR) runs. The push uses the workflow's own token, so it doesn't re-trigger the workflow.
 
-CI then runs `poetry run check-orphans` against whatever `orphaned_subdivisions.json` looks like after this run, and maintains a single, persistent `ingest` → `main` pull request: created as a draft on first use, and on every later run commented with that run's actual diff (`git diff --stat HEAD~1 HEAD -- src/localis/data`), so the PR reads as a log of real changes rather than a bare pointer at commit history. If orphans remain, it comments the `check-orphans` summary and fails the job, visible in the Actions tab. If none remain, it calls `gh pr ready` unconditionally, so a run that clears the last orphan without any other upstream change still surfaces as mergeable.
+Resolving orphans is a local procedure:
 
-The failing check is advisory, not what actually blocks the merge. What blocks it is the PR staying in **draft**: GitHub disables the merge button on a draft regardless of any check's state, and this repo's branch protection on `main` only restricts direct pushes, it doesn't require this workflow's check to pass. The maintainer's real signal is draft vs. ready; the failed job and comment exist purely for visibility. Resolving orphans is still a local step: pull `ingest`, run the resolve-subdivisions skill, commit, and push back to `origin/ingest`, which re-triggers this workflow through its push trigger.
+1. Pull `ingest`.
+2. `poetry run ingest --force`. The source files aren't tracked, so this downloads them fresh regardless of the manifests, reproduces the orphan queue, and stops with exit 10. Compare its orphans with the committed queue; a difference means a source (usually Wikidata) changed in between.
+3. Run the resolve-subdivisions skill until no orphans remain.
+4. `poetry run ingest`, which now runs clean and dumps the dataset (the skill's new decisions change the map's decisions fingerprint, so this rebuilds subdivisions without `--force`), then `poetry run analysis --data-only`.
+5. Commit and push to `ingest`, which re-triggers this workflow through its push trigger.
+
+A clean run then regenerates `tests/analysis/data_stats.json` and fills the docs' stat markers from it (see Performance Profile), so the record counts and resolution breakdown in the README and `methodology.md` always describe the data being committed; the test suite's `render_docs.py --check` fails a run whose docs don't. Locally, `poetry run analysis --data-only` does the same after an ingest. Timing and memory figures aren't regenerated in CI, since they depend on the host: after a change that could move them, run the whole suite with `poetry run analysis --notes "what changed"`, which runs the data stats, footprint and benchmarks and then fills the markers. `poetry run analysis --check` only checks that the docs' deterministic markers are current.
+
+#### Source manifests
+
+Each domain's `ingest/<domain>/inputs/*.manifest.json` records the ETag of every source file its shipped data was built from. A stage re-fetches a source only when its ETag differs, and rebuilds when any of its sources, or an upstream dataset passed in from an earlier stage, changed: subdivision rows store country ids and city rows store country ids and the full subdivision chain, so a rebuilt countries forces both to rebuild. A download only stages its new ETag; the stage writes its manifest after its `dump()` succeeds, so the manifest always describes what was actually shipped and a failed or orphan-blocked run never marks its sources consumed. The subdivisions manifest also holds a `resolution_map` entry, a hash of `NON_ADMINISTRATIVE_TYPES` and `skill_decisions`, so editing a bypass rule or a skill decision rebuilds subdivisions like a changed source would. Pipeline code changes are not tracked: after changing ingest logic, run `poetry run ingest --force`. CI is unaffected, since the source files aren't tracked and a fresh runner fetches and rebuilds everything.
+
+It stages whatever changed. If `src/localis/data` (the published dataset) changed, it bumps the **patch** version with `poetry version patch` before committing. A data refresh doesn't touch the public API, so minor is reserved for genuine backward-compatible additions; conflating the two would mean a consumer reading `1.4.0 → 1.5.0` couldn't tell "just fresher data" from "there's a new method worth checking out." Freshness is still visible, just through the CHANGELOG's per-release counts rather than the version number itself. Bookkeeping files (the per-domain `*.manifest.json`, `resolution_map.json`) can change independently of the dataset output and still get committed on a run where the dataset itself didn't move. Everything staged is committed and pushed back to `ingest`, then a single, persistent `ingest` → `main` pull request is created (ready for review, not draft, since reaching this point already guarantees a clean, orphan-free run) or, if it already exists, commented with that run's actual diff (`git diff --stat HEAD~1 HEAD -- src/localis/data`), so the PR reads as a log of real changes rather than a bare pointer at commit history.
 
 One bug this surfaced and fixed in passing: `release.yaml`'s checkout step never fetched tags, so its `git tag | sort --version-sort | tail -n1` always came back empty. The workflow believed no version had ever shipped and re-attempted publishing whatever version was already in `pyproject.toml`, which is what actually broke the most recent release (PyPI rejects re-uploading an already-used filename), not a PyPI API change as it first appeared. Fixed with `fetch-tags: true` on that checkout step, which matters here specifically because a merged `ingest` PR is exactly the kind of push to `main` that would retrigger this failure mode.
 
 ## Performance Profile
 
-Snapshot taken after the cities500 switch and the entities/views/stores refactor (254 countries, 51,684 subdivisions, 235,895 cities). These numbers move as the dataset grows through the ingest pipeline; re-measure before relying on them for a release decision. Memory figures are RSS deltas measured by calling `force_cache()` on each registry in turn from a fresh interpreter.
+Every figure in this section and in the README's Performance section is generated, never transcribed by hand. `tests/analysis/data_stats.py` produces the deterministic numbers (record counts, the subdivision resolution breakdown, shipped file sizes) into `data_stats.json`, and asserts that they reconcile. `tests/analysis/footprint.py` measures load time and retained memory per registry component, each scenario in fresh subprocesses with the median kept, and `tests/analysis/benchmarks.py` measures per-call latency percentiles and search accuracy; both append to a history (`footprint.json`, `benchmarks.json`) with a fingerprint of the host they ran on. `tests/analysis/render_docs.py` fills each `stat:source.key:format` HTML-comment marker in the docs from those files, and `render_docs.py --check`, run by the test suite, fails if a deterministic marker is stale. Current figures were measured on <!-- stat:footprint.host.cpu:raw -->11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz<!-- /stat --> with Python <!-- stat:footprint.host.python:raw -->3.14.4<!-- /stat -->. Memory figures are retained RSS deltas (`VmRSS` read from `/proc/self/status` after an explicit `gc.collect()`), not `ru_maxrss` peak; see Memory measurement methodology below for why that distinction matters.
 
 ### Search and filter index architecture
 
@@ -74,35 +86,46 @@ The filter index's fix didn't need a format change, just the container: `FilterI
 
 `SubdivisionModel.hashid` is an MD5-derived id used only during ingestion (merging ISO and GeoNames records, and supporting the resolve-subdivisions skill). It used to be computed in `__post_init__`, which runs on every construction, including the normal runtime `_cache` load, where nothing ever reads `hashid`, it's discarded once a subdivision has been merged. `set_hashid()` is now an explicit method, called only at the two ingestion sites that actually need it (`ingest/subdivisions/scripts/geonames_subdivisions.py`, `ingest/subdivisions/scripts/iso_subdivisions.py`); `SubdivisionModel.from_row()`, the runtime path, never calls it. Subdivisions' dataset load dropped from 289.5ms to 98.7ms (−66%) as a result.
 
+### Memory measurement methodology
+
+Earlier benchmarks in this document used `resource.getrusage(resource.RUSAGE_SELF).ru_maxrss`, the process's historical peak resident memory, which only ever increases and never reflects memory freed later in the same process. That overstates any component whose loading path allocates a large transient buffer it doesn't keep: `SearchIndex.load()` decompresses its entire gzip blob into one big `array("I")` before slicing per-trigram arrays out of it (a copy, not a view), so the decompression peak gets permanently recorded by `ru_maxrss` even after that buffer is freed and unmapped moments later. Re-measuring with actual post-GC retained memory (`VmRSS` after `gc.collect()`) showed cities' search index really retains about a third of its previously documented figure (33.5MB vs. 96.8MB), while cache and filter index numbers, which don't have this transient-buffer pattern, held up closely under both methodologies. All numbers below use the retained methodology.
+
 ### Shipped data size
 
-`src/localis/data/` is 54MB total (down from 98MB after the cities500 switch), almost entirely cities:
+`src/localis/data/` is <!-- stat:data.shipped_size.total:size -->57.0MB<!-- /stat --> total, almost entirely cities:
 
 | Domain | Size | Share |
 |---|---|---|
-| Countries | 84KB | 0.15% |
-| Subdivisions | 8.0MB | 14.8% |
-| Cities | 46MB | 85.1% |
+| Countries | <!-- stat:data.shipped_size.countries.total:size -->73KB<!-- /stat --> | <!-- stat:data.shipped_size.countries.share_pct:pct -->0.1%<!-- /stat --> |
+| Subdivisions | <!-- stat:data.shipped_size.subdivisions.total:size -->10.6MB<!-- /stat --> | <!-- stat:data.shipped_size.subdivisions.share_pct:pct -->18.5%<!-- /stat --> |
+| Cities | <!-- stat:data.shipped_size.cities.total:size -->46.4MB<!-- /stat --> | <!-- stat:data.shipped_size.cities.share_pct:pct -->81.4%<!-- /stat --> |
 
-Within cities: `cities.tsv` 13MB, `filter_index.tsv` 18MB, `search_index.bin.gz` 13MB, `search_index_offsets.tsv` 236KB, `lookup_index_int.tsv` 3.3MB.
+Within cities: `cities.tsv` <!-- stat:data.shipped_size.cities.files.cities.tsv:size -->12.6MB<!-- /stat -->, `filter_index.tsv` <!-- stat:data.shipped_size.cities.files.filter_index.tsv:size -->17.5MB<!-- /stat -->, `search_index.bin.gz` <!-- stat:data.shipped_size.cities.files.search_index.bin.gz:size -->12.8MB<!-- /stat -->, `search_index_offsets.tsv` <!-- stat:data.shipped_size.cities.files.search_index_offsets.tsv:size -->234KB<!-- /stat -->, `lookup_index_int.tsv` <!-- stat:data.shipped_size.cities.files.lookup_index_int.tsv:size -->3.2MB<!-- /stat -->.
 
 ### Memory footprint
 
-| Registry (`force_cache()`) | RSS delta |
+| Registry (`force_cache()`) | Retained memory |
 |---|---|
-| import baseline | 42MB |
-| countries | +1MB |
-| subdivisions | +38MB |
-| cities | +213MB |
-| **total, all three fully cached** | **279MB** |
+| countries | <!-- stat:footprint.registries.countries.combined.memory_bytes:size -->1.2MB<!-- /stat --> |
+| subdivisions | <!-- stat:footprint.registries.subdivisions.combined.memory_bytes:size -->61.0MB<!-- /stat --> |
+| cities | <!-- stat:footprint.registries.cities.combined.memory_bytes:size -->151.1MB<!-- /stat --> |
+| **total, all three fully cached** | **<!-- stat:footprint.full_cache.memory_bytes:size -->213.2MB<!-- /stat -->** |
 
-Cities' 213MB breaks down further by structure:
+Cities' <!-- stat:footprint.registries.cities.combined.memory_bytes:size -->151.1MB<!-- /stat --> breaks down further by structure:
 
-| Cities component | RSS delta | Build time |
+| Cities component | Retained memory | Build time |
 |---|---|---|
-| `_cache` (235,895 views) | 57MB | 0.35s |
-| `_lookup_index` | 1MB | 0.07s |
-| `_filter_index` | 58MB | 0.57s |
-| `_search_index` | 97MB | 0.16s |
+| `_cache` | <!-- stat:footprint.registries.cities.dataset.memory_bytes:size -->60.4MB<!-- /stat --> | <!-- stat:footprint.registries.cities.dataset.time_ms:load -->~450ms<!-- /stat --> |
+| `_lookup_index` | <!-- stat:footprint.registries.cities.lookup_index.memory_bytes:size -->4KB<!-- /stat --> | <!-- stat:footprint.registries.cities.lookup_index.time_ms:load -->~63ms<!-- /stat --> |
+| `_filter_index` | <!-- stat:footprint.registries.cities.filter_index.memory_bytes:size -->57.6MB<!-- /stat --> | <!-- stat:footprint.registries.cities.filter_index.time_ms:load -->~580ms<!-- /stat --> |
+| `_search_index` | <!-- stat:footprint.registries.cities.search_index.memory_bytes:size -->33.1MB<!-- /stat --> | <!-- stat:footprint.registries.cities.search_index.time_ms:load -->~178ms<!-- /stat --> |
 
-**Total load time** (all three registries, `_cache` plus every index) is ~1.3s.
+**Total load time** (all three registries, `_cache` plus every index) is <!-- stat:footprint.full_cache.time_ms:load -->~1.50s<!-- /stat -->.
+
+### Population floor
+
+`CityRegistry.set_population_threshold(n)` narrows the cache and all three indexes to cities with population >= n, implemented via two predicate protocols in `localis/utils/data.py`: `CacheFilterPredicate` (`row -> bool`, evaluated inline as `CityView.load()` parses each TSV row, since population is only known once that row is parsed) and `IndexFilterPredicate` (`(id, allowed_ids) -> bool`, the shared membership check `Registry._is_id_allowed()` implements for `FilterIndex`/`SearchIndex`/`LookupIndex`, none of which have population data of their own and can only ever ask "is this id still allowed"). `CityRegistry.build_cache()` derives `self._allowed_ids` as a byproduct of the `CityView.load()` pass it already has to do; `Registry._lookup_index`/`_filter_index`/`_search_index` force `self._cache` before building, guaranteeing `_allowed_ids` reflects the current threshold, since none of the three indexes have any real use without the cache regardless of population filtering.
+
+Ids stay stable across thresholds. `Store.id_to_idx` (an `array.array("i")` sized to the full unfiltered id space, `-1` for an excluded id) decouples a View's physical position in its Store from its public `id`, so `View._idx` resolves through this array instead of assuming `id - 1`. That lets `CityStore` skip allocating rows for excluded cities entirely, a real memory saving rather than just fewer View wrapper objects, without ever renumbering an id a caller might already be holding.
+
+At a <!-- stat:data.cities.threshold:int -->15,000<!-- /stat --> threshold (the tier geonamescache ships as a separate bundled dataset), cities drops from <!-- stat:data.cities.total:int -->235,914<!-- /stat --> to <!-- stat:data.cities.above_threshold:int -->34,171<!-- /stat --> and retained memory drops from <!-- stat:footprint.registries.cities.combined.memory_bytes:size -->151.1MB<!-- /stat --> to <!-- stat:footprint.cities_threshold.memory_bytes:size -->31.1MB<!-- /stat -->.

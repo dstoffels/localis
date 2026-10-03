@@ -8,34 +8,36 @@
 from .fetch_cities import fetch_cities_sources
 from .load_cities import load_cities
 from .dump_cities import dump
-from ingest.countries.scripts import load_countries
-from ingest.subdivisions.scripts import load_subdivisions
-from ingest.utils import log
-from ingest.subdivisions import SubdivisionModel
-from ingest.countries import CountryModel
-from ingest.cities import CityModel
+from ingest.shared.scripts import load_countries, load_subdivisions
+from ingest.utils import ingest_log, commit_manifest, CITIES_MANIFEST_PATH
+from ingest.shared.models import SubdivisionModel, CountryModel, CityModel
 
 
 def ingest_cities(
-    countries: dict[str, CountryModel] = None,
-    subdivisions: dict[str, SubdivisionModel] = None,
+    countries: dict[str, CountryModel] | None = None,
+    subdivisions: dict[str, SubdivisionModel] | None = None,
     force: bool = False,
 ) -> None:
-    log.set_stage("CITIES")
+    ingest_log.set_stage("CITIES")
 
-    has_update = fetch_cities_sources(force=force)
-    if not has_update:
-        log.writeline("No updates for cities.")
-        return None
+    try:
+        has_update = fetch_cities_sources(force=force)
+        # rows and indexes store country ids and the full subdivision chain, so countries or subdivisions rebuilt upstream (passed in) force a rebuild even when cities500 is unchanged
+        if not has_update and countries is None and subdivisions is None:
+            ingest_log.writeline("No updates for cities, subdivisions or countries.")
+            return None
 
-    if countries is None:
-        countries = load_countries()
-    if subdivisions is None:
-        subdivisions = load_subdivisions(countries)
+        if countries is None:
+            countries = load_countries()
+        if subdivisions is None:
+            subdivisions = load_subdivisions(countries)
 
-    cities: list[CityModel] = load_cities(subdivisions, countries)
-    dump(cities)
-    log.writeline(f"completed: {len(cities)} cities")
+        cities: list[CityModel] = load_cities(subdivisions, countries)
+        dump(cities)
+        commit_manifest(CITIES_MANIFEST_PATH)
+        ingest_log.writeline(f"completed: {len(cities)} cities")
+    finally:
+        ingest_log.dump()
 
 
 if __name__ == "__main__":

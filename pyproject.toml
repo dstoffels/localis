@@ -1,6 +1,6 @@
 [project]
 name = "localis"
-version = "1.1.2"
+version = "2.0.0"
 description = "Fast, offline access to comprehensive data for countries, subdivisions, and cities. Built on ISO 3166 and GeoNames datasets (updated monthly) with support for exact lookups, filtering, and fuzzy search."
 readme = "README.md"
 authors = [
@@ -9,12 +9,14 @@ authors = [
 license = "MIT"
 keywords = ["country", "subdivision", "city", "iso", "3166", "3166-1", "3166-2", "geonames"]
 classifiers = [
-    "Development Status :: 3 - Alpha",
+    "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
     "Topic :: Software Development :: Libraries :: Python Modules",
     "Topic :: Scientific/Engineering :: GIS",
 ]
@@ -27,12 +29,13 @@ dependencies = [
 [project.urls]
 homepage = "https://pypi.org/project/localis/"
 repository = "https://github.com/dstoffels/localis"
+funding = "https://github.com/sponsors/dstoffels"
 
 [project.scripts]
 test = "pytest:console_main"
 test-watch = "pytest_watch.command:main"
 ingest = "ingest.__main__:main"
-check-orphans = "ingest.subdivisions.scripts.check_orphans:main"
+analysis = "tests.analysis.__main__:main"
 
 [tool.poetry]
 packages = [
@@ -51,6 +54,7 @@ black = "^25.11.0"
 ruff = "^0.14.6"
 watchfiles = "^1.1.1"
 mcp = "^2.2.0"
+pyright = "^1.1.414"
 
 
 [build-system]

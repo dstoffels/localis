@@ -2,12 +2,12 @@ name: Release
 
 on:
   workflow_run:
-    workflows: ["Test"] 
+    workflows: ["Test"]
     types:
       - completed
     branches:
       - main
-    
+
 jobs:
   release:
     runs-on: ubuntu-latest
@@ -15,45 +15,39 @@ jobs:
       contents: write
       id-token: write
 
-    if: github.repository == 'dstoffels/localis' && github.event.workflow_run.conclusion == 'success'
+    if: >-
+      github.repository == 'dstoffels/localis' &&
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'push'
 
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-tags: true
+          ref: ${{ github.event.workflow_run.head_sha }}
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      
+
       - name: Install Poetry
         uses: snok/install-poetry@v1
 
       - name: Get project version
         id: get_version
-        run: |
-          VERSION=$(poetry version -s)
-          echo "VERSION=v$VERSION" >> $GITHUB_OUTPUT
+        run: echo "VERSION=v$(poetry version -s)" >> "$GITHUB_OUTPUT"
 
-      - name: Get latest tag
-        id: get_tag
-        run: |
-          LATEST_TAG=$(git tag | sort --version-sort | tail -n1)
-          echo "tag=$LATEST_TAG" >> "$GITHUB_OUTPUT"
-
-      - name: Compare versions
+      - name: Check if already released
         id: check_versions
         run: |
-          LATEST_TAG="${{ steps.get_tag.outputs.tag }}"
           VERSION="${{ steps.get_version.outputs.VERSION }}"
-
-          if [ "$LATEST_TAG" == "$VERSION" ]; then
-            echo "Version match. Workflow complete."
-            echo "SHOULD_RELEASE=false" >> $GITHUB_OUTPUT
+          if git rev-parse -q --verify "refs/tags/$VERSION" >/dev/null; then
+            echo "Tag $VERSION already exists. Nothing to release."
+            echo "SHOULD_RELEASE=false" >> "$GITHUB_OUTPUT"
           else
-            echo "New version incoming. Generating new release."
-            echo "SHOULD_RELEASE=true" >> $GITHUB_OUTPUT
+            echo "New version $VERSION. Generating new release."
+            echo "SHOULD_RELEASE=true" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Determine if pre-release (PEP 440).
@@ -68,25 +62,25 @@ jobs:
           else
             echo "IS_PRERELEASE=false" >> "$GITHUB_OUTPUT"
           fi
-          
+
       - name: Build
         if: steps.check_versions.outputs.SHOULD_RELEASE == 'true'
         run: poetry build
-        
+
       - name: Generate new release
         if: steps.check_versions.outputs.SHOULD_RELEASE == 'true'
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ steps.get_version.outputs.VERSION }}
           name: ${{ steps.get_version.outputs.VERSION }}
+          target_commitish: ${{ github.event.workflow_run.head_sha }}
           generate_release_notes: true
           draft: false
           prerelease: ${{ steps.check_prerelease.outputs.IS_PRERELEASE }}
-          files:
+          files: |
             dist/*.whl
             dist/*.tar.gz
 
-        
       - name: Publish to PyPI
         if: steps.check_versions.outputs.SHOULD_RELEASE == 'true'
         uses: pypa/gh-action-pypi-publish@release/v1

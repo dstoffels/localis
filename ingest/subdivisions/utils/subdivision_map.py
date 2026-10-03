@@ -1,4 +1,4 @@
-from ingest.subdivisions import SubdivisionModel
+from ingest.shared.models import SubdivisionModel
 
 
 class SubdivisionMap:
@@ -7,8 +7,10 @@ class SubdivisionMap:
         self._by_id: dict[int, SubdivisionModel] = {}
         self._by_geo_code: dict[str, SubdivisionModel] = {}
         self._by_iso_code: dict[str, SubdivisionModel] = {}
+        self._by_geonames_id: dict[int, SubdivisionModel] = {}
 
     def add(self, sub: SubdivisionModel) -> None:
+        assert sub.hashid is not None, "subdivision must have hashid set before being added to the map"
         country_map = self._subs.setdefault(sub.country.alpha2, {})
         level_map = country_map.setdefault(sub.admin_level, {})
         level_map[sub.hashid] = sub
@@ -17,20 +19,28 @@ class SubdivisionMap:
             self._by_iso_code[sub.iso_code] = sub
         if sub.geonames_code:
             self._by_geo_code[sub.geonames_code] = sub
+        if sub.geonames_id is not None:
+            self._by_geonames_id[sub.geonames_id] = sub
 
     def get(
-        self, id: int = None, geo_code: str = None, iso_code: str = None
-    ) -> SubdivisionModel:
+        self,
+        id: int | None = None,
+        geo_code: str | None = None,
+        iso_code: str | None = None,
+        geonames_id: int | None = None,
+    ) -> SubdivisionModel | None:
         if id is not None:
             return self._by_id.get(id)
         if geo_code is not None:
             return self._by_geo_code.get(geo_code)
         if iso_code is not None:
             return self._by_iso_code.get(iso_code)
+        if geonames_id is not None:
+            return self._by_geonames_id.get(geonames_id)
         return None
 
     def filter(
-        self, country_alpha2: str, admin_level: int = None
+        self, country_alpha2: str, admin_level: int | None = None
     ) -> list[SubdivisionModel]:
         """Filter subdivisions by country alpha2 code and optional admin level"""
         if admin_level is not None:
@@ -62,9 +72,16 @@ class SubdivisionMap:
         return all
 
     def refresh(self):
-        self._subs, self._by_geo_code, self._by_iso_code = {}, {}, {}
+        self._subs, self._by_geo_code, self._by_iso_code, self._by_geonames_id = (
+            {},
+            {},
+            {},
+            {},
+        )
         for sub in self._by_id.values():
-            sub.admin_level = 2 if sub.parent else 1
+            # a merged sub's admin_level is already ISO-authoritative; a pure GeoNames sub sits one below its parent, whose level is final either way (ISO-set if merged, 1 if not, since GeoNames never nests deeper)
+            if sub.iso_code is None:
+                sub.admin_level = sub.parent.admin_level + 1 if isinstance(sub.parent, SubdivisionModel) else 1
             self.add(sub)
 
         # parent may still be a raw iso_code string (see load_iso_subs) if it was
@@ -81,14 +98,3 @@ class SubdivisionMap:
     def to_geocode_map(self) -> dict[str, SubdivisionModel]:
         """Return a plain dict keyed by geonames_code, matching the shape load_subdivisions() reconstructs from disk."""
         return self._by_geo_code
-
-
-def get_geonames_candidates(
-    iso_sub: SubdivisionModel,
-    submap: SubdivisionMap,
-) -> list[SubdivisionModel]:
-    """Retrieve candidate GeoNames subdivisions for a given ISO subdivision and admin level."""
-    return sorted(
-        submap.filter(iso_sub.country.alpha2, iso_sub.admin_level),
-        key=lambda x: x.name,
-    )
