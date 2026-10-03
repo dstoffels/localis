@@ -3,6 +3,7 @@ import json
 import random
 import statistics
 import time
+import unicodedata
 import zlib
 from datetime import datetime
 from pathlib import Path
@@ -39,7 +40,8 @@ def _search_query(entry: Entity) -> str:
 
 def _latin(s: str) -> bool:
     """Whether every letter is Latin script, accented Latin included; mangle() inserts Latin letters, so it can't simulate a typo in any other script."""
-    return all(ord(ch) <= 0x24F or not ch.isalpha() for ch in s)
+    # by Unicode character name rather than code range, since Latin letters span several blocks (Vietnamese in Latin Extended Additional, Azerbaijani ə in IPA Extensions)
+    return all(not ch.isalpha() or unicodedata.name(ch, "").startswith("LATIN ") for ch in s)
 
 
 def _stable_seed(*parts: object) -> int:
