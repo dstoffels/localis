@@ -19,14 +19,13 @@ Blocked on the above, needs a dedicated design pass before implementation starts
 - Gettext-based name translation across `Country`/`Subdivision` (and `Currency`/`Language`/`Script` once they exist), including `language_code` support on `filter()`/`search()`.
 
 ## Backlog
-1. Filter index memory: 35.2MB of cities' 59.1MB filter index is posting arrays, and 217k of its 277k values hold a single id but each pays for a whole `array`, overallocated by `append`; store a lone id as an int and build multi-id arrays at exact size (subdivisions: 88k of 93k values single-id, 10.3MB of arrays). No re-ingest needed; measure with `footprint.py`.
-2. Thread safety across the package: lazy cache and index loading races on first access, and `SearchIndex.search()` stores the normalized query on the shared instance (`self.query`), so concurrent searches on one registry can read each other's query mid-scoring. Search state should live in locals passed to the helpers, plus locking around lazy loads. Documented as a known issue in the README for v2.
-3. Move dev commands (`ingest`, `analysis`, `test`, `test-watch`) out of `[project.scripts]`, which ships in the published package and installs them for every PyPI user even though they point at code the package doesn't include (`ingest/`, `tests/`, dev dependencies), so they crash. A task runner such as poethepoet (`[tool.poe.tasks]`) keeps them dev-only.
-4. City radius feature using lat/lng to return nearby cities within a specified distance?
-5. Implement custom exceptions (localis.exceptions module)?
-6. Implement autocomplete for registries and/or global interface.
-7. No ISO source maps countries to their language(s) (639 and 3166 don't cross-reference); evaluate Unicode CLDR's territory-language data for this.
-8. Search, remaining limits: a subdivision query without context can't pick among same-name records (dozens of Washington Counties), which caps subdivisions' top-result accuracy; benchmarking subdivision queries with their country as context would measure that case the way cities' admin1 context does. `unidecode` transliteration of non-Latin aliases (Korean, Arabic) doesn't consistently match the record's own Latin name. The short-name fallback is off for cities (their queries usually carry context); enabling it is `SHORT_NAMES = True` on `CityModel`, at about 430KB shipped. Indexing each name separately (true per-name Dice) is parked until a failure trace shows alias dilution.
+1. Thread safety across the package: lazy cache and index loading races on first access, and `SearchIndex.search()` stores the normalized query on the shared instance (`self.query`), so concurrent searches on one registry can read each other's query mid-scoring. Search state should live in locals passed to the helpers, plus locking around lazy loads. Documented as a known issue in the README for v2.
+2. Move dev commands (`ingest`, `analysis`, `test`, `test-watch`) out of `[project.scripts]`, which ships in the published package and installs them for every PyPI user even though they point at code the package doesn't include (`ingest/`, `tests/`, dev dependencies), so they crash. A task runner such as poethepoet (`[tool.poe.tasks]`) keeps them dev-only.
+3. City radius feature using lat/lng to return nearby cities within a specified distance?
+4. Implement custom exceptions (localis.exceptions module)?
+5. Implement autocomplete for registries and/or global interface.
+6. No ISO source maps countries to their language(s) (639 and 3166 don't cross-reference); evaluate Unicode CLDR's territory-language data for this.
+7. Search, remaining limits: a subdivision query without context can't pick among same-name records (dozens of Washington Counties), which caps subdivisions' top-result accuracy; benchmarking subdivision queries with their country as context would measure that case the way cities' admin1 context does. `unidecode` transliteration of non-Latin aliases (Korean, Arabic) doesn't consistently match the record's own Latin name. The short-name fallback is off for cities (their queries usually carry context); enabling it is `SHORT_NAMES = True` on `CityModel`, at about 430KB shipped. Indexing each name separately (true per-name Dice) is parked until a failure trace shows alias dilution.
 
 ## Localization (gettext-based name translation)
 
