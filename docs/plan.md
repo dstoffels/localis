@@ -19,7 +19,7 @@ Blocked on the above, needs a dedicated design pass before implementation starts
 - Gettext-based name translation across `Country`/`Subdivision` (and `Currency`/`Language`/`Script` once they exist), including `language_code` support on `filter()`/`search()`.
 
 ## Backlog
-1. Thread safety across the package: lazy cache and index loading races on first access, and `SearchIndex.search()` stores the normalized query on the shared instance (`self.query`), so concurrent searches on one registry can read each other's query mid-scoring. Search state should live in locals passed to the helpers, plus locking around lazy loads. Documented as a known issue in the README for v2.
+1. Batch throughput for large cleanups: registries are thread-safe, but on the standard (GIL) build threads don't parallelize search, which is mostly Python code. Options: process pools (each worker loads its own cache, about 105MB for cities; forking after `force_cache()` shares pages copy-on-write only until reference counting touches them), free-threaded Python (3.13t, 3.14t; rapidfuzz's free-threaded support to be checked), and a batch API such as `search_many(queries, workers=N)` hiding the choice. Measure throughput on both builds.
 2. Move dev commands (`ingest`, `analysis`, `test`, `test-watch`) out of `[project.scripts]`, which ships in the published package and installs them for every PyPI user even though they point at code the package doesn't include (`ingest/`, `tests/`, dev dependencies), so they crash. A task runner such as poethepoet (`[tool.poe.tasks]`) keeps them dev-only.
 3. City radius feature using lat/lng to return nearby cities within a specified distance?
 4. Implement custom exceptions (localis.exceptions module)?

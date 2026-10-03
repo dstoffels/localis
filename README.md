@@ -127,6 +127,8 @@ len(list(localis.countries))         # 281
 localis.countries.set_include_historic(False)
 ```
 
+The toggle applies to every thread using `localis.countries`, so set it before sharing the registry between threads (see Concurrency).
+
 `get()` and `lookup()` always resolve historic entries regardless of the toggle. ISO reused alpha2/alpha3/numeric codes across different withdrawn countries over time (e.g. `CS` was both Czechoslovakia and, decades later, Serbia and Montenegro), so `lookup()` only resolves a historic entry by its unique `alpha_4` withdrawal code, never by bare alpha2/alpha3/numeric:
 
 ### Country Object
@@ -314,7 +316,7 @@ localis.cities.population_threshold  # 15000
 localis.cities.set_population_threshold(None)
 ```
 
-`cities` is fully lazy-loaded, nothing is read from disk until first access. Call `set_population_threshold()` before that first access (before any `.get()`, `.lookup()`, `.filter()`, `.search()`, or `.force_cache()` call) so the registry only ever loads the narrowed dataset. Calling it after the cache or indexes are already built still works, but it invalidates them, so the next access rebuilds the caches from scratch at the new threshold.
+`cities` is fully lazy-loaded, nothing is read from disk until first access. Call `set_population_threshold()` before that first access (before any `.get()`, `.lookup()`, `.filter()`, `.search()`, or `.force_cache()` call) so the registry only ever loads the narrowed dataset. Calling it after the cache or indexes are already built still works, but it invalidates them, so the next access rebuilds the caches from scratch at the new threshold. The threshold applies to every thread using `localis.cities`, so set it before sharing the registry between threads (see Concurrency).
 
 **Returns:** `None`
 
@@ -507,7 +509,9 @@ Data in this project is kept current monthly from the following sources:
 [`docs/methodology.md`](docs/methodology.md) is a complete, falsifiable account of how each dataset is built: the rules that combine these sources, how the results were validated, and where they are known to be wrong. [`unmerged_subdivisions.md`](docs/unmerged_subdivisions.md) lists every ISO subdivision currently without a GeoNames counterpart, regenerated on every ingest run.
 
 ### Concurrency
-localis is not yet thread-safe. Lazy loading can race on first access, and `search()` keeps per-query state on the shared index, so concurrent searches on the same registry can interfere with each other even after `.force_cache()`. Until thread safety lands, call `.force_cache()` up front and serialize searches on a shared registry (or give each thread its own process).
+Registries are safe to share across threads. `get()`, `lookup()`, `filter()`, `search()` and iteration only read shared data, and the first access that loads a dataset or index does so under the registry's lock, so threads reaching a cold registry together load it once.
+
+Two settings change shared state for every thread: `cities.set_population_threshold()` and `countries.set_include_historic()`. Configure them before the registry is shared between threads, never while other threads are querying it.
 
 
 ### Data licensing

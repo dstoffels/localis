@@ -43,7 +43,9 @@ class ViewMap(Mapping[int, V]):
     def __contains__(self, id: object) -> bool:
         id_to_idx = self._store.id_to_idx
         # an id excluded by a load-time filter predicate has no row
-        return isinstance(id, int) and 0 < id <= len(id_to_idx) and id_to_idx[id - 1] != -1
+        return (
+            isinstance(id, int) and 0 < id <= len(id_to_idx) and id_to_idx[id - 1] != -1
+        )
 
     def __getitem__(self, id: int) -> V:
         if id not in self:
@@ -51,7 +53,9 @@ class ViewMap(Mapping[int, V]):
         return self._make(id)
 
     def __iter__(self) -> Iterator[int]:
-        return (id for id, idx in enumerate(self._store.id_to_idx, start=1) if idx != -1)
+        return (
+            id for id, idx in enumerate(self._store.id_to_idx, start=1) if idx != -1
+        )
 
     def __len__(self) -> int:
         return len(self._store)

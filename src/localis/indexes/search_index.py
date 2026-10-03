@@ -115,11 +115,11 @@ class SearchIndex(Index, Generic[T]):
         return index, counts
 
     def search(self, query: str, limit: int) -> list[tuple[View[T, Store], float]]:
-        self.query = search_text(query)
-        if not self.query:
+        query = search_text(query)
+        if not query:
             return []
 
-        tokens = self.query.split()
+        tokens = query.split()
         token_trigrams = [search_trigrams(token) for token in tokens]
         query_trigrams = set().union(*token_trigrams)
         weights = self._weights(query_trigrams)

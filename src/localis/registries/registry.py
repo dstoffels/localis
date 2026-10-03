@@ -1,4 +1,5 @@
 from functools import cached_property
+import threading
 from typing import Iterator, Generic, Mapping, TypeVar
 from pathlib import Path
 from abc import ABC
@@ -10,6 +11,22 @@ from localis.indexes import FilterIndex, SearchIndex, LookupIndex
 T = TypeVar("T", bound=Entity)
 
 
+class locked_cached_property(cached_property):
+    """A cached_property built under its registry's lock, so threads that reach a cold registry together build it once; reads of a built value take no lock."""
+
+    def __get__(self, instance, owner=None):
+        if instance is None:
+            return self
+        cache = instance.__dict__
+        if self.attrname in cache:
+            return cache[self.attrname]
+        with instance._lock:
+            # another thread may have built it while this one waited
+            if self.attrname not in cache:
+                cache[self.attrname] = self.func(instance)
+            return cache[self.attrname]
+
+
 class Registry(Generic[T], ABC):
     """Base API surface (get/lookup/iteration) backed by a lazily-cached View dict and its lookup index."""
 
@@ -17,6 +34,8 @@ class Registry(Generic[T], ABC):
 
     def __init__(self, **kwargs):
         self._allowed_ids: set[int] | None = None
+        # reentrant, since building an index first builds the cache it reads
+        self._lock = threading.RLock()
 
     @staticmethod
     def _is_id_allowed(id: int, allowed_ids: set[int]) -> bool:
@@ -42,7 +61,7 @@ class Registry(Generic[T], ABC):
     def count(self) -> int:
         return self.__len__()
 
-    @cached_property
+    @locked_cached_property
     def _cache(self) -> Mapping[int, View[T, Store]]:
         if not self._data_filepath.exists():
             raise FileNotFoundError(f"Data file not found: {self._data_filepath}")
@@ -54,7 +73,7 @@ class Registry(Generic[T], ABC):
         supply whatever cross-referenced caches its view class needs."""
         raise NotImplementedError
 
-    @cached_property
+    @locked_cached_property
     def _lookup_index(self) -> LookupIndex:
         _ = self._cache
         return LookupIndex(
@@ -67,11 +86,9 @@ class Registry(Generic[T], ABC):
     _CACHED_ATTRS: tuple[str, ...] = ("_cache", "_lookup_index")
 
     def invalidate_cache(self):
-        for attr in self._CACHED_ATTRS:
-            try:
-                delattr(self, attr)
-            except AttributeError:
-                pass
+        with self._lock:
+            for attr in self._CACHED_ATTRS:
+                self.__dict__.pop(attr, None)
 
     def force_cache(self):
         """Force-cache all data and indexes that have not yet been loaded."""
@@ -111,7 +128,7 @@ class QueryableRegistry(Registry[T]):
     def _filter_filepath(self) -> Path:
         return self._data_path / "filter_index.tsv"
 
-    @cached_property
+    @locked_cached_property
     def _filter_index(self) -> FilterIndex:
         _ = self._cache
         return FilterIndex(
@@ -120,7 +137,7 @@ class QueryableRegistry(Registry[T]):
             allowed_ids=self._allowed_ids,
         )
 
-    @cached_property
+    @locked_cached_property
     def _search_index(self) -> SearchIndex[T]:
         return SearchIndex(
             cache=self._cache,
