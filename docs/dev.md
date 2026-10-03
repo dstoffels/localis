@@ -120,12 +120,12 @@ Cities' <!-- stat:footprint.registries.cities.combined.memory_bytes:size -->104.
 
 | Cities component | Retained memory | Build time |
 |---|---|---|
-| `_cache` | <!-- stat:footprint.registries.cities.dataset.memory_bytes:size -->24.5MB<!-- /stat --> | <!-- stat:footprint.registries.cities.dataset.time_ms:load -->~329ms<!-- /stat --> |
+| `_cache` | <!-- stat:footprint.registries.cities.dataset.memory_bytes:size -->24.5MB<!-- /stat --> | <!-- stat:footprint.registries.cities.dataset.time_ms:load -->~332ms<!-- /stat --> |
 | `_lookup_index` | <!-- stat:footprint.registries.cities.lookup_index.memory_bytes:size -->1.8MB<!-- /stat --> | <!-- stat:footprint.registries.cities.lookup_index.time_ms:load -->~62ms<!-- /stat --> |
-| `_filter_index` | <!-- stat:footprint.registries.cities.filter_index.memory_bytes:size -->41.4MB<!-- /stat --> | <!-- stat:footprint.registries.cities.filter_index.time_ms:load -->~610ms<!-- /stat --> |
-| `_search_index` | <!-- stat:footprint.registries.cities.search_index.memory_bytes:size -->36.7MB<!-- /stat --> | <!-- stat:footprint.registries.cities.search_index.time_ms:load -->~157ms<!-- /stat --> |
+| `_filter_index` | <!-- stat:footprint.registries.cities.filter_index.memory_bytes:size -->41.4MB<!-- /stat --> | <!-- stat:footprint.registries.cities.filter_index.time_ms:load -->~613ms<!-- /stat --> |
+| `_search_index` | <!-- stat:footprint.registries.cities.search_index.memory_bytes:size -->36.7MB<!-- /stat --> | <!-- stat:footprint.registries.cities.search_index.time_ms:load -->~158ms<!-- /stat --> |
 
-**Total load time** (all three registries, `_cache` plus every index) is <!-- stat:footprint.full_cache.time_ms:load -->~1.44s<!-- /stat -->.
+**Total load time** (all three registries, `_cache` plus every index) is <!-- stat:footprint.full_cache.time_ms:load -->~1.43s<!-- /stat -->.
 
 The last per-record overhead with no purpose has been removed: views are created on access by a `ViewMap` over each store rather than kept as one object, dict entry and int key per record, which took about 31MB off cities' dataset, and single-id filter postings are plain ints, which took about 15MB off cities' filter index. What remains is the data as modeled: names, the trigram postings search needs, and the filter keys. Storing names as a UTF-8 blob with offsets was considered and rejected; it would save about 11MB on cities' names, but every read would decode from the blob, slowing the bulk paths that read every name (large filters sort by name, iteration builds every entity). The current figures are treated as the memory floor for this data model.
 
