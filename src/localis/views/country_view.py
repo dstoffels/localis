@@ -1,13 +1,19 @@
 from pathlib import Path
-from localis.entities import Country, HistoricInfo
+from typing import Mapping
+from localis.entities import Country, HistoricInfo, MacroregionBase
 from localis.stores import CountryStore
 from .view import View
+from .macroregion_view import MacroregionView
 
 
 class CountryView(View[Country, CountryStore]):
-    """Runtime view over CountryStore, used by Registry._cache."""
+    """Runtime view over CountryStore, used by Registry._cache; resolves its macroregions against the macroregion view dict."""
 
-    __slots__ = ()
+    __slots__ = ("_macroregion_views",)
+
+    def __init__(self, id: int, store: CountryStore, macroregion_views: Mapping[int, MacroregionView]):
+        super().__init__(id, store)
+        self._macroregion_views = macroregion_views
 
     @property
     def name(self) -> str:
@@ -55,6 +61,14 @@ class CountryView(View[Country, CountryStore]):
     def historic(self) -> HistoricInfo | None:
         return self._store.historics[self._idx]
 
+    @property
+    def macroregions(self) -> tuple[MacroregionBase, ...]:
+        return tuple(self._macroregion_views[i].to_base() for i in self._store.macroregion_ids[self._idx])
+
+    @property
+    def groupings(self) -> tuple[MacroregionBase, ...]:
+        return tuple(self._macroregion_views[i].to_base() for i in self._store.grouping_ids[self._idx])
+
     def to_entity(self) -> Country:
         return Country(
             id=self.id,
@@ -68,10 +82,12 @@ class CountryView(View[Country, CountryStore]):
             flag=self.flag,
             geonames_id=self.geonames_id,
             historic=self.historic,
+            macroregions=self.macroregions,
+            groupings=self.groupings,
         )
 
     @classmethod
-    def load(cls, filepath: Path) -> dict[int, "CountryView"]:
+    def load(cls, filepath: Path, macroregion_views: Mapping[int, MacroregionView]) -> dict[int, "CountryView"]:
         store = CountryStore()
         views: dict[int, CountryView] = {}
         idx = 0
@@ -89,11 +105,15 @@ class CountryView(View[Country, CountryStore]):
                     numeric_s,
                     flag,
                     historic_s,
+                    macroregions_s,
+                    groupings_s,
                 ) = row
                 alias_list = tuple(a for a in alias_s.split("|") if a)
                 geonames_id = int(geonames_id_s) if geonames_id_s else None
                 numeric = int(numeric_s) if numeric_s else None
                 historic = cls._parse_historic(historic_s)
+                macroregion_ids = tuple(int(i) for i in macroregions_s.split("|") if i)
+                grouping_ids = tuple(int(i) for i in groupings_s.split("|") if i)
                 store.id_to_idx.append(idx)
                 store.append(
                     name,
@@ -106,8 +126,10 @@ class CountryView(View[Country, CountryStore]):
                     numeric,
                     flag,
                     historic,
+                    macroregion_ids,
+                    grouping_ids,
                 )
-                views[id] = cls(id, store)
+                views[id] = cls(id, store, macroregion_views)
                 idx += 1
         return views
 

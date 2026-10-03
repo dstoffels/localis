@@ -1,12 +1,13 @@
 # localis
 
-Fast, offline access to comprehensive data for **countries**, **subdivisions**, and **cities**. Built on ISO 3166 and GeoNames datasets (updated monthly) with support for exact lookups, filtering, and fuzzy search.
+Fast, offline access to comprehensive data for **countries**, **subdivisions**, **cities** and the **macroregions** countries sit in. Built on ISO 3166, GeoNames and Unicode CLDR datasets (updated monthly) with support for exact lookups, filtering, and fuzzy search.
 
 ## Features
 
 - 🌍 **<!-- stat:data.countries.total:int -->281<!-- /stat --> countries** (<!-- stat:data.countries.historic:int -->31<!-- /stat --> historic) sourced and merged from ISO 3166-1, ISO 3166-3, and GeoNames
 - 🗺️ **<!-- stat:data.subdivisions.total:int -->51,711<!-- /stat --> subdivisions** sourced and merged from ISO 3166-2 and GeoNames
 - 🏙️ **<!-- stat:data.cities.total:int -->235,915<!-- /stat --> cities** sourced from GeoNames cities500.txt
+- 🌐 **<!-- stat:data.macroregions.total:int -->0<!-- /stat --> macroregions** (<!-- stat:data.macroregions.regions:int -->0<!-- /stat --> regions, <!-- stat:data.macroregions.subregions:int -->0<!-- /stat --> subregions, <!-- stat:data.macroregions.groupings:int -->0<!-- /stat --> groupings) sourced from Unicode CLDR, with every current country placed in them
 - 🔍 **Search Engine** for typo-tolerant lookups with up to 89%+ accuracy
 - 📌 **Aliases** - support for colloquial, historic and alternate names
 
@@ -40,7 +41,7 @@ print(results[0][0].name)  # "Australia"
 
 ---
 
-## Countries API
+## Countries
 
 ### Get
 
@@ -76,6 +77,10 @@ results = localis.countries.filter(name="Canada")
 
 # General query across all fields
 results = localis.countries.filter(name="United", limit=5)
+
+# By macroregion: a region, subregion or grouping, by name or code
+results = localis.countries.filter(macroregion="Western Europe")
+results = localis.countries.filter(macroregion="EU")
 ```
 
 **Returns:** `list[Country]`
@@ -140,6 +145,8 @@ country.numeric       # 840
 country.aliases       # tuple[str, ...] - Alternate names
 country.flag          # "🇺🇸" - Unicode flag emoji
 country.historic      # HistoricInfo | None - set only for withdrawn ISO 3166-3 countries
+country.macroregions  # tuple[MacroregionBase, ...] - CLDR path, region then subregion: (Americas, Northern America); () for most historic countries
+country.groupings     # tuple[MacroregionBase, ...] - CLDR groupings the country belongs to: (North America, United Nations)
 
 country = localis.countries.lookup("CSHH")  # Czechoslovakia
 country.historic.alpha_4            # "CSHH"
@@ -153,7 +160,7 @@ country.json()        # Convert to JSON string
 
 ---
 
-## Subdivisions API
+## Subdivisions
 
 ### Get by ID
 
@@ -239,7 +246,7 @@ subdivision.json()          # Convert to JSON string
 
 ---
 
-## Cities API
+## Cities
 
 ### Get by ID
 
@@ -332,8 +339,59 @@ city.json()          # Convert to JSON string
 
 ---
 
+## Macroregions
+
+### Get
+
+```python
+# By localis ID
+region = localis.macroregions.get(1)
+```
+
+**Returns:** `Macroregion` object or `None`
+
+### Lookup
+
+```python
+# By code: M49 numeric codes are zero-padded strings, so lookup(9) finds nothing
+oceania = localis.macroregions.lookup("009")
+eu = localis.macroregions.lookup("EU")
+
+# By name
+western_europe = localis.macroregions.lookup("Western Europe")
+```
+
+**Returns:** `Macroregion` object or `None`
+
+### Iteration
+
+```python
+for macroregion in localis.macroregions:
+    print(macroregion.name)
+
+total = len(localis.macroregions)
+```
+
+### Macroregion Object
+
+```python
+macroregion = localis.macroregions.lookup("155")
+
+macroregion.id        # Database ID
+macroregion.name      # "Western Europe" - CLDR English name
+macroregion.code      # "155" - M49 numeric code as a string, or CLDR's letter code ("QO", "EU")
+macroregion.type      # "region", "subregion" or "grouping"
+macroregion.parent    # MacroregionBase | None - a subregion's region, or the region CLDR files a grouping under
+
+# Utility methods
+macroregion.to_dict() # Convert to dictionary
+macroregion.json()    # Convert to JSON string
+```
+
+---
+
 ## Base Objects
-Basic versions of country and subdivision when nested.
+Basic versions of country, subdivision and macroregion when nested.
 
 ### CountryBase Object
 
@@ -361,11 +419,24 @@ nested_sub.type
 nested_sub.admin_level
 ```
 
+### MacroregionBase Object
+
+```python
+nested_macroregion = country.macroregions[0]
+
+nested_macroregion.id
+nested_macroregion.name
+nested_macroregion.code
+nested_macroregion.type
+```
+
 ## Performance
 
 ### Caching
 
 All registries and their indexes are lazy-loaded on first use, incurring a cold start cost on whichever call touches them first. Any registry's dataset and indexes can be pre-loaded with `.force_cache()` to avoid this during queries, or you can simply access the registry/method to trigger the lazy loading upfront.
+
+A registry's dataset also loads the datasets it references, if they aren't cached yet. Countries load macroregions, subdivisions load countries, and cities load subdivisions and countries. Only those datasets load, not their indexes. The subdivisions and cities tables below exclude them, so a cold first call on cities also pays for the subdivisions and countries datasets.
 
 #### Countries (<!-- stat:data.countries.total:int -->281<!-- /stat -->)
 | Component | Load Time | Memory |
@@ -387,7 +458,7 @@ All registries and their indexes are lazy-loaded on first use, incurring a cold 
 
 #### Cities (<!-- stat:data.cities.total:int -->235,915<!-- /stat -->)
 
-> ⚠️ **Memory-intensive.** Fully caching cities and its indexes adds <!-- stat:footprint.registries.cities.combined.memory_bytes:size -->153.8MB<!-- /stat --> of resident memory. Calling `localis.cities.force_cache()` loads all of it upfront. You can call `cities.set_population_threshold(n)` before first access as a lever to control the memory footprint.
+> ⚠️ **Memory-intensive.** Fully caching cities and its indexes adds <!-- stat:footprint.registries.cities.combined.memory_bytes:size -->153.8MB<!-- /stat --> of memory. Calling `localis.cities.force_cache()` loads all of it upfront. You can call `cities.set_population_threshold(n)` before first access as a lever to control the memory footprint.
 
 | Component | Load Time | Memory |
 |---|---|---|
@@ -400,8 +471,6 @@ All registries and their indexes are lazy-loaded on first use, incurring a cold 
 At a threshold of <!-- stat:data.cities.threshold:int -->15,000<!-- /stat -->, cities drops from <!-- stat:data.cities.total:int -->235,915<!-- /stat --> to <!-- stat:data.cities.above_threshold:int -->34,171<!-- /stat --> and memory drops from <!-- stat:footprint.registries.cities.combined.memory_bytes:size -->153.8MB<!-- /stat --> to <!-- stat:footprint.cities_threshold.memory_bytes:size -->31.8MB<!-- /stat -->.
 
 **Full Cache**: <!-- stat:footprint.full_cache.time_ms:load -->~1.46s<!-- /stat --> load time, <!-- stat:footprint.full_cache.memory_bytes:size -->213.4MB<!-- /stat --> memory for all datasets and indexes
-
-**Concurrency:** localis is not yet thread-safe. Lazy loading can race on first access, and `search()` keeps per-query state on the shared index, so concurrent searches on the same registry can interfere with each other even after `.force_cache()`. Until thread safety lands, call `.force_cache()` up front and serialize searches on a shared registry (or give each thread its own process).
 
 ### Benchmarks
 
@@ -424,16 +493,22 @@ Data in this project is kept current monthly from the following sources:
   - **Canonical**: [ISO 3166-1](https://www.iso.org/iso-3166-country-codes.html) data via [Debian's iso-codes project](https://salsa.debian.org/iso-codes-team/iso-codes)
   - **Merged**: [ISO 3166-3](https://www.iso.org/iso-3166-country-codes.html) withdrawn/historic country codes, also via Debian's iso-codes project
   - **Merged**: [GeoNames](https://www.geonames.org/) `countryInfo.txt`
-  - **Merged**: Additional country aliases from [Wikidata](https://www.wikidata.org/): English labels, alternative labels and short names, queried live
+  - **Merged**: Additional country aliases queried from [Wikidata](https://www.wikidata.org/): English labels, alternative labels and short names
 - **Subdivisions**
   - **Canonical**: [ISO 3166-2](https://www.iso.org/iso-3166-country-codes.html) data via [Debian's iso-codes project](https://salsa.debian.org/iso-codes-team/iso-codes)
   - **Merged**: [GeoNames](https://www.geonames.org/) `admin1CodesASCII.txt` and `admin2Codes.txt`
-  - **Merged**: [Wikidata](https://www.wikidata.org/) crosswalk (ISO 3166-2 code ↔ GeoNames id) for unambiguous resolution ahead of fuzzy matching
+  - **Merged**: [Wikidata](https://www.wikidata.org/) (ISO 3166-2 code ↔ GeoNames id)
   - **Merged**: Additional subdivision aliases from GeoNames' `alternateNamesV2` dump (filtered by [Unicode CLDR](https://cldr.unicode.org/)'s official-language data per country)
 - **Cities**
   - [GeoNames](https://www.geonames.org/) `cities500.txt` dataset
+- **Macroregions**
+  - [Unicode CLDR](https://cldr.unicode.org/) territory containment and English territory names
 
 [`docs/methodology.md`](docs/methodology.md) is a complete, falsifiable account of how each dataset is built: the rules that combine these sources, how the results were validated, and where they are known to be wrong. [`unmerged_subdivisions.md`](docs/unmerged_subdivisions.md) lists every ISO subdivision currently without a GeoNames counterpart, regenerated on every ingest run.
+
+### Concurrency
+localis is not yet thread-safe. Lazy loading can race on first access, and `search()` keeps per-query state on the shared index, so concurrent searches on the same registry can interfere with each other even after `.force_cache()`. Until thread safety lands, call `.force_cache()` up front and serialize searches on a shared registry (or give each thread its own process).
+
 
 ### Data licensing
 

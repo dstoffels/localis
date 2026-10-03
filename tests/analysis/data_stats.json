@@ -1,4 +1,12 @@
 {
+  "macroregions": {
+    "total": 34,
+    "regions": 5,
+    "subregions": 23,
+    "groupings": 6,
+    "current_placed": 250,
+    "historic_placed": 10
+  },
   "countries": {
     "total": 281,
     "current": 250,
@@ -39,7 +47,7 @@
     "above_threshold": 34171
   },
   "shipped_size": {
-    "total": 60155030,
+    "total": 60164483,
     "cities": {
       "total": 48927789,
       "share_pct": 81.3,
@@ -47,18 +55,17 @@
         "cities.tsv": 13251308,
         "filter_index.tsv": 18519255,
         "lookup_index_int.tsv": 3403998,
-        "lookup_index_str.tsv": 0,
         "search_fields.tsv": 102,
         "search_index.bin.gz": 13513456,
         "search_index_offsets.tsv": 239670
       }
     },
     "countries": {
-      "total": 86675,
-      "share_pct": 0.1,
+      "total": 103832,
+      "share_pct": 0.2,
       "files": {
-        "countries.tsv": 25923,
-        "filter_index.tsv": 16880,
+        "countries.tsv": 28372,
+        "filter_index.tsv": 31588,
         "lookup_index_int.tsv": 1852,
         "lookup_index_str.tsv": 3813,
         "search_fields.tsv": 55,
@@ -66,12 +73,19 @@
         "search_index_offsets.tsv": 27234
       }
     },
+    "macroregions": {
+      "total": 1735,
+      "share_pct": 0.0,
+      "files": {
+        "lookup_index_str.tsv": 771,
+        "macroregions.tsv": 964
+      }
+    },
     "subdivisions": {
-      "total": 11140566,
+      "total": 11131127,
       "share_pct": 18.5,
       "files": {
-        "filter_index.tsv": 2834894,
-        "lookup_index_int.tsv": 0,
+        "filter_index.tsv": 2825455,
         "lookup_index_str.tsv": 969848,
         "search_fields.tsv": 107,
         "search_index.bin.gz": 3524577,

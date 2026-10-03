@@ -22,6 +22,25 @@ def _country_stats() -> dict[str, int]:
     return {"total": len(all_countries), "current": len(all_countries) - historic, "historic": historic}
 
 
+def _macroregion_stats() -> dict[str, int]:
+    types = Counter(m.type for m in localis.macroregions)
+    include_historic = localis.countries.include_historic
+    localis.countries.set_include_historic(True)
+    try:
+        all_countries = list(localis.countries)
+    finally:
+        localis.countries.set_include_historic(include_historic)
+    placed = [c for c in all_countries if c.macroregions]
+    return {
+        "total": len(localis.macroregions),
+        "regions": types["region"],
+        "subregions": types["subregion"],
+        "groupings": types["grouping"],
+        "current_placed": sum(1 for c in placed if not c.historic),
+        "historic_placed": sum(1 for c in placed if c.historic),
+    }
+
+
 def _subdivision_stats() -> dict[str, Any]:
     subs = list(localis.subdivisions)
     iso_merged = sum(1 for s in subs if s.iso_code and s.geonames_id is not None)
@@ -91,8 +110,10 @@ def _shipped_size_stats() -> dict[str, Any]:
 
 def _reconcile(stats: dict[str, Any]) -> None:
     """Fails loudly if the counts don't add up, so a broken ingest can't publish inconsistent numbers."""
-    subs, res = stats["subdivisions"], stats["resolution"]
+    subs, res, macro = stats["subdivisions"], stats["resolution"], stats["macroregions"]
     checks = {
+        "macroregion types sum to the macroregions shipped": macro["total"] == macro["regions"] + macro["subregions"] + macro["groupings"],
+        "every current country is placed in a macroregion": macro["current_placed"] == stats["countries"]["current"],
         "resolution sources sum to the ISO subdivisions shipped": res["total"] == subs["iso_total"],
         "merged ISO subdivisions match merging sources": subs["iso_merged"] == res["wikidata"] + res["automerge"] + res["skill_merge"] + res["bypass_twinned"],
         "ISO-only subdivisions match non-merging sources": subs["iso_only"] == res["skill_add"] + res["bypass_untwinned"] + res["geonames_absent"],
@@ -108,6 +129,7 @@ def _reconcile(stats: dict[str, Any]) -> None:
 def compute() -> dict[str, Any]:
     """Deterministic dataset statistics, reconciled against each other."""
     stats = {
+        "macroregions": _macroregion_stats(),
         "countries": _country_stats(),
         "subdivisions": _subdivision_stats(),
         "resolution": _resolution_stats(),

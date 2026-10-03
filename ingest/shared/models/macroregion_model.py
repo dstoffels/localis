@@ -7,11 +7,11 @@ MacroregionType = Literal["region", "subregion", "grouping"]
 
 @dataclass(slots=True)
 class MacroregionModel(Model):
-    """A CLDR macroregion: a UN M49 region, a subregion within one, or a grouping of subregions."""
+    """A CLDR macroregion: a UN M49 region, a subregion within one, or a grouping of subregions or countries."""
 
     code: str
     type: MacroregionType
-    # a subregion's region, or the region a grouping's subregions all sit in; None for a region
+    # a subregion's region, or the region CLDR files a grouping under; None for a region and the groupings filed under World
     parent: "MacroregionModel | None"
 
     LOOKUP_FIELDS = ("code", "name")

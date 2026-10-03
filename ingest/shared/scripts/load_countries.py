@@ -9,7 +9,8 @@ def load_countries() -> dict[str, CountryModel]:
         reader = csv.reader(f, delimiter="\t")
         countries: dict[str, CountryModel] = {}
         for id, row in enumerate(reader, start=1):
-            name, alpha2, alpha3, geonames_id, official_name, common_name, aliases, numeric, flag, historic = row
+            # macroregion placements are left out: downstream stages only relate to countries by id and name fields
+            name, alpha2, alpha3, geonames_id, official_name, common_name, aliases, numeric, flag, historic, _, _ = row
             # historic rows reuse active and each other's alpha2 codes, so key them by alpha_4 like ingest_countries() does
             key = historic.split("|")[0] if historic else alpha2
             countries[key] = CountryModel(

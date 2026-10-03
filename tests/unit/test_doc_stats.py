@@ -9,8 +9,10 @@ class TestDocStats:
     @pytest.mark.slow
     def test_data_stats_current(self):
         """should match data_stats.json to the shipped data, reconciled"""
-        assert data_stats.compute() == json.loads(data_stats.OUTPUT_PATH.read_text(encoding="utf-8"))
+        assert data_stats.compute() == json.loads(
+            data_stats.OUTPUT_PATH.read_text(encoding="utf-8")
+        ), "RUN: poetry run analysis"
 
     def test_markers_current(self):
         """should match every deterministic stat marker in the docs to data_stats.json"""
-        assert render_docs.check() == []
+        assert render_docs.check() == [], "RUN: poetry run analysis"

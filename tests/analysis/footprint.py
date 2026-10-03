@@ -5,6 +5,7 @@ import statistics
 import subprocess
 import sys
 import time
+import tracemalloc
 from datetime import datetime
 from pathlib import Path
 from typing import Any, Callable
@@ -19,26 +20,27 @@ COMPONENTS = {"dataset": "_cache", "lookup_index": "_lookup_index", "filter_inde
 DEPENDENCIES = {"countries": (), "subdivisions": ("countries",), "cities": ("countries", "subdivisions")}
 
 
-def _rss_bytes() -> int:
-    """Retained resident memory after a full collection, not the ru_maxrss peak."""
+def _traced_bytes() -> int:
+    """Bytes still allocated through Python's allocators after a full collection."""
     gc.collect()
-    with open("/proc/self/status") as f:
-        for line in f:
-            if line.startswith("VmRSS:"):
-                return int(line.split()[1]) * 1024
-    raise RuntimeError("VmRSS not found in /proc/self/status")
+    return tracemalloc.get_traced_memory()[0]
 
 
-def _measure(load: Callable[[], object]) -> dict[str, float]:
-    before = _rss_bytes()
+def _measure(load: Callable[[], object], mode: str) -> dict[str, float]:
+    """Load time, or the bytes the load left allocated; tracing slows loading, so each mode runs in its own process."""
+    if mode == "memory":
+        before = _traced_bytes()
+        load()
+        return {"memory_bytes": max(_traced_bytes() - before, 0)}
     start = time.perf_counter()
     load()
-    elapsed_ms = (time.perf_counter() - start) * 1000
-    return {"time_ms": elapsed_ms, "memory_bytes": max(_rss_bytes() - before, 0)}
+    return {"time_ms": (time.perf_counter() - start) * 1000}
 
 
-def _run_scenario(scenario: str) -> dict[str, Any]:
+def _run_scenario(scenario: str, mode: str) -> dict[str, Any]:
     """Runs one measurement in the current, fresh process."""
+    if mode == "memory":
+        tracemalloc.start()
     import localis
 
     def preload(names: tuple[str, ...]) -> None:
@@ -48,26 +50,33 @@ def _run_scenario(scenario: str) -> dict[str, Any]:
     if scenario in REGISTRIES:
         preload(DEPENDENCIES[scenario])
         registry = getattr(localis, scenario)
-        return {component: _measure(lambda attr=attr: getattr(registry, attr)) for component, attr in COMPONENTS.items()}
+        return {component: _measure(lambda attr=attr: getattr(registry, attr), mode) for component, attr in COMPONENTS.items()}
     if scenario == "cities_threshold":
         preload(DEPENDENCIES["cities"])
         localis.cities.set_population_threshold(POPULATION_THRESHOLD)
-        result = _measure(localis.cities.force_cache)
+        result = _measure(localis.cities.force_cache, mode)
         return {**result, "threshold": POPULATION_THRESHOLD, "count": len(localis.cities)}
     if scenario == "full_cache":
-        return _measure(lambda: [getattr(localis, name).force_cache() for name in REGISTRIES])
+        return _measure(lambda: [getattr(localis, name).force_cache() for name in REGISTRIES], mode)
     raise ValueError(f"unknown scenario: {scenario}")
 
 
+def _merge(a: dict[str, Any], b: dict[str, Any]) -> dict[str, Any]:
+    """Combines a time run and a memory run of the same scenario into one result."""
+    return {key: _merge(a[key], b[key]) if isinstance(a.get(key), dict) else a.get(key, b.get(key)) for key in [*a, *(k for k in b if k not in a)]}
+
+
 def _median_runs(scenario: str, runs: int) -> dict[str, Any]:
-    """Runs a scenario in `runs` fresh subprocesses and takes the median of every measured value."""
-    results = []
-    for _ in range(runs):
+    """Runs a scenario's time and memory measurements in `runs` fresh subprocesses each and takes the median of every measured value."""
+
+    def run_once(mode: str) -> dict[str, Any]:
         out = subprocess.run(
-            [sys.executable, "-m", "tests.analysis.footprint", "--scenario", scenario],
+            [sys.executable, "-m", "tests.analysis.footprint", "--scenario", scenario, "--mode", mode],
             cwd=ROOT, check=True, capture_output=True, text=True,
         ).stdout
-        results.append(json.loads(out))
+        return json.loads(out)
+
+    results = [_merge(run_once("time"), run_once("memory")) for _ in range(runs)]
 
     def median_of(samples: list[Any]) -> Any:
         first = samples[0]
@@ -102,14 +111,15 @@ def measure(runs: int, notes: str | None) -> dict[str, Any]:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Measures load time and retained memory per registry component, appending to footprint.json.")
+    parser = argparse.ArgumentParser(description="Measures load time and allocated memory per registry component, appending to footprint.json.")
     parser.add_argument("--scenario", help=argparse.SUPPRESS)
+    parser.add_argument("--mode", choices=("time", "memory"), default="time", help=argparse.SUPPRESS)
     parser.add_argument("--runs", type=int, default=3, help="fresh-process runs per scenario; the median is kept")
     parser.add_argument("--notes", help="what changed since the last measurement")
     args = parser.parse_args()
 
     if args.scenario:
-        print(json.dumps(_run_scenario(args.scenario)))
+        print(json.dumps(_run_scenario(args.scenario, args.mode)))
         return
 
     print(json.dumps(run(args.runs, args.notes), indent=2))
@@ -117,8 +127,6 @@ def main() -> None:
 
 def run(runs: int = 3, notes: str | None = None) -> dict[str, Any]:
     """Measures every scenario and appends the result to footprint.json."""
-    if not Path("/proc/self/status").exists():
-        sys.exit("footprint measures retained memory from /proc/self/status, so it only runs on Linux")
     result = measure(runs, notes)
     history = json.loads(OUTPUT_PATH.read_text()) if OUTPUT_PATH.exists() else {}
     history[datetime.now().isoformat(timespec="seconds")] = result

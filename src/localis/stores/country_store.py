@@ -14,6 +14,8 @@ class CountryStore(Store):
         "numerics",
         "flags",
         "historics",
+        "macroregion_ids",
+        "grouping_ids",
     )
 
     def __init__(self):
@@ -28,6 +30,8 @@ class CountryStore(Store):
         self.numerics = array("i")  # -1 sentinel for None
         self.flags: list[str] = []
         self.historics: list[HistoricInfo | None] = []
+        self.macroregion_ids: list[tuple[int, ...]] = []
+        self.grouping_ids: list[tuple[int, ...]] = []
 
     def append(
         self,
@@ -41,6 +45,8 @@ class CountryStore(Store):
         numeric: int | None,
         flag: str,
         historic: HistoricInfo | None,
+        macroregion_ids: tuple[int, ...],
+        grouping_ids: tuple[int, ...],
     ) -> None:
         self.names.append(name)
         self.alpha2s.append(alpha2)
@@ -52,3 +58,5 @@ class CountryStore(Store):
         self.numerics.append(numeric if numeric is not None else -1)
         self.flags.append(flag)
         self.historics.append(historic)
+        self.macroregion_ids.append(macroregion_ids)
+        self.grouping_ids.append(grouping_ids)

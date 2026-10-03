@@ -7,8 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- `localis.macroregions`: Unicode CLDR's world regions, 34 in all: 5 regions (Africa, Americas, Asia, Europe, Oceania), 23 subregions and 6 groupings (North America, Latin America, Sub-Saharan Africa, European Union, Eurozone, United Nations), each with its CLDR code, English name, type and parent. Lookup-only: `get()`, `lookup()` by code or name (M49 codes are zero-padded strings, so `lookup("009")` finds Oceania), iteration and `len()`
+- `Country.macroregions`, the country's CLDR path as `(region, subregion)`, and `Country.groupings`, the groupings it belongs to, both `tuple[MacroregionBase, ...]`. Every current country is placed; historic countries take only CLDR's placements for withdrawn codes, which cover 10 of 31
+- `countries.filter(macroregion=...)`, matching any region, subregion or grouping in a country's path or groupings, by name or code
+
 ### Changed
+- `localis.registries.Registry` is now the lookup-only base (`get()`, `lookup()`, iteration); `filter()` and `search()` moved to its new subclass `QueryableRegistry`, which the countries, subdivisions and cities registries extend
 - `filter()` raises `TypeError` for a keyword argument the registry can't filter by, instead of silently returning `[]`
+- Lookup index files with no entries are no longer shipped (cities' string index, subdivisions' integer index)
+- Memory figures in the README and docs are measured with `tracemalloc` instead of the change in resident memory around each load, which undercounted components loaded after others (the cities lookup index read 4KB)
 
 ### Fixed
 - The `country` filter on subdivisions never matched an ISO numeric code given as an int (`subdivisions.filter(country=76)`): ISO 3166-1 numerics were indexed as zero-padded strings ("076") while `Country.numeric` is an int
