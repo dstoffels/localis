@@ -3,10 +3,11 @@ from typing import Literal
 
 BASE_PATH = Path(__file__).parent.parent
 
-Stage = Literal["COUNTRIES", "SUBDIVISIONS", "CITIES"]
+Stage = Literal["MACROREGIONS", "COUNTRIES", "SUBDIVISIONS", "CITIES"]
 Level = Literal["INFO", "WARN"]
 
 STAGE_FILES: dict[Stage, Path] = {
+    "MACROREGIONS": BASE_PATH / "macroregions" / "logs" / "macroregions_ingest.log",
     "COUNTRIES": BASE_PATH / "countries" / "logs" / "countries_ingest.log",
     "SUBDIVISIONS": BASE_PATH / "subdivisions" / "logs" / "subdivisions_ingest.log",
     "CITIES": BASE_PATH / "cities" / "logs" / "cities_ingest.log",

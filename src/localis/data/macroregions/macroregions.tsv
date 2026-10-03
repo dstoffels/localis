@@ -1,0 +1,34 @@
+Africa	002	region	
+Oceania	009	region	
+Americas	019	region	
+Asia	142	region	
+Europe	150	region	
+Western Africa	011	subregion	1
+Eastern Africa	014	subregion	1
+Northern Africa	015	subregion	1
+Middle Africa	017	subregion	1
+Southern Africa	018	subregion	1
+Australasia	053	subregion	2
+Melanesia	054	subregion	2
+Micronesian Region	057	subregion	2
+Polynesia	061	subregion	2
+Outlying Oceania	QO	subregion	2
+South America	005	subregion	3
+Central America	013	subregion	3
+Northern America	021	subregion	3
+Caribbean	029	subregion	3
+Eastern Asia	030	subregion	4
+Southern Asia	034	subregion	4
+Southeast Asia	035	subregion	4
+Central Asia	143	subregion	4
+Western Asia	145	subregion	4
+Southern Europe	039	subregion	5
+Eastern Europe	151	subregion	5
+Northern Europe	154	subregion	5
+Western Europe	155	subregion	5
+North America	003	grouping	3
+Sub-Saharan Africa	202	grouping	1
+Latin America	419	grouping	3
+European Union	EU	grouping	
+Eurozone	EZ	grouping	
+United Nations	UN	grouping	

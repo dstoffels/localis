@@ -4,47 +4,4 @@
 [INFO] No update needed for iso_3166-2.json
 [INFO] No update needed for alternateNamesV2.zip
 [INFO] No update needed for cldr_territory_info.json
-[INFO] Loading GeoNames subdivisions...
-[INFO] Merging GeoNames alternate names into subdivision aliases...
-[INFO] Enriched 25789 GeoNames subdivisions with alternate names
-[INFO] Loading ISO subdivisions...
-[INFO] resolved 342/4997 subdivisions from skill-resolved decisions
-[INFO] Querying Wikidata for ISO/GeoNames crosswalk...
-[INFO] resolved 4295/4655 subdivisions from Wikidata crosswalk
-[INFO] bypassed IE-C 'Connaught' merged into its GeoNames twin IE.C 'Connacht'
-[INFO] bypassed IE-L 'Leinster' merged into its GeoNames twin IE.L 'Leinster'
-[INFO] bypassed IE-M 'Munster' merged into its GeoNames twin IE.M 'Munster'
-[INFO] bypassed IE-U 'Ulster' merged into its GeoNames twin IE.U 'Ulster'
-[INFO] bypassed IS-1 'Höfuðborgarsvæði' merged into its GeoNames twin IS.39 'Capital Region'
-[INFO] bypassed IS-2 'Suðurnes' merged into its GeoNames twin IS.43 'Southern Peninsula'
-[INFO] bypassed IS-3 'Vesturland' merged into its GeoNames twin IS.45 'West'
-[INFO] bypassed IS-4 'Vestfirðir' merged into its GeoNames twin IS.44 'Westfjords'
-[INFO] bypassed IS-5 'Norðurland vestra' merged into its GeoNames twin IS.41 'Northwest'
-[INFO] bypassed IS-6 'Norðurland eystra' merged into its GeoNames twin IS.40 'Northeast'
-[INFO] bypassed IS-7 'Austurland' merged into its GeoNames twin IS.38 'East'
-[INFO] bypassed IS-8 'Suðurland' merged into its GeoNames twin IS.42 'South'
-[INFO] bypassed LT-AL 'Alytaus apskritis' merged into its GeoNames twin LT.56 'Alytus'
-[INFO] bypassed LT-KL 'Klaipėdos apskritis' merged into its GeoNames twin LT.58 'Klaipėda County'
-[INFO] bypassed LT-KU 'Kauno apskritis' merged into its GeoNames twin LT.57 'Kaunas'
-[INFO] bypassed LT-MR 'Marijampolės apskritis' merged into its GeoNames twin LT.59 'Marijampolė County'
-[INFO] bypassed LT-PN 'Panevėžio apskritis' merged into its GeoNames twin LT.60 'Panevėžys'
-[INFO] bypassed LT-SA 'Šiaulių apskritis' merged into its GeoNames twin LT.61 'Siauliai'
-[INFO] bypassed LT-TA 'Tauragės apskritis' merged into its GeoNames twin LT.62 'Tauragė County'
-[INFO] bypassed LT-TE 'Telšių apskritis' merged into its GeoNames twin LT.63 'Telsiai'
-[INFO] bypassed LT-UT 'Utenos apskritis' merged into its GeoNames twin LT.64 'Utena'
-[INFO] bypassed LT-VL 'Vilniaus apskritis' merged into its GeoNames twin LT.65 'Vilnius'
-[INFO] bypassed MW-C 'Central Region' merged into its GeoNames twin MW.C 'Central Region'
-[INFO] bypassed MW-N 'Northern Region' merged into its GeoNames twin MW.N 'Northern Region'
-[INFO] bypassed MW-S 'Southern Region' merged into its GeoNames twin MW.S 'Southern Region'
-[INFO] bypassed 49 subdivisions as non-administrative, 25 merged into a GeoNames twin
-[INFO] Attempting to merge ISO to GeoNames subdivisions...
-[INFO] merged MK-211 'Štip' -> MK.98 'Shtip' (89/75)
-[INFO] merged UZ-TK 'Toshkent' -> UZ.13 'Tashkent' (88/80)
-[INFO] Merged 355/360 ISO subdivisions
-[INFO] 5 added as-is, their countries have no GeoNames subdivisions: SG-01, SG-02, SG-03, SG-04, SG-05
-[INFO] 0 subdivisions orphaned (no_candidates=0, no_matches=0, ambiguity=0, low_margin=0, wikidata_conflict=0, grouping_twin=0)
-[INFO] Dumping 51711 subdivisions...
-[INFO] Dumping subdivision lookup indexes...
-[INFO] Dumping subdivision filter index...
-[INFO] Dumping subdivision search index...
-[INFO] completed: 51711 subdivisions
+[INFO] No updates for subdivisions, their resolution decisions or countries.

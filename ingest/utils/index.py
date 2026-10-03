@@ -24,21 +24,20 @@ def dump_lookup_index(data: Sequence[Model], datadir_path: Path) -> None:
     for item in data:
         for value in item.extract_lookup_values():
             key = str(value)
-            if key.isdigit():
+            if item.NUMERIC_LOOKUP and key.isdigit():
                 int_pairs.append((int(key), item.id))
             else:
                 str_pairs.append((key, item.id))
 
-    str_pairs.sort()
-    int_pairs.sort()
-
-    with open(str_path, "w", newline="", encoding="utf-8") as f:
-        writer = csv.writer(f, delimiter="\t", lineterminator="\n")
-        writer.writerows(str_pairs)
-
-    with open(int_path, "w", newline="", encoding="utf-8") as f:
-        writer = csv.writer(f, delimiter="\t", lineterminator="\n")
-        writer.writerows(int_pairs)
+    for path, pairs in ((str_path, str_pairs), (int_path, int_pairs)):
+        # an index with no keys isn't written; removing it also clears one left by an earlier dump that had keys
+        if not pairs:
+            path.unlink(missing_ok=True)
+            continue
+        pairs.sort()
+        with open(path, "w", newline="", encoding="utf-8") as f:
+            writer = csv.writer(f, delimiter="\t", lineterminator="\n")
+            writer.writerows(pairs)
 
 
 def dump_filter_index(data: Sequence[Model], datadir_path: Path) -> None:

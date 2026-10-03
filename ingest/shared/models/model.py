@@ -31,6 +31,8 @@ class Model:
     # ----------- Indexing Methods ----------- #
 
     LOOKUP_FIELDS: ClassVar[tuple[str, ...]] = ()
+    # all-digit lookup values go to the integer lookup index; False keeps them as strings (codes with leading zeros, like M49's "009")
+    NUMERIC_LOOKUP: ClassVar[bool] = True
 
     def extract_lookup_values(self):
         """Used in processing to produce a normalized lookup index for each model from its LOOKUP_FIELDS."""

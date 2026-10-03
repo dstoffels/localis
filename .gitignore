@@ -85,6 +85,7 @@ sandbox.py
 
 *.ps1
 ingest/*/inputs/*
+!ingest/macroregions/inputs/macroregions.manifest.json
 !ingest/countries/inputs/countries.manifest.json
 !ingest/countries/inputs/name_blocklist.json
 !ingest/subdivisions/inputs/subdivisions.manifest.json

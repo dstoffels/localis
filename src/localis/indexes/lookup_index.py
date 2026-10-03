@@ -15,27 +15,30 @@ class LookupIndex(Index):
         allowed_ids: set[int] | None = None,
     ):
         ids = allowed_ids or set()
+        # ingest doesn't write an index with no keys, so a missing file is an empty index
         str_keys: list[str] = []
         str_vals = array("I")
-        with open(filepath, "r", encoding="utf-8") as f:
-            for line in f:
-                key, id_ = line.rstrip("\n").split("\t")
-                id_int = int(id_)
-                if predicate and not predicate(id_int, ids):
-                    continue
-                str_keys.append(key)
-                str_vals.append(id_int)
+        if filepath.exists():
+            with open(filepath, "r", encoding="utf-8") as f:
+                for line in f:
+                    key, id_ = line.rstrip("\n").split("\t")
+                    id_int = int(id_)
+                    if predicate and not predicate(id_int, ids):
+                        continue
+                    str_keys.append(key)
+                    str_vals.append(id_int)
 
         int_keys = array("I")
         int_vals = array("I")
-        with open(int_filepath, "r", encoding="utf-8") as f:
-            for line in f:
-                key, id_ = line.rstrip("\n").split("\t")
-                id_int = int(id_)
-                if predicate and not predicate(id_int, ids):
-                    continue
-                int_keys.append(int(key))
-                int_vals.append(id_int)
+        if int_filepath.exists():
+            with open(int_filepath, "r", encoding="utf-8") as f:
+                for line in f:
+                    key, id_ = line.rstrip("\n").split("\t")
+                    id_int = int(id_)
+                    if predicate and not predicate(id_int, ids):
+                        continue
+                    int_keys.append(int(key))
+                    int_vals.append(id_int)
 
         self._str_keys = str_keys
         self._str_vals = str_vals
