@@ -52,11 +52,11 @@ class SearchIndex(Index, Generic[T]):
         allowed_ids: set[int] | None = None,
     ):
         self.NAME_FIELDS = name_fields
-        self.canon, self.canon_counts = self._load_trigram_index(
+        self.canon = self._load_trigram_index(
             data_path / "canon_index", predicate, allowed_ids or set()
         )
         self.short_names = self._load_short_names(data_path / "short_names.tsv.gz", predicate, allowed_ids or set())
-        self.context, self.context_counts = self._load_trigram_index(
+        self.context = self._load_trigram_index(
             data_path / "context_index", predicate, allowed_ids or set()
         )
 
@@ -82,13 +82,12 @@ class SearchIndex(Index, Generic[T]):
     @staticmethod
     def _load_trigram_index(
         prefix: Path, predicate: IndexFilterPredicate | None, ids_allowed: set[int]
-    ) -> tuple[dict[str, array], array]:
-        """One trigram index's posting lists by trigram and its trigram count per record (position id - 1); a missing index is empty."""
+    ) -> dict[str, array]:
+        """One trigram index's posting lists by trigram; a missing index is empty."""
         index: dict[str, array] = {}
-        counts = array("H")
         blob_path = prefix.with_name(prefix.name + ".bin.gz")
         if not blob_path.exists():
-            return index, counts
+            return index
 
         offsets: dict[str, tuple[int, int]] = {}
         with open(
@@ -109,10 +108,7 @@ class SearchIndex(Index, Generic[T]):
                     "I", (id for id in trigram_ids if predicate(id, ids_allowed))
                 )
             index[trigram] = trigram_ids
-
-        with gzip.open(prefix.with_name(prefix.name + "_counts.bin.gz"), "rb") as f:
-            counts.frombytes(f.read())
-        return index, counts
+        return index
 
     def search(self, query: str, limit: int) -> list[tuple[View[T, Store], float]]:
         query = search_text(query)

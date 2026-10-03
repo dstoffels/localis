@@ -62,13 +62,14 @@ def _gzip(buf: bytes | bytearray) -> bytes:
 
 
 def _dump_trigram_index(trigram_sets: dict[int, set[str]], prefix: Path) -> None:
-    """Writes one trigram index: its posting lists (<prefix>.bin.gz), each trigram's offset into them (<prefix>_offsets.tsv), and every record's trigram count by id (<prefix>_counts.bin.gz); an index with no trigrams isn't written."""
-    paths = [prefix.with_name(prefix.name + suffix) for suffix in (".bin.gz", "_offsets.tsv", "_counts.bin.gz")]
+    """Writes one trigram index: its posting lists (<prefix>.bin.gz) and each trigram's offset into them (<prefix>_offsets.tsv); an index with no trigrams isn't written."""
+    blob_path, offsets_path = (prefix.with_name(prefix.name + suffix) for suffix in (".bin.gz", "_offsets.tsv"))
+    # per-record trigram counts (<prefix>_counts.bin.gz) were dropped when scoring moved to query coverage
+    prefix.with_name(prefix.name + "_counts.bin.gz").unlink(missing_ok=True)
     if not any(trigram_sets.values()):
-        for path in paths:
-            path.unlink(missing_ok=True)
+        blob_path.unlink(missing_ok=True)
+        offsets_path.unlink(missing_ok=True)
         return
-    blob_path, offsets_path, counts_path = paths
 
     index: dict[str, list[int]] = defaultdict(list)
     for id in sorted(trigram_sets):
@@ -89,12 +90,6 @@ def _dump_trigram_index(trigram_sets: dict[int, set[str]], prefix: Path) -> None
     with open(offsets_path, "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f, delimiter="\t", lineterminator="\n")
         writer.writerows(offsets_rows)
-
-    # position id - 1 holds that record's trigram count, the denominator of its trigram similarity
-    counts = array("H", [0] * max(trigram_sets))
-    for id, trigrams in trigram_sets.items():
-        counts[id - 1] = len(trigrams)
-    counts_path.write_bytes(_gzip(counts.tobytes()))
 
 
 def _dump_short_names(data: Sequence[Model], path: Path) -> None:
