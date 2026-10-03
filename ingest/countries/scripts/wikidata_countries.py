@@ -22,8 +22,13 @@ COUNTRY_NAMES_PATH = COUNTRIES_INPUTS_PATH / "wikidata_country_names.json"
 
 def fetch_wikidata_country_names() -> dict[str, dict[str, list[str]]]:
     """English names and sports codes of every ISO alpha-2 country from Wikidata, keyed by alpha-2 as {"names": [...], "codes": [...]}, fetched live and persisted to inputs/."""
-    url = SPARQL_ENDPOINT + "?query=" + urllib.parse.quote(SPARQL_QUERY) + "&format=json"
-    request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT, "Accept": "application/sparql-results+json"})
+    url = (
+        SPARQL_ENDPOINT + "?query=" + urllib.parse.quote(SPARQL_QUERY) + "&format=json"
+    )
+    request = urllib.request.Request(
+        url,
+        headers={"User-Agent": USER_AGENT, "Accept": "application/sparql-results+json"},
+    )
     ingest_log.writeline("Querying Wikidata for country names...")
     with urllib.request.urlopen(request, timeout=120) as response:
         data = json.loads(response.read().decode("utf-8"))
@@ -32,7 +37,9 @@ def fetch_wikidata_country_names() -> dict[str, dict[str, list[str]]]:
     for binding in data["results"]["bindings"]:
         iso = binding["iso"]["value"]
         item = binding["item"]["value"].rsplit("/", 1)[1]
-        _, names, codes = items.setdefault(iso, {}).setdefault(item, (int(binding["sitelinks"]["value"]), set(), set()))
+        _, names, codes = items.setdefault(iso, {}).setdefault(
+            item, (int(binding["sitelinks"]["value"]), set(), set())
+        )
         for field in ("label", "alt", "short"):
             if field in binding:
                 names.add(binding[field]["value"])
@@ -45,5 +52,7 @@ def fetch_wikidata_country_names() -> dict[str, dict[str, list[str]]]:
     for iso, by_item in sorted(items.items()):
         _, names, codes = max(by_item.values(), key=lambda entry: entry[0])
         country_names[iso] = {"names": sorted(names), "codes": sorted(codes)}
-    COUNTRY_NAMES_PATH.write_text(json.dumps(country_names, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    COUNTRY_NAMES_PATH.write_text(
+        json.dumps(country_names, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
+    )
     return country_names

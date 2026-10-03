@@ -96,8 +96,8 @@ Earlier benchmarks in this document used `resource.getrusage(resource.RUSAGE_SEL
 
 | Domain | Size | Share |
 |---|---|---|
-| Countries | <!-- stat:data.shipped_size.countries.total:size -->71KB<!-- /stat --> | <!-- stat:data.shipped_size.countries.share_pct:pct -->0.1%<!-- /stat --> |
-| Subdivisions | <!-- stat:data.shipped_size.subdivisions.total:size -->10.7MB<!-- /stat --> | <!-- stat:data.shipped_size.subdivisions.share_pct:pct -->18.6%<!-- /stat --> |
+| Countries | <!-- stat:data.shipped_size.countries.total:size -->85KB<!-- /stat --> | <!-- stat:data.shipped_size.countries.share_pct:pct -->0.1%<!-- /stat --> |
+| Subdivisions | <!-- stat:data.shipped_size.subdivisions.total:size -->10.6MB<!-- /stat --> | <!-- stat:data.shipped_size.subdivisions.share_pct:pct -->18.5%<!-- /stat --> |
 | Cities | <!-- stat:data.shipped_size.cities.total:size -->46.7MB<!-- /stat --> | <!-- stat:data.shipped_size.cities.share_pct:pct -->81.3%<!-- /stat --> |
 
 Within cities: `cities.tsv` <!-- stat:data.shipped_size.cities.files.cities.tsv:size -->12.6MB<!-- /stat -->, `filter_index.tsv` <!-- stat:data.shipped_size.cities.files.filter_index.tsv:size -->17.7MB<!-- /stat -->, `search_index.bin.gz` <!-- stat:data.shipped_size.cities.files.search_index.bin.gz:size -->12.9MB<!-- /stat -->, `search_index_offsets.tsv` <!-- stat:data.shipped_size.cities.files.search_index_offsets.tsv:size -->234KB<!-- /stat -->, `lookup_index_int.tsv` <!-- stat:data.shipped_size.cities.files.lookup_index_int.tsv:size -->3.2MB<!-- /stat -->.
