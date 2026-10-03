@@ -80,11 +80,11 @@ Every figure in this section and in the README's Performance section is generate
 
 ### Search and filter index architecture
 
-Both indexes moved off `list[int]` postings (each id a full boxed Python object, ~36 bytes) onto `array.array("I", ...)` (packed 4-byte unsigned ints), for the same reason in both cases: the cost was in the container, not the data.
+Both indexes keep their postings in `array.array("I", ...)` (packed 4-byte unsigned ints) rather than `list[int]`, where each id was a full boxed Python object of about 36 bytes: the cost was in the container, not the data. The filter index builds its reverse index (`value -> ids`) in memory from per-entity rows with `defaultdict(lambda: array("I"))`. The search index is shipped pre-built.
 
-The search index also changed format on disk. It used to be one TSV line per trigram, `base64(varint(delta(ids)))`, which requires a serial, byte-at-a-time Python loop to decode, that can't be bulk-loaded regardless of the target container. It's now two files: `search_index.bin.gz` (every trigram's sorted ids, packed as raw uint32, concatenated in one buffer, gzip'd as a whole) and `search_index_offsets.tsv` (`trigram, offset, count`, offset/count in id-count units, plain text since it's small and worth keeping git-diffable). Loading decompresses and `array.frombytes()`s the entire blob in one bulk call, then slices per-trigram arrays out of that single decoded array using the offsets table, decode once, slice many, rather than decoding per trigram.
+Search ships three files per queryable registry, all written at ingest by `dump_search_index` (`ingest/utils/index.py`) from the model's `CANON_FIELDS` and `CONTEXT_FIELDS`. The canon index holds the trigrams of the fields naming a record (its name, official and common names, aliases and ISO suffix) and the context index those of the fields locating it (its parent, admin1 and country); each is a gzipped blob of every trigram's sorted ids packed as uint32 (`canon_index.bin.gz`), an offsets table (`canon_index_offsets.tsv`, plain text so it stays git-diffable) and each record's trigram count (`canon_index_counts.bin.gz`). Loading decompresses each blob and `array.frombytes()`s it in one bulk call, then slices per-trigram arrays out of it using the offsets, decode once and slice many. Countries and subdivisions also ship `short_names.tsv.gz`, every one-word canon name of at most 7 normalized characters with its record id, for the short-query fallback below; cities don't, since their queries usually carry context. Trigrams are built by `search_trigrams()` in `localis/utils/strings.py`, shared by ingest and runtime so the index and the query can't drift apart: text goes through `search_text()` (`normalize()`'s ASCII form with punctuation turned into spaces), and each word is padded with two leading spaces and one trailing one, so a short word keeps its edge trigrams through a typo. The registries own the search policy: each lists its `NAME_FIELDS`, the view fields fuzzy-matched as names, so tuning scoring never needs a re-ingest.
 
-The filter index's fix didn't need a format change, just the container: `FilterIndex.load()` builds its reverse index (`value -> ids`) entirely in memory from per-entity rows already on disk, there was never a variable-length encoding to redesign, so swapping the `defaultdict(list)` factory for `defaultdict(lambda: array("I"))` was the whole change.
+A query runs in three stages in `SearchIndex.search()`. Each query trigram first gets a rarity weight, `log(records / records containing it)` from its posting lengths, so a trigram in tens of thousands of records counts for almost nothing and a distinctive one for a lot. Stage 1 counts, per record, the query trigrams in its canon and context together with `Counter.update()`, which counts a whole id array in C; trigrams in more than 2% of records (and more than 1,000) are skipped as long as 3 rarer ones remain, since they are the longest lists to count and the least telling, such as a country name's trigrams in the context of every city in it. The 200 records with the most hits form the shortlist. Stage 2 computes each shortlisted record's exact rarity-weighted coverage of the query by binary search on the sorted postings, each trigram counted once with canon taking priority over context, and scores it as the mean of its canon coverage and its canon and context coverage together; a record with no canon coverage is dropped, so context alone never surfaces a record, and the top 50 go on. A one-word query of 6 characters or fewer also takes, from the shipped short names within one character of its length, the closest by `rapidfuzz` `ratio`, since a short word with a typo shares only common edge trigrams with its record and would never survive stages 1 and 2. Stage 3 scores each candidate's names: for every name and every span of the query with the name's word count, `token_sort_ratio`, or plain `ratio` when either side has several words and a typo has changed the sorted word order, gives the name score, which is reduced by up to half by the rarity-weighted share of the rest of the query missing from the record's context trigrams, and the candidate keeps its best name and span. Results under 0.5 are dropped, and ties are broken by the stage 2 score.
 
 ### Subdivision hashid
 
@@ -96,36 +96,36 @@ Earlier benchmarks in this document used `resource.getrusage(resource.RUSAGE_SEL
 
 ### Shipped data size
 
-`src/localis/data/` is <!-- stat:data.shipped_size.total:size -->57.6MB<!-- /stat --> total, almost entirely cities:
+`src/localis/data/` is <!-- stat:data.shipped_size.total:size -->57.7MB<!-- /stat --> total, almost entirely cities:
 
 | Domain | Size | Share |
 |---|---|---|
 | Macroregions | <!-- stat:data.shipped_size.macroregions.total:size -->2KB<!-- /stat --> | <!-- stat:data.shipped_size.macroregions.share_pct:pct -->0.0%<!-- /stat --> |
-| Countries | <!-- stat:data.shipped_size.countries.total:size -->95KB<!-- /stat --> | <!-- stat:data.shipped_size.countries.share_pct:pct -->0.2%<!-- /stat --> |
-| Subdivisions | <!-- stat:data.shipped_size.subdivisions.total:size -->10.6MB<!-- /stat --> | <!-- stat:data.shipped_size.subdivisions.share_pct:pct -->18.3%<!-- /stat --> |
-| Cities | <!-- stat:data.shipped_size.cities.total:size -->46.9MB<!-- /stat --> | <!-- stat:data.shipped_size.cities.share_pct:pct -->81.5%<!-- /stat --> |
+| Countries | <!-- stat:data.shipped_size.countries.total:size -->96KB<!-- /stat --> | <!-- stat:data.shipped_size.countries.share_pct:pct -->0.2%<!-- /stat --> |
+| Subdivisions | <!-- stat:data.shipped_size.subdivisions.total:size -->10.7MB<!-- /stat --> | <!-- stat:data.shipped_size.subdivisions.share_pct:pct -->18.5%<!-- /stat --> |
+| Cities | <!-- stat:data.shipped_size.cities.total:size -->46.9MB<!-- /stat --> | <!-- stat:data.shipped_size.cities.share_pct:pct -->81.3%<!-- /stat --> |
 
-Within cities: `cities.tsv` <!-- stat:data.shipped_size.cities.files.cities.tsv:size -->12.6MB<!-- /stat -->, `filter_index.tsv` <!-- stat:data.shipped_size.cities.files.filter_index.tsv:size -->17.7MB<!-- /stat -->, `canon_index.bin.gz` <!-- stat:data.shipped_size.cities.files.canon_index.bin.gz:size -->4.7MB<!-- /stat -->, `context_index.bin.gz` <!-- stat:data.shipped_size.cities.files.context_index.bin.gz:size -->8.2MB<!-- /stat -->, `lookup_index_int.tsv` <!-- stat:data.shipped_size.cities.files.lookup_index_int.tsv:size -->3.2MB<!-- /stat -->.
+Within cities: `cities.tsv` <!-- stat:data.shipped_size.cities.files.cities.tsv:size -->12.6MB<!-- /stat -->, `filter_index.tsv` <!-- stat:data.shipped_size.cities.files.filter_index.tsv:size -->17.7MB<!-- /stat -->, `canon_index.bin.gz` <!-- stat:data.shipped_size.cities.files.canon_index.bin.gz:size -->4.7MB<!-- /stat -->, `context_index.bin.gz` <!-- stat:data.shipped_size.cities.files.context_index.bin.gz:size -->8.2MB<!-- /stat -->, `lookup_index_int.tsv` <!-- stat:data.shipped_size.cities.files.lookup_index_int.tsv:size -->3.2MB<!-- /stat -->. Subdivisions' short-name list, `short_names.tsv.gz`, is <!-- stat:data.shipped_size.subdivisions.files.short_names.tsv.gz:size -->0<!-- /stat -->.
 
 ### Memory footprint
 
 | Registry (`force_cache()`) | Retained memory |
 |---|---|
-| countries | <!-- stat:footprint.registries.countries.combined.memory_bytes:size -->766KB<!-- /stat --> |
-| subdivisions | <!-- stat:footprint.registries.subdivisions.combined.memory_bytes:size -->54.0MB<!-- /stat --> |
+| countries | <!-- stat:footprint.registries.countries.combined.memory_bytes:size -->782KB<!-- /stat --> |
+| subdivisions | <!-- stat:footprint.registries.subdivisions.combined.memory_bytes:size -->55.2MB<!-- /stat --> |
 | cities | <!-- stat:footprint.registries.cities.combined.memory_bytes:size -->150.9MB<!-- /stat --> |
-| **total, all three fully cached** | **<!-- stat:footprint.full_cache.memory_bytes:size -->205.6MB<!-- /stat -->** |
+| **total, all three fully cached** | **<!-- stat:footprint.full_cache.memory_bytes:size -->206.9MB<!-- /stat -->** |
 
 Cities' <!-- stat:footprint.registries.cities.combined.memory_bytes:size -->150.9MB<!-- /stat --> breaks down further by structure:
 
 | Cities component | Retained memory | Build time |
 |---|---|---|
-| `_cache` | <!-- stat:footprint.registries.cities.dataset.memory_bytes:size -->56.0MB<!-- /stat --> | <!-- stat:footprint.registries.cities.dataset.time_ms:load -->~425ms<!-- /stat --> |
-| `_lookup_index` | <!-- stat:footprint.registries.cities.lookup_index.memory_bytes:size -->1.8MB<!-- /stat --> | <!-- stat:footprint.registries.cities.lookup_index.time_ms:load -->~62ms<!-- /stat --> |
-| `_filter_index` | <!-- stat:footprint.registries.cities.filter_index.memory_bytes:size -->56.4MB<!-- /stat --> | <!-- stat:footprint.registries.cities.filter_index.time_ms:load -->~568ms<!-- /stat --> |
-| `_search_index` | <!-- stat:footprint.registries.cities.search_index.memory_bytes:size -->36.7MB<!-- /stat --> | <!-- stat:footprint.registries.cities.search_index.time_ms:load -->~155ms<!-- /stat --> |
+| `_cache` | <!-- stat:footprint.registries.cities.dataset.memory_bytes:size -->56.0MB<!-- /stat --> | <!-- stat:footprint.registries.cities.dataset.time_ms:load -->~413ms<!-- /stat --> |
+| `_lookup_index` | <!-- stat:footprint.registries.cities.lookup_index.memory_bytes:size -->1.8MB<!-- /stat --> | <!-- stat:footprint.registries.cities.lookup_index.time_ms:load -->~59ms<!-- /stat --> |
+| `_filter_index` | <!-- stat:footprint.registries.cities.filter_index.memory_bytes:size -->56.4MB<!-- /stat --> | <!-- stat:footprint.registries.cities.filter_index.time_ms:load -->~554ms<!-- /stat --> |
+| `_search_index` | <!-- stat:footprint.registries.cities.search_index.memory_bytes:size -->36.7MB<!-- /stat --> | <!-- stat:footprint.registries.cities.search_index.time_ms:load -->~152ms<!-- /stat --> |
 
-**Total load time** (all three registries, `_cache` plus every index) is <!-- stat:footprint.full_cache.time_ms:load -->~1.49s<!-- /stat -->.
+**Total load time** (all three registries, `_cache` plus every index) is <!-- stat:footprint.full_cache.time_ms:load -->~1.50s<!-- /stat -->.
 
 ### Population floor
 

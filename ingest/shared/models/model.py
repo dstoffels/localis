@@ -2,7 +2,7 @@ from dataclasses import dataclass, asdict
 import json
 from collections import defaultdict
 from typing import ClassVar
-from localis.utils.strings import search_trigrams, normalize
+from localis.utils.strings import search_trigrams, search_text, normalize, SHORT_NAME_MAX
 
 
 @dataclass(slots=True)
@@ -78,7 +78,10 @@ class Model:
     CONTEXT_FIELDS: ClassVar[tuple[str, ...]] = ()
     """Fields locating the record (its parent, subdivision or country), indexed as its context trigrams. Can be nested fields using dot notation."""
 
-    def _field_text(self, fields: tuple[str, ...]) -> str:
+    SHORT_NAMES: ClassVar[bool] = False
+    """Whether to ship the record's short one-word canon names for search's edit-distance fallback, where short names with typos are common and queries carry no context."""
+
+    def _field_values(self, fields: tuple[str, ...]) -> list[str]:
         values: list[str] = []
         for field in fields:
             obj = self
@@ -93,11 +96,19 @@ class Model:
                 values.extend(value)
             elif value is not None:
                 values.append(value)
-        return " ".join(values)
+        return values
+
+    def _field_text(self, fields: tuple[str, ...]) -> str:
+        return " ".join(self._field_values(fields))
 
     def extract_canon_trigrams(self) -> set[str]:
         """Used in processing to produce the canon trigram index from CANON_FIELDS."""
         return search_trigrams(self._field_text(self.CANON_FIELDS))
+
+    def extract_short_names(self) -> set[str]:
+        """Used in processing to produce the short-name list: each canon name that is one word of at most SHORT_NAME_MAX characters in search_text() form."""
+        names = (search_text(value) for value in self._field_values(self.CANON_FIELDS))
+        return {name for name in names if name and len(name) <= SHORT_NAME_MAX and " " not in name}
 
     def extract_context_trigrams(self) -> set[str]:
         """Used in processing to produce the context trigram index from CONTEXT_FIELDS."""

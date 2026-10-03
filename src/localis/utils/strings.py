@@ -4,6 +4,8 @@ from unidecode import unidecode
 
 SPACE_RE = re.compile(r"\s+")
 PUNCTUATION_RE = re.compile(r"[^\w\s]")
+# the longest one-word name shipped for search's edit-distance fallback on short queries, one character past the longest query that uses it
+SHORT_NAME_MAX = 7
 
 
 def normalize(s: str, lower: bool = True) -> str:

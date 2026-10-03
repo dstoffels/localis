@@ -31,6 +31,7 @@ class SubdivisionModel(Model):
         "admin_level": ("admin_level",),
     }
     CANON_FIELDS = ("name", "aliases", "iso_suffix")
+    SHORT_NAMES = True
     CONTEXT_FIELDS = ("parent.name", "country.name", "country.alpha2", "country.alpha3")
 
     @property

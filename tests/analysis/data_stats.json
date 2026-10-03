@@ -47,10 +47,10 @@
     "above_threshold": 34171
   },
   "shipped_size": {
-    "total": 60391150,
+    "total": 60513678,
     "cities": {
       "total": 49223667,
-      "share_pct": 81.5,
+      "share_pct": 81.3,
       "files": {
         "canon_index.bin.gz": 4967995,
         "canon_index_counts.bin.gz": 150475,
@@ -64,7 +64,7 @@
       }
     },
     "countries": {
-      "total": 97044,
+      "total": 98417,
       "share_pct": 0.2,
       "files": {
         "canon_index.bin.gz": 9591,
@@ -73,7 +73,8 @@
         "countries.tsv": 28372,
         "filter_index.tsv": 31588,
         "lookup_index_int.tsv": 1852,
-        "lookup_index_str.tsv": 3813
+        "lookup_index_str.tsv": 3813,
+        "short_names.tsv.gz": 1373
       }
     },
     "macroregions": {
@@ -85,8 +86,8 @@
       }
     },
     "subdivisions": {
-      "total": 11068704,
-      "share_pct": 18.3,
+      "total": 11189859,
+      "share_pct": 18.5,
       "files": {
         "canon_index.bin.gz": 1880235,
         "canon_index_counts.bin.gz": 41937,
@@ -96,6 +97,7 @@
         "context_index_offsets.tsv": 66955,
         "filter_index.tsv": 2825455,
         "lookup_index_str.tsv": 969848,
+        "short_names.tsv.gz": 121155,
         "subdivisions.tsv": 3568478
       }
     }

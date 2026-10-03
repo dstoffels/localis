@@ -97,7 +97,17 @@ def _dump_trigram_index(trigram_sets: dict[int, set[str]], prefix: Path) -> None
     counts_path.write_bytes(_gzip(counts.tobytes()))
 
 
+def _dump_short_names(data: Sequence[Model], path: Path) -> None:
+    """Writes each record's short one-word names as name/id lines, sorted by length then name; not written for a model without SHORT_NAMES, or with no such names."""
+    rows = sorted({(name, item.id) for item in data if item.SHORT_NAMES for name in item.extract_short_names()}, key=lambda r: (len(r[0]), r[0], r[1]))
+    if not rows:
+        path.unlink(missing_ok=True)
+        return
+    path.write_bytes(_gzip("".join(f"{name}\t{id}\n" for name, id in rows).encode("utf-8")))
+
+
 def dump_search_index(data: Sequence[Model], datadir_path: Path) -> None:
-    """Writes the canon index, from the fields naming each record, and the context index, from the fields locating it."""
+    """Writes the canon index, from the fields naming each record, the context index, from the fields locating it, and the short-name list for edit-distance matching."""
     _dump_trigram_index({item.id: item.extract_canon_trigrams() for item in data}, datadir_path / "canon_index")
     _dump_trigram_index({item.id: item.extract_context_trigrams() for item in data}, datadir_path / "context_index")
+    _dump_short_names(data, datadir_path / "short_names.tsv.gz")

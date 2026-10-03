@@ -7,12 +7,12 @@ import gzip
 from pathlib import Path
 from typing import Generic, Mapping, TypeVar
 from localis.utils.data import IndexFilterPredicate
-from rapidfuzz import fuzz
+from rapidfuzz import fuzz, process
 from localis.indexes.index import Index
 from localis.entities import Entity
 from localis.views import View
 from localis.stores import Store
-from localis.utils.strings import search_text, search_trigrams
+from localis.utils.strings import search_text, search_trigrams, SHORT_NAME_MAX
 from collections import Counter
 
 T = TypeVar("T", bound=Entity)
@@ -37,6 +37,11 @@ class SearchIndex(Index, Generic[T]):
         self.STOP_SHARE = 0.02
         self.STOP_MIN_DF = 1000
         self.MIN_COUNTED = 3
+        # a one-word query this short has too few trigrams to find a typo'd name by, so it's also edit-distance matched against the shipped short names within one character of its length
+        self.SHORT_QUERY_LEN = SHORT_NAME_MAX - 1
+        # how many of those closest names, per length, join the candidates, and the least ratio they need
+        self.SHORT_MATCH_K = 20
+        self.SHORT_MATCH_CUTOFF = 70
         super().__init__(filepath, **kwargs)
 
     def load(
@@ -50,9 +55,29 @@ class SearchIndex(Index, Generic[T]):
         self.canon, self.canon_counts = self._load_trigram_index(
             data_path / "canon_index", predicate, allowed_ids or set()
         )
+        self.short_names = self._load_short_names(data_path / "short_names.tsv.gz", predicate, allowed_ids or set())
         self.context, self.context_counts = self._load_trigram_index(
             data_path / "context_index", predicate, allowed_ids or set()
         )
+
+    @staticmethod
+    def _load_short_names(
+        path: Path, predicate: IndexFilterPredicate | None, ids_allowed: set[int]
+    ) -> dict[int, tuple[list[str], array]]:
+        """The shipped short names and their record ids, by name length; empty for a registry that ships none."""
+        by_length: dict[int, tuple[list[str], array]] = {}
+        if not path.exists():
+            return by_length
+        with gzip.open(path, "rt", encoding="utf-8") as f:
+            for line in f:
+                name, id_s = line.rstrip("\n").split("\t")
+                id = int(id_s)
+                if predicate and not predicate(id, ids_allowed):
+                    continue
+                names, ids = by_length.setdefault(len(name), ([], array("I")))
+                names.append(name)
+                ids.append(id)
+        return by_length
 
     @staticmethod
     def _load_trigram_index(
@@ -117,6 +142,9 @@ class SearchIndex(Index, Generic[T]):
             if canon:
                 trigram_scores[id] = (2 * canon + context) / (2 * total_weight)
         candidates = heapq.nlargest(max(self.TOP_K, limit), trigram_scores, key=trigram_scores.__getitem__)
+        # a short typo'd name shares only common edge trigrams with its record, so its edit-distance matches skip the trigram stages
+        if self.short_names and len(tokens) == 1 and len(tokens[0]) <= self.SHORT_QUERY_LEN:
+            candidates = list(dict.fromkeys([*candidates, *self._short_matches(tokens[0])]))
 
         # stage 3: fuzzy-score the candidates' names, with their context checked against the rest of the query
         results: list[tuple[View[T, Store], float, float]] = []
@@ -124,7 +152,7 @@ class SearchIndex(Index, Generic[T]):
             candidate = self.cache[id]
             score = self._score_candidate(id, candidate, tokens, token_trigrams, weights)
             if score >= self.NOISE_THRESHOLD:
-                results.append((candidate, score, trigram_scores[id]))
+                results.append((candidate, score, trigram_scores.get(id, 0.0)))
 
         # the candidate score ranks, the trigram score breaks its ties
         results.sort(key=lambda r: (r[1], r[2]), reverse=True)
@@ -157,9 +185,8 @@ class SearchIndex(Index, Generic[T]):
             hits.update(ids)
         return hits
 
-    def _names(self, candidate: View[T, Store]) -> list[str]:
-        """The search_text() of every value in the candidate's NAME_FIELDS, list fields such as aliases flattened."""
-        names: list[str] = []
+    def _raw_names(self, candidate: View[T, Store]):
+        """Every value in the candidate's NAME_FIELDS, list fields such as aliases flattened."""
         for field_name in self.NAME_FIELDS:
             value = candidate
             for nested in field_name.split("."):
@@ -167,9 +194,23 @@ class SearchIndex(Index, Generic[T]):
                 if value is None:
                     break
             for name in value if isinstance(value, (list, tuple)) else (value,):
-                if isinstance(name, str) and (text := search_text(name)):
-                    names.append(text)
-        return names
+                if isinstance(name, str) and name:
+                    yield name
+
+    def _names(self, candidate: View[T, Store]) -> list[str]:
+        """The search_text() of every name in the candidate's NAME_FIELDS."""
+        return [text for name in self._raw_names(candidate) if (text := search_text(name))]
+
+    def _short_matches(self, token: str) -> list[int]:
+        """The records whose shipped short names, within one character of the token's length, are closest to it by ratio."""
+        matches: list[int] = []
+        for length in range(len(token) - 1, len(token) + 2):
+            if (bucket := self.short_names.get(length)) is None:
+                continue
+            names, ids = bucket
+            for _, _, i in process.extract(token, names, scorer=fuzz.ratio, limit=self.SHORT_MATCH_K, score_cutoff=self.SHORT_MATCH_CUTOFF):
+                matches.append(ids[i])
+        return matches
 
     @staticmethod
     def _contains(index: dict[str, array], trigram: str, id: int) -> bool:
