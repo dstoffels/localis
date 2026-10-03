@@ -1,6 +1,6 @@
 from functools import cached_property
 import threading
-from typing import Iterator, Generic, Mapping, TypeVar
+from typing import Any, Iterator, Generic, Mapping, Self, TypeVar, overload
 from pathlib import Path
 from abc import ABC
 from localis.entities import Entity
@@ -9,11 +9,17 @@ from localis.stores import Store
 from localis.indexes import FilterIndex, SearchIndex, LookupIndex
 
 T = TypeVar("T", bound=Entity)
+R = TypeVar("R", covariant=True)
 
 
-class locked_cached_property(cached_property):
+class locked_cached_property(cached_property[R]):
     """A cached_property built under its registry's lock, so threads that reach a cold registry together build it once; reads of a built value take no lock."""
 
+    # the overloads keep cached_property's typing: the descriptor on the class, the built value on an instance
+    @overload
+    def __get__(self, instance: None, owner: type[Any] | None = None) -> Self: ...
+    @overload
+    def __get__(self, instance: object, owner: type[Any] | None = None) -> R: ...
     def __get__(self, instance, owner=None):
         if instance is None:
             return self
@@ -88,7 +94,7 @@ class Registry(Generic[T], ABC):
     def invalidate_cache(self):
         with self._lock:
             for attr in self._CACHED_ATTRS:
-                self.__dict__.pop(attr, None)
+                vars(self).pop(attr, None)
 
     def force_cache(self):
         """Force-cache all data and indexes that have not yet been loaded."""
