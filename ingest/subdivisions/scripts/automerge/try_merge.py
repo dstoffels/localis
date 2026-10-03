@@ -114,7 +114,8 @@ def try_merge(
             assert geo_sub.geonames_id is not None
             assert iso_sub.iso_code is not None
             geo_name = geo_names_at_scoring[geo_sub.geonames_id]
-            if iso_sub.iso_code in claimed_iso or iso_sub.iso_code in low_margin_iso:
+            # an ISO code in a namesake collision is already an ambiguity orphan, so it goes to review rather than merging elsewhere
+            if iso_sub.iso_code in claimed_iso or iso_sub.iso_code in low_margin_iso or iso_sub.iso_code in ambiguous_iso_codes:
                 continue
             if geo_sub.geonames_id in ambiguous_geo_ids:
                 continue
