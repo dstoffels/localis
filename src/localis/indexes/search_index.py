@@ -197,7 +197,8 @@ class SearchIndex(Index, Generic[T]):
                     score += field_score * weight
                     total_weight += weight
 
-        return score / total_weight if total_weight > 0 else 0.0
+        # secondary fields corroborate a match but never weaken it, so an exact name match isn't averaged down by its aliases
+        return max(name_score, score / total_weight)
 
     REMOVE_CHARS = (",", ".")
 

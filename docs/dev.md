@@ -100,8 +100,8 @@ Earlier benchmarks in this document used `resource.getrusage(resource.RUSAGE_SEL
 
 | Domain | Size | Share |
 |---|---|---|
-| Macroregions | <!-- stat:data.shipped_size.macroregions.total:size -->1KB<!-- /stat --> | <!-- stat:data.shipped_size.macroregions.share_pct:pct -->0.0%<!-- /stat --> |
-| Countries | <!-- stat:data.shipped_size.countries.total:size -->85KB<!-- /stat --> | <!-- stat:data.shipped_size.countries.share_pct:pct -->0.1%<!-- /stat --> |
+| Macroregions | <!-- stat:data.shipped_size.macroregions.total:size -->2KB<!-- /stat --> | <!-- stat:data.shipped_size.macroregions.share_pct:pct -->0.0%<!-- /stat --> |
+| Countries | <!-- stat:data.shipped_size.countries.total:size -->101KB<!-- /stat --> | <!-- stat:data.shipped_size.countries.share_pct:pct -->0.2%<!-- /stat --> |
 | Subdivisions | <!-- stat:data.shipped_size.subdivisions.total:size -->10.6MB<!-- /stat --> | <!-- stat:data.shipped_size.subdivisions.share_pct:pct -->18.5%<!-- /stat --> |
 | Cities | <!-- stat:data.shipped_size.cities.total:size -->46.7MB<!-- /stat --> | <!-- stat:data.shipped_size.cities.share_pct:pct -->81.3%<!-- /stat --> |
 
@@ -111,21 +111,21 @@ Within cities: `cities.tsv` <!-- stat:data.shipped_size.cities.files.cities.tsv:
 
 | Registry (`force_cache()`) | Retained memory |
 |---|---|
-| countries | <!-- stat:footprint.registries.countries.combined.memory_bytes:size -->1.2MB<!-- /stat --> |
-| subdivisions | <!-- stat:footprint.registries.subdivisions.combined.memory_bytes:size -->58.9MB<!-- /stat --> |
-| cities | <!-- stat:footprint.registries.cities.combined.memory_bytes:size -->153.8MB<!-- /stat --> |
-| **total, all three fully cached** | **<!-- stat:footprint.full_cache.memory_bytes:size -->213.4MB<!-- /stat -->** |
+| countries | <!-- stat:footprint.registries.countries.combined.memory_bytes:size -->833KB<!-- /stat --> |
+| subdivisions | <!-- stat:footprint.registries.subdivisions.combined.memory_bytes:size -->53.7MB<!-- /stat --> |
+| cities | <!-- stat:footprint.registries.cities.combined.memory_bytes:size -->148.8MB<!-- /stat --> |
+| **total, all three fully cached** | **<!-- stat:footprint.full_cache.memory_bytes:size -->203.3MB<!-- /stat -->** |
 
-Cities' <!-- stat:footprint.registries.cities.combined.memory_bytes:size -->153.8MB<!-- /stat --> breaks down further by structure:
+Cities' <!-- stat:footprint.registries.cities.combined.memory_bytes:size -->148.8MB<!-- /stat --> breaks down further by structure:
 
 | Cities component | Retained memory | Build time |
 |---|---|---|
-| `_cache` | <!-- stat:footprint.registries.cities.dataset.memory_bytes:size -->63.1MB<!-- /stat --> | <!-- stat:footprint.registries.cities.dataset.time_ms:load -->~430ms<!-- /stat --> |
-| `_lookup_index` | <!-- stat:footprint.registries.cities.lookup_index.memory_bytes:size -->4KB<!-- /stat --> | <!-- stat:footprint.registries.cities.lookup_index.time_ms:load -->~60ms<!-- /stat --> |
-| `_filter_index` | <!-- stat:footprint.registries.cities.filter_index.memory_bytes:size -->57.7MB<!-- /stat --> | <!-- stat:footprint.registries.cities.filter_index.time_ms:load -->~553ms<!-- /stat --> |
-| `_search_index` | <!-- stat:footprint.registries.cities.search_index.memory_bytes:size -->33.1MB<!-- /stat --> | <!-- stat:footprint.registries.cities.search_index.time_ms:load -->~175ms<!-- /stat --> |
+| `_cache` | <!-- stat:footprint.registries.cities.dataset.memory_bytes:size -->56.0MB<!-- /stat --> | <!-- stat:footprint.registries.cities.dataset.time_ms:load -->~407ms<!-- /stat --> |
+| `_lookup_index` | <!-- stat:footprint.registries.cities.lookup_index.memory_bytes:size -->1.8MB<!-- /stat --> | <!-- stat:footprint.registries.cities.lookup_index.time_ms:load -->~58ms<!-- /stat --> |
+| `_filter_index` | <!-- stat:footprint.registries.cities.filter_index.memory_bytes:size -->56.4MB<!-- /stat --> | <!-- stat:footprint.registries.cities.filter_index.time_ms:load -->~556ms<!-- /stat --> |
+| `_search_index` | <!-- stat:footprint.registries.cities.search_index.memory_bytes:size -->34.7MB<!-- /stat --> | <!-- stat:footprint.registries.cities.search_index.time_ms:load -->~153ms<!-- /stat --> |
 
-**Total load time** (all three registries, `_cache` plus every index) is <!-- stat:footprint.full_cache.time_ms:load -->~1.46s<!-- /stat -->.
+**Total load time** (all three registries, `_cache` plus every index) is <!-- stat:footprint.full_cache.time_ms:load -->~1.43s<!-- /stat -->.
 
 ### Population floor
 
@@ -133,4 +133,4 @@ Cities' <!-- stat:footprint.registries.cities.combined.memory_bytes:size -->153.
 
 Ids stay stable across thresholds. `Store.id_to_idx` (an `array.array("i")` sized to the full unfiltered id space, `-1` for an excluded id) decouples a View's physical position in its Store from its public `id`, so `View._idx` resolves through this array instead of assuming `id - 1`. That lets `CityStore` skip allocating rows for excluded cities entirely, a real memory saving rather than just fewer View wrapper objects, without ever renumbering an id a caller might already be holding.
 
-At a <!-- stat:data.cities.threshold:int -->15,000<!-- /stat --> threshold (the tier geonamescache ships as a separate bundled dataset), cities drops from <!-- stat:data.cities.total:int -->235,915<!-- /stat --> to <!-- stat:data.cities.above_threshold:int -->34,171<!-- /stat --> and memory drops from <!-- stat:footprint.registries.cities.combined.memory_bytes:size -->153.8MB<!-- /stat --> to <!-- stat:footprint.cities_threshold.memory_bytes:size -->31.8MB<!-- /stat -->.
+At a <!-- stat:data.cities.threshold:int -->15,000<!-- /stat --> threshold (the tier geonamescache ships as a separate bundled dataset), cities drops from <!-- stat:data.cities.total:int -->235,915<!-- /stat --> to <!-- stat:data.cities.above_threshold:int -->34,171<!-- /stat --> and memory drops from <!-- stat:footprint.registries.cities.combined.memory_bytes:size -->148.8MB<!-- /stat --> to <!-- stat:footprint.cities_threshold.memory_bytes:size -->30.4MB<!-- /stat -->.
