@@ -2,11 +2,11 @@ from pathlib import Path
 from typing import Mapping, cast
 from localis.entities import Macroregion, MacroregionBase, MacroregionType
 from localis.stores import MacroregionStore
-from .view import View
+from .view import View, ViewMap
 
 
 class MacroregionView(View[Macroregion, MacroregionStore]):
-    """Runtime view over MacroregionStore, used by Registry._cache; resolves its parent against its own view dict."""
+    """Runtime view over MacroregionStore, used by Registry._cache; resolves its parent against its own view mapping."""
 
     __slots__ = ("_views",)
 
@@ -45,13 +45,13 @@ class MacroregionView(View[Macroregion, MacroregionStore]):
         )
 
     @classmethod
-    def load(cls, filepath: Path) -> dict[int, "MacroregionView"]:
+    def load(cls, filepath: Path) -> ViewMap["MacroregionView"]:
         store = MacroregionStore()
-        views: dict[int, MacroregionView] = {}
         with open(filepath, "r", encoding="utf-8") as f:
             for idx, line in enumerate(f):
                 name, code, type_, parent_s = line.rstrip("\r\n").split("\t")
                 store.id_to_idx.append(idx)
                 store.append(name, code, type_, int(parent_s) if parent_s else None)
-                views[idx + 1] = cls(idx + 1, store, views)
+        # a macroregion's parent resolves against this same mapping
+        views: ViewMap[MacroregionView] = ViewMap(store, lambda id: cls(id, store, views))
         return views

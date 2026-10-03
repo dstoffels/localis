@@ -2,7 +2,7 @@ from pathlib import Path
 from typing import Mapping
 from localis.entities import CountryBase, SubdivisionBase, Subdivision
 from localis.stores import SubdivisionStore
-from .view import CrossReferencedView
+from .view import CrossReferencedView, ViewMap
 from .country_view import CountryView
 
 
@@ -96,9 +96,8 @@ class SubdivisionView(
     @classmethod
     def load(
         cls, filepath: Path, country_views: Mapping[int, CountryView]
-    ) -> dict[int, "SubdivisionView"]:
+    ) -> ViewMap["SubdivisionView"]:
         store = SubdivisionStore()
-        views: dict[int, SubdivisionView] = {}
         idx = 0
         with open(filepath, "r", encoding="utf-8") as f:
             for id, line in enumerate(f, start=1):
@@ -131,6 +130,7 @@ class SubdivisionView(
                     parent_id,
                     country_id,
                 )
-                views[id] = cls(id, store, country_views, views)
                 idx += 1
+        # a subdivision's parent resolves against this same mapping
+        views: ViewMap[SubdivisionView] = ViewMap(store, lambda id: cls(id, store, country_views, views))
         return views

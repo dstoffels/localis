@@ -3,7 +3,7 @@ from typing import Mapping
 from localis.entities import CountryBase, SubdivisionBase, City
 from localis.stores import CityStore
 from localis.utils.data import CacheFilterPredicate
-from .view import CrossReferencedView
+from .view import CrossReferencedView, ViewMap
 from .country_view import CountryView
 from .subdivision_view import SubdivisionView
 
@@ -88,9 +88,8 @@ class CityView(CrossReferencedView[City, CityStore, CountryView, SubdivisionView
         country_views: Mapping[int, CountryView],
         subdivision_views: Mapping[int, SubdivisionView],
         predicate: CacheFilterPredicate | None = None,
-    ) -> dict[int, "CityView"]:
+    ) -> ViewMap["CityView"]:
         store = CityStore()
-        views: dict[int, CityView] = {}
         idx = 0
 
         with open(filepath, "r", encoding="utf-8") as f:
@@ -120,6 +119,5 @@ class CityView(CrossReferencedView[City, CityStore, CountryView, SubdivisionView
                     float(lat),
                     float(lng),
                 )
-                views[id] = cls(id, store, country_views, subdivision_views)
                 idx += 1
-        return views
+        return ViewMap(store, lambda id: cls(id, store, country_views, subdivision_views))

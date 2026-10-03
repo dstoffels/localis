@@ -2,12 +2,12 @@ from pathlib import Path
 from typing import Mapping
 from localis.entities import Country, HistoricInfo, MacroregionBase
 from localis.stores import CountryStore
-from .view import View
+from .view import View, ViewMap
 from .macroregion_view import MacroregionView
 
 
 class CountryView(View[Country, CountryStore]):
-    """Runtime view over CountryStore, used by Registry._cache; resolves its macroregions against the macroregion view dict."""
+    """Runtime view over CountryStore, used by Registry._cache; resolves its macroregions against the macroregion view mapping."""
 
     __slots__ = ("_macroregion_views",)
 
@@ -87,9 +87,8 @@ class CountryView(View[Country, CountryStore]):
         )
 
     @classmethod
-    def load(cls, filepath: Path, macroregion_views: Mapping[int, MacroregionView]) -> dict[int, "CountryView"]:
+    def load(cls, filepath: Path, macroregion_views: Mapping[int, MacroregionView]) -> ViewMap["CountryView"]:
         store = CountryStore()
-        views: dict[int, CountryView] = {}
         idx = 0
         with open(filepath, "r", encoding="utf-8") as f:
             for id, line in enumerate(f, start=1):
@@ -129,9 +128,8 @@ class CountryView(View[Country, CountryStore]):
                     macroregion_ids,
                     grouping_ids,
                 )
-                views[id] = cls(id, store, macroregion_views)
                 idx += 1
-        return views
+        return ViewMap(store, lambda id: cls(id, store, macroregion_views))
 
     @staticmethod
     def _parse_historic(s: str) -> HistoricInfo | None:
