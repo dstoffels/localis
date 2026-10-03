@@ -33,8 +33,7 @@ class FilterIndex(Index):
 
             self.index = index
 
-    def get(self, filter_kw: str, field_value: str) -> set[int]:
-        if isinstance(field_value, str):
-            field_value = normalize(field_value)
-        ids = self.index.get(filter_kw, {}).get(field_value, set())
+    def get(self, filter_kw: str, field_value: str | int) -> set[int]:
+        # every indexed cell is stored as a string, so a scalar like admin_level=1 is stringified before lookup
+        ids = self.index.get(filter_kw, {}).get(normalize(str(field_value)), set())
         return set(ids)

@@ -50,7 +50,8 @@ def dump_filter_index(data: Sequence[Model], datadir_path: Path) -> None:
         for item in data:
             row = []
             for _, values in item.extract_filter_values().items():
-                row.append("|".join([str(v) for v in values if v]))
+                # skip only missing values: a plain truthiness check would drop a real 0, such as admin_level=0
+                row.append("|".join([str(v) for v in values if v is not None and v != ""]))
             writer.writerow(row)
 
 
