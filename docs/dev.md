@@ -88,7 +88,7 @@ Every figure in this section and in the README's Performance section is generate
 
 ### Search and filter index architecture
 
-Both indexes keep their postings in `array.array("I", ...)` (packed 4-byte unsigned ints) rather than `list[int]`, where each id was a full boxed Python object of about 36 bytes: the cost was in the container, not the data. The filter index builds its reverse index (`value -> ids`) in memory from per-entity rows; a value held by a single record, which is most of them (217k of cities' 277k), keeps its id as a plain int instead of a whole array, and shared values are packed into arrays at their exact size. The search index is shipped pre-built.
+Both indexes keep their postings in `array.array("I", ...)` (packed 4-byte unsigned ints) rather than `list[int]`, where each id was a full boxed Python object of about 36 bytes: the cost was in the container, not the data. Both are inverted at ingest by `_dump_inverted_index()` (`ingest/utils/index.py`), which writes every key's posting list packed and concatenated in key order (`<index>.bin.gz`) and, per key, its columns with the list's offset and count (`<index>_offsets.tsv`); a search key is a trigram and a filter key a field and value. Loading, through `read_inverted_index()` (`localis/indexes/inverted_index.py`), reads the postings in one pass and slices each list out, rather than building the reverse index from per-record rows. In the filter index a value held by a single record, which is most of them (<stat key="data.filter_index.cities.single_record_values:int">216,663</stat> of cities' <stat key="data.filter_index.cities.values:int">277,222</stat>), keeps its id as a plain int instead of a whole array.
 
 Search ships two trigram indexes per queryable registry, plus a short-name list, all written at ingest by `dump_search_index` (`ingest/utils/index.py`) from the model's `CANON_FIELDS` and `CONTEXT_FIELDS`. The canon index holds the trigrams of the fields naming a record (its name, official and common names, aliases and ISO suffix) and the context index those of the fields locating it (its parent, admin1 and country); each is a gzipped blob of every trigram's sorted ids packed as uint32 (`canon_index.bin.gz`) with an offsets table (`canon_index_offsets.tsv`, plain text so it stays git-diffable). Loading decompresses each blob and `array.frombytes()`s it in one bulk call, then slices per-trigram arrays out of it using the offsets, decode once and slice many. Each also ships `short_names.tsv.gz`, every one-word canon name of at most 7 normalized characters with its record id, for the short-query fallback below. Cities were left out at first, since their queries usually carry context, until an exact search for a four-letter city (Jīān) failed: it shares all its trigrams with dozens of longer names and missed the shortlist. Theirs adds <stat key="data.shipped_size.cities.files.short_names.tsv.gz:size">462KB</stat>. Trigrams are built by `word_trigrams()` in `localis/utils/strings.py`, shared by ingest (through `search_trigrams()`, which normalizes raw field text first) and runtime (on the query's already-normalized tokens) so the index and the query can't drift apart: text goes through `search_text()` (`normalize()`'s form with punctuation turned into spaces; `normalize()` casefolds, strips accents from Latin letters and spells out from `LATIN_FOLDS` the Latin letters Unicode decomposition leaves alone, and leaves other scripts as written, though every shipped name is Latin), and each word is padded with two leading spaces and one trailing one, so a short word keeps its edge trigrams through a typo. The registries own the search policy: each lists its `NAME_FIELDS`, the view fields fuzzy-matched as names, so tuning scoring never needs a re-ingest.
 
@@ -104,36 +104,36 @@ Earlier benchmarks in this document used `resource.getrusage(resource.RUSAGE_SEL
 
 ### Shipped data size
 
-`src/localis/data/` is <stat key="data.shipped_size.total:size">57.0MB</stat> total, almost entirely cities:
+`src/localis/data/` is <stat key="data.shipped_size.total:size">49.9MB</stat> total, almost entirely cities:
 
 | Domain | Size | Share |
 |---|---|---|
 | Macroregions | <stat key="data.shipped_size.macroregions.total:size">2KB</stat> | <stat key="data.shipped_size.macroregions.share_pct:pct">0.0%</stat> |
-| Countries | <stat key="data.shipped_size.countries.total:size">100KB</stat> | <stat key="data.shipped_size.countries.share_pct:pct">0.2%</stat> |
-| Subdivisions | <stat key="data.shipped_size.subdivisions.total:size">9.7MB</stat> | <stat key="data.shipped_size.subdivisions.share_pct:pct">17.0%</stat> |
-| Cities | <stat key="data.shipped_size.cities.total:size">47.2MB</stat> | <stat key="data.shipped_size.cities.share_pct:pct">82.8%</stat> |
+| Countries | <stat key="data.shipped_size.countries.total:size">104KB</stat> | <stat key="data.shipped_size.countries.share_pct:pct">0.2%</stat> |
+| Subdivisions | <stat key="data.shipped_size.subdivisions.total:size">9.7MB</stat> | <stat key="data.shipped_size.subdivisions.share_pct:pct">19.5%</stat> |
+| Cities | <stat key="data.shipped_size.cities.total:size">40.0MB</stat> | <stat key="data.shipped_size.cities.share_pct:pct">80.3%</stat> |
 
-Within cities: `cities.tsv` <stat key="data.shipped_size.cities.files.cities.tsv:size">12.6MB</stat>, `filter_index.tsv` <stat key="data.shipped_size.cities.files.filter_index.tsv:size">17.7MB</stat>, `canon_index.bin.gz` <stat key="data.shipped_size.cities.files.canon_index.bin.gz:size">4.7MB</stat>, `context_index.bin.gz` <stat key="data.shipped_size.cities.files.context_index.bin.gz:size">8.2MB</stat>, `lookup_index_int.tsv` <stat key="data.shipped_size.cities.files.lookup_index_int.tsv:size">3.2MB</stat>. Subdivisions' short-name list, `short_names.tsv.gz`, is <stat key="data.shipped_size.subdivisions.files.short_names.tsv.gz:size">102KB</stat>.
+Within cities: `cities.tsv` <stat key="data.shipped_size.cities.files.cities.tsv:size">12.6MB</stat>, `filter_index.bin.gz` <stat key="data.shipped_size.cities.files.filter_index.bin.gz:size">3.2MB</stat> with `filter_index_offsets.tsv` <stat key="data.shipped_size.cities.files.filter_index_offsets.tsv:size">7.3MB</stat>, `canon_index.bin.gz` <stat key="data.shipped_size.cities.files.canon_index.bin.gz:size">4.7MB</stat>, `context_index.bin.gz` <stat key="data.shipped_size.cities.files.context_index.bin.gz:size">8.2MB</stat>, `lookup_index_int.tsv` <stat key="data.shipped_size.cities.files.lookup_index_int.tsv:size">3.2MB</stat>. Subdivisions' short-name list, `short_names.tsv.gz`, is <stat key="data.shipped_size.subdivisions.files.short_names.tsv.gz:size">102KB</stat>.
 
 ### Memory footprint
 
 | Registry (`force_cache()`) | Retained memory |
 |---|---|
-| countries | <stat key="footprint.registries.countries.combined.memory_bytes:size">780KB</stat> |
-| subdivisions | <stat key="footprint.registries.subdivisions.combined.memory_bytes:size">41.0MB</stat> |
-| cities | <stat key="footprint.registries.cities.combined.memory_bytes:size">120.3MB</stat> |
-| **total, all three fully cached** | **<stat key="footprint.full_cache.memory_bytes:size">162.1MB</stat>** |
+| countries | <stat key="footprint.registries.countries.combined.memory_bytes:size">783KB</stat> |
+| subdivisions | <stat key="footprint.registries.subdivisions.combined.memory_bytes:size">41.7MB</stat> |
+| cities | <stat key="footprint.registries.cities.combined.memory_bytes:size">121.0MB</stat> |
+| **total, all three fully cached** | **<stat key="footprint.full_cache.memory_bytes:size">163.4MB</stat>** |
 
-Cities' <stat key="footprint.registries.cities.combined.memory_bytes:size">120.3MB</stat> breaks down further by structure:
+Cities' <stat key="footprint.registries.cities.combined.memory_bytes:size">121.0MB</stat> breaks down further by structure:
 
 | Cities component | Retained memory | Build time |
 |---|---|---|
-| `_cache` | <stat key="footprint.registries.cities.dataset.memory_bytes:size">28.1MB</stat> | <stat key="footprint.registries.cities.dataset.time_ms:load">~340ms</stat> |
-| `_lookup_index` | <stat key="footprint.registries.cities.lookup_index.memory_bytes:size">1.8MB</stat> | <stat key="footprint.registries.cities.lookup_index.time_ms:load">~75ms</stat> |
-| `_filter_index` | <stat key="footprint.registries.cities.filter_index.memory_bytes:size">48.5MB</stat> | <stat key="footprint.registries.cities.filter_index.time_ms:load">~723ms</stat> |
-| `_search_index` | <stat key="footprint.registries.cities.search_index.memory_bytes:size">41.9MB</stat> | <stat key="footprint.registries.cities.search_index.time_ms:load">~193ms</stat> |
+| `_cache` | <stat key="footprint.registries.cities.dataset.memory_bytes:size">28.1MB</stat> | <stat key="footprint.registries.cities.dataset.time_ms:load">~345ms</stat> |
+| `_lookup_index` | <stat key="footprint.registries.cities.lookup_index.memory_bytes:size">1.8MB</stat> | <stat key="footprint.registries.cities.lookup_index.time_ms:load">~78ms</stat> |
+| `_filter_index` | <stat key="footprint.registries.cities.filter_index.memory_bytes:size">49.1MB</stat> | <stat key="footprint.registries.cities.filter_index.time_ms:load">~283ms</stat> |
+| `_search_index` | <stat key="footprint.registries.cities.search_index.memory_bytes:size">41.9MB</stat> | <stat key="footprint.registries.cities.search_index.time_ms:load">~198ms</stat> |
 
-**Total load time** (all three registries, `_cache` plus every index) is <stat key="footprint.full_cache.time_ms:load">~1.59s</stat>.
+**Total load time** (all three registries, `_cache` plus every index) is <stat key="footprint.full_cache.time_ms:load">~1.15s</stat>.
 
 The last per-record overhead with no purpose has been removed: views are created on access by a `ViewMap` over each store rather than kept as one object, dict entry and int key per record, which took about 31MB off cities' dataset, and single-id filter postings are plain ints, which took about 15MB off cities' filter index. What remains is the data as modeled: names, the trigram postings search needs, and the filter keys. Storing names as a UTF-8 blob with offsets was considered and rejected; it would save about 11MB on cities' names, but every read would decode from the blob, slowing the bulk paths that read every name (large filters sort by name, iteration builds every entity). The current figures are treated as the memory floor for this data model.
 
@@ -143,4 +143,4 @@ The last per-record overhead with no purpose has been removed: views are created
 
 Ids stay stable across thresholds. `Store.id_to_idx` (an `array.array("i")` sized to the full unfiltered id space, `-1` for an excluded id) decouples a View's physical position in its Store from its public `id`, so `View._idx` resolves through this array instead of assuming `id - 1`. That lets `CityStore` skip allocating rows for excluded cities entirely, a real memory saving rather than just fewer View wrapper objects, without ever renumbering an id a caller might already be holding.
 
-At a <stat key="data.cities.threshold:int">15,000</stat> threshold (the tier geonamescache ships as a separate bundled dataset), cities drops from <stat key="data.cities.total:int">235,917</stat> to <stat key="data.cities.above_threshold:int">34,171</stat> and memory drops from <stat key="footprint.registries.cities.combined.memory_bytes:size">120.3MB</stat> to <stat key="footprint.cities_threshold.memory_bytes:size">27.5MB</stat>.
+At a <stat key="data.cities.threshold:int">15,000</stat> threshold (the tier geonamescache ships as a separate bundled dataset), cities drops from <stat key="data.cities.total:int">235,917</stat> to <stat key="data.cities.above_threshold:int">34,171</stat> and memory drops from <stat key="footprint.registries.cities.combined.memory_bytes:size">121.0MB</stat> to <stat key="footprint.cities_threshold.memory_bytes:size">28.4MB</stat>.

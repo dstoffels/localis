@@ -6,7 +6,9 @@ import localis
 
 ROOT = Path(__file__).resolve().parents[2]
 DATA_PATH = ROOT / "src" / "localis" / "data"
-RESOLUTION_MAP_PATH = ROOT / "ingest" / "subdivisions" / "outputs" / "resolution_map.json"
+RESOLUTION_MAP_PATH = (
+    ROOT / "ingest" / "subdivisions" / "outputs" / "resolution_map.json"
+)
 CROSSWALK_PATH = ROOT / "ingest" / "subdivisions" / "inputs" / "wikidata_crosswalk.json"
 CITIES_INGEST_STATS_PATH = ROOT / "ingest" / "cities" / "outputs" / "ingest_stats.json"
 OUTPUT_PATH = Path(__file__).with_name("data_stats.json")
@@ -29,7 +31,9 @@ def _country_stats() -> dict[str, int]:
         # every ISO 3166-1 country has a numeric code; Kosovo, added from GeoNames, has none
         "iso_current": sum(1 for c in current if c.numeric is not None),
         "historic": len(historic),
-        "historic_reusing_current_alpha2": sum(1 for c in historic if c.alpha2 in current_alpha2s),
+        "historic_reusing_current_alpha2": sum(
+            1 for c in historic if c.alpha2 in current_alpha2s
+        ),
     }
 
 
@@ -86,17 +90,30 @@ def _non_administrative_stats(subs: list) -> dict[str, Any]:
     children = _iso_children(subs)
     by_country: dict[str, dict[str, Any]] = {}
     for grouping in (s for s in subs if s.admin_level == 0):
-        entry = by_country.setdefault(grouping.country.alpha2, {"groupings": 0, "children": 0, "children_by_type": Counter()})
+        entry = by_country.setdefault(
+            grouping.country.alpha2,
+            {"groupings": 0, "children": 0, "children_by_type": Counter()},
+        )
         entry["groupings"] += 1
         entry["children"] += len(children.get(grouping.id, []))
-        entry["children_by_type"].update(child.type for child in children.get(grouping.id, []))
-    return {"countries": len(by_country), **{alpha2: {**e, "children_by_type": dict(e["children_by_type"])} for alpha2, e in sorted(by_country.items())}}
+        entry["children_by_type"].update(
+            child.type for child in children.get(grouping.id, [])
+        )
+    return {
+        "countries": len(by_country),
+        **{
+            alpha2: {**e, "children_by_type": dict(e["children_by_type"])}
+            for alpha2, e in sorted(by_country.items())
+        },
+    }
 
 
 def _kosovo_stats(subs: list) -> dict[str, int]:
     """ISO's Serbian records for Kosovo and GeoNames' records under Kosovo, which ship side by side."""
     province = localis.subdivisions.lookup("RS-KM")
-    assert province is not None, "RS-KM is missing, so methodology's Kosovo figures need rewriting"
+    assert (
+        province is not None
+    ), "RS-KM is missing, so methodology's Kosovo figures need rewriting"
     okrugs = len(_iso_children(subs).get(province.id, []))
     levels = Counter(s.admin_level for s in subs if s.country.alpha2 == "XK")
     return {
@@ -114,11 +131,17 @@ def _wikidata_stats() -> dict[str, int]:
     subs = list(localis.subdivisions)
     shipped = {s.iso_code: s.geonames_id for s in subs if s.iso_code}
     admin_ids = {s.geonames_id for s in subs if s.geonames_id is not None}
-    disagreements = [code for code, geonames_id in crosswalk.items() if code in shipped and shipped[code] != geonames_id]
+    disagreements = [
+        code
+        for code, geonames_id in crosswalk.items()
+        if code in shipped and shipped[code] != geonames_id
+    ]
     return {
         "crosswalk_codes": len(crosswalk),
         "disagreements": len(disagreements),
-        "disagreements_not_admin": sum(1 for code in disagreements if crosswalk[code] not in admin_ids),
+        "disagreements_not_admin": sum(
+            1 for code in disagreements if crosswalk[code] not in admin_ids
+        ),
     }
 
 
@@ -140,7 +163,18 @@ def _resolution_stats() -> dict[str, int]:
         "orphans": sum(len(bucket) for bucket in automerge["orphans"].values()),
     }
     stats["skill_decisions"] = stats["skill_merge"] + stats["skill_add"]
-    stats["total"] = sum(stats[k] for k in ("wikidata", "automerge", "skill_merge", "skill_add", "bypass_twinned", "bypass_untwinned", "geonames_absent"))
+    stats["total"] = sum(
+        stats[k]
+        for k in (
+            "wikidata",
+            "automerge",
+            "skill_merge",
+            "skill_add",
+            "bypass_twinned",
+            "bypass_untwinned",
+            "geonames_absent",
+        )
+    )
     return stats
 
 
@@ -153,12 +187,36 @@ def _city_stats() -> dict[str, int]:
     finally:
         localis.cities.set_population_threshold(threshold)
     ingest_stats = json.loads(CITIES_INGEST_STATS_PATH.read_text(encoding="utf-8"))
-    return {"total": total, "threshold": POPULATION_THRESHOLD, "above_threshold": above, "ascii_names": ingest_stats["ascii_names"]}
+    return {
+        "total": total,
+        "threshold": POPULATION_THRESHOLD,
+        "above_threshold": above,
+        "ascii_names": ingest_stats["ascii_names"],
+    }
+
+
+def _filter_index_stats() -> dict[str, dict[str, int]]:
+    """Per queryable registry, how many distinct filter values it indexes and how many belong to a single record."""
+    stats: dict[str, dict[str, int]] = {}
+    for offsets_path in sorted(DATA_PATH.glob("*/filter_index_offsets.tsv")):
+        counts = [
+            int(line.rsplit("\t", 1)[1])
+            for line in offsets_path.read_text(encoding="utf-8").splitlines()
+        ]
+        stats[offsets_path.parent.name] = {
+            "values": len(counts),
+            "single_record_values": counts.count(1),
+        }
+    return stats
 
 
 def _shipped_size_stats() -> dict[str, Any]:
     files_by_domain = {
-        domain_path.name: {f.name: f.stat().st_size for f in sorted(domain_path.iterdir()) if f.is_file()}
+        domain_path.name: {
+            f.name: f.stat().st_size
+            for f in sorted(domain_path.iterdir())
+            if f.is_file()
+        }
         for domain_path in sorted(p for p in DATA_PATH.iterdir() if p.is_dir())
     }
     totals = {domain: sum(files.values()) for domain, files in files_by_domain.items()}
@@ -166,7 +224,11 @@ def _shipped_size_stats() -> dict[str, Any]:
     return {
         "total": total,
         **{
-            domain: {"total": totals[domain], "share_pct": round(100 * totals[domain] / total, 1), "files": files}
+            domain: {
+                "total": totals[domain],
+                "share_pct": round(100 * totals[domain] / total, 1),
+                "files": files,
+            }
             for domain, files in files_by_domain.items()
         },
     }
@@ -176,15 +238,29 @@ def _reconcile(stats: dict[str, Any]) -> None:
     """Fails loudly if the counts don't add up, so a broken ingest can't publish inconsistent numbers."""
     subs, res, macro = stats["subdivisions"], stats["resolution"], stats["macroregions"]
     checks = {
-        "macroregion types sum to the macroregions shipped": macro["total"] == macro["regions"] + macro["subregions"] + macro["groupings"],
-        "every current country is placed in a macroregion": macro["current_placed"] == stats["countries"]["current"],
-        "Kosovo's districts and municipalities are all its records": subs["kosovo"]["kosovan_records"] == subs["kosovo"]["districts"] + subs["kosovo"]["municipalities"],
-        "resolution sources sum to the ISO subdivisions shipped": res["total"] == subs["iso_total"],
-        "merged ISO subdivisions match merging sources": subs["iso_merged"] == res["wikidata"] + res["automerge"] + res["skill_merge"] + res["bypass_twinned"],
-        "ISO-only subdivisions match non-merging sources": subs["iso_only"] == res["skill_add"] + res["bypass_untwinned"] + res["geonames_absent"],
-        "subdivision total is merged + ISO-only + GeoNames-only": subs["total"] == subs["iso_merged"] + subs["iso_only"] + subs["geonames_only"],
+        "macroregion types sum to the macroregions shipped": macro["total"]
+        == macro["regions"] + macro["subregions"] + macro["groupings"],
+        "every current country is placed in a macroregion": macro["current_placed"]
+        == stats["countries"]["current"],
+        "Kosovo's districts and municipalities are all its records": subs["kosovo"][
+            "kosovan_records"
+        ]
+        == subs["kosovo"]["districts"] + subs["kosovo"]["municipalities"],
+        "resolution sources sum to the ISO subdivisions shipped": res["total"]
+        == subs["iso_total"],
+        "merged ISO subdivisions match merging sources": subs["iso_merged"]
+        == res["wikidata"]
+        + res["automerge"]
+        + res["skill_merge"]
+        + res["bypass_twinned"],
+        "ISO-only subdivisions match non-merging sources": subs["iso_only"]
+        == res["skill_add"] + res["bypass_untwinned"] + res["geonames_absent"],
+        "subdivision total is merged + ISO-only + GeoNames-only": subs["total"]
+        == subs["iso_merged"] + subs["iso_only"] + subs["geonames_only"],
         "no orphans remain": res["orphans"] == 0,
-        "skill decisions all have a decider": res["skill_by_agent"] + res["skill_by_human"] == res["skill_decisions"],
+        "skill decisions all have a decider": res["skill_by_agent"]
+        + res["skill_by_human"]
+        == res["skill_decisions"],
     }
     failed = [name for name, ok in checks.items() if not ok]
     if failed:
@@ -200,6 +276,7 @@ def compute() -> dict[str, Any]:
         "resolution": _resolution_stats(),
         "wikidata": _wikidata_stats(),
         "cities": _city_stats(),
+        "filter_index": _filter_index_stats(),
         "shipped_size": _shipped_size_stats(),
     }
     _reconcile(stats)

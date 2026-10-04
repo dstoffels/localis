@@ -2,7 +2,6 @@ from array import array
 from bisect import bisect_left
 import heapq
 import math
-import csv
 import gzip
 from pathlib import Path
 from typing import Generic, Mapping, TypeVar
@@ -13,6 +12,7 @@ from localis.stores import Store
 from localis.utils.strings import search_text, word_trigrams, SHORT_NAME_MAX
 from localis.utils.data import resolve_field
 from collections import Counter
+from .inverted_index import read_inverted_index, keep_allowed
 
 T = TypeVar("T", bound=Entity)
 
@@ -69,29 +69,8 @@ class SearchIndex(Generic[T]):
     @staticmethod
     def _load_trigram_index(prefix: Path, allowed_ids: set[int] | None) -> dict[str, array]:
         """One trigram index's posting lists by trigram; a missing index is empty."""
-        index: dict[str, array] = {}
-        blob_path = prefix.with_name(prefix.name + ".bin.gz")
-        if not blob_path.exists():
-            return index
-
-        offsets: dict[str, tuple[int, int]] = {}
-        with open(
-            prefix.with_name(prefix.name + "_offsets.tsv"), "r", encoding="utf-8"
-        ) as f:
-            reader = csv.reader(f, delimiter="\t")
-            for trigram, offset, count in reader:
-                offsets[trigram] = (int(offset), int(count))
-
-        with gzip.open(blob_path, "rb") as f:
-            full_array = array("I")
-            full_array.frombytes(f.read())
-
-        for trigram, (offset, count) in offsets.items():
-            trigram_ids = full_array[offset : offset + count]
-            if allowed_ids is not None:
-                trigram_ids = array("I", (id for id in trigram_ids if id in allowed_ids))
-            index[trigram] = trigram_ids
-        return index
+        postings, rows = read_inverted_index(prefix)
+        return {trigram: keep_allowed(postings[offset : offset + count], allowed_ids) for (trigram,), offset, count in rows}
 
     def search(self, query: str, limit: int, exclude: frozenset[int] = frozenset()) -> list[tuple[View[T, Store], float]]:
         """The best `limit` matches for the query, best first, leaving out the `exclude`d ids before any are shortlisted."""

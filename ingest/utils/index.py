@@ -8,6 +8,9 @@ import gzip
 from .paths import DATA_PATH
 from .logger import ingest_log
 
+# each key's columns (a trigram, or a filter field and value) to the ids of the records holding it
+InvertedIndex = dict[tuple[str, ...], list[int]]
+
 
 def dump_data(data: Sequence[Model], file_path: Path) -> None:
     with open(file_path, "w", newline="", encoding="utf-8") as f:
@@ -42,16 +45,14 @@ def dump_lookup_index(data: Sequence[Model], datadir_path: Path) -> None:
 
 
 def dump_filter_index(data: Sequence[Model], datadir_path: Path) -> None:
-    path = datadir_path / "filter_index.tsv"
-    with open(path, "w", newline="", encoding="utf-8") as f:
-        writer = csv.writer(f, delimiter="\t", lineterminator="\n")
-        headers = data[0].FILTER_FIELDS.keys()
-        writer.writerow(headers)
-        for item in data:
-            row = []
-            for _, values in item.extract_filter_values().items():
-                row.append("|".join(v for v in values if v))
-            writer.writerow(row)
+    """Writes the filter index, each (field, value)'s posting list, inverted here so loading only slices it."""
+    index: InvertedIndex = defaultdict(list)
+    for item in data:
+        for field, values in item.extract_filter_values().items():
+            for value in values:
+                if value:
+                    index[(field, value)].append(item.id)
+    _dump_inverted_index(index, datadir_path / "filter_index")
 
 
 def _gzip(buf: bytes | bytearray) -> bytes:
@@ -61,33 +62,35 @@ def _gzip(buf: bytes | bytearray) -> bytes:
     return bytes(blob)
 
 
-def _dump_trigram_index(trigram_sets: dict[int, set[str]], prefix: Path) -> None:
-    """Writes one trigram index: its posting lists (<prefix>.bin.gz) and each trigram's offset into them (<prefix>_offsets.tsv); an index with no trigrams isn't written."""
+def _dump_inverted_index(index: InvertedIndex, prefix: Path) -> None:
+    """Writes an inverted index: its posting lists, packed as uint32 and concatenated in key order (<prefix>.bin.gz), and each key's columns with its posting list's offset and count (<prefix>_offsets.tsv); an empty index isn't written."""
     blob_path, offsets_path = (prefix.with_name(prefix.name + suffix) for suffix in (".bin.gz", "_offsets.tsv"))
-    if not any(trigram_sets.values()):
+    if not index:
         blob_path.unlink(missing_ok=True)
         offsets_path.unlink(missing_ok=True)
         return
 
-    index: dict[str, list[int]] = defaultdict(list)
-    for id in sorted(trigram_sets):
-        for trigram in trigram_sets[id]:
-            index[trigram].append(id)
-
-    # each trigram's posting list, packed as uint32 and concatenated in trigram order for deterministic output
     buf = bytearray()
     offset = 0
-    offsets_rows: list[tuple[str, int, int]] = []
-    for trigram in sorted(index):
-        ids = index[trigram]
+    offsets_rows: list[tuple[str | int, ...]] = []
+    for key in sorted(index):
+        ids = sorted(index[key])
         buf += array("I", ids).tobytes()
-        offsets_rows.append((trigram, offset, len(ids)))
+        offsets_rows.append((*key, offset, len(ids)))
         offset += len(ids)
     blob_path.write_bytes(_gzip(buf))
 
     with open(offsets_path, "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f, delimiter="\t", lineterminator="\n")
         writer.writerows(offsets_rows)
+
+
+def _invert_trigrams(trigram_sets: dict[int, set[str]]) -> InvertedIndex:
+    index: InvertedIndex = defaultdict(list)
+    for id, trigrams in trigram_sets.items():
+        for trigram in trigrams:
+            index[(trigram,)].append(id)
+    return index
 
 
 def _dump_short_names(data: Sequence[Model], path: Path) -> None:
@@ -101,8 +104,8 @@ def _dump_short_names(data: Sequence[Model], path: Path) -> None:
 
 def dump_search_index(data: Sequence[Model], datadir_path: Path) -> None:
     """Writes the canon index, from the fields naming each record, the context index, from the fields locating it, and the short-name list for edit-distance matching."""
-    _dump_trigram_index({item.id: item.extract_canon_trigrams() for item in data}, datadir_path / "canon_index")
-    _dump_trigram_index({item.id: item.extract_context_trigrams() for item in data}, datadir_path / "context_index")
+    _dump_inverted_index(_invert_trigrams({item.id: item.extract_canon_trigrams() for item in data}), datadir_path / "canon_index")
+    _dump_inverted_index(_invert_trigrams({item.id: item.extract_context_trigrams() for item in data}), datadir_path / "context_index")
     _dump_short_names(data, datadir_path / "short_names.tsv.gz")
 
 

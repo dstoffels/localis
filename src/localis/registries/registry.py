@@ -138,13 +138,13 @@ class QueryableRegistry(Registry[T]):
     """View fields holding the record's names, fuzzy-matched against a search query; context is matched through the context trigram index. Can be nested fields using dot notation."""
 
     @property
-    def _filter_filepath(self) -> Path:
-        return self._data_path / "filter_index.tsv"
+    def _filter_prefix(self) -> Path:
+        return self._data_path / "filter_index"
 
     @locked_cached_property
     def _filter_index(self) -> FilterIndex:
         return FilterIndex(
-            filepath=self._filter_filepath,
+            prefix=self._filter_prefix,
             allowed_ids=self._allowed_ids,
         )
 
