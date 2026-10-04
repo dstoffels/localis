@@ -1,19 +1,27 @@
 from pathlib import Path
 from typing import Mapping
-from localis.entities import Country, CountryBase, HistoricInfo, MacroregionBase
+from localis.entities import Country, CountryBase, CurrencyBase, HistoricInfo, MacroregionBase
 from localis.stores import CountryStore
 from .view import View, ViewMap
 from .macroregion_view import MacroregionView
+from .currency_view import CurrencyView
 
 
 class CountryView(View[Country, CountryStore]):
-    """Runtime view over CountryStore, used by Registry._cache; resolves its macroregions against the macroregion view mapping."""
+    """Runtime view over CountryStore, used by Registry._cache; resolves its macroregions and currencies against their view mappings."""
 
-    __slots__ = ("_macroregion_views",)
+    __slots__ = ("_macroregion_views", "_currency_views")
 
-    def __init__(self, id: int, store: CountryStore, macroregion_views: Mapping[int, MacroregionView]):
+    def __init__(
+        self,
+        id: int,
+        store: CountryStore,
+        macroregion_views: Mapping[int, MacroregionView],
+        currency_views: Mapping[int, CurrencyView],
+    ):
         super().__init__(id, store)
         self._macroregion_views = macroregion_views
+        self._currency_views = currency_views
 
     @property
     def name(self) -> str:
@@ -69,6 +77,10 @@ class CountryView(View[Country, CountryStore]):
     def groupings(self) -> tuple[MacroregionBase, ...]:
         return tuple(self._macroregion_views[i].to_base() for i in self._store.grouping_ids[self._idx])
 
+    @property
+    def currencies(self) -> tuple[CurrencyBase, ...]:
+        return tuple(self._currency_views[i].to_base() for i in self._store.currency_ids[self._idx])
+
     def to_base(self) -> CountryBase:
         return CountryBase(id=self.id, name=self.name, alpha2=self.alpha2, alpha3=self.alpha3, geonames_id=self.geonames_id)
 
@@ -87,10 +99,13 @@ class CountryView(View[Country, CountryStore]):
             historic=self.historic,
             macroregions=self.macroregions,
             groupings=self.groupings,
+            currencies=self.currencies,
         )
 
     @classmethod
-    def load(cls, filepath: Path, macroregion_views: Mapping[int, MacroregionView]) -> ViewMap["CountryView"]:
+    def load(
+        cls, filepath: Path, macroregion_views: Mapping[int, MacroregionView], currency_views: Mapping[int, CurrencyView]
+    ) -> ViewMap["CountryView"]:
         store = CountryStore()
         idx = 0
         with open(filepath, "r", encoding="utf-8") as f:
@@ -109,6 +124,7 @@ class CountryView(View[Country, CountryStore]):
                     historic_s,
                     macroregions_s,
                     groupings_s,
+                    currencies_s,
                 ) = row
                 alias_list = tuple(a for a in alias_s.split("|") if a)
                 geonames_id = int(geonames_id_s) if geonames_id_s else None
@@ -116,6 +132,7 @@ class CountryView(View[Country, CountryStore]):
                 historic = cls._parse_historic(historic_s)
                 macroregion_ids = tuple(int(i) for i in macroregions_s.split("|") if i)
                 grouping_ids = tuple(int(i) for i in groupings_s.split("|") if i)
+                currency_ids = tuple(int(i) for i in currencies_s.split("|") if i)
                 store.id_to_idx.append(idx)
                 store.append(
                     name,
@@ -130,9 +147,10 @@ class CountryView(View[Country, CountryStore]):
                     historic,
                     macroregion_ids,
                     grouping_ids,
+                    currency_ids,
                 )
                 idx += 1
-        return ViewMap(store, lambda id: cls(id, store, macroregion_views))
+        return ViewMap(store, lambda id: cls(id, store, macroregion_views, currency_views))
 
     @staticmethod
     def _parse_historic(s: str) -> HistoricInfo | None:

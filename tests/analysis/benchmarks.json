@@ -3324,5 +3324,70 @@
         }
       }
     }
+  },
+  "2026-10-04T18:02:28": {
+    "host": {
+      "os": "Linux 7.0.0-38-generic",
+      "machine": "x86_64",
+      "cpu": "11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz",
+      "cpu_count": 8,
+      "memory_total_bytes": 15746977792,
+      "python": "3.14.7",
+      "localis": "2.1.0"
+    },
+    "sample_size": 5000,
+    "iterations": 1,
+    "seed": 0,
+    "notes": null,
+    "registries": {
+      "countries": {
+        "search": {
+          "p50_ms": 1.3449,
+          "p95_ms": 4.4167,
+          "p99_ms": 6.6297,
+          "max_ms": 9.2363
+        },
+        "accuracy": {
+          "queries": 430,
+          "failures": 0,
+          "success_pct": 100.0,
+          "top1_pct": 99.3,
+          "mrr": 0.997,
+          "avg_hit_score": 0.9
+        }
+      },
+      "subdivisions": {
+        "search": {
+          "p50_ms": 2.7962,
+          "p95_ms": 5.1461,
+          "p99_ms": 7.1758,
+          "max_ms": 14.0721
+        },
+        "accuracy": {
+          "queries": 7017,
+          "failures": 189,
+          "success_pct": 97.3,
+          "top1_pct": 85.5,
+          "mrr": 0.901,
+          "avg_hit_score": 0.92
+        }
+      },
+      "cities": {
+        "search": {
+          "p50_ms": 6.791,
+          "p95_ms": 12.0624,
+          "p99_ms": 15.3471,
+          "max_ms": 25.5536
+        },
+        "accuracy": {
+          "queries": 5000,
+          "failures": 78,
+          "success_pct": 98.4,
+          "top1_pct": 91.4,
+          "mrr": 0.942,
+          "avg_hit_score": 0.822
+        }
+      }
+    }
   }
 }

@@ -1,12 +1,13 @@
 from pathlib import Path
 from typing import Literal
-from .paths import MACROREGIONS_LOGS_PATH, COUNTRIES_LOGS_PATH, SUBDIVISIONS_LOGS_PATH, CITIES_LOGS_PATH
+from .paths import MACROREGIONS_LOGS_PATH, CURRENCIES_LOGS_PATH, COUNTRIES_LOGS_PATH, SUBDIVISIONS_LOGS_PATH, CITIES_LOGS_PATH
 
-Stage = Literal["MACROREGIONS", "COUNTRIES", "SUBDIVISIONS", "CITIES"]
+Stage = Literal["MACROREGIONS", "CURRENCIES", "COUNTRIES", "SUBDIVISIONS", "CITIES"]
 Level = Literal["INFO", "WARN"]
 
 STAGE_FILES: dict[Stage, Path] = {
     "MACROREGIONS": MACROREGIONS_LOGS_PATH / "macroregions_ingest.log",
+    "CURRENCIES": CURRENCIES_LOGS_PATH / "currencies_ingest.log",
     "COUNTRIES": COUNTRIES_LOGS_PATH / "countries_ingest.log",
     "SUBDIVISIONS": SUBDIVISIONS_LOGS_PATH / "subdivisions_ingest.log",
     "CITIES": CITIES_LOGS_PATH / "cities_ingest.log",

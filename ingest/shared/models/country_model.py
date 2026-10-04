@@ -3,6 +3,7 @@ from typing import Iterator
 
 from .model import Model
 from .macroregion_model import MacroregionModel
+from .currency_model import CurrencyModel
 from localis.utils.strings import normalize
 
 
@@ -39,11 +40,14 @@ class CountryModel(Model):
     # CLDR path, top-down (region, subregion)
     macroregions: list[MacroregionModel] = field(default_factory=list)
     groupings: list[MacroregionModel] = field(default_factory=list)
+    # legal tender in use, in CLDR's order
+    currencies: list[CurrencyModel] = field(default_factory=list)
 
     LOOKUP_FIELDS = ("alpha2", "alpha3", "numeric")
     FILTER_FIELDS = {
         "name": ("name", "official_name", "common_name", "aliases"),
         "macroregion": ("macroregion_names", "macroregion_codes"),
+        "currency": ("currency_names", "currency_codes"),
     }
     CANON_FIELDS = ("name", "official_name", "common_name", "aliases")
     SHORT_NAMES = True
@@ -63,11 +67,20 @@ class CountryModel(Model):
     def macroregion_codes(self) -> list[str]:
         return [m.code for m in (*self.macroregions, *self.groupings)]
 
+    @property
+    def currency_names(self) -> list[str]:
+        return [c.name for c in self.currencies]
+
+    @property
+    def currency_codes(self) -> list[str]:
+        return [c.alpha3 for c in self.currencies]
+
     def to_row(self) -> tuple[str | int | None]:
         data = self.to_dict()
         data["aliases"] = "|".join(self.aliases)
         data["macroregions"] = "|".join(str(m.id) for m in self.macroregions)
         data["groupings"] = "|".join(str(m.id) for m in self.groupings)
+        data["currencies"] = "|".join(str(c.id) for c in self.currencies)
         data["historic"] = self.historic.to_cell() if self.historic else None
         data.pop("id")
         return tuple(data.values())

@@ -2,6 +2,7 @@ import localis
 from localis.registries import (
     Registry,
     MacroregionRegistry,
+    CurrencyRegistry,
     CountryRegistry,
     SubdivisionRegistry,
     CityRegistry,
@@ -12,6 +13,7 @@ from utils import registry_param
 # each entity's own lookup values, written out rather than derived from the ingest models; a historic country looks up by its alpha_4 only, since its alpha2/alpha3/numeric collide
 LOOKUP_VALUES_BY_REGISTRY = {
     MacroregionRegistry: lambda m: (m.code, m.name),
+    CurrencyRegistry: lambda c: (c.alpha3, c.numeric),
     CountryRegistry: lambda c: (
         (c.historic.alpha_4,) if c.historic else (c.alpha2, c.alpha3, c.numeric)
     ),
@@ -22,7 +24,11 @@ LOOKUP_VALUES_BY_REGISTRY = {
 # each entity's nested base entities, with the registry their key resolves in
 NESTED_BY_REGISTRY = {
     MacroregionRegistry: lambda m: [(m.parent, localis.macroregions)],
-    CountryRegistry: lambda c: [(m, localis.macroregions) for m in (*c.macroregions, *c.groupings)],
+    CurrencyRegistry: lambda c: [],
+    CountryRegistry: lambda c: [
+        *((m, localis.macroregions) for m in (*c.macroregions, *c.groupings)),
+        *((m, localis.currencies) for m in c.currencies),
+    ],
     SubdivisionRegistry: lambda s: [(s.parent, localis.subdivisions), (s.country, localis.countries)],
     CityRegistry: lambda c: [*((s, localis.subdivisions) for s in c.subdivisions), (c.country, localis.countries)],
 }

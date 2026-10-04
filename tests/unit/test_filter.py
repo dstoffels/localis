@@ -3,6 +3,7 @@ import pytest
 import localis
 from localis.registries import (
     QueryableRegistry,
+    CurrencyRegistry,
     CountryRegistry,
     SubdivisionRegistry,
     CityRegistry,
@@ -21,10 +22,12 @@ def _country_values(country_id: int) -> tuple:
 
 # Explicit per-registry callbacks returning every value a filter kwarg indexes for an entity, mirroring each model's FILTER_FIELDS.
 FILTER_VALUES_BY_REGISTRY = {
+    CurrencyRegistry: {},
     CountryRegistry: {
         "macroregion": lambda c: tuple(
             v for m in (*c.macroregions, *c.groupings) for v in (m.name, m.code)
         ),
+        "currency": lambda c: tuple(v for m in c.currencies for v in (m.name, m.alpha3)),
     },
     SubdivisionRegistry: {
         "type": lambda s: (s.type,),

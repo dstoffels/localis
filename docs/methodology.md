@@ -10,6 +10,7 @@ This document describes how every record `localis` ships is produced: which sour
 | Subdivisions | <stat key="data.subdivisions.total:int">51,711</stat> | ISO 3166-2, GeoNames `admin1CodesASCII.txt`/`admin2Codes.txt`, Wikidata crosswalk, GeoNames alternate names |
 | Cities | <stat key="data.cities.total:int">235,917</stat> | GeoNames `cities500.txt` |
 | Macroregions | <stat key="data.macroregions.total:int">34</stat> (<stat key="data.macroregions.regions:int">5</stat> regions, <stat key="data.macroregions.subregions:int">23</stat> subregions, <stat key="data.macroregions.groupings:int">6</stat> groupings) | CLDR territory containment and English territory names |
+| Currencies | <stat key="data.currencies.total:int">178</stat> | ISO 4217; CLDR currency data for each country's legal tender |
 
 How the <stat key="data.subdivisions.iso_total:int">5,046</stat> ISO 3166-2 subdivisions were resolved against GeoNames:
 
@@ -30,7 +31,7 @@ How the <stat key="data.subdivisions.iso_total:int">5,046</stat> ISO 3166-2 subd
 
 `localis`'s code is MIT licensed. The data it ships is derived from the sources below and remains subject to their terms. `src/localis/data/NOTICE` ships with the data and attributes each source, the full license texts are in `LICENSES/` and in the wheel's metadata, and the package declares the combined license expression `MIT AND LGPL-2.1-or-later AND CC-BY-4.0 AND Unicode-3.0 AND CC0-1.0`.
 
-ISO 3166-1, 3166-2 and 3166-3 data comes from Debian's [iso-codes](https://salsa.debian.org/iso-codes-team/iso-codes) project, licensed LGPL-2.1-or-later. [GeoNames](https://www.geonames.org/) supplies `countryInfo.txt`, `admin1CodesASCII.txt`, `admin2Codes.txt`, `alternateNamesV2.txt` and `cities500.txt`, licensed CC BY 4.0, which requires attribution. [Wikidata](https://www.wikidata.org/) supplies the subdivision crosswalk and country aliases under CC0. [Unicode CLDR](https://cldr.unicode.org/) supplies `territoryInfo.json`, used to choose which alternate-name languages to keep, and its territory containment and English territory names, the source of the macroregions, under the Unicode License v3.
+ISO 3166-1, 3166-2, 3166-3 and ISO 4217 data comes from Debian's [iso-codes](https://salsa.debian.org/iso-codes-team/iso-codes) project, licensed LGPL-2.1-or-later. [GeoNames](https://www.geonames.org/) supplies `countryInfo.txt`, `admin1CodesASCII.txt`, `admin2Codes.txt`, `alternateNamesV2.txt` and `cities500.txt`, licensed CC BY 4.0, which requires attribution. [Wikidata](https://www.wikidata.org/) supplies the subdivision crosswalk and country aliases under CC0. [Unicode CLDR](https://cldr.unicode.org/) supplies `territoryInfo.json`, used to choose which alternate-name languages to keep, its territory containment and English territory names, the source of the macroregions, and `currencyData.json`, the source of each country's currencies, under the Unicode License v3.
 
 The monthly ingest re-fetches a source only when its ETag changes, and the ETag of every source file behind the shipped data is recorded in `ingest/<domain>/inputs/*.manifest.json`, committed alongside the data. A manifest is written only after its dataset is dumped, so it never records a source that didn't make it into the shipped data. The commit a release was built from therefore identifies its exact source snapshot.
 
@@ -49,6 +50,16 @@ The groupings are every entry CLDR marks as a grouping: North America (003), Lat
 The ingest fails rather than guesses if CLDR stops matching this shape, such as a region's child that isn't a subregion, a macroregion without an English name, or a territory placed in two subregions.
 
 A country's macroregions are its path through CLDR's tree, its region and then its subregion, and separately the groupings it belongs to. All <stat key="data.macroregions.current_placed:int">250</stat> current countries sit in exactly one subregion, including Kosovo (`XK`), in Southern Europe, and Antarctica's path is Oceania → Outlying Oceania, CLDR's own placement. The ingest fails if CLDR leaves a current country unplaced. Historic countries take only CLDR's placements for withdrawn codes, which covers <stat key="data.macroregions.historic_placed:int">10</stat> of the <stat key="data.countries.historic:int">31</stat>; see [Known limitations](#known-limitations). The path and the groupings, in CLDR's order, are exposed as `Country.macroregions` and `Country.groupings`, and both are filterable with `countries.filter(macroregion=...)`, by name or code.
+
+## Currencies
+
+Currencies are ISO 4217's list as iso-codes publishes it: each code's `alpha3`, its `name`, and its `numeric` code as an integer (so "008" is 8). All <stat key="data.currencies.total:int">178</stat> codes ship, including the funds (Switzerland's WIR currencies, Bolivia's Mvdol), precious metals (XAU), the bond-market units, the IMF's special drawing right (XDR) and the testing and no-currency codes (XTS, XXX), since leaving some of ISO's list out would be an editorial choice.
+
+Minor units (how many decimal places a currency uses) aren't shipped. iso-codes doesn't carry them. SIX, the ISO 4217 maintenance agency, publishes them, but its list carries no license and its site's terms of use reserve its content, so it isn't a source. CLDR's `fractions` give digits, but they are CLDR's formatting practice rather than ISO's minor units and differ for several currencies (CLDR uses 0 for the Afghan afghani and the Albanian lek, ISO 2).
+
+A country's currencies come from CLDR's `currencyData.json`, which lists each territory's currencies with the dates each was in use and whether it is legal tender. A country takes the entries with no end date that CLDR doesn't mark as not legal tender, in CLDR's order. That leaves out every fund code, which CLDR marks as not legal tender, and every withdrawn currency, so <stat key="data.currencies.linked:int">153</stat> of the codes are some current country's legal tender. <stat key="data.currencies.multi_currency_countries:int">7</stat> countries have more than one, such as Panama (the balboa and the US dollar) and Zimbabwe (the Zimbabwe gold and the US dollar). Kosovo takes the euro, since CLDR keys its data by the same `XK` code localis uses, and <stat key="data.currencies.current_countries_without:int">1</stat> current country, Antarctica, has none. A CLDR currency that isn't in ISO 4217 is skipped and logged. The result is exposed as `Country.currencies` and is filterable with `countries.filter(currency=...)`, by name or alpha3.
+
+Historic countries have no currencies; see [Known limitations](#known-limitations).
 
 ## Countries
 
@@ -246,13 +257,15 @@ A "no counterpart" decision is not yet re-checked when GeoNames adds records, th
 
 No per-entry audit verdicts are recorded yet. One full-map audit was run after the 2026-10-02 skill run: every resolution was checked for integrity, and every skill merge, every automerge that wasn't an exact name match or had a same-name record elsewhere in its country, every Wikidata merge whose names diverge, and every ISO-only record were reviewed. It found one wrong merge, now corrected. Its verdicts aren't stored, so it doesn't carry forward to future source updates; a fingerprinted, per-entry audit is planned.
 
-Names ship in Latin script only, so a query written in another script, such as "Москва", matches nothing. Localized names are planned as a separate feature.
+Names ship in Latin script only, so a query written in another script, such as "Москва", matches nothing. Translated names are out of scope.
 
 Only <stat key="data.macroregions.historic_placed:int">10</stat> of the <stat key="data.countries.historic:int">31</stat> historic countries have macroregions. Macroregions come from CLDR's territory containment, which places current countries in its main tree and keeps placements for some withdrawn codes under a deprecated status.
 
 A historic country takes only a deprecated placement, never the main tree, because <stat key="data.countries.historic_reusing_current_alpha2:int">5</stat> historic entries reuse a current country's alpha-2 code (French Afars and Issas, British Antarctic Territory, the Byelorussian SSR, the Gilbert and Ellice Islands and Sikkim would otherwise inherit the macroregions of Anguilla, Bonaire, Belarus, Georgia and Slovakia). A deprecated placement is used only when its code sits in exactly one subregion and belongs to exactly one historic entry; its region is that subregion's parent. That maps the Netherlands Antilles, Burma, East Germany, Metropolitan France, the Neutral Zone, the USSR, East Timor, South Yemen, Yugoslavia and Zaire.
 
 The rest have none: Czechoslovakia and Serbia and Montenegro share the code CS, which CLDR places in Southern Europe, right for Serbia and Montenegro but not for Czechoslovakia, and CLDR places none of the others. The mapped placements are CLDR's conventions rather than historical claims: the USSR sits only in Eastern Europe although it spanned northern Asia, and East Germany sits in Western Europe, following unified Germany's placement.
+
+Historic countries have no currencies. CLDR keys its currency data by alpha-2 code, and the codes historic entries hold are reused (the same <stat key="data.countries.historic_reusing_current_alpha2:int">5</stat> as for macroregions, plus CS, shared by Czechoslovakia and Serbia and Montenegro), so its entries can't be trusted to describe the withdrawn country. CLDR's `BQ` lists the US dollar of today's Caribbean Netherlands, not the British Antarctic Territory's currency. Withdrawn currencies would also need ISO 4217's historic list, which iso-codes doesn't carry.
 
 ## Discovery
 

@@ -56,6 +56,17 @@ def _macroregion_stats() -> dict[str, int]:
     }
 
 
+def _currency_stats() -> dict[str, int]:
+    current = [c for c in localis.countries if not c.historic]
+    linked = {c.id for country in current for c in country.currencies}
+    return {
+        "total": len(localis.currencies),
+        "linked": len(linked),
+        "current_countries_without": sum(1 for c in current if not c.currencies),
+        "multi_currency_countries": sum(1 for c in current if len(c.currencies) > 1),
+    }
+
+
 def _subdivision_stats() -> dict[str, Any]:
     subs = list(localis.subdivisions)
     iso_merged = sum(1 for s in subs if s.iso_code and s.geonames_id is not None)
@@ -272,6 +283,7 @@ def compute() -> dict[str, Any]:
     stats = {
         "macroregions": _macroregion_stats(),
         "countries": _country_stats(),
+        "currencies": _currency_stats(),
         "subdivisions": _subdivision_stats(),
         "resolution": _resolution_stats(),
         "wikidata": _wikidata_stats(),

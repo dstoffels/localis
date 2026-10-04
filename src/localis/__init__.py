@@ -3,6 +3,8 @@ from .entities import (
     Macroregion,
     MacroregionBase,
     MacroregionType,
+    Currency,
+    CurrencyBase,
     Country,
     CountryBase,
     HistoricInfo,
@@ -11,6 +13,7 @@ from .entities import (
     City,
 )
 from .registries.macroregion_registry import macroregions
+from .registries.currency_registry import currencies
 from .registries.country_registry import countries
 from .registries.subdivision_registry import subdivisions
 from .registries.city_registry import cities

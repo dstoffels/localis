@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from .entity import Entity
 from .macroregion import MacroregionBase
+from .currency import CurrencyBase
 
 
 @dataclass(slots=True)
@@ -33,6 +34,8 @@ class Country(CountryBase):
     # CLDR path, top-down (region, subregion)
     macroregions: tuple[MacroregionBase, ...]
     groupings: tuple[MacroregionBase, ...]
+    # legal tender in use, in CLDR's order; none for historic entries
+    currencies: tuple[CurrencyBase, ...]
 
     @property
     def key(self) -> str:

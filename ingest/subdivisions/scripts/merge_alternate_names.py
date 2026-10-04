@@ -50,7 +50,7 @@ def merge_alternate_name_aliases(sub_map: SubdivisionMap) -> None:
                 continue
 
             name = _strip_bidi_controls(parts[3])
-            # only Latin-script names ship; names in other scripts are left to localized names
+            # only Latin-script names ship
             if not name or name == sub.name or not is_latin(name):
                 continue
 

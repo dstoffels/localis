@@ -16,6 +16,7 @@ class CountryStore(Store):
         "historics",
         "macroregion_ids",
         "grouping_ids",
+        "currency_ids",
     )
 
     def __init__(self):
@@ -32,6 +33,7 @@ class CountryStore(Store):
         self.historics: list[HistoricInfo | None] = []
         self.macroregion_ids: list[tuple[int, ...]] = []
         self.grouping_ids: list[tuple[int, ...]] = []
+        self.currency_ids: list[tuple[int, ...]] = []
 
     def append(
         self,
@@ -47,6 +49,7 @@ class CountryStore(Store):
         historic: HistoricInfo | None,
         macroregion_ids: tuple[int, ...],
         grouping_ids: tuple[int, ...],
+        currency_ids: tuple[int, ...],
     ) -> None:
         self.names.append(name)
         self.alpha2s.append(alpha2)
@@ -60,3 +63,4 @@ class CountryStore(Store):
         self.historics.append(historic)
         self.macroregion_ids.append(macroregion_ids)
         self.grouping_ids.append(grouping_ids)
+        self.currency_ids.append(currency_ids)
