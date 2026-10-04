@@ -5,7 +5,7 @@ This document outlines the project plan for the Localis project, detailing the o
 
 ## Objectives
 
-- Keep localis's shipped package size and runtime memory footprint in check, primarily driven by the cities dataset. Runtime memory has reached the floor for the current data model (a full cache is about 147MB, down from about 207MB, after on-demand views and single-id filter postings; see dev.md's Memory footprint); the remaining lever is package size, through splitting cities from the core package (backlog), when adoption calls for it.
+- Keep localis's shipped package size and runtime memory footprint in check, primarily driven by the cities dataset. Runtime memory has reached the floor for the current data model, after on-demand views and single-id filter postings (current figures in dev.md's Memory footprint and the README's Performance section); the remaining lever is package size, through splitting cities from the core package (backlog), when adoption calls for it.
 - Ship comprehensive datasets by default, and let the API narrow them ad hoc (population floors, locales) at query time rather than shipping multiple hard-tiered dataset variants.
 
 ## Features
@@ -29,18 +29,7 @@ Blocked on the above, needs a dedicated design pass before implementation starts
 8. Pin the CLDR version shared by `cldr_territory_info.json` (shared stage) and the macroregions inputs, which each fetch CLDR's `main` and could land on different CLDR commits in one run.
 9. Split cities from the core package (`localis` with macroregions, countries and subdivisions, about 11MB installed; cities as an extra backed by a separate data package, about 49MB). Deferred until users report package size as a problem. City rows store country and subdivision ids that are only valid against the exact core data they were built with, so the two would release in lockstep from one ingest run with an exact-version pin, which removes most of the usual benefit of a split.
 10. Population range filters on cities, `cities.filter(population__gt=..., population__lt=...)`, removed as a commented-out stub from `CityRegistry.filter()` during the code review cleanup. The filter index only holds exact values, so a range needs its own path, such as a scan over `CityStore.populations` or a population-sorted id array searched with `bisect`.
-
-## Wikidata provenance
-
-The subdivision crosswalk is done: the result is committed as `ingest/subdivisions/inputs/wikidata_crosswalk.json` and replaced only after subdivisions dump, a result that differs from it rebuilds subdivisions, a mapping that would change a code's previous resolution becomes a `wikidata_changed` orphan, and a result missing committed codes is kept only once a repeat query confirms it. A manifest hash was dropped, since the committed file is the record and comparing against it is the change check. The country names query still runs live whenever countries rebuild, isn't committed, and a Wikidata edit alone never triggers a rebuild.
-
-### Country names
-
-The crosswalk's treatment without the gate: commit `wikidata_country_names.json`, written only after countries dump, rebuild countries when a result differs from it, and confirm a result that loses codes with a repeat query before keeping it. Country names have no merge to review: a change adds or removes aliases, which already shows as a diff of the committed `countries.tsv` in the ingest PR, and with the raw result committed its diff shows the cause beside the effect. The PR review is the escalation, and `name_blocklist.json` is the fix for a bad alias.
-
-### Open questions
-
-- Corroboration, accepting a changed crosswalk mapping when automerge's scoring would pick the same record, was left out so every relink is reviewed. Revisit if `wikidata_changed` orphans turn out to be mostly noise.
+11. Corroboration for `wikidata_changed` orphans: accepting a changed crosswalk mapping when automerge's scoring would pick the same record. Left out so every relink of a shipped subdivision is reviewed; revisit if those orphans turn out to be mostly noise.
 
 ## Localization (gettext-based name translation)
 

@@ -21,15 +21,6 @@ SAMPLE_SIZE = 5000
 SEED = 0
 
 
-def _lookup_identifier(entry: Entity) -> str | int:
-    if isinstance(entry, localis.Country):
-        return entry.alpha2
-    if isinstance(entry, localis.Subdivision):
-        return entry.iso_code or entry.geonames_code or entry.id
-    assert isinstance(entry, localis.City)
-    return entry.geonames_id
-
-
 def _search_query(entry: Entity) -> str:
     if isinstance(entry, localis.City):
         admin1 = next((s for s in entry.subdivisions if s.admin_level == 1), None)
@@ -63,16 +54,11 @@ def _percentiles(samples: list[float]) -> dict[str, float]:
 def benchmark_registry(
     name: str, sample_size: int, iterations: int, log
 ) -> dict[str, Any]:
-    """Per-call latency percentiles for get/lookup/filter/search on warm caches, and search accuracy (top-10 hit rate, top-1 rate, mean reciprocal rank) on mangled names and aliases."""
+    """Search's per-call latency percentiles on warm caches, and its accuracy (top-10 hit rate, top-1 rate, mean reciprocal rank) on mangled names and aliases; get, lookup and filter are index reads too fast to be worth timing."""
     registry: QueryableRegistry = getattr(localis, name)
     registry.force_cache()
     entries: list[Entity] = list(registry)
-    latency: dict[str, list[float]] = {
-        "get": [],
-        "lookup": [],
-        "filter": [],
-        "search": [],
-    }
+    latency: list[float] = []
     hits, misses, top1, reciprocal_ranks, hit_scores = 0, 0, 0, 0.0, []
 
     def search(query: str, entry: Entity, query_type: str, seed: int) -> None:
@@ -81,7 +67,7 @@ def benchmark_registry(
         if not is_latin(query):
             return
         mangled = mangle(query, seed=seed)
-        results = _timed(lambda: registry.search(mangled), latency["search"])
+        results = _timed(lambda: registry.search(mangled), latency)
         rank = next(
             (i for i, (r, _) in enumerate(results, start=1) if r.id == entry.id), None
         )
@@ -102,11 +88,6 @@ def benchmark_registry(
     for i in range(iterations):
         rng = random.Random(SEED + i)
         for entry in rng.sample(entries, min(sample_size, len(entries))):
-            _timed(lambda: registry.get(entry.id), latency["get"])
-            _timed(
-                lambda: registry.lookup(_lookup_identifier(entry)), latency["lookup"]
-            )
-            _timed(lambda: registry.filter(name=entry.name), latency["filter"])
             search(
                 _search_query(entry),
                 entry,
@@ -121,7 +102,7 @@ def benchmark_registry(
 
     queries = hits + misses
     return {
-        **{op: _percentiles(samples) for op, samples in latency.items()},
+        "search": _percentiles(latency),
         "accuracy": {
             "queries": queries,
             "failures": misses,

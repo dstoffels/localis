@@ -20,7 +20,7 @@ from ingest.subdivisions.scripts import (
     merge_alternate_name_aliases,
     score_candidates,
 )
-from ingest.subdivisions.scripts.wikidata_subdivisions import latest_crosswalk
+from ingest.subdivisions.scripts.wikidata_subdivisions import CROSSWALK
 from ingest.subdivisions.scripts.automerge.scoring import is_directional_mismatch
 
 RESOLUTION_MAP_PATH = SUBDIVISIONS_OUTPUTS_PATH / "resolution_map.json"
@@ -33,7 +33,7 @@ def _resolution_map() -> ResolutionMap:
 
 @functools.cache
 def _crosswalk() -> dict[str, int]:
-    return latest_crosswalk()
+    return CROSSWALK.latest()
 
 
 def write_resolution(

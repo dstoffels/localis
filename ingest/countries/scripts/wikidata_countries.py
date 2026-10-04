@@ -1,6 +1,5 @@
-import json
 from dataclasses import dataclass, field
-from ingest.utils import COUNTRIES_INPUTS_PATH, ingest_log, sparql
+from ingest.utils import COUNTRIES_INPUTS_PATH, CommittedQuery, ingest_log, sparql
 
 # an item's English label, alternative labels and short names (P1813), and its IOC (P984) and FIFA (P3441) codes, which appear among the alternative labels but aren't names
 _NAME_FIELDS = """
@@ -24,9 +23,11 @@ SELECT ?code ?item ?alpha2 ?label ?alt ?short ?ioc ?fifa WHERE {{
   OPTIONAL {{ ?item wdt:P297 ?alpha2 }}
 {_NAME_FIELDS}}}
 """
-COUNTRY_NAMES_PATH = COUNTRIES_INPUTS_PATH / "wikidata_country_names.json"
+CountryEntry = dict[str, list[str]]
+CountryNames = dict[str, CountryEntry]
 
-CountryNames = dict[str, dict[str, list[str]]]
+# committed as the names' provenance; changes need no review beyond the ingest PR, whose countries.tsv diff shows their effect
+COUNTRY_NAMES = CommittedQuery[CountryEntry](COUNTRIES_INPUTS_PATH / "wikidata_country_names.json", "Wikidata country names")
 
 
 @dataclass
@@ -60,9 +61,8 @@ def _entry(items: list[_Item]) -> dict[str, list[str]]:
     return {"names": sorted(set().union(*(i.names for i in items))), "codes": sorted(set().union(*(i.codes for i in items)))}
 
 
-def fetch_wikidata_country_names(current_alpha2s: set[str]) -> CountryNames:
-    """English names and sports codes from Wikidata, keyed by alpha-2 for current countries and by ISO 3166-3 alpha-4 for historic ones, as {"names": [...], "codes": [...]}; fetched live and persisted to inputs/."""
-    ingest_log.writeline("Querying Wikidata for country names...")
+def _query_country_names(current_alpha2s: set[str]) -> CountryNames:
+    """English names and sports codes from Wikidata, keyed by alpha-2 for current countries and by ISO 3166-3 alpha-4 for historic ones, as {"names": [...], "codes": [...]}."""
     country_names: CountryNames = {}
 
     # a code claimed by several items keeps the one with the most sitelinks: Cyprus over a same-named item, Antarctica over the Antarctic Treaty area
@@ -74,6 +74,10 @@ def fetch_wikidata_country_names(current_alpha2s: set[str]) -> CountryNames:
         items = [item for item in by_item.values() if not item.alpha2s & current_alpha2s]
         if items:
             country_names[code] = _entry(items)
-
-    COUNTRY_NAMES_PATH.write_text(json.dumps(country_names, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     return country_names
+
+
+def fetch_wikidata_country_names(current_alpha2s: set[str]) -> CountryNames:
+    """Queries the country names and stages them for COUNTRY_NAMES.commit()."""
+    ingest_log.writeline("Querying Wikidata for country names...")
+    return COUNTRY_NAMES.fetch(lambda: _query_country_names(current_alpha2s))

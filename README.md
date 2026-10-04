@@ -456,3 +456,6 @@ localis began with some database cleanup. I found myself writing mountains of be
 Support this project:
 - [GitHub Sponsors](https://github.com/sponsors/dstoffels)
 - [PayPal](https://www.paypal.biz/danOstoffels)
+
+### Contributors
+- [@SchubmannM](https://github.com/SchubmannM): performance work in [#8](https://github.com/dstoffels/localis/pull/8) that inspired localis's `array('I')` index storage and lazy-loaded registries

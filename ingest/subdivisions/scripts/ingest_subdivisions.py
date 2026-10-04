@@ -22,10 +22,8 @@ from .merge_alternate_names import merge_alternate_name_aliases
 from .automerge import try_merge
 from .resolve_subdivisions import apply_skill_decisions
 from .wikidata_subdivisions import (
+    CROSSWALK,
     fetch_wikidata_crosswalk,
-    committed_crosswalk,
-    commit_crosswalk,
-    log_crosswalk_changes,
     flag_wikidata_conflicts,
     apply_wikidata_matches,
 )
@@ -66,16 +64,14 @@ def ingest_subdivisions(
 
         # the Wikidata crosswalk has no ETag, so the committed file is its record: a result that differs from it is an update
         crosswalk = fetch_wikidata_crosswalk()
-        committed = committed_crosswalk()
-        crosswalk_changed = crosswalk != committed
-        if crosswalk_changed:
-            log_crosswalk_changes(crosswalk, committed)
+        committed = CROSSWALK.committed()
+        crosswalk_changed = CROSSWALK.changed(crosswalk)
 
         # rows store country ids, so a countries rebuilt upstream (passed in) forces a rebuild even when subdivision sources are unchanged
         if not has_update and not decisions_changed and not crosswalk_changed and countries is None:
             ingest_log.writeline("No updates for subdivisions, their resolution decisions, the Wikidata crosswalk or countries.")
             # same mappings, so committing only settles the file's formatting
-            commit_crosswalk()
+            CROSSWALK.commit()
             return None
         record_pending(SUBDIVISIONS_MANIFEST_PATH, DECISIONS_MANIFEST_KEY, decisions)
 
@@ -123,7 +119,7 @@ def ingest_subdivisions(
         # only now are this run's sources consumed; a run stopped by orphans leaves them pending, so the next run reprocesses them
         commit_manifest(SUBDIVISIONS_MANIFEST_PATH)
         commit_manifest(SHARED_MANIFEST_PATH)
-        commit_crosswalk()
+        CROSSWALK.commit()
         ingest_log.writeline(f"completed: {len(sub_map)} subdivisions")
         return sub_map.to_geocode_map()
     finally:

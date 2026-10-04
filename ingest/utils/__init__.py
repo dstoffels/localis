@@ -18,6 +18,7 @@ from .paths import (
 )
 from .logger import ingest_log
 from .download import fetch, sparql, SPARQL_ATTEMPTS, record_pending, committed_value, commit_manifest
+from .committed_query import CommittedQuery
 from .index import (
     dump_data,
     dump_lookup_index,

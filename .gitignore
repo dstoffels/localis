@@ -88,6 +88,7 @@ ingest/*/inputs/*
 !ingest/macroregions/inputs/macroregions.manifest.json
 !ingest/countries/inputs/countries.manifest.json
 !ingest/countries/inputs/name_blocklist.json
+!ingest/countries/inputs/wikidata_country_names.json
 !ingest/subdivisions/inputs/subdivisions.manifest.json
 !ingest/subdivisions/inputs/wikidata_crosswalk.json
 !ingest/cities/inputs/cities.manifest.json
