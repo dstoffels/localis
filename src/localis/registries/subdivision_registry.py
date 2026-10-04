@@ -1,5 +1,6 @@
 from typing import Mapping, cast
 from localis.entities import Subdivision
+from localis.indexes import Missing
 from localis.views import CountryView, SubdivisionView
 from localis.registries import QueryableRegistry, CountryRegistry
 
@@ -25,12 +26,12 @@ class SubdivisionRegistry(QueryableRegistry[Subdivision]):
         *,
         name: str | None = None,
         limit: int | None = None,
-        type: str | None = None,
+        type: str | Missing | None = None,
         admin_level: int | None = None,
         country: str | None = None,
         **kwargs,
     ) -> list[Subdivision]:
-        """Filter subdivisions by exact matches on specified fields with AND logic when filtering by multiple fields. Case insensitive."""
+        """Filter subdivisions by exact matches on specified fields with AND logic when filtering by multiple fields. Case insensitive. type=MISSING matches the GeoNames-only subdivisions, which have no type."""
         kwargs.update(type=type, admin_level=admin_level, country=country)
 
         return super().filter(name=name, limit=limit, **kwargs)

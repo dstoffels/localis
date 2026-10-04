@@ -83,7 +83,12 @@ results = localis.countries.filter(name="United", limit=5)
 # By macroregion: a region, subregion or grouping, by name or code
 results = localis.countries.filter(macroregion="Western Europe")
 results = localis.countries.filter(macroregion="EU")
+
+# Historic countries placed in no macroregion (with include_historic set)
+results = localis.countries.filter(macroregion=localis.MISSING)
 ```
+
+Pass `localis.MISSING` to match the records that have no value in a field, passing `None` will ignore the field in the filter.
 
 **Returns:** `list[Country]`
 
@@ -204,6 +209,9 @@ results = localis.subdivisions.filter(country="United States")
 # By admin level (1 = states/provinces, 2 = counties/districts)
 results = localis.subdivisions.filter(admin_level=1)
 
+# GeoNames-only subdivisions, which have no ISO type
+results = localis.subdivisions.filter(type=localis.MISSING)
+
 # Combine multiple filters (AND logic)
 results = localis.subdivisions.filter(
     country="US",
@@ -283,6 +291,9 @@ results = localis.cities.filter(country="United States", limit=10)
 
 # By subdivision name or ISO/GeoNames code
 results = localis.cities.filter(subdivision="California", limit=10)
+
+# Cities linked to no subdivision
+results = localis.cities.filter(country="US", subdivision=localis.MISSING)
 
 # Combine filters (AND logic)
 results = localis.cities.filter(

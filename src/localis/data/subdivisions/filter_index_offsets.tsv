@@ -75031,112 +75031,113 @@ name	zygi	343455	1
 name	zyrardow county	343456	1
 name	zyryansky district	343457	1
 name	zywiec county	343458	1
-type	administration	343459	2
-type	administrative atoll	343461	19
-type	administrative precinct	343480	3
-type	administrative region	343483	66
-type	administrative territory	343549	9
-type	arctic region	343558	2
-type	area	343560	1
-type	autonomous city	343561	2
-type	autonomous city in north africa	343563	2
-type	autonomous community	343565	17
-type	autonomous district	343582	6
-type	autonomous municipality	343588	1
-type	autonomous province	343589	4
-type	autonomous region	343593	18
-type	autonomous republic	343611	3
-type	autonomous sector	343614	1
-type	autonomous territorial unit	343615	1
-type	borough	343616	3
-type	canton	343619	38
-type	capital	343657	1
-type	capital city	343658	4
-type	capital district	343662	3
-type	capital territory	343665	3
-type	chain (of islands)	343668	2
-type	city	343670	33
-type	city corporation	343703	1
-type	city municipality	343704	7
-type	city with county rights	343711	23
-type	commune	343734	12
-type	council area	343746	32
-type	country	343778	6
-type	county	343784	209
-type	decentralized regional entity	343993	4
-type	department	343997	221
-type	dependency	344218	8
-type	district	344226	646
-type	district municipality	344872	44
-type	district with special status	344916	1
-type	districts under republic administration	344917	1
-type	division	344918	22
-type	economic prefecture	344940	2
-type	emirate	344942	7
-type	entity	344949	2
-type	european collectivity	344951	1
-type	federal capital territory	344952	1
-type	federal dependency	344953	1
-type	federal district	344954	1
-type	federal entity	344955	1
-type	federal territory	344956	3
-type	free municipal consortium	344959	6
-type	geographical entity	344965	3
-type	geographical region	344968	6
-type	geographical unit	344974	7
-type	governorate	344981	148
-type	group of islands (20 inhabited islands)	345129	3
-type	indigenous region	345132	4
-type	island	345136	4
-type	island council	345140	7
-type	islands, groups of islands	345147	9
-type	land	345156	16
-type	local council	345172	68
-type	london borough	345240	32
-type	metropolitan administration	345272	1
-type	metropolitan city	345273	22
-type	metropolitan collectivity with special status	345295	3
-type	metropolitan department	345298	95
-type	metropolitan district	345393	36
-type	metropolitan region	345429	12
-type	municipality	345441	517
-type	oblast	345958	6
-type	outlying area	345964	6
-type	overseas collectivity	345970	5
-type	overseas collectivity with special status	345975	1
-type	overseas departmental collectivity	345976	3
-type	overseas territory	345979	1
-type	overseas unique territorial collectivity	345980	2
-type	pakistan administered area	345982	2
-type	parish	345984	74
-type	popularate	346058	22
-type	prefecture	346080	108
-type	province	346188	1181
-type	quarter	347369	17
-type	rayon	347386	66
-type	region	347452	474
-type	regional state	347926	11
-type	republic	347937	23
-type	rural municipality	347960	64
-type	self-governed part	348024	1
-type	special administrative city	348025	1
-type	special administrative region	348026	3
-type	special city	348029	2
-type	special island authority	348031	1
-type	special municipality	348032	13
-type	special region	348045	1
-type	special self-governing city	348046	1
-type	special self-governing province	348047	2
-type	state	348049	279
-type	state city	348328	7
-type	territorial unit	348335	1
-type	territory	348336	5
-type	town	348341	4
-type	town council	348345	1
-type	two-tier county	348346	25
-type	union territory	348371	9
-type	unitary authority	348380	80
-type	urban community	348460	1
-type	urban municipality	348461	27
-type	voivodship	348488	16
-type	ward	348504	1
+type	MISSING	343459	46665
+type	administration	390124	2
+type	administrative atoll	390126	19
+type	administrative precinct	390145	3
+type	administrative region	390148	66
+type	administrative territory	390214	9
+type	arctic region	390223	2
+type	area	390225	1
+type	autonomous city	390226	2
+type	autonomous city in north africa	390228	2
+type	autonomous community	390230	17
+type	autonomous district	390247	6
+type	autonomous municipality	390253	1
+type	autonomous province	390254	4
+type	autonomous region	390258	18
+type	autonomous republic	390276	3
+type	autonomous sector	390279	1
+type	autonomous territorial unit	390280	1
+type	borough	390281	3
+type	canton	390284	38
+type	capital	390322	1
+type	capital city	390323	4
+type	capital district	390327	3
+type	capital territory	390330	3
+type	chain (of islands)	390333	2
+type	city	390335	33
+type	city corporation	390368	1
+type	city municipality	390369	7
+type	city with county rights	390376	23
+type	commune	390399	12
+type	council area	390411	32
+type	country	390443	6
+type	county	390449	209
+type	decentralized regional entity	390658	4
+type	department	390662	221
+type	dependency	390883	8
+type	district	390891	646
+type	district municipality	391537	44
+type	district with special status	391581	1
+type	districts under republic administration	391582	1
+type	division	391583	22
+type	economic prefecture	391605	2
+type	emirate	391607	7
+type	entity	391614	2
+type	european collectivity	391616	1
+type	federal capital territory	391617	1
+type	federal dependency	391618	1
+type	federal district	391619	1
+type	federal entity	391620	1
+type	federal territory	391621	3
+type	free municipal consortium	391624	6
+type	geographical entity	391630	3
+type	geographical region	391633	6
+type	geographical unit	391639	7
+type	governorate	391646	148
+type	group of islands (20 inhabited islands)	391794	3
+type	indigenous region	391797	4
+type	island	391801	4
+type	island council	391805	7
+type	islands, groups of islands	391812	9
+type	land	391821	16
+type	local council	391837	68
+type	london borough	391905	32
+type	metropolitan administration	391937	1
+type	metropolitan city	391938	22
+type	metropolitan collectivity with special status	391960	3
+type	metropolitan department	391963	95
+type	metropolitan district	392058	36
+type	metropolitan region	392094	12
+type	municipality	392106	517
+type	oblast	392623	6
+type	outlying area	392629	6
+type	overseas collectivity	392635	5
+type	overseas collectivity with special status	392640	1
+type	overseas departmental collectivity	392641	3
+type	overseas territory	392644	1
+type	overseas unique territorial collectivity	392645	2
+type	pakistan administered area	392647	2
+type	parish	392649	74
+type	popularate	392723	22
+type	prefecture	392745	108
+type	province	392853	1181
+type	quarter	394034	17
+type	rayon	394051	66
+type	region	394117	474
+type	regional state	394591	11
+type	republic	394602	23
+type	rural municipality	394625	64
+type	self-governed part	394689	1
+type	special administrative city	394690	1
+type	special administrative region	394691	3
+type	special city	394694	2
+type	special island authority	394696	1
+type	special municipality	394697	13
+type	special region	394710	1
+type	special self-governing city	394711	1
+type	special self-governing province	394712	2
+type	state	394714	279
+type	state city	394993	7
+type	territorial unit	395000	1
+type	territory	395001	5
+type	town	395006	4
+type	town council	395010	1
+type	two-tier county	395011	25
+type	union territory	395036	9
+type	unitary authority	395045	80
+type	urban community	395125	1
+type	urban municipality	395126	27
+type	voivodship	395153	16
+type	ward	395169	1

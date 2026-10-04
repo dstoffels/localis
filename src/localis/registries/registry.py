@@ -162,7 +162,7 @@ class QueryableRegistry(Registry[T]):
     def filter(
         self, *, name: str | None = None, limit: int | None = None, **kwargs
     ) -> list[T]:
-        """Filter by exact matches on specified fields with AND logic when filtering by multiple fields. Case insensitive. Raises TypeError for a kwarg the registry can't filter by."""
+        """Filter by exact matches on specified fields with AND logic when filtering by multiple fields. Case insensitive. A field given MISSING matches the records with no value in it. Raises TypeError for a kwarg the registry can't filter by."""
         kwargs["name"] = name
 
         unknown = [k for k in kwargs if k not in self._filter_index.index]

@@ -1,5 +1,6 @@
 from typing import Mapping, cast
 from localis.entities import Country
+from localis.indexes import Missing
 from localis.views import CountryView, MacroregionView
 from localis.registries import QueryableRegistry, MacroregionRegistry
 from localis.registries.registry import locked_cached_property
@@ -40,10 +41,10 @@ class CountryRegistry(QueryableRegistry[Country]):
         *,
         name: str | None = None,
         limit: int | None = None,
-        macroregion: str | None = None,
+        macroregion: str | Missing | None = None,
         **kwargs,
     ) -> list[Country]:
-        """Filter countries by any of its names (name, official_name, common_name, or aliases) or a macroregion (region, subregion or grouping, by name or code). Excludes historic entries unless include_historic is set."""
+        """Filter countries by any of its names (name, official_name, common_name, or aliases) or a macroregion (region, subregion or grouping, by name or code, or MISSING for none). Excludes historic entries unless include_historic is set."""
         kwargs.update(macroregion=macroregion)
         return super().filter(name=name, limit=limit, **kwargs)
 

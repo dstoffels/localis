@@ -102,6 +102,19 @@ class TestFilter:
             ), f"expected the intersection of name=[{subject.name}] and {kwarg}=[{values[0]}], got: {both}"
             assert subject.id in both, f"subject ({subject.name}) should be in results for name and {kwarg}=[{values[0]}]"
 
+    def test_missing(self, registry: QueryableRegistry, select_random, include_historic):
+        """should return only entities with no value for a filter kwarg when filtered by MISSING, never one that has a value"""
+        subject: Entity = select_random(registry)
+
+        for kwarg, get_values in FILTER_VALUES_BY_REGISTRY[type(registry)].items():
+            filters: dict[str, Any] = {kwarg: localis.MISSING}
+            results = registry.filter(**filters)
+
+            stray = [r.name for r in results if _normalized(get_values(r))]
+            assert not stray, f"expected every result to have no {kwarg}, got: {stray[:10]}"
+            if _normalized(get_values(subject)):
+                assert subject.id not in {r.id for r in results}, f"subject ({subject.name}) has a {kwarg}, so shouldn't match {kwarg}=MISSING"
+
     def test_by_field(
         self, registry: QueryableRegistry, select_random, include_historic
     ):

@@ -5,6 +5,7 @@ from typing import Sequence
 from ingest.shared.models import Model
 from array import array
 import gzip
+from localis.indexes.filter_index import MISSING_KEY
 from .paths import DATA_PATH
 from .logger import ingest_log
 
@@ -45,13 +46,12 @@ def dump_lookup_index(data: Sequence[Model], datadir_path: Path) -> None:
 
 
 def dump_filter_index(data: Sequence[Model], datadir_path: Path) -> None:
-    """Writes the filter index, each (field, value)'s posting list, inverted here so loading only slices it."""
+    """Writes the filter index, each (field, value)'s posting list, inverted here so loading only slices it; a record with no value in a field is indexed under MISSING_KEY."""
     index: InvertedIndex = defaultdict(list)
     for item in data:
         for field, values in item.extract_filter_values().items():
-            for value in values:
-                if value:
-                    index[(field, value)].append(item.id)
+            for value in [v for v in values if v] or [MISSING_KEY]:
+                index[(field, value)].append(item.id)
     _dump_inverted_index(index, datadir_path / "filter_index")
 
 

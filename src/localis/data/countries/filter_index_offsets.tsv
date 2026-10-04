@@ -28,1167 +28,1168 @@ macroregion	154	533	16
 macroregion	155	549	11
 macroregion	202	560	53
 macroregion	419	613	52
-macroregion	africa	665	61
-macroregion	americas	726	58
-macroregion	asia	784	55
-macroregion	australasia	839	6
-macroregion	caribbean	845	29
-macroregion	central america	874	8
-macroregion	central asia	882	5
-macroregion	eastern africa	887	22
-macroregion	eastern asia	909	8
-macroregion	eastern europe	917	11
-macroregion	eu	928	27
-macroregion	europe	955	56
-macroregion	european union	1011	27
-macroregion	eurozone	1038	19
-macroregion	ez	1057	19
-macroregion	latin america	1076	52
-macroregion	melanesia	1128	5
-macroregion	micronesian region	1133	8
-macroregion	middle africa	1141	10
-macroregion	north america	1151	41
-macroregion	northern africa	1192	7
-macroregion	northern america	1199	5
-macroregion	northern europe	1204	16
-macroregion	oceania	1220	30
-macroregion	outlying oceania	1250	1
-macroregion	polynesia	1251	10
-macroregion	qo	1261	1
-macroregion	south america	1262	16
-macroregion	southeast asia	1278	13
-macroregion	southern africa	1291	5
-macroregion	southern asia	1296	9
-macroregion	southern europe	1305	18
-macroregion	sub-saharan africa	1323	53
-macroregion	un	1376	193
-macroregion	united nations	1569	193
-macroregion	western africa	1762	17
-macroregion	western asia	1779	20
-macroregion	western europe	1799	11
-name	aaland	1810	1
-name	aaland islands	1811	1
-name	affghanistan	1812	1
-name	affghanisthan	1813	1
-name	affghaunistan	1814	1
-name	afghania	1815	1
-name	afghanistan	1816	1
-name	afghanisthan	1817	1
-name	afghaunistan	1818	1
-name	afghaunistaun	1819	1
-name	agawej	1820	1
-name	ahvenanmaa	1821	1
-name	al hind	1822	1
-name	al-ittihad al-qumuri	1823	1
-name	al-magrib	1824	1
-name	al-sudan	1825	1
-name	aland	1826	1
-name	aland islands	1827	1
-name	aland region	1828	1
-name	albania	1829	1
-name	algeria	1830	1
-name	american samoa	1831	1
-name	american virgin islands	1832	1
-name	andorra	1833	1
-name	angola	1834	1
-name	anguilla	1835	1
-name	antarctica	1836	1
-name	antigua and barbuda	1837	1
-name	antigua-barbuda	1838	1
-name	antillen	1839	1
-name	aomen	1840	1
-name	aotearoa new zealand	1841	1
-name	arab republic of egypt	1842	1
-name	argentina	1843	1
-name	argentine republic	1844	1
-name	armenia	1845	1
-name	aruba	1846	1
-name	as-sudan	1847	1
-name	australia	1848	1
-name	austria	1849	1
-name	ayiti	1850	1
-name	azerbaijan	1851	1
-name	b.v.i.	1852	1
-name	bahama islands	1853	1
-name	bahamas	1854	1
-name	bahrain	1855	1
-name	bahrein islands	1856	1
-name	bailiwick of guernsey	1857	1
-name	bailliage de guernesey	1858	1
-name	bailliage de guernesi	1859	1
-name	bailliage de jerri	1860	1
-name	bailliage de jersey	1861	1
-name	bal-bo	1862	1
-name	bal-po'i yul	1863	1
-name	bal-yul	1864	1
-name	balbo	1865	1
-name	balliwick of jersey	1866	1
-name	balpo	1867	1
-name	balpo-yul	1868	1
-name	bangla desh	1869	1
-name	bangladesh	1870	1
-name	barbadoes	1871	1
-name	barbados	1872	1
-name	barmuda	1873	1
-name	barmuda islands	1874	1
-name	barmudas	1875	1
-name	bat	1876	1
-name	belarus	1877	1
-name	belarusian soviet socialist republic	1878	1
-name	belarusian ssr	1879	1
-name	belau	1880	1
-name	belgium	1881	1
-name	belize	1882	1
-name	belorussia	1883	1
-name	belorussian s.s.r.	1884	1
-name	belorussian soviet socialist republic	1885	1
-name	belorussian ssr	1886	1
-name	belorusskaya ssr	1887	1
-name	benin	1888	1
-name	bermoothes	1889	1
-name	bermuda	1890	1
-name	bermuda islands	1891	1
-name	bermudian islands	1892	1
-name	bes islands	1893	1
-name	bharat ganarajya	1894	1
-name	bharata	1895	1
-name	bharatvarsh	1896	1
-name	bhutan	1897	1
-name	bielarus	1898	1
-name	bielaruskaja savieckaja sacyjalistycnaja respublika	1899	1
-name	bielorussia	1900	1
-name	biot	1901	1
-name	bolivarian republic of venezuela	1902	1
-name	bolivia	1903	1
-name	bolivia, plurinational state of	1904	1
-name	bonaire, saint eustatius and saba	1905	1
-name	bonaire, sint eustatius and saba	1906	1
-name	boriken	1907	1
-name	borinquen	1908	1
-name	boriquen	1909	1
-name	bosnia and hercegovina	1910	1
-name	bosnia and herzegovina	1911	1
-name	bosnia-herzegovina	1912	1
-name	botswana	1913	1
-name	bourbon island	1914	1
-name	bouvet island	1915	1
-name	br venezuela	1916	1
-name	brazil	1917	1
-name	brd	1918	1
-name	britain	1919	1
-name	british antarctic territory	1920	1
-name	british indian ocean territory	1921	1
-name	british virgin islands	1922	1
-name	brunei	1923	1
-name	brunei darussalam	1924	1
-name	bssr	1925	1
-name	bulgaria	1926	1
-name	bulgarian republic	1927	1
-name	burkina faso	1928	1
-name	burma	1929	1
-name	burma, socialist republic of the union of	1930	1
-name	burundi	1931	1
-name	bvi	1932	1
-name	byeloruss	1933	1
-name	byelorussia	1934	1
-name	byelorussian s.s.r.	1935	1
-name	byelorussian soviet socialist republic	1936	1
-name	byelorussian ssr	1937	1
-name	byelorussian ssr soviet socialist republic	1938	1
-name	byelorusskaya sovyetskaya sotsialisticheskaya respublika	1939	1
-name	cabo verde	1940	1
-name	cambodia	1941	1
-name	camboya	1942	1
-name	cameroon	1943	1
-name	campuchia	1944	1
-name	canada	1945	1
-name	canton and enderbury islands	1946	1
-name	cape verde	1947	1
-name	cape verde islands	1948	1
-name	car	1949	1
-name	caribbean netherlands	1950	1
-name	cayman islands	1951	1
-name	caymans	1952	1
-name	cccp	1953	1
-name	central africa	1954	1
-name	central african republic	1955	1
-name	ceskoslovensko	1956	1
-name	ceylan	1957	1
-name	chad	1958	1
-name	chile	1959	1
-name	china	1960	1
-name	china pr	1961	1
-name	china, republic of	1962	1
-name	chinese republic	1963	1
-name	chinese taipei	1964	1
-name	choson	1965	1
-name	christmas island	1966	1
-name	christmas island, other territories	1967	1
-name	christmas island, other territories, australia	1968	1
-name	chunghwa minkuo	1969	1
-name	chunghwa minkwo	1970	1
-name	citta del vaticano	1971	1
-name	cnmi	1972	1
-name	co-operative republic of guyana	1973	1
-name	cocos (keeling) islands	1974	1
-name	cocos islands	1975	1
-name	collectivite de saint-barthelemy	1976	1
-name	collectivity of saint barthelemy	1977	1
-name	collectivity of saint martin	1978	1
-name	colombia	1979	1
-name	colony of bermuda	1980	1
-name	commonwealth of australia	1981	1
-name	commonwealth of dominica	1982	1
-name	commonwealth of jamaica	1983	1
-name	commonwealth of puerto rico	1984	1
-name	commonwealth of the bahamas	1985	1
-name	commonwealth of the northern maria islands	1986	1
-name	commonwealth of the northern mariana islands	1987	1
-name	communist belarus	1988	1
-name	communist china	1989	1
-name	communist germany	1990	1
-name	comoros	1991	1
-name	confoederatio helvetica	1992	1
-name	congo	1993	1
-name	congo (brazzaville)	1994	1
-name	congo (kinshasa)	1995	1
-name	congo republic	1996	1
-name	congo, the democratic republic of the	1997	1
-name	cook group	1998	1
-name	cook islands	1999	1
-name	costa rica	2000	1
-name	cote d'ivoire	2001	1
-name	cote ivoire	2002	1
-name	country of aruba	2003	1
-name	country of bengal	2004	1
-name	country of curacao	2005	1
-name	croatia	2006	1
-name	cuba	2007	1
-name	curacao	2008	1
-name	curacoa	2009	1
-name	curazao	2010	1
-name	cyprus	2011	1
-name	czech republic	2012	1
-name	czechia	2013	1
-name	czecho-slovakia	2014	1
-name	czechoslovakia	2015	1
-name	czechoslovakia, czechoslovak socialist republic	2016	1
-name	d.r.c.	2017	1
-name	daehan minguk	2018	1
-name	daehanminguk	2019	1
-name	dahomey	2020	1
-name	danemark	2021	1
-name	dania	2022	1
-name	danmark	2023	1
-name	dawlat al-bahrain	2024	1
-name	democratic people's republic of korea	2025	1
-name	democratic republic of sao tome and principe	2026	1
-name	democratic republic of the congo	2027	1
-name	democratic republic of timor-leste	2028	1
-name	democratic republic of vietnam	2029	1
-name	democratic socialist republic of sri lanka	2030	1
-name	democratic yemen	2031	1
-name	denmark	2032	1
-name	denmark proper	2033	1
-name	department of mayotte	2034	1
-name	deutsche demokratische republik	2035	1
-name	devil's isles	2036	1
-name	djazair	2037	1
-name	djibouti	2038	1
-name	dominica	2039	1
-name	dominican republic	2040	1
-name	dominicana	2041	1
-name	dominion of new zealand	2042	1
-name	domrep	2043	1
-name	dpr korea	2044	1
-name	dprk	2045	1
-name	dr congo	2046	1
-name	dr vietnam	2047	1
-name	drc	2048	1
-name	dremoshong	2049	1
-name	drenjong	2050	1
-name	dronning maud land	2051	1
-name	drv	2052	1
-name	dutch antilles	2053	1
-name	dutch guiana	2054	1
-name	dzayer	2055	1
-name	east germany	2056	1
-name	east samoa	2057	1
-name	east timor	2058	2
-name	eastern republic of uruguay	2060	1
-name	ecuador	2061	1
-name	ecuadorian state	2062	1
-name	eesti vabariik	2063	1
-name	egypt	2064	1
-name	el salvador	2065	1
-name	ellada	2066	1
-name	ellice islands	2067	1
-name	emirates	2068	1
-name	equatorial guinea	2069	1
-name	eritrea	2070	1
-name	ertra	2071	1
-name	estland	2072	1
-name	estonia	2073	1
-name	eswatini	2074	1
-name	ethiopia	2075	1
-name	european france	2076	1
-name	european part of france	2077	1
-name	faer oer	2078	1
-name	faereyjar	2079	1
-name	faeroe islands	2080	1
-name	faeroer	2081	1
-name	faeroerne	2082	1
-name	faeroes	2083	1
-name	faeroyene	2084	1
-name	falkland islands	2085	1
-name	falkland islands (malvinas)	2086	1
-name	falklands	2087	1
-name	far oer	2088	1
-name	fareo islands	2089	1
-name	faroe islands	2090	1
-name	faroer	2091	1
-name	faroes	2092	1
-name	faroese islands	2093	1
-name	farre	2094	1
-name	farre islands	2095	1
-name	federal democratic republic of ethiopia	2096	1
-name	federal democratic republic of nepal	2097	1
-name	federal republic of germany	2098	1
-name	federal republic of nigeria	2099	1
-name	federal republic of somalia	2100	1
-name	federal republic of yugoslavia	2101	1
-name	federated states of micronesia	2102	1
-name	federated states of micronesia, fsm	2103	1
-name	federation of czechoslovakia	2104	1
-name	federation of malaysia	2105	1
-name	federation of saint christopher and nevis	2106	1
-name	federation of saint kitts and nevis	2107	1
-name	federative republic of brazil	2108	1
-name	fiji	2109	1
-name	fiji ganarajya	2110	1
-name	finland	2111	1
-name	finnia	2112	1
-name	former yugoslav republic of macedonia	2113	1
-name	foroyar	2114	1
-name	fort-hercule	2115	1
-name	fr yugoslavia	2116	1
-name	france	2117	1
-name	france (part in europe)	2118	1
-name	france, metropolitan	2119	1
-name	free associated state of puerto rico	2120	1
-name	free china	2121	1
-name	french afars and issas	2122	1
-name	french establishments in oceania	2123	1
-name	french guiana	2124	1
-name	french oceania	2125	1
-name	french polynesia	2126	1
-name	french republic	2127	1
-name	french settlements in oceania	2128	1
-name	french southern and antarctic lands	2129	1
-name	french southern and antarctic territories	2130	1
-name	french southern territories	2131	1
-name	french territory of the afars and the issas	2132	1
-name	frg	2133	1
-name	friendly islands	2134	1
-name	fry	2135	1
-name	fyr macedonia	2136	1
-name	gabon	2137	1
-name	gabonese republic	2138	1
-name	gabuuti	2139	1
-name	gambia	2140	1
-name	gannaar	2141	1
-name	georgia	2142	1
-name	georgia (country)	2143	1
-name	georgia (sakartvelo)	2144	1
-name	german democratic republic	2145	1
-name	germany	2146	1
-name	ghana	2147	1
-name	gibraltar	2148	1
-name	giernesi	2149	1
-name	gilbert and ellice islands	2150	1
-name	giordania	2151	1
-name	gouvernement du burundi	2152	1
-name	grand duchy of luxembourg	2153	1
-name	great britain	2154	1
-name	great britain and northern ireland	2155	1
-name	great britain guernsey	2156	1
-name	greece	2157	1
-name	greek administration of southern cyprus	2158	1
-name	greek cypriot state	2159	1
-name	greek republic	2160	1
-name	greenland	2161	1
-name	greenlandia	2162	1
-name	grenada	2163	1
-name	groenland	2164	1
-name	guadeloupe	2165	1
-name	guahan	2166	1
-name	guam	2167	1
-name	guam (usa)	2168	1
-name	guatemala	2169	1
-name	guernsey	2170	1
-name	guiana	2171	1
-name	guiana, france	2172	1
-name	guinea	2173	1
-name	guinea-bissau	2174	1
-name	guinea-conakry	2175	1
-name	guyana	2176	1
-name	guyane	2177	1
-name	gwada	2178	1
-name	gwadloup	2179	1
-name	haiti	2180	1
-name	haitian republic	2181	1
-name	halcyon island	2182	1
-name	hanguk	2183	1
-name	hashemite kingdom of jordan	2184	1
-name	hayastan	2185	1
-name	hayastani hanrapetut'yun	2186	1
-name	hayti	2187	1
-name	heard and macdonald islands	2188	1
-name	heard and mcdonald islands	2189	1
-name	heard island and mcdonald islands	2190	1
-name	hellas	2191	1
-name	hellas, greece	2192	1
-name	hellenic republic	2193	1
-name	hervey islands	2194	1
-name	hewanorra	2195	1
-name	himi	2196	1
-name	hindoostan	2197	1
-name	hindustan	2198	1
-name	hkj	2199	1
-name	hksar	2200	1
-name	holy see	2201	1
-name	holy see (vatican city state)	2202	1
-name	honduran republic	2203	1
-name	honduras	2204	1
-name	hong kong	2205	1
-name	hong kong sar	2206	1
-name	hong kong sar, china	2207	1
-name	hong kong special administrative region	2208	1
-name	hong kong special administrative region of china	2209	1
-name	hong kong special administrative region of the people's republic of china	2210	1
-name	hong kong, china	2211	1
-name	hongkong	2212	1
-name	hungary	2213	1
-name	i. iersey	2214	1
-name	i. mannin	2215	1
-name	i.o.m.	2216	1
-name	iapan	2217	1
-name	iapon	2218	1
-name	iceland	2219	1
-name	icelandic republic	2220	1
-name	iersey	2221	1
-name	iersey i.	2222	1
-name	ile de bourbon	2223	1
-name	ile de la reunion	2224	1
-name	ile saint-barthelemy	2225	1
-name	independent state of papua new guinea	2226	1
-name	independent state of samoa	2227	1
-name	india	2228	1
-name	indonesia	2229	1
-name	indostan	2230	1
-name	iran	2231	1
-name	iran, islamic republic of	2232	1
-name	iraq	2233	1
-name	ireland	2234	1
-name	irish republic	2235	1
-name	iritriya	2236	1
-name	isla san francisco	2237	1
-name	islamic republic of afghanistan	2238	1
-name	islamic republic of iran	2239	1
-name	islamic republic of mauritania	2240	1
-name	islamic republic of pakistan	2241	1
-name	islamic republic of the gambia	2242	1
-name	island of aruba	2243	1
-name	island of dominica	2244	1
-name	island of guam	2245	1
-name	island of montserrat	2246	1
-name	island territory of curacao	2247	1
-name	islas malvinas	2248	1
-name	isle de saint francois	2249	1
-name	isle of devils	2250	1
-name	isle of jersey	2251	1
-name	isle of man	2252	1
-name	isle of mann	2253	1
-name	isle of saint francis	2254	1
-name	isle saint francois	2255	1
-name	israel	2256	1
-name	italian republic	2257	1
-name	italy	2258	1
-name	ivory coast	2259	1
-name	iyonola	2260	1
-name	jabuuti	2261	1
-name	jamaica	2262	1
-name	japan	2263	1
-name	jerri	2264	1
-name	jersey	2265	1
-name	jersey island	2266	1
-name	jibuti	2267	1
-name	johnston atoll	2268	1
-name	johnston island	2269	1
-name	jordan	2270	1
-name	jouanacaera	2271	1
-name	juzur al-qamar	2272	1
-name	juzur al-qumur	2273	1
-name	kalaallit nunaat	2274	1
-name	kalama atoll	2275	1
-name	kambodzha	2276	1
-name	kamboja	2277	1
-name	kampuchea	2278	1
-name	karukera	2279	1
-name	kazakhstan	2280	1
-name	keeling islands	2281	1
-name	kenya	2282	1
-name	kingdom of bahrain	2283	1
-name	kingdom of belgium	2284	1
-name	kingdom of bhutan	2285	1
-name	kingdom of cambodia	2286	1
-name	kingdom of denmark	2287	1
-name	kingdom of eswatini	2288	1
-name	kingdom of jordan	2289	1
-name	kingdom of lesotho	2290	1
-name	kingdom of morocco	2291	1
-name	kingdom of norway	2292	1
-name	kingdom of saudi arabia	2293	1
-name	kingdom of siam	2294	1
-name	kingdom of sikkim	2295	1
-name	kingdom of spain	2296	1
-name	kingdom of swaziland	2297	1
-name	kingdom of sweden	2298	1
-name	kingdom of thailand	2299	1
-name	kingdom of the netherlands	2300	1
-name	kingdom of tonga	2301	1
-name	kiribati	2302	1
-name	kitts and nevis	2303	1
-name	korea (south)	2304	1
-name	korea, democratic people's republic of	2305	1
-name	korea, republic of	2306	1
-name	kosova	2307	1
-name	kosovo	2308	1
-name	kuwait	2309	1
-name	kyrgyz republic	2310	1
-name	kyrgyzstan	2311	1
-name	la reunion	2312	1
-name	la reunion island	2313	1
-name	land of bengal	2314	1
-name	lanka, sri	2315	1
-name	lao pdr	2316	1
-name	lao people's democratic republic	2317	1
-name	laos	2318	1
-name	latveja	2319	1
-name	latvejas republika	2320	1
-name	latvia	2321	1
-name	latvian republic	2322	1
-name	latvija	2323	1
-name	latvijas republika	2324	1
-name	lebanese republic	2325	1
-name	lebanon	2326	1
-name	lefatshe la botswana	2327	1
-name	lesotho	2328	1
-name	liber	2329	1
-name	liberia	2330	1
-name	libya	2331	1
-name	liechtenstein	2332	1
-name	lisia	2333	1
-name	lithuania	2334	1
-name	lmagrib	2335	1
-name	lubnan	2336	1
-name	luxembourg	2337	1
-name	macao	2338	1
-name	macao s.a.r.	2339	1
-name	macao sar	2340	1
-name	macao sar, china	2341	1
-name	macao special administrative region	2342	1
-name	macao special administrative region of china	2343	1
-name	macao special administrative region of the people's republic of china	2344	1
-name	macau	2345	1
-name	macau sar	2346	1
-name	macau sar, china	2347	1
-name	macau special administrative region	2348	1
-name	macau special administrative region of the people's republic of china	2349	1
-name	macedonia	2350	1
-name	madagascar	2351	1
-name	madiana	2352	1
-name	madinina	2353	1
-name	mainland france	2354	1
-name	makedonia	2355	1
-name	malagascar	2356	1
-name	malagaskar	2357	1
-name	malawi	2358	1
-name	malaysia	2359	1
-name	malaysia federation	2360	1
-name	maldives	2361	1
-name	mali	2362	1
-name	malliouhana	2363	1
-name	malta	2364	1
-name	malvinas	2365	1
-name	malvinas islands	2366	1
-name	mamlakat al-bahrayn	2367	1
-name	mann	2368	1
-name	maroc	2369	1
-name	marocco	2370	1
-name	marshall islands	2371	1
-name	martinica	2372	1
-name	martinique	2373	1
-name	massiwa ya komori	2374	1
-name	matanitu tugalala o viti	2375	1
-name	matinik	2376	1
-name	matinino	2377	1
-name	matnik	2378	1
-name	mauretania	2379	1
-name	maurice	2380	1
-name	mauritania	2381	1
-name	mauritius	2382	1
-name	mayotte	2383	1
-name	metropolitan denmark	2384	1
-name	metropolitan france	2385	1
-name	mexican republic	2386	1
-name	mexican united states	2387	1
-name	mexico	2388	1
-name	micronesia	2389	1
-name	micronesia, federated states of	2390	1
-name	midway	2391	1
-name	midway atoll	2392	1
-name	midway islands	2393	1
-name	misr	2394	1
-name	mocambique	2395	1
-name	moldavia	2396	1
-name	moldova	2397	1
-name	moldova, republic of	2398	1
-name	monaco	2399	1
-name	mongol state	2400	1
-name	mongolia	2401	1
-name	montenegro	2402	1
-name	montserrat	2403	1
-name	moris	2404	1
-name	moritani	2405	1
-name	morocco	2406	1
-name	most serene republic of san marino	2407	1
-name	mozambique	2408	1
-name	munegu	2409	1
-name	muritanya	2410	1
-name	murutaane	2411	1
-name	myanmar	2412	1
-name	n. korea	2413	1
-name	n.w.i.	2414	1
-name	naija	2415	1
-name	naipal	2416	1
-name	naipala	2417	1
-name	namibia	2418	1
-name	naoero	2419	1
-name	nation of brunei, the abode of peace	2420	1
-name	nationalist china	2421	1
-name	nauru	2422	1
-name	ne-pel	2423	1
-name	necbal	2424	1
-name	nederlanden	2425	1
-name	nederlandse antillen	2426	1
-name	negara brunei darussalam	2427	1
-name	nehpal	2428	1
-name	nei-pal	2429	1
-name	nekbal	2430	1
-name	nekpal	2431	1
-name	nepaal	2432	1
-name	nepal	2433	1
-name	nepall	2434	1
-name	nepaul	2435	1
-name	nercerri	2436	1
-name	netherland antilles	2437	1
-name	netherlands	2438	1
-name	netherlands antilles	2439	1
-name	neutral zone	2440	1
-name	new cal	2441	1
-name	new caledonia	2442	1
-name	new hebrides	2443	1
-name	new hebrides condominium	2444	1
-name	new holland	2445	1
-name	new hollandia	2446	1
-name	new zealand	2447	1
-name	ngola	2448	1
-name	ni-po-lo	2449	1
-name	ni-po-louo	2450	1
-name	nicaragua	2451	1
-name	niepal	2452	1
-name	niger	2453	1
-name	nigeria	2454	1
-name	nihon-koku	2455	1
-name	nipal	2456	1
-name	nippon-koku	2457	1
-name	niue	2458	1
-name	nmi	2459	1
-name	norfolk island	2460	1
-name	norfolk island, australia	2461	1
-name	norfolk island, other territories	2462	1
-name	norfolk island, other territories, australia	2463	1
-name	north korea	2464	1
-name	north macedonia	2465	1
-name	north sudan	2466	1
-name	north vietnam	2467	1
-name	northern mariana islands	2468	1
-name	northern marianas	2469	1
-name	norway	2470	1
-name	nova hollandia	2471	1
-name	occas island	2472	1
-name	oman	2473	1
-name	oriental republic of uruguay	2474	1
-name	ouanalao	2475	1
-name	ouganda	2476	1
-name	ouvoimoja wakomori	2477	1
-name	p.r.c.	2478	1
-name	pa-eul-pou	2479	1
-name	pa-le-pou	2480	1
-name	pa-lo-pou	2481	1
-name	pacific islands (trust territory)	2482	1
-name	pai-pou	2483	1
-name	pakistan	2484	1
-name	palau	2485	1
-name	palestine	2486	1
-name	palestine, state of	2487	1
-name	palestinian territory	2488	1
-name	palpa	2489	1
-name	palpou	2490	1
-name	panama	2491	1
-name	panama canal zone	2492	1
-name	papal state	2493	1
-name	papua new guinea	2494	1
-name	paraguay	2495	1
-name	peeloo	2496	1
-name	pelew	2497	1
-name	pelew islands	2498	1
-name	pellew	2499	1
-name	people's democratic republic of algeria	2500	1
-name	people's democratic republic of yemen	2501	1
-name	people's republic of albania	2502	1
-name	people's republic of bangladesh	2503	1
-name	people's republic of china	2504	1
-name	people's republic of czechoslovakia	2505	1
-name	people's republic of southern yemen	2506	1
-name	people's socialist republic of albania	2507	1
-name	peru	2508	1
-name	philippine islands	2509	1
-name	philippines	2510	1
-name	pitcairn	2511	1
-name	pitcairn islands	2512	1
-name	pitcairn, henderson, ducie and oeno islands	2513	1
-name	pleasant island	2514	1
-name	plurinational state of bolivia	2515	1
-name	poland	2516	1
-name	porto rico	2517	1
-name	portugal	2518	1
-name	portuguese republic	2519	1
-name	pr china	2520	1
-name	prathet thai	2521	1
-name	prc	2522	1
-name	principality and diocese of monaco	2523	1
-name	principality of andorra	2524	1
-name	principality of liechtenstein	2525	1
-name	principality of monaco	2526	1
-name	principality of the valleys of andorra	2527	1
-name	principato di monaco	2528	1
-name	principatu de munegu	2529	1
-name	principaute de monaco	2530	1
-name	puerto rico	2531	1
-name	qatar	2532	1
-name	qazaqstan	2533	1
-name	queen maud land	2534	1
-name	r.s.a.	2535	1
-name	ratcha-anachak thai	2536	1
-name	rd	2537	1
-name	red china	2538	1
-name	republic of albania	2539	1
-name	republic of angola	2540	1
-name	republic of argentina	2541	1
-name	republic of armenia	2542	1
-name	republic of austria	2543	1
-name	republic of azerbaijan	2544	1
-name	republic of belarus	2545	1
-name	republic of belau	2546	1
-name	republic of benin	2547	1
-name	republic of bolivia	2548	1
-name	republic of bosnia and herzegovina	2549	1
-name	republic of botswana	2550	1
-name	republic of bulgaria	2551	1
-name	republic of burkina faso	2552	1
-name	republic of burundi	2553	1
-name	republic of cabo verde	2554	1
-name	republic of cameroon	2555	1
-name	republic of cape verde	2556	1
-name	republic of chad	2557	1
-name	republic of chile	2558	1
-name	republic of china	2559	1
-name	republic of china (taiwan)	2560	1
-name	republic of colombia	2561	1
-name	republic of costa rica	2562	1
-name	republic of cote d'ivoire	2563	1
-name	republic of croatia	2564	1
-name	republic of cuba	2565	1
-name	republic of cyprus	2566	1
-name	republic of dahomey	2567	1
-name	republic of djibouti	2568	1
-name	republic of ecuador	2569	1
-name	republic of egypt	2570	1
-name	republic of el salvador	2571	1
-name	republic of equatorial guinea	2572	1
-name	republic of estonia	2573	1
-name	republic of fiji	2574	1
-name	republic of finland	2575	1
-name	republic of georgia	2576	1
-name	republic of ghana	2577	1
-name	republic of guatemala	2578	1
-name	republic of guinea	2579	1
-name	republic of guinea-bissau	2580	1
-name	republic of guyana	2581	1
-name	republic of haiti	2582	1
-name	republic of honduras	2583	1
-name	republic of iceland	2584	1
-name	republic of india	2585	1
-name	republic of indonesia	2586	1
-name	republic of iraq	2587	1
-name	republic of ireland	2588	1
-name	republic of italy	2589	1
-name	republic of kazakhstan	2590	1
-name	republic of kenya	2591	1
-name	republic of kiribati	2592	1
-name	republic of korea	2593	1
-name	republic of kosovo	2594	1
-name	republic of latvia	2595	1
-name	republic of lebanon	2596	1
-name	republic of liberia	2597	1
-name	republic of lithuania	2598	1
-name	republic of macedonia	2599	1
-name	republic of madagascar	2600	1
-name	republic of malawi	2601	1
-name	republic of maldives	2602	1
-name	republic of mali	2603	1
-name	republic of malta	2604	1
-name	republic of mauritius	2605	1
-name	republic of moldova	2606	1
-name	republic of montenegro	2607	1
-name	republic of mozambique	2608	1
-name	republic of myanmar	2609	1
-name	republic of namibia	2610	1
-name	republic of naoero	2611	1
-name	republic of nauru	2612	1
-name	republic of nicaragua	2613	1
-name	republic of north macedonia	2614	1
-name	republic of pakistan	2615	1
-name	republic of palau	2616	1
-name	republic of panama	2617	1
-name	republic of paraguay	2618	1
-name	republic of peru	2619	1
-name	republic of poland	2620	1
-name	republic of qazaqstan	2621	1
-name	republic of rwanda	2622	1
-name	republic of san marino	2623	1
-name	republic of senegal	2624	1
-name	republic of serbia	2625	1
-name	republic of seychelles	2626	1
-name	republic of sierra leone	2627	1
-name	republic of singapore	2628	1
-name	republic of slovenia	2629	1
-name	republic of south africa	2630	1
-name	republic of south sudan	2631	1
-name	republic of surinam	2632	1
-name	republic of suriname	2633	1
-name	republic of tajikistan	2634	1
-name	republic of the congo	2635	1
-name	republic of the equator	2636	1
-name	republic of the fiji islands	2637	1
-name	republic of the gambia	2638	1
-name	republic of the ivory coast	2639	1
-name	republic of the marshall islands	2640	1
-name	republic of the niger	2641	1
-name	republic of the philippines	2642	1
-name	republic of the sudan	2643	1
-name	republic of the union of myanmar	2644	1
-name	republic of trinidad and tobago	2645	1
-name	republic of tunisia	2646	1
-name	republic of turkey	2647	1
-name	republic of turkiye	2648	1
-name	republic of uganda	2649	1
-name	republic of upper volta	2650	1
-name	republic of uzbekistan	2651	1
-name	republic of vanuatu	2652	1
-name	republic of venezuela	2653	1
-name	republic of yemen	2654	1
-name	republic of zaire	2655	1
-name	republic of zambia	2656	1
-name	republic of zimbabwe	2657	1
-name	republica argentina	2658	1
-name	republica de mocambique	2659	1
-name	republica del peru	2660	1
-name	republica dominicana	2661	1
-name	republica moldova	2662	1
-name	republika popullore e shqiperise	2663	1
-name	republika popullore socialiste e shqiperise	2664	1
-name	republika y'uburundi	2665	1
-name	republiken finland	2666	1
-name	republique du congo	2667	1
-name	republique gabonaise	2668	1
-name	respublika belarus'	2669	1
-name	respublika bielarus	2670	1
-name	reunion	2671	1
-name	reunion island	2672	1
-name	rhodesia	2673	1
-name	rks	2674	1
-name	roc	2675	1
-name	rok	2676	1
-name	romania	2677	1
-name	roumania	2678	1
-name	rp	2679	1
-name	rumania	2680	1
-name	russia	2681	1
-name	russian federation	2682	1
-name	rwanda	2683	1
-name	rwandese republic	2684	1
-name	s'pore	2685	1
-name	s. korea	2686	1
-name	saint barth	2687	1
-name	saint barthelemy	2688	1
-name	saint barths	2689	1
-name	saint barts	2690	1
-name	saint bartz	2691	1
-name	saint christopher and nevis	2692	1
-name	saint francis	2693	1
-name	saint francis island	2694	1
-name	saint francois	2695	1
-name	saint helena	2696	1
-name	saint helena and dependencies	2697	1
-name	saint helena, ascension and tristan da cunha	2698	1
-name	saint kitts and nevis	2699	1
-name	saint lucia	2700	1
-name	saint martin (dutch part)	2701	1
-name	saint martin (france)	2702	1
-name	saint martin (french part)	2703	1
-name	saint pierre and miquelon	2704	1
-name	saint vincent	2705	1
-name	saint vincent and the grenadines	2706	1
-name	sakartvelo	2707	1
-name	salvador	2708	1
-name	samoa	2709	1
-name	samoa (american)	2710	1
-name	samoa, united states	2711	1
-name	san francisco	2712	1
-name	san francisco island	2713	1
-name	san marino	2714	1
-name	sao tome and principe	2715	1
-name	sao tome og principe	2716	1
-name	saudi	2717	1
-name	saudi arabia	2718	1
-name	saudi-iraqi neutral zone	2719	1
-name	senegal	2720	1
-name	serbia	2721	1
-name	serbia and montenegro	2722	1
-name	serbia-montenegro	2723	1
-name	serendib	2724	1
-name	seychelles	2725	1
-name	sfr yugoslavia	2726	1
-name	sfry	2727	1
-name	sgssi	2728	1
-name	sheep islands	2729	1
-name	sierra leone	2730	1
-name	sikkim	2731	1
-name	sikkim kingdom	2732	1
-name	silla	2733	1
-name	singapore	2734	1
-name	sint maarten	2735	1
-name	sint maarten (dutch part)	2736	1
-name	sint martin	2737	1
-name	slovak republic	2738	1
-name	slovakia	2739	1
-name	slovenia	2740	1
-name	slovenija	2741	1
-name	socialist federal republic of yugoslavia	2742	1
-name	socialist germany	2743	1
-name	socialist republic of viet nam	2744	1
-name	socialist republic of vietnam	2745	1
-name	solomon islands	2746	1
-name	somalia	2747	1
-name	somers islands	2748	1
-name	soudan	2749	1
-name	south africa	2750	1
-name	south georgia	2751	1
-name	south georgia and the south sandwich islands	2752	1
-name	south korea	2753	1
-name	south sandwich islands	2754	1
-name	south sudan	2755	1
-name	south yemen	2756	1
-name	southern ireland	2757	1
-name	southern provinces	2758	1
-name	southern rhodesia	2759	2
-name	southern sudan	2761	1
-name	southern yemen	2762	1
-name	soviet belarus	2763	1
-name	soviet belorussia	2764	1
-name	soviet byelorussia	2765	1
-name	soviet union	2766	1
-name	spain	2767	1
-name	spanish sahara	2768	1
-name	sri lanka	2769	1
-name	srilanka	2770	1
-name	srv	2771	1
-name	st. maarten	2772	1
-name	state of israel	2773	1
-name	state of japan	2774	1
-name	state of jordan	2775	1
-name	state of kuwait	2776	1
-name	state of lebanon	2777	1
-name	state of libya	2778	1
-name	state of mongolia	2779	1
-name	state of qatar	2780	1
-name	state of vatican city	2781	1
-name	state union of serbia and montenegro	2782	1
-name	stato della citta del vaticano	2783	1
-name	status civitatis vaticanae	2784	1
-name	sudan	2785	1
-name	sultanate of oman	2786	1
-name	summer's isles	2787	1
-name	summers' isles	2788	1
-name	suomen tasavalta	2789	1
-name	surinam	2790	1
-name	suriname	2791	1
-name	suriya	2792	1
-name	surrinam	2793	1
-name	svalbard and jan mayen	2794	1
-name	swaziland	2795	1
-name	sweden	2796	1
-name	swedish kingdom	2797	1
-name	swiss confederation	2798	1
-name	switzerland	2799	1
-name	syria	2800	1
-name	syrian arab republic	2801	1
-name	taiwan	2802	1
-name	taiwan roc	2803	1
-name	taiwan, province of china	2804	1
-name	tajikistan	2805	1
-name	tanzania	2806	1
-name	tanzania, united republic of	2807	1
-name	taprobane	2808	1
-name	tci	2809	1
-name	tenjiku	2810	1
-name	territorial collectivity of martinique	2811	1
-name	territorial collectivity of saint pierre and miquelon	2812	1
-name	territory of american samoa	2813	1
-name	territory of bermuda	2814	1
-name	territory of christmas island	2815	1
-name	territory of french polynesia	2816	1
-name	territory of guam	2817	1
-name	territory of heard island and mcdonald islands	2818	1
-name	territory of new caledonia and dependencies	2819	1
-name	territory of norfolk island	2820	1
-name	territory of porto rico	2821	1
-name	territory of puerto rico	2822	1
-name	territory of the cocos (keeling) islands	2823	1
-name	thailand	2824	1
-name	the state of eritrea	2825	1
-name	the state of palestine	2826	1
-name	third yugoslavia	2827	1
-name	tianzhu	2828	1
-name	timor-leste	2829	1
-name	togo	2830	1
-name	togolese republic	2831	1
-name	tokelau	2832	1
-name	tokelau islands	2833	1
-name	tonga	2834	1
-name	tonga islands	2835	1
-name	trinidad and tobago	2836	1
-name	trust territory of the pacific islands	2837	1
-name	ttpi	2838	1
-name	tunisia	2839	1
-name	tunisian republic	2840	1
-name	turkey	2841	1
-name	turkiye	2842	1
-name	turkmenia	2843	1
-name	turkmenistan	2844	1
-name	turks and caicos	2845	1
-name	turks and caicos islands	2846	1
-name	tuvalu	2847	1
-name	u. s.	2848	1
-name	u.a.e.	2849	1
-name	u.s. minor outlying islands	2850	1
-name	u.s. of a	2851	1
-name	u.s. of america	2852	1
-name	u.s. samoa	2853	1
-name	u.s. virgin islands	2854	1
-name	u.s.s.r.	2855	1
-name	udzima wa komori	2856	1
-name	uganda	2857	1
-name	ugandah	2858	1
-name	uk	2859	1
-name	ukraina	2860	1
-name	ukraine	2861	1
-name	ukrainia	2862	1
-name	uman	2863	1
-name	umbuso weswatini	2864	1
-name	union des comores	2865	1
-name	union islands	2866	1
-name	union of burma	2867	1
-name	union of soviet socialist republics	2868	1
-name	union of the comoros	2869	1
-name	united arab emirates	2870	1
-name	united kingdom	2871	1
-name	united kingdom of great britain and northern ireland	2872	1
-name	united mexican states	2873	1
-name	united republic of tanganyika and zanzibar	2874	1
-name	united republic of tanzania	2875	1
-name	united states	2876	1
-name	united states minor outlying islands	2877	1
-name	united states miscellaneous pacific islands	2878	1
-name	united states of america	2879	1
-name	united states of mexico	2880	1
-name	united states virgin islands	2881	1
-name	upper volta	2882	1
-name	upper volta, republic of	2883	1
-name	uruguay	2884	1
-name	us minor outlying islands	2885	1
-name	us miscellaneous pacific islands	2886	1
-name	us of a	2887	1
-name	us of america	2888	1
-name	us samoa	2889	1
-name	us virgin islands	2890	1
-name	usmoi	2891	1
-name	ussr	2892	1
-name	ussr, union of soviet socialist republics	2893	1
-name	usvi	2894	1
-name	uzbekistan	2895	1
-name	vanuatu	2896	1
-name	vatican	2897	1
-name	vatican city	2898	1
-name	vatican city state	2899	1
-name	venezuela	2900	1
-name	venezuela, bolivarian republic of	2901	1
-name	viet nam	2902	1
-name	viet-nam, democratic republic of	2903	1
-name	vietnam	2904	1
-name	vietnam (north)	2905	1
-name	virgin islands of the united kingdom	2906	1
-name	virgin islands of the united states	2907	1
-name	virgin islands, british	2908	1
-name	virgin islands, u.s.	2909	1
-name	virgineola	2910	1
-name	viti	2911	1
-name	wai'tu kubuli	2912	1
-name	wake atoll	2913	1
-name	wake island	2914	1
-name	wallis and futuna	2915	1
-name	wallis and futuna islands	2916	1
-name	wanakaera	2917	1
-name	west sahara	2918	1
-name	western sahara	2919	1
-name	western samoa	2920	1
-name	white russia	2921	1
-name	white russian soviet socialist republic	2922	1
-name	white ruthenia	2923	1
-name	yarden	2924	1
-name	yemen	2925	1
-name	yemen (aden)	2926	1
-name	yemen, democratic, people's democratic republic of	2927	1
-name	yisrael	2928	1
-name	ysland	2929	1
-name	yugoslavia	2930	1
-name	yugoslavia, (socialist) federal republic of	2931	1
-name	zaire	2932	1
-name	zaire, republic of	2933	1
-name	zambia	2934	1
-name	zimbabwe	2935	1
-name	zimbabwe rhodesia	2936	1
-name	zona del canal de panama	2937	1
+macroregion	MISSING	665	21
+macroregion	africa	686	61
+macroregion	americas	747	58
+macroregion	asia	805	55
+macroregion	australasia	860	6
+macroregion	caribbean	866	29
+macroregion	central america	895	8
+macroregion	central asia	903	5
+macroregion	eastern africa	908	22
+macroregion	eastern asia	930	8
+macroregion	eastern europe	938	11
+macroregion	eu	949	27
+macroregion	europe	976	56
+macroregion	european union	1032	27
+macroregion	eurozone	1059	19
+macroregion	ez	1078	19
+macroregion	latin america	1097	52
+macroregion	melanesia	1149	5
+macroregion	micronesian region	1154	8
+macroregion	middle africa	1162	10
+macroregion	north america	1172	41
+macroregion	northern africa	1213	7
+macroregion	northern america	1220	5
+macroregion	northern europe	1225	16
+macroregion	oceania	1241	30
+macroregion	outlying oceania	1271	1
+macroregion	polynesia	1272	10
+macroregion	qo	1282	1
+macroregion	south america	1283	16
+macroregion	southeast asia	1299	13
+macroregion	southern africa	1312	5
+macroregion	southern asia	1317	9
+macroregion	southern europe	1326	18
+macroregion	sub-saharan africa	1344	53
+macroregion	un	1397	193
+macroregion	united nations	1590	193
+macroregion	western africa	1783	17
+macroregion	western asia	1800	20
+macroregion	western europe	1820	11
+name	aaland	1831	1
+name	aaland islands	1832	1
+name	affghanistan	1833	1
+name	affghanisthan	1834	1
+name	affghaunistan	1835	1
+name	afghania	1836	1
+name	afghanistan	1837	1
+name	afghanisthan	1838	1
+name	afghaunistan	1839	1
+name	afghaunistaun	1840	1
+name	agawej	1841	1
+name	ahvenanmaa	1842	1
+name	al hind	1843	1
+name	al-ittihad al-qumuri	1844	1
+name	al-magrib	1845	1
+name	al-sudan	1846	1
+name	aland	1847	1
+name	aland islands	1848	1
+name	aland region	1849	1
+name	albania	1850	1
+name	algeria	1851	1
+name	american samoa	1852	1
+name	american virgin islands	1853	1
+name	andorra	1854	1
+name	angola	1855	1
+name	anguilla	1856	1
+name	antarctica	1857	1
+name	antigua and barbuda	1858	1
+name	antigua-barbuda	1859	1
+name	antillen	1860	1
+name	aomen	1861	1
+name	aotearoa new zealand	1862	1
+name	arab republic of egypt	1863	1
+name	argentina	1864	1
+name	argentine republic	1865	1
+name	armenia	1866	1
+name	aruba	1867	1
+name	as-sudan	1868	1
+name	australia	1869	1
+name	austria	1870	1
+name	ayiti	1871	1
+name	azerbaijan	1872	1
+name	b.v.i.	1873	1
+name	bahama islands	1874	1
+name	bahamas	1875	1
+name	bahrain	1876	1
+name	bahrein islands	1877	1
+name	bailiwick of guernsey	1878	1
+name	bailliage de guernesey	1879	1
+name	bailliage de guernesi	1880	1
+name	bailliage de jerri	1881	1
+name	bailliage de jersey	1882	1
+name	bal-bo	1883	1
+name	bal-po'i yul	1884	1
+name	bal-yul	1885	1
+name	balbo	1886	1
+name	balliwick of jersey	1887	1
+name	balpo	1888	1
+name	balpo-yul	1889	1
+name	bangla desh	1890	1
+name	bangladesh	1891	1
+name	barbadoes	1892	1
+name	barbados	1893	1
+name	barmuda	1894	1
+name	barmuda islands	1895	1
+name	barmudas	1896	1
+name	bat	1897	1
+name	belarus	1898	1
+name	belarusian soviet socialist republic	1899	1
+name	belarusian ssr	1900	1
+name	belau	1901	1
+name	belgium	1902	1
+name	belize	1903	1
+name	belorussia	1904	1
+name	belorussian s.s.r.	1905	1
+name	belorussian soviet socialist republic	1906	1
+name	belorussian ssr	1907	1
+name	belorusskaya ssr	1908	1
+name	benin	1909	1
+name	bermoothes	1910	1
+name	bermuda	1911	1
+name	bermuda islands	1912	1
+name	bermudian islands	1913	1
+name	bes islands	1914	1
+name	bharat ganarajya	1915	1
+name	bharata	1916	1
+name	bharatvarsh	1917	1
+name	bhutan	1918	1
+name	bielarus	1919	1
+name	bielaruskaja savieckaja sacyjalistycnaja respublika	1920	1
+name	bielorussia	1921	1
+name	biot	1922	1
+name	bolivarian republic of venezuela	1923	1
+name	bolivia	1924	1
+name	bolivia, plurinational state of	1925	1
+name	bonaire, saint eustatius and saba	1926	1
+name	bonaire, sint eustatius and saba	1927	1
+name	boriken	1928	1
+name	borinquen	1929	1
+name	boriquen	1930	1
+name	bosnia and hercegovina	1931	1
+name	bosnia and herzegovina	1932	1
+name	bosnia-herzegovina	1933	1
+name	botswana	1934	1
+name	bourbon island	1935	1
+name	bouvet island	1936	1
+name	br venezuela	1937	1
+name	brazil	1938	1
+name	brd	1939	1
+name	britain	1940	1
+name	british antarctic territory	1941	1
+name	british indian ocean territory	1942	1
+name	british virgin islands	1943	1
+name	brunei	1944	1
+name	brunei darussalam	1945	1
+name	bssr	1946	1
+name	bulgaria	1947	1
+name	bulgarian republic	1948	1
+name	burkina faso	1949	1
+name	burma	1950	1
+name	burma, socialist republic of the union of	1951	1
+name	burundi	1952	1
+name	bvi	1953	1
+name	byeloruss	1954	1
+name	byelorussia	1955	1
+name	byelorussian s.s.r.	1956	1
+name	byelorussian soviet socialist republic	1957	1
+name	byelorussian ssr	1958	1
+name	byelorussian ssr soviet socialist republic	1959	1
+name	byelorusskaya sovyetskaya sotsialisticheskaya respublika	1960	1
+name	cabo verde	1961	1
+name	cambodia	1962	1
+name	camboya	1963	1
+name	cameroon	1964	1
+name	campuchia	1965	1
+name	canada	1966	1
+name	canton and enderbury islands	1967	1
+name	cape verde	1968	1
+name	cape verde islands	1969	1
+name	car	1970	1
+name	caribbean netherlands	1971	1
+name	cayman islands	1972	1
+name	caymans	1973	1
+name	cccp	1974	1
+name	central africa	1975	1
+name	central african republic	1976	1
+name	ceskoslovensko	1977	1
+name	ceylan	1978	1
+name	chad	1979	1
+name	chile	1980	1
+name	china	1981	1
+name	china pr	1982	1
+name	china, republic of	1983	1
+name	chinese republic	1984	1
+name	chinese taipei	1985	1
+name	choson	1986	1
+name	christmas island	1987	1
+name	christmas island, other territories	1988	1
+name	christmas island, other territories, australia	1989	1
+name	chunghwa minkuo	1990	1
+name	chunghwa minkwo	1991	1
+name	citta del vaticano	1992	1
+name	cnmi	1993	1
+name	co-operative republic of guyana	1994	1
+name	cocos (keeling) islands	1995	1
+name	cocos islands	1996	1
+name	collectivite de saint-barthelemy	1997	1
+name	collectivity of saint barthelemy	1998	1
+name	collectivity of saint martin	1999	1
+name	colombia	2000	1
+name	colony of bermuda	2001	1
+name	commonwealth of australia	2002	1
+name	commonwealth of dominica	2003	1
+name	commonwealth of jamaica	2004	1
+name	commonwealth of puerto rico	2005	1
+name	commonwealth of the bahamas	2006	1
+name	commonwealth of the northern maria islands	2007	1
+name	commonwealth of the northern mariana islands	2008	1
+name	communist belarus	2009	1
+name	communist china	2010	1
+name	communist germany	2011	1
+name	comoros	2012	1
+name	confoederatio helvetica	2013	1
+name	congo	2014	1
+name	congo (brazzaville)	2015	1
+name	congo (kinshasa)	2016	1
+name	congo republic	2017	1
+name	congo, the democratic republic of the	2018	1
+name	cook group	2019	1
+name	cook islands	2020	1
+name	costa rica	2021	1
+name	cote d'ivoire	2022	1
+name	cote ivoire	2023	1
+name	country of aruba	2024	1
+name	country of bengal	2025	1
+name	country of curacao	2026	1
+name	croatia	2027	1
+name	cuba	2028	1
+name	curacao	2029	1
+name	curacoa	2030	1
+name	curazao	2031	1
+name	cyprus	2032	1
+name	czech republic	2033	1
+name	czechia	2034	1
+name	czecho-slovakia	2035	1
+name	czechoslovakia	2036	1
+name	czechoslovakia, czechoslovak socialist republic	2037	1
+name	d.r.c.	2038	1
+name	daehan minguk	2039	1
+name	daehanminguk	2040	1
+name	dahomey	2041	1
+name	danemark	2042	1
+name	dania	2043	1
+name	danmark	2044	1
+name	dawlat al-bahrain	2045	1
+name	democratic people's republic of korea	2046	1
+name	democratic republic of sao tome and principe	2047	1
+name	democratic republic of the congo	2048	1
+name	democratic republic of timor-leste	2049	1
+name	democratic republic of vietnam	2050	1
+name	democratic socialist republic of sri lanka	2051	1
+name	democratic yemen	2052	1
+name	denmark	2053	1
+name	denmark proper	2054	1
+name	department of mayotte	2055	1
+name	deutsche demokratische republik	2056	1
+name	devil's isles	2057	1
+name	djazair	2058	1
+name	djibouti	2059	1
+name	dominica	2060	1
+name	dominican republic	2061	1
+name	dominicana	2062	1
+name	dominion of new zealand	2063	1
+name	domrep	2064	1
+name	dpr korea	2065	1
+name	dprk	2066	1
+name	dr congo	2067	1
+name	dr vietnam	2068	1
+name	drc	2069	1
+name	dremoshong	2070	1
+name	drenjong	2071	1
+name	dronning maud land	2072	1
+name	drv	2073	1
+name	dutch antilles	2074	1
+name	dutch guiana	2075	1
+name	dzayer	2076	1
+name	east germany	2077	1
+name	east samoa	2078	1
+name	east timor	2079	2
+name	eastern republic of uruguay	2081	1
+name	ecuador	2082	1
+name	ecuadorian state	2083	1
+name	eesti vabariik	2084	1
+name	egypt	2085	1
+name	el salvador	2086	1
+name	ellada	2087	1
+name	ellice islands	2088	1
+name	emirates	2089	1
+name	equatorial guinea	2090	1
+name	eritrea	2091	1
+name	ertra	2092	1
+name	estland	2093	1
+name	estonia	2094	1
+name	eswatini	2095	1
+name	ethiopia	2096	1
+name	european france	2097	1
+name	european part of france	2098	1
+name	faer oer	2099	1
+name	faereyjar	2100	1
+name	faeroe islands	2101	1
+name	faeroer	2102	1
+name	faeroerne	2103	1
+name	faeroes	2104	1
+name	faeroyene	2105	1
+name	falkland islands	2106	1
+name	falkland islands (malvinas)	2107	1
+name	falklands	2108	1
+name	far oer	2109	1
+name	fareo islands	2110	1
+name	faroe islands	2111	1
+name	faroer	2112	1
+name	faroes	2113	1
+name	faroese islands	2114	1
+name	farre	2115	1
+name	farre islands	2116	1
+name	federal democratic republic of ethiopia	2117	1
+name	federal democratic republic of nepal	2118	1
+name	federal republic of germany	2119	1
+name	federal republic of nigeria	2120	1
+name	federal republic of somalia	2121	1
+name	federal republic of yugoslavia	2122	1
+name	federated states of micronesia	2123	1
+name	federated states of micronesia, fsm	2124	1
+name	federation of czechoslovakia	2125	1
+name	federation of malaysia	2126	1
+name	federation of saint christopher and nevis	2127	1
+name	federation of saint kitts and nevis	2128	1
+name	federative republic of brazil	2129	1
+name	fiji	2130	1
+name	fiji ganarajya	2131	1
+name	finland	2132	1
+name	finnia	2133	1
+name	former yugoslav republic of macedonia	2134	1
+name	foroyar	2135	1
+name	fort-hercule	2136	1
+name	fr yugoslavia	2137	1
+name	france	2138	1
+name	france (part in europe)	2139	1
+name	france, metropolitan	2140	1
+name	free associated state of puerto rico	2141	1
+name	free china	2142	1
+name	french afars and issas	2143	1
+name	french establishments in oceania	2144	1
+name	french guiana	2145	1
+name	french oceania	2146	1
+name	french polynesia	2147	1
+name	french republic	2148	1
+name	french settlements in oceania	2149	1
+name	french southern and antarctic lands	2150	1
+name	french southern and antarctic territories	2151	1
+name	french southern territories	2152	1
+name	french territory of the afars and the issas	2153	1
+name	frg	2154	1
+name	friendly islands	2155	1
+name	fry	2156	1
+name	fyr macedonia	2157	1
+name	gabon	2158	1
+name	gabonese republic	2159	1
+name	gabuuti	2160	1
+name	gambia	2161	1
+name	gannaar	2162	1
+name	georgia	2163	1
+name	georgia (country)	2164	1
+name	georgia (sakartvelo)	2165	1
+name	german democratic republic	2166	1
+name	germany	2167	1
+name	ghana	2168	1
+name	gibraltar	2169	1
+name	giernesi	2170	1
+name	gilbert and ellice islands	2171	1
+name	giordania	2172	1
+name	gouvernement du burundi	2173	1
+name	grand duchy of luxembourg	2174	1
+name	great britain	2175	1
+name	great britain and northern ireland	2176	1
+name	great britain guernsey	2177	1
+name	greece	2178	1
+name	greek administration of southern cyprus	2179	1
+name	greek cypriot state	2180	1
+name	greek republic	2181	1
+name	greenland	2182	1
+name	greenlandia	2183	1
+name	grenada	2184	1
+name	groenland	2185	1
+name	guadeloupe	2186	1
+name	guahan	2187	1
+name	guam	2188	1
+name	guam (usa)	2189	1
+name	guatemala	2190	1
+name	guernsey	2191	1
+name	guiana	2192	1
+name	guiana, france	2193	1
+name	guinea	2194	1
+name	guinea-bissau	2195	1
+name	guinea-conakry	2196	1
+name	guyana	2197	1
+name	guyane	2198	1
+name	gwada	2199	1
+name	gwadloup	2200	1
+name	haiti	2201	1
+name	haitian republic	2202	1
+name	halcyon island	2203	1
+name	hanguk	2204	1
+name	hashemite kingdom of jordan	2205	1
+name	hayastan	2206	1
+name	hayastani hanrapetut'yun	2207	1
+name	hayti	2208	1
+name	heard and macdonald islands	2209	1
+name	heard and mcdonald islands	2210	1
+name	heard island and mcdonald islands	2211	1
+name	hellas	2212	1
+name	hellas, greece	2213	1
+name	hellenic republic	2214	1
+name	hervey islands	2215	1
+name	hewanorra	2216	1
+name	himi	2217	1
+name	hindoostan	2218	1
+name	hindustan	2219	1
+name	hkj	2220	1
+name	hksar	2221	1
+name	holy see	2222	1
+name	holy see (vatican city state)	2223	1
+name	honduran republic	2224	1
+name	honduras	2225	1
+name	hong kong	2226	1
+name	hong kong sar	2227	1
+name	hong kong sar, china	2228	1
+name	hong kong special administrative region	2229	1
+name	hong kong special administrative region of china	2230	1
+name	hong kong special administrative region of the people's republic of china	2231	1
+name	hong kong, china	2232	1
+name	hongkong	2233	1
+name	hungary	2234	1
+name	i. iersey	2235	1
+name	i. mannin	2236	1
+name	i.o.m.	2237	1
+name	iapan	2238	1
+name	iapon	2239	1
+name	iceland	2240	1
+name	icelandic republic	2241	1
+name	iersey	2242	1
+name	iersey i.	2243	1
+name	ile de bourbon	2244	1
+name	ile de la reunion	2245	1
+name	ile saint-barthelemy	2246	1
+name	independent state of papua new guinea	2247	1
+name	independent state of samoa	2248	1
+name	india	2249	1
+name	indonesia	2250	1
+name	indostan	2251	1
+name	iran	2252	1
+name	iran, islamic republic of	2253	1
+name	iraq	2254	1
+name	ireland	2255	1
+name	irish republic	2256	1
+name	iritriya	2257	1
+name	isla san francisco	2258	1
+name	islamic republic of afghanistan	2259	1
+name	islamic republic of iran	2260	1
+name	islamic republic of mauritania	2261	1
+name	islamic republic of pakistan	2262	1
+name	islamic republic of the gambia	2263	1
+name	island of aruba	2264	1
+name	island of dominica	2265	1
+name	island of guam	2266	1
+name	island of montserrat	2267	1
+name	island territory of curacao	2268	1
+name	islas malvinas	2269	1
+name	isle de saint francois	2270	1
+name	isle of devils	2271	1
+name	isle of jersey	2272	1
+name	isle of man	2273	1
+name	isle of mann	2274	1
+name	isle of saint francis	2275	1
+name	isle saint francois	2276	1
+name	israel	2277	1
+name	italian republic	2278	1
+name	italy	2279	1
+name	ivory coast	2280	1
+name	iyonola	2281	1
+name	jabuuti	2282	1
+name	jamaica	2283	1
+name	japan	2284	1
+name	jerri	2285	1
+name	jersey	2286	1
+name	jersey island	2287	1
+name	jibuti	2288	1
+name	johnston atoll	2289	1
+name	johnston island	2290	1
+name	jordan	2291	1
+name	jouanacaera	2292	1
+name	juzur al-qamar	2293	1
+name	juzur al-qumur	2294	1
+name	kalaallit nunaat	2295	1
+name	kalama atoll	2296	1
+name	kambodzha	2297	1
+name	kamboja	2298	1
+name	kampuchea	2299	1
+name	karukera	2300	1
+name	kazakhstan	2301	1
+name	keeling islands	2302	1
+name	kenya	2303	1
+name	kingdom of bahrain	2304	1
+name	kingdom of belgium	2305	1
+name	kingdom of bhutan	2306	1
+name	kingdom of cambodia	2307	1
+name	kingdom of denmark	2308	1
+name	kingdom of eswatini	2309	1
+name	kingdom of jordan	2310	1
+name	kingdom of lesotho	2311	1
+name	kingdom of morocco	2312	1
+name	kingdom of norway	2313	1
+name	kingdom of saudi arabia	2314	1
+name	kingdom of siam	2315	1
+name	kingdom of sikkim	2316	1
+name	kingdom of spain	2317	1
+name	kingdom of swaziland	2318	1
+name	kingdom of sweden	2319	1
+name	kingdom of thailand	2320	1
+name	kingdom of the netherlands	2321	1
+name	kingdom of tonga	2322	1
+name	kiribati	2323	1
+name	kitts and nevis	2324	1
+name	korea (south)	2325	1
+name	korea, democratic people's republic of	2326	1
+name	korea, republic of	2327	1
+name	kosova	2328	1
+name	kosovo	2329	1
+name	kuwait	2330	1
+name	kyrgyz republic	2331	1
+name	kyrgyzstan	2332	1
+name	la reunion	2333	1
+name	la reunion island	2334	1
+name	land of bengal	2335	1
+name	lanka, sri	2336	1
+name	lao pdr	2337	1
+name	lao people's democratic republic	2338	1
+name	laos	2339	1
+name	latveja	2340	1
+name	latvejas republika	2341	1
+name	latvia	2342	1
+name	latvian republic	2343	1
+name	latvija	2344	1
+name	latvijas republika	2345	1
+name	lebanese republic	2346	1
+name	lebanon	2347	1
+name	lefatshe la botswana	2348	1
+name	lesotho	2349	1
+name	liber	2350	1
+name	liberia	2351	1
+name	libya	2352	1
+name	liechtenstein	2353	1
+name	lisia	2354	1
+name	lithuania	2355	1
+name	lmagrib	2356	1
+name	lubnan	2357	1
+name	luxembourg	2358	1
+name	macao	2359	1
+name	macao s.a.r.	2360	1
+name	macao sar	2361	1
+name	macao sar, china	2362	1
+name	macao special administrative region	2363	1
+name	macao special administrative region of china	2364	1
+name	macao special administrative region of the people's republic of china	2365	1
+name	macau	2366	1
+name	macau sar	2367	1
+name	macau sar, china	2368	1
+name	macau special administrative region	2369	1
+name	macau special administrative region of the people's republic of china	2370	1
+name	macedonia	2371	1
+name	madagascar	2372	1
+name	madiana	2373	1
+name	madinina	2374	1
+name	mainland france	2375	1
+name	makedonia	2376	1
+name	malagascar	2377	1
+name	malagaskar	2378	1
+name	malawi	2379	1
+name	malaysia	2380	1
+name	malaysia federation	2381	1
+name	maldives	2382	1
+name	mali	2383	1
+name	malliouhana	2384	1
+name	malta	2385	1
+name	malvinas	2386	1
+name	malvinas islands	2387	1
+name	mamlakat al-bahrayn	2388	1
+name	mann	2389	1
+name	maroc	2390	1
+name	marocco	2391	1
+name	marshall islands	2392	1
+name	martinica	2393	1
+name	martinique	2394	1
+name	massiwa ya komori	2395	1
+name	matanitu tugalala o viti	2396	1
+name	matinik	2397	1
+name	matinino	2398	1
+name	matnik	2399	1
+name	mauretania	2400	1
+name	maurice	2401	1
+name	mauritania	2402	1
+name	mauritius	2403	1
+name	mayotte	2404	1
+name	metropolitan denmark	2405	1
+name	metropolitan france	2406	1
+name	mexican republic	2407	1
+name	mexican united states	2408	1
+name	mexico	2409	1
+name	micronesia	2410	1
+name	micronesia, federated states of	2411	1
+name	midway	2412	1
+name	midway atoll	2413	1
+name	midway islands	2414	1
+name	misr	2415	1
+name	mocambique	2416	1
+name	moldavia	2417	1
+name	moldova	2418	1
+name	moldova, republic of	2419	1
+name	monaco	2420	1
+name	mongol state	2421	1
+name	mongolia	2422	1
+name	montenegro	2423	1
+name	montserrat	2424	1
+name	moris	2425	1
+name	moritani	2426	1
+name	morocco	2427	1
+name	most serene republic of san marino	2428	1
+name	mozambique	2429	1
+name	munegu	2430	1
+name	muritanya	2431	1
+name	murutaane	2432	1
+name	myanmar	2433	1
+name	n. korea	2434	1
+name	n.w.i.	2435	1
+name	naija	2436	1
+name	naipal	2437	1
+name	naipala	2438	1
+name	namibia	2439	1
+name	naoero	2440	1
+name	nation of brunei, the abode of peace	2441	1
+name	nationalist china	2442	1
+name	nauru	2443	1
+name	ne-pel	2444	1
+name	necbal	2445	1
+name	nederlanden	2446	1
+name	nederlandse antillen	2447	1
+name	negara brunei darussalam	2448	1
+name	nehpal	2449	1
+name	nei-pal	2450	1
+name	nekbal	2451	1
+name	nekpal	2452	1
+name	nepaal	2453	1
+name	nepal	2454	1
+name	nepall	2455	1
+name	nepaul	2456	1
+name	nercerri	2457	1
+name	netherland antilles	2458	1
+name	netherlands	2459	1
+name	netherlands antilles	2460	1
+name	neutral zone	2461	1
+name	new cal	2462	1
+name	new caledonia	2463	1
+name	new hebrides	2464	1
+name	new hebrides condominium	2465	1
+name	new holland	2466	1
+name	new hollandia	2467	1
+name	new zealand	2468	1
+name	ngola	2469	1
+name	ni-po-lo	2470	1
+name	ni-po-louo	2471	1
+name	nicaragua	2472	1
+name	niepal	2473	1
+name	niger	2474	1
+name	nigeria	2475	1
+name	nihon-koku	2476	1
+name	nipal	2477	1
+name	nippon-koku	2478	1
+name	niue	2479	1
+name	nmi	2480	1
+name	norfolk island	2481	1
+name	norfolk island, australia	2482	1
+name	norfolk island, other territories	2483	1
+name	norfolk island, other territories, australia	2484	1
+name	north korea	2485	1
+name	north macedonia	2486	1
+name	north sudan	2487	1
+name	north vietnam	2488	1
+name	northern mariana islands	2489	1
+name	northern marianas	2490	1
+name	norway	2491	1
+name	nova hollandia	2492	1
+name	occas island	2493	1
+name	oman	2494	1
+name	oriental republic of uruguay	2495	1
+name	ouanalao	2496	1
+name	ouganda	2497	1
+name	ouvoimoja wakomori	2498	1
+name	p.r.c.	2499	1
+name	pa-eul-pou	2500	1
+name	pa-le-pou	2501	1
+name	pa-lo-pou	2502	1
+name	pacific islands (trust territory)	2503	1
+name	pai-pou	2504	1
+name	pakistan	2505	1
+name	palau	2506	1
+name	palestine	2507	1
+name	palestine, state of	2508	1
+name	palestinian territory	2509	1
+name	palpa	2510	1
+name	palpou	2511	1
+name	panama	2512	1
+name	panama canal zone	2513	1
+name	papal state	2514	1
+name	papua new guinea	2515	1
+name	paraguay	2516	1
+name	peeloo	2517	1
+name	pelew	2518	1
+name	pelew islands	2519	1
+name	pellew	2520	1
+name	people's democratic republic of algeria	2521	1
+name	people's democratic republic of yemen	2522	1
+name	people's republic of albania	2523	1
+name	people's republic of bangladesh	2524	1
+name	people's republic of china	2525	1
+name	people's republic of czechoslovakia	2526	1
+name	people's republic of southern yemen	2527	1
+name	people's socialist republic of albania	2528	1
+name	peru	2529	1
+name	philippine islands	2530	1
+name	philippines	2531	1
+name	pitcairn	2532	1
+name	pitcairn islands	2533	1
+name	pitcairn, henderson, ducie and oeno islands	2534	1
+name	pleasant island	2535	1
+name	plurinational state of bolivia	2536	1
+name	poland	2537	1
+name	porto rico	2538	1
+name	portugal	2539	1
+name	portuguese republic	2540	1
+name	pr china	2541	1
+name	prathet thai	2542	1
+name	prc	2543	1
+name	principality and diocese of monaco	2544	1
+name	principality of andorra	2545	1
+name	principality of liechtenstein	2546	1
+name	principality of monaco	2547	1
+name	principality of the valleys of andorra	2548	1
+name	principato di monaco	2549	1
+name	principatu de munegu	2550	1
+name	principaute de monaco	2551	1
+name	puerto rico	2552	1
+name	qatar	2553	1
+name	qazaqstan	2554	1
+name	queen maud land	2555	1
+name	r.s.a.	2556	1
+name	ratcha-anachak thai	2557	1
+name	rd	2558	1
+name	red china	2559	1
+name	republic of albania	2560	1
+name	republic of angola	2561	1
+name	republic of argentina	2562	1
+name	republic of armenia	2563	1
+name	republic of austria	2564	1
+name	republic of azerbaijan	2565	1
+name	republic of belarus	2566	1
+name	republic of belau	2567	1
+name	republic of benin	2568	1
+name	republic of bolivia	2569	1
+name	republic of bosnia and herzegovina	2570	1
+name	republic of botswana	2571	1
+name	republic of bulgaria	2572	1
+name	republic of burkina faso	2573	1
+name	republic of burundi	2574	1
+name	republic of cabo verde	2575	1
+name	republic of cameroon	2576	1
+name	republic of cape verde	2577	1
+name	republic of chad	2578	1
+name	republic of chile	2579	1
+name	republic of china	2580	1
+name	republic of china (taiwan)	2581	1
+name	republic of colombia	2582	1
+name	republic of costa rica	2583	1
+name	republic of cote d'ivoire	2584	1
+name	republic of croatia	2585	1
+name	republic of cuba	2586	1
+name	republic of cyprus	2587	1
+name	republic of dahomey	2588	1
+name	republic of djibouti	2589	1
+name	republic of ecuador	2590	1
+name	republic of egypt	2591	1
+name	republic of el salvador	2592	1
+name	republic of equatorial guinea	2593	1
+name	republic of estonia	2594	1
+name	republic of fiji	2595	1
+name	republic of finland	2596	1
+name	republic of georgia	2597	1
+name	republic of ghana	2598	1
+name	republic of guatemala	2599	1
+name	republic of guinea	2600	1
+name	republic of guinea-bissau	2601	1
+name	republic of guyana	2602	1
+name	republic of haiti	2603	1
+name	republic of honduras	2604	1
+name	republic of iceland	2605	1
+name	republic of india	2606	1
+name	republic of indonesia	2607	1
+name	republic of iraq	2608	1
+name	republic of ireland	2609	1
+name	republic of italy	2610	1
+name	republic of kazakhstan	2611	1
+name	republic of kenya	2612	1
+name	republic of kiribati	2613	1
+name	republic of korea	2614	1
+name	republic of kosovo	2615	1
+name	republic of latvia	2616	1
+name	republic of lebanon	2617	1
+name	republic of liberia	2618	1
+name	republic of lithuania	2619	1
+name	republic of macedonia	2620	1
+name	republic of madagascar	2621	1
+name	republic of malawi	2622	1
+name	republic of maldives	2623	1
+name	republic of mali	2624	1
+name	republic of malta	2625	1
+name	republic of mauritius	2626	1
+name	republic of moldova	2627	1
+name	republic of montenegro	2628	1
+name	republic of mozambique	2629	1
+name	republic of myanmar	2630	1
+name	republic of namibia	2631	1
+name	republic of naoero	2632	1
+name	republic of nauru	2633	1
+name	republic of nicaragua	2634	1
+name	republic of north macedonia	2635	1
+name	republic of pakistan	2636	1
+name	republic of palau	2637	1
+name	republic of panama	2638	1
+name	republic of paraguay	2639	1
+name	republic of peru	2640	1
+name	republic of poland	2641	1
+name	republic of qazaqstan	2642	1
+name	republic of rwanda	2643	1
+name	republic of san marino	2644	1
+name	republic of senegal	2645	1
+name	republic of serbia	2646	1
+name	republic of seychelles	2647	1
+name	republic of sierra leone	2648	1
+name	republic of singapore	2649	1
+name	republic of slovenia	2650	1
+name	republic of south africa	2651	1
+name	republic of south sudan	2652	1
+name	republic of surinam	2653	1
+name	republic of suriname	2654	1
+name	republic of tajikistan	2655	1
+name	republic of the congo	2656	1
+name	republic of the equator	2657	1
+name	republic of the fiji islands	2658	1
+name	republic of the gambia	2659	1
+name	republic of the ivory coast	2660	1
+name	republic of the marshall islands	2661	1
+name	republic of the niger	2662	1
+name	republic of the philippines	2663	1
+name	republic of the sudan	2664	1
+name	republic of the union of myanmar	2665	1
+name	republic of trinidad and tobago	2666	1
+name	republic of tunisia	2667	1
+name	republic of turkey	2668	1
+name	republic of turkiye	2669	1
+name	republic of uganda	2670	1
+name	republic of upper volta	2671	1
+name	republic of uzbekistan	2672	1
+name	republic of vanuatu	2673	1
+name	republic of venezuela	2674	1
+name	republic of yemen	2675	1
+name	republic of zaire	2676	1
+name	republic of zambia	2677	1
+name	republic of zimbabwe	2678	1
+name	republica argentina	2679	1
+name	republica de mocambique	2680	1
+name	republica del peru	2681	1
+name	republica dominicana	2682	1
+name	republica moldova	2683	1
+name	republika popullore e shqiperise	2684	1
+name	republika popullore socialiste e shqiperise	2685	1
+name	republika y'uburundi	2686	1
+name	republiken finland	2687	1
+name	republique du congo	2688	1
+name	republique gabonaise	2689	1
+name	respublika belarus'	2690	1
+name	respublika bielarus	2691	1
+name	reunion	2692	1
+name	reunion island	2693	1
+name	rhodesia	2694	1
+name	rks	2695	1
+name	roc	2696	1
+name	rok	2697	1
+name	romania	2698	1
+name	roumania	2699	1
+name	rp	2700	1
+name	rumania	2701	1
+name	russia	2702	1
+name	russian federation	2703	1
+name	rwanda	2704	1
+name	rwandese republic	2705	1
+name	s'pore	2706	1
+name	s. korea	2707	1
+name	saint barth	2708	1
+name	saint barthelemy	2709	1
+name	saint barths	2710	1
+name	saint barts	2711	1
+name	saint bartz	2712	1
+name	saint christopher and nevis	2713	1
+name	saint francis	2714	1
+name	saint francis island	2715	1
+name	saint francois	2716	1
+name	saint helena	2717	1
+name	saint helena and dependencies	2718	1
+name	saint helena, ascension and tristan da cunha	2719	1
+name	saint kitts and nevis	2720	1
+name	saint lucia	2721	1
+name	saint martin (dutch part)	2722	1
+name	saint martin (france)	2723	1
+name	saint martin (french part)	2724	1
+name	saint pierre and miquelon	2725	1
+name	saint vincent	2726	1
+name	saint vincent and the grenadines	2727	1
+name	sakartvelo	2728	1
+name	salvador	2729	1
+name	samoa	2730	1
+name	samoa (american)	2731	1
+name	samoa, united states	2732	1
+name	san francisco	2733	1
+name	san francisco island	2734	1
+name	san marino	2735	1
+name	sao tome and principe	2736	1
+name	sao tome og principe	2737	1
+name	saudi	2738	1
+name	saudi arabia	2739	1
+name	saudi-iraqi neutral zone	2740	1
+name	senegal	2741	1
+name	serbia	2742	1
+name	serbia and montenegro	2743	1
+name	serbia-montenegro	2744	1
+name	serendib	2745	1
+name	seychelles	2746	1
+name	sfr yugoslavia	2747	1
+name	sfry	2748	1
+name	sgssi	2749	1
+name	sheep islands	2750	1
+name	sierra leone	2751	1
+name	sikkim	2752	1
+name	sikkim kingdom	2753	1
+name	silla	2754	1
+name	singapore	2755	1
+name	sint maarten	2756	1
+name	sint maarten (dutch part)	2757	1
+name	sint martin	2758	1
+name	slovak republic	2759	1
+name	slovakia	2760	1
+name	slovenia	2761	1
+name	slovenija	2762	1
+name	socialist federal republic of yugoslavia	2763	1
+name	socialist germany	2764	1
+name	socialist republic of viet nam	2765	1
+name	socialist republic of vietnam	2766	1
+name	solomon islands	2767	1
+name	somalia	2768	1
+name	somers islands	2769	1
+name	soudan	2770	1
+name	south africa	2771	1
+name	south georgia	2772	1
+name	south georgia and the south sandwich islands	2773	1
+name	south korea	2774	1
+name	south sandwich islands	2775	1
+name	south sudan	2776	1
+name	south yemen	2777	1
+name	southern ireland	2778	1
+name	southern provinces	2779	1
+name	southern rhodesia	2780	2
+name	southern sudan	2782	1
+name	southern yemen	2783	1
+name	soviet belarus	2784	1
+name	soviet belorussia	2785	1
+name	soviet byelorussia	2786	1
+name	soviet union	2787	1
+name	spain	2788	1
+name	spanish sahara	2789	1
+name	sri lanka	2790	1
+name	srilanka	2791	1
+name	srv	2792	1
+name	st. maarten	2793	1
+name	state of israel	2794	1
+name	state of japan	2795	1
+name	state of jordan	2796	1
+name	state of kuwait	2797	1
+name	state of lebanon	2798	1
+name	state of libya	2799	1
+name	state of mongolia	2800	1
+name	state of qatar	2801	1
+name	state of vatican city	2802	1
+name	state union of serbia and montenegro	2803	1
+name	stato della citta del vaticano	2804	1
+name	status civitatis vaticanae	2805	1
+name	sudan	2806	1
+name	sultanate of oman	2807	1
+name	summer's isles	2808	1
+name	summers' isles	2809	1
+name	suomen tasavalta	2810	1
+name	surinam	2811	1
+name	suriname	2812	1
+name	suriya	2813	1
+name	surrinam	2814	1
+name	svalbard and jan mayen	2815	1
+name	swaziland	2816	1
+name	sweden	2817	1
+name	swedish kingdom	2818	1
+name	swiss confederation	2819	1
+name	switzerland	2820	1
+name	syria	2821	1
+name	syrian arab republic	2822	1
+name	taiwan	2823	1
+name	taiwan roc	2824	1
+name	taiwan, province of china	2825	1
+name	tajikistan	2826	1
+name	tanzania	2827	1
+name	tanzania, united republic of	2828	1
+name	taprobane	2829	1
+name	tci	2830	1
+name	tenjiku	2831	1
+name	territorial collectivity of martinique	2832	1
+name	territorial collectivity of saint pierre and miquelon	2833	1
+name	territory of american samoa	2834	1
+name	territory of bermuda	2835	1
+name	territory of christmas island	2836	1
+name	territory of french polynesia	2837	1
+name	territory of guam	2838	1
+name	territory of heard island and mcdonald islands	2839	1
+name	territory of new caledonia and dependencies	2840	1
+name	territory of norfolk island	2841	1
+name	territory of porto rico	2842	1
+name	territory of puerto rico	2843	1
+name	territory of the cocos (keeling) islands	2844	1
+name	thailand	2845	1
+name	the state of eritrea	2846	1
+name	the state of palestine	2847	1
+name	third yugoslavia	2848	1
+name	tianzhu	2849	1
+name	timor-leste	2850	1
+name	togo	2851	1
+name	togolese republic	2852	1
+name	tokelau	2853	1
+name	tokelau islands	2854	1
+name	tonga	2855	1
+name	tonga islands	2856	1
+name	trinidad and tobago	2857	1
+name	trust territory of the pacific islands	2858	1
+name	ttpi	2859	1
+name	tunisia	2860	1
+name	tunisian republic	2861	1
+name	turkey	2862	1
+name	turkiye	2863	1
+name	turkmenia	2864	1
+name	turkmenistan	2865	1
+name	turks and caicos	2866	1
+name	turks and caicos islands	2867	1
+name	tuvalu	2868	1
+name	u. s.	2869	1
+name	u.a.e.	2870	1
+name	u.s. minor outlying islands	2871	1
+name	u.s. of a	2872	1
+name	u.s. of america	2873	1
+name	u.s. samoa	2874	1
+name	u.s. virgin islands	2875	1
+name	u.s.s.r.	2876	1
+name	udzima wa komori	2877	1
+name	uganda	2878	1
+name	ugandah	2879	1
+name	uk	2880	1
+name	ukraina	2881	1
+name	ukraine	2882	1
+name	ukrainia	2883	1
+name	uman	2884	1
+name	umbuso weswatini	2885	1
+name	union des comores	2886	1
+name	union islands	2887	1
+name	union of burma	2888	1
+name	union of soviet socialist republics	2889	1
+name	union of the comoros	2890	1
+name	united arab emirates	2891	1
+name	united kingdom	2892	1
+name	united kingdom of great britain and northern ireland	2893	1
+name	united mexican states	2894	1
+name	united republic of tanganyika and zanzibar	2895	1
+name	united republic of tanzania	2896	1
+name	united states	2897	1
+name	united states minor outlying islands	2898	1
+name	united states miscellaneous pacific islands	2899	1
+name	united states of america	2900	1
+name	united states of mexico	2901	1
+name	united states virgin islands	2902	1
+name	upper volta	2903	1
+name	upper volta, republic of	2904	1
+name	uruguay	2905	1
+name	us minor outlying islands	2906	1
+name	us miscellaneous pacific islands	2907	1
+name	us of a	2908	1
+name	us of america	2909	1
+name	us samoa	2910	1
+name	us virgin islands	2911	1
+name	usmoi	2912	1
+name	ussr	2913	1
+name	ussr, union of soviet socialist republics	2914	1
+name	usvi	2915	1
+name	uzbekistan	2916	1
+name	vanuatu	2917	1
+name	vatican	2918	1
+name	vatican city	2919	1
+name	vatican city state	2920	1
+name	venezuela	2921	1
+name	venezuela, bolivarian republic of	2922	1
+name	viet nam	2923	1
+name	viet-nam, democratic republic of	2924	1
+name	vietnam	2925	1
+name	vietnam (north)	2926	1
+name	virgin islands of the united kingdom	2927	1
+name	virgin islands of the united states	2928	1
+name	virgin islands, british	2929	1
+name	virgin islands, u.s.	2930	1
+name	virgineola	2931	1
+name	viti	2932	1
+name	wai'tu kubuli	2933	1
+name	wake atoll	2934	1
+name	wake island	2935	1
+name	wallis and futuna	2936	1
+name	wallis and futuna islands	2937	1
+name	wanakaera	2938	1
+name	west sahara	2939	1
+name	western sahara	2940	1
+name	western samoa	2941	1
+name	white russia	2942	1
+name	white russian soviet socialist republic	2943	1
+name	white ruthenia	2944	1
+name	yarden	2945	1
+name	yemen	2946	1
+name	yemen (aden)	2947	1
+name	yemen, democratic, people's democratic republic of	2948	1
+name	yisrael	2949	1
+name	ysland	2950	1
+name	yugoslavia	2951	1
+name	yugoslavia, (socialist) federal republic of	2952	1
+name	zaire	2953	1
+name	zaire, republic of	2954	1
+name	zambia	2955	1
+name	zimbabwe	2956	1
+name	zimbabwe rhodesia	2957	1
+name	zona del canal de panama	2958	1

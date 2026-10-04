@@ -1,5 +1,6 @@
 from typing import Mapping, cast
 from localis.entities import City
+from localis.indexes import Missing
 from localis.views import CountryView, CityView, SubdivisionView
 from localis.registries import QueryableRegistry, CountryRegistry, SubdivisionRegistry
 
@@ -40,11 +41,11 @@ class CityRegistry(QueryableRegistry[City]):
         *,
         name: str | None = None,
         limit: int | None = None,
-        subdivision: str | None = None,
+        subdivision: str | Missing | None = None,
         country: str | None = None,
         **kwargs,
     ) -> list[City]:
-        """Filter cities by name, subdivision (name, iso/geonames code) or country (name, alpha2, alpha3). Multiple filters use logical AND."""
+        """Filter cities by name, subdivision (name, iso/geonames code, or MISSING for none) or country (name, alpha2, alpha3). Multiple filters use logical AND."""
         kwargs.update(subdivision=subdivision, country=country)
         results = super().filter(name=name, limit=limit, **kwargs)
         return results
