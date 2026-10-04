@@ -29,36 +29,37 @@
   },
   "resolution": {
     "wikidata": 4295,
-    "automerge": 355,
-    "skill_merge": 168,
+    "automerge": 353,
+    "skill_merge": 170,
     "skill_add": 174,
     "bypass_twinned": 25,
     "bypass_untwinned": 24,
     "geonames_absent": 5,
-    "skill_by_agent": 289,
+    "skill_by_agent": 291,
     "skill_by_human": 53,
     "orphans": 0,
-    "skill_decisions": 342,
+    "skill_decisions": 344,
     "total": 5046
   },
   "cities": {
-    "total": 235915,
+    "total": 235917,
     "threshold": 15000,
     "above_threshold": 34171
   },
   "shipped_size": {
-    "total": 60196989,
+    "total": 59711917,
     "cities": {
-      "total": 48969502,
-      "share_pct": 81.3,
+      "total": 49443186,
+      "share_pct": 82.8,
       "files": {
-        "canon_index.bin.gz": 4967995,
-        "canon_index_offsets.tsv": 166570,
-        "cities.tsv": 13251308,
-        "context_index.bin.gz": 8565106,
+        "canon_index.bin.gz": 4968397,
+        "canon_index_offsets.tsv": 166585,
+        "cities.tsv": 13251231,
+        "context_index.bin.gz": 8565437,
         "context_index_offsets.tsv": 95270,
-        "filter_index.tsv": 18519255,
-        "lookup_index_int.tsv": 3403998
+        "filter_index.tsv": 18519392,
+        "lookup_index_int.tsv": 3404031,
+        "short_names.tsv.gz": 472843
       }
     },
     "countries": {
@@ -83,17 +84,17 @@
       }
     },
     "subdivisions": {
-      "total": 11127686,
-      "share_pct": 18.5,
+      "total": 10168930,
+      "share_pct": 17.0,
       "files": {
-        "canon_index.bin.gz": 1880208,
-        "canon_index_offsets.tsv": 168617,
+        "canon_index.bin.gz": 1701073,
+        "canon_index_offsets.tsv": 141575,
         "context_index.bin.gz": 1526970,
         "context_index_offsets.tsv": 66955,
-        "filter_index.tsv": 2825455,
+        "filter_index.tsv": 2563008,
         "lookup_index_str.tsv": 969848,
-        "short_names.tsv.gz": 121155,
-        "subdivisions.tsv": 3568478
+        "short_names.tsv.gz": 104799,
+        "subdivisions.tsv": 3094702
       }
     }
   }

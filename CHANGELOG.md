@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- The data's licenses travel with it: `src/localis/data/NOTICE` attributes each source, `LICENSES/` holds the LGPL-2.1-or-later, CC-BY-4.0, Unicode-3.0 and CC0-1.0 texts, and the package metadata declares `MIT AND LGPL-2.1-or-later AND CC-BY-4.0 AND Unicode-3.0 AND CC0-1.0` instead of `MIT` alone, which covered only the code
+
+### Changed
+
+- Text normalization folds Latin only: accents are stripped and Latin letters without a Unicode decomposition (ß, æ, ø, ł, ı, ə and others) are spelled out, while other scripts are no longer transliterated
+- A city whose GeoNames name is written in another script takes GeoNames' ASCII name (24 cities)
+- Cities ship a short-name list like countries and subdivisions, so short city names reachable only by an exact query (such as "Jīān") are found through the short-query fallback, for about 463 KiB
+
+### Removed
+
+- The `unidecode` dependency (GPL-2.0-or-later); `rapidfuzz` is now the only runtime dependency
+- Subdivision aliases written in non-Latin scripts (19,882), which only a query in that script could find: subdivisions' shipped data shrinks from 10,866 to 9,930 KiB and their fully loaded memory from 47.4 to 41.0 MiB. 274 Latin aliases that deduplication had dropped in favor of a Cyrillic spelling ship again
+
+### Fixed
+
+- Capital schwa (Ə) and reversed E (Ǝ) normalized to "@" and "3"; both now fold to "a", like their lowercase forms
+
 ### Security
 
 - CI jobs that install or run project and third-party code no longer hold write tokens. Test is read-only, and its ingest check on `dev` fails instead of committing; `ingest.yaml` builds read-only and pushes its commits from a job running only git and `gh`; `release.yaml` builds read-only, publishes to PyPI from a job holding only `id-token: write`, then creates the GitHub release from one holding only `contents: write`

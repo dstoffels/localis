@@ -24,7 +24,7 @@ Blocked on the above, needs a dedicated design pass before implementation starts
 3. Implement custom exceptions (localis.exceptions module)?
 4. Implement autocomplete for registries and/or global interface.
 5. No ISO source maps countries to their language(s) (639 and 3166 don't cross-reference); evaluate Unicode CLDR's territory-language data for this.
-6. Search, remaining limits: a subdivision query without context can't pick among same-name records (dozens of Washington Counties), which caps subdivisions' top-result accuracy; benchmarking subdivision queries with their country as context would measure that case the way cities' admin1 context does. `unidecode` transliteration of non-Latin aliases (Korean, Arabic) doesn't consistently match the record's own Latin name. The short-name fallback is off for cities (their queries usually carry context); enabling it is `SHORT_NAMES = True` on `CityModel`, at about 430KB shipped. Indexing each name separately (true per-name Dice) is parked until a failure trace shows alias dilution.
+6. Search, remaining limits: a subdivision query without context can't pick among same-name records (dozens of Washington Counties), which caps subdivisions' top-result accuracy; benchmarking subdivision queries with their country as context would measure that case the way cities' admin1 context does. Indexing each name separately (true per-name Dice) is parked until a failure trace shows alias dilution.
 7. Macroregion filters on subdivisions and cities (`cities.filter(macroregion="Europe")`), at the cost of another filter column on the largest dataset; deferred until there's demand. The macroregions design is recorded in `methodology.md` (sources, naming, placement rules) and `dev.md`.
 8. Pin the CLDR version shared by `cldr_territory_info.json` (shared stage) and the macroregions inputs, which each fetch CLDR's `main` and could land on different CLDR commits in one run.
 9. Split cities from the core package (`localis` with macroregions, countries and subdivisions, about 11MB installed; cities as an extra backed by a separate data package, about 49MB). Deferred until users report package size as a problem. City rows store country and subdivision ids that are only valid against the exact core data they were built with, so the two would release in lockstep from one ingest run with an exact-version pin, which removes most of the usual benefit of a split.
@@ -32,6 +32,8 @@ Blocked on the above, needs a dedicated design pass before implementation starts
 ## Localization (gettext-based name translation)
 
 Initial plan, not yet started. Goal: pycountry-style translation of `Country`/`Subdivision` names (and `Currency`/`Language`/`Script` once those exist) into other locales via gettext, available both as a per-object transform and as a query-time option on the registries.
+
+Since 2026-10-04 every shipped name is in Latin script (non-Latin GeoNames aliases were dropped, see methodology's Discovery), so this is the planned way to serve names in other scripts. `normalize()` leaves non-Latin text as written, so a per-locale corpus can be matched in its own script.
 
 ### Mechanism
 

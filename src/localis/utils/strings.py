@@ -1,30 +1,103 @@
 import unicodedata
 import re
-from unidecode import unidecode
+from functools import cache
 
 SPACE_RE = re.compile(r"\s+")
+# Latin letters NFKD doesn't decompose, keyed by casefolded form, and the modifier letters and punctuation found in the sources, folded to ASCII; ə (schwa) and ǝ (turned e) are distinct letters that both fold to a
+LATIN_FOLDS = str.maketrans(
+    {
+        "ı": "i",
+        "ł": "l",
+        "ø": "o",
+        "đ": "d",
+        "æ": "ae",
+        "ð": "d",
+        "œ": "oe",
+        "ħ": "h",
+        "þ": "th",
+        "ə": "a",
+        "ǝ": "a",
+        "ɔ": "o",
+        "ɛ": "e",
+        "ɡ": "g",
+        "ƣ": "oi",
+        "ɕ": "c",
+        "ƶ": "z",
+        "ɣ": "g",
+        "ɨ": "i",
+        "ɵ": "o",
+        "ɪ": "i",
+        "ʊ": "u",
+        "ɬ": "l",
+        "ŋ": "ng",
+        "ʂ": "s",
+        "ʐ": "z",
+        "ɲ": "n",
+        "ɑ": "a",
+        "ɾ": "r",
+        "ʑ": "z",
+        "ʒ": "z",
+        "ƿ": "w",
+        "ɩ": "i",
+        "ʃ": "s",
+        "ʁ": "r",
+        "ȝ": "y",
+        "ɞ": "e",
+        "ɹ": "r",
+        "ɐ": "a",
+        "ꞑ": "n",
+        "ʻ": "`",
+        "ʾ": "`",
+        "ʼ": "'",
+        "ʿ": "'",
+        "ˈ": "'",
+        "ʹ": "'",
+        "ˌ": ",",
+        "ː": ":",
+        "‘": "'",
+        "’": "'",
+        "“": '"',
+        "”": '"',
+        "–": "-",
+        "—": "--",
+        "†": "+",
+        # the regional indicator letters that spell flag emoji
+        **{chr(cp): "" for cp in range(0x1F1E6, 0x1F200)},
+    }
+)
 # \w counts the underscore as a word character, so it's matched separately
 PUNCTUATION_RE = re.compile(r"[^\w\s]|_")
 # the longest one-word name shipped for search's edit-distance fallback on short queries, one character past the longest query that uses it
 SHORT_NAME_MAX = 7
 
 
-def normalize(s: str, lower: bool = True) -> str:
-    """Custom transliteration of a string into an ASCII-only search form with optional lowercasing (default=True)."""
+@cache
+def _is_latin(ch: str) -> bool:
+    return ch.isascii() or unicodedata.name(ch, "").startswith("LATIN ")
+
+
+def normalize(s: str) -> str:
+    """The casefolded comparison form of a string: Latin folded to ASCII, other scripts kept as written."""
     if not isinstance(s, str):
         return s
-    MAP = {"ə": "a", "ǝ": "ä"}
+    if s.isascii():
+        return SPACE_RE.sub(" ", s.lower()).strip()
 
-    s = unicodedata.normalize("NFKD", s)
-    s = "".join(ch for ch in s if not unicodedata.combining(ch))
-    s = "".join(MAP.get(ch, ch) for ch in s)
-    s = unidecode(s)
-    s = SPACE_RE.sub(" ", s).strip()
-    return s.lower() if lower else s
+    kept: list[str] = []
+    latin = False
+    for ch in unicodedata.normalize("NFKD", s).casefold():
+        if not unicodedata.combining(ch):
+            latin = _is_latin(ch)
+        # an accent on a Latin letter is dropped; marks on other scripts, such as Devanagari's nukta, are part of the letter
+        elif latin:
+            continue
+        kept.append(ch)
+    s = unicodedata.normalize("NFC", "".join(kept).translate(LATIN_FOLDS))
+    return SPACE_RE.sub(" ", s).strip()
 
 
 def search_text(s: str) -> str:
-    """The form search compares on both the index and query side: normalize()'s ASCII form with punctuation turned into spaces."""
+    """The form search compares on both the index and query side: normalize()'s form with punctuation turned into spaces."""
     return SPACE_RE.sub(" ", PUNCTUATION_RE.sub(" ", normalize(s))).strip()
 
 

@@ -3,7 +3,7 @@ from ingest.utils import ingest_log
 from ingest.shared.scripts.fetch_shared import ALT_NAMES_PATH
 from ingest.shared.scripts.cldr import load_cldr_territory_languages
 from ingest.subdivisions.utils.subdivision_map import SubdivisionMap
-from ingest.utils.strings import dedupe
+from ingest.utils.strings import dedupe, is_latin
 from ingest.shared.models import SubdivisionModel
 
 # isolanguage values that aren't actual human-language name variants and should never be treated as candidate name text
@@ -49,7 +49,8 @@ def merge_alternate_name_aliases(sub_map: SubdivisionMap) -> None:
                 continue
 
             name = _strip_bidi_controls(parts[3])
-            if not name or name == sub.name:
+            # only Latin-script names ship; names in other scripts are left to localized names
+            if not name or name == sub.name or not is_latin(name):
                 continue
 
             is_colloquial = len(parts) > 6 and parts[6] == "1"

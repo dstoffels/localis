@@ -30,6 +30,7 @@ class CityModel(Model):
         ),
     }
     CANON_FIELDS = ("name",)
+    SHORT_NAMES = True
     CONTEXT_FIELDS = ("admin1.name", "admin1.iso_suffix", "country.name", "country.alpha2", "country.alpha3")
 
     @property
