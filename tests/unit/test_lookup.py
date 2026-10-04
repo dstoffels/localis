@@ -3,6 +3,7 @@ from localis.registries import (
     Registry,
     MacroregionRegistry,
     CurrencyRegistry,
+    ScriptRegistry,
     CountryRegistry,
     SubdivisionRegistry,
     CityRegistry,
@@ -14,6 +15,7 @@ from utils import registry_param
 LOOKUP_VALUES_BY_REGISTRY = {
     MacroregionRegistry: lambda m: (m.code, m.name),
     CurrencyRegistry: lambda c: (c.alpha3, c.numeric),
+    ScriptRegistry: lambda s: (s.alpha4, s.numeric),
     CountryRegistry: lambda c: (
         (c.historic.alpha_4,) if c.historic else (c.alpha2, c.alpha3, c.numeric)
     ),
@@ -25,6 +27,7 @@ LOOKUP_VALUES_BY_REGISTRY = {
 NESTED_BY_REGISTRY = {
     MacroregionRegistry: lambda m: [(m.parent, localis.macroregions)],
     CurrencyRegistry: lambda c: [],
+    ScriptRegistry: lambda s: [],
     CountryRegistry: lambda c: [
         *((m, localis.macroregions) for m in (*c.macroregions, *c.groupings)),
         *((m, localis.currencies) for m in c.currencies),

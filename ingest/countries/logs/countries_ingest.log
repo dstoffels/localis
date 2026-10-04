@@ -2,8 +2,7 @@
 [INFO] No update needed for iso_3166-1.json
 [INFO] No update needed for iso_3166-3.json
 [INFO] No update needed for geonamesInfo.txt
-[INFO] Downloading cldr_currency_data.json from https://raw.githubusercontent.com/unicode-org/cldr-json/main/cldr-json/cldr-core/supplemental/currencyData.json
-[INFO] Downloaded and updated cldr_currency_data.json
+[INFO] No update needed for cldr_currency_data.json
 [INFO] Loading ISO countries...
 [INFO] Loading historic ISO countries...
 [INFO] Merging GeoNames countries...

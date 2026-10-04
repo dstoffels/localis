@@ -11,6 +11,7 @@ This document describes how every record `localis` ships is produced: which sour
 | Cities | <stat key="data.cities.total:int">235,917</stat> | GeoNames `cities500.txt` |
 | Macroregions | <stat key="data.macroregions.total:int">34</stat> (<stat key="data.macroregions.regions:int">5</stat> regions, <stat key="data.macroregions.subregions:int">23</stat> subregions, <stat key="data.macroregions.groupings:int">6</stat> groupings) | CLDR territory containment and English territory names |
 | Currencies | <stat key="data.currencies.total:int">178</stat> | ISO 4217; CLDR currency data for each country's legal tender |
+| Scripts | <stat key="data.scripts.total:int">226</stat> | ISO 15924; CLDR English script names as aliases |
 
 How the <stat key="data.subdivisions.iso_total:int">5,046</stat> ISO 3166-2 subdivisions were resolved against GeoNames:
 
@@ -31,7 +32,7 @@ How the <stat key="data.subdivisions.iso_total:int">5,046</stat> ISO 3166-2 subd
 
 `localis`'s code is MIT licensed. The data it ships is derived from the sources below and remains subject to their terms. `src/localis/data/NOTICE` ships with the data and attributes each source, the full license texts are in `LICENSES/` and in the wheel's metadata, and the package declares the combined license expression `MIT AND LGPL-2.1-or-later AND CC-BY-4.0 AND Unicode-3.0 AND CC0-1.0`.
 
-ISO 3166-1, 3166-2, 3166-3 and ISO 4217 data comes from Debian's [iso-codes](https://salsa.debian.org/iso-codes-team/iso-codes) project, licensed LGPL-2.1-or-later. [GeoNames](https://www.geonames.org/) supplies `countryInfo.txt`, `admin1CodesASCII.txt`, `admin2Codes.txt`, `alternateNamesV2.txt` and `cities500.txt`, licensed CC BY 4.0, which requires attribution. [Wikidata](https://www.wikidata.org/) supplies the subdivision crosswalk and country aliases under CC0. [Unicode CLDR](https://cldr.unicode.org/) supplies `territoryInfo.json`, used to choose which alternate-name languages to keep, its territory containment and English territory names, the source of the macroregions, and `currencyData.json`, the source of each country's currencies, under the Unicode License v3.
+ISO 3166-1, 3166-2, 3166-3, ISO 4217 and ISO 15924 data comes from Debian's [iso-codes](https://salsa.debian.org/iso-codes-team/iso-codes) project, licensed LGPL-2.1-or-later. [GeoNames](https://www.geonames.org/) supplies `countryInfo.txt`, `admin1CodesASCII.txt`, `admin2Codes.txt`, `alternateNamesV2.txt` and `cities500.txt`, licensed CC BY 4.0, which requires attribution. [Wikidata](https://www.wikidata.org/) supplies the subdivision crosswalk and country aliases under CC0. [Unicode CLDR](https://cldr.unicode.org/) supplies `territoryInfo.json`, used to choose which alternate-name languages to keep, its territory containment and English territory names, the source of the macroregions, `currencyData.json`, the source of each country's currencies, and its English script names (`scripts.json`), the scripts' aliases, under the Unicode License v3.
 
 The monthly ingest re-fetches a source only when its ETag changes, and the ETag of every source file behind the shipped data is recorded in `ingest/<domain>/inputs/*.manifest.json`, committed alongside the data. A manifest is written only after its dataset is dumped, so it never records a source that didn't make it into the shipped data. The commit a release was built from therefore identifies its exact source snapshot.
 
@@ -60,6 +61,14 @@ Minor units (how many decimal places a currency uses) aren't shipped. iso-codes 
 A country's currencies come from CLDR's `currencyData.json`, which lists each territory's currencies with the dates each was in use and whether it is legal tender. A country takes the entries with no end date that CLDR doesn't mark as not legal tender, in CLDR's order. That leaves out every fund code, which CLDR marks as not legal tender, and every withdrawn currency, so <stat key="data.currencies.linked:int">153</stat> of the codes are some current country's legal tender. <stat key="data.currencies.multi_currency_countries:int">7</stat> countries have more than one, such as Panama (the balboa and the US dollar) and Zimbabwe (the Zimbabwe gold and the US dollar). Kosovo takes the euro, since CLDR keys its data by the same `XK` code localis uses, and <stat key="data.currencies.current_countries_without:int">1</stat> current country, Antarctica, has none. A CLDR currency that isn't in ISO 4217 is skipped and logged. The result is exposed as `Country.currencies` and is filterable with `countries.filter(currency=...)`, by name or alpha3.
 
 Historic countries have no currencies; see [Known limitations](#known-limitations).
+
+## Scripts
+
+Scripts are ISO 15924's list as iso-codes publishes it: each code's `alpha4`, its `name` and its `numeric` code as an integer. All <stat key="data.scripts.total:int">226</stat> entries ship, including the special codes (inherited, mathematical notation, symbols, unwritten, undetermined and uncoded) and the two entries ISO lists for the private-use range, Qaaa "Reserved for private use (start)" and Qabx "(end)", which mark its ends rather than naming a script; localis wraps the list rather than judging its entries.
+
+ISO's names often fold other names into parentheses ("Han (Hanzi, Kanji, Hanja)", "Devanagari (Nagari)"). CLDR's English script names (`scripts.json`) are added as aliases: every name CLDR gives a code, its alternate forms included ("Simplified Han" for Hans), joins the record with that code and is deduplicated against the ISO name; <stat key="data.scripts.with_aliases:int">69</stat> scripts gain at least one. A CLDR code that isn't in ISO 15924, such as Qaag, CLDR's private-use code for the Zawgyi encoding of Burmese, is skipped and logged.
+
+Scripts relate to nothing else yet. Neither ISO 15924 nor CLDR maps scripts to countries directly; CLDR's likely-subtags data names one likely script per territory for defaulting an untagged locale (India's is Devanagari only), which is a default rather than an account of the scripts a country uses, so it isn't used.
 
 ## Countries
 

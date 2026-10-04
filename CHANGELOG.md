@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - `localis.currencies`: every ISO 4217 code (from iso-codes) with `lookup()` by alpha3 or numeric, `filter()` and `search()` by name, and `Country.currencies`, each current country's legal tender per Unicode CLDR, filterable with `countries.filter(currency=...)` by name or alpha3; historic countries have none
+- `localis.scripts`: every ISO 15924 code (from iso-codes) with `lookup()` by alpha4 or numeric, and `filter()` and `search()` by name, Unicode CLDR's English script names included as aliases
 - `key` on every entity, nested ones included: the stable reference to store instead of `id`, which a data release renumbers, resolved by `lookup()` in any later version (`alpha2` or a historic entry's `alpha_4`, a subdivision's ISO code or else its GeoNames code, a city's GeoNames ID, a macroregion's code). The README documents IDs as valid only within an installed version
 - `localis.MISSING` filters for records with no value in a field, which `None` can't, since it means "don't filter on this field": `subdivisions.filter(type=MISSING)` for GeoNames-only subdivisions, `cities.filter(subdivision=MISSING)` for cities linked to no subdivision, `countries.filter(macroregion=MISSING)` for historic countries without one
 - `wikidata_changed` orphans: a Wikidata crosswalk mapping that would relink a subdivision from what it previously resolved to goes to the resolve-subdivisions skill instead of applying silently

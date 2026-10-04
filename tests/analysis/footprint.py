@@ -14,10 +14,17 @@ from tests.analysis.host import host_fingerprint
 ROOT = Path(__file__).resolve().parents[2]
 OUTPUT_PATH = Path(__file__).with_name("footprint.json")
 POPULATION_THRESHOLD = 15_000
-REGISTRIES = ("countries", "subdivisions", "cities")
+REGISTRIES = ("macroregions", "currencies", "scripts", "countries", "subdivisions", "cities")
 COMPONENTS = {"dataset": "_cache", "lookup_index": "_lookup_index", "filter_index": "_filter_index", "search_index": "_search_index"}
 # a registry's views reference the registries before it, so their datasets load first and stay out of its measurement
-DEPENDENCIES = {"countries": (), "subdivisions": ("countries",), "cities": ("countries", "subdivisions")}
+DEPENDENCIES = {
+    "macroregions": (),
+    "currencies": (),
+    "scripts": (),
+    "countries": ("macroregions", "currencies"),
+    "subdivisions": ("countries",),
+    "cities": ("countries", "subdivisions"),
+}
 
 
 def _traced_bytes() -> int:
@@ -50,7 +57,12 @@ def _run_scenario(scenario: str, mode: str) -> dict[str, Any]:
     if scenario in REGISTRIES:
         preload(DEPENDENCIES[scenario])
         registry = getattr(localis, scenario)
-        return {component: _measure(lambda attr=attr: getattr(registry, attr), mode) for component, attr in COMPONENTS.items()}
+        # a registry without filter() and search() (macroregions) has no filter or search index to measure
+        return {
+            component: _measure(lambda attr=attr: getattr(registry, attr), mode)
+            for component, attr in COMPONENTS.items()
+            if attr in registry._CACHED_ATTRS
+        }
     if scenario == "cities_threshold":
         preload(DEPENDENCIES["cities"])
         localis.cities.set_population_threshold(POPULATION_THRESHOLD)

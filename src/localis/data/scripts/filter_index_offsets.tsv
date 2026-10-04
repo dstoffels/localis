@@ -1,0 +1,298 @@
+name	(small) seal	0	1
+name	adlam	1	1
+name	afaka	2	1
+name	ahom	3	1
+name	ahom, tai ahom	4	1
+name	anatolian hieroglyphs	5	1
+name	anatolian hieroglyphs (luwian hieroglyphs, hittite hieroglyphs)	6	1
+name	arabic	7	1
+name	arabic (nastaliq variant)	8	1
+name	armenian	9	1
+name	avestan	10	1
+name	balinese	11	1
+name	bamum	12	1
+name	bangla	13	1
+name	bassa vah	14	1
+name	batak	15	1
+name	bengali (bangla)	16	1
+name	beria erfe	17	1
+name	bhaiksuki	18	1
+name	blissymbols	19	1
+name	book pahlavi	20	1
+name	bopomofo	21	1
+name	brahmi	22	1
+name	braille	23	1
+name	buginese	24	1
+name	buhid	25	1
+name	carian	26	1
+name	caucasian albanian	27	1
+name	chakma	28	1
+name	cham	29	1
+name	cherokee	30	1
+name	chisoi	31	1
+name	chorasmian	32	1
+name	cirth	33	1
+name	code for inherited script	34	1
+name	code for uncoded script	35	1
+name	code for undetermined script	36	1
+name	code for unwritten documents	37	1
+name	common	38	1
+name	coptic	39	1
+name	cuneiform, sumero-akkadian	40	1
+name	cypriot	41	1
+name	cypriot syllabary	42	1
+name	cypro-minoan	43	1
+name	cyrillic	44	1
+name	cyrillic (old church slavonic variant)	45	1
+name	deseret	46	1
+name	deseret (mormon)	47	1
+name	devanagari	48	1
+name	devanagari (nagari)	49	1
+name	dives akuru	50	1
+name	dogra	51	1
+name	duployan shorthand	52	1
+name	duployan shorthand, duployan stenography	53	1
+name	eastern syriac	54	1
+name	egyptian demotic	55	1
+name	egyptian hieratic	56	1
+name	egyptian hieroglyphs	57	1
+name	elbasan	58	1
+name	elymaic	59	1
+name	emoji	60	1
+name	estrangelo syriac	61	1
+name	ethiopic	62	1
+name	ethiopic (ge`ez)	63	1
+name	fraktur latin	64	1
+name	fraser	65	1
+name	gaelic latin	66	1
+name	garay	67	1
+name	georgian	68	1
+name	georgian (mkhedruli and mtavruli)	69	1
+name	georgian khutsuri	70	1
+name	glagolitic	71	1
+name	gothic	72	1
+name	grantha	73	1
+name	greek	74	1
+name	gujarati	75	1
+name	gunjala gondi	76	1
+name	gurmukhi	77	1
+name	gurung khema	78	1
+name	han	79	1
+name	han (hanzi, kanji, hanja)	80	1
+name	han (simplified variant)	81	1
+name	han (traditional variant)	82	1
+name	han (traditional variant) with latin (alias for hant + latn)	83	1
+name	han with bopomofo	84	1
+name	han with bopomofo (alias for han + bopomofo)	85	1
+name	hangul	86	1
+name	hangul (hangul, hangeul)	87	1
+name	hanifi	88	1
+name	hanifi rohingya	89	1
+name	hanunoo	90	1
+name	hanunoo (hanunoo)	91	1
+name	hatran	92	1
+name	hebrew	93	1
+name	hiragana	94	1
+name	imperial aramaic	95	1
+name	indus	96	1
+name	indus (harappan)	97	1
+name	inherited	98	1
+name	inscriptional pahlavi	99	1
+name	inscriptional parthian	100	1
+name	jamo	101	1
+name	jamo (alias for jamo subset of hangul)	102	1
+name	japanese	103	1
+name	japanese (alias for han + hiragana + katakana)	104	1
+name	japanese syllabaries	105	1
+name	japanese syllabaries (alias for hiragana + katakana)	106	1
+name	javanese	107	1
+name	jurchen	108	1
+name	kaithi	109	1
+name	kannada	110	1
+name	katakana	111	1
+name	kawi	112	1
+name	kayah li	113	1
+name	kharoshthi	114	1
+name	khitan large script	115	1
+name	khitan small script	116	1
+name	khmer	117	1
+name	khojki	118	1
+name	khudawadi	119	1
+name	khudawadi, sindhi	120	1
+name	khutsuri (asomtavruli and nuskhuri)	121	1
+name	kirat rai	122	1
+name	klingon (kli piqad)	123	1
+name	korean	124	1
+name	korean (alias for hangul + han)	125	1
+name	kpelle	126	1
+name	lanna	127	1
+name	lao	128	1
+name	latin	129	1
+name	latin (fraktur variant)	130	1
+name	latin (gaelic variant)	131	1
+name	leke	132	1
+name	lepcha	133	1
+name	lepcha (rong)	134	1
+name	limbu	135	1
+name	linear a	136	1
+name	linear b	137	1
+name	lisu (fraser)	138	1
+name	loma	139	1
+name	lycian	140	1
+name	lydian	141	1
+name	mahajani	142	1
+name	makasar	143	1
+name	malayalam	144	1
+name	mandaean	145	1
+name	mandaic, mandaean	146	1
+name	manichaean	147	1
+name	marchen	148	1
+name	masaram gondi	149	1
+name	mathematical notation	150	1
+name	mayan hieroglyphs	151	1
+name	medefaidrin	152	1
+name	medefaidrin (oberi okaime, oberi okaime)	153	1
+name	meitei mayek	154	1
+name	meitei mayek (meithei, meetei)	155	1
+name	mende	156	1
+name	mende kikakui	157	1
+name	meroitic	158	1
+name	meroitic cursive	159	1
+name	meroitic hieroglyphs	160	1
+name	miao (pollard)	161	1
+name	modi	162	1
+name	modi, modi	163	1
+name	mongolian	164	1
+name	moon	165	1
+name	moon (moon code, moon script, moon type)	166	1
+name	mro	167	1
+name	mro, mru	168	1
+name	multani	169	1
+name	myanmar	170	1
+name	myanmar (burmese)	171	1
+name	n'ko	172	1
+name	nabataean	173	1
+name	nag mundari	174	1
+name	nandinagari	175	1
+name	nastaliq	176	1
+name	naxi dongba (na21ci33 to33ba21, nakhi tomba)	177	1
+name	naxi geba	178	1
+name	naxi geba (na21ci33 gʌ21ba21, 'na-'khi 2ggo-1baw, nakhi geba)	179	1
+name	new tai lue	180	1
+name	newa	181	1
+name	newa, newar, newari, nepala lipi	182	1
+name	nushu	183	1
+name	nyiakeng puachue hmong	184	1
+name	odia	185	1
+name	ogham	186	1
+name	ol chiki	187	1
+name	ol chiki (ol cemet', ol, santali)	188	1
+name	ol onal	189	1
+name	old church slavonic cyrillic	190	1
+name	old hungarian	191	1
+name	old hungarian (hungarian runic)	192	1
+name	old italic	193	1
+name	old italic (etruscan, oscan, etc.)	194	1
+name	old north arabian	195	1
+name	old north arabian (ancient north arabian)	196	1
+name	old permic	197	1
+name	old persian	198	1
+name	old sogdian	199	1
+name	old south arabian	200	1
+name	old turkic, orkhon runic	201	1
+name	old uyghur	202	1
+name	oriya (odia)	203	1
+name	orkhon	204	1
+name	osage	205	1
+name	osmanya	206	1
+name	pahawh hmong	207	1
+name	palmyrene	208	1
+name	pau cin hau	209	1
+name	perso-arabic	210	1
+name	phags-pa	211	1
+name	phoenician	212	1
+name	pollard phonetic	213	1
+name	proto-cuneiform	214	1
+name	proto-elamite	215	1
+name	proto-sinaitic	216	1
+name	psalter pahlavi	217	1
+name	ranjana	218	1
+name	rejang	219	1
+name	rejang (redjang, kaganga)	220	1
+name	reserved for private use (end)	221	1
+name	reserved for private use (start)	222	1
+name	rongorongo	223	1
+name	runic	224	1
+name	s-a cuneiform	225	1
+name	samaritan	226	1
+name	sarati	227	1
+name	saurashtra	228	1
+name	sharada	229	1
+name	sharada, sarada	230	1
+name	shavian	231	1
+name	shavian (shaw)	232	1
+name	shuishu	233	1
+name	siddham	234	1
+name	siddham, siddham, siddhamatrka	235	1
+name	sidetic	236	1
+name	signwriting	237	1
+name	simplified	238	1
+name	simplified han	239	1
+name	sinhala	240	1
+name	sogdian	241	1
+name	sora sompeng	242	1
+name	sourashtra	243	1
+name	soyombo	244	1
+name	sumero-akkadian cuneiform	245	1
+name	sundanese	246	1
+name	sunuwar	247	1
+name	syloti nagri	248	1
+name	symbols	249	1
+name	symbols (emoji variant)	250	1
+name	syriac	251	1
+name	syriac (eastern variant)	252	1
+name	syriac (estrangelo variant)	253	1
+name	syriac (western variant)	254	1
+name	tagalog	255	1
+name	tagalog (baybayin, alibata)	256	1
+name	tagbanwa	257	1
+name	tai le	258	1
+name	tai tham (lanna)	259	1
+name	tai viet	260	1
+name	tai yo	261	1
+name	takri	262	1
+name	takri, takri, tankri	263	1
+name	tamil	264	1
+name	tangsa	265	1
+name	tangut	266	1
+name	telugu	267	1
+name	tengwar	268	1
+name	thaana	269	1
+name	thai	270	1
+name	tibetan	271	1
+name	tifinagh	272	1
+name	tifinagh (berber)	273	1
+name	tirhuta	274	1
+name	todhri	275	1
+name	tolong siki	276	1
+name	toto	277	1
+name	traditional	278	1
+name	traditional han	279	1
+name	tulu-tigalari	280	1
+name	ucas	281	1
+name	ugaritic	282	1
+name	unified canadian aboriginal syllabics	283	1
+name	unknown script	284	1
+name	unwritten	285	1
+name	vai	286	1
+name	varang kshiti	287	1
+name	visible speech	288	1
+name	vithkuqi	289	1
+name	wancho	290	1
+name	warang citi (varang kshiti)	291	1
+name	western syriac	292	1
+name	woleai	293	1
+name	yezidi	294	1
+name	yi	295	1
+name	zanabazar square	296	1
+name	zanabazar square (zanabazarin dorboljin useg, xewtee dorboljin bicig, horizontal square script)	297	1

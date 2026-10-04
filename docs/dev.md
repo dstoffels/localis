@@ -46,7 +46,7 @@ Under `ingest/subdivisions/outputs/`:
 
 ## Data Sourcing
 
-Countries pull ISO 3166-1 codes and names from Debian's iso-codes project, country metadata from GeoNames' `countryInfo.txt`, and additional aliases from a live Wikidata query (`ingest/countries/scripts/wikidata_countries.py`: each ISO alpha-2 item's English label, alternative labels and short names, and the same for each item with an ISO 3166-3 alpha-4 code, for historic entries). Subdivisions pull ISO 3166-2 codes and names from the same iso-codes project (`iso_3166-2.json`) and admin boundaries from GeoNames' `admin1CodesASCII.txt` and `admin2Codes.txt`, with aliases from GeoNames' alternate names. Macroregions pull CLDR's territory containment and English territory names from the `unicode-org/cldr-json` repository (`ingest/macroregions/`), and each country's placement in them is set during the countries stage (`ingest/countries/scripts/place_macroregions.py`). Currencies pull ISO 4217 codes and names from iso-codes (`iso_4217.json`, `ingest/currencies/`), and each country's currencies are set during the countries stage from CLDR's `currencyData.json` (`ingest/countries/scripts/place_currencies.py`): the entries with no end date that aren't marked `_tender: false`, in CLDR's order, for current countries only. Cities pull from GeoNames' `cities500.txt`, GeoNames' own pre-filtered export (population ≥ 500, or a seat of an administrative division regardless of population), so `ingest/cities/scripts/load_cities.py` no longer applies its own feature-code or population filtering on top, GeoNames already made that call, and re-filtering on population would wrongly drop the low/no-population admin seats `cities500` specifically includes on purpose.
+Countries pull ISO 3166-1 codes and names from Debian's iso-codes project, country metadata from GeoNames' `countryInfo.txt`, and additional aliases from a live Wikidata query (`ingest/countries/scripts/wikidata_countries.py`: each ISO alpha-2 item's English label, alternative labels and short names, and the same for each item with an ISO 3166-3 alpha-4 code, for historic entries). Subdivisions pull ISO 3166-2 codes and names from the same iso-codes project (`iso_3166-2.json`) and admin boundaries from GeoNames' `admin1CodesASCII.txt` and `admin2Codes.txt`, with aliases from GeoNames' alternate names. Macroregions pull CLDR's territory containment and English territory names from the `unicode-org/cldr-json` repository (`ingest/macroregions/`), and each country's placement in them is set during the countries stage (`ingest/countries/scripts/place_macroregions.py`). Currencies pull ISO 4217 codes and names from iso-codes (`iso_4217.json`, `ingest/currencies/`), and each country's currencies are set during the countries stage from CLDR's `currencyData.json` (`ingest/countries/scripts/place_currencies.py`): the entries with no end date that aren't marked `_tender: false`, in CLDR's order, for current countries only. Scripts pull ISO 15924 codes and names from iso-codes (`iso_15924.json`) and CLDR's English script names (`scripts.json`) as aliases (`ingest/scripts/`, whose build scripts sit in `ingest/scripts/scripts/` like every domain's). Cities pull from GeoNames' `cities500.txt`, GeoNames' own pre-filtered export (population ≥ 500, or a seat of an administrative division regardless of population), so `ingest/cities/scripts/load_cities.py` no longer applies its own feature-code or population filtering on top, GeoNames already made that call, and re-filtering on population would wrongly drop the low/no-population admin seats `cities500` specifically includes on purpose.
 
 Fetching is checksum-aware: nothing gets downloaded unless its remote source has actually changed since the last successful fetch. A domain only ever re-fetches all of its sources together, never a subset, since merging needs the complete raw set on disk rather than whatever piece happened to change. That same check gates the rest of the pipeline too, skipping parsing and merging entirely for a domain with nothing new.
 
@@ -80,7 +80,7 @@ One bug this surfaced and fixed in passing: `release.yaml`'s checkout step never
 
 ## Registries
 
-Every registry extends `Registry` (`src/localis/registries/registry.py`), which loads a dataset and its lookup index lazily and provides `get()`, `lookup()`, iteration and `len()`. `QueryableRegistry` extends it with the filter and search indexes and `filter()`/`search()`, and currencies, countries, subdivisions and cities extend that; macroregions, a small lookup table, extend `Registry` directly and ship no filter or search index. Each registry pairs an entity (`localis/entities/`), a columnar store (`localis/stores/`) and a view that reads a row from the store and builds the entity (`localis/views/`). A view resolves references to other datasets through their views, so a registry's dataset loads the datasets it references first (countries take macroregions and currencies, subdivisions take countries, cities take both). On the ingest side, a domain under `ingest/<domain>/` fetches, builds, dumps its dataset with `dump_data()` and the indexes it ships, and commits its manifest, and `ingest_all` runs the domains in dependency order, passing each stage's result to the stages that store its ids.
+Every registry extends `Registry` (`src/localis/registries/registry.py`), which loads a dataset and its lookup index lazily and provides `get()`, `lookup()`, iteration and `len()`. `QueryableRegistry` extends it with the filter and search indexes and `filter()`/`search()`, and currencies, scripts, countries, subdivisions and cities extend that; macroregions, a small lookup table, extend `Registry` directly and ship no filter or search index. Each registry pairs an entity (`localis/entities/`), a columnar store (`localis/stores/`) and a view that reads a row from the store and builds the entity (`localis/views/`). A view resolves references to other datasets through their views, so a registry's dataset loads the datasets it references first (countries take macroregions and currencies, subdivisions take countries, cities take both). On the ingest side, a domain under `ingest/<domain>/` fetches, builds, dumps its dataset with `dump_data()` and the indexes it ships, and commits its manifest, and `ingest_all` runs the domains in dependency order, passing each stage's result to the stages that store its ids.
 
 ## Performance Profile
 
@@ -110,6 +110,7 @@ Earlier benchmarks in this document used `resource.getrusage(resource.RUSAGE_SEL
 |---|---|---|
 | Macroregions | <stat key="data.shipped_size.macroregions.total:size">2KB</stat> | <stat key="data.shipped_size.macroregions.share_pct:pct">0.0%</stat> |
 | Currencies | <stat key="data.shipped_size.currencies.total:size">25KB</stat> | <stat key="data.shipped_size.currencies.share_pct:pct">0.0%</stat> |
+| Scripts | <stat key="data.shipped_size.scripts.total:size">36KB</stat> | <stat key="data.shipped_size.scripts.share_pct:pct">0.1%</stat> |
 | Countries | <stat key="data.shipped_size.countries.total:size">112KB</stat> | <stat key="data.shipped_size.countries.share_pct:pct">0.2%</stat> |
 | Subdivisions | <stat key="data.shipped_size.subdivisions.total:size">9.8MB</stat> | <stat key="data.shipped_size.subdivisions.share_pct:pct">19.6%</stat> |
 | Cities | <stat key="data.shipped_size.cities.total:size">40.0MB</stat> | <stat key="data.shipped_size.cities.share_pct:pct">80.1%</stat> |
@@ -120,21 +121,24 @@ Within cities: `cities.tsv` <stat key="data.shipped_size.cities.files.cities.tsv
 
 | Registry (`force_cache()`) | Retained memory |
 |---|---|
-| countries | <stat key="footprint.registries.countries.combined.memory_bytes:size">857KB</stat> |
+| macroregions | <stat key="footprint.registries.macroregions.combined.memory_bytes:size">14KB</stat> |
+| currencies | <stat key="footprint.registries.currencies.combined.memory_bytes:size">241KB</stat> |
+| scripts | <stat key="footprint.registries.scripts.combined.memory_bytes:size">321KB</stat> |
+| countries | <stat key="footprint.registries.countries.combined.memory_bytes:size">821KB</stat> |
 | subdivisions | <stat key="footprint.registries.subdivisions.combined.memory_bytes:size">41.8MB</stat> |
 | cities | <stat key="footprint.registries.cities.combined.memory_bytes:size">121.0MB</stat> |
-| **total, all three fully cached** | **<stat key="footprint.full_cache.memory_bytes:size">163.6MB</stat>** |
+| **total, all fully cached** | **<stat key="footprint.full_cache.memory_bytes:size">164.2MB</stat>** |
 
 Cities' <stat key="footprint.registries.cities.combined.memory_bytes:size">121.0MB</stat> breaks down further by structure:
 
 | Cities component | Retained memory | Build time |
 |---|---|---|
 | `_cache` | <stat key="footprint.registries.cities.dataset.memory_bytes:size">28.1MB</stat> | <stat key="footprint.registries.cities.dataset.time_ms:load">~338ms</stat> |
-| `_lookup_index` | <stat key="footprint.registries.cities.lookup_index.memory_bytes:size">1.8MB</stat> | <stat key="footprint.registries.cities.lookup_index.time_ms:load">~75ms</stat> |
-| `_filter_index` | <stat key="footprint.registries.cities.filter_index.memory_bytes:size">49.1MB</stat> | <stat key="footprint.registries.cities.filter_index.time_ms:load">~287ms</stat> |
-| `_search_index` | <stat key="footprint.registries.cities.search_index.memory_bytes:size">41.9MB</stat> | <stat key="footprint.registries.cities.search_index.time_ms:load">~196ms</stat> |
+| `_lookup_index` | <stat key="footprint.registries.cities.lookup_index.memory_bytes:size">1.8MB</stat> | <stat key="footprint.registries.cities.lookup_index.time_ms:load">~74ms</stat> |
+| `_filter_index` | <stat key="footprint.registries.cities.filter_index.memory_bytes:size">49.1MB</stat> | <stat key="footprint.registries.cities.filter_index.time_ms:load">~278ms</stat> |
+| `_search_index` | <stat key="footprint.registries.cities.search_index.memory_bytes:size">41.9MB</stat> | <stat key="footprint.registries.cities.search_index.time_ms:load">~195ms</stat> |
 
-**Total load time** (all three registries, `_cache` plus every index) is <stat key="footprint.full_cache.time_ms:load">~1.12s</stat>.
+**Total load time** (every registry, `_cache` plus every index) is <stat key="footprint.full_cache.time_ms:load">~1.15s</stat>.
 
 The last per-record overhead with no purpose has been removed: views are created on access by a `ViewMap` over each store rather than kept as one object, dict entry and int key per record, which took about 31MB off cities' dataset, and single-id filter postings are plain ints, which took about 15MB off cities' filter index. What remains is the data as modeled: names, the trigram postings search needs, and the filter keys. Storing names as a UTF-8 blob with offsets was considered and rejected; it would save about 11MB on cities' names, but every read would decode from the blob, slowing the bulk paths that read every name (large filters sort by name, iteration builds every entity). The current figures are treated as the memory floor for this data model.
 

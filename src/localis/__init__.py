@@ -5,6 +5,8 @@ from .entities import (
     MacroregionType,
     Currency,
     CurrencyBase,
+    Script,
+    ScriptBase,
     Country,
     CountryBase,
     HistoricInfo,
@@ -14,6 +16,7 @@ from .entities import (
 )
 from .registries.macroregion_registry import macroregions
 from .registries.currency_registry import currencies
+from .registries.script_registry import scripts
 from .registries.country_registry import countries
 from .registries.subdivision_registry import subdivisions
 from .registries.city_registry import cities

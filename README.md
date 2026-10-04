@@ -1,6 +1,6 @@
 # localis
 
-Fast, offline access to comprehensive data for **countries**, **subdivisions**, **cities**, the **macroregions** countries sit in and the **currencies** they use. Built on ISO 3166, ISO 4217, GeoNames, Unicode CLDR and Wikidata datasets (updated monthly) with support for exact lookups, filtering, and fuzzy search.
+Fast, offline access to comprehensive data for **countries**, **subdivisions**, **cities**, the **macroregions** countries sit in, the **currencies** they use and the writing **scripts** of ISO 15924. Built on ISO 3166, ISO 4217, ISO 15924, GeoNames, Unicode CLDR and Wikidata datasets (updated monthly) with support for exact lookups, filtering, and fuzzy search.
 
 ## Features
 
@@ -9,7 +9,8 @@ Fast, offline access to comprehensive data for **countries**, **subdivisions**, 
 - 🏙️ **<stat key="data.cities.total:int">235,917</stat> cities** sourced from GeoNames cities500.txt
 - 🌐 **<stat key="data.macroregions.total:int">34</stat> macroregions** (<stat key="data.macroregions.regions:int">5</stat> regions, <stat key="data.macroregions.subregions:int">23</stat> subregions, <stat key="data.macroregions.groupings:int">6</stat> groupings) sourced from Unicode CLDR, with every current country placed in them
 - 💱 **<stat key="data.currencies.total:int">178</stat> currencies** and funds from ISO 4217, with each current country's legal tender from Unicode CLDR
-- 🔍 **Typo-tolerant search**: with a typo in the query, the intended record ranks first for <stat key="bench.registries.countries.accuracy.top1_pct:pct">99.3%</stat> of countries, <stat key="bench.registries.subdivisions.accuracy.top1_pct:pct">85.5%</stat> of subdivisions and <stat key="bench.registries.cities.accuracy.top1_pct:pct">91.4%</stat> of cities
+- ✍️ **<stat key="data.scripts.total:int">226</stat> scripts** from ISO 15924, with Unicode CLDR's English script names as aliases
+- 🔍 **Typo-tolerant search**: with a typo in the query, the intended record ranks first for <stat key="bench.registries.countries.accuracy.top1_pct:pct">99.3%</stat> of countries, <stat key="bench.registries.subdivisions.accuracy.top1_pct:pct">85.5%</stat> of subdivisions and <stat key="bench.registries.cities.accuracy.top1_pct:pct">91.3%</stat> of cities
 - 📌 **Aliases**: support for colloquial, historic and alternate names
 
 ---
@@ -53,7 +54,7 @@ print(results[0][0].name)  # "Australia"
 
 ## Querying
 
-Each dataset is represented by its registry: `countries`, `subdivisions`, `cities`, `macroregions` and `currencies`, sharing a common query API.
+Each dataset is represented by its registry: `countries`, `subdivisions`, `cities`, `macroregions`, `currencies` and `scripts`, sharing a common query API.
 
 | Registry | `get` | `lookup` | `filter` | `search` | Iteration |
 |---|---|---|---|---|---|
@@ -62,6 +63,7 @@ Each dataset is represented by its registry: `countries`, `subdivisions`, `citie
 | `cities` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `macroregions` | ✓ | ✓ | | | ✓ |
 | `currencies` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `scripts` | ✓ | ✓ | ✓ | ✓ | ✓ |
 
 Lookups, filters and search ignore case and accents, so "sao paulo" finds São Paulo and "strasse" finds Straße.
 
@@ -73,6 +75,7 @@ subdivision = localis.subdivisions.get(1)
 city = localis.cities.get(1)
 macroregion = localis.macroregions.get(1)
 currency = localis.currencies.get(1)
+script = localis.scripts.get(1)
 ```
 
 **Returns:** the entity with that localis ID, or `None`
@@ -90,6 +93,7 @@ Resolves a single record by an identifier other than its localis ID.
 | `cities` | GeoNames ID (`5128581`) |
 | `macroregions` | code (`"155"`, `"EU"`), name (`"Western Europe"`) |
 | `currencies` | alpha-3 (`"EUR"`), numeric (`978`) |
+| `scripts` | alpha-4 (`"Cyrl"`), numeric (`220`) |
 
 ```python
 country = localis.countries.lookup("GB")
@@ -97,6 +101,7 @@ subdivision = localis.subdivisions.lookup("US-CA")
 city = localis.cities.lookup(5128581)
 macroregion = localis.macroregions.lookup("EU")
 currency = localis.currencies.lookup("EUR")
+script = localis.scripts.lookup("Cyrl")
 ```
 
 **Returns:** the entity, or `None`
@@ -113,6 +118,7 @@ Exact matches on any value a field indexes. Using multiple fields combines the c
 | `subdivisions` | `name` (name or alias), `type`, `country` (name, common name, alpha-2, alpha-3 or numeric), `admin_level` (0 = non-administrative groupings, 1 = states/provinces, 2 = counties/districts, 3 = divisions below those) |
 | `cities` | `name`, `country` (name, common name, alpha-2 or alpha-3), `subdivision` (any subdivision in the city's chain, by name, ISO code or its suffix (`"CA"`), or GeoNames code) |
 | `currencies` | `name` |
+| `scripts` | `name` (name or alias) |
 
 ```python
 localis.countries.filter(name="UK")  # aliases and abbreviations match too
@@ -143,6 +149,7 @@ for country, score in localis.countries.search("Germny", limit=5):
 localis.subdivisions.search("Californa")
 localis.cities.search("Springfeld, Illinois")  # context after the name narrows the match
 localis.currencies.search("Swiss Frank")
+localis.scripts.search("Devanagri")
 ```
 
 A subdivision or city query can add context after the name: a subdivision's parent or country, or a city's first-level subdivision or country.
@@ -194,6 +201,7 @@ city = localis.cities.lookup(saved)
 | `cities` | `geonames_id` |
 | `macroregions` | `code` |
 | `currencies` | `alpha3` |
+| `scripts` | `alpha4` |
 
 Nested records have a `key` too, so `city.country.key` and `city.subdivisions[0].key` resolve the same way. A key changes only when its source recodes the place itself, such as ISO reassigning a subdivision's code, and a stored GeoNames code still resolves after the subdivision gains an ISO code.
 
@@ -339,6 +347,23 @@ A ✓ under Base marks a field the nested `CurrencyBase` also has.
 | `alpha3` | `str` | `"EUR"` | | ✓ |
 | `numeric` | `int \| None` | `978` | ISO 4217 numeric code | |
 
+### Scripts
+
+Every ISO 15924 code ships as ISO publishes it, including the special codes (`"Zyyy"` undetermined, `"Zxxx"` unwritten, `"Zmth"` mathematical notation) and the two entries marking the private-use range, `"Qaaa"` (start) and `"Qabx"` (end). ISO's names often carry other names in parentheses, such as "Han (Hanzi, Kanji, Hanja)"; Unicode CLDR's English names for the same code ("Han", "Simplified Han") are its aliases, so both are found by `filter(name=...)` and `search()`.
+
+#### Script Object
+
+A ✓ under Base marks a field the nested `ScriptBase` also has.
+
+| Field | Type | Example (`"Deva"`) | Notes | Base |
+|---|---|---|---|---|
+| `id` | `int` | | localis ID, valid within this version | ✓ |
+| `key` | `str` | `"Deva"` | stable reference to store, the alpha-4 | ✓ |
+| `name` | `str` | `"Devanagari (Nagari)"` | ISO 15924 name, as published | ✓ |
+| `alpha4` | `str` | `"Deva"` | | ✓ |
+| `numeric` | `int \| None` | `315` | ISO 15924 numeric code | |
+| `aliases` | `tuple[str, ...]` | ("Devanagari",) | Unicode CLDR's English names for the code, where they differ from ISO's | |
+
 ---
 
 ## Performance
@@ -347,42 +372,24 @@ A ✓ under Base marks a field the nested `CurrencyBase` also has.
 
 All registries and their indexes are lazy-loaded on first use, incurring a cold start cost on whichever call touches them first. Any registry's dataset and indexes can be pre-loaded with `.force_cache()` to avoid this during queries, or you can simply access the registry/method to trigger the lazy loading upfront.
 
-> ℹ️ A registry's dataset also loads the datasets it references, if they aren't cached yet. Countries load macroregions and currencies, subdivisions load countries, and cities load subdivisions and countries. Only those datasets load, not their indexes. The subdivisions and cities tables below exclude them, so a cold first call on cities also pays for the subdivisions and countries datasets.
+Each component is shown as load time / memory, measured for that registry alone.
 
-#### Countries (<stat key="data.countries.total:int">281</stat>)
-| Component | Load Time | Memory |
-|---|---|---|
-| Dataset | <stat key="footprint.registries.countries.dataset.time_ms:load">~1ms</stat> | <stat key="footprint.registries.countries.dataset.memory_bytes:size">268KB</stat> |
-| Lookup index | <stat key="footprint.registries.countries.lookup_index.time_ms:load">< 1ms</stat> | <stat key="footprint.registries.countries.lookup_index.memory_bytes:size">41KB</stat> |
-| Filter index | <stat key="footprint.registries.countries.filter_index.time_ms:load">~1ms</stat> | <stat key="footprint.registries.countries.filter_index.memory_bytes:size">158KB</stat> |
-| Search index | <stat key="footprint.registries.countries.search_index.time_ms:load">~4ms</stat> | <stat key="footprint.registries.countries.search_index.memory_bytes:size">390KB</stat> |
-| **Combined** | **<stat key="footprint.registries.countries.combined.time_ms:load">~7ms</stat>** | **<stat key="footprint.registries.countries.combined.memory_bytes:size">857KB</stat>** |
+| Registry | Records | Dataset | Lookup index | Filter index | Search index | Combined |
+|---|---|---|---|---|---|---|
+| Macroregions | <stat key="data.macroregions.total:int">34</stat> | <stat key="footprint.registries.macroregions.dataset.time_ms:load">< 1ms</stat> / <stat key="footprint.registries.macroregions.dataset.memory_bytes:size">9KB</stat> | <stat key="footprint.registries.macroregions.lookup_index.time_ms:load">< 1ms</stat> / <stat key="footprint.registries.macroregions.lookup_index.memory_bytes:size">6KB</stat> | n/a | n/a | **<stat key="footprint.registries.macroregions.combined.time_ms:load">< 1ms</stat> / <stat key="footprint.registries.macroregions.combined.memory_bytes:size">14KB</stat>** |
+| Currencies | <stat key="data.currencies.total:int">178</stat> | <stat key="footprint.registries.currencies.dataset.time_ms:load">< 1ms</stat> / <stat key="footprint.registries.currencies.dataset.memory_bytes:size">28KB</stat> | <stat key="footprint.registries.currencies.lookup_index.time_ms:load">< 1ms</stat> / <stat key="footprint.registries.currencies.lookup_index.memory_bytes:size">15KB</stat> | <stat key="footprint.registries.currencies.filter_index.time_ms:load">< 1ms</stat> / <stat key="footprint.registries.currencies.filter_index.memory_bytes:size">20KB</stat> | <stat key="footprint.registries.currencies.search_index.time_ms:load">~3ms</stat> / <stat key="footprint.registries.currencies.search_index.memory_bytes:size">178KB</stat> | **<stat key="footprint.registries.currencies.combined.time_ms:load">~4ms</stat> / <stat key="footprint.registries.currencies.combined.memory_bytes:size">241KB</stat>** |
+| Scripts | <stat key="data.scripts.total:int">226</stat> | <stat key="footprint.registries.scripts.dataset.time_ms:load">< 1ms</stat> / <stat key="footprint.registries.scripts.dataset.memory_bytes:size">46KB</stat> | <stat key="footprint.registries.scripts.lookup_index.time_ms:load">< 1ms</stat> / <stat key="footprint.registries.scripts.lookup_index.memory_bytes:size">19KB</stat> | <stat key="footprint.registries.scripts.filter_index.time_ms:load">< 1ms</stat> / <stat key="footprint.registries.scripts.filter_index.memory_bytes:size">28KB</stat> | <stat key="footprint.registries.scripts.search_index.time_ms:load">~3ms</stat> / <stat key="footprint.registries.scripts.search_index.memory_bytes:size">228KB</stat> | **<stat key="footprint.registries.scripts.combined.time_ms:load">~4ms</stat> / <stat key="footprint.registries.scripts.combined.memory_bytes:size">321KB</stat>** |
+| Countries | <stat key="data.countries.total:int">281</stat> | <stat key="footprint.registries.countries.dataset.time_ms:load">~3ms</stat> / <stat key="footprint.registries.countries.dataset.memory_bytes:size">231KB</stat> | <stat key="footprint.registries.countries.lookup_index.time_ms:load">< 1ms</stat> / <stat key="footprint.registries.countries.lookup_index.memory_bytes:size">41KB</stat> | <stat key="footprint.registries.countries.filter_index.time_ms:load">~1ms</stat> / <stat key="footprint.registries.countries.filter_index.memory_bytes:size">158KB</stat> | <stat key="footprint.registries.countries.search_index.time_ms:load">~2ms</stat> / <stat key="footprint.registries.countries.search_index.memory_bytes:size">390KB</stat> | **<stat key="footprint.registries.countries.combined.time_ms:load">~7ms</stat> / <stat key="footprint.registries.countries.combined.memory_bytes:size">821KB</stat>** |
+| Subdivisions | <stat key="data.subdivisions.total:int">51,711</stat> | <stat key="footprint.registries.subdivisions.dataset.time_ms:load">~74ms</stat> / <stat key="footprint.registries.subdivisions.dataset.memory_bytes:size">14.2MB</stat> | <stat key="footprint.registries.subdivisions.lookup_index.time_ms:load">~16ms</stat> / <stat key="footprint.registries.subdivisions.lookup_index.memory_bytes:size">4.3MB</stat> | <stat key="footprint.registries.subdivisions.filter_index.time_ms:load">~68ms</stat> / <stat key="footprint.registries.subdivisions.filter_index.memory_bytes:size">11.5MB</stat> | <stat key="footprint.registries.subdivisions.search_index.time_ms:load">~59ms</stat> / <stat key="footprint.registries.subdivisions.search_index.memory_bytes:size">11.8MB</stat> | **<stat key="footprint.registries.subdivisions.combined.time_ms:load">~216ms</stat> / <stat key="footprint.registries.subdivisions.combined.memory_bytes:size">41.8MB</stat>** |
+| Cities | <stat key="data.cities.total:int">235,917</stat> | <stat key="footprint.registries.cities.dataset.time_ms:load">~338ms</stat> / <stat key="footprint.registries.cities.dataset.memory_bytes:size">28.1MB</stat> | <stat key="footprint.registries.cities.lookup_index.time_ms:load">~74ms</stat> / <stat key="footprint.registries.cities.lookup_index.memory_bytes:size">1.8MB</stat> | <stat key="footprint.registries.cities.filter_index.time_ms:load">~278ms</stat> / <stat key="footprint.registries.cities.filter_index.memory_bytes:size">49.1MB</stat> | <stat key="footprint.registries.cities.search_index.time_ms:load">~195ms</stat> / <stat key="footprint.registries.cities.search_index.memory_bytes:size">41.9MB</stat> | **<stat key="footprint.registries.cities.combined.time_ms:load">~885ms</stat> / <stat key="footprint.registries.cities.combined.memory_bytes:size">121.0MB</stat>** |
 
-#### Subdivisions (<stat key="data.subdivisions.total:int">51,711</stat>)
-| Component | Load Time | Memory |
-|---|---|---|
-| Dataset | <stat key="footprint.registries.subdivisions.dataset.time_ms:load">~76ms</stat> | <stat key="footprint.registries.subdivisions.dataset.memory_bytes:size">14.2MB</stat> |
-| Lookup index | <stat key="footprint.registries.subdivisions.lookup_index.time_ms:load">~15ms</stat> | <stat key="footprint.registries.subdivisions.lookup_index.memory_bytes:size">4.3MB</stat> |
-| Filter index | <stat key="footprint.registries.subdivisions.filter_index.time_ms:load">~67ms</stat> | <stat key="footprint.registries.subdivisions.filter_index.memory_bytes:size">11.5MB</stat> |
-| Search index | <stat key="footprint.registries.subdivisions.search_index.time_ms:load">~58ms</stat> | <stat key="footprint.registries.subdivisions.search_index.memory_bytes:size">11.8MB</stat> |
-| **Combined** | **<stat key="footprint.registries.subdivisions.combined.time_ms:load">~216ms</stat>** | **<stat key="footprint.registries.subdivisions.combined.memory_bytes:size">41.8MB</stat>** |
-
-#### Cities (<stat key="data.cities.total:int">235,917</stat>)
-
-
-| Component | Load Time | Memory |
-|---|---|---|
-| Dataset | <stat key="footprint.registries.cities.dataset.time_ms:load">~338ms</stat> | <stat key="footprint.registries.cities.dataset.memory_bytes:size">28.1MB</stat> |
-| Lookup index | <stat key="footprint.registries.cities.lookup_index.time_ms:load">~75ms</stat> | <stat key="footprint.registries.cities.lookup_index.memory_bytes:size">1.8MB</stat> |
-| Filter index | <stat key="footprint.registries.cities.filter_index.time_ms:load">~287ms</stat> | <stat key="footprint.registries.cities.filter_index.memory_bytes:size">49.1MB</stat> |
-| Search index | <stat key="footprint.registries.cities.search_index.time_ms:load">~196ms</stat> | <stat key="footprint.registries.cities.search_index.memory_bytes:size">41.9MB</stat> |
-| **Combined** | **<stat key="footprint.registries.cities.combined.time_ms:load">~896ms</stat>** | **<stat key="footprint.registries.cities.combined.memory_bytes:size">121.0MB</stat>** |
+> ℹ️ A registry's dataset also loads the datasets it references, if they aren't cached yet. Countries load macroregions and currencies, subdivisions load countries, and cities load subdivisions and countries. Only those datasets load, not their indexes. Each row excludes them, so a cold first call on cities also pays for the countries and subdivisions datasets. Macroregions have no filter or search index.
 
 > ⚠️ **Memory-intensive.** Fully caching cities and its indexes adds <stat key="footprint.registries.cities.combined.memory_bytes:size">121.0MB</stat> of memory. Calling `localis.cities.force_cache()` loads all of it upfront. You can call `cities.set_population_threshold(n)` before first access as a lever to control the memory footprint.
 
 At a threshold of <stat key="data.cities.threshold:int">15,000</stat>, cities drops from <stat key="data.cities.total:int">235,917</stat> to <stat key="data.cities.above_threshold:int">34,171</stat> and memory drops from <stat key="footprint.registries.cities.combined.memory_bytes:size">121.0MB</stat> to <stat key="footprint.cities_threshold.memory_bytes:size">28.4MB</stat>.
 
-**Full Cache**: <stat key="footprint.full_cache.time_ms:load">~1.12s</stat> load time, <stat key="footprint.full_cache.memory_bytes:size">163.6MB</stat> memory for all datasets and indexes
+**Full Cache**: <stat key="footprint.full_cache.time_ms:load">~1.15s</stat> load time, <stat key="footprint.full_cache.memory_bytes:size">164.2MB</stat> memory for all datasets and indexes
 
 ### Search Benchmarks
 
@@ -390,9 +397,9 @@ At a threshold of <stat key="data.cities.threshold:int">15,000</stat>, cities dr
 
 | Registry | Latency (p50 / p95) | Accuracy (top 10) | Top Result |
 |---|---|---|---|
-| Countries | <stat key="bench.registries.countries.search.p50_ms:latency">1.34ms</stat> / <stat key="bench.registries.countries.search.p95_ms:latency">4.42ms</stat> | <stat key="bench.registries.countries.accuracy.success_pct:pct">100.0%</stat> | <stat key="bench.registries.countries.accuracy.top1_pct:pct">99.3%</stat> |
-| Subdivisions | <stat key="bench.registries.subdivisions.search.p50_ms:latency">2.8ms</stat> / <stat key="bench.registries.subdivisions.search.p95_ms:latency">5.15ms</stat> | <stat key="bench.registries.subdivisions.accuracy.success_pct:pct">97.3%</stat> | <stat key="bench.registries.subdivisions.accuracy.top1_pct:pct">85.5%</stat> |
-| Cities | <stat key="bench.registries.cities.search.p50_ms:latency">6.79ms</stat> / <stat key="bench.registries.cities.search.p95_ms:latency">12.1ms</stat> | <stat key="bench.registries.cities.accuracy.success_pct:pct">98.4%</stat> | <stat key="bench.registries.cities.accuracy.top1_pct:pct">91.4%</stat> |
+| Countries | <stat key="bench.registries.countries.search.p50_ms:latency">1.36ms</stat> / <stat key="bench.registries.countries.search.p95_ms:latency">4.28ms</stat> | <stat key="bench.registries.countries.accuracy.success_pct:pct">100.0%</stat> | <stat key="bench.registries.countries.accuracy.top1_pct:pct">99.3%</stat> |
+| Subdivisions | <stat key="bench.registries.subdivisions.search.p50_ms:latency">2.75ms</stat> / <stat key="bench.registries.subdivisions.search.p95_ms:latency">4.97ms</stat> | <stat key="bench.registries.subdivisions.accuracy.success_pct:pct">97.3%</stat> | <stat key="bench.registries.subdivisions.accuracy.top1_pct:pct">85.5%</stat> |
+| Cities | <stat key="bench.registries.cities.search.p50_ms:latency">6.69ms</stat> / <stat key="bench.registries.cities.search.p95_ms:latency">11.9ms</stat> | <stat key="bench.registries.cities.accuracy.success_pct:pct">98.5%</stat> | <stat key="bench.registries.cities.accuracy.top1_pct:pct">91.3%</stat> |
 
 Accuracy tested on <stat key="bench.sample_size:int">5,000</stat> mangled-query samples per registry; cities' search additionally includes city + admin1 context. Load times, memory and latency are generated by `tests/analysis/footprint.py` and `tests/analysis/benchmarks.py`, last measured on <stat key="footprint.host.cpu">11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz</stat> with Python <stat key="footprint.host.python">3.14.7</stat>.
 
@@ -456,6 +463,9 @@ Data in this project is kept current monthly from the following sources:
 - **Currencies**
   - **Canonical**: [ISO 4217](https://www.iso.org/iso-4217-currency-codes.html) data via [Debian's iso-codes project](https://salsa.debian.org/iso-codes-team/iso-codes)
   - **Merged**: each country's legal tender from [Unicode CLDR](https://cldr.unicode.org/)'s currency data
+- **Scripts**
+  - **Canonical**: [ISO 15924](https://www.unicode.org/iso15924/) data via [Debian's iso-codes project](https://salsa.debian.org/iso-codes-team/iso-codes)
+  - **Merged**: [Unicode CLDR](https://cldr.unicode.org/)'s English script names, as aliases
 
 Names ship in Latin script.
 
@@ -463,7 +473,7 @@ Names ship in Latin script.
 
 ### Data licensing
 
-The shipped data is derived from these sources, modified by localis's ingest pipeline, and remains under their licenses: ISO 3166 and ISO 4217 data via iso-codes (LGPL-2.1-or-later), GeoNames (CC BY 4.0), Unicode CLDR (Unicode License v3) and Wikidata (CC0). [`src/localis/data/NOTICE`](src/localis/data/NOTICE), which ships with the data, attributes each source, and the full license texts are in [`LICENSES/`](LICENSES) and in the wheel's metadata. If you redistribute the data, keep that notice and those licenses with it.
+The shipped data is derived from these sources, modified by localis's ingest pipeline, and remains under their licenses: ISO 3166, ISO 4217 and ISO 15924 data via iso-codes (LGPL-2.1-or-later), GeoNames (CC BY 4.0), Unicode CLDR (Unicode License v3) and Wikidata (CC0). [`src/localis/data/NOTICE`](src/localis/data/NOTICE), which ships with the data, attributes each source, and the full license texts are in [`LICENSES/`](LICENSES) and in the wheel's metadata. If you redistribute the data, keep that notice and those licenses with it.
 
 ---
 

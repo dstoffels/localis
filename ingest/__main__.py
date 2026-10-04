@@ -2,6 +2,7 @@ import argparse
 
 from ingest.macroregions.scripts import ingest_macroregions
 from ingest.currencies.scripts import ingest_currencies
+from ingest.scripts.scripts import ingest_scripts
 from ingest.countries.scripts import ingest_countries
 from ingest.subdivisions.scripts import ingest_subdivisions
 from ingest.cities.scripts import ingest_cities
@@ -10,6 +11,7 @@ from ingest.cities.scripts import ingest_cities
 def ingest_all(force: bool = False) -> None:
     macroregions = ingest_macroregions(force)
     currencies = ingest_currencies(force)
+    ingest_scripts(force)
     countries = ingest_countries(macroregions, currencies, force=force)
     geocode_submap = ingest_subdivisions(countries, force=force)
     ingest_cities(countries, geocode_submap, force=force)

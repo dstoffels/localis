@@ -12,11 +12,11 @@ them monthly. The pipeline is published in the source repository under
 ingest/, and docs/methodology.md there describes every change it makes.
 
 
-ISO 3166-1, ISO 3166-2, ISO 3166-3 and ISO 4217 data
+ISO 3166-1, ISO 3166-2, ISO 3166-3, ISO 4217 and ISO 15924 data
   Source:    Debian iso-codes, https://salsa.debian.org/iso-codes-team/iso-codes
   Copyright: 2016 Dr. Tobias Quathamer <toddy@debian.org>
   License:   GNU Lesser General Public License v2.1 or later (LGPL-2.1-or-later)
-  Used in:   countries, subdivisions, currencies
+  Used in:   countries, subdivisions, currencies, scripts
 
 GeoNames
   Source:    GeoNames, https://www.geonames.org/
@@ -30,8 +30,8 @@ Unicode CLDR
   Source:    Unicode Common Locale Data Repository, https://cldr.unicode.org/
   Copyright: 2015-2024 Unicode, Inc.
   License:   Unicode License v3 (Unicode-3.0)
-  Used in:   macroregions; country currencies; which alternate-name languages
-             subdivisions keep
+  Used in:   macroregions; country currencies; script aliases; which
+             alternate-name languages subdivisions keep
 
 Wikidata
   Source:    Wikidata, https://www.wikidata.org/

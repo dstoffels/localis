@@ -9,11 +9,11 @@ This document outlines the project plan for the Localis project, detailing the o
 - Ship comprehensive datasets by default, and let the API narrow them ad hoc (population floors) at query time rather than shipping multiple hard-tiered dataset variants.
 
 ## Features
-Features currently in development, in priority order:
+Features currently in development, in build order:
 
 1. Currency (ISO 4217), see Currency, Language and Script below. Implemented 2026-10-04.
-2. Language (ISO 639), see Currency, Language and Script below. Supersedes the old "implement native languages in countries" idea.
-3. Script (ISO 15924), see Currency, Language and Script below.
+2. Script (ISO 15924), see Currency, Language and Script below. Registry implemented 2026-10-04; `Language.scripts` comes with Language. Ahead of Language because a country's language links carry the script CLDR states them for.
+3. Language (ISO 639-3), see Currency, Language and Script below. Supersedes the old "implement native languages in countries" idea.
 
 The three close the honest gap identified against pycountry (which also covers ISO 4217, 639 and 15924), so they should ship before that comparison gets used as marketing material.
 
@@ -21,48 +21,59 @@ Out of scope: translated names. Localis ships names in Latin script only and doe
 
 ## Currency, Language and Script
 
-Status: scoped for 2.2.0, not started.
+Status: scoped for 2.2.0; Currency and the Script registry implemented, Language next.
 
-### Shape
+### Principles
 
-Three new registries following the existing pattern:
-- `localis.currencies`: `lookup()` by `alpha3` or `numeric`, `search()` by name.
-- `localis.languages` (ISO 639-3): `lookup()` by `alpha2`, `alpha3` or `bibliographic`, `filter()` by `scope` and `type` (living, extinct, constructed, ...), `search()` by name.
-- `localis.scripts`: `lookup()` by `alpha4` or `numeric`, `search()` by name.
+- ISO is the canon: every record of each ISO list ships as published, and lines are drawn only in the relationships. A CLDR code that doesn't resolve to an ISO record is skipped with a WARN, never enriched.
+- Records come from iso-codes (`iso_4217.json`, `iso_15924.json`, `iso_639-3.json`). None of them map to anything else, so the relationships come from CLDR, a source already in use; no new source joins the aggregation.
+- Each is its own registry following the existing pattern (entity, store, view, registry, an `ingest/<domain>/` stage), with its `Base` form nested elsewhere. Historic countries get no relationships, since CLDR keys territories by alpha2 and ISO reused historic ones.
+- Data CLDR attaches to a relationship rather than either side either decides which records are listed (currencies) or ships on a relationship entity that extends the `Base` form (`CountryLanguage(LanguageBase)`), so it reads like every other nested tuple.
 
-`Country.currencies` and `Country.languages` are nested lists, like `groupings`. The reverse direction is a filter, `countries.filter(currency="EUR")` and `countries.filter(language="de")`, the same pattern as `subdivisions.filter(country=...)`, so entities carry no back-references. `Language.scripts` is a nested list the same way, filtered in reverse with `languages.filter(script="Cyrl")`. Currency's and Language's `key` is their `alpha3`, Script's its `alpha4`.
+### Currency (implemented)
 
-Nesting stays one level deep, as elsewhere: links hold the `Base` form (`CurrencyBase`: `id`, `name`, `alpha3`), and `CountryBase` doesn't gain them, so a subdivision's or city's nested country carries no currencies or languages. Data about a link rather than either side (legal tender, from/to dates, population share, primary or secondary script) only decides which records a link lists and in what order; it isn't shipped.
+- `localis.currencies`: `lookup()` by `alpha3` or `numeric`, `filter()` and `search()` by name; `key` is `alpha3`.
+- All 178 ISO 4217 codes ship, funds, metals and special codes included, with no `type` field.
+- No minor units: SIX's list has them and an `IsFund` flag, but carries no license and its site's terms of use reserve its content.
+- `Country.currencies: tuple[CurrencyBase, ...]` lists current legal tender from CLDR's `currencyData.json`: entries with no `_to` and not `_tender: false`, in CLDR's order. Filterable with `countries.filter(currency=...)` by name or alpha3.
 
-### Sources
+### Script
 
-The records come from iso-codes' `iso_4217.json`, `iso_639-3.json` and `iso_15924.json`, which map none of them to anything else (`iso_4217.json` holds only code, name and numeric), so the links come from CLDR:
-- Languages: `territoryInfo.json`, already fetched in the shared stage and parsed by `load_cldr_territory_languages()` for alias filtering. CLDR language codes are BCP-47 base codes (639-1 where one exists, else 639-3), joined to 639-3 records by `alpha_2`, then `alpha_3`.
-- Currencies: `currencyData.json`, which lists each territory's currencies with from/to dates and a legal-tender flag. It covers multi-currency countries (Panama's PAB and USD, Switzerland's CHF and WIR currencies) and gives historic countries theirs (CS → CSD), unlike GeoNames' single `CurrencyCode` column.
-- Scripts: `languageData.json`, which lists each language's scripts (Serbian: Cyrl and Latn), primary under its code and secondary under `<code>-alt-secondary`, joined to 639-3 records the same way as `territoryInfo.json`.
+- `localis.scripts`: `lookup()` by `alpha4` or `numeric`, `search()` by name; `key` is `alpha4`.
+- iso-codes' `iso_15924.json` has 226 entries (`alpha_4`, `name`, `numeric`). The private-use range is two marker entries, Qaaa "(start)" and Qabx "(end)", not one per code; the special codes Zinh, Zmth, Zsye, Zsym, Zxxx, Zyyy and Zzzz are listed.
+- Aliases: by the same rule as languages, every CLDR English script name (`scripts.json`) whose code resolves to the record, deduplicated. 68 of CLDR's 220 differ from ISO's, mostly ISO's parentheticals ("Han (Hanzi, Kanji, Hanja)" vs "Han").
+- `Language.scripts` comes from CLDR's `languageData.json`: 907 entries, primary scripts under the language's code and secondary ones under `<code>-alt-secondary` (105 languages). All 124 scripts it uses are in ISO 15924, and the only unresolved language code is `kro`.
 
-That makes three CLDR supplemental files beside the macroregions' two, each fetched from CLDR's `main` and able to land on different CLDR commits in one run (backlog 7).
+Decided 2026-10-04:
+- Special codes and the private-use markers ship as published, per the principle above.
+- No `Country.scripts`: neither source maps scripts to countries directly, and CLDR's `likelySubtags.json` `und-XX` entries are one likely default per territory (India: Devanagari only), not the scripts a country uses. A country's scripts come through `CountryLanguage.script`.
 
-### Open decisions
+Open, with Language:
+- Primary and secondary are relationship data, so `Language.scripts` would be `tuple[LanguageScript, ...]` with `LanguageScript(ScriptBase)` adding `primary: bool`, which makes `languages.filter(script=...)` match either.
 
-Currency, decided 2026-10-04:
-- Records from iso-codes only. SIX's list has minor units and an `IsFund` flag, but carries no license and its site's terms of use reserve its content; aggregation stays with sources already in use, so no minor units ship.
-- All 178 codes ship as published, funds, metals and special codes included, with no `type` field.
-- `Country.currencies` lists current legal tender only: CLDR entries with no `_to` and not `_tender: false`, in CLDR's order.
-- Historic countries get none, since CLDR keys by alpha2 and ISO reused historic ones; withdrawn currencies aren't records.
+### Language
 
-Language:
-- Registry scope: all of 639-3 (~7,900, including extinct and ancient) or living individual languages only.
-- `Country.languages`: official only (the `OFFICIAL_STATUSES` the alias filter already uses) or every language CLDR lists, either way ordered by population share.
-- 639-5 language families: likely not.
+Decided 2026-10-04:
+- `localis.languages`: all 7,923 ISO 639-3 records ship as published, `key` is `alpha3`.
+- `lookup()` by `alpha3`, `alpha2` (639-1, 184 records) or `bibliographic` (639-2/B, 20 records); no bibliographic code collides with a 639-3 code.
+- `scope` and `type` ship spelled out as `Literal`s, as `MacroregionType` does: scope `"individual"`, `"macrolanguage"` or `"special"`; type `"living"`, `"extinct"`, `"historical"`, `"constructed"` or `"special"`. Both are filterable.
+- `inverted_name` ("Arabic, Algerian Saharan", 1,417 records) is a field and a search name.
+- No `common_name` field: iso-codes has one (Bangla). It and every CLDR English language name (`languages.json`) whose code resolves to the record are deduplicated into the record's `aliases`, including `-alt-` variants ("Azeri", "Pushto") and region- or script-qualified names ("British English" to English, "Hinglish" to Hindi).
+- `Country.languages: tuple[CountryLanguage, ...]`, where `LanguageBase` branches to both `Language` and `CountryLanguage`. `CountryLanguage` adds:
+  - `status`: `"official"`, `"regional"` or `"de_facto"`, from CLDR's `official`, `official_regional` and `de_facto_official`; languages with no status aren't listed.
+  - `population_percent`: CLDR's share of the country's population; shares overlap and can sum past 100 (Switzerland: German 76, English 45, French 39).
+  - `script: ScriptBase | None`: the script subtag of CLDR's tag (Hong Kong's `zh_Hant` is Chinese in Hant), `None` for a base tag.
+- One `CountryLanguage` per CLDR tag, not collapsed per language, since CLDR states status and share for a language in a script and the two disagree (Hong Kong: `zh` no status 5%, `zh_Hant` official 95%; Montenegro: `sr` no status 5%, `sr_Latn` official 100%). Ordered by `population_percent`. `countries.filter(language=...)` matches any of a country's entries for the language.
+- A base tag's `script` stays `None` until reconciliation logic is designed. CLDR's `likelySubtags.json` has both language-level (`zh` to Hans) and territory-level (`zh-HK` to Hant) defaults, and the territory-level one would label Hong Kong's 5% `zh` entry as Traditional, contradicting its `zh_Hant` entry.
+- `kro` (CLDR's code for the Kru language family, ISO 639-5) doesn't resolve and is skipped; 639-5 families aren't records.
+- Countries with no official language in CLDR (Antarctica, Bouvet Island, Heard Island, the French Southern Territories) list none.
+- `territoryInfo.json` is fetched by the shared stage; the countries stage has to rebuild when it changes.
 
-Script:
-- Special codes (Zyyy common, Zinh inherited, Zxxx unwritten, Zzzz unknown, the Qaaa-Qabx private-use range): include, exclude, or tag with a `type` field.
-- `Language.scripts`: primary only, or secondary too, marked or ordered after the primary ones.
+### Release
 
-Release:
-- Pinning the CLDR version (backlog 7) as part of this build.
-- The Skill decision lifecycle lands before the 1 November 2026 cron, either in 2.2.0 or as a 2.1.x patch from `main`; decide before starting this build.
+Open:
+- Pinning the CLDR version (backlog 7) as part of this build: Script and Language add `scripts.json`, `languages.json` and `languageData.json` to the CLDR files fetched separately from `main`.
+- The Skill decision lifecycle lands before the 1 November 2026 cron, either in 2.2.0 or as a 2.1.x patch from `main`.
 
 ## Backlog
 1. Batch throughput for large cleanups: registries are thread-safe, but on the standard (GIL) build threads don't parallelize search, which is mostly Python code, and rapidfuzz's single scorer calls don't release the GIL usefully (only `process.cdist(..., workers=N)` does, which doesn't fit localis's search). Free-threaded Python is the threaded route: rapidfuzz supports 3.14t since 3.14.2 (3.14.0 added support, 3.14.6 dropped the experimental 3.13t wheels). It requires no change to `requires-python = ">=3.11"`, since free threading is a property of the user's interpreter and localis is pure Python; GIL builds keep working as now. Adopting it is additive: a 3.14t job in the test matrix, optionally raising the `rapidfuzz` floor to 3.14.2 and adding the free-threading PyPI classifier, and a batch API such as `search_many(queries, workers=N)` on a thread pool (parallel on 3.14t, serial on GIL builds, with process pools as the GIL-build option: each worker loads its own cache, about 105MB for cities). Measure throughput on both builds.

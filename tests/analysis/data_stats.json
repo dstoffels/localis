@@ -20,6 +20,10 @@
     "current_countries_without": 1,
     "multi_currency_countries": 7
   },
+  "scripts": {
+    "total": 226,
+    "with_aliases": 69
+  },
   "subdivisions": {
     "non_administrative": {
       "countries": 9,
@@ -151,13 +155,17 @@
       "values": 177,
       "single_record_values": 176
     },
+    "scripts": {
+      "values": 298,
+      "single_record_values": 298
+    },
     "subdivisions": {
       "values": 75143,
       "single_record_values": 69972
     }
   },
   "shipped_size": {
-    "total": 52383901,
+    "total": 52420432,
     "cities": {
       "total": 41962895,
       "share_pct": 80.1,
@@ -207,6 +215,20 @@
       "files": {
         "lookup_index_str.tsv": 771,
         "macroregions.tsv": 964
+      }
+    },
+    "scripts": {
+      "total": 36531,
+      "share_pct": 0.1,
+      "files": {
+        "canon_index.bin.gz": 4037,
+        "canon_index_offsets.tsv": 13687,
+        "filter_index.bin.gz": 469,
+        "filter_index_offsets.tsv": 7503,
+        "lookup_index_int.tsv": 1688,
+        "lookup_index_str.tsv": 1926,
+        "scripts.tsv": 6573,
+        "short_names.tsv.gz": 648
       }
     },
     "subdivisions": {

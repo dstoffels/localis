@@ -67,6 +67,14 @@ def _currency_stats() -> dict[str, int]:
     }
 
 
+def _script_stats() -> dict[str, int]:
+    all_scripts = list(localis.scripts)
+    return {
+        "total": len(all_scripts),
+        "with_aliases": sum(1 for s in all_scripts if s.aliases),
+    }
+
+
 def _subdivision_stats() -> dict[str, Any]:
     subs = list(localis.subdivisions)
     iso_merged = sum(1 for s in subs if s.iso_code and s.geonames_id is not None)
@@ -284,6 +292,7 @@ def compute() -> dict[str, Any]:
         "macroregions": _macroregion_stats(),
         "countries": _country_stats(),
         "currencies": _currency_stats(),
+        "scripts": _script_stats(),
         "subdivisions": _subdivision_stats(),
         "resolution": _resolution_stats(),
         "wikidata": _wikidata_stats(),
