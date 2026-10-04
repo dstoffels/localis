@@ -1,4 +1,3 @@
-from pathlib import Path
 from ingest.subdivisions.utils.subdivision_map import SubdivisionMap
 from ingest.utils import SUBDIVISIONS_INPUTS_PATH
 from ingest.utils import ingest_log
@@ -23,20 +22,12 @@ def load_geonames_file(
             geonames_code: str = row["code"]
             geonames_id: int = int(row["geonames_id"])
 
-            # determine parent code and set admin level
+            # CC.A1 is an admin1 code, CC.A1.A2 an admin2 one; the parent is linked by SubdivisionMap.refresh()
             code_parts = geonames_code.split(".")
-            if len(code_parts) == 2:
-                country_alpha2, _ = code_parts
-                # parent_code = None
-                parent = None
-                admin_level = 1
-            elif len(code_parts) == 3:
-                country_alpha2, parent_code, _ = code_parts
-                parent_code = f"{country_alpha2}.{parent_code}"
-                parent = sub_map.get(geo_code=parent_code)
-                admin_level = 2
-            else:
+            if len(code_parts) not in (2, 3):
                 raise ValueError(f"unexpected geonames code format: {geonames_code}")
+            country_alpha2 = code_parts[0]
+            admin_level = len(code_parts) - 1
 
             country = countries.get(country_alpha2)
             if not country:
@@ -52,15 +43,13 @@ def load_geonames_file(
                 country=country,
                 geonames_code=geonames_code,
                 geonames_id=geonames_id,
-                parent=parent,
+                parent=None,
                 admin_level=admin_level,
                 iso_code=None,  # may be set later if merged with ISO subdivision
                 type=None,  # GeoNames does not provide type info in these files, may be set by ISO data
                 aliases=[],  # may be set later if merged with ISO subdivision
             )
             subdivision.set_hashid()
-            assert subdivision.hashid is not None
-            subdivision.id = subdivision.hashid  # set hashid for internal mapping
             sub_map.add(subdivision)
 
 

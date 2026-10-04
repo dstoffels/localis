@@ -1,9 +1,7 @@
-# This script initializes historic (withdrawn) country entries from ISO 3166-3, keyed by
-# alpha_4 since bare alpha2/alpha3 can be reused across two different historic entries
-# (e.g. CS: Czechoslovakia CSHH, then later Serbia and Montenegro CSXX).
+# Loads ISO 3166-3's withdrawn countries, keyed by alpha_4 since ISO reuses alpha2/alpha3 (CS: Czechoslovakia CSHH, then Serbia and Montenegro CSXX).
 
 from ingest.utils import COUNTRIES_INPUTS_PATH, ingest_log
-from ingest.shared.models import CountryModel
+from ingest.shared.models import CountryModel, HistoricModel
 import json
 
 
@@ -20,7 +18,6 @@ def init_historic_countries(
         for c in historic_countries:
             alpha_4 = c["alpha_4"]
             numeric = c.get("numeric")
-            comment = c.get("comment", "")
 
             countries[alpha_4] = CountryModel(
                 id=len(countries) + 1,
@@ -33,7 +30,16 @@ def init_historic_countries(
                 numeric=int(numeric) if numeric else None,
                 aliases=[],
                 flag=None,
-                historic=f"{alpha_4}|{c['withdrawal_date']}|{comment}",
+                historic=HistoricModel(alpha_4=alpha_4, withdrawal_date=c["withdrawal_date"], comment=c.get("comment") or None),
             )
 
     return countries
+
+
+def historic_by_alpha2(countries: dict[str, CountryModel]) -> dict[str, list[CountryModel]]:
+    """Historic entries grouped by their former alpha-2, each group ordered by withdrawal date, so a reused code's most recent holder is last."""
+    grouped: dict[str, list[CountryModel]] = {}
+    historic = [(c, c.historic) for c in countries.values() if c.historic]
+    for c, _ in sorted(historic, key=lambda pair: pair[1].withdrawal_date):
+        grouped.setdefault(c.alpha2, []).append(c)
+    return grouped

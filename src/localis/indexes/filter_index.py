@@ -1,19 +1,15 @@
 import csv
 from array import array
 from pathlib import Path
-from localis.indexes.index import Index
 from localis.utils.strings import normalize
-from localis.utils.data import IndexFilterPredicate
 
 
-class FilterIndex(Index):
-    def load(
+class FilterIndex:
+    def __init__(
         self,
         filepath: Path,
-        predicate: IndexFilterPredicate | None = None,
         allowed_ids: set[int] | None = None,
-    ):
-        ids = allowed_ids or set()
+    ) -> None:
         with open(filepath, "r", encoding="utf-8") as f:
             reader = csv.reader(f, delimiter="\t")
             params = next(reader)
@@ -21,7 +17,7 @@ class FilterIndex(Index):
             index: dict[str, dict[str, int | list[int]]] = {p: {} for p in params}
 
             for id, row in enumerate(reader, start=1):
-                if predicate and not predicate(id, ids):
+                if allowed_ids is not None and id not in allowed_ids:
                     continue
                 for i, cell in enumerate(row):
                     postings = index[params[i]]

@@ -2,8 +2,7 @@
 
 from .fetch_macroregions import fetch_macroregions_sources
 from .load_macroregions import load_macroregions, Macroregions
-from .dump_macroregions import dump
-from ingest.utils import ingest_log, commit_manifest, MACROREGIONS_MANIFEST_PATH
+from ingest.utils import ingest_log, commit_manifest, dump_registry, MACROREGIONS_MANIFEST_PATH
 
 
 def ingest_macroregions(force: bool = False) -> Macroregions | None:
@@ -14,7 +13,7 @@ def ingest_macroregions(force: bool = False) -> Macroregions | None:
             ingest_log.writeline("No updates for macroregions.")
             return None
         macroregions = load_macroregions()
-        dump(macroregions.all)
+        dump_registry("macroregions", macroregions.all, queryable=False)
         commit_manifest(MACROREGIONS_MANIFEST_PATH)
         ingest_log.writeline(f"completed: {len(macroregions.all)} macroregions")
         return macroregions

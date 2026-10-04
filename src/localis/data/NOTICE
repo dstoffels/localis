@@ -1,0 +1,38 @@
+localis data notice
+
+The files in this directory are data derived from the sources below. Each
+source's data remains under that source's license; localis's MIT license
+covers its code only. The full license texts ship in the package metadata
+(the wheel's .dist-info/licenses/ directory) and in the LICENSES/ directory
+of the source repository: https://github.com/dstoffels/localis
+
+These files are modified from their sources. localis's ingest pipeline
+filters, merges and re-encodes the source data into them, and rebuilds
+them monthly. The pipeline is published in the source repository under
+ingest/, and docs/methodology.md there describes every change it makes.
+
+
+ISO 3166-1, ISO 3166-2 and ISO 3166-3 data
+  Source:    Debian iso-codes, https://salsa.debian.org/iso-codes-team/iso-codes
+  Copyright: 2016 Dr. Tobias Quathamer <toddy@debian.org>
+  License:   GNU Lesser General Public License v2.1 or later (LGPL-2.1-or-later)
+  Used in:   countries, subdivisions
+
+GeoNames
+  Source:    GeoNames, https://www.geonames.org/
+             (countryInfo.txt, admin1CodesASCII.txt, admin2Codes.txt,
+             alternateNamesV2.txt, cities500.txt)
+  License:   Creative Commons Attribution 4.0 International (CC-BY-4.0),
+             https://creativecommons.org/licenses/by/4.0/
+  Used in:   countries, subdivisions, cities
+
+Unicode CLDR
+  Source:    Unicode Common Locale Data Repository, https://cldr.unicode.org/
+  Copyright: 2015-2024 Unicode, Inc.
+  License:   Unicode License v3 (Unicode-3.0)
+  Used in:   macroregions; which alternate-name languages subdivisions keep
+
+Wikidata
+  Source:    Wikidata, https://www.wikidata.org/
+  License:   CC0 1.0 Universal public domain dedication (CC0-1.0)
+  Used in:   country aliases; the subdivision ISO 3166-2 to GeoNames crosswalk

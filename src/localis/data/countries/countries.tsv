@@ -247,35 +247,35 @@ Mayotte	YT	MYT	1024031			Department of Mayotte	175	🇾🇹		1|7	30
 South Africa	ZA	ZAF	953987	Republic of South Africa		R.S.A.	710	🇿🇦		1|10	30|34
 Zambia	ZM	ZMB	895949	Republic of Zambia			894	🇿🇲		1|7	30|34
 Zimbabwe	ZW	ZWE	878675	Republic of Zimbabwe		Rhodesia|Southern Rhodesia|Zimbabwe Rhodesia	716	🇿🇼		1|7	30|34
-French Afars and Issas	AI	AFI					262		AIDJ|1977|		
+French Afars and Issas	AI	AFI				French Territory of the Afars and the Issas	262		AIDJ|1977|		
 Netherlands Antilles	AN	ANT	8505032			Antillen|Dutch Antilles|N.W.I.|Nederlandse Antillen|Netherland Antilles	530		ANHH|2010-12-15|had numeric code 532 until Aruba split away in 1986	3|19	
-British Antarctic Territory	BQ	ATB							BQAQ|1979|		
+British Antarctic Territory	BQ	ATB				BAT			BQAQ|1979|		
 Burma, Socialist Republic of the Union of	BU	BUR					104		BUMM|1989-12-05|	4|22	
-Byelorussian SSR Soviet Socialist Republic	BY	BYS					112		BYAA|1992-06-15|		
-Czechoslovakia, Czechoslovak Socialist Republic	CS	CSK					200		CSHH|1993-06-15|		
-Serbia and Montenegro	CS	SCG	8505033				891		CSXX|2006-09-26|		
+Byelorussian SSR Soviet Socialist Republic	BY	BYS				BSSR|Belarusian SSR|Belarusian Soviet Socialist Republic|Belorussian S.S.R.|Belorussian SSR|Belorussian Soviet Socialist Republic|Belorusskaya SSR|Bielaruskaja Savieckaja Sacyjalistyčnaja Respublika|Byelorussian S.S.R.|Byelorussian SSR|Byelorussian Soviet Socialist Republic|Byelorusskaya Sovyetskaya Sotsialisticheskaya Respublika|Communist Belarus|Soviet Belarus|Soviet Belorussia|Soviet Byelorussia|White Russian Soviet Socialist Republic	112		BYAA|1992-06-15|		
+Czechoslovakia, Czechoslovak Socialist Republic	CS	CSK				Czecho-Slovakia|Czechoslovakia|Federation of Czechoslovakia|People's Republic of Czechoslovakia|Československo	200		CSHH|1993-06-15|		
+Serbia and Montenegro	CS	SCG	8505033			Serbia-Montenegro|State Union of Serbia and Montenegro	891		CSXX|2006-09-26|		
 Canton and Enderbury Islands	CT	CTE					128		CTKI|1984|		
 German Democratic Republic	DD	DDR				Communist Germany|Deutsche Demokratische Republik|East Germany|Socialist Germany	278		DDDE|1990-10-30|	5|28	
-Dahomey	DY	DHY					204		DYBJ|1977|		
+Dahomey	DY	DHY				Republic of Dahomey	204		DYBJ|1977|		
 French Southern and Antarctic Territories	FQ	ATF							FQHH|1979|now split between AQ and TF		
-France, Metropolitan	FX	FXX					249		FXFR|1997-07-14|	5|28	
+France, Metropolitan	FX	FXX				European France|European part of France|France (part in Europe)|mainland France|metropolitan France	249		FXFR|1997-07-14|	5|28	
 Gilbert and Ellice Islands	GE	GEL					296		GEHH|1979|now split into Kiribati and Tuvalu		
-Upper Volta, Republic of	HV	HVO					854		HVBF|1984|		
-Johnston Island	JT	JTN					396		JTUM|1986|		
-Midway Islands	MI	MID					488		MIUM|1986|		
-New Hebrides	NH	NHB					548		NHVU|1980|		
-Dronning Maud Land	NQ	ATN					216		NQAQ|1983|		
-Neutral Zone	NT	NTZ					536		NTHH|1993-07-12|formerly between Saudi Arabia and Iraq	4|24	
+Upper Volta, Republic of	HV	HVO				Republic of Upper Volta|Upper Volta	854		HVBF|1984|		
+Johnston Island	JT	JTN				Johnston Atoll|Kalama Atoll	396		JTUM|1986|		
+Midway Islands	MI	MID				Midway|Midway Atoll	488		MIUM|1986|		
+New Hebrides	NH	NHB				New Hebrides Condominium	548		NHVU|1980|		
+Dronning Maud Land	NQ	ATN				Queen Maud Land	216		NQAQ|1983|		
+Neutral Zone	NT	NTZ				Saudi–Iraqi Neutral Zone	536		NTHH|1993-07-12|formerly between Saudi Arabia and Iraq	4|24	
 Pacific Islands (trust territory)	PC	PCI				TTPI|Trust Territory of the Pacific Islands	582		PCHH|1986|divided into FM, MH, MP, and PW		
-US Miscellaneous Pacific Islands	PU	PUS					849		PUUM|1986|		
-Panama Canal Zone	PZ	PCZ							PZPA|1980|		
+US Miscellaneous Pacific Islands	PU	PUS				United States Miscellaneous Pacific Islands	849		PUUM|1986|		
+Panama Canal Zone	PZ	PCZ				Zona del Canal de Panamá			PZPA|1980|		
 Southern Rhodesia	RH	RHO					716		RHZW|1980|		
-Sikkim	SK	SKM							SKIN|1975|		
-USSR, Union of Soviet Socialist Republics	SU	SUN					810		SUHH|1992-08-30|	5|26	
+Sikkim	SK	SKM				Dremoshong|Drenjong|Kingdom of Sikkim|Sikkim Kingdom			SKIN|1975|		
+USSR, Union of Soviet Socialist Republics	SU	SUN				CCCP|Soviet Union|U.S.S.R.|USSR|Union of Soviet Socialist Republics	810		SUHH|1992-08-30|	5|26	
 East Timor	TP	TMP					626		TPTL|2002-05-20|was Portuguese Timor	4|22	
-Viet-Nam, Democratic Republic of	VD	VDR							VDVN|1977|		
-Wake Island	WK	WAK					872		WKUM|1986|		
-Yemen, Democratic, People's Democratic Republic of	YD	YMD					720		YDYE|1990-08-14|	4|24	
-Yugoslavia, (Socialist) Federal Republic of	YU	YUG				Yugoslavia	891		YUCS|2003-07-23|had numeric code 890 until the 'Socialist Federal Republic of Yugoslavia' formerly broke apart on 27 April 1992 and the 'Federal Republic of Yugoslavia' was founded	5|25	
-Zaire, Republic of	ZR	ZAR					180		ZRCD|1997-07-14|	1|9	
+Viet-Nam, Democratic Republic of	VD	VDR				DR Vietnam|DRV|Democratic Republic of Vietnam|North Vietnam|Vietnam (North)			VDVN|1977|		
+Wake Island	WK	WAK				Halcyon Island|Isla San Francisco|Isle Saint Francois|Isle de Saint Francois|Isle of Saint Francis|Saint Francis|Saint Francis Island|Saint Francois|San Francisco|San Francisco Island|Wake Atoll	872		WKUM|1986|		
+Yemen, Democratic, People's Democratic Republic of	YD	YMD				Democratic Yemen|People's Democratic Republic of Yemen|People's Republic of Southern Yemen|South Yemen|Southern Yemen|Yemen (Aden)	720		YDYE|1990-08-14|	4|24	
+Yugoslavia, (Socialist) Federal Republic of	YU	YUG				FR Yugoslavia|FRY|Federal Republic of Yugoslavia|SFR Yugoslavia|SFRY|Socialist Federal Republic of Yugoslavia|Third Yugoslavia|Yugoslavia	891		YUCS|2003-07-23|had numeric code 890 until the 'Socialist Federal Republic of Yugoslavia' formerly broke apart on 27 April 1992 and the 'Federal Republic of Yugoslavia' was founded	5|25	
+Zaire, Republic of	ZR	ZAR				Republic of Zaire|Zaire	180		ZRCD|1997-07-14|	1|9	
 Kosovo	XK	XKX	831053			Kosova|RKS|Republic of Kosovo				5|25	

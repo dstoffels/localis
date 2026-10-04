@@ -1,6 +1,6 @@
 from pathlib import Path
 from typing import Mapping
-from localis.entities import CountryBase, SubdivisionBase, Subdivision
+from localis.entities import SubdivisionBase, Subdivision
 from localis.stores import SubdivisionStore
 from .view import CrossReferencedView, ViewMap
 from .country_view import CountryView
@@ -33,8 +33,9 @@ class SubdivisionView(
         return v if v else None
 
     @property
-    def type(self) -> str:
-        return self._store.types[self._idx]
+    def type(self) -> str | None:
+        v = self._store.types[self._idx]
+        return v if v else None
 
     @property
     def aliases(self) -> tuple[str, ...]:
@@ -59,9 +60,19 @@ class SubdivisionView(
     def iso_suffix(self) -> str:
         return self.iso_code.split("-")[1] if self.iso_code else ""
 
+    def to_base(self) -> SubdivisionBase:
+        return SubdivisionBase(
+            id=self.id,
+            name=self.name,
+            geonames_code=self.geonames_code,
+            geonames_id=self.geonames_id,
+            iso_code=self.iso_code,
+            type=self.type,
+            admin_level=self.admin_level,
+        )
+
     def to_entity(self) -> Subdivision:
         parent = self.parent
-        country = self.country
         return Subdivision(
             id=self.id,
             name=self.name,
@@ -71,26 +82,8 @@ class SubdivisionView(
             type=self.type,
             admin_level=self.admin_level,
             aliases=self.aliases,
-            parent=(
-                SubdivisionBase(
-                    id=parent.id,
-                    name=parent.name,
-                    geonames_code=parent.geonames_code,
-                    geonames_id=parent.geonames_id,
-                    iso_code=parent.iso_code,
-                    type=parent.type,
-                    admin_level=parent.admin_level,
-                )
-                if parent
-                else None
-            ),
-            country=CountryBase(
-                id=country.id,
-                name=country.name,
-                alpha2=country.alpha2,
-                alpha3=country.alpha3,
-                geonames_id=country.geonames_id,
-            ),
+            parent=parent.to_base() if parent else None,
+            country=self.country.to_base(),
         )
 
     @classmethod

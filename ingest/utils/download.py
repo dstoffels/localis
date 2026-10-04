@@ -1,12 +1,15 @@
 from http.client import HTTPResponse
 import json
+import zipfile
 from pathlib import Path
+from urllib.parse import quote
 from urllib.request import urlopen, Request
 from typing import cast
 from .logger import ingest_log
 
-# Fetch URLs
+# sent with every request to a data source
 USER_AGENT = "localis-data-refresh (+https://github.com/dstoffels/localis)"
+SPARQL_ENDPOINT = "https://query.wikidata.org/sparql"
 
 _Manifest = dict[str, str | None]
 
@@ -83,9 +86,33 @@ def download(url: str, dest: Path, manifest_path: Path) -> None:
     ingest_log.writeline(f"Downloading {dest.name} from {url}")
     response = cast(HTTPResponse, urlopen(request, timeout=60))
     with response, open(tmp, "wb") as f:
+        # the ETag of the bytes actually downloaded, which a second HEAD could miss if the file changed in between
+        etag = response.headers.get("ETag")
         while chunk := response.read(1024 * 1024):
             f.write(chunk)
 
     tmp.replace(dest)
     ingest_log.writeline(f"Downloaded and updated {dest.name}")
-    record_pending(manifest_path, dest.name, _etag(url))
+    record_pending(manifest_path, dest.name, etag)
+
+
+def fetch(url: str, dest: Path, manifest_path: Path, extract: str | None = None) -> bool:
+    """Downloads url to dest if it changed since the last consumed download, unpacking a zip's `extract` member beside it and removing the zip; True if it downloaded."""
+    if not has_changed(url, dest, manifest_path, exists_path=dest.with_name(extract) if extract else None):
+        return False
+    download(url, dest, manifest_path)
+    if extract:
+        with zipfile.ZipFile(dest) as zf:
+            zf.extract(extract, dest.parent)
+        dest.unlink()
+    return True
+
+
+def sparql(query: str) -> list[dict]:
+    """The result rows of a Wikidata SPARQL query, fetched live."""
+    request = Request(
+        f"{SPARQL_ENDPOINT}?query={quote(query)}&format=json",
+        headers={"User-Agent": USER_AGENT, "Accept": "application/sparql-results+json"},
+    )
+    with urlopen(request, timeout=120) as response:
+        return json.loads(response.read().decode("utf-8"))["results"]["bindings"]

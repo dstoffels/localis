@@ -15,8 +15,6 @@ def _sub(name: str, aliases: list[str] | None = None, iso_code: str | None = Non
         geonames_code=f"TL.{geonames_id}" if geonames_id else None, geonames_id=geonames_id, parent=None,
     )
     sub.set_hashid()
-    assert sub.hashid is not None
-    sub.id = sub.hashid
     return sub
 
 

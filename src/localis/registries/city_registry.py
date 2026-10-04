@@ -1,6 +1,5 @@
 from typing import Mapping, cast
 from localis.entities import City
-from localis.utils.data import CacheFilterPredicate
 from localis.views import CountryView, CityView, SubdivisionView
 from localis.registries import QueryableRegistry, CountryRegistry, SubdivisionRegistry
 
@@ -9,30 +8,24 @@ class CityRegistry(QueryableRegistry[City]):
     REGISTRY_NAME = "cities"
     NAME_FIELDS = ("name",)
 
-    def __init__(
-        self, countries: CountryRegistry, subdivisions: SubdivisionRegistry, **kwargs
-    ):
+    def __init__(self, countries: CountryRegistry, subdivisions: SubdivisionRegistry):
         self._population_threshold: int | None = None
-        self._population_filter: CacheFilterPredicate | None = None
 
         self._countries = countries
         self._subdivisions = subdivisions
-        super().__init__(**kwargs)
+        super().__init__()
 
     def build_cache(self) -> Mapping[int, CityView]:
         country_views = cast(Mapping[int, CountryView], self._countries._cache)
         subdivision_views = cast(
             Mapping[int, SubdivisionView], self._subdivisions._cache
         )
-        result = CityView.load(
+        return CityView.load(
             self._data_filepath,
             country_views,
             subdivision_views,
-            self._population_filter,
+            self._row_filter,
         )
-        if self._population_filter is not None:
-            self._allowed_ids = set(result.keys())
-        return result
 
     def get(self, id: int) -> City | None:
         """Get a city by its localis ID."""
@@ -49,8 +42,6 @@ class CityRegistry(QueryableRegistry[City]):
         limit: int | None = None,
         subdivision: str | None = None,
         country: str | None = None,
-        # population__lt: int = None, # TODO: to be implemented
-        # population__gt: int = None, # TODO: to be implemented
         **kwargs,
     ) -> list[City]:
         """Filter cities by name, subdivision (name, iso/geonames code) or country (name, alpha2, alpha3). Multiple filters use logical AND."""
@@ -59,25 +50,25 @@ class CityRegistry(QueryableRegistry[City]):
         return results
 
     def search(
-        self, query: str, limit: int = 10, population_sort: bool = False, **kwargs
+        self, query: str, limit: int = 10, population_sort: bool = False
     ) -> list[tuple[City, float]]:
         """Search cities by name, subdivision (name, iso/geonames code), or country (name, alpha2, alpha3). Can optionally sort by population, which is great for autocompletes."""
         results: list[tuple[City, float]] = super().search(
-            query=query, limit=limit, **kwargs
+            query=query, limit=limit
         )
         if population_sort:
             results.sort(key=lambda x: x[0].population, reverse=True)
         return results
 
     def set_population_threshold(self, threshold: int | None) -> None:
-        self._population_threshold = threshold
-        if threshold is not None:
-            self._population_filter = lambda row: int(row[4]) >= threshold
-        else:
-            self._population_filter = None
-            self._allowed_ids = None
-
-        self.invalidate_cache()
+        # under the lock, so a thread building the cache never sees the filter change mid-build
+        with self._lock:
+            self._population_threshold = threshold
+            if threshold is not None:
+                self._row_filter = lambda row: int(row[4]) >= threshold
+            else:
+                self._row_filter = None
+            self.invalidate_cache()
 
     @property
     def population_threshold(self) -> int | None:

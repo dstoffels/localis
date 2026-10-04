@@ -8,7 +8,7 @@ class SubdivisionBase(Entity):
     geonames_code: str | None
     geonames_id: int | None
     iso_code: str | None
-    type: str
+    type: str | None
     admin_level: int
 
 

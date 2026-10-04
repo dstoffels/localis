@@ -16,10 +16,7 @@ CITIES_INPUTS_PATH = BASE_PATH / "cities" / "inputs"
 SHARED_INPUTS_PATH = BASE_PATH / "shared" / "inputs"
 
 # Outputs (ingestion-process artifacts: resolution decisions, orphan lists, not raw input)
-MACROREGIONS_OUTPUTS_PATH = BASE_PATH / "macroregions" / "outputs"
-COUNTRIES_OUTPUTS_PATH = BASE_PATH / "countries" / "outputs"
 SUBDIVISIONS_OUTPUTS_PATH = BASE_PATH / "subdivisions" / "outputs"
-CITIES_OUTPUTS_PATH = BASE_PATH / "cities" / "outputs"
 
 # Logs
 MACROREGIONS_LOGS_PATH = BASE_PATH / "macroregions" / "logs"

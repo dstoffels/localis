@@ -18,6 +18,11 @@ class TestSearch:
             not results
         ), f"query: {bad_q} should yield [], instead returned {results}"
 
+    def test_kwargs(self, registry: QueryableRegistry):
+        """should raise a TypeError if given an invalid kwarg"""
+        with pytest.raises(TypeError):
+            registry.search("paris", pid="1234")  # type: ignore[call-arg]
+
     def test_exact(self, registry: QueryableRegistry, select_random, include_historic):
         """should return results containing the input subject."""
 

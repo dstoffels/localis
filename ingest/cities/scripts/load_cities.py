@@ -1,5 +1,5 @@
 from ingest.utils import CITIES_INPUTS_PATH
-from ingest.cities.utils.strings import normalize_name, is_latin
+from localis.utils.strings import is_latin
 from ingest.utils import ingest_log
 from ingest.shared.models import SubdivisionModel, CountryModel, CityModel
 import csv
@@ -31,36 +31,6 @@ def is_valid_city(row: dict[str, str]) -> bool:
     return bool(row["country code"])
 
 
-def filter_names(row: dict[str, str]) -> tuple[str, str]:
-    """Keep Latin-based alt names, filter junk and dedupe"""
-    name = row["name"]
-    alt_names = row["alternatenames"].split(",") if row["alternatenames"] else []
-    alt_names.append(row["asciiname"])
-
-    seen = set()
-    base = normalize_name(name)
-    result = []
-
-    for alt in alt_names:
-        # filter out shorties, lots of noise
-        alt = alt.strip()
-        if len(alt) < 3:
-            continue
-
-        # filter out non-latin based names, dataset would be massive
-        if not is_latin(alt):
-            continue
-
-        norm = normalize_name(alt)
-        if norm == base or norm in seen:
-            continue
-
-        seen.add(norm)
-        result.append(alt.title())
-
-    return name, "|".join(result)
-
-
 def resolve_subdivision_chain(
     admin1: SubdivisionModel | None, admin2: SubdivisionModel | None
 ) -> list[SubdivisionModel]:
@@ -82,7 +52,8 @@ def parse_row(
 
     geonames_id = row["geonameid"]
 
-    name = row["name"]
+    # a name written in another script falls back to GeoNames' ASCII form
+    name = row["name"] if is_latin(row["name"]) else row["asciiname"] or row["name"]
 
     admin1_raw = row["admin1 code"]
     admin2_raw = row["admin2 code"]
@@ -102,23 +73,15 @@ def parse_row(
         )
         return None
 
-    lat = row["latitude"]
-    lng = row["longitude"]
-
-    try:
-        population = row["population"] if row["population"] else 0
-    except ValueError:
-        raise ValueError(f"Invalid population value: {row['population']}")
-
     return CityModel(
         id=0,  # to be set before dump
         geonames_id=int(geonames_id),
         name=name,
         subdivisions=resolve_subdivision_chain(admin1, admin2),
         country=country,
-        population=int(population),
-        lat=float(lat),
-        lng=float(lng),
+        population=int(row["population"] or 0),
+        lat=float(row["latitude"]),
+        lng=float(row["longitude"]),
     )
 
 

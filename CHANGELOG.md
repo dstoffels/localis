@@ -7,6 +7,43 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- The data's licenses travel with it: `src/localis/data/NOTICE` attributes each source, `LICENSES/` holds the LGPL-2.1-or-later, CC-BY-4.0, Unicode-3.0 and CC0-1.0 texts, and the package metadata declares `MIT AND LGPL-2.1-or-later AND CC-BY-4.0 AND Unicode-3.0 AND CC0-1.0` instead of `MIT` alone, which covered only the code
+
+### Changed
+
+- Historic countries take their Wikidata names as aliases by ISO 3166-3 alpha-4 code (P773) rather than by a former alpha-2 no other entry shares, so entries whose code ISO reused are named too: with `include_historic` set, "Czechoslovakia", "Soviet Union" and "Yugoslavia" find their entries. 25 of the 31 historic entries now carry Wikidata aliases, up from 4
+- Text normalization folds Latin only: accents are stripped and Latin letters without a Unicode decomposition (ß, æ, ø, ł, ı, ə and others) are spelled out, while other scripts are no longer transliterated
+- A city whose GeoNames name is written in another script takes GeoNames' ASCII name (24 cities)
+- Countries leave historic entries out of `filter()` and `search()` before ranking rather than after, so a search no longer reads every country to size an over-fetch and a historic entry can't take a shortlist slot from a current one
+- `search()` raises `TypeError` for a keyword argument it doesn't take, like `filter()`, instead of silently ignoring it
+- `Subdivision.type` and `SubdivisionBase.type` are `None` for the 46,665 GeoNames-only subdivisions, which have no ISO type, instead of `""`, like every other missing field
+- Cities ship a short-name list like countries and subdivisions, so short city names reachable only by an exact query (such as "Jīān") are found through the short-query fallback, for about 463 KiB
+- With a population threshold set, the cities indexes load faster: each entry is checked against the set of ids the filtered cache kept, instead of through a predicate call
+- The data refresh downloads only the sources whose ETag changed, rather than every source of a stage when any one of them changed, so a CLDR update no longer downloads GeoNames' alternate names again
+
+### Removed
+
+- The `unidecode` dependency (GPL-2.0-or-later); `rapidfuzz` is now the only runtime dependency
+- Subdivision aliases written in non-Latin scripts (19,882), which only a query in that script could find: subdivisions' shipped data shrinks from 10,866 to 9,930 KiB and their fully loaded memory from 47.4 to 41.0 MiB. 274 Latin aliases that deduplication had dropped in favor of a Cyrillic spelling ship again
+
+### Fixed
+
+- Capital schwa (Ə) and reversed E (Ǝ) normalized to "@" and "3"; both now fold to "a", like their lowercase forms
+- Subdivision automerge never stripped type words spelled with diacritics (járás, huyện, ilçesi, shahrestān) from names before matching, since names are compared accent-free; the type words are now folded the same way, and an unaccented spelling such as "Huyen" also marks a name's type
+- `set_population_threshold()` changes the filter under the registry's lock, so a thread loading cities at the same time can't build the cache and indexes from different thresholds
+- `len(countries)` counted historic entries that iteration, `filter()` and `search()` leave out (281 against 250 iterated); it now follows `include_historic` like the rest
+- The data refresh records the ETag of the file it actually downloaded, read from the download itself rather than from a second request that could see a newer version
+
+### Security
+
+- CI jobs that install or run project and third-party code no longer hold write tokens. Test is read-only, and its ingest check on `dev` fails instead of committing; `ingest.yaml` builds read-only and pushes its commits from a job running only git and `gh`; `release.yaml` builds read-only, publishes to PyPI from a job holding only `id-token: write`, then creates the GitHub release from one holding only `contents: write`
+- Every workflow action is pinned to a full commit SHA, with Dependabot proposing updates after a 7-day cooldown; a job's outputs reach later scripts as environment variables rather than pasted into them, the release jobs no longer restore uv's cache, and the GitHub release is created with `gh` instead of a third-party action
+- Release runs on push to `main` instead of on `workflow_run`, a trigger that runs with the default branch's privileges whatever started it, fork PRs included; `main` is no longer tested again after a merge, since its ruleset admits only PRs whose tests passed against an up-to-date `main`
+- The release build is reproducible: CI installs a pinned uv verified by checksum, and `uv build` takes hatchling and its dependencies only from hash-pinned build constraints; release tags can no longer be moved or deleted
+- SECURITY.md describes how to report a vulnerability privately, through the repository's Security tab
+
 ## [2.1.0] - 2026-10-03
 
 ### Upgrading from 2.0.0

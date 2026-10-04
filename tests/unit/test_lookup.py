@@ -8,9 +8,7 @@ from localis.registries import (
 from localis.entities import Entity
 from utils import registry_param
 
-# Explicit per-registry callbacks over the runtime Entity's own shape, not derived from the
-# ingestion-side Model: a historic country has no alpha2/alpha3/numeric lookup (those collide
-# across historic entries), only its own historic.alpha_4 withdrawal code.
+# each entity's own lookup values, written out rather than derived from the ingest models; a historic country looks up by its alpha_4 only, since its alpha2/alpha3/numeric collide
 LOOKUP_VALUES_BY_REGISTRY = {
     MacroregionRegistry: lambda m: (m.code, m.name),
     CountryRegistry: lambda c: (

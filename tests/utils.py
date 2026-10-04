@@ -65,11 +65,6 @@ def mangle(
         first_char = token[0]
         rest = list(token[1:])
 
-        # skip shorties
-        if len(token) < 1:
-            mangled_tokens.append(token)
-            continue
-
         typo_ops = rng.choices(
             ["replace", "swap", "delete", "insert"],
             weights=[60, 25, 10, 5],

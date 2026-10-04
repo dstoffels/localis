@@ -1,6 +1,6 @@
 import re
 from typing import Iterable
-from unidecode import unidecode
+from localis.utils.strings import normalize
 
 # abbreviations and spelling variants of the same word, folded together in name_key() only; shipped names keep their own spelling
 _TOKEN_EQUIVALENTS = {
@@ -22,7 +22,7 @@ _NON_WORD_RE = re.compile(r"[^\w\s]")
 
 def name_key(name: str) -> str:
     """A comparison key under which spelling variants of one name are equal."""
-    tokens = _NON_WORD_RE.sub(" ", unidecode(name).lower().replace("&", " and ")).split()
+    tokens = _NON_WORD_RE.sub(" ", normalize(name).replace("&", " and ")).split()
     return " ".join(_TOKEN_EQUIVALENTS.get(t, t) for t in tokens if t not in _FILLER_TOKENS)
 
 
