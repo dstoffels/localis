@@ -1,5 +1,4 @@
-# This script initializes the dataset from ISO 3166-1, whose names are shipped exactly as published, plus curated aliases.
-# These will be merged with data from their GeoNames and Wikipedia counterparts.
+# Loads ISO 3166-1's countries, whose names ship as published; GeoNames and Wikidata add aliases later.
 
 from ingest.utils import COUNTRIES_INPUTS_PATH, ingest_log
 from ingest.shared.models import CountryModel

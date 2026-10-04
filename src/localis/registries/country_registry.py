@@ -1,12 +1,14 @@
-from typing import Iterator, Mapping, cast
+from typing import Mapping, cast
 from localis.entities import Country
 from localis.views import CountryView, MacroregionView
 from localis.registries import QueryableRegistry, MacroregionRegistry
+from localis.registries.registry import locked_cached_property
 
 
 class CountryRegistry(QueryableRegistry[Country]):
     REGISTRY_NAME = "countries"
     NAME_FIELDS = ("name", "official_name", "common_name", "aliases")
+    _CACHED_ATTRS = QueryableRegistry._CACHED_ATTRS + ("_historic_ids",)
 
     def __init__(self, macroregions: MacroregionRegistry):
         self._include_historic = False
@@ -16,6 +18,14 @@ class CountryRegistry(QueryableRegistry[Country]):
     def build_cache(self) -> Mapping[int, CountryView]:
         macroregion_views = cast(Mapping[int, MacroregionView], self._macroregions._cache)
         return CountryView.load(self._data_filepath, macroregion_views)
+
+    @locked_cached_property
+    def _historic_ids(self) -> frozenset[int]:
+        cache = cast(Mapping[int, CountryView], self._cache)
+        return frozenset(id for id, view in cache.items() if view.historic)
+
+    def _hidden_ids(self) -> frozenset[int]:
+        return frozenset() if self._include_historic else self._historic_ids
 
     def get(self, id: int) -> Country | None:
         """Get a country by its localis ID. Resolves historic entries regardless of include_historic."""
@@ -35,28 +45,13 @@ class CountryRegistry(QueryableRegistry[Country]):
     ) -> list[Country]:
         """Filter countries by any of its names (name, official_name, common_name, or aliases) or a macroregion (region, subregion or grouping, by name or code). Excludes historic entries unless include_historic is set."""
         kwargs.update(macroregion=macroregion)
-        results = super().filter(name=name, limit=None, **kwargs)
-        if not self._include_historic:
-            results = [c for c in results if not c.historic]
-        return results[:limit] if limit is not None else results
+        return super().filter(name=name, limit=limit, **kwargs)
 
     def search(
-        self, query: str, limit: int = 10, **kwargs
+        self, query: str, limit: int = 10
     ) -> list[tuple[Country, float]]:
-        """Search countries by any of its names (name, official_name, or aliases). Excludes historic entries unless include_historic is set."""
-        if self._include_historic:
-            return super().search(query, limit, **kwargs)
-
-        # over-fetch so excluding historic entries post-hoc can't under-return fewer than `limit` matches
-        cache = cast(Mapping[int, CountryView], self._cache)
-        historic_count = sum(1 for v in cache.values() if v.historic)
-        results = super().search(query, limit + historic_count, **kwargs)
-        return [(c, score) for c, score in results if not c.historic][:limit]
-
-    def __iter__(self) -> Iterator[Country]:
-        for c in super().__iter__():
-            if self._include_historic or not c.historic:
-                yield c
+        """Search countries by any of their names (name, official_name, common_name, or aliases). Excludes historic entries unless include_historic is set."""
+        return super().search(query, limit)
 
     def set_include_historic(self, include: bool) -> None:
         self._include_historic = include

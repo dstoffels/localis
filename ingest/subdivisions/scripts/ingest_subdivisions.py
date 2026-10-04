@@ -1,8 +1,4 @@
-# This script merges subdivision data from GeoNames and ISO 3166-2. We initialize from
-# GeoNames and merge in the ISO data, prompting to resolve ambiguities. Manual intervention is required for some
-# entries, which is mapped in ingest/subdivisions/outputs/resolution_map.json.
-# GeoNames itself never nests beyond admin_level 2; ISO subs deeper than that (so far
-# only France) still merge against GeoNames' level-2 data, see automerge/scoring.py.
+# Merges ISO 3166-2 subdivisions into GeoNames': skill decisions, the Wikidata crosswalk and automerge in turn, with what's left recorded in outputs/resolution_map.json for the resolve-subdivisions skill.
 
 import sys
 from ingest.shared.scripts import load_countries
@@ -71,8 +67,7 @@ def ingest_subdivisions(
         if countries is None:
             countries = load_countries()
 
-        # Initialize subdivision cache with geonames subdivisions into a mapping of country_alpha2 > admin_level > id.
-        # SubdivisionMap also flat maps by id, geoname code and iso code
+        # GeoNames' subdivisions, indexed by country and admin level and by each id and code
         sub_map: SubdivisionMap = map_geonames_subdivisions(countries)
 
         # Enrich GeoNames subdivisions with alternate names before merging, so the extra name variants are also available to fuzzy matching

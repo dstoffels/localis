@@ -120,11 +120,11 @@ ISO 3166-3 withdrawn countries (Czechoslovakia, Serbia and Montenegro, Netherlan
 
 ```python
 localis.countries.include_historic   # False
-len(list(localis.countries))         # 250
+len(localis.countries)               # 250
 
 # Include historic entries
 localis.countries.set_include_historic(True)
-len(list(localis.countries))         # 281
+len(localis.countries)               # 281
 
 localis.countries.set_include_historic(False)
 ```
@@ -237,7 +237,7 @@ subdivision.id              # Database ID
 subdivision.name            # "California"
 subdivision.geonames_code   # "US.CA"
 subdivision.iso_code        # "US-CA"
-subdivision.type            # "State"
+subdivision.type            # "State", or None for a GeoNames-only subdivision
 subdivision.admin_level     # 1
 subdivision.parent          # SubdivisionBase | None - Parent subdivision
 subdivision.country         # CountryBase object

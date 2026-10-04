@@ -111,10 +111,12 @@ def search_text(s: str) -> str:
     return SPACE_RE.sub(" ", PUNCTUATION_RE.sub(" ", normalize(s))).strip()
 
 
+def word_trigrams(word: str) -> set[str]:
+    """The trigrams of one word already in search_text() form, padded with two leading spaces and one trailing space so a short word keeps its edge trigrams through a typo."""
+    padded = f"  {word} "
+    return {padded[i : i + 3] for i in range(len(padded) - 2)}
+
+
 def search_trigrams(s: str) -> set[str]:
-    """The distinct trigrams of search_text(s), each word padded with two leading spaces and one trailing space so a short word keeps its edge trigrams through a typo."""
-    trigrams: set[str] = set()
-    for word in search_text(s).split():
-        padded = f"  {word} "
-        trigrams.update(padded[i : i + 3] for i in range(len(padded) - 2))
-    return trigrams
+    """The distinct trigrams of every word in search_text(s)."""
+    return set().union(*(word_trigrams(word) for word in search_text(s).split()))

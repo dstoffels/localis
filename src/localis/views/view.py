@@ -66,7 +66,7 @@ SV = TypeVar("SV", bound=View, covariant=True)
 
 
 class CrossReferencedView(View[T, S], Generic[T, S, CV, SV]):
-    """Shared by SubdivisionView/CityView; resolves references lazily against already-loaded view dicts."""
+    """Shared by SubdivisionView/CityView; resolves references lazily against already-loaded view mappings."""
 
     __slots__ = ("_country_views", "_subdivision_views")
 

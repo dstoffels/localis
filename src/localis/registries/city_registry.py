@@ -50,11 +50,11 @@ class CityRegistry(QueryableRegistry[City]):
         return results
 
     def search(
-        self, query: str, limit: int = 10, population_sort: bool = False, **kwargs
+        self, query: str, limit: int = 10, population_sort: bool = False
     ) -> list[tuple[City, float]]:
         """Search cities by name, subdivision (name, iso/geonames code), or country (name, alpha2, alpha3). Can optionally sort by population, which is great for autocompletes."""
         results: list[tuple[City, float]] = super().search(
-            query=query, limit=limit, **kwargs
+            query=query, limit=limit
         )
         if population_sort:
             results.sort(key=lambda x: x[0].population, reverse=True)

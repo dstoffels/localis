@@ -56,7 +56,8 @@ def seed(request: pytest.FixtureRequest):
 def select_random(seed):
     def callback(reg: Registry, seed_offset: int = 0):
         rng = random.Random(seed + seed_offset)
-        id = rng.randint(1, reg.count)
+        # every id, hidden ones included, since len() leaves those out and they aren't the last ids; tests opt into a hidden subject with include_historic
+        id = rng.randint(1, len(reg._cache))
         return reg.get(id)
 
     return callback
@@ -111,9 +112,7 @@ def historic_country(historic_countries: list[localis.Country]) -> localis.Count
 
 @pytest.hookimpl(hookwrapper=True)
 def pytest_runtest_makereport(item, call):
-    """
-    Hook wrapper to attach extra information (like the seed) to the report object.
-    """
+    """Appends the session seed to a failed test's id so it can be reproduced."""
     outcome = yield
     report = outcome.get_result()
 

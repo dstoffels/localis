@@ -40,9 +40,7 @@ def try_merge(
             unmerged_count += 1
             continue
 
-        # GeoNames never nests beyond admin_level 2, so ISO subs at 2 and 3+ draw from the
-        # same GeoNames pool (candidate_pool() caps the same way) and must compete together,
-        # not in separate, order-dependent bucket passes.
+        # GeoNames never nests below level 2, so ISO levels 2 and deeper share one bucket and compete for the same pool
         bucket_key = (iso_sub.country.alpha2, min(iso_sub.admin_level, 2))
         buckets.setdefault(bucket_key, []).append(iso_sub)
 
@@ -50,9 +48,7 @@ def try_merge(
     for (alpha2, admin_level), bucket_iso_subs in buckets.items():
         geo_subs = candidate_pool(sub_map, alpha2, admin_level)
 
-        # snapshot each geo_sub's pre-merge name up front; merge_matched_sub() mutates geo_sub.name in place,
-        # and a geo_sub can appear against several iso_subs in scored_pairs before one of them claims it.
-        # geonames_id is always set here: candidate_pool() only returns unmerged GeoNames-sourced subs.
+        # each geo_sub's name before merging renames it, for the log lines that mention it after it's claimed
         geo_names_at_scoring: dict[int, str] = {}
         for g in geo_subs:
             assert g.geonames_id is not None
@@ -85,9 +81,7 @@ def try_merge(
             if geo_sub.geonames_id in ambiguous_geo_ids:
                 assert iso_sub.iso_code is not None
                 ambiguous_iso_codes.add(iso_sub.iso_code)
-        # an iso_code can end up contesting more than one target (rare), so gather by iso_code
-        # rather than writing one entry per target; orphans are ISO subs, so the orphan bucket
-        # stays iso_code-primary like no_candidates/no_matches, just carrying multiple candidates.
+        # one orphan per iso_code, carrying every target it contests
         ambiguous_candidates: dict[str, list[int]] = {}
         for geonames_id in ambiguous_geo_ids:
             geo_name = geo_names_at_scoring[geonames_id]
@@ -162,8 +156,7 @@ def try_merge(
             else:
                 reason = "no_matches"
                 if candidate[1] < candidate[2]:
-                    # only log a genuine near-miss (never qualified); a candidate that did
-                    # qualify but lost the competition was already reported as "lost candidate" above
+                    # a near-miss; a candidate that qualified but lost was already logged above
                     geo_sub, score, needed = candidate
                     assert geo_sub.geonames_id is not None
                     geo_name = geo_names_at_scoring[geo_sub.geonames_id]

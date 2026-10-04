@@ -11,7 +11,7 @@ from ingest.shared.models import SubdivisionModel
 NON_NAME_LANG_CODES = {"wkdt", "link", "post", "iata", "icao", "faac", "abbr"}
 
 # invisible bidi/formatting control characters sometimes embedded literally in RTL-script alternate names pulled from Wikipedia/Wikidata
-BIDI_CONTROL_CHARS = re.compile("[​-\u200F\u202A-\u202E\u2066-\u2069]")
+BIDI_CONTROL_CHARS = re.compile("[\u200B-\u200F\u202A-\u202E\u2066-\u2069]")
 
 
 def _strip_bidi_controls(name: str) -> str:

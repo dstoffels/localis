@@ -73,8 +73,7 @@ class Registry(Generic[T], ABC):
         return self.build_cache()
 
     def build_cache(self) -> Mapping[int, View[T, Store]]:
-        """Build the id -> view mapping for this registry. Overridden per registry to
-        supply whatever cross-referenced caches its view class needs."""
+        """The registry's id -> view mapping, built with whatever other registries' views its views reference."""
         raise NotImplementedError
 
     @locked_cached_property
@@ -102,12 +101,19 @@ class Registry(Generic[T], ABC):
         for attr in self._CACHED_ATTRS:
             getattr(self, attr)
 
+    def _hidden_ids(self) -> frozenset[int]:
+        """The ids that iteration, filter() and search() skip, which get() and lookup() still resolve; none by default."""
+        return frozenset()
+
     def __iter__(self) -> Iterator[T]:
-        for view in self._cache.values():
-            yield view.to_entity()
+        hidden = self._hidden_ids()
+        for id, view in self._cache.items():
+            if id not in hidden:
+                yield view.to_entity()
 
     def __len__(self) -> int:
-        return len(self._cache)
+        """How many records iteration yields, leaving out hidden ones."""
+        return len(self._cache) - len(self._hidden_ids())
 
     # ----------- API METHODS ----------- #
 
@@ -124,7 +130,7 @@ class Registry(Generic[T], ABC):
 
 
 class QueryableRegistry(Registry[T]):
-    """Full API surface: LookupRegistry plus filter/search over the filter and search indexes."""
+    """Registry plus filter() and search() over the filter and search indexes."""
 
     _CACHED_ATTRS = Registry._CACHED_ATTRS + ("_filter_index", "_search_index")
 
@@ -184,6 +190,7 @@ class QueryableRegistry(Registry[T]):
                 results &= matches
 
         assert results is not None, "Filter results should not be None at this point."
+        results -= self._hidden_ids()
 
         results_list = [self._cache[id] for id in results]
         results_list.sort(key=lambda r: r.name)  # sort alphabetically by name
@@ -191,6 +198,6 @@ class QueryableRegistry(Registry[T]):
             results_list = results_list[:limit]
         return [r.to_entity() for r in results_list]
 
-    def search(self, query: str, limit: int = 10, **kwargs) -> list[tuple[T, float]]:
-        results = self._search_index.search(query=query, limit=limit)
+    def search(self, query: str, limit: int = 10) -> list[tuple[T, float]]:
+        results = self._search_index.search(query=query, limit=limit, exclude=self._hidden_ids())
         return [(r.to_entity(), score) for r, score in results]

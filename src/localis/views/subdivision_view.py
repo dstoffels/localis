@@ -33,8 +33,9 @@ class SubdivisionView(
         return v if v else None
 
     @property
-    def type(self) -> str:
-        return self._store.types[self._idx]
+    def type(self) -> str | None:
+        v = self._store.types[self._idx]
+        return v if v else None
 
     @property
     def aliases(self) -> tuple[str, ...]:

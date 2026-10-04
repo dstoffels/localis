@@ -1,6 +1,4 @@
-# This script initializes historic (withdrawn) country entries from ISO 3166-3, keyed by
-# alpha_4 since bare alpha2/alpha3 can be reused across two different historic entries
-# (e.g. CS: Czechoslovakia CSHH, then later Serbia and Montenegro CSXX).
+# Loads ISO 3166-3's withdrawn countries, keyed by alpha_4 since ISO reuses alpha2/alpha3 (CS: Czechoslovakia CSHH, then Serbia and Montenegro CSXX).
 
 from ingest.utils import COUNTRIES_INPUTS_PATH, ingest_log
 from ingest.shared.models import CountryModel, HistoricModel

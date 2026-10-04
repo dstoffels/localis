@@ -10,7 +10,7 @@ from rapidfuzz import fuzz, process
 from localis.entities import Entity
 from localis.views import View
 from localis.stores import Store
-from localis.utils.strings import search_text, search_trigrams, SHORT_NAME_MAX
+from localis.utils.strings import search_text, word_trigrams, SHORT_NAME_MAX
 from localis.utils.data import resolve_field
 from collections import Counter
 
@@ -18,6 +18,24 @@ T = TypeVar("T", bound=Entity)
 
 
 class SearchIndex(Generic[T]):
+    # the least score a result needs
+    NOISE_THRESHOLD = 0.5
+    # the share of a record's name score lost when none of the query outside its name fits its context
+    CONTEXT_PENALTY = 0.5
+    # how many of the best trigram matches go on to fuzzy scoring
+    TOP_K = 50
+    # how many records with the most canon and context hits get their exact weighted coverage computed, from which the TOP_K are taken
+    SHORTLIST_K = 200
+    # a trigram in more than this share of records (and more than STOP_MIN_DF of them) isn't counted when selecting, provided MIN_COUNTED rarer ones remain
+    STOP_SHARE = 0.02
+    STOP_MIN_DF = 1000
+    MIN_COUNTED = 3
+    # a one-word query this short has too few trigrams to find a typo'd name by, so it's also edit-distance matched against the shipped short names within one character of its length
+    SHORT_QUERY_LEN = SHORT_NAME_MAX - 1
+    # how many of those closest names, per length, join the candidates, and the least ratio they need
+    SHORT_MATCH_K = 20
+    SHORT_MATCH_CUTOFF = 70
+
     def __init__(
         self,
         cache: Mapping[int, View[T, Store]],
@@ -26,22 +44,6 @@ class SearchIndex(Generic[T]):
         allowed_ids: set[int] | None = None,
     ) -> None:
         self.cache = cache
-        self.NOISE_THRESHOLD = 0.5
-        # the share of a record's name score lost when none of the query outside its name fits its context
-        self.CONTEXT_PENALTY = 0.5
-        # how many of the best trigram matches go on to fuzzy scoring
-        self.TOP_K = 50
-        # how many records with the most canon and context hits get their exact weighted coverage computed, from which the TOP_K are taken
-        self.SHORTLIST_K = 200
-        # a trigram in more than this share of records (and more than STOP_MIN_DF of them) isn't counted when selecting, provided MIN_COUNTED rarer ones remain
-        self.STOP_SHARE = 0.02
-        self.STOP_MIN_DF = 1000
-        self.MIN_COUNTED = 3
-        # a one-word query this short has too few trigrams to find a typo'd name by, so it's also edit-distance matched against the shipped short names within one character of its length
-        self.SHORT_QUERY_LEN = SHORT_NAME_MAX - 1
-        # how many of those closest names, per length, join the candidates, and the least ratio they need
-        self.SHORT_MATCH_K = 20
-        self.SHORT_MATCH_CUTOFF = 70
         self.NAME_FIELDS = name_fields
         self.canon = self._load_trigram_index(data_path / "canon_index", allowed_ids)
         self.short_names = self._load_short_names(data_path / "short_names.tsv.gz", allowed_ids)
@@ -91,19 +93,23 @@ class SearchIndex(Generic[T]):
             index[trigram] = trigram_ids
         return index
 
-    def search(self, query: str, limit: int) -> list[tuple[View[T, Store], float]]:
+    def search(self, query: str, limit: int, exclude: frozenset[int] = frozenset()) -> list[tuple[View[T, Store], float]]:
+        """The best `limit` matches for the query, best first, leaving out the `exclude`d ids before any are shortlisted."""
         query = search_text(query)
         if not query:
             return []
 
         tokens = query.split()
-        token_trigrams = [search_trigrams(token) for token in tokens]
+        # the tokens are already in search_text() form
+        token_trigrams = [word_trigrams(token) for token in tokens]
         query_trigrams = set().union(*token_trigrams)
         weights = self._weights(query_trigrams)
         total_weight = sum(weights.values())
 
         # stage 1: count canon and context hits together in C over the query's rarer trigrams, and shortlist the records with the most
         hits = self._count_hits(query_trigrams)
+        for id in exclude:
+            hits.pop(id, None)
         shortlist = [id for id, _ in hits.most_common(self.SHORTLIST_K)]
 
         # stage 2: each shortlisted record's rarity-weighted coverage of the query, by its names alone and by its names and context together, averaged
@@ -121,7 +127,7 @@ class SearchIndex(Generic[T]):
         candidates = heapq.nlargest(max(self.TOP_K, limit), trigram_scores, key=trigram_scores.__getitem__)
         # a short typo'd name shares only common edge trigrams with its record, so its edit-distance matches skip the trigram stages
         if self.short_names and len(tokens) == 1 and len(tokens[0]) <= self.SHORT_QUERY_LEN:
-            candidates = list(dict.fromkeys([*candidates, *self._short_matches(tokens[0])]))
+            candidates = list(dict.fromkeys([*candidates, *(id for id in self._short_matches(tokens[0]) if id not in exclude)]))
 
         # stage 3: fuzzy-score the candidates' names, with their context checked against the rest of the query
         results: list[tuple[View[T, Store], float, float]] = []

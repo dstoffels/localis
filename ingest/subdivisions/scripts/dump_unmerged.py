@@ -1,5 +1,4 @@
-# Generates docs/unmerged_subdivisions.md: every ISO-sourced subdivision currently
-# without a GeoNames geonames_id, written fresh from the final dataset on every ingest run.
+# Writes docs/unmerged_subdivisions.md, every ISO subdivision without a GeoNames counterpart, fresh on each ingest run.
 
 from ingest.utils import DOCS_PATH
 from ingest.subdivisions.utils.subdivision_map import SubdivisionMap

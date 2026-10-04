@@ -8,10 +8,7 @@ from localis.utils.data import resolve_field
 
 @dataclass(slots=True)
 class Model:
-    """Ingestion-only representation: carries the field-processing API (row
-    serialization, lookup/filter/search extraction) used to build the on-disk
-    data files consumed at runtime by localis's Store/View classes. Deliberately
-    independent of DTO, the runtime return type, no shared base class."""
+    """An ingest record: its shipped TSV row and the values its lookup, filter and search indexes hold; independent of the runtime's entities and views."""
 
     id: int
     name: str
