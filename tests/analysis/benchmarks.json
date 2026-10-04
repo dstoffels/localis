@@ -3205,5 +3205,124 @@
         }
       }
     }
+  },
+  "2026-10-04T14:56:39": {
+    "host": {
+      "os": "Linux 7.0.0-38-generic",
+      "machine": "x86_64",
+      "cpu": "11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz",
+      "cpu_count": 8,
+      "memory_total_bytes": 15746977792,
+      "python": "3.14.7",
+      "localis": "2.1.0"
+    },
+    "sample_size": 5000,
+    "iterations": 1,
+    "seed": 0,
+    "notes": null,
+    "registries": {
+      "countries": {
+        "get": {
+          "p50_ms": 0.0098,
+          "p95_ms": 0.0145,
+          "p99_ms": 0.0193,
+          "max_ms": 0.0234
+        },
+        "lookup": {
+          "p50_ms": 0.0113,
+          "p95_ms": 0.0151,
+          "p99_ms": 0.0258,
+          "max_ms": 0.122
+        },
+        "filter": {
+          "p50_ms": 0.0171,
+          "p95_ms": 0.0238,
+          "p99_ms": 0.036,
+          "max_ms": 0.0387
+        },
+        "search": {
+          "p50_ms": 1.4388,
+          "p95_ms": 4.3928,
+          "p99_ms": 6.7792,
+          "max_ms": 9.6775
+        },
+        "accuracy": {
+          "queries": 430,
+          "failures": 0,
+          "success_pct": 100.0,
+          "top1_pct": 99.3,
+          "mrr": 0.997,
+          "avg_hit_score": 0.9
+        }
+      },
+      "subdivisions": {
+        "get": {
+          "p50_ms": 0.0084,
+          "p95_ms": 0.0103,
+          "p99_ms": 0.0162,
+          "max_ms": 0.0326
+        },
+        "lookup": {
+          "p50_ms": 0.0105,
+          "p95_ms": 0.013,
+          "p99_ms": 0.0177,
+          "max_ms": 0.1085
+        },
+        "filter": {
+          "p50_ms": 0.0168,
+          "p95_ms": 0.0348,
+          "p99_ms": 0.088,
+          "max_ms": 0.2307
+        },
+        "search": {
+          "p50_ms": 2.7717,
+          "p95_ms": 5.0139,
+          "p99_ms": 6.8865,
+          "max_ms": 13.4626
+        },
+        "accuracy": {
+          "queries": 7017,
+          "failures": 189,
+          "success_pct": 97.3,
+          "top1_pct": 85.5,
+          "mrr": 0.901,
+          "avg_hit_score": 0.92
+        }
+      },
+      "cities": {
+        "get": {
+          "p50_ms": 0.0148,
+          "p95_ms": 0.019,
+          "p99_ms": 0.0239,
+          "max_ms": 0.0524
+        },
+        "lookup": {
+          "p50_ms": 0.0119,
+          "p95_ms": 0.015,
+          "p99_ms": 0.0199,
+          "max_ms": 0.0508
+        },
+        "filter": {
+          "p50_ms": 0.0228,
+          "p95_ms": 0.084,
+          "p99_ms": 0.2512,
+          "max_ms": 0.6565
+        },
+        "search": {
+          "p50_ms": 6.839,
+          "p95_ms": 12.1922,
+          "p99_ms": 15.7536,
+          "max_ms": 24.991
+        },
+        "accuracy": {
+          "queries": 5000,
+          "failures": 81,
+          "success_pct": 98.4,
+          "top1_pct": 91.3,
+          "mrr": 0.941,
+          "avg_hit_score": 0.822
+        }
+      }
+    }
   }
 }

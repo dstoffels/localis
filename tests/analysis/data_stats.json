@@ -134,44 +134,44 @@
   },
   "filter_index": {
     "cities": {
-      "values": 277222,
+      "values": 277223,
       "single_record_values": 216663
     },
     "countries": {
-      "values": 1194,
+      "values": 1195,
       "single_record_values": 1126
     },
     "subdivisions": {
-      "values": 75142,
+      "values": 75143,
       "single_record_values": 69972
     }
   },
   "shipped_size": {
-    "total": 52285126,
+    "total": 52349987,
     "cities": {
-      "total": 41962460,
-      "share_pct": 80.3,
+      "total": 41962895,
+      "share_pct": 80.2,
       "files": {
         "canon_index.bin.gz": 4968397,
         "canon_index_offsets.tsv": 166585,
         "cities.tsv": 13251231,
         "context_index.bin.gz": 8565437,
         "context_index_offsets.tsv": 95270,
-        "filter_index.bin.gz": 3366413,
-        "filter_index_offsets.tsv": 7672253,
+        "filter_index.bin.gz": 3366816,
+        "filter_index_offsets.tsv": 7672285,
         "lookup_index_int.tsv": 3404031,
         "short_names.tsv.gz": 472843
       }
     },
     "countries": {
-      "total": 106043,
+      "total": 106109,
       "share_pct": 0.2,
       "files": {
         "canon_index.bin.gz": 10029,
         "canon_index_offsets.tsv": 22159,
         "countries.tsv": 30025,
-        "filter_index.bin.gz": 2835,
-        "filter_index_offsets.tsv": 33907,
+        "filter_index.bin.gz": 2874,
+        "filter_index_offsets.tsv": 33934,
         "lookup_index_int.tsv": 1852,
         "lookup_index_str.tsv": 3813,
         "short_names.tsv.gz": 1423
@@ -186,15 +186,15 @@
       }
     },
     "subdivisions": {
-      "total": 10214888,
-      "share_pct": 19.5,
+      "total": 10279248,
+      "share_pct": 19.6,
       "files": {
         "canon_index.bin.gz": 1701073,
         "canon_index_offsets.tsv": 141575,
         "context_index.bin.gz": 1526970,
         "context_index_offsets.tsv": 66955,
-        "filter_index.bin.gz": 406171,
-        "filter_index_offsets.tsv": 2202795,
+        "filter_index.bin.gz": 470505,
+        "filter_index_offsets.tsv": 2202821,
         "lookup_index_str.tsv": 969848,
         "short_names.tsv.gz": 104799,
         "subdivisions.tsv": 3094702
