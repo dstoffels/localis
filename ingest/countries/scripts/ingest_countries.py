@@ -7,8 +7,7 @@ from .fetch_countries import fetch_countries_sources
 from .merge_countries import merge_wikidata, merge_geonames, drop_ambiguous_aliases
 from .wikidata_countries import fetch_wikidata_country_names
 from .place_macroregions import place_macroregions
-from .dump_countries import dump
-from ingest.utils import ingest_log, commit_manifest, COUNTRIES_MANIFEST_PATH
+from ingest.utils import ingest_log, commit_manifest, dump_registry, COUNTRIES_MANIFEST_PATH
 from ingest.utils.strings import dedupe
 from ingest.shared.models import CountryModel
 from ingest.macroregions.scripts import Macroregions, load_macroregions
@@ -33,7 +32,7 @@ def ingest_countries(macroregions: Macroregions | None = None, force: bool = Fal
         for country in countries.values():
             country.aliases = dedupe(country.aliases, exclude=(country.name, country.official_name or "", country.common_name or ""))
         place_macroregions(countries, macroregions)
-        dump(list(countries.values()))
+        dump_registry("countries", list(countries.values()))
         commit_manifest(COUNTRIES_MANIFEST_PATH)
         ingest_log.writeline(f"completed: {len(countries)} countries")
         return countries

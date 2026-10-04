@@ -8,9 +8,9 @@ class SubdivisionRegistry(QueryableRegistry[Subdivision]):
     REGISTRY_NAME = "subdivisions"
     NAME_FIELDS = ("name", "aliases", "iso_suffix")
 
-    def __init__(self, countries: CountryRegistry, **kwargs):
+    def __init__(self, countries: CountryRegistry):
         self._countries = countries
-        super().__init__(**kwargs)
+        super().__init__()
 
     def build_cache(self) -> Mapping[int, SubdivisionView]:
         country_views = cast(Mapping[int, CountryView], self._countries._cache)

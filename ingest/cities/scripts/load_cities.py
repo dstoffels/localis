@@ -1,5 +1,5 @@
 from ingest.utils import CITIES_INPUTS_PATH
-from ingest.utils.strings import is_latin
+from localis.utils.strings import is_latin
 from ingest.utils import ingest_log
 from ingest.shared.models import SubdivisionModel, CountryModel, CityModel
 import csv
@@ -73,23 +73,15 @@ def parse_row(
         )
         return None
 
-    lat = row["latitude"]
-    lng = row["longitude"]
-
-    try:
-        population = row["population"] if row["population"] else 0
-    except ValueError:
-        raise ValueError(f"Invalid population value: {row['population']}")
-
     return CityModel(
         id=0,  # to be set before dump
         geonames_id=int(geonames_id),
         name=name,
         subdivisions=resolve_subdivision_chain(admin1, admin2),
         country=country,
-        population=int(population),
-        lat=float(lat),
-        lng=float(lng),
+        population=int(row["population"] or 0),
+        lat=float(row["latitude"]),
+        lng=float(row["longitude"]),
     )
 
 

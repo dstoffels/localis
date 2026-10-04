@@ -3,8 +3,10 @@ import re
 import unicodedata
 from ingest.utils import COUNTRIES_INPUTS_PATH, ingest_log
 from ingest.utils.strings import name_key
+from localis.utils.strings import is_latin
 from ingest.shared.models import CountryModel
 from .fetch_countries import GEONAMES_COUNTRIES_DEST
+from .load_historic_countries import historic_by_alpha2
 
 _LEADING_THE_RE = re.compile(r"^the\s+", re.IGNORECASE)
 _SUBDIVISION_CODE_RE = re.compile(r"^[A-Z]{2}-[A-Z0-9]{1,3}$")
@@ -21,7 +23,7 @@ def _wikidata_alias(raw: str, iso_codes: set[str], item_codes: frozenset[str] | 
     if alias in item_codes or _SUBDIVISION_CODE_RE.match(alias):
         return None
     # the query asks for English, so a letter outside Latin script marks a mislabelled name (Armenian, Cyrillic, Greek)
-    if any(unicodedata.category(ch) in ("Lu", "Ll", "Lt", "Lo") and not unicodedata.name(ch, "").startswith("LATIN") for ch in alias):
+    if not is_latin(alias):
         return None
     # a short entry is kept only as an uppercase abbreviation that isn't itself an ISO code: "UK", "DRC" and "ROC" stay; language and domain codes ("el", "zaf") and ISO codes ("CAN", "TWN") go
     if len(alias) <= 3 and not (alias.isalpha() and alias.isupper() and alias not in iso_codes):
@@ -41,15 +43,12 @@ def merge_wikidata(countries: dict[str, CountryModel], country_names: dict[str, 
     iso_codes = {code for c in countries.values() for code in (c.alpha2, c.alpha3) if code}
     blocklist = _load_blocklist()
     # historic entries are keyed by alpha_4; one is matched by its former alpha-2 only where no current country or other historic entry shares it
-    historic_by_alpha2: dict[str, list[CountryModel]] = {}
-    for c in countries.values():
-        if c.historic:
-            historic_by_alpha2.setdefault(c.alpha2, []).append(c)
+    historic_entries = historic_by_alpha2(countries)
 
     for alpha2, entry in country_names.items():
         country = countries.get(alpha2)
         if country is None:
-            historic = historic_by_alpha2.get(alpha2, [])
+            historic = historic_entries.get(alpha2, [])
             country = historic[0] if len(historic) == 1 else None
         if country is None:
             continue
@@ -80,10 +79,8 @@ def drop_ambiguous_aliases(countries: dict[str, CountryModel]) -> None:
 def merge_geonames(countries: dict[str, CountryModel]):
     ingest_log.writeline("Merging GeoNames countries...")
 
-    # historic entries are keyed by alpha_4, not alpha2, so a plain countries.get(alpha2)
-    # misses them; without this, a GeoNames row for a historic country (e.g. CS) would
-    # fall through to "construct new country" and duplicate the entry already loaded from ISO 3166-3
-    historic_by_alpha2 = {c.alpha2: c for c in countries.values() if c.historic}
+    # historic entries are keyed by alpha_4, so a GeoNames row for a withdrawn code (CS, AN) would otherwise be added as a new country; a code ISO reused goes to its most recent holder, the country GeoNames still lists under it (CS: Serbia and Montenegro, not Czechoslovakia)
+    historic_entries = historic_by_alpha2(countries)
 
     with open(GEONAMES_COUNTRIES_DEST, "r", encoding="utf-8") as f:
 
@@ -112,7 +109,7 @@ def merge_geonames(countries: dict[str, CountryModel]):
 
             geonames_id = int(geonames_id)
 
-            country: CountryModel | None = countries.get(alpha2) or historic_by_alpha2.get(alpha2)
+            country: CountryModel | None = countries.get(alpha2) or next(reversed(historic_entries.get(alpha2, [])), None)
 
             # Construct new country
             if not country:

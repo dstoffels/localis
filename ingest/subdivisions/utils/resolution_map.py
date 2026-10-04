@@ -1,6 +1,6 @@
-from dataclasses import dataclass, field, asdict
+from dataclasses import dataclass, field, fields, asdict
 from pathlib import Path
-from typing import Literal
+from typing import Literal, get_args, get_type_hints
 import hashlib
 import json
 
@@ -48,8 +48,18 @@ class GroupingTwinOrphan:
     candidate_geonames_id: int
 
 
+# a no_candidates/no_matches orphan is its bare iso_code; the flagged buckets carry what the pipeline found
+OrphanEntry = str | AmbiguousOrphan | LowMarginOrphan | WikidataConflictOrphan | GroupingTwinOrphan
+
+
+def _iso_code(entry: OrphanEntry) -> str:
+    return entry if isinstance(entry, str) else entry.iso_code
+
+
 @dataclass
 class Orphans:
+    """The ISO subdivisions awaiting the resolve-subdivisions skill, by why they were orphaned; buckets are reviewed in field order."""
+
     no_candidates: list[str] = field(default_factory=list)
     no_matches: list[str] = field(default_factory=list)
     ambiguity: list[AmbiguousOrphan] = field(default_factory=list)
@@ -57,21 +67,40 @@ class Orphans:
     wikidata_conflict: list[WikidataConflictOrphan] = field(default_factory=list)
     grouping_twin: list[GroupingTwinOrphan] = field(default_factory=list)
 
+    @classmethod
+    def from_dict(cls, data: dict[str, list]) -> "Orphans":
+        """Rebuilds each bucket's entries as the type its field declares."""
+        hints = get_type_hints(cls)
+        buckets = {}
+        for f in fields(cls):
+            (entry_type,) = get_args(hints[f.name])
+            entries = data.get(f.name, [])
+            buckets[f.name] = entries if entry_type is str else [entry_type(**entry) for entry in entries]
+        return cls(**buckets)
+
+    def _buckets(self) -> dict[str, list[OrphanEntry]]:
+        return {f.name: getattr(self, f.name) for f in fields(self)}
+
     def count(self) -> int:
-        return (
-            len(self.no_candidates)
-            + len(self.no_matches)
-            + len(self.ambiguity)
-            + len(self.low_margin)
-            + len(self.wikidata_conflict)
-            + len(self.grouping_twin)
-        )
+        return sum(len(bucket) for bucket in self._buckets().values())
 
     def summary(self) -> str:
-        return (
-            f"no_candidates={len(self.no_candidates)}, no_matches={len(self.no_matches)}, ambiguity={len(self.ambiguity)}, "
-            f"low_margin={len(self.low_margin)}, wikidata_conflict={len(self.wikidata_conflict)}, grouping_twin={len(self.grouping_twin)}"
-        )
+        return ", ".join(f"{name}={len(bucket)}" for name, bucket in self._buckets().items())
+
+    def codes(self) -> list[str]:
+        """Every orphan's iso_code, in review order."""
+        return [_iso_code(entry) for bucket in self._buckets().values() for entry in bucket]
+
+    def find(self, iso_code: str) -> OrphanEntry | None:
+        return next((entry for bucket in self._buckets().values() for entry in bucket if _iso_code(entry) == iso_code), None)
+
+    def remove(self, iso_code: str) -> None:
+        for bucket in self._buckets().values():
+            for entry in bucket:
+                if _iso_code(entry) == iso_code:
+                    bucket.remove(entry)
+                    return
+        raise ValueError(f"{iso_code} is not in resolution_map's orphans")
 
 
 @dataclass
@@ -111,26 +140,7 @@ class ResolutionMap:
                     for code, match in automerge_data.get("resolutions", {}).items()
                 },
                 geonames_absent=automerge_data.get("geonames_absent", []),
-                orphans=Orphans(
-                    no_candidates=automerge_data.get("orphans", {}).get("no_candidates", []),
-                    no_matches=automerge_data.get("orphans", {}).get("no_matches", []),
-                    ambiguity=[
-                        AmbiguousOrphan(**orphan)
-                        for orphan in automerge_data.get("orphans", {}).get("ambiguity", [])
-                    ],
-                    low_margin=[
-                        LowMarginOrphan(**orphan)
-                        for orphan in automerge_data.get("orphans", {}).get("low_margin", [])
-                    ],
-                    wikidata_conflict=[
-                        WikidataConflictOrphan(**orphan)
-                        for orphan in automerge_data.get("orphans", {}).get("wikidata_conflict", [])
-                    ],
-                    grouping_twin=[
-                        GroupingTwinOrphan(**orphan)
-                        for orphan in automerge_data.get("orphans", {}).get("grouping_twin", [])
-                    ],
-                ),
+                orphans=Orphans.from_dict(automerge_data.get("orphans", {})),
             ),
         )
 

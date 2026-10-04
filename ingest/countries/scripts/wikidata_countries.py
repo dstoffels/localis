@@ -1,9 +1,6 @@
 import json
-import urllib.parse
-import urllib.request
-from ingest.utils import COUNTRIES_INPUTS_PATH, ingest_log
+from ingest.utils import COUNTRIES_INPUTS_PATH, ingest_log, sparql
 
-SPARQL_ENDPOINT = "https://query.wikidata.org/sparql"
 # every item with an ISO 3166-1 alpha-2 code (P297): its English label, alternative labels and short names (P1813), its IOC (P984) and FIFA (P3441) codes, which appear among the alternative labels but aren't names, and its sitelink count to pick between items sharing a code
 SPARQL_QUERY = """
 SELECT ?iso ?item ?sitelinks ?label ?alt ?short ?ioc ?fifa WHERE {
@@ -16,25 +13,16 @@ SELECT ?iso ?item ?sitelinks ?label ?alt ?short ?ioc ?fifa WHERE {
   OPTIONAL { ?item wdt:P3441 ?fifa }
 }
 """
-USER_AGENT = "localis-data-refresh (+https://github.com/dstoffels/localis)"
 COUNTRY_NAMES_PATH = COUNTRIES_INPUTS_PATH / "wikidata_country_names.json"
 
 
 def fetch_wikidata_country_names() -> dict[str, dict[str, list[str]]]:
     """English names and sports codes of every ISO alpha-2 country from Wikidata, keyed by alpha-2 as {"names": [...], "codes": [...]}, fetched live and persisted to inputs/."""
-    url = (
-        SPARQL_ENDPOINT + "?query=" + urllib.parse.quote(SPARQL_QUERY) + "&format=json"
-    )
-    request = urllib.request.Request(
-        url,
-        headers={"User-Agent": USER_AGENT, "Accept": "application/sparql-results+json"},
-    )
     ingest_log.writeline("Querying Wikidata for country names...")
-    with urllib.request.urlopen(request, timeout=120) as response:
-        data = json.loads(response.read().decode("utf-8"))
+    bindings = sparql(SPARQL_QUERY)
 
     items: dict[str, dict[str, tuple[int, set[str], set[str]]]] = {}
-    for binding in data["results"]["bindings"]:
+    for binding in bindings:
         iso = binding["iso"]["value"]
         item = binding["item"]["value"].rsplit("/", 1)[1]
         _, names, codes = items.setdefault(iso, {}).setdefault(

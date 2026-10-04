@@ -66,10 +66,7 @@ def try_merge(
 
         scored_pairs.sort(key=lambda pair: pair[0], reverse=True)
 
-        # a geo_sub that multiple distinct ISO subs both score >=95 against is a likely namesake
-        # collision (e.g. a city and its own containing rayon sharing an identical name) that
-        # string similarity can't safely break the tie on; exclude it entirely rather than let
-        # the highest scorer quietly win what might be the wrong one.
+        # a geo_sub that several distinct ISO subs all score at least AMBIGUITY_THRESHOLD against is a likely namesake collision (e.g. a city and its own containing rayon sharing an identical name) that string similarity can't safely break, so it's excluded rather than let the highest scorer quietly win what might be the wrong one
         high_scorers: dict[int, set[str]] = {}
         for score, needed, iso_sub, geo_sub in scored_pairs:
             if score >= AMBIGUITY_THRESHOLD:
@@ -140,7 +137,8 @@ def try_merge(
             claimed_iso.add(iso_sub.iso_code)
             claimed_geo.add(geo_sub.geonames_id)
             resolution_map.automerge.resolutions[iso_sub.iso_code] = AutomergeMatch(id=geo_sub.geonames_id, margin=margin)
-            if score < 90:
+            # only a merge short of a high score is logged, as the ones worth a second look
+            if score < AMBIGUITY_THRESHOLD:
                 ingest_log.writeline(
                     f"merged {iso_sub.iso_code} '{iso_sub.name}' -> {geo_sub.geonames_code} '{geo_name}' ({score:.0f}/{needed})"
                 )

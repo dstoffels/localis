@@ -17,6 +17,7 @@ from ingest.utils import (
     record_pending,
     committed_value,
     commit_manifest,
+    dump_registry,
 )
 from ingest.shared.models import CountryModel, SubdivisionModel
 from .geonames_subdivisions import map_geonames_subdivisions
@@ -26,7 +27,6 @@ from .automerge import try_merge
 from .resolve_subdivisions import apply_skill_decisions
 from .wikidata_subdivisions import fetch_wikidata_crosswalk, flag_wikidata_conflicts, apply_wikidata_matches
 from .non_administrative import apply_non_administrative, flag_grouping_twin_merges
-from .dump_subdivisions import dump
 from .dump_unmerged import write as write_unmerged_doc
 
 RESOLUTION_MAP_PATH = SUBDIVISIONS_OUTPUTS_PATH / "resolution_map.json"
@@ -108,7 +108,7 @@ def ingest_subdivisions(
         # refuse to dump subdivisions or hand off to cities (which depends on this run's geocode map) until resolved
         exit_if_orphans(resolution_map)
 
-        dump(sub_map)
+        dump_registry("subdivisions", sub_map.all())
         write_unmerged_doc(sub_map)
         # only now are this run's sources consumed; a run stopped by orphans leaves them pending, so the next run reprocesses them
         commit_manifest(SUBDIVISIONS_MANIFEST_PATH)

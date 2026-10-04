@@ -16,6 +16,8 @@ class SubdivisionModel(Model):
     parent: "SubdivisionModel | None"
     country: CountryModel
     hashid: int | None = None
+    # ISO's parent for this subdivision, the key SubdivisionMap.refresh() links parent by; ingest-only, since the parent object it names may be merged away before then
+    parent_iso_code: str | None = None
 
     LOOKUP_FIELDS = ("iso_code", "geonames_code")
     FILTER_FIELDS = {
@@ -43,19 +45,13 @@ class SubdivisionModel(Model):
         data["parent"] = self.parent.id if self.parent else None
         data["country"] = self.country.id
         data.pop("hashid", None)
+        data.pop("parent_iso_code", None)
         data["aliases"] = "|".join(self.aliases) if self.aliases else None
         data.pop("id")
         return tuple(data.values())
 
     def set_hashid(self) -> None:
-        if not isinstance(self.country, int):
-            key_parts = [
-                self.country.alpha2,
-                str(self.admin_level),
-                normalize(self.name),
-                self.iso_code
-                or self.geonames_code,  # whichever is present at initialization
-            ]
-            key = "|".join(key_parts)
-            # temporarily hash a unique id to later map admin2 subdivisions to their parents and to manually map ISO subdivisions that cannot be automatically merged with its geonames counterpart. hashid is ONLY used internally for these purposes during ingestion; once the subdvision data has been successfully merged, hashid is discarded.
-            self.hashid = int.from_bytes(hashlib.md5(key.encode()).digest()[:8], "big")
+        """Sets hashid, and id to match, to a placeholder unique before merging, when neither the ISO code nor the GeoNames id can key every subdivision; SubdivisionMap.all() assigns the final ids, and hashid never ships."""
+        # the ISO code or the GeoNames code, whichever source the record was loaded from
+        key = "|".join([self.country.alpha2, str(self.admin_level), normalize(self.name), self.iso_code or self.geonames_code or ""])
+        self.hashid = self.id = int.from_bytes(hashlib.md5(key.encode()).digest()[:8], "big")

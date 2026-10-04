@@ -3,7 +3,6 @@ import json
 import random
 import statistics
 import time
-import unicodedata
 import zlib
 from datetime import datetime
 from pathlib import Path
@@ -11,6 +10,7 @@ from typing import Any, Callable
 import localis
 from localis.entities import Entity
 from localis.registries import QueryableRegistry
+from localis.utils.strings import is_latin
 from tests.analysis.host import host_fingerprint
 from tests.utils import mangle
 
@@ -36,12 +36,6 @@ def _search_query(entry: Entity) -> str:
         if admin1:
             return f"{entry.name} {admin1.name}"
     return entry.name
-
-
-def _latin(s: str) -> bool:
-    """Whether every letter is Latin script, accented Latin included; mangle() inserts Latin letters, so it can't simulate a typo in any other script."""
-    # by Unicode character name rather than code range, since Latin letters span several blocks (Vietnamese in Latin Extended Additional, Azerbaijani ə in IPA Extensions)
-    return all(not ch.isalpha() or unicodedata.name(ch, "").startswith("LATIN ") for ch in s)
 
 
 def _stable_seed(*parts: object) -> int:
@@ -83,7 +77,8 @@ def benchmark_registry(
 
     def search(query: str, entry: Entity, query_type: str, seed: int) -> None:
         nonlocal hits, misses, top1, reciprocal_ranks
-        if not _latin(query):
+        # mangle() inserts Latin letters, so it can't simulate a typo in any other script
+        if not is_latin(query):
             return
         mangled = mangle(query, seed=seed)
         results = _timed(lambda: registry.search(mangled), latency["search"])
@@ -118,8 +113,8 @@ def benchmark_registry(
                 "name",
                 seed=_stable_seed(entry.id, i, "name"),
             )
-            # drawn from Latin-script aliases only, so a record with non-Latin aliases is still tested on one it can be typed by
-            aliases = [a for a in getattr(entry, "aliases", ()) if _latin(a)]
+            # drawn from Latin-script aliases only, so a record is never skipped for drawing one mangle() can't typo
+            aliases = [a for a in getattr(entry, "aliases", ()) if is_latin(a)]
             if aliases:
                 alias = random.Random(_stable_seed(entry.id, i)).choice(aliases)
                 search(alias, entry, "alias", seed=_stable_seed(entry.id, i, "alias"))

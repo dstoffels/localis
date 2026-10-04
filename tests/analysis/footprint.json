@@ -2091,5 +2091,96 @@
       "time_ms": 1611.839,
       "memory_bytes": 169918629
     }
+  },
+  "2026-10-04T02:15:24": {
+    "host": {
+      "os": "Linux 7.0.0-38-generic",
+      "machine": "x86_64",
+      "cpu": "11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz",
+      "cpu_count": 8,
+      "memory_total_bytes": 16015437824,
+      "python": "3.14.7",
+      "localis": "2.1.0"
+    },
+    "runs": 3,
+    "notes": null,
+    "registries": {
+      "countries": {
+        "dataset": {
+          "time_ms": 1.129,
+          "memory_bytes": 220600
+        },
+        "lookup_index": {
+          "time_ms": 0.336,
+          "memory_bytes": 41511
+        },
+        "filter_index": {
+          "time_ms": 0.887,
+          "memory_bytes": 121922
+        },
+        "search_index": {
+          "time_ms": 4.072,
+          "memory_bytes": 389468
+        },
+        "combined": {
+          "time_ms": 6.424,
+          "memory_bytes": 773501
+        }
+      },
+      "subdivisions": {
+        "dataset": {
+          "time_ms": 74.877,
+          "memory_bytes": 14871915
+        },
+        "lookup_index": {
+          "time_ms": 15.522,
+          "memory_bytes": 4546447
+        },
+        "filter_index": {
+          "time_ms": 114.311,
+          "memory_bytes": 11212438
+        },
+        "search_index": {
+          "time_ms": 60.356,
+          "memory_bytes": 12365319
+        },
+        "combined": {
+          "time_ms": 265.066,
+          "memory_bytes": 42996119
+        }
+      },
+      "cities": {
+        "dataset": {
+          "time_ms": 339.546,
+          "memory_bytes": 29483921
+        },
+        "lookup_index": {
+          "time_ms": 75.071,
+          "memory_bytes": 1910107
+        },
+        "filter_index": {
+          "time_ms": 731.106,
+          "memory_bytes": 50808202
+        },
+        "search_index": {
+          "time_ms": 195.227,
+          "memory_bytes": 43962480
+        },
+        "combined": {
+          "time_ms": 1340.95,
+          "memory_bytes": 126164710
+        }
+      }
+    },
+    "cities_threshold": {
+      "time_ms": 977.919,
+      "threshold": 15000,
+      "count": 34171,
+      "memory_bytes": 28839868
+    },
+    "full_cache": {
+      "time_ms": 1598.655,
+      "memory_bytes": 169918141
+    }
   }
 }

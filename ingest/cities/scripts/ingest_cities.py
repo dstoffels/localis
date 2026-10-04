@@ -7,9 +7,8 @@
 
 from .fetch_cities import fetch_cities_sources
 from .load_cities import load_cities
-from .dump_cities import dump
 from ingest.shared.scripts import load_countries, load_subdivisions
-from ingest.utils import ingest_log, commit_manifest, CITIES_MANIFEST_PATH
+from ingest.utils import ingest_log, commit_manifest, dump_registry, CITIES_MANIFEST_PATH
 from ingest.shared.models import SubdivisionModel, CountryModel, CityModel
 
 
@@ -33,7 +32,7 @@ def ingest_cities(
             subdivisions = load_subdivisions(countries)
 
         cities: list[CityModel] = load_cities(subdivisions, countries)
-        dump(cities)
+        dump_registry("cities", cities)
         commit_manifest(CITIES_MANIFEST_PATH)
         ingest_log.writeline(f"completed: {len(cities)} cities")
     finally:

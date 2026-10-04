@@ -8,10 +8,10 @@ class CountryRegistry(QueryableRegistry[Country]):
     REGISTRY_NAME = "countries"
     NAME_FIELDS = ("name", "official_name", "common_name", "aliases")
 
-    def __init__(self, macroregions: MacroregionRegistry, **kwargs):
+    def __init__(self, macroregions: MacroregionRegistry):
         self._include_historic = False
         self._macroregions = macroregions
-        super().__init__(**kwargs)
+        super().__init__()
 
     def build_cache(self) -> Mapping[int, CountryView]:
         macroregion_views = cast(Mapping[int, MacroregionView], self._macroregions._cache)

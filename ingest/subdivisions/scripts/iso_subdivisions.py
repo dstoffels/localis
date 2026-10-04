@@ -85,20 +85,15 @@ def load_iso_subs(
             aliases=[bracket_alias] if bracket_alias else [],
             geonames_code=None,  # may be set later if merged with GeoNames subdivision
             geonames_id=None,  # may be set later if merged with GeoNames subdivision
-            parent=parent_iso_code,  # temporarily set to iso_code string to map later once all iso subs are loaded
+            parent=None,
+            parent_iso_code=parent_iso_code,
         )
 
-        # set temporary id to hashid for later mapping
         subdivision.set_hashid()
-        assert subdivision.hashid is not None
-        subdivision.id = subdivision.hashid
 
         if admin_level == 0:
             non_administrative_subs.append(subdivision)
         else:
             iso_subs[iso_code] = subdivision
 
-    # parent stays as the raw iso_code string here; SubdivisionMap.refresh()
-    # resolves it to the actual object once merging/resolution has settled,
-    # since the object it should point to may be discarded during merge.
     return iso_subs, non_administrative_subs

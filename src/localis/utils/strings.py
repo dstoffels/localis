@@ -3,7 +3,8 @@ import re
 from functools import cache
 
 SPACE_RE = re.compile(r"\s+")
-# Latin letters NFKD doesn't decompose, keyed by casefolded form, and the modifier letters and punctuation found in the sources, folded to ASCII; ə (schwa) and ǝ (turned e) are distinct letters that both fold to a
+
+# Latin letters NFKD doesn't decompose, keyed by casefolded form, and the modifier letters and punctuation found in the sources, folded to ASCII. Bespoke rather than unidecode, which is GPL-2.0-or-later and so can't be a dependency of this MIT package.
 LATIN_FOLDS = str.maketrans(
     {
         "ı": "i",
@@ -73,13 +74,22 @@ SHORT_NAME_MAX = 7
 
 @cache
 def _is_latin(ch: str) -> bool:
+    """Whether ch is a Latin base an accent can sit on: a Latin letter, or any ASCII character."""
     return ch.isascii() or unicodedata.name(ch, "").startswith("LATIN ")
+
+
+def is_latin(s: str) -> bool:
+    """Whether every letter in s is Latin script; modifier letters such as the ʻokina count as Latin."""
+    return all(
+        not ch.isalpha()
+        or _is_latin(ch)
+        or unicodedata.name(ch, "").startswith("MODIFIER LETTER ")
+        for ch in s
+    )
 
 
 def normalize(s: str) -> str:
     """The casefolded comparison form of a string: Latin folded to ASCII, other scripts kept as written."""
-    if not isinstance(s, str):
-        return s
     if s.isascii():
         return SPACE_RE.sub(" ", s.lower()).strip()
 

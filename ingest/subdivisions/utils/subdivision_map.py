@@ -63,34 +63,34 @@ class SubdivisionMap:
             for sub in level_map.values()
         ]
 
-        # TODO: ensure subdivisions are sorted by admin level so level 2 subdivisions are processed after their level 1 parents
-        # all.sort(key=lambda s: s.admin_level)
-
         for id, sub in enumerate(all, start=1):
             sub.id = id
 
         return all
 
-    def refresh(self):
-        self._subs, self._by_geo_code, self._by_iso_code, self._by_geonames_id = (
-            {},
-            {},
-            {},
-            {},
-        )
-        for sub in self._by_id.values():
+    def refresh(self) -> None:
+        """Links every subdivision to its parent once merging has settled, then re-indexes the map under the final codes and levels."""
+        subs = list(self._by_id.values())
+        by_iso_code = {sub.iso_code: sub for sub in subs if sub.iso_code}
+        by_geo_code = {sub.geonames_code: sub for sub in subs if sub.geonames_code}
+
+        for sub in subs:
+            # the parent comes from the source that owns the record: ISO's for a sub with an iso_code, otherwise the GeoNames code one level up
+            if sub.iso_code is not None:
+                sub.parent = by_iso_code.get(sub.parent_iso_code) if sub.parent_iso_code else None
+            elif sub.geonames_code is not None and sub.geonames_code.count(".") == 2:
+                sub.parent = by_geo_code.get(sub.geonames_code.rsplit(".", 1)[0])
+            else:
+                sub.parent = None
+
+        for sub in subs:
             # a merged sub's admin_level is already ISO-authoritative; a pure GeoNames sub sits one below its parent, whose level is final either way (ISO-set if merged, 1 if not, since GeoNames never nests deeper)
             if sub.iso_code is None:
-                sub.admin_level = sub.parent.admin_level + 1 if isinstance(sub.parent, SubdivisionModel) else 1
-            self.add(sub)
+                sub.admin_level = sub.parent.admin_level + 1 if sub.parent else 1
 
-        # parent may still be a raw iso_code string (see load_iso_subs) if it was
-        # set before its target was merged into another object. Resolve it now
-        # against the final, authoritative map so it points at whatever object
-        # actually holds that iso_code.
-        for sub in self._by_id.values():
-            if isinstance(sub.parent, str):
-                sub.parent = self._by_iso_code.get(sub.parent)
+        self._subs, self._by_geo_code, self._by_iso_code, self._by_geonames_id = {}, {}, {}, {}
+        for sub in subs:
+            self.add(sub)
 
     def __len__(self):
         return len(self._by_id)

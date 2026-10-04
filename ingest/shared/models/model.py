@@ -1,8 +1,9 @@
 from dataclasses import dataclass, asdict
 import json
 from collections import defaultdict
-from typing import ClassVar
+from typing import ClassVar, Iterator
 from localis.utils.strings import search_trigrams, search_text, normalize, SHORT_NAME_MAX
+from localis.utils.data import resolve_field
 
 
 @dataclass(slots=True)
@@ -34,13 +35,13 @@ class Model:
     # all-digit lookup values go to the integer lookup index; False keeps them as strings (codes with leading zeros, like M49's "009")
     NUMERIC_LOOKUP: ClassVar[bool] = True
 
-    def extract_lookup_values(self):
+    def extract_lookup_values(self) -> Iterator[str]:
         """Used in processing to produce a normalized lookup index for each model from its LOOKUP_FIELDS."""
 
         for field in self.LOOKUP_FIELDS:
-            value: str = getattr(self, field)
+            value: str | int | None = getattr(self, field)
             if value:
-                yield normalize(value)
+                yield normalize(str(value))
 
     FILTER_FIELDS: ClassVar[dict[str, tuple[str, ...]]] = defaultdict(tuple)
     """Fields that can be used for filtering. Key is the filter name, value is a tuple of field names to search on."""
@@ -52,23 +53,16 @@ class Model:
         for param, field_names in self.FILTER_FIELDS.items():
             filter_values[param] = set()
             for field in field_names:
-                obj = self
-                value: str | list[str] | None = None
-                for nested in field.split("."):
-                    value = getattr(obj, nested)
-                    if value is None:
-                        break
-                    obj = value
-
+                value = resolve_field(self, field)
                 if isinstance(value, list):
                     for v in value:
                         filter_values[param].add(normalize(v))
 
                 elif value is not None:
-                    filter_values[param].add(normalize(value))
+                    filter_values[param].add(normalize(str(value)))
 
         return {
-            filter_name: sorted(values, key=str)
+            filter_name: sorted(values)
             for filter_name, values in filter_values.items()
         }
 
@@ -84,14 +78,7 @@ class Model:
     def _field_values(self, fields: tuple[str, ...]) -> list[str]:
         values: list[str] = []
         for field in fields:
-            obj = self
-            value: str | list[str] | None = None
-            for nested in field.split("."):
-                value = getattr(obj, nested, None)
-                if value is None:
-                    break
-                obj = value
-
+            value = resolve_field(self, field)
             if isinstance(value, list):
                 values.extend(value)
             elif value is not None:

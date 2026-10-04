@@ -1,5 +1,4 @@
 import re
-import unicodedata
 from typing import Iterable
 from localis.utils.strings import normalize
 
@@ -25,11 +24,6 @@ def name_key(name: str) -> str:
     """A comparison key under which spelling variants of one name are equal."""
     tokens = _NON_WORD_RE.sub(" ", normalize(name).replace("&", " and ")).split()
     return " ".join(_TOKEN_EQUIVALENTS.get(t, t) for t in tokens if t not in _FILLER_TOKENS)
-
-
-def is_latin(s: str) -> bool:
-    """Whether every letter in s is Latin script; modifier letters such as the ʻokina count as Latin."""
-    return all(not ch.isalpha() or unicodedata.name(ch, "").startswith(("LATIN ", "MODIFIER LETTER ")) for ch in s)
 
 
 def _fullness(s: str) -> tuple[int, int]:

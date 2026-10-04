@@ -1,20 +1,16 @@
 import bisect
 from array import array
 from pathlib import Path
-from localis.indexes.index import Index
 from localis.utils.strings import normalize
-from localis.utils.data import IndexFilterPredicate
 
 
-class LookupIndex(Index):
-    def load(
+class LookupIndex:
+    def __init__(
         self,
         filepath: Path,
         int_filepath: Path,
-        predicate: IndexFilterPredicate | None = None,
         allowed_ids: set[int] | None = None,
-    ):
-        ids = allowed_ids or set()
+    ) -> None:
         # ingest doesn't write an index with no keys, so a missing file is an empty index
         str_keys: list[str] = []
         str_vals = array("I")
@@ -23,7 +19,7 @@ class LookupIndex(Index):
                 for line in f:
                     key, id_ = line.rstrip("\n").split("\t")
                     id_int = int(id_)
-                    if predicate and not predicate(id_int, ids):
+                    if allowed_ids is not None and id_int not in allowed_ids:
                         continue
                     str_keys.append(key)
                     str_vals.append(id_int)
@@ -35,7 +31,7 @@ class LookupIndex(Index):
                 for line in f:
                     key, id_ = line.rstrip("\n").split("\t")
                     id_int = int(id_)
-                    if predicate and not predicate(id_int, ids):
+                    if allowed_ids is not None and id_int not in allowed_ids:
                         continue
                     int_keys.append(int(key))
                     int_vals.append(id_int)

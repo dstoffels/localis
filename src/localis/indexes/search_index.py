@@ -6,25 +6,25 @@ import csv
 import gzip
 from pathlib import Path
 from typing import Generic, Mapping, TypeVar
-from localis.utils.data import IndexFilterPredicate
 from rapidfuzz import fuzz, process
-from localis.indexes.index import Index
 from localis.entities import Entity
 from localis.views import View
 from localis.stores import Store
 from localis.utils.strings import search_text, search_trigrams, SHORT_NAME_MAX
+from localis.utils.data import resolve_field
 from collections import Counter
 
 T = TypeVar("T", bound=Entity)
 
 
-class SearchIndex(Index, Generic[T]):
+class SearchIndex(Generic[T]):
     def __init__(
         self,
         cache: Mapping[int, View[T, Store]],
-        filepath: Path,
-        **kwargs,
-    ):
+        data_path: Path,
+        name_fields: tuple[str, ...],
+        allowed_ids: set[int] | None = None,
+    ) -> None:
         self.cache = cache
         self.NOISE_THRESHOLD = 0.5
         # the share of a record's name score lost when none of the query outside its name fits its context
@@ -42,28 +42,13 @@ class SearchIndex(Index, Generic[T]):
         # how many of those closest names, per length, join the candidates, and the least ratio they need
         self.SHORT_MATCH_K = 20
         self.SHORT_MATCH_CUTOFF = 70
-        super().__init__(filepath, **kwargs)
-
-    def load(
-        self,
-        data_path: Path,
-        name_fields: tuple[str, ...],
-        predicate: IndexFilterPredicate | None = None,
-        allowed_ids: set[int] | None = None,
-    ):
         self.NAME_FIELDS = name_fields
-        self.canon = self._load_trigram_index(
-            data_path / "canon_index", predicate, allowed_ids or set()
-        )
-        self.short_names = self._load_short_names(data_path / "short_names.tsv.gz", predicate, allowed_ids or set())
-        self.context = self._load_trigram_index(
-            data_path / "context_index", predicate, allowed_ids or set()
-        )
+        self.canon = self._load_trigram_index(data_path / "canon_index", allowed_ids)
+        self.short_names = self._load_short_names(data_path / "short_names.tsv.gz", allowed_ids)
+        self.context = self._load_trigram_index(data_path / "context_index", allowed_ids)
 
     @staticmethod
-    def _load_short_names(
-        path: Path, predicate: IndexFilterPredicate | None, ids_allowed: set[int]
-    ) -> dict[int, tuple[list[str], array]]:
+    def _load_short_names(path: Path, allowed_ids: set[int] | None) -> dict[int, tuple[list[str], array]]:
         """The shipped short names and their record ids, by name length; empty for a registry that ships none."""
         by_length: dict[int, tuple[list[str], array]] = {}
         if not path.exists():
@@ -72,7 +57,7 @@ class SearchIndex(Index, Generic[T]):
             for line in f:
                 name, id_s = line.rstrip("\n").split("\t")
                 id = int(id_s)
-                if predicate and not predicate(id, ids_allowed):
+                if allowed_ids is not None and id not in allowed_ids:
                     continue
                 names, ids = by_length.setdefault(len(name), ([], array("I")))
                 names.append(name)
@@ -80,9 +65,7 @@ class SearchIndex(Index, Generic[T]):
         return by_length
 
     @staticmethod
-    def _load_trigram_index(
-        prefix: Path, predicate: IndexFilterPredicate | None, ids_allowed: set[int]
-    ) -> dict[str, array]:
+    def _load_trigram_index(prefix: Path, allowed_ids: set[int] | None) -> dict[str, array]:
         """One trigram index's posting lists by trigram; a missing index is empty."""
         index: dict[str, array] = {}
         blob_path = prefix.with_name(prefix.name + ".bin.gz")
@@ -103,10 +86,8 @@ class SearchIndex(Index, Generic[T]):
 
         for trigram, (offset, count) in offsets.items():
             trigram_ids = full_array[offset : offset + count]
-            if predicate:
-                trigram_ids = array(
-                    "I", (id for id in trigram_ids if predicate(id, ids_allowed))
-                )
+            if allowed_ids is not None:
+                trigram_ids = array("I", (id for id in trigram_ids if id in allowed_ids))
             index[trigram] = trigram_ids
         return index
 
@@ -184,11 +165,7 @@ class SearchIndex(Index, Generic[T]):
     def _raw_names(self, candidate: View[T, Store]):
         """Every value in the candidate's NAME_FIELDS, list fields such as aliases flattened."""
         for field_name in self.NAME_FIELDS:
-            value = candidate
-            for nested in field_name.split("."):
-                value = getattr(value, nested, None)
-                if value is None:
-                    break
+            value = resolve_field(candidate, field_name)
             for name in value if isinstance(value, (list, tuple)) else (value,):
                 if isinstance(name, str) and name:
                     yield name
