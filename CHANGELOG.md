@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Security
+
+- CI jobs that install or run project and third-party code no longer hold write tokens. Test is read-only, and its ingest check on `dev` fails instead of committing; `ingest.yaml` builds read-only and pushes its commits from a job running only git and `gh`; `release.yaml` builds read-only, publishes to PyPI from a job holding only `id-token: write`, then creates the GitHub release from one holding only `contents: write`
+- Every workflow action is pinned to a full commit SHA, with Dependabot proposing updates after a 7-day cooldown; a job's outputs reach later scripts as environment variables rather than pasted into them, the release jobs no longer restore uv's cache, and the GitHub release is created with `gh` instead of a third-party action
+- Release runs on push to `main` instead of on `workflow_run`, a trigger that runs with the default branch's privileges whatever started it, fork PRs included; `main` is no longer tested again after a merge, since its ruleset admits only PRs whose tests passed against an up-to-date `main`
+- The release build is reproducible: CI installs a pinned uv verified by checksum, and `uv build` takes hatchling and its dependencies only from hash-pinned build constraints; release tags can no longer be moved or deleted
+- SECURITY.md describes how to report a vulnerability privately, through the repository's Security tab
+
 ## [2.1.0] - 2026-10-03
 
 ### Upgrading from 2.0.0

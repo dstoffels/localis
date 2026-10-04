@@ -9,8 +9,7 @@ authors = [
 license = "MIT"
 keywords = [
   "country", "subdivision", "city", "macroregion", "region", "state", "province",
-  "iso", "3166", "iso-3166", "3166-1", "3166-2", "3166-3", "m49",
-  "geonames", "cldr", "wikidata", "geography", "geodata", "gazetteer", "offline", "fuzzy-search",
+  "iso", "3166", "iso-3166", "3166-1", "3166-2", "3166-3", "m49", "geocoding", "country codes", "geonames", "cldr", "wikidata", "geography", "geodata", "gazetteer", "offline", "fuzzy-search",
 ]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
@@ -55,6 +54,7 @@ test = { cmd = "pytest", help = "Run the test suite" }
 watch = { cmd = "ptw", help = "Re-run the tests on every change" }
 watch-fast = { cmd = "ptw -- --fast", help = "Re-run the tests on every change, skipping slow tests" }
 typecheck = { cmd = "pyright", help = "Type-check the project" }
+sync-main = { shell = "git pull --ff-only origin main && git push", help = "Fast-forward the checked-out branch to origin/main and push it" }
 
 [build-system]
 requires = ["hatchling"]
