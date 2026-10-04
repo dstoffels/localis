@@ -4,6 +4,7 @@ from localis.registries import (
     MacroregionRegistry,
     CurrencyRegistry,
     ScriptRegistry,
+    LanguageRegistry,
     CountryRegistry,
     SubdivisionRegistry,
     CityRegistry,
@@ -16,6 +17,7 @@ LOOKUP_VALUES_BY_REGISTRY = {
     MacroregionRegistry: lambda m: (m.code, m.name),
     CurrencyRegistry: lambda c: (c.alpha3, c.numeric),
     ScriptRegistry: lambda s: (s.alpha4, s.numeric),
+    LanguageRegistry: lambda l: (l.alpha3, l.alpha2, l.bibliographic),
     CountryRegistry: lambda c: (
         (c.historic.alpha_4,) if c.historic else (c.alpha2, c.alpha3, c.numeric)
     ),
@@ -28,9 +30,12 @@ NESTED_BY_REGISTRY = {
     MacroregionRegistry: lambda m: [(m.parent, localis.macroregions)],
     CurrencyRegistry: lambda c: [],
     ScriptRegistry: lambda s: [],
+    LanguageRegistry: lambda l: [(s, localis.scripts) for s in l.scripts],
     CountryRegistry: lambda c: [
         *((m, localis.macroregions) for m in (*c.macroregions, *c.groupings)),
         *((m, localis.currencies) for m in c.currencies),
+        *((l, localis.languages) for l in c.languages),
+        *((l.script, localis.scripts) for l in c.languages),
     ],
     SubdivisionRegistry: lambda s: [(s.parent, localis.subdivisions), (s.country, localis.countries)],
     CityRegistry: lambda c: [*((s, localis.subdivisions) for s in c.subdivisions), (c.country, localis.countries)],

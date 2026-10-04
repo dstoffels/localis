@@ -12,8 +12,8 @@ This document outlines the project plan for the Localis project, detailing the o
 Features currently in development, in build order:
 
 1. Currency (ISO 4217), see Currency, Language and Script below. Implemented 2026-10-04.
-2. Script (ISO 15924), see Currency, Language and Script below. Registry implemented 2026-10-04; `Language.scripts` comes with Language. Ahead of Language because a country's language links carry the script CLDR states them for.
-3. Language (ISO 639-3), see Currency, Language and Script below. Supersedes the old "implement native languages in countries" idea.
+2. Script (ISO 15924), see Currency, Language and Script below. Implemented 2026-10-04. Ahead of Language because a country's language links carry the script CLDR states them for.
+3. Language (ISO 639-3), see Currency, Language and Script below. Implemented 2026-10-04. Supersedes the old "implement native languages in countries" idea.
 
 The three close the honest gap identified against pycountry (which also covers ISO 4217, 639 and 15924), so they should ship before that comparison gets used as marketing material.
 
@@ -21,7 +21,7 @@ Out of scope: translated names. Localis ships names in Latin script only and doe
 
 ## Currency, Language and Script
 
-Status: scoped for 2.2.0; Currency and the Script registry implemented, Language next.
+Status: scoped for 2.2.0; implemented 2026-10-04.
 
 ### Principles
 
@@ -48,8 +48,12 @@ Decided 2026-10-04:
 - Special codes and the private-use markers ship as published, per the principle above.
 - No `Country.scripts`: neither source maps scripts to countries directly, and CLDR's `likelySubtags.json` `und-XX` entries are one likely default per territory (India: Devanagari only), not the scripts a country uses. A country's scripts come through `CountryLanguage.script`.
 
-Open, with Language:
-- Primary and secondary are relationship data, so `Language.scripts` would be `tuple[LanguageScript, ...]` with `LanguageScript(ScriptBase)` adding `primary: bool`, which makes `languages.filter(script=...)` match either.
+Language-script links, decided 2026-10-04 (built with Language):
+- `Language.scripts: tuple[LanguageScript, ...]`, with `LanguageScript(ScriptBase)` adding `secondary: bool`, CLDR's own rule from TR35: "If the language is not a modern language, or the script is not a modern script, then the `alt` attribute is set to secondary." Arabic in Syriac is secondary; Sanskrit, Coptic, Aramaic and seven other non-modern languages have only secondary scripts. Primary scripts first, each group in CLDR's order.
+- `languages.filter(script=...)` matches either, by the script's alpha4, name or alias, the same as other nested filters.
+- TR35 describes languageData as "used for consistency checking and testing" rather than reference data. It ships anyway, since CLDR is trusted across shipped and enterprise software and it is the only language-to-script source among ISO and CLDR; methodology's Known limitations states the caveat. Every script subtag in `territoryInfo.json` appears in that language's languageData scripts, so `CountryLanguage.script` never contradicts `Language.scripts`.
+- Coverage is CLDR's: 811 of the 7,923 languages have scripts, the rest ship `()`. Seven languages with an official status somewhere have no languageData entry (six Guatemalan Mayan languages and Senegal's Saafi-Saafi), so they have official `CountryLanguage` entries but no scripts.
+- Dependencies first: language rows store script ids and country rows store language and script ids, so the order is scripts, languages, countries; a rebuilt scripts or languages stage, or a changed `territoryInfo.json` (shared stage), rebuilds countries.
 
 ### Language
 
@@ -58,7 +62,7 @@ Decided 2026-10-04:
 - `lookup()` by `alpha3`, `alpha2` (639-1, 184 records) or `bibliographic` (639-2/B, 20 records); no bibliographic code collides with a 639-3 code.
 - `scope` and `type` ship spelled out as `Literal`s, as `MacroregionType` does: scope `"individual"`, `"macrolanguage"` or `"special"`; type `"living"`, `"extinct"`, `"historical"`, `"constructed"` or `"special"`. Both are filterable.
 - `inverted_name` ("Arabic, Algerian Saharan", 1,417 records) is a field and a search name.
-- No `common_name` field: iso-codes has one (Bangla). It and every CLDR English language name (`languages.json`) whose code resolves to the record are deduplicated into the record's `aliases`, including `-alt-` variants ("Azeri", "Pushto") and region- or script-qualified names ("British English" to English, "Hinglish" to Hindi).
+- No `common_name` field: iso-codes has one (Bangla). It and every CLDR English language name (`languages.json`) whose code resolves to the record are deduplicated into the record's `aliases`, including `-alt-` variants ("Azeri", "Pushto") and region- or script-qualified names ("British English" to English, "Hinglish" to Hindi). CLDR's `-menu-core`/`-menu-extension` entries are left out, since each is half of a menu label ("Kurdish" + "Central"), not a name.
 - `Country.languages: tuple[CountryLanguage, ...]`, where `LanguageBase` branches to both `Language` and `CountryLanguage`. `CountryLanguage` adds:
   - `status`: `"official"`, `"regional"` or `"de_facto"`, from CLDR's `official`, `official_regional` and `de_facto_official`; languages with no status aren't listed.
   - `population_percent`: CLDR's share of the country's population; shares overlap and can sum past 100 (Switzerland: German 76, English 45, French 39).

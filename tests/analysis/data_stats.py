@@ -75,6 +75,23 @@ def _script_stats() -> dict[str, int]:
     }
 
 
+def _language_stats() -> dict[str, int]:
+    all_languages = list(localis.languages)
+    current = [c for c in localis.countries if not c.historic]
+    entries = [l for c in current for l in c.languages]
+    return {
+        "total": len(all_languages),
+        "living": sum(1 for l in all_languages if l.type == "living"),
+        "macrolanguages": sum(1 for l in all_languages if l.scope == "macrolanguage"),
+        "with_alpha2": sum(1 for l in all_languages if l.alpha2),
+        "with_scripts": sum(1 for l in all_languages if l.scripts),
+        "with_aliases": sum(1 for l in all_languages if l.aliases),
+        "country_entries": len(entries),
+        "country_entries_with_script": sum(1 for l in entries if l.script),
+        "current_countries_without": sum(1 for c in current if not c.languages),
+    }
+
+
 def _subdivision_stats() -> dict[str, Any]:
     subs = list(localis.subdivisions)
     iso_merged = sum(1 for s in subs if s.iso_code and s.geonames_id is not None)
@@ -286,6 +303,10 @@ def _reconcile(stats: dict[str, Any]) -> None:
         raise AssertionError("data stats don't reconcile: " + "; ".join(failed))
 
 
+# the sections holding each registry's record count
+REGISTRY_STATS = ("macroregions", "currencies", "scripts", "languages", "countries", "subdivisions", "cities")
+
+
 def compute() -> dict[str, Any]:
     """Deterministic dataset statistics, reconciled against each other."""
     stats = {
@@ -293,6 +314,7 @@ def compute() -> dict[str, Any]:
         "countries": _country_stats(),
         "currencies": _currency_stats(),
         "scripts": _script_stats(),
+        "languages": _language_stats(),
         "subdivisions": _subdivision_stats(),
         "resolution": _resolution_stats(),
         "wikidata": _wikidata_stats(),
@@ -300,6 +322,7 @@ def compute() -> dict[str, Any]:
         "filter_index": _filter_index_stats(),
         "shipped_size": _shipped_size_stats(),
     }
+    stats["totals"] = {"records": sum(stats[name]["total"] for name in REGISTRY_STATS)}
     _reconcile(stats)
     return stats
 

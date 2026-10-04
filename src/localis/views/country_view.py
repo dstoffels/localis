@@ -1,16 +1,18 @@
 from pathlib import Path
-from typing import Mapping
-from localis.entities import Country, CountryBase, CurrencyBase, HistoricInfo, MacroregionBase
+from typing import Mapping, cast
+from localis.entities import Country, CountryBase, CountryLanguage, CurrencyBase, HistoricInfo, LanguageStatus, MacroregionBase
 from localis.stores import CountryStore
 from .view import View, ViewMap
 from .macroregion_view import MacroregionView
 from .currency_view import CurrencyView
+from .language_view import LanguageView
+from .script_view import ScriptView
 
 
 class CountryView(View[Country, CountryStore]):
-    """Runtime view over CountryStore, used by Registry._cache; resolves its macroregions and currencies against their view mappings."""
+    """Runtime view over CountryStore, used by Registry._cache; resolves its macroregions, currencies, languages and their scripts against their view mappings."""
 
-    __slots__ = ("_macroregion_views", "_currency_views")
+    __slots__ = ("_macroregion_views", "_currency_views", "_language_views", "_script_views")
 
     def __init__(
         self,
@@ -18,10 +20,14 @@ class CountryView(View[Country, CountryStore]):
         store: CountryStore,
         macroregion_views: Mapping[int, MacroregionView],
         currency_views: Mapping[int, CurrencyView],
+        language_views: Mapping[int, LanguageView],
+        script_views: Mapping[int, ScriptView],
     ):
         super().__init__(id, store)
         self._macroregion_views = macroregion_views
         self._currency_views = currency_views
+        self._language_views = language_views
+        self._script_views = script_views
 
     @property
     def name(self) -> str:
@@ -81,6 +87,24 @@ class CountryView(View[Country, CountryStore]):
     def currencies(self) -> tuple[CurrencyBase, ...]:
         return tuple(self._currency_views[i].to_base() for i in self._store.currency_ids[self._idx])
 
+    @property
+    def languages(self) -> tuple[CountryLanguage, ...]:
+        entries = []
+        for language_id, status, percent, script_id in self._store.languages[self._idx]:
+            language = self._language_views[language_id]
+            entries.append(
+                CountryLanguage(
+                    id=language.id,
+                    name=language.name,
+                    alpha3=language.alpha3,
+                    alpha2=language.alpha2,
+                    status=cast(LanguageStatus, status),
+                    population_percent=percent,
+                    script=self._script_views[script_id].to_base() if script_id != -1 else None,
+                )
+            )
+        return tuple(entries)
+
     def to_base(self) -> CountryBase:
         return CountryBase(id=self.id, name=self.name, alpha2=self.alpha2, alpha3=self.alpha3, geonames_id=self.geonames_id)
 
@@ -100,11 +124,17 @@ class CountryView(View[Country, CountryStore]):
             macroregions=self.macroregions,
             groupings=self.groupings,
             currencies=self.currencies,
+            languages=self.languages,
         )
 
     @classmethod
     def load(
-        cls, filepath: Path, macroregion_views: Mapping[int, MacroregionView], currency_views: Mapping[int, CurrencyView]
+        cls,
+        filepath: Path,
+        macroregion_views: Mapping[int, MacroregionView],
+        currency_views: Mapping[int, CurrencyView],
+        language_views: Mapping[int, LanguageView],
+        script_views: Mapping[int, ScriptView],
     ) -> ViewMap["CountryView"]:
         store = CountryStore()
         idx = 0
@@ -125,6 +155,7 @@ class CountryView(View[Country, CountryStore]):
                     macroregions_s,
                     groupings_s,
                     currencies_s,
+                    languages_s,
                 ) = row
                 alias_list = tuple(a for a in alias_s.split("|") if a)
                 geonames_id = int(geonames_id_s) if geonames_id_s else None
@@ -133,6 +164,7 @@ class CountryView(View[Country, CountryStore]):
                 macroregion_ids = tuple(int(i) for i in macroregions_s.split("|") if i)
                 grouping_ids = tuple(int(i) for i in groupings_s.split("|") if i)
                 currency_ids = tuple(int(i) for i in currencies_s.split("|") if i)
+                languages = tuple(cls._parse_language(item) for item in languages_s.split("|") if item)
                 store.id_to_idx.append(idx)
                 store.append(
                     name,
@@ -148,9 +180,15 @@ class CountryView(View[Country, CountryStore]):
                     macroregion_ids,
                     grouping_ids,
                     currency_ids,
+                    languages,
                 )
                 idx += 1
-        return ViewMap(store, lambda id: cls(id, store, macroregion_views, currency_views))
+        return ViewMap(store, lambda id: cls(id, store, macroregion_views, currency_views, language_views, script_views))
+
+    @staticmethod
+    def _parse_language(item: str) -> tuple[int, str, float | None, int]:
+        language_id, status, percent, script_id = item.split(":")
+        return int(language_id), status, float(percent) if percent else None, int(script_id) if script_id else -1
 
     @staticmethod
     def _parse_historic(s: str) -> HistoricInfo | None:

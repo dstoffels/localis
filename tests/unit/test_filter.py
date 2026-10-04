@@ -5,6 +5,7 @@ from localis.registries import (
     QueryableRegistry,
     CurrencyRegistry,
     ScriptRegistry,
+    LanguageRegistry,
     CountryRegistry,
     SubdivisionRegistry,
     CityRegistry,
@@ -21,15 +22,35 @@ def _country_values(country_id: int) -> tuple:
     return (c.name, c.common_name, c.alpha2, c.alpha3, c.numeric)
 
 
+def _script_values(script_id: int) -> tuple:
+    # the LanguageScript nested in languages lacks aliases, so read the full script
+    s = localis.scripts.get(script_id)
+    assert s is not None
+    return (s.alpha4, s.name, *s.aliases)
+
+
+def _language_values(language_id: int) -> tuple:
+    # the CountryLanguage nested in countries lacks bibliographic, so read the full language
+    l = localis.languages.get(language_id)
+    assert l is not None
+    return (l.name, l.alpha3, l.alpha2, l.bibliographic)
+
+
 # Explicit per-registry callbacks returning every value a filter kwarg indexes for an entity, mirroring each model's FILTER_FIELDS.
 FILTER_VALUES_BY_REGISTRY = {
     CurrencyRegistry: {},
     ScriptRegistry: {},
+    LanguageRegistry: {
+        "scope": lambda l: (l.scope,),
+        "type": lambda l: (l.type,),
+        "script": lambda l: tuple(v for s in l.scripts for v in _script_values(s.id)),
+    },
     CountryRegistry: {
         "macroregion": lambda c: tuple(
             v for m in (*c.macroregions, *c.groupings) for v in (m.name, m.code)
         ),
         "currency": lambda c: tuple(v for m in c.currencies for v in (m.name, m.alpha3)),
+        "language": lambda c: tuple(v for l in c.languages for v in _language_values(l.id)),
     },
     SubdivisionRegistry: {
         "type": lambda s: (s.type,),

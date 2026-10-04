@@ -14,14 +14,15 @@ from tests.analysis.host import host_fingerprint
 ROOT = Path(__file__).resolve().parents[2]
 OUTPUT_PATH = Path(__file__).with_name("footprint.json")
 POPULATION_THRESHOLD = 15_000
-REGISTRIES = ("macroregions", "currencies", "scripts", "countries", "subdivisions", "cities")
+REGISTRIES = ("macroregions", "currencies", "scripts", "languages", "countries", "subdivisions", "cities")
 COMPONENTS = {"dataset": "_cache", "lookup_index": "_lookup_index", "filter_index": "_filter_index", "search_index": "_search_index"}
 # a registry's views reference the registries before it, so their datasets load first and stay out of its measurement
 DEPENDENCIES = {
     "macroregions": (),
     "currencies": (),
     "scripts": (),
-    "countries": ("macroregions", "currencies"),
+    "languages": ("scripts",),
+    "countries": ("macroregions", "currencies", "languages"),
     "subdivisions": ("countries",),
     "cities": ("countries", "subdivisions"),
 }
@@ -112,11 +113,20 @@ def measure(runs: int, notes: str | None) -> dict[str, Any]:
             "memory_bytes": sum(c["memory_bytes"] for c in components.values()),
         }
         registries[name] = components
+    # each registry's row leaves out the datasets it references, so summing the rows counts every dataset once
+    totals = {
+        component: {
+            "time_ms": round(sum(r[component]["time_ms"] for r in registries.values() if component in r), 3),
+            "memory_bytes": sum(r[component]["memory_bytes"] for r in registries.values() if component in r),
+        }
+        for component in (*COMPONENTS, "combined")
+    }
     return {
         "host": host_fingerprint(),
         "runs": runs,
         "notes": notes,
         "registries": registries,
+        "totals": totals,
         "cities_threshold": _median_runs("cities_threshold", runs),
         "full_cache": _median_runs("full_cache", runs),
     }

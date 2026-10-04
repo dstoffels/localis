@@ -1,10 +1,10 @@
 import random
 import string
-from localis import macroregions, currencies, scripts, countries, subdivisions, cities
+from localis import macroregions, currencies, scripts, languages, countries, subdivisions, cities
 import pytest
 
-REGISTRIES = [macroregions, currencies, scripts, countries, subdivisions, cities]
-QUERYABLE_REGISTRIES = [currencies, scripts, countries, subdivisions, cities]
+REGISTRIES = [macroregions, currencies, scripts, languages, countries, subdivisions, cities]
+QUERYABLE_REGISTRIES = [currencies, scripts, languages, countries, subdivisions, cities]
 
 registry_param = pytest.mark.parametrize(
     "registry", REGISTRIES, ids=lambda r: type(r).__name__

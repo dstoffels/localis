@@ -24,6 +24,17 @@
     "total": 226,
     "with_aliases": 69
   },
+  "languages": {
+    "total": 7923,
+    "living": 7078,
+    "macrolanguages": 63,
+    "with_alpha2": 184,
+    "with_scripts": 811,
+    "with_aliases": 117,
+    "country_entries": 492,
+    "country_entries_with_script": 20,
+    "current_countries_without": 4
+  },
   "subdivisions": {
     "non_administrative": {
       "countries": 9,
@@ -148,12 +159,16 @@
       "single_record_values": 216663
     },
     "countries": {
-      "values": 1502,
-      "single_record_values": 1396
+      "values": 2097,
+      "single_record_values": 1842
     },
     "currencies": {
       "values": 177,
       "single_record_values": 176
+    },
+    "languages": {
+      "values": 9761,
+      "single_record_values": 9648
     },
     "scripts": {
       "values": 298,
@@ -165,10 +180,10 @@
     }
   },
   "shipped_size": {
-    "total": 52420432,
+    "total": 53373102,
     "cities": {
       "total": 41962895,
-      "share_pct": 80.1,
+      "share_pct": 78.6,
       "files": {
         "canon_index.bin.gz": 4968397,
         "canon_index_offsets.tsv": 166585,
@@ -182,14 +197,14 @@
       }
     },
     "countries": {
-      "total": 114733,
-      "share_pct": 0.2,
+      "total": 138631,
+      "share_pct": 0.3,
       "files": {
         "canon_index.bin.gz": 10029,
         "canon_index_offsets.tsv": 22159,
-        "countries.tsv": 30918,
-        "filter_index.bin.gz": 3466,
-        "filter_index_offsets.tsv": 41073,
+        "countries.tsv": 40760,
+        "filter_index.bin.gz": 4668,
+        "filter_index_offsets.tsv": 53927,
         "lookup_index_int.tsv": 1852,
         "lookup_index_str.tsv": 3813,
         "short_names.tsv.gz": 1423
@@ -207,6 +222,19 @@
         "lookup_index_int.tsv": 1299,
         "lookup_index_str.tsv": 1316,
         "short_names.tsv.gz": 293
+      }
+    },
+    "languages": {
+      "total": 928772,
+      "share_pct": 1.7,
+      "files": {
+        "canon_index.bin.gz": 153824,
+        "canon_index_offsets.tsv": 65336,
+        "filter_index.bin.gz": 54065,
+        "filter_index_offsets.tsv": 226122,
+        "languages.tsv": 331677,
+        "lookup_index_str.tsv": 71829,
+        "short_names.tsv.gz": 25919
       }
     },
     "macroregions": {
@@ -233,7 +261,7 @@
     },
     "subdivisions": {
       "total": 10279248,
-      "share_pct": 19.6,
+      "share_pct": 19.3,
       "files": {
         "canon_index.bin.gz": 1701073,
         "canon_index_offsets.tsv": 141575,
@@ -246,5 +274,8 @@
         "subdivisions.tsv": 3094702
       }
     }
+  },
+  "totals": {
+    "records": 296270
   }
 }

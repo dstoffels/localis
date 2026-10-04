@@ -7,6 +7,13 @@ from .entities import (
     CurrencyBase,
     Script,
     ScriptBase,
+    LanguageScript,
+    Language,
+    LanguageBase,
+    CountryLanguage,
+    LanguageScope,
+    LanguageType,
+    LanguageStatus,
     Country,
     CountryBase,
     HistoricInfo,
@@ -17,6 +24,7 @@ from .entities import (
 from .registries.macroregion_registry import macroregions
 from .registries.currency_registry import currencies
 from .registries.script_registry import scripts
+from .registries.language_registry import languages
 from .registries.country_registry import countries
 from .registries.subdivision_registry import subdivisions
 from .registries.city_registry import cities

@@ -16,3 +16,9 @@ class ScriptBase(Entity):
 class Script(ScriptBase):
     numeric: int | None
     aliases: tuple[str, ...]
+
+
+@dataclass(slots=True)
+class LanguageScript(ScriptBase):
+    # CLDR's rule: the language or the script isn't modern
+    secondary: bool

@@ -88,6 +88,7 @@ ingest/*/inputs/*
 !ingest/macroregions/inputs/macroregions.manifest.json
 !ingest/currencies/inputs/currencies.manifest.json
 !ingest/scripts/inputs/scripts.manifest.json
+!ingest/languages/inputs/languages.manifest.json
 !ingest/countries/inputs/countries.manifest.json
 !ingest/countries/inputs/name_blocklist.json
 !ingest/countries/inputs/wikidata_country_names.json

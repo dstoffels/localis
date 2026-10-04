@@ -17,6 +17,7 @@ class CountryStore(Store):
         "macroregion_ids",
         "grouping_ids",
         "currency_ids",
+        "languages",
     )
 
     def __init__(self):
@@ -34,6 +35,8 @@ class CountryStore(Store):
         self.macroregion_ids: list[tuple[int, ...]] = []
         self.grouping_ids: list[tuple[int, ...]] = []
         self.currency_ids: list[tuple[int, ...]] = []
+        # (language id, status, population_percent, script id or -1) per entry
+        self.languages: list[tuple[tuple[int, str, float | None, int], ...]] = []
 
     def append(
         self,
@@ -50,6 +53,7 @@ class CountryStore(Store):
         macroregion_ids: tuple[int, ...],
         grouping_ids: tuple[int, ...],
         currency_ids: tuple[int, ...],
+        languages: tuple[tuple[int, str, float | None, int], ...],
     ) -> None:
         self.names.append(name)
         self.alpha2s.append(alpha2)
@@ -64,3 +68,4 @@ class CountryStore(Store):
         self.macroregion_ids.append(macroregion_ids)
         self.grouping_ids.append(grouping_ids)
         self.currency_ids.append(currency_ids)
+        self.languages.append(languages)

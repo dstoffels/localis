@@ -1,8 +1,8 @@
 from typing import Mapping, cast
 from localis.entities import Country
 from localis.indexes import Missing
-from localis.views import CountryView, MacroregionView, CurrencyView
-from localis.registries import QueryableRegistry, MacroregionRegistry, CurrencyRegistry
+from localis.views import CountryView, MacroregionView, CurrencyView, LanguageView, ScriptView
+from localis.registries import QueryableRegistry, MacroregionRegistry, CurrencyRegistry, ScriptRegistry, LanguageRegistry
 from localis.registries.registry import locked_cached_property
 
 
@@ -11,16 +11,22 @@ class CountryRegistry(QueryableRegistry[Country]):
     NAME_FIELDS = ("name", "official_name", "common_name", "aliases")
     _CACHED_ATTRS = QueryableRegistry._CACHED_ATTRS + ("_historic_ids",)
 
-    def __init__(self, macroregions: MacroregionRegistry, currencies: CurrencyRegistry):
+    def __init__(
+        self, macroregions: MacroregionRegistry, currencies: CurrencyRegistry, scripts: ScriptRegistry, languages: LanguageRegistry
+    ):
         self._include_historic = False
         self._macroregions = macroregions
         self._currencies = currencies
+        self._scripts = scripts
+        self._languages = languages
         super().__init__()
 
     def build_cache(self) -> Mapping[int, CountryView]:
         macroregion_views = cast(Mapping[int, MacroregionView], self._macroregions._cache)
         currency_views = cast(Mapping[int, CurrencyView], self._currencies._cache)
-        return CountryView.load(self._data_filepath, macroregion_views, currency_views)
+        language_views = cast(Mapping[int, LanguageView], self._languages._cache)
+        script_views = cast(Mapping[int, ScriptView], self._scripts._cache)
+        return CountryView.load(self._data_filepath, macroregion_views, currency_views, language_views, script_views)
 
     @locked_cached_property
     def _historic_ids(self) -> frozenset[int]:
@@ -45,10 +51,11 @@ class CountryRegistry(QueryableRegistry[Country]):
         limit: int | None = None,
         macroregion: str | Missing | None = None,
         currency: str | Missing | None = None,
+        language: str | Missing | None = None,
         **kwargs,
     ) -> list[Country]:
-        """Filter countries by any of its names (name, official_name, common_name, or aliases), a macroregion (region, subregion or grouping, by name or code) or a currency (by name or alpha3); MISSING matches countries with none. Excludes historic entries unless include_historic is set."""
-        kwargs.update(macroregion=macroregion, currency=currency)
+        """Filter countries by any of its names (name, official_name, common_name, or aliases), a macroregion (region, subregion or grouping, by name or code), a currency (by name or alpha3) or an official language (by name, alpha3, alpha2 or bibliographic code); MISSING matches countries with none. Excludes historic entries unless include_historic is set."""
+        kwargs.update(macroregion=macroregion, currency=currency, language=language)
         return super().filter(name=name, limit=limit, **kwargs)
 
     def search(
@@ -68,5 +75,7 @@ class CountryRegistry(QueryableRegistry[Country]):
 # --------- Singleton --------- #
 from localis.registries.macroregion_registry import macroregions
 from localis.registries.currency_registry import currencies
+from localis.registries.script_registry import scripts
+from localis.registries.language_registry import languages
 
-countries = CountryRegistry(macroregions=macroregions, currencies=currencies)
+countries = CountryRegistry(macroregions=macroregions, currencies=currencies, scripts=scripts, languages=languages)

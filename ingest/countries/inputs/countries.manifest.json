@@ -3,5 +3,6 @@
   "geonames_countries.txt": "\"7bbe-65cbdf8c308d5\"",
   "iso_3166-3.json": "W/\"9c9723ac0a39efcdad3b859dba23fa6c-gzip\"",
   "geonamesInfo.txt": "\"7bbe-65cfb88f8532a\"",
-  "cldr_currency_data.json": "\"c583862c57dbed9fd8f18682d05ae7d36de9dc8e5bfe56815c696be9f2a72a80\""
+  "cldr_currency_data.json": "\"c583862c57dbed9fd8f18682d05ae7d36de9dc8e5bfe56815c696be9f2a72a80\"",
+  "cldr_territory_info.json": "\"8c6146cae002a8b99dabd61010f70745716edd940dba4a9b90758ea597dbeff1\""
 }
