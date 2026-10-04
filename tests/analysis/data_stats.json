@@ -47,7 +47,7 @@
     "above_threshold": 34171
   },
   "shipped_size": {
-    "total": 59711917,
+    "total": 59716409,
     "cities": {
       "total": 49443186,
       "share_pct": 82.8,
@@ -63,16 +63,16 @@
       }
     },
     "countries": {
-      "total": 98066,
+      "total": 102558,
       "share_pct": 0.2,
       "files": {
-        "canon_index.bin.gz": 9591,
-        "canon_index_offsets.tsv": 21477,
-        "countries.tsv": 28372,
-        "filter_index.tsv": 31588,
+        "canon_index.bin.gz": 10029,
+        "canon_index_offsets.tsv": 22159,
+        "countries.tsv": 30025,
+        "filter_index.tsv": 33257,
         "lookup_index_int.tsv": 1852,
         "lookup_index_str.tsv": 3813,
-        "short_names.tsv.gz": 1373
+        "short_names.tsv.gz": 1423
       }
     },
     "macroregions": {

@@ -40,12 +40,13 @@
     "Manx": "demonym",
     "I. M.": "map-label abbreviation"
   },
-  "AN": {
+  "ANHH": {
     "Dutch Antillean": "demonym",
     "Netherlands Antillean": "demonym",
     "Netherlands Antilleans": "demonym",
     "Netherland Antillies": "misspelling"
   },
+  "SUHH": { "Soviets": "demonym" },
   "CI": { "Cote d'lvoire": "misspelling (lowercase L for I)" },
   "CO": { "Colombiá": "misspelling" },
   "CW": {

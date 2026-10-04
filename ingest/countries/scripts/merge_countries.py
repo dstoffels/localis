@@ -7,6 +7,7 @@ from localis.utils.strings import is_latin
 from ingest.shared.models import CountryModel
 from .fetch_countries import GEONAMES_COUNTRIES_DEST
 from .load_historic_countries import historic_by_alpha2
+from .wikidata_countries import CountryNames
 
 _LEADING_THE_RE = re.compile(r"^the\s+", re.IGNORECASE)
 _SUBDIVISION_CODE_RE = re.compile(r"^[A-Z]{2}-[A-Z0-9]{1,3}$")
@@ -32,27 +33,22 @@ def _wikidata_alias(raw: str, iso_codes: set[str], item_codes: frozenset[str] | 
 
 
 def _load_blocklist() -> dict[str, set[str]]:
-    """Names that pass the filters but aren't names of the country (nicknames, demonyms, misspellings, stray codes), keyed by alpha-2; each entry's reason is recorded in the file."""
+    """Names that pass the filters but aren't names of the country (nicknames, demonyms, misspellings, stray codes), keyed by alpha-2, or alpha-4 for a historic entry; each entry's reason is recorded in the file."""
     blocklist: dict[str, dict[str, str]] = json.loads(NAME_BLOCKLIST_PATH.read_text(encoding="utf-8"))
     return {alpha2: {name_key(name) for name in names} for alpha2, names in blocklist.items()}
 
 
-def merge_wikidata(countries: dict[str, CountryModel], country_names: dict[str, dict[str, list[str]]]) -> None:
-    """Adds each country's Wikidata names as aliases."""
+def merge_wikidata(countries: dict[str, CountryModel], country_names: CountryNames) -> None:
+    """Adds each country's Wikidata names as aliases, matched by the key it's stored under: alpha-2 for a current country, alpha-4 for a historic one."""
     ingest_log.writeline("Merging Wikidata country names...")
     iso_codes = {code for c in countries.values() for code in (c.alpha2, c.alpha3) if code}
     blocklist = _load_blocklist()
-    # historic entries are keyed by alpha_4; one is matched by its former alpha-2 only where no current country or other historic entry shares it
-    historic_entries = historic_by_alpha2(countries)
 
-    for alpha2, entry in country_names.items():
-        country = countries.get(alpha2)
-        if country is None:
-            historic = historic_entries.get(alpha2, [])
-            country = historic[0] if len(historic) == 1 else None
+    for code, entry in country_names.items():
+        country = countries.get(code)
         if country is None:
             continue
-        blocked = blocklist.get(alpha2, set())
+        blocked = blocklist.get(code, set())
         for name in entry["names"]:
             alias = _wikidata_alias(name, iso_codes, set(entry["codes"]))
             if alias and name_key(alias) not in blocked:

@@ -26,7 +26,8 @@ def ingest_countries(macroregions: Macroregions | None = None, force: bool = Fal
         countries = init_iso_countries()
         countries = init_historic_countries(countries)
         merge_geonames(countries)
-        merge_wikidata(countries, fetch_wikidata_country_names())
+        current_alpha2s = {c.alpha2 for c in countries.values() if not c.historic}
+        merge_wikidata(countries, fetch_wikidata_country_names(current_alpha2s))
         drop_ambiguous_aliases(countries)
         # curated, GeoNames and Wikidata aliases overlap, so normalize whitespace and dedupe once every source has been merged
         for country in countries.values():

@@ -28,9 +28,38 @@ Blocked on the above, needs a dedicated design pass before implementation starts
 7. Macroregion filters on subdivisions and cities (`cities.filter(macroregion="Europe")`), at the cost of another filter column on the largest dataset; deferred until there's demand. The macroregions design is recorded in `methodology.md` (sources, naming, placement rules) and `dev.md`.
 8. Pin the CLDR version shared by `cldr_territory_info.json` (shared stage) and the macroregions inputs, which each fetch CLDR's `main` and could land on different CLDR commits in one run.
 9. Split cities from the core package (`localis` with macroregions, countries and subdivisions, about 11MB installed; cities as an extra backed by a separate data package, about 49MB). Deferred until users report package size as a problem. City rows store country and subdivision ids that are only valid against the exact core data they were built with, so the two would release in lockstep from one ingest run with an exact-version pin, which removes most of the usual benefit of a split.
-10. Wikidata provenance. Every downloaded source's ETag is committed in its stage's manifest, so a localis version can be traced to the exact source files it was built from, but the two Wikidata queries (country names for country aliases, and the ISO 3166-2 to GeoNames crosswalk for subdivisions) aren't. They run live on every rebuild of their stage, so a rebuild can ship different data with no source marked as changed, and a Wikidata edit on its own never triggers a rebuild. Both results are already written to `inputs/` (`wikidata_country_names.json`, about 50 KB, and `wikidata_crosswalk.json`, about 100 KB) but are gitignored and fingerprinted nowhere. Options: commit both files, so each version records the Wikidata state it shipped and a diff shows what changed; or record a hash of each result in its stage's manifest like `resolution_map`'s fingerprint, so a changed result counts as a changed source and rebuilds the stage. The two combine: the hash drives the rebuild and the committed file explains it. Wikidata has no ETag, so the query runs every refresh either way; the open question is whether the monthly cron should rebuild on a Wikidata change alone.
-11. Historic countries are found only by their full ISO 3166-3 name. iso-codes gives each a single `name` ("Czechoslovakia, Czechoslovak Socialist Republic"), so a search for "Czechoslovakia" ranks Slovakia first even with `include_historic` set. Wikidata aliases reach a historic entry only when its former alpha-2 belongs to no other entry, which excludes `CS` (Czechoslovakia and Serbia and Montenegro both held it); pycountry has the same gap open as an issue. Revisit with item 10, matching historic entries to Wikidata items by their own identity rather than by the reused code.
-12. Population range filters on cities, `cities.filter(population__gt=..., population__lt=...)`, removed as a commented-out stub from `CityRegistry.filter()` during the code review cleanup. The filter index only holds exact values, so a range needs its own path, such as a scan over `CityStore.populations` or a population-sorted id array searched with `bisect`.
+10. Population range filters on cities, `cities.filter(population__gt=..., population__lt=...)`, removed as a commented-out stub from `CityRegistry.filter()` during the code review cleanup. The filter index only holds exact values, so a range needs its own path, such as a scan over `CityStore.populations` or a population-sorted id array searched with `bisect`.
+
+## Wikidata provenance
+
+Every downloaded source's ETag is committed in its stage's manifest, so a localis version traces back to the exact files it was built from. The two Wikidata queries don't: the country names query (aliases for current and historic countries) and the ISO 3166-2 to GeoNames crosswalk (subdivision merges) run live whenever their stage rebuilds, so a rebuild can ship different Wikidata data with no source marked changed, and a Wikidata edit on its own never triggers a rebuild. Both results are written to `inputs/` (`wikidata_country_names.json`, about 50 KB, and `wikidata_crosswalk.json`, about 100 KB) but are gitignored and fingerprinted nowhere. For subdivisions the effect is already tracked, since the committed `resolution_map.json` records every `wikidata_merge`; the raw input and the rebuild trigger are what's missing.
+
+### Provenance
+
+Both raw results are committed, and each stage's manifest records a hash of its result, like the `resolution_map` fingerprint. The hash makes a changed result count as a changed source, so the monthly run rebuilds the stage on a Wikidata change alone. The committed file records which Wikidata state each version shipped, and its diff in the ingest PR shows what Wikidata changed, next to the shipped data it changed.
+
+### Subdivision crosswalk
+
+Wikidata merges run before automerge and apply unreviewed, so a change to the crosswalk can relink a subdivision silently. Three kinds of change:
+
+1. A mapping moves to a different GeoNames record. Today the subdivision is relinked silently; this is the case that needs a gate.
+2. A mapping appears for a code that automerge or a skill decision had resolved. Skill decisions are covered already: `flag_wikidata_conflicts()` sends one that disagrees back as a `wikidata_conflict` orphan. An automerge result is replaced silently.
+3. A mapping disappears. The code falls through to automerge, which merges or orphans it, so this needs nothing new.
+
+Wikidata agrees with independent checks over 99% of the time and most edits are corrections, so orphaning every change would be noise. A changed or new mapping is accepted when automerge's own scoring would pick the same record (the corroboration tier of the audit design), and otherwise becomes an orphan in a new `wikidata_changed` bucket carrying the previous and new targets, like `wikidata_conflict`. The existing orphan gate then holds the release until the skill reviews it. The previous mapping comes from the committed `wikidata_merge`.
+
+### Country names
+
+Country names have no merge to review: a change adds or removes aliases, which already shows as a diff of the committed `countries.tsv` in the ingest PR, and with the raw result committed its diff shows the cause beside the effect. The PR review is the escalation, and `name_blocklist.json` is the fix for a bad alias.
+
+### Result guard
+
+The likelier failure than a bad edit is a degraded response: the Wikidata Query Service can return a valid but partial result instead of an error, which today would drop hundreds of aliases or send hundreds of subdivisions to automerge. With the previous result committed, ingest compares the two and fails, without applying the new one, when a result loses more than a threshold share of its codes.
+
+### Open questions
+
+- The guard's threshold: 5% fewer codes is a starting point, to be checked against how much the results move month to month.
+- What counts as corroboration for a crosswalk change: automerge's top candidate qualifying for the new target, or the new target merely qualifying.
 
 ## Localization (gettext-based name translation)
 
