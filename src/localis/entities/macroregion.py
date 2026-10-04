@@ -10,6 +10,11 @@ class MacroregionBase(Entity):
     code: str
     type: MacroregionType
 
+    @property
+    def key(self) -> str:
+        """The stable reference to store instead of id, resolved by macroregions.lookup(): the CLDR code."""
+        return self.code
+
 
 @dataclass(slots=True)
 class Macroregion(MacroregionBase):

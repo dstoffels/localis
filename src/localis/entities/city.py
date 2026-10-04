@@ -12,3 +12,8 @@ class City(Entity):
     population: int
     lat: float
     lng: float
+
+    @property
+    def key(self) -> int:
+        """The stable reference to store instead of id, resolved by cities.lookup(): the GeoNames ID."""
+        return self.geonames_id

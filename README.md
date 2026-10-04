@@ -74,13 +74,15 @@ macroregion = localis.macroregions.get(1)
 
 **Returns:** the entity with that localis ID, or `None`
 
+> ℹ️ IDs are only valid within the installed version; to store a reference, use [key](#key).
+
 ### lookup
 
-Resolves a single record by an identifier other than its localis ID:
+Resolves a single record by an identifier other than its localis ID.
 
 | Registry | Identifiers |
 |---|---|
-| `countries` | alpha-2 (`"GB"`), alpha-3 (`"GBR"`), numeric (`826`), a historic entry only by its `alpha_4` (`"CSHH"`, see Historic Countries) |
+| `countries` | alpha-2 (`"GB"`), alpha-3 (`"GBR"`), numeric (`826`), a historic entry only by its `alpha_4` (`"CSHH"`, see [Historic Countries](#historic-countries)) |
 | `subdivisions` | ISO 3166-2 code (`"US-CA"`), GeoNames code (`"US.CA"`) |
 | `cities` | GeoNames ID (`5128581`) |
 | `macroregions` | code (`"155"`, `"EU"`), name (`"Western Europe"`) |
@@ -94,11 +96,11 @@ macroregion = localis.macroregions.lookup("EU")
 
 **Returns:** the entity, or `None`
 
-`lookup()` matches identifiers only. Common abbreviations that aren't ISO codes, such as "UK" for the United Kingdom, are found by `filter(name=...)` and `search()`. M49 codes are zero-padded strings, so `macroregions.lookup("009")` finds Oceania and `lookup(9)` finds nothing.
+> ℹ️ `lookup()` matches identifiers only. Common abbreviations that aren't ISO codes, such as "UK" for the United Kingdom, are found by `filter(name=...)` and `search()`. M49 codes are zero-padded strings, so `macroregions.lookup("009")` finds Oceania and `lookup(9)` finds nothing.
 
 ### filter
 
-Exact matches on any value a field indexes; several fields combine with AND:
+Exact matches on any value a field indexes. Using multiple fields combines the conditions with a logical AND.
 
 | Registry | Fields |
 |---|---|
@@ -115,11 +117,11 @@ localis.cities.filter(country="US", subdivision="California", limit=20)
 
 # Records with no value in a field
 localis.subdivisions.filter(type=localis.MISSING)  # GeoNames-only subdivisions, which have no ISO type
-localis.cities.filter(country="US", subdivision=localis.MISSING)
+localis.cities.filter(country="US", subdivision=localis.MISSING)  # US cities linked to no subdivision
 localis.countries.filter(macroregion=localis.MISSING)  # historic countries placed in none (with include_historic set)
 ```
 
-Pass `localis.MISSING` to match records with no value in a field; `None` ignores the field. A field the registry doesn't have raises `TypeError`.
+Pass `localis.MISSING` to match records with no value in a field (`None` ignores the field). A field the registry doesn't have raises `TypeError`.
 
 **Returns:** a list of entities sorted by name. `limit` defaults to every match.
 
@@ -136,7 +138,7 @@ localis.cities.search("Springfeld, Illinois")  # context after the name narrows 
 
 A subdivision or city query can add context after the name: a subdivision's parent or country, or a city's first-level subdivision or country.
 
-**Returns:** a list of `(entity, score)` pairs, best match first. Each score runs from 0 to 1, higher is better.
+**Returns:** a list of `(entity, score)` pairs, best match first. Each score runs from 0 to 1, higher is better. `limit` defaults to 10.
 
 ### Iteration and len()
 
@@ -147,11 +149,13 @@ for country in localis.countries:
 total = len(localis.subdivisions)
 ```
 
-Historic countries are left out of `filter()`, `search()`, iteration and `len()` unless included (see Historic Countries), and a population threshold narrows every cities query (see Population Threshold).
+> ℹ️ Historic countries are left out of `filter()`, `search()`, iteration and `len()` unless included (see [Historic Countries](#historic-countries)), and a population threshold narrows every cities query (see [Population Threshold](#population-threshold)).
 
-### Entities
+---
 
-Results are typed dataclasses, listed field by field under each registry below. Each has `to_dict()` and `json()`, and `str()` gives its JSON. A record nested in another, such as `subdivision.country`, `city.subdivisions` or `country.macroregions`, is its base form (`CountryBase`, `SubdivisionBase`, `MacroregionBase`), which keeps the fields marked Base in those tables.
+## Entities
+
+Results are typed dataclasses, listed field by field under each registry below. Each has `to_dict()` and `json()`, `str()` gives its JSON, and `key` is its stable reference (see [key](#key) below). A record nested in another, such as `subdivision.country`, `city.subdivisions` or `country.macroregions`, is its base form (`CountryBase`, `SubdivisionBase`, `MacroregionBase`), which keeps the fields marked Base in those tables.
 
 ```python
 country = localis.countries.lookup("US")
@@ -160,13 +164,34 @@ country.json()                   # the same, as a JSON string
 localis.subdivisions.lookup("US-CA").country.alpha3  # "USA", from the nested CountryBase
 ```
 
----
+### key
 
-## Countries
+localis IDs are assigned in order each time the data is built. You can use them to carry a record from one query to the next within a process, but don't store them.
 
-### Historic Countries
+`key` extracts the entity's stable lookup identifier, which can be used to reliably reference the entity across different versions of the dataset.
 
-ISO 3166-3 withdrawn countries (Czechoslovakia, Serbia and Montenegro, Netherlands Antilles, and others) are included in the dataset but excluded from `filter()`, `search()`, iteration and `len()` by default.
+```python
+# 5128581, safe to persist
+saved = city.key
+
+# the same city, in this version or a later one
+city = localis.cities.lookup(saved)
+```
+
+| Registry | `key` |
+|---|---|
+| `countries` | `alpha2`, or `historic.alpha_4` for a historic entry |
+| `subdivisions` | `iso_code`, or `geonames_code` for a subdivision ISO doesn't list |
+| `cities` | `geonames_id` |
+| `macroregions` | `code` |
+
+Nested records have a `key` too, so `city.country.key` and `city.subdivisions[0].key` resolve the same way. A key changes only when its source recodes the place itself, such as ISO reassigning a subdivision's code, and a stored GeoNames code still resolves after the subdivision gains an ISO code.
+
+### Countries
+
+#### Historic Countries
+
+ISO 3166-3 withdrawn countries are included in the dataset but excluded from `filter()`, `search()`, iteration and `len()` by default. The countries registry exposes `set_include_historic()` to toggle them on or off.
 
 ```python
 localis.countries.include_historic   # False
@@ -181,7 +206,7 @@ localis.countries.set_include_historic(False)
 
 `len(localis.countries)` is <stat key="data.countries.current:int">250</stat> by default and <stat key="data.countries.total:int">281</stat> with historic entries included.
 
-The toggle applies to every thread using `localis.countries`, so set it before sharing the registry between threads (see Concurrency).
+> ⚠️ The toggle applies to every thread using `localis.countries`, so set it before sharing the registry between threads (see [Concurrency](#concurrency)).
 
 `get()` and `lookup()` always resolve historic entries regardless of the toggle. ISO reused alpha-2/alpha-3/numeric codes across different withdrawn countries over time (e.g. `CS` was both Czechoslovakia and, decades later, Serbia and Montenegro), so `lookup()` only resolves a historic entry by its unique `alpha_4` withdrawal code, never by bare alpha-2/alpha-3/numeric:
 
@@ -190,13 +215,14 @@ localis.countries.lookup("CSHH")  # Czechoslovakia
 localis.countries.lookup("CS")    # None: a reused code never resolves a historic entry
 ```
 
-### Country Object
+#### Country Object
 
 A ✓ under Base marks a field the nested `CountryBase` also has.
 
 | Field | Type | Example (`"US"`) | Notes | Base |
 |---|---|---|---|---|
-| `id` | `int` | | localis ID | ✓ |
+| `id` | `int` | | localis ID, valid within this version | ✓ |
+| `key` | `str` | `"US"` | stable reference to store; `alpha_4` for a historic entry | ✓ |
 | `name` | `str` | `"United States"` | ISO 3166-1 name, as published | ✓ |
 | `official_name` | `str \| None` | `"United States of America"` | ISO 3166-1 official name; `None` where ISO has none | |
 | `common_name` | `str \| None` | `None` | Debian iso-codes' everyday name where it differs, such as "South Korea" for "Korea, Republic of" | |
@@ -210,7 +236,7 @@ A ✓ under Base marks a field the nested `CountryBase` also has.
 | `macroregions` | `tuple[MacroregionBase, ...]` | (Americas, Northern America) | CLDR path, region then subregion; `()` for most historic countries | |
 | `groupings` | `tuple[MacroregionBase, ...]` | (North America, United Nations) | CLDR groupings the country belongs to | |
 
-#### HistoricInfo
+##### HistoricInfo
 
 | Field | Type | Example (`"CSHH"`) | Notes |
 |---|---|---|---|
@@ -218,17 +244,16 @@ A ✓ under Base marks a field the nested `CountryBase` also has.
 | `withdrawal_date` | `str` | `"1993-01-01"` | |
 | `comment` | `str \| None` | | ISO's comment |
 
----
+### Subdivisions
 
-## Subdivisions
-
-### Subdivision Object
+#### Subdivision Object
 
 A ✓ under Base marks a field the nested `SubdivisionBase` also has.
 
 | Field | Type | Example (`"US-CA"`) | Notes | Base |
 |---|---|---|---|---|
-| `id` | `int` | | localis ID | ✓ |
+| `id` | `int` | | localis ID, valid within this version | ✓ |
+| `key` | `str` | `"US-CA"` | stable reference to store; the GeoNames code where ISO doesn't list the subdivision | ✓ |
 | `name` | `str` | `"California"` | ISO 3166-2 name where ISO lists the subdivision, otherwise GeoNames' | ✓ |
 | `iso_code` | `str \| None` | `"US-CA"` | `None` for a GeoNames-only subdivision | ✓ |
 | `geonames_code` | `str \| None` | `"US.CA"` | GeoNames admin code; `None` for an ISO-only subdivision | ✓ |
@@ -239,11 +264,9 @@ A ✓ under Base marks a field the nested `SubdivisionBase` also has.
 | `country` | `CountryBase` | United States | | |
 | `aliases` | `tuple[str, ...]` | | alternate names | |
 
----
+### Cities
 
-## Cities
-
-### Population Threshold
+#### Population Threshold
 
 ```python
 # Narrow the cache and all indexes to cities with population >= 15000
@@ -256,15 +279,16 @@ localis.cities.population_threshold  # 15000
 localis.cities.set_population_threshold(None)
 ```
 
-`cities` is fully lazy-loaded, nothing is read from disk until first access. Call `set_population_threshold()` before that first access (before any `.get()`, `.lookup()`, `.filter()`, `.search()`, or `.force_cache()` call) so the registry only ever loads the narrowed dataset. Calling it after the cache or indexes are already built still works, but it invalidates them, so the next access rebuilds the caches from scratch at the new threshold. The threshold applies to every thread using `localis.cities`, so set it before sharing the registry between threads (see Concurrency).
+`cities` is fully lazy-loaded: nothing is read from disk until first access. Call `set_population_threshold()` before that first access (before any `.get()`, `.lookup()`, `.filter()`, `.search()`, or `.force_cache()` call) so the registry only ever loads the narrowed dataset. Calling it after the cache or indexes are already built still works, but it invalidates them, so the next access rebuilds the caches from scratch at the new threshold.
 
-**Returns:** `None`
+> ⚠️ The threshold applies to every thread using `localis.cities`, so set it before sharing the registry between threads (see [Concurrency](#concurrency)).
 
-### City Object
+#### City Object
 
 | Field | Type | Example (`5128581`) | Notes |
 |---|---|---|---|
-| `id` | `int` | | localis ID |
+| `id` | `int` | | localis ID, valid within this version |
+| `key` | `int` | `5128581` | stable reference to store, the GeoNames ID |
 | `geonames_id` | `int` | `5128581` | |
 | `name` | `str` | `"New York"` | GeoNames' name, or its ASCII form where the name is in another script |
 | `subdivisions` | `list[SubdivisionBase]` | | the city's full subdivision chain, ordered by `admin_level` ascending |
@@ -273,17 +297,16 @@ localis.cities.set_population_threshold(None)
 | `lat` | `float` | `40.71427` | |
 | `lng` | `float` | `-74.00597` | |
 
----
+### Macroregions
 
-## Macroregions
-
-### Macroregion Object
+#### Macroregion Object
 
 A ✓ under Base marks a field the nested `MacroregionBase` also has.
 
 | Field | Type | Example (`"155"`) | Notes | Base |
 |---|---|---|---|---|
-| `id` | `int` | | localis ID | ✓ |
+| `id` | `int` | | localis ID, valid within this version | ✓ |
+| `key` | `str` | `"155"` | stable reference to store, the code | ✓ |
 | `name` | `str` | `"Western Europe"` | CLDR English name | ✓ |
 | `code` | `str` | `"155"` | M49 numeric code as a zero-padded string, or CLDR's letter code (`"QO"`, `"EU"`) | ✓ |
 | `type` | `MacroregionType` | `"subregion"` | `"region"`, `"subregion"` or `"grouping"` | ✓ |
@@ -297,7 +320,7 @@ A ✓ under Base marks a field the nested `MacroregionBase` also has.
 
 All registries and their indexes are lazy-loaded on first use, incurring a cold start cost on whichever call touches them first. Any registry's dataset and indexes can be pre-loaded with `.force_cache()` to avoid this during queries, or you can simply access the registry/method to trigger the lazy loading upfront.
 
-A registry's dataset also loads the datasets it references, if they aren't cached yet. Countries load macroregions, subdivisions load countries, and cities load subdivisions and countries. Only those datasets load, not their indexes. The subdivisions and cities tables below exclude them, so a cold first call on cities also pays for the subdivisions and countries datasets.
+> ℹ️ A registry's dataset also loads the datasets it references, if they aren't cached yet. Countries load macroregions, subdivisions load countries, and cities load subdivisions and countries. Only those datasets load, not their indexes. The subdivisions and cities tables below exclude them, so a cold first call on cities also pays for the subdivisions and countries datasets.
 
 #### Countries (<stat key="data.countries.total:int">281</stat>)
 | Component | Load Time | Memory |
@@ -351,7 +374,7 @@ Accuracy tested on <stat key="bench.sample_size:int">5,000</stat> mangled-query 
 
 Registries are safe to share across threads. `get()`, `lookup()`, `filter()`, `search()` and iteration only read shared data, and the first access that loads a dataset or index does so under the registry's lock, so threads reaching a cold registry together load it once.
 
-Two settings change shared state for every thread: `cities.set_population_threshold()` and `countries.set_include_historic()`. Configure them before the registry is shared between threads, never while other threads are querying it.
+> ⚠️ Two settings change shared state for every thread: `cities.set_population_threshold()` and `countries.set_include_historic()`. Configure them before the registry is shared between threads, never while other threads are querying it.
 
 ### Batch searching
 
@@ -415,8 +438,8 @@ The shipped data is derived from these sources, modified by localis's ingest pip
 
 ## License
 
-**Code**: MIT ([`LICENSE`](LICENSE)). 
-**Data**: its sources' licenses, listed under [Data licensing](#data-licensing). 
+**Code**: MIT ([`LICENSE`](LICENSE)).
+**Data**: its sources' licenses, listed under [Data licensing](#data-licensing).
 The package's license expression is `MIT AND LGPL-2.1-or-later AND CC-BY-4.0 AND Unicode-3.0 AND CC0-1.0`.
 
 ---
@@ -430,6 +453,6 @@ localis began with some database cleanup. I found myself writing mountains of be
 - [Pull requests welcome](https://github.com/dstoffels/localis)
 - [Report issues](https://github.com/dstoffels/localis/issues)
 
-Support this project: 
+Support this project:
 - [GitHub Sponsors](https://github.com/sponsors/dstoffels)
 - [PayPal](https://www.paypal.biz/danOstoffels)

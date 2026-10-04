@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `key` on every entity, nested ones included: the stable reference to store instead of `id`, which a data release renumbers, resolved by `lookup()` in any later version (`alpha2` or a historic entry's `alpha_4`, a subdivision's ISO code or else its GeoNames code, a city's GeoNames ID, a macroregion's code). The README documents IDs as valid only within an installed version
 - `localis.MISSING` filters for records with no value in a field, which `None` can't, since it means "don't filter on this field": `subdivisions.filter(type=MISSING)` for GeoNames-only subdivisions, `cities.filter(subdivision=MISSING)` for cities linked to no subdivision, `countries.filter(macroregion=MISSING)` for historic countries without one
 - `wikidata_changed` orphans: a Wikidata crosswalk mapping that would relink a subdivision from what it previously resolved to goes to the resolve-subdivisions skill instead of applying silently
 - The data's licenses travel with it: `src/localis/data/NOTICE` attributes each source, `LICENSES/` holds the LGPL-2.1-or-later, CC-BY-4.0, Unicode-3.0 and CC0-1.0 texts, and the package metadata declares `MIT AND LGPL-2.1-or-later AND CC-BY-4.0 AND Unicode-3.0 AND CC0-1.0` instead of `MIT` alone, which covered only the code

@@ -1,3 +1,4 @@
+import localis
 from localis.registries import (
     Registry,
     MacroregionRegistry,
@@ -18,6 +19,14 @@ LOOKUP_VALUES_BY_REGISTRY = {
     CityRegistry: lambda c: (c.geonames_id,),
 }
 
+# each entity's nested base entities, with the registry their key resolves in
+NESTED_BY_REGISTRY = {
+    MacroregionRegistry: lambda m: [(m.parent, localis.macroregions)],
+    CountryRegistry: lambda c: [(m, localis.macroregions) for m in (*c.macroregions, *c.groupings)],
+    SubdivisionRegistry: lambda s: [(s.parent, localis.subdivisions), (s.country, localis.countries)],
+    CityRegistry: lambda c: [*((s, localis.subdivisions) for s in c.subdivisions), (c.country, localis.countries)],
+}
+
 
 @registry_param
 class TestLookup:
@@ -31,6 +40,18 @@ class TestLookup:
         assert (
             result is None
         ), f"expected None, got {result} from lookup [{invalid_value}]"
+
+    def test_key(self, registry: Registry, select_random):
+        """should resolve a randomly selected entity, and every entity nested in it, via its key"""
+        subject: Entity = select_random(registry)
+        result = registry.lookup(subject.key)
+        assert result is not None and result.id == subject.id, f"expected id [{subject.id}] for key [{subject.key}], got {result}"
+
+        for base, base_registry in NESTED_BY_REGISTRY[type(registry)](subject):
+            if base is None:
+                continue
+            resolved = base_registry.lookup(base.key)
+            assert resolved is not None and resolved.id == base.id, f"expected nested id [{base.id}] for key [{base.key}], got {resolved}"
 
     def test_valid(self, registry: Registry, select_random):
         """should resolve any randomly selected entity via each of its own valid lookup values"""
