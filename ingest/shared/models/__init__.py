@@ -1,5 +1,5 @@
 from .model import Model
 from .macroregion_model import MacroregionModel, MacroregionType
-from .country_model import CountryModel
+from .country_model import CountryModel, HistoricModel
 from .subdivision_model import SubdivisionModel
 from .city_model import CityModel

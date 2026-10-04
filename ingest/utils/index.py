@@ -5,6 +5,8 @@ from typing import Sequence
 from ingest.shared.models import Model
 from array import array
 import gzip
+from .paths import DATA_PATH
+from .logger import ingest_log
 
 
 def dump_data(data: Sequence[Model], file_path: Path) -> None:
@@ -22,8 +24,7 @@ def dump_lookup_index(data: Sequence[Model], datadir_path: Path) -> None:
     int_pairs: list[tuple[int, int]] = []
 
     for item in data:
-        for value in item.extract_lookup_values():
-            key = str(value)
+        for key in item.extract_lookup_values():
             if item.NUMERIC_LOOKUP and key.isdigit():
                 int_pairs.append((int(key), item.id))
             else:
@@ -49,8 +50,7 @@ def dump_filter_index(data: Sequence[Model], datadir_path: Path) -> None:
         for item in data:
             row = []
             for _, values in item.extract_filter_values().items():
-                # skip only missing values: a plain truthiness check would drop a real 0, such as admin_level=0
-                row.append("|".join([str(v) for v in values if v is not None and v != ""]))
+                row.append("|".join(v for v in values if v))
             writer.writerow(row)
 
 
@@ -64,8 +64,6 @@ def _gzip(buf: bytes | bytearray) -> bytes:
 def _dump_trigram_index(trigram_sets: dict[int, set[str]], prefix: Path) -> None:
     """Writes one trigram index: its posting lists (<prefix>.bin.gz) and each trigram's offset into them (<prefix>_offsets.tsv); an index with no trigrams isn't written."""
     blob_path, offsets_path = (prefix.with_name(prefix.name + suffix) for suffix in (".bin.gz", "_offsets.tsv"))
-    # per-record trigram counts (<prefix>_counts.bin.gz) were dropped when scoring moved to query coverage
-    prefix.with_name(prefix.name + "_counts.bin.gz").unlink(missing_ok=True)
     if not any(trigram_sets.values()):
         blob_path.unlink(missing_ok=True)
         offsets_path.unlink(missing_ok=True)
@@ -106,3 +104,22 @@ def dump_search_index(data: Sequence[Model], datadir_path: Path) -> None:
     _dump_trigram_index({item.id: item.extract_canon_trigrams() for item in data}, datadir_path / "canon_index")
     _dump_trigram_index({item.id: item.extract_context_trigrams() for item in data}, datadir_path / "context_index")
     _dump_short_names(data, datadir_path / "short_names.tsv.gz")
+
+
+def dump_registry(name: str, data: Sequence[Model], queryable: bool = True) -> None:
+    """Writes a registry's data file and lookup index to src/localis/data/<name>/, plus its filter and search indexes when it's queryable."""
+    path = DATA_PATH / name
+    path.mkdir(parents=True, exist_ok=True)
+    ingest_log.writeline(f"Dumping {len(data)} {name}...")
+    dump_data(data, path / f"{name}.tsv")
+
+    ingest_log.writeline(f"Dumping {name} lookup indexes...")
+    dump_lookup_index(data, path)
+    if not queryable:
+        return
+
+    ingest_log.writeline(f"Dumping {name} filter index...")
+    dump_filter_index(data, path)
+
+    ingest_log.writeline(f"Dumping {name} search index...")
+    dump_search_index(data, path)

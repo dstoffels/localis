@@ -1,4 +1,5 @@
 import re
+from localis.utils.strings import normalize
 from ingest.shared.models import SubdivisionModel
 
 # only "city" is kept distinct; finer area distinctions (province/department/county/region/etc) aren't reliable across sources and fold into one "area" family instead
@@ -18,7 +19,7 @@ TYPE_FAMILIES = {
         "okres",
         "amphoe",
         "huyện",
-        "lçesi",
+        "ilçesi",
         "gu",
         "municipality",
         "comuna",
@@ -74,10 +75,11 @@ NON_TYPE_NOISE_TOKENS = {
     "barrio",
 }
 
-NOISE_TOKENS = set.union(*TYPE_FAMILIES.values()) | NON_TYPE_NOISE_TOKENS
+# tokens are matched in normalize()'s folded form, so a word spelled with or without its diacritics ("járás", "jaras") is the same token
+NOISE_TOKENS = {normalize(t) for t in set.union(*TYPE_FAMILIES.values()) | NON_TYPE_NOISE_TOKENS}
 
 TOKEN_TO_FAMILY = {
-    token: family for family, tokens in TYPE_FAMILIES.items() for token in tokens
+    normalize(token): family for family, tokens in TYPE_FAMILIES.items() for token in tokens
 }
 
 # maps an ISO subdivision's own `type` field (lowercased) to "city" or "area"; types left unmapped are ambiguous/hybrid/rare and stay neutral
@@ -127,7 +129,7 @@ ISO_TYPE_FAMILIES = {
 
 def strip_noise_tokens(s: str) -> str:
     """Remove common noise tokens from a subdivision name for better fuzzy matching."""
-    tokens = re.split(r"\W+", s.lower())
+    tokens = re.split(r"\W+", normalize(s))
     filtered = [t for t in tokens if t and t not in NOISE_TOKENS]
     return " ".join(filtered)
 
@@ -136,7 +138,7 @@ def raw_type_families(sub: SubdivisionModel) -> set[str]:
     """Return the set of type families whose qualifier tokens appear in sub's raw, unstripped name/aliases."""
     families = set()
     for text in [sub.name] + sub.aliases:
-        for token in re.split(r"\W+", text.lower()):
+        for token in re.split(r"\W+", normalize(text)):
             family = TOKEN_TO_FAMILY.get(token)
             if family:
                 families.add(family)

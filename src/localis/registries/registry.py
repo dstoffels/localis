@@ -7,6 +7,7 @@ from localis.entities import Entity
 from localis.views import View
 from localis.stores import Store
 from localis.indexes import FilterIndex, SearchIndex, LookupIndex
+from localis.utils.data import CacheFilterPredicate
 
 T = TypeVar("T", bound=Entity)
 R = TypeVar("R", covariant=True)
@@ -38,14 +39,11 @@ class Registry(Generic[T], ABC):
 
     REGISTRY_NAME: str = ""
 
-    def __init__(self, **kwargs):
-        self._allowed_ids: set[int] | None = None
+    def __init__(self):
+        # a load-time filter on the data file's rows, such as CityRegistry's population threshold; None loads every row
+        self._row_filter: CacheFilterPredicate | None = None
         # reentrant, since building an index first builds the cache it reads
         self._lock = threading.RLock()
-
-    @staticmethod
-    def _is_id_allowed(id: int, allowed_ids: set[int]) -> bool:
-        return id in allowed_ids
 
     @property
     def _data_path(self) -> Path:
@@ -75,21 +73,23 @@ class Registry(Generic[T], ABC):
         return self.build_cache()
 
     def build_cache(self) -> Mapping[int, View[T, Store]]:
-        """Build the id -> view mapping for this registry. Overridden per registry to
-        supply whatever cross-referenced caches its view class needs."""
+        """The registry's id -> view mapping, built with whatever other registries' views its views reference."""
         raise NotImplementedError
 
     @locked_cached_property
+    def _allowed_ids(self) -> set[int] | None:
+        """The ids the row filter kept, the only ones the indexes load; None when every row loaded."""
+        return set(self._cache) if self._row_filter is not None else None
+
+    @locked_cached_property
     def _lookup_index(self) -> LookupIndex:
-        _ = self._cache
         return LookupIndex(
             filepath=self._lookup_filepath,
             int_filepath=self._lookup_int_filepath,
-            predicate=self._is_id_allowed if self._allowed_ids is not None else None,
             allowed_ids=self._allowed_ids,
         )
 
-    _CACHED_ATTRS: tuple[str, ...] = ("_cache", "_lookup_index")
+    _CACHED_ATTRS: tuple[str, ...] = ("_cache", "_allowed_ids", "_lookup_index")
 
     def invalidate_cache(self):
         with self._lock:
@@ -101,12 +101,19 @@ class Registry(Generic[T], ABC):
         for attr in self._CACHED_ATTRS:
             getattr(self, attr)
 
+    def _hidden_ids(self) -> frozenset[int]:
+        """The ids that iteration, filter() and search() skip, which get() and lookup() still resolve; none by default."""
+        return frozenset()
+
     def __iter__(self) -> Iterator[T]:
-        for view in self._cache.values():
-            yield view.to_entity()
+        hidden = self._hidden_ids()
+        for id, view in self._cache.items():
+            if id not in hidden:
+                yield view.to_entity()
 
     def __len__(self) -> int:
-        return len(self._cache)
+        """How many records iteration yields, leaving out hidden ones."""
+        return len(self._cache) - len(self._hidden_ids())
 
     # ----------- API METHODS ----------- #
 
@@ -123,7 +130,7 @@ class Registry(Generic[T], ABC):
 
 
 class QueryableRegistry(Registry[T]):
-    """Full API surface: LookupRegistry plus filter/search over the filter and search indexes."""
+    """Registry plus filter() and search() over the filter and search indexes."""
 
     _CACHED_ATTRS = Registry._CACHED_ATTRS + ("_filter_index", "_search_index")
 
@@ -136,10 +143,8 @@ class QueryableRegistry(Registry[T]):
 
     @locked_cached_property
     def _filter_index(self) -> FilterIndex:
-        _ = self._cache
         return FilterIndex(
             filepath=self._filter_filepath,
-            predicate=self._is_id_allowed if self._allowed_ids is not None else None,
             allowed_ids=self._allowed_ids,
         )
 
@@ -147,9 +152,8 @@ class QueryableRegistry(Registry[T]):
     def _search_index(self) -> SearchIndex[T]:
         return SearchIndex(
             cache=self._cache,
-            filepath=self._data_path,
+            data_path=self._data_path,
             name_fields=self.NAME_FIELDS,
-            predicate=self._is_id_allowed if self._allowed_ids is not None else None,
             allowed_ids=self._allowed_ids,
         )
 
@@ -186,6 +190,7 @@ class QueryableRegistry(Registry[T]):
                 results &= matches
 
         assert results is not None, "Filter results should not be None at this point."
+        results -= self._hidden_ids()
 
         results_list = [self._cache[id] for id in results]
         results_list.sort(key=lambda r: r.name)  # sort alphabetically by name
@@ -193,6 +198,6 @@ class QueryableRegistry(Registry[T]):
             results_list = results_list[:limit]
         return [r.to_entity() for r in results_list]
 
-    def search(self, query: str, limit: int = 10, **kwargs) -> list[tuple[T, float]]:
-        results = self._search_index.search(query=query, limit=limit)
+    def search(self, query: str, limit: int = 10) -> list[tuple[T, float]]:
+        results = self._search_index.search(query=query, limit=limit, exclude=self._hidden_ids())
         return [(r.to_entity(), score) for r, score in results]

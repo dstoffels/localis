@@ -2422,6 +2422,20 @@
       "decided_by": "human",
       "escalation": "Found in an independent audit of the resolution map: bypassing Lithuania's counties moves its municipalities to level 1, where automerge's pool is GeoNames' county records, so LT-54 Utena exactly matched Utena County. The municipality's own record, 864514, was unclaimed.",
       "wikidata_seen": 593670
+    },
+    "BY-HM": {
+      "id": 625143,
+      "reason": "Minsk City (Горад Мінск) is the same level-1 city with special status that ISO lists as Horad Minsk.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
+    },
+    "RU-SPE": {
+      "id": 536203,
+      "reason": "Sankt-Peterburg is the transliteration of Санкт-Петербург, the federal city of Saint Petersburg at level 1.",
+      "decided_by": "agent",
+      "escalation": null,
+      "wikidata_seen": null
     }
   },
   "wikidata_merge": {
@@ -6890,10 +6904,6 @@
         "id": 11778173,
         "margin": 25
       },
-      "BY-HM": {
-        "id": 625143,
-        "margin": 6
-      },
       "CD-HL": {
         "id": 216141,
         "margin": 15
@@ -7817,10 +7827,6 @@
       "RU-MOW": {
         "id": 524894,
         "margin": 20
-      },
-      "RU-SPE": {
-        "id": 536203,
-        "margin": 10
       },
       "RW-01": {
         "id": 6413338,

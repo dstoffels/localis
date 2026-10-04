@@ -32,8 +32,8 @@ def _finish_orphan() -> None:
     escalation_findings = None
 
 
-@mcp.tool(name="next")
-def next() -> dict | str | None:
+@mcp.tool(name="next_orphan")
+def next_orphan() -> dict | str | None:
     """Returns the next orphaned subdivision and its candidates. Repeated calls paginate through the candidates until all candidates have been processed.
 
     Candidates are a list, best match first, each formatted "geonames_id: name1, name2 - [admin_level] CLAIMED BY <iso_code> (note)", where "CLAIMED BY" and the note appear only when they apply.

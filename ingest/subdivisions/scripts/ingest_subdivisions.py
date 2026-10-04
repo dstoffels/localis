@@ -1,8 +1,4 @@
-# This script merges subdivision data from GeoNames and ISO 3166-2. We initialize from
-# GeoNames and merge in the ISO data, prompting to resolve ambiguities. Manual intervention is required for some
-# entries, which is mapped in ingest/subdivisions/outputs/resolution_map.json.
-# GeoNames itself never nests beyond admin_level 2; ISO subs deeper than that (so far
-# only France) still merge against GeoNames' level-2 data, see automerge/scoring.py.
+# Merges ISO 3166-2 subdivisions into GeoNames': skill decisions, the Wikidata crosswalk and automerge in turn, with what's left recorded in outputs/resolution_map.json for the resolve-subdivisions skill.
 
 import sys
 from ingest.shared.scripts import load_countries
@@ -17,6 +13,7 @@ from ingest.utils import (
     record_pending,
     committed_value,
     commit_manifest,
+    dump_registry,
 )
 from ingest.shared.models import CountryModel, SubdivisionModel
 from .geonames_subdivisions import map_geonames_subdivisions
@@ -26,7 +23,6 @@ from .automerge import try_merge
 from .resolve_subdivisions import apply_skill_decisions
 from .wikidata_subdivisions import fetch_wikidata_crosswalk, flag_wikidata_conflicts, apply_wikidata_matches
 from .non_administrative import apply_non_administrative, flag_grouping_twin_merges
-from .dump_subdivisions import dump
 from .dump_unmerged import write as write_unmerged_doc
 
 RESOLUTION_MAP_PATH = SUBDIVISIONS_OUTPUTS_PATH / "resolution_map.json"
@@ -71,8 +67,7 @@ def ingest_subdivisions(
         if countries is None:
             countries = load_countries()
 
-        # Initialize subdivision cache with geonames subdivisions into a mapping of country_alpha2 > admin_level > id.
-        # SubdivisionMap also flat maps by id, geoname code and iso code
+        # GeoNames' subdivisions, indexed by country and admin level and by each id and code
         sub_map: SubdivisionMap = map_geonames_subdivisions(countries)
 
         # Enrich GeoNames subdivisions with alternate names before merging, so the extra name variants are also available to fuzzy matching
@@ -108,7 +103,7 @@ def ingest_subdivisions(
         # refuse to dump subdivisions or hand off to cities (which depends on this run's geocode map) until resolved
         exit_if_orphans(resolution_map)
 
-        dump(sub_map)
+        dump_registry("subdivisions", sub_map.all())
         write_unmerged_doc(sub_map)
         # only now are this run's sources consumed; a run stopped by orphans leaves them pending, so the next run reprocesses them
         commit_manifest(SUBDIVISIONS_MANIFEST_PATH)

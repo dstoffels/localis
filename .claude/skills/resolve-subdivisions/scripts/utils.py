@@ -2,7 +2,14 @@ import functools
 import json
 from ingest.subdivisions.utils.subdivision_map import SubdivisionMap
 from typing import Literal
-from ingest.subdivisions.utils.resolution_map import ResolutionMap, SkillDecision
+from ingest.subdivisions.utils.resolution_map import (
+    ResolutionMap,
+    SkillDecision,
+    AmbiguousOrphan,
+    LowMarginOrphan,
+    GroupingTwinOrphan,
+    WikidataConflictOrphan,
+)
 from ingest.shared.models import SubdivisionModel
 from ingest.utils import SUBDIVISIONS_OUTPUTS_PATH
 from ingest.shared.scripts import load_countries
@@ -113,25 +120,22 @@ def _get_top_tier_batch_size(pool_size: int) -> int:
 
 def _flagged_candidates(iso_code: str) -> list[tuple[int, str]]:
     """The specific records the pipeline flagged for this orphan, with a note saying why, shown as its first batch: ambiguity close-calls, the low_margin or grouping_twin pick, or both sides of a wikidata_conflict. Empty for no_candidates/no_matches; raises if iso_code isn't an orphan."""
-    orphans = _resolution_map().automerge.orphans
-    if iso_code in orphans.no_candidates or iso_code in orphans.no_matches:
-        return []
-    for orphan in orphans.ambiguity:
-        if orphan.iso_code == iso_code:
-            return [(gid, "automerge's contested target") for gid in orphan.candidate_geonames_ids]
-    for orphan in orphans.low_margin:
-        if orphan.iso_code == iso_code:
-            return [(orphan.candidate_geonames_id, f"automerge's pick, {orphan.margin} points over threshold")]
-    for orphan in orphans.grouping_twin:
-        if orphan.iso_code == iso_code:
-            return [(orphan.candidate_geonames_id, "automerge's pick, likely the record for this subdivision's non-administrative grouping")]
-    for orphan in orphans.wikidata_conflict:
-        if orphan.iso_code == iso_code:
-            flagged = [(orphan.wikidata_geonames_id, "Wikidata's mapping")]
-            if orphan.decision_geonames_id is not None:
-                flagged.append((orphan.decision_geonames_id, "current skill decision"))
+    match _resolution_map().automerge.orphans.find(iso_code):
+        case None:
+            raise ValueError(f"{iso_code} is not in resolution_map's orphans")
+        case str():
+            return []
+        case AmbiguousOrphan(candidate_geonames_ids=gids):
+            return [(gid, "automerge's contested target") for gid in gids]
+        case LowMarginOrphan(candidate_geonames_id=gid, margin=margin):
+            return [(gid, f"automerge's pick, {margin} points over threshold")]
+        case GroupingTwinOrphan(candidate_geonames_id=gid):
+            return [(gid, "automerge's pick, likely the record for this subdivision's non-administrative grouping")]
+        case WikidataConflictOrphan(wikidata_geonames_id=wikidata_gid, decision_geonames_id=decision_gid):
+            flagged = [(wikidata_gid, "Wikidata's mapping")]
+            if decision_gid is not None:
+                flagged.append((decision_gid, "current skill decision"))
             return flagged
-    raise ValueError(f"{iso_code} is not in resolution_map's orphans")
 
 
 def get_candidates(iso_code: str, batch_num: int = 0) -> list[str]:
@@ -214,14 +218,7 @@ def is_valid_candidate(iso_code: str, geo_sub_geonames_id: int) -> tuple[bool, s
 def get_next_orphan() -> dict | None:
     resolution_map = _resolution_map()
     orphans = resolution_map.automerge.orphans
-    ambiguity_codes = [orphan.iso_code for orphan in orphans.ambiguity]
-    low_margin_codes = [orphan.iso_code for orphan in orphans.low_margin]
-    conflict_codes = [orphan.iso_code for orphan in orphans.wikidata_conflict]
-    twin_codes = [orphan.iso_code for orphan in orphans.grouping_twin]
-    iso_code = next(
-        iter(orphans.no_candidates + orphans.no_matches + ambiguity_codes + low_margin_codes + conflict_codes + twin_codes),
-        None,
-    )
+    iso_code = next(iter(orphans.codes()), None)
     if iso_code is None:
         return None
 
@@ -234,7 +231,7 @@ def get_next_orphan() -> dict | None:
         "type": iso_sub.type,
         "admin_level": iso_sub.admin_level,
     }
-    if iso_code in conflict_codes:
+    if any(conflict.iso_code == iso_code for conflict in orphans.wikidata_conflict):
         decision = resolution_map.skill_decisions[iso_code]
         orphan["current_decision"] = {
             "geonames_id": decision.id if decision.id is not None else "add as-is (no GeoNames counterpart)",
@@ -245,16 +242,5 @@ def get_next_orphan() -> dict | None:
 
 def pop_orphan(iso_code: str) -> None:
     """Removes an orphan from resolution_map's automerge.orphans by iso_code."""
-    orphans = _resolution_map().automerge.orphans
-    for bucket in (orphans.no_candidates, orphans.no_matches):
-        if iso_code in bucket:
-            bucket.remove(iso_code)
-            _resolution_map().save(RESOLUTION_MAP_PATH)
-            return
-    for flagged_bucket in (orphans.ambiguity, orphans.low_margin, orphans.wikidata_conflict, orphans.grouping_twin):
-        for orphan in flagged_bucket:
-            if orphan.iso_code == iso_code:
-                flagged_bucket.remove(orphan)
-                _resolution_map().save(RESOLUTION_MAP_PATH)
-                return
-    raise ValueError(f"{iso_code} is not in resolution_map's orphans")
+    _resolution_map().automerge.orphans.remove(iso_code)
+    _resolution_map().save(RESOLUTION_MAP_PATH)

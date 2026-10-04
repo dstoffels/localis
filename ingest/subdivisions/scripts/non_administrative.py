@@ -9,7 +9,7 @@ def _twin(grouping: SubdivisionModel, sub_map: SubdivisionMap) -> SubdivisionMod
     """The unclaimed GeoNames level-1 record every already-merged child of the grouping sits under, if there is one."""
     child_codes = [
         sub.geonames_code for sub in sub_map.filter(grouping.country.alpha2)
-        if sub.parent == grouping.iso_code and sub.geonames_code is not None
+        if sub.parent_iso_code == grouping.iso_code and sub.geonames_code is not None
     ]
     # a child merged into a level-1 record means GeoNames' level 1 is the children's tier, not the grouping's
     if not child_codes or any(code.count(".") != 2 for code in child_codes):
@@ -57,17 +57,17 @@ def flag_grouping_twin_merges(
     groupings = {grouping.iso_code for grouping in non_administrative_subs}
     for iso_code, match in list(resolution_map.automerge.resolutions.items()):
         target = sub_map.get(geonames_id=match.id)
-        if target is None or target.parent not in groupings or target.geonames_code is None or target.geonames_code.count(".") != 1:
+        if target is None or target.parent_iso_code not in groupings or target.geonames_code is None or target.geonames_code.count(".") != 1:
             continue
         siblings_beneath = [
             sub for sub in sub_map.filter(target.country.alpha2)
-            if sub is not target and sub.parent == target.parent and sub.geonames_code is not None
+            if sub is not target and sub.parent_iso_code == target.parent_iso_code and sub.geonames_code is not None
             and sub.geonames_code.startswith(target.geonames_code + ".")
         ]
         if not siblings_beneath:
             continue
         ingest_log.writeline(
-            f"{iso_code} merged into {target.geonames_code}, which its siblings under non-administrative {target.parent} sit beneath, so it is likely the grouping's twin; sent for review",
+            f"{iso_code} merged into {target.geonames_code}, which its siblings under non-administrative {target.parent_iso_code} sit beneath, so it is likely the grouping's twin; sent for review",
             level="WARN",
         )
         del resolution_map.automerge.resolutions[iso_code]

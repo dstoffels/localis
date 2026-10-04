@@ -4,7 +4,7 @@ from ingest.utils import (
     COUNTRIES_MANIFEST_PATH,
     GEONAMES_DUMP_URL,
 )
-from ingest.utils import has_changed, download
+from ingest.utils import fetch
 
 ISO_COUNTRIES_URL = (
     "https://salsa.debian.org/iso-codes-team/iso-codes/-/raw/main/data/iso_3166-1.json"
@@ -26,39 +26,13 @@ def _strip_comment_lines(path: Path) -> None:
 
 
 def fetch_countries_sources(force: bool = False) -> bool:
-
-    # Check first: if either source changed, we need both files locally to merge,
-    # so a partial fetch would leave the other missing.
-    should_download = any(
-        [
-            has_changed(ISO_COUNTRIES_URL, ISO_COUNTRIES_PATH, COUNTRIES_MANIFEST_PATH),
-            has_changed(
-                ISO_HISTORIC_COUNTRIES_URL,
-                ISO_HISTORIC_COUNTRIES_PATH,
-                COUNTRIES_MANIFEST_PATH,
-            ),
-            has_changed(
-                GEONAMES_COUNTRIES_URL, GEONAMES_COUNTRIES_DEST, COUNTRIES_MANIFEST_PATH
-            ),
-        ]
-    )
-
-    if not should_download and not force:
-        return False
-
-    if should_download:
-        download(ISO_COUNTRIES_URL, ISO_COUNTRIES_PATH, COUNTRIES_MANIFEST_PATH)
-
-        download(
-            ISO_HISTORIC_COUNTRIES_URL,
-            ISO_HISTORIC_COUNTRIES_PATH,
-            COUNTRIES_MANIFEST_PATH,
-        )
-
-        download(
-            GEONAMES_COUNTRIES_URL, GEONAMES_COUNTRIES_DEST, COUNTRIES_MANIFEST_PATH
-        )
+    """Downloads whichever of ISO 3166-1, ISO 3166-3 and GeoNames' country info changed; True if the stage should rebuild."""
+    fetched = [
+        fetch(ISO_COUNTRIES_URL, ISO_COUNTRIES_PATH, COUNTRIES_MANIFEST_PATH),
+        fetch(ISO_HISTORIC_COUNTRIES_URL, ISO_HISTORIC_COUNTRIES_PATH, COUNTRIES_MANIFEST_PATH),
+        fetch(GEONAMES_COUNTRIES_URL, GEONAMES_COUNTRIES_DEST, COUNTRIES_MANIFEST_PATH),
+    ]
+    if fetched[2]:
         # GeoNames ships this with a '#' doc header the parser doesn't expect
         _strip_comment_lines(GEONAMES_COUNTRIES_DEST)
-
-    return True
+    return any(fetched) or force

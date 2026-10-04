@@ -1,35 +1,26 @@
 import json
-import urllib.parse
-import urllib.request
-from ingest.utils import SUBDIVISIONS_INPUTS_PATH, ingest_log
+from ingest.utils import SUBDIVISIONS_INPUTS_PATH, ingest_log, sparql
 from ingest.subdivisions.utils.subdivision_map import SubdivisionMap
 from ingest.subdivisions.utils.resolution_map import ResolutionMap, WikidataConflictOrphan
 from ingest.shared.models import SubdivisionModel
 from .automerge import merge_matched_sub
 
-SPARQL_ENDPOINT = "https://query.wikidata.org/sparql"
 SPARQL_QUERY = """
 SELECT ?isoCode ?geonamesId WHERE {
   ?item wdt:P300 ?isoCode .
   ?item wdt:P1566 ?geonamesId .
 }
 """
-USER_AGENT = "localis-data-refresh (+https://github.com/dstoffels/localis)"
 CROSSWALK_PATH = SUBDIVISIONS_INPUTS_PATH / "wikidata_crosswalk.json"
 
 
 def fetch_wikidata_crosswalk() -> dict[str, int]:
     """Queries Wikidata for every (P300 ISO 3166-2 code, P1566 GeoNames id) pair, keeping only unambiguous ISO codes (exactly one distinct geonames_id claimed). Persists the raw crosswalk to inputs/ for inspection, but always re-fetches live rather than checksum-gating, since this is a derived query result, not a stable file with its own ETag."""
-    url = SPARQL_ENDPOINT + "?query=" + urllib.parse.quote(SPARQL_QUERY) + "&format=json"
-    request = urllib.request.Request(
-        url, headers={"User-Agent": USER_AGENT, "Accept": "application/sparql-results+json"}
-    )
     ingest_log.writeline("Querying Wikidata for ISO/GeoNames crosswalk...")
-    with urllib.request.urlopen(request, timeout=120) as response:
-        data = json.loads(response.read().decode("utf-8"))
+    bindings = sparql(SPARQL_QUERY)
 
     by_iso_code: dict[str, set[int]] = {}
-    for binding in data["results"]["bindings"]:
+    for binding in bindings:
         iso_code = binding["isoCode"]["value"]
         geonames_id = int(binding["geonamesId"]["value"])
         by_iso_code.setdefault(iso_code, set()).add(geonames_id)

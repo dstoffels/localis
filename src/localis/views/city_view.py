@@ -1,6 +1,6 @@
 from pathlib import Path
 from typing import Mapping
-from localis.entities import CountryBase, SubdivisionBase, City
+from localis.entities import City
 from localis.stores import CityStore
 from localis.utils.data import CacheFilterPredicate
 from .view import CrossReferencedView, ViewMap
@@ -29,11 +29,6 @@ class CityView(CrossReferencedView[City, CityStore, CountryView, SubdivisionView
         return [self._subdivision_views[sid] for sid in blob[offset : offset + count]]
 
     @property
-    def admin1(self) -> SubdivisionView | None:
-        """The city's admin_level=1 subdivision, read by the search scorer's admin1.* fields."""
-        return next((s for s in self.subdivisions if s.admin_level == 1), None)
-
-    @property
     def country(self) -> CountryView:
         country = self._country_views.get(self._store.country_ids[self._idx])
         assert country is not None, "city has no country, violates ingest invariant"
@@ -52,30 +47,12 @@ class CityView(CrossReferencedView[City, CityStore, CountryView, SubdivisionView
         return self._store.lngs[self._idx]
 
     def to_entity(self) -> City:
-        country = self.country
         return City(
             id=self.id,
             name=self.name,
             geonames_id=self.geonames_id,
-            subdivisions=[
-                SubdivisionBase(
-                    id=s.id,
-                    name=s.name,
-                    geonames_code=s.geonames_code,
-                    geonames_id=s.geonames_id,
-                    iso_code=s.iso_code,
-                    type=s.type,
-                    admin_level=s.admin_level,
-                )
-                for s in self.subdivisions
-            ],
-            country=CountryBase(
-                id=country.id,
-                name=country.name,
-                alpha2=country.alpha2,
-                alpha3=country.alpha3,
-                geonames_id=country.geonames_id,
-            ),
+            subdivisions=[s.to_base() for s in self.subdivisions],
+            country=self.country.to_base(),
             population=self.population,
             lat=self.lat,
             lng=self.lng,

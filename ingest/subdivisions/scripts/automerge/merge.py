@@ -7,7 +7,7 @@ def merge_matched_sub(iso_sub: SubdivisionModel, geo_sub: SubdivisionModel) -> N
     geo_sub.type = iso_sub.type
     geo_sub.iso_code = iso_sub.iso_code
     geo_sub.admin_level = iso_sub.admin_level
-    geo_sub.parent = iso_sub.parent
+    geo_sub.parent_iso_code = iso_sub.parent_iso_code
     # ISO's name always wins; GeoNames' becomes an alias
     if geo_sub.name != iso_sub.name:
         geo_sub.aliases.append(geo_sub.name)

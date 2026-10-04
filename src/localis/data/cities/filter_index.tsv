@@ -11289,6 +11289,7 @@ capel sound	au|aus|australia	au-vic|au.07|au.07.25340|mornington peninsula|vic|v
 cobblebank	au|aus|australia	au-vic|au.07|au.07.24650|melton|vic|victoria
 kurrajong	au|aus|australia	au-nsw|au.02|au.02.13800|hawkesbury|new south wales|nsw
 chisholm	au|aus|australia	au-nsw|au.02|au.02.15050|maitland|new south wales|nsw
+glendale	au|aus|australia	au-qld|au.04|au.04.34530|livingstone|qld|queensland
 washington	abw|aruba|aw	
 tanki leendert	abw|aruba|aw	
 san nicolas	abw|aruba|aw	
@@ -11331,7 +11332,7 @@ yayci	az|aze|azerbaijan	az-cul|az-nx|az.35|az.35.148132|cul|culfa|naxcivan|nx
 yardimli	az|aze|azerbaijan	az-yar|az.66|yar|yardimli
 khojavend	az|aze|azerbaijan	az-xvd|az.65|xocavand|xvd
 khankendi	az|aze|azerbaijan	az-xa|az.61|xa|xankandi
-@hmadbayli	az|aze|azerbaijan	az-sat|az.45|saatli|sat
+ahmadbayli	az|aze|azerbaijan	az-sat|az.45|saatli|sat
 shusha	az|aze|azerbaijan	az-sus|az.55|sus|susa
 salyan	az|aze|azerbaijan	az-sal|az.49|sal|salyan
 shahbuz	az|aze|azerbaijan	az-nx|az-sah|az.35|az.35.147212|naxcivan|nx|sah|sahbuz
@@ -12062,6 +12063,7 @@ mirpur model thana	bangladesh|bd|bgd	13|bd-13|bd-c|bd.81|bd.81.3026|c|dhaka
 singair	bangladesh|bd|bgd	33|bd-33|bd-c|bd.81|bd.81.3056|c|dhaka|manikganj
 khanbaniara	bangladesh|bd|bgd	33|bd-33|bd-c|bd.81|bd.81.3056|c|dhaka|manikganj
 sayani	bangladesh|bd|bgd	33|bd-33|bd-c|bd.81|bd.81.3056|c|dhaka|manikganj
+gulshan	bangladesh|bd|bgd	13|bd-13|bd-c|bd.81|bd.81.3026|c|dhaka
 motijheel	bangladesh|bd|bgd	13|bd-13|bd-c|bd.81|bd.81.3026|c|dhaka
 zwijndrecht	be|bel|belgium	be-vlg|be-vov|be.vlg|be.vlg.vov|oost-vlaanderen|vlaams gewest|vlg|vov
 zwijnaarde	be|bel|belgium	be-vlg|be-vov|be.vlg|be.vlg.vov|oost-vlaanderen|vlaams gewest|vlg|vov
@@ -21551,7 +21553,7 @@ bobruysk	belarus|blr|by	by-ma|by.06|ma|mahiliouskaja voblasc
 oshmyany	belarus|blr|by	by-hr|by.03|hr|hrodzienskaja voblasc
 antopal'	belarus|blr|by	br|bresckaja voblasc|by-br|by.01
 bolbasovo	belarus|blr|by	by-vi|by.07|vi|viciebskaja voblasc
-ryasno, riasno, rasna	belarus|blr|by	by-ma|by.06|ma|mahiliouskaja voblasc
+ryasno, rjasno, rasna	belarus|blr|by	by-ma|by.06|ma|mahiliouskaja voblasc
 novoselki	belarus|blr|by	by-ma|by.06|ma|mahiliouskaja voblasc
 ramanavichy	belarus|blr|by	by-ma|by.06|ma|mahiliouskaja voblasc
 palykavichy pyershyya	belarus|blr|by	by-ma|by.06|ma|mahiliouskaja voblasc
@@ -21578,7 +21580,7 @@ lyasny	belarus|blr|by	by-mi|by.05|mi|minskaja voblasc
 bal'shavik	belarus|blr|by	by-mi|by.05|mi|minskaja voblasc
 usiazh	belarus|blr|by	by-mi|by.05|by.05.621728|mi|minskaja voblasc|smolevichskiy rayon
 nikolaevka-2	belarus|blr|by	by-ma|by.06|by.06.625072|ma|mahiliouskaja voblasc|mahilyowski rayon
-oktiabr'skii	belarus|blr|by	by-mi|by.05|by.05.621728|mi|minskaja voblasc|smolevichskiy rayon
+oktjabr'skij	belarus|blr|by	by-mi|by.05|by.05.621728|mi|minskaja voblasc|smolevichskiy rayon
 michanovichi	belarus|blr|by	by-mi|by.05|mi|minskaja voblasc
 poselok voskhod	belarus|blr|by	by-ma|by.06|ma|mahiliouskaja voblasc
 korobchicy	belarus|blr|by	by-hr|by.03|by.03.628034|grodnenskiy rayon|hr|hrodzienskaja voblasc
@@ -121996,7 +121998,6 @@ suq ash shuyukh	iq|iraq|irq	dhi qar|dq|iq-dq|iq.09|iq.09.90509|suq al-shoyokh di
 sumayl	iq|iraq|irq	da|dahuk|iq-da|iq-kr|iq.08|iq.08.9166607|iqlim kurdistan|kr|semel district
 sinah	iq|iraq|irq	da|dahuk|iq-da|iq-kr|iq.08|iq.08.9166607|iqlim kurdistan|kr|semel district
 'ayn tamr	iq|iraq|irq	ain al-tamur district|iq-ka|iq.12|iq.12.9166603|ka|karbala'
-mostafa	iq|iraq|irq	al-maimouna district|iq-ma|iq.14|iq.14.9166562|ma|maysan
 ash sharqat	iq|iraq|irq	al-shirqat district|iq-sd|iq.18|iq.18.6804454|salah ad din|sd
 shaqlawah	iq|iraq|irq	ar|arbil|iq-ar|iq-kr|iq.11|iq.11.9166591|iqlim kurdistan|kr|shaqlawa
 seyid sadiq	iq|iraq|irq	as sulaymaniyah|iq-kr|iq-su|iq.05|iqlim kurdistan|kr|su
@@ -143072,7 +143073,7 @@ podares	mk|mkd|north macedonia	409|mk-409|mk.84|radovis
 plasnica	mk|mkd|north macedonia	311|mk-311|mk.80|plasnica
 pirok	mk|mkd|north macedonia	609|mk-609|mk.e8|tetovo
 pirava	mk|mkd|north macedonia	403|mk-403|mk.e9|valandovo
-petrovets	mk|mkd|north macedonia	810|mk-810|mk.79|petrovec
+petrovec	mk|mkd|north macedonia	810|mk-810|mk.79|petrovec
 pehcevo	mk|mkd|north macedonia	208|mk-208|mk.78|pehcevo
 patiska reka	mk|mkd|north macedonia	812|mk-812|mk.92|sopiste
 pasino ruvci	mk|mkd|north macedonia	504|krivogastani|mk-504|mk.53
@@ -143102,7 +143103,7 @@ mralino	mk|mkd|north macedonia
 morani	mk|mkd|north macedonia	813|mk-813|mk.a2|studenicani
 mogila	mk|mkd|north macedonia	506|mk-506|mk.d9|mogila
 mislesevo	mk|mkd|north macedonia	312|mk-312|mk.e6|struga
-mirkovtsi	mk|mkd|north macedonia	
+mirkovci	mk|mkd|north macedonia	
 miravci	mk|mkd|north macedonia	405|gevgelija|mk-405|mk.33
 miletino	mk|mkd|north macedonia	602|brvenica|mk-602|mk.12
 miladinovci	mk|mkd|north macedonia	807|ilinden|mk-807|mk.36
@@ -194793,7 +194794,7 @@ al-fulah	sd|sdn|sudan	gk|sd-gk|sd.62|west kordofan
 burri al mahas	sd|sdn|sudan	kh|khartoum|sd-kh|sd.29
 nagaro	sd|sdn|sudan	gezira|gz|sd-gz|sd.38
 riyadh	sd|sdn|sudan	kh|khartoum|sd-kh|sd.29
-al taif	sd|sdn|sudan	kh|khartoum|sd-kh|sd.29
+ِal taif	sd|sdn|sudan	kh|khartoum|sd-kh|sd.29
 garden city	sd|sdn|sudan	kh|khartoum|sd-kh|sd.29
 al jazeera aba	sd|sdn|sudan	nw|sd-nw|sd.41|white nile
 aldinigila wad dhahi	sd|sdn|sudan	kosti|nw|sd-nw|sd.41|sd.41.8051148|white nile
@@ -200459,6 +200460,7 @@ yildizeli	tr|tur|turkiye	58|sivas|tr-58|tr.58|tr.58.8631658|yildizeli ilcesi
 yigityolu	tr|tur|turkiye	21|baglar|diyarbakir|tr-21|tr.21|tr.21.9565135
 yigityolu	tr|tur|turkiye	31|altinozu ilcesi|hatay|tr-31|tr.31|tr.31.438418
 yigitler	tr|tur|turkiye	17|bayramic ilcesi|canakkale|tr-17|tr.17|tr.17.8632579
+yigitcavus	tr|tur|turkiye	21|diyarbakir|sur|tr-21|tr.21|tr.21.9565377
 yiginli	tr|tur|turkiye	27|gaziantep|sehitkamil|tr-27|tr.83|tr.83.7732373
 yesilyuva	tr|tur|turkiye	20|acipayam ilcesi|denizli|tr-20|tr.20|tr.20.8632193
 yesilyurt	tr|tur|turkiye	45|alasehir ilcesi|manisa|tr-45|tr.45|tr.45.8632416
@@ -234684,7 +234686,7 @@ sahhab	ye|yem|yemen	'amran|am|iyal surayh|ye-am|ye.19|ye.19.2918
 majz	ye|yem|yemen	majz|sa`dah|sd|ye-sd|ye.15|ye.15.2210
 al-khasha lower	ye|yem|yemen	as said|sh|shabwah|ye-sh|ye.05|ye.05.2112
 al-khasha upper	ye|yem|yemen	as said|sh|shabwah|ye-sh|ye.05|ye.05.2112
-al-medy village, qry@ lmdy	ye|yem|yemen	dh|dhamar|wusab al ali|ye-dh|ye.11|ye.11.2006
+al-medy village, qryt almdy	ye|yem|yemen	dh|dhamar|wusab al ali|ye-dh|ye.11|ye.11.2006
 village of alamrah	ye|yem|yemen	maqbanah|ta|ta`izz|ye-ta|ye.25|ye.25.1505
 jadder cemetery	ye|yem|yemen	amanat al 'asimah|bani al harith|sa|ye-sa|ye.26|ye.26.1310
 ahl mohammed bin ahmed	ye|yem|yemen	ab|abyan|khanfir|ye-ab|ye.01|ye.01.1211

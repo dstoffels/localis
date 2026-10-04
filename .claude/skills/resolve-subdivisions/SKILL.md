@@ -8,29 +8,29 @@ disallowed-tools: Bash Read Grep Glob Edit Write Agent WebFetch
 
 ## Reading the orphan and its candidates
 
-`next` returns the orphan's `iso_code`, `name`, `aliases`, `country`, `type` and `admin_level`, plus a batch of `candidates`.
+`next_orphan` returns the orphan's `iso_code`, `name`, `aliases`, `country`, `type` and `admin_level`, plus a batch of `candidates`.
 
 Candidates come from every GeoNames subdivision in the orphan's country, as a list ordered best match first, with candidates at the orphan's own level first on ties. Each is formatted `"geonames_id: name, aliases - [admin_level]"`, for example `"1668352: Tainan, 台南市, 臺南市 - [2]"`, with two optional suffixes:
 - `CLAIMED BY <iso_code>`: another ISO subdivision already holds this record. You can never merge into it.
 - `(note)`: for some orphans, the first batch holds only the specific records automerge flagged, either "automerge's pick" (a match just over the threshold that needs confirming) or "automerge's contested target" (a record several ISO subdivisions matched equally well), or "automerge's pick, likely the record for this subdivision's non-administrative grouping" (a match into the larger unit the subdivision belongs to, such as Utena County for the Utena district municipality; look for the subdivision's own record instead). The batch after it is the regular top-tier batch. A note can also read "type mismatch": the GeoNames name contains a word like "City" that suggests a different kind of place than the ISO type. That is sometimes a real difference (a city vs. the region around it) and sometimes just naming (Hamburg is both a city and a German state), so judge which before merging. A note can also read "directional mismatch": the names differ by a word like North or Southern. That usually means a different division (East vs. West), but sometimes it's just a different name for the same place, so confirm with the web search before merging.
 
-A `wikidata_conflict` orphan is an earlier skill decision that disagrees with Wikidata's mapping. `next` includes it as `current_decision` (its `geonames_id`, or "add as-is", and its `reason`), and its first batch holds the two records in question, noted "Wikidata's mapping" and "current skill decision". Wikidata agrees with independent checks over 99% of the time, so keep the current decision only if you can say concretely why Wikidata's record is wrong (a different place, the wrong level, a populated place rather than the administrative unit). Either way, `merge` with the record you choose, or `add` to keep an "add as-is" decision, giving that explanation as the `reason`.
+A `wikidata_conflict` orphan is an earlier skill decision that disagrees with Wikidata's mapping. `next_orphan` includes it as `current_decision` (its `geonames_id`, or "add as-is", and its `reason`), and its first batch holds the two records in question, noted "Wikidata's mapping" and "current skill decision". Wikidata agrees with independent checks over 99% of the time, so keep the current decision only if you can say concretely why Wikidata's record is wrong (a different place, the wrong level, a populated place rather than the administrative unit). Either way, `merge` with the record you choose, or `add` to keep an "add as-is" decision, giving that explanation as the `reason`.
 
 ISO and GeoNames sometimes disagree on a subdivision's level (a city ISO lists at level 1 can sit at level 2 in GeoNames), so a candidate at a different level can still be the right one. Use the level to tell apart same-name candidates, such as a city and the county named after it, not to rule candidates out.
 
 ## Instructions
 
 ### Step 1. Retrieve the queued orphan
-Call the `next` tool to retrieve the queued orphaned ISO subdivision and its first batch of candidates.
+Call the `next_orphan` tool to retrieve the queued orphaned ISO subdivision and its first batch of candidates.
 
-If `next` returns `null`, stop. We've reached the end of the orphaned subdivisions list.
+If `next_orphan` returns `null`, stop. We've reached the end of the orphaned subdivisions list.
 
-If `next` returns "CONTEXT BUDGET REACHED...", follow the instructions in that message verbatim. Do not report session progress.
+If `next_orphan` returns "CONTEXT BUDGET REACHED...", follow the instructions in that message verbatim. Do not report session progress.
 
-If `next` returns an empty candidates array, proceed to Step 3.
+If `next_orphan` returns an empty candidates array, proceed to Step 3.
 
 ### Step 2. Check the top-tier candidates
-The top-tier batch is the first batch, or the second batch if the first held only flagged records (call `next` once more to get it, after checking the flagged records).
+The top-tier batch is the first batch, or the second batch if the first held only flagged records (call `next_orphan` once more to get it, after checking the flagged records).
 
 Use real-world knowledge, not string similarity. If iterating over candidates of the same country as the previous orphan, you can use that previous context to inform your decision.
 
@@ -48,13 +48,13 @@ If the search confirms the matching place is `CLAIMED BY` another ISO code, or c
 Otherwise, proceed to Step 4.
 
 ### Step 4. Check the remaining candidates
-Call `next` repeatedly to page through the remaining batches, checking each against what the search taught you. A place listed under an old or local name can appear in any batch.
+Call `next_orphan` repeatedly to page through the remaining batches, checking each against what the search taught you. A place listed under an old or local name can appear in any batch.
 
 If you find one specific unclaimed candidate that is the same place, call `merge` with `candidate_geonames_id` and a `reason` naming what connects them, then return to Step 1.
 
 If you find the same place `CLAIMED BY` another ISO code, or two or more plausible candidates you can't tell apart, proceed to Step 6.
 
-If `next` returns an empty candidates array, proceed to Step 5.
+If `next_orphan` returns an empty candidates array, proceed to Step 5.
 
 ### Step 5. Decide whether the place has no GeoNames counterpart
 Call the `add` tool only if the search confirmed the orphan is a real, current or historical entity and one of these reasons applies. Give the reason that applies, with the specifics, as the `reason`, then return to Step 1.

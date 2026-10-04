@@ -1,6 +1,6 @@
 from pathlib import Path
 from typing import Mapping
-from localis.entities import Country, HistoricInfo, MacroregionBase
+from localis.entities import Country, CountryBase, HistoricInfo, MacroregionBase
 from localis.stores import CountryStore
 from .view import View, ViewMap
 from .macroregion_view import MacroregionView
@@ -68,6 +68,9 @@ class CountryView(View[Country, CountryStore]):
     @property
     def groupings(self) -> tuple[MacroregionBase, ...]:
         return tuple(self._macroregion_views[i].to_base() for i in self._store.grouping_ids[self._idx])
+
+    def to_base(self) -> CountryBase:
+        return CountryBase(id=self.id, name=self.name, alpha2=self.alpha2, alpha3=self.alpha3, geonames_id=self.geonames_id)
 
     def to_entity(self) -> Country:
         return Country(

@@ -1,4 +1,4 @@
-from ingest.utils import has_changed, download
+from ingest.utils import fetch
 from ingest.utils import (
     SUBDIVISIONS_INPUTS_PATH,
     SUBDIVISIONS_MANIFEST_PATH,
@@ -20,31 +20,11 @@ ISO_CODES_SUBS_PATH = SUBDIVISIONS_INPUTS_PATH / "iso_3166-2.json"
 
 
 def fetch_subdivisions_sources(force: bool = False) -> bool:
-
-    # Check first: merging needs all sources locally, so if any one of them
-    # changed, a partial fetch would leave the others missing.
-    should_download = any(
-        [
-            has_changed(ADMIN1_URL, GEONAMES_ADMIN1_PATH, SUBDIVISIONS_MANIFEST_PATH),
-            has_changed(ADMIN2_URL, GEONAMES_ADMIN2_PATH, SUBDIVISIONS_MANIFEST_PATH),
-            has_changed(
-                ISO_CODES_SUBDIVISIONS_URL,
-                ISO_CODES_SUBS_PATH,
-                SUBDIVISIONS_MANIFEST_PATH,
-            ),
-        ]
-    )
-
-    shared_downloaded = fetch_shared_sources(force=force)
-
-    if not should_download and not shared_downloaded and not force:
-        return False
-
-    if should_download:
-        download(ADMIN1_URL, GEONAMES_ADMIN1_PATH, SUBDIVISIONS_MANIFEST_PATH)
-        download(ADMIN2_URL, GEONAMES_ADMIN2_PATH, SUBDIVISIONS_MANIFEST_PATH)
-        download(
-            ISO_CODES_SUBDIVISIONS_URL, ISO_CODES_SUBS_PATH, SUBDIVISIONS_MANIFEST_PATH
-        )
-
-    return True
+    """Downloads whichever of GeoNames' admin1/admin2 codes, ISO 3166-2 and the shared sources changed; True if the stage should rebuild."""
+    fetched = [
+        fetch(ADMIN1_URL, GEONAMES_ADMIN1_PATH, SUBDIVISIONS_MANIFEST_PATH),
+        fetch(ADMIN2_URL, GEONAMES_ADMIN2_PATH, SUBDIVISIONS_MANIFEST_PATH),
+        fetch(ISO_CODES_SUBDIVISIONS_URL, ISO_CODES_SUBS_PATH, SUBDIVISIONS_MANIFEST_PATH),
+        fetch_shared_sources(force=force),
+    ]
+    return any(fetched) or force

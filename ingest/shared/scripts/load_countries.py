@@ -1,6 +1,6 @@
 import csv
 from ingest.utils import DATA_PATH, ingest_log
-from ingest.shared.models import CountryModel
+from ingest.shared.models import CountryModel, HistoricModel
 
 
 def load_countries() -> dict[str, CountryModel]:
@@ -10,9 +10,10 @@ def load_countries() -> dict[str, CountryModel]:
         countries: dict[str, CountryModel] = {}
         for id, row in enumerate(reader, start=1):
             # macroregion placements are left out: downstream stages only relate to countries by id and name fields
-            name, alpha2, alpha3, geonames_id, official_name, common_name, aliases, numeric, flag, historic, _, _ = row
+            name, alpha2, alpha3, geonames_id, official_name, common_name, aliases, numeric, flag, historic_cell, _, _ = row
+            historic = HistoricModel.from_cell(historic_cell)
             # historic rows reuse active and each other's alpha2 codes, so key them by alpha_4 like ingest_countries() does
-            key = historic.split("|")[0] if historic else alpha2
+            key = historic.alpha_4 if historic else alpha2
             countries[key] = CountryModel(
                 id=id,
                 name=name,

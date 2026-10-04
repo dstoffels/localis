@@ -24,14 +24,48 @@ Blocked on the above, needs a dedicated design pass before implementation starts
 3. Implement custom exceptions (localis.exceptions module)?
 4. Implement autocomplete for registries and/or global interface.
 5. No ISO source maps countries to their language(s) (639 and 3166 don't cross-reference); evaluate Unicode CLDR's territory-language data for this.
-6. Search, remaining limits: a subdivision query without context can't pick among same-name records (dozens of Washington Counties), which caps subdivisions' top-result accuracy; benchmarking subdivision queries with their country as context would measure that case the way cities' admin1 context does. `unidecode` transliteration of non-Latin aliases (Korean, Arabic) doesn't consistently match the record's own Latin name. The short-name fallback is off for cities (their queries usually carry context); enabling it is `SHORT_NAMES = True` on `CityModel`, at about 430KB shipped. Indexing each name separately (true per-name Dice) is parked until a failure trace shows alias dilution.
+6. Search, remaining limits: a subdivision query without context can't pick among same-name records (dozens of Washington Counties), which caps subdivisions' top-result accuracy; benchmarking subdivision queries with their country as context would measure that case the way cities' admin1 context does. Indexing each name separately (true per-name Dice) is parked until a failure trace shows alias dilution.
 7. Macroregion filters on subdivisions and cities (`cities.filter(macroregion="Europe")`), at the cost of another filter column on the largest dataset; deferred until there's demand. The macroregions design is recorded in `methodology.md` (sources, naming, placement rules) and `dev.md`.
 8. Pin the CLDR version shared by `cldr_territory_info.json` (shared stage) and the macroregions inputs, which each fetch CLDR's `main` and could land on different CLDR commits in one run.
 9. Split cities from the core package (`localis` with macroregions, countries and subdivisions, about 11MB installed; cities as an extra backed by a separate data package, about 49MB). Deferred until users report package size as a problem. City rows store country and subdivision ids that are only valid against the exact core data they were built with, so the two would release in lockstep from one ingest run with an exact-version pin, which removes most of the usual benefit of a split.
+10. Population range filters on cities, `cities.filter(population__gt=..., population__lt=...)`, removed as a commented-out stub from `CityRegistry.filter()` during the code review cleanup. The filter index only holds exact values, so a range needs its own path, such as a scan over `CityStore.populations` or a population-sorted id array searched with `bisect`.
+
+## Wikidata provenance
+
+Every downloaded source's ETag is committed in its stage's manifest, so a localis version traces back to the exact files it was built from. The two Wikidata queries don't: the country names query (aliases for current and historic countries) and the ISO 3166-2 to GeoNames crosswalk (subdivision merges) run live whenever their stage rebuilds, so a rebuild can ship different Wikidata data with no source marked changed, and a Wikidata edit on its own never triggers a rebuild. Both results are written to `inputs/` (`wikidata_country_names.json`, about 50 KB, and `wikidata_crosswalk.json`, about 100 KB) but are gitignored and fingerprinted nowhere. For subdivisions the effect is already tracked, since the committed `resolution_map.json` records every `wikidata_merge`; the raw input and the rebuild trigger are what's missing.
+
+### Provenance
+
+Both raw results are committed, and each stage's manifest records a hash of its result, like the `resolution_map` fingerprint. The hash makes a changed result count as a changed source, so the monthly run rebuilds the stage on a Wikidata change alone. The committed file records which Wikidata state each version shipped, and its diff in the ingest PR shows what Wikidata changed, next to the shipped data it changed.
+
+### Subdivision crosswalk
+
+Wikidata merges run before automerge and apply unreviewed, so a change to the crosswalk can relink a subdivision silently. Three kinds of change:
+
+1. A mapping moves to a different GeoNames record. Today the subdivision is relinked silently; this is the case that needs a gate.
+2. A mapping appears for a code that automerge or a skill decision had resolved. Skill decisions are covered already: `flag_wikidata_conflicts()` sends one that disagrees back as a `wikidata_conflict` orphan. An automerge result is replaced silently.
+3. A mapping disappears. The code falls through to automerge, which merges or orphans it, so this needs nothing new.
+
+Wikidata agrees with independent checks over 99% of the time and most edits are corrections, so orphaning every change would be noise. A changed or new mapping is accepted when automerge's own scoring would pick the same record (the corroboration tier of the audit design), and otherwise becomes an orphan in a new `wikidata_changed` bucket carrying the previous and new targets, like `wikidata_conflict`. The existing orphan gate then holds the release until the skill reviews it. The previous mapping comes from the committed `wikidata_merge`.
+
+### Country names
+
+Country names have no merge to review: a change adds or removes aliases, which already shows as a diff of the committed `countries.tsv` in the ingest PR, and with the raw result committed its diff shows the cause beside the effect. The PR review is the escalation, and `name_blocklist.json` is the fix for a bad alias.
+
+### Result guard
+
+The likelier failure than a bad edit is a degraded response: the Wikidata Query Service can return a valid but partial result instead of an error, which today would drop hundreds of aliases or send hundreds of subdivisions to automerge. With the previous result committed, ingest compares the two and fails, without applying the new one, when a result loses more than a threshold share of its codes.
+
+### Open questions
+
+- The guard's threshold: 5% fewer codes is a starting point, to be checked against how much the results move month to month.
+- What counts as corroboration for a crosswalk change: automerge's top candidate qualifying for the new target, or the new target merely qualifying.
 
 ## Localization (gettext-based name translation)
 
 Initial plan, not yet started. Goal: pycountry-style translation of `Country`/`Subdivision` names (and `Currency`/`Language`/`Script` once those exist) into other locales via gettext, available both as a per-object transform and as a query-time option on the registries.
+
+Since 2026-10-04 every shipped name is in Latin script (non-Latin GeoNames aliases were dropped, see methodology's Discovery), so this is the planned way to serve names in other scripts. `normalize()` leaves non-Latin text as written, so a per-locale corpus can be matched in its own script.
 
 ### Mechanism
 
@@ -92,7 +126,7 @@ stale, contested and new_candidate become orphans in three new buckets, so the r
 
 ### `retired_decisions`
 
-`retired_decisions: dict[str, RetiredDecision]`, where `RetiredDecision` carries the full `SkillDecision` plus `retired_because: Literal["removed_from_iso", "bypassed"]`. No timestamp, to keep ingest output deterministic. Retirement is one-way: if ISO later restores a retired code, it comes back as a normal orphan, and its retired entry stays as the record of the earlier decision; the skill sees that entry as `previous_decision` in `next` so the history informs the new decision without deciding it. MH-L's decision, removed by hand when the Marshall Islands chains were bypassed, is backfilled as the first entry.
+`retired_decisions: dict[str, RetiredDecision]`, where `RetiredDecision` carries the full `SkillDecision` plus `retired_because: Literal["removed_from_iso", "bypassed"]`. No timestamp, to keep ingest output deterministic. Retirement is one-way: if ISO later restores a retired code, it comes back as a normal orphan, and its retired entry stays as the record of the earlier decision; the skill sees that entry as `previous_decision` in `next_orphan` so the history informs the new decision without deciding it. MH-L's decision, removed by hand when the Marshall Islands chains were bypassed, is backfilled as the first entry.
 
 A new `flag_new_candidates()` runs after `try_merge()`, once every recomputed source has claimed what it will, so only genuinely unclaimed records count. For each add decision it scores the ISO subdivision against its country's unclaimed GeoNames records at every level, with automerge's gates (`score_candidates()` with the type-family and directional checks on, `score >= threshold`). A level-crossing match only reopens a decision for review, never merges, so the wider pool is safe here even though automerge itself stays same-level. A qualifying record not in the decision's `candidates_seen` makes it a `new_candidate` orphan.
 

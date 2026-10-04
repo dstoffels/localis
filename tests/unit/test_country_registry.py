@@ -1,5 +1,5 @@
 from localis import countries
-from localis.entities import Country, HistoricInfo
+from localis.entities import Country
 
 
 class TestHistoricCountries:

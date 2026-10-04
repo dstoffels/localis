@@ -8,27 +8,38 @@ on:
       - ingest
 
 permissions:
-  contents: write
-  pull-requests: write
+  contents: read
 
 concurrency:
   group: ingest
   cancel-in-progress: false
 
 jobs:
-  ingest:
+  # runs the pipeline read-only and commits locally; its commits reach publish as a git bundle, so the job holding write access runs no project code
+  build:
     runs-on: ubuntu-latest
     if: github.repository == 'dstoffels/localis'
 
+    outputs:
+      orphans: ${{ steps.orphans.outputs.count }}
+      data_changed: ${{ steps.version.outputs.data_changed }}
+      bumped: ${{ steps.version.outputs.bumped }}
+      version: ${{ steps.version.outputs.version }}
+      changed: ${{ steps.stage.outputs.changed }}
+      has_commits: ${{ steps.bundle.outputs.has_commits }}
+
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           ref: ingest
           fetch-depth: 0
+          persist-credentials: false
 
       - name: Set up uv and Python
-        uses: astral-sh/setup-uv@v6
+        uses: astral-sh/setup-uv@d0cc045d04ccac9d8b7881df0226f9e82c39688e # v6.8.0
         with:
+          version: "0.12.19"
+          checksum: "23bf5552d220e0842b65c862097b2ebaeba0064b74eda5e565e77fd25969d8c8"
           python-version: "3.11"
           enable-cache: true
 
@@ -66,13 +77,13 @@ jobs:
           uv run poe ingest
           code=$?
           echo "exit_code=$code" >> "$GITHUB_OUTPUT"
-          # exit 10 means orphans need resolving; the next step records them before failing
+          # exit 10 means orphans need resolving; the next step records them for publish to push before failing
           if [ "$code" -ne 0 ] && [ "$code" -ne 10 ]; then
             exit "$code"
           fi
 
-      # Only the orphan queue and logs are committed; manifests are written only after a stage dumps, so an orphan-blocked run leaves them unchanged
-      - name: Record orphans and fail
+      - name: Record orphans
+        id: orphans
         if: steps.ingest.outputs.exit_code == '10'
         run: |
           count=$(python -c "import json; m = json.load(open('ingest/subdivisions/outputs/resolution_map.json')); print(sum(len(b) for b in m['automerge']['orphans'].values()))")
@@ -80,21 +91,23 @@ jobs:
           if ! git diff --cached --quiet; then
             git commit -m "chore: ingest found $count orphans awaiting resolution"
           fi
-          git push origin ingest
-          echo "::error::Ingest found $count subdivision orphans; the queue is committed to the ingest branch. Resolve locally: pull ingest, run 'poe ingest --force', run the resolve-subdivisions skill, run 'poe ingest', then commit and push to ingest."
-          exit 1
+          echo "count=$count" >> "$GITHUB_OUTPUT"
 
       - name: Regenerate data stats and docs
+        if: steps.ingest.outputs.exit_code == '0'
         run: uv run poe analysis --data-only
 
       - name: Type Check
+        if: steps.ingest.outputs.exit_code == '0'
         run: uv run poe typecheck
 
       - name: Run Tests
+        if: steps.ingest.outputs.exit_code == '0'
         run: uv run poe test
 
       - name: Bump version if the published dataset changed
         id: version
+        if: steps.ingest.outputs.exit_code == '0'
         run: |
           current="$(uv version --short)"
           if [ -z "$(git status --porcelain -- src/localis/data)" ]; then
@@ -112,6 +125,7 @@ jobs:
 
       - name: Stage changes
         id: stage
+        if: steps.ingest.outputs.exit_code == '0'
         run: |
           git add -A
           if git diff --cached --quiet; then
@@ -122,18 +136,65 @@ jobs:
 
       - name: Commit changes
         if: steps.stage.outputs.changed == 'true'
+        env:
+          BUMPED: ${{ steps.version.outputs.bumped }}
+          VERSION: ${{ steps.version.outputs.version }}
         run: |
-          if [ "${{ steps.version.outputs.bumped }}" == "true" ]; then
-            git commit -m "chore: automated data ingest (v${{ steps.version.outputs.version }})"
+          if [ "$BUMPED" == "true" ]; then
+            git commit -m "chore: automated data ingest (v$VERSION)"
           else
             git commit -m "chore: automated data ingest"
           fi
 
+      - name: Bundle new commits
+        id: bundle
+        run: |
+          if [ "$(git rev-list --count origin/ingest..HEAD)" -eq 0 ]; then
+            echo "has_commits=false" >> "$GITHUB_OUTPUT"
+          else
+            git bundle create ingest.bundle origin/ingest..HEAD
+            echo "has_commits=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        if: steps.bundle.outputs.has_commits == 'true'
+        with:
+          name: ingest-bundle
+          path: ingest.bundle
+          retention-days: 1
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        if: needs.build.outputs.has_commits == 'true'
+        with:
+          ref: ingest
+          fetch-depth: 0
+          persist-credentials: false
+
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        if: needs.build.outputs.has_commits == 'true'
+        with:
+          name: ingest-bundle
+
       - name: Push ingest branch
-        run: git push origin ingest
+        if: needs.build.outputs.has_commits == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git fetch ingest.bundle HEAD
+          gh auth setup-git
+          git push origin FETCH_HEAD:refs/heads/ingest
 
       - name: Ensure PR exists
-        if: steps.stage.outputs.changed == 'true'
+        if: needs.build.outputs.changed == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -145,23 +206,34 @@ jobs:
           fi
 
       - name: Comment on PR with this run's changes
-        if: steps.stage.outputs.changed == 'true'
+        if: needs.build.outputs.changed == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BUMPED: ${{ needs.build.outputs.bumped }}
+          DATA_CHANGED: ${{ needs.build.outputs.data_changed }}
+          VERSION: ${{ needs.build.outputs.version }}
         run: |
           {
             echo "### Ingest run: $(date -u +%Y-%m-%d)"
             echo
-            if [ "${{ steps.version.outputs.bumped }}" == "true" ]; then
-              echo "Dataset changed, version bumped to \`${{ steps.version.outputs.version }}\`."
-            elif [ "${{ steps.version.outputs.data_changed }}" == "true" ]; then
-              echo "Dataset changed; rides along with unreleased version \`${{ steps.version.outputs.version }}\`, no bump."
+            if [ "$BUMPED" == "true" ]; then
+              echo "Dataset changed, version bumped to \`$VERSION\`."
+            elif [ "$DATA_CHANGED" == "true" ]; then
+              echo "Dataset changed; rides along with unreleased version \`$VERSION\`, no bump."
             else
               echo "Only bookkeeping files changed; no dataset version bump."
             fi
             echo
             echo '```'
-            git diff --stat HEAD~1 HEAD -- src/localis/data
+            git diff --stat FETCH_HEAD~1 FETCH_HEAD -- src/localis/data
             echo '```'
           } > run_summary.md
           gh pr comment ingest --body-file run_summary.md
+
+      - name: Fail on orphans
+        if: needs.build.outputs.orphans != ''
+        env:
+          ORPHANS: ${{ needs.build.outputs.orphans }}
+        run: |
+          echo "::error::Ingest found $ORPHANS subdivision orphans; the queue is committed to the ingest branch. Resolve locally: pull ingest, run 'poe ingest --force', run the resolve-subdivisions skill, run 'poe ingest', then commit and push to ingest."
+          exit 1
