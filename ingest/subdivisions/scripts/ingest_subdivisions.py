@@ -21,7 +21,14 @@ from .iso_subdivisions import load_iso_subs
 from .merge_alternate_names import merge_alternate_name_aliases
 from .automerge import try_merge
 from .resolve_subdivisions import apply_skill_decisions
-from .wikidata_subdivisions import fetch_wikidata_crosswalk, flag_wikidata_conflicts, apply_wikidata_matches
+from .wikidata_subdivisions import (
+    fetch_wikidata_crosswalk,
+    committed_crosswalk,
+    commit_crosswalk,
+    log_crosswalk_changes,
+    flag_wikidata_conflicts,
+    apply_wikidata_matches,
+)
 from .non_administrative import apply_non_administrative, flag_grouping_twin_merges
 from .dump_unmerged import write as write_unmerged_doc
 
@@ -57,9 +64,18 @@ def ingest_subdivisions(
         decisions = resolution_map.decisions_fingerprint()
         decisions_changed = decisions != committed_value(SUBDIVISIONS_MANIFEST_PATH, DECISIONS_MANIFEST_KEY)
 
+        # the Wikidata crosswalk has no ETag, so the committed file is its record: a result that differs from it is an update
+        crosswalk = fetch_wikidata_crosswalk()
+        committed = committed_crosswalk()
+        crosswalk_changed = crosswalk != committed
+        if crosswalk_changed:
+            log_crosswalk_changes(crosswalk, committed)
+
         # rows store country ids, so a countries rebuilt upstream (passed in) forces a rebuild even when subdivision sources are unchanged
-        if not has_update and not decisions_changed and countries is None:
-            ingest_log.writeline("No updates for subdivisions, their resolution decisions or countries.")
+        if not has_update and not decisions_changed and not crosswalk_changed and countries is None:
+            ingest_log.writeline("No updates for subdivisions, their resolution decisions, the Wikidata crosswalk or countries.")
+            # same mappings, so committing only settles the file's formatting
+            commit_crosswalk()
             return None
         record_pending(SUBDIVISIONS_MANIFEST_PATH, DECISIONS_MANIFEST_KEY, decisions)
 
@@ -80,11 +96,10 @@ def ingest_subdivisions(
         remaining_iso_subs = apply_skill_decisions(iso_subs, resolution_map, sub_map)
 
         # Skill decisions win, but only knowingly: any that disagree with a valid Wikidata mapping they weren't made against go back to the skill
-        crosswalk = fetch_wikidata_crosswalk()
         flag_wikidata_conflicts(crosswalk, resolution_map, sub_map)
 
-        # Apply unambiguous Wikidata crosswalk matches next, a stronger signal than fuzzy string matching, still ahead of auto-merge
-        remaining_iso_subs = apply_wikidata_matches(remaining_iso_subs, resolution_map, sub_map, crosswalk)
+        # Apply unambiguous Wikidata crosswalk matches next, a stronger signal than fuzzy string matching, still ahead of auto-merge; one that changes a previous resolution goes to the skill instead
+        remaining_iso_subs = apply_wikidata_matches(remaining_iso_subs, resolution_map, sub_map, crosswalk, committed)
 
         # Non-administrative groupings take their GeoNames twin, if any, once their children have merged and before auto-merge, so a child can't match the twin
         apply_non_administrative(non_administrative_subs, sub_map, resolution_map)
@@ -108,6 +123,7 @@ def ingest_subdivisions(
         # only now are this run's sources consumed; a run stopped by orphans leaves them pending, so the next run reprocesses them
         commit_manifest(SUBDIVISIONS_MANIFEST_PATH)
         commit_manifest(SHARED_MANIFEST_PATH)
+        commit_crosswalk()
         ingest_log.writeline(f"completed: {len(sub_map)} subdivisions")
         return sub_map.to_geocode_map()
     finally:

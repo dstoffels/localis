@@ -32,34 +32,15 @@ Blocked on the above, needs a dedicated design pass before implementation starts
 
 ## Wikidata provenance
 
-Every downloaded source's ETag is committed in its stage's manifest, so a localis version traces back to the exact files it was built from. The two Wikidata queries don't: the country names query (aliases for current and historic countries) and the ISO 3166-2 to GeoNames crosswalk (subdivision merges) run live whenever their stage rebuilds, so a rebuild can ship different Wikidata data with no source marked changed, and a Wikidata edit on its own never triggers a rebuild. Both results are written to `inputs/` (`wikidata_country_names.json`, about 50 KB, and `wikidata_crosswalk.json`, about 100 KB) but are gitignored and fingerprinted nowhere. For subdivisions the effect is already tracked, since the committed `resolution_map.json` records every `wikidata_merge`; the raw input and the rebuild trigger are what's missing.
-
-### Provenance
-
-Both raw results are committed, and each stage's manifest records a hash of its result, like the `resolution_map` fingerprint. The hash makes a changed result count as a changed source, so the monthly run rebuilds the stage on a Wikidata change alone. The committed file records which Wikidata state each version shipped, and its diff in the ingest PR shows what Wikidata changed, next to the shipped data it changed.
-
-### Subdivision crosswalk
-
-Wikidata merges run before automerge and apply unreviewed, so a change to the crosswalk can relink a subdivision silently. Three kinds of change:
-
-1. A mapping moves to a different GeoNames record. Today the subdivision is relinked silently; this is the case that needs a gate.
-2. A mapping appears for a code that automerge or a skill decision had resolved. Skill decisions are covered already: `flag_wikidata_conflicts()` sends one that disagrees back as a `wikidata_conflict` orphan. An automerge result is replaced silently.
-3. A mapping disappears. The code falls through to automerge, which merges or orphans it, so this needs nothing new.
-
-Wikidata agrees with independent checks over 99% of the time and most edits are corrections, so orphaning every change would be noise. A changed or new mapping is accepted when automerge's own scoring would pick the same record (the corroboration tier of the audit design), and otherwise becomes an orphan in a new `wikidata_changed` bucket carrying the previous and new targets, like `wikidata_conflict`. The existing orphan gate then holds the release until the skill reviews it. The previous mapping comes from the committed `wikidata_merge`.
+The subdivision crosswalk is done: the result is committed as `ingest/subdivisions/inputs/wikidata_crosswalk.json` and replaced only after subdivisions dump, a result that differs from it rebuilds subdivisions, a mapping that would change a code's previous resolution becomes a `wikidata_changed` orphan, and a result missing committed codes is kept only once a repeat query confirms it. A manifest hash was dropped, since the committed file is the record and comparing against it is the change check. The country names query still runs live whenever countries rebuild, isn't committed, and a Wikidata edit alone never triggers a rebuild.
 
 ### Country names
 
-Country names have no merge to review: a change adds or removes aliases, which already shows as a diff of the committed `countries.tsv` in the ingest PR, and with the raw result committed its diff shows the cause beside the effect. The PR review is the escalation, and `name_blocklist.json` is the fix for a bad alias.
-
-### Result guard
-
-The likelier failure than a bad edit is a degraded response: the Wikidata Query Service can return a valid but partial result instead of an error, which today would drop hundreds of aliases or send hundreds of subdivisions to automerge. With the previous result committed, ingest compares the two and fails, without applying the new one, when a result loses more than a threshold share of its codes.
+The crosswalk's treatment without the gate: commit `wikidata_country_names.json`, written only after countries dump, rebuild countries when a result differs from it, and confirm a result that loses codes with a repeat query before keeping it. Country names have no merge to review: a change adds or removes aliases, which already shows as a diff of the committed `countries.tsv` in the ingest PR, and with the raw result committed its diff shows the cause beside the effect. The PR review is the escalation, and `name_blocklist.json` is the fix for a bad alias.
 
 ### Open questions
 
-- The guard's threshold: 5% fewer codes is a starting point, to be checked against how much the results move month to month.
-- What counts as corroboration for a crosswalk change: automerge's top candidate qualifying for the new target, or the new target merely qualifying.
+- Corroboration, accepting a changed crosswalk mapping when automerge's scoring would pick the same record, was left out so every relink is reviewed. Revisit if `wikidata_changed` orphans turn out to be mostly noise.
 
 ## Localization (gettext-based name translation)
 

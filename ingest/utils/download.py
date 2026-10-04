@@ -1,8 +1,10 @@
-from http.client import HTTPResponse
+from http.client import HTTPException, HTTPResponse
 import json
+import time
 import zipfile
 from pathlib import Path
-from urllib.parse import quote
+from urllib.error import HTTPError
+from urllib.parse import urlencode
 from urllib.request import urlopen, Request
 from typing import cast
 from .logger import ingest_log
@@ -10,6 +12,9 @@ from .logger import ingest_log
 # sent with every request to a data source
 USER_AGENT = "localis-data-refresh (+https://github.com/dstoffels/localis)"
 SPARQL_ENDPOINT = "https://query.wikidata.org/sparql"
+# tries per SPARQL query, waiting SPARQL_BACKOFF seconds before the first retry and doubling each time
+SPARQL_ATTEMPTS = 4
+SPARQL_BACKOFF = 10
 
 _Manifest = dict[str, str | None]
 
@@ -108,11 +113,32 @@ def fetch(url: str, dest: Path, manifest_path: Path, extract: str | None = None)
     return True
 
 
-def sparql(query: str) -> list[dict]:
-    """The result rows of a Wikidata SPARQL query, fetched live."""
-    request = Request(
-        f"{SPARQL_ENDPOINT}?query={quote(query)}&format=json",
-        headers={"User-Agent": USER_AGENT, "Accept": "application/sparql-results+json"},
-    )
+def _sparql_bindings(request: Request) -> list[dict]:
     with urlopen(request, timeout=120) as response:
         return json.loads(response.read().decode("utf-8"))["results"]["bindings"]
+
+
+def sparql(query: str) -> list[dict]:
+    """The result rows of a Wikidata SPARQL query, fetched live, retrying a failed or cut-off response with backoff."""
+    # POST, since the query service caches GET responses and a repeat query must reach a server
+    request = Request(
+        SPARQL_ENDPOINT,
+        data=urlencode({"query": query, "format": "json"}).encode(),
+        headers={"User-Agent": USER_AGENT, "Accept": "application/sparql-results+json"},
+    )
+    for retry in range(SPARQL_ATTEMPTS - 1):
+        delay = SPARQL_BACKOFF * 2**retry
+        try:
+            return _sparql_bindings(request)
+        except HTTPError as e:
+            if e.code != 429 and e.code < 500:
+                raise
+            retry_after = e.headers.get("Retry-After", "")
+            delay = int(retry_after) if retry_after.isdigit() else delay
+            failure = f"HTTP {e.code}"
+        # a dropped connection or timeout (OSError, HTTPException), or a body cut off mid-stream (ValueError from decoding)
+        except (OSError, HTTPException, ValueError) as e:
+            failure = type(e).__name__
+        ingest_log.writeline(f"Wikidata query failed ({failure}), retrying in {delay}s", level="WARN")
+        time.sleep(delay)
+    return _sparql_bindings(request)

@@ -14,7 +14,8 @@ HISTORY_SOURCES = {"footprint", "bench"}
 # only deterministic numbers are checked; timings and memory vary by host
 CHECKED_SOURCES = {"data"}
 # the format follows a colon, not a pipe, since a pipe would split the marker across markdown table cells
-MARKER_RE = re.compile(r"<!-- stat:([a-z_]+)\.([\w.]+)(?::(\w+))? -->((?:(?!<!--).)*)<!-- /stat -->")
+# a value can't contain another tag, so an unclosed example tag in prose never pairs with a later tag's close
+MARKER_RE = re.compile(r'<stat key="([a-z_]+)\.([\w.]+)(?::(\w+))?">((?:(?!</?stat\b).)*)</stat>')
 
 
 def _load_time(ms: float) -> str:
@@ -100,7 +101,7 @@ def check() -> list[str]:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Fills <!-- stat:source.key:format --> markers in the docs from tests/analysis outputs.")
+    parser = argparse.ArgumentParser(description='Fills <stat key="source.key:format"> tags in the docs from tests/analysis outputs.')
     parser.add_argument("--check", action="store_true", help="exit 1 if a deterministic marker is stale, without writing")
     args = parser.parse_args()
 

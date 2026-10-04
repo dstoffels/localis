@@ -8,6 +8,7 @@ from .paths import (
     CITIES_INPUTS_PATH,
     SHARED_INPUTS_PATH,
     SUBDIVISIONS_OUTPUTS_PATH,
+    CITIES_OUTPUTS_PATH,
     MACROREGIONS_MANIFEST_PATH,
     COUNTRIES_MANIFEST_PATH,
     SUBDIVISIONS_MANIFEST_PATH,
@@ -16,7 +17,7 @@ from .paths import (
     GEONAMES_DUMP_URL,
 )
 from .logger import ingest_log
-from .download import fetch, sparql, record_pending, committed_value, commit_manifest
+from .download import fetch, sparql, SPARQL_ATTEMPTS, record_pending, committed_value, commit_manifest
 from .index import (
     dump_data,
     dump_lookup_index,

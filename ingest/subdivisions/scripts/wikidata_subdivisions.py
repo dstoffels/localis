@@ -1,7 +1,8 @@
 import json
-from ingest.utils import SUBDIVISIONS_INPUTS_PATH, ingest_log, sparql
+from pathlib import Path
+from ingest.utils import SUBDIVISIONS_INPUTS_PATH, SPARQL_ATTEMPTS, ingest_log, sparql
 from ingest.subdivisions.utils.subdivision_map import SubdivisionMap
-from ingest.subdivisions.utils.resolution_map import ResolutionMap, WikidataConflictOrphan
+from ingest.subdivisions.utils.resolution_map import ResolutionMap, WikidataChangedOrphan, WikidataConflictOrphan
 from ingest.shared.models import SubdivisionModel
 from .automerge import merge_matched_sub
 
@@ -11,26 +12,69 @@ SELECT ?isoCode ?geonamesId WHERE {
   ?item wdt:P1566 ?geonamesId .
 }
 """
+# committed as the crosswalk's provenance, written only once subdivisions dump successfully
 CROSSWALK_PATH = SUBDIVISIONS_INPUTS_PATH / "wikidata_crosswalk.json"
+# this run's result until it's committed
+PENDING_CROSSWALK_PATH = SUBDIVISIONS_INPUTS_PATH / "wikidata_crosswalk.pending.json"
 
 
-def fetch_wikidata_crosswalk() -> dict[str, int]:
-    """Queries Wikidata for every (P300 ISO 3166-2 code, P1566 GeoNames id) pair, keeping only unambiguous ISO codes (exactly one distinct geonames_id claimed). Persists the raw crosswalk to inputs/ for inspection, but always re-fetches live rather than checksum-gating, since this is a derived query result, not a stable file with its own ETag."""
-    ingest_log.writeline("Querying Wikidata for ISO/GeoNames crosswalk...")
-    bindings = sparql(SPARQL_QUERY)
+def _read_crosswalk(path: Path) -> dict[str, int]:
+    return json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
 
+
+def committed_crosswalk() -> dict[str, int]:
+    """The crosswalk as of the last successful dump."""
+    return _read_crosswalk(CROSSWALK_PATH)
+
+
+def latest_crosswalk() -> dict[str, int]:
+    """The crosswalk the last ingest run fetched, committed or not."""
+    return _read_crosswalk(PENDING_CROSSWALK_PATH if PENDING_CROSSWALK_PATH.exists() else CROSSWALK_PATH)
+
+
+def _query_crosswalk() -> dict[str, int]:
+    """Every (P300 ISO 3166-2 code, P1566 GeoNames id) pair on Wikidata, keeping only ISO codes with exactly one GeoNames id."""
     by_iso_code: dict[str, set[int]] = {}
-    for binding in bindings:
+    for binding in sparql(SPARQL_QUERY):
         iso_code = binding["isoCode"]["value"]
         geonames_id = int(binding["geonamesId"]["value"])
         by_iso_code.setdefault(iso_code, set()).add(geonames_id)
+    return {code: next(iter(ids)) for code, ids in sorted(by_iso_code.items()) if len(ids) == 1}
 
-    crosswalk = {code: next(iter(ids)) for code, ids in by_iso_code.items() if len(ids) == 1}
 
-    CROSSWALK_PATH.write_text(
-        json.dumps(crosswalk, indent=2, ensure_ascii=False), encoding="utf-8"
-    )
+def fetch_wikidata_crosswalk() -> dict[str, int]:
+    """Queries the crosswalk and stages it for commit_crosswalk(). Removals fall through to automerge unreviewed, so a result missing committed codes is kept only once a repeat query returns it unchanged: a Wikidata edit repeats, a flaky response doesn't."""
+    ingest_log.writeline("Querying Wikidata for ISO/GeoNames crosswalk...")
+    committed_codes = committed_crosswalk().keys()
+    crosswalk = _query_crosswalk()
+    queries = 1
+
+    while removed := sorted(committed_codes - crosswalk.keys()):
+        if queries == SPARQL_ATTEMPTS:
+            raise RuntimeError(f"Wikidata crosswalk results kept changing across {queries} queries; try again later")
+        ingest_log.writeline(f"Wikidata crosswalk is missing {len(removed)} committed codes, querying again to confirm")
+        repeat = _query_crosswalk()
+        queries += 1
+        if repeat == crosswalk:
+            ingest_log.writeline(f"confirmed {len(removed)} crosswalk mappings removed on Wikidata: {', '.join(removed)}", level="WARN")
+            break
+        crosswalk = repeat
+
+    PENDING_CROSSWALK_PATH.write_text(json.dumps(crosswalk, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     return crosswalk
+
+
+def commit_crosswalk() -> None:
+    """Promotes this run's crosswalk to CROSSWALK_PATH; call only after subdivisions dump."""
+    if PENDING_CROSSWALK_PATH.exists():
+        PENDING_CROSSWALK_PATH.replace(CROSSWALK_PATH)
+
+
+def log_crosswalk_changes(crosswalk: dict[str, int], committed: dict[str, int]) -> None:
+    moved = sum(1 for code in crosswalk.keys() & committed.keys() if crosswalk[code] != committed[code])
+    added = len(crosswalk.keys() - committed.keys())
+    removed = len(committed.keys() - crosswalk.keys())
+    ingest_log.writeline(f"Wikidata crosswalk changed since the last dump: {moved} moved, {added} added, {removed} removed")
 
 
 def _valid_target(crosswalk: dict[str, int], iso_code: str, sub_map: SubdivisionMap) -> SubdivisionModel | None:
@@ -69,14 +113,31 @@ def flag_wikidata_conflicts(
     resolution_map.automerge.orphans.wikidata_conflict = conflicts
 
 
+def _prior_targets(
+    resolution_map: ResolutionMap, sub_map: SubdivisionMap, committed: dict[str, int]
+) -> dict[str, int]:
+    """What each iso_code resolved to before this run, read before it's recomputed: an unresolved wikidata_changed flag's previous target, else the committed crosswalk's valid mapping, else automerge's match."""
+    prior = {code: match.id for code, match in resolution_map.automerge.resolutions.items()}
+    for iso_code in committed:
+        mapped_sub = _valid_target(committed, iso_code, sub_map)
+        if mapped_sub is not None and mapped_sub.geonames_id is not None:
+            prior[iso_code] = mapped_sub.geonames_id
+    for orphan in resolution_map.automerge.orphans.wikidata_changed:
+        prior[orphan.iso_code] = orphan.previous_geonames_id
+    return prior
+
+
 def apply_wikidata_matches(
     iso_subs: dict[str, SubdivisionModel],
     resolution_map: ResolutionMap,
     sub_map: SubdivisionMap,
     crosswalk: dict[str, int],
+    committed: dict[str, int],
 ) -> dict[str, SubdivisionModel]:
-    """Applies unambiguous Wikidata crosswalk matches for whatever skill_decisions didn't already claim, before auto-merge ever sees these iso_subs. Recomputed fresh every run (external data we don't control, not a one-time human decision)."""
+    """Applies unambiguous Wikidata crosswalk matches for whatever skill_decisions didn't already claim, before auto-merge ever sees these iso_subs. A mapping that would change what an iso_code previously resolved to is held back as a wikidata_changed orphan instead; a code's first mapping applies as-is. Recomputed every run."""
+    prior = _prior_targets(resolution_map, sub_map, committed)
     resolution_map.wikidata_merge = {}
+    resolution_map.automerge.orphans.wikidata_changed = []
     remaining: dict[str, SubdivisionModel] = {}
 
     for iso_code, iso_sub in iso_subs.items():
@@ -86,6 +147,17 @@ def apply_wikidata_matches(
             continue
         geonames_id = mapped_sub.geonames_id
         assert geonames_id is not None
+
+        previous_id = prior.get(iso_code)
+        if previous_id is not None and previous_id != geonames_id:
+            ingest_log.writeline(
+                f"wikidata changed: {iso_code} '{iso_sub.name}' now maps to {mapped_sub.geonames_code} '{mapped_sub.name}' ({geonames_id}), previously {previous_id}, sent for review",
+                level="WARN",
+            )
+            resolution_map.automerge.orphans.wikidata_changed.append(
+                WikidataChangedOrphan(iso_code=iso_code, previous_geonames_id=previous_id, wikidata_geonames_id=geonames_id)
+            )
+            continue
 
         if mapped_sub.iso_code and mapped_sub.iso_code != iso_code:
             ingest_log.writeline(
@@ -98,8 +170,7 @@ def apply_wikidata_matches(
         resolution_map.wikidata_merge[iso_code] = geonames_id
         merge_matched_sub(iso_sub, mapped_sub)
 
-    resolved_count = len(iso_subs) - len(remaining)
     ingest_log.writeline(
-        f"resolved {resolved_count}/{len(iso_subs)} subdivisions from Wikidata crosswalk"
+        f"resolved {len(resolution_map.wikidata_merge)}/{len(iso_subs)} subdivisions from Wikidata crosswalk, {len(resolution_map.automerge.orphans.wikidata_changed)} held back as changed"
     )
     return remaining

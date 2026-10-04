@@ -54,7 +54,7 @@ test = { cmd = "pytest", help = "Run the test suite" }
 watch = { cmd = "ptw", help = "Re-run the tests on every change" }
 watch-fast = { cmd = "ptw -- --fast", help = "Re-run the tests on every change, skipping slow tests" }
 typecheck = { cmd = "pyright", help = "Type-check the project" }
-sync-main = { shell = "git pull --ff-only origin main && git push", help = "Fast-forward the checked-out branch to origin/main and push it" }
+sync-main = { shell = "git pull --no-rebase --no-edit && git pull --no-rebase --no-edit origin main && git push", help = "Bring the active branch up to date with its remote and with origin/main, then push it" }
 
 [build-system]
 requires = ["hatchling"]

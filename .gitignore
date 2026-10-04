@@ -89,6 +89,7 @@ ingest/*/inputs/*
 !ingest/countries/inputs/countries.manifest.json
 !ingest/countries/inputs/name_blocklist.json
 !ingest/subdivisions/inputs/subdivisions.manifest.json
+!ingest/subdivisions/inputs/wikidata_crosswalk.json
 !ingest/cities/inputs/cities.manifest.json
 !ingest/shared/inputs/shared.manifest.json
 

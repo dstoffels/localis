@@ -43,13 +43,27 @@ class WikidataConflictOrphan:
 
 
 @dataclass
+class WikidataChangedOrphan:
+    iso_code: str
+    previous_geonames_id: int
+    wikidata_geonames_id: int
+
+
+@dataclass
 class GroupingTwinOrphan:
     iso_code: str
     candidate_geonames_id: int
 
 
 # a no_candidates/no_matches orphan is its bare iso_code; the flagged buckets carry what the pipeline found
-OrphanEntry = str | AmbiguousOrphan | LowMarginOrphan | WikidataConflictOrphan | GroupingTwinOrphan
+OrphanEntry = (
+    str
+    | AmbiguousOrphan
+    | LowMarginOrphan
+    | WikidataConflictOrphan
+    | WikidataChangedOrphan
+    | GroupingTwinOrphan
+)
 
 
 def _iso_code(entry: OrphanEntry) -> str:
@@ -65,6 +79,7 @@ class Orphans:
     ambiguity: list[AmbiguousOrphan] = field(default_factory=list)
     low_margin: list[LowMarginOrphan] = field(default_factory=list)
     wikidata_conflict: list[WikidataConflictOrphan] = field(default_factory=list)
+    wikidata_changed: list[WikidataChangedOrphan] = field(default_factory=list)
     grouping_twin: list[GroupingTwinOrphan] = field(default_factory=list)
 
     @classmethod
@@ -75,7 +90,11 @@ class Orphans:
         for f in fields(cls):
             (entry_type,) = get_args(hints[f.name])
             entries = data.get(f.name, [])
-            buckets[f.name] = entries if entry_type is str else [entry_type(**entry) for entry in entries]
+            buckets[f.name] = (
+                entries
+                if entry_type is str
+                else [entry_type(**entry) for entry in entries]
+            )
         return cls(**buckets)
 
     def _buckets(self) -> dict[str, list[OrphanEntry]]:
@@ -85,14 +104,26 @@ class Orphans:
         return sum(len(bucket) for bucket in self._buckets().values())
 
     def summary(self) -> str:
-        return ", ".join(f"{name}={len(bucket)}" for name, bucket in self._buckets().items())
+        return ", ".join(
+            f"{name}={len(bucket)}" for name, bucket in self._buckets().items()
+        )
 
     def codes(self) -> list[str]:
         """Every orphan's iso_code, in review order."""
-        return [_iso_code(entry) for bucket in self._buckets().values() for entry in bucket]
+        return [
+            _iso_code(entry) for bucket in self._buckets().values() for entry in bucket
+        ]
 
     def find(self, iso_code: str) -> OrphanEntry | None:
-        return next((entry for bucket in self._buckets().values() for entry in bucket if _iso_code(entry) == iso_code), None)
+        return next(
+            (
+                entry
+                for bucket in self._buckets().values()
+                for entry in bucket
+                if _iso_code(entry) == iso_code
+            ),
+            None,
+        )
 
     def remove(self, iso_code: str) -> None:
         for bucket in self._buckets().values():
@@ -147,7 +178,10 @@ class ResolutionMap:
     def save(self, path: Path) -> None:
         data = {
             "NON_ADMINISTRATIVE_TYPES": self.non_administrative_types,
-            "skill_decisions": {code: asdict(decision) for code, decision in self.skill_decisions.items()},
+            "skill_decisions": {
+                code: asdict(decision)
+                for code, decision in self.skill_decisions.items()
+            },
             "wikidata_merge": self.wikidata_merge,
             "automerge": {
                 "bypassed": self.automerge.bypassed,
@@ -167,7 +201,10 @@ class ResolutionMap:
         """A hash of the human-maintained inputs to subdivision ingest (bypass rules and skill decisions), so editing them counts as a changed source."""
         inputs = {
             "NON_ADMINISTRATIVE_TYPES": self.non_administrative_types,
-            "skill_decisions": {code: asdict(decision) for code, decision in self.skill_decisions.items()},
+            "skill_decisions": {
+                code: asdict(decision)
+                for code, decision in self.skill_decisions.items()
+            },
         }
         return hashlib.sha256(json.dumps(inputs, sort_keys=True).encode()).hexdigest()
 

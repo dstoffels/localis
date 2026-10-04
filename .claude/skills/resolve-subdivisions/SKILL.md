@@ -16,6 +16,8 @@ Candidates come from every GeoNames subdivision in the orphan's country, as a li
 
 A `wikidata_conflict` orphan is an earlier skill decision that disagrees with Wikidata's mapping. `next_orphan` includes it as `current_decision` (its `geonames_id`, or "add as-is", and its `reason`), and its first batch holds the two records in question, noted "Wikidata's mapping" and "current skill decision". Wikidata agrees with independent checks over 99% of the time, so keep the current decision only if you can say concretely why Wikidata's record is wrong (a different place, the wrong level, a populated place rather than the administrative unit). Either way, `merge` with the record you choose, or `add` to keep an "add as-is" decision, giving that explanation as the `reason`.
 
+A `wikidata_changed` orphan is one whose Wikidata mapping now points to a different record than the one it previously resolved to (Wikidata's earlier mapping, or automerge's match where Wikidata had none). Its first batch holds the two records, noted "Wikidata's new mapping" and "previous resolution". The same standard applies: take Wikidata's new mapping unless you can say concretely why it's wrong, and keep the previous record only with that explanation. Either way, `merge` with the record you choose, giving the explanation as the `reason`.
+
 ISO and GeoNames sometimes disagree on a subdivision's level (a city ISO lists at level 1 can sit at level 2 in GeoNames), so a candidate at a different level can still be the right one. Use the level to tell apart same-name candidates, such as a city and the county named after it, not to rule candidates out.
 
 ## Instructions

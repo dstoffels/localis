@@ -87,11 +87,13 @@ def parse_row(
 
 def load_cities(
     subdivisions: dict[str, SubdivisionModel], countries: dict[str, CountryModel]
-) -> list[CityModel]:
+) -> tuple[list[CityModel], int]:
+    """The parsed cities, and how many of them took GeoNames' ASCII name over a primary name in another script."""
     with open(CITIES_INPUTS_PATH / "cities500.txt", "r", encoding="utf-8") as f:
         ingest_log.writeline("Parsing cities from cities500.txt...")
         rows = csv.DictReader(f, fieldnames=HEADERS, delimiter="\t")
         cities = []
+        ascii_names = 0
         for row in rows:
             if not is_valid_city(row):
                 continue
@@ -103,4 +105,6 @@ def load_cities(
 
             city.id = len(cities) + 1
             cities.append(city)
-        return cities
+            if city.name != row["name"]:
+                ascii_names += 1
+        return cities, ascii_names

@@ -1,5 +1,4 @@
 import functools
-import json
 from ingest.subdivisions.utils.subdivision_map import SubdivisionMap
 from typing import Literal
 from ingest.subdivisions.utils.resolution_map import (
@@ -9,6 +8,7 @@ from ingest.subdivisions.utils.resolution_map import (
     LowMarginOrphan,
     GroupingTwinOrphan,
     WikidataConflictOrphan,
+    WikidataChangedOrphan,
 )
 from ingest.shared.models import SubdivisionModel
 from ingest.utils import SUBDIVISIONS_OUTPUTS_PATH
@@ -20,7 +20,7 @@ from ingest.subdivisions.scripts import (
     merge_alternate_name_aliases,
     score_candidates,
 )
-from ingest.subdivisions.scripts.wikidata_subdivisions import CROSSWALK_PATH
+from ingest.subdivisions.scripts.wikidata_subdivisions import latest_crosswalk
 from ingest.subdivisions.scripts.automerge.scoring import is_directional_mismatch
 
 RESOLUTION_MAP_PATH = SUBDIVISIONS_OUTPUTS_PATH / "resolution_map.json"
@@ -33,10 +33,7 @@ def _resolution_map() -> ResolutionMap:
 
 @functools.cache
 def _crosswalk() -> dict[str, int]:
-    """The Wikidata crosswalk the last ingest run fetched."""
-    if not CROSSWALK_PATH.exists():
-        return {}
-    return json.loads(CROSSWALK_PATH.read_text(encoding="utf-8"))
+    return latest_crosswalk()
 
 
 def write_resolution(
@@ -119,7 +116,7 @@ def _get_top_tier_batch_size(pool_size: int) -> int:
 
 
 def _flagged_candidates(iso_code: str) -> list[tuple[int, str]]:
-    """The specific records the pipeline flagged for this orphan, with a note saying why, shown as its first batch: ambiguity close-calls, the low_margin or grouping_twin pick, or both sides of a wikidata_conflict. Empty for no_candidates/no_matches; raises if iso_code isn't an orphan."""
+    """The specific records the pipeline flagged for this orphan, with a note saying why, shown as its first batch: ambiguity close-calls, the low_margin or grouping_twin pick, or both sides of a wikidata_conflict or wikidata_changed. Empty for no_candidates/no_matches; raises if iso_code isn't an orphan."""
     match _resolution_map().automerge.orphans.find(iso_code):
         case None:
             raise ValueError(f"{iso_code} is not in resolution_map's orphans")
@@ -136,6 +133,8 @@ def _flagged_candidates(iso_code: str) -> list[tuple[int, str]]:
             if decision_gid is not None:
                 flagged.append((decision_gid, "current skill decision"))
             return flagged
+        case WikidataChangedOrphan(wikidata_geonames_id=wikidata_gid, previous_geonames_id=previous_gid):
+            return [(wikidata_gid, "Wikidata's new mapping"), (previous_gid, "previous resolution")]
 
 
 def get_candidates(iso_code: str, batch_num: int = 0) -> list[str]:
@@ -148,7 +147,7 @@ def get_candidates(iso_code: str, batch_num: int = 0) -> list[str]:
     flagged_ids = [gid for gid, _ in flagged]
     sub_map = get_geonames_submap()
 
-    # ambiguity, low_margin and wikidata_conflict orphans see the specific records the pipeline flagged first, before the full pool
+    # ambiguity, low_margin, grouping_twin and wikidata orphans see the specific records the pipeline flagged first, before the full pool
     if flagged and batch_num == 0:
         records = [(sub_map.get(geonames_id=gid), note) for gid, note in flagged]
         return [_format_candidate(c, note) for c, note in records if c is not None]

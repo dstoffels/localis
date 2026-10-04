@@ -1,10 +1,14 @@
 # Builds cities from GeoNames' cities500, linked to the countries and subdivisions built upstream; cities500 is already filtered (population >= 500 or an administrative seat), so no further filtering is applied.
 
+import json
 from .fetch_cities import fetch_cities_sources
 from .load_cities import load_cities
 from ingest.shared.scripts import load_countries, load_subdivisions
-from ingest.utils import ingest_log, commit_manifest, dump_registry, CITIES_MANIFEST_PATH
-from ingest.shared.models import SubdivisionModel, CountryModel, CityModel
+from ingest.utils import ingest_log, commit_manifest, dump_registry, CITIES_MANIFEST_PATH, CITIES_OUTPUTS_PATH
+from ingest.shared.models import SubdivisionModel, CountryModel
+
+# counts only the ingest can see, read by tests/analysis/data_stats.py
+INGEST_STATS_PATH = CITIES_OUTPUTS_PATH / "ingest_stats.json"
 
 
 def ingest_cities(
@@ -26,8 +30,9 @@ def ingest_cities(
         if subdivisions is None:
             subdivisions = load_subdivisions(countries)
 
-        cities: list[CityModel] = load_cities(subdivisions, countries)
+        cities, ascii_names = load_cities(subdivisions, countries)
         dump_registry("cities", cities)
+        INGEST_STATS_PATH.write_text(json.dumps({"ascii_names": ascii_names}, indent=2) + "\n", encoding="utf-8")
         commit_manifest(CITIES_MANIFEST_PATH)
         ingest_log.writeline(f"completed: {len(cities)} cities")
     finally:

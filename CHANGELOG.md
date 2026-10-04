@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `wikidata_changed` orphans: a Wikidata crosswalk mapping that would relink a subdivision from what it previously resolved to goes to the resolve-subdivisions skill instead of applying silently
 - The data's licenses travel with it: `src/localis/data/NOTICE` attributes each source, `LICENSES/` holds the LGPL-2.1-or-later, CC-BY-4.0, Unicode-3.0 and CC0-1.0 texts, and the package metadata declares `MIT AND LGPL-2.1-or-later AND CC-BY-4.0 AND Unicode-3.0 AND CC0-1.0` instead of `MIT` alone, which covered only the code
 
 ### Changed
@@ -21,6 +22,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Subdivision.type` and `SubdivisionBase.type` are `None` for the 46,665 GeoNames-only subdivisions, which have no ISO type, instead of `""`, like every other missing field
 - Cities ship a short-name list like countries and subdivisions, so short city names reachable only by an exact query (such as "Jīān") are found through the short-query fallback, for about 463 KiB
 - With a population threshold set, the cities indexes load faster: each entry is checked against the set of ids the filtered cache kept, instead of through a predicate call
+- Generated doc figures are marked with `<stat key="source.key:format">` tags instead of HTML comments, and more figures are generated: the crosswalk's size and disagreements, the non-administrative groupings, Kosovo's records and the cities named in ASCII
+- The data refresh commits the Wikidata crosswalk it built subdivisions from (`ingest/subdivisions/inputs/wikidata_crosswalk.json`) and rebuilds subdivisions when Wikidata's result changes, and keeps a result missing committed codes only once a repeat query returns it unchanged. Failed or cut-off Wikidata queries are retried with backoff
 - The data refresh downloads only the sources whose ETag changed, rather than every source of a stage when any one of them changed, so a CLDR update no longer downloads GeoNames' alternate names again
 
 ### Removed

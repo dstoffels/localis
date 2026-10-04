@@ -10,9 +10,89 @@
   "countries": {
     "total": 281,
     "current": 250,
-    "historic": 31
+    "iso_current": 249,
+    "historic": 31,
+    "historic_reusing_current_alpha2": 5
   },
   "subdivisions": {
+    "non_administrative": {
+      "countries": 9,
+      "CV": {
+        "groupings": 2,
+        "children": 22,
+        "children_by_type": {
+          "Municipality": 22
+        }
+      },
+      "DO": {
+        "groupings": 10,
+        "children": 32,
+        "children_by_type": {
+          "Province": 31,
+          "District": 1
+        }
+      },
+      "GW": {
+        "groupings": 3,
+        "children": 8,
+        "children_by_type": {
+          "Region": 8
+        }
+      },
+      "ID": {
+        "groupings": 7,
+        "children": 38,
+        "children_by_type": {
+          "Special region": 1,
+          "Province": 36,
+          "Capital district": 1
+        }
+      },
+      "IE": {
+        "groupings": 4,
+        "children": 26,
+        "children_by_type": {
+          "County": 26
+        }
+      },
+      "IS": {
+        "groupings": 8,
+        "children": 64,
+        "children_by_type": {
+          "Municipality": 64
+        }
+      },
+      "LT": {
+        "groupings": 10,
+        "children": 60,
+        "children_by_type": {
+          "Municipality": 9,
+          "City municipality": 7,
+          "District municipality": 44
+        }
+      },
+      "MH": {
+        "groupings": 2,
+        "children": 24,
+        "children_by_type": {
+          "Municipality": 24
+        }
+      },
+      "MW": {
+        "groupings": 3,
+        "children": 28,
+        "children_by_type": {
+          "District": 28
+        }
+      }
+    },
+    "kosovo": {
+      "serbian_okrugs": 5,
+      "serbian_records": 6,
+      "districts": 7,
+      "municipalities": 38,
+      "kosovan_records": 45
+    },
     "total": 51711,
     "iso_total": 5046,
     "iso_merged": 4843,
@@ -41,10 +121,16 @@
     "skill_decisions": 344,
     "total": 5046
   },
+  "wikidata": {
+    "crosswalk_codes": 4968,
+    "disagreements": 278,
+    "disagreements_not_admin": 276
+  },
   "cities": {
     "total": 235917,
     "threshold": 15000,
-    "above_threshold": 34171
+    "above_threshold": 34171,
+    "ascii_names": 24
   },
   "shipped_size": {
     "total": 59716409,
