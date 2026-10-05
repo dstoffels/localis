@@ -10,7 +10,8 @@ license = "MIT AND LGPL-2.1-or-later AND CC-BY-4.0 AND Unicode-3.0 AND CC0-1.0"
 license-files = ["LICENSE", "LICENSES/*.txt"]
 keywords = [
   "country", "subdivision", "city", "macroregion", "region", "state", "province",
-  "iso", "3166", "iso-3166", "3166-1", "3166-2", "3166-3", "m49", "geocoding", "country codes", "geonames", "cldr", "wikidata", "geography", "geodata", "gazetteer", "offline", "fuzzy-search",
+  "currency", "language", "script",
+  "iso", "3166", "iso-3166", "3166-1", "3166-2", "3166-3", "iso-4217", "iso-639", "iso-639-3", "iso-15924", "m49", "geocoding", "country codes", "geonames", "cldr", "wikidata", "geography", "geodata", "gazetteer", "offline", "fuzzy-search",
 ]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
@@ -22,6 +23,7 @@ classifiers = [
     "Programming Language :: Python :: 3.14",
     "Topic :: Software Development :: Libraries :: Python Modules",
     "Topic :: Scientific/Engineering :: GIS",
+    "Typing :: Typed",
 ]
 requires-python = ">=3.11"
 dependencies = [
@@ -29,8 +31,9 @@ dependencies = [
 ]
 
 [project.urls]
-homepage = "https://pypi.org/project/localis/"
+homepage = "https://github.com/dstoffels/localis"
 repository = "https://github.com/dstoffels/localis"
+changelog = "https://github.com/dstoffels/localis/blob/main/CHANGELOG.md"
 funding = "https://github.com/sponsors/dstoffels"
 
 [dependency-groups]

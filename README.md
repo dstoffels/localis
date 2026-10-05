@@ -185,6 +185,8 @@ Results are typed dataclasses, listed field by field under each registry below. 
 
 Every returned entity is built fresh; yours to mutate freely. Entities are also hashable, so they can be used in sets and as dict keys.
 
+Every entity type, their base `Entity`, `Missing` and the registry classes (`CountryRegistry` and the rest) import from `localis` for type annotations.
+
 ```python
 country = localis.countries.lookup("US")
 country.to_dict()                # dict of every field
@@ -194,7 +196,7 @@ localis.subdivisions.lookup("US-CA").country.alpha3  # "USA", from the nested Co
 
 ### key
 
-localis IDs are not stable across builds. Use the `key` attribute to reliably reference entities instead, which returns the entity's stable lookup identifier. A nested record also carries its `key`.
+localis IDs are not stable across builds (`localis.__version__` gives the installed one). Use the `key` attribute to reliably reference entities instead, which returns the entity's stable lookup identifier. A nested record also carries its `key`.
 
 ```python
 # 5128581, safe to persist

@@ -16,6 +16,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `localis.MISSING` filters for records with no value in a field, which `None` can't, since it means "don't filter on this field": `subdivisions.filter(type=MISSING)` for GeoNames-only subdivisions, `cities.filter(subdivision=MISSING)` for cities linked to no subdivision, `countries.filter(macroregion=MISSING)` for historic countries without one
 - `wikidata_changed` orphans: a Wikidata crosswalk mapping that would relink a subdivision from what it previously resolved to goes to the resolve-subdivisions skill instead of applying silently
 - The data's licenses travel with it: `src/localis/data/NOTICE` attributes each source, `LICENSES/` holds the LGPL-2.1-or-later, CC-BY-4.0, Unicode-3.0 and CC0-1.0 texts, and the package metadata declares `MIT AND LGPL-2.1-or-later AND CC-BY-4.0 AND Unicode-3.0 AND CC0-1.0` instead of `MIT` alone, which covered only the code
+- `localis.__version__`, and top-level exports of `Entity`, `Missing` and the registry classes (`Registry`, `QueryableRegistry`, `CountryRegistry` and the rest) for annotating code that takes them
+- Package metadata: the `Typing :: Typed` classifier, currency, language and script keywords, a changelog link, and the homepage pointing at the repository instead of the PyPI page
 
 ### Changed
 
@@ -48,6 +50,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Type checkers no longer flag `from localis import countries` (or any other public name) as a private import: the package declares its public names in `__all__`
 - `lookup()` resolves a numeric code or GeoNames ID given as a string (`countries.lookup("840")`, `cities.lookup("5128581")`), not only as an int
 - `search()` honors a `limit` above 200 instead of capping results there
 - `filter()` and `search()` raise `ValueError` for a `limit` below 1, which a negative value had silently cut results by
