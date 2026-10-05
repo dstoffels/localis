@@ -11,7 +11,7 @@ from pathlib import Path
 from urllib.error import HTTPError
 import pytest
 from localis.entities import CountryLanguage, Language, LanguageBase, LanguageScript, ScriptBase
-from ingest.shared.models import CurrencyModel, LanguageModel, ScriptModel, SubdivisionModel
+from ingest.shared.models import CountryModel, CurrencyModel, LanguageModel, ScriptModel, SubdivisionModel
 from ingest.utils import change_report, download, index, logger, paths, staging
 from ingest.utils.committed_query import CONFIRM_QUERIES, CommittedQuery
 from ingest.utils.logger import ORPHANS_EXIT_CODE, IngestLog, PipelineLog
@@ -542,3 +542,36 @@ class TestLanguageScripts:
 
         with pytest.raises(ValueError):
             self._scripts_of(monkeypatch, tmp_path, data)
+
+
+def _country(alpha2: str, alpha3: str) -> CountryModel:
+    return CountryModel(name=alpha2, alpha2=alpha2, alpha3=alpha3, geonames_id=None, official_name=None, common_name=None, aliases=[], numeric=None, flag=None, historic=None)
+
+
+class TestCountries:
+    """COUNTRIES"""
+
+    def test_legal_tender_on_run_date(self):
+        """should keep legal-tender currencies started by the run date and not yet ended, ending inclusive"""
+        place_currencies = importlib.import_module("ingest.countries.scripts.place_currencies")
+        entries = [
+            {"NOW": {"_from": "2000-01-01"}},
+            {"LTR": {"_from": "2026-11-01"}},
+            {"OLD": {"_from": "1990-01-01", "_to": "2000-01-01"}},
+            {"END": {"_from": "1990-01-01", "_to": "2026-10-05"}},
+            {"FND": {"_from": "2000-01-01", "_tender": "false"}},
+        ]
+
+        assert place_currencies._legal_tender(_country("DM", "DMO"), entries, "2026-10-05") == ["NOW", "END"]
+
+    @pytest.mark.parametrize("short_names, aliases", [(["UAE"], ["UAE"]), ([], [])])
+    def test_short_name_exempt_from_sports_codes(self, monkeypatch, tmp_path, short_names, aliases):
+        """should keep a short name that's also the item's sports code, while dropping it as an alternative label"""
+        merge_countries = importlib.import_module("ingest.countries.scripts.merge_countries")
+        _write_json(tmp_path / "blocklist.json", {})
+        monkeypatch.setattr(merge_countries, "NAME_BLOCKLIST_PATH", tmp_path / "blocklist.json")
+        countries = {"AE": _country("AE", "ARE")}
+
+        merge_countries.merge_wikidata(countries, {"AE": {"names": ["UAE"], "short_names": short_names, "codes": ["UAE"]}})
+
+        assert countries["AE"].aliases == aliases

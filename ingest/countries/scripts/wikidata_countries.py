@@ -34,6 +34,8 @@ COUNTRY_NAMES = CommittedQuery[CountryEntry](COUNTRIES.inputs / "wikidata_countr
 class _Item:
     sitelinks: int = 0
     names: set[str] = field(default_factory=set)
+    # P1813, kept apart since a short name is an abbreviation even where it's also a sports code (UAE, RSA)
+    short_names: set[str] = field(default_factory=set)
     codes: set[str] = field(default_factory=set)
     alpha2s: set[str] = field(default_factory=set)
 
@@ -46,9 +48,11 @@ def _items_by_code(query: str) -> dict[str, dict[str, _Item]]:
         item = items.setdefault(binding["code"]["value"], {}).setdefault(item_id, _Item())
         if "sitelinks" in binding:
             item.sitelinks = int(binding["sitelinks"]["value"])
-        for name_field in ("label", "alt", "short"):
+        for name_field in ("label", "alt"):
             if name_field in binding:
                 item.names.add(binding[name_field]["value"])
+        if "short" in binding:
+            item.short_names.add(binding["short"]["value"])
         for code_field in ("ioc", "fifa"):
             if code_field in binding:
                 item.codes.add(binding[code_field]["value"])
@@ -58,11 +62,15 @@ def _items_by_code(query: str) -> dict[str, dict[str, _Item]]:
 
 
 def _entry(items: list[_Item]) -> dict[str, list[str]]:
-    return {"names": sorted(set().union(*(i.names for i in items))), "codes": sorted(set().union(*(i.codes for i in items)))}
+    return {
+        "names": sorted(set().union(*(i.names for i in items))),
+        "short_names": sorted(set().union(*(i.short_names for i in items))),
+        "codes": sorted(set().union(*(i.codes for i in items))),
+    }
 
 
 def _query_country_names(current_alpha2s: set[str]) -> CountryNames:
-    """English names and sports codes from Wikidata, keyed by alpha-2 for current countries and by ISO 3166-3 alpha-4 for historic ones, as {"names": [...], "codes": [...]}."""
+    """English names and sports codes from Wikidata, keyed by alpha-2 for current countries and by ISO 3166-3 alpha-4 for historic ones, as {"names": [...], "short_names": [...], "codes": [...]}."""
     country_names: CountryNames = {}
 
     # a code claimed by several items keeps the one with the most sitelinks: Cyprus over a same-named item, Antarctica over the Antarctic Treaty area

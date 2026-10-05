@@ -5,8 +5,8 @@ from ingest.shared.models import CountryModel
 import json
 
 
-def init_iso_countries() -> dict[str, CountryModel]:
-    """Parses country data from ISO 3166-1 and returns an alpha2 mapped cache"""
+def load_iso_countries() -> dict[str, CountryModel]:
+    """ISO 3166-1's countries as published, keyed by alpha2."""
     ingest_log.writeline("Loading ISO countries...")
     countries: dict[str, CountryModel] = {}
 

@@ -53,7 +53,8 @@ class CountryModel(Model):
         "currency": ("currency_names", "currency_codes"),
         "language": ("language_values",),
     }
-    CANON_FIELDS = ("name", "official_name", "common_name", "aliases")
+    # alpha3 too, so a search for an abbreviation that's the country's own code ("USA", "PNG") finds it
+    CANON_FIELDS = ("name", "official_name", "common_name", "aliases", "alpha3")
     SHORT_NAMES = True
 
     def extract_lookup_values(self) -> Iterator[str]:

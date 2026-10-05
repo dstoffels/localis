@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Historic countries take their Wikidata names as aliases by ISO 3166-3 alpha-4 code (P773) rather than by a former alpha-2 no other entry shares, so entries whose code ISO reused are named too: with `include_historic` set, "Czechoslovakia", "Soviet Union" and "Yugoslavia" find their entries. 25 of the 31 historic entries now carry Wikidata aliases, up from 4
 - Text normalization folds Latin only: accents are stripped and Latin letters without a Unicode decomposition (ß, æ, ø, ł, ı, ə and others) are spelled out, while other scripts are no longer transliterated
 - A city whose GeoNames name is written in another script takes GeoNames' ASCII name (24 cities)
+- Country search matches alpha-3 codes, so `countries.search("USA")` finds the United States, and Wikidata's English short names are kept even where they're also the country's IOC or FIFA code, adding UAE, RSA and GDR as aliases
 - Countries leave historic entries out of `filter()` and `search()` before ranking rather than after, so a search no longer reads every country to size an over-fetch and a historic entry can't take a shortlist slot from a current one
 - `search()` raises `TypeError` for a keyword argument it doesn't take, like `filter()`, instead of silently ignoring it
 - `Subdivision.type` and `SubdivisionBase.type` are `None` for the 46,665 GeoNames-only subdivisions, which have no ISO type, instead of `""`, like every other missing field

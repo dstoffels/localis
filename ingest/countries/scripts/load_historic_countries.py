@@ -5,10 +5,8 @@ from ingest.shared.models import CountryModel, HistoricModel
 import json
 
 
-def init_historic_countries(
-    countries: dict[str, CountryModel],
-) -> dict[str, CountryModel]:
-    """Parses country data from ISO 3166-3 and returns an alpha_4 mapped cache"""
+def load_historic_countries(countries: dict[str, CountryModel]) -> dict[str, CountryModel]:
+    """Adds ISO 3166-3's withdrawn countries to countries, keyed by alpha_4."""
     ingest_log.writeline("Loading historic ISO countries...")
 
     with open(COUNTRIES.inputs / "iso_3166-3.json", "r", encoding="utf-8") as f:

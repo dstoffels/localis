@@ -8,7 +8,7 @@ from localis.registries.registry import locked_cached_property
 
 class CountryRegistry(QueryableRegistry[Country]):
     REGISTRY_NAME = "countries"
-    NAME_FIELDS = ("name", "official_name", "common_name", "aliases")
+    NAME_FIELDS = ("name", "official_name", "common_name", "aliases", "alpha3")
     _CACHED_ATTRS = QueryableRegistry._CACHED_ATTRS + ("_historic_ids",)
 
     def __init__(

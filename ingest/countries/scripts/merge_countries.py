@@ -32,10 +32,10 @@ def _wikidata_alias(raw: str, iso_codes: set[str], item_codes: frozenset[str] | 
     return alias
 
 
-def _load_blocklist() -> dict[str, set[str]]:
-    """Names that pass the filters but aren't names of the country (nicknames, demonyms, misspellings, stray codes), keyed by alpha-2, or alpha-4 for a historic entry; each entry's reason is recorded in the file."""
+def _load_blocklist() -> dict[str, dict[str, str]]:
+    """Names that pass the filters but aren't names of the country (nicknames, demonyms, misspellings, stray codes), by name_key() under alpha-2, or alpha-4 for a historic entry; each entry's reason is recorded in the file."""
     blocklist: dict[str, dict[str, str]] = json.loads(NAME_BLOCKLIST_PATH.read_text(encoding="utf-8"))
-    return {alpha2: {name_key(name) for name in names} for alpha2, names in blocklist.items()}
+    return {code: {name_key(name): name for name in names} for code, names in blocklist.items()}
 
 
 def merge_wikidata(countries: dict[str, CountryModel], country_names: CountryNames) -> None:
@@ -43,16 +43,28 @@ def merge_wikidata(countries: dict[str, CountryModel], country_names: CountryNam
     ingest_log.writeline("Merging Wikidata country names...")
     iso_codes = {code for c in countries.values() for code in (c.alpha2, c.alpha3) if code}
     blocklist = _load_blocklist()
+    used: set[tuple[str, str]] = set()
 
     for code, entry in country_names.items():
         country = countries.get(code)
         if country is None:
             continue
-        blocked = blocklist.get(code, set())
-        for name in entry["names"]:
-            alias = _wikidata_alias(name, iso_codes, set(entry["codes"]))
-            if alias and name_key(alias) not in blocked:
-                country.aliases.append(alias)
+        blocked = blocklist.get(code, {})
+        item_codes = set(entry["codes"])
+        # a short name is exempt from the item's sports codes, which some abbreviations share (UAE, RSA), but not from ISO codes, most of which are the country's own (NG, MYS)
+        aliases = [_wikidata_alias(name, iso_codes, item_codes) for name in entry["names"]]
+        aliases += [_wikidata_alias(name, iso_codes) for name in entry["short_names"]]
+        for alias in aliases:
+            if not alias:
+                continue
+            if name_key(alias) in blocked:
+                used.add((code, name_key(alias)))
+                continue
+            country.aliases.append(alias)
+
+    stale = [f"{code} {name!r}" for code, names in blocklist.items() for key, name in names.items() if (code, key) not in used]
+    if stale:
+        ingest_log.writeline(f"blocklist entries that no longer block a Wikidata name, safe to remove from name_blocklist.json: {', '.join(stale)}", level="WARN")
 
 
 def drop_ambiguous_aliases(countries: dict[str, CountryModel]) -> None:
@@ -72,7 +84,8 @@ def drop_ambiguous_aliases(countries: dict[str, CountryModel]) -> None:
 
 # GeoNames countries file format: tab-separated values with the following columns:
 # ISO	ISO3	ISO-Numeric	fips	Country	Capital	Area(in sq km)	Population	Continent	tld	CurrencyCode	CurrencyName	Phone	Postal Code Format	Postal Code Regex	Languages	geonameid	neighbours	EquivalentFipsCode
-def merge_geonames(countries: dict[str, CountryModel]):
+def merge_geonames(countries: dict[str, CountryModel]) -> None:
+    """Sets each country's GeoNames id and adds GeoNames' name as an alias, adding a country GeoNames lists under a code in neither ISO list (Kosovo)."""
     ingest_log.writeline("Merging GeoNames countries...")
 
     # historic entries are keyed by alpha_4, so a GeoNames row for a withdrawn code (CS, AN) would otherwise be added as a new country; a code ISO reused goes to its most recent holder, the country GeoNames still lists under it (CS: Serbia and Montenegro, not Czechoslovakia)
@@ -129,20 +142,7 @@ def merge_geonames(countries: dict[str, CountryModel]):
                 )
                 countries[alpha2] = country
 
-            # Merge GeoNames data into existing ISO country
             country.geonames_id = geonames_id
-
-            # add name if not duplicate
-            if name and name.lower() not in [
-                country.name.lower(),
-                (country.official_name or "").lower(),
-                (country.common_name or "").lower(),
-                *[n.lower() for n in country.aliases],
-            ]:
+            # ingest_countries() dedupes every alias against the country's names once all sources are merged
+            if name:
                 country.aliases.append(name)
-
-            # remove name/official name from aliases if present
-            if country.name in country.aliases:
-                country.aliases.remove(country.name)
-            if country.official_name in country.aliases:
-                country.aliases.remove(country.official_name)

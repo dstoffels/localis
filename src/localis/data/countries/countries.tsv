@@ -1,5 +1,5 @@
 Andorra	AD	AND	3041565	Principality of Andorra		Principality of the Valleys of Andorra	20	🇦🇩		5|25	34	46	1162:official:51.0:
-United Arab Emirates	AE	ARE	290557			Emirates|U.A.E.	784	🇦🇪		4|24	34	1	345:official:78.0:
+United Arab Emirates	AE	ARE	290557			Emirates|U.A.E.|UAE	784	🇦🇪		4|24	34	1	345:official:78.0:
 Afghanistan	AF	AFG	1149361	Islamic Republic of Afghanistan		Affghanistan|Affghanisthan|Affghaunistan|Afghania|Afghanisthan|Afghaunistan|Afghaunistaun	4	🇦🇫		4|21	34	2	1909:official:50.0:|5445:official:43.0:|6861:regional:4.7:5|6639:regional:1.7:
 Antigua and Barbuda	AG	ATG	3576396			Antigua–Barbuda	28	🇦🇬		3|19	29|31|34	164	1832:official:86.0:
 Anguilla	AI	AIA	3573511			Malliouhana	660	🇦🇮		3|19	29|31	164	1832:official:95.0:
@@ -244,7 +244,7 @@ Wallis and Futuna	WF	WLF	4034749			Wallis and Futuna Islands	876	🇼🇫		2|14	
 Samoa	WS	WSM	4034894	Independent State of Samoa		Western Samoa	882	🇼🇸		2|14	34	155	5953:official:100.0:|1832:official:2.1:
 Yemen	YE	YEM	69543	Republic of Yemen			887	🇾🇪		4|24	34	175	345:official:74.0:
 Mayotte	YT	MYT	1024031			Department of Mayotte	175	🇾🇹		1|7	30	46	1953:official:63.0:
-South Africa	ZA	ZAF	953987	Republic of South Africa		R.S.A.	710	🇿🇦		1|10	30|34	176	1832:official:31.0:|7911:regional:24.0:|7271:regional:18.0:|118:regional:13.0:|4839:regional:9.4:|6591:regional:8.2:|6005:regional:7.9:|6592:regional:4.4:|6092:regional:2.7:|6887:regional:2.3:|4494:regional:1.6:
+South Africa	ZA	ZAF	953987	Republic of South Africa		R.S.A.|RSA	710	🇿🇦		1|10	30|34	176	1832:official:31.0:|7911:regional:24.0:|7271:regional:18.0:|118:regional:13.0:|4839:regional:9.4:|6591:regional:8.2:|6005:regional:7.9:|6592:regional:4.4:|6092:regional:2.7:|6887:regional:2.3:|4494:regional:1.6:
 Zambia	ZM	ZMB	895949	Republic of Zambia			894	🇿🇲		1|7	30|34	177	1832:official:16.0:
 Zimbabwe	ZW	ZWE	878675	Republic of Zimbabwe		Rhodesia|Southern Rhodesia|Zimbabwe Rhodesia	716	🇿🇼		1|7	30|34	178|145	5965:official:81.0:|1832:official:42.0:|4533:official:12.0:
 French Afars and Issas	AI	AFI				French Territory of the Afars and the Issas	262		AIDJ|1977|				
@@ -255,7 +255,7 @@ Byelorussian SSR Soviet Socialist Republic	BY	BYS				BSSR|Belarusian SSR|Belarus
 Czechoslovakia, Czechoslovak Socialist Republic	CS	CSK				Czecho-Slovakia|Czechoslovakia|Federation of Czechoslovakia|People's Republic of Czechoslovakia|Československo	200		CSHH|1993-06-15|				
 Serbia and Montenegro	CS	SCG	8505033			Serbia-Montenegro|State Union of Serbia and Montenegro	891		CSXX|2006-09-26|				
 Canton and Enderbury Islands	CT	CTE					128		CTKI|1984|				
-German Democratic Republic	DD	DDR				Communist Germany|Deutsche Demokratische Republik|East Germany|Socialist Germany	278		DDDE|1990-10-30|	5|28			
+German Democratic Republic	DD	DDR				Communist Germany|Deutsche Demokratische Republik|East Germany|GDR|Socialist Germany	278		DDDE|1990-10-30|	5|28			
 Dahomey	DY	DHY				Republic of Dahomey	204		DYBJ|1977|				
 French Southern and Antarctic Territories	FQ	ATF							FQHH|1979|now split between AQ and TF				
 France, Metropolitan	FX	FXX				European France|European part of France|France (part in Europe)|mainland France|metropolitan France	249		FXFR|1997-07-14|	5|28			

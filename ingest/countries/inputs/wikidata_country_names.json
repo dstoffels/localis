@@ -3,7 +3,8 @@
     "codes": [],
     "names": [
       "Ascension"
-    ]
+    ],
+    "short_names": []
   },
   "AD": {
     "codes": [
@@ -13,7 +14,8 @@
       "Andorra",
       "Principality of Andorra",
       "Principality of the Valleys of Andorra"
-    ]
+    ],
+    "short_names": []
   },
   "AE": {
     "codes": [
@@ -22,13 +24,15 @@
     "names": [
       "Emirates",
       "U.A.E.",
-      "UAE",
       "United Arab Emirates",
       "ae",
       "the Emirates",
       "the U.A.E.",
       "the UAE",
       "the United Arab Emirates"
+    ],
+    "short_names": [
+      "UAE"
     ]
   },
   "AF": {
@@ -44,18 +48,21 @@
       "Afghanisthan",
       "Afghaunistan",
       "Afghaunistaun"
-    ]
+    ],
+    "short_names": []
   },
   "AG": {
     "codes": [
       "ANT"
     ],
     "names": [
-      "AG",
       "Antigua & Barbuda",
       "Antigua and Barbuda",
       "Antigua-Barbuda",
       "Antigua–Barbuda"
+    ],
+    "short_names": [
+      "AG"
     ]
   },
   "AI": {
@@ -65,13 +72,15 @@
       "Anguilla",
       "Malliouhana",
       "ai"
-    ]
+    ],
+    "short_names": []
   },
   "AIDJ": {
     "codes": [],
     "names": [
       "French Territory of the Afars and the Issas"
-    ]
+    ],
+    "short_names": []
   },
   "AL": {
     "codes": [
@@ -85,7 +94,8 @@
       "Republika Popullore Socialiste e Shqiperise",
       "Republika Popullore e Shqiperise",
       "Shqipërisë"
-    ]
+    ],
+    "short_names": []
   },
   "AM": {
     "codes": [
@@ -97,7 +107,8 @@
       "Hayastani Hanrapetut’yun",
       "Republic of Armenia",
       "Հայաստան"
-    ]
+    ],
+    "short_names": []
   },
   "AN": {
     "codes": [
@@ -120,7 +131,8 @@
       "Netherlands Antilles",
       "Netherlands-Antilles",
       "The Netherlands Antilles"
-    ]
+    ],
+    "short_names": []
   },
   "ANHH": {
     "codes": [
@@ -143,7 +155,8 @@
       "Netherlands Antilles",
       "Netherlands-Antilles",
       "The Netherlands Antilles"
-    ]
+    ],
+    "short_names": []
   },
   "AO": {
     "codes": [
@@ -154,13 +167,15 @@
       "Ngola",
       "Republic of Angola",
       "ao"
-    ]
+    ],
+    "short_names": []
   },
   "AQ": {
     "codes": [],
     "names": [
       "Antarctica"
-    ]
+    ],
+    "short_names": []
   },
   "AR": {
     "codes": [
@@ -171,14 +186,14 @@
       "Argentine Republic",
       "Republic of Argentina",
       "Republica Argentina"
-    ]
+    ],
+    "short_names": []
   },
   "AS": {
     "codes": [
       "ASA"
     ],
     "names": [
-      "AS",
       "American Samoa",
       "American Sāmoa",
       "East Samoa",
@@ -189,6 +204,9 @@
       "U.S. Samoa",
       "US Samoa",
       "as"
+    ],
+    "short_names": [
+      "AS"
     ]
   },
   "AT": {
@@ -198,7 +216,8 @@
     "names": [
       "Austria",
       "Republic of Austria"
-    ]
+    ],
+    "short_names": []
   },
   "AU": {
     "codes": [
@@ -206,7 +225,6 @@
     ],
     "names": [
       "'Straya",
-      "AUS",
       "Aussieland",
       "Australia",
       "Commonwealth of Australia",
@@ -219,6 +237,9 @@
       "Straya",
       "Stria",
       "The Commonwealth of Australia"
+    ],
+    "short_names": [
+      "AUS"
     ]
   },
   "AW": {
@@ -230,7 +251,8 @@
       "Country of Aruba",
       "Island of Aruba",
       "aw"
-    ]
+    ],
+    "short_names": []
   },
   "AX": {
     "codes": [],
@@ -245,7 +267,8 @@
       "Åland",
       "Åland Islands",
       "Åland region"
-    ]
+    ],
+    "short_names": []
   },
   "AZ": {
     "codes": [
@@ -254,7 +277,8 @@
     "names": [
       "Azerbaijan",
       "Republic of Azerbaijan"
-    ]
+    ],
+    "short_names": []
   },
   "BA": {
     "codes": [
@@ -267,6 +291,9 @@
       "Bosnia and Herzegovina",
       "Bosnia-Herzegovina",
       "ba"
+    ],
+    "short_names": [
+      "B&H"
     ]
   },
   "BB": {
@@ -278,7 +305,8 @@
       "Barbadoes",
       "Barbados",
       "bb"
-    ]
+    ],
+    "short_names": []
   },
   "BD": {
     "codes": [
@@ -291,7 +319,8 @@
       "Land of Bengal",
       "People's Republic of Bangladesh",
       "bd"
-    ]
+    ],
+    "short_names": []
   },
   "BE": {
     "codes": [
@@ -300,7 +329,8 @@
     "names": [
       "Belgium",
       "Kingdom of Belgium"
-    ]
+    ],
+    "short_names": []
   },
   "BF": {
     "codes": [
@@ -311,7 +341,8 @@
       "Republic of Burkina Faso",
       "Republic of Upper Volta (-1984)",
       "bf"
-    ]
+    ],
+    "short_names": []
   },
   "BG": {
     "codes": [
@@ -321,7 +352,8 @@
       "Bulgaria",
       "Bulgarian Republic",
       "Republic of Bulgaria"
-    ]
+    ],
+    "short_names": []
   },
   "BH": {
     "codes": [
@@ -335,7 +367,8 @@
       "Kingdom of Bahrain",
       "Mamlakat al-Baḥrayn",
       "bh"
-    ]
+    ],
+    "short_names": []
   },
   "BI": {
     "codes": [
@@ -347,7 +380,8 @@
       "Republic of Burundi",
       "Republika y'Uburundi",
       "bi"
-    ]
+    ],
+    "short_names": []
   },
   "BJ": {
     "codes": [
@@ -356,7 +390,8 @@
     "names": [
       "Benin",
       "Republic of Benin"
-    ]
+    ],
+    "short_names": []
   },
   "BL": {
     "codes": [],
@@ -384,7 +419,8 @@
       "St. Barthélemy",
       "St. Barts",
       "Île Saint-Barthélemy"
-    ]
+    ],
+    "short_names": []
   },
   "BM": {
     "codes": [
@@ -412,7 +448,8 @@
       "The Somers Isles",
       "Virgineola",
       "bm"
-    ]
+    ],
+    "short_names": []
   },
   "BN": {
     "codes": [
@@ -423,7 +460,8 @@
       "Nation of Brunei, the Abode of Peace",
       "Negara Brunei Darussalam",
       "bn"
-    ]
+    ],
+    "short_names": []
   },
   "BO": {
     "codes": [
@@ -434,7 +472,8 @@
       "Bolivia (Plurinational State of)",
       "Plurinational State of Bolivia",
       "Republic of Bolivia"
-    ]
+    ],
+    "short_names": []
   },
   "BQ": {
     "codes": [],
@@ -442,13 +481,17 @@
       "BES islands",
       "Bonaire, Saint Eustatius and Saba",
       "Caribbean Netherlands"
-    ]
+    ],
+    "short_names": []
   },
   "BQAQ": {
     "codes": [],
     "names": [
       "BAT",
       "British Antarctic Territory"
+    ],
+    "short_names": [
+      "BAT"
     ]
   },
   "BR": {
@@ -458,7 +501,8 @@
     "names": [
       "Brazil",
       "Federative Republic of Brazil"
-    ]
+    ],
+    "short_names": []
   },
   "BS": {
     "codes": [
@@ -472,7 +516,8 @@
       "Commonwealth of the Bahamas",
       "The Bahamas",
       "bs"
-    ]
+    ],
+    "short_names": []
   },
   "BT": {
     "codes": [
@@ -483,13 +528,15 @@
       "Bhutan",
       "Kingdom of Bhutan",
       "bt"
-    ]
+    ],
+    "short_names": []
   },
   "BV": {
     "codes": [],
     "names": [
       "Bouvet Island"
-    ]
+    ],
+    "short_names": []
   },
   "BW": {
     "codes": [
@@ -500,7 +547,8 @@
       "Lefatshe la Botswana",
       "Republic of Botswana",
       "bw"
-    ]
+    ],
+    "short_names": []
   },
   "BY": {
     "codes": [
@@ -519,7 +567,8 @@
       "White Russia",
       "White Ruthenia",
       "by"
-    ]
+    ],
+    "short_names": []
   },
   "BYAA": {
     "codes": [],
@@ -544,7 +593,8 @@
       "Беларуская Савецкая Сацыялістычная Рэспубліка",
       "Белорусская ССР",
       "Белорусская Советская Социалистическая Республика"
-    ]
+    ],
+    "short_names": []
   },
   "BZ": {
     "codes": [
@@ -553,7 +603,8 @@
     "names": [
       "Belize",
       "bz"
-    ]
+    ],
+    "short_names": []
   },
   "CA": {
     "codes": [
@@ -563,7 +614,8 @@
       "CA",
       "CAN",
       "Canada"
-    ]
+    ],
+    "short_names": []
   },
   "CC": {
     "codes": [],
@@ -573,7 +625,8 @@
       "Keeling Islands",
       "Territory of the Cocos (Keeling) Islands",
       "cc"
-    ]
+    ],
+    "short_names": []
   },
   "CD": {
     "codes": [
@@ -591,6 +644,9 @@
       "Democratic Republic of Congo",
       "Democratic Republic of the Congo",
       "cd"
+    ],
+    "short_names": [
+      "DRC"
     ]
   },
   "CF": {
@@ -598,10 +654,12 @@
       "CAF"
     ],
     "names": [
-      "CAR",
       "Central Africa",
       "Central African Republic",
       "cf"
+    ],
+    "short_names": [
+      "CAR"
     ]
   },
   "CG": {
@@ -620,6 +678,9 @@
       "Republique du Congo",
       "République du Congo",
       "cg"
+    ],
+    "short_names": [
+      "Congo"
     ]
   },
   "CH": {
@@ -631,7 +692,8 @@
       "Swiss",
       "Swiss Confederation",
       "Switzerland"
-    ]
+    ],
+    "short_names": []
   },
   "CI": {
     "codes": [
@@ -650,7 +712,8 @@
       "Republic of the Ivory Coast",
       "The Ivory Coast",
       "ci"
-    ]
+    ],
+    "short_names": []
   },
   "CK": {
     "codes": [
@@ -661,7 +724,8 @@
       "Cook Islands",
       "Hervey Islands",
       "ck"
-    ]
+    ],
+    "short_names": []
   },
   "CL": {
     "codes": [
@@ -671,7 +735,8 @@
       "CHI",
       "Chile",
       "Republic of Chile"
-    ]
+    ],
+    "short_names": []
   },
   "CM": {
     "codes": [
@@ -680,7 +745,8 @@
     "names": [
       "Cameroon",
       "Republic of Cameroon"
-    ]
+    ],
+    "short_names": []
   },
   "CN": {
     "codes": [
@@ -696,7 +762,8 @@
       "The PRC",
       "cn",
       "the People's Republic of China"
-    ]
+    ],
+    "short_names": []
   },
   "CO": {
     "codes": [
@@ -707,7 +774,8 @@
       "Colombiá",
       "Republic of Colombia",
       "The Republic of Colombia"
-    ]
+    ],
+    "short_names": []
   },
   "CP": {
     "codes": [],
@@ -715,7 +783,8 @@
       "Clipperton Island",
       "La Passion–Clipperton",
       "Passion Island"
-    ]
+    ],
+    "short_names": []
   },
   "CQ": {
     "codes": [],
@@ -724,7 +793,8 @@
       "Sark",
       "Ser",
       "Sèr"
-    ]
+    ],
+    "short_names": []
   },
   "CR": {
     "codes": [
@@ -734,7 +804,8 @@
       "Costa Rica",
       "Republic of Costa Rica",
       "cr"
-    ]
+    ],
+    "short_names": []
   },
   "CSHH": {
     "codes": [
@@ -748,7 +819,8 @@
       "TCH",
       "cs",
       "Československo"
-    ]
+    ],
+    "short_names": []
   },
   "CSXX": {
     "codes": [
@@ -758,13 +830,15 @@
       "Serbia and Montenegro",
       "Serbia-Montenegro",
       "State Union of Serbia and Montenegro"
-    ]
+    ],
+    "short_names": []
   },
   "CTKI": {
     "codes": [],
     "names": [
       "Canton and Enderbury Islands"
-    ]
+    ],
+    "short_names": []
   },
   "CU": {
     "codes": [
@@ -774,7 +848,8 @@
       "Cuba",
       "Republic of Cuba",
       "cu"
-    ]
+    ],
+    "short_names": []
   },
   "CV": {
     "codes": [
@@ -785,7 +860,8 @@
       "Cape Verde Islands",
       "Republic of Cabo Verde",
       "Republic of Cape Verde"
-    ]
+    ],
+    "short_names": []
   },
   "CW": {
     "codes": [],
@@ -799,7 +875,8 @@
       "Curocao",
       "ISO 3166-1:CW",
       "Island Territory of Curaçao"
-    ]
+    ],
+    "short_names": []
   },
   "CX": {
     "codes": [],
@@ -809,7 +886,8 @@
       "Christmas Island, Other Territories, Australia",
       "Territory of Christmas Island",
       "cx"
-    ]
+    ],
+    "short_names": []
   },
   "CY": {
     "codes": [
@@ -820,7 +898,8 @@
       "Greek Administration of Southern Cyprus",
       "Greek Cypriot State",
       "Republic of Cyprus"
-    ]
+    ],
+    "short_names": []
   },
   "CZ": {
     "codes": [
@@ -830,7 +909,8 @@
       "Czech Republic",
       "Czechia",
       "the Czech Republic"
-    ]
+    ],
+    "short_names": []
   },
   "DD": {
     "codes": [
@@ -844,6 +924,9 @@
       "GDR",
       "German Democratic Republic",
       "Socialist Germany"
+    ],
+    "short_names": [
+      "GDR"
     ]
   },
   "DDDE": {
@@ -858,6 +941,9 @@
       "GDR",
       "German Democratic Republic",
       "Socialist Germany"
+    ],
+    "short_names": [
+      "GDR"
     ]
   },
   "DE": {
@@ -871,13 +957,15 @@
       "FRG",
       "Federal Republic of Germany",
       "Germany"
-    ]
+    ],
+    "short_names": []
   },
   "DG": {
     "codes": [],
     "names": [
       "Diego Garcia"
-    ]
+    ],
+    "short_names": []
   },
   "DJ": {
     "codes": [
@@ -890,7 +978,8 @@
       "Jībūtī",
       "Republic of Djibouti",
       "dj"
-    ]
+    ],
+    "short_names": []
   },
   "DK": {
     "codes": [
@@ -905,6 +994,9 @@
       "TAN",
       "dk",
       "metropolitan Denmark"
+    ],
+    "short_names": [
+      "Denmark"
     ]
   },
   "DM": {
@@ -920,7 +1012,8 @@
       "Wai'tu kubuli",
       "Wai‘tu kubuli",
       "dm"
-    ]
+    ],
+    "short_names": []
   },
   "DO": {
     "codes": [
@@ -933,14 +1026,16 @@
       "RD",
       "Republica Dominicana",
       "República Dominicana"
-    ]
+    ],
+    "short_names": []
   },
   "DYBJ": {
     "codes": [],
     "names": [
       "Dahomey",
       "Republic of Dahomey"
-    ]
+    ],
+    "short_names": []
   },
   "DZ": {
     "codes": [
@@ -951,20 +1046,24 @@
       "Djazaïr",
       "Dzayer",
       "People's Democratic Republic of Algeria"
-    ]
+    ],
+    "short_names": []
   },
   "EC": {
     "codes": [
       "ECU"
     ],
     "names": [
-      "EC",
-      "ECU",
       "Ecuador",
       "Republic of Ecuador",
       "Republic of Equator",
       "Republic of the Equator",
       "The Ecuadorian State"
+    ],
+    "short_names": [
+      "EC",
+      "ECU",
+      "Ecuador"
     ]
   },
   "EE": {
@@ -977,6 +1076,9 @@
       "Estonia",
       "Republic of Estonia",
       "ee"
+    ],
+    "short_names": [
+      "Estonia"
     ]
   },
   "EG": {
@@ -990,7 +1092,8 @@
       "Misr",
       "Rep. Egypt",
       "Republic of Egypt"
-    ]
+    ],
+    "short_names": []
   },
   "EH": {
     "codes": [],
@@ -999,7 +1102,8 @@
       "Spanish Sahara",
       "West Sahara",
       "Western Sahara"
-    ]
+    ],
+    "short_names": []
   },
   "ER": {
     "codes": [
@@ -1011,7 +1115,8 @@
       "Iritriyā",
       "State of Eritrea",
       "er"
-    ]
+    ],
+    "short_names": []
   },
   "ES": {
     "codes": [
@@ -1020,6 +1125,9 @@
     ],
     "names": [
       "Kingdom of Spain",
+      "Spain"
+    ],
+    "short_names": [
       "Spain"
     ]
   },
@@ -1031,7 +1139,8 @@
       "Ethiopia",
       "Federal Democratic Republic of Ethiopia",
       "et"
-    ]
+    ],
+    "short_names": []
   },
   "FI": {
     "codes": [
@@ -1045,7 +1154,8 @@
       "Republiken Finland",
       "Suomen tasavalta",
       "fi"
-    ]
+    ],
+    "short_names": []
   },
   "FJ": {
     "codes": [
@@ -1060,6 +1170,9 @@
       "Republic of the Fiji Islands",
       "Viti",
       "fj"
+    ],
+    "short_names": [
+      "Fiji"
     ]
   },
   "FK": {
@@ -1074,14 +1187,14 @@
       "Islas Malvinas",
       "Malvinas",
       "Malvinas Islands"
-    ]
+    ],
+    "short_names": []
   },
   "FM": {
     "codes": [
       "FSM"
     ],
     "names": [
-      "FM",
       "FSM",
       "Fed. Sts. Micronesia",
       "Fed. Sts. of Micronesia",
@@ -1089,6 +1202,9 @@
       "Federated States of Micronesia, FSM",
       "Micronesia",
       "fm"
+    ],
+    "short_names": [
+      "FM"
     ]
   },
   "FO": {
@@ -1133,7 +1249,8 @@
       "the Faeroe Islands",
       "the Faroe Islands",
       "🇫🇴"
-    ]
+    ],
+    "short_names": []
   },
   "FR": {
     "codes": [
@@ -1142,7 +1259,8 @@
     "names": [
       "France",
       "French Republic"
-    ]
+    ],
+    "short_names": []
   },
   "FXFR": {
     "codes": [],
@@ -1152,7 +1270,8 @@
       "France (part in Europe)",
       "mainland France",
       "metropolitan France"
-    ]
+    ],
+    "short_names": []
   },
   "GA": {
     "codes": [
@@ -1165,14 +1284,14 @@
       "Republique Gabonaise",
       "République Gabonaise",
       "ga"
-    ]
+    ],
+    "short_names": []
   },
   "GB": {
     "codes": [
       "GBR"
     ],
     "names": [
-      "Britain",
       "G B",
       "Great Britain",
       "Great Britain and Northern Ireland",
@@ -1182,6 +1301,10 @@
       "the UK",
       "the United Kingdom",
       "the United Kingdom of Great Britain and Northern Ireland"
+    ],
+    "short_names": [
+      "Britain",
+      "United Kingdom"
     ]
   },
   "GD": {
@@ -1192,7 +1315,8 @@
       "GRN",
       "Grenada",
       "gd"
-    ]
+    ],
+    "short_names": []
   },
   "GE": {
     "codes": [
@@ -1204,13 +1328,15 @@
       "Georgia (country)",
       "Republic of Georgia",
       "Sakartvelo"
-    ]
+    ],
+    "short_names": []
   },
   "GEHH": {
     "codes": [],
     "names": [
       "Gilbert and Ellice Islands"
-    ]
+    ],
+    "short_names": []
   },
   "GF": {
     "codes": [],
@@ -1219,7 +1345,8 @@
       "Guiana",
       "Guiana, France",
       "Guyane"
-    ]
+    ],
+    "short_names": []
   },
   "GG": {
     "codes": [],
@@ -1235,6 +1362,9 @@
       "Lisia",
       "XA-GG",
       "gg"
+    ],
+    "short_names": [
+      "Guernsey"
     ]
   },
   "GH": {
@@ -1243,7 +1373,8 @@
     ],
     "names": [
       "Ghana"
-    ]
+    ],
+    "short_names": []
   },
   "GI": {
     "codes": [],
@@ -1251,7 +1382,8 @@
       "Gib",
       "Gibraltar",
       "gi"
-    ]
+    ],
+    "short_names": []
   },
   "GL": {
     "codes": [],
@@ -1262,7 +1394,8 @@
       "Greenlandia",
       "Groenland",
       "Kalaallit Nunaat"
-    ]
+    ],
+    "short_names": []
   },
   "GM": {
     "codes": [
@@ -1273,7 +1406,8 @@
       "Islamic Republic of the Gambia",
       "Republic of the Gambia",
       "The Gambia"
-    ]
+    ],
+    "short_names": []
   },
   "GN": {
     "codes": [
@@ -1285,7 +1419,8 @@
       "Guinea-Conakry",
       "Republic of Guinea",
       "gn"
-    ]
+    ],
+    "short_names": []
   },
   "GP": {
     "codes": [],
@@ -1296,7 +1431,8 @@
       "Gwadloup",
       "Karukera",
       "gp"
-    ]
+    ],
+    "short_names": []
   },
   "GQ": {
     "codes": [
@@ -1307,7 +1443,8 @@
       "GEQ",
       "Republic of Equatorial Guinea",
       "gq"
-    ]
+    ],
+    "short_names": []
   },
   "GR": {
     "codes": [
@@ -1322,7 +1459,8 @@
       "Hellenic Republic",
       "el",
       "gr"
-    ]
+    ],
+    "short_names": []
   },
   "GS": {
     "codes": [],
@@ -1333,7 +1471,8 @@
       "South Georgia and the South Sandwich Islands",
       "South Sandwich Islands",
       "gs"
-    ]
+    ],
+    "short_names": []
   },
   "GT": {
     "codes": [
@@ -1345,7 +1484,8 @@
       "Guatemala",
       "Republic of Guatemala",
       "gt"
-    ]
+    ],
+    "short_names": []
   },
   "GU": {
     "codes": [
@@ -1363,6 +1503,9 @@
       "Island of Guam",
       "Territory of Guam",
       "US-GU"
+    ],
+    "short_names": [
+      "GU"
     ]
   },
   "GW": {
@@ -1374,7 +1517,8 @@
       "Guinea-Bissau",
       "Republic of Guinea-Bissau",
       "gw"
-    ]
+    ],
+    "short_names": []
   },
   "GY": {
     "codes": [
@@ -1385,14 +1529,14 @@
       "Guyana",
       "Republic of Guyana",
       "gy"
-    ]
+    ],
+    "short_names": []
   },
   "HK": {
     "codes": [
       "HKG"
     ],
     "names": [
-      "HK",
       "HKSAR",
       "Hong Kong",
       "Hong Kong SAR",
@@ -1401,6 +1545,10 @@
       "Hong Kong Special Administrative Region of the People's Republic of China",
       "Hong Kong, China",
       "Hongkong"
+    ],
+    "short_names": [
+      "HK",
+      "HKSAR"
     ]
   },
   "HM": {
@@ -1412,7 +1560,8 @@
       "Heard and McDonald Islands",
       "Territory of Heard Island and McDonald Islands",
       "hm"
-    ]
+    ],
+    "short_names": []
   },
   "HN": {
     "codes": [
@@ -1424,7 +1573,8 @@
       "Honduras",
       "Republic of Honduras",
       "hn"
-    ]
+    ],
+    "short_names": []
   },
   "HR": {
     "codes": [
@@ -1437,7 +1587,8 @@
       "HRV",
       "RH",
       "Republic of Croatia"
-    ]
+    ],
+    "short_names": []
   },
   "HT": {
     "codes": [
@@ -1451,7 +1602,8 @@
       "Hayti",
       "Republic of Haiti",
       "ht"
-    ]
+    ],
+    "short_names": []
   },
   "HU": {
     "codes": [
@@ -1459,7 +1611,8 @@
     ],
     "names": [
       "Hungary"
-    ]
+    ],
+    "short_names": []
   },
   "HVBF": {
     "codes": [
@@ -1468,7 +1621,8 @@
     "names": [
       "Republic of Upper Volta",
       "Upper Volta"
-    ]
+    ],
+    "short_names": []
   },
   "ID": {
     "codes": [
@@ -1478,7 +1632,8 @@
       "Indonesia",
       "Republic of Indonesia",
       "id"
-    ]
+    ],
+    "short_names": []
   },
   "IE": {
     "codes": [
@@ -1489,7 +1644,8 @@
       "Irish Republic",
       "Republic of Ireland",
       "Southern Ireland"
-    ]
+    ],
+    "short_names": []
   },
   "IL": {
     "codes": [
@@ -1501,7 +1657,8 @@
       "State of Israel",
       "Yisrael",
       "il"
-    ]
+    ],
+    "short_names": []
   },
   "IM": {
     "codes": [],
@@ -1510,13 +1667,15 @@
       "I. Man",
       "I. Mann",
       "I. Mannin",
-      "I.O.M.",
       "Isle of Man",
       "Isle of Mann",
       "Man",
       "Mann",
       "Manx",
       "the Isle of Man"
+    ],
+    "short_names": [
+      "I.O.M."
     ]
   },
   "IN": {
@@ -1535,6 +1694,9 @@
       "Republic of India",
       "Tenjiku",
       "Tianzhu"
+    ],
+    "short_names": [
+      "India"
     ]
   },
   "IO": {
@@ -1545,7 +1707,8 @@
       "The British Indian Ocean Territory",
       "io",
       "🇮🇴"
-    ]
+    ],
+    "short_names": []
   },
   "IQ": {
     "codes": [
@@ -1555,7 +1718,8 @@
       "Iraq",
       "Republic of Iraq",
       "iq"
-    ]
+    ],
+    "short_names": []
   },
   "IR": {
     "codes": [
@@ -1567,7 +1731,8 @@
       "Islamic Rep. Iran",
       "Islamic Republic of Iran",
       "ir"
-    ]
+    ],
+    "short_names": []
   },
   "IS": {
     "codes": [
@@ -1579,7 +1744,8 @@
       "Isl.",
       "Republic of Iceland",
       "Ysland"
-    ]
+    ],
+    "short_names": []
   },
   "IT": {
     "codes": [
@@ -1589,7 +1755,8 @@
       "Italian Republic",
       "Italy",
       "Republic of Italy"
-    ]
+    ],
+    "short_names": []
   },
   "JE": {
     "codes": [],
@@ -1609,7 +1776,8 @@
       "Jersey Island",
       "Jèrri",
       "je"
-    ]
+    ],
+    "short_names": []
   },
   "JM": {
     "codes": [
@@ -1619,7 +1787,8 @@
       "Commonwealth of Jamaica",
       "JA",
       "Jamaica"
-    ]
+    ],
+    "short_names": []
   },
   "JO": {
     "codes": [
@@ -1634,7 +1803,8 @@
       "Kingdom of Jordan",
       "State of Jordan",
       "Yarden"
-    ]
+    ],
+    "short_names": []
   },
   "JP": {
     "codes": [
@@ -1649,6 +1819,9 @@
       "Nihon-koku",
       "Nippon-koku",
       "State of Japan"
+    ],
+    "short_names": [
+      "Japan"
     ]
   },
   "JTUM": {
@@ -1656,7 +1829,8 @@
     "names": [
       "Johnston Atoll",
       "Kalama Atoll"
-    ]
+    ],
+    "short_names": []
   },
   "KE": {
     "codes": [
@@ -1666,7 +1840,8 @@
       "Kenya",
       "Republic of Kenya",
       "ke"
-    ]
+    ],
+    "short_names": []
   },
   "KG": {
     "codes": [
@@ -1676,7 +1851,8 @@
       "Kyrgyz Republic",
       "Kyrgyzstan",
       "kg"
-    ]
+    ],
+    "short_names": []
   },
   "KH": {
     "codes": [
@@ -1691,7 +1867,8 @@
       "Kampuchea",
       "Kingdom of Cambodia",
       "kh"
-    ]
+    ],
+    "short_names": []
   },
   "KI": {
     "codes": [
@@ -1701,6 +1878,9 @@
       "Kiribati",
       "Republic of Kiribati",
       "ki"
+    ],
+    "short_names": [
+      "Kiribati"
     ]
   },
   "KM": {
@@ -1719,7 +1899,8 @@
       "km",
       "ouvoimoja wakomori",
       "the Comoros"
-    ]
+    ],
+    "short_names": []
   },
   "KN": {
     "codes": [
@@ -1736,7 +1917,8 @@
       "St Kitts and Nevis",
       "St. Kitts & Nevis",
       "St. Kitts and Nevis"
-    ]
+    ],
+    "short_names": []
   },
   "KP": {
     "codes": [
@@ -1749,6 +1931,9 @@
       "N. Korea",
       "North Korea",
       "kp"
+    ],
+    "short_names": [
+      "DPRK"
     ]
   },
   "KR": {
@@ -1762,12 +1947,14 @@
       "Hanguk",
       "Korea (South)",
       "Korea Republic",
-      "ROK",
       "Rep. Korea",
       "Republic of Korea",
       "S. Korea",
       "Silla",
       "South Korea"
+    ],
+    "short_names": [
+      "ROK"
     ]
   },
   "KW": {
@@ -1778,7 +1965,8 @@
       "Kuwait",
       "State of Kuwait",
       "kw"
-    ]
+    ],
+    "short_names": []
   },
   "KY": {
     "codes": [
@@ -1789,7 +1977,8 @@
       "Cayman Islands",
       "Caymans",
       "ky"
-    ]
+    ],
+    "short_names": []
   },
   "KZ": {
     "codes": [
@@ -1801,7 +1990,8 @@
       "Republic of Kazakhstan",
       "Republic of Qazaqstan",
       "kz"
-    ]
+    ],
+    "short_names": []
   },
   "LA": {
     "codes": [
@@ -1812,7 +2002,8 @@
       "Lao People's Democratic Republic",
       "Laos",
       "la"
-    ]
+    ],
+    "short_names": []
   },
   "LB": {
     "codes": [
@@ -1825,7 +2016,8 @@
       "Republic of Lebanon",
       "State of Lebanon",
       "lb"
-    ]
+    ],
+    "short_names": []
   },
   "LC": {
     "codes": [
@@ -1839,7 +2031,8 @@
       "St. Lucia",
       "lc",
       "lca"
-    ]
+    ],
+    "short_names": []
   },
   "LI": {
     "codes": [
@@ -1850,7 +2043,8 @@
       "Liechtenstein",
       "Principality of Liechtenstein",
       "li"
-    ]
+    ],
+    "short_names": []
   },
   "LK": {
     "codes": [
@@ -1869,7 +2063,8 @@
       "lk",
       "lke",
       "sri"
-    ]
+    ],
+    "short_names": []
   },
   "LR": {
     "codes": [
@@ -1880,7 +2075,8 @@
       "Liberia",
       "Republic of Liberia",
       "lr"
-    ]
+    ],
+    "short_names": []
   },
   "LS": {
     "codes": [
@@ -1892,7 +2088,8 @@
       "Lesotho",
       "The Mountain Kingdom",
       "ls"
-    ]
+    ],
+    "short_names": []
   },
   "LT": {
     "codes": [
@@ -1901,7 +2098,8 @@
     "names": [
       "Lithuania",
       "Republic of Lithuania"
-    ]
+    ],
+    "short_names": []
   },
   "LU": {
     "codes": [
@@ -1910,7 +2108,8 @@
     "names": [
       "Grand Duchy of Luxembourg",
       "Luxembourg"
-    ]
+    ],
+    "short_names": []
   },
   "LV": {
     "codes": [
@@ -1927,7 +2126,8 @@
       "Leţmо̄ Vabāmо̄",
       "Republic of Latvia",
       "lv"
-    ]
+    ],
+    "short_names": []
   },
   "LY": {
     "codes": [
@@ -1938,7 +2138,8 @@
       "Libya",
       "State of Libya",
       "ly"
-    ]
+    ],
+    "short_names": []
   },
   "MA": {
     "codes": [
@@ -1951,7 +2152,8 @@
       "Marocco",
       "Morocco",
       "al-Maġrib"
-    ]
+    ],
+    "short_names": []
   },
   "MC": {
     "codes": [
@@ -1968,7 +2170,8 @@
       "Principauté de Monaco",
       "Prinçipatu de Mùnegu",
       "mc"
-    ]
+    ],
+    "short_names": []
   },
   "MD": {
     "codes": [
@@ -1979,7 +2182,8 @@
       "Moldova",
       "Republic of Moldova",
       "Republica Moldova"
-    ]
+    ],
+    "short_names": []
   },
   "ME": {
     "codes": [
@@ -1989,7 +2193,8 @@
       "ME",
       "Montenegro",
       "Republic of Montenegro"
-    ]
+    ],
+    "short_names": []
   },
   "MF": {
     "codes": [],
@@ -2003,7 +2208,8 @@
       "St. Martin",
       "St. Martin (French part)",
       "mf"
-    ]
+    ],
+    "short_names": []
   },
   "MG": {
     "codes": [
@@ -2015,17 +2221,20 @@
       "Malagaskar",
       "Republic of Madagascar",
       "mg"
-    ]
+    ],
+    "short_names": []
   },
   "MH": {
     "codes": [
       "MHL"
     ],
     "names": [
-      "MH",
       "Marshall Islands",
       "Republic of the Marshall Islands",
       "mh"
+    ],
+    "short_names": [
+      "MH"
     ]
   },
   "MIUM": {
@@ -2035,7 +2244,8 @@
       "Midway Atoll",
       "Midway Island",
       "Midway Islands"
-    ]
+    ],
+    "short_names": []
   },
   "MK": {
     "codes": [
@@ -2052,6 +2262,9 @@
       "North Macedonia",
       "Republic of Macedonia",
       "Republic of North Macedonia"
+    ],
+    "short_names": [
+      "North Macedonia"
     ]
   },
   "ML": {
@@ -2062,17 +2275,21 @@
       "Mali",
       "Republic of Mali",
       "ml"
-    ]
+    ],
+    "short_names": []
   },
   "MM": {
     "codes": [
       "MYA"
     ],
     "names": [
-      "Burma",
       "Myanmar",
       "Republic of the Union of Myanmar",
       "Union of Burma"
+    ],
+    "short_names": [
+      "Burma",
+      "Myanmar"
     ]
   },
   "MN": {
@@ -2083,6 +2300,9 @@
       "Mongol State",
       "Mongolia",
       "State of Mongolia"
+    ],
+    "short_names": [
+      "Mongolia"
     ]
   },
   "MO": {
@@ -2101,7 +2321,8 @@
       "Macau SAR, China",
       "Macau Special Administrative Region",
       "Macau Special Administrative Region of the People's Republic of China"
-    ]
+    ],
+    "short_names": []
   },
   "MP": {
     "codes": [],
@@ -2118,6 +2339,10 @@
       "mp",
       "nmi",
       "the Northern Mariana Islands"
+    ],
+    "short_names": [
+      "CNMI",
+      "Northern Mariana Islands"
     ]
   },
   "MQ": {
@@ -2133,7 +2358,8 @@
       "Matnik",
       "Territorial Collectivity of Martinique",
       "Wanakaera"
-    ]
+    ],
+    "short_names": []
   },
   "MR": {
     "codes": [
@@ -2150,7 +2376,8 @@
       "Muritanya",
       "Murutaane",
       "mr"
-    ]
+    ],
+    "short_names": []
   },
   "MS": {
     "codes": [],
@@ -2160,7 +2387,8 @@
       "MSR",
       "Montserrat",
       "ms"
-    ]
+    ],
+    "short_names": []
   },
   "MT": {
     "codes": [
@@ -2169,7 +2397,8 @@
     "names": [
       "Malta",
       "Republic of Malta"
-    ]
+    ],
+    "short_names": []
   },
   "MU": {
     "codes": [
@@ -2182,7 +2411,8 @@
       "Mauritius",
       "Moris",
       "Republic of Mauritius"
-    ]
+    ],
+    "short_names": []
   },
   "MV": {
     "codes": [
@@ -2193,7 +2423,8 @@
       "Maldives",
       "Republic of Maldives",
       "mv"
-    ]
+    ],
+    "short_names": []
   },
   "MW": {
     "codes": [
@@ -2204,7 +2435,8 @@
       "Malawi",
       "Republic of Malawi",
       "mw"
-    ]
+    ],
+    "short_names": []
   },
   "MX": {
     "codes": [
@@ -2219,7 +2451,8 @@
       "United Mexican States",
       "United States of Mexico",
       "mx"
-    ]
+    ],
+    "short_names": []
   },
   "MY": {
     "codes": [
@@ -2227,9 +2460,11 @@
     ],
     "names": [
       "Federation of Malaysia",
-      "MYS",
       "Malaysia",
       "Malaysia Federation"
+    ],
+    "short_names": [
+      "MYS"
     ]
   },
   "MZ": {
@@ -2242,7 +2477,8 @@
       "Republic of Mozambique",
       "República de Moçambique",
       "mz"
-    ]
+    ],
+    "short_names": []
   },
   "NA": {
     "codes": [
@@ -2252,7 +2488,8 @@
       "Namibia",
       "Republic of Namibia",
       "na"
-    ]
+    ],
+    "short_names": []
   },
   "NC": {
     "codes": [],
@@ -2260,7 +2497,8 @@
       "New Cal",
       "New Caledonia",
       "Territory of New Caledonia and Dependencies"
-    ]
+    ],
+    "short_names": []
   },
   "NE": {
     "codes": [
@@ -2273,7 +2511,8 @@
       "Republic of the Niger",
       "The Niger",
       "ne"
-    ]
+    ],
+    "short_names": []
   },
   "NF": {
     "codes": [],
@@ -2283,7 +2522,8 @@
       "Norfolk Island, Other Territories",
       "Norfolk Island, Other Territories, Australia",
       "Territory of Norfolk Island"
-    ]
+    ],
+    "short_names": []
   },
   "NG": {
     "codes": [
@@ -2291,8 +2531,11 @@
     ],
     "names": [
       "Federal Republic of Nigeria",
-      "NG",
       "Naija",
+      "Nigeria"
+    ],
+    "short_names": [
+      "NG",
       "Nigeria"
     ]
   },
@@ -2301,7 +2544,8 @@
     "names": [
       "New Hebrides",
       "New Hebrides Condominium"
-    ]
+    ],
+    "short_names": []
   },
   "NI": {
     "codes": [
@@ -2314,6 +2558,9 @@
       "Nicaragua",
       "Republic of Nicaragua",
       "ni"
+    ],
+    "short_names": [
+      "NIC"
     ]
   },
   "NL": {
@@ -2324,6 +2571,9 @@
       "Nederlanden",
       "Netherlands",
       "the Netherlands"
+    ],
+    "short_names": [
+      "Netherlands"
     ]
   },
   "NO": {
@@ -2333,7 +2583,8 @@
     "names": [
       "Kingdom of Norway",
       "Norway"
-    ]
+    ],
+    "short_names": []
   },
   "NP": {
     "codes": [
@@ -2374,14 +2625,16 @@
       "Palpa",
       "Palpou",
       "Paï-pou"
-    ]
+    ],
+    "short_names": []
   },
   "NQAQ": {
     "codes": [],
     "names": [
       "Dronning Maud Land",
       "Queen Maud Land"
-    ]
+    ],
+    "short_names": []
   },
   "NR": {
     "codes": [
@@ -2393,20 +2646,23 @@
       "Pleasant Island",
       "Republic of Naoero",
       "Republic of Nauru"
-    ]
+    ],
+    "short_names": []
   },
   "NTHH": {
     "codes": [],
     "names": [
       "Saudi–Iraqi Neutral Zone"
-    ]
+    ],
+    "short_names": []
   },
   "NU": {
     "codes": [],
     "names": [
       "Niue",
       "nu"
-    ]
+    ],
+    "short_names": []
   },
   "NZ": {
     "codes": [
@@ -2417,7 +2673,8 @@
       "Dominion of New Zealand",
       "New Zealand",
       "nz"
-    ]
+    ],
+    "short_names": []
   },
   "OM": {
     "codes": [
@@ -2429,7 +2686,8 @@
       "Uman",
       "om",
       "omn"
-    ]
+    ],
+    "short_names": []
   },
   "PA": {
     "codes": [
@@ -2439,21 +2697,24 @@
       "Panama",
       "Republic of Panama",
       "pa"
-    ]
+    ],
+    "short_names": []
   },
   "PC": {
     "codes": [],
     "names": [
       "TTPI",
       "Trust Territory of the Pacific Islands"
-    ]
+    ],
+    "short_names": []
   },
   "PCHH": {
     "codes": [],
     "names": [
       "TTPI",
       "Trust Territory of the Pacific Islands"
-    ]
+    ],
+    "short_names": []
   },
   "PE": {
     "codes": [
@@ -2465,7 +2726,8 @@
       "Republica del Peru",
       "pe",
       "per"
-    ]
+    ],
+    "short_names": []
   },
   "PF": {
     "codes": [],
@@ -2476,7 +2738,8 @@
       "French Settlements in Oceania",
       "Territory of French Polynesia",
       "pf"
-    ]
+    ],
+    "short_names": []
   },
   "PG": {
     "codes": [
@@ -2484,8 +2747,10 @@
     ],
     "names": [
       "Independent State of Papua New Guinea",
-      "PNG",
       "Papua New Guinea"
+    ],
+    "short_names": [
+      "PNG"
     ]
   },
   "PH": {
@@ -2493,12 +2758,15 @@
       "PHI"
     ],
     "names": [
-      "PH",
       "Philippine Islands",
       "Philippines",
       "RP",
       "Republic of the Philippines",
       "The Philippines"
+    ],
+    "short_names": [
+      "PH",
+      "RP"
     ]
   },
   "PK": {
@@ -2512,7 +2780,8 @@
       "Republic of Pakistan",
       "Tây Hồi",
       "pk"
-    ]
+    ],
+    "short_names": []
   },
   "PL": {
     "codes": [
@@ -2521,7 +2790,8 @@
     "names": [
       "Poland",
       "Republic of Poland"
-    ]
+    ],
+    "short_names": []
   },
   "PM": {
     "codes": [],
@@ -2540,7 +2810,8 @@
       "St.-Pierre and Miquelon",
       "Territorial Collectivity of Saint Pierre and Miquelon",
       "pm"
-    ]
+    ],
+    "short_names": []
   },
   "PN": {
     "codes": [],
@@ -2549,7 +2820,8 @@
       "Pitcairn Islands",
       "Pitcairn, Henderson, Ducie and Oeno Islands",
       "pn"
-    ]
+    ],
+    "short_names": []
   },
   "PR": {
     "codes": [
@@ -2567,7 +2839,8 @@
       "Puerto Rico",
       "Territory of Porto Rico",
       "Territory of Puerto Rico"
-    ]
+    ],
+    "short_names": []
   },
   "PS": {
     "codes": [
@@ -2577,7 +2850,8 @@
       "PSE",
       "Palestine",
       "State of Palestine"
-    ]
+    ],
+    "short_names": []
   },
   "PT": {
     "codes": [
@@ -2587,13 +2861,15 @@
       "POR",
       "Portugal",
       "Portuguese Republic"
-    ]
+    ],
+    "short_names": []
   },
   "PUUM": {
     "codes": [],
     "names": [
       "United States Miscellaneous Pacific Islands"
-    ]
+    ],
+    "short_names": []
   },
   "PW": {
     "codes": [
@@ -2601,7 +2877,6 @@
     ],
     "names": [
       "Belau",
-      "PW",
       "Palau",
       "Peeloo",
       "Pelew",
@@ -2610,6 +2885,9 @@
       "Republic of Belau",
       "Republic of Palau",
       "pw"
+    ],
+    "short_names": [
+      "PW"
     ]
   },
   "PY": {
@@ -2620,7 +2898,8 @@
       "Heart of South America",
       "Paraguay",
       "Republic of Paraguay"
-    ]
+    ],
+    "short_names": []
   },
   "PZPA": {
     "codes": [],
@@ -2628,7 +2907,8 @@
       "Panama Canal Zone",
       "Zona del Canal de Panama",
       "Zona del Canal de Panamá"
-    ]
+    ],
+    "short_names": []
   },
   "QA": {
     "codes": [
@@ -2639,7 +2919,8 @@
       "State of Qatar",
       "qa",
       "qat"
-    ]
+    ],
+    "short_names": []
   },
   "RE": {
     "codes": [],
@@ -2656,13 +2937,15 @@
       "Île de Bourbon",
       "Île de La Réunion",
       "Île de la Réunion"
-    ]
+    ],
+    "short_names": []
   },
   "RHZW": {
     "codes": [],
     "names": [
       "Southern Rhodesia"
-    ]
+    ],
+    "short_names": []
   },
   "RO": {
     "codes": [
@@ -2672,7 +2955,8 @@
       "Romania",
       "Roumania",
       "Rumania"
-    ]
+    ],
+    "short_names": []
   },
   "RS": {
     "codes": [
@@ -2682,7 +2966,8 @@
       "RS",
       "Republic of Serbia",
       "Serbia"
-    ]
+    ],
+    "short_names": []
   },
   "RU": {
     "codes": [
@@ -2691,7 +2976,8 @@
     "names": [
       "Russia",
       "Russian Federation"
-    ]
+    ],
+    "short_names": []
   },
   "RW": {
     "codes": [
@@ -2701,7 +2987,8 @@
       "Republic of Rwanda",
       "Rwanda",
       "The Land of a Thousand Hills"
-    ]
+    ],
+    "short_names": []
   },
   "SA": {
     "codes": [
@@ -2711,7 +2998,8 @@
       "Kingdom of Saudi Arabia",
       "Saudi",
       "Saudi Arabia"
-    ]
+    ],
+    "short_names": []
   },
   "SB": {
     "codes": [
@@ -2722,7 +3010,8 @@
       "Solomon Islands",
       "sb",
       "the Solomon Islands"
-    ]
+    ],
+    "short_names": []
   },
   "SC": {
     "codes": [
@@ -2733,7 +3022,8 @@
       "SEY",
       "Seychelles",
       "sc"
-    ]
+    ],
+    "short_names": []
   },
   "SD": {
     "codes": [
@@ -2751,7 +3041,8 @@
       "as-Sūdān",
       "sd",
       "the Sudan"
-    ]
+    ],
+    "short_names": []
   },
   "SE": {
     "codes": [
@@ -2762,7 +3053,8 @@
       "Sweden",
       "Swedish Kingdom",
       "se"
-    ]
+    ],
+    "short_names": []
   },
   "SG": {
     "codes": [
@@ -2776,14 +3068,17 @@
       "Singapore",
       "Singapore City",
       "sg"
-    ]
+    ],
+    "short_names": []
   },
   "SH": {
     "codes": [],
     "names": [
       "Saint Helena and Dependencies",
       "Saint Helena, Ascension and Tristan da Cunha",
-      "Saint Helena, Ascension, and Tristan da Cunha",
+      "Saint Helena, Ascension, and Tristan da Cunha"
+    ],
+    "short_names": [
       "St Helena"
     ]
   },
@@ -2798,7 +3093,8 @@
       "si",
       "slo",
       "svn"
-    ]
+    ],
+    "short_names": []
   },
   "SJ": {
     "codes": [],
@@ -2806,7 +3102,8 @@
       "Svalbard and Jan Mayen",
       "sj",
       "🇸🇯"
-    ]
+    ],
+    "short_names": []
   },
   "SK": {
     "codes": [
@@ -2817,7 +3114,8 @@
       "SVK",
       "Slovak Republic",
       "Slovakia"
-    ]
+    ],
+    "short_names": []
   },
   "SKIN": {
     "codes": [],
@@ -2827,7 +3125,8 @@
       "Kingdom of Sikkim",
       "Sikkim",
       "Sikkim Kingdom"
-    ]
+    ],
+    "short_names": []
   },
   "SL": {
     "codes": [
@@ -2838,7 +3137,8 @@
       "SLE",
       "Sierra Leone",
       "sl"
-    ]
+    ],
+    "short_names": []
   },
   "SM": {
     "codes": [
@@ -2848,7 +3148,8 @@
       "Most Serene Republic of San Marino",
       "San Marino",
       "sm"
-    ]
+    ],
+    "short_names": []
   },
   "SN": {
     "codes": [
@@ -2857,7 +3158,8 @@
     "names": [
       "Republic of Senegal",
       "Senegal"
-    ]
+    ],
+    "short_names": []
   },
   "SO": {
     "codes": [
@@ -2866,7 +3168,8 @@
     "names": [
       "Federal Republic of Somalia",
       "Somalia"
-    ]
+    ],
+    "short_names": []
   },
   "SR": {
     "codes": [
@@ -2880,7 +3183,8 @@
       "Suriname",
       "Surrinam",
       "sr"
-    ]
+    ],
+    "short_names": []
   },
   "SS": {
     "codes": [
@@ -2892,7 +3196,8 @@
       "South Sudan",
       "Southern Sudan",
       "ss"
-    ]
+    ],
+    "short_names": []
   },
   "ST": {
     "codes": [
@@ -2905,7 +3210,8 @@
       "São Tomé and Príncipe",
       "São Tomé og Príncipe",
       "st"
-    ]
+    ],
+    "short_names": []
   },
   "SUHH": {
     "codes": [
@@ -2921,7 +3227,8 @@
       "the Soviet Union",
       "the Soviets",
       "the USSR"
-    ]
+    ],
+    "short_names": []
   },
   "SV": {
     "codes": [
@@ -2933,7 +3240,8 @@
       "Republic of El Salvador",
       "Salvador",
       "sv"
-    ]
+    ],
+    "short_names": []
   },
   "SX": {
     "codes": [],
@@ -2948,7 +3256,8 @@
       "St Martin",
       "St. Maarten",
       "sxm"
-    ]
+    ],
+    "short_names": []
   },
   "SY": {
     "codes": [
@@ -2958,7 +3267,8 @@
       "Syria",
       "Syrian Arab Republic",
       "Sūriyā"
-    ]
+    ],
+    "short_names": []
   },
   "SZ": {
     "codes": [
@@ -2972,13 +3282,15 @@
       "Umbuso weSwatini",
       "eSwatini",
       "sz"
-    ]
+    ],
+    "short_names": []
   },
   "TA": {
     "codes": [],
     "names": [
       "Tristan da Cunha"
-    ]
+    ],
+    "short_names": []
   },
   "TC": {
     "codes": [],
@@ -2988,7 +3300,8 @@
       "Turks and Caicos",
       "Turks and Caicos Islands",
       "tc"
-    ]
+    ],
+    "short_names": []
   },
   "TD": {
     "codes": [
@@ -3000,7 +3313,8 @@
       "GUM",
       "Republic of Chad",
       "td"
-    ]
+    ],
+    "short_names": []
   },
   "TF": {
     "codes": [],
@@ -3008,7 +3322,8 @@
       "French Southern Territories",
       "French Southern and Antarctic Lands",
       "tf"
-    ]
+    ],
+    "short_names": []
   },
   "TG": {
     "codes": [
@@ -3018,7 +3333,8 @@
       "Togo",
       "Togolese Republic",
       "tg"
-    ]
+    ],
+    "short_names": []
   },
   "TH": {
     "codes": [
@@ -3034,6 +3350,9 @@
       "The Kingdom of Siam",
       "The Kingdom of Thailand",
       "th"
+    ],
+    "short_names": [
+      "Thailand"
     ]
   },
   "TJ": {
@@ -3044,7 +3363,8 @@
       "Republic of Tajikistan",
       "Tajikistan",
       "tj"
-    ]
+    ],
+    "short_names": []
   },
   "TK": {
     "codes": [],
@@ -3053,7 +3373,8 @@
       "Tokelau Islands",
       "Union Islands",
       "tk"
-    ]
+    ],
+    "short_names": []
   },
   "TL": {
     "codes": [
@@ -3064,7 +3385,8 @@
       "East Timor",
       "TL",
       "Timor-Leste"
-    ]
+    ],
+    "short_names": []
   },
   "TM": {
     "codes": [
@@ -3075,7 +3397,8 @@
       "Turkmenia",
       "Turkmenistan",
       "tm"
-    ]
+    ],
+    "short_names": []
   },
   "TN": {
     "codes": [
@@ -3086,7 +3409,8 @@
       "Tunisia",
       "Tunisian Republic",
       "tn"
-    ]
+    ],
+    "short_names": []
   },
   "TO": {
     "codes": [
@@ -3099,7 +3423,8 @@
       "Tonga",
       "Tonga Islands",
       "to"
-    ]
+    ],
+    "short_names": []
   },
   "TR": {
     "codes": [
@@ -3109,7 +3434,8 @@
       "Republic of Turkey",
       "Republic of Türkiye",
       "Turkey"
-    ]
+    ],
+    "short_names": []
   },
   "TT": {
     "codes": [
@@ -3120,7 +3446,8 @@
       "Trinidad & Tobago",
       "Trinidad and Tobago",
       "tt"
-    ]
+    ],
+    "short_names": []
   },
   "TV": {
     "codes": [
@@ -3131,7 +3458,8 @@
       "TUV",
       "Tuvalu",
       "tv"
-    ]
+    ],
+    "short_names": []
   },
   "TW": {
     "codes": [
@@ -3153,6 +3481,9 @@
       "Taiwan",
       "Taiwan ROC",
       "The ROC"
+    ],
+    "short_names": [
+      "ROC"
     ]
   },
   "TZ": {
@@ -3166,7 +3497,8 @@
       "United Republic of Tanzania",
       "tz",
       "tza"
-    ]
+    ],
+    "short_names": []
   },
   "UA": {
     "codes": [
@@ -3178,7 +3510,8 @@
       "Ukraine",
       "Ukrainia",
       "Ukraïna"
-    ]
+    ],
+    "short_names": []
   },
   "UG": {
     "codes": [
@@ -3193,7 +3526,8 @@
       "Uganda",
       "Ugandah",
       "ug"
-    ]
+    ],
+    "short_names": []
   },
   "UM": {
     "codes": [],
@@ -3204,7 +3538,8 @@
       "USMOI",
       "United States Minor Outlying Islands",
       "um"
-    ]
+    ],
+    "short_names": []
   },
   "US": {
     "codes": [
@@ -3215,11 +3550,9 @@
       "Murica",
       "U. S.",
       "U. S. A.",
-      "U.S.",
       "U.S. of America",
       "US of A",
       "US of America",
-      "USA",
       "United States",
       "United States of America",
       "the States",
@@ -3233,6 +3566,10 @@
       "the USA",
       "the United States",
       "the United States of America"
+    ],
+    "short_names": [
+      "U.S.",
+      "USA"
     ]
   },
   "UY": {
@@ -3245,7 +3582,8 @@
       "URU",
       "Uruguay",
       "uy"
-    ]
+    ],
+    "short_names": []
   },
   "UZ": {
     "codes": [
@@ -3254,7 +3592,8 @@
     "names": [
       "Republic of Uzbekistan",
       "Uzbekistan"
-    ]
+    ],
+    "short_names": []
   },
   "VA": {
     "codes": [],
@@ -3269,7 +3608,8 @@
       "Vatican",
       "Vatican City",
       "Vatican City State"
-    ]
+    ],
+    "short_names": []
   },
   "VC": {
     "codes": [
@@ -3284,16 +3624,19 @@
       "St. Vincent and the Grenadines",
       "vc",
       "vct"
-    ]
+    ],
+    "short_names": []
   },
   "VDVN": {
     "codes": [],
     "names": [
       "DR Vietnam",
-      "DRV",
       "Democratic Republic of Vietnam",
       "North Vietnam",
       "Vietnam (North)"
+    ],
+    "short_names": [
+      "DRV"
     ]
   },
   "VE": {
@@ -3305,7 +3648,8 @@
       "Bolivarian Republic of Venezuela",
       "Republic of Venezuela",
       "Venezuela"
-    ]
+    ],
+    "short_names": []
   },
   "VG": {
     "codes": [
@@ -3319,7 +3663,8 @@
       "Virgin Islands of the United Kingdom",
       "Virgin Islands, United Kingdom",
       "vg"
-    ]
+    ],
+    "short_names": []
   },
   "VI": {
     "codes": [
@@ -3329,10 +3674,12 @@
       "American Virgin Islands",
       "U.S. Virgin Islands",
       "US Virgin Islands",
-      "USVI",
       "United States Virgin Islands",
       "Virgin Islands of the United States",
       "the United States Virgin Islands"
+    ],
+    "short_names": [
+      "USVI"
     ]
   },
   "VN": {
@@ -3349,7 +3696,8 @@
       "Viet Nam",
       "Vietnam",
       "Việt Nam"
-    ]
+    ],
+    "short_names": []
   },
   "VU": {
     "codes": [
@@ -3362,7 +3710,8 @@
       "van",
       "vu",
       "vut"
-    ]
+    ],
+    "short_names": []
   },
   "WF": {
     "codes": [],
@@ -3370,7 +3719,8 @@
       "Wallis & Futuna",
       "Wallis and Futuna",
       "Wallis and Futuna Islands"
-    ]
+    ],
+    "short_names": []
   },
   "WKUM": {
     "codes": [],
@@ -3395,7 +3745,8 @@
       "St Francois",
       "Wake Atoll",
       "Wake Island"
-    ]
+    ],
+    "short_names": []
   },
   "WS": {
     "codes": [
@@ -3407,7 +3758,8 @@
       "Samoa",
       "Western Samoa",
       "ws"
-    ]
+    ],
+    "short_names": []
   },
   "XK": {
     "codes": [
@@ -3422,7 +3774,8 @@
       "Republic of Kosovo",
       "XK",
       "XKX"
-    ]
+    ],
+    "short_names": []
   },
   "YDYE": {
     "codes": [
@@ -3435,7 +3788,8 @@
       "South Yemen",
       "Southern Yemen",
       "Yemen (Aden)"
-    ]
+    ],
+    "short_names": []
   },
   "YE": {
     "codes": [
@@ -3446,14 +3800,16 @@
       "Republic of Yemen",
       "Yemen",
       "ye"
-    ]
+    ],
+    "short_names": []
   },
   "YT": {
     "codes": [],
     "names": [
       "Department of Mayotte",
       "Mayotte"
-    ]
+    ],
+    "short_names": []
   },
   "YU": {
     "codes": [
@@ -3461,7 +3817,8 @@
     ],
     "names": [
       "Yugoslavia"
-    ]
+    ],
+    "short_names": []
   },
   "YUCS": {
     "codes": [],
@@ -3474,6 +3831,9 @@
       "Socialist Federal Republic of Yugoslavia",
       "Third  Yugoslavia",
       "Yugoslavia"
+    ],
+    "short_names": [
+      "FR Yugoslavia"
     ]
   },
   "ZA": {
@@ -3487,6 +3847,9 @@
       "SA",
       "South Africa",
       "zaf"
+    ],
+    "short_names": [
+      "RSA"
     ]
   },
   "ZM": {
@@ -3497,7 +3860,8 @@
       "Republic of Zambia",
       "Zambia",
       "Zed"
-    ]
+    ],
+    "short_names": []
   },
   "ZRCD": {
     "codes": [
@@ -3506,7 +3870,8 @@
     "names": [
       "Republic of Zaire",
       "Zaire"
-    ]
+    ],
+    "short_names": []
   },
   "ZW": {
     "codes": [
@@ -3518,6 +3883,7 @@
       "Southern Rhodesia",
       "Zimbabwe",
       "Zimbabwe Rhodesia"
-    ]
+    ],
+    "short_names": []
   }
 }
