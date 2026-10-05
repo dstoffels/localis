@@ -172,7 +172,7 @@ A subdivision the pipeline can't resolve unreviewed is an orphan, sorted into on
 - `wikidata_changed`: a Wikidata mapping that changed a previous resolution.
 - `grouping_twin`: an automerge result that merged a subdivision into the GeoNames record of the non-administrative grouping it belongs to, detected because the subdivision's merged siblings sit beneath that record.
 
-If any orphan remains, ingest exits with code 10 before writing any data, so the shipped dataset never contains an unresolved subdivision. Orphans are resolved with the resolve-subdivisions skill.
+If any orphan remains, ingest exits with code 10 before anything is promoted, so the shipped dataset never contains an unresolved subdivision. Orphans are resolved with the resolve-subdivisions skill.
 
 Wikidata and automerge results are recomputed on every run. A correction to either always goes through a skill decision, the only resolution that overrides them. No per-entry audit record exists yet: an earlier `audited` record, which was never populated, was removed, because the planned audit system binds each verdict to the facts it was made against and keeps superseded verdicts rather than deleting them, which that record's design couldn't do.
 

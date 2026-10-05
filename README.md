@@ -4,7 +4,7 @@ Fast, offline access to comprehensive data for **countries**, **subdivisions**, 
 
 ## Features
 
-- 🌍 **<stat key="data.countries.total:int">281</stat> countries** (<stat key="data.countries.historic:int">31</stat> historic) sourced and merged from ISO 3166-1, ISO 3166-3, and GeoNames
+- 🌍 **<stat key="data.countries.total:int">281</stat> countries** (<stat key="data.countries.historic:int">31</stat> historic) sourced and merged from ISO 3166-1, ISO 3166-3, GeoNames and Wikidata
 - 🗺️ **<stat key="data.subdivisions.total:int">51,711</stat> subdivisions** sourced and merged from ISO 3166-2 and GeoNames
 - 🏙️ **<stat key="data.cities.total:int">235,970</stat> cities** sourced from GeoNames cities500.txt
 - 🌐 **<stat key="data.macroregions.total:int">34</stat> macroregions** (<stat key="data.macroregions.regions:int">5</stat> regions, <stat key="data.macroregions.subregions:int">23</stat> subregions, <stat key="data.macroregions.groupings:int">6</stat> groupings) sourced from Unicode CLDR, with every current country placed in them
@@ -217,8 +217,6 @@ city = localis.cities.lookup(saved)
 | `scripts` | `alpha4` |
 | `languages` | `alpha3` (ISO 639-3) |
 
-
-
 ### Countries
 
 #### Historic Countries
@@ -348,7 +346,7 @@ A ✓ under Base marks a field the nested `MacroregionBase` also has.
 
 ### Currencies
 
-Every ISO 15924 code ships as published. Unicode CLDR's English names are aliases, so "Han" finds "Han (Hanzi, Kanji, Hanja)".
+Every ISO 4217 code ships as published, funds, precious metals and the testing codes included. Each current country's legal tender comes from Unicode CLDR (see [Country Object](#country-object)).
 
 #### Currency Object
 
@@ -454,8 +452,6 @@ Each component is shown as load time / memory, measured for that registry alone.
 
 > ⚠️ Fully caching cities and its indexes adds <stat key="footprint.registries.cities.combined.memory_bytes:size">126.9MB</stat> of memory. Calling `localis.cities.force_cache()` loads all of it upfront. You can call `cities.set_population_threshold(n)` before first access as a lever to control the memory footprint. At a threshold of <stat key="data.cities.threshold:int">15,000</stat>, cities drops from <stat key="data.cities.total:int">235,970</stat> to <stat key="data.cities.above_threshold:int">34,172</stat> and memory drops from <stat key="footprint.registries.cities.combined.memory_bytes:size">126.9MB</stat> to <stat key="footprint.cities_threshold.memory_bytes:size">29.8MB</stat>.
 
-
-
 ### Search Benchmarks
 
 `get()`, `lookup()` and `filter()` return in microseconds on warm caches.
@@ -509,6 +505,7 @@ if __name__ == "__main__":  # workers import this module, so the pool only start
 ---
 
 ## Data Sources
+
 Data in this project is kept current monthly from the following sources:
 
 - **Countries**
@@ -554,11 +551,13 @@ The package's license expression is `MIT AND LGPL-2.1-or-later AND CC-BY-4.0 AND
 ---
 
 ## History
+
 localis began with some database cleanup. I found myself writing mountains of bespoke code to parse inconsistent, dirty data while trying to reconcile pycountry, GeoNames and Wikidata to name a few (Google Places was not in the budget). When the pipeline was complete and the data finally cleaned, I realized this mountain of code could be useful for others who might need a reliable offline solution, so here we are! Over the past few years I've taken great care to build a robust, reliable dataset, wrapped in a simple, performant interface. I hope you find it useful and please don't hesitate to contribute or report any issues.
 
 ---
 
 ## Contributing
+
 - [Pull requests welcome](https://github.com/dstoffels/localis)
 - [Report issues](https://github.com/dstoffels/localis/issues)
 

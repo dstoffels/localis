@@ -9,154 +9,29 @@ This document outlines the project plan for the Localis project, detailing the o
 - Ship comprehensive datasets by default, and let the API narrow them ad hoc (population floors) at query time rather than shipping multiple hard-tiered dataset variants.
 
 ## Features
-Features currently in development, in build order:
 
-1. Currency (ISO 4217), see Currency, Language and Script below. Implemented 2026-10-04.
-2. Script (ISO 15924), see Currency, Language and Script below. Implemented 2026-10-04. Ahead of Language because a country's language links carry the script CLDR states them for.
-3. Language (ISO 639-3), see Currency, Language and Script below. Implemented 2026-10-04. Supersedes the old "implement native languages in countries" idea.
-
-The three close the honest gap identified against pycountry (which also covers ISO 4217, 639 and 15924), so they should ship before that comparison gets used as marketing material.
+Next: the Skill decision lifecycle (below), landing before the 1 November 2026 cron, either in 2.2.0 or as a 2.1.x patch from `main`.
 
 Out of scope: translated names. Localis ships names in Latin script only and doesn't map them to other locales; a pycountry-style `translate(locale)` and `language_code` query support were planned and dropped.
 
-## Currency, Language and Script
+## Done
 
-Status: scoped for 2.2.0; implemented 2026-10-04.
-
-### Principles
-
-- ISO is the canon: every record of each ISO list ships as published, and lines are drawn only in the relationships. A CLDR code that doesn't resolve to an ISO record is skipped with a WARN, never enriched.
-- Records come from iso-codes (`iso_4217.json`, `iso_15924.json`, `iso_639-3.json`). None of them map to anything else, so the relationships come from CLDR, a source already in use; no new source joins the aggregation.
-- Each is its own registry following the existing pattern (entity, store, view, registry, an `ingest/<domain>/` stage), with its `Base` form nested elsewhere. Historic countries get no relationships, since CLDR keys territories by alpha2 and ISO reused historic ones.
-- Data CLDR attaches to a relationship rather than either side either decides which records are listed (currencies) or ships on a relationship entity that extends the `Base` form (`CountryLanguage(LanguageBase)`), so it reads like every other nested tuple.
-
-### Currency (implemented)
-
-- `localis.currencies`: `lookup()` by `alpha3` or `numeric`, `filter()` and `search()` by name; `key` is `alpha3`.
-- All 178 ISO 4217 codes ship, funds, metals and special codes included, with no `type` field.
-- No minor units: SIX's list has them and an `IsFund` flag, but carries no license and its site's terms of use reserve its content.
-- `Country.currencies: tuple[CurrencyBase, ...]` lists current legal tender from CLDR's `currencyData.json`: entries with no `_to` and not `_tender: false`, in CLDR's order. Filterable with `countries.filter(currency=...)` by name or alpha3.
-
-### Script
-
-- `localis.scripts`: `lookup()` by `alpha4` or `numeric`, `search()` by name; `key` is `alpha4`.
-- iso-codes' `iso_15924.json` has 226 entries (`alpha_4`, `name`, `numeric`). The private-use range is two marker entries, Qaaa "(start)" and Qabx "(end)", not one per code; the special codes Zinh, Zmth, Zsye, Zsym, Zxxx, Zyyy and Zzzz are listed.
-- Aliases: by the same rule as languages, every CLDR English script name (`scripts.json`) whose code resolves to the record, deduplicated. 68 of CLDR's 220 differ from ISO's, mostly ISO's parentheticals ("Han (Hanzi, Kanji, Hanja)" vs "Han").
-- `Language.scripts` comes from CLDR's `languageData.json`: 907 entries, primary scripts under the language's code and secondary ones under `<code>-alt-secondary` (105 languages). All 124 scripts it uses are in ISO 15924, and the only unresolved language code is `kro`.
-
-Decided 2026-10-04:
-- Special codes and the private-use markers ship as published, per the principle above.
-- No `Country.scripts`: neither source maps scripts to countries directly, and CLDR's `likelySubtags.json` `und-XX` entries are one likely default per territory (India: Devanagari only), not the scripts a country uses. A country's scripts come through `CountryLanguage.script`.
-
-Language-script links, decided 2026-10-04 (built with Language):
-- `Language.scripts: tuple[LanguageScript, ...]`, with `LanguageScript(ScriptBase)` adding `secondary: bool`, CLDR's own rule from TR35: "If the language is not a modern language, or the script is not a modern script, then the `alt` attribute is set to secondary." Arabic in Syriac is secondary; Sanskrit, Coptic, Aramaic and seven other non-modern languages have only secondary scripts. Primary scripts first, each group in CLDR's order.
-- `languages.filter(script=...)` matches either, by the script's alpha4, name or alias, the same as other nested filters.
-- TR35 describes languageData as "used for consistency checking and testing" rather than reference data. It ships anyway, since CLDR is trusted across shipped and enterprise software and it is the only language-to-script source among ISO and CLDR; methodology's Known limitations states the caveat. Every script subtag in `territoryInfo.json` appears in that language's languageData scripts, so `CountryLanguage.script` never contradicts `Language.scripts`.
-- Coverage is CLDR's: 811 of the 7,923 languages have scripts, the rest ship `()`. Seven languages with an official status somewhere have no languageData entry (six Guatemalan Mayan languages and Senegal's Saafi-Saafi), so they have official `CountryLanguage` entries but no scripts.
-- Dependencies first: language rows store script ids and country rows store language and script ids, so the order is scripts, languages, countries; a rebuilt scripts or languages stage, or a changed `territoryInfo.json` (shared stage), rebuilds countries.
-
-### Language
-
-Decided 2026-10-04:
-- `localis.languages`: all 7,923 ISO 639-3 records ship as published, `key` is `alpha3`.
-- `lookup()` by `alpha3`, `alpha2` (639-1, 184 records) or `bibliographic` (639-2/B, 20 records); no bibliographic code collides with a 639-3 code.
-- `scope` and `type` ship spelled out as `Literal`s, as `MacroregionType` does: scope `"individual"`, `"macrolanguage"` or `"special"`; type `"living"`, `"extinct"`, `"historical"`, `"constructed"` or `"special"`. Both are filterable.
-- `inverted_name` ("Arabic, Algerian Saharan", 1,417 records) is a field and a search name.
-- No `common_name` field: iso-codes has one (Bangla). It and every CLDR English language name (`languages.json`) whose code resolves to the record are deduplicated into the record's `aliases`, including `-alt-` variants ("Azeri", "Pushto") and region- or script-qualified names ("British English" to English, "Hinglish" to Hindi). CLDR's `-menu-core`/`-menu-extension` entries are left out, since each is half of a menu label ("Kurdish" + "Central"), not a name.
-- `Country.languages: tuple[CountryLanguage, ...]`, where `LanguageBase` branches to both `Language` and `CountryLanguage`. `CountryLanguage` adds:
-  - `status`: `"official"`, `"regional"` or `"de_facto"`, from CLDR's `official`, `official_regional` and `de_facto_official`; languages with no status aren't listed.
-  - `population_percent`: CLDR's share of the country's population; shares overlap and can sum past 100 (Switzerland: German 76, English 45, French 39).
-  - `script: ScriptBase | None`: the script subtag of CLDR's tag (Hong Kong's `zh_Hant` is Chinese in Hant), `None` for a base tag.
-- One `CountryLanguage` per CLDR tag, not collapsed per language, since CLDR states status and share for a language in a script and the two disagree (Hong Kong: `zh` no status 5%, `zh_Hant` official 95%; Montenegro: `sr` no status 5%, `sr_Latn` official 100%). Ordered by `population_percent`. `countries.filter(language=...)` matches any of a country's entries for the language.
-- A base tag's `script` stays `None` until reconciliation logic is designed. CLDR's `likelySubtags.json` has both language-level (`zh` to Hans) and territory-level (`zh-HK` to Hant) defaults, and the territory-level one would label Hong Kong's 5% `zh` entry as Traditional, contradicting its `zh_Hant` entry.
-- `kro` (CLDR's code for the Kru language family, ISO 639-5) doesn't resolve and is skipped; 639-5 families aren't records.
-- Countries with no official language in CLDR (Antarctica, Bouvet Island, Heard Island, the French Southern Territories) list none.
-- `territoryInfo.json` is fetched by the shared stage; the countries stage has to rebuild when it changes.
-
-### Release
-
-Open:
-- Pinning the CLDR version (backlog 7) as part of this build: Script and Language add `scripts.json`, `languages.json` and `languageData.json` to the CLDR files fetched separately from `main`.
-- The Skill decision lifecycle lands before the 1 November 2026 cron, either in 2.2.0 or as a 2.1.x patch from `main`.
-
-## Atomic pipeline
-
-Status: designed, approved and implemented 2026-10-04, from the review of codebase area 1 (ingest orchestration); dev.md's Pipeline section describes the result. "Pipeline" and "pipeline stage" are the terms in docs; the `ingest/` package, `poe ingest`, `ingest.yaml` and `ingest_log` keep their names.
-
-### Why
-
-A stage rebuilds its dependents by passing its result down in memory, a remnant of stages once running in isolation. Nothing on disk records that a dependent still needs rebuilding, so a run that fails after countries dumps (shifted ids) but before subdivisions does leaves `subdivisions.tsv` and `cities.tsv` pointing at stale country ids, and the next non-force local run never repairs them. CI is unaffected only because a fresh runner has no inputs and rebuilds everything. Stages also dump straight into `src/localis/data`, so the shipped data can be partly from one run and partly from another.
-
-### Always-build stages
-
-- Every stage builds from its inputs on every run: no "No updates" early returns, no "passed in means rebuilt" parameters, no rebuilding from shipped TSVs. Each stage receives the models of the stages it links to, built earlier in the same run.
-- `--force` is removed. A stage downloads an input only when it's missing locally or its ETag differs from the manifest's; deleting an input forces its re-download.
-- Determinism is already guaranteed: repeated runs on the same inputs produce no diff, which always-build depends on.
-
-### Manifests
-
-ETags currently serve as download gate, provenance and change trigger at once; the three are split:
-- Download gate: the ETag, compared on a HEAD request, purely to save bandwidth.
-- Provenance: each manifest entry becomes `{url, etag, sha256}`, the sha256 of the downloaded file identifying exactly which bytes a release was built from, whatever the server does with its ETags.
-- Change detection: unchanged, the shipped data's diff, which CI already uses (`git status -- src/localis/data`) to bump the version. It catches changes input hashes can't (code, Wikidata edits) and ignores input changes that don't reach the output.
-
-### Staging and promotion
-
-- Each stage dumps to a staging directory (`ingest/staging/data/<registry>/`, gitignored, with the other promoted files under `ingest/staging/files/` at their repo paths) and returns its models for the stages after it. Dumping as it goes keeps memory to what downstream stages need, rather than every stage's output at once.
-- Staging is wiped at the start of a run, not at the end of a failed one, so it survives an orphan stop for the skill.
-- Once every stage has dumped, the pipeline writes a completion marker into staging, runs the reconcile gate (below), writes the structured change report, then promotes.
-- Promotion moves, together and only on full success: the staged data into `src/localis/data`, the manifests, the committed Wikidata files (`CommittedQuery.commit()`), `unmerged_subdivisions.md` and `ingest_stats.json`.
-- Always written, success or not: the logs, with the failure that stopped a run, and `resolution_map.json`, the skill's work queue, which has to survive an orphan stop.
-- An orphan stop exits before promotion. `exit_if_orphans()` logs but no longer dumps the log itself; the stage's `finally` does.
-
-### Structured change report
-
-At promotion the new build sits next to the shipped one, so the pipeline compares them before promoting: per registry, records added, removed and changed (by `key`), and keys that disappeared. Each stage's report is promoted to `ingest/<stage>/outputs/change_report.md`, uncapped and opening with a counts table, and the workflow gathers those counts into a summary for the ingest PR's body and a per-run comment (PR bodies and comments cap at 65,536 characters), for the PR and the CHANGELOG, replacing a raw diff of TSVs as the account of what a release changed.
-
-### Skill and analysis
-
-- The resolve-subdivisions skill reads staged data, not shipped data: `load_countries()` stays, as the skill's TSV reader, pointed at staging. Countries must have built by the time subdivisions runs, so a staged countries is always there when orphans are open. `load_subdivisions()`, used only by the cities fallback, is removed.
-- Analysis reads either the staged build or the shipped data, chosen explicitly rather than falling back from one to the other, which would mix a partial staging (after an orphan stop) with shipped data. It reads staging only when the completion marker is present. The runtime is unchanged: analysis overrides `Registry._data_path` on its own side, so `localis` keeps reading only its packaged data.
-
-### Reconcile gate
-
-Before promoting, the pipeline checks that `data_stats`' counts for the staged build reconcile (`analysis --staging`, which writes nothing), and a failure stops the run before promotion like any other. Once the build is promoted it regenerates `data_stats.json` and the docs' deterministic stat markers from it (`analysis --data-only`), never the full analysis with footprint and benchmarks, so they never describe a build that didn't ship. In staging mode analysis reads the staged copies of every artifact it uses, not only the data: `ingest_stats.json`, the staged Wikidata crosswalk and the run's `resolution_map.json`.
-
-### Also in this pass
-
-From the same review:
-- Stage paths derived from the stage name, replacing the per-stage constants in `paths.py`, `utils/__init__.py` and the logger's `Stage` literal and `STAGE_FILES`, so adding a stage touches only the stage itself, `__main__` and the `.gitignore` manifest exception.
-- A stage that raises writes an `ERROR` line with the exception to its log before re-raising.
-- Dead code: the logger's never-false `if text`, the double log dump on an orphan stop, and inconsistent stage entry points (`ingest_cities.py`'s `__main__` lacked `force=True`).
-- Stages return their staged output consistently.
-
-### Follow-up, done 2026-10-04
-
-- `territoryInfo.json` is fetched once per run, with the other shared sources, at the start of `run_pipeline()`, instead of by both countries and subdivisions.
-- Manifests are rewritten as each run's entries alone, dropping stale ones; `committed_value()` and the subdivisions decisions fingerprint are removed, since `resolution_map.json` is committed with the data.
-- `CommittedQuery.changed()` is `log_changes()`, which only logs.
-- The legacy branch in `fetch()` that accepted a bare-ETag manifest entry, removed once the first promotion had rewritten every manifest as `{url, etag, sha256}`.
-- Manifests and committed Wikidata results are staged as files like every other promoted file, replacing `fetch()`'s in-memory pending entries, `commit_manifests()` and the `.pending.json` files with `CommittedQuery.commit_all()`, so promotion only moves files.
-- A rerun after a failed or orphan-stopped run no longer downloads again what that run already did: `reset_staging()` merges the run's staged manifests into `staging/fetched/`, which `fetch()` checks before the committed manifest.
-- The reconcile gate only checks the staged build; `data_stats.json` and the docs' stat markers are regenerated after promotion, so they never describe a build that didn't ship.
-- The ingest PR's body says its change report compares the latest run with the one before it, not the PR's whole diff against `dev`.
-- `ingest/pipeline.log` records each run's steps and its result (succeeded, stopped on orphans, or failed in a named step, and whether the build was promoted), with the analysis runs' output captured into it; analysis says what each step reads and writes.
-
-### Deferred
-
-- The full pipeline's local run time, unmeasured.
+- Currency, Script and Language (ISO 4217, ISO 15924, ISO 639-3), implemented 2026-10-04 for 2.2.0, closing the gap against pycountry, which also covers those standards. methodology.md describes their sources and rules.
+- Atomic pipeline, implemented 2026-10-04 from the review of codebase area 1: every stage builds on every run into staging, and a build is promoted only whole and reconciled. dev.md's Pipeline section describes it.
+- One CLDR and one iso-codes commit per run, so every stage builds from the same upstream versions, done in the review of codebase area 3.
 
 ## Backlog
-1. Batch throughput for large cleanups: registries are thread-safe, but on the standard (GIL) build threads don't parallelize search, which is mostly Python code, and rapidfuzz's single scorer calls don't release the GIL usefully (only `process.cdist(..., workers=N)` does, which doesn't fit localis's search). Free-threaded Python is the threaded route: rapidfuzz supports 3.14t since 3.14.2 (3.14.0 added support, 3.14.6 dropped the experimental 3.13t wheels). It requires no change to `requires-python = ">=3.11"`, since free threading is a property of the user's interpreter and localis is pure Python; GIL builds keep working as now. Adopting it is additive: a 3.14t job in the test matrix, optionally raising the `rapidfuzz` floor to 3.14.2 and adding the free-threading PyPI classifier, and a batch API such as `search_many(queries, workers=N)` on a thread pool (parallel on 3.14t, serial on GIL builds, with process pools as the GIL-build option: each worker loads its own cache, about 105MB for cities). Measure throughput on both builds.
+
+1. Batch throughput for large cleanups: registries are thread-safe, but on the standard (GIL) build threads don't parallelize search, which is mostly Python code, and rapidfuzz's single scorer calls don't release the GIL usefully (only `process.cdist(..., workers=N)` does, which doesn't fit localis's search). Free-threaded Python is the threaded route: rapidfuzz supports 3.14t since 3.14.2 (3.14.0 added support, 3.14.6 dropped the experimental 3.13t wheels). It requires no change to `requires-python = ">=3.11"`, since free threading is a property of the user's interpreter and localis is pure Python; GIL builds keep working as now. Adopting it is additive: a 3.14t job in the test matrix, optionally raising the `rapidfuzz` floor to 3.14.2 and adding the free-threading PyPI classifier, and a batch API such as `search_many(queries, workers=N)` on a thread pool (parallel on 3.14t, serial on GIL builds, with process pools as the GIL-build option: each worker loads its own cache, about 127MB for cities). Measure throughput on both builds.
 2. City radius feature using lat/lng to return nearby cities within a specified distance?
 3. Implement custom exceptions (localis.exceptions module)?
 4. Implement autocomplete for registries and/or global interface.
 5. Search, remaining limits: a subdivision query without context can't pick among same-name records (dozens of Washington Counties), which caps subdivisions' top-result accuracy; benchmarking subdivision queries with their country as context would measure that case the way cities' admin1 context does. Indexing each name separately (true per-name Dice) is parked until a failure trace shows alias dilution.
 6. Macroregion filters on subdivisions and cities (`cities.filter(macroregion="Europe")`), at the cost of another filter column on the largest dataset; deferred until there's demand. The macroregions design is recorded in `methodology.md` (sources, naming, placement rules) and `dev.md`.
-7. Pin the CLDR version shared by `cldr_territory_info.json` (shared stage) and the macroregions inputs, which each fetch CLDR's `main` and could land on different CLDR commits in one run.
-8. Split cities from the core package (`localis` with macroregions, countries and subdivisions, about 11MB installed; cities as an extra backed by a separate data package, about 42MB). Deferred until users report package size as a problem. City rows store country and subdivision ids that are only valid against the exact core data they were built with, so the two would release in lockstep from one ingest run with an exact-version pin, which removes most of the usual benefit of a split.
-9. Population range filters on cities, `cities.filter(population__gt=..., population__lt=...)`, removed as a commented-out stub from `CityRegistry.filter()` during the code review cleanup. The filter index only holds exact values, so a range needs its own path, such as a scan over `CityStore.populations` or a population-sorted id array searched with `bisect`.
-10. Corroboration for `wikidata_changed` orphans: accepting a changed crosswalk mapping when automerge's scoring would pick the same record. Left out so every relink of a shipped subdivision is reviewed; revisit if those orphans turn out to be mostly noise.
+7. Split cities from the core package (`localis` with macroregions, countries and subdivisions, about 11MB installed; cities as an extra backed by a separate data package, about 42MB). Deferred until users report package size as a problem. City rows store country and subdivision ids that are only valid against the exact core data they were built with, so the two would release in lockstep from one ingest run with an exact-version pin, which removes most of the usual benefit of a split.
+8. Population range filters on cities, `cities.filter(population__gt=..., population__lt=...)`, removed as a commented-out stub from `CityRegistry.filter()` during the code review cleanup. The filter index only holds exact values, so a range needs its own path, such as a scan over `CityStore.populations` or a population-sorted id array searched with `bisect`.
+9. Corroboration for `wikidata_changed` orphans: accepting a changed crosswalk mapping when automerge's scoring would pick the same record. Left out so every relink of a shipped subdivision is reviewed; revisit if those orphans turn out to be mostly noise.
+10. Measure the full pipeline's local run time, never measured since the atomic pipeline landed.
 
 ## Skill decision lifecycle
 
