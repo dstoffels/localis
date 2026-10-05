@@ -71,13 +71,12 @@ def load_languages(scripts: dict[str, ScriptModel]) -> dict[str, LanguageModel]:
     ingest_log.writeline("Loading ISO 639-3 languages...")
     entries: list[dict[str, str]] = json.loads(ISO_LANGUAGES_PATH.read_text(encoding="utf-8"))["639-3"]
     languages: dict[str, LanguageModel] = {}
-    for id, entry in enumerate(entries, start=1):
+    for entry in entries:
         alpha3 = entry["alpha_3"]
         scope, type_ = SCOPES.get(entry["scope"]), TYPES.get(entry["type"])
         if scope is None or type_ is None:
             raise ValueError(f"ISO 639-3 {alpha3} has an unknown scope {entry['scope']!r} or type {entry['type']!r}")
         languages[alpha3] = LanguageModel(
-            id=id,
             name=entry["name"],
             alpha3=alpha3,
             alpha2=entry.get("alpha_2"),

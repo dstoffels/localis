@@ -76,7 +76,6 @@ def load_iso_subs(
         name, bracket_alias = _split_bracketed_name(entry["name"])
 
         subdivision = SubdivisionModel(
-            id=0,  # temporary, will be set when all loaded
             name=name,
             country=country,
             type=entry["type"],

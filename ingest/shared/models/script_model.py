@@ -16,8 +16,7 @@ class ScriptModel(Model):
     CANON_FIELDS = ("name", "aliases")
     SHORT_NAMES = True
 
-    def to_row(self) -> tuple[str | int | None]:
-        data = self.to_dict()
-        data["aliases"] = "|".join(self.aliases)
-        data.pop("id")
-        return tuple(data.values())
+    def row_values(self) -> dict[str, object]:
+        data = Model.row_values(self)
+        data["aliases"] = self.join_cell(self.aliases)
+        return data

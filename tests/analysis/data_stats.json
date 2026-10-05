@@ -180,14 +180,14 @@
     }
   },
   "shipped_size": {
-    "total": 53380306,
+    "total": 53380302,
     "cities": {
-      "total": 41969934,
+      "total": 41969930,
       "share_pct": 78.6,
       "files": {
         "canon_index.bin.gz": 4968698,
         "canon_index_offsets.tsv": 166585,
-        "cities.tsv": 13254280,
+        "cities.tsv": 13254276,
         "context_index.bin.gz": 8566135,
         "context_index_offsets.tsv": 95270,
         "filter_index.bin.gz": 3367404,

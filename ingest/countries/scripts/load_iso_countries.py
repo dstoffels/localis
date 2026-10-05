@@ -14,10 +14,9 @@ def init_iso_countries() -> dict[str, CountryModel]:
         iso_countries: list[dict] = json.load(f).get("3166-1")
         iso_countries.sort(key=lambda c: c.get("alpha_2") or "")
 
-        for id, c in enumerate(iso_countries, 1):
+        for c in iso_countries:
             alpha2 = c["alpha_2"]
             countries[alpha2] = CountryModel(
-                id=id,
                 name=c["name"],
                 official_name=c.get("official_name"),
                 common_name=c.get("common_name"),

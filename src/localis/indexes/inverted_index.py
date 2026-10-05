@@ -1,5 +1,6 @@
 import csv
 import gzip
+import sys
 from array import array
 from pathlib import Path
 from typing import Iterator
@@ -22,6 +23,9 @@ def read_inverted_index(prefix: Path) -> tuple[array, Iterator[OffsetsRow]]:
     with gzip.open(blob_path, "rb") as f:
         postings = array("I")
         postings.frombytes(f.read())
+    # written little-endian at ingest
+    if sys.byteorder == "big":
+        postings.byteswap()
     return postings, _offsets_rows(prefix.with_name(prefix.name + "_offsets.tsv"))
 
 

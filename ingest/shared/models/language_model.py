@@ -45,13 +45,12 @@ class LanguageModel(Model):
     def script_values(self) -> list[str]:
         return [v for s in self.scripts for v in (s.script.alpha4, s.script.name, *s.script.aliases)]
 
-    def to_row(self) -> tuple[str | int | None]:
-        data = self.to_dict()
-        data["aliases"] = "|".join(self.aliases)
+    def row_values(self) -> dict[str, object]:
+        data = Model.row_values(self)
+        data["aliases"] = self.join_cell(self.aliases)
         data["scripts"] = "|".join(str(s.script.id) for s in self.scripts if not s.secondary)
         data["secondary_scripts"] = "|".join(str(s.script.id) for s in self.scripts if s.secondary)
-        data.pop("id")
-        return tuple(data.values())
+        return data
 
 
 @dataclass(slots=True)

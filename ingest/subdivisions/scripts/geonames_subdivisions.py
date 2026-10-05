@@ -38,7 +38,6 @@ def load_geonames_file(
                 continue
 
             subdivision = SubdivisionModel(
-                id=0,  # temporary, will be set when all loaded
                 name=name,
                 country=country,
                 geonames_code=geonames_code,

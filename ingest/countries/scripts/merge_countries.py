@@ -116,7 +116,6 @@ def merge_geonames(countries: dict[str, CountryModel]):
                     f"country not in ISO 3166-1, added from GeoNames: {alpha2} ({name})"
                 )
                 country = CountryModel(
-                    id=len(countries) + 1,
                     alpha2=alpha2,
                     alpha3=alpha3,
                     geonames_id=geonames_id,

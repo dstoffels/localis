@@ -1,5 +1,4 @@
 [SHARED]
 [INFO] No update needed for alternateNamesV2.txt
 [INFO] Using cldr-json main at 91c267402229a59e3ef2774544f001bf959e8809
-[INFO] Downloading cldr_territory_info.json from https://raw.githubusercontent.com/unicode-org/cldr-json/91c267402229a59e3ef2774544f001bf959e8809/cldr-json/cldr-core/supplemental/territoryInfo.json
-[INFO] Downloaded and updated cldr_territory_info.json
+[INFO] No update needed for cldr_territory_info.json

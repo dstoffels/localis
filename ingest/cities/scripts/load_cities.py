@@ -74,7 +74,6 @@ def parse_row(
         return None
 
     return CityModel(
-        id=0,  # to be set before dump
         geonames_id=int(geonames_id),
         name=name,
         subdivisions=resolve_subdivision_chain(admin1, admin2),
@@ -103,7 +102,6 @@ def load_cities(
             if not city:
                 continue
 
-            city.id = len(cities) + 1
             cities.append(city)
             if city.name != row["name"]:
                 ascii_names += 1

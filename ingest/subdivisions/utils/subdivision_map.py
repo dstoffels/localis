@@ -55,18 +55,13 @@ class SubdivisionMap:
             ]
 
     def all(self) -> list[SubdivisionModel]:
-        """Returns a list of all subdivisions, assigning sequential IDs to each."""
-        all = [
+        """Every subdivision, in the order they're dumped."""
+        return [
             sub
             for country_map in self._subs.values()
             for level_map in country_map.values()
             for sub in level_map.values()
         ]
-
-        for id, sub in enumerate(all, start=1):
-            sub.id = id
-
-        return all
 
     def refresh(self) -> None:
         """Links every subdivision to its parent once merging has settled, then re-indexes the map under the final codes and levels."""

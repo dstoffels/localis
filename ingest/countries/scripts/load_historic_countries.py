@@ -20,7 +20,6 @@ def init_historic_countries(
             numeric = c.get("numeric")
 
             countries[alpha_4] = CountryModel(
-                id=len(countries) + 1,
                 name=c["name"],
                 official_name=c.get("official_name"),
                 common_name=None,

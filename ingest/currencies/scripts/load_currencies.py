@@ -9,10 +9,10 @@ def load_currencies() -> dict[str, CurrencyModel]:
     ingest_log.writeline("Loading ISO 4217 currencies...")
     entries: list[dict[str, str]] = json.loads(ISO_CURRENCIES_PATH.read_text(encoding="utf-8"))["4217"]
     currencies: dict[str, CurrencyModel] = {}
-    for id, entry in enumerate(entries, start=1):
+    for entry in entries:
         numeric = entry.get("numeric")
         currencies[entry["alpha_3"]] = CurrencyModel(
-            id=id, name=entry["name"], alpha3=entry["alpha_3"], numeric=int(numeric) if numeric else None
+            name=entry["name"], alpha3=entry["alpha_3"], numeric=int(numeric) if numeric else None
         )
     ingest_log.writeline(f"{len(currencies)} currencies")
     return currencies

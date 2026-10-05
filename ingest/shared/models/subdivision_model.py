@@ -19,6 +19,7 @@ class SubdivisionModel(Model):
     # ISO's parent for this subdivision, the key SubdivisionMap.refresh() links parent by; ingest-only, since the parent object it names may be merged away before then
     parent_iso_code: str | None = None
 
+    UNSHIPPED_FIELDS = ("id", "hashid", "parent_iso_code")
     LOOKUP_FIELDS = ("iso_code", "geonames_code")
     FILTER_FIELDS = {
         "name": ("name", "aliases"),
@@ -40,18 +41,15 @@ class SubdivisionModel(Model):
     def iso_suffix(self) -> str:
         return self.iso_code.split("-")[1] if self.iso_code else ""
 
-    def to_row(self) -> tuple[str | int | None]:
-        data = self.to_dict()
+    def row_values(self) -> dict[str, object]:
+        data = Model.row_values(self)
         data["parent"] = self.parent.id if self.parent else None
         data["country"] = self.country.id
-        data.pop("hashid", None)
-        data.pop("parent_iso_code", None)
-        data["aliases"] = "|".join(self.aliases) if self.aliases else None
-        data.pop("id")
-        return tuple(data.values())
+        data["aliases"] = self.join_cell(self.aliases)
+        return data
 
     def set_hashid(self) -> None:
-        """Sets hashid, and id to match, to a placeholder unique before merging, when neither the ISO code nor the GeoNames id can key every subdivision; SubdivisionMap.all() assigns the final ids, and hashid never ships."""
+        """Sets hashid, the key SubdivisionMap holds a subdivision by before merging, when neither the ISO code nor the GeoNames id can key every subdivision; it never ships."""
         # the ISO code or the GeoNames code, whichever source the record was loaded from
         key = "|".join([self.country.alpha2, str(self.admin_level), normalize(self.name), self.iso_code or self.geonames_code or ""])
-        self.hashid = self.id = int.from_bytes(hashlib.md5(key.encode()).digest()[:8], "big")
+        self.hashid = int.from_bytes(hashlib.md5(key.encode()).digest()[:8], "big")

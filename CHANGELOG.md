@@ -43,6 +43,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- A city whose name contains a double quote (Poselok Turisticheskogo pansionata "Klyazminskoe vodohranilische") had its name returned wrapped in extra quotes, with each inner quote doubled
+- Filter and search indexes load correctly on big-endian machines, where their packed ids had been read in the wrong byte order
 - Capital schwa (Ə) and reversed E (Ǝ) normalized to "@" and "3"; both now fold to "a", like their lowercase forms
 - Subdivision automerge never stripped type words spelled with diacritics (járás, huyện, ilçesi, shahrestān) from names before matching, since names are compared accent-free; the type words are now folded the same way, and an unaccented spelling such as "Huyen" also marks a name's type
 - `set_population_threshold()` changes the filter under the registry's lock, so a thread loading cities at the same time can't build the cache and indexes from different thresholds

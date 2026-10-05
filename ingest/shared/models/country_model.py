@@ -84,13 +84,12 @@ class CountryModel(Model):
         values = (v for l in self.languages for v in (l.language.name, l.language.alpha3, l.language.alpha2, l.language.bibliographic))
         return [v for v in values if v]
 
-    def to_row(self) -> tuple[str | int | None]:
-        data = self.to_dict()
-        data["aliases"] = "|".join(self.aliases)
+    def row_values(self) -> dict[str, object]:
+        data = Model.row_values(self)
+        data["aliases"] = self.join_cell(self.aliases)
         data["macroregions"] = "|".join(str(m.id) for m in self.macroregions)
         data["groupings"] = "|".join(str(m.id) for m in self.groupings)
         data["currencies"] = "|".join(str(c.id) for c in self.currencies)
         data["languages"] = "|".join(l.to_cell() for l in self.languages)
         data["historic"] = self.historic.to_cell() if self.historic else None
-        data.pop("id")
-        return tuple(data.values())
+        return data

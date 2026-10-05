@@ -1,8 +1,6 @@
 [MACROREGIONS]
-[INFO] Downloading cldr_territory_containment.json from https://raw.githubusercontent.com/unicode-org/cldr-json/91c267402229a59e3ef2774544f001bf959e8809/cldr-json/cldr-core/supplemental/territoryContainment.json
-[INFO] Downloaded and updated cldr_territory_containment.json
-[INFO] Downloading cldr_territory_names_en.json from https://raw.githubusercontent.com/unicode-org/cldr-json/91c267402229a59e3ef2774544f001bf959e8809/cldr-json/cldr-localenames-full/main/en/territories.json
-[INFO] Downloaded and updated cldr_territory_names_en.json
+[INFO] No update needed for cldr_territory_containment.json
+[INFO] No update needed for cldr_territory_names_en.json
 [INFO] Loading CLDR macroregions...
 [INFO] 5 regions, 23 subregions and 6 groupings; 257 territories placed
 [INFO] Dumping 34 macroregions...

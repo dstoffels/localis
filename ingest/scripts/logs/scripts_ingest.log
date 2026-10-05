@@ -1,7 +1,6 @@
 [SCRIPTS]
 [INFO] No update needed for iso_15924.json
-[INFO] Downloading cldr_script_names_en.json from https://raw.githubusercontent.com/unicode-org/cldr-json/91c267402229a59e3ef2774544f001bf959e8809/cldr-json/cldr-localenames-full/main/en/scripts.json
-[INFO] Downloaded and updated cldr_script_names_en.json
+[INFO] No update needed for cldr_script_names_en.json
 [INFO] Loading ISO 15924 scripts...
 [INFO] CLDR names scripts not in ISO 15924, skipped: Qaag
 [INFO] 226 scripts, 69 with CLDR aliases

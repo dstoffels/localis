@@ -10,10 +10,10 @@ def load_scripts() -> dict[str, ScriptModel]:
     ingest_log.writeline("Loading ISO 15924 scripts...")
     entries: list[dict[str, str]] = json.loads(ISO_SCRIPTS_PATH.read_text(encoding="utf-8"))["15924"]
     scripts: dict[str, ScriptModel] = {}
-    for id, entry in enumerate(entries, start=1):
+    for entry in entries:
         numeric = entry.get("numeric")
         scripts[entry["alpha_4"]] = ScriptModel(
-            id=id, name=entry["name"], alpha4=entry["alpha_4"], numeric=int(numeric) if numeric else None
+            name=entry["name"], alpha4=entry["alpha_4"], numeric=int(numeric) if numeric else None
         )
 
     # keys are a code ("Hans") or an alternate form of one ("Hans-alt-stand-alone"); the code is the part before the first hyphen
