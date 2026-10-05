@@ -9,6 +9,7 @@ from urllib.parse import urlencode
 from urllib.request import urlopen, Request
 from typing import Any, cast
 from .logger import ingest_log
+from .staging import staged_path, fetched_path
 
 # sent with every request to a data source
 USER_AGENT = "localis-data-refresh (+https://github.com/dstoffels/localis)"
@@ -34,17 +35,6 @@ def _save_manifest(path: Path, manifest: _Manifest) -> None:
         json.dump(manifest, f, indent=2)
         # a trailing newline, as editors add on save, so a hand-opened manifest doesn't show as changed
         f.write("\n")
-
-
-# entries recorded this run, written to their manifests only when the pipeline promotes its build
-_pending: dict[Path, _Manifest] = {}
-
-
-def commit_manifests() -> None:
-    """Writes each manifest as this run's entries alone, since every run fetches every source, so a source no longer used leaves no stale entry; called only on promotion, so a failed run leaves the manifests describing the shipped build."""
-    for manifest_path, pending in _pending.items():
-        _save_manifest(manifest_path, dict(sorted(pending.items())))
-    _pending.clear()
 
 
 def _etag(url: str) -> str | None:
@@ -78,10 +68,11 @@ def _download(url: str, dest: Path) -> str | None:
 
 
 def fetch(url: str, dest: Path, manifest_path: Path, extract: str | None = None) -> bool:
-    """Downloads url to dest, unpacking a zip's `extract` member beside it and removing the zip, unless the file the stage reads is already the one the manifest records under the same ETag; stages its manifest entry either way. True if it downloaded."""
+    """Downloads url to dest, unpacking a zip's `extract` member beside it and removing the zip, unless the file the stage reads is already the one last recorded under the same ETag; stages its manifest entry either way, promoted with the build. True if it downloaded."""
     local = dest.with_name(extract) if extract else dest
     etag = _etag(url)
-    entry = _load_manifest(manifest_path).get(dest.name, {})
+    # a run since the last promotion may have downloaded past what the committed manifest records
+    entry = _load_manifest(fetched_path(manifest_path)).get(dest.name) or _load_manifest(manifest_path).get(dest.name, {})
     # hashed only when the ETag matches, so a changed source isn't hashed just to be replaced
     sha256 = _sha256(local) if local.exists() and etag == entry.get("etag") else None
     current = sha256 is not None and sha256 == entry.get("sha256")
@@ -96,7 +87,11 @@ def fetch(url: str, dest: Path, manifest_path: Path, extract: str | None = None)
         ingest_log.writeline(f"Downloaded and updated {local.name}")
     else:
         ingest_log.writeline(f"No update needed for {local.name}")
-    _pending.setdefault(manifest_path, {})[dest.name] = {"url": url, "etag": etag, "sha256": sha256}
+    # each manifest is staged as this run's entries alone, so a source no longer used leaves no stale entry
+    staged = staged_path(manifest_path)
+    entries = _load_manifest(staged)
+    entries[dest.name] = {"url": url, "etag": etag, "sha256": sha256}
+    _save_manifest(staged, dict(sorted(entries.items())))
     return not current
 
 

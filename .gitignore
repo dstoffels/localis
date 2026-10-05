@@ -103,3 +103,4 @@ ingest/staging/
 
 # ingest logs: tracked so each run's diagnostics are reviewable in the ingest PR
 !ingest/*/logs/*.log
+!ingest/pipeline.log

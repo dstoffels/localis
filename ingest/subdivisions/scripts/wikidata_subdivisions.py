@@ -25,7 +25,7 @@ def _query_crosswalk() -> dict[str, int]:
 
 
 def fetch_wikidata_crosswalk() -> dict[str, int]:
-    """Queries the crosswalk and stages it for CROSSWALK.commit()."""
+    """Queries the crosswalk and stages it for promotion."""
     ingest_log.writeline("Querying Wikidata for ISO/GeoNames crosswalk...")
     return CROSSWALK.fetch(_query_crosswalk)
 

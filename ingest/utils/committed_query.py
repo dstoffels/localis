@@ -1,23 +1,19 @@
 import json
 from pathlib import Path
-from typing import Any, Callable, ClassVar, Generic, TypeVar
+from typing import Any, Callable, Generic, TypeVar
 from .download import SPARQL_ATTEMPTS
 from .logger import ingest_log
+from .staging import staged_path, stage_text
 
 V = TypeVar("V")
 
 
 class CommittedQuery(Generic[V]):
-    """A live query's result (Wikidata has no ETag), committed as its own provenance: each run's result is staged to a pending file and replaces the committed one only when the pipeline promotes its build."""
-
-    # every instance, so promotion commits them all
-    instances: ClassVar[list["CommittedQuery[Any]"]] = []
+    """A live query's result (Wikidata has no ETag), committed as its own provenance: each run stages its result, which replaces the committed one when the pipeline promotes its build."""
 
     def __init__(self, path: Path, label: str) -> None:
         self.path = path
-        self.pending_path = path.with_suffix(".pending.json")
         self.label = label
-        CommittedQuery.instances.append(self)
 
     @staticmethod
     def _read(path: Path) -> dict[str, Any]:
@@ -28,11 +24,12 @@ class CommittedQuery(Generic[V]):
         return self._read(self.path)
 
     def latest(self) -> dict[str, V]:
-        """The result the last run fetched, committed or not."""
-        return self._read(self.pending_path if self.pending_path.exists() else self.path)
+        """The result the last run fetched, promoted or not."""
+        staged = staged_path(self.path)
+        return self._read(staged if staged.exists() else self.path)
 
     def fetch(self, query: Callable[[], dict[str, V]]) -> dict[str, V]:
-        """Runs query and stages its result for commit(). A result missing committed keys is kept only once a repeat returns it unchanged: a Wikidata edit repeats, a flaky response doesn't."""
+        """Runs query and stages its result for promotion. A result missing committed keys is kept only once a repeat returns it unchanged: a Wikidata edit repeats, a flaky response doesn't."""
         committed_keys = self.committed().keys()
         result = query()
         queries = 1
@@ -48,18 +45,8 @@ class CommittedQuery(Generic[V]):
                 break
             result = repeat
 
-        self.pending_path.write_text(json.dumps(result, indent=2, ensure_ascii=False, sort_keys=True) + "\n", encoding="utf-8")
+        stage_text(self.path, json.dumps(result, indent=2, ensure_ascii=False, sort_keys=True) + "\n")
         return result
-
-    def commit(self) -> None:
-        """Replaces the committed result with this run's; called only on promotion."""
-        if self.pending_path.exists():
-            self.pending_path.replace(self.path)
-
-    @classmethod
-    def commit_all(cls) -> None:
-        for query in cls.instances:
-            query.commit()
 
     def log_changes(self, result: dict[str, V]) -> None:
         """Logs how result differs from the committed one, for the ingest PR."""

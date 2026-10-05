@@ -4,7 +4,7 @@ import sys
 from .fetch_subdivisions import fetch_subdivisions_sources
 from ingest.subdivisions.utils.subdivision_map import SubdivisionMap
 from ingest.subdivisions.utils.resolution_map import ResolutionMap
-from ingest.utils import SUBDIVISIONS, ingest_log, dump_registry
+from ingest.utils import SUBDIVISIONS, ORPHANS_EXIT_CODE, ingest_log, dump_registry
 from ingest.shared.models import CountryModel, SubdivisionModel
 from .geonames_subdivisions import map_geonames_subdivisions
 from .iso_subdivisions import load_iso_subs
@@ -24,7 +24,7 @@ RESOLUTION_MAP_PATH = SUBDIVISIONS.outputs / "resolution_map.json"
 
 
 def exit_if_orphans(resolution_map: ResolutionMap) -> None:
-    """Hard gate: active orphans mean the dataset is incomplete, so stop with exit code 10, before promotion, until the resolve-subdivisions skill resolves them."""
+    """Hard gate: active orphans mean the dataset is incomplete, so stop with ORPHANS_EXIT_CODE, before promotion, until the resolve-subdivisions skill resolves them."""
     orphans = resolution_map.automerge.orphans
     if not orphans.count():
         return
@@ -33,7 +33,7 @@ def exit_if_orphans(resolution_map: ResolutionMap) -> None:
         "run the resolve-subdivisions skill first",
         level="WARN",
     )
-    sys.exit(10)
+    sys.exit(ORPHANS_EXIT_CODE)
 
 
 def ingest_subdivisions(countries: dict[str, CountryModel]) -> dict[str, SubdivisionModel]:

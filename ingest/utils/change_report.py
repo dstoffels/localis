@@ -49,7 +49,8 @@ def _value(value: Any) -> Any:
 
 def _nested(entity: Entity) -> Any:
     """A nested record as its key, which a change to the record itself doesn't touch, plus any facts about the relationship it carries beyond its base form (a CountryLanguage's status)."""
-    base = next(c for c in type(entity).__mro__ if c.__name__.endswith("Base"))
+    # the class directly under Entity, the form every nested record of the type shares
+    base = next(c for c in type(entity).__mro__ if Entity in c.__bases__)
     base_fields = {f.name for f in fields(base)}
     extra = {f.name: _value(getattr(entity, f.name)) for f in fields(entity) if f.name not in base_fields}
     return (entity.key, extra) if extra else entity.key

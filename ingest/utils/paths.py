@@ -13,6 +13,9 @@ DOCS_PATH = REPO_PATH / "docs"
 STAGING_PATH = BASE_PATH / "staging"
 STAGED_DATA_PATH = STAGING_PATH / "data"
 
+# each run's steps and result, however it ends
+PIPELINE_LOG_PATH = BASE_PATH / "pipeline.log"
+
 
 class Stage:
     """A pipeline stage's directories and files, derived from its name under ingest/<name>/."""
@@ -28,7 +31,7 @@ class Stage:
 
     @property
     def inputs(self) -> Path:
-        """Fetched sources, untracked except the manifest and committed query results."""
+        """Fetched sources and curated inputs; only the manifest, the curated inputs and committed query results are tracked."""
         return self.root / "inputs"
 
     @property
@@ -52,7 +55,7 @@ LANGUAGES = Stage("languages")
 COUNTRIES = Stage("countries")
 SUBDIVISIONS = Stage("subdivisions")
 CITIES = Stage("cities")
-# sources several stages read, fetched by the stages that use them
+# sources several stages read, fetched once by run_pipeline() before any stage
 SHARED = Stage("shared")
 
 GEONAMES_DUMP_URL = "https://download.geonames.org/export/dump"

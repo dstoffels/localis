@@ -87,7 +87,7 @@ jobs:
         if: steps.ingest.outputs.exit_code == '10'
         run: |
           count=$(python -c "import json; m = json.load(open('ingest/subdivisions/outputs/resolution_map.json')); print(sum(len(b) for b in m['automerge']['orphans'].values()))")
-          git add ingest/subdivisions/outputs/resolution_map.json ingest/*/logs/*.log
+          git add ingest/subdivisions/outputs/resolution_map.json ingest/*/logs/*.log ingest/pipeline.log
           if ! git diff --cached --quiet; then
             git commit -m "chore: ingest found $count orphans awaiting resolution"
           fi
@@ -210,7 +210,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           {
-            echo "This PR is maintained automatically by the ingest workflow and always reflects the current state of the \`ingest\` branch: below is the latest run's change report, and each run comments with its own. Type check and tests ran in the ingest workflow itself before this was pushed, since bot-opened PRs don't trigger the Test workflow."
+            echo "This PR is maintained automatically by the ingest workflow and always reflects the current state of the \`ingest\` branch. Below is the latest run's change report, which compares that run's build with the one before it on \`ingest\`, not this PR's whole diff against \`dev\`; each run also comments with its own. Type check and tests ran in the ingest workflow itself before this was pushed, since bot-opened PRs don't trigger the Test workflow."
             echo
             cat report_summary.md
           } > pr_body.md

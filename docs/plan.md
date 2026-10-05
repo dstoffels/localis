@@ -120,7 +120,7 @@ At promotion the new build sits next to the shipped one, so the pipeline compare
 
 ### Reconcile gate
 
-Before promoting, the pipeline runs the `analysis --data-only` step (`data_stats` and the docs' deterministic stat markers) against the staged build, never the full analysis with footprint and benchmarks. `data_stats` raises before writing anything when its counts don't reconcile, which stops the run before promotion like any other failure; when they do, `data_stats.json` and the docs' figures already describe the build being promoted. In staging mode analysis reads the staged copies of every artifact it uses, not only the data: `ingest_stats.json`, the pending Wikidata crosswalk and the run's `resolution_map.json`.
+Before promoting, the pipeline checks that `data_stats`' counts for the staged build reconcile (`analysis --staging`, which writes nothing), and a failure stops the run before promotion like any other. Once the build is promoted it regenerates `data_stats.json` and the docs' deterministic stat markers from it (`analysis --data-only`), never the full analysis with footprint and benchmarks, so they never describe a build that didn't ship. In staging mode analysis reads the staged copies of every artifact it uses, not only the data: `ingest_stats.json`, the staged Wikidata crosswalk and the run's `resolution_map.json`.
 
 ### Also in this pass
 
@@ -136,6 +136,11 @@ From the same review:
 - Manifests are rewritten as each run's entries alone, dropping stale ones; `committed_value()` and the subdivisions decisions fingerprint are removed, since `resolution_map.json` is committed with the data.
 - `CommittedQuery.changed()` is `log_changes()`, which only logs.
 - The legacy branch in `fetch()` that accepted a bare-ETag manifest entry, removed once the first promotion had rewritten every manifest as `{url, etag, sha256}`.
+- Manifests and committed Wikidata results are staged as files like every other promoted file, replacing `fetch()`'s in-memory pending entries, `commit_manifests()` and the `.pending.json` files with `CommittedQuery.commit_all()`, so promotion only moves files.
+- A rerun after a failed or orphan-stopped run no longer downloads again what that run already did: `reset_staging()` merges the run's staged manifests into `staging/fetched/`, which `fetch()` checks before the committed manifest.
+- The reconcile gate only checks the staged build; `data_stats.json` and the docs' stat markers are regenerated after promotion, so they never describe a build that didn't ship.
+- The ingest PR's body says its change report compares the latest run with the one before it, not the PR's whole diff against `dev`.
+- `ingest/pipeline.log` records each run's steps and its result (succeeded, stopped on orphans, or failed in a named step, and whether the build was promoted), with the analysis runs' output captured into it; analysis says what each step reads and writes.
 
 ### Deferred
 
