@@ -7,7 +7,7 @@ from localis.registries import Registry
 class MacroregionRegistry(Registry[Macroregion]):
     REGISTRY_NAME = "macroregions"
 
-    def build_cache(self) -> Mapping[int, MacroregionView]:
+    def _build_cache(self) -> Mapping[int, MacroregionView]:
         return MacroregionView.load(self._data_filepath)
 
     def lookup(self, identifier: str | int) -> Macroregion | None:

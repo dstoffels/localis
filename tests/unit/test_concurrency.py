@@ -37,7 +37,7 @@ class TestConcurrency:
         expected = _calls(registry, subjects)
 
         # cold again, so the threads race to load the dataset and every index
-        registry.invalidate_cache()
+        registry._invalidate_cache()
         barrier = threading.Barrier(THREADS)
 
         def run() -> list[tuple]:

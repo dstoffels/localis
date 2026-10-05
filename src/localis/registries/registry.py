@@ -2,7 +2,7 @@ from functools import cached_property
 import threading
 from typing import Any, Iterator, Generic, Mapping, Self, TypeVar, overload
 from pathlib import Path
-from abc import ABC
+from abc import ABC, abstractmethod
 from localis.entities import Entity
 from localis.views import View
 from localis.stores import Store
@@ -61,20 +61,16 @@ class Registry(Generic[T], ABC):
     def _lookup_int_filepath(self) -> Path:
         return self._data_path / "lookup_index_int.tsv"
 
-    @property
-    def count(self) -> int:
-        return self.__len__()
-
     @locked_cached_property
     def _cache(self) -> Mapping[int, View[T, Store]]:
         if not self._data_filepath.exists():
             raise FileNotFoundError(f"Data file not found: {self._data_filepath}")
 
-        return self.build_cache()
+        return self._build_cache()
 
-    def build_cache(self) -> Mapping[int, View[T, Store]]:
+    @abstractmethod
+    def _build_cache(self) -> Mapping[int, View[T, Store]]:
         """The registry's id -> view mapping, built with whatever other registries' views its views reference."""
-        raise NotImplementedError
 
     @locked_cached_property
     def _allowed_ids(self) -> set[int] | None:
@@ -91,7 +87,7 @@ class Registry(Generic[T], ABC):
 
     _CACHED_ATTRS: tuple[str, ...] = ("_cache", "_allowed_ids", "_lookup_index")
 
-    def invalidate_cache(self):
+    def _invalidate_cache(self):
         with self._lock:
             for attr in self._CACHED_ATTRS:
                 vars(self).pop(attr, None)
@@ -165,24 +161,23 @@ class QueryableRegistry(Registry[T]):
         if limit is not None and (not isinstance(limit, int) or isinstance(limit, bool) or limit < 1):
             raise ValueError(f"limit must be a positive integer, got {limit!r}")
 
-    def filter(
-        self, *, name: str | None = None, limit: int | None = None, **kwargs
-    ) -> list[T]:
-        """Filter by exact matches on specified fields with AND logic when filtering by multiple fields. Case insensitive. A field given MISSING matches the records with no value in it. Raises TypeError for a kwarg the registry can't filter by, and ValueError for a limit below 1."""
-        self._check_limit(limit)
-        kwargs["name"] = name
+    def filter(self, *, name: str | None = None, limit: int | None = None) -> list[T]:
+        """Filter by name; each registry adds its own fields. Exact, case-insensitive matches, combined with AND, sorted by name; a field given MISSING matches the records with no value in it. Raises TypeError when no field is given, and ValueError for a limit below 1."""
+        return self._filter(limit, name=name)
 
-        unknown = [k for k in kwargs if k not in self._filter_index.index]
+    def _filter(self, limit: int | None, **fields) -> list[T]:
+        """filter() over the given fields, None ones ignored."""
+        self._check_limit(limit)
+        filter_kws = {k: v for k, v in fields.items() if v is not None}
+        if not filter_kws:
+            raise TypeError(f"{type(self).__name__}.filter() needs at least one field")
+
+        # each registry's filter() signature names its fields, so this only catches a signature out of step with the shipped index
+        unknown = [k for k in fields if k not in self._filter_index.index]
         if unknown:
             raise TypeError(f"{type(self).__name__}.filter() got an unexpected keyword argument '{unknown[0]}'")
 
-        filter_kws = {k: v for k, v in kwargs.items() if v is not None}
-
         results: set[int] | None = None
-
-        # short circuit
-        if not filter_kws:
-            return []
 
         for key, value in filter_kws.items():
             matches = self._filter_index.get(filter_kw=key, field_value=value)
@@ -206,6 +201,7 @@ class QueryableRegistry(Registry[T]):
         return [r.to_entity() for r in results_list]
 
     def search(self, query: str, limit: int = 10) -> list[tuple[T, float]]:
+        """Typo-tolerant search: up to `limit` (entity, score) pairs, best first. Raises ValueError for a limit below 1."""
         self._check_limit(limit)
         results = self._search_index.search(query=query, limit=limit, exclude=self._hidden_ids())
         return [(r.to_entity(), score) for r, score in results]

@@ -144,7 +144,7 @@ localis.countries.filter(currency=localis.MISSING)  # countries with no legal te
 localis.languages.filter(script=localis.MISSING)  # languages CLDR lists no script for
 ```
 
-Pass `localis.MISSING` to match records with no value in a field (`None` ignores the field). A field the registry doesn't have raises `TypeError`.
+Pass `localis.MISSING` to match records with no value in a field (`None` ignores the field). A field the registry doesn't have raises `TypeError`, as does a call with no field.
 
 **Returns:** a list of entities sorted by name. `limit` defaults to every match and must be at least 1.
 
@@ -157,6 +157,7 @@ for country, score in localis.countries.search("Germny", limit=5):
 
 localis.subdivisions.search("Californa")
 localis.cities.search("Springfeld, Illinois")  # context after the name narrows the match
+localis.cities.search("Springfield", population_sort=True)  # the best matches, largest city first
 localis.currencies.search("Swiss Frank")
 localis.scripts.search("Devanagri")
 localis.languages.search("Portugese")

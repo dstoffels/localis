@@ -56,6 +56,14 @@ class CityView(CrossReferencedView[City, CityStore, CountryView, SubdivisionView
             lng=self.lng,
         )
 
+    # the population's position in the row load() unpacks
+    _POPULATION_COLUMN = 4
+
+    @classmethod
+    def population_filter(cls, threshold: int) -> CacheFilterPredicate:
+        """A load() predicate keeping the rows of at least the threshold's population."""
+        return lambda row: int(row[cls._POPULATION_COLUMN]) >= threshold
+
     @classmethod
     def load(
         cls,

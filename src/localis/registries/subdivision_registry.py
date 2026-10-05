@@ -13,7 +13,7 @@ class SubdivisionRegistry(QueryableRegistry[Subdivision]):
         self._countries = countries
         super().__init__()
 
-    def build_cache(self) -> Mapping[int, SubdivisionView]:
+    def _build_cache(self) -> Mapping[int, SubdivisionView]:
         country_views = cast(Mapping[int, CountryView], self._countries._cache)
         return SubdivisionView.load(self._data_filepath, country_views)
 
@@ -29,17 +29,14 @@ class SubdivisionRegistry(QueryableRegistry[Subdivision]):
         type: str | Missing | None = None,
         admin_level: int | None = None,
         country: str | None = None,
-        **kwargs,
     ) -> list[Subdivision]:
-        """Filter subdivisions by exact matches on specified fields with AND logic when filtering by multiple fields. Case insensitive. type=MISSING matches the GeoNames-only subdivisions, which have no type."""
-        kwargs.update(type=type, admin_level=admin_level, country=country)
-
-        return super().filter(name=name, limit=limit, **kwargs)
+        """Filter subdivisions by name (name or alias), type, admin_level or country (name, alpha2 or alpha3); type=MISSING matches the GeoNames-only subdivisions, which have no type."""
+        return self._filter(limit, name=name, type=type, admin_level=admin_level, country=country)
 
     def search(
         self, query: str, limit: int = 10
     ) -> list[tuple[Subdivision, float]]:
-        """Fuzzy search for subdivisions by name, aliases, parent name, or country name"""
+        """Search subdivisions by name, alias or ISO code suffix, with their parent and country names matched as context."""
         return super().search(query, limit)
 
 

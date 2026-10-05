@@ -95,7 +95,14 @@ class TestFilter:
     def test_kwargs(self, registry: QueryableRegistry):
         """should raise a TypeError if given an invalid kwarg"""
         with pytest.raises(TypeError):
-            registry.filter(pid="1234")
+            registry.filter(pid="1234")  # pyright: ignore[reportCallIssue]
+
+    def test_no_fields(self, registry: QueryableRegistry):
+        """should raise a TypeError when given no field to filter by, None ones included"""
+        with pytest.raises(TypeError):
+            registry.filter()
+        with pytest.raises(TypeError):
+            registry.filter(name=None, limit=5)
 
     def test_limit(self, registry: QueryableRegistry, select_random, include_historic):
         """should limit the number of results"""

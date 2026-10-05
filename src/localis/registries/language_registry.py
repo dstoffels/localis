@@ -13,7 +13,7 @@ class LanguageRegistry(QueryableRegistry[Language]):
         self._scripts = scripts
         super().__init__()
 
-    def build_cache(self) -> Mapping[int, LanguageView]:
+    def _build_cache(self) -> Mapping[int, LanguageView]:
         script_views = cast(Mapping[int, ScriptView], self._scripts._cache)
         return LanguageView.load(self._data_filepath, script_views)
 
@@ -29,11 +29,9 @@ class LanguageRegistry(QueryableRegistry[Language]):
         scope: str | None = None,
         type: str | None = None,
         script: str | Missing | None = None,
-        **kwargs,
     ) -> list[Language]:
         """Filter languages by name (name, inverted_name or alias), scope, type or a script (by alpha4, name or alias, primary or secondary); script=MISSING matches languages with none."""
-        kwargs.update(scope=scope, type=type, script=script)
-        return super().filter(name=name, limit=limit, **kwargs)
+        return self._filter(limit, name=name, scope=scope, type=type, script=script)
 
     def search(self, query: str, limit: int = 10) -> list[tuple[Language, float]]:
         """Search languages by name, inverted_name or alias."""

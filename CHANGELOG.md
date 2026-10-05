@@ -28,6 +28,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Country search matches alpha-3 codes, so `countries.search("USA")` finds the United States, and Wikidata's English short names are kept even where they're also the country's IOC or FIFA code, adding UAE, RSA and GDR as aliases
 - Countries leave historic entries out of `filter()` and `search()` before ranking rather than after, so a search no longer reads every country to size an over-fetch and a historic entry can't take a shortlist slot from a current one
 - `search()` raises `TypeError` for a keyword argument it doesn't take, like `filter()`, instead of silently ignoring it
+- `filter()` raises `TypeError` when given no field, instead of returning `[]`
+- `cities.set_population_threshold()` raises when called with a value that isn't a non-negative int, instead of failing on the next cities access, and setting the threshold already in place keeps the loaded cache
 - `Subdivision.type` and `SubdivisionBase.type` are `None` for the 46,665 GeoNames-only subdivisions, which have no ISO type, instead of `""`, like every other missing field
 - Cities ship a short-name list like countries and subdivisions, so short city names reachable only by an exact query (such as "Jīān") are found through the short-query fallback, for about 463 KiB
 - The filter index ships inverted, like the search index: each field value's ids are packed at ingest and sliced out at load, instead of the index being rebuilt from per-record rows on every load, so filters' first use is faster, most of all for cities
@@ -45,11 +47,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+- The registries' undocumented `count` (use `len()`), `build_cache()` and `invalidate_cache()`
 - The `unidecode` dependency (GPL-2.0-or-later); `rapidfuzz` is now the only runtime dependency
 - Subdivision aliases written in non-Latin scripts (19,882), which only a query in that script could find: subdivisions' shipped data shrinks from 10,866 to 9,930 KiB and their fully loaded memory from 47.4 to 41.0 MiB. 274 Latin aliases that deduplication had dropped in favor of a Cyrillic spelling ship again
 
 ### Fixed
 
+- Type checkers flag a field a registry's `filter()` doesn't have, since its signature no longer takes `**kwargs`
 - Type checkers no longer flag `from localis import countries` (or any other public name) as a private import: the package declares its public names in `__all__`
 - `lookup()` resolves a numeric code or GeoNames ID given as a string (`countries.lookup("840")`, `cities.lookup("5128581")`), not only as an int
 - `search()` honors a `limit` above 200 instead of capping results there

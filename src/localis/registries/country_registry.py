@@ -21,7 +21,7 @@ class CountryRegistry(QueryableRegistry[Country]):
         self._languages = languages
         super().__init__()
 
-    def build_cache(self) -> Mapping[int, CountryView]:
+    def _build_cache(self) -> Mapping[int, CountryView]:
         macroregion_views = cast(Mapping[int, MacroregionView], self._macroregions._cache)
         currency_views = cast(Mapping[int, CurrencyView], self._currencies._cache)
         language_views = cast(Mapping[int, LanguageView], self._languages._cache)
@@ -52,11 +52,9 @@ class CountryRegistry(QueryableRegistry[Country]):
         macroregion: str | Missing | None = None,
         currency: str | Missing | None = None,
         language: str | Missing | None = None,
-        **kwargs,
     ) -> list[Country]:
         """Filter countries by any of its names (name, official_name, common_name, or aliases), a macroregion (region, subregion or grouping, by name or code), a currency (by name or alpha3) or an official language (by name, alpha3, alpha2 or bibliographic code); MISSING matches countries with none. Excludes historic entries unless include_historic is set."""
-        kwargs.update(macroregion=macroregion, currency=currency, language=language)
-        return super().filter(name=name, limit=limit, **kwargs)
+        return self._filter(limit, name=name, macroregion=macroregion, currency=currency, language=language)
 
     def search(
         self, query: str, limit: int = 10
@@ -65,7 +63,7 @@ class CountryRegistry(QueryableRegistry[Country]):
         return super().search(query, limit)
 
     def set_include_historic(self, include: bool) -> None:
-        self._include_historic = include
+        self._include_historic = bool(include)
 
     @property
     def include_historic(self) -> bool:

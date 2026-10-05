@@ -1,3 +1,4 @@
+import pytest
 from localis import cities
 
 
@@ -39,3 +40,16 @@ class TestPopulationThreshold:
         finally:
             cities.set_population_threshold(None)
             assert cities.lookup(geonames_id) is not None
+
+    @pytest.mark.parametrize("bad_threshold, error", [("15000", TypeError), (1.5, TypeError), (True, TypeError), (-1, ValueError)])
+    def test_bad_threshold(self, bad_threshold, error):
+        """should raise when set, rather than on first access, for a threshold that isn't a non-negative int, leaving the current one in place"""
+        with pytest.raises(error):
+            cities.set_population_threshold(bad_threshold)
+        assert cities.population_threshold is None
+
+    def test_same_threshold_keeps_cache(self):
+        """should keep the loaded cache when the threshold set is the one already in place"""
+        cache = cities._cache
+        cities.set_population_threshold(None)
+        assert cities._cache is cache
