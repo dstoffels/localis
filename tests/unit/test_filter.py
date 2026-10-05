@@ -19,7 +19,9 @@ def _country_values(country_id: int) -> tuple:
     # the CountryBase embedded in subdivisions and cities lacks common_name and numeric, so read the full country
     c = localis.countries.get(country_id)
     assert c is not None
-    return (c.name, c.common_name, c.alpha2, c.alpha3, c.numeric)
+    # subdivisions index the numeric code zero-padded too ("076"); cities index no numeric
+    numeric = (c.numeric, f"{c.numeric:03d}") if c.numeric is not None else ()
+    return (c.name, c.common_name, c.alpha2, c.alpha3, *numeric)
 
 
 def _script_values(script_id: int) -> tuple:

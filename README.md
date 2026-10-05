@@ -21,7 +21,7 @@ Fast, offline access to comprehensive data for **countries**, **subdivisions**, 
 ## Installation
 
 ```bash
-pip install localis
+pip install --pre localis
 ```
 
 localis follows Semantic Versioning; [docs/versioning.md](https://github.com/dstoffels/localis/blob/main/docs/versioning.md) says what each release can change and which releases are supported.
@@ -124,7 +124,7 @@ Exact matches on any value a field indexes. Using multiple fields combines the c
 | Registry | Fields |
 |---|---|
 | `countries` | `name` (name, official name, common name or alias), `macroregion` (a region, subregion or grouping, by name or code), `currency` (by name or alpha-3), `language` (an official language, by name or ISO 639 code) |
-| `subdivisions` | `name` (name or alias), `type`, `country` (name, common name, alpha-2, alpha-3 or numeric), `admin_level` (0 = non-administrative groupings, 1 = states/provinces, 2 = counties/districts, 3 = divisions below those) |
+| `subdivisions` | `name` (name or alias), `type`, `country` (name, common name, alpha-2, alpha-3 or numeric, as `76` or `"076"`), `admin_level` (0 = non-administrative groupings, 1 = states/provinces, 2 = counties/districts, 3 = divisions below those) |
 | `cities` | `name`, `country` (name, common name, alpha-2 or alpha-3), `subdivision` (any subdivision in the city's chain, by name, ISO code or its suffix (`"CA"`), or GeoNames code) |
 | `currencies` | `name` |
 | `scripts` | `name` (name or alias) |

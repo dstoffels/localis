@@ -59,6 +59,21 @@ class TestTryMerge:
         assert {o.iso_code for o in resolution_map.automerge.orphans.ambiguity} == {"TL-X", "TL-Y"}
 
 
+class TestDedupeAliases:
+    """DEDUPE ALIASES"""
+
+    def test_drops_variants_of_name(self):
+        """should drop an alias that is a case or accent variant of the subdivision's own name, keeping the rest"""
+        ingest_subdivisions = importlib.import_module("ingest.subdivisions.scripts.ingest_subdivisions")
+        sub_map = SubdivisionMap()
+        sub = _sub("Dōshī Kanton", aliases=["Doshi kanton", "Doshi"], geonames_id=1)
+        sub_map.add(sub)
+
+        ingest_subdivisions.dedupe_aliases(sub_map)
+
+        assert sub.aliases == ["Doshi"]
+
+
 class TestIsoCoverage:
     """ISO COVERAGE"""
 

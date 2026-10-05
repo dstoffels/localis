@@ -60,10 +60,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 - The `unidecode` dependency (GPL-2.0-or-later); `rapidfuzz` is now the only runtime dependency
-- Subdivision aliases written in non-Latin scripts (19,882), which only a query in that script could find: subdivisions' shipped data shrinks from 11,127 to 10,168 KB and their fully loaded memory from 49.7 to 43.0 MB. 274 Latin aliases that deduplication had dropped in favor of a Cyrillic spelling ship again
+- Subdivision aliases written in non-Latin scripts (19,882), which only a query in that script could find: subdivisions' shipped data shrinks from 11,127 to 10,168 KB and their fully loaded memory from 49.7 to 43.0 MB. 274 Latin aliases that deduplication had previously dropped in favor of a Cyrillic spelling ship again
 
 ### Fixed
 
+- 448 GeoNames-only subdivisions carried an alias that was their own name in another case or spelling (Posavski Kanton's "Posavski kanton"), since only a subdivision merged with ISO had its aliases deduplicated against its name; every subdivision's now are
+- `subdivisions.filter(country=...)` matched a country's numeric code only unpadded (`"76"` or `76`); ISO's three-digit form (`"076"`) now matches too
 - Generated sizes in the README and docs were computed in KiB and MiB but labeled KB and MB, understating every figure by 2.4% (KB) or 4.9% (MB); they're now computed in decimal KB and MB
 - Search benchmarks counted a result as a miss when it was a different record with the same name as the sampled one (two "Franklin County" subdivisions), which no search can tell apart; such a result now counts as a hit, and the benchmarks report how many hits came that way
 - The README's search benchmarks claimed 5,000 queries per registry; each registry's actual query count is now shown, and the host line names the machine the benchmarks ran on rather than the footprint's

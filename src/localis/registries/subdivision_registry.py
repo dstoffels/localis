@@ -30,7 +30,7 @@ class SubdivisionRegistry(QueryableRegistry[Subdivision]):
         admin_level: int | None = None,
         country: str | None = None,
     ) -> list[Subdivision]:
-        """Filter subdivisions by name (name or alias), type, admin_level or country (name, alpha2 or alpha3); type=MISSING matches the GeoNames-only subdivisions, which have no type."""
+        """Filter subdivisions by name (name or alias), type, admin_level or country (name, common name, alpha2, alpha3 or numeric, as 76 or "076"); type=MISSING matches the GeoNames-only subdivisions, which have no type."""
         return self._filter(limit, name=name, type=type, admin_level=admin_level, country=country)
 
     def search(

@@ -12,6 +12,8 @@ This document outlines the project plan for the Localis project, detailing the o
 
 Next: the Skill decision lifecycle (below), landing before the 1 November 2026 cron, either in 2.2.0 or as a 2.1.x patch from `main`.
 
+At 3.0.0 final: set pyproject's classifier back to `Development Status :: 5 - Production/Stable`, and the README's Installation line back to `pip install localis` with its beta banner removed.
+
 Out of scope: translated names. Localis ships names in Latin script only and doesn't map them to other locales; a pycountry-style `translate(locale)` and `language_code` query support were planned and dropped.
 
 ## Done

@@ -14,7 +14,7 @@ keywords = [
   "iso", "3166", "iso-3166", "3166-1", "3166-2", "3166-3", "iso-4217", "iso-639", "iso-639-3", "iso-15924", "m49", "geocoding", "country codes", "geonames", "cldr", "wikidata", "geography", "geodata", "gazetteer", "offline", "fuzzy-search",
 ]
 classifiers = [
-    "Development Status :: 5 - Production/Stable",
+    "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.11",

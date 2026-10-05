@@ -30,6 +30,7 @@ class SubdivisionModel(Model):
             "country.alpha2",
             "country.alpha3",
             "country.numeric",
+            "padded_country_numeric",
         ),
         "admin_level": ("admin_level",),
     }
@@ -40,6 +41,11 @@ class SubdivisionModel(Model):
     @property
     def iso_suffix(self) -> str:
         return self.iso_code.split("-")[1] if self.iso_code else ""
+
+    @property
+    def padded_country_numeric(self) -> str | None:
+        """The country's numeric code as ISO writes it, zero-padded to three digits ("076")."""
+        return f"{self.country.numeric:03d}" if self.country.numeric is not None else None
 
     def row_values(self) -> dict[str, object]:
         data = Model.row_values(self)

@@ -5,6 +5,7 @@ from .fetch_subdivisions import fetch_subdivisions_sources
 from ingest.subdivisions.utils.subdivision_map import SubdivisionMap
 from ingest.subdivisions.utils.resolution_map import ResolutionMap
 from ingest.utils import SUBDIVISIONS, ORPHANS_EXIT_CODE, ingest_log, dump_registry
+from ingest.utils.strings import dedupe
 from ingest.shared.models import CountryModel, SubdivisionModel
 from .geonames_subdivisions import map_geonames_subdivisions
 from .iso_subdivisions import load_iso_subs
@@ -45,6 +46,12 @@ def check_iso_coverage(build_codes: set[str], sub_map: SubdivisionMap, resolutio
             f"{len(missing)} ISO subdivision(s) in this release neither ship nor await the skill: {', '.join(missing)}; "
             "a merge step dropped them without recording an orphan, so trace each code through the subdivisions log to the step that last held it and make that step merge, add or orphan it"
         )
+
+
+def dedupe_aliases(sub_map: SubdivisionMap) -> None:
+    """Drops each subdivision's aliases that are variants of its final name."""
+    for sub in sub_map.all():
+        sub.aliases = dedupe(sub.aliases, exclude=(sub.name,))
 
 
 def ingest_subdivisions(countries: dict[str, CountryModel]) -> dict[str, SubdivisionModel]:
@@ -89,6 +96,9 @@ def ingest_subdivisions(countries: dict[str, CountryModel]) -> dict[str, Subdivi
 
         # rebuild cache with complete data, update parents
         sub_map.refresh()
+
+        # once names are final, after automerge has matched on every variant
+        dedupe_aliases(sub_map)
 
         resolution_map.save(RESOLUTION_MAP_PATH)
 
