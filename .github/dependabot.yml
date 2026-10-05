@@ -7,3 +7,10 @@ updates:
       interval: weekly
     cooldown:
       default-days: 7
+  - package-ecosystem: uv
+    directory: /
+    target-branch: dev
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 7

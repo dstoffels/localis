@@ -15,6 +15,7 @@ concurrency:
 jobs:
   check:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     if: github.repository == 'dstoffels/localis'
 
@@ -55,12 +56,22 @@ jobs:
             echo "SHOULD_RELEASE=true" >> "$GITHUB_OUTPUT"
           fi
 
+      - name: Require a CHANGELOG section for the version
+        if: steps.check_versions.outputs.SHOULD_RELEASE == 'true'
+        env:
+          VERSION: ${{ steps.get_version.outputs.VERSION }}
+        run: |
+          if ! grep -qF "## [$VERSION]" CHANGELOG.md; then
+            echo "::error::CHANGELOG.md has no '## [$VERSION]' section; rename [Unreleased] to the version before releasing it."
+            exit 1
+          fi
+
       - name: Determine if pre-release (PEP 440)
         id: check_prerelease
         env:
           VERSION: ${{ steps.get_version.outputs.VERSION }}
         run: |
-          if [[ "$VERSION" =~ (a|alpha|b|beta|rc|.dev)[0-9]*$ ]]; then
+          if [[ "$VERSION" =~ (a|alpha|b|beta|rc|\.dev)[0-9]*$ ]]; then
             echo "Incoming version is a pre-release."
             echo "IS_PRERELEASE=true" >> "$GITHUB_OUTPUT"
           else
@@ -71,6 +82,7 @@ jobs:
     needs: check
     if: needs.check.outputs.should_release == 'true'
     runs-on: ubuntu-latest
+    timeout-minutes: 15
 
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -94,9 +106,46 @@ jobs:
           path: dist/
           retention-days: 1
 
-  publish:
+  # installs the built wheel from the uploaded artifact in a fresh environment and checks it, apart from the build job so the third-party packages it installs never share a job with the build output
+  smoke:
     needs: [check, build]
     runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          sparse-checkout: .github/smoke_test.py
+          sparse-checkout-cone-mode: false
+
+      - name: Set up uv and Python
+        uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7 # v10.2.0
+        with:
+          version: "0.12.19"
+          checksum: "23bf5552d220e0842b65c862097b2ebaeba0064b74eda5e565e77fd25969d8c8"
+          python-version: '3.11'
+          enable-cache: false
+
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: dist
+          path: dist/
+
+      - name: Install the wheel and check it
+        env:
+          VERSION: ${{ needs.check.outputs.version }}
+        run: |
+          uv venv "$RUNNER_TEMP/smoke"
+          uv pip install --python "$RUNNER_TEMP/smoke" dist/*.whl
+          # run outside the checkout, so localis can only import from the installed wheel
+          cp .github/smoke_test.py "$RUNNER_TEMP/"
+          cd "$RUNNER_TEMP" && "$RUNNER_TEMP/smoke/bin/python" smoke_test.py
+
+  publish:
+    needs: [check, build, smoke]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     environment:
       name: pypi
@@ -118,15 +167,29 @@ jobs:
   github-release:
     needs: [check, publish]
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     permissions:
       contents: write
 
     steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          sparse-checkout: CHANGELOG.md
+          sparse-checkout-cone-mode: false
+
       - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
           name: dist
           path: dist/
+
+      - name: Extract the version's CHANGELOG section
+        env:
+          VERSION: ${{ needs.check.outputs.version }}
+        run: |
+          # the lines under '## [VERSION]' up to the next version heading
+          awk -v heading="## [$VERSION]" 'index($0, heading) == 1 { found = 1; next } found && /^## / { exit } found { print }' CHANGELOG.md > notes.md
 
       - name: Generate new release
         env:
@@ -143,5 +206,5 @@ jobs:
           gh release create "v$VERSION" dist/*.whl dist/*.tar.gz \
             --title "v$VERSION" \
             --target "$SHA" \
-            --generate-notes \
+            --notes-file notes.md \
             "${prerelease[@]}"

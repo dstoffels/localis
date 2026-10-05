@@ -79,6 +79,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Release runs on push to `main` instead of on `workflow_run`, a trigger that runs with the default branch's privileges whatever started it, fork PRs included; `main` is no longer tested again after a merge, since its ruleset admits only PRs whose tests passed against an up-to-date `main`
 - The release build is reproducible: CI installs a pinned uv verified by checksum, and `uv build` takes hatchling and its dependencies only from hash-pinned build constraints; release tags can no longer be moved or deleted
 - SECURITY.md describes how to report a vulnerability privately, through the repository's Security tab
+- Each release installs its built wheel in a fresh environment and checks it before publishing to PyPI, refuses a version without a CHANGELOG section, and takes its GitHub release notes from that section; Dependabot also proposes Python dependency updates, and CI tests every supported Python, 3.11 to 3.14
 
 ## [2.1.0] - 2026-10-03
 
@@ -227,7 +228,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Subdivisions: 51,541 -> 51,684
   - Cities: 451,792 -> 472,613
 
-## [1.0.0] - 2026-09-28
+## 1.0.0 - 2026-09-28
 
 ### Added
 - `resolve-subdivisions` Claude Code skill and MCP server for resolving ISO/GeoNames subdivision merge orphans, with human escalation for genuinely ambiguous cases
@@ -282,3 +283,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Basic fuzzy matching capabilities
 - Comprehensive test suite
 - GitHub CI/CD Workflows
+
+[Unreleased]: https://github.com/dstoffels/localis/compare/v2.1.0...HEAD
+[2.1.0]: https://github.com/dstoffels/localis/compare/v2.0.0...v2.1.0
+[2.0.0]: https://github.com/dstoffels/localis/compare/v1.1.2...v2.0.0
+[1.1.2]: https://github.com/dstoffels/localis/compare/v1.1.1...v1.1.2
+[1.1.1]: https://github.com/dstoffels/localis/compare/v1.1.0...v1.1.1
+[1.1.0]: https://github.com/dstoffels/localis/compare/v1.0.0a3...v1.1.0
+[1.0.0a3]: https://github.com/dstoffels/localis/compare/v1.0.0a2...v1.0.0a3
+[1.0.0a2]: https://github.com/dstoffels/localis/compare/v1.0.0a1...v1.0.0a2

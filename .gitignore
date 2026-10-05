@@ -20,10 +20,6 @@ env/
 Venv/
 VENV/
 
-# Pipenv and Poetry
-Pipfile.lock
-poetry.lock
-
 # pyenv
 .python-version
 
@@ -67,23 +63,12 @@ htmlcov/
 .pytest_cache/
 
 # ======================================
-# SQLite database & local data
-# ======================================
-*.sqlite
-*.sqlite3
-
-# ======================================
 # Custom project-specific ignores
 # ======================================
-allCountries.txt
-.villager_cache/
 *.zip
+# local scratch file
 sandbox.py
 
-# Keep empty folders tracked (optional)
-!ingest/.gitkeep
-
-*.ps1
 ingest/*/inputs/*
 # each run's build, promoted to the repo only when the whole pipeline succeeds
 ingest/staging/
