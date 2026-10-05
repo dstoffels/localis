@@ -8,7 +8,7 @@ from .subdivision_model import SubdivisionModel
 class CityModel(Model):
     geonames_id: int
     subdivisions: list[SubdivisionModel]
-    country: CountryModel | None
+    country: CountryModel
     population: int
     lat: float
     lng: float
@@ -57,5 +57,5 @@ class CityModel(Model):
     def row_values(self) -> dict[str, object]:
         data = Model.row_values(self)
         data["subdivisions"] = "|".join(str(s.id) for s in self.subdivisions)
-        data["country"] = self.country.id if self.country else None
+        data["country"] = self.country.id
         return data

@@ -233,6 +233,7 @@ def _resolution_stats() -> dict[str, int]:
 def _city_stats() -> dict[str, int]:
     threshold = localis.cities.population_threshold
     total = len(localis.cities)
+    shipped_unlinked = len(localis.cities.filter(subdivision=localis.MISSING))
     localis.cities.set_population_threshold(POPULATION_THRESHOLD)
     try:
         above = len(localis.cities)
@@ -244,6 +245,12 @@ def _city_stats() -> dict[str, int]:
         "threshold": POPULATION_THRESHOLD,
         "above_threshold": above,
         "ascii_names": ingest_stats["ascii_names"],
+        # cities GeoNames leaves outside its admin1 divisions, by why, as the ingest counted them
+        "unlinked": ingest_stats["unlinked_no_admin1"] + ingest_stats["unlinked_admin1_00"] + ingest_stats["unlinked_unknown_admin1"],
+        "unlinked_no_admin1": ingest_stats["unlinked_no_admin1"],
+        "unlinked_admin1_00": ingest_stats["unlinked_admin1_00"],
+        "unlinked_unknown_admin1": ingest_stats["unlinked_unknown_admin1"],
+        "shipped_unlinked": shipped_unlinked,
     }
 
 
@@ -313,6 +320,8 @@ def _reconcile(stats: dict[str, Any]) -> None:
         "skill decisions all have a decider": res["skill_by_agent"]
         + res["skill_by_human"]
         == res["skill_decisions"],
+        "cities linked to no subdivision match the ingest's count": stats["cities"]["shipped_unlinked"]
+        == stats["cities"]["unlinked"],
     }
     failed = [name for name, ok in checks.items() if not ok]
     if failed:

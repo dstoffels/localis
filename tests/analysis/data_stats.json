@@ -151,7 +151,12 @@
     "total": 235970,
     "threshold": 15000,
     "above_threshold": 34172,
-    "ascii_names": 24
+    "ascii_names": 24,
+    "unlinked": 461,
+    "unlinked_no_admin1": 117,
+    "unlinked_admin1_00": 305,
+    "unlinked_unknown_admin1": 39,
+    "shipped_unlinked": 461
   },
   "filter_index": {
     "cities": {

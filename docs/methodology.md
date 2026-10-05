@@ -261,11 +261,13 @@ The Serbian records are kept deliberately: the resolve-subdivisions skill's rule
 
 ## Cities
 
-Cities come from GeoNames' `cities500.txt`, GeoNames' own export of every populated place with a population of 500 or more, plus administrative seats of any size. No further population or feature filtering is applied. A city without a country code, or whose country isn't in localis's country data, is dropped and logged. A missing population is recorded as 0.
+Cities come from GeoNames' `cities500.txt`, GeoNames' own export of every populated place with a population of 500 or more, plus administrative seats of any size. No further population or feature filtering is applied. A city without a country code, or whose country isn't in localis's country data, is dropped and logged as a warning. A row with other than the file's 19 fields stops the pipeline, since it means GeoNames changed the file's columns. A missing population is recorded as 0.
 
 A city's country is attached by its ISO alpha2 code. Its subdivisions are attached through its GeoNames admin1 and admin2 codes: the deepest one that resolves is taken, and its parent chain is walked to the top, so `City.subdivisions` holds the city's full administrative chain in ascending `admin_level` order. That includes ISO levels GeoNames itself doesn't have, such as France's third level or a non-administrative grouping. A city can only link to a subdivision that has a GeoNames code, so the <stat key="data.subdivisions.iso_only:int">203</stat> ISO-only subdivisions never appear directly as a city's subdivision.
 
-A city's `name` is GeoNames' primary name, or GeoNames' ASCII name where the primary name is written in a script other than Latin, which applies to <stat key="data.cities.ascii_names:int">24</stat> cities; alternate city names are not shipped.
+<stat key="data.cities.unlinked:int">461</stat> cities link to no subdivision, because GeoNames itself leaves them outside its admin1 divisions: <stat key="data.cities.unlinked_no_admin1:int">117</stat> have no admin1 code, <stat key="data.cities.unlinked_admin1_00:int">305</stat> have `00`, GeoNames' code for none, and <stat key="data.cities.unlinked_unknown_admin1:int">39</stat> carry an admin1 code GeoNames' own admin1 file no longer lists, most of them in Singapore's five retired districts. They ship with empty `subdivisions`, `cities.filter(subdivision=localis.MISSING)` finds them, and each run logs the three counts with the unknown codes. The data stats check that the cities shipped without a subdivision are exactly the ones the ingest counted.
+
+A city's `name` is GeoNames' primary name, or GeoNames' ASCII name where the primary name is written in a script other than Latin, which applies to <stat key="data.cities.ascii_names:int">24</stat> cities; alternate city names are not shipped. A city with no Latin name at all, primary or ASCII, would ship its primary name and be logged as a warning; none does.
 
 ## Known limitations
 

@@ -13,8 +13,8 @@ INGEST_STATS_PATH = CITIES.outputs / "ingest_stats.json"
 def ingest_cities(countries: dict[str, CountryModel], subdivisions: dict[str, SubdivisionModel]) -> list[CityModel]:
     with ingest_log.stage(CITIES):
         fetch_cities_sources()
-        cities, ascii_names = load_cities(subdivisions, countries)
+        cities, stats = load_cities(subdivisions, countries)
         dump_registry("cities", cities)
-        stage_text(INGEST_STATS_PATH, json.dumps({"ascii_names": ascii_names}, indent=2) + "\n")
+        stage_text(INGEST_STATS_PATH, json.dumps(stats, indent=2) + "\n")
         ingest_log.writeline(f"completed: {len(cities)} cities")
         return cities
