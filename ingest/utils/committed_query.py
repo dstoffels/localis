@@ -9,7 +9,7 @@ V = TypeVar("V")
 
 
 class CommittedQuery(Generic[V]):
-    """A live query's result (Wikidata has no ETag), committed as its own provenance: each run stages its result, which replaces the committed one when the pipeline promotes its build."""
+    """A live query's result (Wikidata has no ETag), staged each run and committed on promotion as its provenance."""
 
     def __init__(self, path: Path, label: str) -> None:
         self.path = path
@@ -20,16 +20,16 @@ class CommittedQuery(Generic[V]):
         return json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
 
     def committed(self) -> dict[str, V]:
-        """The result as of the last promoted build."""
+        """The last promoted build's result."""
         return self._read(self.path)
 
     def latest(self) -> dict[str, V]:
-        """The result the last run fetched, promoted or not."""
+        """The last run's result, promoted or not."""
         staged = staged_path(self.path)
         return self._read(staged if staged.exists() else self.path)
 
     def fetch(self, query: Callable[[], dict[str, V]]) -> dict[str, V]:
-        """Runs query and stages its result for promotion. A result missing committed keys is kept only once a repeat returns it unchanged: a Wikidata edit repeats, a flaky response doesn't."""
+        """Runs query and stages its result, keeping one missing committed keys only once a repeat returns it unchanged."""
         committed_keys = self.committed().keys()
         result = query()
         queries = 1
@@ -49,7 +49,7 @@ class CommittedQuery(Generic[V]):
         return result
 
     def log_changes(self, result: dict[str, V]) -> None:
-        """Logs how result differs from the committed one, for the ingest PR."""
+        """Logs how result differs from the committed one."""
         committed = self.committed()
         if result == committed:
             return

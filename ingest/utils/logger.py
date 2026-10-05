@@ -5,7 +5,7 @@ from .paths import Stage, PIPELINE_LOG_PATH
 
 Level = Literal["INFO", "WARN", "ERROR"]
 
-# the exit code of a run stopped by subdivision orphans, which the ingest workflow tells apart from a failure
+# a run stopped by subdivision orphans, which CI tells apart from a failure
 ORPHANS_EXIT_CODE = 10
 
 
@@ -27,7 +27,7 @@ class IngestLog:
 
     @contextmanager
     def stage(self, stage: Stage) -> Iterator[None]:
-        """Logs a stage to its own file, replacing the previous run's, written even when the stage fails; an exception that stops it is logged as an ERROR line before it propagates."""
+        """Logs a stage to its own file, even when it fails, with an ERROR line for the exception that stopped it."""
         self._stage = stage
         self._lines = []
         try:
@@ -40,19 +40,19 @@ class IngestLog:
             self._stage = None
 
     def writeline(self, message: str, level: Level = "INFO") -> None:
-        """Prints the line, and keeps it for the open stage's log if there is one."""
+        """Prints the line, kept for the open stage's log if any."""
         line = _line(message, level)
         if self._stage is not None:
             self._lines.append(line)
 
     def dump(self) -> None:
-        """Write this stage's buffered lines to its own file, replacing whatever that file held from the previous run."""
+        """Writes the stage's lines to its log file, replacing the last run's."""
         if self._stage is not None:
             _write(self._stage.log_file, self._stage.name.upper(), self._lines)
 
 
 class PipelineLog:
-    """The run as a whole, written to ingest/pipeline.log however it ends: each step, then exactly one line with the result."""
+    """Logs the run's steps and result to ingest/pipeline.log, however it ends."""
 
     def __init__(self) -> None:
         self._lines: list[str] = []
@@ -82,7 +82,7 @@ class PipelineLog:
         return "build promoted" if self.promoted else "nothing promoted"
 
     def step(self, doing: str) -> None:
-        """Logs the step the run is starting, which a failure from here on is reported against."""
+        """Logs the step starting, which a failure is reported against."""
         self._step = doing
         self.writeline(doing[0].upper() + doing[1:])
 

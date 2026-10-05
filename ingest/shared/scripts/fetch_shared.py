@@ -9,6 +9,6 @@ CLDR_TERRITORY_INFO_PATH = SHARED.inputs / "cldr_territory_info.json"
 
 
 def fetch_shared_sources() -> None:
-    """Downloads whichever of GeoNames' alternate names and CLDR's territory info changed; fetched once per run, before the stages that read them (countries, subdivisions)."""
+    """Downloads whichever of GeoNames' alternate names and CLDR's territory info changed."""
     fetch(ALT_NAMES_URL, ALT_NAMES_ZIP_PATH, SHARED.manifest, extract=ALT_NAMES_PATH.name)
     fetch(CLDR_TERRITORY_INFO_URL, CLDR_TERRITORY_INFO_PATH, SHARED.manifest)

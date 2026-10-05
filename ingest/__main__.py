@@ -15,7 +15,7 @@ from ingest.utils.change_report import write_change_report
 
 
 def _analysis(*args: str) -> None:
-    """Runs the analysis suite with args, its output going to the pipeline log; a failure exits with analysis's own error."""
+    """Runs the analysis suite with args into the pipeline log, exiting with its error if it fails."""
     result = subprocess.run([sys.executable, "-m", "tests.analysis", *args], cwd=REPO_PATH, capture_output=True, text=True)
     for line in result.stdout.splitlines():
         pipeline_log.writeline(line)
@@ -26,7 +26,7 @@ def _analysis(*args: str) -> None:
 
 
 def run_pipeline() -> None:
-    """Builds every stage from its inputs into staging, promotes the whole build to the repo only once every stage has dumped and the staged counts reconcile, then regenerates the data stats and docs from it."""
+    """Builds every stage into staging, promotes the build once it reconciles, then regenerates the data stats and docs."""
     with pipeline_log.run():
         reset_staging()
         pipeline_log.step("fetching the shared sources")
@@ -55,13 +55,13 @@ def run_pipeline() -> None:
         pipeline_log.step("promoting the build")
         promote()
         pipeline_log.promoted = True
-        # the data stats and the docs' stat markers, written only once the build they describe has shipped
+        # after promotion, so the stats and docs only ever describe a shipped build
         pipeline_log.step("regenerating the data stats and docs")
         _analysis("--data-only")
 
 
 def main() -> None:
-    argparse.ArgumentParser(description="Runs the data pipeline: every stage builds from its inputs, downloading only what changed, and the build is promoted to src/localis/data only when the whole pipeline succeeds.").parse_args()
+    argparse.ArgumentParser(description="Runs the data pipeline, promoting its build to src/localis/data only if every step succeeds.").parse_args()
     run_pipeline()
 
 

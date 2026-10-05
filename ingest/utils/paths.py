@@ -31,7 +31,7 @@ class Stage:
 
     @property
     def inputs(self) -> Path:
-        """Fetched sources and curated inputs; only the manifest, the curated inputs and committed query results are tracked."""
+        """Fetched sources and curated inputs."""
         return self.root / "inputs"
 
     @property

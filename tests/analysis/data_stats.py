@@ -17,7 +17,7 @@ POPULATION_THRESHOLD = 15_000
 
 
 def use_staging() -> None:
-    """Points the stats at the pipeline's staged build instead of the shipped one: its data, read through localis's own registries, and the staged copies of the pipeline files it reads. The build must be complete, so a run stopped partway is never mixed with shipped data."""
+    """Points the stats at the complete staged build instead of the shipped data."""
     global DATA_PATH, CROSSWALK_PATH, CITIES_INGEST_STATS_PATH
     # imported here, so the unit tests that read these stats don't need the pipeline importable
     from ingest.utils import STAGED_DATA_PATH, is_complete, staged_path

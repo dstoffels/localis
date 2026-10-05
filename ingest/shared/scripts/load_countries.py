@@ -4,7 +4,7 @@ from ingest.shared.models import CountryModel, HistoricModel
 
 
 def load_countries() -> dict[str, CountryModel]:
-    """The countries of the last run's staged build, for the resolve-subdivisions skill: a run stopped by orphans keeps its staging, and countries has always staged by the time subdivisions runs."""
+    """The staged build's countries, for the resolve-subdivisions skill."""
     path = STAGED_DATA_PATH / "countries" / "countries.tsv"
     if not path.exists():
         raise FileNotFoundError(f"No staged countries at {path}; run the pipeline first")

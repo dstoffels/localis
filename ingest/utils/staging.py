@@ -3,15 +3,15 @@ import shutil
 from pathlib import Path
 from .paths import REPO_PATH, DATA_PATH, STAGING_PATH, STAGED_DATA_PATH
 
-# written once every stage has dumped, so a staged build is read as a whole only when it is complete
+# marks a staged build every stage finished
 COMPLETE_MARKER = STAGING_PATH / "COMPLETE"
 STAGED_FILES_PATH = STAGING_PATH / "files"
-# the manifest entries staged by every run since the last promotion, so a rerun knows what inputs/ already holds instead of downloading it again
+# the manifest entries of every run since the last promotion: what each stage's inputs/ holds
 FETCHED_PATH = STAGING_PATH / "fetched"
 
 
 def reset_staging() -> None:
-    """Clears the last run's build at the start of a run, first merging its staged manifests into the fetched record; a failed run's staging is kept until then, since the skill reads it while orphans are open."""
+    """Clears the last run's build, first merging its staged manifests into the fetched record."""
     staged_manifests = STAGED_FILES_PATH.rglob("*.manifest.json") if STAGED_FILES_PATH.exists() else ()
     for staged in staged_manifests:
         fetched = FETCHED_PATH / staged.relative_to(STAGED_FILES_PATH)
@@ -26,12 +26,12 @@ def reset_staging() -> None:
 
 
 def staged_path(path: Path) -> Path:
-    """Where a repo file promoted with the data is staged: its repo-relative path under staging/files."""
+    """Where a repo file is staged: its repo-relative path under staging/files."""
     return STAGED_FILES_PATH / path.relative_to(REPO_PATH)
 
 
 def fetched_path(manifest_path: Path) -> Path:
-    """The fetched record of a manifest: what runs since the last promotion downloaded into its stage's inputs/."""
+    """The fetched record of a manifest."""
     return FETCHED_PATH / manifest_path.relative_to(REPO_PATH)
 
 
@@ -51,7 +51,7 @@ def is_complete() -> bool:
 
 
 def promote() -> None:
-    """Moves the staged build into the repo, each registry's data directory and every staged file (the manifests and committed Wikidata results among them), then clears staging."""
+    """Moves the staged registries and files into the repo, then clears staging."""
     if not is_complete():
         raise RuntimeError("staging holds no complete build to promote")
     for staged in sorted(STAGED_DATA_PATH.iterdir()):

@@ -110,7 +110,7 @@ def dump_search_index(data: Sequence[Model], datadir_path: Path) -> None:
 
 
 def dump_registry(name: str, data: Sequence[Model], queryable: bool = True) -> None:
-    """Writes a registry's data file and lookup index to its staging directory, promoted to src/localis/data/<name>/ with the rest of the build, plus its filter and search indexes when it's queryable."""
+    """Stages a registry's data file and lookup index, plus its filter and search indexes when it's queryable."""
     path = STAGED_DATA_PATH / name
     path.mkdir(parents=True, exist_ok=True)
     ingest_log.writeline(f"Dumping {len(data)} {name}...")

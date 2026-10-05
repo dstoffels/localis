@@ -24,7 +24,7 @@ RESOLUTION_MAP_PATH = SUBDIVISIONS.outputs / "resolution_map.json"
 
 
 def exit_if_orphans(resolution_map: ResolutionMap) -> None:
-    """Hard gate: active orphans mean the dataset is incomplete, so stop with ORPHANS_EXIT_CODE, before promotion, until the resolve-subdivisions skill resolves them."""
+    """Exits with ORPHANS_EXIT_CODE while orphans await the resolve-subdivisions skill."""
     orphans = resolution_map.automerge.orphans
     if not orphans.count():
         return

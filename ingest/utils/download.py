@@ -53,7 +53,7 @@ def _sha256(path: Path) -> str:
 
 
 def _download(url: str, dest: Path) -> str | None:
-    """Downloads url to dest via a .part temp file; the ETag of the bytes downloaded, which a second HEAD could miss if the file changed in between."""
+    """Downloads url to dest via a .part file, returning the ETag of the bytes downloaded."""
     dest.parent.mkdir(parents=True, exist_ok=True)
     tmp = dest.with_suffix(dest.suffix + ".part")
     request = Request(url, headers={"User-Agent": USER_AGENT})
@@ -68,10 +68,10 @@ def _download(url: str, dest: Path) -> str | None:
 
 
 def fetch(url: str, dest: Path, manifest_path: Path, extract: str | None = None) -> bool:
-    """Downloads url to dest, unpacking a zip's `extract` member beside it and removing the zip, unless the file the stage reads is already the one last recorded under the same ETag; stages its manifest entry either way, promoted with the build. True if it downloaded."""
+    """Downloads url to dest, extracting a zip's `extract` member, unless the local file matches its last record; stages its manifest entry either way. True if it downloaded."""
     local = dest.with_name(extract) if extract else dest
     etag = _etag(url)
-    # a run since the last promotion may have downloaded past what the committed manifest records
+    # a failed run since the last promotion may have downloaded past the committed manifest
     entry = _load_manifest(fetched_path(manifest_path)).get(dest.name) or _load_manifest(manifest_path).get(dest.name, {})
     # hashed only when the ETag matches, so a changed source isn't hashed just to be replaced
     sha256 = _sha256(local) if local.exists() and etag == entry.get("etag") else None
@@ -87,7 +87,7 @@ def fetch(url: str, dest: Path, manifest_path: Path, extract: str | None = None)
         ingest_log.writeline(f"Downloaded and updated {local.name}")
     else:
         ingest_log.writeline(f"No update needed for {local.name}")
-    # each manifest is staged as this run's entries alone, so a source no longer used leaves no stale entry
+    # staged manifests hold this run's entries alone, so unused sources drop out
     staged = staged_path(manifest_path)
     entries = _load_manifest(staged)
     entries[dest.name] = {"url": url, "etag": etag, "sha256": sha256}

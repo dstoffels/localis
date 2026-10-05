@@ -26,7 +26,7 @@ def _rooted(cls: type[R], root: Path) -> type[R]:
 
 
 def _registries(root: Path) -> list[Registry]:
-    """A separate set of registries over the build under root, so localis's own singletons are left alone."""
+    """Registries over the build under root, apart from localis's own singletons."""
     macroregions = _rooted(MacroregionRegistry, root)()
     currencies = _rooted(CurrencyRegistry, root)()
     scripts = _rooted(ScriptRegistry, root)()
@@ -48,8 +48,8 @@ def _value(value: Any) -> Any:
 
 
 def _nested(entity: Entity) -> Any:
-    """A nested record as its key, which a change to the record itself doesn't touch, plus any facts about the relationship it carries beyond its base form (a CountryLanguage's status)."""
-    # the class directly under Entity, the form every nested record of the type shares
+    """A nested record as its key, plus any relationship fields beyond its base form (a CountryLanguage's status)."""
+    # the class directly under Entity
     base = next(c for c in type(entity).__mro__ if Entity in c.__bases__)
     base_fields = {f.name for f in fields(base)}
     extra = {f.name: _value(getattr(entity, f.name)) for f in fields(entity) if f.name not in base_fields}
@@ -62,7 +62,7 @@ def _comparable(entity: Entity) -> dict[str, Any]:
 
 
 def _records(registry: Registry) -> Iterator[tuple[Any, str, dict[str, Any]]]:
-    """Each record's key, name and comparable fields, built one at a time."""
+    """Each record's key, name and comparable fields."""
     try:
         views = registry._cache.values()
     except FileNotFoundError:
@@ -73,7 +73,7 @@ def _records(registry: Registry) -> Iterator[tuple[Any, str, dict[str, Any]]]:
 
 
 def _compare(shipped: Registry, staged: Registry) -> tuple[int, int, list[str], list[str], list[str]]:
-    """Each build's record count, and the staged build's records added, removed and changed by key against the shipped one; only the shipped side is held in memory."""
+    """Both builds' record counts, and the staged build's records added, removed and changed by key."""
     before = {key: (name, record) for key, name, record in _records(shipped)}
     count_before = len(before)
     added: list[str] = []
@@ -96,7 +96,7 @@ def _section(title: str, items: list[str]) -> list[str]:
 
 
 def write_change_report() -> None:
-    """Stages each stage's report of what the staged build changes in its registry against the shipped one, in ingest/<stage>/outputs/: a counts table, which the ingest workflow gathers into the PR's summary, then every record added, removed and changed."""
+    """Stages each registry's change report: a counts table, then every record added, removed and changed."""
     for shipped, staged in zip(_registries(DATA_PATH), _registries(STAGED_DATA_PATH)):
         count_before, count_after, added, removed, changed = _compare(shipped, staged)
         name = staged.REGISTRY_NAME
