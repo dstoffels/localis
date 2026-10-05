@@ -1,3 +1,5 @@
+import importlib
+import pytest
 from ingest.shared.models import CountryModel, SubdivisionModel
 from ingest.subdivisions.scripts.automerge import try_merge
 from ingest.subdivisions.utils.resolution_map import ResolutionMap
@@ -37,3 +39,44 @@ class TestTryMerge:
 
         assert "TL-X" not in resolution_map.automerge.resolutions
         assert {o.iso_code for o in resolution_map.automerge.orphans.ambiguity} == {"TL-X", "TL-Y"}
+
+    def test_iso_code_only_qualifying_against_ambiguous_record(self):
+        """should still merge an ISO code that only qualified against an ambiguous GeoNames record, below the ambiguity score, into its own match"""
+        sub_map = SubdivisionMap()
+        sub_map.add(_sub("Alpha", geonames_id=1))
+        sub_map.add(_sub("Delta", geonames_id=3))
+        iso_subs = {
+            "TL-X": _sub("Alpha", iso_code="TL-X"),
+            "TL-Y": _sub("Alpha", iso_code="TL-Y"),
+            # scores 80 against Alpha, enough to qualify but short of the ambiguity score, and 100 against Delta
+            "TL-Z": _sub("Alphx", aliases=["Delta"], iso_code="TL-Z"),
+        }
+        resolution_map = ResolutionMap()
+
+        try_merge(iso_subs, sub_map, resolution_map)
+
+        assert resolution_map.automerge.resolutions["TL-Z"].id == 3
+        assert {o.iso_code for o in resolution_map.automerge.orphans.ambiguity} == {"TL-X", "TL-Y"}
+
+
+
+class TestIsoCoverage:
+    """ISO COVERAGE"""
+
+    @staticmethod
+    def _check(missing_orphan: bool) -> None:
+        ingest_subdivisions = importlib.import_module("ingest.subdivisions.scripts.ingest_subdivisions")
+        sub_map = SubdivisionMap()
+        sub_map.add(_sub("Alpha", iso_code="TL-A", geonames_id=1))
+        resolution_map = ResolutionMap()
+        resolution_map.automerge.orphans.no_matches = ["TL-B"] if not missing_orphan else []
+        ingest_subdivisions.check_iso_coverage({"TL-A", "TL-B"}, sub_map, resolution_map)
+
+    def test_every_code_ships_or_awaits_skill(self):
+        """should pass when every ISO code ships or is an orphan"""
+        self._check(missing_orphan=False)
+
+    def test_raises_on_dropped_code(self):
+        """should raise on an ISO code that neither ships nor is an orphan"""
+        with pytest.raises(ValueError):
+            self._check(missing_orphan=True)

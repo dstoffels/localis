@@ -10,7 +10,7 @@ from .geonames_subdivisions import map_geonames_subdivisions
 from .iso_subdivisions import load_iso_subs
 from .merge_alternate_names import merge_alternate_name_aliases
 from .automerge import try_merge
-from .resolve_subdivisions import apply_skill_decisions
+from .resolve_subdivisions import apply_skill_decisions, log_inactive_decisions
 from .wikidata_subdivisions import (
     CROSSWALK,
     fetch_wikidata_crosswalk,
@@ -36,6 +36,17 @@ def exit_if_orphans(resolution_map: ResolutionMap) -> None:
     sys.exit(ORPHANS_EXIT_CODE)
 
 
+def check_iso_coverage(build_codes: set[str], sub_map: SubdivisionMap, resolution_map: ResolutionMap) -> None:
+    """Raises if an ISO code in this release neither ships nor awaits the skill, which the orphan gate and the reconcile gate can't see."""
+    shipped = {sub.iso_code for sub in sub_map.all() if sub.iso_code}
+    missing = sorted(build_codes - shipped - set(resolution_map.automerge.orphans.codes()))
+    if missing:
+        raise ValueError(
+            f"{len(missing)} ISO subdivision(s) in this release neither ship nor await the skill: {', '.join(missing)}; "
+            "a merge step dropped them without recording an orphan, so trace each code through the subdivisions log to the step that last held it and make that step merge, add or orphan it"
+        )
+
+
 def ingest_subdivisions(countries: dict[str, CountryModel]) -> dict[str, SubdivisionModel]:
     with ingest_log.stage(SUBDIVISIONS):
         fetch_subdivisions_sources()
@@ -54,12 +65,15 @@ def ingest_subdivisions(countries: dict[str, CountryModel]) -> dict[str, Subdivi
 
         # Cache and dedupe iso subs by id
         iso_subs, non_administrative_subs = load_iso_subs(countries, resolution_map)
+        # every ISO code in this release, against which a skill decision is active or inactive
+        build_codes = {*iso_subs, *(sub.iso_code for sub in non_administrative_subs if sub.iso_code)}
+        log_inactive_decisions(resolution_map, build_codes)
 
         # Apply skill-resolved decisions directly, before auto-merge ever sees these iso_subs, so a verified decision can never lose its target to a fresh auto-merge
         remaining_iso_subs = apply_skill_decisions(iso_subs, resolution_map, sub_map)
 
         # Skill decisions win, but only knowingly: any that disagree with a valid Wikidata mapping they weren't made against go back to the skill
-        flag_wikidata_conflicts(crosswalk, resolution_map, sub_map)
+        flag_wikidata_conflicts(crosswalk, resolution_map, sub_map, build_codes)
 
         # Apply unambiguous Wikidata crosswalk matches next, a stronger signal than fuzzy string matching, still ahead of auto-merge; one that changes a previous resolution goes to the skill instead
         remaining_iso_subs = apply_wikidata_matches(remaining_iso_subs, resolution_map, sub_map, crosswalk, committed)
@@ -77,6 +91,9 @@ def ingest_subdivisions(countries: dict[str, CountryModel]) -> dict[str, Subdivi
         sub_map.refresh()
 
         resolution_map.save(RESOLUTION_MAP_PATH)
+
+        # every ISO code must ship or await the skill; checked before the orphan stop, so a dropped code surfaces even in a run that has orphans
+        check_iso_coverage(build_codes, sub_map, resolution_map)
 
         # refuse to dump subdivisions or hand off to cities (which depends on this run's geocode map) until resolved
         exit_if_orphans(resolution_map)

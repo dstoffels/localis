@@ -45,6 +45,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Subdivision automerge could leave out an ISO subdivision that qualified against a name another two subdivisions contested, without merging or orphaning it, so it never shipped; none was affected, and every ISO subdivision is now checked to ship or await review
 - A city whose name contains a double quote (Poselok Turisticheskogo pansionata "Klyazminskoe vodohranilische") had its name returned wrapped in extra quotes, with each inner quote doubled
 - Filter and search indexes load correctly on big-endian machines, where their packed ids had been read in the wrong byte order
 - Capital schwa (Ə) and reversed E (Ǝ) normalized to "@" and "3"; both now fold to "a", like their lowercase forms

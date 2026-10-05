@@ -1,4 +1,5 @@
 from ingest.shared.models import SubdivisionModel
+from ingest.utils import ingest_log
 
 
 class SubdivisionMap:
@@ -74,7 +75,10 @@ class SubdivisionMap:
             if sub.iso_code is not None:
                 sub.parent = by_iso_code.get(sub.parent_iso_code) if sub.parent_iso_code else None
             elif sub.geonames_code is not None and sub.geonames_code.count(".") == 2:
-                sub.parent = by_geo_code.get(sub.geonames_code.rsplit(".", 1)[0])
+                admin1_code = sub.geonames_code.rsplit(".", 1)[0]
+                sub.parent = by_geo_code.get(admin1_code)
+                if sub.parent is None:
+                    ingest_log.writeline(f"GeoNames admin2 {sub.geonames_code} '{sub.name}' has no admin1 {admin1_code} in this build, so it ships at level 1 with no parent", level="WARN")
             else:
                 sub.parent = None
 

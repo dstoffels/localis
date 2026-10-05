@@ -45,10 +45,13 @@ def flag_wikidata_conflicts(
     crosswalk: dict[str, int],
     resolution_map: ResolutionMap,
     sub_map: SubdivisionMap,
+    build_codes: set[str],
 ) -> None:
-    """A skill decision may override Wikidata only knowingly: one that disagrees with a valid Wikidata mapping it wasn't made against (`wikidata_seen`) is sent back to the skill as a `wikidata_conflict` orphan. Recomputed every run, so a later change on Wikidata's side resurfaces the decision."""
+    """A skill decision may override Wikidata only knowingly: one that disagrees with a valid Wikidata mapping it wasn't made against (`wikidata_seen`) is sent back to the skill as a `wikidata_conflict` orphan. Recomputed every run, so a later change on Wikidata's side resurfaces the decision; an inactive decision, whose code isn't in this build, is left alone."""
     conflicts: list[WikidataConflictOrphan] = []
     for iso_code, decision in resolution_map.skill_decisions.items():
+        if iso_code not in build_codes:
+            continue
         mapped_sub = _valid_target(crosswalk, iso_code, sub_map)
         if mapped_sub is None:
             continue
