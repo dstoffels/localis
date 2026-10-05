@@ -1,7 +1,10 @@
 [COUNTRIES]
-[INFO] No update needed for iso_3166-1.json
-[INFO] No update needed for iso_3166-3.json
-[INFO] No update needed for geonamesInfo.txt
+[INFO] Downloading iso_3166-1.json from https://salsa.debian.org/iso-codes-team/iso-codes/-/raw/90b9fe56ec2f3a05675d525d3587ab6c18f30376/data/iso_3166-1.json
+[INFO] Downloaded and updated iso_3166-1.json
+[INFO] Downloading iso_3166-3.json from https://salsa.debian.org/iso-codes-team/iso-codes/-/raw/90b9fe56ec2f3a05675d525d3587ab6c18f30376/data/iso_3166-3.json
+[INFO] Downloaded and updated iso_3166-3.json
+[INFO] Downloading geonamesInfo.txt from https://download.geonames.org/export/dump/countryInfo.txt
+[INFO] Downloaded and updated geonamesInfo.txt
 [INFO] No update needed for cldr_currency_data.json
 [INFO] Loading ISO countries...
 [INFO] Loading historic ISO countries...

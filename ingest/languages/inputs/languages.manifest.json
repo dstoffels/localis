@@ -10,7 +10,7 @@
     "sha256": "a5960d2371bc7d982da7fcfd9a0e237429d3467a5cc76f680bc3af5bcef9fb4e"
   },
   "iso_639-3.json": {
-    "url": "https://salsa.debian.org/iso-codes-team/iso-codes/-/raw/main/data/iso_639-3.json",
+    "url": "https://salsa.debian.org/iso-codes-team/iso-codes/-/raw/90b9fe56ec2f3a05675d525d3587ab6c18f30376/data/iso_639-3.json",
     "etag": "W/\"77c99daa5d804d0e5228d47687c538a4-gzip\"",
     "sha256": "2c61a9bb90a8c50c46bfbab484838863a12335bfdd0a92b4809f3faf1756b22d"
   }

@@ -1,5 +1,7 @@
 [CURRENCIES]
-[INFO] No update needed for iso_4217.json
+[INFO] Using iso-codes main at 90b9fe56ec2f3a05675d525d3587ab6c18f30376
+[INFO] Downloading iso_4217.json from https://salsa.debian.org/iso-codes-team/iso-codes/-/raw/90b9fe56ec2f3a05675d525d3587ab6c18f30376/data/iso_4217.json
+[INFO] Downloaded and updated iso_4217.json
 [INFO] Loading ISO 4217 currencies...
 [INFO] 178 currencies
 [INFO] Dumping 178 currencies...

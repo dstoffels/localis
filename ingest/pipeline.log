@@ -9,11 +9,11 @@
 [INFO] Building cities
 [INFO] Checking the staged build
 [INFO] Checking the data stats of the staged build (ingest/staging/data)...
-[INFO] The staged build's data stats reconcile: 296,270 records across 7 registries
+[INFO] The staged build's data stats reconcile: 296,323 records across 7 registries
 [INFO] Writing the change reports
 [INFO] Promoting the build
 [INFO] Regenerating the data stats and docs
 [INFO] Computing the data stats of the shipped data (src/localis/data)...
-[INFO] Wrote tests/analysis/data_stats.json: 296,270 records across 7 registries
-[INFO] The docs' stat markers were already current
+[INFO] Wrote tests/analysis/data_stats.json: 296,323 records across 7 registries
+[INFO] Filled the stat markers in README.md, docs/methodology.md, docs/dev.md
 [INFO] Pipeline succeeded: build promoted

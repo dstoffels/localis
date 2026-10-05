@@ -1,11 +1,13 @@
 import json
 from pathlib import Path
 from typing import Any, Callable, Generic, TypeVar
-from .download import SPARQL_ATTEMPTS
 from .logger import ingest_log
 from .staging import staged_path, stage_text
 
 V = TypeVar("V")
+
+# queries per run that may disagree on which committed keys are missing before a removal counts as unconfirmed
+CONFIRM_QUERIES = 4
 
 
 class CommittedQuery(Generic[V]):
@@ -29,21 +31,23 @@ class CommittedQuery(Generic[V]):
         return self._read(staged if staged.exists() else self.path)
 
     def fetch(self, query: Callable[[], dict[str, V]]) -> dict[str, V]:
-        """Runs query and stages its result, keeping one missing committed keys only once a repeat returns it unchanged."""
+        """Runs query and stages its result, accepting a removal of committed keys only once a repeat is missing the same ones."""
         committed_keys = self.committed().keys()
         result = query()
+        removed = sorted(committed_keys - result.keys())
         queries = 1
 
-        while removed := sorted(committed_keys - result.keys()):
-            if queries == SPARQL_ATTEMPTS:
-                raise RuntimeError(f"{self.label} results kept changing across {queries} queries; try again later")
+        while removed:
+            if queries == CONFIRM_QUERIES:
+                raise RuntimeError(f"{self.label}'s missing committed keys kept changing across {queries} queries; try again later")
             ingest_log.writeline(f"{self.label} is missing {len(removed)} committed keys, querying again to confirm")
-            repeat = query()
+            result = query()
             queries += 1
-            if repeat == result:
+            # only the missing keys must repeat, since the query service's servers lag by different amounts and the rest may differ
+            unconfirmed, removed = removed, sorted(committed_keys - result.keys())
+            if removed == unconfirmed:
                 ingest_log.writeline(f"confirmed {len(removed)} {self.label} entries removed on Wikidata: {', '.join(removed)}", level="WARN")
                 break
-            result = repeat
 
         stage_text(self.path, json.dumps(result, indent=2, ensure_ascii=False, sort_keys=True) + "\n")
         return result

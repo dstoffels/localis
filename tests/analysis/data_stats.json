@@ -148,15 +148,15 @@
     "disagreements_not_admin": 276
   },
   "cities": {
-    "total": 235917,
+    "total": 235970,
     "threshold": 15000,
-    "above_threshold": 34171,
+    "above_threshold": 34172,
     "ascii_names": 24
   },
   "filter_index": {
     "cities": {
-      "values": 277223,
-      "single_record_values": 216663
+      "values": 277273,
+      "single_record_values": 216712
     },
     "countries": {
       "values": 2097,
@@ -176,24 +176,24 @@
     },
     "subdivisions": {
       "values": 75143,
-      "single_record_values": 69972
+      "single_record_values": 69973
     }
   },
   "shipped_size": {
-    "total": 53373102,
+    "total": 53380128,
     "cities": {
-      "total": 41962895,
+      "total": 41969934,
       "share_pct": 78.6,
       "files": {
-        "canon_index.bin.gz": 4968397,
+        "canon_index.bin.gz": 4968698,
         "canon_index_offsets.tsv": 166585,
-        "cities.tsv": 13251231,
-        "context_index.bin.gz": 8565437,
+        "cities.tsv": 13254280,
+        "context_index.bin.gz": 8566135,
         "context_index_offsets.tsv": 95270,
-        "filter_index.bin.gz": 3366816,
-        "filter_index_offsets.tsv": 7672285,
-        "lookup_index_int.tsv": 3404031,
-        "short_names.tsv.gz": 472843
+        "filter_index.bin.gz": 3367404,
+        "filter_index_offsets.tsv": 7673483,
+        "lookup_index_int.tsv": 3404872,
+        "short_names.tsv.gz": 473207
       }
     },
     "countries": {
@@ -260,22 +260,22 @@
       }
     },
     "subdivisions": {
-      "total": 10279248,
+      "total": 10279235,
       "share_pct": 19.3,
       "files": {
         "canon_index.bin.gz": 1701073,
         "canon_index_offsets.tsv": 141575,
         "context_index.bin.gz": 1526970,
         "context_index_offsets.tsv": 66955,
-        "filter_index.bin.gz": 470505,
+        "filter_index.bin.gz": 470503,
         "filter_index_offsets.tsv": 2202821,
         "lookup_index_str.tsv": 969848,
-        "short_names.tsv.gz": 104799,
-        "subdivisions.tsv": 3094702
+        "short_names.tsv.gz": 104795,
+        "subdivisions.tsv": 3094695
       }
     }
   },
   "totals": {
-    "records": 296270
+    "records": 296323
   }
 }

@@ -5,7 +5,7 @@
     "sha256": "48ce7e6cf85ca719ec04850786e778bb93fb7c83067a417f56f02d2fa882448b"
   },
   "iso_15924.json": {
-    "url": "https://salsa.debian.org/iso-codes-team/iso-codes/-/raw/main/data/iso_15924.json",
+    "url": "https://salsa.debian.org/iso-codes-team/iso-codes/-/raw/90b9fe56ec2f3a05675d525d3587ab6c18f30376/data/iso_15924.json",
     "etag": "W/\"a207def2586075d409bd4dff9337e44d-gzip\"",
     "sha256": "cb7e2ed1bd2345a9ac119aad0a38adfaf6170b8699f45b988c30cc102199312d"
   }

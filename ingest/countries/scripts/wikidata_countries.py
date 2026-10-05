@@ -78,6 +78,6 @@ def _query_country_names(current_alpha2s: set[str]) -> CountryNames:
 
 
 def fetch_wikidata_country_names(current_alpha2s: set[str]) -> CountryNames:
-    """Queries the country names and stages them for COUNTRY_NAMES.commit()."""
+    """Queries the country names and stages them for promotion."""
     ingest_log.writeline("Querying Wikidata for country names...")
     return COUNTRY_NAMES.fetch(lambda: _query_country_names(current_alpha2s))
