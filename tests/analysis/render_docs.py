@@ -1,7 +1,5 @@
-import argparse
 import json
 import re
-import sys
 from pathlib import Path
 from typing import Any, Callable
 
@@ -31,10 +29,11 @@ def _load_time(ms: float) -> str:
 
 
 def _size(size_bytes: float) -> str:
+    # decimal units, as the KB and MB labels mean
     return (
-        f"{size_bytes / 1024:.0f}KB"
-        if size_bytes < 1024**2
-        else f"{size_bytes / 1024**2:.1f}MB"
+        f"{size_bytes / 1000:.0f}KB"
+        if size_bytes < 1000**2
+        else f"{size_bytes / 1000**2:.1f}MB"
     )
 
 
@@ -115,9 +114,9 @@ def render(
 
 
 def check() -> list[str]:
-    """Stale deterministic markers across the docs, empty if all are current."""
+    """Stale deterministic markers across the docs, empty if all are current; a checked source that's missing counts as stale."""
     sources = _load_sources()
-    stale: list[str] = []
+    stale = [f"{SOURCES[name]} is missing, so no {name} marker can be checked" for name in sorted(CHECKED_SOURCES) if name not in sources]
     for doc in DOCS:
         render(
             doc.read_text(encoding="utf-8"),
@@ -126,27 +125,6 @@ def check() -> list[str]:
             doc.relative_to(ROOT).as_posix(),
         )
     return stale
-
-
-def main() -> None:
-    parser = argparse.ArgumentParser(
-        description='Fills <stat key="source.key:format"> tags in the docs from tests/analysis outputs.'
-    )
-    parser.add_argument(
-        "--check",
-        action="store_true",
-        help="exit 1 if a deterministic marker is stale, without writing",
-    )
-    args = parser.parse_args()
-
-    if args.check:
-        stale = check()
-        for line in stale:
-            print(line)
-        sys.exit(1 if stale else 0)
-
-    for doc in render_all():
-        print(f"updated {doc}")
 
 
 def render_all() -> list[str]:
@@ -160,7 +138,3 @@ def render_all() -> list[str]:
             doc.write_text(rendered, encoding="utf-8")
             updated.append(doc.relative_to(ROOT).as_posix())
     return updated
-
-
-if __name__ == "__main__":
-    main()

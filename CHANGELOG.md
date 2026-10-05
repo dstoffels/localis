@@ -32,10 +32,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `lookup()` raises `TypeError` for a key that isn't a string or an int, instead of `AttributeError` for `None` or a float, and no longer takes `True` as the integer 1
 - `cities.set_population_threshold()` raises when called with a value that isn't a non-negative int, instead of failing on the next cities access, and setting the threshold already in place keeps the loaded cache
 - `Subdivision.type` and `SubdivisionBase.type` are `None` for the 46,665 GeoNames-only subdivisions, which have no ISO type, instead of `""`, like every other missing field
-- Cities ship a short-name list like countries and subdivisions, so short city names reachable only by an exact query (such as "Jīān") are found through the short-query fallback, for about 463 KiB
+- Cities ship a short-name list like countries and subdivisions, so short city names reachable only by an exact query (such as "Jīān") are found through the short-query fallback, for about 474 KB
 - The filter index ships inverted, like the search index: each field value's ids are packed at ingest and sliced out at load, instead of the index being rebuilt from per-record rows on every load, so filters' first use is faster, most of all for cities
 - Building entities is faster: each result reads its row position once rather than on every field, so iterating every city takes about a fifth less time
-- Languages' and subdivisions' loaded data is smaller: the few scope and type values those records repeat are stored once each, about 0.9 MiB less for languages and 0.3 MiB for subdivisions
+- Languages' and subdivisions' loaded data is smaller: the few scope and type values those records repeat are stored once each, about 0.9 MB less for languages and 0.3 MB for subdivisions
 - With a population threshold set, the cities indexes load faster: each entry is checked against the set of ids the filtered cache kept, instead of through a predicate call
 - The README is organized by query API (`get`, `lookup`, `filter`, `search`, iteration) with each registry's specifics under Entities, where each entity's fields are a table marking which ones its nested form keeps. methodology.md lists the pipeline's four merge stages in order and keeps its one-off validation checks, dated and with how each was determined, in Discovery
 - Generated doc figures are marked with `<stat key="source.key:format">` tags instead of HTML comments, and more figures are generated: the crosswalk's size and disagreements, the non-administrative groupings, Kosovo's records and the cities named in ASCII
@@ -50,10 +50,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - The registries' undocumented `count` (use `len()`), `build_cache()` and `invalidate_cache()`
 - The `unidecode` dependency (GPL-2.0-or-later); `rapidfuzz` is now the only runtime dependency
-- Subdivision aliases written in non-Latin scripts (19,882), which only a query in that script could find: subdivisions' shipped data shrinks from 10,866 to 9,930 KiB and their fully loaded memory from 47.4 to 41.0 MiB. 274 Latin aliases that deduplication had dropped in favor of a Cyrillic spelling ship again
+- Subdivision aliases written in non-Latin scripts (19,882), which only a query in that script could find: subdivisions' shipped data shrinks from 11,127 to 10,168 KB and their fully loaded memory from 49.7 to 43.0 MB. 274 Latin aliases that deduplication had dropped in favor of a Cyrillic spelling ship again
 
 ### Fixed
 
+- Generated sizes in the README and docs were computed in KiB and MiB but labeled KB and MB, understating every figure by 2.4% (KB) or 4.9% (MB); they're now computed in decimal KB and MB
+- Search benchmarks counted a result as a miss when it was a different record with the same name as the sampled one (two "Franklin County" subdivisions), which no search can tell apart; such a result now counts as a hit, and the benchmarks report how many hits came that way
+- The README's search benchmarks claimed 5,000 queries per registry; each registry's actual query count is now shown, and the host line names the machine the benchmarks ran on rather than the footprint's
 - Type checkers flag a field a registry's `filter()` doesn't have, since its signature no longer takes `**kwargs`
 - Type checkers no longer flag `from localis import countries` (or any other public name) as a private import: the package declares its public names in `__all__`
 - `lookup()` resolves a numeric code or GeoNames ID given as a string (`countries.lookup("840")`, `cities.lookup("5128581")`), not only as an int

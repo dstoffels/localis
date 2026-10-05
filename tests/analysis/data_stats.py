@@ -163,9 +163,8 @@ def _non_administrative_stats(subs: list) -> dict[str, Any]:
 def _kosovo_stats(subs: list) -> dict[str, int]:
     """ISO's Serbian records for Kosovo and GeoNames' records under Kosovo, which ship side by side."""
     province = localis.subdivisions.lookup("RS-KM")
-    assert (
-        province is not None
-    ), "RS-KM is missing, so methodology's Kosovo figures need rewriting"
+    if province is None:
+        raise AssertionError("RS-KM is missing, so methodology's Kosovo figures need rewriting")
     okrugs = len(_iso_children(subs).get(province.id, []))
     levels = Counter(s.admin_level for s in subs if s.country.alpha2 == "XK")
     return {

@@ -20,7 +20,7 @@ def main() -> None:
         prog="analysis",
         description="Runs the analysis suite: data stats, footprint and benchmarks, then fills the docs' stat markers.",
     )
-    parser.add_argument("--data-only", action="store_true", help="only the deterministic data stats and docs, as CI runs after ingest")
+    parser.add_argument("--data-only", action="store_true", help="only the deterministic data stats and docs, as the pipeline runs after promoting a build")
     parser.add_argument("--staging", action="store_true", help="only check that the pipeline's complete staged build reconciles, as its reconcile gate does; writes nothing")
     parser.add_argument("--check", action="store_true", help="only check that the docs' deterministic markers are current; writes nothing")
     parser.add_argument("--notes", help="what changed since the last footprint and benchmark run")

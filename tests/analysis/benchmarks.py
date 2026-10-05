@@ -10,7 +10,7 @@ from typing import Any, Callable
 import localis
 from localis.entities import Entity
 from localis.registries import QueryableRegistry
-from localis.utils.strings import is_latin
+from localis.utils.strings import is_latin, normalize
 from tests.analysis.host import host_fingerprint
 from tests.utils import mangle
 
@@ -27,6 +27,12 @@ def _search_query(entry: Entity) -> str:
         if admin1:
             return f"{entry.name} {admin1.name}"
     return entry.name
+
+
+def _indistinguishable(result: Entity, query: str) -> bool:
+    """Whether the unmangled query is one of the result's names, or for a city its name with its admin1, so it answers the query as well as the sampled record."""
+    names = {normalize(n) for n in (result.name, *getattr(result, "aliases", ()), _search_query(result))}
+    return normalize(query) in names
 
 
 def _stable_seed(*parts: object) -> int:
@@ -54,25 +60,27 @@ def _percentiles(samples: list[float]) -> dict[str, float]:
 def benchmark_registry(
     name: str, sample_size: int, iterations: int, log
 ) -> dict[str, Any]:
-    """Search's per-call latency percentiles on warm caches, and its accuracy (top-10 hit rate, top-1 rate, mean reciprocal rank) on mangled names and aliases; get, lookup and filter are index reads too fast to be worth timing."""
+    """Search's per-call latency percentiles on warm caches, and its accuracy (top-10 hit rate, top-1 rate, mean reciprocal rank) on mangled names and aliases, where a record the query can't tell apart from the sampled one counts as a hit; get, lookup and filter are index reads too fast to be worth timing."""
     registry: QueryableRegistry = getattr(localis, name)
     registry.force_cache()
     entries: list[Entity] = list(registry)
     latency: list[float] = []
-    hits, misses, top1, reciprocal_ranks, hit_scores = 0, 0, 0, 0.0, []
+    hits, misses, twin_hits, top1, reciprocal_ranks, hit_scores = 0, 0, 0, 0, 0.0, []
 
     def search(query: str, entry: Entity, query_type: str, seed: int) -> None:
-        nonlocal hits, misses, top1, reciprocal_ranks
+        nonlocal hits, misses, twin_hits, top1, reciprocal_ranks
         # mangle() inserts Latin letters, so it can't simulate a typo in any other script
         if not is_latin(query):
             return
         mangled = mangle(query, seed=seed)
         results = _timed(lambda: registry.search(mangled), latency)
+        # a record sharing the sampled one's name (and a city's admin1) is as right an answer as the query allows
         rank = next(
-            (i for i, (r, _) in enumerate(results, start=1) if r.id == entry.id), None
+            (i for i, (r, _) in enumerate(results, start=1) if r.id == entry.id or _indistinguishable(r, query)), None
         )
         if rank is not None:
             hits += 1
+            twin_hits += results[rank - 1][0].id != entry.id
             top1 += rank == 1
             reciprocal_ranks += 1 / rank
             hit_scores.append(results[rank - 1][1])
@@ -106,6 +114,8 @@ def benchmark_registry(
         "accuracy": {
             "queries": queries,
             "failures": misses,
+            # hits answered by a record the query can't tell apart from the sampled one
+            "twin_hits": twin_hits,
             "success_pct": round(100 * hits / queries, 1) if queries else 0.0,
             # top-10 hits alone can't see a ranking regression, since candidate selection can still surface the right entry
             "top1_pct": round(100 * top1 / queries, 1) if queries else 0.0,
@@ -116,7 +126,7 @@ def benchmark_registry(
 
 
 def benchmark(sample_size: int, iterations: int, notes: str | None) -> dict[str, Any]:
-    with open(FAILURES_LOG_PATH, "w") as log:
+    with open(FAILURES_LOG_PATH, "w", encoding="utf-8") as log:
         log.write(
             f"# search failures - sample {sample_size} x {iterations}, seed {SEED}\n"
         )
@@ -151,9 +161,9 @@ def run(
 ) -> dict[str, Any]:
     """Benchmarks every registry and appends the result to benchmarks.json."""
     result = benchmark(sample_size, iterations, notes)
-    history = json.loads(OUTPUT_PATH.read_text()) if OUTPUT_PATH.exists() else {}
+    history = json.loads(OUTPUT_PATH.read_text(encoding="utf-8")) if OUTPUT_PATH.exists() else {}
     history[datetime.now().isoformat(timespec="seconds")] = result
-    OUTPUT_PATH.write_text(json.dumps(history, indent=2) + "\n")
+    OUTPUT_PATH.write_text(json.dumps(history, indent=2) + "\n", encoding="utf-8")
     return result
 
 
