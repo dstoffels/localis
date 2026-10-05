@@ -40,10 +40,12 @@ def _add_cldr_names(by_code: dict[str, LanguageModel]) -> None:
 
 
 def _add_cldr_scripts(by_code: dict[str, LanguageModel], scripts: dict[str, ScriptModel]) -> None:
-    """Sets each language's scripts from CLDR's language data: its code's entry lists primary scripts and its "-alt-secondary" entry secondary ones, which TR35 defines as a non-modern language or script."""
+    """Sets each language's scripts from CLDR's language data: its code's entry lists primary scripts and its "-alt-secondary" entry secondary ones, which TR35 defines as a non-modern language or script; a script listed twice is kept once, and one listed as both raises."""
     data: dict[str, dict[str, list[str]]] = json.loads(CLDR_LANGUAGE_DATA_PATH.read_text(encoding="utf-8"))["supplemental"]["languageData"]
     primary: dict[str, list[LanguageScriptModel]] = {}
     secondary: dict[str, list[LanguageScriptModel]] = {}
+    # each language's scripts so far, with whether each is secondary and the CLDR key that listed it, so a repeat is dropped and a contradiction caught
+    listed: dict[str, dict[str, tuple[bool, str]]] = {}
     unresolved: set[str] = set()
     for key, entry in data.items():
         code = key.removesuffix(SECONDARY_SUFFIX)
@@ -58,6 +60,12 @@ def _add_cldr_scripts(by_code: dict[str, LanguageModel], scripts: dict[str, Scri
             if script is None:
                 ingest_log.writeline(f"CLDR gives {code} script {script_code}, which isn't in ISO 15924; skipped", level="WARN")
                 continue
+            earlier = listed.setdefault(language.alpha3, {}).get(script_code)
+            if earlier is not None:
+                if earlier[0] != is_secondary:
+                    raise ValueError(f"CLDR's languageData lists {script_code} as both a primary and a secondary script of {language.alpha3} (under {earlier[1]!r} and {key!r}), and a language's script is one or the other; check languageData.json at the cldr-json commit in languages.manifest.json and decide in _add_cldr_scripts() which to keep")
+                continue
+            listed[language.alpha3][script_code] = (is_secondary, key)
             target.setdefault(language.alpha3, []).append(LanguageScriptModel(script=script, secondary=is_secondary))
     for alpha3 in {*primary, *secondary}:
         by_code[alpha3].scripts = [*primary.get(alpha3, []), *secondary.get(alpha3, [])]
@@ -76,6 +84,8 @@ def load_languages(scripts: dict[str, ScriptModel]) -> dict[str, LanguageModel]:
         scope, type_ = SCOPES.get(entry["scope"]), TYPES.get(entry["type"])
         if scope is None or type_ is None:
             raise ValueError(f"ISO 639-3 {alpha3} has an unknown scope {entry['scope']!r} or type {entry['type']!r}")
+        if alpha3 in languages:
+            raise ValueError(f"iso-codes' iso_639-3.json lists {alpha3} twice ({languages[alpha3].name!r} and {entry['name']!r}), and a code must name one language; check the file at the iso-codes commit in languages.manifest.json and decide in load_languages() which entry to keep")
         languages[alpha3] = LanguageModel(
             name=entry["name"],
             alpha3=alpha3,

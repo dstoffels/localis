@@ -46,6 +46,8 @@ def load_macroregions() -> Macroregions:
     def add(code: str, type_: MacroregionType, parent: MacroregionModel | None) -> None:
         if code not in names:
             raise ValueError(f"CLDR has no English name for macroregion {code}")
+        if code in by_code:
+            raise ValueError(f"CLDR's territory containment makes {code} both a {by_code[code].type} and a {type_}, and localis keeps one macroregion per code; check what changed in territoryContainment.json and decide in load_macroregions() which {code} should be")
         by_code[code] = MacroregionModel(name=names[code], code=code, type=type_, parent=parent)
 
     for code in region_codes:

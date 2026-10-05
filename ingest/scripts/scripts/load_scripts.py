@@ -11,10 +11,10 @@ def load_scripts() -> dict[str, ScriptModel]:
     entries: list[dict[str, str]] = json.loads(ISO_SCRIPTS_PATH.read_text(encoding="utf-8"))["15924"]
     scripts: dict[str, ScriptModel] = {}
     for entry in entries:
-        numeric = entry.get("numeric")
-        scripts[entry["alpha_4"]] = ScriptModel(
-            name=entry["name"], alpha4=entry["alpha_4"], numeric=int(numeric) if numeric else None
-        )
+        alpha4, numeric = entry["alpha_4"], entry.get("numeric")
+        if alpha4 in scripts:
+            raise ValueError(f"iso-codes' iso_15924.json lists {alpha4} twice ({scripts[alpha4].name!r} and {entry['name']!r}), and a code must name one script; check the file at the iso-codes commit in scripts.manifest.json and decide in load_scripts() which entry to keep")
+        scripts[alpha4] = ScriptModel(name=entry["name"], alpha4=alpha4, numeric=int(numeric) if numeric else None)
 
     # keys are a code ("Hans") or an alternate form of one ("Hans-alt-stand-alone"); the code is the part before the first hyphen
     names: dict[str, str] = json.loads(CLDR_SCRIPT_NAMES_PATH.read_text(encoding="utf-8"))["main"]["en"]["localeDisplayNames"]["scripts"]

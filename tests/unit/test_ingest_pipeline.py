@@ -1,5 +1,6 @@
 import gzip
 import hashlib
+import importlib
 import io
 import struct
 import json
@@ -10,7 +11,7 @@ from pathlib import Path
 from urllib.error import HTTPError
 import pytest
 from localis.entities import CountryLanguage, Language, LanguageBase, LanguageScript, ScriptBase
-from ingest.shared.models import CurrencyModel, ScriptModel, SubdivisionModel
+from ingest.shared.models import CurrencyModel, LanguageModel, ScriptModel, SubdivisionModel
 from ingest.utils import change_report, download, index, logger, paths, staging
 from ingest.utils.committed_query import CONFIRM_QUERIES, CommittedQuery
 from ingest.utils.logger import ORPHANS_EXIT_CODE, IngestLog, PipelineLog
@@ -511,3 +512,33 @@ class TestDump:
 
         assert [c.id for c in currencies] == [1, 2]
         assert (tmp_path / "demo" / "lookup_index_str.tsv").read_text(encoding="utf-8") == "aaa\t2\nbbb\t1\n"
+
+
+class TestLanguageScripts:
+    """LANGUAGE SCRIPTS"""
+
+    @staticmethod
+    def _scripts_of(monkeypatch, tmp_path, language_data: dict) -> list[tuple[str, bool]]:
+        """The scripts _add_cldr_scripts() gives a language "dmo" (alpha2 "dm") from CLDR language data."""
+        load_languages = importlib.import_module("ingest.languages.scripts.load_languages")
+        _write_json(tmp_path / "language_data.json", {"supplemental": {"languageData": language_data}})
+        monkeypatch.setattr(load_languages, "CLDR_LANGUAGE_DATA_PATH", tmp_path / "language_data.json")
+        language = LanguageModel(name="Demo", alpha3="dmo", alpha2="dm", bibliographic=None, scope="individual", type="living", inverted_name=None)
+        scripts = {code: ScriptModel(name=code, alpha4=code, numeric=None) for code in ("Latn", "Cyrl")}
+
+        load_languages._add_cldr_scripts({"dmo": language, "dm": language}, scripts)
+
+        return [(s.script.alpha4, s.secondary) for s in language.scripts]
+
+    def test_keeps_repeat_once(self, monkeypatch, tmp_path):
+        """should keep a script CLDR lists twice for a language, under its alpha2 and alpha3, once"""
+        data = {"dm": {"_scripts": ["Latn"]}, "dmo": {"_scripts": ["Latn", "Cyrl"]}}
+
+        assert self._scripts_of(monkeypatch, tmp_path, data) == [("Latn", False), ("Cyrl", False)]
+
+    def test_raises_on_primary_and_secondary(self, monkeypatch, tmp_path):
+        """should raise on a script CLDR lists as both primary and secondary for a language, rather than keep either"""
+        data = {"dmo": {"_scripts": ["Latn"]}, "dmo-alt-secondary": {"_scripts": ["Latn"]}}
+
+        with pytest.raises(ValueError):
+            self._scripts_of(monkeypatch, tmp_path, data)
