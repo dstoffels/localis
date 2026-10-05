@@ -29,6 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Countries leave historic entries out of `filter()` and `search()` before ranking rather than after, so a search no longer reads every country to size an over-fetch and a historic entry can't take a shortlist slot from a current one
 - `search()` raises `TypeError` for a keyword argument it doesn't take, like `filter()`, instead of silently ignoring it
 - `filter()` raises `TypeError` when given no field, instead of returning `[]`
+- `lookup()` raises `TypeError` for a key that isn't a string or an int, instead of `AttributeError` for `None` or a float, and no longer takes `True` as the integer 1
 - `cities.set_population_threshold()` raises when called with a value that isn't a non-negative int, instead of failing on the next cities access, and setting the threshold already in place keeps the loaded cache
 - `Subdivision.type` and `SubdivisionBase.type` are `None` for the 46,665 GeoNames-only subdivisions, which have no ISO type, instead of `""`, like every other missing field
 - Cities ship a short-name list like countries and subdivisions, so short city names reachable only by an exact query (such as "Jīān") are found through the short-query fallback, for about 463 KiB

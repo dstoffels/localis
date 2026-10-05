@@ -1,7 +1,10 @@
 import bisect
 from array import array
 from pathlib import Path
+from typing import Sequence, TypeVar
 from localis.utils.strings import normalize
+
+K = TypeVar("K", str, int)
 
 
 class LookupIndex:
@@ -44,7 +47,9 @@ class LookupIndex:
         self._int_vals = int_vals
 
     def get(self, key: str | int) -> int | None:
-        """The record id a lookup key resolves to, or None."""
+        """The record id a lookup key resolves to, or None; raises TypeError for a key that isn't a str or an int."""
+        if isinstance(key, bool) or not isinstance(key, (str, int)):
+            raise TypeError(f"lookup key must be a str or an int, got {key!r}")
         if isinstance(key, int):
             return self._find(self._int_keys, self._int_vals, key)
         key = normalize(key)
@@ -55,8 +60,8 @@ class LookupIndex:
         return found
 
     @staticmethod
-    def _find(keys: list[str] | array, vals: array, key: str | int) -> int | None:
-        i = bisect.bisect_left(keys, key)  # type: ignore[arg-type]
+    def _find(keys: Sequence[K], vals: array, key: K) -> int | None:
+        i = bisect.bisect_left(keys, key)
         if i < len(keys) and keys[i] == key:
             return vals[i]
         return None

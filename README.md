@@ -109,7 +109,7 @@ script = localis.scripts.lookup("Cyrl")
 language = localis.languages.lookup("de")
 ```
 
-**Returns:** the entity, or `None`
+**Returns:** the entity, or `None`. A key that isn't a string or an int raises `TypeError`.
 
 > ℹ️ `lookup()` matches identifiers only. Common abbreviations that aren't ISO codes, such as "UK" for the United Kingdom, are found by `filter(name=...)` and `search()`. M49 codes are zero-padded strings, so `macroregions.lookup("009")` finds Oceania and `lookup(9)` finds nothing.
 

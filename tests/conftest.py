@@ -105,9 +105,9 @@ def historic_countries() -> list[localis.Country]:
 
 
 @pytest.fixture(scope="session")
-def historic_country(historic_countries: list[localis.Country]) -> localis.Country:
-    """A single historic country entry to be tested."""
-    return historic_countries[0]
+def historic_country(historic_countries: list[localis.Country], seed) -> localis.Country:
+    """A single historic country entry to be tested, picked by the session seed."""
+    return random.Random(seed).choice(historic_countries)
 
 
 @pytest.hookimpl(hookwrapper=True)

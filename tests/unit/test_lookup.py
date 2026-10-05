@@ -1,3 +1,4 @@
+import pytest
 import localis
 from localis.registries import (
     Registry,
@@ -54,6 +55,12 @@ class TestLookup:
         assert (
             result is None
         ), f"expected None, got {result} from lookup [{invalid_value}]"
+
+    @pytest.mark.parametrize("bad_key", [None, True, 3.0])
+    def test_bad_type(self, bad_key, registry: Registry):
+        """should raise a TypeError for a key that isn't a str or an int"""
+        with pytest.raises(TypeError):
+            registry.lookup(bad_key)
 
     def test_key(self, registry: Registry, select_random):
         """should resolve a randomly selected entity, and every entity nested in it, via its key"""

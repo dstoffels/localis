@@ -1,6 +1,6 @@
 from dataclasses import asdict, fields, is_dataclass
 from pathlib import Path
-from typing import Any, Iterator, TypeVar, cast
+from typing import Any, Iterable, Iterator, TypeVar, cast
 from localis.entities import Entity
 from localis.registries import (
     Registry,
@@ -61,7 +61,11 @@ def _comparable(entity: Entity) -> dict[str, Any]:
     return {f.name: _value(getattr(entity, f.name)) for f in fields(entity) if f.name != "id"}
 
 
-def _records(registry: Registry) -> Iterator[tuple[Any, str, dict[str, Any]]]:
+# a record's key, name and comparable fields
+Record = tuple[Any, str, dict[str, Any]]
+
+
+def _records(registry: Registry) -> Iterator[Record]:
     """Each record's key, name and comparable fields."""
     try:
         views = registry._cache.values()
@@ -72,14 +76,14 @@ def _records(registry: Registry) -> Iterator[tuple[Any, str, dict[str, Any]]]:
         yield entity.key, entity.name, _comparable(entity)
 
 
-def _compare(shipped: Registry, staged: Registry) -> tuple[int, int, list[str], list[str], list[str]]:
+def _compare(shipped: Iterable[Record], staged: Iterable[Record]) -> tuple[int, int, list[str], list[str], list[str]]:
     """Both builds' record counts, and the staged build's records added, removed and changed by key."""
-    before = {key: (name, record) for key, name, record in _records(shipped)}
+    before = {key: (name, record) for key, name, record in shipped}
     count_before = len(before)
     added: list[str] = []
     changed: list[str] = []
     count_after = 0
-    for key, name, record in _records(staged):
+    for key, name, record in staged:
         count_after += 1
         old = before.pop(key, None)
         if old is None:
@@ -98,7 +102,7 @@ def _section(title: str, items: list[str]) -> list[str]:
 def write_change_report() -> None:
     """Stages each registry's change report: a counts table, then every record added, removed and changed."""
     for shipped, staged in zip(_registries(DATA_PATH), _registries(STAGED_DATA_PATH)):
-        count_before, count_after, added, removed, changed = _compare(shipped, staged)
+        count_before, count_after, added, removed, changed = _compare(_records(shipped), _records(staged))
         name = staged.REGISTRY_NAME
         header = [
             f"# {name.capitalize()} changes",

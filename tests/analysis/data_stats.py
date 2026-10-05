@@ -3,7 +3,7 @@ from collections import Counter
 from pathlib import Path
 from typing import Any
 import localis
-from localis.registries import Registry
+from localis.registries import CityRegistry, Registry
 
 ROOT = Path(__file__).resolve().parents[2]
 DATA_PATH = ROOT / "src" / "localis" / "data"
@@ -231,14 +231,12 @@ def _resolution_stats() -> dict[str, int]:
 
 
 def _city_stats() -> dict[str, int]:
-    threshold = localis.cities.population_threshold
     total = len(localis.cities)
     shipped_unlinked = len(localis.cities.filter(subdivision=localis.MISSING))
-    localis.cities.set_population_threshold(POPULATION_THRESHOLD)
-    try:
-        above = len(localis.cities)
-    finally:
-        localis.cities.set_population_threshold(threshold)
+    # a registry of its own, so narrowing it never drops the shared cities cache
+    narrowed = CityRegistry(countries=localis.countries, subdivisions=localis.subdivisions)
+    narrowed.set_population_threshold(POPULATION_THRESHOLD)
+    above = len(narrowed)
     ingest_stats = json.loads(CITIES_INGEST_STATS_PATH.read_text(encoding="utf-8"))
     return {
         "total": total,

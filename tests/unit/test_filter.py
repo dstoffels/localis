@@ -94,8 +94,9 @@ class TestFilter:
 
     def test_kwargs(self, registry: QueryableRegistry):
         """should raise a TypeError if given an invalid kwarg"""
+        kwargs: dict[str, Any] = {"pid": "1234"}
         with pytest.raises(TypeError):
-            registry.filter(pid="1234")  # pyright: ignore[reportCallIssue]
+            registry.filter(**kwargs)
 
     def test_no_fields(self, registry: QueryableRegistry):
         """should raise a TypeError when given no field to filter by, None ones included"""

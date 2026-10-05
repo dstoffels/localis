@@ -3,8 +3,10 @@ from localis.entities import Country
 
 
 class TestHistoricCountries:
+    """HISTORIC COUNTRIES"""
+
     def test_excluded_from_iteration_by_default(self) -> None:
-        """no historic entry should appear in iteration by default, and at least one should once included"""
+        """should leave every historic entry out of iteration by default, and yield at least one once included"""
         assert (
             countries.include_historic is False
         ), "include_historic should be False by default"
@@ -23,8 +25,18 @@ class TestHistoricCountries:
         finally:
             countries.set_include_historic(False)
 
+    def test_len_follows_include_historic(self) -> None:
+        """should count in len() the records iteration yields with historic entries included, more than without"""
+        default_len = len(countries)
+        try:
+            countries.set_include_historic(True)
+            assert len(countries) == sum(1 for _ in countries)
+            assert len(countries) > default_len
+        finally:
+            countries.set_include_historic(False)
+
     def test_filter_search_exclusion(self, historic_country: Country) -> None:
-        """a historic country's name should not surface via filter()/search() by default, and should once included"""
+        """should keep a historic country's name from surfacing via filter()/search() by default, and surface it once included"""
         assert historic_country.name not in [
             c.name for c in countries.filter(name=historic_country.name)
         ]
@@ -44,16 +56,16 @@ class TestHistoricCountries:
             countries.set_include_historic(False)
 
     def test_get_and_lookup_bypass(self, historic_country: Country) -> None:
-        """get() and lookup() should resolve a historic entry regardless of include_historic"""
+        """should resolve a historic entry through get() and lookup() regardless of include_historic"""
         assert historic_country.historic is not None
         by_lookup: Country | None = countries.lookup(historic_country.historic.alpha_4)
 
         assert (
-            by_lookup is not None
+            by_lookup is not None and by_lookup.id == historic_country.id
         ), f"lookup() should resolve a historic entry regardless of include_historic: {by_lookup}"
 
-        by_get: Country | None = countries.get(by_lookup.id)
+        by_get: Country | None = countries.get(historic_country.id)
 
         assert (
-            by_get is not None
+            by_get is not None and by_get.id == historic_country.id
         ), "get() should resolve a historic entry regardless of include_historic"

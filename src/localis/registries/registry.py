@@ -119,7 +119,7 @@ class Registry(Generic[T], ABC):
         return model.to_entity() if model else None
 
     def lookup(self, identifier: str | int) -> T | None:
-        """Fetches a single item by one of its other unique identifiers (use .get() for localis ID)."""
+        """Fetches a single item by one of its other unique identifiers (use .get() for localis ID); raises TypeError for an identifier that isn't a str or an int."""
         model_id = self._lookup_index.get(identifier)
         model = self._cache.get(model_id) if model_id is not None else None
         return model.to_entity() if model else None
