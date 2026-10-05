@@ -3,6 +3,9 @@ import pytest
 import localis
 from localis.registries import (
     QueryableRegistry,
+    CurrencyRegistry,
+    ScriptRegistry,
+    LanguageRegistry,
     CountryRegistry,
     SubdivisionRegistry,
     CityRegistry,
@@ -16,15 +19,40 @@ def _country_values(country_id: int) -> tuple:
     # the CountryBase embedded in subdivisions and cities lacks common_name and numeric, so read the full country
     c = localis.countries.get(country_id)
     assert c is not None
-    return (c.name, c.common_name, c.alpha2, c.alpha3, c.numeric)
+    # subdivisions index the numeric code zero-padded too ("076"); cities index no numeric
+    numeric = (c.numeric, f"{c.numeric:03d}") if c.numeric is not None else ()
+    return (c.name, c.common_name, c.alpha2, c.alpha3, *numeric)
+
+
+def _script_values(script_id: int) -> tuple:
+    # the LanguageScript nested in languages lacks aliases, so read the full script
+    s = localis.scripts.get(script_id)
+    assert s is not None
+    return (s.alpha4, s.name, *s.aliases)
+
+
+def _language_values(language_id: int) -> tuple:
+    # the CountryLanguage nested in countries lacks bibliographic, so read the full language
+    l = localis.languages.get(language_id)
+    assert l is not None
+    return (l.name, l.alpha3, l.alpha2, l.bibliographic)
 
 
 # Explicit per-registry callbacks returning every value a filter kwarg indexes for an entity, mirroring each model's FILTER_FIELDS.
 FILTER_VALUES_BY_REGISTRY = {
+    CurrencyRegistry: {},
+    ScriptRegistry: {},
+    LanguageRegistry: {
+        "scope": lambda l: (l.scope,),
+        "type": lambda l: (l.type,),
+        "script": lambda l: tuple(v for s in l.scripts for v in _script_values(s.id)),
+    },
     CountryRegistry: {
         "macroregion": lambda c: tuple(
             v for m in (*c.macroregions, *c.groupings) for v in (m.name, m.code)
         ),
+        "currency": lambda c: tuple(v for m in c.currencies for v in (m.name, m.alpha3)),
+        "language": lambda c: tuple(v for l in c.languages for v in _language_values(l.id)),
     },
     SubdivisionRegistry: {
         "type": lambda s: (s.type,),
@@ -60,10 +88,24 @@ class TestFilter:
         results = registry.filter(name="asjh238gjs")
         assert results == []
 
+    @pytest.mark.parametrize("bad_limit", [0, -1, True])
+    def test_bad_limit(self, bad_limit, registry: QueryableRegistry):
+        """should raise a ValueError for a limit that isn't a positive integer, rather than slice by it"""
+        with pytest.raises(ValueError):
+            registry.filter(name="paris", limit=bad_limit)
+
     def test_kwargs(self, registry: QueryableRegistry):
         """should raise a TypeError if given an invalid kwarg"""
+        kwargs: dict[str, Any] = {"pid": "1234"}
         with pytest.raises(TypeError):
-            registry.filter(pid="1234")
+            registry.filter(**kwargs)
+
+    def test_no_fields(self, registry: QueryableRegistry):
+        """should raise a TypeError when given no field to filter by, None ones included"""
+        with pytest.raises(TypeError):
+            registry.filter()
+        with pytest.raises(TypeError):
+            registry.filter(name=None, limit=5)
 
     def test_limit(self, registry: QueryableRegistry, select_random, include_historic):
         """should limit the number of results"""
@@ -101,6 +143,19 @@ class TestFilter:
                 both == by_name & by_field
             ), f"expected the intersection of name=[{subject.name}] and {kwarg}=[{values[0]}], got: {both}"
             assert subject.id in both, f"subject ({subject.name}) should be in results for name and {kwarg}=[{values[0]}]"
+
+    def test_missing(self, registry: QueryableRegistry, select_random, include_historic):
+        """should return only entities with no value for a filter kwarg when filtered by MISSING, never one that has a value"""
+        subject: Entity = select_random(registry)
+
+        for kwarg, get_values in FILTER_VALUES_BY_REGISTRY[type(registry)].items():
+            filters: dict[str, Any] = {kwarg: localis.MISSING}
+            results = registry.filter(**filters)
+
+            stray = [r.name for r in results if _normalized(get_values(r))]
+            assert not stray, f"expected every result to have no {kwarg}, got: {stray[:10]}"
+            if _normalized(get_values(subject)):
+                assert subject.id not in {r.id for r in results}, f"subject ({subject.name}) has a {kwarg}, so shouldn't match {kwarg}=MISSING"
 
     def test_by_field(
         self, registry: QueryableRegistry, select_random, include_historic

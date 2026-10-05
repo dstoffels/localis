@@ -1,48 +1,54 @@
-import csv
 from array import array
+from enum import Enum
 from pathlib import Path
+from typing import Final, Literal
 from localis.utils.strings import normalize
+from .inverted_index import read_inverted_index, keep_allowed
+
+
+class _MissingType(Enum):
+    MISSING = "MISSING"
+
+    def __repr__(self) -> str:
+        return "MISSING"
+
+
+# a filter value matching the records with no value in that field, since None means "don't filter on this field"
+MISSING: Final = _MissingType.MISSING
+Missing = Literal[_MissingType.MISSING]
+# the key those records are indexed under; uppercase, so no normalized query value can equal it
+MISSING_KEY = "MISSING"
 
 
 class FilterIndex:
     def __init__(
         self,
-        filepath: Path,
+        prefix: Path,
         allowed_ids: set[int] | None = None,
     ) -> None:
-        with open(filepath, "r", encoding="utf-8") as f:
-            reader = csv.reader(f, delimiter="\t")
-            params = next(reader)
-            # during the load a value's postings are its lone id, or a list once a second record shares it
-            index: dict[str, dict[str, int | list[int]]] = {p: {} for p in params}
-
-            for id, row in enumerate(reader, start=1):
-                if allowed_ids is not None and id not in allowed_ids:
-                    continue
-                for i, cell in enumerate(row):
-                    postings = index[params[i]]
-                    for value in cell.split("|"):
-                        existing = postings.get(value)
-                        if existing is None:
-                            postings[value] = id
-                        elif isinstance(existing, int):
-                            postings[value] = [existing, id]
-                        else:
-                            existing.append(id)
-
-        # most values belong to a single record, whose id is kept as a plain int rather than a whole array; the rest are packed at their exact size
+        postings, rows = read_inverted_index(prefix)
+        # most values belong to a single record, whose id is kept as a plain int rather than a whole array; the rest are sliced at their exact size
         self.index: dict[str, dict[str, int | array]] = {}
-        for param in params:
-            # popped so each parameter's load-time postings are freed as soon as they're converted
-            postings = index.pop(param)
-            self.index[param] = {
-                value: value_ids if isinstance(value_ids, int) else array("I", value_ids)
-                for value, value_ids in postings.items()
-            }
+        for (field, value), offset, count in rows:
+            # rows are sorted by field, so a field's dict is created once, even if none of its values survive allowed_ids
+            values = self.index.get(field)
+            if values is None:
+                values = self.index[field] = {}
+            if count == 1:
+                id = postings[offset]
+                if allowed_ids is None or id in allowed_ids:
+                    values[value] = id
+                continue
+            ids = keep_allowed(postings[offset : offset + count], allowed_ids)
+            if len(ids) > 1:
+                values[value] = ids
+            elif ids:
+                values[value] = ids[0]
 
-    def get(self, filter_kw: str, field_value: str | int) -> set[int]:
-        # every indexed cell is stored as a string, so a scalar like admin_level=1 is stringified before lookup
-        ids = self.index.get(filter_kw, {}).get(normalize(str(field_value)))
+    def get(self, filter_kw: str, field_value: str | int | Missing) -> set[int]:
+        # every indexed value is stored as a string, so a scalar like admin_level=1 is stringified before lookup
+        key = MISSING_KEY if field_value is MISSING else normalize(str(field_value))
+        ids = self.index.get(filter_kw, {}).get(key)
         if ids is None:
             return set()
         return {ids} if isinstance(ids, int) else set(ids)

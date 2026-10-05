@@ -1,38 +1,31 @@
 # Merges ISO 3166-2 subdivisions into GeoNames': skill decisions, the Wikidata crosswalk and automerge in turn, with what's left recorded in outputs/resolution_map.json for the resolve-subdivisions skill.
 
 import sys
-from ingest.shared.scripts import load_countries
 from .fetch_subdivisions import fetch_subdivisions_sources
 from ingest.subdivisions.utils.subdivision_map import SubdivisionMap
 from ingest.subdivisions.utils.resolution_map import ResolutionMap
-from ingest.utils import (
-    ingest_log,
-    SUBDIVISIONS_OUTPUTS_PATH,
-    SUBDIVISIONS_MANIFEST_PATH,
-    SHARED_MANIFEST_PATH,
-    record_pending,
-    committed_value,
-    commit_manifest,
-    dump_registry,
-)
+from ingest.utils import SUBDIVISIONS, ORPHANS_EXIT_CODE, ingest_log, dump_registry
+from ingest.utils.strings import dedupe
 from ingest.shared.models import CountryModel, SubdivisionModel
 from .geonames_subdivisions import map_geonames_subdivisions
 from .iso_subdivisions import load_iso_subs
 from .merge_alternate_names import merge_alternate_name_aliases
 from .automerge import try_merge
-from .resolve_subdivisions import apply_skill_decisions
-from .wikidata_subdivisions import fetch_wikidata_crosswalk, flag_wikidata_conflicts, apply_wikidata_matches
+from .resolve_subdivisions import apply_skill_decisions, log_inactive_decisions
+from .wikidata_subdivisions import (
+    CROSSWALK,
+    fetch_wikidata_crosswalk,
+    flag_wikidata_conflicts,
+    apply_wikidata_matches,
+)
 from .non_administrative import apply_non_administrative, flag_grouping_twin_merges
 from .dump_unmerged import write as write_unmerged_doc
 
-RESOLUTION_MAP_PATH = SUBDIVISIONS_OUTPUTS_PATH / "resolution_map.json"
-DECISIONS_MANIFEST_KEY = "resolution_map"
+RESOLUTION_MAP_PATH = SUBDIVISIONS.outputs / "resolution_map.json"
 
 
-def exit_if_orphans(resolution_map: ResolutionMap | None = None) -> None:
-    """Hard gate: active orphans mean the dataset is incomplete, so stop with exit code 10 until the resolve-subdivisions skill resolves them."""
-    if resolution_map is None:
-        resolution_map = ResolutionMap.load(RESOLUTION_MAP_PATH)
+def exit_if_orphans(resolution_map: ResolutionMap) -> None:
+    """Exits with ORPHANS_EXIT_CODE while orphans await the resolve-subdivisions skill."""
     orphans = resolution_map.automerge.orphans
     if not orphans.count():
         return
@@ -41,31 +34,35 @@ def exit_if_orphans(resolution_map: ResolutionMap | None = None) -> None:
         "run the resolve-subdivisions skill first",
         level="WARN",
     )
-    ingest_log.dump()
-    sys.exit(10)
+    sys.exit(ORPHANS_EXIT_CODE)
 
 
-def ingest_subdivisions(
-    countries: dict[str, CountryModel] | None = None, force: bool = False
-) -> dict[str, SubdivisionModel] | None:
-    ingest_log.set_stage("SUBDIVISIONS")
-    try:
-        has_update = fetch_subdivisions_sources(force=force)
+def check_iso_coverage(build_codes: set[str], sub_map: SubdivisionMap, resolution_map: ResolutionMap) -> None:
+    """Raises if an ISO code in this release neither ships nor awaits the skill, which the orphan gate and the reconcile gate can't see."""
+    shipped = {sub.iso_code for sub in sub_map.all() if sub.iso_code}
+    missing = sorted(build_codes - shipped - set(resolution_map.automerge.orphans.codes()))
+    if missing:
+        raise ValueError(
+            f"{len(missing)} ISO subdivision(s) in this release neither ship nor await the skill: {', '.join(missing)}; "
+            "a merge step dropped them without recording an orphan, so trace each code through the subdivisions log to the step that last held it and make that step merge, add or orphan it"
+        )
 
-        # the map's bypass rules and skill decisions are tracked like a source, so editing them triggers a rebuild without --force
+
+def dedupe_aliases(sub_map: SubdivisionMap) -> None:
+    """Drops each subdivision's aliases that are variants of its final name."""
+    for sub in sub_map.all():
+        sub.aliases = dedupe(sub.aliases, exclude=(sub.name,))
+
+
+def ingest_subdivisions(countries: dict[str, CountryModel]) -> dict[str, SubdivisionModel]:
+    with ingest_log.stage(SUBDIVISIONS):
+        fetch_subdivisions_sources()
+
         resolution_map = ResolutionMap.load(RESOLUTION_MAP_PATH)
-        decisions = resolution_map.decisions_fingerprint()
-        decisions_changed = decisions != committed_value(SUBDIVISIONS_MANIFEST_PATH, DECISIONS_MANIFEST_KEY)
 
-        # rows store country ids, so a countries rebuilt upstream (passed in) forces a rebuild even when subdivision sources are unchanged
-        if not has_update and not decisions_changed and countries is None:
-            ingest_log.writeline("No updates for subdivisions, their resolution decisions or countries.")
-            return None
-        record_pending(SUBDIVISIONS_MANIFEST_PATH, DECISIONS_MANIFEST_KEY, decisions)
-
-        # Cache countries by alpha2 code, unless already provided by a prior ingest stage
-        if countries is None:
-            countries = load_countries()
+        crosswalk = fetch_wikidata_crosswalk()
+        committed = CROSSWALK.committed()
+        CROSSWALK.log_changes(crosswalk)
 
         # GeoNames' subdivisions, indexed by country and admin level and by each id and code
         sub_map: SubdivisionMap = map_geonames_subdivisions(countries)
@@ -75,16 +72,18 @@ def ingest_subdivisions(
 
         # Cache and dedupe iso subs by id
         iso_subs, non_administrative_subs = load_iso_subs(countries, resolution_map)
+        # every ISO code in this release, against which a skill decision is active or inactive
+        build_codes = {*iso_subs, *(sub.iso_code for sub in non_administrative_subs if sub.iso_code)}
+        log_inactive_decisions(resolution_map, build_codes)
 
         # Apply skill-resolved decisions directly, before auto-merge ever sees these iso_subs, so a verified decision can never lose its target to a fresh auto-merge
         remaining_iso_subs = apply_skill_decisions(iso_subs, resolution_map, sub_map)
 
         # Skill decisions win, but only knowingly: any that disagree with a valid Wikidata mapping they weren't made against go back to the skill
-        crosswalk = fetch_wikidata_crosswalk()
-        flag_wikidata_conflicts(crosswalk, resolution_map, sub_map)
+        flag_wikidata_conflicts(crosswalk, resolution_map, sub_map, build_codes)
 
-        # Apply unambiguous Wikidata crosswalk matches next, a stronger signal than fuzzy string matching, still ahead of auto-merge
-        remaining_iso_subs = apply_wikidata_matches(remaining_iso_subs, resolution_map, sub_map, crosswalk)
+        # Apply unambiguous Wikidata crosswalk matches next, a stronger signal than fuzzy string matching, still ahead of auto-merge; one that changes a previous resolution goes to the skill instead
+        remaining_iso_subs = apply_wikidata_matches(remaining_iso_subs, resolution_map, sub_map, crosswalk, committed)
 
         # Non-administrative groupings take their GeoNames twin, if any, once their children have merged and before auto-merge, so a child can't match the twin
         apply_non_administrative(non_administrative_subs, sub_map, resolution_map)
@@ -98,17 +97,18 @@ def ingest_subdivisions(
         # rebuild cache with complete data, update parents
         sub_map.refresh()
 
+        # once names are final, after automerge has matched on every variant
+        dedupe_aliases(sub_map)
+
         resolution_map.save(RESOLUTION_MAP_PATH)
+
+        # every ISO code must ship or await the skill; checked before the orphan stop, so a dropped code surfaces even in a run that has orphans
+        check_iso_coverage(build_codes, sub_map, resolution_map)
 
         # refuse to dump subdivisions or hand off to cities (which depends on this run's geocode map) until resolved
         exit_if_orphans(resolution_map)
 
         dump_registry("subdivisions", sub_map.all())
         write_unmerged_doc(sub_map)
-        # only now are this run's sources consumed; a run stopped by orphans leaves them pending, so the next run reprocesses them
-        commit_manifest(SUBDIVISIONS_MANIFEST_PATH)
-        commit_manifest(SHARED_MANIFEST_PATH)
         ingest_log.writeline(f"completed: {len(sub_map)} subdivisions")
         return sub_map.to_geocode_map()
-    finally:
-        ingest_log.dump()

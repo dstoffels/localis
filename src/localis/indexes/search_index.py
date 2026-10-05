@@ -2,7 +2,6 @@ from array import array
 from bisect import bisect_left
 import heapq
 import math
-import csv
 import gzip
 from pathlib import Path
 from typing import Generic, Mapping, TypeVar
@@ -13,6 +12,7 @@ from localis.stores import Store
 from localis.utils.strings import search_text, word_trigrams, SHORT_NAME_MAX
 from localis.utils.data import resolve_field
 from collections import Counter
+from .inverted_index import read_inverted_index, keep_allowed
 
 T = TypeVar("T", bound=Entity)
 
@@ -24,7 +24,7 @@ class SearchIndex(Generic[T]):
     CONTEXT_PENALTY = 0.5
     # how many of the best trigram matches go on to fuzzy scoring
     TOP_K = 50
-    # how many records with the most canon and context hits get their exact weighted coverage computed, from which the TOP_K are taken
+    # how many records with the most canon and context hits get their exact weighted coverage computed, from which the TOP_K are taken; a larger limit widens it
     SHORTLIST_K = 200
     # a trigram in more than this share of records (and more than STOP_MIN_DF of them) isn't counted when selecting, provided MIN_COUNTED rarer ones remain
     STOP_SHARE = 0.02
@@ -44,7 +44,7 @@ class SearchIndex(Generic[T]):
         allowed_ids: set[int] | None = None,
     ) -> None:
         self.cache = cache
-        self.NAME_FIELDS = name_fields
+        self.name_fields = name_fields
         self.canon = self._load_trigram_index(data_path / "canon_index", allowed_ids)
         self.short_names = self._load_short_names(data_path / "short_names.tsv.gz", allowed_ids)
         self.context = self._load_trigram_index(data_path / "context_index", allowed_ids)
@@ -69,29 +69,8 @@ class SearchIndex(Generic[T]):
     @staticmethod
     def _load_trigram_index(prefix: Path, allowed_ids: set[int] | None) -> dict[str, array]:
         """One trigram index's posting lists by trigram; a missing index is empty."""
-        index: dict[str, array] = {}
-        blob_path = prefix.with_name(prefix.name + ".bin.gz")
-        if not blob_path.exists():
-            return index
-
-        offsets: dict[str, tuple[int, int]] = {}
-        with open(
-            prefix.with_name(prefix.name + "_offsets.tsv"), "r", encoding="utf-8"
-        ) as f:
-            reader = csv.reader(f, delimiter="\t")
-            for trigram, offset, count in reader:
-                offsets[trigram] = (int(offset), int(count))
-
-        with gzip.open(blob_path, "rb") as f:
-            full_array = array("I")
-            full_array.frombytes(f.read())
-
-        for trigram, (offset, count) in offsets.items():
-            trigram_ids = full_array[offset : offset + count]
-            if allowed_ids is not None:
-                trigram_ids = array("I", (id for id in trigram_ids if id in allowed_ids))
-            index[trigram] = trigram_ids
-        return index
+        postings, rows = read_inverted_index(prefix)
+        return {trigram: keep_allowed(postings[offset : offset + count], allowed_ids) for (trigram,), offset, count in rows}
 
     def search(self, query: str, limit: int, exclude: frozenset[int] = frozenset()) -> list[tuple[View[T, Store], float]]:
         """The best `limit` matches for the query, best first, leaving out the `exclude`d ids before any are shortlisted."""
@@ -110,7 +89,7 @@ class SearchIndex(Generic[T]):
         hits = self._count_hits(query_trigrams)
         for id in exclude:
             hits.pop(id, None)
-        shortlist = [id for id, _ in hits.most_common(self.SHORTLIST_K)]
+        shortlist = [id for id, _ in hits.most_common(max(self.SHORTLIST_K, limit))]
 
         # stage 2: each shortlisted record's rarity-weighted coverage of the query, by its names alone and by its names and context together, averaged
         trigram_scores: dict[int, float] = {}
@@ -169,15 +148,15 @@ class SearchIndex(Generic[T]):
         return hits
 
     def _raw_names(self, candidate: View[T, Store]):
-        """Every value in the candidate's NAME_FIELDS, list fields such as aliases flattened."""
-        for field_name in self.NAME_FIELDS:
+        """Every value in the candidate's name fields, list fields such as aliases flattened."""
+        for field_name in self.name_fields:
             value = resolve_field(candidate, field_name)
             for name in value if isinstance(value, (list, tuple)) else (value,):
                 if isinstance(name, str) and name:
                     yield name
 
     def _names(self, candidate: View[T, Store]) -> list[str]:
-        """The search_text() of every name in the candidate's NAME_FIELDS."""
+        """The search_text() of every name in the candidate's name fields."""
         return [text for name in self._raw_names(candidate) if (text := search_text(name))]
 
     def _short_matches(self, token: str) -> list[int]:

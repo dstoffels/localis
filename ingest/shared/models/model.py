@@ -1,7 +1,6 @@
-from dataclasses import dataclass, asdict
+from dataclasses import dataclass, asdict, field, fields
 import json
-from collections import defaultdict
-from typing import ClassVar, Iterator
+from typing import ClassVar, Iterable, Iterator
 from localis.utils.strings import search_trigrams, search_text, normalize, SHORT_NAME_MAX
 from localis.utils.data import resolve_field
 
@@ -10,7 +9,8 @@ from localis.utils.data import resolve_field
 class Model:
     """An ingest record: its shipped TSV row and the values its lookup, filter and search indexes hold; independent of the runtime's entities and views."""
 
-    id: int
+    # the record's row position, numbered by dump_registry(); keyword-only so it can default while subclass fields stay required
+    id: int = field(default=0, kw_only=True)
     name: str
 
     def to_dict(self):
@@ -23,8 +23,29 @@ class Model:
         return self.json()
 
     # ----------- Serialization Methods ----------- #
-    def to_row(self) -> tuple[str | int | None]:
-        return tuple(self.to_dict().values())
+
+    # fields the shipped row leaves out; id is the row's position
+    UNSHIPPED_FIELDS: ClassVar[tuple[str, ...]] = ("id",)
+
+    @classmethod
+    def row_fields(cls) -> tuple[str, ...]:
+        """The shipped row's columns, in field order."""
+        return tuple(f.name for f in fields(cls) if f.name not in cls.UNSHIPPED_FIELDS)
+
+    def row_values(self) -> dict[str, object]:
+        """The shipped row's values by column, unconverted, without asdict()'s deep copy of every nested record; subclasses turn nested records and lists into cells."""
+        return {name: getattr(self, name) for name in self.row_fields()}
+
+    def to_row(self) -> tuple[object, ...]:
+        return tuple(self.row_values().values())
+
+    def join_cell(self, values: Iterable[str]) -> str:
+        """A multi-value cell's values joined with "|", raising on a value holding one, which the runtime's split("|") would cut in two."""
+        values = list(values)
+        for value in values:
+            if "|" in value:
+                raise ValueError(f"{type(self).__name__} {self.name!r} has the value {value!r}, holding '|', the separator its row's multi-value cells are split on; strip it from the value in the stage that loads it")
+        return "|".join(values)
 
     # ----------- Indexing Methods ----------- #
 
@@ -40,7 +61,7 @@ class Model:
             if value:
                 yield normalize(str(value))
 
-    FILTER_FIELDS: ClassVar[dict[str, tuple[str, ...]]] = defaultdict(tuple)
+    FILTER_FIELDS: ClassVar[dict[str, tuple[str, ...]]] = {}
     """Fields that can be used for filtering. Key is the filter name, value is a tuple of field names to search on."""
 
     def extract_filter_values(self) -> dict[str, list[str]]:

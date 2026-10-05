@@ -14,7 +14,7 @@ def _calls(registry: QueryableRegistry, subjects: list[Entity]) -> list[tuple]:
     results = []
     for subject in subjects:
         got = registry.get(subject.id)
-        looked_up = registry.lookup(subject.name)
+        looked_up = registry.lookup(subject.key)
         results.append(
             (
                 [(r.id, score) for r, score in registry.search(subject.name)],
@@ -37,7 +37,7 @@ class TestConcurrency:
         expected = _calls(registry, subjects)
 
         # cold again, so the threads race to load the dataset and every index
-        registry.invalidate_cache()
+        registry._invalidate_cache()
         barrier = threading.Barrier(THREADS)
 
         def run() -> list[tuple]:

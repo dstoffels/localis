@@ -1,6 +1,11 @@
+import pytest
+import localis
 from localis.registries import (
     Registry,
     MacroregionRegistry,
+    CurrencyRegistry,
+    ScriptRegistry,
+    LanguageRegistry,
     CountryRegistry,
     SubdivisionRegistry,
     CityRegistry,
@@ -11,11 +16,30 @@ from utils import registry_param
 # each entity's own lookup values, written out rather than derived from the ingest models; a historic country looks up by its alpha_4 only, since its alpha2/alpha3/numeric collide
 LOOKUP_VALUES_BY_REGISTRY = {
     MacroregionRegistry: lambda m: (m.code, m.name),
+    CurrencyRegistry: lambda c: (c.alpha3, c.numeric),
+    ScriptRegistry: lambda s: (s.alpha4, s.numeric),
+    LanguageRegistry: lambda l: (l.alpha3, l.alpha2, l.bibliographic),
     CountryRegistry: lambda c: (
         (c.historic.alpha_4,) if c.historic else (c.alpha2, c.alpha3, c.numeric)
     ),
     SubdivisionRegistry: lambda s: (s.iso_code, s.geonames_code),
     CityRegistry: lambda c: (c.geonames_id,),
+}
+
+# each entity's nested base entities, with the registry their key resolves in
+NESTED_BY_REGISTRY = {
+    MacroregionRegistry: lambda m: [(m.parent, localis.macroregions)],
+    CurrencyRegistry: lambda c: [],
+    ScriptRegistry: lambda s: [],
+    LanguageRegistry: lambda l: [(s, localis.scripts) for s in l.scripts],
+    CountryRegistry: lambda c: [
+        *((m, localis.macroregions) for m in (*c.macroregions, *c.groupings)),
+        *((m, localis.currencies) for m in c.currencies),
+        *((l, localis.languages) for l in c.languages),
+        *((l.script, localis.scripts) for l in c.languages),
+    ],
+    SubdivisionRegistry: lambda s: [(s.parent, localis.subdivisions), (s.country, localis.countries)],
+    CityRegistry: lambda c: [*((s, localis.subdivisions) for s in c.subdivisions), (c.country, localis.countries)],
 }
 
 
@@ -31,6 +55,24 @@ class TestLookup:
         assert (
             result is None
         ), f"expected None, got {result} from lookup [{invalid_value}]"
+
+    @pytest.mark.parametrize("bad_key", [None, True, 3.0])
+    def test_bad_type(self, bad_key, registry: Registry):
+        """should raise a TypeError for a key that isn't a str or an int"""
+        with pytest.raises(TypeError):
+            registry.lookup(bad_key)
+
+    def test_key(self, registry: Registry, select_random):
+        """should resolve a randomly selected entity, and every entity nested in it, via its key"""
+        subject: Entity = select_random(registry)
+        result = registry.lookup(subject.key)
+        assert result is not None and result.id == subject.id, f"expected id [{subject.id}] for key [{subject.key}], got {result}"
+
+        for base, base_registry in NESTED_BY_REGISTRY[type(registry)](subject):
+            if base is None:
+                continue
+            resolved = base_registry.lookup(base.key)
+            assert resolved is not None and resolved.id == base.id, f"expected nested id [{base.id}] for key [{base.key}], got {resolved}"
 
     def test_valid(self, registry: Registry, select_random):
         """should resolve any randomly selected entity via each of its own valid lookup values"""
@@ -57,3 +99,8 @@ class TestLookup:
             assert (
                 result.id == subject.id
             ), f"expected id [{subject.id}], got [{result.id}] for lookup value [{value}]"
+            # a value arriving as text, such as a numeric code from a form, resolves the same way
+            as_text = registry.lookup(str(value))
+            assert (
+                as_text is not None and as_text.id == subject.id
+            ), f"expected id [{subject.id}] for lookup value [{value!r}] as text, got {as_text}"

@@ -1,17 +1,33 @@
-from http.client import HTTPResponse
+from functools import cache
+from http.client import HTTPException, HTTPResponse, IncompleteRead
+import hashlib
 import json
+import time
 import zipfile
 from pathlib import Path
-from urllib.parse import quote
+from urllib.error import HTTPError
+from urllib.parse import urlencode
 from urllib.request import urlopen, Request
-from typing import cast
+from typing import Any, Callable, TypeVar, cast
 from .logger import ingest_log
+from .staging import staged_path, fetched_path
+
+T = TypeVar("T")
 
 # sent with every request to a data source
 USER_AGENT = "localis-data-refresh (+https://github.com/dstoffels/localis)"
 SPARQL_ENDPOINT = "https://query.wikidata.org/sparql"
+# iso-codes' and CLDR's files are fetched at their main branch's current commit, so each manifest url names the exact upstream version
+ISO_CODES_RAW_URL = "https://salsa.debian.org/iso-codes-team/iso-codes/-/raw"
+ISO_CODES_MAIN_URL = "https://salsa.debian.org/api/v4/projects/iso-codes-team%2Fiso-codes/repository/branches/main"
+CLDR_RAW_URL = "https://raw.githubusercontent.com/unicode-org/cldr-json"
+CLDR_MAIN_URL = "https://api.github.com/repos/unicode-org/cldr-json/branches/main"
+# tries per request, waiting RETRY_BACKOFF seconds before the first retry and doubling each time
+REQUEST_ATTEMPTS = 4
+RETRY_BACKOFF = 10
 
-_Manifest = dict[str, str | None]
+# each source file's entry, {url, etag, sha256}, keyed by its local file name
+_Manifest = dict[str, Any]
 
 
 def _load_manifest(path: Path) -> _Manifest:
@@ -29,28 +45,48 @@ def _save_manifest(path: Path, manifest: _Manifest) -> None:
         f.write("\n")
 
 
-# entries fetched this run, written to their manifest only once the stage that consumes them dumps successfully
-_pending: dict[Path, _Manifest] = {}
+def _retrying(request: Callable[[], T], label: str) -> T:
+    """request's result, retrying a 429, a 5xx, a dropped connection or timeout, or a cut-off body with backoff."""
+    for retry in range(REQUEST_ATTEMPTS - 1):
+        delay = RETRY_BACKOFF * 2**retry
+        try:
+            return request()
+        except HTTPError as e:
+            if e.code != 429 and e.code < 500:
+                raise
+            retry_after = e.headers.get("Retry-After", "")
+            delay = int(retry_after) if retry_after.isdigit() else delay
+            failure = f"HTTP {e.code}"
+        # a dropped connection or timeout (OSError), or a body cut off mid-stream (HTTPException, or ValueError from decoding)
+        except (OSError, HTTPException, ValueError) as e:
+            failure = type(e).__name__
+        ingest_log.writeline(f"{label} failed ({failure}), retrying in {delay}s", level="WARN")
+        time.sleep(delay)
+    return request()
 
 
-def record_pending(manifest_path: Path, name: str, value: str | None) -> None:
-    """Stages a manifest entry to be written by commit_manifest()."""
-    _pending.setdefault(manifest_path, {})[name] = value
+def _read_json(request: Request, timeout: int) -> Any:
+    with urlopen(request, timeout=timeout) as response:
+        return json.loads(response.read().decode("utf-8"))
 
 
-def committed_value(manifest_path: Path, name: str) -> str | None:
-    """The manifest entry as of the last successful dump."""
-    return _load_manifest(manifest_path).get(name)
+@cache
+def _main_commit(branch_url: str, sha_key: str, label: str) -> str:
+    """A repository's main commit from its branch API, under sha_key, looked up once per run so every stage builds from the same commit."""
+    request = Request(branch_url, headers={"User-Agent": USER_AGENT})
+    commit = _retrying(lambda: _read_json(request, timeout=60)["commit"][sha_key], f"{label} commit lookup")
+    ingest_log.writeline(f"Using {label} main at {commit}")
+    return commit
 
 
-def commit_manifest(manifest_path: Path) -> None:
-    """Writes this run's pending entries to the manifest; call only after the consuming stage has dumped, so a failed run leaves its sources marked unconsumed."""
-    pending = _pending.pop(manifest_path, None)
-    if not pending:
-        return
-    manifest = _load_manifest(manifest_path)
-    manifest.update(pending)
-    _save_manifest(manifest_path, manifest)
+def iso_codes_url(file: str) -> str:
+    """The URL of an iso-codes data file at main's current commit."""
+    return f"{ISO_CODES_RAW_URL}/{_main_commit(ISO_CODES_MAIN_URL, 'id', 'iso-codes')}/data/{file}"
+
+
+def cldr_url(path: str) -> str:
+    """The URL of a cldr-json file, by its path under cldr-json/, at main's current commit."""
+    return f"{CLDR_RAW_URL}/{_main_commit(CLDR_MAIN_URL, 'sha', 'cldr-json')}/cldr-json/{path}"
 
 
 def _etag(url: str) -> str | None:
@@ -60,59 +96,65 @@ def _etag(url: str) -> str | None:
         return head_response.headers.get("ETag")
 
 
-def has_changed(
-    url: str, dest: Path, manifest_path: Path, exists_path: Path | None = None
-) -> bool:
-    """Read-only HEAD check against manifest_path; never downloads or writes."""
-    if not (exists_path or dest).exists():
-        return True
-
-    manifest = _load_manifest(manifest_path)
-    etag = _etag(url)
-
-    if etag == manifest.get(dest.name):
-        ingest_log.writeline(f"No update needed for {dest.name}")
-        return False
-
-    return True
+def _sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with open(path, "rb") as f:
+        while chunk := f.read(1024 * 1024):
+            digest.update(chunk)
+    return digest.hexdigest()
 
 
-def download(url: str, dest: Path, manifest_path: Path) -> None:
-    """Unconditional fetch via a .part temp file; pair with has_changed()."""
+def _download(url: str, dest: Path) -> str | None:
+    """Downloads url to dest via a .part file, returning the ETag of the bytes downloaded."""
     dest.parent.mkdir(parents=True, exist_ok=True)
     tmp = dest.with_suffix(dest.suffix + ".part")
-
     request = Request(url, headers={"User-Agent": USER_AGENT})
     ingest_log.writeline(f"Downloading {dest.name} from {url}")
     response = cast(HTTPResponse, urlopen(request, timeout=60))
     with response, open(tmp, "wb") as f:
-        # the ETag of the bytes actually downloaded, which a second HEAD could miss if the file changed in between
         etag = response.headers.get("ETag")
+        length = response.headers.get("Content-Length")
         while chunk := response.read(1024 * 1024):
             f.write(chunk)
-
+        # http.client ends a body cut off short of its Content-Length without an error
+        if length is not None and f.tell() != int(length):
+            raise IncompleteRead(b"", int(length) - f.tell())
     tmp.replace(dest)
-    ingest_log.writeline(f"Downloaded and updated {dest.name}")
-    record_pending(manifest_path, dest.name, etag)
+    return etag
 
 
-def fetch(url: str, dest: Path, manifest_path: Path, extract: str | None = None) -> bool:
-    """Downloads url to dest if it changed since the last consumed download, unpacking a zip's `extract` member beside it and removing the zip; True if it downloaded."""
-    if not has_changed(url, dest, manifest_path, exists_path=dest.with_name(extract) if extract else None):
-        return False
-    download(url, dest, manifest_path)
-    if extract:
-        with zipfile.ZipFile(dest) as zf:
-            zf.extract(extract, dest.parent)
-        dest.unlink()
-    return True
+def fetch(url: str, dest: Path, manifest_path: Path, extract: str | None = None) -> None:
+    """Downloads url to dest, extracting a zip's `extract` member, unless the local file matches its last record; stages its manifest entry either way."""
+    local = dest.with_name(extract) if extract else dest
+    etag = _retrying(lambda: _etag(url), f"HEAD {url}")
+    # a failed run since the last promotion may have downloaded past the committed manifest
+    entry = _load_manifest(fetched_path(manifest_path)).get(local.name) or _load_manifest(manifest_path).get(local.name, {})
+    # hashed only when the url and ETag match, so a changed source isn't hashed just to be replaced
+    sha256 = _sha256(local) if local.exists() and url == entry.get("url") and etag == entry.get("etag") else None
+
+    if sha256 is None or sha256 != entry.get("sha256"):
+        etag = _retrying(lambda: _download(url, dest), f"Downloading {dest.name}")
+        if extract:
+            with zipfile.ZipFile(dest) as zf:
+                zf.extract(extract, dest.parent)
+            dest.unlink()
+        sha256 = _sha256(local)
+        ingest_log.writeline(f"Downloaded and updated {local.name}")
+    else:
+        ingest_log.writeline(f"No update needed for {local.name}")
+    # staged manifests hold this run's entries alone, so unused sources drop out
+    staged = staged_path(manifest_path)
+    entries = _load_manifest(staged)
+    entries[local.name] = {"url": url, "etag": etag, "sha256": sha256}
+    _save_manifest(staged, dict(sorted(entries.items())))
 
 
 def sparql(query: str) -> list[dict]:
     """The result rows of a Wikidata SPARQL query, fetched live."""
+    # POST, since the query service caches GET responses and a repeat query must reach a server
     request = Request(
-        f"{SPARQL_ENDPOINT}?query={quote(query)}&format=json",
+        SPARQL_ENDPOINT,
+        data=urlencode({"query": query, "format": "json"}).encode(),
         headers={"User-Agent": USER_AGENT, "Accept": "application/sparql-results+json"},
     )
-    with urlopen(request, timeout=120) as response:
-        return json.loads(response.read().decode("utf-8"))["results"]["bindings"]
+    return _retrying(lambda: _read_json(request, timeout=120)["results"]["bindings"], "Wikidata query")

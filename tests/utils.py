@@ -1,10 +1,13 @@
+import json
 import random
 import string
-from localis import macroregions, countries, subdivisions, cities
+from pathlib import Path
+from ingest.shared.models import CountryModel
+from localis import macroregions, currencies, scripts, languages, countries, subdivisions, cities
 import pytest
 
-REGISTRIES = [macroregions, countries, subdivisions, cities]
-QUERYABLE_REGISTRIES = [countries, subdivisions, cities]
+REGISTRIES = [macroregions, currencies, scripts, languages, countries, subdivisions, cities]
+QUERYABLE_REGISTRIES = [currencies, scripts, languages, countries, subdivisions, cities]
 
 registry_param = pytest.mark.parametrize(
     "registry", REGISTRIES, ids=lambda r: type(r).__name__
@@ -17,6 +20,20 @@ queryable_registry_param = pytest.mark.parametrize(
 """Tests will loop over the registries with filter() and search() and perform the same assertions."""
 
 ALPHABET = string.ascii_lowercase
+
+
+def read_json(path: Path) -> dict:
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def write_json(path: Path, data: dict) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(data), encoding="utf-8")
+
+
+def country_model(alpha2: str, alpha3: str) -> CountryModel:
+    """A minimal country for ingest stage tests, named by its alpha2."""
+    return CountryModel(name=alpha2, alpha2=alpha2, alpha3=alpha3, geonames_id=None, official_name=None, common_name=None, aliases=[], numeric=None, flag=None, historic=None)
 
 
 def mangle(

@@ -1,0 +1,7 @@
+{
+  "iso_4217.json": {
+    "url": "https://salsa.debian.org/iso-codes-team/iso-codes/-/raw/90b9fe56ec2f3a05675d525d3587ab6c18f30376/data/iso_4217.json",
+    "etag": "W/\"aaae11f57f8cfb05ba94719b34854a55-gzip\"",
+    "sha256": "a84a5b83c38591e87569b2e0ba184ed867386e00f2b5a93349a0cd1ded6b6ccf"
+  }
+}

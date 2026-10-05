@@ -1,0 +1,177 @@
+name	adb unit of account	0	1
+name	afghani	1	1
+name	algerian dinar	2	1
+name	arab accounting dinar	3	1
+name	argentine peso	4	1
+name	armenian dram	5	1
+name	aruban florin	6	1
+name	australian dollar	7	1
+name	azerbaijan manat	8	1
+name	bahamian dollar	9	1
+name	bahraini dinar	10	1
+name	baht	11	1
+name	balboa	12	1
+name	barbados dollar	13	1
+name	belarusian ruble	14	1
+name	belize dollar	15	1
+name	bermudian dollar	16	1
+name	bolivar soberano	17	2
+name	boliviano	19	1
+name	bond markets unit european composite unit (eurco)	20	1
+name	bond markets unit european monetary unit (e.m.u.-6)	21	1
+name	bond markets unit european unit of account 17 (e.u.a.-17)	22	1
+name	bond markets unit european unit of account 9 (e.u.a.-9)	23	1
+name	brazilian real	24	1
+name	brunei dollar	25	1
+name	burundi franc	26	1
+name	cabo verde escudo	27	1
+name	canadian dollar	28	1
+name	caribbean guilder	29	1
+name	cayman islands dollar	30	1
+name	cfa franc bceao	31	1
+name	cfa franc beac	32	1
+name	cfp franc	33	1
+name	chilean peso	34	1
+name	codes specifically reserved for testing purposes	35	1
+name	colombian peso	36	1
+name	comorian franc	37	1
+name	congolese franc	38	1
+name	convertible mark	39	1
+name	cordoba oro	40	1
+name	costa rican colon	41	1
+name	cuban peso	42	1
+name	czech koruna	43	1
+name	dalasi	44	1
+name	danish krone	45	1
+name	denar	46	1
+name	djibouti franc	47	1
+name	dobra	48	1
+name	dominican peso	49	1
+name	dong	50	1
+name	east caribbean dollar	51	1
+name	egyptian pound	52	1
+name	el salvador colon	53	1
+name	ethiopian birr	54	1
+name	euro	55	1
+name	falkland islands pound	56	1
+name	fiji dollar	57	1
+name	forint	58	1
+name	ghana cedi	59	1
+name	gibraltar pound	60	1
+name	gold	61	1
+name	gourde	62	1
+name	guarani	63	1
+name	guinean franc	64	1
+name	guyana dollar	65	1
+name	hong kong dollar	66	1
+name	hryvnia	67	1
+name	iceland krona	68	1
+name	indian rupee	69	1
+name	iranian rial	70	1
+name	iraqi dinar	71	1
+name	jamaican dollar	72	1
+name	jordanian dinar	73	1
+name	kenyan shilling	74	1
+name	kina	75	1
+name	kuwaiti dinar	76	1
+name	kwanza	77	1
+name	kyat	78	1
+name	lao kip	79	1
+name	lari	80	1
+name	lebanese pound	81	1
+name	lek	82	1
+name	lempira	83	1
+name	leone	84	1
+name	liberian dollar	85	1
+name	libyan dinar	86	1
+name	lilangeni	87	1
+name	loti	88	1
+name	malagasy ariary	89	1
+name	malawi kwacha	90	1
+name	malaysian ringgit	91	1
+name	mauritius rupee	92	1
+name	mexican peso	93	1
+name	mexican unidad de inversion (udi)	94	1
+name	moldovan leu	95	1
+name	moroccan dirham	96	1
+name	mozambique metical	97	1
+name	mvdol	98	1
+name	naira	99	1
+name	nakfa	100	1
+name	namibia dollar	101	1
+name	nepalese rupee	102	1
+name	new israeli sheqel	103	1
+name	new taiwan dollar	104	1
+name	new zealand dollar	105	1
+name	ngultrum	106	1
+name	north korean won	107	1
+name	norwegian krone	108	1
+name	ouguiya	109	1
+name	pa'anga	110	1
+name	pakistan rupee	111	1
+name	palladium	112	1
+name	pataca	113	1
+name	peso uruguayo	114	1
+name	philippine peso	115	1
+name	platinum	116	1
+name	pound sterling	117	1
+name	pula	118	1
+name	qatari rial	119	1
+name	quetzal	120	1
+name	rand	121	1
+name	rial omani	122	1
+name	riel	123	1
+name	romanian leu	124	1
+name	rufiyaa	125	1
+name	rupiah	126	1
+name	russian ruble	127	1
+name	rwanda franc	128	1
+name	saint helena pound	129	1
+name	saudi riyal	130	1
+name	sdr (special drawing right)	131	1
+name	serbian dinar	132	1
+name	seychelles rupee	133	1
+name	silver	134	1
+name	singapore dollar	135	1
+name	sol	136	1
+name	solomon islands dollar	137	1
+name	som	138	1
+name	somali shilling	139	1
+name	somoni	140	1
+name	south sudanese pound	141	1
+name	sri lanka rupee	142	1
+name	sucre	143	1
+name	sudanese pound	144	1
+name	surinam dollar	145	1
+name	swedish krona	146	1
+name	swiss franc	147	1
+name	syrian pound	148	1
+name	taka	149	1
+name	tala	150	1
+name	tanzanian shilling	151	1
+name	tenge	152	1
+name	the codes assigned for transactions where no currency is involved	153	1
+name	trinidad and tobago dollar	154	1
+name	tugrik	155	1
+name	tunisian dinar	156	1
+name	turkish lira	157	1
+name	turkmenistan new manat	158	1
+name	uae dirham	159	1
+name	uganda shilling	160	1
+name	unidad de fomento	161	1
+name	unidad de valor real	162	1
+name	unidad previsional	163	1
+name	uruguay peso en unidades indexadas (ui)	164	1
+name	us dollar	165	1
+name	us dollar (next day)	166	1
+name	uzbekistan sum	167	1
+name	vatu	168	1
+name	wir euro	169	1
+name	wir franc	170	1
+name	won	171	1
+name	yemeni rial	172	1
+name	yen	173	1
+name	yuan renminbi	174	1
+name	zambian kwacha	175	1
+name	zimbabwe gold	176	1
+name	zloty	177	1

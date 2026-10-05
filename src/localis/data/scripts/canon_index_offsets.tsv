@@ -1,0 +1,1263 @@
+  1	0	1
+  2	1	1
+  a	2	25
+  b	27	20
+  c	47	25
+  d	72	9
+  e	81	13
+  f	94	14
+  g	108	15
+  h	123	26
+  i	149	6
+  j	155	5
+  k	160	25
+  l	185	21
+  m	206	25
+  n	231	16
+  o	247	18
+  p	265	20
+  r	285	11
+  s	296	46
+  t	342	28
+  u	370	9
+  v	379	17
+  w	396	6
+  x	402	1
+  y	403	3
+  z	406	1
+ 1b	407	1
+ 2g	408	1
+ a 	409	2
+ ab	411	1
+ ad	412	1
+ af	413	1
+ ah	414	1
+ ak	415	2
+ al	417	8
+ an	425	4
+ ar	429	6
+ as	435	1
+ av	436	1
+ b 	437	1
+ ba	438	6
+ be	444	3
+ bh	447	1
+ bi	448	1
+ bl	449	1
+ bo	450	3
+ br	453	2
+ bu	455	3
+ ca	458	3
+ ce	461	1
+ ch	462	7
+ ci	469	3
+ co	472	6
+ cu	478	3
+ cy	481	4
+ de	485	3
+ di	488	1
+ do	489	4
+ du	493	1
+ ea	494	1
+ eg	495	3
+ el	498	3
+ em	501	1
+ en	502	1
+ er	503	1
+ es	504	1
+ et	505	2
+ ez	507	1
+ fo	508	12
+ fr	520	2
+ ga	522	2
+ ge	524	4
+ gl	528	1
+ go	529	3
+ gr	532	2
+ gu	534	4
+ gʌ	538	1
+ ha	539	14
+ he	553	1
+ hi	554	8
+ hm	562	2
+ ho	564	1
+ hu	565	1
+ im	566	1
+ in	567	4
+ it	571	1
+ ja	572	4
+ ju	576	1
+ ka	577	9
+ kh	586	9
+ ki	595	2
+ kl	597	1
+ ko	598	2
+ kp	600	1
+ ks	601	1
+ la	602	7
+ le	609	3
+ li	612	6
+ lo	618	1
+ lu	619	2
+ ly	621	2
+ ma	623	10
+ me	633	5
+ mi	638	2
+ mk	640	1
+ mo	641	4
+ mr	645	1
+ mt	646	1
+ mu	647	2
+ my	649	1
+ n 	650	1
+ na	651	8
+ ne	659	2
+ no	661	2
+ nu	663	2
+ ny	665	1
+ ob	666	1
+ od	667	1
+ of	668	1
+ og	669	1
+ ok	670	1
+ ol	671	12
+ on	683	1
+ or	684	2
+ os	686	3
+ pa	689	8
+ pe	697	3
+ ph	700	3
+ pi	703	1
+ po	704	1
+ pr	705	5
+ ps	710	1
+ pu	711	1
+ ra	712	2
+ re	714	3
+ ro	717	3
+ ru	720	3
+ s 	723	1
+ sa	724	5
+ sc	729	7
+ se	736	1
+ sh	737	4
+ si	741	8
+ sl	749	1
+ sm	750	2
+ so	752	6
+ sp	758	1
+ sq	759	1
+ st	760	2
+ su	762	4
+ sy	766	10
+ ta	776	12
+ te	788	2
+ th	790	3
+ ti	793	4
+ to	797	4
+ tr	801	2
+ tu	803	2
+ ty	805	1
+ uc	806	1
+ ug	807	1
+ un	808	4
+ us	812	3
+ uy	815	1
+ va	816	14
+ vi	830	3
+ wa	833	2
+ we	835	1
+ wi	836	2
+ wo	838	1
+ xe	839	1
+ ye	840	1
+ yi	841	1
+ yo	842	1
+ za	843	1
+1ba	844	1
+1ci	845	2
+21 	847	2
+21b	849	1
+21c	850	2
+2gg	852	1
+33 	853	2
+33b	855	1
+3ba	856	1
+a21	857	2
+aan	859	1
+aba	860	4
+abi	864	5
+abo	869	1
+ac 	870	4
+ach	874	1
+ad 	875	1
+ada	876	2
+adi	878	5
+adl	883	1
+aea	884	3
+ael	887	1
+afa	888	1
+ag 	889	1
+aga	890	7
+agb	897	1
+age	898	1
+agh	899	1
+ago	900	1
+agr	901	1
+ags	902	1
+ah 	903	2
+aha	905	2
+ahl	907	3
+ahm	910	1
+aho	911	1
+ai 	912	10
+aic	922	3
+aid	925	1
+aik	926	1
+ail	927	1
+aim	928	1
+ait	929	2
+aja	931	1
+ak 	932	1
+aka	933	5
+ake	938	1
+akh	939	2
+akk	941	1
+akm	942	1
+akr	943	1
+akt	944	1
+aku	945	2
+al 	947	10
+ala	957	5
+alb	962	1
+ali	963	12
+all	975	2
+alm	977	1
+alo	978	1
+alt	979	1
+am 	980	7
+ama	987	3
+ami	990	2
+amo	992	1
+amu	993	1
+an 	994	46
+ana	1040	10
+anc	1050	2
+and	1052	5
+ane	1057	4
+ang	1061	9
+ani	1070	5
+anj	1075	2
+ank	1077	1
+anm	1078	1
+ann	1079	2
+ant	1081	13
+anu	1094	1
+anw	1095	1
+any	1096	1
+anz	1097	1
+ao 	1098	2
+apa	1100	2
+aph	1102	1
+app	1103	1
+ar 	1104	8
+ara	1112	12
+arc	1124	1
+ard	1125	1
+are	1126	1
+arg	1127	1
+ari	1128	22
+arm	1150	1
+aro	1151	1
+art	1152	2
+ary	1154	1
+as 	1155	7
+asa	1162	3
+ase	1165	1
+ash	1166	1
+asi	1167	1
+asm	1168	1
+aso	1169	1
+ass	1170	1
+ast	1171	2
+at 	1173	1
+ata	1174	6
+ate	1180	2
+ath	1182	1
+ati	1183	8
+atn	1191	1
+ato	1192	1
+atr	1193	2
+au 	1195	1
+auc	1196	1
+aur	1197	1
+ava	1198	1
+ave	1199	1
+avi	1200	4
+avo	1204	1
+avr	1205	2
+aw 	1207	2
+awa	1209	1
+awh	1210	1
+awi	1211	1
+axi	1212	2
+ay 	1214	1
+aya	1215	3
+ayb	1218	1
+aye	1219	1
+ayi	1220	1
+aza	1221	1
+ba 	1222	2
+ba2	1224	2
+bal	1226	1
+bam	1227	1
+ban	1228	3
+bar	1231	2
+bas	1233	2
+bat	1235	3
+baw	1238	1
+bay	1239	1
+baz	1240	1
+ben	1241	1
+ber	1242	3
+bet	1245	1
+bha	1246	1
+bia	1247	2
+bic	1249	4
+ble	1253	1
+bli	1254	1
+bo 	1255	1
+bol	1256	4
+boo	1260	1
+bop	1261	2
+bor	1263	1
+bra	1264	2
+bre	1266	1
+bse	1267	1
+bu 	1268	1
+bug	1269	1
+buh	1270	1
+bur	1271	1
+cal	1272	1
+can	1273	2
+car	1275	1
+cas	1276	2
+cau	1278	1
+cem	1279	1
+ch 	1280	2
+cha	1282	4
+che	1286	3
+chi	1289	2
+cho	1291	2
+chu	1293	2
+ci3	1295	2
+cia	1297	2
+cie	1299	1
+cig	1300	1
+cin	1301	1
+cir	1302	1
+cit	1303	1
+cod	1304	5
+com	1309	1
+cop	1310	1
+cri	1311	9
+cs 	1320	1
+cum	1321	1
+cun	1322	2
+cur	1324	1
+cyp	1325	2
+cyr	1327	2
+da 	1329	2
+dae	1331	1
+dai	1332	1
+dan	1333	1
+dar	1334	1
+daw	1335	1
+ddh	1336	1
+de 	1337	6
+ded	1343	1
+def	1344	1
+dem	1345	1
+des	1346	1
+det	1347	2
+dev	1349	1
+dha	1350	1
+dhi	1351	1
+dhr	1352	1
+di 	1353	5
+dia	1358	6
+din	1364	1
+dit	1365	2
+div	1367	1
+dja	1368	1
+dla	1369	1
+doc	1370	1
+dog	1371	1
+don	1372	1
+dor	1373	1
+dri	1374	1
+dru	1375	1
+dup	1376	1
+dus	1377	1
+eai	1378	1
+eal	1379	1
+ean	1380	4
+ear	1384	2
+eas	1386	1
+eba	1387	1
+ebr	1388	1
+ech	1389	1
+ed 	1390	7
+ede	1397	1
+edj	1398	1
+edr	1399	1
+ee 	1400	2
+eec	1402	1
+eek	1403	1
+eet	1404	1
+efa	1405	1
+eg 	1406	1
+egy	1407	3
+ei 	1410	1
+eif	1411	2
+eit	1413	1
+eja	1414	1
+ek 	1415	2
+eke	1417	1
+ela	1418	1
+elb	1419	1
+eli	1420	1
+ell	1421	1
+elo	1422	1
+elu	1423	1
+ely	1424	1
+ema	1425	2
+eme	1427	1
+emo	1428	2
+en 	1430	3
+end	1433	2
+ene	1435	1
+eng	1436	4
+eni	1440	2
+eno	1442	1
+ent	1443	2
+eor	1445	2
+epa	1447	1
+epc	1448	1
+er 	1449	4
+era	1453	1
+erb	1454	1
+ere	1455	1
+erf	1456	1
+eri	1457	4
+erm	1461	2
+ern	1463	2
+ero	1465	7
+ers	1472	2
+erv	1474	2
+es 	1476	2
+ese	1478	10
+est	1488	3
+et 	1491	4
+eta	1495	1
+etc	1496	1
+ete	1497	2
+eth	1499	1
+eti	1500	2
+etr	1502	1
+eul	1503	1
+eva	1504	1
+ew 	1505	2
+ewa	1507	1
+ewt	1508	1
+ez 	1509	1
+ezi	1510	1
+fai	1511	1
+fak	1512	1
+fe 	1513	1
+fi 	1514	1
+fie	1515	2
+fin	1517	1
+fo 	1518	2
+for	1520	14
+fra	1534	2
+ga 	1536	1
+gae	1537	1
+gal	1538	3
+gan	1541	4
+gar	1545	5
+gba	1550	2
+gdi	1552	2
+ge 	1554	3
+geb	1557	1
+gel	1558	1
+geo	1559	2
+geu	1561	1
+ggo	1562	1
+gh 	1563	1
+gha	1564	1
+ghu	1565	1
+gia	1566	2
+gin	1568	2
+gla	1570	2
+gly	1572	4
+gnw	1576	1
+go 	1577	2
+gol	1579	2
+gon	1581	3
+gor	1584	1
+got	1585	1
+gra	1586	3
+gre	1589	1
+gri	1590	1
+gs 	1591	1
+gsa	1592	1
+gu 	1593	1
+guj	1594	1
+gul	1595	3
+gun	1598	1
+gur	1599	2
+gut	1601	1
+gwa	1602	1
+gya	1603	1
+gyp	1604	3
+gʌ2	1607	1
+ha 	1608	2
+haa	1610	1
+hae	1611	1
+hag	1612	1
+hai	1613	2
+haj	1615	1
+hak	1616	1
+hal	1617	1
+ham	1618	4
+han	1622	12
+har	1634	3
+hat	1637	1
+hau	1638	1
+hav	1639	1
+haw	1640	2
+heb	1642	1
+hed	1643	1
+hei	1644	1
+hem	1645	2
+hen	1647	2
+her	1649	2
+hi 	1651	6
+hia	1657	1
+hic	1658	1
+hid	1659	1
+hie	1660	5
+hik	1665	1
+hin	1666	1
+hio	1667	1
+hir	1668	3
+his	1671	1
+hit	1672	4
+hku	1676	1
+hla	1677	3
+hme	1680	1
+hmi	1681	1
+hmo	1682	2
+ho 	1684	1
+hoe	1685	1
+hoj	1686	1
+hom	1687	1
+hon	1688	2
+hor	1690	3
+hri	1693	1
+hs 	1694	4
+hth	1698	1
+htr	1699	1
+hu 	1700	2
+hud	1702	1
+hue	1703	1
+hui	1704	1
+hun	1705	1
+hur	1706	3
+hut	1709	2
+hy 	1711	1
+i33	1712	2
+ia 	1714	2
+iac	1716	4
+iak	1720	1
+ial	1721	1
+ian	1722	35
+iao	1757	1
+ias	1758	6
+iba	1764	1
+ibe	1765	1
+ibl	1766	1
+ic 	1767	25
+ica	1792	1
+ich	1793	1
+ici	1794	2
+ics	1796	1
+id 	1797	1
+idd	1798	1
+ide	1799	1
+idi	1800	1
+idr	1801	1
+ied	1802	2
+ien	1804	1
+ier	1805	5
+ies	1810	1
+iet	1811	1
+ifi	1812	4
+ifo	1816	2
+ig 	1818	1
+iga	1819	1
+igi	1820	1
+ign	1821	1
+ika	1822	1
+iki	1823	2
+iks	1825	1
+il 	1826	1
+ill	1827	3
+imb	1830	1
+ime	1831	1
+imp	1832	2
+in 	1834	8
+ina	1842	4
+ind	1846	2
+ine	1848	5
+ing	1853	3
+inh	1856	2
+ino	1858	1
+ins	1859	2
+ion	1861	5
+iop	1866	1
+iot	1867	1
+ipi	1868	1
+ipt	1869	9
+iq 	1878	1
+iqa	1879	1
+ira	1880	4
+irh	1884	1
+irt	1885	1
+ish	1886	1
+isi	1887	1
+iso	1888	1
+iss	1889	1
+isu	1890	1
+ita	1891	4
+ite	1895	4
+ith	1899	5
+iti	1904	9
+itt	1913	2
+iva	1915	2
+ive	1917	2
+iya	1919	1
+izo	1920	1
+ja 	1921	1
+jal	1922	1
+jam	1923	1
+jan	1924	3
+jap	1927	2
+jar	1929	1
+jav	1930	1
+ji 	1931	2
+jin	1933	1
+jki	1934	1
+jur	1935	1
+ka 	1936	2
+kad	1938	1
+kag	1939	1
+kai	1940	2
+kak	1942	1
+kan	1943	5
+kas	1948	1
+kat	1949	3
+kaw	1952	1
+kay	1953	1
+ke 	1954	1
+kee	1955	1
+ken	1956	1
+kha	1957	1
+khe	1958	2
+khi	1960	5
+khm	1965	1
+kho	1966	2
+khu	1968	2
+ki 	1970	4
+kic	1974	1
+kik	1975	1
+kir	1976	1
+kka	1977	1
+kli	1978	1
+kma	1979	1
+kno	1980	1
+ko 	1981	1
+kor	1982	1
+kpe	1983	1
+kri	1984	1
+ksh	1985	1
+ksu	1986	1
+ktu	1987	1
+kui	1988	1
+kuq	1989	1
+kur	1990	1
+la 	1991	4
+lab	1995	3
+lag	1998	1
+lam	1999	3
+lan	2002	1
+lao	2003	1
+lar	2004	3
+lat	2007	4
+lav	2011	4
+lay	2015	1
+lba	2016	2
+ld 	2018	10
+le 	2028	4
+lea	2032	1
+lek	2033	1
+lep	2034	1
+li 	2035	6
+lia	2041	8
+lib	2049	1
+lic	2050	4
+lif	2054	1
+lim	2055	1
+lin	2056	4
+lip	2060	1
+liq	2061	1
+lis	2062	2
+lit	2064	1
+lji	2065	1
+ll 	2066	2
+lla	2068	4
+lle	2072	2
+lli	2074	2
+lmy	2076	1
+lo 	2077	1
+log	2078	1
+lom	2079	1
+lon	2080	1
+lot	2081	1
+loy	2082	1
+ls 	2083	3
+lta	2086	1
+lte	2087	1
+lu 	2088	1
+lue	2089	1
+lug	2090	1
+luw	2091	1
+lyc	2092	1
+lyd	2093	1
+lym	2094	1
+lyp	2095	4
+ma 	2099	3
+mah	2102	1
+mai	2103	2
+mak	2105	1
+mal	2106	3
+man	2109	3
+mar	2112	3
+mas	2115	1
+mat	2116	2
+may	2118	2
+mba	2120	1
+mbo	2121	4
+mbu	2125	1
+me 	2126	1
+med	2127	1
+mee	2128	1
+mei	2129	1
+men	2130	3
+mer	2133	4
+mes	2137	1
+met	2138	1
+mi 	2139	1
+mia	2140	2
+mic	2142	1
+mil	2143	1
+min	2144	2
+mit	2146	1
+mkh	2147	1
+mmo	2148	1
+mo 	2149	1
+mod	2150	1
+mof	2151	2
+moj	2153	1
+mon	2154	5
+moo	2159	1
+mor	2160	1
+mot	2161	1
+mpe	2162	2
+mpl	2164	1
+mro	2165	1
+mru	2166	1
+mta	2167	2
+muk	2169	1
+mul	2170	1
+mum	2171	1
+mun	2172	1
+mya	2173	1
+myr	2174	1
+na 	2175	8
+na2	2183	2
+nab	2185	2
+nad	2187	2
+nag	2189	5
+nai	2194	1
+nak	2195	2
+nal	2197	6
+nan	2203	1
+nas	2204	1
+nat	2205	1
+nax	2206	2
+nch	2208	1
+nci	2209	1
+nco	2210	1
+nd 	2211	4
+nda	2215	3
+nde	2218	2
+ndh	2220	1
+ndi	2221	3
+ndu	2224	1
+ne 	2225	1
+nea	2226	2
+ned	2228	1
+nei	2229	2
+nep	2231	1
+nes	2232	6
+net	2238	1
+new	2239	2
+ng 	2241	9
+nga	2250	3
+ngb	2253	1
+nge	2254	2
+ngl	2256	1
+ngo	2257	3
+ngs	2260	1
+ngu	2261	4
+ngw	2265	1
+ngy	2266	1
+nha	2267	1
+nhe	2268	1
+ni 	2269	2
+nia	2271	2
+nic	2273	6
+nif	2279	2
+nja	2281	3
+nji	2284	1
+nkn	2285	1
+nkr	2286	1
+nma	2287	1
+nna	2288	2
+noa	2290	1
+nog	2291	1
+noo	2292	1
+nor	2293	1
+not	2294	1
+now	2295	1
+nsc	2296	2
+nt 	2298	12
+nta	2310	2
+nth	2312	1
+nts	2313	1
+nun	2314	1
+nus	2315	2
+nuw	2317	1
+nwa	2318	1
+nwr	2319	2
+nya	2321	1
+nyi	2322	1
+nzi	2323	1
+o33	2324	1
+oan	2325	1
+obe	2326	1
+ocu	2327	1
+ode	2328	5
+odh	2333	1
+odi	2334	2
+oen	2336	1
+of 	2337	1
+ofo	2338	2
+og 	2340	1
+ogd	2341	2
+ogh	2343	1
+ogl	2344	4
+ogr	2348	2
+ohi	2350	1
+oi 	2351	1
+oit	2352	2
+oji	2354	1
+ojk	2355	1
+ok 	2356	1
+oka	2357	1
+oke	2358	1
+ol 	2359	2
+old	2361	10
+ole	2371	1
+oli	2372	3
+olj	2375	1
+oll	2376	1
+olo	2377	1
+ols	2378	3
+om 	2381	1
+oma	2382	1
+omb	2383	2
+omm	2385	1
+omo	2386	2
+omp	2388	1
+omt	2389	1
+on 	2390	6
+ona	2396	5
+ond	2401	2
+one	2403	1
+ong	2404	7
+oni	2411	1
+ont	2412	1
+oo 	2413	1
+ook	2414	1
+oon	2415	1
+opi	2416	1
+opo	2417	2
+opt	2419	1
+or 	2420	12
+ora	2432	2
+orb	2434	1
+ore	2435	1
+org	2436	2
+ori	2438	3
+ork	2441	1
+orm	2442	3
+oro	2445	1
+ort	2446	2
+osa	2448	1
+osc	2449	1
+osh	2450	1
+osm	2451	1
+ot 	2452	1
+ota	2453	1
+oth	2454	1
+oti	2455	2
+oto	2457	4
+our	2461	1
+out	2462	1
+own	2463	1
+oya	2464	1
+oyo	2465	1
+pa 	2466	1
+pah	2467	4
+pal	2471	2
+pan	2473	3
+par	2476	1
+pau	2477	1
+pch	2478	1
+pe 	2479	1
+pee	2480	1
+pel	2481	1
+pen	2482	1
+per	2483	4
+pha	2487	1
+pho	2488	2
+phs	2490	4
+phy	2494	1
+pi 	2495	1
+pic	2496	1
+piq	2497	1
+pli	2498	1
+plo	2499	1
+pol	2500	1
+pom	2501	2
+ppa	2503	1
+pri	2504	3
+pro	2507	4
+psa	2511	1
+pt 	2512	7
+pti	2519	6
+pua	2525	1
+qad	2526	1
+qi 	2527	1
+qua	2528	1
+ra 	2529	3
+rab	2532	4
+rad	2536	3
+rag	2539	3
+rah	2542	1
+rai	2543	2
+rak	2545	1
+ram	2546	2
+ran	2548	5
+rap	2553	2
+ras	2555	3
+rat	2558	4
+ray	2562	1
+rbe	2563	1
+rbo	2564	1
+rch	2565	3
+rd 	2568	1
+re 	2569	1
+rea	2570	1
+red	2571	1
+ree	2572	1
+rej	2573	1
+ren	2574	1
+res	2575	2
+ret	2577	1
+rew	2578	1
+rfe	2579	1
+rge	2580	1
+rgi	2581	2
+rhu	2583	1
+ri 	2584	10
+ria	2594	16
+rie	2610	1
+rig	2611	1
+ril	2612	2
+rin	2614	2
+rio	2616	1
+rip	2617	9
+rit	2626	5
+riv	2631	2
+riy	2633	1
+riz	2634	1
+rka	2635	1
+rkh	2636	1
+rki	2637	1
+rm 	2638	2
+rme	2640	2
+rmi	2642	2
+rmo	2644	1
+rmu	2645	1
+rn 	2646	2
+ro 	2648	3
+rog	2651	4
+roh	2655	1
+roi	2656	2
+rok	2658	1
+ron	2659	2
+ros	2661	1
+rot	2662	3
+rsi	2665	2
+rso	2667	1
+rt 	2668	1
+rth	2669	4
+ru 	2673	2
+rul	2675	2
+run	2677	4
+rus	2681	1
+rve	2682	2
+ry 	2684	1
+sa 	2685	2
+sag	2687	1
+sal	2688	1
+sam	2689	1
+san	2690	2
+sar	2692	4
+sau	2696	1
+sca	2697	1
+scr	2698	9
+se 	2707	9
+sea	2716	1
+seg	2717	1
+ser	2718	4
+set	2722	1
+sha	2723	2
+shi	2725	1
+sho	2726	1
+sht	2727	2
+shu	2729	2
+sia	2731	2
+sib	2733	1
+sid	2734	2
+sig	2736	1
+sik	2737	1
+sim	2738	1
+sin	2739	3
+siv	2742	1
+skh	2743	1
+sla	2744	1
+sma	2745	3
+smi	2748	1
+so 	2749	1
+sog	2750	2
+soi	2752	1
+som	2753	2
+sor	2755	1
+sou	2756	2
+soy	2758	1
+spe	2759	1
+squ	2760	1
+ssa	2761	1
+ssy	2762	1
+sta	2763	3
+ste	2766	3
+str	2769	1
+su 	2770	1
+sub	2771	1
+suk	2772	1
+sum	2773	1
+sun	2774	2
+sur	2776	1
+syl	2777	4
+sym	2781	3
+syr	2784	4
+ta 	2788	2
+tae	2790	1
+tag	2791	2
+tai	2793	6
+tak	2799	5
+tal	2804	4
+tam	2808	1
+tan	2809	9
+tar	2818	1
+tat	2819	1
+tav	2820	2
+tc 	2822	1
+te 	2823	4
+ted	2827	1
+tee	2828	1
+tei	2829	1
+tel	2830	1
+ten	2831	3
+ter	2834	4
+th 	2838	5
+tha	2843	5
+the	2848	2
+thi	2850	5
+thk	2855	1
+ti 	2856	4
+tia	2860	3
+tib	2863	1
+tic	2864	11
+tif	2875	1
+tig	2876	1
+tin	2877	5
+tio	2882	5
+tir	2887	1
+tit	2888	1
+tn 	2889	1
+to 	2890	4
+to3	2894	1
+tod	2895	1
+tol	2896	2
+tom	2898	1
+tot	2899	1
+tra	2900	5
+trk	2905	1
+tru	2906	1
+ts 	2907	1
+tsu	2908	1
+tte	2909	1
+tti	2910	1
+tul	2911	1
+tur	2912	2
+typ	2914	1
+uac	2915	1
+uar	2916	1
+ubs	2917	1
+uca	2918	2
+uda	2920	1
+ue 	2921	2
+uga	2923	1
+ugi	2924	1
+ugu	2925	1
+uhi	2926	1
+ui 	2927	1
+uis	2928	1
+uja	2929	1
+ukh	2930	1
+uki	2931	1
+ul 	2932	3
+uli	2935	2
+ult	2937	1
+ulu	2938	1
+um 	2939	1
+ume	2940	2
+unc	2942	1
+und	2943	3
+une	2946	2
+ung	2948	2
+uni	2950	4
+unj	2954	1
+unk	2955	1
+uno	2956	1
+unu	2957	1
+unw	2958	1
+upl	2959	1
+uqi	2960	1
+ur 	2961	2
+ura	2963	1
+urc	2964	2
+uri	2966	1
+urk	2967	1
+urm	2968	2
+urs	2970	1
+uru	2971	2
+us 	2973	1
+usc	2974	1
+use	2975	3
+ush	2978	1
+usk	2979	1
+ut 	2980	1
+uta	2981	1
+uth	2982	1
+uts	2983	1
+uwa	2984	1
+uwi	2985	1
+uyg	2986	1
+vah	2987	1
+vai	2988	1
+van	2989	2
+var	2991	12
+vat	3003	2
+ve 	3005	1
+ved	3006	2
+ves	3008	2
+vi 	3010	3
+via	3013	1
+vie	3014	1
+vis	3015	1
+vit	3016	1
+von	3017	1
+vru	3018	2
+wa 	3020	2
+wad	3022	1
+wan	3023	1
+war	3024	4
+wes	3028	1
+wh 	3029	1
+wi 	3030	1
+wia	3031	1
+wit	3032	2
+wn 	3034	1
+wol	3035	1
+wri	3036	2
+wte	3038	1
+xew	3039	1
+xi 	3040	2
+ya 	3042	3
+yah	3045	1
+yal	3046	1
+yan	3047	3
+yba	3050	1
+yci	3051	1
+ydi	3052	1
+yek	3053	1
+yez	3054	1
+ygh	3055	1
+yi 	3056	1
+yia	3057	1
+yin	3058	1
+yll	3059	3
+ylo	3062	1
+yma	3063	1
+ymb	3064	3
+yo 	3067	1
+yom	3068	1
+ype	3069	1
+yph	3070	4
+ypr	3074	2
+ypt	3076	3
+yre	3079	1
+yri	3080	6
+zan	3086	1
+zar	3087	1
+zi 	3088	1
+zid	3089	1
+zon	3090	1
+ʌ21	3091	1

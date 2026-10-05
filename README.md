@@ -1,23 +1,37 @@
 # localis
 
-Fast, offline access to comprehensive data for **countries**, **subdivisions**, **cities** and the **macroregions** countries sit in. Built on ISO 3166, GeoNames and Unicode CLDR datasets (updated monthly) with support for exact lookups, filtering, and fuzzy search.
+Fast, offline access to comprehensive data for **countries**, **subdivisions**, **cities**, the countries' **macroregions**, the **currencies** and **languages** they use, and the writing **scripts** languages are written in. Built on ISO 3166, ISO 4217, ISO 639-3, ISO 15924, GeoNames, Unicode CLDR and Wikidata datasets (updated monthly) with support for exact lookups, filtering, and fuzzy search.
+
+> ⚠️ **localis 3.0 is in beta.** `pip install localis` still installs 2.1.x, which is no longer maintained; install the beta with `pip install --pre localis`. The [CHANGELOG](https://github.com/dstoffels/localis/blob/main/CHANGELOG.md#upgrading-from-210) lists what changed from 2.1, and [docs/versioning.md](https://github.com/dstoffels/localis/blob/main/docs/versioning.md#pre-releases) explains the beta.
 
 ## Features
 
-- 🌍 **<!-- stat:data.countries.total:int -->281<!-- /stat --> countries** (<!-- stat:data.countries.historic:int -->31<!-- /stat --> historic) sourced and merged from ISO 3166-1, ISO 3166-3, and GeoNames
-- 🗺️ **<!-- stat:data.subdivisions.total:int -->51,711<!-- /stat --> subdivisions** sourced and merged from ISO 3166-2 and GeoNames
-- 🏙️ **<!-- stat:data.cities.total:int -->235,917<!-- /stat --> cities** sourced from GeoNames cities500.txt
-- 🌐 **<!-- stat:data.macroregions.total:int -->34<!-- /stat --> macroregions** (<!-- stat:data.macroregions.regions:int -->5<!-- /stat --> regions, <!-- stat:data.macroregions.subregions:int -->23<!-- /stat --> subregions, <!-- stat:data.macroregions.groupings:int -->6<!-- /stat --> groupings) sourced from Unicode CLDR, with every current country placed in them
-- 🔍 **Typo-tolerant search**: with a typo in the query, the intended record ranks first for <!-- stat:bench.registries.countries.accuracy.top1_pct:pct -->99.3%<!-- /stat --> of countries, <!-- stat:bench.registries.subdivisions.accuracy.top1_pct:pct -->85.4%<!-- /stat --> of subdivisions and <!-- stat:bench.registries.cities.accuracy.top1_pct:pct -->91.4%<!-- /stat --> of cities
-- 📌 **Aliases** - support for colloquial, historic and alternate names
+- 🌍 **<stat key="data.countries.total:int">281</stat> countries** (<stat key="data.countries.historic:int">31</stat> historic) sourced and merged from ISO 3166-1, ISO 3166-3, GeoNames and Wikidata
+- 🗺️ **<stat key="data.subdivisions.total:int">51,711</stat> subdivisions** sourced and merged from ISO 3166-2 and GeoNames
+- 🏙️ **<stat key="data.cities.total:int">235,970</stat> cities** sourced from GeoNames cities500.txt
+- 🌐 **<stat key="data.macroregions.total:int">34</stat> macroregions** (<stat key="data.macroregions.regions:int">5</stat> regions, <stat key="data.macroregions.subregions:int">23</stat> subregions, <stat key="data.macroregions.groupings:int">6</stat> groupings) sourced from Unicode CLDR, with every current country placed in them
+- 💱 **<stat key="data.currencies.total:int">178</stat> currencies** and funds from ISO 4217, with each current country's legal tender from Unicode CLDR
+- ✍️ **<stat key="data.scripts.total:int">226</stat> scripts** from ISO 15924, with Unicode CLDR's English script names as aliases
+- 🗣️ **<stat key="data.languages.total:int">7,923</stat> languages** from ISO 639-3, with Unicode CLDR's scripts for each and each current country's official languages
+- 🔍 **Typo-tolerant search**: with a typo in the query, the intended record ranks first for <stat key="bench.registries.countries.accuracy.top1_pct:pct">99.3%</stat> of countries, <stat key="bench.registries.subdivisions.accuracy.top1_pct:pct">93.9%</stat> of subdivisions and <stat key="bench.registries.cities.accuracy.top1_pct:pct">93.6%</stat> of cities
+- 📌 **Aliases**: support for colloquial, historic and alternate names
 
 ---
 
 ## Installation
 
 ```bash
-pip install localis
+pip install --pre localis
 ```
+
+localis follows Semantic Versioning; [docs/versioning.md](https://github.com/dstoffels/localis/blob/main/docs/versioning.md) says what each release can change and which releases are supported.
+
+---
+
+## Requirements
+
+- Python 3.11+
+- `rapidfuzz` - Fast fuzzy string matching
 
 ---
 
@@ -26,286 +40,269 @@ pip install localis
 ```python
 import localis
 
-# Countries
+# Exact lookups by code
 country = localis.countries.lookup("US")
 print(country.name)  # "United States"
 
-# Subdivisions
 state = localis.subdivisions.lookup("US-CA")
 print(state.name)  # "California"
 
-# Fuzzy search
-results = localis.countries.search("Austrlia")  # Typo-tolerant
+# Filters: exact matches, combined with AND
+cities = localis.cities.filter(country="US", subdivision="California", limit=10)
+
+# Typo-tolerant search: (result, score) pairs, best first
+results = localis.countries.search("Austrlia")
 print(results[0][0].name)  # "Australia"
 ```
 
 ---
 
-## Countries
+## Querying
 
-### Get
+Each dataset is represented by its registry: `countries`, `subdivisions`, `cities`, `macroregions`, `currencies`, `scripts` and `languages`, sharing a common query API.
+
+| Registry | `get` | `lookup` | `filter` | `search` | Iteration |
+|---|---|---|---|---|---|
+| `countries` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `subdivisions` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `cities` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `macroregions` | ✓ | ✓ | | | ✓ |
+| `currencies` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `scripts` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `languages` | ✓ | ✓ | ✓ | ✓ | ✓ |
+
+Lookups, filters and search ignore case and accents, so "sao paulo" finds São Paulo and "strasse" finds Straße.
+
+### get
 
 ```python
-import localis
-
-# By localis ID
 country = localis.countries.get(1)
+subdivision = localis.subdivisions.get(1)
+city = localis.cities.get(1)
+macroregion = localis.macroregions.get(1)
+currency = localis.currencies.get(1)
+script = localis.scripts.get(1)
+language = localis.languages.get(1)
 ```
 
-**Returns:** `Country` object or `None`
+**Returns:** the entity with that localis ID, or `None`
 
-### Lookup
+> ℹ️ IDs are only valid within the installed version; to store a reference, use [key](#key).
+
+### lookup
+
+Resolves a single record by an identifier other than its localis ID.
+
+| Registry | Identifiers |
+|---|---|
+| `countries` | alpha-2 (`"GB"`), alpha-3 (`"GBR"`), numeric (`826`), a historic entry only by its `alpha_4` (`"CSHH"`, see [Historic Countries](#historic-countries)) |
+| `subdivisions` | ISO 3166-2 code (`"US-CA"`), GeoNames code (`"US.CA"`) |
+| `cities` | GeoNames ID (`5128581`) |
+| `macroregions` | code (`"155"`, `"EU"`), name (`"Western Europe"`) |
+| `currencies` | alpha-3 (`"EUR"`), numeric (`978`) |
+| `scripts` | alpha-4 (`"Cyrl"`), numeric (`220`) |
+| `languages` | ISO 639-3 (`"deu"`), ISO 639-1 (`"de"`), ISO 639-2/B (`"ger"`) |
 
 ```python
-# By alpha-2 code
 country = localis.countries.lookup("GB")
-
-# By alpha-3 code
-country = localis.countries.lookup("GBR")
-
-# By numeric code
-country = localis.countries.lookup(826)
+subdivision = localis.subdivisions.lookup("US-CA")
+city = localis.cities.lookup(5128581)
+macroregion = localis.macroregions.lookup("EU")
+currency = localis.currencies.lookup("EUR")
+script = localis.scripts.lookup("Cyrl")
+language = localis.languages.lookup("de")
 ```
 
-**Returns:** `Country` object or `None`
+**Returns:** the entity, or `None`. A key that isn't a string or an int raises `TypeError`.
 
-`lookup()` matches codes only (alpha-2, alpha-3, numeric). Common abbreviations that aren't ISO codes, such as "UK" for the United Kingdom, are found by `filter(name=...)` and `search()`.
+> ℹ️ `lookup()` matches identifiers only. Common abbreviations that aren't ISO codes, such as "UK" for the United Kingdom, are found by `filter(name=...)` and `search()`. M49 codes are zero-padded strings, so `macroregions.lookup("009")` finds Oceania and `lookup(9)` finds nothing.
 
-### Filter
+### filter
+
+Exact matches on any value a field indexes. Using multiple fields combines the conditions with a logical AND.
+
+| Registry | Fields |
+|---|---|
+| `countries` | `name` (name, official name, common name or alias), `macroregion` (a region, subregion or grouping, by name or code), `currency` (by name or alpha-3), `language` (an official language, by name or ISO 639 code) |
+| `subdivisions` | `name` (name or alias), `type`, `country` (name, common name, alpha-2, alpha-3 or numeric, as `76` or `"076"`), `admin_level` (0 = non-administrative groupings, 1 = states/provinces, 2 = counties/districts, 3 = divisions below those) |
+| `cities` | `name`, `country` (name, common name, alpha-2 or alpha-3), `subdivision` (any subdivision in the city's chain, by name, ISO code or its suffix (`"CA"`), or GeoNames code) |
+| `currencies` | `name` |
+| `scripts` | `name` (name or alias) |
+| `languages` | `name` (name, inverted name or alias), `scope`, `type`, `script` (by alpha-4, name or alias, primary or secondary) |
 
 ```python
-# Exact name match (searches name, official_name, common_name, and aliases)
-results = localis.countries.filter(name="Canada")
+localis.countries.filter(name="UK")  # aliases and abbreviations match too
+localis.countries.filter(macroregion="Western Europe")
+localis.countries.filter(currency="EUR")  # countries whose legal tender includes the euro
+localis.countries.filter(language="fr")  # countries where French has an official status
+localis.languages.filter(script="Cyrl", type="living")
+localis.subdivisions.filter(country="US", type="state")
+localis.subdivisions.filter(admin_level=1, limit=10)
+localis.cities.filter(country="US", subdivision="California", limit=20)
 
-# General query across all fields
-results = localis.countries.filter(name="United", limit=5)
-
-# By macroregion: a region, subregion or grouping, by name or code
-results = localis.countries.filter(macroregion="Western Europe")
-results = localis.countries.filter(macroregion="EU")
+# Records with no value in a field
+localis.subdivisions.filter(type=localis.MISSING)  # GeoNames-only subdivisions, which have no ISO type
+localis.cities.filter(country="US", subdivision=localis.MISSING)  # US cities linked to no subdivision
+localis.countries.filter(macroregion=localis.MISSING)  # historic countries placed in none (with include_historic set)
+localis.countries.filter(currency=localis.MISSING)  # countries with no legal tender, such as Antarctica
+localis.languages.filter(script=localis.MISSING)  # languages CLDR lists no script for
 ```
 
-**Returns:** `list[Country]`
+Pass `localis.MISSING` to match records with no value in a field (`None` ignores the field). A field the registry doesn't have raises `TypeError`, as does a call with no field.
 
-### Fuzzy Search
+**Returns:** a list of entities sorted by name. `limit` defaults to every match and must be at least 1.
+
+### search
 
 ```python
-# Typo-tolerant search
-results = localis.countries.search("Germny", limit=5)
+for country, score in localis.countries.search("Germny", limit=5):
+    print(f"{country.name}: {score:.2f}")
+# Germany first, then weaker matches such as Guernsey
 
-for country, score in results:
-    print(f"{country.name}: {score}")
-# Output:
-# Germany: 0.951
-# Guernsey: 0.714
-# ...
+localis.subdivisions.search("Californa")
+localis.cities.search("Springfeld, Illinois")  # context after the name narrows the match
+localis.cities.search("Springfield", population_sort=True)  # the best matches, largest city first
+localis.currencies.search("Swiss Frank")
+localis.scripts.search("Devanagri")
+localis.languages.search("Portugese")
 ```
 
-**Returns:** `list[tuple[Country, float]]` - sorted by similarity score
+A subdivision or city query can add context after the name: a subdivision's parent or country, or a city's first-level subdivision or country.
 
-### Iteration
+**Returns:** a list of `(entity, score)` pairs, best match first. Each score runs from 0 to 1, higher is better. `limit` defaults to 10 and must be at least 1.
+
+### Iteration and len()
 
 ```python
-# Iterate over all countries
 for country in localis.countries:
     print(country.name)
 
-# Get count
-total = len(localis.countries)
+total = len(localis.subdivisions)
 ```
 
-### Historic Countries
+> ℹ️ Historic countries are left out of `filter()`, `search()`, iteration and `len()` unless included (see [Historic Countries](#historic-countries)), and a population threshold narrows every cities query (see [Population Threshold](#population-threshold)).
 
-ISO 3166-3 withdrawn countries (Czechoslovakia, Serbia and Montenegro, Netherlands Antilles, and others) are included in the dataset but excluded from `filter()`, `search()`, iteration and `len()` by default.
+---
+
+## Entities
+
+Results are typed dataclasses, listed field by field under each registry below. Each has `to_dict()` and `json()`, `str()` gives its JSON, and `key` is its stable reference (see [key](#key) below). A record nested in another, such as `subdivision.country`, `city.subdivisions`, `country.macroregions` or `country.currencies`, is its base form (`CountryBase`, `SubdivisionBase`, `MacroregionBase`, `CurrencyBase`), which keeps the fields marked Base in those tables. A nested record that carries facts about the relationship, such as a country's languages or a language's scripts, is its base form plus those facts (`CountryLanguage`, `LanguageScript`).
+
+Every returned entity is built fresh; yours to mutate freely. Entities are also hashable, so they can be used in sets and as dict keys.
+
+Every entity type, their base `Entity`, `Missing` and the registry classes (`CountryRegistry` and the rest) import from `localis` for type annotations.
+
+```python
+country = localis.countries.lookup("US")
+country.to_dict()                # dict of every field
+country.json()                   # the same, as a JSON string
+localis.subdivisions.lookup("US-CA").country.alpha3  # "USA", from the nested CountryBase
+```
+
+### key
+
+localis IDs are not stable across builds (`localis.__version__` gives the installed one). Use the `key` attribute to reliably reference entities instead, which returns the entity's stable lookup identifier. A nested record also carries its `key`.
+
+```python
+# 5128581, safe to persist
+saved = city.key
+
+# the same city, in this version or a later one
+city = localis.cities.lookup(saved)
+```
+
+| Registry | `key` |
+|---|---|
+| `countries` | `alpha2`, or `historic.alpha_4` for a historic entry |
+| `subdivisions` | `iso_code`, or `geonames_code` for a subdivision ISO doesn't list |
+| `cities` | `geonames_id` |
+| `macroregions` | `code` |
+| `currencies` | `alpha3` |
+| `scripts` | `alpha4` |
+| `languages` | `alpha3` (ISO 639-3) |
+
+### Countries
+
+#### Historic Countries
+
+ISO 3166-3 withdrawn countries are included in the dataset but excluded from `filter()`, `search()`, iteration and `len()` by default. The countries registry exposes `set_include_historic()` to toggle them on or off.
 
 ```python
 localis.countries.include_historic   # False
-len(localis.countries)               # 250
+len(localis.countries)               # current countries only
 
 # Include historic entries
 localis.countries.set_include_historic(True)
-len(localis.countries)               # 281
+len(localis.countries)               # current and historic
 
 localis.countries.set_include_historic(False)
 ```
 
-The toggle applies to every thread using `localis.countries`, so set it before sharing the registry between threads (see Concurrency).
+`len(localis.countries)` is <stat key="data.countries.current:int">250</stat> by default and <stat key="data.countries.total:int">281</stat> with historic entries included.
 
-`get()` and `lookup()` always resolve historic entries regardless of the toggle. ISO reused alpha2/alpha3/numeric codes across different withdrawn countries over time (e.g. `CS` was both Czechoslovakia and, decades later, Serbia and Montenegro), so `lookup()` only resolves a historic entry by its unique `alpha_4` withdrawal code, never by bare alpha2/alpha3/numeric:
+> ⚠️ The toggle applies to every thread using `localis.countries`, so set it before sharing the registry between threads (see [Concurrency](#concurrency)).
 
-### Country Object
-
-```python
-country = localis.countries.lookup("US")
-
-country.id            # Database ID
-country.name          # "United States" - ISO 3166-1 name, as published
-country.official_name # "United States of America" - ISO 3166-1 official name, or None where ISO has none
-country.common_name   # None - common name from Debian iso-codes where it differs (e.g. "South Korea" for "Korea, Republic of"), otherwise None
-country.alpha2        # "US"
-country.alpha3        # "USA"
-country.geonames_id   # 6252001
-country.numeric       # 840
-country.aliases       # tuple[str, ...] - Alternate names
-country.flag          # "🇺🇸" - Unicode flag emoji
-country.historic      # HistoricInfo | None - set only for withdrawn ISO 3166-3 countries
-country.macroregions  # tuple[MacroregionBase, ...] - CLDR path, region then subregion: (Americas, Northern America); () for most historic countries
-country.groupings     # tuple[MacroregionBase, ...] - CLDR groupings the country belongs to: (North America, United Nations)
-
-country = localis.countries.lookup("CSHH")  # Czechoslovakia
-country.historic.alpha_4            # "CSHH"
-country.historic.withdrawal_date    # "1993-01-01"
-country.historic.comment            # str | None
-
-# Utility methods
-country.to_dict()     # Convert to dictionary
-country.json()        # Convert to JSON string
-```
-
----
-
-## Subdivisions
-
-### Get by ID
+`get()` and `lookup()` always find historic entries; `lookup()` finds them only by alpha_4.
 
 ```python
-import localis
-
-# By localis ID
-subdivision = localis.subdivisions.get(1)
+localis.countries.lookup("CSHH")  # Czechoslovakia
+localis.countries.lookup("CS")    # None: a reused code never resolves a historic entry
 ```
 
-**Returns:** `Subdivision` object or `None`
+#### Country Object
 
-### Lookup by identifier
+A ✓ under Base marks a field the nested `CountryBase` also has.
 
-```python
-# By ISO code (country-subdivision)
-subdivision = localis.subdivisions.lookup("US-CA")
+| Field | Type | Example (`"US"`) | Notes | Base |
+|---|---|---|---|---|
+| `id` | `int` | | localis ID, valid within this version | ✓ |
+| `key` | `str` | `"US"` | stable reference to store; `alpha_4` for a historic entry | ✓ |
+| `name` | `str` | `"United States"` | ISO 3166-1 name, as published | ✓ |
+| `official_name` | `str \| None` | `"United States of America"` | ISO 3166-1 official name; `None` where ISO has none | |
+| `common_name` | `str \| None` | `None` | Debian iso-codes' everyday name where it differs, such as "South Korea" for "Korea, Republic of" | |
+| `alpha2` | `str` | `"US"` | | ✓ |
+| `alpha3` | `str \| None` | `"USA"` | | ✓ |
+| `numeric` | `int \| None` | `840` | ISO 3166-1 numeric code; `None` for Kosovo, which has no ISO assignment | |
+| `geonames_id` | `int \| None` | `6252001` | | ✓ |
+| `aliases` | `list[str]` | | alternate names from GeoNames and Wikidata | |
+| `flag` | `str \| None` | `"🇺🇸"` | Unicode flag emoji | |
+| `historic` | `HistoricInfo \| None` | `None` | set only for withdrawn ISO 3166-3 countries | |
+| `macroregions` | `list[MacroregionBase]` | [Americas, Northern America] | CLDR path, region then subregion; `[]` for most historic countries | |
+| `groupings` | `list[MacroregionBase]` | [North America, United Nations] | CLDR groupings the country belongs to | |
+| `currencies` | `list[CurrencyBase]` | [US Dollar] | legal tender in use, per CLDR, in CLDR's order; `[]` for historic countries | |
+| `languages` | `list[CountryLanguage]` | [English, Spanish, Hawaiian] | languages with an official status, per CLDR, by population share; `[]` for historic countries (see [CountryLanguage](#countrylanguage)) | |
 
-# By GeoNames code
-subdivision = localis.subdivisions.lookup("US.CA")
-```
+##### HistoricInfo
 
-**Returns:** `Subdivision` object or `None`
+| Field | Type | Example (`"CSHH"`) | Notes |
+|---|---|---|---|
+| `alpha_4` | `str` | `"CSHH"` | ISO 3166-3 withdrawal code, unique to the entry |
+| `withdrawal_date` | `str` | `"1993-01-01"` | |
+| `comment` | `str \| None` | | ISO's comment |
 
-### Filter
+### Subdivisions
 
-```python
-# Exact name match
-results = localis.subdivisions.filter(name="California")
+#### Subdivision Object
 
-# By subdivision type
-results = localis.subdivisions.filter(type="state")
+A ✓ under Base marks a field the nested `SubdivisionBase` also has.
 
-# By country
-results = localis.subdivisions.filter(country="United States")
+| Field | Type | Example (`"US-CA"`) | Notes | Base |
+|---|---|---|---|---|
+| `id` | `int` | | localis ID, valid within this version | ✓ |
+| `key` | `str` | `"US-CA"` | stable reference to store; the GeoNames code where ISO doesn't list the subdivision | ✓ |
+| `name` | `str` | `"California"` | ISO 3166-2 name where ISO lists the subdivision, otherwise GeoNames' | ✓ |
+| `iso_code` | `str \| None` | `"US-CA"` | `None` for a GeoNames-only subdivision | ✓ |
+| `geonames_code` | `str \| None` | `"US.CA"` | GeoNames admin code; `None` for an ISO-only subdivision | ✓ |
+| `geonames_id` | `int \| None` | `5332921` | `None` for an ISO-only subdivision | ✓ |
+| `type` | `str \| None` | `"State"` | ISO type; `None` for a GeoNames-only subdivision | ✓ |
+| `admin_level` | `int` | `1` | 0 = non-administrative grouping, 1 = top-level, 2 = second-level, 3 = below that | ✓ |
+| `parent` | `SubdivisionBase \| None` | `None` | the subdivision it sits in | |
+| `country` | `CountryBase` | United States | | |
+| `aliases` | `list[str]` | | alternate names | |
 
-# By admin level (1 = states/provinces, 2 = counties/districts)
-results = localis.subdivisions.filter(admin_level=1)
+### Cities
 
-# Combine multiple filters (AND logic)
-results = localis.subdivisions.filter(
-    country="US",
-    type="state",
-    limit=10
-)
-```
-
-**Returns:** `list[Subdivision]`
-
-### Fuzzy Search
-
-```python
-results = localis.subdivisions.search("Californa", limit=3)
-
-for subdivision, score in results:
-    print(f"{subdivision.name}: {score}")
-# California: 0.94
-# Baja California: 0.8
-# ...
-```
-
-**Returns:** `list[tuple[Subdivision, float]]`
-
-### Subdivision Object
-
-```python
-subdivision = localis.subdivisions.lookup("US-CA")
-
-subdivision.id              # Database ID
-subdivision.name            # "California"
-subdivision.geonames_code   # "US.CA"
-subdivision.iso_code        # "US-CA"
-subdivision.type            # "State", or None for a GeoNames-only subdivision
-subdivision.admin_level     # 1
-subdivision.parent          # SubdivisionBase | None - Parent subdivision
-subdivision.country         # CountryBase object
-subdivision.aliases         # tuple[str, ...] - Alternate names
-
-# Utility methods
-subdivision.to_dict()       # Convert to dictionary
-subdivision.json()          # Convert to JSON string
-```
-
----
-
-## Cities
-
-### Get by ID
-
-```python
-import localis
-
-# By localis ID
-city = localis.cities.get(1)
-```
-
-**Returns:** `City` object or `None`
-
-### Lookup by GeoNames id
-
-```python
-# By GeoNames ID
-city = localis.cities.lookup(5128581)
-```
-
-**Returns:** `City` object or `None`
-
-### Filter
-
-```python
-# Exact name match
-results = localis.cities.filter(name="Los Angeles")
-
-# By country name or alpha2/alpha 3 code
-results = localis.cities.filter(country="United States", limit=10)
-
-# By subdivision name or ISO/GeoNames code
-results = localis.cities.filter(subdivision="California", limit=10)
-
-# Combine filters (AND logic)
-results = localis.cities.filter(
-    country="US",
-    subdivision="California",
-    limit=20
-)
-```
-
-**Returns:** `list[City]`
-
-### Fuzzy Search
-
-```python
-results = localis.cities.search("Los Angelos", limit=5)
-
-for city, score in results:
-    print(f"{city.name}, {city.country.name}: {score}")
-```
-
-**Returns:** `list[tuple[City, float]]` - sorted by similarity score
-
-### Population Threshold
+#### Population Threshold
 
 ```python
 # Narrow the cache and all indexes to cities with population >= 15000
@@ -318,121 +315,123 @@ localis.cities.population_threshold  # 15000
 localis.cities.set_population_threshold(None)
 ```
 
-`cities` is fully lazy-loaded, nothing is read from disk until first access. Call `set_population_threshold()` before that first access (before any `.get()`, `.lookup()`, `.filter()`, `.search()`, or `.force_cache()` call) so the registry only ever loads the narrowed dataset. Calling it after the cache or indexes are already built still works, but it invalidates them, so the next access rebuilds the caches from scratch at the new threshold. The threshold applies to every thread using `localis.cities`, so set it before sharing the registry between threads (see Concurrency).
+Call `cities.set_population_threshold()` before first access so the registry only ever caches the narrowed dataset. Calling it after the cache or indexes are already built still works, but it invalidates them, so the next access rebuilds everything from scratch at the new threshold, paying the cache tax twice.
 
-**Returns:** `None`
+> ⚠️ The threshold applies to every thread using `localis.cities`, so set it before sharing the registry between threads (see [Concurrency](#concurrency)).
 
-### City Object
+#### City Object
+
+| Field | Type | Example (`5128581`) | Notes |
+|---|---|---|---|
+| `id` | `int` | | localis ID, valid within this version |
+| `key` | `int` | `5128581` | stable reference to store, the GeoNames ID |
+| `geonames_id` | `int` | `5128581` | |
+| `name` | `str` | `"New York"` | GeoNames' name, or its ASCII form where the name is in another script |
+| `subdivisions` | `list[SubdivisionBase]` | | the city's full subdivision chain, ordered by `admin_level` ascending |
+| `country` | `CountryBase` | United States | |
+| `population` | `int` | | GeoNames population; `0` where unknown |
+| `lat` | `float` | `40.71427` | |
+| `lng` | `float` | `-74.00597` | |
+
+### Macroregions
+
+#### Macroregion Object
+
+A ✓ under Base marks a field the nested `MacroregionBase` also has.
+
+| Field | Type | Example (`"155"`) | Notes | Base |
+|---|---|---|---|---|
+| `id` | `int` | | localis ID, valid within this version | ✓ |
+| `key` | `str` | `"155"` | stable reference to store, the code | ✓ |
+| `name` | `str` | `"Western Europe"` | CLDR English name | ✓ |
+| `code` | `str` | `"155"` | M49 numeric code as a zero-padded string, or CLDR's letter code (`"QO"`, `"EU"`) | ✓ |
+| `type` | `MacroregionType` | `"subregion"` | `"region"`, `"subregion"` or `"grouping"` | ✓ |
+| `parent` | `MacroregionBase \| None` | Europe | a subregion's region, or the region CLDR files a grouping under | |
+
+### Currencies
+
+Every ISO 4217 code ships as published, funds, precious metals and the testing codes included. Each current country's legal tender comes from Unicode CLDR (see [Country Object](#country-object)).
+
+#### Currency Object
+
+A ✓ under Base marks a field the nested `CurrencyBase` also has.
+
+| Field | Type | Example (`"EUR"`) | Notes | Base |
+|---|---|---|---|---|
+| `id` | `int` | | localis ID, valid within this version | ✓ |
+| `key` | `str` | `"EUR"` | stable reference to store, the alpha-3 | ✓ |
+| `name` | `str` | `"Euro"` | ISO 4217 name, as published | ✓ |
+| `alpha3` | `str` | `"EUR"` | | ✓ |
+| `numeric` | `int \| None` | `978` | ISO 4217 numeric code | |
+
+### Scripts
+
+Every ISO 15924 code ships as ISO publishes it, including the special codes (`"Zyyy"` undetermined, `"Zxxx"` unwritten, `"Zmth"` mathematical notation) and the two entries marking the private-use range, `"Qaaa"` (start) and `"Qabx"` (end). ISO's names often carry other names in parentheses, such as "Han (Hanzi, Kanji, Hanja)"; Unicode CLDR's English names for the same code ("Han", "Simplified Han") are its aliases, so both are found by `filter(name=...)` and `search()`.
+
+#### Script Object
+
+A ✓ under Base marks a field the nested `ScriptBase` also has.
+
+| Field | Type | Example (`"Deva"`) | Notes | Base |
+|---|---|---|---|---|
+| `id` | `int` | | localis ID, valid within this version | ✓ |
+| `key` | `str` | `"Deva"` | stable reference to store, the alpha-4 | ✓ |
+| `name` | `str` | `"Devanagari (Nagari)"` | ISO 15924 name, as published | ✓ |
+| `alpha4` | `str` | `"Deva"` | | ✓ |
+| `numeric` | `int \| None` | `315` | ISO 15924 numeric code | |
+| `aliases` | `list[str]` | ["Devanagari"] | Unicode CLDR's English names for the code, where they differ from ISO's | |
+
+### Languages
+
+Every ISO 639-3 code ships as ISO publishes it: living, extinct, historical and constructed languages, macrolanguages such as Arabic and Chinese, and the special codes (`"und"` undetermined, `"mul"` multiple, `"zxx"` no linguistic content). A language's `scripts` come from Unicode CLDR, which covers <stat key="data.languages.with_scripts:int">811</stat> of them; the rest have none.
 
 ```python
-city = localis.cities.lookup(5128581) # GeoNames ID
+german = localis.languages.lookup("de")
+german.scripts  # [LanguageScript(alpha4="Latn", secondary=False, ...)]
 
-city.id              # Database ID
-city.geonames_id     # 5128581
-city.name            # "New York"
-city.subdivisions    # list[SubdivisionBase] - ordered by admin_level ascending
-city.country         # CountryBase object
-city.population      # 8804190
-city.lat             # 40.71427
-city.lng             # -74.00597
-
-# Utility methods
-city.to_dict()       # Convert to dictionary
-city.json()          # Convert to JSON string
+for language in localis.countries.lookup("HK").languages:
+    print(language.name, language.status, language.population_percent, language.script)
 ```
+
+#### Language Object
+
+A ✓ under Base marks a field the nested `LanguageBase` also has.
+
+| Field | Type | Example (`"deu"`) | Notes | Base |
+|---|---|---|---|---|
+| `id` | `int` | | localis ID, valid within this version | ✓ |
+| `key` | `str` | `"deu"` | stable reference to store, the ISO 639-3 code | ✓ |
+| `name` | `str` | `"German"` | ISO 639-3 name, as published | ✓ |
+| `alpha3` | `str` | `"deu"` | ISO 639-3 code | ✓ |
+| `alpha2` | `str \| None` | `"de"` | ISO 639-1 code, for the <stat key="data.languages.with_alpha2:int">184</stat> languages that have one | ✓ |
+| `bibliographic` | `str \| None` | `"ger"` | ISO 639-2/B code, where it differs from the 639-3 one | |
+| `scope` | `LanguageScope` | `"individual"` | `"individual"`, `"macrolanguage"` or `"special"` | |
+| `type` | `LanguageType` | `"living"` | `"living"`, `"extinct"`, `"historical"`, `"constructed"` or `"special"` | |
+| `inverted_name` | `str \| None` | `None` | ISO's name with the qualifier moved last, such as "Arabic, Algerian Saharan" | |
+| `aliases` | `list[str]` | ["Austrian German", ...] | Unicode CLDR's English names for the language and its regional and script forms, where they differ from ISO's | |
+| `scripts` | `list[LanguageScript]` | [Latin] | per CLDR, primary scripts first; see [LanguageScript](#languagescript) | |
+
+#### LanguageScript
+
+A script as one language uses it: every `ScriptBase` field plus `secondary`.
+
+| Field | Type | Notes |
+|---|---|---|
+| `secondary` | `bool` | CLDR's rule: `True` when the language isn't a modern language or the script isn't a modern script, such as Arabic written in Syriac or anything in Sanskrit |
+
+`languages.filter(script=...)` matches primary and secondary scripts alike.
+
+#### CountryLanguage
+
+A language as one country recognizes it: every `LanguageBase` field plus three from Unicode CLDR. A country lists one per language and script CLDR gives an official status, ordered by `population_percent`.
+
+| Field | Type | Example (Hong Kong's Chinese) | Notes |
+|---|---|---|---|
+| `status` | `LanguageStatus` | `"official"` | `"official"`, `"regional"` (official in part of the country) or `"de_facto"` (official in practice, such as English in the US) |
+| `population_percent` | `float \| None` | `95.0` | CLDR's estimate of the population using it; shares overlap, since people use several languages |
+| `script` | `ScriptBase \| None` | Han (Traditional variant) | the script CLDR gives the status for, so a language can appear once per script; `None` where CLDR names none |
 
 ---
-
-## Macroregions
-
-### Get
-
-```python
-# By localis ID
-region = localis.macroregions.get(1)
-```
-
-**Returns:** `Macroregion` object or `None`
-
-### Lookup
-
-```python
-# By code: M49 numeric codes are zero-padded strings, so lookup(9) finds nothing
-oceania = localis.macroregions.lookup("009")
-eu = localis.macroregions.lookup("EU")
-
-# By name
-western_europe = localis.macroregions.lookup("Western Europe")
-```
-
-**Returns:** `Macroregion` object or `None`
-
-### Iteration
-
-```python
-for macroregion in localis.macroregions:
-    print(macroregion.name)
-
-total = len(localis.macroregions)
-```
-
-### Macroregion Object
-
-```python
-macroregion = localis.macroregions.lookup("155")
-
-macroregion.id        # Database ID
-macroregion.name      # "Western Europe" - CLDR English name
-macroregion.code      # "155" - M49 numeric code as a string, or CLDR's letter code ("QO", "EU")
-macroregion.type      # "region", "subregion" or "grouping"
-macroregion.parent    # MacroregionBase | None - a subregion's region, or the region CLDR files a grouping under
-
-# Utility methods
-macroregion.to_dict() # Convert to dictionary
-macroregion.json()    # Convert to JSON string
-```
-
----
-
-## Base Objects
-Basic versions of country, subdivision and macroregion when nested.
-
-### CountryBase Object
-
-
-```python
-nested_country = subdivision.country
-
-nested_country.id
-nested_country.name
-nested_country.alpha2
-nested_country.alpha3
-nested_country.geonames_id
-```
-
-### SubdivisionBase Object
-
-```python
-nested_sub = city.subdivisions[0]
-
-nested_sub.id
-nested_sub.name
-nested_sub.geonames_code
-nested_sub.iso_code
-nested_sub.type
-nested_sub.admin_level
-```
-
-### MacroregionBase Object
-
-```python
-nested_macroregion = country.macroregions[0]
-
-nested_macroregion.id
-nested_macroregion.name
-nested_macroregion.code
-nested_macroregion.type
-```
 
 ## Performance
 
@@ -440,86 +439,46 @@ nested_macroregion.type
 
 All registries and their indexes are lazy-loaded on first use, incurring a cold start cost on whichever call touches them first. Any registry's dataset and indexes can be pre-loaded with `.force_cache()` to avoid this during queries, or you can simply access the registry/method to trigger the lazy loading upfront.
 
-A registry's dataset also loads the datasets it references, if they aren't cached yet. Countries load macroregions, subdivisions load countries, and cities load subdivisions and countries. Only those datasets load, not their indexes. The subdivisions and cities tables below exclude them, so a cold first call on cities also pays for the subdivisions and countries datasets.
+Each component is shown as load time / memory, measured for that registry alone.
 
-#### Countries (<!-- stat:data.countries.total:int -->281<!-- /stat -->)
-| Component | Load Time | Memory |
-|---|---|---|
-| Dataset | <!-- stat:footprint.registries.countries.dataset.time_ms:load -->~1ms<!-- /stat --> | <!-- stat:footprint.registries.countries.dataset.memory_bytes:size -->223KB<!-- /stat --> |
-| Lookup index | <!-- stat:footprint.registries.countries.lookup_index.time_ms:load -->< 1ms<!-- /stat --> | <!-- stat:footprint.registries.countries.lookup_index.memory_bytes:size -->41KB<!-- /stat --> |
-| Filter index | <!-- stat:footprint.registries.countries.filter_index.time_ms:load -->< 1ms<!-- /stat --> | <!-- stat:footprint.registries.countries.filter_index.memory_bytes:size -->125KB<!-- /stat --> |
-| Search index | <!-- stat:footprint.registries.countries.search_index.time_ms:load -->~4ms<!-- /stat --> | <!-- stat:footprint.registries.countries.search_index.memory_bytes:size -->391KB<!-- /stat --> |
-| **Combined** | **<!-- stat:footprint.registries.countries.combined.time_ms:load -->~7ms<!-- /stat -->** | **<!-- stat:footprint.registries.countries.combined.memory_bytes:size -->780KB<!-- /stat -->** |
-
-#### Subdivisions (<!-- stat:data.subdivisions.total:int -->51,711<!-- /stat -->)
-| Component | Load Time | Memory |
-|---|---|---|
-| Dataset | <!-- stat:footprint.registries.subdivisions.dataset.time_ms:load -->~76ms<!-- /stat --> | <!-- stat:footprint.registries.subdivisions.dataset.memory_bytes:size -->14.2MB<!-- /stat --> |
-| Lookup index | <!-- stat:footprint.registries.subdivisions.lookup_index.time_ms:load -->~16ms<!-- /stat --> | <!-- stat:footprint.registries.subdivisions.lookup_index.memory_bytes:size -->4.3MB<!-- /stat --> |
-| Filter index | <!-- stat:footprint.registries.subdivisions.filter_index.time_ms:load -->~114ms<!-- /stat --> | <!-- stat:footprint.registries.subdivisions.filter_index.memory_bytes:size -->10.7MB<!-- /stat --> |
-| Search index | <!-- stat:footprint.registries.subdivisions.search_index.time_ms:load -->~57ms<!-- /stat --> | <!-- stat:footprint.registries.subdivisions.search_index.memory_bytes:size -->11.8MB<!-- /stat --> |
-| **Combined** | **<!-- stat:footprint.registries.subdivisions.combined.time_ms:load -->~263ms<!-- /stat -->** | **<!-- stat:footprint.registries.subdivisions.combined.memory_bytes:size -->41.0MB<!-- /stat -->** |
-
-#### Cities (<!-- stat:data.cities.total:int -->235,917<!-- /stat -->)
-
-> ⚠️ **Memory-intensive.** Fully caching cities and its indexes adds <!-- stat:footprint.registries.cities.combined.memory_bytes:size -->120.3MB<!-- /stat --> of memory. Calling `localis.cities.force_cache()` loads all of it upfront. You can call `cities.set_population_threshold(n)` before first access as a lever to control the memory footprint.
-
-| Component | Load Time | Memory |
-|---|---|---|
-| Dataset | <!-- stat:footprint.registries.cities.dataset.time_ms:load -->~344ms<!-- /stat --> | <!-- stat:footprint.registries.cities.dataset.memory_bytes:size -->28.1MB<!-- /stat --> |
-| Lookup index | <!-- stat:footprint.registries.cities.lookup_index.time_ms:load -->~75ms<!-- /stat --> | <!-- stat:footprint.registries.cities.lookup_index.memory_bytes:size -->1.8MB<!-- /stat --> |
-| Filter index | <!-- stat:footprint.registries.cities.filter_index.time_ms:load -->~745ms<!-- /stat --> | <!-- stat:footprint.registries.cities.filter_index.memory_bytes:size -->48.5MB<!-- /stat --> |
-| Search index | <!-- stat:footprint.registries.cities.search_index.time_ms:load -->~199ms<!-- /stat --> | <!-- stat:footprint.registries.cities.search_index.memory_bytes:size -->41.9MB<!-- /stat --> |
-| **Combined** | **<!-- stat:footprint.registries.cities.combined.time_ms:load -->~1.36s<!-- /stat -->** | **<!-- stat:footprint.registries.cities.combined.memory_bytes:size -->120.3MB<!-- /stat -->** |
-
-At a threshold of <!-- stat:data.cities.threshold:int -->15,000<!-- /stat -->, cities drops from <!-- stat:data.cities.total:int -->235,917<!-- /stat --> to <!-- stat:data.cities.above_threshold:int -->34,171<!-- /stat --> and memory drops from <!-- stat:footprint.registries.cities.combined.memory_bytes:size -->120.3MB<!-- /stat --> to <!-- stat:footprint.cities_threshold.memory_bytes:size -->27.5MB<!-- /stat -->.
-
-**Full Cache**: <!-- stat:footprint.full_cache.time_ms:load -->~1.60s<!-- /stat --> load time, <!-- stat:footprint.full_cache.memory_bytes:size -->162.1MB<!-- /stat --> memory for all datasets and indexes
-
-### Benchmarks
-
-Per-call query latency on warm caches, median (95th percentile), and fuzzy search accuracy on mangled/misspelled queries: how often the right entry appears in the top 10 results, and how often it's the top result.
-
-| Registry | Get | Lookup | Filter | Search (p50/p95) | Search Accuracy (top 10) | Top Result |
+| Registry | Records | Dataset | Lookup index | Filter index | Search index | Combined |
 |---|---|---|---|---|---|---|
-| Countries | <!-- stat:bench.registries.countries.get.p50_ms:latency -->0.0086ms<!-- /stat --> (<!-- stat:bench.registries.countries.get.p95_ms:latency -->0.0109ms<!-- /stat -->) | <!-- stat:bench.registries.countries.lookup.p50_ms:latency -->0.0099ms<!-- /stat --> (<!-- stat:bench.registries.countries.lookup.p95_ms:latency -->0.012ms<!-- /stat -->) | <!-- stat:bench.registries.countries.filter.p50_ms:latency -->0.0151ms<!-- /stat --> (<!-- stat:bench.registries.countries.filter.p95_ms:latency -->0.0182ms<!-- /stat -->) | <!-- stat:bench.registries.countries.search.p50_ms:latency -->1.26ms<!-- /stat --> (<!-- stat:bench.registries.countries.search.p95_ms:latency -->4.03ms<!-- /stat -->) | <!-- stat:bench.registries.countries.accuracy.success_pct:pct -->100.0%<!-- /stat --> | <!-- stat:bench.registries.countries.accuracy.top1_pct:pct -->99.3%<!-- /stat --> |
-| Subdivisions | <!-- stat:bench.registries.subdivisions.get.p50_ms:latency -->0.0083ms<!-- /stat --> (<!-- stat:bench.registries.subdivisions.get.p95_ms:latency -->0.0105ms<!-- /stat -->) | <!-- stat:bench.registries.subdivisions.lookup.p50_ms:latency -->0.0103ms<!-- /stat --> (<!-- stat:bench.registries.subdivisions.lookup.p95_ms:latency -->0.0141ms<!-- /stat -->) | <!-- stat:bench.registries.subdivisions.filter.p50_ms:latency -->0.016ms<!-- /stat --> (<!-- stat:bench.registries.subdivisions.filter.p95_ms:latency -->0.0352ms<!-- /stat -->) | <!-- stat:bench.registries.subdivisions.search.p50_ms:latency -->2.74ms<!-- /stat --> (<!-- stat:bench.registries.subdivisions.search.p95_ms:latency -->4.98ms<!-- /stat -->) | <!-- stat:bench.registries.subdivisions.accuracy.success_pct:pct -->97.3%<!-- /stat --> | <!-- stat:bench.registries.subdivisions.accuracy.top1_pct:pct -->85.4%<!-- /stat --> |
-| Cities | <!-- stat:bench.registries.cities.get.p50_ms:latency -->0.0152ms<!-- /stat --> (<!-- stat:bench.registries.cities.get.p95_ms:latency -->0.0202ms<!-- /stat -->) | <!-- stat:bench.registries.cities.lookup.p50_ms:latency -->0.0124ms<!-- /stat --> (<!-- stat:bench.registries.cities.lookup.p95_ms:latency -->0.0167ms<!-- /stat -->) | <!-- stat:bench.registries.cities.filter.p50_ms:latency -->0.0245ms<!-- /stat --> (<!-- stat:bench.registries.cities.filter.p95_ms:latency -->0.0864ms<!-- /stat -->) | <!-- stat:bench.registries.cities.search.p50_ms:latency -->6.93ms<!-- /stat --> (<!-- stat:bench.registries.cities.search.p95_ms:latency -->12.5ms<!-- /stat -->) | <!-- stat:bench.registries.cities.accuracy.success_pct:pct -->98.4%<!-- /stat --> | <!-- stat:bench.registries.cities.accuracy.top1_pct:pct -->91.4%<!-- /stat --> |
+| Macroregions | <stat key="data.macroregions.total:int">34</stat> | <stat key="footprint.registries.macroregions.dataset.time_ms:load">< 1ms</stat> / <stat key="footprint.registries.macroregions.dataset.memory_bytes:size">7KB</stat> | <stat key="footprint.registries.macroregions.lookup_index.time_ms:load">< 1ms</stat> / <stat key="footprint.registries.macroregions.lookup_index.memory_bytes:size">6KB</stat> | n/a | n/a | **<stat key="footprint.registries.macroregions.combined.time_ms:load">< 1ms</stat> / <stat key="footprint.registries.macroregions.combined.memory_bytes:size">13KB</stat>** |
+| Currencies | <stat key="data.currencies.total:int">178</stat> | <stat key="footprint.registries.currencies.dataset.time_ms:load">< 1ms</stat> / <stat key="footprint.registries.currencies.dataset.memory_bytes:size">29KB</stat> | <stat key="footprint.registries.currencies.lookup_index.time_ms:load">< 1ms</stat> / <stat key="footprint.registries.currencies.lookup_index.memory_bytes:size">15KB</stat> | <stat key="footprint.registries.currencies.filter_index.time_ms:load">< 1ms</stat> / <stat key="footprint.registries.currencies.filter_index.memory_bytes:size">20KB</stat> | <stat key="footprint.registries.currencies.search_index.time_ms:load">< 1ms</stat> / <stat key="footprint.registries.currencies.search_index.memory_bytes:size">181KB</stat> | **<stat key="footprint.registries.currencies.combined.time_ms:load">~1ms</stat> / <stat key="footprint.registries.currencies.combined.memory_bytes:size">245KB</stat>** |
+| Scripts | <stat key="data.scripts.total:int">226</stat> | <stat key="footprint.registries.scripts.dataset.time_ms:load">< 1ms</stat> / <stat key="footprint.registries.scripts.dataset.memory_bytes:size">48KB</stat> | <stat key="footprint.registries.scripts.lookup_index.time_ms:load">< 1ms</stat> / <stat key="footprint.registries.scripts.lookup_index.memory_bytes:size">19KB</stat> | <stat key="footprint.registries.scripts.filter_index.time_ms:load">< 1ms</stat> / <stat key="footprint.registries.scripts.filter_index.memory_bytes:size">29KB</stat> | <stat key="footprint.registries.scripts.search_index.time_ms:load">~1ms</stat> / <stat key="footprint.registries.scripts.search_index.memory_bytes:size">231KB</stat> | **<stat key="footprint.registries.scripts.combined.time_ms:load">~2ms</stat> / <stat key="footprint.registries.scripts.combined.memory_bytes:size">327KB</stat>** |
+| Languages | <stat key="data.languages.total:int">7,923</stat> | <stat key="footprint.registries.languages.dataset.time_ms:load">~11ms</stat> / <stat key="footprint.registries.languages.dataset.memory_bytes:size">1.9MB</stat> | <stat key="footprint.registries.languages.lookup_index.time_ms:load">~2ms</stat> / <stat key="footprint.registries.languages.lookup_index.memory_bytes:size">589KB</stat> | <stat key="footprint.registries.languages.filter_index.time_ms:load">~7ms</stat> / <stat key="footprint.registries.languages.filter_index.memory_bytes:size">1.4MB</stat> | <stat key="footprint.registries.languages.search_index.time_ms:load">~10ms</stat> / <stat key="footprint.registries.languages.search_index.memory_bytes:size">1.5MB</stat> | **<stat key="footprint.registries.languages.combined.time_ms:load">~31ms</stat> / <stat key="footprint.registries.languages.combined.memory_bytes:size">5.4MB</stat>** |
+| Countries | <stat key="data.countries.total:int">281</stat> | <stat key="footprint.registries.countries.dataset.time_ms:load">~1ms</stat> / <stat key="footprint.registries.countries.dataset.memory_bytes:size">369KB</stat> | <stat key="footprint.registries.countries.lookup_index.time_ms:load">< 1ms</stat> / <stat key="footprint.registries.countries.lookup_index.memory_bytes:size">41KB</stat> | <stat key="footprint.registries.countries.filter_index.time_ms:load">~2ms</stat> / <stat key="footprint.registries.countries.filter_index.memory_bytes:size">229KB</stat> | <stat key="footprint.registries.countries.search_index.time_ms:load">~2ms</stat> / <stat key="footprint.registries.countries.search_index.memory_bytes:size">474KB</stat> | **<stat key="footprint.registries.countries.combined.time_ms:load">~5ms</stat> / <stat key="footprint.registries.countries.combined.memory_bytes:size">1.1MB</stat>** |
+| Subdivisions | <stat key="data.subdivisions.total:int">51,711</stat> | <stat key="footprint.registries.subdivisions.dataset.time_ms:load">~78ms</stat> / <stat key="footprint.registries.subdivisions.dataset.memory_bytes:size">14.5MB</stat> | <stat key="footprint.registries.subdivisions.lookup_index.time_ms:load">~16ms</stat> / <stat key="footprint.registries.subdivisions.lookup_index.memory_bytes:size">4.5MB</stat> | <stat key="footprint.registries.subdivisions.filter_index.time_ms:load">~62ms</stat> / <stat key="footprint.registries.subdivisions.filter_index.memory_bytes:size">12.1MB</stat> | <stat key="footprint.registries.subdivisions.search_index.time_ms:load">~58ms</stat> / <stat key="footprint.registries.subdivisions.search_index.memory_bytes:size">12.4MB</stat> | **<stat key="footprint.registries.subdivisions.combined.time_ms:load">~215ms</stat> / <stat key="footprint.registries.subdivisions.combined.memory_bytes:size">43.5MB</stat>** |
+| Cities | <stat key="data.cities.total:int">235,970</stat> | <stat key="footprint.registries.cities.dataset.time_ms:load">~341ms</stat> / <stat key="footprint.registries.cities.dataset.memory_bytes:size">29.5MB</stat> | <stat key="footprint.registries.cities.lookup_index.time_ms:load">~75ms</stat> / <stat key="footprint.registries.cities.lookup_index.memory_bytes:size">1.9MB</stat> | <stat key="footprint.registries.cities.filter_index.time_ms:load">~282ms</stat> / <stat key="footprint.registries.cities.filter_index.memory_bytes:size">51.5MB</stat> | <stat key="footprint.registries.cities.search_index.time_ms:load">~195ms</stat> / <stat key="footprint.registries.cities.search_index.memory_bytes:size">44.0MB</stat> | **<stat key="footprint.registries.cities.combined.time_ms:load">~894ms</stat> / <stat key="footprint.registries.cities.combined.memory_bytes:size">126.9MB</stat>** |
+| **Total** | **<stat key="data.totals.records:int">296,323</stat>** | **<stat key="footprint.totals.dataset.time_ms:load">~433ms</stat> / <stat key="footprint.totals.dataset.memory_bytes:size">46.3MB</stat>** | **<stat key="footprint.totals.lookup_index.time_ms:load">~94ms</stat> / <stat key="footprint.totals.lookup_index.memory_bytes:size">7.1MB</stat>** | **<stat key="footprint.totals.filter_index.time_ms:load">~354ms</stat> / <stat key="footprint.totals.filter_index.memory_bytes:size">65.3MB</stat>** | **<stat key="footprint.totals.search_index.time_ms:load">~268ms</stat> / <stat key="footprint.totals.search_index.memory_bytes:size">58.7MB</stat>** | **<stat key="footprint.totals.combined.time_ms:load">~1.15s</stat> / <stat key="footprint.totals.combined.memory_bytes:size">177.5MB</stat>** |
 
-Accuracy tested on <!-- stat:bench.sample_size:int -->5,000<!-- /stat --> mangled-query samples per registry; cities' search additionally includes city + admin1 context. Load times, memory and latency are generated by `tests/analysis/footprint.py` and `tests/analysis/benchmarks.py`, last measured on <!-- stat:footprint.host.cpu -->11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz<!-- /stat --> with Python <!-- stat:footprint.host.python -->3.14.7<!-- /stat -->.
+> ℹ️ A registry also loads the datasets it references (without their indexes) so a cold first call on cities also loads countries and subdivisions, for example.
+
+> ⚠️ Fully caching cities and its indexes adds <stat key="footprint.registries.cities.combined.memory_bytes:size">126.9MB</stat> of memory. Calling `localis.cities.force_cache()` loads all of it upfront. You can call `cities.set_population_threshold(n)` before first access as a lever to control the memory footprint. At a threshold of <stat key="data.cities.threshold:int">15,000</stat>, cities drops from <stat key="data.cities.total:int">235,970</stat> to <stat key="data.cities.above_threshold:int">34,172</stat> and memory drops from <stat key="footprint.registries.cities.combined.memory_bytes:size">126.9MB</stat> to <stat key="footprint.cities_threshold.memory_bytes:size">29.8MB</stat>.
+
+### Search Benchmarks
+
+`get()`, `lookup()` and `filter()` return in microseconds on warm caches.
+
+| Registry | Latency (p50 / p95) | Queries | Accuracy (top 10) | Top Result |
+|---|---|---|---|---|
+| Countries | <stat key="bench.registries.countries.search.p50_ms:latency">1.39ms</stat> / <stat key="bench.registries.countries.search.p95_ms:latency">4.23ms</stat> | <stat key="bench.registries.countries.accuracy.queries:int">430</stat> | <stat key="bench.registries.countries.accuracy.success_pct:pct">100.0%</stat> | <stat key="bench.registries.countries.accuracy.top1_pct:pct">99.3%</stat> |
+| Subdivisions | <stat key="bench.registries.subdivisions.search.p50_ms:latency">2.6ms</stat> / <stat key="bench.registries.subdivisions.search.p95_ms:latency">4.72ms</stat> | <stat key="bench.registries.subdivisions.accuracy.queries:int">7,005</stat> | <stat key="bench.registries.subdivisions.accuracy.success_pct:pct">98.0%</stat> | <stat key="bench.registries.subdivisions.accuracy.top1_pct:pct">93.9%</stat> |
+| Cities | <stat key="bench.registries.cities.search.p50_ms:latency">6.4ms</stat> / <stat key="bench.registries.cities.search.p95_ms:latency">11.4ms</stat> | <stat key="bench.registries.cities.accuracy.queries:int">5,000</stat> | <stat key="bench.registries.cities.accuracy.success_pct:pct">98.5%</stat> | <stat key="bench.registries.cities.accuracy.top1_pct:pct">93.6%</stat> |
+
+Accuracy is tested on mangled names and aliases of up to <stat key="bench.sample_size:int">5,000</stat> sampled records per registry; cities' queries add the city's admin1. A record the query can't tell apart from the sampled one, sharing its name (and a city's admin1), counts as a hit. Measured on <stat key="bench.host.cpu">11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz</stat> with Python <stat key="bench.host.python">3.14.7</stat>.
 
 ---
 
-## Data Sources
-Data in this project is kept current monthly from the following sources:
+## Concurrency
 
-- **Countries**
-  - **Canonical**: [ISO 3166-1](https://www.iso.org/iso-3166-country-codes.html) data via [Debian's iso-codes project](https://salsa.debian.org/iso-codes-team/iso-codes)
-  - **Merged**: [ISO 3166-3](https://www.iso.org/iso-3166-country-codes.html) withdrawn/historic country codes, also via Debian's iso-codes project
-  - **Merged**: [GeoNames](https://www.geonames.org/) `countryInfo.txt`
-  - **Merged**: Additional country aliases queried from [Wikidata](https://www.wikidata.org/): English labels, alternative labels and short names
-- **Subdivisions**
-  - **Canonical**: [ISO 3166-2](https://www.iso.org/iso-3166-country-codes.html) data via [Debian's iso-codes project](https://salsa.debian.org/iso-codes-team/iso-codes)
-  - **Merged**: [GeoNames](https://www.geonames.org/) `admin1CodesASCII.txt` and `admin2Codes.txt`
-  - **Merged**: [Wikidata](https://www.wikidata.org/) (ISO 3166-2 code ↔ GeoNames id)
-  - **Merged**: Additional subdivision aliases from GeoNames' `alternateNamesV2` dump (Latin-script names only, filtered by [Unicode CLDR](https://cldr.unicode.org/)'s official-language data per country)
-- **Cities**
-  - [GeoNames](https://www.geonames.org/) `cities500.txt` dataset
-- **Macroregions**
-  - [Unicode CLDR](https://cldr.unicode.org/) territory containment and English territory names
+Registries are safe to share across threads, and a cold registry loads once even when several threads reach it together.
 
-Names ship in Latin script. Lookups, filters and search ignore case and accents, so "sao paulo" finds São Paulo and "strasse" finds Straße.
+> ⚠️ Two settings change shared state for every thread: `cities.set_population_threshold()` and `countries.set_include_historic()`. Configure them before the registry is shared between threads, never while other threads are querying it.
 
-[`docs/methodology.md`](docs/methodology.md) is a complete, falsifiable account of how each dataset is built: the rules that combine these sources, how the results were validated, and where they are known to be wrong. [`unmerged_subdivisions.md`](docs/unmerged_subdivisions.md) lists every ISO subdivision currently without a GeoNames counterpart, regenerated on every ingest run.
+### Batch searching
 
-### Concurrency
-Registries are safe to share across threads. `get()`, `lookup()`, `filter()`, `search()` and iteration only read shared data, and the first access that loads a dataset or index does so under the registry's lock, so threads reaching a cold registry together load it once.
-
-Two settings change shared state for every thread: `cities.set_population_threshold()` and `countries.set_include_historic()`. Configure them before the registry is shared between threads, never while other threads are querying it.
-
-#### Batch searching
-
-localis doesn't parallelize batches for you, since the right approach depends on your Python build, memory budget and surrounding executor. On free-threaded Python (3.14t), a thread pool searches in parallel:
+On free-threaded Python (3.14t), a thread pool searches in parallel:
 
 ```python
 from concurrent.futures import ThreadPoolExecutor
@@ -530,7 +489,7 @@ with ThreadPoolExecutor() as pool:
     results = list(pool.map(localis.cities.search, queries))
 ```
 
-On a standard Python build the same code is correct but runs one search at a time, because the GIL lets only one thread run Python code at once. To search in parallel there, use processes. Each worker loads its own copy of the data (up to <!-- stat:footprint.registries.cities.combined.memory_bytes:size -->120.3MB<!-- /stat --> for cities), so apply any settings in the worker's initializer, and search through a module-level function, since a registry itself can't be sent to a process:
+On a standard build, use processes. Each worker loads its own copy of the data (up to <stat key="footprint.registries.cities.combined.memory_bytes:size">126.9MB</stat> for cities), so apply settings in the worker's initializer:
 
 ```python
 from concurrent.futures import ProcessPoolExecutor
@@ -547,35 +506,68 @@ if __name__ == "__main__":  # workers import this module, so the pool only start
         results = list(pool.map(search_city, queries, chunksize=500))
 ```
 
+---
+
+## Data Sources
+
+Data in this project is kept current monthly from the following sources:
+
+- **Countries**
+  - **Canonical**: [ISO 3166-1](https://www.iso.org/iso-3166-country-codes.html) data via [Debian's iso-codes project](https://salsa.debian.org/iso-codes-team/iso-codes)
+  - **Merged**: [ISO 3166-3](https://www.iso.org/iso-3166-country-codes.html) withdrawn/historic country codes, also via Debian's iso-codes project
+  - **Merged**: [GeoNames](https://www.geonames.org/) `countryInfo.txt`
+  - **Merged**: Additional country aliases queried from [Wikidata](https://www.wikidata.org/): English labels, alternative labels and short names
+- **Subdivisions**
+  - **Canonical**: [ISO 3166-2](https://www.iso.org/iso-3166-country-codes.html) data via [Debian's iso-codes project](https://salsa.debian.org/iso-codes-team/iso-codes)
+  - **Merged**: [GeoNames](https://www.geonames.org/) `admin1CodesASCII.txt` and `admin2Codes.txt`
+  - **Merged**: [Wikidata](https://www.wikidata.org/) (ISO 3166-2 code ↔ GeoNames id)
+  - **Merged**: Additional subdivision aliases from GeoNames' `alternateNamesV2` dump (Latin-script names only, filtered by [Unicode CLDR](https://cldr.unicode.org/)'s official-language data per country)
+- **Cities**
+  - [GeoNames](https://www.geonames.org/) `cities500.txt` dataset
+- **Macroregions**
+  - [Unicode CLDR](https://cldr.unicode.org/) territory containment and English territory names
+- **Currencies**
+  - **Canonical**: [ISO 4217](https://www.iso.org/iso-4217-currency-codes.html) data via [Debian's iso-codes project](https://salsa.debian.org/iso-codes-team/iso-codes)
+  - **Merged**: each country's legal tender from [Unicode CLDR](https://cldr.unicode.org/)'s currency data
+- **Scripts**
+  - **Canonical**: [ISO 15924](https://www.unicode.org/iso15924/) data via [Debian's iso-codes project](https://salsa.debian.org/iso-codes-team/iso-codes)
+  - **Merged**: [Unicode CLDR](https://cldr.unicode.org/)'s English script names, as aliases
+- **Languages**
+  - **Canonical**: [ISO 639-3](https://iso639-3.sil.org/) data via [Debian's iso-codes project](https://salsa.debian.org/iso-codes-team/iso-codes)
+  - **Merged**: [Unicode CLDR](https://cldr.unicode.org/)'s English language names as aliases, each language's scripts, and each country's official languages
+
+Names ship in Latin script.
+
+[`docs/methodology.md`](https://github.com/dstoffels/localis/blob/main/docs/methodology.md) is a complete, falsifiable account of how each dataset is built: the rules that combine these sources, how the results were validated, and where they are known to be wrong. [`unmerged_subdivisions.md`](https://github.com/dstoffels/localis/blob/main/docs/unmerged_subdivisions.md) lists every ISO subdivision currently without a GeoNames counterpart.
 
 ### Data licensing
 
-The shipped data is derived from these sources, modified by localis's ingest pipeline, and remains under their licenses: ISO 3166 data via iso-codes (LGPL-2.1-or-later), GeoNames (CC BY 4.0), Unicode CLDR (Unicode License v3) and Wikidata (CC0). [`src/localis/data/NOTICE`](src/localis/data/NOTICE), which ships with the data, attributes each source, and the full license texts are in [`LICENSES/`](LICENSES) and in the wheel's metadata. If you redistribute the data, keep that notice and those licenses with it.
-
----
-
-## Requirements
-
-- Python 3.11+
-- `rapidfuzz` - Fast fuzzy string matching
+The shipped data is derived from these sources, modified by localis's ingest pipeline, and remains under their licenses: ISO 3166, ISO 4217, ISO 639-3 and ISO 15924 data via iso-codes (LGPL-2.1-or-later), GeoNames (CC BY 4.0), Unicode CLDR (Unicode License v3) and Wikidata (CC0). [`src/localis/data/NOTICE`](https://github.com/dstoffels/localis/blob/main/src/localis/data/NOTICE), which ships with the data, attributes each source, and the full license texts are in [`LICENSES/`](https://github.com/dstoffels/localis/tree/main/LICENSES) and in the wheel's metadata. If you redistribute the data, keep that notice and those licenses with it.
 
 ---
 
 ## License
 
-Code: MIT ([`LICENSE`](LICENSE)). Data: its sources' licenses, listed under [Data licensing](#data-licensing). The package's license expression is `MIT AND LGPL-2.1-or-later AND CC-BY-4.0 AND Unicode-3.0 AND CC0-1.0`.
+**Code**: MIT ([`LICENSE`](https://github.com/dstoffels/localis/blob/main/LICENSE)).
+**Data**: its sources' licenses, listed under [Data licensing](#data-licensing).
+The package's license expression is `MIT AND LGPL-2.1-or-later AND CC-BY-4.0 AND Unicode-3.0 AND CC0-1.0`.
 
 ---
 
-## Why localis
-localis began with some database cleanup. I found myself writing mountains of bespoke code to parse inconsistent, dirty data with pycountry, GeoNames and Wikidata to name a few (Google Places was not in the budget). When the pipeline was complete and the data cleaned, I realized this mountain of code could be useful for others who might need a reliable offline geo-data solution, so here we are! I hope you find it useful and please don't hesitate to contribute or report any issues.
+## History
+
+localis began with some database cleanup. I found myself writing mountains of bespoke code to parse inconsistent, dirty data while trying to reconcile pycountry, GeoNames and Wikidata to name a few (Google Places was not in the budget). When the pipeline was complete and the data finally cleaned, I realized this mountain of code could be useful for others who might need a reliable offline solution, so here we are! Over the past few years I've taken great care to build a robust, reliable dataset, wrapped in a simple, performant interface. I hope you find it useful and please don't hesitate to contribute or report any issues.
 
 ---
 
 ## Contributing
-[Pull requests welcome](https://github.com/dstoffels/localis)
-[Report issues](https://github.com/dstoffels/localis/issues)
 
-Support this project: 
+- [Pull requests welcome](https://github.com/dstoffels/localis)
+- [Report issues](https://github.com/dstoffels/localis/issues)
+
+Support this project:
 - [GitHub Sponsors](https://github.com/sponsors/dstoffels)
 - [PayPal](https://www.paypal.biz/danOstoffels)
+
+### Contributors
+- [@SchubmannM](https://github.com/SchubmannM): performance work in [#8](https://github.com/dstoffels/localis/pull/8) that inspired localis's `array('I')` index storage and lazy-loaded registries

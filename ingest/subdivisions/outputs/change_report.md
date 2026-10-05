@@ -1,0 +1,458 @@
+# Subdivisions changes
+
+Records compared by `key` between the shipped data and this build.
+
+| Records | Added | Removed | Changed |
+|---|---|---|---|
+| 51,711 → 51,711 | 0 | 0 | 448 |
+
+## Changed (448)
+
+- `AF.03.1304` Dōshī: aliases
+- `AF.09.2701` Chaghcharān: aliases
+- `AF.18.821` Bihsūd: aliases
+- `BA.01.3343706` Posavski Kanton: aliases
+- `BA.01.3343716` Tuzlanski Kanton: aliases
+- `BA.01.3343722` Zeničko-Dobojski Kanton: aliases
+- `BA.01.3343731` Srednjobosanski Kanton: aliases
+- `BA.01.3343733` Hercegovačko-Neretvanski Kanton: aliases
+- `BA.01.3343736` Zapadnohercegovački Kanton: aliases
+- `BJ.16.7668940` Aguégués: aliases
+- `BJ.10.7669349` Kalalè: aliases
+- `BJ.10.7669352` Pèrèrè: aliases
+- `BJ.10.7669357` Sinendé: aliases
+- `BJ.15.9166076` Comé: aliases
+- `BJ.07.10344468` Ségbana: aliases
+- `BJ.12.10344472` Aplahoué: aliases
+- `BJ.12.10344474` Klouékanmè: aliases
+- `BO.05.0411` Tomás Barrón: aliases
+- `BO.05.0410` Saucarí: aliases
+- `BO.07.3911502` José María Linares: aliases
+- `BO.07.0507` Alonso de Ibáñez: aliases
+- `BO.02.7576102` Bolivar: aliases
+- `BO.05.10400859` Sebastian Pagador Province: aliases
+- `BR.17.2503308` Cachoeira dos Índios: aliases
+- `BR.13.2105401` Itapecuru Mirim: aliases
+- `BR.22.2409100` Passa e Fica: aliases
+- `BR.15.3107307` Bocaiúva: aliases
+- `BR.27.3506607` Biritiba-Mirim: aliases
+- `BR.14.5102694` CanaBrava do Norte: aliases
+- `BY.01.618911` Žabinkaŭski rajon: aliases
+- `BY.01.627799` Ivacevicki rajon: aliases
+- `BY.07.629639` Braslaŭski rajon: aliases
+- `CM.12.2229291` Logone-et-Chari: aliases
+- `CM.14.2232969` Dja-et-Lobo: aliases
+- `CM.11.7731690` Méfou-et-Afamba: aliases
+- `CM.11.9224948` Mbam-Et-Inoubou: aliases
+- `CM.14.9239012` Vallée-du-Ntem: aliases
+- `CM.07.10289311` Ngo-Ketunjia: aliases
+- `CN.01.3418` Xuancheng Shi: aliases
+- `CN.20.1503` Wuhai Shi: aliases
+- `CN.26.6105` Weinan Shi: aliases
+- `CN.09.4114` Shangqiu Shi: aliases
+- `CN.02.3308` Quzhou Shi: aliases
+- `CN.30.4418` Qingyuan Shi: aliases
+- `CN.09.4111` Luohe Shi: aliases
+- `CN.26.6107` Hanzhong Shi: aliases
+- `CN.05.2204` Liaoyuan Shi: aliases
+- `CN.05.2206` Baishan Shi: aliases
+- `CN.32.5109` Suining Shi: aliases
+- `CY.05.5013` Germasógeia: aliases
+- `CY.06.6010` Geroskípou Municipality: aliases
+- `DO.29.3002` Sabana de La Mar: aliases
+- `DO.37.3205` San Antonio De Guerra: aliases
+- `DZ.36.12952558` Aïn Larbaâ: aliases
+- `ET.44.11750843` Bole: aliases
+- `ET.44.11750847` Arada: aliases
+- `GG.6417213` St Pierre du Bois: aliases
+- `GG.6417215` Saint Saviour: aliases
+- `GG.6417224` St Martin: aliases
+- `GG.6417226` Saint Andrew: aliases
+- `GG.6417228` St Peter Port: aliases
+- `GG.6417233` St Sampson: aliases
+- `GR.ESYE22.26` Lefkada: aliases
+- `GT.08.1306` Municipio de San Pedro Necta: aliases
+- `GT.13.908` Municipio de San Miguel Sigüilá: aliases
+- `GT.13.918` Municipio de San Francisco La Unión: aliases
+- `HR.21.8531816` Donji grad: aliases
+- `HR.21.8531817` Gornji grad – Medveščak: aliases
+- `HR.21.8531823` Peščenica – Žitnjak: aliases
+- `HR.21.8531824` Novi Zagreb – istok: aliases
+- `HR.21.8531825` Novi Zagreb - zapad: aliases
+- `HR.21.8531826` Trešnjevka – sjever: aliases
+- `HR.21.8531827` Trešnjevka – jug: aliases
+- `HR.21.8531828` Črnomerec: aliases
+- `HR.21.8531832` Podsused - Vrapče: aliases
+- `HU.21.170` Bonyhádi járás: aliases
+- `HU.21.175` Tolnai járás: aliases
+- `HU.21.173` Szekszárdi járás: aliases
+- `HU.21.172` Paksi járás: aliases
+- `ID.38.7309` Kabupaten Pangkajene Dan Kepulauan: aliases
+- `IN.02.546` West Godāvari: aliases
+- `IN.09.491` Valsād: aliases
+- `IN.34.220` Vaishāli: aliases
+- `IN.19.571` Tumkur: aliases
+- `IN.30.254` Tirāp: aliases
+- `IN.35.424` Tīkamgarh: aliases
+- `IN.09.492` Sūrat: aliases
+- `IN.12.010` Srīnagar: aliases
+- `IN.02.542` Srīkākulam: aliases
+- `IN.10.076` Sonīpat: aliases
+- `IN.34.218` Siwān: aliases
+- `IN.34.206` Sītāmarhi: aliases
+- `IN.35.423` Shivpurī: aliases
+- `IN.35.436` Shājāpur: aliases
+- `IN.35.456` Seonī: aliases
+- `IN.24.108` Sawāi Mādhopur: aliases
+- `IN.34.219` Sāran: aliases
+- `IN.34.221` Samastīpur: aliases
+- `IN.35.427` Sāgar: aliases
+- `IN.34.234` Rohtās: aliases
+- `IN.35.434` Ratlām: aliases
+- `IN.38.364` Rānchī: aliases
+- `IN.25.626` Rāmanāthapuram: aliases
+- `IN.09.476` Rājkot: aliases
+- `IN.35.442` Rājgarh: aliases
+- `IN.12.006` Rājauri: aliases
+- `IN.34.203` Pashchim Champāran: aliases
+- `IN.09.484` Pānch Mahāls: aliases
+- `IN.38.358` Palāmu: aliases
+- `IN.25.611` Nilgiris: aliases
+- `IN.34.237` Nawāda: aliases
+- `IN.34.229` Nālanda: aliases
+- `IN.36.135` Morādābād: aliases
+- `IN.20.262` Mokokchūng: aliases
+- `IN.36.199` Mirzāpur: aliases
+- `IN.21.376` Mayūrbhanj: aliases
+- `IN.09.471` Mahesāna: aliases
+- `IN.23.041` Ludhiāna: aliases
+- `IN.11.025` Lāhul and Spiti: aliases
+- `IN.20.270` Kohīma: aliases
+- `IN.18.298` East Khāsi Hills: aliases
+- `IN.10.074` Karnāl: aliases
+- `IN.40.534` Karīmnagar: aliases
+- `IN.03.314` Kārbi Ānglong: aliases
+- `IN.22.637` Kāraikāl: aliases
+- `IN.11.024` Kāngra: aliases
+- `IN.03.321` Kāmrūp: aliases
+- `IN.21.395` Kālāhandi: aliases
+- `IN.09.479` Jūnāgadh: aliases
+- `IN.10.077` Jīnd: aliases
+- `IN.36.166` Jhānsi: aliases
+- `IN.35.464` Jhābua: aliases
+- `IN.09.477` Jāmnagar: aliases
+- `IN.28.328` Jalpāiguri: aliases
+- `IN.40.536` Hyderābād: aliases
+- `IN.10.080` Hisār: aliases
+- `IN.11.028` Hamīrpur: aliases
+- `IN.02.548` Guntūr: aliases
+- `IN.34.217` Gopālganj: aliases
+- `IN.03.302` Goālpāra: aliases
+- `IN.38.349` Girīdīh: aliases
+- `IN.36.140` Ghāziābād: aliases
+- `IN.34.236` Gayā: aliases
+- `IN.18.294` East Gāro Hills: aliases
+- `IN.21.388` Ganjām: aliases
+- `IN.24.099` Gangānagar: aliases
+- `IN.09.473` Gāndhīnagar: aliases
+- `IN.36.201` Etah District: aliases
+- `IN.13.595` Ernākulam: aliases
+- `IN.02.545` East Godāvari: aliases
+- `IN.24.124` Dūngarpur: aliases
+- `IN.30.257` Dibāng Valley: aliases
+- `IN.21.383` Dhenkānāl: aliases
+- `IN.35.438` Dhār: aliases
+- `IN.38.354` Dhānbād: aliases
+- `IN.35.455` Chhindwāra: aliases
+- `IN.03.316` Cāchār: aliases
+- `IN.11.030` Bilāspur: aliases
+- `IN.37.406` Bilāspur: aliases
+- `IN.24.101` Bikaner District: aliases
+- `IN.19.558` Bīdar: aliases
+- `IN.35.444` Bhopāl: aliases
+- `IN.24.122` Bhilwara District: aliases
+- `IN.09.481` Bhāvnagar: aliases
+- `IN.09.488` Bharūch: aliases
+- `IN.34.224` Bhāgalpur: aliases
+- `IN.35.447` Betūl: aliases
+- `IN.34.222` Begusarāi: aliases
+- `IN.24.115` Barmer District: aliases
+- `IN.09.469` Banās Kāntha: aliases
+- `IN.21.377` Bāleshwar: aliases
+- `IN.21.393` Balāngīr: aliases
+- `IN.35.457` Bālāghāt: aliases
+- `IN.36.191` Āzamgarh: aliases
+- `IN.34.235` Aurangābād: aliases
+- `IN.12.014` Anantnāg: aliases
+- `IN.10.070` Ambāla: aliases
+- `IN.36.143` Alīgarh: aliases
+- `IN.09.474` Ahmadābād: aliases
+- `IN.36.146` Āgra: aliases
+- `IN.18.297` Ri-Bhoi: aliases
+- `IN.31.282` Kolasib district: aliases
+- `IN.52.496` Dadra & Nagar Haveli: aliases
+- `IN.01.639` North  & Middle Andaman: aliases
+- `IR.07.125034` Mamasanī: aliases
+- `JE.3237200` St. Brelade: aliases
+- `JE.3237212` St Mary: aliases
+- `JE.3237214` St Lawrence: aliases
+- `JE.3237221` St Peter: aliases
+- `JE.3237229` St Ouen: aliases
+- `JE.3237497` St John: aliases
+- `JE.3237716` St Martîn: aliases
+- `JE.3237864` St Helier: aliases
+- `JM.10.1432` St. John's West: aliases
+- `JM.10.1435` St. John's East: aliases
+- `JM.08.15018` Half-Way-Tree: aliases
+- `JM.09.603` Mount Zion: aliases
+- `JM.09.626` Saint D'Acre: aliases
+- `JM.07.409` St. Margaret's Bay: aliases
+- `JP.34.1848915` Wakō-shi: aliases
+- `JP.01.1849840` Toyokawa Shi: aliases
+- `JP.01.1849862` Toyoake Shi: aliases
+- `JP.01.1850183` Tokoname Shi: aliases
+- `JP.01.1850219` Tōkai Shi: aliases
+- `JP.37.1851714` Shizuoka Shi: aliases
+- `JP.01.1852044` Shinshiro Shi: aliases
+- `JP.40.1853655` Ōta-ku: aliases
+- `JP.01.1854373` Okazaki Shi: aliases
+- `JP.01.1854797` Ōbu Shi: aliases
+- `JP.25.1856706` Miyazaki-shi: aliases
+- `JP.40.1856786` Miyake Shichō: aliases
+- `JP.40.1858665` Kōtō-ku: aliases
+- `JP.01.1858832` Kōnan-shi: aliases
+- `JP.35.1858984` Kōka-shi: aliases
+- `JP.07.1859306` Kitakyushu-shi: aliases
+- `JP.34.1859316` Kitakatsushika Gun: aliases
+- `JP.40.1859779` Katsushika Ku: aliases
+- `JP.01.1860033` Kariya Shi: aliases
+- `JP.01.1861940` Ichinomiya Shi: aliases
+- `JP.01.1863204` Handa Shi: aliases
+- `JP.40.1864148` Fuchū-shi: aliases
+- `JP.40.1864242` Edogawa Ku: aliases
+- `JP.01.1864539` Chita Shi: aliases
+- `JP.01.1864548` Chiryū Shi: aliases
+- `JP.40.1865187` Arakawa Ku: aliases
+- `JP.01.1865293` Anjō Shi: aliases
+- `JP.40.1865750` Adachi Ku: aliases
+- `JP.40.2111520` Ogasawara Shichō: aliases
+- `JP.01.7369797` Kiyosu Shi: aliases
+- `JP.01.7369798` Aisai Shi: aliases
+- `JP.01.7369799` Iwakura Shi: aliases
+- `JP.01.7369800` Kitanagoya Shi: aliases
+- `JP.27.7418807` Ōmura Shi: aliases
+- `JP.34.7458573` Ōsato-gun: aliases
+- `JP.34.7464125` Kitamoto Shi: aliases
+- `JP.34.7464126` Satte Shi: aliases
+- `JP.34.7464128` Fujimino Shi: aliases
+- `JP.34.8304214` Ageo Shi: aliases
+- `JP.34.8304215` Shiki Shi: aliases
+- `KH.31.2506` Krŏng Suŏng: aliases
+- `KH.13.1308` Krŏng Preăh Vĭhéar: aliases
+- `KH.04.0502` Krŏng Chbar Mon: aliases
+- `KH.19.2108` Krŏng Doun Kaev: aliases
+- `KH.07.0811` Krŏng Ta Khmau: aliases
+- `KH.18.2008` Krŏng Bavĕt: aliases
+- `KR.06.32020` Wonju-si: aliases
+- `LU.DI.07` Ettelbruck: aliases
+- `MN.03.6619144` Sagsay sum: aliases
+- `MN.24.6988011` Shiveegovi Sum: aliases
+- `MR.06.9212604` R'Kiz: aliases
+- `MX.20.010` El Barrio de la Soledad: aliases
+- `MX.20.104` San Antonino el Alto: aliases
+- `MX.26.038` Moctezuma municipality: aliases
+- `MZ.06.9252730` Ilha de Mocambique: aliases
+- `NG.32.31018` Iwajowa: aliases
+- `NG.32.31024` Olorunsogo: aliases
+- `NG.32.31025` Oluyole: aliases
+- `NG.32.31026` Ona Ara: aliases
+- `NG.32.31027` Orelope: aliases
+- `NG.32.31014` Ido: aliases
+- `NG.32.31019` Kajola: aliases
+- `NG.32.31028` Ori Ire: aliases
+- `NG.32.31033` Surulere: aliases
+- `NG.32.31015` Irepo: aliases
+- `NG.32.31004` Atisbo: aliases
+- `NG.32.31003` Atiba: aliases
+- `NG.32.31023` Ogo Oluwa: aliases
+- `NG.32.31017` Itesiwaju: aliases
+- `NG.32.31005` Egbeda: aliases
+- `NI.17.9127` Mulukuku: aliases
+- `NL.02.1900` Sûdwest Fryslân: aliases
+- `NO.05.5601` Alta: aliases
+- `NO.34.3403` Hamar: aliases
+- `PA.12.1205` Nurun: aliases
+- `PE.13.1309` Sanchez Carrion: aliases
+- `PE.02.0204` Asuncion: aliases
+- `PE.02.0207` Carlos Fermin Fitzcarrald: aliases
+- `PE.15.1509` Oyon: aliases
+- `PE.16.1604` Mariscal Ramon Castilla: aliases
+- `PK.04.1169821` Multān District: aliases
+- `PK.03.1170950` Mānsehra District: aliases
+- `PK.02.1173663` Khuzdār District: aliases
+- `PK.02.1174059` Khārān District: aliases
+- `PK.04.1177651` Gujrāt District: aliases
+- `PK.04.1177658` Gujrānwāla District: aliases
+- `PK.04.1179399` Faisalābād District: aliases
+- `PK.04.1180287` Dera Ghāzi Khān District: aliases
+- `PK.03.1181064` Chitrāl District: aliases
+- `PK.02.1181950` Chāgai District: aliases
+- `PK.03.1183781` Bājaur Agency: aliases
+- `PK.04.1183876` Bahāwalpur District: aliases
+- `PK.04.1183882` Bahāwalnagar District: aliases
+- `PK.05.1184051` Badīn District: aliases
+- `PK.03.1185055` Abbottābād District: aliases
+- `PK.02.6641896` Awārān District: aliases
+- `PK.02.6641922` Jāfarābād District: aliases
+- `PK.02.6641965` Wāshuk District: aliases
+- `PK.02.6641972` Ziārat District: aliases
+- `PK.04.7418846` Lodhrān District: aliases
+- `PK.04.7418850` Pākpattan District: aliases
+- `PK.04.7418888` Okāra District: aliases
+- `PK.04.7418890` Khānewāl District: aliases
+- `PK.04.7418962` Hāfizābād District: aliases
+- `PK.04.7418963` Mandi Bahāuddīn District: aliases
+- `PK.04.7418968` Nārowāl District: aliases
+- `PK.03.7419051` Chārsadda District: aliases
+- `PK.03.7419053` Shāngla District: aliases
+- `PK.03.7419054` Harīpur District: aliases
+- `PK.03.7419055` Swābi District: aliases
+- `PK.03.7419056` Lower Dīr District: aliases
+- `PK.05.7419156` Jāmshoro District: aliases
+- `PK.05.7419157` Matiāri District: aliases
+- `PK.04.7419159` Nankāna Sāhib District: aliases
+- `PL.85.2814` Powiat olsztyński: aliases
+- `PL.77.1207` Powiat limanowski: aliases
+- `PL.74.1061` Łódź: aliases
+- `PL.75.0603` Powiat chełmski: aliases
+- `PL.75.0609` Powiat lubelski: aliases
+- `PL.78.1406` Powiat grójecki: aliases
+- `PL.77.1206` Powiat krakowski: aliases
+- `PL.80.1805` Powiat jasielski: aliases
+- `PL.85.2801` Powiat bartoszycki: aliases
+- `PL.72.0203` Powiat głogowski: aliases
+- `PL.72.0204` Powiat górowski: aliases
+- `PL.72.0205` Powiat jaworski: aliases
+- `PL.72.0206` Powiat jeleniogórski: aliases
+- `PL.72.0208` Powiat kłodzki: aliases
+- `PL.72.0210` Powiat lubański: aliases
+- `PL.72.0211` Powiat lubiński: aliases
+- `PL.72.0212` Powiat lwówecki: aliases
+- `PL.72.0213` Powiat milicki: aliases
+- `PL.72.0214` Powiat oleśnicki: aliases
+- `PL.72.0215` Powiat oławski: aliases
+- `PL.72.0216` Powiat polkowicki: aliases
+- `PL.72.0217` Powiat strzeliński: aliases
+- `PL.72.0218` Powiat średzki: aliases
+- `PL.87.3207` Powiat kamieński: aliases
+- `PL.72.0219` Powiat świdnicki: aliases
+- `PL.72.0220` Powiat trzebnicki: aliases
+- `PL.72.0222` Powiat wołowski: aliases
+- `PL.72.0223` Powiat wrocławski: aliases
+- `PL.72.0224` Powiat ząbkowicki: aliases
+- `PL.72.0225` Powiat zgorzelecki: aliases
+- `PL.72.0226` Powiat złotoryjski: aliases
+- `PL.83.2415` Powiat wodzisławski: aliases
+- `PL.86.3013` Powiat leszczyński: aliases
+- `PL.73.0415` Powiat Toruński: aliases
+- `PL.78.1437` Powiat żuromiński: aliases
+- `PL.82.2204` Powiat gdański: aliases
+- `PL.76.0806` Powiat strzelecko-drezdenecki: aliases
+- `PL.72.0207` Powiat kamiennogórski: aliases
+- `PL.74.1012` Powiat radomszczański: aliases
+- `PL.74.1007` Powiat opoczyński: aliases
+- `PL.74.1019` Powiat zduńskowolski: aliases
+- `PL.84.2612` Powiat staszowski: aliases
+- `PL.79.1611` Powiat strzelecki: aliases
+- `PL.80.1820` Powiat tarnobrzeski: aliases
+- `PL.86.3006` Powiat jarociński: aliases
+- `PL.86.3011` Powiat kościański: aliases
+- `PL.86.3025` Powiat średzki: aliases
+- `PT.02.0102` Albergaria-A-Velha: aliases
+- `PT.05.0404` Freixo de Espada À Cinta: aliases
+- `PT.06.0505` Idanha-A-Nova: aliases
+- `PT.06.0508` Proença-A-Nova: aliases
+- `PT.07.0604` Condeixa-A-Nova: aliases
+- `PT.07.0610` Montemor-O-Velho: aliases
+- `PT.08.0706` Montemor-O-Novo: aliases
+- `PT.13.1008` Figueiró Dos Vinhos: aliases
+- `PT.23.4801` Lajes Das Flores: aliases
+- `PT.23.4802` Santa Cruz Das Flores: aliases
+- `RE.RE` Reunion: aliases
+- `RO.39.171101` Comuna Măciuca: aliases
+- `RO.04.20359` Comuna Letea Veche: aliases
+- `SA.15.10972287` Rafha: aliases
+- `SA.06.10972331` Al Aḩsā’: aliases
+- `SE.14.2583` Haparanda Kommun: aliases
+- `SE.26.0183` Sundbybergs Kommun: aliases
+- `SE.23.2421` Storumans kommun: aliases
+- `SE.26.0163` Sollentuna Kommun: aliases
+- `SK.03.806` Okres Kosice-okolie: aliases
+- `SN.07.2244804` Thiès: aliases
+- `SN.18.2245705` Sédhiou: aliases
+- `SN.03.2248699` Mbacké: aliases
+- `ST.01.11995790` Pagué: aliases
+- `TD.02.10377074` Kobé: aliases
+- `TD.20.12186506` Lac Léré: aliases
+- `TD.25.12186513` Adé: aliases
+- `TD.25.12186514` Koukou-Angarana: aliases
+- `TD.20.12186525` Mayo-Dallah: aliases
+- `TD.20.12186526` Mayo-Binder: aliases
+- `TD.08.12186528` Guéni: aliases
+- `TD.09.12186530` Kouh-Ouest: aliases
+- `TD.14.12186532` Tandjilé-Centre: aliases
+- `TD.16.12186539` Mayo-Lemié: aliases
+- `TD.16.12186540` Mont-Illi: aliases
+- `TD.13.12186545` Aboudeia: aliases
+- `TD.02.12186833` Dar-Tama: aliases
+- `TD.02.12186852` Wadi-Hawar: aliases
+- `TD.26.12186866` Tibesti-Est: aliases
+- `TD.26.12186867` Tibesti-Ouest: aliases
+- `TD.06.12186903` Nord-Kanem: aliases
+- `TD.18.12186910` Haraz-Al-Biar: aliases
+- `TD.13.13448900` Haraze-Mangueigne: aliases
+- `TH.40.1015` Thon buri: aliases
+- `TH.40.1049` Thung khru: aliases
+- `TN.23.3151` Sousse Médina: aliases
+- `TN.30.6159` El Guetar: aliases
+- `TN.23.3157` Kalaa Kebira: aliases
+- `TN.22.2454` Gaafour: aliases
+- `TN.03.4158` Hajeb El Ayoun: aliases
+- `TN.06.2259` Balta Bou Aouane: aliases
+- `TN.17.2152` Beja Sud: aliases
+- `TN.14.2361` Es Sers: aliases
+- `TN.19.1552` Dar Chaabane El Fehri: aliases
+- `TN.19.1553` Beni Khiar: aliases
+- `TN.23.3166` Zaouia-Ksiba-Thrayet: aliases
+- `TN.32.3454` Sakiet Eddaier: aliases
+- `TN.34.5353` Smar: aliases
+- `TN.33.4356` Sidi Ali Ben Aoun: aliases
+- `TN.27.1355` Hammam Chott: aliases
+- `TN.38.1254` Kalaat El Andalous: aliases
+- `TR.34.7732504` Kâğıthane: aliases
+- `TR.38.7910468` Yesilhisar: aliases
+- `TR.38.7932395` Yahyali: aliases
+- `TR.79.8631942` Bahşılı İlçesi: aliases
+- `TZ.09.1207` Mbarali district: aliases
+- `TZ.30.2202` Wanging’ombe: aliases
+- `UA.27.1806` Korosten' Raion: aliases
+- `UA.12.8520167` Desnianskyi Raion: aliases
+- `US.LA.091` Saint Helena Parish: aliases
+- `US.LA.095` Saint John the Baptist Parish: aliases
+- `US.LA.101` St. Mary Parish: aliases
+- `US.MD.037` Saint Mary's County: aliases
+- `US.MO.185` St. Clair County: aliases
+- `US.IN.141` Saint Joseph County: aliases
+- `US.NH.007` Coos County: aliases
+- `US.AK.290` Yukon-Koyukuk Census Area: aliases
+- `UZ.10.1346451` Chelak Tumani: aliases
+- `UZ.07.1513133` Karmana Tumani: aliases
+- `VE.18.1808` Municipio Páez: aliases
+- `VE.14.1402` Municipio Andrés Bello: aliases
+- `VN.79.765` Quận Bình Thạnh: aliases
+- `VN.38.405` Huyện Đông Sơn: aliases
+- `VN.66.654` Huyện Krông Pắk: aliases
+- `VN.82.817` Thị xã Cai Lậy: aliases
+- `XK.10097359.11` Komuna e Klines: aliases
+- `ZA.02.DC23` uThukela District Municipality: aliases
+- `ZA.02.DC29` iLembe District Municipality: aliases

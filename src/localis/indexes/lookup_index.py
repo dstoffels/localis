@@ -1,10 +1,15 @@
 import bisect
 from array import array
 from pathlib import Path
+from typing import Sequence, TypeVar
 from localis.utils.strings import normalize
+
+K = TypeVar("K", str, int)
 
 
 class LookupIndex:
+    """A registry's lookup keys, string and integer, each sorted for binary search, mapped to record ids."""
+
     def __init__(
         self,
         filepath: Path,
@@ -42,13 +47,20 @@ class LookupIndex:
         self._int_vals = int_vals
 
     def get(self, key: str | int) -> int | None:
-        """Get the model ID by its lookup key."""
-        if isinstance(key, str):
-            key = normalize(key)
-            keys, vals = self._str_keys, self._str_vals
-        else:
-            keys, vals = self._int_keys, self._int_vals
+        """The record id a lookup key resolves to, or None; raises TypeError for a key that isn't a str or an int."""
+        if isinstance(key, bool) or not isinstance(key, (str, int)):
+            raise TypeError(f"lookup key must be a str or an int, got {key!r}")
+        if isinstance(key, int):
+            return self._find(self._int_keys, self._int_vals, key)
+        key = normalize(key)
+        found = self._find(self._str_keys, self._str_vals, key)
+        # an all-digit code (a numeric code, a GeoNames id) is indexed as an integer, so "840" also tries 840
+        if found is None and key.isdigit():
+            found = self._find(self._int_keys, self._int_vals, int(key))
+        return found
 
+    @staticmethod
+    def _find(keys: Sequence[K], vals: array, key: K) -> int | None:
         i = bisect.bisect_left(keys, key)
         if i < len(keys) and keys[i] == key:
             return vals[i]

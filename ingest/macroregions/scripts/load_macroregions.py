@@ -42,14 +42,13 @@ def load_macroregions() -> Macroregions:
             raise ValueError(f"CLDR region child {code} isn't a subregion in the containment tree")
 
     by_code: dict[str, MacroregionModel] = {}
-    next_id = 1
 
     def add(code: str, type_: MacroregionType, parent: MacroregionModel | None) -> None:
-        nonlocal next_id
         if code not in names:
             raise ValueError(f"CLDR has no English name for macroregion {code}")
-        by_code[code] = MacroregionModel(id=next_id, name=names[code], code=code, type=type_, parent=parent)
-        next_id += 1
+        if code in by_code:
+            raise ValueError(f"CLDR's territory containment makes {code} both a {by_code[code].type} and a {type_}, and localis keeps one macroregion per code; check what changed in territoryContainment.json and decide in load_macroregions() which {code} should be")
+        by_code[code] = MacroregionModel(name=names[code], code=code, type=type_, parent=parent)
 
     for code in region_codes:
         add(code, "region", None)

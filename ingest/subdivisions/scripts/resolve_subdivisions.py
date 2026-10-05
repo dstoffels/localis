@@ -5,6 +5,13 @@ from .automerge import merge_matched_sub
 from ingest.shared.models import SubdivisionModel
 
 
+def log_inactive_decisions(resolution_map: ResolutionMap, build_codes: set[str]) -> None:
+    """Logs the skill decisions whose code this ISO 3166-2 release doesn't list; they stay recorded and apply again if the code returns."""
+    inactive = sorted(set(resolution_map.skill_decisions) - build_codes)
+    if inactive:
+        ingest_log.writeline(f"{len(inactive)} skill decisions inactive, their codes not in this ISO 3166-2 release: {', '.join(inactive)}", level="WARN")
+
+
 def apply_skill_decisions(
     iso_subs: dict[str, SubdivisionModel],
     resolution_map: ResolutionMap,

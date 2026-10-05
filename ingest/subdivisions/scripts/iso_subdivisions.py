@@ -1,4 +1,4 @@
-from ingest.utils import SUBDIVISIONS_INPUTS_PATH, ingest_log
+from ingest.utils import SUBDIVISIONS, ingest_log
 from ingest.shared.models import CountryModel
 from ingest.shared.models import SubdivisionModel
 from ingest.subdivisions.utils.resolution_map import ResolutionMap
@@ -58,7 +58,7 @@ def load_iso_subs(
     iso_subs: dict[str, SubdivisionModel] = {}
     non_administrative_subs: list[SubdivisionModel] = []
 
-    with open(SUBDIVISIONS_INPUTS_PATH / "iso_3166-2.json", "r", encoding="utf-8") as f:
+    with open(SUBDIVISIONS.inputs / "iso_3166-2.json", "r", encoding="utf-8") as f:
         entries: list[dict] = json.load(f)["3166-2"]
 
     entries_by_code = {entry["code"]: entry for entry in entries}
@@ -76,7 +76,6 @@ def load_iso_subs(
         name, bracket_alias = _split_bracketed_name(entry["name"])
 
         subdivision = SubdivisionModel(
-            id=0,  # temporary, will be set when all loaded
             name=name,
             country=country,
             type=entry["type"],

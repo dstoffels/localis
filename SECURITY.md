@@ -2,7 +2,7 @@
 
 ## Supported versions
 
-Only the latest release of localis receives security fixes. Upgrade to it before reporting, to check the issue still exists.
+Only the latest release of localis receives security fixes, pre-releases included; 2.x is no longer maintained (see [docs/versioning.md](docs/versioning.md#support)). Upgrade to the latest release before reporting, to check the issue still exists.
 
 ## Reporting a vulnerability
 

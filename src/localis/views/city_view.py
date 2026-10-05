@@ -30,9 +30,7 @@ class CityView(CrossReferencedView[City, CityStore, CountryView, SubdivisionView
 
     @property
     def country(self) -> CountryView:
-        country = self._country_views.get(self._store.country_ids[self._idx])
-        assert country is not None, "city has no country, violates ingest invariant"
-        return country
+        return self._country_views[self._store.country_ids[self._idx]]
 
     @property
     def population(self) -> int:
@@ -57,6 +55,14 @@ class CityView(CrossReferencedView[City, CityStore, CountryView, SubdivisionView
             lat=self.lat,
             lng=self.lng,
         )
+
+    # the population's position in the row load() unpacks
+    _POPULATION_COLUMN = 4
+
+    @classmethod
+    def population_filter(cls, threshold: int) -> CacheFilterPredicate:
+        """A load() predicate keeping the rows of at least the threshold's population."""
+        return lambda row: int(row[cls._POPULATION_COLUMN]) >= threshold
 
     @classmethod
     def load(

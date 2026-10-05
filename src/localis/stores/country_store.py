@@ -16,6 +16,8 @@ class CountryStore(Store):
         "historics",
         "macroregion_ids",
         "grouping_ids",
+        "currency_ids",
+        "languages",
     )
 
     def __init__(self):
@@ -25,13 +27,16 @@ class CountryStore(Store):
         self.geonames_ids = array("i")  # -1 sentinel for None
         self.official_names: list[str] = []
         self.common_names: list[str] = []
-        # tuples, so entities can share them without copying and callers can't mutate the cache through a returned entity
+        # tuples, immutable in the store; views copy them into each entity's own list
         self.aliases: list[tuple[str, ...]] = []
         self.numerics = array("i")  # -1 sentinel for None
         self.flags: list[str] = []
         self.historics: list[HistoricInfo | None] = []
         self.macroregion_ids: list[tuple[int, ...]] = []
         self.grouping_ids: list[tuple[int, ...]] = []
+        self.currency_ids: list[tuple[int, ...]] = []
+        # (language id, status, population_percent, script id or -1) per entry
+        self.languages: list[tuple[tuple[int, str, float | None, int], ...]] = []
 
     def append(
         self,
@@ -47,6 +52,8 @@ class CountryStore(Store):
         historic: HistoricInfo | None,
         macroregion_ids: tuple[int, ...],
         grouping_ids: tuple[int, ...],
+        currency_ids: tuple[int, ...],
+        languages: tuple[tuple[int, str, float | None, int], ...],
     ) -> None:
         self.names.append(name)
         self.alpha2s.append(alpha2)
@@ -60,3 +67,5 @@ class CountryStore(Store):
         self.historics.append(historic)
         self.macroregion_ids.append(macroregion_ids)
         self.grouping_ids.append(grouping_ids)
+        self.currency_ids.append(currency_ids)
+        self.languages.append(languages)

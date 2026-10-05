@@ -20,10 +20,6 @@ env/
 Venv/
 VENV/
 
-# Pipenv and Poetry
-Pipfile.lock
-poetry.lock
-
 # pyenv
 .python-version
 
@@ -67,28 +63,24 @@ htmlcov/
 .pytest_cache/
 
 # ======================================
-# SQLite database & local data
-# ======================================
-*.sqlite
-*.sqlite3
-
-# ======================================
 # Custom project-specific ignores
 # ======================================
-allCountries.txt
-.villager_cache/
 *.zip
+# local scratch file
 sandbox.py
 
-# Keep empty folders tracked (optional)
-!ingest/.gitkeep
-
-*.ps1
 ingest/*/inputs/*
+# each run's build, promoted to the repo only when the whole pipeline succeeds
+ingest/staging/
 !ingest/macroregions/inputs/macroregions.manifest.json
+!ingest/currencies/inputs/currencies.manifest.json
+!ingest/scripts/inputs/scripts.manifest.json
+!ingest/languages/inputs/languages.manifest.json
 !ingest/countries/inputs/countries.manifest.json
 !ingest/countries/inputs/name_blocklist.json
+!ingest/countries/inputs/wikidata_country_names.json
 !ingest/subdivisions/inputs/subdivisions.manifest.json
+!ingest/subdivisions/inputs/wikidata_crosswalk.json
 !ingest/cities/inputs/cities.manifest.json
 !ingest/shared/inputs/shared.manifest.json
 
@@ -96,3 +88,4 @@ ingest/*/inputs/*
 
 # ingest logs: tracked so each run's diagnostics are reviewable in the ingest PR
 !ingest/*/logs/*.log
+!ingest/pipeline.log

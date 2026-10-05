@@ -7,33 +7,80 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.0b1] - 2026-10-05
+
+### Upgrading from 2.1.0
+
+- Entity collection fields (`aliases`, `scripts`, `macroregions`, `groupings`, `currencies`, `languages`) are lists instead of tuples, like `City.subdivisions` already was. Compare them with lists, and use `tuple(...)` where you need one as a dict key or set member.
+- `Subdivision.type` and `SubdivisionBase.type` are `None` instead of `""` for the GeoNames-only subdivisions, which have no ISO type, like every other missing field. Check `type is None`, and filter them with `subdivisions.filter(type=localis.MISSING)`.
+- `filter(field="")` no longer matches records with no value in the field, which was an accident of the old filter index. Use `localis.MISSING`.
+- `filter()` with no field raises `TypeError` instead of returning `[]`. Iterate the registry to get every record.
+- `search()` raises `TypeError` for a keyword argument it doesn't take, instead of ignoring it. Remove the argument.
+- `lookup()` raises `TypeError` for a key that isn't a string or an int, instead of `AttributeError` for `None` or a float, and no longer takes `True` as the integer 1. Check for `None` before looking a key up.
+- `len(countries)` leaves out historic entries unless they're included, like iteration, `filter()` and `search()` (250 rather than 281). Call `countries.set_include_historic(True)` for the count with them.
+- The registries' undocumented `count`, `build_cache()` and `invalidate_cache()` are removed. Use `len()` for `count`; the other two were internal.
+- A query in a non-Latin script no longer finds a subdivision through its aliases, since those aliases were removed (see Removed). Query in Latin script.
+
 ### Added
 
+- `localis.currencies`: every ISO 4217 code (from iso-codes) with `lookup()` by alpha3 or numeric, `filter()` and `search()` by name, and `Country.currencies`, each current country's legal tender per Unicode CLDR, filterable with `countries.filter(currency=...)` by name or alpha3; historic countries have none
+- `localis.languages`: every ISO 639-3 code (from iso-codes) with `lookup()` by ISO 639-3, 639-1 or 639-2/B code, `filter()` by name, `scope`, `type` or `script`, and `search()`; Unicode CLDR's English language names are aliases and `Language.scripts` lists CLDR's scripts for each, with CLDR's `secondary` flag. `Country.languages` lists each current country's languages with an official status per CLDR, one `CountryLanguage` per language and script with its `status`, `population_percent` and `script`, filterable with `countries.filter(language=...)`
+- `localis.scripts`: every ISO 15924 code (from iso-codes) with `lookup()` by alpha4 or numeric, and `filter()` and `search()` by name, Unicode CLDR's English script names included as aliases
+- `key` on every entity, nested ones included: the stable reference to store instead of `id`, which a data release renumbers, resolved by `lookup()` in any later version (`alpha2` or a historic entry's `alpha_4`, a subdivision's ISO code or else its GeoNames code, a city's GeoNames ID, a macroregion's code). The README documents IDs as valid only within an installed version
+- `localis.MISSING` filters for records with no value in a field, which `None` can't, since it means "don't filter on this field": `subdivisions.filter(type=MISSING)` for GeoNames-only subdivisions, `cities.filter(subdivision=MISSING)` for cities linked to no subdivision, `countries.filter(macroregion=MISSING)` for historic countries without one
+- `wikidata_changed` orphans: a Wikidata crosswalk mapping that would relink a subdivision from what it previously resolved to goes to the resolve-subdivisions skill instead of applying silently
 - The data's licenses travel with it: `src/localis/data/NOTICE` attributes each source, `LICENSES/` holds the LGPL-2.1-or-later, CC-BY-4.0, Unicode-3.0 and CC0-1.0 texts, and the package metadata declares `MIT AND LGPL-2.1-or-later AND CC-BY-4.0 AND Unicode-3.0 AND CC0-1.0` instead of `MIT` alone, which covered only the code
+- `localis.__version__`, and top-level exports of `Entity`, `Missing` and the registry classes (`Registry`, `QueryableRegistry`, `CountryRegistry` and the rest) for annotating code that takes them
+- `docs/versioning.md`: the versioning policy, covering what the public API is, what each release can change, deprecation before removal, the beta and release-candidate stages, and which releases are supported
+- Package metadata: the `Typing :: Typed` classifier, currency, language and script keywords, a changelog link, and the homepage pointing at the repository instead of the PyPI page
 
 ### Changed
 
 - Historic countries take their Wikidata names as aliases by ISO 3166-3 alpha-4 code (P773) rather than by a former alpha-2 no other entry shares, so entries whose code ISO reused are named too: with `include_historic` set, "Czechoslovakia", "Soviet Union" and "Yugoslavia" find their entries. 25 of the 31 historic entries now carry Wikidata aliases, up from 4
 - Text normalization folds Latin only: accents are stripped and Latin letters without a Unicode decomposition (ß, æ, ø, ł, ı, ə and others) are spelled out, while other scripts are no longer transliterated
 - A city whose GeoNames name is written in another script takes GeoNames' ASCII name (24 cities)
+- Every entity a call returns is built fresh, its nested records and lists included, so it can be changed freely without affecting the loaded data or later results. Entities are hashable by record, so they can go in a set or be a dict key
+- Country search matches alpha-3 codes, so `countries.search("USA")` finds the United States, and Wikidata's English short names are kept even where they're also the country's IOC or FIFA code, adding UAE, RSA and GDR as aliases
 - Countries leave historic entries out of `filter()` and `search()` before ranking rather than after, so a search no longer reads every country to size an over-fetch and a historic entry can't take a shortlist slot from a current one
-- `search()` raises `TypeError` for a keyword argument it doesn't take, like `filter()`, instead of silently ignoring it
-- `Subdivision.type` and `SubdivisionBase.type` are `None` for the 46,665 GeoNames-only subdivisions, which have no ISO type, instead of `""`, like every other missing field
-- Cities ship a short-name list like countries and subdivisions, so short city names reachable only by an exact query (such as "Jīān") are found through the short-query fallback, for about 463 KiB
+- `cities.set_population_threshold()` raises when called with a value that isn't a non-negative int, instead of failing on the next cities access, and setting the threshold already in place keeps the loaded cache
+- Cities ship a short-name list like countries and subdivisions, so short city names reachable only by an exact query (such as "Jīān") are found through the short-query fallback, for about 474 KB
+- The filter index ships inverted, like the search index: each field value's ids are packed at ingest and sliced out at load, instead of the index being rebuilt from per-record rows on every load, so filters' first use is faster, most of all for cities
+- Building entities is faster: each result reads its row position once rather than on every field, so iterating every city takes about a fifth less time
+- Languages' and subdivisions' loaded data is smaller: the few scope and type values those records repeat are stored once each, about 0.9 MB less for languages and 0.3 MB for subdivisions
 - With a population threshold set, the cities indexes load faster: each entry is checked against the set of ids the filtered cache kept, instead of through a predicate call
-- The data refresh downloads only the sources whose ETag changed, rather than every source of a stage when any one of them changed, so a CLDR update no longer downloads GeoNames' alternate names again
+- The README is organized by query API (`get`, `lookup`, `filter`, `search`, iteration) with each registry's specifics under Entities, where each entity's fields are a table marking which ones its nested form keeps. methodology.md lists the pipeline's four merge stages in order and keeps its one-off validation checks, dated and with how each was determined, in Discovery
+- Generated doc figures are marked with `<stat key="source.key:format">` tags instead of HTML comments, and more figures are generated: the crosswalk's size and disagreements, the non-administrative groupings, Kosovo's records and the cities named in ASCII
+- The data refresh commits the Wikidata results it built from, the subdivision crosswalk (`ingest/subdivisions/inputs/wikidata_crosswalk.json`) and the country names (`ingest/countries/inputs/wikidata_country_names.json`) and accepts a removal of committed entries only once a repeat query is missing the same ones
+- The data refresh builds every dataset from its sources on every run and replaces the shipped data only when the whole run succeeds, including a final reconcile check of the new build's counts, so the shipped datasets always come from one run and a failed run can't leave one dataset pointing at another's ids. Each source file is recorded by URL and SHA-256 as well as ETag, and each refresh reports the records it added, removed and changed per dataset. The documented figures are regenerated only after the new data replaces the old, and each refresh logs its steps and how it ended to `ingest/pipeline.log`: succeeded, stopped on subdivision orphans, or failed in a named step
+- The data refresh fetches iso-codes and CLDR at their main branch's current commit rather than by branch name, so each source manifest records the exact upstream commit a release was built from
+- The data refresh stops, naming the conflict and how to resolve it, when a source contradicts itself rather than silently keeping one side: a code iso-codes lists twice, a code CLDR's territory containment makes two kinds of macroregion, a script CLDR gives a language as both primary and secondary, or a lookup key two records would share. A script CLDR repeats for one language ships once
+- The data refresh retries failed downloads with backoff, like Wikidata queries, and treats a download cut off short of its length as failed rather than complete
+- The data refresh downloads only the sources whose ETag changed, rather than every source of a stage when any one of them changed, so a CLDR update no longer downloads GeoNames' alternate names again, and a rerun after a failed or orphan-stopped refresh doesn't download again what that refresh already did
 
 ### Removed
 
 - The `unidecode` dependency (GPL-2.0-or-later); `rapidfuzz` is now the only runtime dependency
-- Subdivision aliases written in non-Latin scripts (19,882), which only a query in that script could find: subdivisions' shipped data shrinks from 10,866 to 9,930 KiB and their fully loaded memory from 47.4 to 41.0 MiB. 274 Latin aliases that deduplication had dropped in favor of a Cyrillic spelling ship again
+- Subdivision aliases written in non-Latin scripts (19,882), which only a query in that script could find: subdivisions' shipped data shrinks from 11,127 to 10,168 KB and their fully loaded memory from 49.7 to 43.0 MB. 274 Latin aliases that deduplication had previously dropped in favor of a Cyrillic spelling ship again
 
 ### Fixed
 
+- 448 GeoNames-only subdivisions carried an alias that was their own name in another case or spelling (Posavski Kanton's "Posavski kanton"), since only a subdivision merged with ISO had its aliases deduplicated against its name; every subdivision's now are
+- `subdivisions.filter(country=...)` matched a country's numeric code only unpadded (`"76"` or `76`); ISO's three-digit form (`"076"`) now matches too
+- Generated sizes in the README and docs were computed in KiB and MiB but labeled KB and MB, understating every figure by 2.4% (KB) or 4.9% (MB); they're now computed in decimal KB and MB
+- Search benchmarks counted a result as a miss when it was a different record with the same name as the sampled one (two "Franklin County" subdivisions), which no search can tell apart; such a result now counts as a hit, and the benchmarks report how many hits came that way
+- The README's search benchmarks claimed 5,000 queries per registry; each registry's actual query count is now shown, and the host line names the machine the benchmarks ran on rather than the footprint's
+- Type checkers flag a field a registry's `filter()` doesn't have, since its signature no longer takes `**kwargs`
+- Type checkers no longer flag `from localis import countries` (or any other public name) as a private import: the package declares its public names in `__all__`
+- `lookup()` resolves a numeric code or GeoNames ID given as a string (`countries.lookup("840")`, `cities.lookup("5128581")`), not only as an int
+- `search()` honors a `limit` above 200 instead of capping results there
+- `filter()` and `search()` raise `ValueError` for a `limit` below 1, which a negative value had silently cut results by
+- `get(True)` returned the record with ID 1, since `True` counts as the integer 1; a bool is no longer taken as an ID
+- Subdivision automerge could leave out an ISO subdivision that qualified against a name another two subdivisions contested, without merging or orphaning it, so it never shipped; none was affected, and every ISO subdivision is now checked to ship or await review
+- A city whose name contains a double quote (Poselok Turisticheskogo pansionata "Klyazminskoe vodohranilische") had its name returned wrapped in extra quotes, with each inner quote doubled
+- Filter and search indexes load correctly on big-endian machines, where their packed ids had been read in the wrong byte order
 - Capital schwa (Ə) and reversed E (Ǝ) normalized to "@" and "3"; both now fold to "a", like their lowercase forms
 - Subdivision automerge never stripped type words spelled with diacritics (járás, huyện, ilçesi, shahrestān) from names before matching, since names are compared accent-free; the type words are now folded the same way, and an unaccented spelling such as "Huyen" also marks a name's type
 - `set_population_threshold()` changes the filter under the registry's lock, so a thread loading cities at the same time can't build the cache and indexes from different thresholds
-- `len(countries)` counted historic entries that iteration, `filter()` and `search()` leave out (281 against 250 iterated); it now follows `include_historic` like the rest
 - The data refresh records the ETag of the file it actually downloaded, read from the download itself rather than from a second request that could see a newer version
 
 ### Security
@@ -43,6 +90,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Release runs on push to `main` instead of on `workflow_run`, a trigger that runs with the default branch's privileges whatever started it, fork PRs included; `main` is no longer tested again after a merge, since its ruleset admits only PRs whose tests passed against an up-to-date `main`
 - The release build is reproducible: CI installs a pinned uv verified by checksum, and `uv build` takes hatchling and its dependencies only from hash-pinned build constraints; release tags can no longer be moved or deleted
 - SECURITY.md describes how to report a vulnerability privately, through the repository's Security tab
+- Each release installs its built wheel in a fresh environment and checks it before publishing to PyPI, refuses a version without a CHANGELOG section, and takes its GitHub release notes from that section; Dependabot also proposes Python dependency updates, and CI tests every supported Python, 3.11 to 3.14
 
 ## [2.1.0] - 2026-10-03
 
@@ -191,7 +239,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Subdivisions: 51,541 -> 51,684
   - Cities: 451,792 -> 472,613
 
-## [1.0.0] - 2026-09-28
+## 1.0.0 - 2026-09-28
 
 ### Added
 - `resolve-subdivisions` Claude Code skill and MCP server for resolving ISO/GeoNames subdivision merge orphans, with human escalation for genuinely ambiguous cases
@@ -246,3 +294,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Basic fuzzy matching capabilities
 - Comprehensive test suite
 - GitHub CI/CD Workflows
+
+[Unreleased]: https://github.com/dstoffels/localis/compare/v3.0.0b1...HEAD
+[3.0.0b1]: https://github.com/dstoffels/localis/compare/v2.1.0...v3.0.0b1
+[2.1.0]: https://github.com/dstoffels/localis/compare/v2.0.0...v2.1.0
+[2.0.0]: https://github.com/dstoffels/localis/compare/v1.1.2...v2.0.0
+[1.1.2]: https://github.com/dstoffels/localis/compare/v1.1.1...v1.1.2
+[1.1.1]: https://github.com/dstoffels/localis/compare/v1.1.0...v1.1.1
+[1.1.0]: https://github.com/dstoffels/localis/compare/v1.0.0a3...v1.1.0
+[1.0.0a3]: https://github.com/dstoffels/localis/compare/v1.0.0a2...v1.0.0a3
+[1.0.0a2]: https://github.com/dstoffels/localis/compare/v1.0.0a1...v1.0.0a2

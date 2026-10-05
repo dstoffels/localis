@@ -1,3 +1,4 @@
+import sys
 from pathlib import Path
 from typing import Mapping
 from localis.entities import SubdivisionBase, Subdivision
@@ -52,9 +53,7 @@ class SubdivisionView(
 
     @property
     def country(self) -> CountryView:
-        country = self._country_views.get(self._store.country_ids[self._idx])
-        assert country is not None, "subdivision has no country, violates ingest invariant"
-        return country
+        return self._country_views[self._store.country_ids[self._idx]]
 
     @property
     def iso_suffix(self) -> str:
@@ -81,7 +80,7 @@ class SubdivisionView(
             iso_code=self.iso_code,
             type=self.type,
             admin_level=self.admin_level,
-            aliases=self.aliases,
+            aliases=list(self.aliases),
             parent=parent.to_base() if parent else None,
             country=self.country.to_base(),
         )
@@ -91,9 +90,8 @@ class SubdivisionView(
         cls, filepath: Path, country_views: Mapping[int, CountryView]
     ) -> ViewMap["SubdivisionView"]:
         store = SubdivisionStore()
-        idx = 0
         with open(filepath, "r", encoding="utf-8") as f:
-            for id, line in enumerate(f, start=1):
+            for idx, line in enumerate(f):
                 row = line.rstrip("\r\n").split("\t")
                 (
                     name,
@@ -117,13 +115,13 @@ class SubdivisionView(
                     geonames_code,
                     geonames_id,
                     iso_code,
-                    type_,
+                    # interned, since about a hundred ISO types repeat across the rows
+                    sys.intern(type_),
                     alias_list,
                     admin_level,
                     parent_id,
                     country_id,
                 )
-                idx += 1
         # a subdivision's parent resolves against this same mapping
         views: ViewMap[SubdivisionView] = ViewMap(store, lambda id: cls(id, store, country_views, views))
         return views

@@ -10,15 +10,13 @@ S = TypeVar("S", bound=Store, covariant=True)
 class View(ABC, Generic[T, S]):
     """Base runtime view: owns id and a Store reference, other fields read from the Store by id; created on access by its ViewMap, never kept per record."""
 
-    __slots__ = ("id", "_store")
+    __slots__ = ("id", "_store", "_idx")
 
     def __init__(self, id: int, store: S):
         self.id = id
         self._store = store
-
-    @property
-    def _idx(self) -> int:
-        return self._store.id_to_idx[self.id - 1]
+        # the row's position in the store, resolved once, since every field read needs it
+        self._idx = store.id_to_idx[id - 1]
 
     @property
     @abstractmethod
@@ -43,8 +41,9 @@ class ViewMap(Mapping[int, V]):
     def __contains__(self, id: object) -> bool:
         id_to_idx = self._store.id_to_idx
         # an id excluded by a load-time filter predicate has no row
+        # bool is an int, but True isn't an id
         return (
-            isinstance(id, int) and 0 < id <= len(id_to_idx) and id_to_idx[id - 1] != -1
+            isinstance(id, int) and not isinstance(id, bool) and 0 < id <= len(id_to_idx) and id_to_idx[id - 1] != -1
         )
 
     def __getitem__(self, id: int) -> V:

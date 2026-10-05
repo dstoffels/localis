@@ -76,11 +76,6 @@ def try_merge(
             for geonames_id, iso_codes in high_scorers.items()
             if len(iso_codes) > 1
         }
-        ambiguous_iso_codes: set[str] = set()
-        for score, needed, iso_sub, geo_sub in scored_pairs:
-            if geo_sub.geonames_id in ambiguous_geo_ids:
-                assert iso_sub.iso_code is not None
-                ambiguous_iso_codes.add(iso_sub.iso_code)
         # one orphan per iso_code, carrying every target it contests
         ambiguous_candidates: dict[str, list[int]] = {}
         for geonames_id in ambiguous_geo_ids:
@@ -97,6 +92,8 @@ def try_merge(
             resolution_map.automerge.orphans.ambiguity.append(
                 AmbiguousOrphan(iso_code=iso_code, candidate_geonames_ids=candidate_geonames_ids)
             )
+        # only the codes contesting a target are held for review; one that merely qualified against it can still merge elsewhere, since the target itself is skipped below
+        ambiguous_iso_codes = set(ambiguous_candidates)
 
         claimed_iso: set[str] = set()
         claimed_geo: set[int] = set()
@@ -105,7 +102,7 @@ def try_merge(
             assert geo_sub.geonames_id is not None
             assert iso_sub.iso_code is not None
             geo_name = geo_names_at_scoring[geo_sub.geonames_id]
-            # an ISO code in a namesake collision is already an ambiguity orphan, so it goes to review rather than merging elsewhere
+            # an ISO code contesting a namesake collision is an ambiguity orphan, so it goes to review rather than merging elsewhere
             if iso_sub.iso_code in claimed_iso or iso_sub.iso_code in low_margin_iso or iso_sub.iso_code in ambiguous_iso_codes:
                 continue
             if geo_sub.geonames_id in ambiguous_geo_ids:

@@ -1,4 +1,5 @@
 from ingest.shared.models import SubdivisionModel
+from ingest.utils import ingest_log
 
 
 class SubdivisionMap:
@@ -55,18 +56,13 @@ class SubdivisionMap:
             ]
 
     def all(self) -> list[SubdivisionModel]:
-        """Returns a list of all subdivisions, assigning sequential IDs to each."""
-        all = [
+        """Every subdivision, in the order they're dumped."""
+        return [
             sub
             for country_map in self._subs.values()
             for level_map in country_map.values()
             for sub in level_map.values()
         ]
-
-        for id, sub in enumerate(all, start=1):
-            sub.id = id
-
-        return all
 
     def refresh(self) -> None:
         """Links every subdivision to its parent once merging has settled, then re-indexes the map under the final codes and levels."""
@@ -79,7 +75,10 @@ class SubdivisionMap:
             if sub.iso_code is not None:
                 sub.parent = by_iso_code.get(sub.parent_iso_code) if sub.parent_iso_code else None
             elif sub.geonames_code is not None and sub.geonames_code.count(".") == 2:
-                sub.parent = by_geo_code.get(sub.geonames_code.rsplit(".", 1)[0])
+                admin1_code = sub.geonames_code.rsplit(".", 1)[0]
+                sub.parent = by_geo_code.get(admin1_code)
+                if sub.parent is None:
+                    ingest_log.writeline(f"GeoNames admin2 {sub.geonames_code} '{sub.name}' has no admin1 {admin1_code} in this build, so it ships at level 1 with no parent", level="WARN")
             else:
                 sub.parent = None
 
@@ -96,5 +95,5 @@ class SubdivisionMap:
         return len(self._by_id)
 
     def to_geocode_map(self) -> dict[str, SubdivisionModel]:
-        """Return a plain dict keyed by geonames_code, matching the shape load_subdivisions() reconstructs from disk."""
+        """Return a plain dict keyed by geonames_code, the shape the cities stage reads subdivisions in."""
         return self._by_geo_code

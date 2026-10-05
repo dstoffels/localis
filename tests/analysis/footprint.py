@@ -14,10 +14,8 @@ from tests.analysis.host import host_fingerprint
 ROOT = Path(__file__).resolve().parents[2]
 OUTPUT_PATH = Path(__file__).with_name("footprint.json")
 POPULATION_THRESHOLD = 15_000
-REGISTRIES = ("countries", "subdivisions", "cities")
+REGISTRIES = ("macroregions", "currencies", "scripts", "languages", "countries", "subdivisions", "cities")
 COMPONENTS = {"dataset": "_cache", "lookup_index": "_lookup_index", "filter_index": "_filter_index", "search_index": "_search_index"}
-# a registry's views reference the registries before it, so their datasets load first and stay out of its measurement
-DEPENDENCIES = {"countries": (), "subdivisions": ("countries",), "cities": ("countries", "subdivisions")}
 
 
 def _traced_bytes() -> int:
@@ -42,17 +40,25 @@ def _run_scenario(scenario: str, mode: str) -> dict[str, Any]:
     if mode == "memory":
         tracemalloc.start()
     import localis
+    from localis.registries import Registry
 
-    def preload(names: tuple[str, ...]) -> None:
-        for name in names:
-            _ = getattr(localis, name)._cache
+    def preload(registry: Registry) -> None:
+        # the registries a registry was built with, whose datasets its views reference, load first and stay out of its measurement
+        for dependency in vars(registry).values():
+            if isinstance(dependency, Registry):
+                _ = dependency._cache
 
     if scenario in REGISTRIES:
-        preload(DEPENDENCIES[scenario])
         registry = getattr(localis, scenario)
-        return {component: _measure(lambda attr=attr: getattr(registry, attr), mode) for component, attr in COMPONENTS.items()}
+        preload(registry)
+        # a registry without filter() and search() (macroregions) has no filter or search index to measure
+        return {
+            component: _measure(lambda attr=attr: getattr(registry, attr), mode)
+            for component, attr in COMPONENTS.items()
+            if attr in registry._CACHED_ATTRS
+        }
     if scenario == "cities_threshold":
-        preload(DEPENDENCIES["cities"])
+        preload(localis.cities)
         localis.cities.set_population_threshold(POPULATION_THRESHOLD)
         result = _measure(localis.cities.force_cache, mode)
         return {**result, "threshold": POPULATION_THRESHOLD, "count": len(localis.cities)}
@@ -100,11 +106,20 @@ def measure(runs: int, notes: str | None) -> dict[str, Any]:
             "memory_bytes": sum(c["memory_bytes"] for c in components.values()),
         }
         registries[name] = components
+    # each registry's row leaves out the datasets it references, so summing the rows counts every dataset once
+    totals = {
+        component: {
+            "time_ms": round(sum(r[component]["time_ms"] for r in registries.values() if component in r), 3),
+            "memory_bytes": sum(r[component]["memory_bytes"] for r in registries.values() if component in r),
+        }
+        for component in (*COMPONENTS, "combined")
+    }
     return {
         "host": host_fingerprint(),
         "runs": runs,
         "notes": notes,
         "registries": registries,
+        "totals": totals,
         "cities_threshold": _median_runs("cities_threshold", runs),
         "full_cache": _median_runs("full_cache", runs),
     }
@@ -128,9 +143,9 @@ def main() -> None:
 def run(runs: int = 3, notes: str | None = None) -> dict[str, Any]:
     """Measures every scenario and appends the result to footprint.json."""
     result = measure(runs, notes)
-    history = json.loads(OUTPUT_PATH.read_text()) if OUTPUT_PATH.exists() else {}
+    history = json.loads(OUTPUT_PATH.read_text(encoding="utf-8")) if OUTPUT_PATH.exists() else {}
     history[datetime.now().isoformat(timespec="seconds")] = result
-    OUTPUT_PATH.write_text(json.dumps(history, indent=2) + "\n")
+    OUTPUT_PATH.write_text(json.dumps(history, indent=2) + "\n", encoding="utf-8")
     return result
 
 

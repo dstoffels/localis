@@ -17,8 +17,7 @@ class MacroregionModel(Model):
     LOOKUP_FIELDS = ("code", "name")
     NUMERIC_LOOKUP = False
 
-    def to_row(self) -> tuple[str | int | None]:
-        data = self.to_dict()
+    def row_values(self) -> dict[str, object]:
+        data = Model.row_values(self)
         data["parent"] = self.parent.id if self.parent else None
-        data.pop("id")
-        return tuple(data.values())
+        return data

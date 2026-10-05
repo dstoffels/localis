@@ -1,7 +1,9 @@
 import json
+from ingest.shared.models import LanguageStatus
 from .fetch_shared import CLDR_TERRITORY_INFO_PATH
 
-OFFICIAL_STATUSES = {"official", "official_regional", "de_facto_official"}
+# CLDR's official statuses, named as localis ships them; a language with no status isn't official
+OFFICIAL_STATUSES: dict[str, LanguageStatus] = {"official": "official", "official_regional": "regional", "de_facto_official": "de_facto"}
 
 
 def load_cldr_territory_languages() -> dict[str, set[str]]:

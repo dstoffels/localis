@@ -1,5 +1,6 @@
 from typing import Mapping, cast
 from localis.entities import City
+from localis.indexes import Missing
 from localis.views import CountryView, CityView, SubdivisionView
 from localis.registries import QueryableRegistry, CountryRegistry, SubdivisionRegistry
 
@@ -15,7 +16,7 @@ class CityRegistry(QueryableRegistry[City]):
         self._subdivisions = subdivisions
         super().__init__()
 
-    def build_cache(self) -> Mapping[int, CityView]:
+    def _build_cache(self) -> Mapping[int, CityView]:
         country_views = cast(Mapping[int, CountryView], self._countries._cache)
         subdivision_views = cast(
             Mapping[int, SubdivisionView], self._subdivisions._cache
@@ -40,19 +41,16 @@ class CityRegistry(QueryableRegistry[City]):
         *,
         name: str | None = None,
         limit: int | None = None,
-        subdivision: str | None = None,
+        subdivision: str | Missing | None = None,
         country: str | None = None,
-        **kwargs,
     ) -> list[City]:
-        """Filter cities by name, subdivision (name, iso/geonames code) or country (name, alpha2, alpha3). Multiple filters use logical AND."""
-        kwargs.update(subdivision=subdivision, country=country)
-        results = super().filter(name=name, limit=limit, **kwargs)
-        return results
+        """Filter cities by name, subdivision (name, iso/geonames code, or MISSING for none) or country (name, alpha2, alpha3). Multiple filters use logical AND."""
+        return self._filter(limit, name=name, subdivision=subdivision, country=country)
 
     def search(
         self, query: str, limit: int = 10, population_sort: bool = False
     ) -> list[tuple[City, float]]:
-        """Search cities by name, subdivision (name, iso/geonames code), or country (name, alpha2, alpha3). Can optionally sort by population, which is great for autocompletes."""
+        """Search cities by name, with subdivision and country names matched as context; population_sort reorders the best `limit` matches by population, largest first."""
         results: list[tuple[City, float]] = super().search(
             query=query, limit=limit
         )
@@ -61,14 +59,19 @@ class CityRegistry(QueryableRegistry[City]):
         return results
 
     def set_population_threshold(self, threshold: int | None) -> None:
+        """Narrows every cities query to cities of at least this population; None restores them all. Raises TypeError for a non-int and ValueError for a negative one."""
+        if threshold is not None:
+            if not isinstance(threshold, int) or isinstance(threshold, bool):
+                raise TypeError(f"threshold must be an int or None, got {threshold!r}")
+            if threshold < 0:
+                raise ValueError(f"threshold must be at least 0, got {threshold!r}")
         # under the lock, so a thread building the cache never sees the filter change mid-build
         with self._lock:
+            if threshold == self._population_threshold:
+                return
             self._population_threshold = threshold
-            if threshold is not None:
-                self._row_filter = lambda row: int(row[4]) >= threshold
-            else:
-                self._row_filter = None
-            self.invalidate_cache()
+            self._row_filter = CityView.population_filter(threshold) if threshold is not None else None
+            self._invalidate_cache()
 
     @property
     def population_threshold(self) -> int | None:

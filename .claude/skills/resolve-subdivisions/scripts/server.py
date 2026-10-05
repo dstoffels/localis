@@ -1,6 +1,6 @@
 import json
 from typing import Literal
-from utils import *
+from utils import get_candidates, get_geonames_submap, get_next_orphan, is_stale, is_valid_candidate, pop_orphan, reload_if_stale, write_resolution
 from mcp.server import MCPServer
 
 mcp = MCPServer(name="resolve-subdivisions")
@@ -14,6 +14,8 @@ estimated_tokens = 0
 batch_num = 0
 escalated_iso_code: str | None = None
 escalation_findings: str | None = None
+# returned by merge and add when another process wrote resolution_map.json since this server read it
+STALE = "ERROR: resolution_map.json changed outside this session (a new ingest, or another session's decision); call next_orphan to reload, then decide this orphan again"
 
 
 def _decided_by(iso_code: str) -> Literal["agent", "human"]:
@@ -40,6 +42,10 @@ def next_orphan() -> dict | str | None:
     """
     global estimated_tokens, batch_num
 
+    # a fresh ingest or another session's decision restarts the current orphan against the file as it now stands
+    if reload_if_stale():
+        _finish_orphan()
+
     # only checked between orphans (batch_num == 0), never mid-orphan, so a reset never splits an orphan's candidates across sessions
     if estimated_tokens >= TOKEN_BUDGET and batch_num == 0:
         estimated_tokens = 0
@@ -64,18 +70,22 @@ def next_orphan() -> dict | str | None:
 
 @mcp.tool(name="merge")
 def merge(candidate_geonames_id: str, reason: str) -> str:
-    """Merges an orphaned subdivision into an existing country candidate.
+    """Merges the current orphan into a GeoNames candidate from its country.
 
     Args:
         candidate_geonames_id (str): The geonames_id of the geonames subdivision to merge into.
         reason (str): One sentence on why the candidate is the same place, e.g. "transliteration of Krasnodarskiy kray", "former name, renamed 2019", or the user's explanation after a review.
     """
+    if is_stale():
+        return STALE
     orphan = get_next_orphan()
     if orphan is None:
         return "ERROR: NO ORPHAN TO MERGE"
 
     iso_code = orphan["iso_code"]
 
+    if not candidate_geonames_id.strip().isdigit():
+        return "ERROR: Invalid candidate: the geonames_id must be the number at the start of a candidate's entry"
     geonames_id = int(candidate_geonames_id)
 
     is_valid, msg = is_valid_candidate(iso_code, geonames_id)
@@ -99,7 +109,8 @@ def add(reason: str) -> str:
     Args:
         reason (str): The concrete reason GeoNames has no record for this place, e.g. "GeoNames uses Madagascar's 22 regions, not ISO's 6 provinces". "No candidate matched" is not a reason.
     """
-
+    if is_stale():
+        return STALE
     orphan = get_next_orphan()
 
     if orphan is None:

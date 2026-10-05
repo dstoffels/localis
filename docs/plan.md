@@ -5,93 +5,36 @@ This document outlines the project plan for the Localis project, detailing the o
 
 ## Objectives
 
-- Keep localis's shipped package size and runtime memory footprint in check, primarily driven by the cities dataset. Runtime memory has reached the floor for the current data model (a full cache is about 147MB, down from about 207MB, after on-demand views and single-id filter postings; see dev.md's Memory footprint); the remaining lever is package size, through splitting cities from the core package (backlog), when adoption calls for it.
-- Ship comprehensive datasets by default, and let the API narrow them ad hoc (population floors, locales) at query time rather than shipping multiple hard-tiered dataset variants.
+- Keep localis's shipped package size and runtime memory footprint in check, primarily driven by the cities dataset. Runtime memory has reached the floor for the current data model, after on-demand views and single-id filter postings (current figures in dev.md's Memory footprint and the README's Performance section); the remaining lever is package size, through splitting cities from the core package (backlog), when adoption calls for it.
+- Ship comprehensive datasets by default, and let the API narrow them ad hoc (population floors) at query time rather than shipping multiple hard-tiered dataset variants.
 
 ## Features
-Features currently in development, in priority order:
 
-1. Add `Currency` entity + `Country.currency` (ISO 4217, sourced from iso-codes' `iso_4217.json`, not GeoNames' embedded currency fields, since iso-codes is the authoritative source and already the same upstream `countries` data comes from)
-2. Add `Language` entity + `Country.languages` (ISO 639, sourced from iso-codes' `iso_639-3.json`, same reasoning as currency; supersedes the old "implement native languages in countries" idea). Currency and Language close the honest gap identified against pycountry (which also covers ISO 4217/639), so both should ship before that comparison gets used as marketing material.
-3. Add standalone `Script` reference table (ISO 15924, code → name only). Lowest priority of this batch: a language can be written in more than one script, so it isn't 1:1 with `Language` or `Country`; mostly used for font rendering and BCP-47 locale tags, not something to wire into other entities.
+Next: the Skill decision lifecycle (below), landing before the 1 November 2026 cron, either in 2.2.0 or as a 2.1.x patch from `main`.
 
-Blocked on the above, needs a dedicated design pass before implementation starts (see Localization section below for the open questions):
-- Gettext-based name translation across `Country`/`Subdivision` (and `Currency`/`Language`/`Script` once they exist), including `language_code` support on `filter()`/`search()`.
+At 3.0.0 final: set pyproject's classifier back to `Development Status :: 5 - Production/Stable`, and the README's Installation line back to `pip install localis` with its beta banner removed.
+
+Out of scope: translated names. Localis ships names in Latin script only and doesn't map them to other locales; a pycountry-style `translate(locale)` and `language_code` query support were planned and dropped.
+
+## Done
+
+- Currency, Script and Language (ISO 4217, ISO 15924, ISO 639-3), implemented 2026-10-04 for 2.2.0, closing the gap against pycountry, which also covers those standards. methodology.md describes their sources and rules.
+- Atomic pipeline, implemented 2026-10-04 from the review of codebase area 1: every stage builds on every run into staging, and a build is promoted only whole and reconciled. dev.md's Pipeline section describes it.
+- One CLDR and one iso-codes commit per run, so every stage builds from the same upstream versions, done in the review of codebase area 3.
 
 ## Backlog
-1. Batch throughput for large cleanups: registries are thread-safe, but on the standard (GIL) build threads don't parallelize search, which is mostly Python code, and rapidfuzz's single scorer calls don't release the GIL usefully (only `process.cdist(..., workers=N)` does, which doesn't fit localis's search). Free-threaded Python is the threaded route: rapidfuzz supports 3.14t since 3.14.2 (3.14.0 added support, 3.14.6 dropped the experimental 3.13t wheels). It requires no change to `requires-python = ">=3.11"`, since free threading is a property of the user's interpreter and localis is pure Python; GIL builds keep working as now. Adopting it is additive: a 3.14t job in the test matrix, optionally raising the `rapidfuzz` floor to 3.14.2 and adding the free-threading PyPI classifier, and a batch API such as `search_many(queries, workers=N)` on a thread pool (parallel on 3.14t, serial on GIL builds, with process pools as the GIL-build option: each worker loads its own cache, about 105MB for cities). Measure throughput on both builds.
+
+1. Batch throughput for large cleanups: registries are thread-safe, but on the standard (GIL) build threads don't parallelize search, which is mostly Python code, and rapidfuzz's single scorer calls don't release the GIL usefully (only `process.cdist(..., workers=N)` does, which doesn't fit localis's search). Free-threaded Python is the threaded route: rapidfuzz supports 3.14t since 3.14.2 (3.14.0 added support, 3.14.6 dropped the experimental 3.13t wheels). It requires no change to `requires-python = ">=3.11"`, since free threading is a property of the user's interpreter and localis is pure Python; GIL builds keep working as now. Adopting it is additive: a 3.14t job in the test matrix, optionally raising the `rapidfuzz` floor to 3.14.2 and adding the free-threading PyPI classifier, and a batch API such as `search_many(queries, workers=N)` on a thread pool (parallel on 3.14t, serial on GIL builds, with process pools as the GIL-build option: each worker loads its own cache, about 127MB for cities). Measure throughput on both builds.
 2. City radius feature using lat/lng to return nearby cities within a specified distance?
 3. Implement custom exceptions (localis.exceptions module)?
 4. Implement autocomplete for registries and/or global interface.
-5. No ISO source maps countries to their language(s) (639 and 3166 don't cross-reference); evaluate Unicode CLDR's territory-language data for this.
-6. Search, remaining limits: a subdivision query without context can't pick among same-name records (dozens of Washington Counties), which caps subdivisions' top-result accuracy; benchmarking subdivision queries with their country as context would measure that case the way cities' admin1 context does. Indexing each name separately (true per-name Dice) is parked until a failure trace shows alias dilution.
-7. Macroregion filters on subdivisions and cities (`cities.filter(macroregion="Europe")`), at the cost of another filter column on the largest dataset; deferred until there's demand. The macroregions design is recorded in `methodology.md` (sources, naming, placement rules) and `dev.md`.
-8. Pin the CLDR version shared by `cldr_territory_info.json` (shared stage) and the macroregions inputs, which each fetch CLDR's `main` and could land on different CLDR commits in one run.
-9. Split cities from the core package (`localis` with macroregions, countries and subdivisions, about 11MB installed; cities as an extra backed by a separate data package, about 49MB). Deferred until users report package size as a problem. City rows store country and subdivision ids that are only valid against the exact core data they were built with, so the two would release in lockstep from one ingest run with an exact-version pin, which removes most of the usual benefit of a split.
-10. Population range filters on cities, `cities.filter(population__gt=..., population__lt=...)`, removed as a commented-out stub from `CityRegistry.filter()` during the code review cleanup. The filter index only holds exact values, so a range needs its own path, such as a scan over `CityStore.populations` or a population-sorted id array searched with `bisect`.
+5. Search, remaining limits: a subdivision query without context can't pick among same-name records (dozens of Washington Counties), which caps subdivisions' top-result accuracy; benchmarking subdivision queries with their country as context would measure that case the way cities' admin1 context does. Indexing each name separately (true per-name Dice) is parked until a failure trace shows alias dilution.
+6. Macroregion filters on subdivisions and cities (`cities.filter(macroregion="Europe")`), at the cost of another filter column on the largest dataset; deferred until there's demand. The macroregions design is recorded in `methodology.md` (sources, naming, placement rules) and `dev.md`.
+7. Split cities from the core package (`localis` with macroregions, countries and subdivisions, about 11MB installed; cities as an extra backed by a separate data package, about 42MB). Deferred until users report package size as a problem. City rows store country and subdivision ids that are only valid against the exact core data they were built with, so the two would release in lockstep from one ingest run with an exact-version pin, which removes most of the usual benefit of a split.
+8. Population range filters on cities, `cities.filter(population__gt=..., population__lt=...)`, removed as a commented-out stub from `CityRegistry.filter()` during the code review cleanup. The filter index only holds exact values, so a range needs its own path, such as a scan over `CityStore.populations` or a population-sorted id array searched with `bisect`.
+9. Corroboration for `wikidata_changed` orphans: accepting a changed crosswalk mapping when automerge's scoring would pick the same record. Left out so every relink of a shipped subdivision is reviewed; revisit if those orphans turn out to be mostly noise.
+10. Measure the full pipeline's local run time, never measured since the atomic pipeline landed.
 
-## Wikidata provenance
-
-Every downloaded source's ETag is committed in its stage's manifest, so a localis version traces back to the exact files it was built from. The two Wikidata queries don't: the country names query (aliases for current and historic countries) and the ISO 3166-2 to GeoNames crosswalk (subdivision merges) run live whenever their stage rebuilds, so a rebuild can ship different Wikidata data with no source marked changed, and a Wikidata edit on its own never triggers a rebuild. Both results are written to `inputs/` (`wikidata_country_names.json`, about 50 KB, and `wikidata_crosswalk.json`, about 100 KB) but are gitignored and fingerprinted nowhere. For subdivisions the effect is already tracked, since the committed `resolution_map.json` records every `wikidata_merge`; the raw input and the rebuild trigger are what's missing.
-
-### Provenance
-
-Both raw results are committed, and each stage's manifest records a hash of its result, like the `resolution_map` fingerprint. The hash makes a changed result count as a changed source, so the monthly run rebuilds the stage on a Wikidata change alone. The committed file records which Wikidata state each version shipped, and its diff in the ingest PR shows what Wikidata changed, next to the shipped data it changed.
-
-### Subdivision crosswalk
-
-Wikidata merges run before automerge and apply unreviewed, so a change to the crosswalk can relink a subdivision silently. Three kinds of change:
-
-1. A mapping moves to a different GeoNames record. Today the subdivision is relinked silently; this is the case that needs a gate.
-2. A mapping appears for a code that automerge or a skill decision had resolved. Skill decisions are covered already: `flag_wikidata_conflicts()` sends one that disagrees back as a `wikidata_conflict` orphan. An automerge result is replaced silently.
-3. A mapping disappears. The code falls through to automerge, which merges or orphans it, so this needs nothing new.
-
-Wikidata agrees with independent checks over 99% of the time and most edits are corrections, so orphaning every change would be noise. A changed or new mapping is accepted when automerge's own scoring would pick the same record (the corroboration tier of the audit design), and otherwise becomes an orphan in a new `wikidata_changed` bucket carrying the previous and new targets, like `wikidata_conflict`. The existing orphan gate then holds the release until the skill reviews it. The previous mapping comes from the committed `wikidata_merge`.
-
-### Country names
-
-Country names have no merge to review: a change adds or removes aliases, which already shows as a diff of the committed `countries.tsv` in the ingest PR, and with the raw result committed its diff shows the cause beside the effect. The PR review is the escalation, and `name_blocklist.json` is the fix for a bad alias.
-
-### Result guard
-
-The likelier failure than a bad edit is a degraded response: the Wikidata Query Service can return a valid but partial result instead of an error, which today would drop hundreds of aliases or send hundreds of subdivisions to automerge. With the previous result committed, ingest compares the two and fails, without applying the new one, when a result loses more than a threshold share of its codes.
-
-### Open questions
-
-- The guard's threshold: 5% fewer codes is a starting point, to be checked against how much the results move month to month.
-- What counts as corroboration for a crosswalk change: automerge's top candidate qualifying for the new target, or the new target merely qualifying.
-
-## Localization (gettext-based name translation)
-
-Initial plan, not yet started. Goal: pycountry-style translation of `Country`/`Subdivision` names (and `Currency`/`Language`/`Script` once those exist) into other locales via gettext, available both as a per-object transform and as a query-time option on the registries.
-
-Since 2026-10-04 every shipped name is in Latin script (non-Latin GeoNames aliases were dropped, see methodology's Discovery), so this is the planned way to serve names in other scripts. `normalize()` leaves non-Latin text as written, so a per-locale corpus can be matched in its own script.
-
-### Mechanism
-
-Dependency: none. `gettext` is part of Python's standard library. The actual scope is data: iso-codes ships `.po`/`.mo` locale catalogs per domain (`iso3166-1`, `iso3166-2`, `iso4217`, `iso639-3`, `iso15924`), the same upstream project `countries`/`subdivisions` already source their base data from. Fetching and shipping those as package data (same category as `src/localis/data/*.tsv`) plus a small ingestion step is the actual work. Locale coverage varies a lot per language; gettext's own fallback (an untranslated msgid returns the original English string unchanged) means sparse locales degrade gracefully with no extra error handling needed.
-
-### API shape
-
-`Country.translate(locale: str) -> Country` (`.localize()` also reads fine; `.translate()` matches gettext's own vocabulary) returns a new DTO with `name`/`official_name` swapped to the localized string; `alpha2`/`alpha3`/`numeric`/`flag` stay untouched since codes don't translate. Same shape for `Subdivision.name`, and later `Currency`/`Language`/`Script` names. Out of scope: `aliases` (a separate, already-existing mechanism for colloquial/historical name variants, not systematic per-locale translation) and city names (GeoNames-sourced, no ISO/iso-codes backing; GeoNames has its own, much larger alternate-names-by-language file, a distinct future item). Catalogs load lazily and cache per `(domain, locale)`, the same `@cached_property` pattern `Registry` already uses for its indexes, so an unused locale costs nothing.
-
-### Registry-level `language_code` support
-
-`filter()` and `search()` accept an optional `language_code` kwarg; query mechanics differ between the two.
-
-`filter()` is an exact match against `FilterIndex`, so a localized query reverse-translates cleanly: invert the target locale's gettext catalog into `{normalized_translated_string: english_canonical}`, resolve the localized `name` argument through it, run the existing English `FilterIndex.get()`, then translate the result DTOs back to the requested locale before returning.
-
-`search()` cannot use the same reverse-translation step, since the reverse map is an exact-string lookup and a typo in the localized query (e.g. "Deutschlnd") has no catalog entry to resolve, which would defeat the fuzzy-match tolerance `search()` exists for. Instead, `search()` fuzzy-matches directly against a per-locale corpus built from the localized name strings themselves, then resolves the winning match to its canonical id. Countries (250 active entities) already skip trigram pre-filtering under 300 records, so a per-locale corpus is cheap there; subdivisions (51k) are the same cost class as the existing ~3ms English search and should be built lazily per `(domain, locale)` rather than precomputed and shipped for every locale upfront. Cities have no ISO/iso-codes source and stay out of scope, so this never needs to scale to city-sized data.
-
-`lookup()` matches on language-independent identifiers (`alpha2`, `alpha3`, `iso_code`, etc.), so it has no reverse-translation need; a `language_code` there would only mean "translate the returned DTO," equivalent to `.get(...).translate(locale)`.
-
-### Open questions
-
-- Which locales to ship: all of iso-codes' catalogs, or a curated subset. Leaning all, since gettext's fallback makes sparse coverage safe by default.
-- Whether iso-codes' catalogs cover secondary fields (e.g. `Subdivision.type`) or only the primary name/official_name fields, not yet verified.
-- Semantics of a cross-registry filter kwarg under `language_code`, e.g. `subdivisions.filter(country="Deutschland", language_code="de")`, where `country` references a different registry's translatable field.
-- Actual size of the compiled `.mo` catalogs across all locales isn't confirmed yet, needs measuring before deciding to ship all of them.
-- Reconsider Unicode CLDR as the translation data source instead of iso-codes' gettext catalogs; CLDR is more actively maintained and broader-coverage for exactly this kind of translated display-name data. Decide before implementation starts, not after.
 ## Skill decision lifecycle
 
 Status: designed, not started; to land as a patch before the next scheduled ingest run (the monthly cron, 1 November 2026), since that run is the first that can retire or reopen skill decisions.

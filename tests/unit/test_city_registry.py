@@ -1,41 +1,80 @@
-from localis import cities
+import pytest
+from localis import cities, countries, subdivisions, City, CityRegistry
+
+
+def _registry() -> CityRegistry:
+    """A cities registry of its own, so a threshold set on it never invalidates the shared cities cache."""
+    return CityRegistry(countries=countries, subdivisions=subdivisions)
+
+
+@pytest.fixture(scope="module")
+def thresholded(city: City) -> tuple[CityRegistry, int]:
+    """A registry of its own narrowed to exclude a random city, built once for the module."""
+    # at least 100,000 keeps the narrowed cache small; just above the city's population so it's always excluded
+    threshold = max(city.population + 1, 100_000)
+    registry = _registry()
+    registry.set_population_threshold(threshold)
+    return registry, threshold
 
 
 class TestPopulationThreshold:
     """POPULATION THRESHOLD"""
 
-    def test_filters_cache(self):
-        """should exclude every city below the threshold from the cache once set, and restore the full cache once cleared"""
-        full_count = len(cities)
-        threshold = 100_000
-        try:
-            cities.set_population_threshold(threshold)
-            filtered = list(cities)
-            assert len(filtered) < full_count, "threshold should have excluded some cities"
-            assert all(city.population >= threshold for city in filtered)
-        finally:
-            cities.set_population_threshold(None)
-            assert len(cities) == full_count
+    def test_filters_cache(self, thresholded: tuple[CityRegistry, int]):
+        """should exclude every city below the threshold from the cache"""
+        registry, threshold = thresholded
+        filtered = list(registry)
 
-    def test_filters_indexes(self):
-        """should exclude a below-threshold city from lookup(), filter(), and search() once the threshold is set, and restore access to it once cleared"""
-        geonames_id = 3040686  # Encamp, population 11223
-        threshold = 100_000
+        assert len(filtered) < len(cities), "threshold should have excluded some cities"
+        assert all(c.population >= threshold for c in filtered)
 
-        encamp = cities.lookup(geonames_id)
-        assert encamp is not None
-        assert encamp.population == 11223
+    def test_filters_indexes(self, city: City, thresholded: tuple[CityRegistry, int]):
+        """should exclude a below-threshold city from lookup(), filter(), and search()"""
+        registry, _ = thresholded
 
-        try:
-            cities.set_population_threshold(threshold)
+        assert registry.lookup(city.key) is None
+        assert city.id not in [c.id for c in registry.filter(name=city.name)]
+        assert city.id not in [c.id for c, _ in registry.search(city.name)]
 
-            assert cities.lookup(geonames_id) is None
+    def test_change_drops_cache(self):
+        """should drop the loaded cache and row filter when the threshold is cleared, so the next access loads every city"""
+        registry = _registry()
+        registry.set_population_threshold(1_000)
+        # stands in for a loaded cache, so the test needn't load one
+        vars(registry)["_cache"] = {}
 
-            filter_results = cities.filter(name=encamp.name)
-            assert encamp.id not in [c.id for c in filter_results]
+        registry.set_population_threshold(None)
 
-            search_results = cities.search(encamp.name)
-            assert encamp.id not in [c.id for c, _ in search_results]
-        finally:
-            cities.set_population_threshold(None)
-            assert cities.lookup(geonames_id) is not None
+        assert "_cache" not in vars(registry)
+        assert registry._row_filter is None
+
+    def test_same_threshold_keeps_cache(self):
+        """should keep the loaded cache when the threshold set is the one already in place"""
+        registry = _registry()
+        registry.set_population_threshold(1_000)
+        cache = vars(registry)["_cache"] = {}
+
+        registry.set_population_threshold(1_000)
+
+        assert vars(registry)["_cache"] is cache
+
+    @pytest.mark.parametrize("bad_threshold, error", [("15000", TypeError), (1.5, TypeError), (True, TypeError), (-1, ValueError)])
+    def test_bad_threshold(self, bad_threshold, error):
+        """should raise when set, rather than on first access, for a threshold that isn't a non-negative int, leaving the current one in place"""
+        registry = _registry()
+        with pytest.raises(error):
+            registry.set_population_threshold(bad_threshold)
+        assert registry.population_threshold is None
+
+
+class TestPopulationSort:
+    """POPULATION SORT"""
+
+    def test_reorders_by_population(self, city: City):
+        """should return the same matches as an unsorted search, largest population first"""
+        by_score = cities.search(city.name)
+        by_population = cities.search(city.name, population_sort=True)
+
+        assert sorted(c.id for c, _ in by_population) == sorted(c.id for c, _ in by_score)
+        populations = [c.population for c, _ in by_population]
+        assert populations == sorted(populations, reverse=True)

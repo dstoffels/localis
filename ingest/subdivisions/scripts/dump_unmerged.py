@@ -1,6 +1,6 @@
-# Writes docs/unmerged_subdivisions.md, every ISO subdivision without a GeoNames counterpart, fresh on each ingest run.
+# Stages docs/unmerged_subdivisions.md, every ISO subdivision without a GeoNames counterpart, promoted with the rest of each run's build.
 
-from ingest.utils import DOCS_PATH
+from ingest.utils import DOCS_PATH, stage_text
 from ingest.subdivisions.utils.subdivision_map import SubdivisionMap
 
 DOC_PATH = DOCS_PATH / "unmerged_subdivisions.md"
@@ -24,4 +24,4 @@ def generate(sub_map: SubdivisionMap) -> str:
 
 
 def write(sub_map: SubdivisionMap) -> None:
-    DOC_PATH.write_text(generate(sub_map), encoding="utf-8")
+    stage_text(DOC_PATH, generate(sub_map))
