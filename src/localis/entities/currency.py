@@ -1,9 +1,10 @@
-from dataclasses import dataclass
-from .entity import Entity
+from .entity import Entity, entity
 
 
-@dataclass(slots=True)
+@entity
 class CurrencyBase(Entity):
+    """A currency as other records nest it."""
+
     alpha3: str
 
     @property
@@ -12,6 +13,8 @@ class CurrencyBase(Entity):
         return self.alpha3
 
 
-@dataclass(slots=True)
+@entity
 class Currency(CurrencyBase):
+    """An ISO 4217 currency or fund code."""
+
     numeric: int | None

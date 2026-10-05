@@ -1,10 +1,11 @@
-from dataclasses import dataclass
-from localis.entities.entity import Entity
-from localis.entities.country import CountryBase
+from .entity import Entity, entity
+from .country import CountryBase
 
 
-@dataclass(slots=True)
+@entity
 class SubdivisionBase(Entity):
+    """A subdivision as other records nest it."""
+
     geonames_code: str | None
     geonames_id: int | None
     iso_code: str | None
@@ -14,14 +15,17 @@ class SubdivisionBase(Entity):
     @property
     def key(self) -> str:
         """The stable reference to store instead of id, resolved by subdivisions.lookup(): the ISO code, or the GeoNames code of a subdivision ISO doesn't list."""
-        key = self.iso_code or self.geonames_code
         # every subdivision comes from ISO, GeoNames or both
-        assert key is not None
+        key = self.iso_code or self.geonames_code
+        if key is None:
+            raise ValueError(f"subdivision {self.id} ({self.name}) has neither an ISO nor a GeoNames code")
         return key
 
 
-@dataclass(slots=True)
+@entity
 class Subdivision(SubdivisionBase):
-    aliases: tuple[str, ...]
+    """An ISO 3166-2 subdivision, a GeoNames one, or both merged."""
+
+    aliases: list[str]
     parent: SubdivisionBase | None
     country: CountryBase

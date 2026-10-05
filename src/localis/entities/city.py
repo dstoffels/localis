@@ -1,12 +1,14 @@
-from dataclasses import dataclass
-from .entity import Entity
+from .entity import Entity, entity
 from .country import CountryBase
 from .subdivision import SubdivisionBase
 
 
-@dataclass(slots=True)
+@entity
 class City(Entity):
+    """A GeoNames populated place from cities500."""
+
     geonames_id: int
+    # the full chain, ascending admin_level
     subdivisions: list[SubdivisionBase]
     country: CountryBase
     population: int

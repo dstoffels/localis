@@ -1,12 +1,13 @@
-from dataclasses import dataclass
 from typing import Literal
-from .entity import Entity
+from .entity import Entity, entity
 
 MacroregionType = Literal["region", "subregion", "grouping"]
 
 
-@dataclass(slots=True)
+@entity
 class MacroregionBase(Entity):
+    """A macroregion as other records nest it."""
+
     code: str
     type: MacroregionType
 
@@ -16,7 +17,9 @@ class MacroregionBase(Entity):
         return self.code
 
 
-@dataclass(slots=True)
+@entity
 class Macroregion(MacroregionBase):
+    """A CLDR macroregion: a UN M49 region, a subregion within one, or a grouping."""
+
     # a subregion's region, or the region CLDR files a grouping under; None for a region and the groupings filed under World
     parent: MacroregionBase | None

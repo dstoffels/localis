@@ -1,9 +1,10 @@
-from dataclasses import dataclass
-from .entity import Entity
+from .entity import Entity, entity
 
 
-@dataclass(slots=True)
+@entity
 class ScriptBase(Entity):
+    """A script as other records nest it."""
+
     alpha4: str
 
     @property
@@ -12,13 +13,17 @@ class ScriptBase(Entity):
         return self.alpha4
 
 
-@dataclass(slots=True)
+@entity
 class Script(ScriptBase):
+    """An ISO 15924 script code."""
+
     numeric: int | None
-    aliases: tuple[str, ...]
+    aliases: list[str]
 
 
-@dataclass(slots=True)
+@entity
 class LanguageScript(ScriptBase):
+    """A script a language is written in, per CLDR."""
+
     # CLDR's rule: the language or the script isn't modern
     secondary: bool

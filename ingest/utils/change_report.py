@@ -40,7 +40,7 @@ def _registries(root: Path) -> list[Registry]:
 def _value(value: Any) -> Any:
     if isinstance(value, Entity):
         return _nested(value)
-    if isinstance(value, tuple):
+    if isinstance(value, (list, tuple)):
         return tuple(_value(v) for v in value)
     if is_dataclass(value) and not isinstance(value, type):
         return asdict(value)

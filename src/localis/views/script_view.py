@@ -30,7 +30,7 @@ class ScriptView(View[Script, ScriptStore]):
         return ScriptBase(id=self.id, name=self.name, alpha4=self.alpha4)
 
     def to_entity(self) -> Script:
-        return Script(id=self.id, name=self.name, alpha4=self.alpha4, numeric=self.numeric, aliases=self.aliases)
+        return Script(id=self.id, name=self.name, alpha4=self.alpha4, numeric=self.numeric, aliases=list(self.aliases))
 
     @classmethod
     def load(cls, filepath: Path) -> ViewMap["ScriptView"]:

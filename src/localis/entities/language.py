@@ -1,6 +1,5 @@
-from dataclasses import dataclass
 from typing import Literal
-from .entity import Entity
+from .entity import Entity, entity
 from .script import LanguageScript, ScriptBase
 
 LanguageScope = Literal["individual", "macrolanguage", "special"]
@@ -8,8 +7,10 @@ LanguageType = Literal["living", "extinct", "historical", "constructed", "specia
 LanguageStatus = Literal["official", "regional", "de_facto"]
 
 
-@dataclass(slots=True)
+@entity
 class LanguageBase(Entity):
+    """A language as other records nest it."""
+
     alpha3: str
     alpha2: str | None
 
@@ -19,19 +20,23 @@ class LanguageBase(Entity):
         return self.alpha3
 
 
-@dataclass(slots=True)
+@entity
 class Language(LanguageBase):
+    """An ISO 639-3 language."""
+
     bibliographic: str | None
     scope: LanguageScope
     type: LanguageType
     inverted_name: str | None
-    aliases: tuple[str, ...]
+    aliases: list[str]
     # primary scripts first, then secondary, each in CLDR's order
-    scripts: tuple[LanguageScript, ...]
+    scripts: list[LanguageScript]
 
 
-@dataclass(slots=True)
+@entity
 class CountryLanguage(LanguageBase):
+    """A language CLDR gives a country an official status for."""
+
     status: LanguageStatus
     # CLDR's share of the country's population; shares overlap, since people speak several languages
     population_percent: float | None

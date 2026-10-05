@@ -24,3 +24,23 @@ class TestGet:
         assert result is not None, "expected a result, got None"
         assert isinstance(result, Entity), f"expected an Entity, got {type(result)}"
         assert result.id == valid_id, f"expected ID {valid_id}, got {result.id}"
+
+    def test_hashable(self, registry: Registry):
+        """should return results that hash by record, so the same record twice dedupes in a set"""
+
+        first, again, other = registry.get(10), registry.get(10), registry.get(11)
+        assert first is not None and again is not None and other is not None
+        assert first == again and hash(first) == hash(again)
+        assert len({first, again, other}) == 2
+
+    def test_results_are_copies(self, registry: Registry):
+        """should build every result fresh, so changing one leaves the loaded data and later results as they were"""
+
+        result = registry.get(10)
+        assert result is not None
+        for name in ("aliases", "subdivisions", "scripts", "languages", "currencies", "macroregions"):
+            value = getattr(result, name, None)
+            if isinstance(value, list):
+                value.clear()
+        result.name = "changed"
+        assert registry.get(10) == registry.get(10) != result

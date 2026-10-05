@@ -81,7 +81,7 @@ class SubdivisionView(
             iso_code=self.iso_code,
             type=self.type,
             admin_level=self.admin_level,
-            aliases=self.aliases,
+            aliases=list(self.aliases),
             parent=parent.to_base() if parent else None,
             country=self.country.to_base(),
         )

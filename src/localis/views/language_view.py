@@ -51,13 +51,13 @@ class LanguageView(View[Language, LanguageStore]):
         return self._store.aliases[self._idx]
 
     @property
-    def scripts(self) -> tuple[LanguageScript, ...]:
+    def scripts(self) -> list[LanguageScript]:
         idx = self._idx
-        return tuple(
+        return [
             LanguageScript(id=view.id, name=view.name, alpha4=view.alpha4, secondary=secondary)
             for ids, secondary in ((self._store.script_ids[idx], False), (self._store.secondary_script_ids[idx], True))
             for view in (self._script_views[i] for i in ids)
-        )
+        ]
 
     def to_base(self) -> LanguageBase:
         return LanguageBase(id=self.id, name=self.name, alpha3=self.alpha3, alpha2=self.alpha2)
@@ -72,7 +72,7 @@ class LanguageView(View[Language, LanguageStore]):
             scope=self.scope,
             type=self.type,
             inverted_name=self.inverted_name,
-            aliases=self.aliases,
+            aliases=list(self.aliases),
             scripts=self.scripts,
         )
 

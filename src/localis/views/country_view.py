@@ -76,20 +76,20 @@ class CountryView(View[Country, CountryStore]):
         return self._store.historics[self._idx]
 
     @property
-    def macroregions(self) -> tuple[MacroregionBase, ...]:
-        return tuple(self._macroregion_views[i].to_base() for i in self._store.macroregion_ids[self._idx])
+    def macroregions(self) -> list[MacroregionBase]:
+        return [self._macroregion_views[i].to_base() for i in self._store.macroregion_ids[self._idx]]
 
     @property
-    def groupings(self) -> tuple[MacroregionBase, ...]:
-        return tuple(self._macroregion_views[i].to_base() for i in self._store.grouping_ids[self._idx])
+    def groupings(self) -> list[MacroregionBase]:
+        return [self._macroregion_views[i].to_base() for i in self._store.grouping_ids[self._idx]]
 
     @property
-    def currencies(self) -> tuple[CurrencyBase, ...]:
-        return tuple(self._currency_views[i].to_base() for i in self._store.currency_ids[self._idx])
+    def currencies(self) -> list[CurrencyBase]:
+        return [self._currency_views[i].to_base() for i in self._store.currency_ids[self._idx]]
 
     @property
-    def languages(self) -> tuple[CountryLanguage, ...]:
-        entries = []
+    def languages(self) -> list[CountryLanguage]:
+        entries: list[CountryLanguage] = []
         for language_id, status, percent, script_id in self._store.languages[self._idx]:
             language = self._language_views[language_id]
             entries.append(
@@ -103,12 +103,13 @@ class CountryView(View[Country, CountryStore]):
                     script=self._script_views[script_id].to_base() if script_id != -1 else None,
                 )
             )
-        return tuple(entries)
+        return entries
 
     def to_base(self) -> CountryBase:
         return CountryBase(id=self.id, name=self.name, alpha2=self.alpha2, alpha3=self.alpha3, geonames_id=self.geonames_id)
 
     def to_entity(self) -> Country:
+        historic = self.historic
         return Country(
             id=self.id,
             name=self.name,
@@ -116,11 +117,12 @@ class CountryView(View[Country, CountryStore]):
             alpha3=self.alpha3,
             official_name=self.official_name,
             common_name=self.common_name,
-            aliases=self.aliases,
+            aliases=list(self.aliases),
             numeric=self.numeric,
             flag=self.flag,
             geonames_id=self.geonames_id,
-            historic=self.historic,
+            # the store's own object, so copied: a change to the entity's must not reach later calls
+            historic=HistoricInfo(historic.alpha_4, historic.withdrawal_date, historic.comment) if historic else None,
             macroregions=self.macroregions,
             groupings=self.groupings,
             currencies=self.currencies,

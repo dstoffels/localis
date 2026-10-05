@@ -348,7 +348,7 @@ def _language(id: int, script_name: str, secondary: bool) -> Language:
     script = LanguageScript(id=id, name=script_name, alpha4="Latn", secondary=secondary)
     return Language(
         id=id, name="Demo", alpha3="dmo", alpha2=None, bibliographic=None, scope="individual", type="living",
-        inverted_name=None, aliases=(), scripts=(script,),
+        inverted_name=None, aliases=[], scripts=[script],
     )
 
 
