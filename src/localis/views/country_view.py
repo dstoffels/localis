@@ -139,9 +139,8 @@ class CountryView(View[Country, CountryStore]):
         script_views: Mapping[int, ScriptView],
     ) -> ViewMap["CountryView"]:
         store = CountryStore()
-        idx = 0
         with open(filepath, "r", encoding="utf-8") as f:
-            for id, line in enumerate(f, start=1):
+            for idx, line in enumerate(f):
                 row = line.rstrip("\r\n").split("\t")
                 (
                     name,
@@ -184,7 +183,6 @@ class CountryView(View[Country, CountryStore]):
                     currency_ids,
                     languages,
                 )
-                idx += 1
         return ViewMap(store, lambda id: cls(id, store, macroregion_views, currency_views, language_views, script_views))
 
     @staticmethod

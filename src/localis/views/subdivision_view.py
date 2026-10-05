@@ -53,9 +53,7 @@ class SubdivisionView(
 
     @property
     def country(self) -> CountryView:
-        country = self._country_views.get(self._store.country_ids[self._idx])
-        assert country is not None, "subdivision has no country, violates ingest invariant"
-        return country
+        return self._country_views[self._store.country_ids[self._idx]]
 
     @property
     def iso_suffix(self) -> str:
@@ -92,9 +90,8 @@ class SubdivisionView(
         cls, filepath: Path, country_views: Mapping[int, CountryView]
     ) -> ViewMap["SubdivisionView"]:
         store = SubdivisionStore()
-        idx = 0
         with open(filepath, "r", encoding="utf-8") as f:
-            for id, line in enumerate(f, start=1):
+            for idx, line in enumerate(f):
                 row = line.rstrip("\r\n").split("\t")
                 (
                     name,
@@ -125,7 +122,6 @@ class SubdivisionView(
                     parent_id,
                     country_id,
                 )
-                idx += 1
         # a subdivision's parent resolves against this same mapping
         views: ViewMap[SubdivisionView] = ViewMap(store, lambda id: cls(id, store, country_views, views))
         return views

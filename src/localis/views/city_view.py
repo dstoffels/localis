@@ -30,9 +30,7 @@ class CityView(CrossReferencedView[City, CityStore, CountryView, SubdivisionView
 
     @property
     def country(self) -> CountryView:
-        country = self._country_views.get(self._store.country_ids[self._idx])
-        assert country is not None, "city has no country, violates ingest invariant"
-        return country
+        return self._country_views[self._store.country_ids[self._idx]]
 
     @property
     def population(self) -> int:
