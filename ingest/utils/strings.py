@@ -13,7 +13,7 @@ _TOKEN_EQUIVALENTS = {
     "sts": "states",
     "fed": "federal",
     "federated": "federal",
-    **{form: "island" for form in ("i", "is", "isl", "isle", "isles", "islands")},
+    **{form: "island" for form in ("is", "isl", "isle", "isles", "islands")},
 }
 # words whose presence doesn't change which name it is: "Republic of Congo" / "Rep. Congo", "the Bahamas" / "Bahamas"
 _FILLER_TOKENS = {"the", "of"}

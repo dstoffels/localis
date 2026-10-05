@@ -1,10 +1,7 @@
 [SUBDIVISIONS]
-[INFO] Downloading admin1CodesASCII.txt from https://download.geonames.org/export/dump/admin1CodesASCII.txt
-[INFO] Downloaded and updated admin1CodesASCII.txt
-[INFO] Downloading admin2Codes.txt from https://download.geonames.org/export/dump/admin2Codes.txt
-[INFO] Downloaded and updated admin2Codes.txt
-[INFO] Downloading iso_3166-2.json from https://salsa.debian.org/iso-codes-team/iso-codes/-/raw/90b9fe56ec2f3a05675d525d3587ab6c18f30376/data/iso_3166-2.json
-[INFO] Downloaded and updated iso_3166-2.json
+[INFO] No update needed for admin1CodesASCII.txt
+[INFO] No update needed for admin2Codes.txt
+[INFO] No update needed for iso_3166-2.json
 [INFO] Querying Wikidata for ISO/GeoNames crosswalk...
 [INFO] Loading GeoNames subdivisions...
 [INFO] Merging GeoNames alternate names into subdivision aliases...

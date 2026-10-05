@@ -1,6 +1,6 @@
 {
   "cldr_script_names_en.json": {
-    "url": "https://raw.githubusercontent.com/unicode-org/cldr-json/main/cldr-json/cldr-localenames-full/main/en/scripts.json",
+    "url": "https://raw.githubusercontent.com/unicode-org/cldr-json/91c267402229a59e3ef2774544f001bf959e8809/cldr-json/cldr-localenames-full/main/en/scripts.json",
     "etag": "\"a96a77dff52fa8eb8fe091bf4a45ea550a4b349ca9d04453a39fd2a7f6008e3a\"",
     "sha256": "48ce7e6cf85ca719ec04850786e778bb93fb7c83067a417f56f02d2fa882448b"
   },

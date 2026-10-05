@@ -159,8 +159,8 @@
       "single_record_values": 216712
     },
     "countries": {
-      "values": 2097,
-      "single_record_values": 1842
+      "values": 2103,
+      "single_record_values": 1848
     },
     "currencies": {
       "values": 177,
@@ -180,7 +180,7 @@
     }
   },
   "shipped_size": {
-    "total": 53380128,
+    "total": 53380306,
     "cities": {
       "total": 41969934,
       "share_pct": 78.6,
@@ -197,14 +197,14 @@
       }
     },
     "countries": {
-      "total": 138631,
+      "total": 138809,
       "share_pct": 0.3,
       "files": {
-        "canon_index.bin.gz": 10029,
+        "canon_index.bin.gz": 10030,
         "canon_index_offsets.tsv": 22159,
-        "countries.tsv": 40760,
-        "filter_index.bin.gz": 4668,
-        "filter_index_offsets.tsv": 53927,
+        "countries.tsv": 40815,
+        "filter_index.bin.gz": 4663,
+        "filter_index_offsets.tsv": 54054,
         "lookup_index_int.tsv": 1852,
         "lookup_index_str.tsv": 3813,
         "short_names.tsv.gz": 1423

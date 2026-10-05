@@ -15,5 +15,5 @@
 [INFO] Regenerating the data stats and docs
 [INFO] Computing the data stats of the shipped data (src/localis/data)...
 [INFO] Wrote tests/analysis/data_stats.json: 296,323 records across 7 registries
-[INFO] Filled the stat markers in README.md, docs/methodology.md, docs/dev.md
+[INFO] Filled the stat markers in docs/dev.md
 [INFO] Pipeline succeeded: build promoted

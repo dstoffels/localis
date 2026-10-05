@@ -1,11 +1,9 @@
 import json
-from ingest.shared.models import CountryModel, CountryLanguageModel, LanguageModel, LanguageStatus, ScriptModel
+from ingest.shared.models import CountryModel, CountryLanguageModel, LanguageModel, ScriptModel
+from ingest.shared.scripts.cldr import OFFICIAL_STATUSES
 from ingest.shared.scripts.fetch_shared import CLDR_TERRITORY_INFO_PATH
 from ingest.languages.scripts import language_codes
 from ingest.utils import ingest_log
-
-# CLDR's official statuses, named as localis ships them; a language with no status isn't listed
-STATUSES: dict[str, LanguageStatus] = {"official": "official", "official_regional": "regional", "de_facto_official": "de_facto"}
 
 
 def _parse_tag(tag: str) -> tuple[str, str | None]:
@@ -32,7 +30,7 @@ def place_languages(countries: dict[str, CountryModel], languages: dict[str, Lan
             raw_status = info.get("_officialStatus")
             if raw_status is None:
                 continue
-            status = STATUSES.get(raw_status)
+            status = OFFICIAL_STATUSES.get(raw_status)
             if status is None:
                 raise ValueError(f"CLDR gives {country.alpha2} language {tag} an unknown official status {raw_status!r}")
             code, script_code = _parse_tag(tag)

@@ -1,6 +1,6 @@
 {
   "cldr_currency_data.json": {
-    "url": "https://raw.githubusercontent.com/unicode-org/cldr-json/main/cldr-json/cldr-core/supplemental/currencyData.json",
+    "url": "https://raw.githubusercontent.com/unicode-org/cldr-json/91c267402229a59e3ef2774544f001bf959e8809/cldr-json/cldr-core/supplemental/currencyData.json",
     "etag": "\"c583862c57dbed9fd8f18682d05ae7d36de9dc8e5bfe56815c696be9f2a72a80\"",
     "sha256": "e50315091b1f34428480f82970be64159ad207af0bdcebe7faa6260d3e34c8a6"
   },

@@ -5,7 +5,7 @@
     "sha256": "7e8b640ffe3ab1a79e9cc5aa57e0755d1ecb29ece83ea8a11817eda900095060"
   },
   "cldr_territory_info.json": {
-    "url": "https://raw.githubusercontent.com/unicode-org/cldr-json/main/cldr-json/cldr-core/supplemental/territoryInfo.json",
+    "url": "https://raw.githubusercontent.com/unicode-org/cldr-json/91c267402229a59e3ef2774544f001bf959e8809/cldr-json/cldr-core/supplemental/territoryInfo.json",
     "etag": "\"8c6146cae002a8b99dabd61010f70745716edd940dba4a9b90758ea597dbeff1\"",
     "sha256": "b50369a0e1f5434c942dfe45064b39f488604ca0cedac5117e993248c19f2c0a"
   }

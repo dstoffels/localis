@@ -24,7 +24,7 @@ Bahrain	BH	BHR	290291	Kingdom of Bahrain		Bahrein Islands|Dawlat al-Bahrain|Maml
 Burundi	BI	BDI	433561	Republic of Burundi		Gouvernement du Burundi|Republika y'Uburundi	108	🇧🇮		1|7	30|34	14	5673:official:63.0:|1953:official:59.0:|1832:official:0.046:
 Benin	BJ	BEN	2395170	Republic of Benin			204	🇧🇯		1|6	30|34	167	1953:official:34.0:
 Saint Barthélemy	BL	BLM	3578476			Collectivity of Saint Barthélemy|Collectivité de Saint-Barthélemy|Ouanalao|Saint Barth|Saint Barths|Saint Barts|Saint Bartz|Île Saint-Barthélemy	652	🇧🇱		3|19	29|31	46	1953:official:85.0:
-Bermuda	BM	BMU	3573345			Barmuda|Barmuda Islands|Barmudas|Bermoothes|Bermuda Islands|Bermudian Islands|Colony of Bermuda|Devil's Isles|Isle of Devils|Somers Islands|Summer's Isles|Summers' Isles|Territory of Bermuda|Virgineola	60	🇧🇲		3|18	29	15	1832:official:92.0:
+Bermuda	BM	BMU	3573345			Barmuda|Barmuda I.|Barmuda Islands|Barmudas|Bermoothes|Bermuda Islands|Bermudian Islands|Colony of Bermuda|Devil's Isles|Isle of Devils|Somers Islands|Summer's Isles|Summers' Isles|Territory of Bermuda|Virgineola	60	🇧🇲		3|18	29	15	1832:official:92.0:
 Brunei Darussalam	BN	BRN	1820814			Brunei|Nation of Brunei, the Abode of Peace|Negara Brunei Darussalam	96	🇧🇳		4|22	34	16	4271:official:93.0:|4271:official:5.0:5
 Bolivia, Plurinational State of	BO	BOL	3923057	Plurinational State of Bolivia	Bolivia	Republic of Bolivia	68	🇧🇴		3|16	31|34	17	6012:official:61.0:|5475:official:32.0:|489:official:20.0:
 Bonaire, Sint Eustatius and Saba	BQ	BES	7626844	Bonaire, Sint Eustatius and Saba		BES islands|Bonaire, Saint Eustatius and Saba|Caribbean Netherlands	535	🇧🇶		3|19	29|31	145	4699:official:8.0:
@@ -71,7 +71,7 @@ Finland	FI	FIN	660013	Republic of Finland		Finnia|Republiken Finland|Suomen tasa
 Fiji	FJ	FJI	2205218	Republic of Fiji		Fijī Gaṇarājya|Matanitu Tugalala o Viti|Republic of the Fiji Islands|Viti	242	🇫🇯		2|12	34	47	1832:official:94.0:|2380:official:41.0:|1924:official:39.0:
 Falkland Islands (Malvinas)	FK	FLK	3474414			Falkland Islands|Falklands|Islas Malvinas|Malvinas|Malvinas Islands	238	🇫🇰		3|16	31	48	1832:official:77.0:
 Micronesia, Federated States of	FM	FSM	2081918	Federated States of Micronesia		Federated States of Micronesia, FSM|Micronesia	583	🇫🇲		2|13	34	145	1832:official:57.0:
-Faroe Islands	FO	FRO	2622320			Faer Oer|Faeroe Islands|Faeroer|Faeroerne|Faeroes|Faeroyene|Far Oer|Fareo islands|Faroes|Faroese Islands|Farre|Farre Islands|Färöer|Færeyjar|Føroyar|Sheep Islands	234	🇫🇴		5|27		40	1906:official:95.0:
+Faroe Islands	FO	FRO	2622320			Faer Oer|Faeroe Islands|Faeroer|Faeroerne|Faeroes|Faeroyene|Far Oer|Fareo islands|Faroes|Faroese Islands|Farre|Farre I.|Farre Islands|Färöer|Færeyjar|Føroyar|Sheep Islands	234	🇫🇴		5|27		40	1906:official:95.0:
 France	FR	FRA	3017382	French Republic			250	🇫🇷		5|28	32|33|34	46	1953:official:97.0:
 Gabon	GA	GAB	2400553	Gabonese Republic		République Gabonaise	266	🇬🇦		1|9	30|34	157	1953:official:63.0:
 United Kingdom	GB	GBR	2635167	United Kingdom of Great Britain and Northern Ireland		Britain|Great Britain|Great Britain and Northern Ireland|UK	826	🇬🇧		5|27	34	49	1832:official:98.0:|1464:regional:1.3:|2144:regional:0.15:|2140:regional:0.11:
@@ -101,14 +101,14 @@ Hungary	HU	HUN	719819	Hungary			348	🇭🇺		5|26	32|34	60	2499:official:100.0:
 Indonesia	ID	IDN	1643084	Republic of Indonesia			360	🇮🇩		4|22	34	61	2620:official:64.0:
 Ireland	IE	IRL	2963597			Irish Republic|Republic of Ireland|Southern Ireland	372	🇮🇪		5|27	32|33|34	46	1832:official:98.0:|2144:official:22.0:
 Israel	IL	ISR	294640	State of Israel		Yisrael	376	🇮🇱		4|24	34	62	2365:official:100.0:|345:official:20.0:
-Isle of Man	IM	IMN	3042225			I. Mannin|I.O.M.|Isle of Mann|Mann	833	🇮🇲		5|27		49	1832:official:100.0:|2153:official:1.8:
+Isle of Man	IM	IMN	3042225			I. Man|I. Mann|I. Mannin|I.O.M.|Isle of Mann|Mann	833	🇮🇲		5|27		49	1832:official:100.0:|2153:official:1.8:
 India	IN	IND	1269750	Republic of India		Al Hind|Bharat Ganarajya|Bharata|Bharatvarsh|Hindoostan|Hindustan|Indostan|Tenjiku|Tianzhu	356	🇮🇳		4|21	34	63	2387:official:41.0:|1832:official:19.0:|620:regional:8.1:|6313:regional:7.2:|3842:regional:7.0:|6220:regional:5.9:|6820:regional:5.0:|2265:regional:4.5:|2849:regional:3.7:|3838:regional:3.2:|5076:regional:3.2:|5141:regional:2.8:|379:regional:1.3:|3835:regional:1.2:|4569:regional:0.56:|5710:regional:0.55:|2853:regional:0.41:|3193:regional:0.32:|5967:regional:0.26:|5967:regional:0.14:36|3007:regional:0.08:|5705:regional:0.0012:
 British Indian Ocean Territory	IO	IOT	1282588			BIOT	86	🇮🇴		1|7	30	145	1832:official:100.0:
 Iraq	IQ	IRQ	99237	Republic of Iraq			368	🇮🇶		4|24	34	64	345:official:68.0:|1275:regional:12.0:|502:regional:1.8:5
 Iran, Islamic Republic of	IR	IRN	130758	Islamic Republic of Iran	Iran		364	🇮🇷		4|21	34	65	1909:official:75.0:
 Iceland	IS	ISL	2629691	Republic of Iceland		Icelandic republic|Ysland	352	🇮🇸		5|27	34	66	2657:official:100.0:
 Italy	IT	ITA	3175395	Italian Republic		Republic of Italy	380	🇮🇹		5|25	32|33|34	46	2665:official:95.0:|1953:regional:20.0:|6883:regional:1.3:
-Jersey	JE	JEY	3042142			Bailliage de Jersey|Bailliage de Jèrri|Balliwick of Jersey|I. Iersey|Iersey|Iersey I.|Isle of Jersey|Jersey Island|Jèrri	832	🇯🇪		5|27		49	1832:official:95.0:
+Jersey	JE	JEY	3042142			Bailliage de Jersey|Bailliage de Jèrri|Balliwick of Jersey|I. Iersey|I. Jersey|Iersey|Iersey I.|Isle of Jersey|Jersey I.|Jersey Island|Jèrri	832	🇯🇪		5|27		49	1832:official:95.0:
 Jamaica	JM	JAM	3489940			Commonwealth of Jamaica	388	🇯🇲		3|19	29|31|34	67	1832:official:98.0:
 Jordan	JO	JOR	248816	Hashemite Kingdom of Jordan		Giordania|HKJ|Kingdom of Jordan|State of Jordan|Yarden	400	🇯🇴		4|24	34	68	345:official:100.0:
 Japan	JP	JPN	1861060			Iapan|Iapon|Nihon-koku|Nippon-koku|State of Japan	392	🇯🇵		4|20	34	69	2803:official:95.0:

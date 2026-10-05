@@ -1,11 +1,11 @@
 {
   "cldr_language_data.json": {
-    "url": "https://raw.githubusercontent.com/unicode-org/cldr-json/main/cldr-json/cldr-core/supplemental/languageData.json",
+    "url": "https://raw.githubusercontent.com/unicode-org/cldr-json/91c267402229a59e3ef2774544f001bf959e8809/cldr-json/cldr-core/supplemental/languageData.json",
     "etag": "\"20f12c2054ce4237bc34719846924f0a1285335263ed631b6600cf1a55c4f86f\"",
     "sha256": "249e39c6bc9dff82cdd36348039b23e0f4ba9df0f3cea9a5857f00ed4253f6af"
   },
   "cldr_language_names_en.json": {
-    "url": "https://raw.githubusercontent.com/unicode-org/cldr-json/main/cldr-json/cldr-localenames-full/main/en/languages.json",
+    "url": "https://raw.githubusercontent.com/unicode-org/cldr-json/91c267402229a59e3ef2774544f001bf959e8809/cldr-json/cldr-localenames-full/main/en/languages.json",
     "etag": "\"a90488af9d4bb9a3fa7f4b043bf0321b74d30688410bbc7880c5f26a460feff8\"",
     "sha256": "a5960d2371bc7d982da7fcfd9a0e237429d3467a5cc76f680bc3af5bcef9fb4e"
   },

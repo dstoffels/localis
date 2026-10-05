@@ -18,7 +18,7 @@ from .paths import (
     GEONAMES_DUMP_URL,
 )
 from .logger import ingest_log, pipeline_log, ORPHANS_EXIT_CODE
-from .download import fetch, iso_codes_url, sparql
+from .download import fetch, iso_codes_url, cldr_url, sparql
 from .committed_query import CommittedQuery
 from .index import (
     dump_data,

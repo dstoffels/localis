@@ -17,9 +17,11 @@ T = TypeVar("T")
 # sent with every request to a data source
 USER_AGENT = "localis-data-refresh (+https://github.com/dstoffels/localis)"
 SPARQL_ENDPOINT = "https://query.wikidata.org/sparql"
-# iso-codes' data files are fetched at main's current commit, so each manifest url names the exact upstream version
+# iso-codes' and CLDR's files are fetched at their main branch's current commit, so each manifest url names the exact upstream version
 ISO_CODES_RAW_URL = "https://salsa.debian.org/iso-codes-team/iso-codes/-/raw"
 ISO_CODES_MAIN_URL = "https://salsa.debian.org/api/v4/projects/iso-codes-team%2Fiso-codes/repository/branches/main"
+CLDR_RAW_URL = "https://raw.githubusercontent.com/unicode-org/cldr-json"
+CLDR_MAIN_URL = "https://api.github.com/repos/unicode-org/cldr-json/branches/main"
 # tries per request, waiting RETRY_BACKOFF seconds before the first retry and doubling each time
 REQUEST_ATTEMPTS = 4
 RETRY_BACKOFF = 10
@@ -69,17 +71,22 @@ def _read_json(request: Request, timeout: int) -> Any:
 
 
 @cache
-def _iso_codes_commit() -> str:
-    """iso-codes' main commit, looked up once per run so every stage builds from the same commit."""
-    request = Request(ISO_CODES_MAIN_URL, headers={"User-Agent": USER_AGENT})
-    commit = _retrying(lambda: _read_json(request, timeout=60)["commit"]["id"], "iso-codes commit lookup")
-    ingest_log.writeline(f"Using iso-codes main at {commit}")
+def _main_commit(branch_url: str, sha_key: str, label: str) -> str:
+    """A repository's main commit from its branch API, under sha_key, looked up once per run so every stage builds from the same commit."""
+    request = Request(branch_url, headers={"User-Agent": USER_AGENT})
+    commit = _retrying(lambda: _read_json(request, timeout=60)["commit"][sha_key], f"{label} commit lookup")
+    ingest_log.writeline(f"Using {label} main at {commit}")
     return commit
 
 
 def iso_codes_url(file: str) -> str:
     """The URL of an iso-codes data file at main's current commit."""
-    return f"{ISO_CODES_RAW_URL}/{_iso_codes_commit()}/data/{file}"
+    return f"{ISO_CODES_RAW_URL}/{_main_commit(ISO_CODES_MAIN_URL, 'id', 'iso-codes')}/data/{file}"
+
+
+def cldr_url(path: str) -> str:
+    """The URL of a cldr-json file, by its path under cldr-json/, at main's current commit."""
+    return f"{CLDR_RAW_URL}/{_main_commit(CLDR_MAIN_URL, 'sha', 'cldr-json')}/cldr-json/{path}"
 
 
 def _etag(url: str) -> str | None:
