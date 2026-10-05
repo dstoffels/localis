@@ -114,7 +114,7 @@ Baghlān-e Jadīd		AF.03.1311	7052897		Baghlani Jadid District	2	70	3
 Būrkah		AF.03.1310	7052899		Burka District	2	70	3
 Dahanah-ye Ghōrī		AF.03.1303	7052900		Dahana i Ghuri|Dahni Ghori	2	70	3
 Deh-e Şalāḩ		AF.03.1312	7052901		Dih Salah District	2	70	3
-Dōshī		AF.03.1304	7052902		Doshi|Dushi|Dushi District	2	70	3
+Dōshī		AF.03.1304	7052902		Dushi|Dushi District	2	70	3
 Firing wa Ghārū		AF.03.1313	7052903			2	70	3
 Guz̄argāh-e Nūr		AF.03.1314	7052904			2	70	3
 Khinjān		AF.03.1306	7052905		Khinjan District	2	70	3
@@ -170,7 +170,7 @@ Rashīdān		AF.08.617	7052990		Rashidan District	2	65	3
 Wāghaz̧		AF.08.618	7052992		Waghaz District	2	65	3
 Walī Muḩammad Shahīd Khūgyāṉī		AF.08.619	7052994		Walī Muḩammad Shahīd Khūgyāṉī District	2	65	3
 Zanakhān		AF.08.616	7052996		Zana Khan District	2	65	3
-Chaghcharān		AF.09.2701	7052997		Chaghcharan|Chaghcharan District	2	64	3
+Chaghcharān		AF.09.2701	7052997		Chaghcharan District	2	64	3
 Chahār Şadah		AF.09.2708	7052998		Chahār Şadah District	2	64	3
 Dū Laīnah		AF.09.2710	7052999		Dū Laīnah District	2	64	3
 Dowlatyār		AF.09.2709	7053000		Dawlat Yar|Dawlat Yar District	2	64	3
@@ -236,7 +236,7 @@ Muḩammad Āghah		AF.17.505	7053260		Mohammad Agha|Muḩammad Āghah District	2
 Pul-e ‘Alam		AF.17.501	7053261		Pul-e ‘Alam District|Pul-i-Alam	2	54	3
 Achīn		AF.18.810	7053262		Achin District	2	53	3
 Batī Kōṯ		AF.18.817	7053263		Bati Kot District	2	53	3
-Bihsūd		AF.18.821	7053264		Bihsud|Bihsud District	2	53	3
+Bihsūd		AF.18.821	7053264		Bihsud District	2	53	3
 Chaparhār		AF.18.806	7053265		Chaparhar District	2	53	3
 Darah-ye Nūr		AF.18.820	7053266		Dara-I-Nur|Darai Nur District|Dare Noor	2	53	3
 Deh Bālā		AF.18.808	7053267			2	53	3
@@ -2184,13 +2184,13 @@ Brčko distrikt	BA-BRC	BA.BRC	3294903	District with special status	Brčko|Brčko
 Opština Modriča		BA.02.3294911	3294911			2	2182	17
 Opština Novi Grad		BA.02.3294915	3294915			2	2182	17
 Unsko-Sanski Kanton		BA.01.3343704	3343704		Una-Sana Canton|Unsko-Sanska Županija	2	2181	17
-Posavski Kanton		BA.01.3343706	3343706		Posavina Canton|Posavski kanton|Županija Posavska	2	2181	17
-Tuzlanski Kanton		BA.01.3343716	3343716		Tuzla Canton|Tuzlanska Županija|Tuzlanski kanton	2	2181	17
-Zeničko-Dobojski Kanton		BA.01.3343722	3343722		Zenica-Doboj Canton|Zeničko-Dobojska Županija|Zeničko-dobojski kanton	2	2181	17
+Posavski Kanton		BA.01.3343706	3343706		Posavina Canton|Županija Posavska	2	2181	17
+Tuzlanski Kanton		BA.01.3343716	3343716		Tuzla Canton|Tuzlanska Županija	2	2181	17
+Zeničko-Dobojski Kanton		BA.01.3343722	3343722		Zenica-Doboj Canton|Zeničko-Dobojska Županija	2	2181	17
 Bosansko-Podrinjski Kanton Goražde		BA.01.3343726	3343726		Bosansko-Podrinjska Županija Goražde	2	2181	17
-Srednjobosanski Kanton		BA.01.3343731	3343731		Central Bosnia Canton|Srednjobosanski kanton|Županija Središnja Bosna|Županjia Srednjobosanska	2	2181	17
-Hercegovačko-Neretvanski Kanton		BA.01.3343733	3343733		Hercegovačko-neretvanska županija|Hercegovačko-neretvanski kanton|Herzegovina-Neretva Canton	2	2181	17
-Zapadnohercegovački Kanton		BA.01.3343736	3343736		West Herzegovina Canton|Zapadnohercegovačka Županija|Zapadnohercegovački kanton|Županija Zapadnohercegovačka	2	2181	17
+Srednjobosanski Kanton		BA.01.3343731	3343731		Central Bosnia Canton|Županija Središnja Bosna|Županjia Srednjobosanska	2	2181	17
+Hercegovačko-Neretvanski Kanton		BA.01.3343733	3343733		Hercegovačko-neretvanska županija|Herzegovina-Neretva Canton	2	2181	17
+Zapadnohercegovački Kanton		BA.01.3343736	3343736		West Herzegovina Canton|Zapadnohercegovačka Županija|Županija Zapadnohercegovačka	2	2181	17
 Canton of Sarajevo		BA.01.3343737	3343737		Kanton Sarajevo|Sarajevo Canton|Sarajevo kanton|Sarajevska Županija	2	2181	17
 Kanton 10		BA.01.3343740	3343740		Canton 10|Županija 10	2	2181	17
 Opština Krupa na Uni		BA.02.3344087	3344087			2	2182	17
@@ -2820,7 +2820,7 @@ Commune of Ouidah		BJ.09.7668936	7668936		Ouidah	2	2795	25
 Commune of Kpomasse		BJ.09.7668937	7668937		Kpomasse	2	2795	25
 Commune of Tori-Bossito		BJ.09.7668938	7668938		Tori-Bossito	2	2795	25
 Porto-Novo		BJ.16.7668939	7668939			2	2792	25
-Aguégués		BJ.16.7668940	7668940		Aguegues	2	2792	25
+Aguégués		BJ.16.7668940	7668940			2	2792	25
 Seme-Kpodji		BJ.16.7668941	7668941			2	2792	25
 Ouake		BJ.13.7669263	7669263			2	2800	25
 Commune of Tchaourou		BJ.10.7669265	7669265		Tchaourou	2	2794	25
@@ -2829,10 +2829,10 @@ Ndali		BJ.10.7669269	7669269		N'dali	2	2794	25
 Bembereke		BJ.10.7669270	7669270			2	2794	25
 Natitingou		BJ.08.7669273	7669273			2	2796	25
 Copargo		BJ.13.7669275	7669275			2	2800	25
-Kalalè		BJ.10.7669349	7669349		Kalale	2	2794	25
-Pèrèrè		BJ.10.7669352	7669352		Perere	2	2794	25
+Kalalè		BJ.10.7669349	7669349			2	2794	25
+Pèrèrè		BJ.10.7669352	7669352			2	2794	25
 Nikki		BJ.10.7669355	7669355			2	2794	25
-Sinendé		BJ.10.7669357	7669357		Sinende	2	2794	25
+Sinendé		BJ.10.7669357	7669357			2	2794	25
 Commune of Ketou		BJ.17.7670840	7670840		Ketou	2	2802	25
 Commune of Pobe		BJ.17.7670841	7670841		Pobe	2	2802	25
 Cotonou		BJ.14.7874113	7874113			2	2801	25
@@ -2866,15 +2866,15 @@ Akpro-Misserete		BJ.16.9063965	9063965			2	2792	25
 Avrankou		BJ.16.9063966	9063966			2	2792	25
 Ifangni		BJ.17.9063970	9063970			2	2802	25
 Grand-Popo		BJ.15.9166075	9166075			2	2793	25
-Comé		BJ.15.9166076	9166076		Come	2	2793	25
+Comé		BJ.15.9166076	9166076			2	2793	25
 Cobly		BJ.08.10344466	10344466		Kobli	2	2796	25
 Boukoumbé		BJ.08.10344467	10344467		Boukombe	2	2796	25
-Ségbana		BJ.07.10344468	10344468		Segbana	2	2797	25
+Ségbana		BJ.07.10344468	10344468			2	2797	25
 Gogounou		BJ.07.10344469	10344469			2	2797	25
 Bassila		BJ.13.10344470	10344470			2	2800	25
-Aplahoué		BJ.12.10344472	10344472		Aplahoue	2	2799	25
+Aplahoué		BJ.12.10344472	10344472			2	2799	25
 Djakotomey		BJ.12.10344473	10344473			2	2799	25
-Klouékanmè		BJ.12.10344474	10344474		Klouekanme	2	2799	25
+Klouékanmè		BJ.12.10344474	10344474			2	2799	25
 Lalo		BJ.12.10344475	10344475			2	2799	25
 Toviklin		BJ.12.10344476	10344476			2	2799	25
 Warwick		BM.11	3572972			1		27
@@ -2952,13 +2952,13 @@ Provincia Vallegrande		BO.08.0708	3901872		Vallegrande	2	2936	29
 Provincia Vaca Diez		BO.03.0802	3901896		Vaca Diez	2	2943	29
 Provincia Tomina		BO.01.0104	3902667		Tomina	2	2942	29
 Provincia Tomás Frías		BO.07.0501	3902683		Tomás Frías	2	2937	29
-Tomás Barrón		BO.05.0411	3902684		Provincia Tomás Barrón|Tomas Barron|Tomas Barrón Province	2	2939	29
+Tomás Barrón		BO.05.0411	3902684		Provincia Tomás Barrón|Tomas Barrón Province	2	2939	29
 Provincia Tapacarí		BO.02.0311	3903462		Tapacarí|Tapacarí Province	2	2941	29
 Provincia Sud Yungas		BO.04.0211	3903975		Sud Yungas|Sud Yungas Province	2	2940	29
 Sur Lípez		BO.07.0510	3903976		Provincia Sur Lípez	2	2937	29
 Sur Cinti		BO.01.0109	3903977		Provincia Sur Cinti|Sud Cinti	2	2942	29
 Sur Chichas		BO.07.0508	3903978		Provincia Sur Chichas	2	2937	29
-Saucarí		BO.05.0410	3904553		Provincia Saucarí|Saucari	2	2939	29
+Saucarí		BO.05.0410	3904553		Provincia Saucarí	2	2939	29
 Provincia Sara		BO.08.0706	3904588		Sara	2	2936	29
 Provincia Obispo Santistevan		BO.08.3904660	3904660		Obispo Santiestevan|Obispo Santistevan|Obispo Santistéban|Provincia Obispo Santistéban	2	2936	29
 Provincia San Pedro de Totora		BO.05.0413	3905117		San Pedro de Totora|San Pedro de Totora Province	2	2939	29
@@ -2996,7 +2996,7 @@ Provincia Luis Calvo		BO.01.0110	3911048		Luis Calvo	2	2942	29
 Provincia Los Andes		BO.04.0212	3911185		Los Andes|Los Andes Province	2	2940	29
 Provincia Loayza		BO.04.0209	3911271		Loayza|Loayza Province	2	2940	29
 Sud Carangas Province		BO.05.0405	3911447		Sur Carangas	2	2939	29
-José María Linares		BO.07.3911502	3911502		José Maria Linares|Provincia José María Linares	2	2937	29
+José María Linares		BO.07.3911502	3911502		Provincia José María Linares	2	2937	29
 Provincia Larecaja		BO.04.0206	3911853		Larecaja|Larecaja Province	2	2940	29
 Provincia Ladislao Cabrera		BO.05.0408	3912280		Ladislao Cabrera|Ladislao Cabrera Province	2	2939	29
 Provincia Abel Iturralde		BO.04.0215	3913873		Abel Iturralde|Abel Iturralde Province	2	2940	29
@@ -3040,12 +3040,12 @@ Provincia Aroma		BO.04.0213	3923690		Aroma|Aroma Province	2	2940	29
 Provincia Arce		BO.09.0602	3923749		Aniceto Arce|Aniceto Arce Province	2	2935	29
 Provincia Arani		BO.02.0305	3923769		Arani|Arani Province	2	2941	29
 Provincia Andrés Ibáñez		BO.08.0701	3923972		Andrés Ibañez|Andrés Ibáñez Province	2	2936	29
-Alonso de Ibáñez		BO.07.0507	3924205		Alonso de Ibañez|Provincia Alonso de Ibáñez	2	2937	29
+Alonso de Ibáñez		BO.07.0507	3924205		Provincia Alonso de Ibáñez	2	2937	29
 Provincia Abuná		BO.06.0904	3924631		Abuna	2	2938	29
-Bolivar		BO.02.7576102	7576102		Bolívar|Bolívar Province	2	2941	29
+Bolivar		BO.02.7576102	7576102		Bolívar Province	2	2941	29
 Tiraque Province		BO.02.8335405	8335405		Tiraque	2	2941	29
 Nor Carangas Province		BO.05.10400355	10400355		Nor Carangas	2	2939	29
-Sebastian Pagador Province		BO.05.10400859	10400859		Sebastián Pagador|Sebastián Pagador Province	2	2939	29
+Sebastian Pagador Province		BO.05.10400859	10400859		Sebastián Pagador	2	2939	29
 Caranavi		BO.04.11184247	11184247		Caranavi Province	2	2940	29
 José Manuel Pando		BO.04.11184248	11184248		José Manuel Pando Province	2	2940	29
 Puerto de Mejillones		BO.05.11184249	11184249		Mejillones|Puerto de Mejillones Province	2	2939	29
@@ -3320,7 +3320,7 @@ Touros		BR.22.2414407	6319044			2	3059	31
 Alhandra		BR.17.2500601	6319045			2	3062	31
 Aparecida		BR.17.2500775	6319046			2	3062	31
 Boqueirão		BR.17.2502508	6319047			2	3062	31
-Cachoeira dos Índios		BR.17.2503308	6319048		Cachoeira dos Indios	2	3062	31
+Cachoeira dos Índios		BR.17.2503308	6319048			2	3062	31
 Cajazeiras		BR.17.2503704	6319049			2	3062	31
 Conceição		BR.17.2504405	6319050			2	3062	31
 Cruz do Espírito Santo		BR.17.2504900	6319051			2	3062	31
@@ -3988,7 +3988,7 @@ Igarapé do Meio		BR.13.2105153	6319713			2	3064	31
 Igarapé Grande		BR.13.2105203	6319714			2	3064	31
 Imperatriz		BR.13.2105302	6319715			2	3064	31
 Itaipava do Grajaú		BR.13.2105351	6319716			2	3064	31
-Itapecuru Mirim		BR.13.2105401	6319717		Itapecuru-Mirim	2	3064	31
+Itapecuru Mirim		BR.13.2105401	6319717			2	3064	31
 Itinga do Maranhão		BR.13.2105427	6319718			2	3064	31
 Jatobá		BR.13.2105450	6319719			2	3064	31
 Jenipapo dos Vieiras		BR.13.2105476	6319720			2	3064	31
@@ -4468,7 +4468,7 @@ Paraná		BR.22.2408607	6320193			2	3059	31
 Parazinho		BR.22.2408805	6320194			2	3059	31
 Parelhas		BR.22.2408904	6320195			2	3059	31
 Rio do Fogo		BR.22.2408953	6320196			2	3059	31
-Passa e Fica		BR.22.2409100	6320197		Passa-e-Fica	2	3059	31
+Passa e Fica		BR.22.2409100	6320197			2	3059	31
 Passagem		BR.22.2409209	6320198			2	3059	31
 Santa Maria		BR.22.2409332	6320199			2	3059	31
 Pau dos Ferros		BR.22.2409407	6320200			2	3059	31
@@ -5444,7 +5444,7 @@ Bicas		BR.15.3106903	6321170			2	3074	31
 Biquinhas		BR.15.3107000	6321171			2	3074	31
 Boa Esperança		BR.15.3107109	6321172			2	3074	31
 Bocaina de Minas		BR.15.3107208	6321173			2	3074	31
-Bocaiúva		BR.15.3107307	6321174		Bocaiuva	2	3074	31
+Bocaiúva		BR.15.3107307	6321174			2	3074	31
 Bom Despacho		BR.15.3107406	6321175			2	3074	31
 Bom Jardim de Minas		BR.15.3107505	6321176			2	3074	31
 Bom Jesus da Penha		BR.15.3107604	6321177			2	3074	31
@@ -6410,7 +6410,7 @@ Bernardino de Campos		BR.27.3506300	6322136			2	3069	31
 Bertioga		BR.27.3506359	6322137			2	3069	31
 Bilac		BR.27.3506409	6322138			2	3069	31
 Birigui		BR.27.3506508	6322139			2	3069	31
-Biritiba-Mirim		BR.27.3506607	6322140		Biritiba Mirim	2	3069	31
+Biritiba-Mirim		BR.27.3506607	6322140			2	3069	31
 Boa Esperança do Sul		BR.27.3506706	6322141			2	3069	31
 Bocaina		BR.27.3506805	6322142			2	3069	31
 Bofete		BR.27.3506904	6322143			2	3069	31
@@ -8081,7 +8081,7 @@ Campinápolis		BR.14.5102603	6323807			2	3076	31
 Campo Novo do Parecis		BR.14.5102637	6323808			2	3076	31
 Campo Verde		BR.14.5102678	6323809			2	3076	31
 Campos de Júlio		BR.14.5102686	6323810			2	3076	31
-CanaBrava do Norte		BR.14.5102694	6323811		Canabrava do Norte	2	3076	31
+CanaBrava do Norte		BR.14.5102694	6323811			2	3076	31
 Canarana		BR.14.5102702	6323812			2	3076	31
 Castanheira		BR.14.5102850	6323813			2	3076	31
 Chapada dos Guimarães		BR.14.5103007	6323814			2	3076	31
@@ -8782,7 +8782,7 @@ Homieĺskaja voblasć	BY-HO	BY.02	628281	Oblast	Gomelskaya Oblast|Homyelskaya Vo
 Bresckaja voblasć	BY-BR	BY.01	629631	Oblast	Brest|Brest Oblast|Brestskaya Oblast’	1		36
 Zhlobinskiy Rayon		BY.02.618803	618803		Zhlobin District	2	8781	36
 Zhitkovichskiy Rayon		BY.02.618814	618814		Zhytkavichy District	2	8781	36
-Žabinkaŭski rajon		BY.01.618911	618911		Zhabinka District|Žabinkaŭski Rajon	2	8782	36
+Žabinkaŭski rajon		BY.01.618911	618911		Zhabinka District	2	8782	36
 Zel’venskiy Rayon		BY.03.618930	618930		Zel’va District	2	8780	36
 Zavodski Rayon		BY.04.619008	619008		Zavodski District	2	8779	36
 Yel’skiy Rayon		BY.02.619597	619597		Yelsk District	2	8781	36
@@ -8872,7 +8872,7 @@ Khotimskiy Rayon		BY.06.627380	627380		Khotsimsk District	2	8777	36
 Kamianiecki rajon		BY.01.627709	627709		Kamenets|Kamenets District	2	8782	36
 Kalinkovichskiy Rayon		BY.02.627748	627748		Kalinkavichy District	2	8781	36
 Iwyewski Rayon		BY.03.627794	627794		Iv’yevskiy Rayon|Iwye District	2	8780	36
-Ivacevicki rajon		BY.01.627799	627799		Ivacevicki Rajon|Ivatsevichy District	2	8782	36
+Ivacevicki rajon		BY.01.627799	627799		Ivatsevichy District	2	8782	36
 Ivanovskiy Rayon		BY.01.627807	627807		Ivanava|Ivanava District	2	8782	36
 Grodnenskiy Rayon		BY.03.628034	628034		Grodno district|Hrodna district|Hrodzienski raion|Hrodzienski rajon|Hrodzyenski Rayon	2	8780	36
 Gorodokskiy Rayon		BY.07.628152	628152		Haradok District	2	8776	36
@@ -8896,7 +8896,7 @@ Chashnikskiy Rayon		BY.07.629398	629398		Chashniki District	2	8776	36
 Bykhovskiy Rayon		BY.06.629443	629443		Bykhaw District	2	8777	36
 Buda-Koshelevskiy Rayon		BY.02.629562	629562		Buda-Kashalyova District	2	8781	36
 Brestskiy Rayon		BY.01.629630	629630		Brest|Brest District	2	8782	36
-Braslaŭski rajon		BY.07.629639	629639		Braslaw District|Braslaŭski Rajon	2	8776	36
+Braslaŭski rajon		BY.07.629639	629639		Braslaw District	2	8776	36
 Braginskiy Rayon		BY.02.629645	629645		Brahin District|Brahinski Rayon	2	8781	36
 Borisovskiy Rayon		BY.05.629799	629799		Barysaw District	2	8778	36
 Bobruyskiy Rayon		BY.06.630046	630046		Babruysk District	2	8777	36
@@ -11354,7 +11354,7 @@ Meme Division		CM.09.2227197	2227197		Meme	2	11329	47
 Département du Mayo Danaï		CM.12.2228217	2228217		Mayo-Danay	2	11335	47
 Manyu Division		CM.09.2228442	2228442		Manyu	2	11329	47
 Département du Lom-et-Djérem		CM.04.2229251	2229251		Lom-Et-Djerem	2	11336	47
-Logone-et-Chari		CM.12.2229291	2229291		Logone-Et-Chari	2	11335	47
+Logone-et-Chari		CM.12.2229291	2229291			2	11335	47
 Département de la Lékié		CM.11.2229546	2229546		Lekie	2	11337	47
 Département de l'Océan		CM.14.2229760	2229760		Ocean	2	11330	47
 Département de la Kadeï		CM.04.2230606	2230606		Kadei	2	11336	47
@@ -11363,7 +11363,7 @@ Haut-Nkam		CM.08.2230816	2230816			2	11331	47
 Haute-Sanaga		CM.11.2230817	2230817			2	11337	47
 Fako Division		CM.09.2231710	2231710		Fako	2	11329	47
 Donga and Mantung Division		CM.07.2232640	2232640		Donga-Mantung	2	11332	47
-Dja-et-Lobo		CM.14.2232969	2232969		Dja-Et-Lobo	2	11330	47
+Dja-et-Lobo		CM.14.2232969	2232969			2	11330	47
 Département du Diamaré		CM.12.2233122	2233122		Diamare	2	11335	47
 Bui Division		CM.07.2233408	2233408		Bui	2	11332	47
 Boumba-Ngoko		CM.04.2233500	2233500		Boumba-Et-Ngoko	2	11336	47
@@ -11373,7 +11373,7 @@ Djerem		CM.10.7670946	7670946			2	11338	47
 Faro-et-Deo		CM.10.7670947	7670947			2	11338	47
 Vina		CM.10.7670948	7670948			2	11338	47
 Mbam-et-Kim		CM.11.7730793	7730793			2	11337	47
-Méfou-et-Afamba		CM.11.7731690	7731690		Mefou-et-Afamba	2	11337	47
+Méfou-et-Afamba		CM.11.7731690	7731690			2	11337	47
 Departement du Mayo-Kani		CM.12.7932539	7932539		Mayo-Kani	2	11335	47
 Mbere Department		CM.10.8299279	8299279		Mbere	2	11338	47
 Koupé-Manengouba		CM.09.8505106	8505106		Kupe-Manenguba	2	11329	47
@@ -11382,7 +11382,7 @@ Mayo-Rey		CM.13.8740150	8740150			2	11333	47
 Mayo-Louti		CM.13.8740152	8740152			2	11333	47
 Mefou-et-Akono		CM.11.9165815	9165815			2	11337	47
 Mayo-Banyo		CM.10.9224946	9224946			2	11338	47
-Mbam-Et-Inoubou		CM.11.9224948	9224948		Mbam-et-Inoubou	2	11337	47
+Mbam-Et-Inoubou		CM.11.9224948	9224948			2	11337	47
 Mayo-Sava		CM.12.9224949	9224949			2	11335	47
 Mayo-Tsanaga		CM.12.9224951	9224951			2	11335	47
 Boyo		CM.07.9224959	9224959			2	11332	47
@@ -11392,8 +11392,8 @@ Noun		CM.08.9224965	9224965			2	11331	47
 Lebialem		CM.09.9224975	9224975			2	11329	47
 Faro Department		CM.13.9228189	9228189		Faro	2	11333	47
 Mvila		CM.14.9230015	9230015			2	11330	47
-Vallée-du-Ntem		CM.14.9239012	9239012		Vallee-du-Ntem	2	11330	47
-Ngo-Ketunjia		CM.07.10289311	10289311		Ngo-ketunjia	2	11332	47
+Vallée-du-Ntem		CM.14.9239012	9239012			2	11330	47
+Ngo-Ketunjia		CM.07.10289311	10289311			2	11332	47
 Xizang Zizhiqu	CN-XZ	CN.14	1279685	Autonomous region	Poi|Poi Ranggyong Jong|Tibet|Tibet Autonomous Region|Xizang|Xizang Autonomous Region	1		48
 Qinghai Sheng	CN-QH	CN.06	1280239	Province	Qinghai|Qinghai Province	1		48
 Xinjiang Uygur Zizhiqu	CN-XJ	CN.13	1529047	Autonomous region	Shinjang|Shinjang Uyghur Aptonom Rayoni|Xinjiang|Xinjiang Uyghur Autonomous Region|Xinjiang Uyghur Zizhiqu	1		48
@@ -11496,7 +11496,7 @@ Yan’an Shi		CN.26.6106	1787763		Yan'an|Yan'an City	2	11407	48
 Ya’an Shi		CN.32.5118	1787815		Ya'an	2	11403	48
 Xuzhou		CN.04.3203	1787823			2	11410	48
 Xuchang Shi		CN.09.4110	1788045			2	11413	48
-Xuancheng Shi		CN.01.3418	1788080		xuancheng shi	2	11422	48
+Xuancheng Shi		CN.01.3418	1788080			2	11422	48
 Xishuangbanna Daizu Zizhizhou		CN.29.5328	1788323			2	11401	48
 Xinyang Shi		CN.09.4115	1788527			2	11413	48
 Xinxiang Shi		CN.09.4107	1788571			2	11413	48
@@ -11515,11 +11515,11 @@ Wuxi Shi		CN.04.3202	1790902			2	11410	48
 Wuwei Shi		CN.15.6206	1790930			2	11419	48
 Wuhu Shi		CN.01.3402	1791227			2	11422	48
 Wuhan Shi		CN.12.4201	1791243			2	11412	48
-Wuhai Shi		CN.20.1503	1791248		wuhai shi	2	11423	48
+Wuhai Shi		CN.20.1503	1791248			2	11423	48
 Wenzhou Shi		CN.02.3303	1791385			2	11400	48
 Wenshan Zhuangzu Miaozu Zizhizhou		CN.29.5326	1791424		Wenshan Zhuang and Miao Autonomous Prefecture	2	11401	48
 Wenchang Shi		CN.31.1791540	1791540			2	11415	48
-Weinan Shi		CN.26.6105	1791635		weinan shi	2	11407	48
+Weinan Shi		CN.26.6105	1791635			2	11407	48
 Weihai Shi		CN.25.3710	1791671			2	11406	48
 Weifang Shi		CN.25.3707	1791680			2	11406	48
 Wanning Shi		CN.31.1791778	1791778			2	11415	48
@@ -11546,19 +11546,19 @@ Shaoxing Shi		CN.02.3306	1795854			2	11400	48
 Shaoguan Shi		CN.30.4402	1795873			2	11418	48
 Shantou Shi		CN.30.4405	1795932			2	11418	48
 Shangrao Shi		CN.03.3611	1796129			2	11409	48
-Shangqiu Shi		CN.09.4114	1796132		Shangqiu shi	2	11413	48
+Shangqiu Shi		CN.09.4114	1796132			2	11413	48
 Shangluo Shi		CN.26.6110	1796165			2	11407	48
 Sanya Shi		CN.31.4602	1796539			2	11415	48
 Sanming Shi		CN.07.3504	1796662			2	11420	48
 Sanmenxia Shi		CN.09.4112	1796667			2	11413	48
 Rizhao Shi		CN.25.3711	1797131			2	11406	48
-Quzhou Shi		CN.02.3308	1797262		quzhou shi	2	11400	48
+Quzhou Shi		CN.02.3308	1797262			2	11400	48
 Qujing Shi		CN.29.5303	1797315			2	11401	48
 Quanzhou Shi		CN.07.3505	1797350			2	11420	48
 Qionghai County		CN.31.1797544	1797544			2	11415	48
 Qinzhou Shi		CN.16.4507	1797550			2	11417	48
 Qinhuangdao Shi		CN.10.1303	1797593			2	11414	48
-Qingyuan Shi		CN.30.4418	1797626		qingyuan shi	2	11418	48
+Qingyuan Shi		CN.30.4418	1797626			2	11418	48
 Qingyang Shi		CN.15.6210	1797652		Qingyang	2	11419	48
 Qingdao Shi		CN.25.3702	1797926			2	11406	48
 Qianxinan Buyei and Miao Autonomous Prefecture		CN.18.5223	1798226			2	11416	48
@@ -11586,7 +11586,7 @@ Ma’anshan Shi		CN.01.3405	1801618		Ma'anshan City	2	11422	48
 Luzhou Shi		CN.32.5105	1801637			2	11403	48
 Lupanshui Shi		CN.18.5202	1801764		Liupanshui|Liupanshui City	2	11416	48
 Luoyang Shi		CN.09.4103	1801785			2	11413	48
-Luohe Shi		CN.09.4111	1801930		luohe shi	2	11413	48
+Luohe Shi		CN.09.4111	1801930			2	11413	48
 Lüliang		CN.24.1411	1802029			2	11404	48
 Lu’an Shi		CN.01.3415	1802199		Lu'an City	2	11422	48
 Loudi Shi		CN.11.4313	1802234		Loudi District	2	11411	48
@@ -11641,7 +11641,7 @@ Hengshui Shi		CN.10.1311	1808391			2	11414	48
 Hefei Shi		CN.01.3401	1808721			2	11422	48
 Hechi Shi		CN.16.4512	1808757			2	11417	48
 Hebi Shi		CN.09.4106	1808765			2	11413	48
-Hanzhong Shi		CN.26.6107	1808856		hanzhong shi	2	11407	48
+Hanzhong Shi		CN.26.6107	1808856			2	11407	48
 Hangzhou Shi		CN.02.3301	1808925			2	11400	48
 Handan Shi		CN.10.1304	1808961			2	11414	48
 Hainan Zangzu Zizhizhou		CN.06.6325	1809051		Hainan Tibetan Autonomous Prefecture	2	11398	48
@@ -11712,7 +11712,7 @@ Qitaihe Shi		CN.08.2309	2035260			2	11426	48
 Qiqihar Shi		CN.08.2302	2035264		Qiqihar	2	11426	48
 Panjin Shi		CN.19.2111	2035516			2	11424	48
 Mudanjiang Shi		CN.08.2310	2035713			2	11426	48
-Liaoyuan Shi		CN.05.2204	2036107		liaoyuan shi	2	11425	48
+Liaoyuan Shi		CN.05.2204	2036107			2	11425	48
 Liaoyang Shi		CN.19.2110	2036112			2	11424	48
 Jixi Shi		CN.08.2303	2036380			2	11426	48
 Tongliao Shi		CN.20.1505	2036421			2	11423	48
@@ -11720,7 +11720,7 @@ Jinzhou Shi		CN.19.2107	2036425			2	11424	48
 Huludao Shi		CN.19.2114	2036430			2	11424	48
 Jilin Shi		CN.05.2202	2036499		Jilin City	2	11425	48
 Jiamusi Shi		CN.08.2308	2036580			2	11426	48
-Baishan Shi		CN.05.2206	2036646		baishan shi	2	11425	48
+Baishan Shi		CN.05.2206	2036646			2	11425	48
 Hulunbuir Region		CN.20.1507	2036660		Hulunbuir|Kölön Buyir qota	2	11423	48
 Hohhot Shi		CN.20.1501	2036891		Hohhot	2	11423	48
 Hinggan Meng		CN.20.1522	2036898			2	11423	48
@@ -11751,7 +11751,7 @@ Deyang Shi		CN.32.5106	6642946			2	11403	48
 Zhongwei Shi		CN.21.6405	6643239		Zhongwei	2	11408	48
 Guangyuan Shi		CN.32.5108	6643372			2	11403	48
 Guang’an Shi		CN.32.5116	6643373			2	11403	48
-Suining Shi		CN.32.5109	6643374		suining|suining shi	2	11403	48
+Suining Shi		CN.32.5109	6643374		suining	2	11403	48
 Bazhong Shi		CN.32.5119	6643375		Bazhong	2	11403	48
 Guigang Shi		CN.16.4508	7909203			2	11417	48
 Chongzuo Shi		CN.16.4514	7909220			2	11417	48
@@ -13651,7 +13651,7 @@ Vavatsiniá		CY.03.4319	10346940			2	13277	55
 Lemesós		CY.05.5000	10346941		Limassol Municipality	2	13276	55
 Mésa Geitoniá		CY.05.5011	10346942			2	13276	55
 Ágios Athanásios		CY.05.5012	10346943			2	13276	55
-Germasógeia		CY.05.5013	10346944		Germasogeia|Yermasoyia|Yermasoyia Municipality	2	13276	55
+Germasógeia		CY.05.5013	10346944		Yermasoyia|Yermasoyia Municipality	2	13276	55
 Páno Polemídia		CY.05.5020	10346945			2	13276	55
 Ýpsonas		CY.05.5021	10346946			2	13276	55
 Káto Polemídia		CY.05.5022	10346947			2	13276	55
@@ -13749,7 +13749,7 @@ Agrídia		CY.05.5367	10347038			2	13276	55
 Chandriá		CY.05.5368	10347039			2	13276	55
 Kyperoúnta		CY.05.5369	10347040			2	13276	55
 Páfos		CY.06.6000	10347041			2	13274	55
-Geroskípou Municipality		CY.06.6010	10347042		Geroskipou Municipality|Geroskípou	2	13274	55
+Geroskípou Municipality		CY.06.6010	10347042		Geroskípou	2	13274	55
 Koniá		CY.06.6011	10347043			2	13274	55
 Agía Marinoúda		CY.06.6012	10347044			2	13274	55
 Achéleia		CY.06.6014	10347045			2	13274	55
@@ -14222,7 +14222,7 @@ Samaná Municipality		DO.20.2001	3493236		Santa Bárbara de Samaná	2	14172	61
 Salcedo		DO.19.1901	3493284			2	14173	61
 San Ignacio de Sabaneta		DO.26.2601	3493405			2	14166	61
 Sabana Grande de Boyá		DO.32.2903	3493483			2	14178	61
-Sabana de La Mar		DO.29.3002	3493569		Sabana de la Mar	2	14186	61
+Sabana de La Mar		DO.29.3002	3493569			2	14186	61
 Río San Juan		DO.14.1404	3493745			2	14181	61
 Restauración		DO.04.0504	3493888			2	14191	61
 Ramón Santana		DO.24.2303	3494065			2	14168	61
@@ -14336,7 +14336,7 @@ Villa Los Almácigos		DO.26.2602	11154567			2	14166	61
 Santo Domingo Este		DO.37.3201	11154568			2	14196	61
 Santo Domingo Oeste		DO.37.3202	11154569			2	14196	61
 Boca Chica		DO.37.3204	11154570			2	14196	61
-San Antonio De Guerra		DO.37.3205	11154571		San Antonio de Guerra	2	14196	61
+San Antonio De Guerra		DO.37.3205	11154571			2	14196	61
 Los Alcarrizos		DO.37.3206	11154572			2	14196	61
 Pedro Brand		DO.37.3207	11154573			2	14196	61
 Juan Santiago		DO.11.0706	11154574			2	14189	61
@@ -14636,7 +14636,7 @@ Djendel		DZ.35.12952554	12952554			2	14408	62
 Tabelbala		DZ.38.12952555	12952555			2	14403	62
 El Abadia		DZ.35.12952556	12952556			2	14408	62
 El Amra		DZ.35.12952557	12952557			2	14408	62
-Aïn Larbaâ		DZ.36.12952558	12952558		Ain Larbaa	2	14407	62
+Aïn Larbaâ		DZ.36.12952558	12952558			2	14407	62
 Ain Temouchent		DZ.36.12952559	12952559			2	14407	62
 Rouina		DZ.35.12952560	12952560			2	14408	62
 Bir Mourad Rais		DZ.01.12952561	12952561			2	14406	62
@@ -15721,11 +15721,11 @@ Harari		ET.50.11750838	11750838			2	15613	69
 Kolife Keraniyo		ET.44.11750840	11750840		Kolfē K’eranīyo|Kolfē K’eranīyo Kifle Ketema|Kolife Keraniyo Sub-City	2	15607	69
 Akaki Kaliti		ET.44.11750841	11750841		Akaki Kaliti Sub-City|Āk’ak’ī K’alītī|Āk’ak’ī K’alītī Kifle Ketema	2	15607	69
 Nifas Silk Lafto		ET.44.11750842	11750842		Nifas Silik Lafto|Nifas Silik Lafto Sub-City|Nifas Silk Lafto Kifle Ketema	2	15607	69
-Bole		ET.44.11750843	11750843		Bole Sub-City|Bolē|Bolē Kifle Ketema	2	15607	69
+Bole		ET.44.11750843	11750843		Bole Sub-City|Bolē Kifle Ketema	2	15607	69
 Yeka		ET.44.11750844	11750844		Yeka Kifle Ketema|Yeka Sub-City	2	15607	69
 Kirkos		ET.44.11750845	11750845		Kirkos Sub-City|K’īrk’os|K’īrk’os Kifle Ketema	2	15607	69
 Gullele		ET.44.11750846	11750846		Gulelē|Gulelē Kifle Ketema|Gullele Sub-City	2	15607	69
-Arada		ET.44.11750847	11750847		Arada Sub-City|Ārada|Ārada Kifle Ketema	2	15607	69
+Arada		ET.44.11750847	11750847		Arada Sub-City|Ārada Kifle Ketema	2	15607	69
 Addis Ketema		ET.44.11750848	11750848		Addis Ketema Sub-City|Ādīs Ketema|Ādīs Ketema Kifle Ketema	2	15607	69
 Lideta		ET.44.11750849	11750849		Lideta Kifle Ketema|Lideta Sub-City	2	15607	69
 West Arsi		ET.51.11750850	11750850			2	15614	69
@@ -16473,16 +16473,16 @@ Kalaki Batumi		GE.04.13216140	13216140		Batumis Munitsip’alit’et’i	2	16379
 Upper Abkhazia		GE.02.13254038	13254038		Azharis Munitsip’alit’et’i|Zemo Apkhazetis Munitsip’alit’et’i	2	16389	79
 Guyane		GF.GF	6690605			1		80
 Guyane		GF.GF.973	6690606			2	16474	80
-St Pierre du Bois		GG.6417213	6417213		Saint Pierre du Bois	1		81
+St Pierre du Bois		GG.6417213	6417213			1		81
 Torteval		GG.6417214	6417214			1		81
-Saint Saviour		GG.6417215	6417215		St. Saviour	1		81
+Saint Saviour		GG.6417215	6417215			1		81
 Forest		GG.6417223	6417223			1		81
-St Martin		GG.6417224	6417224		Saint Martin	1		81
-Saint Andrew		GG.6417226	6417226		St. Andrew	1		81
-St Peter Port		GG.6417228	6417228		Saint Peter Port	1		81
+St Martin		GG.6417224	6417224			1		81
+Saint Andrew		GG.6417226	6417226			1		81
+St Peter Port		GG.6417228	6417228			1		81
 Castel		GG.6417229	6417229			1		81
 Vale		GG.6417230	6417230			1		81
-St Sampson		GG.6417233	6417233		Saint Sampson	1		81
+St Sampson		GG.6417233	6417233			1		81
 Alderney		GG.8989934	8989934			1		81
 Western	GH-WP	GH.09	2294076	Region		1		82
 Volta	GH-TV	GH.08	2294234	Region		1		82
@@ -16925,7 +16925,7 @@ Nomós Rethýmnis		GR.ESYE43.44	254353		Rethymno	2	16909	89
 Nomós Prevézis		GR.ESYE21.19	254695			2	16911	89
 Nomós Messinías		GR.ESYE25.40	257149		Messenia	2	16914	89
 Nomós Magnisías		GR.ESYE14.24	258013		Magnesia	2	16916	89
-Lefkada		GR.ESYE22.26	258445		Lefkáda|Levkádha|Nomós Lefkádos	2	16912	89
+Lefkada		GR.ESYE22.26	258445		Levkádha|Nomós Lefkádos	2	16912	89
 Lesbos		GR.ESYE41.51	258465			2	16913	89
 Nomós Lasithíou		GR.ESYE43.46	258569		Lasithi	2	16909	89
 Nomós Larísis		GR.ESYE14.21	258575			2	16916	89
@@ -17071,7 +17071,7 @@ Municipio de San Rafael La Independencia		GT.08.1314	3589594		San Rafael La Inde
 Municipio de San Pedro Sacatepéquez		GT.17.1202	3589624		San Pedro Sacatepéquez	2	16978	91
 Municipio de San Pedro Sacatepéquez		GT.07.109	3589625		San Pedro Sacatepéquez	2	16988	91
 Municipio de San Pedro Pinula		GT.10.2102	3589628		San Pedro Pinula	2	16985	91
-Municipio de San Pedro Necta		GT.08.1306	3589631		Municipio de San Pedro Nectá|San Pedro Nectá	2	16987	91
+Municipio de San Pedro Necta		GT.08.1306	3589631		San Pedro Nectá	2	16987	91
 Municipio de San Pedro La Laguna		GT.19.718	3589636		San Pedro|San Pedro La Laguna	2	16976	91
 Municipio de San Pedro Jocopilas		GT.14.1409	3589639		San Pedro Jocopilas	2	16981	91
 Municipio de San Pedro Carchá		GT.01.1609	3589642		San Pedro Carchá	2	16994	91
@@ -17079,7 +17079,7 @@ Municipio de San Pedro Ayampuc		GT.07.107	3589645		San Pedro Ayampuc	2	16988	91
 Municipio de San Pablo La Laguna		GT.19.715	3589668			2	16976	91
 Municipio de San Pablo Jocopilas		GT.20.1009	3589670		Municipio de San Pablo Jocopila|San Pablo Jocopila|San Pablo Jocopilas	2	16975	91
 Municipio de San Pablo		GT.17.1219	3589673		San Pablo	2	16978	91
-Municipio de San Miguel Sigüilá		GT.13.908	3589705		Municipio de San Miguel Sigüila|San Miguel Sigüilá	2	16982	91
+Municipio de San Miguel Sigüilá		GT.13.908	3589705		San Miguel Sigüilá	2	16982	91
 Municipio de San Miguel Panán		GT.20.1011	3589708			2	16975	91
 Municipio de San Miguel Ixtahuacán		GT.17.1205	3589719		San Miguel Ixtahuacán	2	16978	91
 Municipio de San Miguel Dueñas		GT.16.313	3589726		San Miguel Dueñas	2	16979	91
@@ -17123,7 +17123,7 @@ Municipio de San Jacinto		GT.04.2010	3590124		San Jacinto	2	16991	91
 Municipio de San Gaspar Ixchil		GT.08.1329	3590187		San Gaspar Ixchil	2	16987	91
 Municipio de San Gabriel		GT.20.1012	3590192		San Gabriel	2	16975	91
 Municipio de San Francisco Zapotitlán		GT.20.1003	3590196		San Francisco Zapotitlán	2	16975	91
-Municipio de San Francisco La Unión		GT.13.918	3590210		Municipio de San Francisco la Unión|San Francisco la Unión	2	16982	91
+Municipio de San Francisco La Unión		GT.13.918	3590210		San Francisco la Unión	2	16982	91
 Municipio de San Francisco El Alto		GT.21.803	3590218		San Francisco El Alto	2	16974	91
 Municipio de San Francisco		GT.12.1706	3590233		San Francisco	2	16983	91
 Municipio de San Felipe		GT.15.1105	3590281			2	16980	91
@@ -17856,20 +17856,20 @@ Grad Biograd na Moru		HR.19.3204122	3204122		Biograd na Moru|Town of Biograd na 
 Grad Beli Manastir		HR.10.3204319	3204319		Beli Manastir|Town of Beli Manastir	2	17758	98
 Grad Dubrovnik		HR.03.7577034	7577034		Comune di Dubrovnik|Dubrovnik|Municipality of Dubrovnik|Raguxa|Town of Dubrovnik	2	17751	98
 Općina Dubrava		HR.20.8260123	8260123		Dubrava|Municipality of Dubrava	2	17767	98
-Donji grad		HR.21.8531816	8531816		Donji Grad	2	17768	98
-Gornji grad – Medveščak		HR.21.8531817	8531817		Gornji Grad – Medveščak	2	17768	98
+Donji grad		HR.21.8531816	8531816			2	17768	98
+Gornji grad – Medveščak		HR.21.8531817	8531817			2	17768	98
 Trnje		HR.21.8531820	8531820			2	17768	98
 Maksimir		HR.21.8531822	8531822		City District Maksimir|Gradska četvrt Maksimir	2	17768	98
-Peščenica – Žitnjak		HR.21.8531823	8531823		City District Peščenica – Žitnjak|Gradska četvrt Peščenica - Žitnjak|Peščenica – Žitnjak	2	17768	98
-Novi Zagreb – istok		HR.21.8531824	8531824		Novi Zagreb – east|Novi Zagreb – istok	2	17768	98
-Novi Zagreb - zapad		HR.21.8531825	8531825		Novi Zagreb – west|Novi Zagreb – zapad	2	17768	98
-Trešnjevka – sjever		HR.21.8531826	8531826		Trešnjevka – north|Trešnjevka – sjever	2	17768	98
-Trešnjevka – jug		HR.21.8531827	8531827		Trešnjevka – jug|Trešnjevka – south	2	17768	98
-Črnomerec		HR.21.8531828	8531828		City District Črnomerec|Crnomerec|Gradska četvrt Črnomerec	2	17768	98
+Peščenica – Žitnjak		HR.21.8531823	8531823		City District Peščenica – Žitnjak|Gradska četvrt Peščenica - Žitnjak	2	17768	98
+Novi Zagreb – istok		HR.21.8531824	8531824		Novi Zagreb – east	2	17768	98
+Novi Zagreb - zapad		HR.21.8531825	8531825		Novi Zagreb – west	2	17768	98
+Trešnjevka – sjever		HR.21.8531826	8531826		Trešnjevka – north	2	17768	98
+Trešnjevka – jug		HR.21.8531827	8531827		Trešnjevka – south	2	17768	98
+Črnomerec		HR.21.8531828	8531828		City District Črnomerec|Gradska četvrt Črnomerec	2	17768	98
 Gornja Dubrava		HR.21.8531829	8531829		Gradska četvrt Gornja Dubrava	2	17768	98
 Donja Dubrava		HR.21.8531830	8531830		Gradska četvrt Donja Dubrava	2	17768	98
 Stenjevec		HR.21.8531831	8531831		City District Stenjevec|Gradska četvrt Stenjevec	2	17768	98
-Podsused - Vrapče		HR.21.8531832	8531832		City District Podsused – Vrapče|Gradska četvrt Podsused - Vrapče|Podsused – Vrapče	2	17768	98
+Podsused - Vrapče		HR.21.8531832	8531832		City District Podsused – Vrapče|Gradska četvrt Podsused - Vrapče	2	17768	98
 Podsljeme		HR.21.8531833	8531833		City District Podsljeme|Gradska četvrt Podsljeme	2	17768	98
 Brezovica		HR.21.8531834	8531834		City District Brezovica|Gradska četvrt Brezovica	2	17768	98
 Rogoznica Općina		HR.13.9076750	9076750		Municipality of Rogoznica|Općina Rogoznica|Rogoznica	2	17761	98
@@ -18595,10 +18595,10 @@ Enyingi Járás		HU.08.079	9644770			2	18410	100
 Móri Járás		HU.08.082	9644771			2	18410	100
 Tamási Járás		HU.21.174	9644772			2	18404	100
 Dombóvári járás		HU.21.171	9644773		Dombóvár District	2	18404	100
-Bonyhádi járás		HU.21.170	9644774		Bonyhádi Járás	2	18404	100
-Tolnai járás		HU.21.175	9644775		Tolnai Járás	2	18404	100
-Szekszárdi járás		HU.21.173	9644776		Szekszárdi Járás	2	18404	100
-Paksi járás		HU.21.172	9644777		Paksi Járás	2	18404	100
+Bonyhádi járás		HU.21.170	9644774			2	18404	100
+Tolnai járás		HU.21.175	9644775			2	18404	100
+Szekszárdi járás		HU.21.173	9644776			2	18404	100
+Paksi járás		HU.21.172	9644777			2	18404	100
 Jászberényi Járás		HU.20.162	9644779			2	18395	100
 Jászapáti Járás		HU.20.161	9644780			2	18395	100
 Szolnoki Járás		HU.20.167	9644781			2	18395	100
@@ -18767,7 +18767,7 @@ Kabupaten Pasuruan		ID.08.3514	1632032			2	18652	101
 Kota Parepare		ID.38.7372	1632352		Kotamadya Parepare	2	18642	101
 Kabupaten Paniai		ID.PT.9410	1632622		Paniai Regency	2	18669	101
 Kota Pangkal Pinang		ID.35.1971	1632653			2	18662	101
-Kabupaten Pangkajene Dan Kepulauan		ID.38.7309	1632723		Kabupaten Pangkajene dan Kepulauan|Pangkajene Islands Regency	2	18642	101
+Kabupaten Pangkajene Dan Kepulauan		ID.38.7309	1632723		Pangkajene Islands Regency	2	18642	101
 Kabupaten Pandeglang		ID.33.3601	1632822			2	18660	101
 Kabupaten Situbondo		ID.08.3512	1632902			2	18652	101
 Kabupaten Pamekasan		ID.08.3528	1632977			2	18652	101
@@ -19318,15 +19318,15 @@ Wokha		IN.20.264	1252841			2	19287	105
 West Tripura		IN.26.289	1252864		West Tripura District	2	19279	105
 West Siang		IN.30.250	1252865		West Siang district	2	19305	105
 West Kameng		IN.30.246	1252869			2	19305	105
-West Godāvari		IN.02.546	1252873		West Godavari|West Godāvari District	2	19306	105
+West Godāvari		IN.02.546	1252873		West Godāvari District	2	19306	105
 Gyalshing		IN.29.242	1252877		Geyzing District|West Sikkim	2	19282	105
 Wardha		IN.16.504	1252944		Wardha district	2	19291	105
 Warangal Rural		IN.40.540	1252949			2	19280	105
 Visākhapatnam		IN.02.544	1253103		Visakhapatanam|Visakhapatnam District	2	19306	105
 Vidisha		IN.35.443	1253201			2	19292	105
 Varanasi		IN.36.197	1253407			2	19278	105
-Valsād		IN.09.491	1253469		Bulsar District|Valsad	2	19299	105
-Vaishāli		IN.34.220	1253533		Vaishali	2	19303	105
+Valsād		IN.09.491	1253469		Bulsar District	2	19299	105
+Vaishāli		IN.34.220	1253533			2	19303	105
 Vadodara		IN.09.486	1253574			2	19299	105
 Uttarkashi		IN.39.056	1253629		Uttar Kashi	2	19310	105
 Uttar Kannada		IN.19.563	1253630		Kanara North District|Uttar Kannad	2	19295	105
@@ -19335,31 +19335,31 @@ District Unnao		IN.36.156	1253748		Unao District|Unnao	2	19278	105
 Ujjain		IN.35.435	1253915		Ujjain district	2	19292	105
 Udhampur		IN.12.019	1253957		Udhampur district	2	19296	105
 Udaipur		IN.24.130	1253989		Udaipur District	2	19283	105
-Tumkur		IN.19.571	1254090		Tumakūru|Tumkur district|Tumkūr	2	19295	105
+Tumkur		IN.19.571	1254090		Tumakūru|Tumkur district	2	19295	105
 Tuensang District		IN.20.267	1254132		Tuensang	2	19287	105
 Tonk		IN.24.120	1254242		Tonk District	2	19283	105
 Tiruchirappalli		IN.25.614	1254389		Trichinopoly District	2	19281	105
-Tirāp		IN.30.254	1254418		Tirap	2	19305	105
-Tīkamgarh		IN.35.424	1254535		Tikamgarh	2	19292	105
+Tirāp		IN.30.254	1254418			2	19305	105
+Tīkamgarh		IN.35.424	1254535			2	19292	105
 The Dāngs		IN.09.489	1254616		Dang	2	19299	105
 Thanjavur		IN.25.620	1254650			2	19281	105
 Thane		IN.16.517	1254662		Thane District	2	19291	105
 Tehri Garhwal		IN.39.059	1254807		Tehri Garhwal District	2	19310	105
 Surguja		IN.37.401	1255347		Surguja district	2	19308	105
 Surendranagar		IN.09.475	1255350		Surendranagar District	2	19299	105
-Sūrat		IN.09.492	1255365		Surat|Surat District	2	19299	105
+Sūrat		IN.09.492	1255365		Surat District	2	19299	105
 Sundargarh		IN.21.374	1255438		Sundergarh district	2	19286	105
 District Sultanpur		IN.36.179	1255497		Sultanpur|Sultānpur District	2	19278	105
-Srīnagar		IN.12.010	1255639		Srinagar|Srīnagar District	2	19296	105
-Srīkākulam		IN.02.542	1255649		Srikakulam|Srikakulam district	2	19306	105
+Srīnagar		IN.12.010	1255639		Srīnagar District	2	19296	105
+Srīkākulam		IN.02.542	1255649		Srikakulam district	2	19306	105
 South Tripura		IN.26.290	1255671		South Tripura District	2	19279	105
 Namchi		IN.29.243	1255681		Namchi District|South District	2	19282	105
-Sonīpat		IN.10.076	1255745		Sonipat|Sonipat District	2	19298	105
+Sonīpat		IN.10.076	1255745		Sonipat District	2	19298	105
 Solapur		IN.16.526	1255847		Sholāpur District|Solapur district	2	19291	105
 Solan		IN.11.031	1255851			2	19297	105
-Siwān		IN.34.218	1255930		Siwan	2	19303	105
+Siwān		IN.34.218	1255930			2	19303	105
 Sitapur		IN.36.154	1255971		Sītāpur District	2	19278	105
-Sītāmarhi		IN.34.206	1255984		Sitamarhi|Sītāmarhi District	2	19303	105
+Sītāmarhi		IN.34.206	1255984		Sītāmarhi District	2	19303	105
 Sirsa		IN.10.079	1256056			2	19298	105
 Sirohi		IN.24.117	1256068		Sirohi District	2	19283	105
 Sirmaur		IN.11.032	1256073			2	19297	105
@@ -19368,37 +19368,37 @@ Shimla		IN.11.033	1256238		Shimla district	2	19297	105
 Sikar District		IN.24.111	1256321		Sikar	2	19283	105
 Sidhi		IN.35.462	1256370			2	19292	105
 Sibsāgar		IN.03.311	1256389		Sibsāgar District|Sivasagar	2	19304	105
-Shivpurī		IN.35.423	1256452		Shivpuri|Shivpuri District	2	19292	105
+Shivpurī		IN.35.423	1256452		Shivpuri District	2	19292	105
 Shimoga		IN.19.568	1256516		Shimoga District|Shivamogga	2	19295	105
-Shājāpur		IN.35.436	1256694		Shajapur|Shājāpur District	2	19292	105
+Shājāpur		IN.35.436	1256694		Shājāpur District	2	19292	105
 Shājahānpur		IN.36.152	1256729		Shahjahanpur|Shāhjahānpur District	2	19278	105
 Shahdol		IN.35.460	1256740			2	19292	105
-Seonī		IN.35.456	1256827		Seoni	2	19292	105
+Seonī		IN.35.456	1256827			2	19292	105
 Sehore		IN.35.445	1256914			2	19292	105
-Sawāi Mādhopur		IN.24.108	1256950		Sawai Madhopur	2	19283	105
+Sawāi Mādhopur		IN.24.108	1256950			2	19283	105
 Satna		IN.35.429	1257023			2	19292	105
-Sāran		IN.34.219	1257248		Saran|Sáran District	2	19303	105
+Sāran		IN.34.219	1257248		Sáran District	2	19303	105
 Sangrur		IN.23.053	1257403		Sangrur District	2	19284	105
 Sambalpur		IN.21.372	1257544		Sambalpur District	2	19286	105
-Samastīpur		IN.34.221	1257552		Samastipur	2	19303	105
+Samastīpur		IN.34.221	1257552			2	19303	105
 Salem		IN.25.608	1257630		Salem district	2	19281	105
 Saharsa		IN.34.214	1257805			2	19303	105
 District Saharanpur		IN.36.132	1257807		Saharanpur|Sahāranpur District	2	19278	105
-Sāgar		IN.35.427	1257852		Sagar	2	19292	105
+Sāgar		IN.35.427	1257852			2	19292	105
 Sabarkantha		IN.09.472	1257922		Sabar Kantha	2	19299	105
 Rupnagar		IN.23.051	1257953		Rupnagar District	2	19284	105
-Rohtās		IN.34.234	1258074		Rohtas|Rohtas District	2	19303	105
+Rohtās		IN.34.234	1258074		Rohtas District	2	19303	105
 Rohtak		IN.10.082	1258077		Rohtak District	2	19298	105
 Rewa		IN.35.430	1258183			2	19292	105
 Ratnagiri		IN.16.528	1258340		Ratnagiri District	2	19291	105
-Ratlām		IN.35.434	1258343		Ratlam	2	19292	105
-Rānchī		IN.38.364	1258527		Ranchi|Rānchī District	2	19309	105
+Ratlām		IN.35.434	1258343			2	19292	105
+Rānchī		IN.38.364	1258527		Rānchī District	2	19309	105
 District Rampur		IN.36.136	1258622		Rampur	2	19278	105
-Rāmanāthapuram		IN.25.626	1258741		Ramanathapuram|Ramanathapuram district|Ramnad District	2	19281	105
+Rāmanāthapuram		IN.25.626	1258741		Ramanathapuram district|Ramnad District	2	19281	105
 Rāj Nāndgaon		IN.37.408	1258832		Rajnandgaon|Rajnandgaon district	2	19308	105
-Rājkot		IN.09.476	1258849		Rajkot	2	19299	105
-Rājgarh		IN.35.442	1258878		Rajgarh	2	19292	105
-Rājauri		IN.12.006	1258892		Rajauri|Rajouri District	2	19296	105
+Rājkot		IN.09.476	1258849			2	19299	105
+Rājgarh		IN.35.442	1258878			2	19292	105
+Rājauri		IN.12.006	1258892		Rajouri District	2	19296	105
 Raisen		IN.35.446	1258953			2	19292	105
 Raipur		IN.37.410	1258984		Raipur district	2	19308	105
 Raigarh		IN.37.403	1259006		Raigarh district	2	19308	105
@@ -19416,25 +19416,25 @@ District Pilibhit		IN.36.151	1259687		Pilibhit|Pilibhit District	2	19278	105
 Phek		IN.20.266	1259785			2	19287	105
 Patna		IN.34.230	1260091		Patna district	2	19303	105
 Patiala		IN.23.048	1260108		Patiala district	2	19284	105
-Pashchim Champāran		IN.34.203	1260208		Pashchim Champaran	2	19303	105
+Pashchim Champāran		IN.34.203	1260208			2	19303	105
 Parbhani		IN.16.513	1260342		Parbhani District	2	19291	105
 Panna		IN.35.426	1260455			2	19292	105
-Pānch Mahāls		IN.09.484	1260571		Panch Mahals|Panch Mahals District	2	19299	105
+Pānch Mahāls		IN.09.484	1260571		Panch Mahals District	2	19299	105
 Pali District		IN.24.118	1260724		Pāli	2	19283	105
-Palāmu		IN.38.358	1260783		Palamu|Palāmau District	2	19309	105
+Palāmu		IN.38.358	1260783		Palāmau District	2	19309	105
 Osmanabad		IN.16.525	1261013		Osmanabad District	2	19291	105
 North Tripura		IN.26.292	1261174			2	19279	105
 Mangan		IN.29.241	1261190		North District	2	19282	105
 Dima Hasao District		IN.03.315	1261192		Dima Hasao	2	19304	105
 Nizamabad		IN.40.533	1261260		Nizamabad District	2	19280	105
-Nilgiris		IN.25.611	1261391		Nilgiris District|The Nilgiris	2	19281	105
+Nilgiris		IN.25.611	1261391		Nilgiris District	2	19281	105
 Nicobar		IN.01.638	1261448		Nicobars	2	19307	105
 Nellore		IN.02.550	1261530		Nellore District|Spsr Nellore	2	19306	105
-Nawāda		IN.34.237	1261632		Nawada|Nawada District	2	19303	105
+Nawāda		IN.34.237	1261632		Nawada District	2	19303	105
 Narsimhapur		IN.35.452	1261755		Narsinghpur	2	19292	105
 Nanded		IN.16.511	1261978		Nanded District	2	19291	105
 Nalgonda District		IN.40.539	1262068		Nalgonda	2	19280	105
-Nālanda		IN.34.229	1262081		Nalanda	2	19303	105
+Nālanda		IN.34.229	1262081			2	19303	105
 Nainital		IN.39.066	1262118			2	19310	105
 Nagaur District		IN.24.112	1262217		Nagaur	2	19283	105
 Nadia		IN.28.336	1262293			2	19277	105
@@ -19443,13 +19443,13 @@ Muzaffarpur		IN.34.216	1262331		Muzaffarpur district	2	19303	105
 Muzaffarnagar		IN.36.133	1262333		Muzaffarnagar district	2	19278	105
 Munger		IN.34.226	1262483		Munger District	2	19303	105
 Morena		IN.35.419	1262772			2	19292	105
-Morādābād		IN.36.135	1262802		Moradabad	2	19278	105
+Morādābād		IN.36.135	1262802			2	19278	105
 Mon		IN.20.261	1262825			2	19287	105
-Mokokchūng		IN.20.262	1262844		Mokokchung|Mokokchung District	2	19287	105
-Mirzāpur		IN.36.199	1262997		Mirzapur	2	19278	105
+Mokokchūng		IN.20.262	1262844		Mokokchung District	2	19287	105
+Mirzāpur		IN.36.199	1262997			2	19278	105
 Meerut		IN.36.138	1263215		District Meerut	2	19278	105
 Medak		IN.40.535	1263231		Medak District	2	19280	105
-Mayūrbhanj		IN.21.376	1263245		Mayurbhanj|Mayurbhanj district	2	19286	105
+Mayūrbhanj		IN.21.376	1263245		Mayurbhanj district	2	19286	105
 Mathura		IN.36.145	1263366		District Mathura|Mathura district	2	19278	105
 Mandya		IN.19.573	1263815			2	19295	105
 Mandsaur		IN.35.433	1263835		Mandasor District|Mandsaur district	2	19292	105
@@ -19458,19 +19458,19 @@ Mandi		IN.11.027	1263863			2	19297	105
 Malda District		IN.28.332	1264122		Malda|Maldah	2	19277	105
 Malappuram		IN.13.592	1264155			2	19294	105
 Mainpuri		IN.36.148	1264293		District Mainpuri|Mainpuri district	2	19278	105
-Mahesāna		IN.09.471	1264390		Mahesana|Mehsāna District	2	19299	105
+Mahesāna		IN.09.471	1264390		Mehsāna District	2	19299	105
 Mahendragarh		IN.10.084	1264396			2	19298	105
 Mahe		IN.22.636	1264404		Mahe District	2	19285	105
 Mahbūbnagar		IN.40.538	1264408		Mahabubnagar|Mahbūbnagar District	2	19280	105
 Madurai		IN.25.623	1264522			2	19281	105
 Madhubani		IN.34.207	1264556			2	19303	105
-Ludhiāna		IN.23.041	1264729		Ludhiana|Ludhiana district	2	19284	105
+Ludhiāna		IN.23.041	1264729		Ludhiana district	2	19284	105
 Lucknow District		IN.36.157	1264734		Lucknow	2	19278	105
 Lower Subansiri		IN.30.255	1264739			2	19305	105
 Lohit District		IN.30.259	1264818		Lohit	2	19305	105
 Lalitpur		IN.36.167	1265158		District Lalitpur	2	19278	105
 Lakhimpur		IN.03.307	1265243		Lakhimpur district	2	19304	105
-Lāhul and Spiti		IN.11.025	1265292		Lahaul and Spiti District|Lahul and Spiti	2	19297	105
+Lāhul and Spiti		IN.11.025	1265292		Lahaul and Spiti District	2	19297	105
 Kurukshetra		IN.10.072	1265468			2	19298	105
 Kurnool		IN.02.552	1265492		Kurnool district	2	19306	105
 Kulu		IN.11.026	1265710		Kullu	2	19297	105
@@ -19481,39 +19481,39 @@ Kota		IN.24.127	1266054		Kota District	2	19283	105
 Koraput		IN.21.398	1266129		Koraput District	2	19286	105
 Kolhapur		IN.16.530	1266287			2	19291	105
 Kolar		IN.19.581	1266306		Kolar district	2	19295	105
-Kohīma		IN.20.270	1266367		Kohima	2	19287	105
+Kohīma		IN.20.270	1266367			2	19287	105
 Kodagu		IN.19.576	1266426		Coorg|Kodagu District	2	19295	105
 Cooch Behar District		IN.28.329	1266437		Cooch Behar|Coochbehar	2	19277	105
 Kinnaur		IN.11.034	1266519		Kinnaur district	2	19297	105
 Kheri		IN.36.153	1266768		Lakhimpur Kheri	2	19278	105
 Kheda		IN.09.483	1266810		Kheda district	2	19299	105
-East Khāsi Hills		IN.18.298	1266857		East Khasi Hills|East Khasi Hills District	2	19289	105
+East Khāsi Hills		IN.18.298	1266857		East Khasi Hills District	2	19289	105
 Khammam		IN.40.541	1267077		Khammam district	2	19280	105
 Kendujhar		IN.21.375	1267268			2	19286	105
 Kathua		IN.12.007	1267487		Kathua District	2	19296	105
-Karnāl		IN.10.074	1267709		Karnal|Karnāl District	2	19298	105
-Karīmnagar		IN.40.534	1267756		Karimnagar|Karīmngar District	2	19280	105
-Kārbi Ānglong		IN.03.314	1267812		Karbi Anglong|Karbi Anglong district	2	19304	105
-Kāraikāl		IN.22.637	1267888		Karaikal	2	19285	105
+Karnāl		IN.10.074	1267709		Karnāl District	2	19298	105
+Karīmnagar		IN.40.534	1267756		Karīmngar District	2	19280	105
+Kārbi Ānglong		IN.03.314	1267812		Karbi Anglong district	2	19304	105
+Kāraikāl		IN.22.637	1267888			2	19285	105
 Kapurthala		IN.23.036	1267912		Kapurthala district	2	19284	105
 Kānpur		IN.36.164	1267997		Kanpur Nagar	2	19278	105
 Kanniyakumari		IN.25.629	1268009			2	19281	105
-Kāngra		IN.11.024	1268085		Kangra|Kāngra District	2	19297	105
-Kāmrūp		IN.03.321	1268209		Kamrup|Kamrup District	2	19304	105
-Kālāhandi		IN.21.395	1268508		Kalahandi|Kalahandi District	2	19286	105
+Kāngra		IN.11.024	1268085		Kāngra District	2	19297	105
+Kāmrūp		IN.03.321	1268209		Kamrup District	2	19304	105
+Kālāhandi		IN.21.395	1268508		Kalahandi District	2	19286	105
 Kutch		IN.09.468	1268731		Kachchh|Kutch district	2	19299	105
-Jūnāgadh		IN.09.479	1268774		Junagadh|Jūnāgadh District	2	19299	105
+Jūnāgadh		IN.09.479	1268774		Jūnāgadh District	2	19299	105
 Jalandhar		IN.23.037	1268783		Jalandhar district	2	19284	105
 Jodhpur		IN.24.113	1268867			2	19283	105
-Jīnd		IN.10.077	1268908		Jind	2	19298	105
+Jīnd		IN.10.077	1268908			2	19298	105
 Jhunjhunu District		IN.24.103	1268937		Jhunjhunu	2	19283	105
-Jhānsi		IN.36.166	1269007		Jhansi|Jhānsi District	2	19278	105
+Jhānsi		IN.36.166	1269007		Jhānsi District	2	19278	105
 Jhalawar District		IN.24.129	1269028		Jhalawar	2	19283	105
-Jhābua		IN.35.464	1269054		Jhabua	2	19292	105
+Jhābua		IN.35.464	1269054			2	19292	105
 Jaunpur		IN.36.194	1269136		District Jaunpur|Jaunpur district	2	19278	105
-Jāmnagar		IN.09.477	1269318		Jamnagar|Jamnagar district	2	19299	105
+Jāmnagar		IN.09.477	1269318		Jamnagar district	2	19299	105
 Jammu		IN.12.021	1269322		Jammu district	2	19296	105
-Jalpāiguri		IN.28.328	1269389		Jalpaiguri|Jalpaiguri District	2	19277	105
+Jalpāiguri		IN.28.328	1269389		Jalpaiguri District	2	19277	105
 Jalore		IN.24.116	1269393		Jalore District	2	19283	105
 Jalgaon		IN.16.499	1269411			2	19291	105
 District Jalaun		IN.36.165	1269423		Jalaun	2	19278	105
@@ -19523,61 +19523,61 @@ West Jaintia Hills		IN.18.299	1269523		West Jaintia Hills District	2	19289	105
 Jabalpur		IN.35.451	1269634		Jabalpur district	2	19292	105
 Indore		IN.35.439	1269744		Indore district	2	19292	105
 Idukki		IN.13.596	1269812		Idukki district	2	19294	105
-Hyderābād		IN.40.536	1269844		Hyderabad|Hyderabad District	2	19280	105
+Hyderābād		IN.40.536	1269844		Hyderabad District	2	19280	105
 Hugli		IN.28.338	1269911		Hooghly	2	19277	105
 Hoshiarpur		IN.23.038	1269938		Hoshiarpur district	2	19284	105
 Narmadapuram district		IN.35.449	1269940		Hoshangabad|Hoshangābād District	2	19292	105
-Hisār		IN.10.080	1270023		Hisar|Hissār District	2	19298	105
+Hisār		IN.10.080	1270023		Hissār District	2	19298	105
 Hazārībāg		IN.38.360	1270165		Hazaribagh|Hazāribāgh District	2	19309	105
 Hassan		IN.19.574	1270240			2	19295	105
 Hardoi		IN.36.155	1270371		Hardoi district	2	19278	105
 Hāora		IN.28.341	1270397		Howrah	2	19277	105
-Hamīrpur		IN.11.028	1270456		Hamirpur	2	19297	105
+Hamīrpur		IN.11.028	1270456			2	19297	105
 District Hamirpur		IN.36.168	1270457		Hamirpur	2	19278	105
 Gwalior		IN.35.421	1270585		Gwalior District	2	19292	105
 Gurugram district		IN.10.086	1270644		Gurugram	2	19298	105
 Gurdaspur		IN.23.035	1270648		Gurdaspur district	2	19284	105
-Guntūr		IN.02.548	1270669		Guntur|Guntūr District	2	19306	105
+Guntūr		IN.02.548	1270669		Guntūr District	2	19306	105
 Guna		IN.35.458	1270712			2	19292	105
 Gulbarga		IN.19.579	1270753		Kalaburagi	2	19295	105
 Mumbai Suburban		IN.16.518	1270836		Mumbai City District	2	19291	105
 Gorakhpur		IN.36.188	1270930		Gorakhpur District	2	19278	105
-Gopālganj		IN.34.217	1270967		Gopalganj	2	19303	105
+Gopālganj		IN.34.217	1270967			2	19303	105
 Gonda		IN.36.183	1270997		Gonda district	2	19278	105
-Goālpāra		IN.03.302	1271152		Goalpara|Goālpāra District	2	19304	105
-Girīdīh		IN.38.349	1271176		Giridih|Giridih District	2	19309	105
+Goālpāra		IN.03.302	1271152		Goālpāra District	2	19304	105
+Girīdīh		IN.38.349	1271176		Giridih District	2	19309	105
 Ghazipur		IN.36.195	1271307			2	19278	105
-Ghāziābād		IN.36.140	1271310		Ghaziabad	2	19278	105
-Gayā		IN.34.236	1271440		Gaya|Gaya District	2	19303	105
-East Gāro Hills		IN.18.294	1271512		East Garo Hills|East Garo Hills District	2	19289	105
+Ghāziābād		IN.36.140	1271310			2	19278	105
+Gayā		IN.34.236	1271440		Gaya District	2	19303	105
+East Gāro Hills		IN.18.294	1271512		East Garo Hills District	2	19289	105
 Garhwāl		IN.39.061	1271535		Garhwāl District|Pauri Garhwal	2	19310	105
-Ganjām		IN.21.388	1271622		Ganjam	2	19286	105
-Gangānagar		IN.24.099	1271686		Ganganagar	2	19283	105
-Gāndhīnagar		IN.09.473	1271716		Gandhinagar|Gāndhīnagar District	2	19299	105
+Ganjām		IN.21.388	1271622			2	19286	105
+Gangānagar		IN.24.099	1271686			2	19283	105
+Gāndhīnagar		IN.09.473	1271716		Gāndhīnagar District	2	19299	105
 Firozpur		IN.23.043	1271884		Firozepur|Firozpur district	2	19284	105
 Fatehpur		IN.36.172	1271920		Fatehpur District	2	19278	105
 Ferrukhabad		IN.36.159	1271943		Farrukhabad|Farrukhābād District	2	19278	105
 Faridkot		IN.23.045	1271950			2	19284	105
 Ayodhya		IN.36.177	1271977			2	19278	105
 District Etawah		IN.36.161	1271989		Etawah|Etāwah District	2	19278	105
-Etah District		IN.36.201	1271993		Etah|Etah district	2	19278	105
-Ernākulam		IN.13.595	1272019		Ernakulam|Ernakulam District	2	19294	105
+Etah District		IN.36.201	1271993		Etah	2	19278	105
+Ernākulam		IN.13.595	1272019		Ernakulam District	2	19294	105
 East Siang		IN.30.251	1272115		East Siang District	2	19305	105
 Khandwa district		IN.35.466	1272117		Khandwa	2	19292	105
 East Kameng		IN.30.247	1272120		East Kameng District	2	19305	105
-East Godāvari		IN.02.545	1272123		East Godavari|East Godavari District	2	19306	105
+East Godāvari		IN.02.545	1272123		East Godavari District	2	19306	105
 Gangtok		IN.29.244	1272129		Gangtok district	2	19282	105
 Durg		IN.37.409	1272182		Durg district	2	19308	105
-Dūngarpur		IN.24.124	1272203		Dungarpur	2	19283	105
+Dūngarpur		IN.24.124	1272203			2	19283	105
 Diu		IN.52.494	1272504			2	19312	105
 Dibrugarh		IN.03.310	1272649		Dibrugarh district	2	19304	105
-Dibāng Valley		IN.30.257	1272651		Dibang Valley|Dibang Valley District	2	19305	105
+Dibāng Valley		IN.30.257	1272651		Dibang Valley District	2	19305	105
 Dhule		IN.16.498	1272692		Dhule district	2	19291	105
-Dhenkānāl		IN.21.383	1272781		Dhenkanal|Dhenkānāl District	2	19286	105
+Dhenkānāl		IN.21.383	1272781		Dhenkānāl District	2	19286	105
 Dharwad		IN.19.562	1272797		Dharwad district	2	19295	105
 Dharmapuri		IN.25.630	1272848			2	19281	105
-Dhār		IN.35.438	1272895		Dhar	2	19292	105
-Dhānbād		IN.38.354	1272980		Dhanbad|Dhanbad District	2	19309	105
+Dhār		IN.35.438	1272895			2	19292	105
+Dhānbād		IN.38.354	1272980		Dhanbad District	2	19309	105
 Dewas		IN.35.437	1273067		Dewas district	2	19292	105
 Deoria		IN.36.190	1273196			2	19278	105
 Datia		IN.35.422	1273404			2	19292	105
@@ -19595,43 +19595,43 @@ Chittoor		IN.02.554	1274034			2	19306	105
 Chittaurgarh		IN.24.126	1274041		Chittorgarh|Chittorgarh District	2	19283	105
 Chitradurga		IN.19.566	1274057		Chitradurga district	2	19295	105
 Chikmagalur		IN.19.570	1274221		Chikkamagaluru|Chikmagalur district	2	19295	105
-Chhindwāra		IN.35.455	1274305		Chhindwara	2	19292	105
+Chhindwāra		IN.35.455	1274305			2	19292	105
 Chhatarpur		IN.35.425	1274339			2	19292	105
 Chamoli		IN.39.057	1274839		Chamoli district	2	19310	105
 Chamba		IN.11.023	1274849			2	19297	105
 Kannur		IN.13.589	1274988		Kannur district	2	19294	105
 Kolkata		IN.28.342	1275005			2	19277	105
-Cāchār		IN.03.316	1275009		Cachar	2	19304	105
+Cāchār		IN.03.316	1275009			2	19304	105
 Bundi District		IN.24.121	1275104		Bundi	2	19283	105
 Buldhana		IN.16.500	1275118			2	19291	105
 Bulandshahr		IN.36.142	1275121		Bulandshahr district|District Bulandshahr	2	19278	105
 Budaun		IN.36.149	1275164		Budaun district|District Budaun	2	19278	105
 Birbhum		IN.28.334	1275525		Bīrbhūm District	2	19277	105
 Bid		IN.16.523	1275540		Beed|Beed District	2	19291	105
-Bilāspur		IN.11.030	1275638		Bilaspur|Bilaspur District	2	19297	105
-Bilāspur		IN.37.406	1275639		Bilaspur|Bilāspur District	2	19308	105
-Bikaner District		IN.24.101	1275666		Bikaner|Bīkāner District	2	19283	105
+Bilāspur		IN.11.030	1275638		Bilaspur District	2	19297	105
+Bilāspur		IN.37.406	1275639		Bilāspur District	2	19308	105
+Bikaner District		IN.24.101	1275666		Bikaner	2	19283	105
 Bijnor		IN.36.134	1275680		Bijnor district|District Bijnor	2	19278	105
 Bijāpur		IN.19.557	1275702		Bijāpur District|Vijayapura	2	19295	105
-Bīdar		IN.19.558	1275739		Bidar|Bīdar District	2	19295	105
-Bhopāl		IN.35.444	1275842		Bhopal|Bhopal District	2	19292	105
+Bīdar		IN.19.558	1275739		Bīdar District	2	19295	105
+Bhopāl		IN.35.444	1275842		Bhopal District	2	19292	105
 Bhojpur		IN.34.231	1275871			2	19303	105
 Bhiwani		IN.10.081	1275900		Bhiwani District	2	19298	105
 Bhind		IN.35.420	1275927			2	19292	105
-Bhilwara District		IN.24.122	1275961		Bhilwara|Bhīlwāra District	2	19283	105
-Bhāvnagar		IN.09.481	1276033		Bhavnagar	2	19299	105
+Bhilwara District		IN.24.122	1275961		Bhilwara	2	19283	105
+Bhāvnagar		IN.09.481	1276033			2	19299	105
 Bathinda		IN.23.046	1276071			2	19284	105
-Bharūch		IN.09.488	1276101		Bharuch|Bharūch District	2	19299	105
+Bharūch		IN.09.488	1276101		Bharūch District	2	19299	105
 Bharatpur		IN.24.105	1276130			2	19283	105
 Bhandara		IN.16.506	1276192		Bhandara district	2	19291	105
-Bhāgalpur		IN.34.224	1276301		Bhagalpur|Bhāgalpur District	2	19303	105
-Betūl		IN.35.447	1276391		Betul|Betūl District	2	19292	105
+Bhāgalpur		IN.34.224	1276301		Bhāgalpur District	2	19303	105
+Betūl		IN.35.447	1276391		Betūl District	2	19292	105
 Ballari		IN.19.565	1276510		Ballari district	2	19295	105
 Belgaum		IN.19.555	1276534		Belagavi|Belgaum district	2	19295	105
-Begusarāi		IN.34.222	1276610		Begusarai	2	19303	105
+Begusarāi		IN.34.222	1276610			2	19303	105
 Basti		IN.36.185	1276737		Basti district	2	19278	105
 Bastar		IN.37.414	1276739			2	19308	105
-Barmer District		IN.24.115	1276902		Barmer|Bārmer District	2	19283	105
+Barmer District		IN.24.115	1276902		Barmer	2	19283	105
 Bareilly		IN.36.150	1277014		Bareilly district	2	19278	105
 Purba Bardhaman		IN.28.335	1277030		Bardhaman District	2	19277	105
 Bāramūla		IN.12.008	1277086		Baramulla|Bāramūla District	2	19296	105
@@ -19641,29 +19641,29 @@ Bankura		IN.28.339	1277265		Bānkura District	2	19277	105
 Bangalore Urban		IN.19.572	1277331		Bengaluru Urban	2	19295	105
 Bangalore Rural		IN.19.583	1277332		Bengaluru Rural	2	19295	105
 District Banda		IN.36.170	1277400		Banda|Bānda District	2	19278	105
-Banās Kāntha		IN.09.469	1277417		Banas Kantha|Banaskantha district	2	19299	105
+Banās Kāntha		IN.09.469	1277417		Banaskantha district	2	19299	105
 Ballia		IN.36.193	1277553			2	19278	105
-Bāleshwar		IN.21.377	1277600		Balasore District|Baleshwar	2	19286	105
-Balāngīr		IN.21.393	1277644		Balangir	2	19286	105
-Bālāghāt		IN.35.457	1277662		Balaghat|Bālāghāt District	2	19292	105
+Bāleshwar		IN.21.377	1277600		Balasore District	2	19286	105
+Balāngīr		IN.21.393	1277644			2	19286	105
+Bālāghāt		IN.35.457	1277662		Bālāghāt District	2	19292	105
 Bahraich		IN.36.180	1277800		Bahraich district	2	19278	105
-Āzamgarh		IN.36.191	1278084		Azamgarh|Azamgarh District	2	19278	105
-Aurangābād		IN.34.235	1278150		Aurangabad	2	19303	105
+Āzamgarh		IN.36.191	1278084		Azamgarh District	2	19278	105
+Aurangābād		IN.34.235	1278150			2	19303	105
 South Andaman		IN.01.640	1278648		South Andaman District|South Andamans	2	19307	105
-Anantnāg		IN.12.014	1278668		Anantnag	2	19296	105
+Anantnāg		IN.12.014	1278668			2	19296	105
 Anantapur		IN.02.553	1278673		Anantapur District	2	19306	105
 Amritsar		IN.23.049	1278711			2	19284	105
 Amreli		IN.09.480	1278716		Amreli district	2	19299	105
-Ambāla		IN.10.070	1278861		Ambala	2	19298	105
+Ambāla		IN.10.070	1278861			2	19298	105
 Alwar		IN.24.104	1278947		Alwar District	2	19283	105
 Almora		IN.39.064	1278975		Almora district	2	19310	105
 Alappuzha		IN.13.598	1278986		Alleppey|Alleppey District	2	19294	105
 Prayagraj		IN.36.175	1278995		Prayagraj district	2	19278	105
-Alīgarh		IN.36.143	1279020		Aligarh|Alīgarh District	2	19278	105
+Alīgarh		IN.36.143	1279020		Alīgarh District	2	19278	105
 Akola		IN.16.501	1279109		Akola district	2	19291	105
 Ajmer		IN.24.119	1279160		Ajmer District	2	19283	105
-Ahmadābād		IN.09.474	1279234		Ahmadabad|Ahmadābād District	2	19299	105
-Āgra		IN.36.146	1279262		Agra|Agra District	2	19278	105
+Ahmadābād		IN.09.474	1279234		Ahmadābād District	2	19299	105
+Āgra		IN.36.146	1279262		Agra District	2	19278	105
 Adilabad		IN.40.532	1279345		Adilabad District	2	19280	105
 Namakkal		IN.25.609	6640313		District of Namakkal|Namakkal district	2	19281	105
 Wayanad		IN.13.590	6951502		Wayanad district	2	19294	105
@@ -19758,7 +19758,7 @@ Una		IN.11.029	7701379			2	19297	105
 Purba Singhbhum		IN.38.357	7701426		East Singhbhum District|East Singhbum	2	19309	105
 Bokaro		IN.38.355	7701427		Bokaro district	2	19309	105
 Gumla		IN.38.366	7701429		Gumla District	2	19309	105
-Ri-Bhoi		IN.18.297	7701507		Rh-Bhoi District|Ri Bhoi	2	19289	105
+Ri-Bhoi		IN.18.297	7701507		Rh-Bhoi District	2	19289	105
 West Khasi Hills		IN.18.296	7701511		West Khasi Hills District	2	19289	105
 Bageshwar		IN.39.063	7701513			2	19310	105
 Champawat		IN.39.065	7701515			2	19310	105
@@ -19808,7 +19808,7 @@ Udupi		IN.19.569	8224051			2	19295	105
 Ramanagara		IN.19.584	8224306		Ramanagara District	2	19295	105
 Yadgir		IN.19.580	8224605		Yadgir district	2	19295	105
 Pratapgarh		IN.24.131	8224619		Pratapgarh District	2	19283	105
-Kolasib district		IN.31.282	8261085		Kolasib|Kolasib District	2	19288	105
+Kolasib district		IN.31.282	8261085		Kolasib	2	19288	105
 Dakshin Dinajpur		IN.28.331	8299687		Dakshin Dinajpur district|Dinajpur Dakshin	2	19277	105
 Peren		IN.20.271	8335032		Peren District	2	19287	105
 South 24 Parganas		IN.28.343	8335041		Dakshin 24 Parganas|South 24 Paraganas|South 24 Parganas District|South Twenty Four Parganas	2	19277	105
@@ -19905,7 +19905,7 @@ Dakshin Bastar Dantewada		IN.37.416	9747953		Dantewada	2	19308	105
 Chandel		IN.17.280	9747955		Chandel District	2	19290	105
 Chandigarh		IN.05.055	9747956		Chandigarh District	2	19302	105
 Kodarma		IN.38.348	9747958		Kodarma District|Koderma	2	19309	105
-Dadra & Nagar Haveli		IN.52.496	9747961		Dadra and Nagar Haveli	2	19312	105
+Dadra & Nagar Haveli		IN.52.496	9747961			2	19312	105
 Kulgam		IN.12.015	9747963			2	19296	105
 Samba		IN.12.022	9747965		Samba District	2	19296	105
 Sangli		IN.16.531	9747967			2	19291	105
@@ -19937,7 +19937,7 @@ Lower Dibang Valley		IN.30.258	9748012		Lower Dibang Valley District	2	19305	105
 Sonbhadra		IN.36.200	9748013			2	19278	105
 South Garo Hills		IN.18.295	9748015			2	19289	105
 Nuh		IN.10.087	9748016			2	19298	105
-North  & Middle Andaman		IN.01.639	9748018		North and Middle Andaman	2	19307	105
+North  & Middle Andaman		IN.01.639	9748018			2	19307	105
 Lakshadweep		IN.14.587	9748019		Lakshadweep District	2	19293	105
 Tiruppur		IN.25.633	9748021		Tiruppur district	2	19281	105
 Narayanpur		IN.37.415	9748023			2	19308	105
@@ -20256,7 +20256,7 @@ Shahrestān-e Āshtīān		IR.34.69179	69179		Ashtian|Ashtian County	2	20223	108
 Badreh		IR.10.112941	112941			2	20230	108
 Shahrestān-e Naţanz		IR.28.122490	122490		Natanz|Natanz County	2	20240	108
 Mahdishahr		IR.25.124337	124337			2	20221	108
-Mamasanī		IR.07.125034	125034		Mamasani|Mamasani County	2	20234	108
+Mamasanī		IR.07.125034	125034		Mamasani County	2	20234	108
 Shahrestān-e Āz̄arshahr		IR.33.449425	449425			2	20237	108
 Shahrestān-e Oskū		IR.33.449426	449426			2	20237	108
 Ahar		IR.33.449427	449427			2	20237	108
@@ -20882,16 +20882,16 @@ Monza e Brianza	IT-MB	IT.09.MB	6955700	Province	Monza Brianza|Monza e della Bria
 Sud Sardegna	IT-SU	IT.14.SU	11550038	Province	Province du Sud-Sardaigne|Province of South Sardinia|Provincia del Sud Sardegna|South Sardinia	2	20757	110
 St Clement		JE.3237072	3237072			1		111
 St Saviour		JE.3237073	3237073			1		111
-St. Brelade		JE.3237200	3237200		Saint Brelade	1		111
+St. Brelade		JE.3237200	3237200			1		111
 Grouville		JE.3237203	3237203			1		111
-St Mary		JE.3237212	3237212		Saint Mary	1		111
-St Lawrence		JE.3237214	3237214		Saint Lawrence	1		111
-St Peter		JE.3237221	3237221		Saint Peter	1		111
-St Ouen		JE.3237229	3237229		Saint Ouen	1		111
-St John		JE.3237497	3237497		Saint John	1		111
+St Mary		JE.3237212	3237212			1		111
+St Lawrence		JE.3237214	3237214			1		111
+St Peter		JE.3237221	3237221			1		111
+St Ouen		JE.3237229	3237229			1		111
+St John		JE.3237497	3237497			1		111
 Trinity		JE.3237530	3237530			1		111
-St Martîn		JE.3237716	3237716		Saint Martin	1		111
-St Helier		JE.3237864	3237864		Saint Helier	1		111
+St Martîn		JE.3237716	3237716			1		111
+St Helier		JE.3237864	3237864			1		111
 Westmoreland	JM-10	JM.16	3488081	Parish		1		112
 Trelawny	JM-07	JM.15	3488222	Parish	Trelawny Parish	1		112
 Saint Thomas	JM-03	JM.14	3488688	Parish	Saint Thomas Parish	1		112
@@ -21059,7 +21059,7 @@ Alexandria		JM.09.627	11495037			2	20902	112
 Alva		JM.09.628	11495038			2	20902	112
 Alderton		JM.09.636	11495039			2	20902	112
 Blackstonedge		JM.09.655	11495040			2	20902	112
-St. John's West		JM.10.1432	11495041		Saint John's West|Saint Johns West	2	20901	112
+St. John's West		JM.10.1432	11495041		Saint Johns West	2	20901	112
 Ensom		JM.10.1420	11495042			2	20901	112
 Calderwood		JM.09.637	11495043			2	20902	112
 Gibraltar (Moneague)		JM.09.652	11495044			2	20902	112
@@ -21180,7 +21180,7 @@ Belvedere		JM.07.402	11495158			2	20904	112
 Orange Bay		JM.07.405	11495159			2	20904	112
 Charles Town		JM.07.403	11495160			2	20904	112
 Long Road		JM.07.427	11495161			2	20904	112
-St. John's East		JM.10.1435	11495162		Saint John's East|Saint Johns East	2	20901	112
+St. John's East		JM.10.1435	11495162		Saint Johns East	2	20901	112
 Johnson Town		JM.17.15089	11495163			2	20906	112
 Newport East		JM.17.15103	11495164			2	20906	112
 Big Bridge		JM.16.1047	11495165			2	20895	112
@@ -21247,7 +21247,7 @@ Riverton City		JM.08.15044	11495225			2	20903	112
 Drewsland		JM.08.15052	11495226			2	20903	112
 Bournemouth Gardens		JM.17.15091	11495227			2	20906	112
 Seaward Pen		JM.08.15060	11495228			2	20903	112
-Half-Way-Tree		JM.08.15018	11495229		Half Way Tree	2	20903	112
+Half-Way-Tree		JM.08.15018	11495229			2	20903	112
 Denham Town		JM.17.15101	11495230			2	20906	112
 Trafalgar Park		JM.08.15016	11495231			2	20903	112
 Dawkins		JM.01.1332	11495232			2	20908	112
@@ -21581,7 +21581,7 @@ Montpelier		JM.12.856	11495561			2	20899	112
 Moore Town		JM.07.430	11495562			2	20904	112
 Mount Carey		JM.12.855	11495563			2	20899	112
 Mount Moriah		JM.09.644	11495564			2	20902	112
-Mount Zion		JM.09.603	11495565		Mt Zion	2	20902	112
+Mount Zion		JM.09.603	11495565			2	20902	112
 Parry Town		JM.09.613	11495566			2	20902	112
 Mulgrave		JM.11.1105	11495567			2	20900	112
 Gutters		JM.04.1238	11495568			2	20905	112
@@ -21670,12 +21670,12 @@ Spring Garden		JM.15.730	11495650			2	20896	112
 Spur Tree		JM.04.1257	11495651			2	20905	112
 Sturge Town		JM.09.621	11495652			2	20902	112
 St. Ann's Bay		JM.09.606	11495653			2	20902	112
-Saint D'Acre		JM.09.626	11495654		St. D'Acre	2	20902	112
+Saint D'Acre		JM.09.626	11495654			2	20902	112
 Steer Town		JM.09.607	11495655			2	20902	112
 Stettin		JM.15.731	11495656			2	20896	112
 Stewart Town		JM.15.721	11495657			2	20896	112
 St. Paul's		JM.04.1220	11495658			2	20905	112
-St. Margaret's Bay		JM.07.409	11495659		Saint Margaret's Bay|St Margarets Bay	2	20904	112
+St. Margaret's Bay		JM.07.409	11495659		St Margarets Bay	2	20904	112
 Success		JM.02.917	11495660			2	20907	112
 Summer Hill		JM.12.861	11495661			2	20899	112
 Sunning Hill		JM.14.311	11495662			2	20897	112
@@ -21878,7 +21878,7 @@ Yaeyama-gun		JP.47.1848816	1848816			2	21813	114
 Yabu-shi		JP.13.1848845	1848845			2	21829	114
 Watarai-gun		JP.23.1848873	1848873		Watarai	2	21821	114
 Warabi-shi		JP.34.1848902	1848902			2	21810	114
-Wakō-shi		JP.34.1848915	1848915		Wako-shi	2	21810	114
+Wakō-shi		JP.34.1848915	1848915			2	21810	114
 Wakayama Shi		JP.43.1848936	1848936			2	21801	114
 Wajima Shi		JP.15.1848973	1848973			2	21828	114
 Uwajima-shi		JP.05.1849041	1849041		Uwajima	2	21835	114
@@ -21908,8 +21908,8 @@ Tsubame Shi		JP.29.1849786	1849786			2	21816	114
 Toyota-shi		JP.01.1849809	1849809		Toyota	2	21836	114
 Toyota-gun		JP.11.1849812	1849812		Toyota	2	21830	114
 Toyooka Shi		JP.13.1849826	1849826			2	21829	114
-Toyokawa Shi		JP.01.1849840	1849840		Toyokawa|Toyokawa-shi	2	21836	114
-Toyoake Shi		JP.01.1849862	1849862		Toyoake|Toyoake-shi	2	21836	114
+Toyokawa Shi		JP.01.1849840	1849840		Toyokawa	2	21836	114
+Toyoake Shi		JP.01.1849862	1849862		Toyoake	2	21836	114
 Toyama Shi		JP.42.1849870	1849870			2	21802	114
 Tottori Shi		JP.41.1849887	1849887			2	21803	114
 Tosu Shi		JP.33.1849903	1849903			2	21811	114
@@ -21923,10 +21923,10 @@ Tomigusuku-shi		JP.47.1850107	1850107			2	21813	114
 Tomata-gun		JP.31.1850139	1850139			2	21814	114
 Tokushima Shi		JP.39.1850156	1850156			2	21805	114
 Tokorozawa-shi		JP.34.1850180	1850180			2	21810	114
-Tokoname Shi		JP.01.1850183	1850183		Tokoname|Tokoname-shi	2	21836	114
+Tokoname Shi		JP.01.1850183	1850183		Tokoname	2	21836	114
 Toki Shi		JP.09.1850200	1850200			2	21832	114
 Tōkamachi-shi		JP.29.1850218	1850218			2	21816	114
-Tōkai Shi		JP.01.1850219	1850219		Tōkai|Tōkai-shi	2	21836	114
+Tōkai Shi		JP.01.1850219	1850219		Tōkai	2	21836	114
 Tōhaku-gun		JP.41.1850247	1850247			2	21803	114
 Toda-shi		JP.34.1850300	1850300			2	21810	114
 Toba-shi		JP.23.1850342	1850342			2	21821	114
@@ -21974,11 +21974,11 @@ Suginami-ku		JP.40.1851510	1851510		Suginami	2	21804	114
 Sōraku-gun		JP.22.1851574	1851574		Sōraku	2	21822	114
 Soo Gun		JP.18.1851576	1851576			2	21826	114
 Shōzu-gun		JP.17.1851654	1851654			2	21827	114
-Shizuoka Shi		JP.37.1851714	1851714		Shizuoka-shi	2	21807	114
+Shizuoka Shi		JP.37.1851714	1851714			2	21807	114
 Shiraoka-shi		JP.34.1851882	1851882			2	21810	114
 Shioya-gun		JP.38.1851957	1851957			2	21806	114
 Shiojiri-shi		JP.26.1852001	1852001			2	21819	114
-Shinshiro Shi		JP.01.1852044	1852044		Shinshiro|Shinshiro-shi	2	21836	114
+Shinshiro Shi		JP.01.1852044	1852044		Shinshiro	2	21836	114
 Shinjuku-ku		JP.40.1852083	1852083		Shinjuku	2	21804	114
 Shingū Shi		JP.43.1852105	1852105			2	21801	114
 Shinagawa-ku		JP.40.1852140	1852140		Shinagawa	2	21804	114
@@ -22034,7 +22034,7 @@ Owariasahi-shi		JP.01.1853518	1853518		Owariasahi	2	21836	114
 Ōtsu Shi		JP.35.1853552	1853552			2	21809	114
 Ōtsuki Shi		JP.46.1853562	1853562			2	21799	114
 Ōta-shi		JP.10.1853626	1853626			2	21831	114
-Ōta-ku		JP.40.1853655	1853655		Ota-ku|Ōta	2	21804	114
+Ōta-ku		JP.40.1853655	1853655		Ōta	2	21804	114
 Ōtake-shi		JP.11.1853661	1853661		Ōtake	2	21830	114
 Ōshima Shichō		JP.40.1853724	1853724			2	21804	114
 Ōshima-gun		JP.18.1853737	1853737			2	21826	114
@@ -22052,7 +22052,7 @@ Omaezaki-shi		JP.37.1854181	1854181			2	21807	114
 Okinawa Shi		JP.47.1854344	1854344			2	21813	114
 Oki-gun		JP.36.1854361	1854361		Oki District	2	21808	114
 Okegawa-shi		JP.34.1854369	1854369			2	21810	114
-Okazaki Shi		JP.01.1854373	1854373		Okazaki-shi	2	21836	114
+Okazaki Shi		JP.01.1854373	1854373			2	21836	114
 Okaya Shi		JP.26.1854378	1854378			2	21819	114
 Okayama Shi		JP.31.1854380	1854380			2	21814	114
 Ōkawa-shi		JP.07.1854385	1854385			2	21833	114
@@ -22068,7 +22068,7 @@ Odawara-shi		JP.19.1854744	1854744			2	21825	114
 Oda-gun		JP.31.1854770	1854770			2	21814	114
 Ōchi Gun		JP.36.1854781	1854781			2	21808	114
 Ochi-gun		JP.05.1854782	1854782			2	21835	114
-Ōbu Shi		JP.01.1854797	1854797		Obu|Ōbu-shi	2	21836	114
+Ōbu Shi		JP.01.1854797	1854797		Obu	2	21836	114
 Obama-shi		JP.06.1854843	1854843			2	21834	114
 Nyū-gun		JP.06.1854875	1854875		Nyu	2	21834	114
 Numazu-shi		JP.37.1854900	1854900			2	21807	114
@@ -22136,10 +22136,10 @@ Mizunami Shi		JP.09.1856666	1856666			2	21832	114
 Miyoshi Shi		JP.11.1856691	1856691			2	21830	114
 Miyoshi-gun		JP.39.1856695	1856695			2	21805	114
 Miyoshi-shi		JP.01.1856697	1856697		Miyoshi City	2	21836	114
-Miyazaki-shi		JP.25.1856706	1856706		Miyazaki|Miyazaki City|Miyazaki Shi	2	21820	114
+Miyazaki-shi		JP.25.1856706	1856706		Miyazaki|Miyazaki City	2	21820	114
 Miyakonojō Shi		JP.25.1856774	1856774			2	21820	114
 Miyaki-gun		JP.33.1856784	1856784			2	21811	114
-Miyake Shichō		JP.40.1856786	1856786		Miyake-shichō	2	21804	114
+Miyake Shichō		JP.40.1856786	1856786			2	21804	114
 Miura Shi		JP.19.1856849	1856849		Miura	2	21825	114
 Miura-gun		JP.19.1856851	1856851			2	21825	114
 Mitsuke Shi		JP.29.1856876	1856876			2	21816	114
@@ -22197,10 +22197,10 @@ Kuga Gun		JP.45.1858484	1858484			2	21800	114
 Kudamatsu Shi		JP.45.1858497	1858497			2	21800	114
 Kōza-gun		JP.19.1858593	1858593			2	21825	114
 Kōyu-gun		JP.25.1858599	1858599			2	21820	114
-Kōtō-ku		JP.40.1858665	1858665		Koto|Koto-ku|Kōtō City	2	21804	114
+Kōtō-ku		JP.40.1858665	1858665		Koto|Kōtō City	2	21804	114
 Koshigaya Shi		JP.34.1858728	1858728			2	21810	114
 Konan-shi		JP.35.1858739	1858739			2	21809	114
-Kōnan-shi		JP.01.1858832	1858832		Konan|Konan-shi	2	21836	114
+Kōnan-shi		JP.01.1858832	1858832		Konan	2	21836	114
 Komoro Shi		JP.26.1858856	1858856			2	21819	114
 Komatsushima Shi		JP.39.1858900	1858900			2	21805	114
 Komatsu Shi		JP.15.1858904	1858904			2	21828	114
@@ -22208,7 +22208,7 @@ Komaki-shi		JP.01.1858921	1858921		Komaki	2	21836	114
 Komagane Shi		JP.26.1858938	1858938			2	21819	114
 Komae-shi		JP.40.1858941	1858941			2	21804	114
 Kokubunji Shi		JP.40.1858962	1858962		Kokubunji	2	21804	114
-Kōka-shi		JP.35.1858984	1858984		Koka-Shi	2	21809	114
+Kōka-shi		JP.35.1858984	1858984			2	21809	114
 Koga Shi		JP.14.1859082	1859082			2	21840	114
 Koganei-shi		JP.40.1859087	1859087		Koganei	2	21804	114
 Koga-shi		JP.07.1859090	1859090			2	21833	114
@@ -22225,9 +22225,9 @@ Kitashitara-gun		JP.01.1859272	1859272			2	21836	114
 Kitasaku-gun		JP.26.1859278	1859278			2	21819	114
 Kitamuro-gun		JP.23.1859297	1859297		Kitamuro	2	21821	114
 Kitamatsuura-gun		JP.27.1859301	1859301			2	21818	114
-Kitakyushu-shi		JP.07.1859306	1859306		Kitakyushu City|Kitakyūshū-shi	2	21833	114
+Kitakyushu-shi		JP.07.1859306	1859306		Kitakyushu City	2	21833	114
 Kita-ku		JP.40.1859308	1859308		Kita	2	21804	114
-Kitakatsushika Gun		JP.34.1859316	1859316		Kitakatsushika-gun	2	21810	114
+Kitakatsushika Gun		JP.34.1859316	1859316			2	21810	114
 Kitakata-shi		JP.08.1859317	1859317			2	21841	114
 Kitakambara-gun		JP.29.1859323	1859323			2	21816	114
 Kita-gun		JP.17.1859337	1859337		Kita	2	21827	114
@@ -22252,7 +22252,7 @@ Kawanabe-gun		JP.13.1859755	1859755			2	21829	114
 Katsuyama Shi		JP.06.1859762	1859762			2	21834	114
 Katsuura Gun		JP.39.1859771	1859771			2	21805	114
 Katsuta-gun		JP.31.1859776	1859776			2	21814	114
-Katsushika Ku		JP.40.1859779	1859779		Katsushika|Katsushika-ku	2	21804	114
+Katsushika Ku		JP.40.1859779	1859779		Katsushika	2	21804	114
 Katano Shi		JP.32.1859848	1859848			2	21812	114
 Kasuya-gun		JP.07.1859874	1859874			2	21833	114
 Kasuga Shi		JP.07.1859888	1859888			2	21833	114
@@ -22262,7 +22262,7 @@ Kashiwara-shi		JP.32.1859912	1859912			2	21812	114
 Kashima		JP.33.1859936	1859936			2	21811	114
 Kashiba-shi		JP.28.1859955	1859955			2	21817	114
 Kasaoka Shi		JP.31.1859989	1859989			2	21814	114
-Kariya Shi		JP.01.1860033	1860033		Kariya|Kariya-shi	2	21836	114
+Kariya Shi		JP.01.1860033	1860033		Kariya	2	21836	114
 Kanuma Shi		JP.38.1860097	1860097			2	21806	114
 Kanra-gun		JP.10.1860108	1860108			2	21831	114
 Kan’onji Shi		JP.17.1860119	1860119			2	21827	114
@@ -22328,7 +22328,7 @@ Iizuka Shi		JP.07.1861834	1861834			2	21833	114
 Iiyama Shi		JP.26.1861837	1861837			2	21819	114
 Iida Shi		JP.26.1861858	1861858			2	21819	114
 Iga-shi		JP.23.1861901	1861901		Iga	2	21821	114
-Ichinomiya Shi		JP.01.1861940	1861940		Ichinomiya|Ichinomiya-shi	2	21836	114
+Ichinomiya Shi		JP.01.1861940	1861940		Ichinomiya	2	21836	114
 Ichikawa Shi		JP.04.1861964	1861964		Ichikawa	2	21842	114
 Ibusuki Shi		JP.18.1862007	1862007			2	21826	114
 Ibo-gun		JP.13.1862022	1862022			2	21829	114
@@ -22372,7 +22372,7 @@ Hashima-gun		JP.09.1863085	1863085			2	21832	114
 Hannō-shi		JP.34.1863182	1863182		Hannō	2	21810	114
 Hannan Shi		JP.32.1863185	1863185			2	21812	114
 Hanishina-gun		JP.26.1863187	1863187			2	21819	114
-Handa Shi		JP.01.1863204	1863204		Handa|Handa City|Handa-shi	2	21836	114
+Handa Shi		JP.01.1863204	1863204		Handa|Handa City	2	21836	114
 Hamura-shi		JP.40.1863251	1863251			2	21804	114
 Hamamatsu Shi		JP.37.1863288	1863288		Hamamatsu|Hamamatsu City	2	21807	114
 Hamada Shi		JP.36.1863308	1863308			2	21808	114
@@ -22410,10 +22410,10 @@ Fujinomiya Shi		JP.37.1864104	1864104			2	21807	114
 Fujimi-shi		JP.34.1864112	1864112			2	21810	114
 Fujiidera-shi		JP.32.1864125	1864125			2	21812	114
 Fujieda Shi		JP.37.1864131	1864131			2	21807	114
-Fuchū-shi		JP.40.1864148	1864148		Fuchu|Fuchu-shi	2	21804	114
+Fuchū-shi		JP.40.1864148	1864148		Fuchu	2	21804	114
 Fuchū-shi		JP.11.1864151	1864151			2	21830	114
 Ena-shi		JP.09.1864208	1864208			2	21832	114
-Edogawa Ku		JP.40.1864242	1864242		Edogawa|Edogawa-ku	2	21804	114
+Edogawa Ku		JP.40.1864242	1864242		Edogawa	2	21804	114
 Echi-gun		JP.35.1864254	1864254		Echi	2	21809	114
 Ebino-shi		JP.25.1864313	1864313			2	21820	114
 Dazaifu-shi		JP.07.1864394	1864394			2	21833	114
@@ -22421,9 +22421,9 @@ Daitō Shi		JP.32.1864413	1864413		Daitō	2	21812	114
 Chūō Ku		JP.40.1864487	1864487		Chuo	2	21804	114
 Chōfu-shi		JP.40.1864514	1864514			2	21804	114
 Chiyoda-ku		JP.40.1864529	1864529		Chiyoda	2	21804	114
-Chita Shi		JP.01.1864539	1864539		Chita|Chita-shi	2	21836	114
+Chita Shi		JP.01.1864539	1864539		Chita	2	21836	114
 Chita-gun		JP.01.1864542	1864542			2	21836	114
-Chiryū Shi		JP.01.1864548	1864548		Chiryu-shi	2	21836	114
+Chiryū Shi		JP.01.1864548	1864548			2	21836	114
 Chino Shi		JP.26.1864555	1864555			2	21819	114
 Chikushino-shi		JP.07.1864573	1864573			2	21833	114
 Chikujō-gun		JP.07.1864588	1864588			2	21833	114
@@ -22451,9 +22451,9 @@ Asaka-shi		JP.34.1865056	1865056			2	21810	114
 Arida Shi		JP.43.1865121	1865121			2	21801	114
 Arida-gun		JP.43.1865123	1865123			2	21801	114
 Arao Shi		JP.21.1865168	1865168			2	21823	114
-Arakawa Ku		JP.40.1865187	1865187		Arakawa|Arakawa-ku	2	21804	114
+Arakawa Ku		JP.40.1865187	1865187		Arakawa	2	21804	114
 Myoko-shi		JP.29.1865200	1865200			2	21816	114
-Anjō Shi		JP.01.1865293	1865293		Anjo|Anjō-shi	2	21836	114
+Anjō Shi		JP.01.1865293	1865293		Anjo	2	21836	114
 Anan Shi		JP.39.1865306	1865306			2	21805	114
 Ampachi-gun		JP.09.1865323	1865323			2	21832	114
 Amakusa Shi		JP.21.1865358	1865358			2	21823	114
@@ -22473,7 +22473,7 @@ Aira Gun		JP.18.1865649	1865649			2	21826	114
 Aira Shi		JP.18.1865650	1865650			2	21826	114
 Aichi-gun		JP.01.1865696	1865696			2	21836	114
 Agawa-gun		JP.20.1865726	1865726			2	21824	114
-Adachi Ku		JP.40.1865750	1865750		Adachi|Adachi-ku	2	21804	114
+Adachi Ku		JP.40.1865750	1865750		Adachi	2	21804	114
 Abu-gun		JP.45.1865762	1865762			2	21800	114
 Yawatahama-shi		JP.05.1926017	1926017			2	21835	114
 Imabari-shi		JP.05.1926135	1926135		Imabari	2	21835	114
@@ -22511,7 +22511,7 @@ Sakura Shi		JP.04.2111215	2111215			2	21842	114
 Sagae-shi		JP.44.2111245	2111245			2	21837	114
 Ryūgasaki Shi		JP.14.2111256	2111256			2	21840	114
 Ōtawara Shi		JP.38.2111324	2111324			2	21806	114
-Ogasawara Shichō		JP.40.2111520	2111520		Ogasawara Subprefecture|Ogasawara-shichō	2	21804	114
+Ogasawara Shichō		JP.40.2111520	2111520		Ogasawara Subprefecture	2	21804	114
 Ōfunato-shi		JP.16.2111528	2111528			2	21839	114
 Nishishirakawa-gun		JP.08.2111613	2111613			2	21841	114
 Nishimurayama-gun		JP.44.2111620	2111620			2	21837	114
@@ -22650,10 +22650,10 @@ Kamiukena-gun		JP.05.6691622	6691622		Kamiukena	2	21835	114
 Higashiōmi-shi		JP.35.6822197	6822197			2	21809	114
 Moriya-shi		JP.14.6950859	6950859			2	21840	114
 Kunisaki-shi		JP.30.7279571	7279571			2	21815	114
-Kiyosu Shi		JP.01.7369797	7369797		Kiyosu|Kiyosu-shi	2	21836	114
-Aisai Shi		JP.01.7369798	7369798		Aisai|Aisai-shi	2	21836	114
-Iwakura Shi		JP.01.7369799	7369799		Iwakura|Iwakura-shi	2	21836	114
-Kitanagoya Shi		JP.01.7369800	7369800		Kitanagoya|Kitanagoya-shi	2	21836	114
+Kiyosu Shi		JP.01.7369797	7369797		Kiyosu	2	21836	114
+Aisai Shi		JP.01.7369798	7369798		Aisai	2	21836	114
+Iwakura Shi		JP.01.7369799	7369799		Iwakura	2	21836	114
+Kitanagoya Shi		JP.01.7369800	7369800		Kitanagoya	2	21836	114
 Takahama Shi		JP.01.7369801	7369801			2	21836	114
 Toyohashi Shi		JP.01.7369802	7369802		Toyohashi|Toyohashi City	2	21836	114
 Kanzaki-gun		JP.13.7370808	7370808			2	21829	114
@@ -22805,7 +22805,7 @@ Shimada-shi		JP.37.7418322	7418322		Shimada	2	21807	114
 Gotō Shi		JP.27.7418804	7418804			2	21818	114
 Hirado Shi		JP.27.7418805	7418805			2	21818	114
 Minamishimabara Shi		JP.27.7418806	7418806			2	21818	114
-Ōmura Shi		JP.27.7418807	7418807		Ōmura-shi	2	21818	114
+Ōmura Shi		JP.27.7418807	7418807			2	21818	114
 Saikai Shi		JP.27.7418808	7418808			2	21818	114
 Shimabara Shi		JP.27.7418809	7418809			2	21818	114
 Tsushima Shi		JP.27.7418810	7418810			2	21818	114
@@ -22930,15 +22930,15 @@ Midori Shi		JP.10.7453841	7453841			2	21831	114
 Numata Shi		JP.10.7453843	7453843			2	21831	114
 Tatebayashi Shi		JP.10.7453849	7453849			2	21831	114
 Kodama-gun		JP.34.7458572	7458572			2	21810	114
-Ōsato-gun		JP.34.7458573	7458573		Osato-gun	2	21810	114
+Ōsato-gun		JP.34.7458573	7458573			2	21810	114
 Chichibu Shi		JP.34.7464121	7464121		Chichibu	2	21810	114
 Hanyū Shi		JP.34.7464122	7464122			2	21810	114
 Sōka Shi		JP.34.7464123	7464123			2	21810	114
 Kuki-shi		JP.34.7464124	7464124			2	21810	114
-Kitamoto Shi		JP.34.7464125	7464125		Kitamoto|Kitamoto-shi	2	21810	114
-Satte Shi		JP.34.7464126	7464126		Satte|Satte-shi	2	21810	114
+Kitamoto Shi		JP.34.7464125	7464125		Kitamoto	2	21810	114
+Satte Shi		JP.34.7464126	7464126		Satte	2	21810	114
 Yoshikawa Shi		JP.34.7464127	7464127			2	21810	114
-Fujimino Shi		JP.34.7464128	7464128		Fujimino|Fujimino-shi	2	21810	114
+Fujimino Shi		JP.34.7464128	7464128		Fujimino	2	21810	114
 Yotsukaidō Shi		JP.04.7465520	7465520			2	21842	114
 Minamibōsō Shi		JP.04.7465521	7465521			2	21842	114
 Sōsa Shi		JP.04.7465522	7465522			2	21842	114
@@ -22992,8 +22992,8 @@ Inashiki Shi		JP.14.8304034	8304034			2	21840	114
 Sakuragawa Shi		JP.14.8304035	8304035			2	21840	114
 Kumagaya Shi		JP.34.8304212	8304212		Kumagaya	2	21810	114
 Kasukabe Shi		JP.34.8304213	8304213			2	21810	114
-Ageo Shi		JP.34.8304214	8304214		Ageo|Ageo-shi	2	21810	114
-Shiki Shi		JP.34.8304215	8304215		Shiki|Shiki-shi	2	21810	114
+Ageo Shi		JP.34.8304214	8304214		Ageo	2	21810	114
+Shiki Shi		JP.34.8304215	8304215		Shiki	2	21810	114
 Kisarazu Shi		JP.04.8304237	8304237			2	21842	114
 Yachimata Shi		JP.04.8304238	8304238			2	21842	114
 Sabae Shi		JP.06.8304246	8304246			2	21834	114
@@ -23248,7 +23248,7 @@ Srŏk Bathéay		KH.02.0301	8403885		Batheay	2	23190	117
 Srŏk Dâmbê		KH.31.2501	8403886		Dambae|Dambae District	2	23193	117
 Srŏk O Reăng Âu		KH.31.2504	8403887		Ou Reang Ov|Ou Reang Ov District	2	23193	117
 Srŏk Pônhê Krêk		KH.31.2505	8403888		Ponhea Kraek|Ponhea Kraek District	2	23193	117
-Krŏng Suŏng		KH.31.2506	8403889		Krong Suong|Krong Suong District	2	23193	117
+Krŏng Suŏng		KH.31.2506	8403889		Krong Suong District	2	23193	117
 Krŏng Paôy Pêt		KH.25.0110	8403890		Krong Paoy Paet	2	23192	117
 Srŏk Prasat Bakong		KH.24.1709	8403891		Prasat Bakong	2	23175	117
 Srŏk Ânlóng Vêng		KH.27.2201	8403981		Anlong Veaeng	2	23174	117
@@ -23256,7 +23256,7 @@ Srŏk Trâpeăng Prasat		KH.27.2205	8403982		Trapeang Prasat	2	23174	117
 Srŏk Ch’êh Sên		KH.13.1301	8403983		Chey Saen	2	23178	117
 Srŏk Kulén		KH.13.1304	8403984		Kuleaen	2	23178	117
 Srŏk Tbêng Méanchey		KH.13.1307	8403986		Tbaeng Mean Chey	2	23178	117
-Krŏng Preăh Vĭhéar		KH.13.1308	8403987		Krong Preah Vihear	2	23178	117
+Krŏng Preăh Vĭhéar		KH.13.1308	8403987			2	23178	117
 Srŏk Srêsén		KH.17.1901	8404435		Sesan	2	23173	117
 Srŏk Ândong Méas		KH.23.1601	8405025		Andoung Meas	2	23176	117
 Srŏk Ban Lŭng		KH.23.1602	8405026		Krong Ban Lung	2	23176	117
@@ -23275,18 +23275,18 @@ Krŏng Khémârâ Phumĭn		KH.08.0904	8405254		Krong Khemarak Phoumin	2	23184	11
 Srŏk Môndôl Seima		KH.08.0905	8405255		Mondol Seima	2	23184	117
 Srŏk Stœ̆ng Hav		KH.28.1803	8405256		Stueng Hav	2	23191	117
 Srŏk Basedth		KH.04.0501	8405257		Basedth	2	23188	117
-Krŏng Chbar Mon		KH.04.0502	8405258		Krong Chbar Mon	2	23188	117
+Krŏng Chbar Mon		KH.04.0502	8405258			2	23188	117
 Srŏk Chol Kiri		KH.03.0402	8405259		Chol Kiri	2	23189	117
 Srŏk Sameakki Mean Chey		KH.03.0407	8405260		Sameakki Mean Chey	2	23189	117
 Srŏk Ângkôr Borei		KH.19.2101	8405261		Angkor Borei	2	23171	117
 Srŏk Borei Cholsar		KH.19.2103	8405262		Borei Cholsar	2	23171	117
-Krŏng Doun Kaev		KH.19.2108	8405707		Krong Doun Kaev	2	23171	117
+Krŏng Doun Kaev		KH.19.2108	8405707			2	23171	117
 Srŏk Dâmnăk Châng’aeur		KH.26.2301	8405987		Damnak Chang'aeur	2	23183	117
 Srŏk Chŭm Kiri		KH.21.0704	8405988		Chum Kiri	2	23186	117
 Srŏk Dângtóng		KH.21.0705	8405989		Dang Tong	2	23186	117
 Srŏk Tœ̆k Chhu		KH.21.0707	8405990		Tuek Chhou	2	23186	117
 Srŏk Khsăch Kândal		KH.07.0803	8405991		Khsach Kandal	2	23185	117
-Krŏng Ta Khmau		KH.07.0811	8405992		Krong Ta Khmau	2	23185	117
+Krŏng Ta Khmau		KH.07.0811	8405992			2	23185	117
 Khan Rœssei Kêv		KH.22.1207	8405993		Ruessei Kaev	2	23179	117
 Khan Duŏn Pénh		KH.22.1202	8405994		Doun Penh	2	23179	117
 Khan Tuŏl Koŭk		KH.22.1204	8405995		Tuol Kouk	2	23179	117
@@ -23300,7 +23300,7 @@ Srŏk Mésang		KH.14.1405	8406192		Me Sang	2	23177	117
 Srŏk Preăh Sdéch		KH.14.1409	8406195		Preah Sdach	2	23177	117
 Srŏk Kâmpóng Léav		KH.14.1411	8406197		Kampong Leav	2	23177	117
 Srŏk Svay Ântôr		KH.14.1413	8406203		Svay Antor	2	23177	117
-Krŏng Bavĕt		KH.18.2008	8406206		Krong Bavet	2	23172	117
+Krŏng Bavĕt		KH.18.2008	8406206			2	23172	117
 Srŏk Banăn		KH.29.0201	8541388		Banan	2	23170	117
 Srŏk Âk Phnŭm		KH.29.0205	8541389		Aek Phnum	2	23170	117
 Srok Phnum Proek		KH.29.0211	8541391		Phnom Proek|Srŏk Phnŭm Prœ̆ks	2	23170	117
@@ -23695,7 +23695,7 @@ Yangyang-gun		KR.06.32410	1832808		Yangyang County	2	23670	122
 Yangsan-si		KR.20.38100	1832824		Yangsan	2	23677	122
 Yangpyeong-gun		KR.13.31380	1832832		Yangpyeong County	2	23668	122
 Yanggu-gun		KR.06.32380	1832908			2	23670	122
-Wonju-si		KR.06.32020	1833099		Wonju|Wŏnju-si	2	23670	122
+Wonju-si		KR.06.32020	1833099		Wonju	2	23670	122
 Gyeongju		KR.14.37020	1833276		Gyeongju-si|Kyŏngju-gun|Wŏlsŏng-gun	2	23667	122
 Wando-gun		KR.16.36460	1833493		Wando County	2	23674	122
 Eunpyeong-gu		KR.11.11120	1833594			2	23665	122
@@ -25486,7 +25486,7 @@ Pétange		LU.ES.09	2960188		Commune de Pétange|Gemeinde Petingen|Gemeng Péiten
 Ville de Luxembourg		LU.LU.2960317	2960317		Luxemburg|Lëtzebuerg|Stad Lëtzebuerg|Stadt Luxemburg	2	25473	134
 Kayl		LU.ES.06	2960392		Commune de Kayl|Gemeinde Kayl|Gemeng Keel|Gemeng Käl|Keel|Käl	2	25475	134
 Grevenmacher		LU.GR.04	2960516		Canton de Grevenmacher|Gemeinde Grevenmacher|Gréiwemaacher|Kanton Grevenmacher|Kanton Gréiwemaacher|Stad Gréiwemaacher|Ville de Grevenmacher	2	25474	134
-Ettelbruck		LU.DI.07	2960590		Ettelbréck|Ettelbrück|Gemeinde Ettelbrück|Stad Ettelbréck|Ville d'Ettelbruck	2	25477	134
+Ettelbruck		LU.DI.07	2960590		Ettelbréck|Gemeinde Ettelbrück|Stad Ettelbréck|Ville d'Ettelbruck	2	25477	134
 Echternach		LU.EC.05	2960631		Eechternoach|Iechternach	2	25476	134
 Dudelange		LU.ES.03	2960635		Diddeleng|Düdelingen|Gemeinde Düdelingen|Gemeng Diddeleng|Ville de Dudelange	2	25475	134
 Differdange		LU.ES.02	2960652		Differdingen|Déifferdang|Gemeinde Differdingen|Gemeng Déifferdang|Ville de Differdange	2	25475	134
@@ -27115,7 +27115,7 @@ Tsagaannuur		MN.03.6619140	6619140		Tsagaannuur District|Tsagaannuur Sum	2	26822
 Nogoonnuur		MN.03.6619141	6619141		Nogoonnuur District|Nogoonnuur Sum	2	26822	147
 Ulaanhus		MN.03.6619142	6619142		Ulaanhus Sum|Ulaankhus District	2	26822	147
 Tsengel		MN.03.6619143	6619143		Tsengel District|Tsengel Sum	2	26822	147
-Sagsay sum		MN.03.6619144	6619144		Sagsai District|Sagsay Sum	2	26822	147
+Sagsay sum		MN.03.6619144	6619144		Sagsai District	2	26822	147
 Bugat		MN.03.6619145	6619145		Bugat District|Bugat Sum	2	26822	147
 Ölgii		MN.03.6619146	6619146			2	26822	147
 Altantsögts		MN.03.6619147	6619147		Altantsögts District	2	26822	147
@@ -27190,7 +27190,7 @@ Bayan-Ovoo Sum		MN.14.6987984	6987984		Bayan-Ovoo	2	26829	147
 Öldziyt Sum		MN.08.6987992	6987992		Öldziyt	2	26832	147
 Bayantsagaan Sum		MN.18.6988008	6988008		Bayantsagaan	2	26825	147
 Bayantal Sum		MN.24.6988010	6988010		Bayantal|Bayantal District	2	26838	147
-Shiveegovi Sum		MN.24.6988011	6988011		Bayan|Bayan Sum|Shiveegovi|Shiveegovi District|Shiveegovĭ Sum	2	26838	147
+Shiveegovi Sum		MN.24.6988011	6988011		Bayan|Bayan Sum|Shiveegovi|Shiveegovi District	2	26838	147
 Sümber Sum		MN.24.6988012	6988012		Govĭsümber Sum|Sümber	2	26838	147
 Darhan Sum		MN.11.6988013	6988013		Darhan|Darhan District	2	26831	147
 Bayantümen Sum		MN.06.6988033	6988033		Bayantümen	2	26834	147
@@ -27282,7 +27282,7 @@ Toujounine		MR.14.9212597	9212597			2	27266	151
 Selibaby		MR.10.9212601	9212601			2	27259	151
 Guerou		MR.03.9212602	9212602		Guerrou	2	27263	151
 Maghama		MR.04.9212603	9212603			2	27260	151
-R'Kiz		MR.06.9212604	9212604		R'kiz	2	27253	151
+R'Kiz		MR.06.9212604	9212604			2	27253	151
 Kiffa		MR.03.9212605	9212605			2	27263	151
 Aioun		MR.02.9212606	9212606			2	27257	151
 Nema		MR.01.9212608	9212608			2	27258	151
@@ -28409,7 +28409,7 @@ Asunción Nochixtlán		MX.20.006	8582477			2	27466	157
 Asunción Ocotlán		MX.20.007	8582478			2	27466	157
 Asunción Tlacolulita		MX.20.008	8582479			2	27466	157
 Ayotzintepec		MX.20.009	8582480			2	27466	157
-El Barrio de la Soledad		MX.20.010	8582481		El Barrio de La Soledad	2	27466	157
+El Barrio de la Soledad		MX.20.010	8582481			2	27466	157
 Calihualá		MX.20.011	8582482			2	27466	157
 Candelaria Loxicha		MX.20.012	8582483			2	27466	157
 Ciénega de Zimatlán		MX.20.013	8582484			2	27466	157
@@ -28503,7 +28503,7 @@ San Andrés Yaá		MX.20.100	8582571			2	27466	157
 San Andrés Zabache		MX.20.101	8582572			2	27466	157
 San Andrés Zautla		MX.20.102	8582573			2	27466	157
 San Antonino Castillo Velasco		MX.20.103	8582574			2	27466	157
-San Antonino el Alto		MX.20.104	8582575		San Antonino El Alto	2	27466	157
+San Antonino el Alto		MX.20.104	8582575			2	27466	157
 San Antonino Monte Verde		MX.20.105	8582576			2	27466	157
 San Antonio Acutla		MX.20.106	8582577			2	27466	157
 San Antonio de la Cal		MX.20.107	8582578			2	27466	157
@@ -29330,7 +29330,7 @@ Huépac		MX.26.034	8583398		Huépac Municipality	2	27476	157
 Imuris		MX.26.035	8583399		Imuris Municipality	2	27476	157
 Magdalena		MX.26.036	8583400		Magdalena de Kino Municipality	2	27476	157
 Mazatán		MX.26.037	8583401		Mazatán Municipality	2	27476	157
-Moctezuma municipality		MX.26.038	8583402		Moctezuma|Moctezuma Municipality	2	27476	157
+Moctezuma municipality		MX.26.038	8583402		Moctezuma	2	27476	157
 Naco		MX.26.039	8583403		Naco Municipality	2	27476	157
 Nácori Chico		MX.26.040	8583404			2	27476	157
 Nacozari de García		MX.26.041	8583405			2	27476	157
@@ -30259,7 +30259,7 @@ Maxixe		MZ.03.9252722	9252722			2	30128	159
 Meluco		MZ.01.9252727	9252727		Meluco District	2	30130	159
 Guija		MZ.02.9252728	9252728		Guijá District	2	30129	159
 Chiure		MZ.01.9252729	9252729		Chiúre District	2	30130	159
-Ilha de Mocambique		MZ.06.9252730	9252730		Ilha de Moçambique|Island of Mozambique	2	30125	159
+Ilha de Mocambique		MZ.06.9252730	9252730		Island of Mozambique	2	30125	159
 Cidade de Tete		MZ.08.9252731	9252731			2	30122	159
 Luenha		MZ.08.9252732	9252732			2	30122	159
 Cidade de Inhambane		MZ.03.9252733	9252733			2	30128	159
@@ -30534,11 +30534,11 @@ Odo Otin		NG.42.30025	7701479		Agbègbè Ìjọba Ìbílẹ̀ Odo Otin	2	30502	1
 Ola Oluwa		NG.42.30026	7701480		Agbègbè Ìjọba Ìbílẹ̀ Ola Oluwa	2	30502	164
 Olorunda		NG.42.30027	7701482		Agbègbè Ìjọba Ìbílẹ̀ Olorunda	2	30502	164
 Oriade		NG.42.30028	7701483		Agbègbè Ìjọba Ìbílẹ̀ Oriade	2	30502	164
-Iwajowa		NG.32.31018	7701486		Ìwájọ̀wà	2	30471	164
-Olorunsogo		NG.32.31024	7701488		Ọlọ́ruńsògo	2	30471	164
-Oluyole		NG.32.31025	7701489		Olúyọ̀lé	2	30471	164
-Ona Ara		NG.32.31026	7701491		Ọ̀nà Àrà	2	30471	164
-Orelope		NG.32.31027	7701492		Orelópé	2	30471	164
+Iwajowa		NG.32.31018	7701486			2	30471	164
+Olorunsogo		NG.32.31024	7701488			2	30471	164
+Oluyole		NG.32.31025	7701489			2	30471	164
+Ona Ara		NG.32.31026	7701491			2	30471	164
+Orelope		NG.32.31027	7701492			2	30471	164
 Ahoada West		NG.50.33003	7701495		Agbègbè Ìjọba Ìbílẹ̀ Ìwọòrùn Ahoada	2	30469	164
 Akuku Toru		NG.50.33004	7701497			2	30469	164
 Andoni		NG.50.33005	7701499			2	30469	164
@@ -30656,14 +30656,14 @@ Gujba		NG.44.707	7730053			2	30504	164
 Ibarapa East		NG.32.31012	7730054		Ìlàoòrùn Ìbàràpá	2	30471	164
 Ibarapa North		NG.32.31013	7730055		Àríwá Ìbàràpá	2	30471	164
 Gulani		NG.44.708	7730056		Agbègbè Ìjọba Ìbílẹ̀ Gulani	2	30504	164
-Ido		NG.32.31014	7730057		Ìdó	2	30471	164
-Kajola		NG.32.31019	7730058		Kájọlà	2	30471	164
+Ido		NG.32.31014	7730057			2	30471	164
+Kajola		NG.32.31019	7730058			2	30471	164
 Lagelu		NG.32.31020	7730059			2	30471	164
-Ori Ire		NG.32.31028	7730060		Orí-Ire	2	30471	164
+Ori Ire		NG.32.31028	7730060			2	30471	164
 Oyo East		NG.32.31029	7730061		Ìlàoòrùn Ọ̀yọ́	2	30471	164
 Oyo West		NG.32.31030	7730062		Ìwọòrùn Ọ̀yọ́	2	30471	164
 Saki West		NG.32.31032	7730066		Ìwọ̀oòrùn Ṣakí	2	30471	164
-Surulere		NG.32.31033	7730073		Súrùlérè	2	30471	164
+Surulere		NG.32.31033	7730073			2	30471	164
 Gokana		NG.50.33012	7730086			2	30469	164
 Ikwerre		NG.50.33013	7730104			2	30469	164
 Ogu Bolo		NG.50.33017	7730136			2	30469	164
@@ -30728,7 +30728,7 @@ Obafemi Owode		NG.16.28015	7873905		Agbègbè Ìjọba Ìbílẹ̀ Obafemi-Owode
 Ibadan South West		NG.32.31010	7873907			2	30471	164
 Ibadan South East		NG.32.31009	7873908			2	30471	164
 Ibadan North East		NG.32.31007	7873910			2	30471	164
-Irepo		NG.32.31015	7873911		Ìrẹ́pọ̀	2	30471	164
+Irepo		NG.32.31015	7873911			2	30471	164
 Kaiama		NG.30.24011	7873912		Agbègbè Ìjọba Ìbílẹ̀ Kaiama	2	30476	164
 Bagudo		NG.40.505	7873914		Agbègbè Ìjọba Ìbílẹ̀ Bagudo	2	30500	164
 Koko-Besse		NG.40.513	7873915			2	30500	164
@@ -30996,14 +30996,14 @@ Oke Ero		NG.30.24014	8635166		Ìjọba Agbègbè Oke Ero	2	30476	164
 Ekiti		NG.30.24004	8635167			2	30476	164
 Edu		NG.30.24003	8635168		Ìjọba Agbègbè Edu	2	30476	164
 Saki East		NG.32.31031	8636065		Ìlàoòrùn Ṣakí	2	30471	164
-Atisbo		NG.32.31004	8636066		Àtisbò	2	30471	164
-Atiba		NG.32.31003	8636067		Àtìbà	2	30471	164
+Atisbo		NG.32.31004	8636066			2	30471	164
+Atiba		NG.32.31003	8636067			2	30471	164
 Ogbomosho North		NG.32.31021	8636068		Àríwá Ògbómọ̀shọ́	2	30471	164
-Ogo Oluwa		NG.32.31023	8636069		Ògo-Olúwa	2	30471	164
-Itesiwaju		NG.32.31017	8636070		Ìtẹ̀síwájú	2	30471	164
+Ogo Oluwa		NG.32.31023	8636069			2	30471	164
+Itesiwaju		NG.32.31017	8636070			2	30471	164
 Iseyin		NG.32.31016	8636318			2	30471	164
 Ibarapa Central		NG.32.31011	8636319		Gbọ̀ngàn Ìbàràpá	2	30471	164
-Egbeda		NG.32.31005	8636320		Ẹgbẹ́dá	2	30471	164
+Egbeda		NG.32.31005	8636320			2	30471	164
 Ogbomosho South		NG.32.31022	8636321		Gúúsù Ògbómọ̀shọ́	2	30471	164
 Imeko Afon		NG.16.28013	8636322		Agbègbè Ìjọba Ìbílẹ̀ Imeko-Afon	2	30473	164
 Egbado North		NG.16.28004	8636323			2	30473	164
@@ -31445,7 +31445,7 @@ Municipality of Rosita		NI.17.9115	8693133			2	31305	165
 Desembocadura de Río Grande		NI.18.9312	9161306			2	31306	165
 Municipality of El Rama		NI.18.9320	9165985			2	31306	165
 Municipality of Bonanza		NI.17.9120	9166062			2	31305	165
-Mulukuku		NI.17.9127	9166065		Mulukukú	2	31305	165
+Mulukuku		NI.17.9127	9166065			2	31305	165
 Kukra Hill		NI.18.9330	9166071			2	31306	165
 Pearl Lagoon		NI.18.9315	9166072		Laguna de Perlas	2	31306	165
 El Almendro		NI.14.8510	9166157			2	31291	165
@@ -31794,7 +31794,7 @@ Gemeente Zuidplas		NL.11.1892	7535501		Zuidplas	2	31460	166
 Gemeente Peel en Maas		NL.05.1894	7535502		Peel en Maas|Peel en Maas Municipality	2	31466	166
 Eijsden-Margraten		NL.05.1903	8260046		Eijsden-Margraten Municipality	2	31466	166
 Stichtse Vecht		NL.09.1904	8260047			2	31462	166
-Sûdwest Fryslân		NL.02.1900	8260049		Southwest Friesland|Súdwest-Fryslân	2	31469	166
+Sûdwest Fryslân		NL.02.1900	8260049		Southwest Friesland	2	31469	166
 Bodegraven-Reeuwijk		NL.11.1901	8260050			2	31460	166
 Gemeente Hollands Kroon		NL.07.1911	8426240		Hollands Kroon|Hollands Kroon Municipality	2	31464	166
 Gemeente Goeree-Overflakkee		NL.11.1924	8549513		Goeree-Overflakkee	2	31460	166
@@ -31857,7 +31857,7 @@ Hasvik		NO.05.5616	779641		Ákŋoluokta	2	31820	167
 Gamvik		NO.05.5626	779933		Gamvik kommune|Gáŋgaviika	2	31820	167
 Berlevåg		NO.05.5630	780686		Bearalváhki	2	31820	167
 Båtsfjord		NO.05.5632	780714		Báhcavuotna|Båtsfjord kommune	2	31820	167
-Alta		NO.05.5601	780946		Áltá	2	31820	167
+Alta		NO.05.5601	780946			2	31820	167
 Voss		NO.46.4621	3131325			2	31834	167
 Volda		NO.08.1577	3131447			2	31828	167
 Vik		NO.46.4639	3131675			2	31834	167
@@ -32131,7 +32131,7 @@ Sande		NO.08.1514	6453345			2	31828	167
 Årdal		NO.46.4643	6453348			2	31834	167
 Vang		NO.34.3454	6453349			2	31833	167
 Lillehammer		NO.34.3405	6453350			2	31833	167
-Hamar		NO.34.3403	6453351		Hámar	2	31833	167
+Hamar		NO.34.3403	6453351			2	31833	167
 Vaksdal		NO.46.4628	6453352			2	31834	167
 Øygarden		NO.46.4626	6453353		Øygarden kommune	2	31834	167
 Gjøvik		NO.34.3407	6453355		Gjøvik kommune	2	31833	167
@@ -32536,7 +32536,7 @@ Mirono		PA.12.1202	9862220		Mironó District	2	32461	173
 Kusapín		PA.12.1207	9862221		Kusapín District	2	32461	173
 Kankintú		PA.12.1206	9862223		Kankintú District	2	32461	173
 Besiko		PA.12.1201	9862224		Besikó District	2	32461	173
-Nurun		PA.12.1205	9862226		Ñürüm District|Ñürün	2	32461	173
+Nurun		PA.12.1205	9862226		Ñürüm District	2	32461	173
 Santa Catalina o Calovébora		PA.12.1209	12510669		Santa Catalina o Calovébora District	2	32461	173
 Santa Fe		PA.05.0503	12510670			2	32455	173
 Omar Torrijos Herrera		PA.04.0306	12510671			2	32456	173
@@ -32723,11 +32723,11 @@ Provincia de Churcampa		PE.09.0905	7778813		Churcampa Province	2	32566	174
 Provincia de Sucre		PE.05.0509	7778814		Sucre Province	2	32569	174
 Provincia de Huanca Sancos		PE.05.0503	7778815		Huanca Sancos Province	2	32569	174
 Provincia de Vilcas Huamán		PE.05.0511	7778816		Vilcas Huamán Province	2	32569	174
-Sanchez Carrion		PE.13.1309	7807970		Sánchez Carrión|Sánchez Carrión Province	2	32552	174
+Sanchez Carrion		PE.13.1309	7807970		Sánchez Carrión Province	2	32552	174
 Condorcanqui		PE.01.0104	8349545		Condorcanqui Province	2	32556	174
 Utcubamba		PE.01.0107	8349546		Provincia de Utcubamba|Utcubamba Province|Utkupampa pruwinsya	2	32556	174
-Asuncion		PE.02.0204	8349547		Asunción|Asunción Province	2	32555	174
-Carlos Fermin Fitzcarrald		PE.02.0207	8349548		Carlos Fermín Fitzcarrald|Carlos Fermín Fitzcarrald Province	2	32555	174
+Asuncion		PE.02.0204	8349547		Asunción Province	2	32555	174
+Carlos Fermin Fitzcarrald		PE.02.0207	8349548		Carlos Fermín Fitzcarrald Province	2	32555	174
 Ocros		PE.02.0214	8349549			2	32555	174
 Chincheros		PE.03.0306	8349550			2	32571	174
 Paucar Del Sara Sara		PE.05.0508	8349551		Paucar del Sara Sara Province	2	32569	174
@@ -32745,8 +32745,8 @@ Gran Chimu		PE.13.1311	8349562		Gran Chimú Province	2	32552	174
 Viru		PE.13.1312	8349563		Virú Province	2	32552	174
 Barranca		PE.15.1502	8349564			2	32563	174
 Huaura		PE.15.1508	8349565		Huaura Province|Provincia de Huaura|Wawra pruwinsya	2	32563	174
-Oyon		PE.15.1509	8349566		Oyón|Oyón Province	2	32563	174
-Mariscal Ramon Castilla		PE.16.1604	8349567		Mariscal Ramón Castilla|Mariscal Ramón Castilla Province	2	32550	174
+Oyon		PE.15.1509	8349566		Oyón Province	2	32563	174
+Mariscal Ramon Castilla		PE.16.1604	8349567		Mariscal Ramón Castilla Province	2	32550	174
 Datem del Marañón		PE.16.1607	8349568		Datem del Marañón Province	2	32550	174
 Sechura		PE.20.2008	8349569			2	32549	174
 El Collao		PE.21.2105	8349570		El Collao Province|Provincia de El Collao|Qullaw pruwinsya	2	32558	174
@@ -33065,12 +33065,12 @@ Nawabshah District		PK.05.1169115	1169115			2	33035	178
 Nasirabad		PK.02.1169249	1169249		Nasirabad District	2	33039	178
 Muzaffargarh District		PK.04.1169603	1169603		Muzaffargarh	2	33036	178
 Muzaffarabad District		PK.06.1169606	1169606		Muzaffarabad	2	33040	178
-Multān District		PK.04.1169821	1169821		Multan|Multan District	2	33036	178
+Multān District		PK.04.1169821	1169821		Multan	2	33036	178
 Mohmand Agency		PK.03.1170122	1170122		Mohmand	2	33037	178
 Mirpur District		PK.06.1170297	1170297			2	33040	178
 Mianwali		PK.04.1170424	1170424		Mianwali District	2	33036	178
 Mardan		PK.03.1170875	1170875		Mardan District	2	33037	178
-Mānsehra District		PK.03.1170950	1170950		Mansehra|Mansehra District	2	33037	178
+Mānsehra District		PK.03.1170950	1170950		Mansehra	2	33037	178
 Malakand Protected Area		PK.03.1171388	1171388		Malakand|Malakand Agency	2	33037	178
 Loralai District		PK.02.1171867	1171867		Loralai	2	33039	178
 Lasbela District		PK.02.1172115	1172115		Lasbela	2	33039	178
@@ -33081,8 +33081,8 @@ Kotli District		PK.06.1173037	1173037		Kotli	2	33040	178
 Kohlu District		PK.02.1173463	1173463		Kohlu	2	33039	178
 Kohat		PK.03.1173489	1173489		Kohat District	2	33037	178
 Khyber Agency		PK.03.1173641	1173641		Khyber	2	33037	178
-Khuzdār District		PK.02.1173663	1173663		Khuzdar|Khuzdar District	2	33039	178
-Khārān District		PK.02.1174059	1174059		Kharan District	2	33039	178
+Khuzdār District		PK.02.1173663	1173663		Khuzdar	2	33039	178
+Khārān District		PK.02.1174059	1174059			2	33039	178
 Khairpur District		PK.05.1174349	1174349		Khairpur	2	33035	178
 Kasur		PK.04.1174623	1174623		Kasur District	2	33036	178
 Kalat		PK.02.1175293	1175293		Kalat District	2	33039	178
@@ -33093,53 +33093,53 @@ Jacobabad District		PK.05.1176514	1176514		Jacobabad|Upper Sind Frontier Distric
 Hyderabad District		PK.05.1176733	1176733		Hyderabad	2	33035	178
 Hunza-Nagar District		PK.07.1176775	1176775		Hunza-Nagar	2	33038	178
 Gwadar		PK.02.1177445	1177445		Gwadar District	2	33039	178
-Gujrāt District		PK.04.1177651	1177651		Gujrat|Gujrat District	2	33036	178
-Gujrānwāla District		PK.04.1177658	1177658		Gujranwala|Gujranwala District	2	33036	178
+Gujrāt District		PK.04.1177651	1177651		Gujrat	2	33036	178
+Gujrānwāla District		PK.04.1177658	1177658		Gujranwala	2	33036	178
 Gilgit District		PK.07.1178336	1178336			2	33038	178
-Faisalābād District		PK.04.1179399	1179399		Faisalabad|Faisalabad District	2	33036	178
+Faisalābād District		PK.04.1179399	1179399		Faisalabad	2	33036	178
 Upper Dir District		PK.03.1179754	1179754		Dir District|Upper Dir	2	33037	178
 Dera Ismail Khan Tribal Area		PK.03.1180280	1180280			2	33037	178
 Dera Ismail Khan		PK.03.1180282	1180282		D. I. Khan District|Dera Ismail Khan District	2	33037	178
-Dera Ghāzi Khān District		PK.04.1180287	1180287		Dera Ghazi Khan|Dera Ghazi Khan District	2	33036	178
+Dera Ghāzi Khān District		PK.04.1180287	1180287		Dera Ghazi Khan	2	33036	178
 Dadu		PK.05.1180802	1180802		Dadu District	2	33035	178
-Chitrāl District		PK.03.1181064	1181064		Chitral|Chitral District	2	33037	178
-Chāgai District		PK.02.1181950	1181950		Chagai|Chagai District	2	33039	178
+Chitrāl District		PK.03.1181064	1181064		Chitral	2	33037	178
+Chāgai District		PK.02.1181950	1181950		Chagai	2	33039	178
 Buner District		PK.03.1182146	1182146		Buner	2	33037	178
 Bannu District		PK.03.1183459	1183459		Bannu	2	33037	178
 Skardu		PK.07.1183615	1183615		Skardu District	2	33038	178
-Bājaur Agency		PK.03.1183781	1183781		Bajaur|Bajaur Agency	2	33037	178
-Bahāwalpur District		PK.04.1183876	1183876		Bahawalpur|Bahawalpur District	2	33036	178
-Bahāwalnagar District		PK.04.1183882	1183882		Bahawalnagar|Bahawalnagar District	2	33036	178
-Badīn District		PK.05.1184051	1184051		Badin District	2	33035	178
+Bājaur Agency		PK.03.1183781	1183781		Bajaur	2	33037	178
+Bahāwalpur District		PK.04.1183876	1183876		Bahawalpur	2	33036	178
+Bahāwalnagar District		PK.04.1183882	1183882		Bahawalnagar	2	33036	178
+Badīn District		PK.05.1184051	1184051			2	33035	178
 Attock District		PK.04.1184248	1184248		Attock	2	33036	178
-Abbottābād District		PK.03.1185055	1185055		Abbottabad|Abbottabad District	2	33037	178
+Abbottābād District		PK.03.1185055	1185055		Abbottabad	2	33037	178
 Mirpur Khas District		PK.05.1376894	1376894			2	33035	178
-Awārān District		PK.02.6641896	6641896		Awaran|Awaran District	2	33039	178
+Awārān District		PK.02.6641896	6641896		Awaran	2	33039	178
 Barkhan District		PK.02.6641912	6641912		Barkhan	2	33039	178
 Dera Bugti District		PK.02.6641919	6641919		Dera Bugti	2	33039	178
-Jāfarābād District		PK.02.6641922	6641922		Jafarabad|Jafarabad District	2	33039	178
+Jāfarābād District		PK.02.6641922	6641922		Jafarabad	2	33039	178
 Jhal Magsi District		PK.02.6641923	6641923		Jhal Magsi	2	33039	178
 Mastung District		PK.02.6641952	6641952		Mastung	2	33039	178
 Musa Khel District		PK.02.6641955	6641955		Musa Khel	2	33039	178
 Nushki District		PK.02.6641960	6641960			2	33039	178
 Qila Abdullah District		PK.02.6641961	6641961		Qila Abdullah	2	33039	178
 Qila Saifullah		PK.02.6641963	6641963		Killa Saifullah District|Qila Saifullah District	2	33039	178
-Wāshuk District		PK.02.6641965	6641965		Washuk|Washuk District	2	33039	178
-Ziārat District		PK.02.6641972	6641972		Ziarat|Ziarat District	2	33039	178
+Wāshuk District		PK.02.6641965	6641965		Washuk	2	33039	178
+Ziārat District		PK.02.6641972	6641972		Ziarat	2	33039	178
 Toba Tek Singh District		PK.04.7331706	7331706		Toba Tek Singh	2	33036	178
 Naushahro Firoz		PK.05.7352189	7352189		Naushahro Feroze District|Naushahro Firoz District	2	33035	178
 Ghotki District		PK.05.7418822	7418822		Ghotki	2	33035	178
-Lodhrān District		PK.04.7418846	7418846		Lodhran|Lodhran District	2	33036	178
-Pākpattan District		PK.04.7418850	7418850		Pakpattan|Pakpattan District	2	33036	178
-Okāra District		PK.04.7418888	7418888		Okara|Okara District	2	33036	178
-Khānewāl District		PK.04.7418890	7418890		Khanewal|Khanewal District	2	33036	178
-Hāfizābād District		PK.04.7418962	7418962		Hafizabad|Hafizabad District	2	33036	178
-Mandi Bahāuddīn District		PK.04.7418963	7418963		Mandi Bahauddin|Mandi Bahauddin District	2	33036	178
+Lodhrān District		PK.04.7418846	7418846		Lodhran	2	33036	178
+Pākpattan District		PK.04.7418850	7418850		Pakpattan	2	33036	178
+Okāra District		PK.04.7418888	7418888		Okara	2	33036	178
+Khānewāl District		PK.04.7418890	7418890		Khanewal	2	33036	178
+Hāfizābād District		PK.04.7418962	7418962		Hafizabad	2	33036	178
+Mandi Bahāuddīn District		PK.04.7418963	7418963		Mandi Bahauddin	2	33036	178
 Chakwal District		PK.04.7418964	7418964		Chakwal	2	33036	178
 Khushab		PK.04.7418965	7418965		Khushab District	2	33036	178
 Bhakkar District		PK.04.7418966	7418966		Bhakkar	2	33036	178
 Layyah District		PK.04.7418967	7418967			2	33036	178
-Nārowāl District		PK.04.7418968	7418968		Narowal|Narowal District	2	33036	178
+Nārowāl District		PK.04.7418968	7418968		Narowal	2	33036	178
 Lakki Marwat District		PK.03.7419039	7419039		Lakki Marwat	2	33037	178
 Tank		PK.03.7419040	7419040		Tank District	2	33037	178
 Tank Frontier Region		PK.03.7419041	7419041		Tank Tribal Area|Tribal Area Adjoining Tank District	2	33037	178
@@ -33149,16 +33149,16 @@ Karak District		PK.03.7419047	7419047		Karak	2	33037	178
 Hangu District		PK.03.7419048	7419048			2	33037	178
 Peshawar Frontier Region		PK.03.7419049	7419049		Peshawar Tribal Area|Tribal Area Adjoining Peshawar District	2	33037	178
 Tribal Area Adjoining Kohat District		PK.03.7419050	7419050		Kohat Frontier Region|Kohat Tribal Area	2	33037	178
-Chārsadda District		PK.03.7419051	7419051		Charsadda|Charsadda District	2	33037	178
+Chārsadda District		PK.03.7419051	7419051		Charsadda	2	33037	178
 Nowshera District		PK.03.7419052	7419052		Nowshera	2	33037	178
-Shāngla District		PK.03.7419053	7419053		Shangla|Shangla District	2	33037	178
-Harīpur District		PK.03.7419054	7419054		Haripur|Haripur District	2	33037	178
-Swābi District		PK.03.7419055	7419055		Swabi|Swabi District	2	33037	178
-Lower Dīr District		PK.03.7419056	7419056		Lower Dir|Lower Dir District	2	33037	178
+Shāngla District		PK.03.7419053	7419053		Shangla	2	33037	178
+Harīpur District		PK.03.7419054	7419054		Haripur	2	33037	178
+Swābi District		PK.03.7419055	7419055		Swabi	2	33037	178
+Lower Dīr District		PK.03.7419056	7419056		Lower Dir	2	33037	178
 Ghanche District		PK.07.7419077	7419077		Ghanche	2	33038	178
-Jāmshoro District		PK.05.7419156	7419156		Jamshoro|Jamshoro District	2	33035	178
-Matiāri District		PK.05.7419157	7419157		Matiari|Matiari District	2	33035	178
-Nankāna Sāhib District		PK.04.7419159	7419159		Nankana Sahib|Nankana Sahib District	2	33036	178
+Jāmshoro District		PK.05.7419156	7419156		Jamshoro	2	33035	178
+Matiāri District		PK.05.7419157	7419157		Matiari	2	33035	178
+Nankāna Sāhib District		PK.04.7419159	7419159		Nankana Sahib	2	33036	178
 Bhimbar District		PK.06.7536187	7536187		Bhimbar	2	33040	178
 Bagh		PK.06.7536188	7536188		Bagh District	2	33040	178
 Tor Ghar		PK.03.8061265	8061265			2	33037	178
@@ -33212,7 +33212,7 @@ Wielkopolskie	PL-30	PL.86	3337498	Voivodship	Didžiosios Lenkijos vaivadija|Grea
 Zachodniopomorskie	PL-32	PL.87	3337499	Voivodship	Vakarų Pamario vaivadija|West Pomerania|West Pomerania Province|West Pomeranian|West Pomeranian Voivodeship|Woiwodschaft Westpommern|Zôpadnopòmòrsczé wòjewództwò|województwo zachodniopomorskie	1		179
 Kujawsko-Pomorskie	PL-04	PL.73	3337500	Voivodship	Kujavijos Pamario vaivadija|Kujawsko-Pomorskie Voivodship|Kuyavian-Pomeranian|Kuyavian-Pomeranian Voivodeship|Woiwodschaft Kujawien-Pommern|Województwo kujawsko-pomorskie	1		179
 Powiat będziński		PL.83.2401	3079850		Będzin County	2	33210	179
-Powiat olsztyński		PL.85.2814	6619358		Olsztyn County|Powiat Olsztyński	2	33204	179
+Powiat olsztyński		PL.85.2814	6619358		Olsztyn County	2	33204	179
 Powiat miechowski		PL.77.1208	6690130		Miechów County	2	33199	179
 Powiat bocheński		PL.77.1201	6690149		Bochnia County	2	33199	179
 Powiat brzeski		PL.77.1202	6690150		Brzesko County	2	33199	179
@@ -33220,7 +33220,7 @@ Powiat chrzanowski		PL.77.1203	6690151		Chrzanów County	2	33199	179
 Powiat dąbrowski		PL.77.1204	6690152		Dąbrowa County	2	33199	179
 Powiat gorlicki		PL.77.1205	6690153		Gorlice County	2	33199	179
 Kraków		PL.77.1261	6690154		Krakau|Krakòwò|Krokuva	2	33199	179
-Powiat limanowski		PL.77.1207	6690155		Limanowa County|Powiat Limanowski	2	33199	179
+Powiat limanowski		PL.77.1207	6690155		Limanowa County	2	33199	179
 Powiat myślenicki		PL.77.1209	6690156		Myślenice County	2	33199	179
 Nowy Sącz		PL.77.1262	6690157		Neu-Sandez	2	33199	179
 Powiat nowotarski		PL.77.1211	6690158		Nowy Targ County	2	33199	179
@@ -33233,7 +33233,7 @@ Powiat tatrzański		PL.77.1217	6690164		Tatra County	2	33199	179
 Powiat wadowicki		PL.77.1218	6690165		Wadowice County	2	33199	179
 Powiat wielicki		PL.77.1219	6690166		Wieliczka County	2	33199	179
 Warszawa		PL.78.1465	6695624		Powiat m. Warszawa	2	33200	179
-Łódź		PL.74.1061	6697536		Lodz	2	33206	179
+Łódź		PL.74.1061	6697536			2	33206	179
 powiat Łowicki		PL.74.1005	6941021		Łowicz County	2	33206	179
 Biała Podlaska		PL.75.0661	7530726		Biała County|Powiat bialski	2	33198	179
 Chełm		PL.75.0662	7530729		powiat miasto Chełm	2	33198	179
@@ -33244,13 +33244,13 @@ Powiat namysłowski		PL.79.1606	7530733		Namysłów County	2	33208	179
 Powiat nyski		PL.79.1607	7530734		Nysa County	2	33208	179
 Powiat kępiński		PL.86.3008	7530735		Kępno County	2	33211	179
 Powiat biłgorajski		PL.75.0602	7530736		Biłgoraj County	2	33198	179
-Powiat chełmski		PL.75.0603	7530737		Chełm County|powiat chełmski	2	33198	179
+Powiat chełmski		PL.75.0603	7530737		Chełm County	2	33198	179
 Powiat hrubieszowski		PL.75.0604	7530738		Hrubieszów County	2	33198	179
 Powiat janowski		PL.75.0605	7530739		Janów County	2	33198	179
 Powiat krasnostawski		PL.75.0606	7530740		Krasnystaw County	2	33198	179
 Powiat kraśnicki		PL.75.0607	7530741		Kraśnik County	2	33198	179
 Powiat lubartowski		PL.75.0608	7530742		Lubartów County	2	33198	179
-Powiat lubelski		PL.75.0609	7530743		Lublin County|Powiat Lubelski	2	33198	179
+Powiat lubelski		PL.75.0609	7530743		Lublin County	2	33198	179
 Gorzów Wielkopolski		PL.76.0861	7530744		Gorzów|Landsberg an der Warthe	2	33207	179
 Piotrków Trybunalski		PL.74.1062	7530745		Powiat piotrkowski	2	33206	179
 Dąbrowa Górnicza		PL.83.2465	7530746			2	33210	179
@@ -33264,7 +33264,7 @@ Powiat ostródzki		PL.85.2815	7530753		Ostróda County	2	33204	179
 Powiat koszaliński		PL.87.3209	7530754		Koszalin County	2	33212	179
 Powiat sławieński		PL.87.3213	7530755		Sławno County	2	33212	179
 Powiat szczecinecki		PL.87.3215	7530756		Szczecinek County	2	33212	179
-Powiat grójecki		PL.78.1406	7530757		Grójec County|Powiat Grójecki	2	33200	179
+Powiat grójecki		PL.78.1406	7530757		Grójec County	2	33200	179
 Powiat przysuski		PL.78.1423	7530758		Przysucha County	2	33200	179
 Powiat sochaczewski		PL.78.1428	7530759		Sochaczew County	2	33200	179
 Powiat żyrardowski		PL.78.1438	7530760		Żyrardów County	2	33200	179
@@ -33275,9 +33275,9 @@ Powiat kłobucki		PL.83.2406	7530764		Kłobuck County	2	33210	179
 Powiat konecki		PL.84.2605	7530765		Końskie County	2	33203	179
 Powiat włoszczowski		PL.84.2613	7530766		Włoszczowa County	2	33203	179
 Powiat kaliski		PL.86.3007	7530767		Kalisz County	2	33211	179
-Powiat krakowski		PL.77.1206	7530768		Kraków County|Powiat Krakowski	2	33199	179
+Powiat krakowski		PL.77.1206	7530768		Kraków County	2	33199	179
 Powiat dębicki		PL.80.1803	7530769		Dębica County	2	33201	179
-Powiat jasielski		PL.80.1805	7530770		Jasło County|Powiat Jasielski	2	33201	179
+Powiat jasielski		PL.80.1805	7530770		Jasło County	2	33201	179
 Powiat mielecki		PL.80.1811	7530771		Mielec County	2	33201	179
 Białystok		PL.81.2061	7530772		Wysoczyzna Białostocka	2	33202	179
 Łomża		PL.81.2062	7530773		powiat miasto Łomża	2	33202	179
@@ -33305,7 +33305,7 @@ Powiat goleniowski		PL.87.3204	7530794		Goleniów County	2	33212	179
 Powiat gryficki		PL.87.3205	7530795		Gryfice County	2	33212	179
 Jelenia Góra		PL.72.0261	7530796		Hirschberg im Riesengebirge	2	33205	179
 Powiat kielecki		PL.84.2604	7530797		Kielce County	2	33203	179
-Powiat bartoszycki		PL.85.2801	7530798		Bartoszyce County|Powiat Bartoszycki	2	33204	179
+Powiat bartoszycki		PL.85.2801	7530798		Bartoszyce County	2	33204	179
 Powiat giżycki		PL.85.2806	7530799		Giżycko County|Kreis Lötzen	2	33204	179
 Powiat lidzbarski		PL.85.2809	7530800		Lidzbark County	2	33204	179
 Wrocław		PL.72.0264	7530801			2	33205	179
@@ -33313,8 +33313,8 @@ Powiat obornicki		PL.86.3016	7530802		Oborniki County	2	33211	179
 Powiat szczycieński		PL.85.2817	7530803		Powiat szczycieńsk|Szczytno County	2	33204	179
 Powiat bolesławiecki		PL.72.0201	7530804		Bolesławiec County	2	33205	179
 Powiat dzierżoniowski		PL.72.0202	7530805		Dzierżoniów County	2	33205	179
-Powiat głogowski		PL.72.0203	7530806		Głogòwsczi kréz|Głogów County|Powiat Głogowski	2	33205	179
-Powiat górowski		PL.72.0204	7530807		Góra County|Powiat Górowski	2	33205	179
+Powiat głogowski		PL.72.0203	7530806		Głogòwsczi kréz|Głogów County	2	33205	179
+Powiat górowski		PL.72.0204	7530807		Góra County	2	33205	179
 Powiat cieszyński		PL.83.2403	7530808		Cieszyn County	2	33210	179
 Powiat mikołowski		PL.83.2408	7530809		Mikołów County	2	33210	179
 Powiat myszkowski		PL.83.2409	7530810		Myszków County	2	33210	179
@@ -33322,15 +33322,15 @@ Powiat rybnicki		PL.83.2412	7530811		Rybnik County	2	33210	179
 Powiat wschowski		PL.76.0812	7530812		Wschowa County	2	33207	179
 Toruń		PL.73.0463	7530813		Torunė|powiat miasto Toruń	2	33213	179
 Bydgoszcz		PL.73.0461	7530814			2	33213	179
-Powiat jaworski		PL.72.0205	7530815		Jawor County|Powiat Jaworski	2	33205	179
-Powiat jeleniogórski		PL.72.0206	7530816		Jelenia Góra County|Powiat Jeleniogórski	2	33205	179
+Powiat jaworski		PL.72.0205	7530815		Jawor County	2	33205	179
+Powiat jeleniogórski		PL.72.0206	7530816		Jelenia Góra County	2	33205	179
 Jaworzno		PL.83.2468	7530817			2	33210	179
 Opole		PL.79.1661	7530818			2	33208	179
 Rzeszów		PL.80.1863	7530819			2	33201	179
 Sopot		PL.82.2264	7530820			2	33209	179
-Powiat kłodzki		PL.72.0208	7530821		Klodzko apskritis|Kłodzko County|Powiat Kłodzki	2	33205	179
+Powiat kłodzki		PL.72.0208	7530821		Klodzko apskritis|Kłodzko County	2	33205	179
 Powiat legnicki		PL.72.0209	7530822		Legnica County	2	33205	179
-Powiat lubański		PL.72.0210	7530823		Lubań County|Powiat Lubański	2	33205	179
+Powiat lubański		PL.72.0210	7530823		Lubań County	2	33205	179
 Powiat nowosądecki		PL.77.1210	7530824		Nowy Sącz County	2	33199	179
 Powiat tarnowski		PL.77.1216	7530825		Tarnów County	2	33199	179
 Powiat kolneński		PL.81.2006	7530826		Kolno County	2	33202	179
@@ -33338,30 +33338,30 @@ Powiat Łomżyński		PL.81.2007	7530827		Łomża County|łomżyński	2	33202	179
 Powiat zambrowski		PL.81.2014	7530828		Zambrów County	2	33202	179
 Powiat ostrowiecki		PL.84.2607	7530829		Ostrowiec County	2	33203	179
 Powiat jarosławski		PL.80.1804	7530830		Jarosław County	2	33201	179
-Powiat lubiński		PL.72.0211	7530831		Lubin County|Powiat Lubiński	2	33205	179
-Powiat lwówecki		PL.72.0212	7530832		Lwówek Śląski County|Powiat Lwówecki	2	33205	179
-Powiat milicki		PL.72.0213	7530833		Milicz County|Powiat Milicki	2	33205	179
-Powiat oleśnicki		PL.72.0214	7530834		Oleśnica County|Powiat Oleśnicki	2	33205	179
-Powiat oławski		PL.72.0215	7530835		Oława County|Powiat Oławski	2	33205	179
-Powiat polkowicki		PL.72.0216	7530836		Polkowice County|Powiat Polkowicki	2	33205	179
-Powiat strzeliński		PL.72.0217	7530837		Powiat Strzeliński|Strzelin County	2	33205	179
-Powiat średzki		PL.72.0218	7530838		Powiat Średzki|Środa Śląska County	2	33205	179
+Powiat lubiński		PL.72.0211	7530831		Lubin County	2	33205	179
+Powiat lwówecki		PL.72.0212	7530832		Lwówek Śląski County	2	33205	179
+Powiat milicki		PL.72.0213	7530833		Milicz County	2	33205	179
+Powiat oleśnicki		PL.72.0214	7530834		Oleśnica County	2	33205	179
+Powiat oławski		PL.72.0215	7530835		Oława County	2	33205	179
+Powiat polkowicki		PL.72.0216	7530836		Polkowice County	2	33205	179
+Powiat strzeliński		PL.72.0217	7530837		Strzelin County	2	33205	179
+Powiat średzki		PL.72.0218	7530838		Środa Śląska County	2	33205	179
 Tarnobrzeg		PL.80.1864	7530839			2	33201	179
 Szczecin		PL.87.3262	7530840		Stettin	2	33212	179
 Powiat augustowski		PL.81.2001	7530841			2	33202	179
-Powiat kamieński		PL.87.3207	7530842		Kamień County|Powiat kamieński)	2	33212	179
+Powiat kamieński		PL.87.3207	7530842		Kamień County	2	33212	179
 Powiat kołobrzeski		PL.87.3208	7530843		Kołobrzeg County	2	33212	179
 Powiat policki		PL.87.3211	7530844		Police County	2	33212	179
 Powiat pyrzycki		PL.87.3212	7530845		Pyrzyce County	2	33212	179
-Powiat świdnicki		PL.72.0219	7530846		Powiat Świdnicki|Świdnica County	2	33205	179
-Powiat trzebnicki		PL.72.0220	7530847		Powiat Trzebnicki|Trzebnica County	2	33205	179
+Powiat świdnicki		PL.72.0219	7530846		Świdnica County	2	33205	179
+Powiat trzebnicki		PL.72.0220	7530847		Trzebnica County	2	33205	179
 Powiat wałbrzyski		PL.72.0221	7530848		Waldenburg|Wałbrzych|Wałbrzych County	2	33205	179
-Powiat wołowski		PL.72.0222	7530849		Powiat Wołowski|Wołów County	2	33205	179
-Powiat wrocławski		PL.72.0223	7530850		Powiat wrocławski)|Wrocław County	2	33205	179
-Powiat ząbkowicki		PL.72.0224	7530851		Powiat Ząbkowicki|Ząbkowice Śląskie County	2	33205	179
-Powiat zgorzelecki		PL.72.0225	7530852		Powiat Zgorzelecki|Zgorzelec County	2	33205	179
-Powiat złotoryjski		PL.72.0226	7530853		Powiat Złotoryjski|Złotoryja County	2	33205	179
-Powiat wodzisławski		PL.83.2415	7530854		Powiat Wodzisławski|Wodzisław County	2	33210	179
+Powiat wołowski		PL.72.0222	7530849		Wołów County	2	33205	179
+Powiat wrocławski		PL.72.0223	7530850		Wrocław County	2	33205	179
+Powiat ząbkowicki		PL.72.0224	7530851		Ząbkowice Śląskie County	2	33205	179
+Powiat zgorzelecki		PL.72.0225	7530852		Zgorzelec County	2	33205	179
+Powiat złotoryjski		PL.72.0226	7530853		Złotoryja County	2	33205	179
+Powiat wodzisławski		PL.83.2415	7530854		Wodzisław County	2	33210	179
 Powiat nowosolski		PL.76.0804	7530855		Nowa Sól County	2	33207	179
 Powiat żagański		PL.76.0810	7530856		Żagań County	2	33207	179
 Gliwice		PL.83.2466	7530857		Gleiwitz	2	33210	179
@@ -33410,7 +33410,7 @@ Powiat stalowowolski		PL.80.1818	7530899		Stalowa Wola County	2	33201	179
 Powiat siemiatycki		PL.81.2010	7530900		Siemiatycze County	2	33202	179
 Powiat opatowski		PL.84.2606	7530901		Opatów County	2	33203	179
 Powiat krotoszyński		PL.86.3012	7530902		Krotoszyn County	2	33211	179
-Powiat leszczyński		PL.86.3013	7530903		Leszno County|Powiat Leszczyński|leszczyński	2	33211	179
+Powiat leszczyński		PL.86.3013	7530903		Leszno County|leszczyński	2	33211	179
 Powiat aleksandrowski		PL.73.0401	7530904		Aleksandrów County	2	33213	179
 Powiat brodnicki		PL.73.0402	7530905		Brodnica County	2	33213	179
 Powiat bydgoski		PL.73.0403	7530906		Bydgoszcz County	2	33213	179
@@ -33425,7 +33425,7 @@ Powiat radziejowski		PL.73.0411	7530914		Radziejów County	2	33213	179
 Powiat rypiński		PL.73.0412	7530915		Rypin County	2	33213	179
 Powiat sępoleński		PL.73.0413	7530916		Sępólno County	2	33213	179
 Powiat świecki		PL.73.0414	7530917		Świecie County	2	33213	179
-Powiat Toruński		PL.73.0415	7530918		Powiat toruński|Toruń County|toruński	2	33213	179
+Powiat Toruński		PL.73.0415	7530918		Toruń County|toruński	2	33213	179
 Powiat tucholski		PL.73.0416	7530919		Tuchola County	2	33213	179
 Powiat wąbrzeski		PL.73.0417	7530920		Wąbrzeźno County	2	33213	179
 Powiat włocławski		PL.73.0418	7530921		Włocławek County	2	33213	179
@@ -33437,7 +33437,7 @@ Powiat legionowski		PL.78.1408	7530926		Legionowo County	2	33200	179
 Powiat kutnowski		PL.74.1002	7530927		Kutno County	2	33206	179
 Powiat gostyniński		PL.78.1404	7530928		Gostynin County	2	33200	179
 Powiat sierpecki		PL.78.1427	7530929		Sierpc County	2	33200	179
-Powiat żuromiński		PL.78.1437	7530930		Powiat żuromiński)|Żuromin County	2	33200	179
+Powiat żuromiński		PL.78.1437	7530930		Żuromin County	2	33200	179
 Powiat chojnicki		PL.82.2202	7530931		Chojnice County|Chòniczzi kréz	2	33209	179
 Powiat człuchowski		PL.82.2203	7530932		Człuchów County	2	33209	179
 Powiat kwidzyński		PL.82.2207	7530933		Kwidzyn County	2	33209	179
@@ -33478,7 +33478,7 @@ Chorzów		PL.83.2463	7530967		Königshütte	2	33210	179
 Legnica		PL.72.0262	7530968			2	33205	179
 Grudziądz		PL.73.0462	7530969			2	33213	179
 Lublin		PL.75.0663	7530970		Liublinas	2	33198	179
-Powiat gdański		PL.82.2204	7530971		Gdańsk County|Gduńsczi kréz|Powiat Gdański	2	33209	179
+Powiat gdański		PL.82.2204	7530971		Gdańsk County|Gduńsczi kréz	2	33209	179
 Powiat białogardzki		PL.87.3201	7530972		Białogard County	2	33212	179
 Skierniewice		PL.74.1063	7530973			2	33206	179
 Ostrołęka		PL.78.1461	7530974			2	33200	179
@@ -33488,7 +33488,7 @@ Powiat sandomierski		PL.84.2609	7530977		Sandomierz County	2	33203	179
 Powiat gorzowski		PL.76.0801	7530978		Gorzów County	2	33207	179
 Powiat międzyrzecki		PL.76.0803	7530979		Międzyrzecz County	2	33207	179
 Powiat słubicki		PL.76.0805	7530980		Słubice County	2	33207	179
-Powiat strzelecko-drezdenecki		PL.76.0806	7530981		Powiat strzelecko-drezdenecki)|Strzelce-Drezdenko County	2	33207	179
+Powiat strzelecko-drezdenecki		PL.76.0806	7530981		Strzelce-Drezdenko County	2	33207	179
 Radom		PL.78.1463	7530982		powiat miasto Radom	2	33200	179
 Koszalin		PL.87.3261	7530983			2	33212	179
 Tychy		PL.83.2477	7530984			2	33210	179
@@ -33505,7 +33505,7 @@ Powiat poznański		PL.86.3021	7530994		Poznań County	2	33211	179
 Powiat szamotulski		PL.86.3024	7530995		Szamotuły County	2	33211	179
 Powiat wrzesiński		PL.86.3030	7530996		Września County	2	33211	179
 Powiat skarżyski		PL.84.2610	7530997		Skarżysko County	2	33203	179
-Powiat kamiennogórski		PL.72.0207	7530998		Kamienna Góra County|Powiat Kamiennogórski	2	33205	179
+Powiat kamiennogórski		PL.72.0207	7530998		Kamienna Góra County	2	33205	179
 Powiat starachowicki		PL.84.2611	7530999		Starachowice County	2	33203	179
 Powiat nidzicki		PL.85.2811	7531000		Nidzica County	2	33204	179
 Powiat piski		PL.85.2816	7531001		Pisz County	2	33204	179
@@ -33515,7 +33515,7 @@ Powiat turecki		PL.86.3027	7531004		Turek County	2	33211	179
 Powiat myśliborski		PL.87.3210	7531005		Myślibórz County	2	33212	179
 Powiat piotrkowski		PL.74.1010	7531006		Piotrków County	2	33206	179
 Powiat poddębicki		PL.74.1011	7531007		Poddębice County	2	33206	179
-Powiat radomszczański		PL.74.1012	7531008		Powiat Radomszczański|Radomsko County	2	33206	179
+Powiat radomszczański		PL.74.1012	7531008		Radomsko County	2	33206	179
 Powiat sieradzki		PL.74.1014	7531009		Sieradz County	2	33206	179
 Powiat bełchatowski		PL.74.1001	7531010		Bełchatów County	2	33206	179
 Powiat świdwiński		PL.87.3216	7531011		Świdwin County	2	33212	179
@@ -33527,14 +33527,14 @@ Powiat łaski		PL.74.1003	7531016		Łask County	2	33206	179
 Powiat łęczycki		PL.74.1004	7531017		Łęczyca County	2	33206	179
 Powiat brzeziński		PL.74.1021	7531018		Brzeziny County	2	33206	179
 Powiat łódzki wschodni		PL.74.1006	7531019		Łódź East County	2	33206	179
-Powiat opoczyński		PL.74.1007	7531020		Opoczno County|Powiat Opoczyński	2	33206	179
+Powiat opoczyński		PL.74.1007	7531020		Opoczno County	2	33206	179
 Powiat pabianicki		PL.74.1008	7531021		Pabianice County	2	33206	179
 Powiat pajęczański		PL.74.1009	7531022		Pajęczno County	2	33206	179
 Powiat skierniewicki		PL.74.1015	7531023		Skierniewice County	2	33206	179
 Powiat tomaszowski		PL.74.1016	7531024		Tomaszów County	2	33206	179
 Powiat wieluński		PL.74.1017	7531025		Wieluń County	2	33206	179
 Powiat wieruszowski		PL.74.1018	7531026		Wieruszów County	2	33206	179
-Powiat zduńskowolski		PL.74.1019	7531027		Powiat Zduńskowolski|Zduńska Wola County	2	33206	179
+Powiat zduńskowolski		PL.74.1019	7531027		Zduńska Wola County	2	33206	179
 Powiat zgierski		PL.74.1020	7531028		Zgierz County	2	33206	179
 Powiat warszawski zachodni		PL.78.1432	7531029		Warsaw West County	2	33200	179
 Powiat krośnieński		PL.76.0802	7531030		Krosno County	2	33207	179
@@ -33548,7 +33548,7 @@ Powiat buski		PL.84.2601	7531037		Busko County	2	33203	179
 Powiat jędrzejowski		PL.84.2602	7531038		Jędrzejów County	2	33203	179
 Powiat kazimierski		PL.84.2603	7531039		Kazimierza County	2	33203	179
 Powiat pińczowski		PL.84.2608	7531040		Pińczów County	2	33203	179
-Powiat staszowski		PL.84.2612	7531041		Powiat Staszowski|Staszów County	2	33203	179
+Powiat staszowski		PL.84.2612	7531041		Staszów County	2	33203	179
 Powiat wysokomazowiecki		PL.81.2013	7531042		Wysokie Mazowieckie County	2	33202	179
 Powiat ostrowski		PL.86.3017	7531043		Ostrów County	2	33211	179
 Powiat ostrzeszowski		PL.86.3018	7531044		Ostrzeszów County	2	33211	179
@@ -33559,13 +33559,13 @@ Powiat kędzierzyńsko-kozielski		PL.79.1603	7531048		Kędzierzyn-Koźle County	
 Powiat opolski		PL.79.1609	7531049		Opole County	2	33208	179
 Powiat lubliniecki		PL.83.2407	7531050		Lubliniec County	2	33210	179
 Powiat krapkowicki		PL.79.1605	7531051		Krapkowice County	2	33208	179
-Powiat strzelecki		PL.79.1611	7531052		Powiat strzelecki)|Strzelce County	2	33208	179
+Powiat strzelecki		PL.79.1611	7531052		Strzelce County	2	33208	179
 Powiat tarnogórski		PL.83.2413	7531053		Tarnowskie Góry County	2	33210	179
 Powiat raciborski		PL.83.2411	7531054		Racibórz County	2	33210	179
 Powiat gliwicki		PL.83.2405	7531055		Gliwice County	2	33210	179
 Powiat bieszczadzki		PL.80.1801	7531056		Bieszczady County	2	33201	179
 Powiat brzozowski		PL.80.1802	7531057		Brzozów County	2	33201	179
-Powiat tarnobrzeski		PL.80.1820	7531058		Powiat tarnobrzeski)|Tarnobrzeg County	2	33201	179
+Powiat tarnobrzeski		PL.80.1820	7531058		Tarnobrzeg County	2	33201	179
 Powiat łobeski		PL.87.3218	7531059		Kreis Labes|Łobez County	2	33212	179
 Powiat białostocki		PL.81.2002	7531060		Białystok County	2	33202	179
 Powiat bielski		PL.81.2003	7531061		Bielsk County	2	33202	179
@@ -33582,10 +33582,10 @@ Powiat sztumski		PL.82.2216	7531071		Stuhm Kreis	2	33209	179
 Powiat mrągowski		PL.85.2810	7531072		Mrągowo County	2	33204	179
 Powiat gostyński		PL.86.3004	7531073			2	33211	179
 Powiat grodziski		PL.86.3005	7531074		Grodzisk County	2	33211	179
-Powiat jarociński		PL.86.3006	7531075		Jarocin County|Powiat jarociński)	2	33211	179
-Powiat kościański		PL.86.3011	7531076		Kościan County|Powiat kościański)	2	33211	179
+Powiat jarociński		PL.86.3006	7531075		Jarocin County	2	33211	179
+Powiat kościański		PL.86.3011	7531076		Kościan County	2	33211	179
 Powiat chodzieski		PL.86.3001	7531077		Chodzież County	2	33211	179
-Powiat średzki		PL.86.3025	7531079		Powiat średzki)|Środa County	2	33211	179
+Powiat średzki		PL.86.3025	7531079		Środa County	2	33211	179
 Powiat śremski		PL.86.3026	7531080		Śrem County	2	33211	179
 Powiat gnieźnieński		PL.86.3003	7531081		Gniezno County	2	33211	179
 Powiat kolski		PL.86.3009	7531082		Koło County	2	33211	179
@@ -34630,7 +34630,7 @@ Monforte		PT.16.1211	6930694		Monforte Municipality	2	34596	184
 Carregal do Sal		PT.22.1802	7116056		Carregal do Sal Municipality	2	34604	184
 Seixal		PT.19.1510	7732032		Seixal Municipality	2	34594	184
 Águeda		PT.02.0101	8010413		Agueda Municipality	2	34612	184
-Albergaria-A-Velha		PT.02.0102	8010414		Albergaria-A-Velha Municipality|Albergaria-a-Velha	2	34612	184
+Albergaria-A-Velha		PT.02.0102	8010414		Albergaria-A-Velha Municipality	2	34612	184
 Anadia		PT.02.0103	8010415		Anadia Municipality	2	34612	184
 Arouca		PT.02.0104	8010416		Arouca Municipality	2	34612	184
 Aveiro		PT.02.0105	8010417		Aveiro Municipality	2	34612	184
@@ -34679,7 +34679,7 @@ Vizela		PT.04.0314	8010459			2	34611	184
 Alfândega da Fé		PT.05.0401	8010460		Alfândega da Fé Municipality	2	34610	184
 Bragança Municipality		PT.05.0402	8010461		Bragança	2	34610	184
 Carrazeda de Ansiães		PT.05.0403	8010462		Carrazeda de Ansiães Municipality	2	34610	184
-Freixo de Espada À Cinta		PT.05.0404	8010463		Freixo de Espada à Cinta|Freixo de Espada à Cinta Municipality	2	34610	184
+Freixo de Espada À Cinta		PT.05.0404	8010463		Freixo de Espada à Cinta Municipality	2	34610	184
 Macedo de Cavaleiros		PT.05.0405	8010464		Macedo de Cavaleiros Municipality	2	34610	184
 Miranda do Douro		PT.05.0406	8010465		Miranda do Douro Municipality	2	34610	184
 Mirandela		PT.05.0407	8010466		Mirandela Municipality	2	34610	184
@@ -34691,22 +34691,22 @@ Vinhais		PT.05.0412	8010471		Vinhais Municipality	2	34610	184
 Belmonte		PT.06.0501	8010472		Belmonte Municipality	2	34601	184
 Castelo Branco		PT.06.0502	8010473		Castelo Branco Municipality	2	34601	184
 Covilhã		PT.06.0503	8010474		Covilhã Municipality	2	34601	184
-Idanha-A-Nova		PT.06.0505	8010475		Idanha-a-Nova|Idanha-a-Nova Municipality	2	34601	184
+Idanha-A-Nova		PT.06.0505	8010475		Idanha-a-Nova Municipality	2	34601	184
 Oleiros		PT.06.0506	8010476		Oleiros Municipality	2	34601	184
 Penamacor		PT.06.0507	8010477		Penamacor Municipality	2	34601	184
-Proença-A-Nova		PT.06.0508	8010478		Proença-a-Nova|Proença-a-Nova Municipality	2	34601	184
+Proença-A-Nova		PT.06.0508	8010478		Proença-a-Nova Municipality	2	34601	184
 Sertã		PT.06.0509	8010479		Sertã Municipality	2	34601	184
 Vila de Rei		PT.06.0510	8010480		Vila de Rei Municipality	2	34601	184
 Arganil		PT.07.0601	8010481		Arganil Municipality	2	34609	184
 Cantanhede		PT.07.0602	8010482		Cantanhede Municipality	2	34609	184
 Coimbra		PT.07.0603	8010483		Coimbra Municipality	2	34609	184
-Condeixa-A-Nova		PT.07.0604	8010484		Condeixa-a-Nova|Condeixa-a-Nova Municipality	2	34609	184
+Condeixa-A-Nova		PT.07.0604	8010484		Condeixa-a-Nova Municipality	2	34609	184
 Figueira da Foz		PT.07.0605	8010485		Figueira da Foz Municipality	2	34609	184
 Góis		PT.07.0606	8010486		Góis Municipality	2	34609	184
 Lousã		PT.07.0607	8010487		Lousã Municipality	2	34609	184
 Mira		PT.07.0608	8010488		Mira Municipality	2	34609	184
 Miranda do Corvo		PT.07.0609	8010489		Miranda do Corvo Municipality	2	34609	184
-Montemor-O-Velho		PT.07.0610	8010490		Montemor-o-Velho|Montemor-o-Velho Municipality	2	34609	184
+Montemor-O-Velho		PT.07.0610	8010490		Montemor-o-Velho Municipality	2	34609	184
 Oliveira do Hospital		PT.07.0611	8010491		Oliveira do Hospital Municipality	2	34609	184
 Pampilhosa da Serra		PT.07.0612	8010492		Pampilhosa da Serra Municipality	2	34609	184
 Penacova		PT.07.0613	8010493		Penacova Municipality	2	34609	184
@@ -34719,7 +34719,7 @@ Arraiolos		PT.08.0702	8010499		Arraiolos Municipality	2	34600	184
 Borba		PT.08.0703	8010500		Borba Municipality	2	34600	184
 Estremoz		PT.08.0704	8010501		Estremoz Municipality	2	34600	184
 Évora		PT.08.0705	8010502		Évora Municipality	2	34600	184
-Montemor-O-Novo		PT.08.0706	8010503		Montemor-o-Novo|Montemor-o-Novo Municipality	2	34600	184
+Montemor-O-Novo		PT.08.0706	8010503		Montemor-o-Novo Municipality	2	34600	184
 Mora		PT.08.0707	8010504		Mora Municipality	2	34600	184
 Mourão		PT.08.0708	8010505		Mourão Municipality	2	34600	184
 Portel		PT.08.0709	8010506		Portel Municipality	2	34600	184
@@ -34764,7 +34764,7 @@ Batalha		PT.13.1004	8010544		Batalha Municipality	2	34598	184
 Bombarral		PT.13.1005	8010545		Bombarral Municipality	2	34598	184
 Caldas da Rainha		PT.13.1006	8010546		Caldas da Rainha Municipality	2	34598	184
 Castanheira de Pera		PT.13.1007	8010547		Castanheira de Pera Municipality	2	34598	184
-Figueiró Dos Vinhos		PT.13.1008	8010548		Figueiró dos Vinhos|Figueiró dos Vinhos Municipality	2	34598	184
+Figueiró Dos Vinhos		PT.13.1008	8010548		Figueiró dos Vinhos Municipality	2	34598	184
 Leiria		PT.13.1009	8010549		Leiria Municipality	2	34598	184
 Marinha Grande		PT.13.1010	8010550		Marinha Grande Municipality	2	34598	184
 Nazaré		PT.13.1011	8010551		Nazaré Municipality	2	34598	184
@@ -34916,8 +34916,8 @@ Lajes do Pico		PT.23.4601	8010696		Lajes do Pico Municipality	2	34613	184
 Madalena		PT.23.4602	8010697		Madalena Municipality	2	34613	184
 São Roque do Pico		PT.23.4603	8010698		São Roque do Pico Municipality	2	34613	184
 Horta		PT.23.4701	8010699		Horta Municipality	2	34613	184
-Lajes Das Flores		PT.23.4801	8010700		Lajes das Flores|Lajes das Flores Municipality	2	34613	184
-Santa Cruz Das Flores		PT.23.4802	8010701		Santa Cruz das Flores|Santa Cruz das Flores Municipality	2	34613	184
+Lajes Das Flores		PT.23.4801	8010700		Lajes das Flores Municipality	2	34613	184
+Santa Cruz Das Flores		PT.23.4802	8010701		Santa Cruz das Flores Municipality	2	34613	184
 Corvo		PT.23.4901	8010702		Vila do Corvo|Vila do Corvo Municipality	2	34613	184
 Ngatpang	PW-224	PW.11	1559532	State		1		185
 Sonsorol	PW-370	PW.16	1559630	State		1		185
@@ -35208,7 +35208,7 @@ Ad Dawḩah	QA-DA	QA.01	389470	Municipality	Baladiyat ad Dawhah	1		187
 Al Wakrah	QA-WA	QA.10	389472	Municipality		1		187
 Az̧ Z̧a‘āyin	QA-ZA	QA.13	8030540	Municipality	Al Daayen	1		187
 Ash Shīḩānīyah	QA-SH	QA.14	11777514	Municipality	Al-Shahaniya	1		187
-Reunion		RE.RE	6690283		Réunion	1		188
+Reunion		RE.RE	6690283			1		188
 Réunion		RE.RE.974	6690284		La Reunion	2	35211	188
 Vrancea	RO-VN	RO.40	662447	Department	Județul Vrancea|Vrancea County	1		189
 Vâlcea	RO-VL	RO.39	662892	Department	Județul Vâlcea|Vâlcea County	1		189
@@ -36298,7 +36298,7 @@ Comuna Padeş		RO.19.81095	671558			2	35233	189
 Comuna Păcureţi		RO.30.134336	671567			2	35223	189
 Comuna Ozun		RO.15.64639	671579			2	35238	189
 Oraş Ovidiu		RO.14.60687	671583			2	35239	189
-Comuna Măciuca		RO.39.171101	671585		Comuna Maciuca|Măciuca	2	35214	189
+Comuna Măciuca		RO.39.171101	671585		Măciuca	2	35214	189
 Oraş Otopeni		RO.43.179481	671589			2	35254	189
 Comuna Oteşani		RO.39.171931	671599			2	35214	189
 Oraş Oţelu Roşu		RO.12.51207	671602			2	35241	189
@@ -36650,7 +36650,7 @@ Comuna Lieşti		RO.18.76674	674794			2	35235	189
 Comuna Liebling		RO.36.157497	674798			2	35217	189
 Comuna Licurici		RO.19.80711	674802			2	35233	189
 Comuna Leu		RO.17.72926	674822			2	35236	189
-Comuna Letea Veche		RO.04.20359	674825		Comuna Letea-Veche	2	35250	189
+Comuna Letea Veche		RO.04.20359	674825			2	35250	189
 Comuna Letca Nouă		RO.42.104047	674831			2	35234	189
 Comuna Leţcani		RO.23.97679	674833			2	35229	189
 Comuna Letca		RO.31.141786	674836			2	35222	189
@@ -41265,7 +41265,7 @@ Al Qurá		SA.02.10972283	10972283			2	41247	193
 Baljurashī		SA.02.10972284	10972284			2	41247	193
 Qilwah		SA.02.10972285	10972285			2	41247	193
 ‘Ar‘ar		SA.15.10972286	10972286			2	41246	193
-Rafha		SA.15.10972287	10972287		Rafḩā’	2	41246	193
+Rafha		SA.15.10972287	10972287			2	41246	193
 Ţurayf		SA.15.10972288	10972288			2	41246	193
 Al Qurayyāt		SA.20.10972289	10972289			2	41245	193
 Dawmat al Jandal		SA.20.10972290	10972290			2	41245	193
@@ -41309,7 +41309,7 @@ Shaqrā’		SA.10.10972327	10972327			2	41242	193
 Thādiq		SA.10.10972328	10972328			2	41242	193
 Wādī ad Dawāsir		SA.10.10972329	10972329			2	41242	193
 Ad Dammām		SA.06.10972330	10972330			2	41241	193
-Al Aḩsā’		SA.06.10972331	10972331		Al Ahsa	2	41241	193
+Al Aḩsā’		SA.06.10972331	10972331			2	41241	193
 Al Jubayl		SA.06.10972332	10972332			2	41241	193
 Al Khafjī		SA.06.10972333	10972333			2	41241	193
 Al Khubar		SA.06.10972334	10972334			2	41241	193
@@ -41726,7 +41726,7 @@ Pajala Kommun		SE.14.2521	603760		Pajala Municipality|Pajalan Kunta	2	41699	197
 Överkalix Kommun		SE.14.2513	603822		Överkalix Municipality	2	41699	197
 Luleå kommun		SE.14.2580	604488		Luleå Municipality|Luulaja|Luulajan Kunta	2	41699	197
 Kalix Kommun		SE.14.2514	605387		Kalix Municipality|Kalixin Kunta	2	41699	197
-Haparanda Kommun		SE.14.2583	605857		Haaparannan kaupunki|Haaparannan kunta|Haaparanta|Haparanda Municipality|Haparanda Stad|Haparanda kommun	2	41699	197
+Haparanda Kommun		SE.14.2583	605857		Haaparannan kaupunki|Haaparannan kunta|Haaparanta|Haparanda Municipality|Haparanda Stad	2	41699	197
 Gällivare kommun		SE.14.2523	606084		Gällivare Municipality|Jällivaara|Jällivaaran Kunta	2	41699	197
 Bodens Kommun		SE.14.2582	606530		Boden Municipality	2	41699	197
 Älvsbyns Kommun		SE.14.2560	606833		Älvsbyn Municipality	2	41699	197
@@ -41783,11 +41783,11 @@ Svalövs Kommun		SE.27.1214	2670540		Svalöv Municipality	2	41718	197
 Surahammars Kommun		SE.25.1907	2670612		Surahammar Municipality|Surahammarin Kunta	2	41700	197
 Sunne Kommun		SE.22.1766	2670703		Sunne Municipality	2	41703	197
 Sundsvalls Kommun		SE.24.2281	2670776		Sundsvall Municipality|Sundsvallin Kunta	2	41701	197
-Sundbybergs Kommun		SE.26.0183	2670878		Sundbyberg Municipality|Sundbybergin kunta|Sundbybergs kommun|Sundbybergs stad	2	41705	197
+Sundbybergs Kommun		SE.26.0183	2670878		Sundbyberg Municipality|Sundbybergin kunta|Sundbybergs stad	2	41705	197
 Strömsunds kommun		SE.07.2313	2671219		Strömsund Municipality	2	41713	197
 Strömstads Kommun		SE.28.1486	2671222			2	41719	197
 Strängnäs Kommun		SE.18.0486	2671389		Strängnäs Municipality	2	41706	197
-Storumans kommun		SE.23.2421	2671529		Storuman Municipality|Storumans Kommun	2	41702	197
+Storumans kommun		SE.23.2421	2671529		Storuman Municipality	2	41702	197
 Storfors Kommun		SE.22.1760	2672047		Storfors Municipality	2	41703	197
 Stockholms Kommun		SE.26.0180	2673723		Stockholm Municipality|Stockholms stad	2	41705	197
 Stenungsunds Kommun		SE.28.1415	2673874		Stenungsund Municipality	2	41719	197
@@ -41796,7 +41796,7 @@ Sotenäs Kommun		SE.28.1427	2674968		Sotenäs Municipality	2	41719	197
 Sorsele kommun		SE.23.2422	2675078		Sorsele Municipality	2	41702	197
 Sölvesborgs kommun		SE.02.1083	2675364		Sölvesborg Municipality	2	41717	197
 Solna Kommun		SE.26.0184	2675396		Solna Municipality	2	41705	197
-Sollentuna Kommun		SE.26.0163	2675406		Sollentuna Municipality|Sollentuna kommun	2	41705	197
+Sollentuna Kommun		SE.26.0163	2675406		Sollentuna Municipality	2	41705	197
 Sollefteå Kommun		SE.24.2283	2675415			2	41701	197
 Södertälje Kommun		SE.26.0181	2676174		Södertälje Municipality	2	41705	197
 Söderköpings Kommun		SE.16.0582	2676214		Söderköping Municipality	2	41707	197
@@ -42338,7 +42338,7 @@ Okres Bratislava II		SK.02.102	8986339			2	42260	202
 Okres Bratislava III		SK.02.103	8986340			2	42260	202
 Okres Bratislava IV		SK.02.104	8986341			2	42260	202
 Okres Bratislava V		SK.02.105	8986342			2	42260	202
-Okres Kosice-okolie		SK.03.806	8986343		Košice-okolie District|Okres Košice–okolie	2	42256	202
+Okres Kosice-okolie		SK.03.806	8986343		Košice-okolie District	2	42256	202
 Okres Levoča		SK.05.704	8989441		Levoča District	2	42257	202
 Western Area	SL-W	SL.04	2403068	Area	Freetown	1		203
 Southern	SL-S	SL.03	2403745	Province	Southern Province	1		203
@@ -42387,14 +42387,14 @@ Sédhiou	SN-SE	SN.18	7303937	Region	Diiwaanu Séeju	1		205
 Ziguinchor		SN.12.2243943	2243943			2	42373	205
 Velingara Department		SN.11.2244181	2244181		Velingara	2	42379	205
 Tivaouane		SN.07.2244388	2244388			2	42374	205
-Thiès		SN.07.2244804	2244804		Thies	2	42374	205
+Thiès		SN.07.2244804	2244804			2	42374	205
 Tambacounda Department		SN.05.2244993	2244993		Tambacounda	2	42375	205
-Sédhiou		SN.18.2245705	2245705		Sedhiou	2	42386	205
+Sédhiou		SN.18.2245705	2245705			2	42386	205
 Podor		SN.14.2246656	2246656			2	42376	205
 Oussouye		SN.12.2246902	2246902		Département d'Oussouye	2	42373	205
 Nioro du Rip		SN.10.2247158	2247158			2	42380	205
 Mbour		SN.07.2248478	2248478		Département de M'bour|M'bour	2	42374	205
-Mbacké		SN.03.2248699	2248699		M'Backé|Mbacke	2	42382	205
+Mbacké		SN.03.2248699	2248699		M'Backé	2	42382	205
 Louga Department		SN.13.2249224	2249224		Louga	2	42378	205
 Linguere Department		SN.13.2249283	2249283		Linguère	2	42378	205
 Kédougou Department		SN.17.2250648	2250648		Kedougou	2	42385	205
@@ -42658,7 +42658,7 @@ Mé-Zóchi	ST-06	ST.02.11203894	11203894	District	Mé-Zóchi District	1		209
 Água Grande	ST-01	ST.02.11203920	11203920	District	Água Grande District	1		209
 Cantagalo	ST-02	ST.02.11204213	11204213	District	Cantagalo District	1		209
 Caué	ST-03	ST.02.11994811	11994811	District	Caué District	1		209
-Pagué		ST.01.11995790	11995790		Pague	2	42654	209
+Pagué		ST.01.11995790	11995790			2	42654	209
 Usulután	SV-US	SV.14	3582882	Department		1		210
 Sonsonate	SV-SO	SV.13	3583101	Department	Departamento de Sonsonate|Sonsonate Department	1		210
 San Vicente	SV-SV	SV.12	3583176	Department	Departamento de San Vicente|San Vicente Department	1		210
@@ -42894,7 +42894,7 @@ Loug Chari		TD.15.9072808	9072808			2	42848	215
 Barh Signaka		TD.05.9166522	9166522			2	42847	215
 Fitri		TD.01.9166643	9166643			2	42849	215
 Chari		TD.15.9166667	9166667			2	42848	215
-Kobé		TD.02.10377074	10377074		Kobe	2	42839	215
+Kobé		TD.02.10377074	10377074			2	42839	215
 Assoungha Department		TD.12.10377165	10377165			2	42838	215
 Barh Azoum		TD.13.10399865	10399865			2	42837	215
 Wayi		TD.07.10400441	10400441			2	42845	215
@@ -42912,41 +42912,41 @@ Dixième Arrondissement		TD.21.12180690	12180690		10ème Arrondissement	2	42854	
 El Ouaya		TD.20.12186503	12186503		Département d'El Ouaya	2	42853	215
 Kimiti		TD.25.12186504	12186504		Département de Kimiti|Kimitini	2	42856	215
 Tissi		TD.25.12186505	12186505		Département de Tissi	2	42856	215
-Lac Léré		TD.20.12186506	12186506		Département du Lac Léré|Lac-Léré	2	42853	215
-Adé		TD.25.12186513	12186513		Ade|Département d'Adé	2	42856	215
-Koukou-Angarana		TD.25.12186514	12186514		Département de Koukou-Angarana|Koukou Angarana	2	42856	215
-Mayo-Dallah		TD.20.12186525	12186525		Département du Mayo-Dallah|Mayo Dallah	2	42853	215
-Mayo-Binder		TD.20.12186526	12186526		Département du Mayo-Binder|Mayo Binder	2	42853	215
+Lac Léré		TD.20.12186506	12186506		Département du Lac Léré	2	42853	215
+Adé		TD.25.12186513	12186513		Département d'Adé	2	42856	215
+Koukou-Angarana		TD.25.12186514	12186514		Département de Koukou-Angarana	2	42856	215
+Mayo-Dallah		TD.20.12186525	12186525		Département du Mayo-Dallah	2	42853	215
+Mayo-Binder		TD.20.12186526	12186526		Département du Mayo-Binder	2	42853	215
 Gagal		TD.20.12186527	12186527		Département de Gagal	2	42853	215
-Guéni		TD.08.12186528	12186528		Département de Guéni|Gueni	2	42844	215
+Guéni		TD.08.12186528	12186528		Département de Guéni	2	42844	215
 Kouh-Est		TD.09.12186529	12186529		Département de Kouh-Est|Département du Kouh-Est	2	42843	215
-Kouh-Ouest		TD.09.12186530	12186530		Département de Kouh-Ouest|Département du Kouh Ouest|Kouh Ouest	2	42843	215
+Kouh-Ouest		TD.09.12186530	12186530		Département de Kouh-Ouest|Département du Kouh Ouest	2	42843	215
 La Pendé		TD.09.12186531	12186531		Département de la Pendé	2	42843	215
-Tandjilé-Centre		TD.14.12186532	12186532		Département de la Tandjilé-Centre|Tandjilé Centre	2	42840	215
+Tandjilé-Centre		TD.14.12186532	12186532		Département de la Tandjilé-Centre	2	42840	215
 Manga		TD.14.12186533	12186533		Département de Manga	2	42840	215
 Manbagué		TD.14.12186534	12186534		Département de Manbagué	2	42840	215
 Goundi		TD.19.12186535	12186535		Département de Goundi	2	42852	215
 Taralnass		TD.19.12186536	12186536		Département de Taralnass	2	42852	215
 La Moula		TD.19.12186537	12186537		Département de la Moula|Moula	2	42852	215
 Kabia		TD.16.12186538	12186538		Département de la Kabbia|Département de la Kabia|Kabbia	2	42842	215
-Mayo-Lemié		TD.16.12186539	12186539		Département du Mayo-Lemié|Mayo-Lémié	2	42842	215
-Mont-Illi		TD.16.12186540	12186540		Département de Mont-Illi|Mont Illi	2	42842	215
+Mayo-Lemié		TD.16.12186539	12186539		Département du Mayo-Lemié	2	42842	215
+Mont-Illi		TD.16.12186540	12186540		Département de Mont-Illi	2	42842	215
 Dourbali		TD.15.12186541	12186541		Département de Dourbali	2	42848	215
 Korbol		TD.17.12186542	12186542		Département de Korbol	2	42841	215
 Mangalmé		TD.05.12186543	12186543		Département de Mangalmé	2	42847	215
 Garada		TD.05.12186544	12186544		Département de Garada	2	42847	215
-Aboudeia		TD.13.12186545	12186545		Aboudeïa|Département d'Aboudeia	2	42837	215
+Aboudeia		TD.13.12186545	12186545		Département d'Aboudeia	2	42837	215
 Abdi		TD.12.12186546	12186546		Département d'Abdi	2	42838	215
 Djourf-Al-Ahmar		TD.25.12186547	12186547		Djourouf Al Ahmar|Département du Djourf-Al-Ahmar	2	42856	215
 Abougoudam		TD.12.12186831	12186831		Département d'Aboudgoudam	2	42838	215
 Biltine		TD.02.12186832	12186832		Département de Biltine	2	42839	215
-Dar-Tama		TD.02.12186833	12186833		Dar Tama|Département de Dar-Tama	2	42839	215
+Dar-Tama		TD.02.12186833	12186833		Département de Dar-Tama	2	42839	215
 Mégri		TD.02.12186834	12186834		Département de Mégri|Département du Mégri	2	42839	215
 Iriba		TD.02.12186848	12186848		Département d'Iriba	2	42839	215
 Al-Biher		TD.02.12186849	12186849		Département d'Al-Biher	2	42839	215
 Dar-Alfawakih		TD.02.12186850	12186850		Département de Dar-Alfawakih	2	42839	215
 Amdjarass		TD.27.12186851	12186851		Département d'Amdjarass	2	42859	215
-Wadi-Hawar		TD.02.12186852	12186852		Département de Wadi Hawar|Département du Wadi-Hawar|Wadi Hawar	2	42839	215
+Wadi-Hawar		TD.02.12186852	12186852		Département de Wadi Hawar|Département du Wadi-Hawar	2	42839	215
 Itou		TD.27.12186853	12186853		Département d'Itou	2	42859	215
 Bao		TD.27.12186854	12186854		Département de Bao	2	42859	215
 Mourdi		TD.27.12186855	12186855		Département de Mourdi	2	42859	215
@@ -42960,8 +42960,8 @@ Borkou		TD.23.12186862	12186862		Département de Borkou	2	42850	215
 Borkou-Yala		TD.23.12186863	12186863		Département de Borkou-Yala	2	42850	215
 Kouba		TD.23.12186864	12186864		Département de Kouba	2	42850	215
 Emi-Koussi		TD.23.12186865	12186865		Département d'Emi-Koussi	2	42850	215
-Tibesti-Est		TD.26.12186866	12186866		Bardaï|Département du Tibesti-Est|Tibesti Est	2	42857	215
-Tibesti-Ouest		TD.26.12186867	12186867		Département de Tibesti-Ouest|Département du Tibesti-Ouest|Tibesti Ouest|Zouar	2	42857	215
+Tibesti-Est		TD.26.12186866	12186866		Bardaï|Département du Tibesti-Est	2	42857	215
+Tibesti-Ouest		TD.26.12186867	12186867		Département de Tibesti-Ouest|Département du Tibesti-Ouest|Zouar	2	42857	215
 Wour		TD.26.12186887	12186887		Département de Wour	2	42857	215
 Aouzou		TD.26.12186889	12186889		Département d'Aouzou	2	42857	215
 Batha-Est		TD.01.12186890	12186890		Département du Batha-Est	2	42849	215
@@ -42973,20 +42973,20 @@ Barh-El-Gazel Nord		TD.22.12186898	12186898		Département du Barh-El-Gazel Nord	
 Barh-El-Gazel Sud		TD.22.12186899	12186899		Département du Barh-El-Gazel Sud	2	42855	215
 Barh-El-Gazel Ouest		TD.22.12186900	12186900		Département du Barh-El-Gazel Ouest	2	42855	215
 Kléta		TD.22.12186902	12186902		Département de Kléta	2	42855	215
-Nord-Kanem		TD.06.12186903	12186903		Département du Nord-Kanem|Nord Kanem	2	42846	215
+Nord-Kanem		TD.06.12186903	12186903		Département du Nord-Kanem	2	42846	215
 Sud-Kanem		TD.06.12186904	12186904		Département du Sud-Kanem	2	42846	215
 Kouloudia		TD.07.12186905	12186905		Doum-Doum|Département de Kouloudia	2	42845	215
 Kaya		TD.07.12186906	12186906		Département de Kaya	2	42845	215
 Fouli		TD.07.12186907	12186907		Département de Fouli	2	42845	215
 Dababa		TD.18.12186908	12186908		Département de Dababa	2	42851	215
 Ngoura		TD.18.12186909	12186909		Département de Ngoura	2	42851	215
-Haraz-Al-Biar		TD.18.12186910	12186910		Département de Haraz-Al-Biar|Haraz Al-Biar|Haraz-Albiar|Haraze Al Biar	2	42851	215
+Haraz-Al-Biar		TD.18.12186910	12186910		Département de Haraz-Al-Biar|Haraz-Albiar|Haraze Al Biar	2	42851	215
 La Nya		TD.09.13448894	13448894		Département de la Nya|Département du Nya	2	42843	215
 Tandjilé-Est		TD.14.13448895	13448895		Département de la Tandjilé-Est	2	42840	215
 Barh-Koh		TD.17.13448897	13448897		Bahr-Kô|Département de Barh-Koh|Département du Barh-Koh	2	42841	215
 Barh-Signaka		TD.05.13448898	13448898		Bahr Signaka|Département de Barh-Signaka|Département du Bahr Signaka	2	42847	215
 Guéra		TD.05.13448899	13448899		Département du Guéra	2	42847	215
-Haraze-Mangueigne		TD.13.13448900	13448900		Département de Haraze-Mangueigne|Haraze Mangueigne	2	42837	215
+Haraze-Mangueigne		TD.13.13448900	13448900		Département de Haraze-Mangueigne	2	42837	215
 Kanem		TD.06.13448908	13448908		Département du Kanem	2	42846	215
 Mamdi		TD.07.13448909	13448909		Département de Mamdi|Département du Mamdi	2	42845	215
 Dagana		TD.18.13448910	13448910		Département de Dagana	2	42851	215
@@ -43293,7 +43293,7 @@ Amphoe Uthai		TH.36.1414	1605222		Uthai	2	43075	218
 Amphoe Tron		TH.10.5302	1605267		Tron|Tron district	2	43060	218
 Amphoe Trakan Phuetphon		TH.75.3411	1605280		Trakan Phuet Phon	2	43110	218
 Amphoe Thung Chang		TH.04.5508	1605358		Thung Chang|Thung Chang District	2	43087	218
-Thon buri		TH.40.1015	1605401		Thon Buri	2	43098	218
+Thon buri		TH.40.1015	1605401			2	43098	218
 Amphoe Thoeng		TH.03.5704	1605408		Thoeng|Thoeng district	2	43056	218
 Amphoe Thepha		TH.68.9005	1605460		Thepha|Thepha District	2	43064	218
 Amphoe Tha Wung		TH.34.1605	1605468		Tha Wung|Tha Wung District	2	43096	218
@@ -43682,7 +43682,7 @@ Sai Mai		TH.40.1042	6845608			2	43098	218
 Thawi Watthana		TH.40.1048	6865728			2	43098	218
 Amphoe Phutthamonthon		TH.53.7307	6865782		Phutthamonthon|Phutthamonthon District	2	43092	218
 Amphoe Phra Samut Chedi		TH.42.1105	6907984		Phra Samut Chedi	2	43071	218
-Thung khru		TH.40.1049	6908219		Thung Khru	2	43098	218
+Thung khru		TH.40.1049	6908219			2	43098	218
 Bang Na		TH.40.1047	6908403			2	43098	218
 Bang Kho laen		TH.40.1031	6908544		Bang Kho Laem	2	43098	218
 Sathon		TH.40.1028	6908643			2	43098	218
@@ -44299,7 +44299,7 @@ Tajerouine		TN.14.2355	2464807			2	44290	223
 Teboursouk		TN.17.2155	2464853			2	44284	223
 Tebourba		TN.39.1457	2464857			2	44291	223
 Tabarka		TN.06.2254	2464869			2	44281	223
-Sousse Médina		TN.23.3151	2464914		Sousse Medina	2	44272	223
+Sousse Médina		TN.23.3151	2464914			2	44272	223
 Soliman		TN.19.1561	2464951			2	44279	223
 Sbeitla		TN.02.4255	2464977			2	44287	223
 Sbikha		TN.03.4154	2464980			2	44286	223
@@ -44320,11 +44320,11 @@ Grombalia		TN.19.1564	2467897			2	44279	223
 Korba		TN.19.1554	2467917			2	44279	223
 Mu‘tamadīyat Qulaybīyah		TN.19.1557	2467957		Kelibia	2	44279	223
 Délégation de Kébili Sud		TN.31.6351	2468016		Kebili Sud	2	44276	223
-El Guetar		TN.30.6159	2468046		EL Guetar	2	44277	223
+El Guetar		TN.30.6159	2468046			2	44277	223
 Kerkennah		TN.32.3466	2468247		Kerkenah	2	44275	223
 El Fahs		TN.37.1654	2468284			2	44268	223
-Kalaa Kebira		TN.23.3157	2468331		Kalaâ Kebira	2	44272	223
-Gaafour		TN.22.2454	2468347		Gaâfour	2	44273	223
+Kalaa Kebira		TN.23.3157	2468331			2	44272	223
+Gaafour		TN.22.2454	2468347			2	44273	223
 Délégation de Gabès Ville		TN.29.5151	2468367		Gabes Medina	2	44278	223
 Nefta		TN.35.6254	2468560			2	44270	223
 Mu‘tamadīyat an Nafīḑah		TN.23.3160	2468568		Enfidha	2	44272	223
@@ -44351,7 +44351,7 @@ Djebeniana		TN.32.3458	2470258			2	44275	223
 Mu‘tamadīyat Ḩawmat as Sūq		TN.28.5256	2470383		Djerba Houmet Souk	2	44280	223
 Hammam Lif		TN.27.1354	2470587			2	44282	223
 El Hamma		TN.29.5157	2470606			2	44278	223
-Hajeb El Ayoun		TN.03.4158	2470749		Hajeb el Ayoun	2	44286	223
+Hajeb El Ayoun		TN.03.4158	2470749			2	44286	223
 Haffouz		TN.03.4156	2470799			2	44286	223
 Ghomrassen		TN.34.5355	2470926			2	44271	223
 Ghardimaou		TN.06.2257	2471002			2	44281	223
@@ -44374,7 +44374,7 @@ El Jem		TN.15.3357	2473655		El Djem	2	44289	223
 Nefza		TN.17.2154	2473663			2	44284	223
 Hammamet		TN.19.1566	2473745			2	44279	223
 El Ksour		TN.14.2359	2474123			2	44290	223
-Balta Bou Aouane		TN.06.2259	7870271		Balta - Bou Aouane	2	44281	223
+Balta Bou Aouane		TN.06.2259	7870271			2	44281	223
 Bou Salem		TN.06.2253	7870272			2	44281	223
 Jendouba Nord		TN.06.2252	7870273			2	44281	223
 Oued Meliz		TN.06.2258	7870274			2	44281	223
@@ -44394,11 +44394,11 @@ Nadhour		TN.37.1655	7870578		En-Nadhour	2	44268	223
 Sejnane		TN.18.1754	7870601		Sedjnane	2	44283	223
 Joumine		TN.18.1755	7870602		Djoumine	2	44283	223
 Ghazala		TN.18.1757	7870603		Ghezala	2	44283	223
-Beja Sud		TN.17.2152	7870605		Béja Sud	2	44284	223
+Beja Sud		TN.17.2152	7870605			2	44284	223
 Goubellat		TN.17.2158	7870606			2	44284	223
 Fernana		TN.06.2256	7870609			2	44281	223
 Kef Quest		TN.14.2351	7870612		Kef Ouest	2	44290	223
-Es Sers		TN.14.2361	7870616		Es-Sers	2	44290	223
+Es Sers		TN.14.2361	7870616			2	44290	223
 Nebeur		TN.14.2353	7870617			2	44290	223
 Elkrib		TN.22.2455	7870618		El Krib	2	44273	223
 Bourouis		TN.22.2456	7870619			2	44273	223
@@ -44413,9 +44413,9 @@ Takelsa		TN.19.1560	11104808			2	44279	223
 El Mida		TN.19.1556	11104809			2	44279	223
 Menzel Bouzelfa		TN.19.1562	11104810			2	44279	223
 Bou Argoub		TN.19.1565	11104811			2	44279	223
-Dar Chaabane El Fehri		TN.19.1552	11104812		Dar Châabane El Fehri	2	44279	223
+Dar Chaabane El Fehri		TN.19.1552	11104812			2	44279	223
 Beni Khalled		TN.19.1563	11104930			2	44279	223
-Beni Khiar		TN.19.1553	11104931		Beni khiar	2	44279	223
+Beni Khiar		TN.19.1553	11104931			2	44279	223
 Bouficha		TN.23.3161	11104932			2	44272	223
 Ksibet El Mediouni		TN.16.3262	11104933			2	44288	223
 Hergla		TN.23.3159	11104936			2	44272	223
@@ -44428,7 +44428,7 @@ Hammam Sousse		TN.23.3155	11104942			2	44272	223
 Sousse Jawhara		TN.23.3153	11104943			2	44272	223
 Sousse Sidi Abdelhamid		TN.23.3154	11104944			2	44272	223
 Sousse Riadh		TN.23.3152	11104945			2	44272	223
-Zaouia-Ksiba-Thrayet		TN.23.3166	11104948		Zaouia - Ksiba - Thrayet	2	44272	223
+Zaouia-Ksiba-Thrayet		TN.23.3166	11104948			2	44272	223
 Bekalta		TN.16.3259	11104954			2	44288	223
 Délégation de Téboulba		TN.16.3260	11104955		Teboulba	2	44288	223
 Sayada Lamta Bouhjar		TN.16.3263	11104956		Sayada-Lamta Bou-Hjar	2	44288	223
@@ -44436,7 +44436,7 @@ Sfax Ouest		TN.32.3452	11104958			2	44275	223
 Thyna		TN.32.3456	11104959		Tina	2	44275	223
 Sfax Sud		TN.32.3455	11104960			2	44275	223
 Sakiet Ezzit		TN.32.3453	11104961			2	44275	223
-Sakiet Eddaier		TN.32.3454	11104962		Sakiet Eddaïer	2	44275	223
+Sakiet Eddaier		TN.32.3454	11104962			2	44275	223
 Ksar Helal		TN.16.3261	11104963			2	44288	223
 Sahline		TN.16.3253	11104964			2	44288	223
 Ouerdanine		TN.16.3252	11104965			2	44288	223
@@ -44455,7 +44455,7 @@ Ghraiba		TN.32.3462	11105079			2	44275	223
 Skhira		TN.32.3464	11105080			2	44275	223
 Nouvelle Matmata		TN.29.5159	11105082			2	44278	223
 Ghannouch		TN.29.5154	11105083		Ghanouch	2	44278	223
-Smar		TN.34.5353	11105087		Smâr	2	44271	223
+Smar		TN.34.5353	11105087			2	44271	223
 Bir Lahmar		TN.34.5354	11105088			2	44271	223
 Tataouine Sud		TN.34.5352	11105089			2	44271	223
 Dhehiba		TN.34.5356	11105090			2	44271	223
@@ -44474,7 +44474,7 @@ Sned		TN.30.6161	11106653			2	44277	223
 Gafsa Nord		TN.30.6151	11106656			2	44277	223
 Délégation de Sidi Aïch		TN.30.6152	11106657		Sidi Aïch	2	44277	223
 Menzel Bouzaiene		TN.33.4357	11106662		Menzel Bouzaïenne	2	44274	223
-Sidi Ali Ben Aoun		TN.33.4356	11106663		Sidi Ali Ben Aoûn	2	44274	223
+Sidi Ali Ben Aoun		TN.33.4356	11106663			2	44274	223
 Bir El Hafey		TN.33.4355	11106664			2	44274	223
 Souk Jedid		TN.33.4359	11106665			2	44274	223
 Ouled Haffouz		TN.33.4362	11106666			2	44274	223
@@ -44515,7 +44515,7 @@ Douar Hicher		TN.39.1452	11108956			2	44291	223
 Oued Ellil		TN.39.1453	11108957			2	44291	223
 Délégation de Jedaïda		TN.39.1456	11108958		Djedeida	2	44291	223
 Mornag		TN.27.1362	11109010			2	44282	223
-Hammam Chott		TN.27.1355	11109011		Hammam Chôtt	2	44282	223
+Hammam Chott		TN.27.1355	11109011			2	44282	223
 Délégation de Radès		TN.27.1358	11109012		Radès	2	44282	223
 Ezzahra		TN.27.1357	11109013			2	44282	223
 Mohamedia		TN.27.1360	11109014			2	44282	223
@@ -44529,7 +44529,7 @@ Soukra		TN.38.1252	11109021			2	44285	223
 Délégation de Cité Ettadhamen		TN.38.1256	11109022		Cité Ettadhamen	2	44285	223
 El Mnihla		TN.38.1257	11109023			2	44285	223
 Sidi Thabet		TN.38.1255	11109024			2	44285	223
-Kalaat El Andalous		TN.38.1254	11109078		Kalaât El Andalous	2	44285	223
+Kalaat El Andalous		TN.38.1254	11109078			2	44285	223
 El Hrairia		TN.36.1163	11109157			2	44269	223
 El Kabaria		TN.36.1166	11109158			2	44269	223
 Jebel Jelloud		TN.36.1168	11109159		Djebel Djelloud	2	44269	223
@@ -44765,7 +44765,7 @@ Eyüpsultan		TR.34.7732469	7732469			2	44648	225
 Gaziosmanpaşa		TR.34.7732471	7732471			2	44648	225
 Güngören		TR.34.7732474	7732474			2	44648	225
 Kadıköy		TR.34.7732501	7732501			2	44648	225
-Kâğıthane		TR.34.7732504	7732504		Kağıthane	2	44648	225
+Kâğıthane		TR.34.7732504	7732504			2	44648	225
 Kartal		TR.34.7732506	7732506			2	44648	225
 Küçükçekmece		TR.34.7732569	7732569			2	44648	225
 Pendik		TR.34.7732579	7732579			2	44648	225
@@ -44843,7 +44843,7 @@ Tekkeköy		TR.55.7733243	7733243			2	44640	225
 Toprakkale		TR.91.7910463	7910463			2	44627	225
 Ulukisla		TR.73.7910465	7910465			2	44591	225
 Bor		TR.73.7910467	7910467			2	44591	225
-Yesilhisar		TR.38.7910468	7910468		Yeşilhisar	2	44601	225
+Yesilhisar		TR.38.7910468	7910468			2	44601	225
 Incesu		TR.38.7910469	7910469			2	44601	225
 Kula		TR.45.7910589	7910589			2	44596	225
 Dursunbey İlçesi		TR.10.7910603	7910603			2	44619	225
@@ -44864,7 +44864,7 @@ Muradiye / Berkri		TR.65.7911042	7911042		Muradiye	2	44585	225
 Ayancık		TR.57.7911054	7911054			2	44639	225
 Kozan		TR.81.7911055	7911055			2	44626	225
 Cihanbeyli District		TR.71.7932392	7932392			2	44599	225
-Yahyali		TR.38.7932395	7932395		Yahyalı	2	44601	225
+Yahyali		TR.38.7932395	7932395			2	44601	225
 Adalar		TR.34.8521527	8521527		Prince Islands	2	44648	225
 Arnavutköy		TR.34.8521528	8521528			2	44648	225
 Ataşehir		TR.34.8521529	8521529			2	44648	225
@@ -45178,7 +45178,7 @@ Kaman İlçesi		TR.40.8631938	8631938			2	44600	225
 Boztepe İlçesi		TR.40.8631939	8631939			2	44600	225
 Mucur İlçesi		TR.40.8631940	8631940			2	44600	225
 Yahşihan İlçesi		TR.79.8631941	8631941			2	44632	225
-Bahşılı İlçesi		TR.79.8631942	8631942		Bahşili İlçesi	2	44632	225
+Bahşılı İlçesi		TR.79.8631942	8631942			2	44632	225
 Balışeyh İlçesi		TR.79.8631943	8631943			2	44632	225
 Delice İlçesi		TR.79.8631944	8631944			2	44632	225
 Sulakyurt İlçesi		TR.79.8631945	8631945			2	44632	225
@@ -45845,7 +45845,7 @@ Meatu		TZ.31.2403	7646376			2	45751	229
 Misungwi district		TZ.12.1907	7647446			2	45737	229
 Kilolo District		TZ.04.1104	7647452		Wilaya ya Kilolo	2	45744	229
 Uyui District		TZ.17.1403	7647455			2	45730	229
-Mbarali district		TZ.09.1207	7647511		Mbarali|Mbarali District	2	45739	229
+Mbarali district		TZ.09.1207	7647511		Mbarali	2	45739	229
 Kibaha District		TZ.02.0602	7647520		Wilaya ya Kibaha	2	45734	229
 Kongwa		TZ.03.0103	7647659			2	45745	229
 Arusha District		TZ.26.0206	7647661			2	45747	229
@@ -45901,7 +45901,7 @@ Gairo		TZ.10.0507	9998153		Gairo District Council	2	45738	229
 Masasi Town		TZ.11.0907	9998154		Masasi Town Council|Masasi Township Authority	2	45750	229
 Makambako Town		TZ.30.2206	9998174		Makambako Town Council|Makambako Township Authority	2	45754	229
 Njombe Town		TZ.30.2201	9998175		Njombe Town Council|Njombe Urban	2	45754	229
-Wanging’ombe		TZ.30.2202	9998176		Wanging'ombe|Wanging’ombe District Council	2	45754	229
+Wanging’ombe		TZ.30.2202	9998176		Wanging’ombe District Council	2	45754	229
 Kibaha Town		TZ.02.0607	9998177		Kibaha Town Council|Kibaha Urban	2	45734	229
 Kalambo		TZ.24.1501	9998179		Kalambo District Council	2	45733	229
 Nyasa		TZ.14.1006	9998181		Nyasa District Council	2	45749	229
@@ -46012,7 +46012,7 @@ Pokrovsk Raion		UA.05.1416	704417		Pokrovski raion|Pokrovskyi raion|Pokrowski ra
 Podilsk Raion		UA.17.5112	704677			2	45936	230
 Kosiv Raion		UA.06.2610	704755			2	45947	230
 Koriukivskyi Raion		UA.02.7402	704838		Koriukivka Raion|Koryukivs’kyy Rayon	2	45951	230
-Korosten' Raion		UA.27.1806	704899		Korosten Raion|Korostenskiy Rayon|Korostenskyi Raion|Korostenskyy Rayon	2	45926	230
+Korosten' Raion		UA.27.1806	704899		Korostenskiy Rayon|Korostenskyi Raion|Korostenskyy Rayon	2	45926	230
 Kolomyya Raion		UA.06.2608	705389			2	45947	230
 Kropyvnytskyy Raion		UA.10.3504	705813		Kropyvnytskyi Raion	2	45943	230
 Khust Raion		UA.25.2112	706162			2	45928	230
@@ -46051,7 +46051,7 @@ Bakhmut Raion		UA.05.1402	713172		Bachmutski rajon|Bachmutskyj rajon	2	45948	230
 Okhtyrskiy Rayon		UA.21.5904	713748			2	45932	230
 Yalta Raion		UA.11.0120	8449687			2	45942	230
 Kerch Raion		UA.11.0110	8449692		Gorodskoy okrug Kerch	2	45942	230
-Desnianskyi Raion		UA.12.8520167	8520167		Desnianskyi raion	2	45941	230
+Desnianskyi Raion		UA.12.8520167	8520167			2	45941	230
 Dnipro Raion		UA.12.8693025	8693025		Dniprovskyi District	2	45941	230
 Lozova City Council		UA.07.6310	9101597			2	45946	230
 Kharkiv Raion		UA.07.6312	9114284			2	45946	230
@@ -47021,12 +47021,12 @@ Richland Parish		US.LA.083	4338711		Parroquia de Richland|Richland	2	46253	233
 Sabine Parish		US.LA.085	4339354		Parroquia de Sabine|Sabine	2	46253	233
 Saint Bernard Parish		US.LA.087	4339526		Saint Bernard	2	46253	233
 Saint Charles Parish		US.LA.089	4339583		Saint Charles	2	46253	233
-Saint Helena Parish		US.LA.091	4339724		Saint Helena|St. Helena Parish	2	46253	233
+Saint Helena Parish		US.LA.091	4339724		Saint Helena	2	46253	233
 Saint James Parish		US.LA.093	4339793		Saint James	2	46253	233
-Saint John the Baptist Parish		US.LA.095	4339881		Saint John the Baptist|St. John the Baptist Parish	2	46253	233
+Saint John the Baptist Parish		US.LA.095	4339881		Saint John the Baptist	2	46253	233
 Saint Landry Parish		US.LA.097	4340045		Saint Landry	2	46253	233
 Saint Martin Parish		US.LA.099	4340186		Saint Martin	2	46253	233
-St. Mary Parish		US.LA.101	4340232		Saint Mary|Saint Mary Parish	2	46253	233
+St. Mary Parish		US.LA.101	4340232		Saint Mary	2	46253	233
 Saint Tammany Parish		US.LA.103	4340579		Saint Tammany	2	46253	233
 Tangipahoa Parish		US.LA.105	4343122		Parroquia de Tangipahoa|Tangipahoa	2	46253	233
 Tensas Parish		US.LA.107	4343280		Parroquia de Tensas|Tensas	2	46253	233
@@ -47058,7 +47058,7 @@ Kent County		US.MD.029	4359780		Condado de Kent|Kent	2	46254	233
 Montgomery County		US.MD.031	4362716		Condado de Montgomery|Montgomery	2	46254	233
 Prince George's County		US.MD.033	4366164		Condado de Prince George|Prince George's|Prince Georges County	2	46254	233
 Queen Anne's County		US.MD.035	4366351		Condado de Queen Anne|Queen Anne's	2	46254	233
-Saint Mary's County		US.MD.037	4368320		Saint Mary's|St. Mary's County	2	46254	233
+Saint Mary's County		US.MD.037	4368320		Saint Mary's	2	46254	233
 Somerset County		US.MD.039	4369894		Condado de Somerset|Somerset	2	46254	233
 Talbot County		US.MD.041	4370904		Condado de Talbot|Talbot	2	46254	233
 Washington County		US.MD.043	4372777		Condado de Washington|Washington	2	46254	233
@@ -47144,7 +47144,7 @@ Ray County		US.MO.177	4405143		Condado de Ray|Ray	2	46255	233
 Reynolds County		US.MO.179	4405470		Condado de Reynolds|Reynolds	2	46255	233
 Ripley County		US.MO.181	4405720		Condado de Ripley|Ripley	2	46255	233
 Saint Charles County		US.MO.183	4406835		Saint Charles	2	46255	233
-St. Clair County		US.MO.185	4406842		Saint Clair|Saint Clair County	2	46255	233
+St. Clair County		US.MO.185	4406842		Saint Clair	2	46255	233
 Saint Francois County		US.MO.187	4406884		Saint Francois	2	46255	233
 Saint Louis County		US.MO.189	4407074		Saint Louis	2	46255	233
 City of Saint Louis		US.MO.510	4407084		Saint Louis	2	46255	233
@@ -48138,7 +48138,7 @@ Noble County		US.IN.113	4924192		Condado de Noble|Noble	2	46267	233
 Porter County		US.IN.127	4925020		Condado de Porter|Porter	2	46267	233
 Pulaski County		US.IN.131	4925155		Condado de Pulaski|Pulaski	2	46267	233
 Randolph County		US.IN.135	4925224		Condado de Randolph|Randolph	2	46267	233
-Saint Joseph County		US.IN.141	4925848		Saint Joseph|St. Joseph County	2	46267	233
+Saint Joseph County		US.IN.141	4925848		Saint Joseph	2	46267	233
 Starke County		US.IN.149	4926760		Condado de Starke|Starke	2	46267	233
 Steuben County		US.IN.151	4926796		Condado de Steuben|Steuben	2	46267	233
 Tippecanoe County		US.IN.157	4927230		Condado de Tippecanoe|Tippecanoe	2	46267	233
@@ -48458,7 +48458,7 @@ York County		US.NE.185	5082335		Condado de York|York	2	46271	233
 Belknap County		US.NH.001	5083273		Belknap|Condado de Belknap	2	46272	233
 Carroll County		US.NH.003	5084247		Carroll|Condado de Carroll	2	46272	233
 Cheshire County		US.NH.005	5084505		Cheshire|Condado de Cheshire	2	46272	233
-Coos County		US.NH.007	5084973		Condado de Coös|Coos|Coös County	2	46272	233
+Coos County		US.NH.007	5084973		Condado de Coös|Coos	2	46272	233
 Grafton County		US.NH.009	5086767		Condado de Grafton|Grafton	2	46272	233
 Hillsborough County		US.NH.011	5087463		Hillsborough	2	46272	233
 Merrimack County		US.NH.013	5089480		Condado de Merrimack|Merrimack	2	46272	233
@@ -49421,7 +49421,7 @@ Nome Census Area		US.AK.180	5870134		Nome|Área censal de Nome	2	46293	233
 North Slope Borough		US.AK.185	5870308		Borough de North Slope|North Slope	2	46293	233
 Northwest Arctic Borough		US.AK.188	5870351		Borough de Northwest Arctic|Northwest Arctic	2	46293	233
 Southeast Fairbanks Census Area		US.AK.240	5874863		Southeast Fairbanks|Área censal de Southeast Fairbanks	2	46293	233
-Yukon-Koyukuk Census Area		US.AK.290	5878558		Yukon-Koyukuk|Yukon–Koyukuk Census Area|Área censal de Yukón–Koyukuk	2	46293	233
+Yukon-Koyukuk Census Area		US.AK.290	5878558		Yukon-Koyukuk|Área censal de Yukón–Koyukuk	2	46293	233
 Aleutians West Census Area		US.AK.016	5879164		Aleutians West	2	46293	233
 Aleutians East Borough		US.AK.013	5879166		Aleutians East|Borough de Aleutianas Orientales	2	46293	233
 Anchorage Municipality		US.AK.020	5879348		Anchorage	2	46293	233
@@ -49660,7 +49660,7 @@ Olot Tumani		UZ.02.1217905	1217905		Olot District	2	49594	235
 Oqdaryo Tumani		UZ.10.1217960	1217960			2	49592	235
 Qorovulbozor Tumani		UZ.02.1346433	1346433		Qorovulbozor District	2	49594	235
 Kogon Shahri		UZ.02.1346437	1346437		Kogon District	2	49594	235
-Chelak Tumani		UZ.10.1346451	1346451		Chelak tumani	2	49592	235
+Chelak Tumani		UZ.10.1346451	1346451			2	49592	235
 Go`zalkent Tumani		UZ.10.1346455	1346455			2	49592	235
 Toyloq Tumani		UZ.10.1346462	1346462			2	49592	235
 Samarqand Shahri		UZ.10.1346463	1346463			2	49592	235
@@ -49707,7 +49707,7 @@ Qibray Tumani		UZ.14.1513057	1513057			2	49595	235
 Shayxontohur Tumani		UZ.13.1513066	1513066			2	49596	235
 Zafarobod Tumani		UZ.15.1513067	1513067		Zafarobod District	2	49601	235
 Nurota Tumani		UZ.07.1513082	1513082			2	49598	235
-Karmana Tumani		UZ.07.1513133	1513133		Karmana tumani	2	49598	235
+Karmana Tumani		UZ.07.1513133	1513133			2	49598	235
 Navbahor Tumani		UZ.07.1513135	1513135			2	49598	235
 Norin Tumani		UZ.06.1513144	1513144			2	49599	235
 Namangan Tumani		UZ.06.1513156	1513156		Namangan District	2	49599	235
@@ -49912,7 +49912,7 @@ Municipio Panamericano		VE.20.2019	3630887		Panamericano Municipality	2	49834	23
 Municipio Palavecino		VE.13.1306	3631101		Palavecino|Palavecino Municipality	2	49841	238
 Municipio Guajira		VE.23.2315	3631168		Municipio Indígena Bolivariano Guajira	2	49831	238
 Municipio Páez		VE.15.1514	3631169		Páez Municipality	2	49839	238
-Municipio Páez		VE.18.1808	3631170		Municipio Paez|Páez Municipality	2	49836	238
+Municipio Páez		VE.18.1808	3631170		Páez Municipality	2	49836	238
 Municipio Páez		VE.03.0404	3631171		Páez Municipality	2	49852	238
 Municipio Ospino		VE.18.1807	3631207		Ospino Municipality	2	49836	238
 Municipio Obispos		VE.05.0608	3631430		Obispos Municipality	2	49850	238
@@ -50003,7 +50003,7 @@ Municipio Aragua		VE.02.0302	3649111		Aragua Municipality	2	49853	238
 Municipio Anzoátegui		VE.08.0901	3649199		Anzoátegui Municipality	2	49847	238
 Municipio Antonio Díaz		VE.09.1001	3649210			2	49846	238
 Municipio Andrés Eloy Blanco		VE.19.1901	3649248		Andrés Eloy Blanco Municipality	2	49835	238
-Municipio Andrés Bello		VE.14.1402	3649249		Andrés Bello Municipality|Municipio Andres Bello	2	49840	238
+Municipio Andrés Bello		VE.14.1402	3649249		Andrés Bello Municipality	2	49840	238
 Municipio Anaco		VE.02.0301	3649281		Anaco Municipality	2	49853	238
 Municipio Alberto Adriani		VE.14.1401	3649500		Alberto Adriani Municipality	2	49840	238
 Municipio Acosta		VE.11.1101	3649798		Acosta Municipality	2	49845	238
@@ -50318,7 +50318,7 @@ Quận Mười Một		VN.79.772	1904883			2	50240	241
 Quận 12		VN.79.761	1904884		Quận Mười Hai	2	50240	241
 Phu Nhuan		VN.79.768	1904885			2	50240	241
 Quận Tân Bình		VN.79.766	1904886		Binh Tan District	2	50240	241
-Quận Bình Thạnh		VN.79.765	1904887		Quận Bình Thanh	2	50240	241
+Quận Bình Thạnh		VN.79.765	1904887			2	50240	241
 Quận Gò Vấp		VN.79.764	1904888			2	50240	241
 Quận Thủ Đức		VN.79.762	1904890			2	50240	241
 Huyện Hóc Môn		VN.79.784	1904891		Hóc Môn	2	50240	241
@@ -50571,7 +50571,7 @@ Huyện Như Xuân		VN.38.402	1905222		Như Xuân District	2	50216	241
 Huyện Quảng Xương		VN.38.406	1905223		Quảng Xương District	2	50216	241
 Thành Phố Sầm Sơn		VN.38.382	1905224		Thị Xã Sầm Sơn	2	50216	241
 Huyện Hoằng Hóa		VN.38.399	1905225			2	50216	241
-Huyện Đông Sơn		VN.38.405	1905226		Huyện Đơng Sơn	2	50216	241
+Huyện Đông Sơn		VN.38.405	1905226			2	50216	241
 Huyện Thiệu Hóa		VN.38.398	1905227		Thiệu Hóa District	2	50216	241
 Huyện Yên Định		VN.38.394	1905228		Yên Định District	2	50216	241
 Huyện Triệu Sơn		VN.38.397	1905229		Triệu Sơn District	2	50216	241
@@ -50861,7 +50861,7 @@ Huyện Lắk		VN.66.656	2591717			2	50237	241
 Huyện Đắk Mil		VN.68.663	2591718			2	50238	241
 Huyện Krông Ana		VN.66.655	2591721			2	50237	241
 Huyện Krông Bông		VN.66.653	2591722			2	50237	241
-Huyện Krông Pắk		VN.66.654	2591723		Huyện Krông Păk	2	50237	241
+Huyện Krông Pắk		VN.66.654	2591723			2	50237	241
 Huyện Ea Kar		VN.66.651	2591724			2	50237	241
 Huyện M’Đrắk		VN.66.652	2591725			2	50237	241
 Huyện Cư M’Gar		VN.66.648	2591727			2	50237	241
@@ -50946,7 +50946,7 @@ Huyện Bàu Bàng		VN.79.719	9091202			2	50240	241
 Thành Phố Dĩ An		VN.79.724	9091481		Thị Xã Dĩ An	2	50240	241
 Huyện Dầu Tiêng		VN.79.720	9091482			2	50240	241
 Thị Xã Kiến Tường		VN.80.795	9101340			2	50241	241
-Thị xã Cai Lậy		VN.82.817	9113513		Thị Xã Cai Lậy	2	50242	241
+Thị xã Cai Lậy		VN.82.817	9113513			2	50242	241
 Huyện Tân Phú Đông		VN.82.825	9113514			2	50242	241
 Huyện U Minh Thượng		VN.91.913	9280591		U Minh Thượng District	2	50244	241
 Thị Xã Hồng Ngự		VN.82.868	9289553			2	50242	241
@@ -51057,7 +51057,7 @@ Orahovac		XK.10096859.22	787455		Komuna e Rahovecit|Opština Orahovac|Rahovec	2	
 Lipjan		XK.10097360.13	788651		Komuna e Lipjanit|Komuna e Lypianit|Lipljan|Opština Lipljan	2	51044	281
 Komuna e Leposaviqit		XK.10097358.12	788730			2	51042	281
 Kamenica		XK.10097357.10	789226		Kamenicë|Kamenicës|Komuna e Dardanës|Komuna e Kamenicës|Opština Kamenica|Opština Kosovska Kamenica	2	51041	281
-Komuna e Klines		XK.10097359.11	789453		Klina|Klinë|Komuna e Klinës|Opština Klina	2	51043	281
+Komuna e Klines		XK.10097359.11	789453		Klina|Klinë|Opština Klina	2	51043	281
 Komuna e Kaçanikut		XK.10096138.09	789720			2	51039	281
 Komuna e Istogut		XK.10097359.08	789995			2	51043	281
 Komuna e Gjilanit		XK.10097357.06	790673			2	51041	281
@@ -51490,11 +51490,11 @@ Thabo Mofutsanyana District Municipality		ZA.03.DC19	8347361		Mmasepala Setereke
 Fezile Dabi District Municipality		ZA.03.DC20	8347362		Fezile Dabi-distriksmunisipaliteit|Mmasepala Setereke tša Fezile Dabi	2	51456	247
 Ugu District Municipality		ZA.02.DC21	8347363		Mmasepala Setereke tša Ugu|Ugu|Ugu-distriksmunisipaliteit	2	51457	247
 uMgungundlovu District Municipality		ZA.02.DC22	8347364			2	51457	247
-uThukela District Municipality		ZA.02.DC23	8347365		Mmasepala Setereke tša uThukela|UThukela-distriksmunisipaliteit|Uthukela|Uthukela District Municipality	2	51457	247
+uThukela District Municipality		ZA.02.DC23	8347365		Mmasepala Setereke tša uThukela|UThukela-distriksmunisipaliteit|Uthukela	2	51457	247
 uMzinyathi District Municipality		ZA.02.DC24	8347366			2	51457	247
 Zululand District Municipality		ZA.02.DC26	8347367			2	51457	247
 uThungulu District Municipality		ZA.02.DC28	8347368			2	51457	247
-iLembe District Municipality		ZA.02.DC29	8347369		ILembe|ILembe District Municipality|ILembe-distriksmunisipaliteit|Mmasepala Setereke tša iLembe	2	51457	247
+iLembe District Municipality		ZA.02.DC29	8347369		ILembe|ILembe-distriksmunisipaliteit|Mmasepala Setereke tša iLembe	2	51457	247
 Overberg District Municipality		ZA.11.DC3	8347370		Mmasepala Setereke tša Overberg|Overberg-distriksmunisipaliteit	2	51464	247
 Gert Sibande District Municipality		ZA.07.DC30	8347371		Gert Sibande-distriksmunisipaliteit|Mmasepala Setereke tša Gert Sibande	2	51460	247
 Nkangala District Municipality		ZA.07.DC31	8347372		Mmasepala Setereke tša Nkangala|Nkangala-distriksmunisipaliteit	2	51460	247

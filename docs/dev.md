@@ -131,25 +131,25 @@ Within cities: `cities.tsv` <stat key="data.shipped_size.cities.files.cities.tsv
 
 | Registry (`force_cache()`) | Retained memory |
 |---|---|
-| macroregions | <stat key="footprint.registries.macroregions.combined.memory_bytes:size">12KB</stat> |
+| macroregions | <stat key="footprint.registries.macroregions.combined.memory_bytes:size">13KB</stat> |
 | currencies | <stat key="footprint.registries.currencies.combined.memory_bytes:size">245KB</stat> |
-| scripts | <stat key="footprint.registries.scripts.combined.memory_bytes:size">328KB</stat> |
+| scripts | <stat key="footprint.registries.scripts.combined.memory_bytes:size">327KB</stat> |
 | languages | <stat key="footprint.registries.languages.combined.memory_bytes:size">5.4MB</stat> |
 | countries | <stat key="footprint.registries.countries.combined.memory_bytes:size">1.1MB</stat> |
 | subdivisions | <stat key="footprint.registries.subdivisions.combined.memory_bytes:size">43.5MB</stat> |
 | cities | <stat key="footprint.registries.cities.combined.memory_bytes:size">126.9MB</stat> |
-| **total, all fully cached** | **<stat key="footprint.full_cache.memory_bytes:size">177.5MB</stat>** |
+| **total, all fully cached** | **<stat key="footprint.full_cache.memory_bytes:size">177.4MB</stat>** |
 
 Cities' <stat key="footprint.registries.cities.combined.memory_bytes:size">126.9MB</stat> breaks down further by structure:
 
 | Cities component | Retained memory | Build time |
 |---|---|---|
 | `_cache` | <stat key="footprint.registries.cities.dataset.memory_bytes:size">29.5MB</stat> | <stat key="footprint.registries.cities.dataset.time_ms:load">~341ms</stat> |
-| `_lookup_index` | <stat key="footprint.registries.cities.lookup_index.memory_bytes:size">1.9MB</stat> | <stat key="footprint.registries.cities.lookup_index.time_ms:load">~76ms</stat> |
+| `_lookup_index` | <stat key="footprint.registries.cities.lookup_index.memory_bytes:size">1.9MB</stat> | <stat key="footprint.registries.cities.lookup_index.time_ms:load">~75ms</stat> |
 | `_filter_index` | <stat key="footprint.registries.cities.filter_index.memory_bytes:size">51.5MB</stat> | <stat key="footprint.registries.cities.filter_index.time_ms:load">~282ms</stat> |
-| `_search_index` | <stat key="footprint.registries.cities.search_index.memory_bytes:size">44.0MB</stat> | <stat key="footprint.registries.cities.search_index.time_ms:load">~200ms</stat> |
+| `_search_index` | <stat key="footprint.registries.cities.search_index.memory_bytes:size">44.0MB</stat> | <stat key="footprint.registries.cities.search_index.time_ms:load">~195ms</stat> |
 
-**Total load time** (every registry, `_cache` plus every index) is <stat key="footprint.full_cache.time_ms:load">~1.14s</stat>.
+**Total load time** (every registry, `_cache` plus every index) is <stat key="footprint.full_cache.time_ms:load">~1.12s</stat>.
 
 The last per-record overhead with no purpose has been removed: views are created on access by a `ViewMap` over each store rather than kept as one object, dict entry and int key per record, which took about 33MB off cities' dataset, and single-id filter postings are plain ints, which took about 16MB off cities' filter index. Columns whose few values repeat on every row (language scopes and types, subdivision and macroregion types) are interned as they load, so each holds one string per distinct value, which took about 0.9MB off languages' dataset and 0.3MB off subdivisions'. What remains is the data as modeled: names, the trigram postings search needs, and the filter keys. Storing names as a UTF-8 blob with offsets was considered and rejected; it would save about 12MB on cities' names, but every read would decode from the blob, slowing the bulk paths that read every name (large filters sort by name, iteration builds every entity). The current figures are treated as the memory floor for this data model.
 

@@ -180,12 +180,12 @@
       "single_record_values": 298
     },
     "subdivisions": {
-      "values": 75143,
-      "single_record_values": 69973
+      "values": 75080,
+      "single_record_values": 69886
     }
   },
   "shipped_size": {
-    "total": 53386640,
+    "total": 53390870,
     "cities": {
       "total": 41969930,
       "share_pct": 78.6,
@@ -265,18 +265,18 @@
       }
     },
     "subdivisions": {
-      "total": 10279235,
+      "total": 10283465,
       "share_pct": 19.3,
       "files": {
-        "canon_index.bin.gz": 1701073,
+        "canon_index.bin.gz": 1700960,
         "canon_index_offsets.tsv": 141575,
         "context_index.bin.gz": 1526970,
         "context_index_offsets.tsv": 66955,
-        "filter_index.bin.gz": 470503,
-        "filter_index_offsets.tsv": 2202821,
+        "filter_index.bin.gz": 482952,
+        "filter_index_offsets.tsv": 2200897,
         "lookup_index_str.tsv": 969848,
         "short_names.tsv.gz": 104795,
-        "subdivisions.tsv": 3094695
+        "subdivisions.tsv": 3088513
       }
     }
   },
