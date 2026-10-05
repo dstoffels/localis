@@ -25,10 +25,39 @@ from ingest.subdivisions.scripts.automerge.scoring import is_directional_mismatc
 
 RESOLUTION_MAP_PATH = SUBDIVISIONS.outputs / "resolution_map.json"
 
+# resolution_map.json's modification time as this server last loaded or saved it; any other change is a fresh ingest or another session's decision
+_known_mtime: int | None = None
+
+
+def _mtime() -> int | None:
+    return RESOLUTION_MAP_PATH.stat().st_mtime_ns if RESOLUTION_MAP_PATH.exists() else None
+
 
 @functools.cache
 def _resolution_map() -> ResolutionMap:
+    global _known_mtime
+    _known_mtime = _mtime()
     return ResolutionMap.load(RESOLUTION_MAP_PATH)
+
+
+def _save_resolution_map() -> None:
+    global _known_mtime
+    _resolution_map().save(RESOLUTION_MAP_PATH)
+    _known_mtime = _mtime()
+
+
+def is_stale() -> bool:
+    """Whether resolution_map.json changed since this server last loaded or saved it."""
+    return _known_mtime is not None and _mtime() != _known_mtime
+
+
+def reload_if_stale() -> bool:
+    """Clears every cache when resolution_map.json changed outside this server, so the next call loads the current state; True if it did."""
+    if not is_stale():
+        return False
+    for cached in (_resolution_map, _crosswalk, _countries, get_geonames_submap, _get_iso_subs):
+        cached.cache_clear()
+    return True
 
 
 @functools.cache
@@ -52,7 +81,7 @@ def write_resolution(
         escalation=escalation,
         wikidata_seen=_crosswalk().get(iso_code),
     )
-    resolution_map.save(RESOLUTION_MAP_PATH)
+    _save_resolution_map()
 
 
 @functools.cache
@@ -242,4 +271,4 @@ def get_next_orphan() -> dict | None:
 def pop_orphan(iso_code: str) -> None:
     """Removes an orphan from resolution_map's automerge.orphans by iso_code."""
     _resolution_map().automerge.orphans.remove(iso_code)
-    _resolution_map().save(RESOLUTION_MAP_PATH)
+    _save_resolution_map()

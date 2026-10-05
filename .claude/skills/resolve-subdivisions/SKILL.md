@@ -10,7 +10,7 @@ disallowed-tools: Bash Read Grep Glob Edit Write Agent WebFetch
 
 `next_orphan` returns the orphan's `iso_code`, `name`, `aliases`, `country`, `type` and `admin_level`, plus a batch of `candidates`.
 
-Candidates come from every GeoNames subdivision in the orphan's country, as a list ordered best match first, with candidates at the orphan's own level first on ties. Each is formatted `"geonames_id: name, aliases - [admin_level]"`, for example `"1668352: Tainan, 台南市, 臺南市 - [2]"`, with two optional suffixes:
+Candidates come from every GeoNames subdivision in the orphan's country, as a list ordered best match first; on ties, candidates without a mismatch note come before noted ones, then candidates at the orphan's own level first. Each is formatted `"geonames_id: name, aliases - [admin_level]"`, for example `"1668352: Tainan, 台南市, 臺南市 - [2]"`, with two optional suffixes:
 - `CLAIMED BY <iso_code>`: another ISO subdivision already holds this record. You can never merge into it.
 - `(note)`: for some orphans, the first batch holds only the specific records automerge flagged, either "automerge's pick" (a match just over the threshold that needs confirming) or "automerge's contested target" (a record several ISO subdivisions matched equally well), or "automerge's pick, likely the record for this subdivision's non-administrative grouping" (a match into the larger unit the subdivision belongs to, such as Utena County for the Utena district municipality; look for the subdivision's own record instead). The batch after it is the regular top-tier batch. A note can also read "type mismatch": the GeoNames name contains a word like "City" that suggests a different kind of place than the ISO type. That is sometimes a real difference (a city vs. the region around it) and sometimes just naming (Hamburg is both a city and a German state), so judge which before merging. A note can also read "directional mismatch": the names differ by a word like North or Southern. That usually means a different division (East vs. West), but sometimes it's just a different name for the same place, so confirm with the web search before merging.
 
@@ -41,7 +41,7 @@ If you have high confidence that this ISO subdivision and one specific unclaimed
 Otherwise, including when the matching place is `CLAIMED BY` another ISO code or when two or more candidates plausibly fit, proceed to Step 3.
 
 ### Step 3. Research
-Call the `Websearch` tool once, using only the orphan's `name` and `iso_code`. Do not add other search terms. Learn what the place is: its other current and former names, the region it belongs to, and its administrative level.
+Call the `WebSearch` tool once, using only the orphan's `name` and `iso_code`. Do not add other search terms. Learn what the place is: its other current and former names, the region it belongs to, and its administrative level.
 
 If the search identifies one specific unclaimed candidate you've already seen as the same place, call `merge` with `candidate_geonames_id` and a `reason` naming what the search showed (e.g. a former name), then return to Step 1.
 
