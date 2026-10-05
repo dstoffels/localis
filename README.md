@@ -2,6 +2,8 @@
 
 Fast, offline access to comprehensive data for **countries**, **subdivisions**, **cities**, the countries' **macroregions**, the **currencies** and **languages** they use, and the writing **scripts** languages are written in. Built on ISO 3166, ISO 4217, ISO 639-3, ISO 15924, GeoNames, Unicode CLDR and Wikidata datasets (updated monthly) with support for exact lookups, filtering, and fuzzy search.
 
+> ⚠️ **localis 3.0 is in beta.** `pip install localis` still installs 2.1.x, which is no longer maintained; install the beta with `pip install --pre localis`. The [CHANGELOG](https://github.com/dstoffels/localis/blob/main/CHANGELOG.md#upgrading-from-210) lists what changed from 2.1, and [docs/versioning.md](https://github.com/dstoffels/localis/blob/main/docs/versioning.md#pre-releases) explains the beta.
+
 ## Features
 
 - 🌍 **<stat key="data.countries.total:int">281</stat> countries** (<stat key="data.countries.historic:int">31</stat> historic) sourced and merged from ISO 3166-1, ISO 3166-3, GeoNames and Wikidata
@@ -21,6 +23,8 @@ Fast, offline access to comprehensive data for **countries**, **subdivisions**, 
 ```bash
 pip install localis
 ```
+
+localis follows Semantic Versioning; [docs/versioning.md](https://github.com/dstoffels/localis/blob/main/docs/versioning.md) says what each release can change and which releases are supported.
 
 ---
 
@@ -534,17 +538,17 @@ Data in this project is kept current monthly from the following sources:
 
 Names ship in Latin script.
 
-[`docs/methodology.md`](docs/methodology.md) is a complete, falsifiable account of how each dataset is built: the rules that combine these sources, how the results were validated, and where they are known to be wrong. [`unmerged_subdivisions.md`](docs/unmerged_subdivisions.md) lists every ISO subdivision currently without a GeoNames counterpart.
+[`docs/methodology.md`](https://github.com/dstoffels/localis/blob/main/docs/methodology.md) is a complete, falsifiable account of how each dataset is built: the rules that combine these sources, how the results were validated, and where they are known to be wrong. [`unmerged_subdivisions.md`](https://github.com/dstoffels/localis/blob/main/docs/unmerged_subdivisions.md) lists every ISO subdivision currently without a GeoNames counterpart.
 
 ### Data licensing
 
-The shipped data is derived from these sources, modified by localis's ingest pipeline, and remains under their licenses: ISO 3166, ISO 4217, ISO 639-3 and ISO 15924 data via iso-codes (LGPL-2.1-or-later), GeoNames (CC BY 4.0), Unicode CLDR (Unicode License v3) and Wikidata (CC0). [`src/localis/data/NOTICE`](src/localis/data/NOTICE), which ships with the data, attributes each source, and the full license texts are in [`LICENSES/`](LICENSES) and in the wheel's metadata. If you redistribute the data, keep that notice and those licenses with it.
+The shipped data is derived from these sources, modified by localis's ingest pipeline, and remains under their licenses: ISO 3166, ISO 4217, ISO 639-3 and ISO 15924 data via iso-codes (LGPL-2.1-or-later), GeoNames (CC BY 4.0), Unicode CLDR (Unicode License v3) and Wikidata (CC0). [`src/localis/data/NOTICE`](https://github.com/dstoffels/localis/blob/main/src/localis/data/NOTICE), which ships with the data, attributes each source, and the full license texts are in [`LICENSES/`](https://github.com/dstoffels/localis/tree/main/LICENSES) and in the wheel's metadata. If you redistribute the data, keep that notice and those licenses with it.
 
 ---
 
 ## License
 
-**Code**: MIT ([`LICENSE`](LICENSE)).
+**Code**: MIT ([`LICENSE`](https://github.com/dstoffels/localis/blob/main/LICENSE)).
 **Data**: its sources' licenses, listed under [Data licensing](#data-licensing).
 The package's license expression is `MIT AND LGPL-2.1-or-later AND CC-BY-4.0 AND Unicode-3.0 AND CC0-1.0`.
 

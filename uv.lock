@@ -443,7 +443,7 @@ wheels = [
 
 [[package]]
 name = "localis"
-version = "2.1.0"
+version = "3.0.0b1"
 source = { editable = "." }
 dependencies = [
     { name = "rapidfuzz" },

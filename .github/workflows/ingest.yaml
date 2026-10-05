@@ -111,7 +111,14 @@ jobs:
             echo "data_changed=false" >> "$GITHUB_OUTPUT"
             echo "bumped=false" >> "$GITHUB_OUTPUT"
           elif git rev-parse -q --verify "refs/tags/v$current" >/dev/null; then
-            uv version --bump patch
+            # a data refresh stays on the current line: a pre-release bumps its own segment (3.0.0b1 to 3.0.0b2), since a patch bump would release it as stable
+            case "$current" in
+              *rc[0-9]*) part=rc ;;
+              *b[0-9]*) part=beta ;;
+              *a[0-9]*) part=alpha ;;
+              *) part=patch ;;
+            esac
+            uv version --bump "$part"
             echo "data_changed=true" >> "$GITHUB_OUTPUT"
             echo "bumped=true" >> "$GITHUB_OUTPUT"
           else
