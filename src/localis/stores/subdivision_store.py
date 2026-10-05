@@ -20,7 +20,7 @@ class SubdivisionStore(Store):
         self.geonames_ids = array("i")  # -1 sentinel for None
         self.iso_codes: list[str] = []
         self.types: list[str] = []
-        # tuples, so entities can share them without copying and callers can't mutate the cache through a returned entity
+        # tuples, immutable in the store; views copy them into each entity's own list
         self.aliases: list[tuple[str, ...]] = []
         self.admin_levels = array("B")
         self.parent_ids = array("i")  # -1 sentinel for None

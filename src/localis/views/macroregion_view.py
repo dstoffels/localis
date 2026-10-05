@@ -1,3 +1,4 @@
+import sys
 from pathlib import Path
 from typing import Mapping, cast
 from localis.entities import Macroregion, MacroregionBase, MacroregionType
@@ -51,7 +52,8 @@ class MacroregionView(View[Macroregion, MacroregionStore]):
             for idx, line in enumerate(f):
                 name, code, type_, parent_s = line.rstrip("\r\n").split("\t")
                 store.id_to_idx.append(idx)
-                store.append(name, code, type_, int(parent_s) if parent_s else None)
+                # interned, since three types repeat on every row
+                store.append(name, code, sys.intern(type_), int(parent_s) if parent_s else None)
         # a macroregion's parent resolves against this same mapping
         views: ViewMap[MacroregionView] = ViewMap(store, lambda id: cls(id, store, views))
         return views

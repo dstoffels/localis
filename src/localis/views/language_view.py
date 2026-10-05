@@ -1,3 +1,4 @@
+import sys
 from pathlib import Path
 from typing import Mapping, cast
 from localis.entities import Language, LanguageBase, LanguageScope, LanguageType, LanguageScript
@@ -88,8 +89,9 @@ class LanguageView(View[Language, LanguageStore]):
                     alpha3,
                     alpha2,
                     bibliographic,
-                    scope,
-                    type_,
+                    # interned, since a handful of values repeat on every row
+                    sys.intern(scope),
+                    sys.intern(type_),
                     inverted_name,
                     tuple(a for a in alias_s.split("|") if a),
                     tuple(int(i) for i in scripts_s.split("|") if i),

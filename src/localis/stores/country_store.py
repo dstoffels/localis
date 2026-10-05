@@ -27,7 +27,7 @@ class CountryStore(Store):
         self.geonames_ids = array("i")  # -1 sentinel for None
         self.official_names: list[str] = []
         self.common_names: list[str] = []
-        # tuples, so entities can share them without copying and callers can't mutate the cache through a returned entity
+        # tuples, immutable in the store; views copy them into each entity's own list
         self.aliases: list[tuple[str, ...]] = []
         self.numerics = array("i")  # -1 sentinel for None
         self.flags: list[str] = []

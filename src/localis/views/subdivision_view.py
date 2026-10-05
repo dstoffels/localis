@@ -1,3 +1,4 @@
+import sys
 from pathlib import Path
 from typing import Mapping
 from localis.entities import SubdivisionBase, Subdivision
@@ -117,7 +118,8 @@ class SubdivisionView(
                     geonames_code,
                     geonames_id,
                     iso_code,
-                    type_,
+                    # interned, since about a hundred ISO types repeat across the rows
+                    sys.intern(type_),
                     alias_list,
                     admin_level,
                     parent_id,

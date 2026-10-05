@@ -9,6 +9,7 @@ class ScriptStore(Store):
         super().__init__()
         self.alpha4s: list[str] = []
         self.numerics = array("i")  # -1 sentinel for None
+        # tuples, immutable in the store; views copy them into each entity's own list
         self.aliases: list[tuple[str, ...]] = []
 
     def append(self, name: str, alpha4: str, numeric: int | None, alias_list: tuple[str, ...]) -> None:

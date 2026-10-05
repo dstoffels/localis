@@ -12,6 +12,7 @@ class LanguageStore(Store):
         self.scopes: list[str] = []
         self.types: list[str] = []
         self.inverted_names: list[str] = []
+        # tuples, immutable in the store; views copy them into each entity's own list
         self.aliases: list[tuple[str, ...]] = []
         self.script_ids: list[tuple[int, ...]] = []
         self.secondary_script_ids: list[tuple[int, ...]] = []
