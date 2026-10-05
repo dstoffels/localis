@@ -9,6 +9,7 @@ def main() -> None:
         description="Runs the analysis suite: data stats, footprint and benchmarks, then fills the docs' stat markers.",
     )
     parser.add_argument("--data-only", action="store_true", help="only the deterministic data stats and docs, as CI runs after ingest")
+    parser.add_argument("--staging", action="store_true", help="read the pipeline's complete staged build instead of the shipped data, as the pipeline's reconcile gate does")
     parser.add_argument("--check", action="store_true", help="only check that the docs' deterministic markers are current; writes nothing")
     parser.add_argument("--notes", help="what changed since the last footprint and benchmark run")
     parser.add_argument("--runs", type=int, default=3, help="fresh-process runs per footprint scenario")
@@ -21,6 +22,9 @@ def main() -> None:
         for line in stale:
             print(line)
         sys.exit(1 if stale else 0)
+
+    if args.staging:
+        data_stats.use_staging()
 
     print("data stats...")
     data_stats.run()

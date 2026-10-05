@@ -3,6 +3,7 @@ from collections import Counter
 from pathlib import Path
 from typing import Any
 import localis
+from localis.registries import Registry
 
 ROOT = Path(__file__).resolve().parents[2]
 DATA_PATH = ROOT / "src" / "localis" / "data"
@@ -13,6 +14,21 @@ CROSSWALK_PATH = ROOT / "ingest" / "subdivisions" / "inputs" / "wikidata_crosswa
 CITIES_INGEST_STATS_PATH = ROOT / "ingest" / "cities" / "outputs" / "ingest_stats.json"
 OUTPUT_PATH = Path(__file__).with_name("data_stats.json")
 POPULATION_THRESHOLD = 15_000
+
+
+def use_staging() -> None:
+    """Points the stats at the pipeline's staged build instead of the shipped one: its data, read through localis's own registries, and the staged copies of the pipeline outputs it reads. The build must be complete, so a run stopped partway is never mixed with shipped data."""
+    global DATA_PATH, CROSSWALK_PATH, CITIES_INGEST_STATS_PATH
+    # imported here, so the unit tests that read these stats don't need the pipeline importable
+    from ingest.utils import STAGED_DATA_PATH, is_complete, staged_path
+
+    if not is_complete():
+        raise RuntimeError("staging holds no complete build; run the pipeline")
+    # set on analysis's side before any registry loads, so the runtime itself only ever reads its packaged data
+    setattr(Registry, "_data_path", property(lambda self: STAGED_DATA_PATH / self.REGISTRY_NAME))
+    DATA_PATH = STAGED_DATA_PATH
+    CROSSWALK_PATH = CROSSWALK_PATH.with_suffix(".pending.json")
+    CITIES_INGEST_STATS_PATH = staged_path(CITIES_INGEST_STATS_PATH)
 
 
 def _country_stats() -> dict[str, int]:

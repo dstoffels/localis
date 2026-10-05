@@ -79,6 +79,68 @@ Open:
 - Pinning the CLDR version (backlog 7) as part of this build: Script and Language add `scripts.json`, `languages.json` and `languageData.json` to the CLDR files fetched separately from `main`.
 - The Skill decision lifecycle lands before the 1 November 2026 cron, either in 2.2.0 or as a 2.1.x patch from `main`.
 
+## Atomic pipeline
+
+Status: designed, approved and implemented 2026-10-04, from the review of codebase area 1 (ingest orchestration); dev.md's Pipeline section describes the result. "Pipeline" and "pipeline stage" are the terms in docs; the `ingest/` package, `poe ingest`, `ingest.yaml` and `ingest_log` keep their names.
+
+### Why
+
+A stage rebuilds its dependents by passing its result down in memory, a remnant of stages once running in isolation. Nothing on disk records that a dependent still needs rebuilding, so a run that fails after countries dumps (shifted ids) but before subdivisions does leaves `subdivisions.tsv` and `cities.tsv` pointing at stale country ids, and the next non-force local run never repairs them. CI is unaffected only because a fresh runner has no inputs and rebuilds everything. Stages also dump straight into `src/localis/data`, so the shipped data can be partly from one run and partly from another.
+
+### Always-build stages
+
+- Every stage builds from its inputs on every run: no "No updates" early returns, no "passed in means rebuilt" parameters, no rebuilding from shipped TSVs. Each stage receives the models of the stages it links to, built earlier in the same run.
+- `--force` is removed. A stage downloads an input only when it's missing locally or its ETag differs from the manifest's; deleting an input forces its re-download.
+- Determinism is already guaranteed: repeated runs on the same inputs produce no diff, which always-build depends on.
+
+### Manifests
+
+ETags currently serve as download gate, provenance and change trigger at once; the three are split:
+- Download gate: the ETag, compared on a HEAD request, purely to save bandwidth.
+- Provenance: each manifest entry becomes `{url, etag, sha256}`, the sha256 of the downloaded file identifying exactly which bytes a release was built from, whatever the server does with its ETags.
+- Change detection: unchanged, the shipped data's diff, which CI already uses (`git status -- src/localis/data`) to bump the version. It catches changes input hashes can't (code, Wikidata edits) and ignores input changes that don't reach the output.
+
+### Staging and promotion
+
+- Each stage dumps to a staging directory (`ingest/staging/data/<registry>/`, gitignored, with the other promoted files under `ingest/staging/files/` at their repo paths) and returns its models for the stages after it. Dumping as it goes keeps memory to what downstream stages need, rather than every stage's output at once.
+- Staging is wiped at the start of a run, not at the end of a failed one, so it survives an orphan stop for the skill.
+- Once every stage has dumped, the pipeline writes a completion marker into staging, runs the reconcile gate (below), writes the structured change report, then promotes.
+- Promotion moves, together and only on full success: the staged data into `src/localis/data`, the manifests, the committed Wikidata files (`CommittedQuery.commit()`), `unmerged_subdivisions.md` and `ingest_stats.json`.
+- Always written, success or not: the logs, with the failure that stopped a run, and `resolution_map.json`, the skill's work queue, which has to survive an orphan stop.
+- An orphan stop exits before promotion. `exit_if_orphans()` logs but no longer dumps the log itself; the stage's `finally` does.
+
+### Structured change report
+
+At promotion the new build sits next to the shipped one, so the pipeline compares them before promoting: per registry, records added, removed and changed (by `key`), and keys that disappeared. Each stage's report is promoted to `ingest/<stage>/outputs/change_report.md`, uncapped and opening with a counts table, and the workflow gathers those counts into a summary for the ingest PR's body and a per-run comment (PR bodies and comments cap at 65,536 characters), for the PR and the CHANGELOG, replacing a raw diff of TSVs as the account of what a release changed.
+
+### Skill and analysis
+
+- The resolve-subdivisions skill reads staged data, not shipped data: `load_countries()` stays, as the skill's TSV reader, pointed at staging. Countries must have built by the time subdivisions runs, so a staged countries is always there when orphans are open. `load_subdivisions()`, used only by the cities fallback, is removed.
+- Analysis reads either the staged build or the shipped data, chosen explicitly rather than falling back from one to the other, which would mix a partial staging (after an orphan stop) with shipped data. It reads staging only when the completion marker is present. The runtime is unchanged: analysis overrides `Registry._data_path` on its own side, so `localis` keeps reading only its packaged data.
+
+### Reconcile gate
+
+Before promoting, the pipeline runs the `analysis --data-only` step (`data_stats` and the docs' deterministic stat markers) against the staged build, never the full analysis with footprint and benchmarks. `data_stats` raises before writing anything when its counts don't reconcile, which stops the run before promotion like any other failure; when they do, `data_stats.json` and the docs' figures already describe the build being promoted. In staging mode analysis reads the staged copies of every artifact it uses, not only the data: `ingest_stats.json`, the pending Wikidata crosswalk and the run's `resolution_map.json`.
+
+### Also in this pass
+
+From the same review:
+- Stage paths derived from the stage name, replacing the per-stage constants in `paths.py`, `utils/__init__.py` and the logger's `Stage` literal and `STAGE_FILES`, so adding a stage touches only the stage itself, `__main__` and the `.gitignore` manifest exception.
+- A stage that raises writes an `ERROR` line with the exception to its log before re-raising.
+- Dead code: the logger's never-false `if text`, the double log dump on an orphan stop, and inconsistent stage entry points (`ingest_cities.py`'s `__main__` lacked `force=True`).
+- Stages return their staged output consistently.
+
+### Follow-up, done 2026-10-04
+
+- `territoryInfo.json` is fetched once per run, with the other shared sources, at the start of `run_pipeline()`, instead of by both countries and subdivisions.
+- Manifests are rewritten as each run's entries alone, dropping stale ones; `committed_value()` and the subdivisions decisions fingerprint are removed, since `resolution_map.json` is committed with the data.
+- `CommittedQuery.changed()` is `log_changes()`, which only logs.
+- The legacy branch in `fetch()` that accepted a bare-ETag manifest entry, removed once the first promotion had rewritten every manifest as `{url, etag, sha256}`.
+
+### Deferred
+
+- The full pipeline's local run time, unmeasured.
+
 ## Backlog
 1. Batch throughput for large cleanups: registries are thread-safe, but on the standard (GIL) build threads don't parallelize search, which is mostly Python code, and rapidfuzz's single scorer calls don't release the GIL usefully (only `process.cdist(..., workers=N)` does, which doesn't fit localis's search). Free-threaded Python is the threaded route: rapidfuzz supports 3.14t since 3.14.2 (3.14.0 added support, 3.14.6 dropped the experimental 3.13t wheels). It requires no change to `requires-python = ">=3.11"`, since free threading is a property of the user's interpreter and localis is pure Python; GIL builds keep working as now. Adopting it is additive: a 3.14t job in the test matrix, optionally raising the `rapidfuzz` floor to 3.14.2 and adding the free-threading PyPI classifier, and a batch API such as `search_many(queries, workers=N)` on a thread pool (parallel on 3.14t, serial on GIL builds, with process pools as the GIL-build option: each worker loads its own cache, about 105MB for cities). Measure throughput on both builds.
 2. City radius feature using lat/lng to return nearby cities within a specified distance?

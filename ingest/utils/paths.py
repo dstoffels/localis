@@ -1,45 +1,58 @@
 from pathlib import Path
 
-BASE_PATH = Path(__file__).parent.parent
+BASE_PATH = Path(__file__).resolve().parent.parent
+REPO_PATH = BASE_PATH.parent
 
 # localis data
-DATA_PATH = BASE_PATH.parent / "src" / "localis" / "data"
+DATA_PATH = REPO_PATH / "src" / "localis" / "data"
 
 # Published docs
-DOCS_PATH = BASE_PATH.parent / "docs"
+DOCS_PATH = REPO_PATH / "docs"
 
-# Inputs (fetched sources only)
-MACROREGIONS_INPUTS_PATH = BASE_PATH / "macroregions" / "inputs"
-CURRENCIES_INPUTS_PATH = BASE_PATH / "currencies" / "inputs"
-SCRIPTS_INPUTS_PATH = BASE_PATH / "scripts" / "inputs"
-LANGUAGES_INPUTS_PATH = BASE_PATH / "languages" / "inputs"
-COUNTRIES_INPUTS_PATH = BASE_PATH / "countries" / "inputs"
-SUBDIVISIONS_INPUTS_PATH = BASE_PATH / "subdivisions" / "inputs"
-CITIES_INPUTS_PATH = BASE_PATH / "cities" / "inputs"
-SHARED_INPUTS_PATH = BASE_PATH / "shared" / "inputs"
+# Each run's build, promoted to the repo only once every stage has dumped and the reconcile gate passes
+STAGING_PATH = BASE_PATH / "staging"
+STAGED_DATA_PATH = STAGING_PATH / "data"
 
-# Outputs (ingestion-process artifacts: resolution decisions, orphan lists, not raw input)
-SUBDIVISIONS_OUTPUTS_PATH = BASE_PATH / "subdivisions" / "outputs"
-CITIES_OUTPUTS_PATH = BASE_PATH / "cities" / "outputs"
 
-# Logs
-MACROREGIONS_LOGS_PATH = BASE_PATH / "macroregions" / "logs"
-CURRENCIES_LOGS_PATH = BASE_PATH / "currencies" / "logs"
-SCRIPTS_LOGS_PATH = BASE_PATH / "scripts" / "logs"
-LANGUAGES_LOGS_PATH = BASE_PATH / "languages" / "logs"
-COUNTRIES_LOGS_PATH = BASE_PATH / "countries" / "logs"
-SUBDIVISIONS_LOGS_PATH = BASE_PATH / "subdivisions" / "logs"
-CITIES_LOGS_PATH = BASE_PATH / "cities" / "logs"
+class Stage:
+    """A pipeline stage's directories and files, derived from its name under ingest/<name>/."""
 
-# Manifest
-MACROREGIONS_MANIFEST_PATH = MACROREGIONS_INPUTS_PATH / "macroregions.manifest.json"
-CURRENCIES_MANIFEST_PATH = CURRENCIES_INPUTS_PATH / "currencies.manifest.json"
-SCRIPTS_MANIFEST_PATH = SCRIPTS_INPUTS_PATH / "scripts.manifest.json"
-LANGUAGES_MANIFEST_PATH = LANGUAGES_INPUTS_PATH / "languages.manifest.json"
-COUNTRIES_MANIFEST_PATH = COUNTRIES_INPUTS_PATH / "countries.manifest.json"
-SUBDIVISIONS_MANIFEST_PATH = SUBDIVISIONS_INPUTS_PATH / "subdivisions.manifest.json"
-CITIES_MANIFEST_PATH = CITIES_INPUTS_PATH / "cities.manifest.json"
-SHARED_MANIFEST_PATH = SHARED_INPUTS_PATH / "shared.manifest.json"
+    __slots__ = ("name",)
 
-# Paths
+    def __init__(self, name: str) -> None:
+        self.name = name
+
+    @property
+    def root(self) -> Path:
+        return BASE_PATH / self.name
+
+    @property
+    def inputs(self) -> Path:
+        """Fetched sources, untracked except the manifest and committed query results."""
+        return self.root / "inputs"
+
+    @property
+    def outputs(self) -> Path:
+        """Tracked artifacts of the build process, such as resolution decisions."""
+        return self.root / "outputs"
+
+    @property
+    def manifest(self) -> Path:
+        return self.inputs / f"{self.name}.manifest.json"
+
+    @property
+    def log_file(self) -> Path:
+        return self.root / "logs" / f"{self.name}_ingest.log"
+
+
+MACROREGIONS = Stage("macroregions")
+CURRENCIES = Stage("currencies")
+SCRIPTS = Stage("scripts")
+LANGUAGES = Stage("languages")
+COUNTRIES = Stage("countries")
+SUBDIVISIONS = Stage("subdivisions")
+CITIES = Stage("cities")
+# sources several stages read, fetched by the stages that use them
+SHARED = Stage("shared")
+
 GEONAMES_DUMP_URL = "https://download.geonames.org/export/dump"

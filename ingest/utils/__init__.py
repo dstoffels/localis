@@ -1,29 +1,23 @@
 from .paths import (
     BASE_PATH,
+    REPO_PATH,
     DATA_PATH,
     DOCS_PATH,
-    MACROREGIONS_INPUTS_PATH,
-    CURRENCIES_INPUTS_PATH,
-    SCRIPTS_INPUTS_PATH,
-    LANGUAGES_INPUTS_PATH,
-    COUNTRIES_INPUTS_PATH,
-    SUBDIVISIONS_INPUTS_PATH,
-    CITIES_INPUTS_PATH,
-    SHARED_INPUTS_PATH,
-    SUBDIVISIONS_OUTPUTS_PATH,
-    CITIES_OUTPUTS_PATH,
-    MACROREGIONS_MANIFEST_PATH,
-    CURRENCIES_MANIFEST_PATH,
-    SCRIPTS_MANIFEST_PATH,
-    LANGUAGES_MANIFEST_PATH,
-    COUNTRIES_MANIFEST_PATH,
-    SUBDIVISIONS_MANIFEST_PATH,
-    CITIES_MANIFEST_PATH,
-    SHARED_MANIFEST_PATH,
+    STAGING_PATH,
+    STAGED_DATA_PATH,
+    Stage,
+    MACROREGIONS,
+    CURRENCIES,
+    SCRIPTS,
+    LANGUAGES,
+    COUNTRIES,
+    SUBDIVISIONS,
+    CITIES,
+    SHARED,
     GEONAMES_DUMP_URL,
 )
 from .logger import ingest_log
-from .download import fetch, sparql, SPARQL_ATTEMPTS, record_pending, committed_value, commit_manifest
+from .download import fetch, sparql, SPARQL_ATTEMPTS, commit_manifests
 from .committed_query import CommittedQuery
 from .index import (
     dump_data,
@@ -32,3 +26,4 @@ from .index import (
     dump_search_index,
     dump_registry,
 )
+from .staging import reset_staging, staged_path, stage_text, mark_complete, is_complete, promote

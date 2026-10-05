@@ -1,7 +1,7 @@
 import json
 import re
 import unicodedata
-from ingest.utils import COUNTRIES_INPUTS_PATH, ingest_log
+from ingest.utils import COUNTRIES, ingest_log
 from ingest.utils.strings import name_key
 from localis.utils.strings import is_latin
 from ingest.shared.models import CountryModel
@@ -11,7 +11,7 @@ from .wikidata_countries import CountryNames
 
 _LEADING_THE_RE = re.compile(r"^the\s+", re.IGNORECASE)
 _SUBDIVISION_CODE_RE = re.compile(r"^[A-Z]{2}-[A-Z0-9]{1,3}$")
-NAME_BLOCKLIST_PATH = COUNTRIES_INPUTS_PATH / "name_blocklist.json"
+NAME_BLOCKLIST_PATH = COUNTRIES.inputs / "name_blocklist.json"
 
 
 def _wikidata_alias(raw: str, iso_codes: set[str], item_codes: frozenset[str] | set[str] = frozenset()) -> str | None:
@@ -81,6 +81,9 @@ def merge_geonames(countries: dict[str, CountryModel]):
     with open(GEONAMES_COUNTRIES_DEST, "r", encoding="utf-8") as f:
 
         for row in f:
+            # GeoNames ships this with a '#' doc header, read past rather than stripped, so the input stays the file the manifest hashes
+            if row.startswith("#"):
+                continue
             (
                 alpha2,
                 alpha3,

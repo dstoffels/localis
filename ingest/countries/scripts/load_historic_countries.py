@@ -1,6 +1,6 @@
 # Loads ISO 3166-3's withdrawn countries, keyed by alpha_4 since ISO reuses alpha2/alpha3 (CS: Czechoslovakia CSHH, then Serbia and Montenegro CSXX).
 
-from ingest.utils import COUNTRIES_INPUTS_PATH, ingest_log
+from ingest.utils import COUNTRIES, ingest_log
 from ingest.shared.models import CountryModel, HistoricModel
 import json
 
@@ -11,7 +11,7 @@ def init_historic_countries(
     """Parses country data from ISO 3166-3 and returns an alpha_4 mapped cache"""
     ingest_log.writeline("Loading historic ISO countries...")
 
-    with open(COUNTRIES_INPUTS_PATH / "iso_3166-3.json", "r", encoding="utf-8") as f:
+    with open(COUNTRIES.inputs / "iso_3166-3.json", "r", encoding="utf-8") as f:
         historic_countries: list[dict] = json.load(f).get("3166-3")
         historic_countries.sort(key=lambda c: c.get("alpha_4") or "")
 

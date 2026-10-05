@@ -1,6 +1,17 @@
 {
-  "admin1CodesASCII.txt": "\"2501f-65cfb6df9b6ce\"",
-  "admin2Codes.txt": "\"243de8-65cfb6df9b6ce\"",
-  "iso_3166-2.json": "W/\"fbffbe3c69b915ad1093545358650827-gzip\"",
-  "resolution_map": "7264c592553cfc710b6888b9ee70fc2eeda204e67877319403719a59d756101f"
+  "admin1CodesASCII.txt": {
+    "url": "https://download.geonames.org/export/dump/admin1CodesASCII.txt",
+    "etag": "\"2501f-65cfb6df9b6ce\"",
+    "sha256": "1da92a6323a5fec3176f3f743bf4cf4040fd56a876da55e46fbca23c863aa60a"
+  },
+  "admin2Codes.txt": {
+    "url": "https://download.geonames.org/export/dump/admin2Codes.txt",
+    "etag": "\"243de8-65cfb6df9b6ce\"",
+    "sha256": "a2c9cc3cefbeca82f4af9637ab68ae4975cc78444289bc4f62718e76c59b8488"
+  },
+  "iso_3166-2.json": {
+    "url": "https://salsa.debian.org/iso-codes-team/iso-codes/-/raw/main/data/iso_3166-2.json",
+    "etag": "W/\"fbffbe3c69b915ad1093545358650827-gzip\"",
+    "sha256": "78c90ef7fc25b5c2631aac5f089bc9ff6ec22c025c05b6ddbc087a1f1be2e46a"
+  }
 }

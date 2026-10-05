@@ -48,7 +48,7 @@ dev = [
 ]
 
 [tool.poe.tasks]
-ingest = { cmd = "python -m ingest", help = "Run the ingest pipeline; --force rebuilds every stage" }
+ingest = { cmd = "python -m ingest", help = "Run the data pipeline: build every stage into staging and promote the build only if the whole pipeline succeeds" }
 analysis = { cmd = "python -m tests.analysis", help = "Regenerate data stats, footprint and benchmarks, and fill the docs' stat markers" }
 test = { cmd = "pytest", help = "Run the test suite" }
 watch = { cmd = "ptw", help = "Re-run the tests on every change" }

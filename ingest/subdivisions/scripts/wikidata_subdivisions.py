@@ -1,4 +1,4 @@
-from ingest.utils import SUBDIVISIONS_INPUTS_PATH, CommittedQuery, ingest_log, sparql
+from ingest.utils import SUBDIVISIONS, CommittedQuery, ingest_log, sparql
 from ingest.subdivisions.utils.subdivision_map import SubdivisionMap
 from ingest.subdivisions.utils.resolution_map import ResolutionMap, WikidataChangedOrphan, WikidataConflictOrphan
 from ingest.shared.models import SubdivisionModel
@@ -11,7 +11,7 @@ SELECT ?isoCode ?geonamesId WHERE {
 }
 """
 # committed as the crosswalk's provenance; a removed mapping falls through to automerge unreviewed, so CommittedQuery confirms removals before keeping them
-CROSSWALK = CommittedQuery[int](SUBDIVISIONS_INPUTS_PATH / "wikidata_crosswalk.json", "Wikidata crosswalk")
+CROSSWALK = CommittedQuery[int](SUBDIVISIONS.inputs / "wikidata_crosswalk.json", "Wikidata crosswalk")
 
 
 def _query_crosswalk() -> dict[str, int]:

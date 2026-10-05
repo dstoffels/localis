@@ -1,11 +1,15 @@
 import csv
-from ingest.utils import DATA_PATH, ingest_log
+from ingest.utils import STAGED_DATA_PATH, ingest_log
 from ingest.shared.models import CountryModel, HistoricModel
 
 
 def load_countries() -> dict[str, CountryModel]:
-    ingest_log.writeline("Loading countries...")
-    with open(DATA_PATH / "countries" / "countries.tsv", "r", encoding="utf-8") as f:
+    """The countries of the last run's staged build, for the resolve-subdivisions skill: a run stopped by orphans keeps its staging, and countries has always staged by the time subdivisions runs."""
+    path = STAGED_DATA_PATH / "countries" / "countries.tsv"
+    if not path.exists():
+        raise FileNotFoundError(f"No staged countries at {path}; run the pipeline first")
+    ingest_log.writeline("Loading staged countries...")
+    with open(path, "r", encoding="utf-8") as f:
         reader = csv.reader(f, delimiter="\t")
         countries: dict[str, CountryModel] = {}
         for id, row in enumerate(reader, start=1):

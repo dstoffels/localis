@@ -1,8 +1,6 @@
-from ingest.utils import fetch
-from ingest.utils import CITIES_INPUTS_PATH, CITIES_MANIFEST_PATH, GEONAMES_DUMP_URL
+from ingest.utils import CITIES, GEONAMES_DUMP_URL, fetch
 
 
-def fetch_cities_sources(force: bool = False) -> bool:
-    """Downloads GeoNames' cities500 if it changed; True if the stage should rebuild."""
-    fetched = fetch(f"{GEONAMES_DUMP_URL}/cities500.zip", CITIES_INPUTS_PATH / "cities500.zip", CITIES_MANIFEST_PATH, extract="cities500.txt")
-    return fetched or force
+def fetch_cities_sources() -> None:
+    """Downloads GeoNames' cities500 if it changed."""
+    fetch(f"{GEONAMES_DUMP_URL}/cities500.zip", CITIES.inputs / "cities500.zip", CITIES.manifest, extract="cities500.txt")

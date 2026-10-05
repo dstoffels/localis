@@ -96,5 +96,5 @@ class SubdivisionMap:
         return len(self._by_id)
 
     def to_geocode_map(self) -> dict[str, SubdivisionModel]:
-        """Return a plain dict keyed by geonames_code, matching the shape load_subdivisions() reconstructs from disk."""
+        """Return a plain dict keyed by geonames_code, the shape the cities stage reads subdivisions in."""
         return self._by_geo_code

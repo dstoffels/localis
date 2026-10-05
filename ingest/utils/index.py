@@ -6,7 +6,7 @@ from ingest.shared.models import Model
 from array import array
 import gzip
 from localis.indexes.filter_index import MISSING_KEY
-from .paths import DATA_PATH
+from .paths import STAGED_DATA_PATH
 from .logger import ingest_log
 
 # each key's columns (a trigram, or a filter field and value) to the ids of the records holding it
@@ -110,8 +110,8 @@ def dump_search_index(data: Sequence[Model], datadir_path: Path) -> None:
 
 
 def dump_registry(name: str, data: Sequence[Model], queryable: bool = True) -> None:
-    """Writes a registry's data file and lookup index to src/localis/data/<name>/, plus its filter and search indexes when it's queryable."""
-    path = DATA_PATH / name
+    """Writes a registry's data file and lookup index to its staging directory, promoted to src/localis/data/<name>/ with the rest of the build, plus its filter and search indexes when it's queryable."""
+    path = STAGED_DATA_PATH / name
     path.mkdir(parents=True, exist_ok=True)
     ingest_log.writeline(f"Dumping {len(data)} {name}...")
     dump_data(data, path / f"{name}.tsv")

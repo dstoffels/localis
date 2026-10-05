@@ -85,6 +85,8 @@ sandbox.py
 
 *.ps1
 ingest/*/inputs/*
+# each run's build, promoted to the repo only when the whole pipeline succeeds
+ingest/staging/
 !ingest/macroregions/inputs/macroregions.manifest.json
 !ingest/currencies/inputs/currencies.manifest.json
 !ingest/scripts/inputs/scripts.manifest.json

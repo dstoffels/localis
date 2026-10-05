@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from ingest.utils import COUNTRIES_INPUTS_PATH, CommittedQuery, ingest_log, sparql
+from ingest.utils import COUNTRIES, CommittedQuery, ingest_log, sparql
 
 # an item's English label, alternative labels and short names (P1813), and its IOC (P984) and FIFA (P3441) codes, which appear among the alternative labels but aren't names
 _NAME_FIELDS = """
@@ -27,7 +27,7 @@ CountryEntry = dict[str, list[str]]
 CountryNames = dict[str, CountryEntry]
 
 # committed as the names' provenance; changes need no review beyond the ingest PR, whose countries.tsv diff shows their effect
-COUNTRY_NAMES = CommittedQuery[CountryEntry](COUNTRIES_INPUTS_PATH / "wikidata_country_names.json", "Wikidata country names")
+COUNTRY_NAMES = CommittedQuery[CountryEntry](COUNTRIES.inputs / "wikidata_country_names.json", "Wikidata country names")
 
 
 @dataclass

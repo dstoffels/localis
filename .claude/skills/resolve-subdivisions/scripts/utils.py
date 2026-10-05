@@ -11,7 +11,7 @@ from ingest.subdivisions.utils.resolution_map import (
     WikidataChangedOrphan,
 )
 from ingest.shared.models import SubdivisionModel
-from ingest.utils import SUBDIVISIONS_OUTPUTS_PATH
+from ingest.utils import SUBDIVISIONS
 from ingest.shared.scripts import load_countries
 from ingest.subdivisions.scripts.automerge.type_families import is_type_disqualified, raw_type_families
 from ingest.subdivisions.scripts import (
@@ -23,7 +23,7 @@ from ingest.subdivisions.scripts import (
 from ingest.subdivisions.scripts.wikidata_subdivisions import CROSSWALK
 from ingest.subdivisions.scripts.automerge.scoring import is_directional_mismatch
 
-RESOLUTION_MAP_PATH = SUBDIVISIONS_OUTPUTS_PATH / "resolution_map.json"
+RESOLUTION_MAP_PATH = SUBDIVISIONS.outputs / "resolution_map.json"
 
 
 @functools.cache

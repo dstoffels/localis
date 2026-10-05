@@ -1,4 +1,4 @@
-from ingest.utils import CITIES_INPUTS_PATH
+from ingest.utils import CITIES
 from localis.utils.strings import is_latin
 from ingest.utils import ingest_log
 from ingest.shared.models import SubdivisionModel, CountryModel, CityModel
@@ -89,7 +89,7 @@ def load_cities(
     subdivisions: dict[str, SubdivisionModel], countries: dict[str, CountryModel]
 ) -> tuple[list[CityModel], int]:
     """The parsed cities, and how many of them took GeoNames' ASCII name over a primary name in another script."""
-    with open(CITIES_INPUTS_PATH / "cities500.txt", "r", encoding="utf-8") as f:
+    with open(CITIES.inputs / "cities500.txt", "r", encoding="utf-8") as f:
         ingest_log.writeline("Parsing cities from cities500.txt...")
         rows = csv.DictReader(f, fieldnames=HEADERS, delimiter="\t")
         cities = []

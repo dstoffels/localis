@@ -93,10 +93,6 @@ jobs:
           fi
           echo "count=$count" >> "$GITHUB_OUTPUT"
 
-      - name: Regenerate data stats and docs
-        if: steps.ingest.outputs.exit_code == '0'
-        run: uv run poe analysis --data-only
-
       - name: Type Check
         if: steps.ingest.outputs.exit_code == '0'
         run: uv run poe typecheck
@@ -193,16 +189,36 @@ jobs:
           gh auth setup-git
           git push origin FETCH_HEAD:refs/heads/ingest
 
-      - name: Ensure PR exists
+      - name: Summarize this run's change report
+        if: needs.build.outputs.changed == 'true'
+        run: |
+          # each stage report's counts row, linked to the full report at this run's commit
+          base="https://github.com/${GITHUB_REPOSITORY}/blob/$(git rev-parse FETCH_HEAD)"
+          {
+            echo "| Stage | Records | Added | Removed | Changed |"
+            echo "|---|---|---|---|---|"
+            for report in $(git ls-tree -r --name-only FETCH_HEAD -- ingest | grep '/outputs/change_report\.md$'); do
+              stage=$(basename "$(dirname "$(dirname "$report")")")
+              counts=$(git show "FETCH_HEAD:$report" | grep -m1 -E '^\| [0-9,]+ → ')
+              echo "| [$stage]($base/$report) $counts"
+            done
+          } > report_summary.md
+
+      - name: Open or update the PR
         if: needs.build.outputs.changed == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          {
+            echo "This PR is maintained automatically by the ingest workflow and always reflects the current state of the \`ingest\` branch: below is the latest run's change report, and each run comments with its own. Type check and tests ran in the ingest workflow itself before this was pushed, since bot-opened PRs don't trigger the Test workflow."
+            echo
+            cat report_summary.md
+          } > pr_body.md
           existing=$(gh pr list --head ingest --base dev --json number --jq '.[0].number')
           if [ -z "$existing" ]; then
-            gh pr create --head ingest --base dev \
-              --title "Automated data ingest" \
-              --body "This PR is maintained automatically by the ingest workflow and always reflects the current state of the \`ingest\` branch. Each run comments below with what changed. Type check and tests ran in the ingest workflow itself before this was pushed, since bot-opened PRs don't trigger the Test workflow."
+            gh pr create --head ingest --base dev --title "Automated data ingest" --body-file pr_body.md
+          else
+            gh pr edit "$existing" --body-file pr_body.md
           fi
 
       - name: Comment on PR with this run's changes
@@ -224,9 +240,7 @@ jobs:
               echo "Only bookkeeping files changed; no dataset version bump."
             fi
             echo
-            echo '```'
-            git diff --stat FETCH_HEAD~1 FETCH_HEAD -- src/localis/data
-            echo '```'
+            cat report_summary.md
           } > run_summary.md
           gh pr comment ingest --body-file run_summary.md
 
@@ -235,5 +249,5 @@ jobs:
         env:
           ORPHANS: ${{ needs.build.outputs.orphans }}
         run: |
-          echo "::error::Ingest found $ORPHANS subdivision orphans; the queue is committed to the ingest branch. Resolve locally: pull ingest, run 'poe ingest --force', run the resolve-subdivisions skill, run 'poe ingest', then commit and push to ingest."
+          echo "::error::Ingest found $ORPHANS subdivision orphans; the queue is committed to the ingest branch. Resolve locally: pull ingest, run 'poe ingest' to reproduce the orphans in staging, run the resolve-subdivisions skill, run 'poe ingest' again, then commit and push to ingest."
           exit 1

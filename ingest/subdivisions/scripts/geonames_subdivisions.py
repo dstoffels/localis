@@ -1,5 +1,5 @@
 from ingest.subdivisions.utils.subdivision_map import SubdivisionMap
-from ingest.utils import SUBDIVISIONS_INPUTS_PATH
+from ingest.utils import SUBDIVISIONS
 from ingest.utils import ingest_log
 import csv
 from ingest.shared.models import CountryModel
@@ -9,7 +9,7 @@ from ingest.shared.models import SubdivisionModel
 def load_geonames_file(
     file_name: str, countries: dict[str, CountryModel], sub_map: SubdivisionMap
 ) -> None:
-    with open(SUBDIVISIONS_INPUTS_PATH / file_name, "r", encoding="utf-8") as f:
+    with open(SUBDIVISIONS.inputs / file_name, "r", encoding="utf-8") as f:
         HEADERS = ("code", "name", "name_ascii", "geonames_id")
         reader = csv.DictReader(
             f,

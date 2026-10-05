@@ -1,4 +1,5 @@
 from http.client import HTTPException, HTTPResponse
+import hashlib
 import json
 import time
 import zipfile
@@ -6,7 +7,7 @@ from pathlib import Path
 from urllib.error import HTTPError
 from urllib.parse import urlencode
 from urllib.request import urlopen, Request
-from typing import cast
+from typing import Any, cast
 from .logger import ingest_log
 
 # sent with every request to a data source
@@ -16,7 +17,8 @@ SPARQL_ENDPOINT = "https://query.wikidata.org/sparql"
 SPARQL_ATTEMPTS = 4
 SPARQL_BACKOFF = 10
 
-_Manifest = dict[str, str | None]
+# each source file's entry, {url, etag, sha256}, keyed by its file name
+_Manifest = dict[str, Any]
 
 
 def _load_manifest(path: Path) -> _Manifest:
@@ -34,28 +36,15 @@ def _save_manifest(path: Path, manifest: _Manifest) -> None:
         f.write("\n")
 
 
-# entries fetched this run, written to their manifest only once the stage that consumes them dumps successfully
+# entries recorded this run, written to their manifests only when the pipeline promotes its build
 _pending: dict[Path, _Manifest] = {}
 
 
-def record_pending(manifest_path: Path, name: str, value: str | None) -> None:
-    """Stages a manifest entry to be written by commit_manifest()."""
-    _pending.setdefault(manifest_path, {})[name] = value
-
-
-def committed_value(manifest_path: Path, name: str) -> str | None:
-    """The manifest entry as of the last successful dump."""
-    return _load_manifest(manifest_path).get(name)
-
-
-def commit_manifest(manifest_path: Path) -> None:
-    """Writes this run's pending entries to the manifest; call only after the consuming stage has dumped, so a failed run leaves its sources marked unconsumed."""
-    pending = _pending.pop(manifest_path, None)
-    if not pending:
-        return
-    manifest = _load_manifest(manifest_path)
-    manifest.update(pending)
-    _save_manifest(manifest_path, manifest)
+def commit_manifests() -> None:
+    """Writes each manifest as this run's entries alone, since every run fetches every source, so a source no longer used leaves no stale entry; called only on promotion, so a failed run leaves the manifests describing the shipped build."""
+    for manifest_path, pending in _pending.items():
+        _save_manifest(manifest_path, dict(sorted(pending.items())))
+    _pending.clear()
 
 
 def _etag(url: str) -> str | None:
@@ -65,52 +54,50 @@ def _etag(url: str) -> str | None:
         return head_response.headers.get("ETag")
 
 
-def has_changed(
-    url: str, dest: Path, manifest_path: Path, exists_path: Path | None = None
-) -> bool:
-    """Read-only HEAD check against manifest_path; never downloads or writes."""
-    if not (exists_path or dest).exists():
-        return True
-
-    manifest = _load_manifest(manifest_path)
-    etag = _etag(url)
-
-    if etag == manifest.get(dest.name):
-        ingest_log.writeline(f"No update needed for {dest.name}")
-        return False
-
-    return True
+def _sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with open(path, "rb") as f:
+        while chunk := f.read(1024 * 1024):
+            digest.update(chunk)
+    return digest.hexdigest()
 
 
-def download(url: str, dest: Path, manifest_path: Path) -> None:
-    """Unconditional fetch via a .part temp file; pair with has_changed()."""
+def _download(url: str, dest: Path) -> str | None:
+    """Downloads url to dest via a .part temp file; the ETag of the bytes downloaded, which a second HEAD could miss if the file changed in between."""
     dest.parent.mkdir(parents=True, exist_ok=True)
     tmp = dest.with_suffix(dest.suffix + ".part")
-
     request = Request(url, headers={"User-Agent": USER_AGENT})
     ingest_log.writeline(f"Downloading {dest.name} from {url}")
     response = cast(HTTPResponse, urlopen(request, timeout=60))
     with response, open(tmp, "wb") as f:
-        # the ETag of the bytes actually downloaded, which a second HEAD could miss if the file changed in between
         etag = response.headers.get("ETag")
         while chunk := response.read(1024 * 1024):
             f.write(chunk)
-
     tmp.replace(dest)
-    ingest_log.writeline(f"Downloaded and updated {dest.name}")
-    record_pending(manifest_path, dest.name, etag)
+    return etag
 
 
 def fetch(url: str, dest: Path, manifest_path: Path, extract: str | None = None) -> bool:
-    """Downloads url to dest if it changed since the last consumed download, unpacking a zip's `extract` member beside it and removing the zip; True if it downloaded."""
-    if not has_changed(url, dest, manifest_path, exists_path=dest.with_name(extract) if extract else None):
-        return False
-    download(url, dest, manifest_path)
-    if extract:
-        with zipfile.ZipFile(dest) as zf:
-            zf.extract(extract, dest.parent)
-        dest.unlink()
-    return True
+    """Downloads url to dest, unpacking a zip's `extract` member beside it and removing the zip, unless the file the stage reads is already the one the manifest records under the same ETag; stages its manifest entry either way. True if it downloaded."""
+    local = dest.with_name(extract) if extract else dest
+    etag = _etag(url)
+    entry = _load_manifest(manifest_path).get(dest.name, {})
+    # hashed only when the ETag matches, so a changed source isn't hashed just to be replaced
+    sha256 = _sha256(local) if local.exists() and etag == entry.get("etag") else None
+    current = sha256 is not None and sha256 == entry.get("sha256")
+
+    if not current:
+        etag = _download(url, dest)
+        if extract:
+            with zipfile.ZipFile(dest) as zf:
+                zf.extract(extract, dest.parent)
+            dest.unlink()
+        sha256 = _sha256(local)
+        ingest_log.writeline(f"Downloaded and updated {local.name}")
+    else:
+        ingest_log.writeline(f"No update needed for {local.name}")
+    _pending.setdefault(manifest_path, {})[dest.name] = {"url": url, "etag": etag, "sha256": sha256}
+    return not current
 
 
 def _sparql_bindings(request: Request) -> list[dict]:
