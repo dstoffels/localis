@@ -29,6 +29,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Subdivision.type` and `SubdivisionBase.type` are `None` for the 46,665 GeoNames-only subdivisions, which have no ISO type, instead of `""`, like every other missing field
 - Cities ship a short-name list like countries and subdivisions, so short city names reachable only by an exact query (such as "Jīān") are found through the short-query fallback, for about 463 KiB
 - The filter index ships inverted, like the search index: each field value's ids are packed at ingest and sliced out at load, instead of the index being rebuilt from per-record rows on every load, so filters' first use is faster, most of all for cities
+- Building entities is faster: each result reads its row position once rather than on every field, so iterating every city takes about a fifth less time
+- Languages' and subdivisions' loaded data is smaller: the few scope and type values those records repeat are stored once each, about 0.9 MiB less for languages and 0.3 MiB for subdivisions
 - With a population threshold set, the cities indexes load faster: each entry is checked against the set of ids the filtered cache kept, instead of through a predicate call
 - The README is organized by query API (`get`, `lookup`, `filter`, `search`, iteration) with each registry's specifics under Entities, where each entity's fields are a table marking which ones its nested form keeps. methodology.md lists the pipeline's four merge stages in order and keeps its one-off validation checks, dated and with how each was determined, in Discovery
 - Generated doc figures are marked with `<stat key="source.key:format">` tags instead of HTML comments, and more figures are generated: the crosswalk's size and disagreements, the non-administrative groupings, Kosovo's records and the cities named in ASCII
@@ -46,6 +48,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- `lookup()` resolves a numeric code or GeoNames ID given as a string (`countries.lookup("840")`, `cities.lookup("5128581")`), not only as an int
+- `search()` honors a `limit` above 200 instead of capping results there
+- `filter()` and `search()` raise `ValueError` for a `limit` below 1, which a negative value had silently cut results by
+- `get(True)` returned the record with ID 1, since `True` counts as the integer 1; a bool is no longer taken as an ID
 - Subdivision automerge could leave out an ISO subdivision that qualified against a name another two subdivisions contested, without merging or orphaning it, so it never shipped; none was affected, and every ISO subdivision is now checked to ship or await review
 - A city whose name contains a double quote (Poselok Turisticheskogo pansionata "Klyazminskoe vodohranilische") had its name returned wrapped in extra quotes, with each inner quote doubled
 - Filter and search indexes load correctly on big-endian machines, where their packed ids had been read in the wrong byte order

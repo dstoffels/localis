@@ -159,10 +159,17 @@ class QueryableRegistry(Registry[T]):
 
     # ----------- API METHODS ----------- #
 
+    @staticmethod
+    def _check_limit(limit: int | None) -> None:
+        # a slice would read a negative limit as "all but the last few"
+        if limit is not None and (not isinstance(limit, int) or isinstance(limit, bool) or limit < 1):
+            raise ValueError(f"limit must be a positive integer, got {limit!r}")
+
     def filter(
         self, *, name: str | None = None, limit: int | None = None, **kwargs
     ) -> list[T]:
-        """Filter by exact matches on specified fields with AND logic when filtering by multiple fields. Case insensitive. A field given MISSING matches the records with no value in it. Raises TypeError for a kwarg the registry can't filter by."""
+        """Filter by exact matches on specified fields with AND logic when filtering by multiple fields. Case insensitive. A field given MISSING matches the records with no value in it. Raises TypeError for a kwarg the registry can't filter by, and ValueError for a limit below 1."""
+        self._check_limit(limit)
         kwargs["name"] = name
 
         unknown = [k for k in kwargs if k not in self._filter_index.index]
@@ -199,5 +206,6 @@ class QueryableRegistry(Registry[T]):
         return [r.to_entity() for r in results_list]
 
     def search(self, query: str, limit: int = 10) -> list[tuple[T, float]]:
+        self._check_limit(limit)
         results = self._search_index.search(query=query, limit=limit, exclude=self._hidden_ids())
         return [(r.to_entity(), score) for r, score in results]

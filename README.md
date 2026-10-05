@@ -146,7 +146,7 @@ localis.languages.filter(script=localis.MISSING)  # languages CLDR lists no scri
 
 Pass `localis.MISSING` to match records with no value in a field (`None` ignores the field). A field the registry doesn't have raises `TypeError`.
 
-**Returns:** a list of entities sorted by name. `limit` defaults to every match.
+**Returns:** a list of entities sorted by name. `limit` defaults to every match and must be at least 1.
 
 ### search
 
@@ -164,7 +164,7 @@ localis.languages.search("Portugese")
 
 A subdivision or city query can add context after the name: a subdivision's parent or country, or a city's first-level subdivision or country.
 
-**Returns:** a list of `(entity, score)` pairs, best match first. Each score runs from 0 to 1, higher is better. `limit` defaults to 10.
+**Returns:** a list of `(entity, score)` pairs, best match first. Each score runs from 0 to 1, higher is better. `limit` defaults to 10 and must be at least 1.
 
 ### Iteration and len()
 

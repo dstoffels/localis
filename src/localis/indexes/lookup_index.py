@@ -5,6 +5,8 @@ from localis.utils.strings import normalize
 
 
 class LookupIndex:
+    """A registry's lookup keys, string and integer, each sorted for binary search, mapped to record ids."""
+
     def __init__(
         self,
         filepath: Path,
@@ -42,14 +44,19 @@ class LookupIndex:
         self._int_vals = int_vals
 
     def get(self, key: str | int) -> int | None:
-        """Get the model ID by its lookup key."""
-        if isinstance(key, str):
-            key = normalize(key)
-            keys, vals = self._str_keys, self._str_vals
-        else:
-            keys, vals = self._int_keys, self._int_vals
+        """The record id a lookup key resolves to, or None."""
+        if isinstance(key, int):
+            return self._find(self._int_keys, self._int_vals, key)
+        key = normalize(key)
+        found = self._find(self._str_keys, self._str_vals, key)
+        # an all-digit code (a numeric code, a GeoNames id) is indexed as an integer, so "840" also tries 840
+        if found is None and key.isdigit():
+            found = self._find(self._int_keys, self._int_vals, int(key))
+        return found
 
-        i = bisect.bisect_left(keys, key)
+    @staticmethod
+    def _find(keys: list[str] | array, vals: array, key: str | int) -> int | None:
+        i = bisect.bisect_left(keys, key)  # type: ignore[arg-type]
         if i < len(keys) and keys[i] == key:
             return vals[i]
         return None

@@ -92,3 +92,8 @@ class TestLookup:
             assert (
                 result.id == subject.id
             ), f"expected id [{subject.id}], got [{result.id}] for lookup value [{value}]"
+            # a value arriving as text, such as a numeric code from a form, resolves the same way
+            as_text = registry.lookup(str(value))
+            assert (
+                as_text is not None and as_text.id == subject.id
+            ), f"expected id [{subject.id}] for lookup value [{value!r}] as text, got {as_text}"

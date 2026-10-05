@@ -86,6 +86,12 @@ class TestFilter:
         results = registry.filter(name="asjh238gjs")
         assert results == []
 
+    @pytest.mark.parametrize("bad_limit", [0, -1, True])
+    def test_bad_limit(self, bad_limit, registry: QueryableRegistry):
+        """should raise a ValueError for a limit that isn't a positive integer, rather than slice by it"""
+        with pytest.raises(ValueError):
+            registry.filter(name="paris", limit=bad_limit)
+
     def test_kwargs(self, registry: QueryableRegistry):
         """should raise a TypeError if given an invalid kwarg"""
         with pytest.raises(TypeError):
