@@ -44,6 +44,8 @@ jobs:
 
       - name: Run ingest
         if: github.event_name == 'push' && github.ref == 'refs/heads/dev' && matrix.python-version == '3.11'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: uv run poe ingest
 
       - name: Check for unexpected dataset changes

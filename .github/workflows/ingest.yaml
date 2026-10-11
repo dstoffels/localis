@@ -73,6 +73,8 @@ jobs:
 
       - name: Run full ingest pipeline
         id: ingest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set +e
           uv run poe ingest

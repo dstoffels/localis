@@ -2,6 +2,7 @@ from functools import cache
 from http.client import HTTPException, HTTPResponse, IncompleteRead
 import hashlib
 import json
+import os
 import time
 import zipfile
 from pathlib import Path
@@ -71,9 +72,12 @@ def _read_json(request: Request, timeout: int) -> Any:
 
 
 @cache
-def _main_commit(branch_url: str, sha_key: str, label: str) -> str:
+def _main_commit(branch_url: str, sha_key: str, label: str, token: str | None = None) -> str:
     """A repository's main commit from its branch API, under sha_key, looked up once per run so every stage builds from the same commit."""
     request = Request(branch_url, headers={"User-Agent": USER_AGENT})
+    if token:
+        # unredirected, so a redirect never carries the token to another host
+        request.add_unredirected_header("Authorization", f"Bearer {token}")
     commit = _retrying(lambda: _read_json(request, timeout=60)["commit"][sha_key], f"{label} commit lookup")
     ingest_log.writeline(f"Using {label} main at {commit}")
     return commit
@@ -86,7 +90,9 @@ def iso_codes_url(file: str) -> str:
 
 def cldr_url(path: str) -> str:
     """The URL of a cldr-json file, by its path under cldr-json/, at main's current commit."""
-    return f"{CLDR_RAW_URL}/{_main_commit(CLDR_MAIN_URL, 'sha', 'cldr-json')}/cldr-json/{path}"
+    # GitHub's API rate-limits unauthenticated requests per IP, which CI runners share, so CI passes its read-only job token
+    commit = _main_commit(CLDR_MAIN_URL, "sha", "cldr-json", os.environ.get("GITHUB_TOKEN"))
+    return f"{CLDR_RAW_URL}/{commit}/cldr-json/{path}"
 
 
 def _etag(url: str) -> str | None:
