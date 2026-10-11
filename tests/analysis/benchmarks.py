@@ -73,6 +73,9 @@ def benchmark_registry(
         if not is_latin(query):
             return
         mangled = mangle(query, seed=seed)
+        # a name too short for mangle() to typo would be an exact search, which isn't what this measures
+        if normalize(mangled) == normalize(query):
+            return
         results = _timed(lambda: registry.search(mangled), latency)
         # a record sharing the sampled one's name (and a city's admin1) is as right an answer as the query allows
         rank = next(
