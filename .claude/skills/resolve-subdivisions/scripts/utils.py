@@ -9,6 +9,9 @@ from ingest.subdivisions.utils.resolution_map import (
     GroupingTwinOrphan,
     WikidataConflictOrphan,
     WikidataChangedOrphan,
+    StaleDecisionOrphan,
+    ContestedDecisionOrphan,
+    NewCandidateOrphan,
 )
 from ingest.shared.models import SubdivisionModel
 from ingest.utils import SUBDIVISIONS
@@ -21,7 +24,7 @@ from ingest.subdivisions.scripts import (
     score_candidates,
 )
 from ingest.subdivisions.scripts.wikidata_subdivisions import CROSSWALK
-from ingest.subdivisions.scripts.automerge.scoring import is_directional_mismatch
+from ingest.subdivisions.scripts.automerge.scoring import is_directional_mismatch, qualifying_candidates
 
 RESOLUTION_MAP_PATH = SUBDIVISIONS.outputs / "resolution_map.json"
 
@@ -72,14 +75,16 @@ def write_resolution(
     decided_by: Literal["agent", "human"],
     escalation: str | None,
 ) -> None:
-    """geonames_id of None means "add as-is"."""
+    """geonames_id of None means "add as-is". An add records the qualifying candidates it was decided against, so the pipeline reopens it only for a record GeoNames adds later."""
     resolution_map = _resolution_map()
+    candidates_seen = qualifying_candidates(_get_iso_subs()[iso_code], get_geonames_submap()) if geonames_id is None else []
     resolution_map.skill_decisions[iso_code] = SkillDecision(
         id=geonames_id,
         reason=reason,
         decided_by=decided_by,
         escalation=escalation,
         wikidata_seen=_crosswalk().get(iso_code),
+        candidates_seen=candidates_seen,
     )
     _save_resolution_map()
 
@@ -89,9 +94,15 @@ def _countries():
     return load_countries()
 
 
+def _reopened_decisions(resolution_map: ResolutionMap) -> list[str]:
+    """The codes whose skill decision the pipeline sent back for review."""
+    orphans = resolution_map.automerge.orphans
+    return [orphan.iso_code for orphan in (*orphans.wikidata_conflict, *orphans.stale_decision, *orphans.contested_decision, *orphans.new_candidate)]
+
+
 def _apply_resolved_claims(sub_map: SubdivisionMap, resolution_map: ResolutionMap) -> None:
-    """Marks every GeoNames sub already claimed by a recorded resolution, so a target another iso_code already has doesn't look unclaimed. A decision under review as a wikidata_conflict doesn't count as a claim, so keeping it stays possible."""
-    under_review = {orphan.iso_code for orphan in resolution_map.automerge.orphans.wikidata_conflict}
+    """Marks every GeoNames sub already claimed by a recorded resolution, so a target another iso_code already has doesn't look unclaimed. A decision sent back for review doesn't count as a claim, so keeping it stays possible."""
+    under_review = set(_reopened_decisions(resolution_map))
     claims = {
         code: decision.id
         for code, decision in resolution_map.skill_decisions.items()
@@ -145,7 +156,7 @@ def _get_top_tier_batch_size(pool_size: int) -> int:
 
 
 def _flagged_candidates(iso_code: str) -> list[tuple[int, str]]:
-    """The specific records the pipeline flagged for this orphan, with a note saying why, shown as its first batch: ambiguity close-calls, the low_margin or grouping_twin pick, or both sides of a wikidata_conflict or wikidata_changed. Empty for no_candidates/no_matches; raises if iso_code isn't an orphan."""
+    """The specific records the pipeline flagged for this orphan, with a note saying why, shown as its first batch: ambiguity close-calls, the low_margin or grouping_twin pick, both sides of a wikidata_conflict or wikidata_changed, a contested decision's target, an add's new candidates, or Wikidata's mapping for a stale decision. Empty for no_candidates/no_matches; raises if iso_code isn't an orphan."""
     match _resolution_map().automerge.orphans.find(iso_code):
         case None:
             raise ValueError(f"{iso_code} is not in resolution_map's orphans")
@@ -162,6 +173,16 @@ def _flagged_candidates(iso_code: str) -> list[tuple[int, str]]:
             if decision_gid is not None:
                 flagged.append((decision_gid, "current skill decision"))
             return flagged
+        case StaleDecisionOrphan():
+            # the decision's target is gone, so Wikidata's mapping, if it has a record, is the lead; otherwise the regular top tier
+            wikidata_gid = _crosswalk().get(iso_code)
+            if wikidata_gid is not None and get_geonames_submap().get(geonames_id=wikidata_gid) is not None:
+                return [(wikidata_gid, "Wikidata's mapping")]
+            return []
+        case ContestedDecisionOrphan(decision_geonames_id=decision_gid, contested_with=contested_with):
+            return [(decision_gid, f"current skill decision, also named by {', '.join(contested_with)}")]
+        case NewCandidateOrphan(candidate_geonames_ids=gids):
+            return [(gid, "new GeoNames record since this decision") for gid in gids]
         case WikidataChangedOrphan(wikidata_geonames_id=wikidata_gid, previous_geonames_id=previous_gid):
             return [(wikidata_gid, "Wikidata's new mapping"), (previous_gid, "previous resolution")]
 
@@ -259,13 +280,21 @@ def get_next_orphan() -> dict | None:
         "type": iso_sub.type,
         "admin_level": iso_sub.admin_level,
     }
-    if any(conflict.iso_code == iso_code for conflict in orphans.wikidata_conflict):
-        decision = resolution_map.skill_decisions[iso_code]
-        orphan["current_decision"] = {
-            "geonames_id": decision.id if decision.id is not None else "add as-is (no GeoNames counterpart)",
-            "reason": decision.reason,
-        }
+    if iso_code in _reopened_decisions(resolution_map):
+        orphan["current_decision"] = _describe(resolution_map.skill_decisions[iso_code])
+    # a code that returned after its decision was retired is decided afresh, with the old decision as history
+    retired = resolution_map.retired_decisions.get(iso_code)
+    if retired is not None:
+        orphan["previous_decision"] = {**_describe(retired.decision), "retired_because": retired.retired_because}
     return orphan
+
+
+def _describe(decision: SkillDecision) -> dict:
+    return {
+        "geonames_id": decision.id if decision.id is not None else "add as-is (no GeoNames counterpart)",
+        "reason": decision.reason,
+        "decided_by": decision.decided_by,
+    }
 
 
 def pop_orphan(iso_code: str) -> None:

@@ -44,7 +44,7 @@ Cities search, potential feature: GeoNames names New York City "New York City", 
 
 ## Skill decision lifecycle
 
-Status: designed, not started; to land in a 3.0 beta before the next scheduled ingest run (the monthly cron, 1 November 2026), since that run is the first that can retire or reopen skill decisions.
+Status: implemented (#28), to reach `dev` before the next scheduled ingest run (the monthly cron, 1 November 2026, which merges `dev` into `ingest` first), the first run that can retire or reopen skill decisions. The first local `poe ingest` baselines `candidates_seen` and rewrites `resolution_map.json`, which has to be committed with it.
 
 Goal: a skill decision is never silently ignored or replaced. Wikidata merges, automerge, `geonames_absent` and the non-administrative bypass are recomputed every run and already follow source updates. Skill decisions are permanent and applied first, and today only `flag_wikidata_conflicts()` ever re-examines them, so a GeoNames or ISO update can leave one wrong without anything failing.
 

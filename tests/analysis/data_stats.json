@@ -114,17 +114,17 @@
       "municipalities": 38,
       "kosovan_records": 45
     },
-    "total": 51711,
+    "total": 51710,
     "iso_total": 5046,
     "iso_merged": 4843,
     "iso_merged_pct": 96.0,
     "iso_only": 203,
-    "geonames_total": 51508,
-    "geonames_only": 46665,
+    "geonames_total": 51507,
+    "geonames_only": 46664,
     "by_level": {
       "0": 49,
       "1": 4199,
-      "2": 47398,
+      "2": 47397,
       "3": 65
     }
   },
@@ -148,20 +148,20 @@
     "disagreements_not_admin": 276
   },
   "cities": {
-    "total": 235970,
+    "total": 236041,
     "threshold": 15000,
-    "above_threshold": 34172,
+    "above_threshold": 34178,
     "ascii_names": 24,
-    "unlinked": 461,
-    "unlinked_no_admin1": 117,
+    "unlinked": 462,
+    "unlinked_no_admin1": 118,
     "unlinked_admin1_00": 305,
     "unlinked_unknown_admin1": 39,
-    "shipped_unlinked": 461
+    "shipped_unlinked": 462
   },
   "filter_index": {
     "cities": {
-      "values": 277273,
-      "single_record_values": 216712
+      "values": 277356,
+      "single_record_values": 216786
     },
     "countries": {
       "values": 2106,
@@ -180,25 +180,25 @@
       "single_record_values": 298
     },
     "subdivisions": {
-      "values": 75080,
-      "single_record_values": 69886
+      "values": 75611,
+      "single_record_values": 70398
     }
   },
   "shipped_size": {
-    "total": 53390870,
+    "total": 53425879,
     "cities": {
-      "total": 41969930,
+      "total": 41983360,
       "share_pct": 78.6,
       "files": {
-        "canon_index.bin.gz": 4968698,
-        "canon_index_offsets.tsv": 166585,
-        "cities.tsv": 13254276,
-        "context_index.bin.gz": 8566135,
-        "context_index_offsets.tsv": 95270,
-        "filter_index.bin.gz": 3367404,
-        "filter_index_offsets.tsv": 7673483,
-        "lookup_index_int.tsv": 3404872,
-        "short_names.tsv.gz": 473207
+        "canon_index.bin.gz": 4970120,
+        "canon_index_offsets.tsv": 166589,
+        "cities.tsv": 13258299,
+        "context_index.bin.gz": 8569392,
+        "context_index_offsets.tsv": 95271,
+        "filter_index.bin.gz": 3369324,
+        "filter_index_offsets.tsv": 7674869,
+        "lookup_index_int.tsv": 3405924,
+        "short_names.tsv.gz": 473572
       }
     },
     "countries": {
@@ -265,22 +265,22 @@
       }
     },
     "subdivisions": {
-      "total": 10283465,
+      "total": 10305044,
       "share_pct": 19.3,
       "files": {
-        "canon_index.bin.gz": 1700960,
-        "canon_index_offsets.tsv": 141575,
-        "context_index.bin.gz": 1526970,
-        "context_index_offsets.tsv": 66955,
-        "filter_index.bin.gz": 482952,
-        "filter_index_offsets.tsv": 2200897,
-        "lookup_index_str.tsv": 969848,
-        "short_names.tsv.gz": 104795,
-        "subdivisions.tsv": 3088513
+        "canon_index.bin.gz": 1702185,
+        "canon_index_offsets.tsv": 141599,
+        "context_index.bin.gz": 1526968,
+        "context_index_offsets.tsv": 66968,
+        "filter_index.bin.gz": 483757,
+        "filter_index_offsets.tsv": 2213855,
+        "lookup_index_str.tsv": 969827,
+        "short_names.tsv.gz": 105735,
+        "subdivisions.tsv": 3094150
       }
     }
   },
   "totals": {
-    "records": 296323
+    "records": 296393
   }
 }

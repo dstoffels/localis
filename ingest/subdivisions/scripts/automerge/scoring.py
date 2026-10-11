@@ -66,3 +66,9 @@ def score_candidates(
             scored.append((geo_sub, best[0], best[1]))
     scored.sort(key=lambda t: t[1], reverse=True)
     return scored
+
+
+def qualifying_candidates(iso_sub: SubdivisionModel, sub_map: SubdivisionMap) -> list[int]:
+    """The GeoNames ids of the country's unclaimed records, at every level, that pass automerge's gates against iso_sub: an add decision's candidates, recorded by the skill and rechecked by the pipeline with this same function. Level-crossing matches count, since one only reopens a decision for review, never merges."""
+    scored = score_candidates(iso_sub, candidate_pool(sub_map, iso_sub.country.alpha2))
+    return sorted(geo_sub.geonames_id for geo_sub, score, needed in scored if score >= needed and geo_sub.geonames_id is not None)

@@ -12,13 +12,22 @@ class AutomergeMatch:
 
 @dataclass
 class SkillDecision:
-    """A resolve-subdivisions decision: a GeoNames id to merge into, or None for "add as-is". escalation holds the agent's findings when it sent the orphan to a human. wikidata_seen is the Wikidata crosswalk's mapping when the decision was made, so a decision that disagrees with it is a known override rather than a silent one. reason and decided_by are None for decisions recorded before they were tracked."""
+    """A resolve-subdivisions decision: a GeoNames id to merge into, or None for "add as-is". escalation holds the agent's findings when it sent the orphan to a human. wikidata_seen is the Wikidata crosswalk's mapping when the decision was made, so a decision that disagrees with it is a known override rather than a silent one. candidates_seen is an add's qualifying GeoNames records when it was made, so only a record GeoNames adds later reopens it; empty for a merge, None until a run records it. reason and decided_by are None for decisions recorded before they were tracked."""
 
     id: int | None
     reason: str | None = None
     decided_by: Literal["agent", "human"] | None = None
     escalation: str | None = None
     wikidata_seen: int | None = None
+    candidates_seen: list[int] | None = None
+
+
+@dataclass
+class RetiredDecision:
+    """A skill decision whose code ISO removed or the pipeline now bypasses as non-administrative, kept as the record of what was decided; a code that returns comes back as an orphan, with this shown as its previous decision."""
+
+    decision: SkillDecision
+    retired_because: Literal["removed_from_iso", "bypassed"]
 
 
 @dataclass
@@ -42,6 +51,25 @@ class WikidataConflictOrphan:
 
 
 @dataclass
+class StaleDecisionOrphan:
+    iso_code: str
+    decision_geonames_id: int
+
+
+@dataclass
+class ContestedDecisionOrphan:
+    iso_code: str
+    decision_geonames_id: int
+    contested_with: list[str]
+
+
+@dataclass
+class NewCandidateOrphan:
+    iso_code: str
+    candidate_geonames_ids: list[int]
+
+
+@dataclass
 class WikidataChangedOrphan:
     iso_code: str
     previous_geonames_id: int
@@ -60,6 +88,9 @@ OrphanEntry = (
     | AmbiguousOrphan
     | LowMarginOrphan
     | WikidataConflictOrphan
+    | StaleDecisionOrphan
+    | ContestedDecisionOrphan
+    | NewCandidateOrphan
     | WikidataChangedOrphan
     | GroupingTwinOrphan
 )
@@ -78,6 +109,10 @@ class Orphans:
     ambiguity: list[AmbiguousOrphan] = field(default_factory=list)
     low_margin: list[LowMarginOrphan] = field(default_factory=list)
     wikidata_conflict: list[WikidataConflictOrphan] = field(default_factory=list)
+    # skill decisions reopened by the pipeline: a merge target GeoNames deleted, a target two decisions name, an add GeoNames now has a qualifying record for
+    stale_decision: list[StaleDecisionOrphan] = field(default_factory=list)
+    contested_decision: list[ContestedDecisionOrphan] = field(default_factory=list)
+    new_candidate: list[NewCandidateOrphan] = field(default_factory=list)
     wikidata_changed: list[WikidataChangedOrphan] = field(default_factory=list)
     grouping_twin: list[GroupingTwinOrphan] = field(default_factory=list)
 
@@ -145,6 +180,7 @@ class Automerge:
 class ResolutionMap:
     non_administrative_types: dict[str, list[str]] = field(default_factory=dict)
     skill_decisions: dict[str, SkillDecision] = field(default_factory=dict)
+    retired_decisions: dict[str, RetiredDecision] = field(default_factory=dict)
     wikidata_merge: dict[str, int | None] = field(default_factory=dict)
     automerge: Automerge = field(default_factory=Automerge)
 
@@ -161,6 +197,10 @@ class ResolutionMap:
             skill_decisions={
                 code: SkillDecision(**decision)
                 for code, decision in data.get("skill_decisions", {}).items()
+            },
+            retired_decisions={
+                code: RetiredDecision(decision=SkillDecision(**retired["decision"]), retired_because=retired["retired_because"])
+                for code, retired in data.get("retired_decisions", {}).items()
             },
             wikidata_merge=data.get("wikidata_merge", {}),
             automerge=Automerge(
@@ -180,6 +220,10 @@ class ResolutionMap:
             "skill_decisions": {
                 code: asdict(decision)
                 for code, decision in self.skill_decisions.items()
+            },
+            "retired_decisions": {
+                code: asdict(retired)
+                for code, retired in self.retired_decisions.items()
             },
             "wikidata_merge": self.wikidata_merge,
             "automerge": {
