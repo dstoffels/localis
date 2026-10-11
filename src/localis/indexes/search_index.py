@@ -4,10 +4,10 @@ import heapq
 import math
 import gzip
 from pathlib import Path
-from typing import Generic, Mapping, TypeVar
+from typing import Any, Callable, Generic, Mapping, TypeVar
 from rapidfuzz import fuzz, process
 from localis.entities import Entity
-from localis.views import View
+from localis.views import View, ViewMap
 from localis.stores import Store
 from localis.utils.strings import search_text, word_trigrams, SHORT_NAME_MAX
 from localis.utils.data import resolve_field
@@ -41,10 +41,17 @@ class SearchIndex(Generic[T]):
         cache: Mapping[int, View[T, Store]],
         data_path: Path,
         name_fields: tuple[str, ...],
+        prominence_columns: tuple[str, ...] = (),
         allowed_ids: set[int] | None = None,
     ) -> None:
         self.cache = cache
         self.name_fields = name_fields
+        # the store's own column arrays, read by row at search time, so prominence costs nothing to load
+        store = cache.store if isinstance(cache, ViewMap) else None
+        if prominence_columns and store is None:
+            raise TypeError("prominence columns are read from a store, so the cache must be a ViewMap")
+        columns = tuple(getattr(store, column) for column in prominence_columns)
+        self.prominence = self._prominence_key(store.id_to_idx, columns) if store is not None and columns else None
         self.canon = self._load_trigram_index(data_path / "canon_index", allowed_ids)
         self.short_names = self._load_short_names(data_path / "short_names.tsv.gz", allowed_ids)
         self.context = self._load_trigram_index(data_path / "context_index", allowed_ids)
@@ -65,6 +72,27 @@ class SearchIndex(Generic[T]):
                 names.append(name)
                 ids.append(id)
         return by_length
+
+    @staticmethod
+    def _prominence_key(id_to_idx: array, columns: tuple[array, ...]) -> Callable[[int], Any]:
+        """A record id's prominence, read by row from the store's columns: a single column's value as is, since cities' one-column case runs per tied record, or several as a tuple."""
+        if len(columns) == 1:
+            (column,) = columns
+            return lambda id: column[id_to_idx[id - 1]]
+        return lambda id: tuple(column[id_to_idx[id - 1]] for column in columns)
+
+    def _top(self, values: Mapping[int, float], k: int) -> list[int]:
+        """The ids of the k largest values, prominence picking among those tied at the cut, so a prominent record tied with the last one kept is never dropped for a lesser one."""
+        # one past the cut shows whether a tie spans it, the only case prominence is needed
+        top = heapq.nlargest(k + 1, values, key=values.__getitem__)
+        if len(top) <= k:
+            return top
+        cut = values[top[k - 1]]
+        if self.prominence is None or values[top[k]] < cut:
+            return top[:k]
+        above = [id for id in top if values[id] > cut]
+        tied = [id for id, value in values.items() if value == cut]
+        return above + heapq.nlargest(k - len(above), tied, key=self.prominence)
 
     @staticmethod
     def _load_trigram_index(prefix: Path, allowed_ids: set[int] | None) -> dict[str, array]:
@@ -89,7 +117,7 @@ class SearchIndex(Generic[T]):
         hits = self._count_hits(query_trigrams)
         for id in exclude:
             hits.pop(id, None)
-        shortlist = [id for id, _ in hits.most_common(max(self.SHORTLIST_K, limit))]
+        shortlist = self._top(hits, max(self.SHORTLIST_K, limit))
 
         # stage 2: each shortlisted record's rarity-weighted coverage of the query, by its names alone and by its names and context together, averaged
         trigram_scores: dict[int, float] = {}
@@ -103,7 +131,7 @@ class SearchIndex(Generic[T]):
             # only records whose names share a trigram with the query qualify, so context alone (a city's state) never surfaces a record
             if canon:
                 trigram_scores[id] = (2 * canon + context) / (2 * total_weight)
-        candidates = heapq.nlargest(max(self.TOP_K, limit), trigram_scores, key=trigram_scores.__getitem__)
+        candidates = self._top(trigram_scores, max(self.TOP_K, limit))
         # a short typo'd name shares only common edge trigrams with its record, so its edit-distance matches skip the trigram stages
         if self.short_names and len(tokens) == 1 and len(tokens[0]) <= self.SHORT_QUERY_LEN:
             candidates = list(dict.fromkeys([*candidates, *(id for id in self._short_matches(tokens[0]) if id not in exclude)]))
@@ -116,8 +144,12 @@ class SearchIndex(Generic[T]):
             if score >= self.NOISE_THRESHOLD:
                 results.append((candidate, score, trigram_scores.get(id, 0.0)))
 
-        # the candidate score ranks, the trigram score breaks its ties
-        results.sort(key=lambda r: (r[1], r[2]), reverse=True)
+        # the candidate score ranks, prominence breaks its ties, then the trigram score
+        prominence = self.prominence
+        if prominence is None:
+            results.sort(key=lambda r: (r[1], r[2]), reverse=True)
+        else:
+            results.sort(key=lambda r: (r[1], prominence(r[0].id), r[2]), reverse=True)
         return [(candidate, score) for candidate, score, _ in results[:limit]]
 
     def _weights(self, query_trigrams: set[str]) -> dict[str, float]:

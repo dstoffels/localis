@@ -75,3 +75,15 @@ class TestSearchLimit:
         monkeypatch.setattr(search_index, "TOP_K", 1)
 
         assert len(search_index.search("demonstration", limit=5)) == 5
+
+    def test_prominence_survives_cuts(self, monkeypatch: pytest.MonkeyPatch, tmp_path: Path):
+        """should keep the most prominent of records tied at the shortlist and candidate cuts"""
+        monkeypatch.setattr(index, "STAGED_DATA_PATH", tmp_path)
+        # identically named records tie at every stage; the numerics column stands in for a prominence column
+        index.dump_registry("currencies", [CurrencyModel(name="Demonstration", alpha3=f"D{c}{c}", numeric=n) for n, c in enumerate("ABCDE", start=1)])
+        search_index = SearchIndex(CurrencyView.load(tmp_path / "currencies" / "currencies.tsv"), tmp_path / "currencies", ("name",), ("numerics",))
+        monkeypatch.setattr(search_index, "SHORTLIST_K", 1)
+        monkeypatch.setattr(search_index, "TOP_K", 1)
+
+        [(result, _)] = search_index.search("demonstration", limit=1)
+        assert result.numeric == 5

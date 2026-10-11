@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- `cities.search()` ranks cities with the same score by population, largest first, so "Paris" returns Paris, France before Paris, Ontario, and a large city among many same-name places is never cut before it's scored. Reported by @SchubmannM in #8 (#26).
+
 ## [3.0.0b1] - 2026-10-05
 
 ### Upgrading from 2.1.0

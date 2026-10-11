@@ -38,6 +38,11 @@ class ViewMap(Mapping[int, V]):
         self._store = store
         self._make = make
 
+    @property
+    def store(self) -> Store:
+        """The columnar store the views read from."""
+        return self._store
+
     def __contains__(self, id: object) -> bool:
         id_to_idx = self._store.id_to_idx
         # an id excluded by a load-time filter predicate has no row

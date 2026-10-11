@@ -3627,5 +3627,584 @@
       "time_ms": 1115.346,
       "memory_bytes": 177447101
     }
+  },
+  "2026-10-11T14:53:52": {
+    "host": {
+      "os": "Linux 7.0.0-38-generic",
+      "machine": "x86_64",
+      "cpu": "11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz",
+      "cpu_count": 8,
+      "memory_total_bytes": 16015437824,
+      "python": "3.14.7",
+      "localis": "3.0.0b1"
+    },
+    "runs": 3,
+    "notes": null,
+    "registries": {
+      "macroregions": {
+        "dataset": {
+          "time_ms": 0.116,
+          "memory_bytes": 6532
+        },
+        "lookup_index": {
+          "time_ms": 0.083,
+          "memory_bytes": 5989
+        },
+        "combined": {
+          "time_ms": 0.199,
+          "memory_bytes": 12521
+        }
+      },
+      "currencies": {
+        "dataset": {
+          "time_ms": 0.184,
+          "memory_bytes": 28674
+        },
+        "lookup_index": {
+          "time_ms": 0.163,
+          "memory_bytes": 15233
+        },
+        "filter_index": {
+          "time_ms": 0.293,
+          "memory_bytes": 20505
+        },
+        "search_index": {
+          "time_ms": 0.815,
+          "memory_bytes": 180715
+        },
+        "combined": {
+          "time_ms": 1.455,
+          "memory_bytes": 245127
+        }
+      },
+      "scripts": {
+        "dataset": {
+          "time_ms": 0.318,
+          "memory_bytes": 47595
+        },
+        "lookup_index": {
+          "time_ms": 0.21,
+          "memory_bytes": 19193
+        },
+        "filter_index": {
+          "time_ms": 0.4,
+          "memory_bytes": 29091
+        },
+        "search_index": {
+          "time_ms": 1.08,
+          "memory_bytes": 231484
+        },
+        "combined": {
+          "time_ms": 2.008,
+          "memory_bytes": 327363
+        }
+      },
+      "languages": {
+        "dataset": {
+          "time_ms": 11.748,
+          "memory_bytes": 1898379
+        },
+        "lookup_index": {
+          "time_ms": 2.478,
+          "memory_bytes": 588771
+        },
+        "filter_index": {
+          "time_ms": 7.957,
+          "memory_bytes": 1392388
+        },
+        "search_index": {
+          "time_ms": 8.926,
+          "memory_bytes": 1496743
+        },
+        "combined": {
+          "time_ms": 31.109,
+          "memory_bytes": 5376281
+        }
+      },
+      "countries": {
+        "dataset": {
+          "time_ms": 1.453,
+          "memory_bytes": 368672
+        },
+        "lookup_index": {
+          "time_ms": 0.317,
+          "memory_bytes": 41450
+        },
+        "filter_index": {
+          "time_ms": 1.864,
+          "memory_bytes": 228984
+        },
+        "search_index": {
+          "time_ms": 2.157,
+          "memory_bytes": 473585
+        },
+        "combined": {
+          "time_ms": 5.791,
+          "memory_bytes": 1112691
+        }
+      },
+      "subdivisions": {
+        "dataset": {
+          "time_ms": 81.074,
+          "memory_bytes": 14493905
+        },
+        "lookup_index": {
+          "time_ms": 15.933,
+          "memory_bytes": 4546447
+        },
+        "filter_index": {
+          "time_ms": 63.979,
+          "memory_bytes": 12117138
+        },
+        "search_index": {
+          "time_ms": 60.963,
+          "memory_bytes": 12364439
+        },
+        "combined": {
+          "time_ms": 221.949,
+          "memory_bytes": 43521929
+        }
+      },
+      "cities": {
+        "dataset": {
+          "time_ms": 345.25,
+          "memory_bytes": 29488182
+        },
+        "lookup_index": {
+          "time_ms": 75.606,
+          "memory_bytes": 1909964
+        },
+        "filter_index": {
+          "time_ms": 285.029,
+          "memory_bytes": 51511221
+        },
+        "search_index": {
+          "time_ms": 455.769,
+          "memory_bytes": 45975005
+        },
+        "combined": {
+          "time_ms": 1161.654,
+          "memory_bytes": 128884372
+        }
+      }
+    },
+    "totals": {
+      "dataset": {
+        "time_ms": 440.143,
+        "memory_bytes": 46331939
+      },
+      "lookup_index": {
+        "time_ms": 94.79,
+        "memory_bytes": 7127047
+      },
+      "filter_index": {
+        "time_ms": 359.522,
+        "memory_bytes": 65299327
+      },
+      "search_index": {
+        "time_ms": 529.71,
+        "memory_bytes": 60721971
+      },
+      "combined": {
+        "time_ms": 1424.165,
+        "memory_bytes": 179480284
+      }
+    },
+    "cities_threshold": {
+      "time_ms": 1199.347,
+      "threshold": 15000,
+      "count": 34172,
+      "memory_bytes": 31783592
+    },
+    "full_cache": {
+      "time_ms": 1436.638,
+      "memory_bytes": 179453305
+    }
+  },
+  "2026-10-11T15:06:25": {
+    "host": {
+      "os": "Linux 7.0.0-38-generic",
+      "machine": "x86_64",
+      "cpu": "11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz",
+      "cpu_count": 8,
+      "memory_total_bytes": 16015437824,
+      "python": "3.14.7",
+      "localis": "3.0.0b1"
+    },
+    "runs": 3,
+    "notes": null,
+    "registries": {
+      "macroregions": {
+        "dataset": {
+          "time_ms": 0.126,
+          "memory_bytes": 6532
+        },
+        "lookup_index": {
+          "time_ms": 0.078,
+          "memory_bytes": 6064
+        },
+        "combined": {
+          "time_ms": 0.204,
+          "memory_bytes": 12596
+        }
+      },
+      "currencies": {
+        "dataset": {
+          "time_ms": 0.216,
+          "memory_bytes": 28737
+        },
+        "lookup_index": {
+          "time_ms": 0.205,
+          "memory_bytes": 15294
+        },
+        "filter_index": {
+          "time_ms": 0.294,
+          "memory_bytes": 20411
+        },
+        "search_index": {
+          "time_ms": 0.831,
+          "memory_bytes": 180659
+        },
+        "combined": {
+          "time_ms": 1.546,
+          "memory_bytes": 245101
+        }
+      },
+      "scripts": {
+        "dataset": {
+          "time_ms": 0.309,
+          "memory_bytes": 47593
+        },
+        "lookup_index": {
+          "time_ms": 0.197,
+          "memory_bytes": 19305
+        },
+        "filter_index": {
+          "time_ms": 0.389,
+          "memory_bytes": 29091
+        },
+        "search_index": {
+          "time_ms": 1.105,
+          "memory_bytes": 231436
+        },
+        "combined": {
+          "time_ms": 2.0,
+          "memory_bytes": 327425
+        }
+      },
+      "languages": {
+        "dataset": {
+          "time_ms": 12.044,
+          "memory_bytes": 1898315
+        },
+        "lookup_index": {
+          "time_ms": 2.121,
+          "memory_bytes": 588840
+        },
+        "filter_index": {
+          "time_ms": 7.758,
+          "memory_bytes": 1392309
+        },
+        "search_index": {
+          "time_ms": 8.036,
+          "memory_bytes": 1496761
+        },
+        "combined": {
+          "time_ms": 29.959,
+          "memory_bytes": 5376225
+        }
+      },
+      "countries": {
+        "dataset": {
+          "time_ms": 1.672,
+          "memory_bytes": 368733
+        },
+        "lookup_index": {
+          "time_ms": 0.29,
+          "memory_bytes": 41450
+        },
+        "filter_index": {
+          "time_ms": 1.967,
+          "memory_bytes": 228972
+        },
+        "search_index": {
+          "time_ms": 2.129,
+          "memory_bytes": 473651
+        },
+        "combined": {
+          "time_ms": 6.058,
+          "memory_bytes": 1112806
+        }
+      },
+      "subdivisions": {
+        "dataset": {
+          "time_ms": 78.75,
+          "memory_bytes": 14493905
+        },
+        "lookup_index": {
+          "time_ms": 16.127,
+          "memory_bytes": 4546447
+        },
+        "filter_index": {
+          "time_ms": 64.824,
+          "memory_bytes": 12116964
+        },
+        "search_index": {
+          "time_ms": 59.794,
+          "memory_bytes": 12364325
+        },
+        "combined": {
+          "time_ms": 219.495,
+          "memory_bytes": 43521641
+        }
+      },
+      "cities": {
+        "dataset": {
+          "time_ms": 344.737,
+          "memory_bytes": 29488182
+        },
+        "lookup_index": {
+          "time_ms": 74.53,
+          "memory_bytes": 1910107
+        },
+        "filter_index": {
+          "time_ms": 291.494,
+          "memory_bytes": 51511437
+        },
+        "search_index": {
+          "time_ms": 207.264,
+          "memory_bytes": 43969296
+        },
+        "combined": {
+          "time_ms": 918.025,
+          "memory_bytes": 126879022
+        }
+      }
+    },
+    "totals": {
+      "dataset": {
+        "time_ms": 437.854,
+        "memory_bytes": 46331997
+      },
+      "lookup_index": {
+        "time_ms": 93.548,
+        "memory_bytes": 7127507
+      },
+      "filter_index": {
+        "time_ms": 366.726,
+        "memory_bytes": 65299184
+      },
+      "search_index": {
+        "time_ms": 279.159,
+        "memory_bytes": 58716128
+      },
+      "combined": {
+        "time_ms": 1177.287,
+        "memory_bytes": 177474816
+      }
+    },
+    "cities_threshold": {
+      "time_ms": 1173.355,
+      "threshold": 15000,
+      "count": 34172,
+      "memory_bytes": 29777688
+    },
+    "full_cache": {
+      "time_ms": 1155.847,
+      "memory_bytes": 177447502
+    }
+  },
+  "2026-10-11T15:18:45": {
+    "host": {
+      "os": "Linux 7.0.0-38-generic",
+      "machine": "x86_64",
+      "cpu": "11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz",
+      "cpu_count": 8,
+      "memory_total_bytes": 16015437824,
+      "python": "3.14.7",
+      "localis": "3.0.0b1"
+    },
+    "runs": 3,
+    "notes": null,
+    "registries": {
+      "macroregions": {
+        "dataset": {
+          "time_ms": 0.137,
+          "memory_bytes": 6532
+        },
+        "lookup_index": {
+          "time_ms": 0.08,
+          "memory_bytes": 6003
+        },
+        "combined": {
+          "time_ms": 0.217,
+          "memory_bytes": 12535
+        }
+      },
+      "currencies": {
+        "dataset": {
+          "time_ms": 0.19,
+          "memory_bytes": 28613
+        },
+        "lookup_index": {
+          "time_ms": 0.169,
+          "memory_bytes": 15233
+        },
+        "filter_index": {
+          "time_ms": 0.293,
+          "memory_bytes": 20330
+        },
+        "search_index": {
+          "time_ms": 0.932,
+          "memory_bytes": 180657
+        },
+        "combined": {
+          "time_ms": 1.584,
+          "memory_bytes": 244833
+        }
+      },
+      "scripts": {
+        "dataset": {
+          "time_ms": 0.305,
+          "memory_bytes": 47534
+        },
+        "lookup_index": {
+          "time_ms": 0.199,
+          "memory_bytes": 19315
+        },
+        "filter_index": {
+          "time_ms": 0.385,
+          "memory_bytes": 29012
+        },
+        "search_index": {
+          "time_ms": 1.064,
+          "memory_bytes": 231367
+        },
+        "combined": {
+          "time_ms": 1.953,
+          "memory_bytes": 327228
+        }
+      },
+      "languages": {
+        "dataset": {
+          "time_ms": 11.578,
+          "memory_bytes": 1898239
+        },
+        "lookup_index": {
+          "time_ms": 2.151,
+          "memory_bytes": 588850
+        },
+        "filter_index": {
+          "time_ms": 7.742,
+          "memory_bytes": 1392284
+        },
+        "search_index": {
+          "time_ms": 8.073,
+          "memory_bytes": 1496824
+        },
+        "combined": {
+          "time_ms": 29.544,
+          "memory_bytes": 5376197
+        }
+      },
+      "countries": {
+        "dataset": {
+          "time_ms": 1.468,
+          "memory_bytes": 368733
+        },
+        "lookup_index": {
+          "time_ms": 0.297,
+          "memory_bytes": 41511
+        },
+        "filter_index": {
+          "time_ms": 1.739,
+          "memory_bytes": 228895
+        },
+        "search_index": {
+          "time_ms": 2.151,
+          "memory_bytes": 473651
+        },
+        "combined": {
+          "time_ms": 5.655,
+          "memory_bytes": 1112790
+        }
+      },
+      "subdivisions": {
+        "dataset": {
+          "time_ms": 82.588,
+          "memory_bytes": 14493905
+        },
+        "lookup_index": {
+          "time_ms": 16.427,
+          "memory_bytes": 4546447
+        },
+        "filter_index": {
+          "time_ms": 65.058,
+          "memory_bytes": 12117104
+        },
+        "search_index": {
+          "time_ms": 61.032,
+          "memory_bytes": 12364330
+        },
+        "combined": {
+          "time_ms": 225.105,
+          "memory_bytes": 43521786
+        }
+      },
+      "cities": {
+        "dataset": {
+          "time_ms": 345.101,
+          "memory_bytes": 29488111
+        },
+        "lookup_index": {
+          "time_ms": 75.251,
+          "memory_bytes": 1910046
+        },
+        "filter_index": {
+          "time_ms": 287.177,
+          "memory_bytes": 51511384
+        },
+        "search_index": {
+          "time_ms": 197.261,
+          "memory_bytes": 43969402
+        },
+        "combined": {
+          "time_ms": 904.79,
+          "memory_bytes": 126878943
+        }
+      }
+    },
+    "totals": {
+      "dataset": {
+        "time_ms": 441.367,
+        "memory_bytes": 46331667
+      },
+      "lookup_index": {
+        "time_ms": 94.574,
+        "memory_bytes": 7127405
+      },
+      "filter_index": {
+        "time_ms": 362.394,
+        "memory_bytes": 65299009
+      },
+      "search_index": {
+        "time_ms": 270.513,
+        "memory_bytes": 58716231
+      },
+      "combined": {
+        "time_ms": 1168.848,
+        "memory_bytes": 177474312
+      }
+    },
+    "cities_threshold": {
+      "time_ms": 1138.874,
+      "threshold": 15000,
+      "count": 34172,
+      "memory_bytes": 29778017
+    },
+    "full_cache": {
+      "time_ms": 1190.054,
+      "memory_bytes": 177447510
+    }
   }
 }
