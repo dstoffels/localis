@@ -87,4 +87,4 @@ class TestSearchLimit:
         monkeypatch.setattr(search_index, "TOP_K", 1)
 
         [(result, _)] = search_index.search("demonstration", limit=1)
-        assert result.numeric == expected
+        assert result.to_entity().numeric == expected
