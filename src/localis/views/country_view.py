@@ -2,6 +2,7 @@ from pathlib import Path
 from typing import Mapping, cast
 from localis.entities import Country, CountryBase, CountryLanguage, CurrencyBase, HistoricInfo, LanguageStatus, MacroregionBase
 from localis.stores import CountryStore
+from localis.utils.data import open_data
 from .view import View, ViewMap
 from .macroregion_view import MacroregionView
 from .currency_view import CurrencyView
@@ -139,7 +140,7 @@ class CountryView(View[Country, CountryStore]):
         script_views: Mapping[int, ScriptView],
     ) -> ViewMap["CountryView"]:
         store = CountryStore()
-        with open(filepath, "r", encoding="utf-8") as f:
+        with open_data(filepath) as f:
             for idx, line in enumerate(f):
                 row = line.rstrip("\r\n").split("\t")
                 (

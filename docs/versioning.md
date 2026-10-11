@@ -14,7 +14,7 @@ The public API is everything `localis` exports at the top level (`localis.__all_
 | Minor | 3.1.0 | new, backward-compatible features |
 | Major | 4.0.0 | changes that can break code written against the public API |
 
-Records changing with their sources (added, removed or renamed) isn't a breaking change, and every monthly data refresh is a patch release. IDs are renumbered by every refresh, so store `key`, not `id`.
+Records changing with their sources (added, removed or renamed) isn't a breaking change, and every monthly data refresh is a patch release, its changes counted per dataset in the release's Data subsection of the [CHANGELOG](../CHANGELOG.md), with every record renamed, added and removed in the [data changelog](../DATA_CHANGELOG.md). IDs are renumbered by every refresh, so store `key`, not `id`.
 
 ## Deprecation
 

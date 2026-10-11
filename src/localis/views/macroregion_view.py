@@ -3,6 +3,7 @@ from pathlib import Path
 from typing import Mapping, cast
 from localis.entities import Macroregion, MacroregionBase, MacroregionType
 from localis.stores import MacroregionStore
+from localis.utils.data import open_data
 from .view import View, ViewMap
 
 
@@ -48,7 +49,7 @@ class MacroregionView(View[Macroregion, MacroregionStore]):
     @classmethod
     def load(cls, filepath: Path) -> ViewMap["MacroregionView"]:
         store = MacroregionStore()
-        with open(filepath, "r", encoding="utf-8") as f:
+        with open_data(filepath) as f:
             for idx, line in enumerate(f):
                 name, code, type_, parent_s = line.rstrip("\r\n").split("\t")
                 store.id_to_idx.append(idx)

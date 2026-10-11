@@ -7,10 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Each release's Data subsection: every data refresh it ships, dated, with each dataset's record counts and changed fields, linked to the records it renamed, added and removed in `DATA_CHANGELOG.md`, recorded back to 2026-10-04
+
+### Changed
+
+- The installed package is about 40% smaller (about 32MB, from 53.6MB): every data file now ships gzipped. The data and the API are unchanged (#29).
+
 ### Fixed
 
 - `cities.search()` ranks cities with the same score by population, largest first, so "Paris" returns Paris, France before Paris, Ontario, and a large city among many same-name places is never cut before it's scored. Reported by @SchubmannM in #8 (#26).
 - Subdivision skill decisions are rechecked on every ingest run instead of applying permanently: a merge whose GeoNames record was deleted or is named by another decision, or an add-as-is GeoNames now has a matching record for, goes back for review rather than shipping a duplicate or being replaced by an unreviewed fuzzy match, and a decision whose code ISO removed is retired with its history kept (#28).
+
+### Data
+
+#### 2026-10-11 21:33 UTC
+
+| Dataset | Records | Added | Removed | Changed | Changed fields |
+|---|---|---|---|---|---|
+| Subdivisions | 51,711 → 51,710 | 1 | 2 | 409 | `name` (335), `aliases` (323) |
+| Cities | 235,970 → 236,041 | 71 | 0 | 22 | `subdivisions` (13), `population` (6), `lat` (3), `lng` (3), `name` (2) |
+
+[Records renamed, added and removed](https://github.com/dstoffels/localis/blob/main/DATA_CHANGELOG.md#2026-10-11-2133-utc)
 
 ## [3.0.0b1] - 2026-10-05
 
@@ -96,6 +115,43 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The release build is reproducible: CI installs a pinned uv verified by checksum, and `uv build` takes hatchling and its dependencies only from hash-pinned build constraints; release tags can no longer be moved or deleted
 - SECURITY.md describes how to report a vulnerability privately, through the repository's Security tab
 - Each release installs its built wheel in a fresh environment and checks it before publishing to PyPI, refuses a version without a CHANGELOG section, and takes its GitHub release notes from that section; Dependabot also proposes Python dependency updates, and CI tests every supported Python, 3.11 to 3.14
+
+### Data
+
+#### 2026-10-05 16:52 UTC
+
+| Dataset | Records | Added | Removed | Changed | Changed fields |
+|---|---|---|---|---|---|
+| Subdivisions | 51,711 → 51,711 | 0 | 0 | 448 | `aliases` (448) |
+
+#### 2026-10-05 05:21 UTC
+
+| Dataset | Records | Added | Removed | Changed | Changed fields |
+|---|---|---|---|---|---|
+| Countries | 281 → 281 | 0 | 0 | 3 | `aliases` (3) |
+
+#### 2026-10-05 04:43 UTC
+
+| Dataset | Records | Added | Removed | Changed | Changed fields |
+|---|---|---|---|---|---|
+| Cities | 235,970 → 235,970 | 0 | 0 | 1 | `name` (1) |
+
+[Records renamed, added and removed](https://github.com/dstoffels/localis/blob/main/DATA_CHANGELOG.md#2026-10-05-0443-utc)
+
+#### 2026-10-05 04:13 UTC
+
+| Dataset | Records | Added | Removed | Changed | Changed fields |
+|---|---|---|---|---|---|
+| Countries | 281 → 281 | 0 | 0 | 4 | `aliases` (4) |
+
+#### 2026-10-05 03:52 UTC
+
+| Dataset | Records | Added | Removed | Changed | Changed fields |
+|---|---|---|---|---|---|
+| Subdivisions | 51,711 → 51,711 | 0 | 0 | 1 | `aliases` (1) |
+| Cities | 235,917 → 235,970 | 53 | 0 | 0 |  |
+
+[Records renamed, added and removed](https://github.com/dstoffels/localis/blob/main/DATA_CHANGELOG.md#2026-10-05-0352-utc)
 
 ## [2.1.0] - 2026-10-03
 

@@ -2,7 +2,7 @@ from pathlib import Path
 from typing import Mapping
 from localis.entities import City
 from localis.stores import CityStore
-from localis.utils.data import CacheFilterPredicate
+from localis.utils.data import CacheFilterPredicate, open_data
 from .view import CrossReferencedView, ViewMap
 from .country_view import CountryView
 from .subdivision_view import SubdivisionView
@@ -75,7 +75,7 @@ class CityView(CrossReferencedView[City, CityStore, CountryView, SubdivisionView
         store = CityStore()
         idx = 0
 
-        with open(filepath, "r", encoding="utf-8") as f:
+        with open_data(filepath) as f:
             for id, line in enumerate(f, start=1):
 
                 row = line.rstrip("\r\n").split("\t")

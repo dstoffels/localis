@@ -1,4 +1,7 @@
-from dataclasses import asdict, fields, is_dataclass
+import re
+from collections import Counter
+from dataclasses import asdict, dataclass, fields, is_dataclass
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Iterable, Iterator, TypeVar, cast
 from localis.entities import Entity
@@ -12,10 +15,19 @@ from localis.registries import (
     SubdivisionRegistry,
     CityRegistry,
 )
-from .paths import DATA_PATH, STAGED_DATA_PATH, Stage
+from .paths import REPO_PATH, DATA_PATH, STAGED_DATA_PATH
 from .staging import stage_text
 
-REPORT_NAME = "change_report.md"
+CHANGELOG_PATH = REPO_PATH / "CHANGELOG.md"
+UNRELEASED = "## [Unreleased]"
+DATA = "### Data"
+DATA_CHANGELOG_PATH = REPO_PATH / "DATA_CHANGELOG.md"
+# absolute, so the links work in the GitHub release notes the CHANGELOG becomes
+DATA_CHANGELOG_URL = "https://github.com/dstoffels/localis/blob/main/DATA_CHANGELOG.md"
+DATA_CHANGELOG_HEADER = """# Data changelog
+
+Every record an ingest run renamed, added or removed, by `key`, newest first. Each run's counts, with its other changed records counted per field, are in [CHANGELOG.md](https://github.com/dstoffels/localis/blob/main/CHANGELOG.md) under the release that shipped it.
+"""
 
 R = TypeVar("R", bound=Registry)
 
@@ -66,22 +78,43 @@ Record = tuple[Any, str, dict[str, Any]]
 
 
 def _records(registry: Registry) -> Iterator[Record]:
-    """Each record's key, name and comparable fields."""
+    """Each record's key, name and comparable fields; none for a registry new in this build."""
     try:
         views = registry._cache.values()
     except FileNotFoundError:
+        # a registry that shipped must be read, or every record of it would count as added
+        if registry._data_path.exists():
+            raise
         return
     for view in views:
         entity = view.to_entity()
         yield entity.key, entity.name, _comparable(entity)
 
 
-def _compare(shipped: Iterable[Record], staged: Iterable[Record]) -> tuple[int, int, list[str], list[str], list[str]]:
-    """Both builds' record counts, and the staged build's records added, removed and changed by key."""
+@dataclass
+class Changes:
+    """A registry's changes from one build to the next: its records added, removed and renamed by key, and how many it changed, in all and per field."""
+
+    count_before: int
+    count_after: int
+    added: list[str]
+    removed: list[str]
+    renamed: list[str]
+    changed: int
+    changed_fields: Counter[str]
+
+    def __bool__(self) -> bool:
+        return bool(self.added or self.removed or self.changed)
+
+
+def _compare(shipped: Iterable[Record], staged: Iterable[Record]) -> Changes:
+    """The staged build's changes to the shipped one, compared by key."""
     before = {key: (name, record) for key, name, record in shipped}
     count_before = len(before)
     added: list[str] = []
-    changed: list[str] = []
+    renamed: list[str] = []
+    changed = 0
+    changed_fields: Counter[str] = Counter()
     count_after = 0
     for key, name, record in staged:
         count_after += 1
@@ -89,31 +122,92 @@ def _compare(shipped: Iterable[Record], staged: Iterable[Record]) -> tuple[int, 
         if old is None:
             added.append(f"`{key}` {name}")
         elif old[1] != record:
-            fields_changed = sorted(f for f in record.keys() | old[1].keys() if record.get(f) != old[1].get(f))
-            changed.append(f"`{key}` {name}: {', '.join(fields_changed)}")
+            changed += 1
+            changed_fields.update(f for f in record.keys() | old[1].keys() if record.get(f) != old[1].get(f))
+            if old[0] != name:
+                renamed.append(f"`{key}` {old[0]} → {name}")
     removed = [f"`{key}` {name}" for key, (name, _) in before.items()]
-    return count_before, count_after, added, removed, changed
+    return Changes(count_before, count_after, added, removed, renamed, changed, changed_fields)
 
 
-def _section(title: str, items: list[str]) -> list[str]:
-    return [f"## {title} ({len(items):,})", "", *(f"- {item}" for item in items), ""] if items else []
+def _listed(title: str, items: list[str]) -> list[str]:
+    return [f"**{title} ({len(items):,})**", "", *(f"- {item}" for item in items), ""] if items else []
+
+
+def _anchor(heading: str) -> str:
+    """GitHub's id for a heading."""
+    return re.sub(r"[^\w\- ]", "", heading.lower()).replace(" ", "-")
+
+
+def _run_lists(when: str, datasets: list[tuple[str, Changes]]) -> list[str]:
+    """A run's section of the data changelog: each registry's records renamed, with both names, added and removed; none if it has none."""
+    lines: list[str] = []
+    for name, c in datasets:
+        listed = [*_listed("Renamed", c.renamed), *_listed("Added", c.added), *_listed("Removed", c.removed)]
+        if listed:
+            lines += [f"### {name.capitalize()}", "", *listed]
+    while lines and not lines[-1]:
+        lines.pop()
+    return [f"## {when}", "", *lines] if lines else []
+
+
+def _run_table(when: str, datasets: list[tuple[str, Changes]]) -> list[str]:
+    """A run's section of the changelog's data changes: a table of each registry it changed, linked to its records in the data changelog if it listed any; none if it changed no registry."""
+    changed = [(name, changes) for name, changes in datasets if changes]
+    if not changed:
+        return []
+    lines = [f"#### {when}", "", "| Dataset | Records | Added | Removed | Changed | Changed fields |", "|---|---|---|---|---|---|"]
+    for name, c in changed:
+        by_count = ", ".join(f"`{field}` ({count:,})" for field, count in sorted(c.changed_fields.items(), key=lambda item: (-item[1], item[0])))
+        lines.append(f"| {name.capitalize()} | {c.count_before:,} → {c.count_after:,} | {len(c.added):,} | {len(c.removed):,} | {c.changed:,} | {by_count} |")
+    if any(c.renamed or c.added or c.removed for _, c in changed):
+        lines += ["", f"[Records renamed, added and removed]({DATA_CHANGELOG_URL}#{_anchor(when)})"]
+    return lines
+
+
+def _insert_run(changelog: str, run: list[str]) -> str:
+    """The changelog with the run's section first under [Unreleased]'s data changes, a subsection added last if missing, as is [Unreleased] above the releases."""
+    lines = changelog.rstrip("\n").split("\n")
+    if UNRELEASED not in lines:
+        first_release = next((i for i, line in enumerate(lines) if line.startswith("## ")), len(lines))
+        lines[first_release:first_release] = [UNRELEASED, ""]
+    start = lines.index(UNRELEASED) + 1
+    end = next((i for i in range(start, len(lines)) if lines[i].startswith("## ")), len(lines))
+    if DATA in lines[start:end]:
+        at = lines.index(DATA, start) + 1
+        lines[at:at] = ["", *run]
+    else:
+        # last, after the hand-written subsections
+        while end > start and not lines[end - 1]:
+            end -= 1
+        lines[end:end] = ["", DATA, "", *run]
+    return "\n".join(lines) + "\n"
+
+
+def _prepend_run(data_changelog: str, run: list[str]) -> str:
+    """The data changelog with the run's section above the earlier runs."""
+    lines = data_changelog.rstrip("\n").split("\n")
+    at = next((i for i, line in enumerate(lines) if line.startswith("## ")), None)
+    if at is None:
+        lines += ["", *run]
+    else:
+        lines[at:at] = [*run, ""]
+    return "\n".join(lines) + "\n"
+
+
+def _compare_builds(shipped_root: Path, staged_root: Path) -> list[tuple[str, Changes]]:
+    """Each registry's changes from the build under shipped_root to the one under staged_root."""
+    return [(staged.REGISTRY_NAME, _compare(_records(shipped), _records(staged))) for shipped, staged in zip(_registries(shipped_root), _registries(staged_root))]
 
 
 def write_change_report() -> None:
-    """Stages each registry's change report: a counts table, then every record added, removed and changed."""
-    for shipped, staged in zip(_registries(DATA_PATH), _registries(STAGED_DATA_PATH)):
-        count_before, count_after, added, removed, changed = _compare(_records(shipped), _records(staged))
-        name = staged.REGISTRY_NAME
-        header = [
-            f"# {name.capitalize()} changes",
-            "",
-            "Records compared by `key` between the shipped data and this build.",
-            "",
-            "| Records | Added | Removed | Changed |",
-            "|---|---|---|---|",
-            f"| {count_before:,} → {count_after:,} | {len(added):,} | {len(removed):,} | {len(changed):,} |",
-            "",
-        ]
-        sections = [*_section("Added", added), *_section("Removed", removed), *_section("Changed", changed)]
-        # a registry is built by the stage of the same name
-        stage_text(Stage(name).outputs / REPORT_NAME, "\n".join([*header, *sections]).rstrip() + "\n")
+    """Stages this run's table first under the changelog's [Unreleased] data changes and its records renamed, added and removed first in the data changelog; a run that changed no record writes neither."""
+    when = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+    datasets = _compare_builds(DATA_PATH, STAGED_DATA_PATH)
+    table = _run_table(when, datasets)
+    if not table:
+        return
+    stage_text(CHANGELOG_PATH, _insert_run(CHANGELOG_PATH.read_text(encoding="utf-8"), table))
+    if lists := _run_lists(when, datasets):
+        data_changelog = DATA_CHANGELOG_PATH.read_text(encoding="utf-8") if DATA_CHANGELOG_PATH.exists() else DATA_CHANGELOG_HEADER
+        stage_text(DATA_CHANGELOG_PATH, _prepend_run(data_changelog, lists))

@@ -3,6 +3,7 @@ from pathlib import Path
 from typing import Mapping, cast
 from localis.entities import Language, LanguageBase, LanguageScope, LanguageType, LanguageScript
 from localis.stores import LanguageStore
+from localis.utils.data import open_data
 from .view import View, ViewMap
 from .script_view import ScriptView
 
@@ -80,7 +81,7 @@ class LanguageView(View[Language, LanguageStore]):
     @classmethod
     def load(cls, filepath: Path, script_views: Mapping[int, ScriptView]) -> ViewMap["LanguageView"]:
         store = LanguageStore()
-        with open(filepath, "r", encoding="utf-8") as f:
+        with open_data(filepath) as f:
             for idx, line in enumerate(f):
                 name, alpha3, alpha2, bibliographic, scope, type_, inverted_name, alias_s, scripts_s, secondary_s = line.rstrip("\r\n").split("\t")
                 store.id_to_idx.append(idx)

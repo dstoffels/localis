@@ -27,6 +27,7 @@ jobs:
       bumped: ${{ steps.version.outputs.bumped }}
       version: ${{ steps.version.outputs.version }}
       changed: ${{ steps.stage.outputs.changed }}
+      reported: ${{ steps.stage.outputs.reported }}
       has_commits: ${{ steps.bundle.outputs.has_commits }}
 
     steps:
@@ -133,6 +134,12 @@ jobs:
         id: stage
         if: steps.ingest.outputs.exit_code == '0'
         run: |
+          # the pipeline adds a section to the CHANGELOG's data changes only when a run changed a record
+          if [ -n "$(git status --porcelain -- CHANGELOG.md)" ]; then
+            echo "reported=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "reported=false" >> "$GITHUB_OUTPUT"
+          fi
           git add -A
           if git diff --cached --quiet; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
@@ -200,20 +207,26 @@ jobs:
           gh auth setup-git
           git push origin FETCH_HEAD:refs/heads/ingest
 
-      - name: Summarize this run's change report
+      - name: Summarize this run's changes
         if: needs.build.outputs.changed == 'true'
+        env:
+          REPORTED: ${{ needs.build.outputs.reported }}
         run: |
-          # each stage report's counts row, linked to the full report at this run's commit
-          base="https://github.com/${GITHUB_REPOSITORY}/blob/$(git rev-parse FETCH_HEAD)"
-          {
-            echo "| Stage | Records | Added | Removed | Changed |"
-            echo "|---|---|---|---|---|"
-            for report in $(git ls-tree -r --name-only FETCH_HEAD -- ingest | grep '/outputs/change_report\.md$'); do
-              stage=$(basename "$(dirname "$(dirname "$report")")")
-              counts=$(git show "FETCH_HEAD:$report" | grep -m1 -E '^\| [0-9,]+ → ')
-              echo "| [$stage]($base/$report) $counts"
-            done
-          } > report_summary.md
+          if [ "$REPORTED" != "true" ]; then
+            echo "No record changed in this run." > report_summary.md
+            exit 0
+          fi
+          # the table of the run's section, newest first under the CHANGELOG's [Unreleased] data changes, with its link to the data changelog's lists pointed at this run's commit, since main has them only once released
+          url="https://github.com/${GITHUB_REPOSITORY}/blob/$(git rev-parse FETCH_HEAD)/DATA_CHANGELOG.md"
+          git show "FETCH_HEAD:CHANGELOG.md" | awk -v url="$url" '
+            /^## \[Unreleased\]/ { unreleased = 1; next }
+            unreleased && /^## / { exit }
+            unreleased && $0 == "### Data" { data = 1; next }
+            data && /^### / { exit }
+            data && /^#### / { if (run) exit; run = 1; anchor = tolower(substr($0, 6)); gsub(/[^a-z0-9 _-]/, "", anchor); gsub(/ /, "-", anchor); next }
+            run && /^\|/ { print }
+            run && /^\[Records/ { print ""; print "[Records renamed, added and removed](" url "#" anchor ")" }
+          ' > report_summary.md
 
       - name: Open or update the PR
         if: needs.build.outputs.changed == 'true'
@@ -221,7 +234,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           {
-            echo "This PR is maintained automatically by the ingest workflow and always reflects the current state of the \`ingest\` branch. Below is the latest run's change report, which compares that run's build with the one before it on \`ingest\`, not this PR's whole diff against \`dev\`; each run also comments with its own. Type check and tests ran in the ingest workflow itself before this was pushed, since bot-opened PRs don't trigger the Test workflow."
+            echo "This PR is maintained automatically by the ingest workflow and always reflects the current state of the \`ingest\` branch. Below are the latest run's changes, comparing that run's build with the one before it on \`ingest\`, not this PR's whole diff against \`dev\`, with the records it renamed, added and removed in \`DATA_CHANGELOG.md\`; each run also comments with its own. Type check and tests ran in the ingest workflow itself before this was pushed, since bot-opened PRs don't trigger the Test workflow."
             echo
             cat report_summary.md
           } > pr_body.md

@@ -1,4 +1,5 @@
 import csv
+import io
 import sys
 from pathlib import Path
 from collections import defaultdict
@@ -15,14 +16,15 @@ InvertedIndex = dict[tuple[str, ...], list[int]]
 
 
 def _write_tsv(rows: Iterable[Iterable[object]], path: Path) -> None:
-    """Writes rows for the runtime's line.split("\\t"), unquoted, None as an empty cell; a cell holding a tab or line break raises, since it would split its row."""
-    with open(path, "w", newline="", encoding="utf-8") as f:
-        for number, row in enumerate(rows, start=1):
-            cells = ["" if value is None else str(value) for value in row]
-            for cell in cells:
-                if "\t" in cell or "\n" in cell or "\r" in cell:
-                    raise ValueError(f"{path.name} row {number} has the cell {cell!r}, holding a tab or line break, which would split its row; strip it from the value in the stage that loads it")
-            f.write("\t".join(cells) + "\n")
+    """Writes rows gzipped for the runtime's line.split("\\t"), unquoted, None as an empty cell; a cell holding a tab or line break raises, since it would split its row."""
+    lines: list[str] = []
+    for number, row in enumerate(rows, start=1):
+        cells = ["" if value is None else str(value) for value in row]
+        for cell in cells:
+            if "\t" in cell or "\n" in cell or "\r" in cell:
+                raise ValueError(f"{path.name} row {number} has the cell {cell!r}, holding a tab or line break, which would split its row; strip it from the value in the stage that loads it")
+        lines.append("\t".join(cells) + "\n")
+    path.write_bytes(_gzip("".join(lines).encode("utf-8")))
 
 
 def dump_data(data: Sequence[Model], file_path: Path) -> None:
@@ -45,7 +47,7 @@ def dump_lookup_index(data: Sequence[Model], datadir_path: Path) -> None:
     str_pairs = sorted((key, id) for key, items in holders.items() if isinstance(key, str) for id in items)
     int_pairs = sorted((key, id) for key, items in holders.items() if isinstance(key, int) for id in items)
     # an index with no keys isn't written
-    for path, pairs in ((datadir_path / "lookup_index_str.tsv", str_pairs), (datadir_path / "lookup_index_int.tsv", int_pairs)):
+    for path, pairs in ((datadir_path / "lookup_index_str.tsv.gz", str_pairs), (datadir_path / "lookup_index_int.tsv.gz", int_pairs)):
         if pairs:
             _write_tsv(pairs, path)
 
@@ -68,7 +70,7 @@ def _gzip(buf: bytes | bytearray) -> bytes:
 
 
 def _dump_inverted_index(index: InvertedIndex, prefix: Path) -> None:
-    """Writes an inverted index: its posting lists, packed as little-endian uint32 and concatenated in key order (<prefix>.bin.gz), and each key's columns with its posting list's offset and count (<prefix>_offsets.tsv); an empty index isn't written."""
+    """Writes an inverted index: its posting lists, packed as little-endian uint32 and concatenated in key order (<prefix>.bin.gz), and each key's columns with its posting list's offset and count (<prefix>_offsets.tsv.gz); an empty index isn't written."""
     if not index:
         return
 
@@ -84,9 +86,9 @@ def _dump_inverted_index(index: InvertedIndex, prefix: Path) -> None:
     prefix.with_name(prefix.name + ".bin.gz").write_bytes(_gzip(postings.tobytes()))
 
     # read back with csv.reader, so a key holding a quote is quoted
-    with open(prefix.with_name(prefix.name + "_offsets.tsv"), "w", newline="", encoding="utf-8") as f:
-        writer = csv.writer(f, delimiter="\t", lineterminator="\n")
-        writer.writerows(offsets_rows)
+    buf = io.StringIO(newline="")
+    csv.writer(buf, delimiter="\t", lineterminator="\n").writerows(offsets_rows)
+    prefix.with_name(prefix.name + "_offsets.tsv.gz").write_bytes(_gzip(buf.getvalue().encode("utf-8")))
 
 
 def _invert_trigrams(trigram_sets: dict[int, set[str]]) -> InvertedIndex:
@@ -120,7 +122,7 @@ def dump_registry(name: str, data: Sequence[Model], queryable: bool = True) -> N
     for id, item in enumerate(data, start=1):
         item.id = id
     ingest_log.writeline(f"Dumping {len(data)} {name}...")
-    dump_data(data, path / f"{name}.tsv")
+    dump_data(data, path / f"{name}.tsv.gz")
 
     ingest_log.writeline(f"Dumping {name} lookup indexes...")
     dump_lookup_index(data, path)

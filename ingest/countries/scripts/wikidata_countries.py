@@ -26,7 +26,7 @@ SELECT ?code ?item ?alpha2 ?label ?alt ?short ?ioc ?fifa WHERE {{
 CountryEntry = dict[str, list[str]]
 CountryNames = dict[str, CountryEntry]
 
-# committed as the names' provenance; changes need no review beyond the ingest PR, whose countries.tsv diff shows their effect
+# committed as the names' provenance; changes need no review beyond the ingest PR, whose CHANGELOG data entry shows their effect
 COUNTRY_NAMES = CommittedQuery[CountryEntry](COUNTRIES.inputs / "wikidata_country_names.json", "Wikidata country names")
 
 

@@ -185,98 +185,98 @@
     }
   },
   "shipped_size": {
-    "total": 53425879,
+    "total": 31968422,
     "cities": {
-      "total": 41983360,
-      "share_pct": 78.6,
+      "total": 25765429,
+      "share_pct": 80.6,
       "files": {
         "canon_index.bin.gz": 4970120,
-        "canon_index_offsets.tsv": 166589,
-        "cities.tsv": 13258299,
+        "canon_index_offsets.tsv.gz": 73874,
+        "cities.tsv.gz": 5016345,
         "context_index.bin.gz": 8569392,
-        "context_index_offsets.tsv": 95271,
+        "context_index_offsets.tsv.gz": 44213,
         "filter_index.bin.gz": 3369324,
-        "filter_index_offsets.tsv": 7674869,
-        "lookup_index_int.tsv": 3405924,
+        "filter_index_offsets.tsv.gz": 2101474,
+        "lookup_index_int.tsv.gz": 1147115,
         "short_names.tsv.gz": 473572
       }
     },
     "countries": {
-      "total": 145147,
-      "share_pct": 0.3,
+      "total": 63864,
+      "share_pct": 0.2,
       "files": {
         "canon_index.bin.gz": 10945,
-        "canon_index_offsets.tsv": 26368,
-        "countries.tsv": 40827,
+        "canon_index_offsets.tsv.gz": 12247,
+        "countries.tsv.gz": 15149,
         "filter_index.bin.gz": 4664,
-        "filter_index_offsets.tsv": 54102,
-        "lookup_index_int.tsv": 1852,
-        "lookup_index_str.tsv": 3813,
+        "filter_index_offsets.tsv.gz": 15623,
+        "lookup_index_int.tsv.gz": 915,
+        "lookup_index_str.tsv.gz": 1745,
         "short_names.tsv.gz": 2576
       }
     },
     "currencies": {
-      "total": 25290,
+      "total": 14176,
       "share_pct": 0.0,
       "files": {
         "canon_index.bin.gz": 3115,
-        "canon_index_offsets.tsv": 10552,
-        "currencies.tsv": 4001,
+        "canon_index_offsets.tsv.gz": 4932,
+        "currencies.tsv.gz": 2353,
         "filter_index.bin.gz": 303,
-        "filter_index_offsets.tsv": 4411,
-        "lookup_index_int.tsv": 1299,
-        "lookup_index_str.tsv": 1316,
+        "filter_index_offsets.tsv.gz": 1731,
+        "lookup_index_int.tsv.gz": 651,
+        "lookup_index_str.tsv.gz": 798,
         "short_names.tsv.gz": 293
       }
     },
     "languages": {
-      "total": 928772,
-      "share_pct": 1.7,
+      "total": 452311,
+      "share_pct": 1.4,
       "files": {
         "canon_index.bin.gz": 153824,
-        "canon_index_offsets.tsv": 65336,
+        "canon_index_offsets.tsv.gz": 30226,
         "filter_index.bin.gz": 54065,
-        "filter_index_offsets.tsv": 226122,
-        "languages.tsv": 331677,
-        "lookup_index_str.tsv": 71829,
+        "filter_index_offsets.tsv.gz": 72617,
+        "languages.tsv.gz": 81884,
+        "lookup_index_str.tsv.gz": 33776,
         "short_names.tsv.gz": 25919
       }
     },
     "macroregions": {
-      "total": 1735,
+      "total": 741,
       "share_pct": 0.0,
       "files": {
-        "lookup_index_str.tsv": 771,
-        "macroregions.tsv": 964
+        "lookup_index_str.tsv.gz": 385,
+        "macroregions.tsv.gz": 356
       }
     },
     "scripts": {
-      "total": 36531,
+      "total": 19669,
       "share_pct": 0.1,
       "files": {
         "canon_index.bin.gz": 4037,
-        "canon_index_offsets.tsv": 13687,
+        "canon_index_offsets.tsv.gz": 6381,
         "filter_index.bin.gz": 469,
-        "filter_index_offsets.tsv": 7503,
-        "lookup_index_int.tsv": 1688,
-        "lookup_index_str.tsv": 1926,
-        "scripts.tsv": 6573,
+        "filter_index_offsets.tsv.gz": 2799,
+        "lookup_index_int.tsv.gz": 805,
+        "lookup_index_str.tsv.gz": 1092,
+        "scripts.tsv.gz": 3438,
         "short_names.tsv.gz": 648
       }
     },
     "subdivisions": {
-      "total": 10305044,
-      "share_pct": 19.3,
+      "total": 5652232,
+      "share_pct": 17.7,
       "files": {
         "canon_index.bin.gz": 1702185,
-        "canon_index_offsets.tsv": 141599,
+        "canon_index_offsets.tsv.gz": 62481,
         "context_index.bin.gz": 1526968,
-        "context_index_offsets.tsv": 66968,
+        "context_index_offsets.tsv.gz": 31660,
         "filter_index.bin.gz": 483757,
-        "filter_index_offsets.tsv": 2213855,
-        "lookup_index_str.tsv": 969827,
+        "filter_index_offsets.tsv.gz": 590141,
+        "lookup_index_str.tsv.gz": 294896,
         "short_names.tsv.gz": 105735,
-        "subdivisions.tsv": 3094150
+        "subdivisions.tsv.gz": 854409
       }
     }
   },

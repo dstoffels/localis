@@ -1,6 +1,7 @@
 from pathlib import Path
 from localis.entities import Currency, CurrencyBase
 from localis.stores import CurrencyStore
+from localis.utils.data import open_data
 from .view import View, ViewMap
 
 
@@ -31,7 +32,7 @@ class CurrencyView(View[Currency, CurrencyStore]):
     @classmethod
     def load(cls, filepath: Path) -> ViewMap["CurrencyView"]:
         store = CurrencyStore()
-        with open(filepath, "r", encoding="utf-8") as f:
+        with open_data(filepath) as f:
             for idx, line in enumerate(f):
                 name, alpha3, numeric_s = line.rstrip("\r\n").split("\t")
                 store.id_to_idx.append(idx)

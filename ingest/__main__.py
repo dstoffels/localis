@@ -50,7 +50,7 @@ def run_pipeline() -> None:
 
         pipeline_log.step("checking the staged build")
         _analysis("--staging")
-        pipeline_log.step("writing the change reports")
+        pipeline_log.step("recording the data changes in the changelog")
         write_change_report()
         pipeline_log.step("promoting the build")
         promote()

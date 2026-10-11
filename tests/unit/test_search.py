@@ -70,7 +70,7 @@ class TestSearchLimit:
         monkeypatch.setattr(index, "STAGED_DATA_PATH", tmp_path)
         # a name too long for the short-query fallback, so only the trigram stages find the records
         index.dump_registry("currencies", [CurrencyModel(name="Demonstration", alpha3=f"D{c}{c}", numeric=None) for c in "ABCDE"])
-        search_index = SearchIndex(CurrencyView.load(tmp_path / "currencies" / "currencies.tsv"), tmp_path / "currencies", ("name",))
+        search_index = SearchIndex(CurrencyView.load(tmp_path / "currencies" / "currencies.tsv.gz"), tmp_path / "currencies", ("name",))
         monkeypatch.setattr(search_index, "SHORTLIST_K", 1)
         monkeypatch.setattr(search_index, "TOP_K", 1)
 
@@ -82,7 +82,7 @@ class TestSearchLimit:
         monkeypatch.setattr(index, "STAGED_DATA_PATH", tmp_path)
         # identically named records tie at every stage; the numerics column stands in for a prominence column
         index.dump_registry("currencies", [CurrencyModel(name="Demonstration", alpha3=f"D{c}{c}", numeric=n) for n, c in enumerate("ABCDE", start=1)])
-        search_index = SearchIndex(CurrencyView.load(tmp_path / "currencies" / "currencies.tsv"), tmp_path / "currencies", ("name",), column)
+        search_index = SearchIndex(CurrencyView.load(tmp_path / "currencies" / "currencies.tsv.gz"), tmp_path / "currencies", ("name",), column)
         monkeypatch.setattr(search_index, "SHORTLIST_K", 1)
         monkeypatch.setattr(search_index, "TOP_K", 1)
 

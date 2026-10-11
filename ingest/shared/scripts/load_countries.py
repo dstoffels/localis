@@ -1,16 +1,17 @@
 from ingest.utils import STAGED_DATA_PATH, ingest_log
 from ingest.shared.models import CountryModel, HistoricModel
+from localis.utils.data import open_data
 
 
 def load_countries() -> dict[str, CountryModel]:
     """The staged build's countries, for the resolve-subdivisions skill."""
-    path = STAGED_DATA_PATH / "countries" / "countries.tsv"
+    path = STAGED_DATA_PATH / "countries" / "countries.tsv.gz"
     if not path.exists():
         raise FileNotFoundError(f"No staged countries at {path}; run the pipeline first")
     ingest_log.writeline("Loading staged countries...")
     columns = CountryModel.row_fields()
     countries: dict[str, CountryModel] = {}
-    with open(path, "r", encoding="utf-8") as f:
+    with open_data(path) as f:
         for id, line in enumerate(f, start=1):
             cells = line.rstrip("\n").split("\t")
             if len(cells) != len(columns):

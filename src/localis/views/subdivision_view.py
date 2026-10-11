@@ -3,6 +3,7 @@ from pathlib import Path
 from typing import Mapping
 from localis.entities import SubdivisionBase, Subdivision
 from localis.stores import SubdivisionStore
+from localis.utils.data import open_data
 from .view import CrossReferencedView, ViewMap
 from .country_view import CountryView
 
@@ -90,7 +91,7 @@ class SubdivisionView(
         cls, filepath: Path, country_views: Mapping[int, CountryView]
     ) -> ViewMap["SubdivisionView"]:
         store = SubdivisionStore()
-        with open(filepath, "r", encoding="utf-8") as f:
+        with open_data(filepath) as f:
             for idx, line in enumerate(f):
                 row = line.rstrip("\r\n").split("\t")
                 (

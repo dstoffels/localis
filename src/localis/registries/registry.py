@@ -51,15 +51,15 @@ class Registry(Generic[T], ABC):
 
     @property
     def _data_filepath(self) -> Path:
-        return self._data_path / f"{self.REGISTRY_NAME}.tsv"
+        return self._data_path / f"{self.REGISTRY_NAME}.tsv.gz"
 
     @property
     def _lookup_filepath(self) -> Path:
-        return self._data_path / "lookup_index_str.tsv"
+        return self._data_path / "lookup_index_str.tsv.gz"
 
     @property
     def _lookup_int_filepath(self) -> Path:
-        return self._data_path / "lookup_index_int.tsv"
+        return self._data_path / "lookup_index_int.tsv.gz"
 
     @locked_cached_property
     def _cache(self) -> Mapping[int, View[T, Store]]:

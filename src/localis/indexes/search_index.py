@@ -2,7 +2,6 @@ from array import array
 from bisect import bisect_left
 import heapq
 import math
-import gzip
 from pathlib import Path
 from typing import Callable, Generic, Mapping, TypeVar
 from rapidfuzz import fuzz, process
@@ -10,7 +9,7 @@ from localis.entities import Entity
 from localis.views import View, ViewMap
 from localis.stores import Store
 from localis.utils.strings import search_text, word_trigrams, SHORT_NAME_MAX
-from localis.utils.data import resolve_field
+from localis.utils.data import open_data, resolve_field
 from collections import Counter
 from .inverted_index import read_inverted_index, keep_allowed
 
@@ -61,7 +60,7 @@ class SearchIndex(Generic[T]):
         by_length: dict[int, tuple[list[str], array]] = {}
         if not path.exists():
             return by_length
-        with gzip.open(path, "rt", encoding="utf-8") as f:
+        with open_data(path) as f:
             for line in f:
                 name, id_s = line.rstrip("\n").split("\t")
                 id = int(id_s)

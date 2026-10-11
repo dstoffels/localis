@@ -3,6 +3,7 @@ from array import array
 from pathlib import Path
 from typing import Sequence, TypeVar
 from localis.utils.strings import normalize
+from localis.utils.data import open_data
 
 K = TypeVar("K", str, int)
 
@@ -20,7 +21,7 @@ class LookupIndex:
         str_keys: list[str] = []
         str_vals = array("I")
         if filepath.exists():
-            with open(filepath, "r", encoding="utf-8") as f:
+            with open_data(filepath) as f:
                 for line in f:
                     key, id_ = line.rstrip("\n").split("\t")
                     id_int = int(id_)
@@ -32,7 +33,7 @@ class LookupIndex:
         int_keys = array("I")
         int_vals = array("I")
         if int_filepath.exists():
-            with open(int_filepath, "r", encoding="utf-8") as f:
+            with open_data(int_filepath) as f:
                 for line in f:
                     key, id_ = line.rstrip("\n").split("\t")
                     id_int = int(id_)

@@ -34,6 +34,7 @@ dependencies = [
 homepage = "https://github.com/dstoffels/localis"
 repository = "https://github.com/dstoffels/localis"
 changelog = "https://github.com/dstoffels/localis/blob/main/CHANGELOG.md"
+"data changelog" = "https://github.com/dstoffels/localis/blob/main/DATA_CHANGELOG.md"
 funding = "https://github.com/sponsors/dstoffels"
 
 [dependency-groups]
