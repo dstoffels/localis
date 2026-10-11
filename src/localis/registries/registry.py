@@ -133,8 +133,8 @@ class QueryableRegistry(Registry[T]):
     NAME_FIELDS: tuple[str, ...] = ()
     """View fields holding the record's names, fuzzy-matched against a search query; context is matched through the context trigram index. Can be nested fields using dot notation."""
 
-    PROMINENCE_COLUMNS: tuple[str, ...] = ()
-    """Numeric store columns that rank search results tied on score, compared in turn, larger first; store columns, so a ranking-only value needs no entity field."""
+    PROMINENCE_COLUMN: str | None = None
+    """A numeric store column that ranks search results tied on score, named as in an ordering: "-populations" larger first, "admin_levels" smaller first."""
 
     @property
     def _filter_prefix(self) -> Path:
@@ -153,7 +153,7 @@ class QueryableRegistry(Registry[T]):
             cache=self._cache,
             data_path=self._data_path,
             name_fields=self.NAME_FIELDS,
-            prominence_columns=self.PROMINENCE_COLUMNS,
+            prominence_column=self.PROMINENCE_COLUMN,
             allowed_ids=self._allowed_ids,
         )
 

@@ -8,7 +8,7 @@ from localis.registries import QueryableRegistry, CountryRegistry, SubdivisionRe
 class CityRegistry(QueryableRegistry[City]):
     REGISTRY_NAME = "cities"
     NAME_FIELDS = ("name",)
-    PROMINENCE_COLUMNS = ("populations",)
+    PROMINENCE_COLUMN = "-populations"
 
     def __init__(self, countries: CountryRegistry, subdivisions: SubdivisionRegistry):
         self._population_threshold: int | None = None

@@ -4,7 +4,7 @@ import heapq
 import math
 import gzip
 from pathlib import Path
-from typing import Any, Callable, Generic, Mapping, TypeVar
+from typing import Callable, Generic, Mapping, TypeVar
 from rapidfuzz import fuzz, process
 from localis.entities import Entity
 from localis.views import View, ViewMap
@@ -41,17 +41,16 @@ class SearchIndex(Generic[T]):
         cache: Mapping[int, View[T, Store]],
         data_path: Path,
         name_fields: tuple[str, ...],
-        prominence_columns: tuple[str, ...] = (),
+        prominence_column: str | None = None,
         allowed_ids: set[int] | None = None,
     ) -> None:
         self.cache = cache
         self.name_fields = name_fields
-        # the store's own column arrays, read by row at search time, so prominence costs nothing to load
-        store = cache.store if isinstance(cache, ViewMap) else None
-        if prominence_columns and store is None:
-            raise TypeError("prominence columns are read from a store, so the cache must be a ViewMap")
-        columns = tuple(getattr(store, column) for column in prominence_columns)
-        self.prominence = self._prominence_key(store.id_to_idx, columns) if store is not None and columns else None
+        self.prominence: Callable[[int], float] | None = None
+        if prominence_column:
+            if not isinstance(cache, ViewMap):
+                raise TypeError("a prominence column is read from a store, so the cache must be a ViewMap")
+            self.prominence = self._prominence_key(cache.store, prominence_column)
         self.canon = self._load_trigram_index(data_path / "canon_index", allowed_ids)
         self.short_names = self._load_short_names(data_path / "short_names.tsv.gz", allowed_ids)
         self.context = self._load_trigram_index(data_path / "context_index", allowed_ids)
@@ -74,12 +73,14 @@ class SearchIndex(Generic[T]):
         return by_length
 
     @staticmethod
-    def _prominence_key(id_to_idx: array, columns: tuple[array, ...]) -> Callable[[int], Any]:
-        """A record id's prominence, read by row from the store's columns: a single column's value as is, since cities' one-column case runs per tied record, or several as a tuple."""
-        if len(columns) == 1:
-            (column,) = columns
-            return lambda id: column[id_to_idx[id - 1]]
-        return lambda id: tuple(column[id_to_idx[id - 1]] for column in columns)
+    def _prominence_key(store: Store, column: str) -> Callable[[int], float]:
+        """A record id's prominence, read by row from the store's own column array at search time, so it costs nothing to load: "-column" ranks larger first, "column" smaller first, as in an ordering."""
+        id_to_idx = store.id_to_idx
+        values = getattr(store, column.removeprefix("-"))
+        if column.startswith("-"):
+            return lambda id: values[id_to_idx[id - 1]]
+        # the cuts and the final sort keep the largest, so an ascending column is negated
+        return lambda id: -values[id_to_idx[id - 1]]
 
     def _top(self, values: Mapping[int, float], k: int) -> list[int]:
         """The ids of the k largest values, prominence picking among those tied at the cut, so a prominent record tied with the last one kept is never dropped for a lesser one."""
