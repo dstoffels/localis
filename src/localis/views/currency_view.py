@@ -1,7 +1,6 @@
 from pathlib import Path
 from localis.entities import Currency, CurrencyBase
 from localis.stores import CurrencyStore
-from localis.utils.data import open_data
 from .view import View, ViewMap
 
 
@@ -9,6 +8,7 @@ class CurrencyView(View[Currency, CurrencyStore]):
     """Runtime view over CurrencyStore, used by Registry._cache."""
 
     __slots__ = ()
+    COLUMNS = ("name", "alpha3", "numeric")
 
     @property
     def name(self) -> str:
@@ -32,7 +32,7 @@ class CurrencyView(View[Currency, CurrencyStore]):
     @classmethod
     def load(cls, filepath: Path) -> ViewMap["CurrencyView"]:
         store = CurrencyStore()
-        with open_data(filepath) as f:
+        with cls._open_data(filepath) as f:
             for idx, line in enumerate(f):
                 name, alpha3, numeric_s = line.rstrip("\r\n").split("\t")
                 store.id_to_idx.append(idx)

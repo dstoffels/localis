@@ -185,14 +185,14 @@
     }
   },
   "shipped_size": {
-    "total": 31969124,
+    "total": 31968932,
     "cities": {
-      "total": 25765429,
+      "total": 25765473,
       "share_pct": 80.6,
       "files": {
         "canon_index.bin.gz": 4970120,
         "canon_index_offsets.tsv.gz": 73874,
-        "cities.tsv.gz": 5016345,
+        "cities.tsv.gz": 5016389,
         "context_index.bin.gz": 8569392,
         "context_index_offsets.tsv.gz": 44213,
         "filter_index.bin.gz": 3369324,
@@ -202,12 +202,12 @@
       }
     },
     "countries": {
-      "total": 64566,
+      "total": 64649,
       "share_pct": 0.2,
       "files": {
         "canon_index.bin.gz": 10945,
         "canon_index_offsets.tsv.gz": 12247,
-        "countries.tsv.gz": 15629,
+        "countries.tsv.gz": 15712,
         "filter_index.bin.gz": 4782,
         "filter_index_offsets.tsv.gz": 15727,
         "lookup_index_int.tsv.gz": 915,
@@ -216,12 +216,12 @@
       }
     },
     "currencies": {
-      "total": 14176,
+      "total": 14190,
       "share_pct": 0.0,
       "files": {
         "canon_index.bin.gz": 3115,
         "canon_index_offsets.tsv.gz": 4932,
-        "currencies.tsv.gz": 2353,
+        "currencies.tsv.gz": 2367,
         "filter_index.bin.gz": 303,
         "filter_index_offsets.tsv.gz": 1731,
         "lookup_index_int.tsv.gz": 651,
@@ -230,28 +230,28 @@
       }
     },
     "languages": {
-      "total": 452311,
+      "total": 451893,
       "share_pct": 1.4,
       "files": {
         "canon_index.bin.gz": 153824,
         "canon_index_offsets.tsv.gz": 30226,
         "filter_index.bin.gz": 54065,
         "filter_index_offsets.tsv.gz": 72617,
-        "languages.tsv.gz": 81884,
+        "languages.tsv.gz": 81466,
         "lookup_index_str.tsv.gz": 33776,
         "short_names.tsv.gz": 25919
       }
     },
     "macroregions": {
-      "total": 741,
+      "total": 756,
       "share_pct": 0.0,
       "files": {
         "lookup_index_str.tsv.gz": 385,
-        "macroregions.tsv.gz": 356
+        "macroregions.tsv.gz": 371
       }
     },
     "scripts": {
-      "total": 19669,
+      "total": 19685,
       "share_pct": 0.1,
       "files": {
         "canon_index.bin.gz": 4037,
@@ -260,12 +260,12 @@
         "filter_index_offsets.tsv.gz": 2799,
         "lookup_index_int.tsv.gz": 805,
         "lookup_index_str.tsv.gz": 1092,
-        "scripts.tsv.gz": 3438,
+        "scripts.tsv.gz": 3454,
         "short_names.tsv.gz": 648
       }
     },
     "subdivisions": {
-      "total": 5652232,
+      "total": 5652286,
       "share_pct": 17.7,
       "files": {
         "canon_index.bin.gz": 1702185,
@@ -276,7 +276,7 @@
         "filter_index_offsets.tsv.gz": 590141,
         "lookup_index_str.tsv.gz": 294896,
         "short_names.tsv.gz": 105735,
-        "subdivisions.tsv.gz": 854409
+        "subdivisions.tsv.gz": 854463
       }
     }
   },

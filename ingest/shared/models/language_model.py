@@ -10,10 +10,13 @@ LanguageStatus = Literal["official", "regional", "de_facto"]
 
 @dataclass(slots=True)
 class LanguageScriptModel:
-    """A script CLDR lists for a language; secondary when the language or the script isn't modern."""
+    """A script CLDR lists for a language, shipped as one "script_id:secondary" item; secondary when the language or the script isn't modern."""
 
     script: ScriptModel
     secondary: bool
+
+    def to_cell(self) -> str:
+        return f"{self.script.id}:{int(self.secondary)}"
 
 
 @dataclass(slots=True)
@@ -48,8 +51,7 @@ class LanguageModel(Model):
     def row_values(self) -> dict[str, object]:
         data = Model.row_values(self)
         data["aliases"] = self.join_cell(self.aliases)
-        data["scripts"] = "|".join(str(s.script.id) for s in self.scripts if not s.secondary)
-        data["secondary_scripts"] = "|".join(str(s.script.id) for s in self.scripts if s.secondary)
+        data["scripts"] = "|".join(s.to_cell() for s in self.scripts)
         return data
 
 

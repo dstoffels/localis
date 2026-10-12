@@ -1,3 +1,6 @@
+import gzip
+from dataclasses import fields
+import pytest
 from pathlib import Path
 from ingest.shared.models import (
     CityModel,
@@ -13,6 +16,7 @@ from ingest.shared.models import (
     SubdivisionModel,
 )
 from ingest.utils.index import dump_data
+from localis.entities import City, Country, Currency, Language, Macroregion, Script, Subdivision
 from localis.views import CityView, CountryView, CurrencyView, LanguageView, MacroregionView, ScriptView, SubdivisionView
 
 
@@ -38,6 +42,21 @@ def _subdivision(id: int, country: CountryModel, parent: SubdivisionModel | None
 
 class TestRowFormats:
     """ROW FORMATS"""
+
+    @pytest.mark.parametrize("view, entity", [
+        (MacroregionView, Macroregion), (CurrencyView, Currency), (ScriptView, Script), (LanguageView, Language),
+        (CountryView, Country), (SubdivisionView, Subdivision), (CityView, City),
+    ])
+    def test_columns_are_served_fields(self, view, entity):
+        """should name every data file column after a field the registry serves, and leave none out but the id"""
+        assert set(view.COLUMNS) == {f.name for f in fields(entity)} - {"id"}
+
+    def test_rejects_other_columns(self, tmp_path: Path):
+        """should refuse a data file whose header names other columns than the view reads"""
+        (tmp_path / "rows.tsv.gz").write_bytes(gzip.compress(b"name\talpha3\nDemo Dollar\tDMD\n"))
+
+        with pytest.raises(ValueError):
+            CurrencyView.load(tmp_path / "rows.tsv.gz")
 
     # each test writes a model whose every field holds a distinct value through ingest's dump, then reads it back through the runtime view, so a column the two order differently fails
 

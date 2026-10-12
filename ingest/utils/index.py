@@ -13,8 +13,6 @@ from .logger import ingest_log
 
 # each key's columns (a trigram, or a filter field and value) to the ids of the records holding it
 InvertedIndex = dict[tuple[str, ...], list[int]]
-# each registry's row columns as this run dumped them, which the change report records with the build
-ROW_COLUMNS: dict[str, list[str]] = {}
 
 
 def _write_tsv(rows: Iterable[Iterable[object]], path: Path) -> None:
@@ -30,7 +28,9 @@ def _write_tsv(rows: Iterable[Iterable[object]], path: Path) -> None:
 
 
 def dump_data(data: Sequence[Model], file_path: Path) -> None:
-    _write_tsv((item.to_row() for item in data), file_path)
+    """Writes the rows under a header naming their columns, which the runtime checks and the change report reads older builds by."""
+    header = [tuple(data[0].row_values())] if data else []
+    _write_tsv([*header, *(item.to_row() for item in data)], file_path)
 
 
 def dump_lookup_index(data: Sequence[Model], datadir_path: Path) -> None:
@@ -125,8 +125,6 @@ def dump_registry(name: str, data: Sequence[Model], queryable: bool = True) -> N
         item.id = id
     ingest_log.writeline(f"Dumping {len(data)} {name}...")
     dump_data(data, path / f"{name}.tsv.gz")
-    if data:
-        ROW_COLUMNS[name] = list(data[0].row_values())
 
     ingest_log.writeline(f"Dumping {name} lookup indexes...")
     dump_lookup_index(data, path)

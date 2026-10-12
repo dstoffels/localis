@@ -13,10 +13,10 @@ class TestDump:
     """DUMP"""
 
     def test_writes_quotes_unquoted(self, tmp_path):
-        """should write a value holding a quote as it is, since the runtime splits rows on tabs rather than parsing csv"""
+        """should write a header naming the columns, then a value holding a quote as it is, since the runtime splits rows on tabs rather than parsing csv"""
         index.dump_data([CurrencyModel(id=1, name='The "Peso"', alpha3="XPS", numeric=None)], tmp_path / "demo.tsv.gz")
 
-        assert _read(tmp_path / "demo.tsv.gz") == 'The "Peso"\tXPS\t\n'
+        assert _read(tmp_path / "demo.tsv.gz") == 'name\talpha3\tnumeric\nThe "Peso"\tXPS\t\n'
 
     @pytest.mark.parametrize("name", ["Tab\tName", "Line\nName", "Return\rName"])
     def test_raises_on_row_breaking_value(self, tmp_path, name):

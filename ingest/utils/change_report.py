@@ -1,4 +1,3 @@
-import json
 import re
 import tempfile
 from collections import Counter
@@ -18,17 +17,15 @@ from localis.registries import (
     CityRegistry,
 )
 from localis.utils.data import open_data
-from .index import ROW_COLUMNS, gzip_bytes
+from .index import gzip_bytes
 from .logger import pipeline_log
-from .paths import BASE_PATH, REPO_PATH, DATA_PATH, STAGED_DATA_PATH
+from .paths import REPO_PATH, DATA_PATH, STAGED_DATA_PATH
 from .staging import stage_text
 
 CHANGELOG_PATH = REPO_PATH / "CHANGELOG.md"
 UNRELEASED = "## [Unreleased]"
 DATA = "### Data"
 DATA_CHANGELOG_PATH = REPO_PATH / "DATA_CHANGELOG.md"
-# each registry's row columns in the shipped build, by name, so the next build's comparison can read its rows
-ROW_COLUMNS_PATH = BASE_PATH / "row_columns.json"
 # absolute, so the links work in the GitHub release notes the CHANGELOG becomes
 DATA_CHANGELOG_URL = "https://github.com/dstoffels/localis/blob/main/DATA_CHANGELOG.md"
 DATA_CHANGELOG_HEADER = """# Data changelog
@@ -205,53 +202,49 @@ def _prepend_records(data_changelog: str, run: list[str]) -> str:
     return "\n".join(lines) + "\n"
 
 
-def _column_count(path: Path) -> int:
+def _first_row(path: Path) -> list[str]:
     with open_data(path) as f:
-        line = f.readline()
-    return len(line.rstrip("\r\n").split("\t")) if line else 0
+        return f.readline().rstrip("\r\n").split("\t")
 
 
-def _realign_shipped(shipped_root: Path, shipped_columns: Mapping[str, list[str]], staged_columns: Mapping[str, list[str]], scratch: Path) -> dict[str, Path]:
-    """The scratch root of each registry whose shipped rows needed realigning to this build's columns: added ones empty, removed ones dropped."""
+def _realign_shipped(shipped_root: Path, staged_root: Path, scratch: Path) -> dict[str, Path]:
+    """The scratch root of each registry whose shipped rows needed realigning to this build's header: added columns empty, removed ones dropped."""
     realigned: dict[str, Path] = {}
-    for name, columns in staged_columns.items():
-        source = shipped_root / name / f"{name}.tsv.gz"
-        if not source.exists():
+    for directory in sorted(staged_root.iterdir()):
+        name = directory.name
+        staged, source = directory / f"{name}.tsv.gz", shipped_root / name / f"{name}.tsv.gz"
+        if not (staged.exists() and source.exists()):
             continue
-        old = shipped_columns.get(name)
-        if old is None:
-            # shipped before its columns were recorded, when new fields could only be appended
-            count = _column_count(source)
-            if count > len(columns):
-                raise ValueError(f"{name}: the shipped rows have {count - len(columns)} more columns than this build's, and no recorded columns to match them by")
-            old = columns[:count]
+        columns, old = _first_row(staged), _first_row(source)
         if old == columns:
             continue
+        # every header starts with name
+        if old[0] != "name":
+            raise ValueError(f"{source} has no header to read its columns by")
         positions = [old.index(column) if column in old else None for column in columns]
         target = scratch / name / source.name
         target.parent.mkdir(parents=True)
         with open_data(source) as f:
+            f.readline()
             rows = (line.rstrip("\r\n").split("\t") for line in f)
             text = "".join("\t".join(cells[i] if i is not None else "" for i in positions) + "\n" for cells in rows)
-        target.write_bytes(gzip_bytes(text.encode("utf-8")))
+        target.write_bytes(gzip_bytes(("\t".join(columns) + "\n" + text).encode("utf-8")))
         realigned[name] = scratch
         added, removed = [c for c in columns if c not in old], [c for c in old if c not in columns]
         pipeline_log.writeline(f"{name}: compared with the shipped rows realigned to this build's columns (added: {', '.join(added) or 'none'}; removed: {', '.join(removed) or 'none'})")
     return realigned
 
 
-def _compare_builds(shipped_root: Path, staged_root: Path, shipped_columns: Mapping[str, list[str]], staged_columns: Mapping[str, list[str]]) -> list[tuple[str, Changes]]:
+def _compare_builds(shipped_root: Path, staged_root: Path) -> list[tuple[str, Changes]]:
     with tempfile.TemporaryDirectory() as scratch:
-        realigned = _realign_shipped(shipped_root, shipped_columns, staged_columns, Path(scratch))
+        realigned = _realign_shipped(shipped_root, staged_root, Path(scratch))
         return [(staged.REGISTRY_NAME, _compare(_records(shipped), _records(staged))) for shipped, staged in zip(_registries(shipped_root, realigned), _registries(staged_root))]
 
 
 def write_data_changes() -> None:
-    """Stages this build's row columns, and its sections of CHANGELOG.md and DATA_CHANGELOG.md unless it changed no record."""
+    """Stages this run's sections of CHANGELOG.md and DATA_CHANGELOG.md; a run that changed no record writes neither."""
     when = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
-    shipped_columns = json.loads(ROW_COLUMNS_PATH.read_text(encoding="utf-8")) if ROW_COLUMNS_PATH.exists() else {}
-    datasets = _compare_builds(DATA_PATH, STAGED_DATA_PATH, shipped_columns, ROW_COLUMNS)
-    stage_text(ROW_COLUMNS_PATH, json.dumps(dict(sorted(ROW_COLUMNS.items())), indent=2) + "\n")
+    datasets = _compare_builds(DATA_PATH, STAGED_DATA_PATH)
     table = _counts_section(when, datasets)
     if not table:
         return

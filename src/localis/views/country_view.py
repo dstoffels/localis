@@ -2,7 +2,6 @@ from pathlib import Path
 from typing import Mapping, cast
 from localis.entities import Continent, Country, CountryBase, CountryLanguage, CurrencyBase, HistoricInfo, LanguageStatus, MacroregionBase
 from localis.stores import CountryStore
-from localis.utils.data import open_data
 from .view import View, ViewMap
 from .macroregion_view import MacroregionView
 from .currency_view import CurrencyView
@@ -14,6 +13,7 @@ class CountryView(View[Country, CountryStore]):
     """Runtime view over CountryStore, used by Registry._cache; resolves its macroregions, currencies, languages and their scripts against their view mappings."""
 
     __slots__ = ("_macroregion_views", "_currency_views", "_language_views", "_script_views")
+    COLUMNS = ("name", "alpha2", "alpha3", "geonames_id", "official_name", "common_name", "aliases", "numeric", "flag", "historic", "macroregions", "groupings", "currencies", "languages", "continent")
 
     def __init__(
         self,
@@ -147,7 +147,7 @@ class CountryView(View[Country, CountryStore]):
     ) -> ViewMap["CountryView"]:
         store = CountryStore()
         continents: dict[str, Continent] = {}
-        with open_data(filepath) as f:
+        with cls._open_data(filepath) as f:
             for idx, line in enumerate(f):
                 row = line.rstrip("\r\n").split("\t")
                 (

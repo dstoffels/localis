@@ -1,7 +1,6 @@
 from pathlib import Path
 from localis.entities import Script, ScriptBase
 from localis.stores import ScriptStore
-from localis.utils.data import open_data
 from .view import View, ViewMap
 
 
@@ -9,6 +8,7 @@ class ScriptView(View[Script, ScriptStore]):
     """Runtime view over ScriptStore, used by Registry._cache."""
 
     __slots__ = ()
+    COLUMNS = ("name", "alpha4", "numeric", "aliases")
 
     @property
     def name(self) -> str:
@@ -36,7 +36,7 @@ class ScriptView(View[Script, ScriptStore]):
     @classmethod
     def load(cls, filepath: Path) -> ViewMap["ScriptView"]:
         store = ScriptStore()
-        with open_data(filepath) as f:
+        with cls._open_data(filepath) as f:
             for idx, line in enumerate(f):
                 name, alpha4, numeric_s, alias_s = line.rstrip("\r\n").split("\t")
                 store.id_to_idx.append(idx)

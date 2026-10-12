@@ -3,7 +3,6 @@ from pathlib import Path
 from typing import Mapping
 from localis.entities import SubdivisionBase, Subdivision
 from localis.stores import SubdivisionStore
-from localis.utils.data import open_data
 from .view import CrossReferencedView, ViewMap
 from .country_view import CountryView
 
@@ -14,6 +13,7 @@ class SubdivisionView(
     """Runtime view over SubdivisionStore, used by Registry._cache."""
 
     __slots__ = ()
+    COLUMNS = ("name", "iso_code", "geonames_code", "geonames_id", "type", "aliases", "admin_level", "parent", "country")
 
     @property
     def name(self) -> str:
@@ -91,7 +91,7 @@ class SubdivisionView(
         cls, filepath: Path, country_views: Mapping[int, CountryView]
     ) -> ViewMap["SubdivisionView"]:
         store = SubdivisionStore()
-        with open_data(filepath) as f:
+        with cls._open_data(filepath) as f:
             for idx, line in enumerate(f):
                 row = line.rstrip("\r\n").split("\t")
                 (

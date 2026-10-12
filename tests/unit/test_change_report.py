@@ -106,22 +106,19 @@ class TestChangeReport:
         assert change_report._comparable(_language(1, "Latin", secondary=True)) != before
 
     def test_realign_shipped(self, tmp_path: Path):
-        """should realign shipped rows to this build's columns by name, added ones empty and removed ones dropped, leave matching registries in place, and fall back to appended columns where none were recorded"""
-        shipped, scratch = tmp_path / "shipped", tmp_path / "scratch"
-        _write_rows(shipped, "currencies", ["1\t2\t3"])
-        _write_rows(shipped, "scripts", ["1\t2"])
-        _write_rows(shipped, "languages", ["1\t2"])
+        """should realign shipped rows to this build's header by name, added columns empty and removed ones dropped, leave matching registries in place, and refuse shipped rows with no header"""
+        shipped, staged, scratch = tmp_path / "shipped", tmp_path / "staged", tmp_path / "scratch"
+        _write_rows(shipped, "currencies", ["name\tb\tc", "1\t2\t3"])
+        _write_rows(staged, "currencies", ["name\tc\td"])
+        _write_rows(shipped, "scripts", ["name\tb", "1\t2"])
+        _write_rows(staged, "scripts", ["name\tb"])
 
-        realigned = change_report._realign_shipped(
-            shipped,
-            {"currencies": ["a", "b", "c"], "scripts": ["a", "b"]},
-            {"currencies": ["a", "c", "d"], "scripts": ["a", "b"], "languages": ["a", "b", "c"]},
-            scratch,
-        )
+        realigned = change_report._realign_shipped(shipped, staged, scratch)
 
-        assert realigned == {"currencies": scratch, "languages": scratch}
-        assert gzip.decompress((scratch / "currencies" / "currencies.tsv.gz").read_bytes()).decode("utf-8") == "1\t3\t\n"
-        assert gzip.decompress((scratch / "languages" / "languages.tsv.gz").read_bytes()).decode("utf-8") == "1\t2\t\n"
+        assert realigned == {"currencies": scratch}
+        assert gzip.decompress((scratch / "currencies" / "currencies.tsv.gz").read_bytes()).decode("utf-8") == "name\tc\td\n1\t3\t\n"
         assert not (scratch / "scripts").exists()
+        _write_rows(shipped, "languages", ["1\t2"])
+        _write_rows(staged, "languages", ["name\tb"])
         with pytest.raises(ValueError):
-            change_report._realign_shipped(shipped, {}, {"currencies": ["a", "b"]}, tmp_path / "scratch2")
+            change_report._realign_shipped(shipped, staged, tmp_path / "scratch2")
