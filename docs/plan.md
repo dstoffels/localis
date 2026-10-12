@@ -12,7 +12,7 @@ This document outlines the project plan for the Localis project, detailing the o
 
 Next: release 3.0.0b2. The betas move to release candidate two weeks after b2 at the earliest, since b2's continents add API and restart the clock, and only fixes land in a release candidate.
 
-At 3.0.0 final: set pyproject's classifier back to `Development Status :: 5 - Production/Stable`, and the README's Installation line back to `pip install localis` with its beta banner removed.
+At 3.0.0 final: set pyproject's classifier back to `Development Status :: 5 - Production/Stable`, and the README's Installation commands back to `pip install localis` and `uv add localis` with its beta banner removed.
 
 Cities search, potential feature: GeoNames names New York City "New York City", so `cities.filter(name="New York")` finds nothing and search finds it only partly. English alternate names for cities, previously left out because adding all of them would bloat the dataset, could be bounded instead: English only, for cities above a population floor (15,000 keeps about 34,000 of 236,000), skipping colloquial and historic entries as the subdivision stage does. `alternateNamesV2.txt` is already fetched for subdivisions, so it needs no new source. Measure the growth of the shipped data and the canon trigram index before deciding; a `City.aliases` field would be an API addition, so in a beta it restarts the two weeks before the release candidate. Names in other languages belong to the translation layer (Translations, below), not to `City.aliases`.
 

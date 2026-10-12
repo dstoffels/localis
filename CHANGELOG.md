@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.0b2] - 2026-10-11
+
 ### Added
 
 - `Country.continent`, a `Continent` with `name`, `geonames_code` and `geonames_id` for the seven continents, from GeoNames, filterable with `countries.filter(continent=...)` by name or GeoNames code; `None` for a country GeoNames doesn't list. Continents are GeoNames enrichment, not an authoritative standard, and separate from macroregions (#25).
@@ -15,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - The installed package is about 40% smaller (about 32MB, from 53.6MB): every data file now ships gzipped. The data and the API are unchanged (#29).
+- Each data file starts with a header naming its columns after the fields its registry serves, and loading one built for another version raises `ValueError` with both column lists instead of misreading its rows.
 
 ### Fixed
 
@@ -364,7 +367,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Comprehensive test suite
 - GitHub CI/CD Workflows
 
-[Unreleased]: https://github.com/dstoffels/localis/compare/v3.0.0b1...HEAD
+[Unreleased]: https://github.com/dstoffels/localis/compare/v3.0.0b2...HEAD
+[3.0.0b2]: https://github.com/dstoffels/localis/compare/v3.0.0b1...v3.0.0b2
 [3.0.0b1]: https://github.com/dstoffels/localis/compare/v2.1.0...v3.0.0b1
 [2.1.0]: https://github.com/dstoffels/localis/compare/v2.0.0...v2.1.0
 [2.0.0]: https://github.com/dstoffels/localis/compare/v1.1.2...v2.0.0

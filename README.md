@@ -24,8 +24,6 @@ pip install --pre localis
 uv add --prerelease allow localis
 ```
 
-localis follows Semantic Versioning; [docs/versioning.md](https://github.com/dstoffels/localis/blob/main/docs/versioning.md) says what each release can change and which releases are supported.
-
 ### Requirements
 
 - Python 3.11+
