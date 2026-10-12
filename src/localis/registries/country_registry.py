@@ -52,9 +52,10 @@ class CountryRegistry(QueryableRegistry[Country]):
         macroregion: str | Missing | None = None,
         currency: str | Missing | None = None,
         language: str | Missing | None = None,
+        continent: str | Missing | None = None,
     ) -> list[Country]:
-        """Filter countries by any of its names (name, official_name, common_name, or aliases), a macroregion (region, subregion or grouping, by name or code), a currency (by name or alpha3) or an official language (by name, alpha3, alpha2 or bibliographic code); MISSING matches countries with none. Excludes historic entries unless include_historic is set."""
-        return self._filter(limit, name=name, macroregion=macroregion, currency=currency, language=language)
+        """Filter countries by any of its names (name, official_name, common_name, or aliases), a macroregion (region, subregion or grouping, by name or code), a currency (by name or alpha3) an official language (by name, alpha3, alpha2 or bibliographic code) or a continent (by name or GeoNames code); MISSING matches countries with none. Excludes historic entries unless include_historic is set."""
+        return self._filter(limit, name=name, macroregion=macroregion, currency=currency, language=language, continent=continent)
 
     def search(
         self, query: str, limit: int = 10

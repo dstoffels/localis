@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `Country.continent`, a `Continent` with `name`, `geonames_code` and `geonames_id` for the seven continents, from GeoNames, filterable with `countries.filter(continent=...)` by name or GeoNames code (#25). Continents are GeoNames enrichment, not an authoritative standard, and separate from macroregions; `None` for a country GeoNames doesn't list
 - Each release's Data subsection: every data refresh it ships, dated, with each dataset's record counts and changed fields, linked to the records it renamed, added and removed in `DATA_CHANGELOG.md`, recorded back to 2026-10-04
 
 ### Changed
@@ -22,6 +23,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The ingest pipeline's cldr-json commit lookup authenticates with the workflow's token, so a scheduled or CI run no longer fails on the rate limit GitHub-hosted runners share (#27).
 
 ### Data
+
+#### 2026-10-11 23:52 UTC
+
+| Dataset | Records | Added | Removed | Changed | Changed fields |
+|---|---|---|---|---|---|
+| Countries | 281 → 281 | 0 | 0 | 252 | `continent` (252) |
 
 #### 2026-10-11 21:33 UTC
 

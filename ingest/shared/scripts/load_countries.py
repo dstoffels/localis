@@ -17,7 +17,7 @@ def load_countries() -> dict[str, CountryModel]:
             if len(cells) != len(columns):
                 raise ValueError(f"{path} row {id} has {len(cells)} columns where CountryModel ships {len(columns)}; run the pipeline again to restage countries")
             row = dict(zip(columns, cells))
-            # macroregion placements, currencies and languages are left out: downstream stages only relate to countries by id and name fields
+            # macroregion placements, currencies, languages and continents are left out: downstream stages only relate to countries by id and name fields
             historic = HistoricModel.from_cell(row["historic"])
             # historic rows reuse active and each other's alpha2 codes, so key them by alpha_4 like ingest_countries() does
             key = historic.alpha_4 if historic else row["alpha2"]

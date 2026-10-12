@@ -53,6 +53,7 @@ FILTER_VALUES_BY_REGISTRY = {
         ),
         "currency": lambda c: tuple(v for m in c.currencies for v in (m.name, m.alpha3)),
         "language": lambda c: tuple(v for l in c.languages for v in _language_values(l.id)),
+        "continent": lambda c: (c.continent.name, c.continent.geonames_code) if c.continent else (),
     },
     SubdivisionRegistry: {
         "type": lambda s: (s.type,),

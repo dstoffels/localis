@@ -28,6 +28,18 @@ class HistoricModel:
 
 
 @dataclass(slots=True)
+class ContinentModel:
+    """A GeoNames continent, shipped as one "geonames_code|name|geonames_id" cell."""
+
+    geonames_code: str
+    name: str
+    geonames_id: int
+
+    def to_cell(self) -> str:
+        return f"{self.geonames_code}|{self.name}|{self.geonames_id}"
+
+
+@dataclass(slots=True)
 class CountryModel(Model):
     alpha2: str
     alpha3: str | None
@@ -45,6 +57,8 @@ class CountryModel(Model):
     currencies: list[CurrencyModel] = field(default_factory=list)
     # one per CLDR tag with an official status, by population share
     languages: list[CountryLanguageModel] = field(default_factory=list)
+    # GeoNames' continent, enrichment rather than a standard; none without a GeoNames row
+    continent: ContinentModel | None = None
 
     LOOKUP_FIELDS = ("alpha2", "alpha3", "numeric")
     FILTER_FIELDS = {
@@ -52,6 +66,7 @@ class CountryModel(Model):
         "macroregion": ("macroregion_names", "macroregion_codes"),
         "currency": ("currency_names", "currency_codes"),
         "language": ("language_values",),
+        "continent": ("continent_values",),
     }
     # alpha3 too, so a search for an abbreviation that's the country's own code ("USA", "PNG") finds it
     CANON_FIELDS = ("name", "official_name", "common_name", "aliases", "alpha3")
@@ -81,6 +96,10 @@ class CountryModel(Model):
         return [c.alpha3 for c in self.currencies]
 
     @property
+    def continent_values(self) -> list[str]:
+        return [self.continent.name, self.continent.geonames_code] if self.continent else []
+
+    @property
     def language_values(self) -> list[str]:
         values = (v for l in self.languages for v in (l.language.name, l.language.alpha3, l.language.alpha2, l.language.bibliographic))
         return [v for v in values if v]
@@ -93,4 +112,5 @@ class CountryModel(Model):
         data["currencies"] = "|".join(str(c.id) for c in self.currencies)
         data["languages"] = "|".join(l.to_cell() for l in self.languages)
         data["historic"] = self.historic.to_cell() if self.historic else None
+        data["continent"] = self.continent.to_cell() if self.continent else None
         return data

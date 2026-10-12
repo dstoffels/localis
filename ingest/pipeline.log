@@ -10,7 +10,8 @@
 [INFO] Checking the staged build
 [INFO] Checking the data stats of the staged build (ingest/staging/data)...
 [INFO] The staged build's data stats reconcile: 296,393 records across 7 registries
-[INFO] Writing the change reports
+[INFO] Recording the data changes in the changelog
+[INFO] countries: compared with the shipped rows' 1 missing column(s), which this build added, empty
 [INFO] Promoting the build
 [INFO] Regenerating the data stats and docs
 [INFO] Computing the data stats of the shipped data (src/localis/data)...

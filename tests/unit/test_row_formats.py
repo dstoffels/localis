@@ -1,6 +1,7 @@
 from pathlib import Path
 from ingest.shared.models import (
     CityModel,
+    ContinentModel,
     CountryLanguageModel,
     CountryModel,
     CurrencyModel,
@@ -88,6 +89,7 @@ class TestRowFormats:
             aliases=["Demostan"], numeric=123, flag="🏳", historic=HistoricModel(alpha_4="DMHH", withdrawal_date="1990-01-01", comment="merged"),
             macroregions=[_macroregion(5), _macroregion(6)], groupings=[_macroregion(7)], currencies=[CurrencyModel(id=8, name="Demo Dollar", alpha3="DMD", numeric=None)],
             languages=[CountryLanguageModel(language=_language(9), status="regional", population_percent=12.5, script=_script(10))],
+            continent=ContinentModel(geonames_code="DC", name="Democontinent", geonames_id=333),
         )
         dump_data([country], tmp_path / "rows.tsv.gz")
 
@@ -98,6 +100,7 @@ class TestRowFormats:
             "Demoland", "DM", "DMO", 111, "Republic of Demoland", "Demo", ("Demostan",), 123, "🏳",
         )
         assert view.historic is not None and (view.historic.alpha_4, view.historic.withdrawal_date, view.historic.comment) == ("DMHH", "1990-01-01", "merged")
+        assert view.continent is not None and (view.continent.name, view.continent.geonames_code, view.continent.geonames_id) == ("Democontinent", "DC", 333)
         assert (store.macroregion_ids[idx], store.grouping_ids[idx], store.currency_ids[idx], store.languages[idx]) == ((5, 6), (7,), (8,), ((9, "regional", 12.5, 10),))
 
     def test_subdivisions(self, tmp_path: Path):

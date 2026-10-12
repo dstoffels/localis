@@ -9,6 +9,11 @@
     "etag": "\"7bc0-65d87df9028a7\"",
     "sha256": "c5997ea659df5bcf42509eb937064d172b2a998bb873608603e8421d714a9974"
   },
+  "geonames_readme.txt": {
+    "url": "https://download.geonames.org/export/dump/readme.txt",
+    "etag": "\"228b-65d87a0bff6d9\"",
+    "sha256": "b1957379b6c1242c700c98ac9a8aa0a09f56c3c0a50ee72175527005f48ef2c5"
+  },
   "iso_3166-1.json": {
     "url": "https://salsa.debian.org/iso-codes-team/iso-codes/-/raw/90b9fe56ec2f3a05675d525d3587ab6c18f30376/data/iso_3166-1.json",
     "etag": "W/\"5af71921cc8d6683538e692027135ff9-gzip\"",

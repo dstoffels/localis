@@ -1,4 +1,6 @@
 import re
+import shutil
+import tempfile
 from collections import Counter
 from dataclasses import asdict, dataclass, fields, is_dataclass
 from datetime import datetime, timezone
@@ -15,6 +17,9 @@ from localis.registries import (
     SubdivisionRegistry,
     CityRegistry,
 )
+from localis.utils.data import open_data
+from .index import _gzip
+from .logger import pipeline_log
 from .paths import REPO_PATH, DATA_PATH, STAGED_DATA_PATH
 from .staging import stage_text
 
@@ -195,9 +200,50 @@ def _prepend_run(data_changelog: str, run: list[str]) -> str:
     return "\n".join(lines) + "\n"
 
 
+def _columns(path: Path) -> int:
+    """How many columns a data file's rows have; 0 for an empty file."""
+    with open_data(path) as f:
+        line = f.readline()
+    return len(line.rstrip("\r\n").split("\t")) if line else 0
+
+
+def _padded(shipped_root: Path, staged_root: Path, scratch: Path) -> Path:
+    """The shipped build as this build's code reads it: copied under scratch with empty cells for the columns a field added since appends to a registry's rows, or shipped_root itself if no registry gained one."""
+    names = [registry.REGISTRY_NAME for registry in _registries(staged_root)]
+    short: dict[str, int] = {}
+    for name in names:
+        shipped, staged = shipped_root / name / f"{name}.tsv.gz", staged_root / name / f"{name}.tsv.gz"
+        if not (shipped.exists() and staged.exists()) or not (shipped_columns := _columns(shipped)):
+            continue
+        missing = _columns(staged) - shipped_columns
+        if missing < 0:
+            raise ValueError(f"{name}: the shipped rows have {-missing} more columns than this build's; a removed column can't be compared")
+        if missing:
+            short[name] = missing
+    if not short:
+        return shipped_root
+    for name in names:
+        source = shipped_root / name / f"{name}.tsv.gz"
+        if not source.exists():
+            continue
+        target = scratch / name / source.name
+        target.parent.mkdir(parents=True)
+        if name not in short:
+            shutil.copyfile(source, target)
+            continue
+        # a new field's column is appended at the row's end, so an empty cell there reads as the field's empty value
+        with open_data(source) as f:
+            text = "".join(line.rstrip("\r\n") + "\t" * short[name] + "\n" for line in f)
+        target.write_bytes(_gzip(text.encode("utf-8")))
+        pipeline_log.writeline(f"{name}: compared with the shipped rows' {short[name]} missing column(s), which this build added, empty")
+    return scratch
+
+
 def _compare_builds(shipped_root: Path, staged_root: Path) -> list[tuple[str, Changes]]:
     """Each registry's changes from the build under shipped_root to the one under staged_root."""
-    return [(staged.REGISTRY_NAME, _compare(_records(shipped), _records(staged))) for shipped, staged in zip(_registries(shipped_root), _registries(staged_root))]
+    with tempfile.TemporaryDirectory() as scratch:
+        shipped_root = _padded(shipped_root, staged_root, Path(scratch))
+        return [(staged.REGISTRY_NAME, _compare(_records(shipped), _records(staged))) for shipped, staged in zip(_registries(shipped_root), _registries(staged_root))]
 
 
 def write_change_report() -> None:

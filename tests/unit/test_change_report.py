@@ -1,4 +1,7 @@
+import gzip
 from collections import Counter
+from pathlib import Path
+import pytest
 from localis.entities import CountryLanguage, Language, LanguageBase, LanguageScript, ScriptBase
 from ingest.utils import change_report
 
@@ -9,6 +12,13 @@ def _language(id: int, script_name: str, secondary: bool) -> Language:
         id=id, name="Demo", alpha3="dmo", alpha2=None, bibliographic=None, scope="individual", type="living",
         inverted_name=None, aliases=[], scripts=[script],
     )
+
+
+def _write_rows(root: Path, name: str, rows: list[str]) -> Path:
+    path = root / name / f"{name}.tsv.gz"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_bytes(gzip.compress("".join(f"{row}\n" for row in rows).encode("utf-8")))
+    return path
 
 
 def _added() -> change_report.Changes:
@@ -94,3 +104,17 @@ class TestChangeReport:
 
         assert change_report._comparable(_language(2, "Roman", secondary=False)) == before
         assert change_report._comparable(_language(1, "Latin", secondary=True)) != before
+
+    def test_padded_appended_columns(self, tmp_path: Path):
+        """should compare shipped rows short of a column the build appended as if the column were empty, and refuse rows with more columns than the build's"""
+        shipped, staged, scratch = tmp_path / "shipped", tmp_path / "staged", tmp_path / "scratch"
+        _write_rows(shipped, "currencies", ["Demo\tDMD"])
+        _write_rows(staged, "currencies", ["Demo\tDMD\t"])
+
+        padded = change_report._padded(shipped, staged, scratch)
+
+        assert gzip.decompress((padded / "currencies" / "currencies.tsv.gz").read_bytes()).decode("utf-8") == "Demo\tDMD\t\n"
+        _write_rows(shipped, "currencies", ["Demo\tDMD\t\t"])
+        with pytest.raises(ValueError):
+            change_report._padded(shipped, staged, tmp_path / "scratch2")
+
