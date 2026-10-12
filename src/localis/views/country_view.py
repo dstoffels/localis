@@ -129,7 +129,7 @@ class CountryView(View[Country, CountryStore]):
             geonames_id=self.geonames_id,
             # the store's own object, so copied: a change to the entity's must not reach later calls
             historic=HistoricInfo(historic.alpha_4, historic.withdrawal_date, historic.comment) if historic else None,
-            continent=Continent(continent.name, continent.geonames_code, continent.geonames_id) if continent else None,
+            continent=Continent(name=continent.name, geonames_code=continent.geonames_code, geonames_id=continent.geonames_id) if continent else None,
             macroregions=self.macroregions,
             groupings=self.groupings,
             currencies=self.currencies,

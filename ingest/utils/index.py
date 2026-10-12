@@ -13,6 +13,8 @@ from .logger import ingest_log
 
 # each key's columns (a trigram, or a filter field and value) to the ids of the records holding it
 InvertedIndex = dict[tuple[str, ...], list[int]]
+# each registry's row columns as this run dumped them, which the change report records with the build
+ROW_COLUMNS: dict[str, list[str]] = {}
 
 
 def _write_tsv(rows: Iterable[Iterable[object]], path: Path) -> None:
@@ -123,6 +125,8 @@ def dump_registry(name: str, data: Sequence[Model], queryable: bool = True) -> N
         item.id = id
     ingest_log.writeline(f"Dumping {len(data)} {name}...")
     dump_data(data, path / f"{name}.tsv.gz")
+    if data:
+        ROW_COLUMNS[name] = list(data[0].row_values())
 
     ingest_log.writeline(f"Dumping {name} lookup indexes...")
     dump_lookup_index(data, path)

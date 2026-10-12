@@ -31,8 +31,8 @@ class HistoricModel:
 class ContinentModel:
     """A GeoNames continent, shipped as one "geonames_code|name|geonames_id" cell."""
 
-    geonames_code: str
     name: str
+    geonames_code: str
     geonames_id: int
 
     def to_cell(self) -> str:

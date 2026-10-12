@@ -16,26 +16,22 @@ Fast, offline data for **countries**, **subdivisions**, **cities**, **macroregio
 - 🔍 **Typo-tolerant search**: with a typo in the query, the intended record ranks first for <stat key="bench.registries.countries.accuracy.top1_pct:pct">99.3%</stat> of countries, <stat key="bench.registries.subdivisions.accuracy.top1_pct:pct">93.7%</stat> of subdivisions and <stat key="bench.registries.cities.accuracy.top1_pct:pct">93.4%</stat> of cities
 - 📌 **Aliases**: support for colloquial, historic and alternate names
 
----
-
 ## Installation
 
 ```bash
 pip install --pre localis
+
+uv add --prerelease allow localis
 ```
 
 localis follows Semantic Versioning; [docs/versioning.md](https://github.com/dstoffels/localis/blob/main/docs/versioning.md) says what each release can change and which releases are supported.
 
----
-
-## Requirements
+### Requirements
 
 - Python 3.11+
 - `rapidfuzz` - Fast fuzzy string matching
 
----
-
-## Quick Start
+### Quick Start
 
 ```python
 import localis
@@ -54,8 +50,6 @@ cities = localis.cities.filter(country="US", subdivision="California", limit=10)
 results = localis.countries.search("Austrlia")
 print(results[0][0].name)  # "Australia"
 ```
-
----
 
 ## Querying
 
@@ -143,7 +137,6 @@ Exact matches on any value a field indexes. Using multiple fields combines the c
 **Scripts**
 - `name` (name or alias)
 
-
 ```python
 # aliases and abbreviations match too
 localis.countries.filter(name="UK")
@@ -185,8 +178,6 @@ total = len(localis.subdivisions)
 ```
 
 > ℹ️ Historic countries are left out unless included (see [Historic Countries](#historic-countries)), and a [population threshold](#population-threshold) narrows every cities query.
-
----
 
 ## Entities
 
@@ -426,8 +417,6 @@ A language as one country recognizes it: every `LanguageBase` field plus three f
 | `population_percent` | `float \| None` | `95.0` | CLDR's estimate of the population using it; shares overlap, since people use several languages |
 | `script` | `ScriptBase \| None` | Han (Traditional variant) | the script CLDR gives the status for, so a language can appear once per script; `None` where CLDR names none |
 
----
-
 ## Performance
 
 ### Caching
@@ -460,8 +449,6 @@ A registry also loads the datasets it references, without their indexes: a cold 
 | Cities | <stat key="bench.registries.cities.search.p50_ms:latency">7.73ms</stat> / <stat key="bench.registries.cities.search.p95_ms:latency">13.9ms</stat> | <stat key="bench.registries.cities.accuracy.queries:int">4,999</stat> | <stat key="bench.registries.cities.accuracy.success_pct:pct">98.8%</stat> | <stat key="bench.registries.cities.accuracy.top1_pct:pct">93.4%</stat> |
 
 Accuracy is measured on names and aliases, each with at least one typo, of up to <stat key="bench.sample_size:int">5,000</stat> sampled records per registry; city queries add the admin1. A record sharing the sampled one's name (and a city's admin1) counts as a hit. Measured on <stat key="bench.host.cpu">11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz</stat> with Python <stat key="bench.host.python">3.14.7</stat>.
-
----
 
 ## Concurrency
 
@@ -501,8 +488,6 @@ if __name__ == "__main__":
         results = list(pool.map(search_city, queries, chunksize=500))
 ```
 
----
-
 ## Data Sources
 
 Refreshed monthly from:
@@ -539,21 +524,15 @@ Names ship in Latin script.
 
 The shipped data is modified from these sources and stays under their licenses: iso-codes (LGPL-2.1-or-later), GeoNames (CC BY 4.0), Unicode CLDR (Unicode License v3) and Wikidata (CC0). [`src/localis/data/NOTICE`](https://github.com/dstoffels/localis/blob/main/src/localis/data/NOTICE) attributes each source, and the license texts are in [`LICENSES/`](https://github.com/dstoffels/localis/tree/main/LICENSES) and the wheel's metadata. Keep both with the data if you redistribute it.
 
----
-
 ## License
 
 **Code**: MIT ([`LICENSE`](https://github.com/dstoffels/localis/blob/main/LICENSE)).
 **Data**: its sources' licenses, listed under [Data licensing](#data-licensing).
 The package's license expression is `MIT AND LGPL-2.1-or-later AND CC-BY-4.0 AND Unicode-3.0 AND CC0-1.0`.
 
----
-
 ## History
 
 localis began with some database cleanup. I found myself writing mountains of bespoke code to parse inconsistent, dirty data while trying to reconcile pycountry, GeoNames and Wikidata to name a few (Google Places was not in the budget). When the pipeline was complete and the data finally cleaned, I realized this mountain of code could be useful for others who might need a reliable offline solution, so here we are! Over the past few years I've taken great care to build a robust, reliable dataset, wrapped in a simple, performant interface. I hope you find it useful and please don't hesitate to contribute or report any issues.
-
----
 
 ## Contributing
 

@@ -1,7 +1,7 @@
 import bisect
 from array import array
 from pathlib import Path
-from typing import Iterator, Sequence, TypeVar
+from typing import Sequence, TypeVar
 from localis.utils.strings import normalize
 from localis.utils.data import open_data
 
@@ -17,28 +17,25 @@ class LookupIndex:
         int_filepath: Path,
         allowed_ids: set[int] | None = None,
     ) -> None:
-        self._str_keys: list[str] = []
-        self._str_vals = array("I")
-        for key, id in self._pairs(filepath, allowed_ids):
-            self._str_keys.append(key)
-            self._str_vals.append(id)
-        self._int_keys = array("I")
-        self._int_vals = array("I")
-        for key, id in self._pairs(int_filepath, allowed_ids):
-            self._int_keys.append(int(key))
-            self._int_vals.append(id)
+        self._str_keys, self._str_vals = self._read(filepath, allowed_ids)
+        int_keys, self._int_vals = self._read(int_filepath, allowed_ids)
+        self._int_keys = array("I", map(int, int_keys))
 
     @staticmethod
-    def _pairs(path: Path, allowed_ids: set[int] | None) -> Iterator[tuple[str, int]]:
+    def _read(path: Path, allowed_ids: set[int] | None) -> tuple[list[str], array]:
+        keys: list[str] = []
+        ids = array("I")
         # ingest writes no file for an index with no keys
         if not path.exists():
-            return
+            return keys, ids
         with open_data(path) as f:
             for line in f:
                 key, id_s = line.rstrip("\n").split("\t")
-                id = int(id_s)
-                if allowed_ids is None or id in allowed_ids:
-                    yield key, id
+                record_id = int(id_s)
+                if allowed_ids is None or record_id in allowed_ids:
+                    keys.append(key)
+                    ids.append(record_id)
+        return keys, ids
 
     def get(self, key: str | int) -> int | None:
         """The record id a lookup key resolves to, or None; raises TypeError for a key that isn't a str or an int."""

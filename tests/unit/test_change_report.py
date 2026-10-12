@@ -105,16 +105,23 @@ class TestChangeReport:
         assert change_report._comparable(_language(2, "Roman", secondary=False)) == before
         assert change_report._comparable(_language(1, "Latin", secondary=True)) != before
 
-    def test_pad_shipped_columns(self, tmp_path: Path):
-        """should compare shipped rows short of a column the build appended as if the column were empty, and refuse rows with more columns than the build's"""
-        shipped, staged, scratch = tmp_path / "shipped", tmp_path / "staged", tmp_path / "scratch"
-        _write_rows(shipped, "currencies", ["Demo\tDMD"])
-        _write_rows(staged, "currencies", ["Demo\tDMD\t"])
+    def test_realign_shipped(self, tmp_path: Path):
+        """should realign shipped rows to this build's columns by name, added ones empty and removed ones dropped, leave matching registries in place, and fall back to appended columns where none were recorded"""
+        shipped, scratch = tmp_path / "shipped", tmp_path / "scratch"
+        _write_rows(shipped, "currencies", ["1\t2\t3"])
+        _write_rows(shipped, "scripts", ["1\t2"])
+        _write_rows(shipped, "languages", ["1\t2"])
 
-        padded = change_report._pad_shipped_columns(shipped, staged, scratch)
+        realigned = change_report._realign_shipped(
+            shipped,
+            {"currencies": ["a", "b", "c"], "scripts": ["a", "b"]},
+            {"currencies": ["a", "c", "d"], "scripts": ["a", "b"], "languages": ["a", "b", "c"]},
+            scratch,
+        )
 
-        assert gzip.decompress((padded / "currencies" / "currencies.tsv.gz").read_bytes()).decode("utf-8") == "Demo\tDMD\t\n"
-        _write_rows(shipped, "currencies", ["Demo\tDMD\t\t"])
+        assert realigned == {"currencies": scratch, "languages": scratch}
+        assert gzip.decompress((scratch / "currencies" / "currencies.tsv.gz").read_bytes()).decode("utf-8") == "1\t3\t\n"
+        assert gzip.decompress((scratch / "languages" / "languages.tsv.gz").read_bytes()).decode("utf-8") == "1\t2\t\n"
+        assert not (scratch / "scripts").exists()
         with pytest.raises(ValueError):
-            change_report._pad_shipped_columns(shipped, staged, tmp_path / "scratch2")
-
+            change_report._realign_shipped(shipped, {}, {"currencies": ["a", "b"]}, tmp_path / "scratch2")
