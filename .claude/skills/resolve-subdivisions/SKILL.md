@@ -18,6 +18,15 @@ A `wikidata_conflict` orphan is an earlier skill decision that disagrees with Wi
 
 A `wikidata_changed` orphan is one whose Wikidata mapping now points to a different record than the one it previously resolved to (Wikidata's earlier mapping, or automerge's match where Wikidata had none). Its first batch holds the two records, noted "Wikidata's new mapping" and "previous resolution". The same standard applies: take Wikidata's new mapping unless you can say concretely why it's wrong, and keep the previous record only with that explanation. Either way, `merge` with the record you choose, giving the explanation as the `reason`.
 
+Three more buckets hold earlier skill decisions the pipeline sent back because GeoNames changed under them. `next_orphan` includes each one's `current_decision`: its `geonames_id` or "add as-is", its `reason`, and `decided_by`, `agent` or `human`.
+- A `stale_decision` merged into a record GeoNames has since deleted. Its first batch holds Wikidata's mapping, noted "Wikidata's mapping", when Wikidata has one; otherwise it starts at the regular top tier. Decide it afresh.
+- A `contested_decision` names the same record as another decision, noted "current skill decision, also named by <iso_code>". At most one of them can keep it, so decide which place the record actually is; the other needs its own record, or escalation.
+- A `new_candidate` was added as-is, and GeoNames now has a record that qualifies for it, noted "new GeoNames record since this decision". `merge` into it if it's the same place, and keep the add only if you can say concretely why it isn't (a different place, a populated place rather than the administrative unit).
+
+Keep a current decision only with a concrete reason, given as the `reason` when you `merge` into the same record again or `add` again. If its `decided_by` is `human`, don't overturn it yourself: escalate (Step 6) with what changed.
+
+If `next_orphan` includes a `previous_decision`, the code's earlier decision was retired, because ISO removed the code or the pipeline began bypassing it as a non-administrative grouping, and the code has since returned. Decide the orphan on its own evidence; the previous decision is history to inform that, not a ruling to repeat.
+
 ISO and GeoNames sometimes disagree on a subdivision's level (a city ISO lists at level 1 can sit at level 2 in GeoNames), so a candidate at a different level can still be the right one. Use the level to tell apart same-name candidates, such as a city and the county named after it, not to rule candidates out.
 
 ## Instructions
@@ -66,7 +75,7 @@ Call the `add` tool only if the search confirmed the orphan is a real, current o
 3. **A real reorganization retired the subdivision.** It was merged into or split into other subdivisions, ISO still lists it, and GeoNames has no record of the retired subdivision itself (only its successors). If GeoNames still has a record for the retired subdivision, `merge` into that instead. A simple rename isn't a retirement: the renamed place is still there to merge with.
 4. **Disputed territory.** ISO lists the subdivision under one country, while GeoNames files that land under another (Serbia's Kosovo districts, which GeoNames places under Kosovo). Add it as ISO lists it, without taking a side.
 
-Otherwise, proceed to Step 6. "None of the candidates matched" is not a reason to `add`, and neither is a place being too new for GeoNames: an `add` is permanent and becomes a duplicate once GeoNames includes the place.
+Otherwise, proceed to Step 6. "None of the candidates matched" is not a reason to `add`, and neither is a place being too new for GeoNames: an `add` says GeoNames has no record for the place, which only a human should decide for one GeoNames hasn't caught up with yet.
 
 ### Step 6. Escalate for human review
 Escalate whenever any of these is true:

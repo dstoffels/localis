@@ -8,6 +8,7 @@ class ScriptView(View[Script, ScriptStore]):
     """Runtime view over ScriptStore, used by Registry._cache."""
 
     __slots__ = ()
+    COLUMNS = ("name", "alpha4", "numeric", "aliases")
 
     @property
     def name(self) -> str:
@@ -35,7 +36,7 @@ class ScriptView(View[Script, ScriptStore]):
     @classmethod
     def load(cls, filepath: Path) -> ViewMap["ScriptView"]:
         store = ScriptStore()
-        with open(filepath, "r", encoding="utf-8") as f:
+        with cls._open_data(filepath) as f:
             for idx, line in enumerate(f):
                 name, alpha4, numeric_s, alias_s = line.rstrip("\r\n").split("\t")
                 store.id_to_idx.append(idx)

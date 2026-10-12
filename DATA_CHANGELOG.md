@@ -1,0 +1,505 @@
+# Data changelog
+
+Every record an ingest run renamed, added or removed, by `key`, newest first. Each run's counts, with its other changed records counted per field, are in [CHANGELOG.md](https://github.com/dstoffels/localis/blob/main/CHANGELOG.md) under the release that shipped it.
+
+Runs up to 2026-10-11 21:33 UTC were rebuilt from the per-dataset reports committed with each, dated by their commit; where several runs went into one commit, only the last one's changes were recorded.
+
+## 2026-10-11 21:33 UTC
+
+### Subdivisions
+
+**Renamed (335)**
+
+- `IR.35.68057` Shahrestan-e Kalār Dasht → Kalār Dasht
+- `IR.07.68471` Shahrestān-e Fasā → Fasā
+- `IR.28.122490` Shahrestān-e Naţanz → Naţanz
+- `IR.33.449425` Shahrestān-e Āz̄arshahr → Āz̄arshahr
+- `IR.33.449426` Shahrestān-e Oskū → Oskū
+- `IR.33.449428` Shahrestān-e Bostānābād → Bostānābād
+- `IR.33.449429` Shahrestān-e Bonāb → Bonāb
+- `IR.33.449430` Shahrestān-e Tabrīz → Tabrīz
+- `IR.33.449431` Shahrestān-e Jolfā → Jolfā
+- `IR.33.449432` Shahrestān-e Chārāvīmāq → Chārāvīmāq
+- `IR.33.449435` Shahrestān-e ‘Ajab Shīr → ‘Ajab Shīr
+- `IR.33.449437` Shahrestān-e Marāgheh → Marāgheh
+- `IR.33.449439` Shahrestān-e Malekān → Malekān
+- `IR.33.449440` Shahrestān-e Mīāneh → Mīāneh
+- `IR.33.449441` Shahrestān-e Herīs → Herīs
+- `IR.33.449442` Shahrestān-e Varzaqān → Varzaqān
+- `IR.33.449443` Shahrestān-e Hashtrūd → Hashtrūd
+- `IR.01.449445` Shahrestān-e Oshnavīyeh → Oshnavīyeh
+- `IR.01.449446` Shahrestān-e Būkān → Būkān
+- `IR.01.449447` Shahrestān-e Pīrānshahr → Pīrānshahr
+- `IR.01.449448` Shahrestān-e Takāb → Takāb
+- `IR.01.449449` Shahrestān-e Chāldorān → Chāldorān
+- `IR.01.449452` Shahrestān-e Salmās → Salmās
+- `IR.01.449453` Shahrestān-e Shāhīn Dezh → Shāhīn Dezh
+- `IR.01.449454` Shahrestān-e Mākū → Mākū
+- `IR.01.449455` Shahrestān-e Mahābād → Mahābād
+- `IR.01.449456` Shahrestān-e Mīāndoāb → Mīāndoāb
+- `IR.10.449458` Shahrestān-e Ābdānān → Ābdānān
+- `IR.10.449459` Shahrestān-e Īlām → Īlām
+- `IR.10.449460` Shahrestān-e Eyvān → Eyvān
+- `IR.10.449462` Shahrestān-e Dehlorān → Dehlorān
+- `IR.10.449464` Shahrestān-e Mehrān → Mehrān
+- `IR.32.449465` Shahrestān-e Ardabīl → Ardabīl
+- `IR.32.449466` Shahrestān-e Bīleh Savār → Bīleh Savār
+- `IR.32.449467` Shahrestān-e Pārsābād → Pārsābād
+- `IR.32.449469` Shahrestān-e Kows̄ar → Kows̄ar
+- `IR.32.449470` Shahrestān-e Germī → Germī
+- `IR.32.449471` Shahrestān-e Meshgīn Shahr → Meshgīn Shahr
+- `IR.32.449472` Shahrestān-e Namīn → Namīn
+- `IR.32.449473` Shahrestān-e Nīr → Nīr
+- `IR.28.449474` Shahrestān-e Ārān va Bīdgol → Ārān va Bīdgol
+- `IR.28.449475` Shahrestān-e Ardestān → Ardestān
+- `IR.28.449476` Shahrestān-e Eşfahān → Eşfahān
+- `IR.28.449477` Shahrestān-e Borkhvār → Borkhvār
+- `IR.28.449478` Shahrestān-e Tīrān va Karvan → Tīrān va Karvan
+- `IR.28.449479` Shahrestān-e Chādegān → Chādegān
+- `IR.28.449480` Shahrestān-e Khomeynī Shahr → Khomeynī Shahr
+- `IR.28.449481` Shahrestān-e Khvānsār → Khānsār
+- `IR.28.449482` Shahrestān-e Semīrom → Semīrom
+- `IR.28.449483` Shahrestān-e Dehāqān → Dehāqān
+- `IR.28.449484` Shahrestān-e Shahreẕā → Shahreẕā
+- `IR.28.449486` Shahrestān-e Fareydūnshahr → Fareydūnshahr
+- `IR.28.449487` Shahrestān-e Falāvarjān → Falāvarjān
+- `IR.28.449488` Shahrestān-e Kāshān → Kāshān
+- `IR.28.449489` Shahrestān-e Golpāyegān → Golpāyegān
+- `IR.28.449490` Shahrestān-e Lenjān → Lenjān
+- `IR.28.449491` Shahrestān-e Mobārakeh → Mobārakeh
+- `IR.28.449492` Shahrestān-e Nā’īn → Nā’īn
+- `IR.28.449493` Shahrestān-e Najafābād → Najafābād
+- `IR.22.449495` Shahrestān-e Būshehr → Būshehr
+- `IR.22.449496` Shahrestān-e Tangestān → Tangestān
+- `IR.22.449498` Shahrestān-e Dashtestān → Dashtestān
+- `IR.22.449499` Shahrestān-e Dashtī → Dashtī
+- `IR.22.449502` Shahrestān-e Kangān → Kangān
+- `IR.22.449503` Shahrestān-e Genāveh → Genāveh
+- `IR.26.449505` Shahrestān-e Pākdasht → Pākdasht
+- `IR.26.449506` Shahrestān-e Tehrān → Tehrān
+- `IR.26.449507` Shahrestān-e Damāvand → Damāvand
+- `IR.26.449508` Shahrestān-e Robāţ Karīm → Robāţ Karīm
+- `IR.44.449510` Shahrestān-e Sāvojbolāgh → Sāvojbolāgh
+- `IR.26.449511` Shahrestān-e Shemīrānāt → Shemīrānāt
+- `IR.26.449512` Shahrestān-e Shahrīār → Shahrīār
+- `IR.26.449513` Shahrestān-e Fīrūzkūh → Fīrūzkūh
+- `IR.44.449515` Shahrestān-e Naz̧arābād → Naz̧arābād
+- `IR.26.449516` Shahrestān-e Varāmīn → Varāmīn
+- `IR.03.449518` Shahrestān-e Borūjen → Borūjen
+- `IR.03.449520` Shahrestān-e Fārsān → Fārsān
+- `IR.03.449521` Shahrestān-e Kūhrang → Kūhrang
+- `IR.03.449522` Shahrestān-e Lordegān → Lordegān
+- `IR.41.449523` Shahrestān-e Bīrjand → Bīrjand
+- `IR.41.449524` Shahrestān-e Sarbīsheh → Sarbīsheh
+- `IR.42.449526` Shahrestān-e Torbat-e Ḩeydarīyeh → Torbat-e Ḩeydariyeh
+- `IR.42.449527` Shahrestān-e Chenārān → Chenārān
+- `IR.42.449528` Shahrestān-e Khalīlābād → Khalīlābād
+- `IR.42.449530` Shahrestān-e Roshtkhvār → Roshtkhār
+- `IR.42.449531` Shahrestān-e Sabzevār → Sabzevār
+- `IR.42.449533` Shahrestān-e Farīmān → Farīmān
+- `IR.41.449534` Shahrestān-e Qā’enāt → Qā’en
+- `IR.42.449535` Shahrestān-e Qūchān → Qūchān
+- `IR.42.449536` Shahrestān-e Kāshmar → Kāshmar
+- `IR.42.449537` Shahrestān-e Gonābād → Gonābād
+- `IR.42.449539` Shahrestān-e Neyshābūr → Neyshābūr
+- `IR.43.449540` Shahrestān-e Esfarāyen → Esfarāyen
+- `IR.43.449541` Shahrestān-e Bojnūrd → Bojnūrd
+- `IR.43.449542` Shahrestān-e Jājarm → Jājrom
+- `IR.43.449543` Shahrestān-e Shīrvān → Shīrvān
+- `IR.15.449544` Shahrestān-e Ābādān → Ābādān
+- `IR.15.449545` Shahrestān-e Omīdīyeh → Omīdiyeh
+- `IR.15.449546` Shahrestān-e Andīmeshk → Andīmeshk
+- `IR.15.449547` Shahrestān-e Ahvāz → Ahvāz
+- `IR.15.449548` Shahrestān-e Īz̄eh → Īz̄eh
+- `IR.15.449549` Shahrestān-e Bāgh-e Malek → Bāgh-e Malek
+- `IR.15.449550` Shahrestān-e Bandar-e Māhshahr → Bandar-e Māhshahr
+- `IR.15.449551` Shahrestān-e Behbahān → Behbahān
+- `IR.15.449553` Shahrestān-e Dezfūl → Dezfūl
+- `IR.15.449554` Shahrestān-e Dasht-e Āzādegān → Dasht-e Āzādegān
+- `IR.15.449555` Shahrestān-e Rāmhormoz → Rāmhormoz
+- `IR.15.449556` Shahrestān-e Shādegān → Shādegān
+- `IR.15.449557` Shahrestān-e Shūsh → Shūsh
+- `IR.15.449558` Shahrestān-e Shūshtar → Shūshtar
+- `IR.15.449559` Shahrestān-e Lālī → Lālī
+- `IR.15.449560` Shahrestān-e Masjed Soleymān → Masjed Soleymān
+- `IR.15.449561` Shahrestān-e Hendījān → Hendījān
+- `IR.36.449563` Shahrestān-e Ījrūd → Ījrūd
+- `IR.36.449564` Shahrestān-e Khodābandeh → Khodābandeh
+- `IR.36.449567` Shahrestān-e Ţārom → Ţārom
+- `IR.36.449568` Shahrestān-e Māhneshān → Māhneshān
+- `IR.25.449569` Shahrestān-e Dāmghān → Dāmghān
+- `IR.25.449570` Shahrestān-e Semnān → Semnān
+- `IR.25.449571` Shahrestān-e Shāhrūd → Shāhrūd
+- `IR.25.449572` Shahrestān-e Garmsār → Garmsār
+- `IR.07.449573` Shahrestān-e Ābādeh → Ābādeh
+- `IR.07.449574` Shahrestān-e Arsanjān → Arsanjān
+- `IR.07.449575` Shahrestān-e Estahbān → Estahbān
+- `IR.07.449577` Shahrestān-e Bavānāt → Bavānāt
+- `IR.07.449579` Shahrestān-e Khorrambīd → Khorrambīd
+- `IR.07.449580` Shahrestān-e Dārāb → Dārāb
+- `IR.07.449581` Shahrestān-e Zarrīn Dasht → Zarrīn Dasht
+- `IR.07.449582` Shahrestān-e Sepīdān → Sepīdān
+- `IR.07.449583` Shahrestān-e Shīrāz → Shīrāz
+- `IR.07.449584` Shahrestān-e Farrāshband → Farrāshband
+- `IR.07.449586` Shahrestān-e Fīrūzābād → Fīrūzābād
+- `IR.07.449587` Shahrestān-e Qīr va Kārzīn → Qīr va Kārzīn
+- `IR.07.449588` Shahrestān-e Kāzerūn → Kāzerūn
+- `IR.07.449589` Shahrestān-e Lārestān → Lārestān
+- `IR.07.449590` Shahrestān-e Lāmerd → Lāmerd
+- `IR.07.449594` Shahrestān-e Neyrīz → Neyrīz
+- `IR.38.449596` Shahrestān-e Bū’īn Zahrā → Bū’īn Zahrā
+- `IR.38.449597` Shahrestān-e Tākestān → Tākestān
+- `IR.38.449598` Shahrestān-e Qazvīn → Qazvīn
+- `IR.16.449600` Shahrestān-e Bāneh → Bāneh
+- `IR.16.449601` Shahrestān-e Bījār → Bījār
+- `IR.16.449602` Shahrestān-e Dīvāndarreh → Dīvāndarreh
+- `IR.16.449603` Shahrestān-e Sarvābād → Sarvābād
+- `IR.16.449607` Shahrestān-e Kāmyārān → Kāmyārān
+- `IR.16.449608` Shahrestān-e Marīvān → Marīvān
+- `IR.29.449609` Shahrestān-e Bāft → Bāft
+- `IR.29.449610` Shahrestān-e Bardsīr → Bardsīr
+- `IR.29.449612` Shahrestān-e Jīroft → Jīroft
+- `IR.29.449613` Shahrestān-e Rāvar → Rāvar
+- `IR.29.449614` Shahrestān-e Rafsanjān → Rafsanjān
+- `IR.29.449617` Shahrestān-e Shahr-e Bābak → Shahr-e Bābak
+- `IR.29.449618` Shahrestān-e ‘Anbarābād → ‘Anbarābād
+- `IR.29.449619` Shahrestān-e Kermān → Kermān
+- `IR.29.449620` Shahrestān-e Kahnūj → Kahnūj
+- `IR.29.449621` Shahrestān-e Manūjān → Manūjān
+- `IR.13.449622` Shahrestān-e Eslāmābād-e Gharb → Eslāmābād-e Gharb
+- `IR.13.449623` Shahrestān-e Pāveh → Pāveh
+- `IR.13.449624` Shahrestān-e S̄alās̄-e Bābā Jānī → S̄alās̄-e Bābā Jānī
+- `IR.13.449625` Shahrestān-e Javānrūd → Javānrūd
+- `IR.13.449626` Shahrestān-e Sarpol-e Z̄ahāb → Sarpol-e Z̄ahāb
+- `IR.13.449628` Shahrestān-e Şaḩneh → Şaḩneh
+- `IR.13.449629` Shahrestān-e Qaşr-e Shīrīn → Qaşr-e Shīrīn
+- `IR.13.449630` Shahrestān-e Kermānshāh → Kermānshāh
+- `IR.13.449631` Shahrestān-e Kangāvar → Kangāvar
+- `IR.13.449632` Shahrestān-e Gīlān-e Gharb → Gīlān-e Gharb
+- `IR.13.449633` Shahrestān-e Harsīn → Harsīn
+- `IR.05.449634` Shahrestān-e Bowyer Aḩmad → Boyer Aḩmad
+- `IR.05.449635` Shahrestān-e Danā → Danā
+- `IR.05.449636` Shahrestān-e Kohgīlūyeh → Kohgīlūyeh
+- `IR.05.449637` Shahrestān-e Gachsārān → Gachsārān
+- `IR.37.449638` Shahrestān-e Āzādshahr → Āzādshahr
+- `IR.37.449639` Shahrestān-e Āq Qalā → Āq Qalā
+- `IR.37.449642` Shahrestān-e Rāmīān → Rāmīān
+- `IR.37.449643` Shahrestān-e ‘Alīābād → ‘Alīābād-e Katūl
+- `IR.37.449644` Shahrestān-e Kordkūy → Kordkūy
+- `IR.37.449645` Shahrestān-e Kalāleh → Kalāleh
+- `IR.37.449646` Shahrestān-e Gorgān → Gorgān
+- `IR.37.449647` Shahrestān-e Gonbad-e Kāvūs → Gonbad-e Kāvūs
+- `IR.37.449648` Shahrestān-e Mīnūdasht → Mīnūdasht
+- `IR.08.449649` Shahrestān-e Āstārā → Āstārā
+- `IR.08.449650` Shahrestān-e Āstāneh-ye Ashrafīyeh → Āstāneh-ye Ashrafīyeh
+- `IR.08.449652` Shahrestān-e Bandar-e Anzalī → Bandar-e Anzalī
+- `IR.08.449654` Shahrestān-e Reẕvānshahr → Reẕvānshahr
+- `IR.08.449655` Shahrestān-e Rūdbār → Rūdbār
+- `IR.08.449656` Shahrestān-e Rūdsar → Rūdsar
+- `IR.08.449657` Shahrestān-e Sīāhkal → Sīāhkal
+- `IR.08.449659` Shahrestān-e Şowme‘eh Sarā → Şowme‘eh Sarā
+- `IR.08.449661` Shahrestān-e Fūman → Fūman
+- `IR.08.449662` Shahrestān-e Lāhījān → Lāhījān
+- `IR.08.449663` Shahrestān-e Langarūd → Langarūd
+- `IR.08.449664` Shahrestān-e Māsāl → Māsāl
+- `IR.23.449665` Shahrestān-e Aznā → Aznā
+- `IR.23.449666` Shahrestān-e Alīgūdarz → Alīgūdarz
+- `IR.23.449667` Shahrestān-e Borūjerd → Borūjerd
+- `IR.23.449669` Shahrestān-e Khorramābād → Khorramābād
+- `IR.23.449673` Shahrestān-e Kūhdasht → Kūhdasht
+- `IR.35.449674` Shahrestān-e Āmol → Āmol
+- `IR.35.449676` Shahrestān-e Bābolsar → Bābolsar
+- `IR.35.449678` Shahrestān-e Tonekābon → Tonekābon
+- `IR.35.449679` Shahrestān-e Jūybār → Jūybār
+- `IR.35.449680` Shahrestān-e Chālūs → Chālūs
+- `IR.35.449681` Shahrestān-e Rāmsar → Rāmsar
+- `IR.35.449682` Shahrestān-e Sārī → Sārī
+- `IR.35.449683` Shahrestān-e Savādkūh → Savādkūh
+- `IR.35.449684` Shahrestān-e Qā’em Shahr → Qā’em Shahr
+- `IR.35.449685` Shahrestān-e Maḩmūdābād → Maḩmūdābād
+- `IR.35.449686` Shahrestān-e Nekā → Nekā
+- `IR.35.449687` Shahrestān-e Nūr → Nūr
+- `IR.34.449690` Shahrestān-e Arāk → Arāk
+- `IR.34.449693` Shahrestān-e Delījān → Delījān
+- `IR.34.449694` Shahrestān-e Zarandīyeh → Zarandīeh
+- `IR.34.449695` Shahrestān-e Sāveh → Sāveh
+- `IR.34.449696` Shahrestān-e Shāzand → Shāzand
+- `IR.34.449697` Shahrestān-e Komījān → Komījān
+- `IR.34.449698` Shahrestān-e Maḩallāt → Maḩallāt
+- `IR.11.449699` Shahrestān-e Abū Mūsá → Abū Mūsá
+- `IR.11.449701` Shahrestān-e Bandar ‘Abbās → Bandar ‘Abbās
+- `IR.11.449703` Shahrestān-e Jāsk → Jāsk
+- `IR.11.449704` Shahrestān-e Ḩājjīābād → Ḩājjīābād
+- `IR.11.449705` Shahrestān-e Rūdān → Rūdān
+- `IR.11.449707` Shahrestān-e Mīnāb → Mīnāb
+- `IR.09.449708` Shahrestān-e Asadābād → Asadābād
+- `IR.09.449709` Shahrestān-e Bahār → Bahār
+- `IR.09.449710` Shahrestān-e Tūyserkān → Tūyserkān
+- `IR.09.449712` Shahrestān-e Kabūdarāhang → Kabūdarāhang
+- `IR.09.449713` Shahrestān-e Malāyer → Malāyer
+- `IR.09.449714` Shahrestān-e Nahāvand → Nahāvand
+- `IR.09.449715` Shahrestān-e Hamadān → Hamadān
+- `IR.40.449716` Shahrestān-e Abarkūh → Abarkūh
+- `IR.40.449717` Shahrestān-e Ardakān → Ardakān
+- `IR.40.449718` Shahrestān-e Bāfq → Bāfq
+- `IR.40.449720` Shahrestān-e Khātam → Khātam
+- `IR.40.449721` Shahrestān-e Ashkez̄ar → Ashkez̄ar
+- `IR.40.449723` Shahrestān-e Mehrīz → Mehrīz
+- `IR.40.449725` Shahrestān-e Yazd → Yazd
+- `IR.04.1158999` Shahrestān-e Īrānshahr → Īrānshahr
+- `IR.41.1482419` Shahrestān-e Nehbandān → Nehbandān
+- `IR.42.1482420` Shahrestān-e Tāybād → Tāybād
+- `IR.42.1482426` Shahrestān-e Khvāf → Khāf
+- `IR.42.1482469` Shahrestān-e Kalāt → Kalāt
+- `IR.04.1482480` Shahrestān-e Chābahār → Chābahār
+- `IR.04.1482481` Shahrestān-e Khāsh → Khāsh
+- `IR.04.1482483` Shahrestān-e Zābol → Zābol
+- `IR.04.1482486` Shahrestān-e Zāhedān → Zāhedān
+- `IR.04.1482494` Shahrestān-e Sarāvān → Sarāvān
+- `IR.04.1482499` Shahrestān-e Sarbāz → Sarbāz
+- `IR.04.1482504` Shahrestān-e Nīkshahr → Nīkshahr
+- `IR.08.8620884` Shahrestān-e Ţavālesh → Ţavālesh
+- `IR.43.8620942` Shahrestān-e Fārūj → Fārūj
+- `IR.41.8620944` Shahrestān-e Darmīān → Darmīān
+- `IR.11.8620945` Shahrestān-e Khamīr → Khamīr
+- `IR.11.8620946` Shahrestān-e Pārsīān → Pārsīān
+- `IR.07.8620947` Shahrestān-e Eqlīd → Eqlīd
+- `IR.13.8620948` Shahrestān-e Dālāhū → Dālāhū
+- `IR.13.8620949` Shahrestān-e Ravānsar → Ravānsar
+- `IR.32.8620950` Shahrestān-e Khalkhāl → Khalkhāl
+- `IR.33.8620951` Shahrestān-e Sarāb → Sarāb
+- `IR.44.9513960` Shahrestān-e Ţāleqān → Ţāleqān
+- `IR.44.9513961` Shahrestān-e Eshtehārd → Eshtehārd
+- `IR.32.9514745` Shahrestān-e Sar‘eyn → Sar‘eyn
+- `IR.33.9517647` Shahrestān-e Khodā Āfarīn → Khodā Āfarīn
+- `IR.22.9519975` ‘Asalūyah → ‘Asalūyeh
+- `IR.03.9519976` Shahrestān-e Kīār → Kīār
+- `IR.28.9519980` Shahrestān-e Khūr va Bīābānak → Khūr va Bīābānak
+- `IR.28.9519981` Shahrestān-e Shāhīn Shahr va Meymeh → Shāhīn Shahr va Meymeh
+- `IR.07.9520865` Shahrestān-e Pāsārgād → Pāsārgād
+- `IR.07.9520866` Shahrestān-e Kherāmeh → Kherāmeh
+- `IR.07.9520867` Shahrestān-e Kavār → Kavār
+- `IR.07.9520868` Shahrestān-e Sarvestān → Sarvestān
+- `IR.07.9520869` Shahrestān-e Gerāsh → Gerāsh
+- `IR.37.9522216` Shahrestān-e Gomīshān → Gomīshān
+- `IR.37.9522217` Shahrestān-e Marāveh Tappeh → Marāveh Tappeh
+- `IR.37.9522218` Shahrestān-e Gālīkesh → Gālīkesh
+- `IR.09.9523287` Shahrestān-e Fāmenīn → Fāmenīn
+- `IR.11.9523757` Shahrestān-e Bashāgard → Bashāgard
+- `IR.11.9523758` Shahrestān-e Sīrīk → Sīrīk
+- `IR.10.9524084` Shahrestān-e Malekshāhī → Malekshāhī
+- `IR.29.9524445` Shahrestān-e Anār → Anār
+- `IR.29.9524446` Shahrestān-e Kūhbanān → Kūhbanān
+- `IR.29.9524447` Shahrestān-e Rābor → Rābor
+- `IR.29.9524448` Shahrestān-e Orzū‘īyeh → Orzū‘īyeh
+- `IR.29.9524449` Shahrestān-e Fāryāb → Fāryāb
+- `IR.29.9524451` Shahrestān-e Narmāshīr → Narmāshīr
+- `IR.29.9524454` Shahrestān-e Rūdbār-e Jonūbī → Rūdbār-e Jonūbī
+- `IR.29.9524455` Shahrestān-e Qal‘eh Ganj → Qal‘eh Ganj
+- `IR.41.9525806` Shahrestān-e Boshrūyeh → Boshrūyeh
+- `IR.41.9525807` Shahrestān-e Sarāyān → Sarāyān
+- `IR.42.9526253` Shahrestān-e Bajestān → Bajestān
+- `IR.42.9526254` Shahrestān-e Joghatāy → Joghatāy
+- `IR.42.9526257` Shahrestān-e Khowshāb → Khoshāb
+- `IR.42.9526260` Shahrestān-e Bīnālūd → Torqabeh Shāndīz
+- `IR.42.9526343` Shahrestān-e Bākharz → Bākharz
+- `IR.15.9532922` Shahrestān-e Andīkā → Andīkā
+- `IR.15.9532926` Shahrestān-e Bāvī → Bāvī
+- `IR.15.9532929` Shahrestān-e Rāmshīr → Rāmshīr
+- `IR.05.9532946` Shahrestān-e Bahma’ī → Bahma’ī
+- `IR.05.9532947` Shahrestān-e Charām → Charām
+- `IR.05.9532948` Shahrestān-e Bāsht → Bāsht
+- `IR.16.9532949` Shahrestān-e Dehgolān → Dehgolān
+- `IR.23.9533002` Shahrestān-e Dūreh → Dowreh
+- `IR.34.9533005` Shahrestān-e Farahān → Farahān
+- `IR.34.9533006` Shahrestān-e Khondāb → Khondāb
+- `IR.35.9533059` Shahrestān-e ‘Abbāsābād → 'Abbāsābād
+- `IR.35.9533060` Shahrestān-e Galūgāh → Galūgāh
+- `IR.35.9533061` Shahrestān-e Mīāndorūd → Mīāndorūd
+- `IR.35.9533062` Shahrestān-e Fareydūnkenār → Fereydūnkenār
+- `IR.25.9533331` Shahrestān-e Mayāmey → Mayāmey
+- `IR.25.9533333` Shahrestān-e Ārādān → Ārādān
+- `IR.04.9533575` Shahrestān-e Hīrmand → Hīrmand
+- `IR.04.9533580` Shahrestān-e Dalgān → Dalgān
+- `IR.04.9533581` Shahrestān-e Konārak → Konārak
+- `IR.04.9533590` Shahrestān-e Mehrestān → Mehrestān
+- `IR.04.9533591` Shahrestān-e Sīb va Sūrān → Sīb va Sūrān
+- `IR.26.9533736` Shahrestān-e Malārd → Malārd
+- `IR.26.9533739` Shahrestān-e Bahārestān → Bahārestān
+- `IR.26.9533740` Shahrestān-e Eslāmshahr → Eslāmshahr
+- `IR.26.9533741` Shahrestān-e Pīshvā → Pīshvā
+- `IR.40.9533896` Shahrestān-e Behābād → Behābād
+- `IR.41.9534259` Shahrestān-e Khūsf → Khūsf
+- `IR.41.9534260` Shahrestān-e Zīrkūh → Zīrkūh
+- `IR.23.11962671` Rumeshkhan County → Rūmeshkhān
+- `IR.35.11962672` Simorgh County → Sīmorgh
+- `IR.44.11963420` Fardis → Fardīs
+- `IR.10.11963422` Sirvan → Sīrvān
+- `IR.26.11963423` Pardis → Pardīs
+- `IR.03.11963426` Saman → Sāmān
+- `IR.43.11963428` Raz and Jargalan → Rāz va Jargalān
+- `IR.15.11963429` Aghajari → Aghājārī
+- `IR.15.11963430` Hamidiyeh → Ḥamīdiyeh
+- `IR.15.11963434` Karun → Kārūn
+- `IR.04.11963516` Nimruz → Nīmrūz
+- `IR.04.11963562` Fanuj → Fanūj
+- `IR.28.12543581` Shahrestān-e Bū‘īn va Mīāndasht → Bū‘īn va Mīāndasht
+- `IR.04.12543582` Shahrestān-e Qaşr-e Qand → Qaşr-e Qand
+
+**Added (1)**
+
+- `TM.S.13696857` Berkararlyk District
+
+**Removed (2)**
+
+- `IR.43.8620941` Shahrestān-e Māneh va Samalqān
+- `TM.01.13696857` Berkararlyk District
+
+### Cities
+
+**Renamed (2)**
+
+- `1160946` Hīdūj-e Bonāb → Hīdūch-e Pā’īn
+- `738377` Umraniye → Ümraniye
+
+**Added (71)**
+
+- `7733115` Demra
+- `2657972` Winkeln
+- `2811405` Welschingen
+- `2867982` Mühlheim an der Donau
+- `2955927` Anselfingen
+- `10701532` Kadūpur
+- `10713291` Aujla
+- `10713735` Akalpur
+- `10713738` Atti
+- `10713754` Ashaur
+- `10763858` Rāmpur Chaudhri
+- `13713016` Aujla Dhak
+- `17685` Reyḩānābād
+- `28365` Darb-e Gonbad
+- `39987` Balūchābād
+- `119076` Qūrchī Bāshī
+- `122926` Nāghān
+- `130324` Jaghdān
+- `131535` Havāvarjān
+- `133900` Gasht
+- `140334` Bolūrān
+- `140958` Bahābād
+- `143132` Ard
+- `417714` Jūshān
+- `1114078` Gosht
+- `2743673` Zuidoostbeemster
+- `2744808` Westbeemster
+- `2749994` Noordbeemster
+- `161529` Şorgala
+- `161707` Türkmenistan
+- `161772` Hurmantgökje
+- `161825` Kelejar
+- `161957` Gäwers
+- `161963` Gökdepe
+- `162121` Ahal
+- `8756059` Parahat
+- `8769688` Ýaşyldepe
+- `8770087` Gulangyrlan
+- `8773776` Balykçy
+- `8774639` Bereket
+- `8999450` Öňaldy
+- `8999943` Täzedurmuş
+- `8999965` Magtymguly
+- `9643348` Tozanly
+- `9643371` Talhanly
+- `9643374` Orazow
+- `13562181` Gäwers bekedi
+- `13713005` Bugdaýly
+- `13713006` Saryk
+- `13713007` Derýa
+- `13713010` Akýaýla
+- `13713012` Garagum
+- `13713013` Sähra
+- `13713014` Täzeoba
+- `13713026` Toraňňyly
+- `13713027` Nazarly
+- `13713047` Akgoňur
+- `296117` Yunuslar
+- `296998` Yenikent
+- `304543` Eski Gediz
+- `313628` Gümele
+- `313885` Göynükören
+- `314225` Gökler
+- `314919` Fırdan
+- `315504` Erdoğmuş
+- `323898` Altınkent
+- `548133` Kyslychuvata
+- `13713025` Kosmichnyi
+- `971441` New Brighton
+- `1010717` Despatch
+- `11205248` Motherwell
+
+## 2026-10-05 04:43 UTC
+
+### Cities
+
+**Renamed (1)**
+
+- `11189102` "Poselok Turisticheskogo pansionata ""Klyazminskoe vodohranilische""" → Poselok Turisticheskogo pansionata "Klyazminskoe vodohranilische"
+
+## 2026-10-05 03:52 UTC
+
+### Cities
+
+**Added (53)**
+
+- `1252465` Samtengang
+- `1257938` Rurka Kalān
+- `1271458` Gauriganj
+- `1275622` Bilga
+- `7645179` Nagar
+- `10713135` Daduwāl
+- `10713155` Lakhanpal
+- `10713156` Samrai
+- `10713169` Dhesiān Kāhna
+- `10713170` Nathewāl
+- `10713171` Sunār Khurd
+- `10713178` Surja
+- `10713183` Pabwān
+- `10713194` Bhandal Būta
+- `10713195` Chuheki
+- `10713199` Sidhu Hari Singh
+- `10713201` Pāsla
+- `10713204` Dhanda
+- `10713207` Jājā Kalān
+- `10713211` Rūpowāl
+- `10713215` Shāmpur
+- `10713217` Sagarpur
+- `10713218` Gumtāli
+- `10713229` Sangha Khālsa
+- `10713234` Ajtāni
+- `10713242` Sherpur
+- `10713245` Partābpura
+- `10713247` Khela
+- `10713249` Thammānwāl
+- `10713274` Gorsiān Nihāl
+- `10713277` Bhandal Himmat
+- `10713278` Pandori Jāgīr
+- `10713287` Mithra
+- `10713301` Nat
+- `10713629` Dosanjh Kalān
+- `10713631` Paddi Khālsa
+- `10713632` Chachrāri
+- `10713634` Takhar
+- `10713637` Chak Dhotrān
+- `10713638` Mahal
+- `10713642` Kot Garewāl
+- `10713643` Anihar
+- `10713658` Ladhar Khurd
+- `10713695` Chhokrān
+- `10713696` Moron
+- `10713704` Garhi Māhān Singh
+- `10713712` Thalla
+- `10713718` Kang Jāgīr
+- `10713720` Phalpota
+- `10713721` Samrāri
+- `10713724` Dhuleta
+- `10713725` Rūrka Khurd
+- `142171` Bāgh Daraq

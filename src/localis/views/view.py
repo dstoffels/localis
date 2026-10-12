@@ -1,7 +1,9 @@
 from abc import ABC, abstractmethod
-from typing import Callable, Generic, Iterator, Mapping, TypeVar
+from pathlib import Path
+from typing import Callable, ClassVar, Generic, Iterator, Mapping, TextIO, TypeVar
 from localis.entities import Entity
 from localis.stores import Store
+from localis.utils.data import open_data
 
 T = TypeVar("T", bound=Entity)
 S = TypeVar("S", bound=Store, covariant=True)
@@ -11,6 +13,9 @@ class View(ABC, Generic[T, S]):
     """Base runtime view: owns id and a Store reference, other fields read from the Store by id; created on access by its ViewMap, never kept per record."""
 
     __slots__ = ("id", "_store", "_idx")
+
+    # the data file's columns, as its header names them
+    COLUMNS: ClassVar[tuple[str, ...]] = ()
 
     def __init__(self, id: int, store: S):
         self.id = id
@@ -25,6 +30,16 @@ class View(ABC, Generic[T, S]):
     @abstractmethod
     def to_entity(self) -> T: ...
 
+    @classmethod
+    def _open_data(cls, filepath: Path) -> TextIO:
+        """The data file, opened past its header; raises ValueError if the header doesn't name COLUMNS."""
+        f = open_data(filepath)
+        header = tuple(f.readline().rstrip("\r\n").split("\t"))
+        if header != cls.COLUMNS:
+            f.close()
+            raise ValueError(f"{filepath} has the columns {list(header)}, not {list(cls.COLUMNS)}; it was built for another version of localis")
+        return f
+
 
 V = TypeVar("V", bound=View)
 
@@ -37,6 +52,11 @@ class ViewMap(Mapping[int, V]):
     def __init__(self, store: Store, make: Callable[[int], V]):
         self._store = store
         self._make = make
+
+    @property
+    def store(self) -> Store:
+        """The columnar store the views read from."""
+        return self._store
 
     def __contains__(self, id: object) -> bool:
         id_to_idx = self._store.id_to_idx

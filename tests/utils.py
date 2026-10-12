@@ -3,6 +3,7 @@ import random
 import string
 from pathlib import Path
 from ingest.shared.models import CountryModel
+from localis.utils.strings import normalize
 from localis import macroregions, currencies, scripts, languages, countries, subdivisions, cities
 import pytest
 
@@ -105,14 +106,22 @@ def mangle(
 
             used_positions.add(idx)
 
+            # a swap at the end or of letters that compare equal, or a delete of the only letter left, would change nothing, so it's a replace instead
+            if op == "swap" and (idx == len(rest) - 1 or normalize(rest[idx]) == normalize(rest[idx + 1])):
+                op = "replace"
+            elif op == "delete" and len(rest) == 1:
+                op = "replace"
+
             # apply op
             if op == "replace":
-                rest[idx] = rng.choice(ALPHABET)
+                # never the same letter, or its other case or accented form, which compares equal
+                original = normalize(rest[idx])
+                rest[idx] = rng.choice([c for c in ALPHABET if c != original])
 
-            elif op == "swap" and idx < len(rest) - 1:
+            elif op == "swap":
                 rest[idx], rest[idx + 1] = rest[idx + 1], rest[idx]
 
-            elif op == "delete" and len(rest) > 1:
+            elif op == "delete":
                 del rest[idx]
 
             elif op == "insert":

@@ -51,15 +51,15 @@ class Registry(Generic[T], ABC):
 
     @property
     def _data_filepath(self) -> Path:
-        return self._data_path / f"{self.REGISTRY_NAME}.tsv"
+        return self._data_path / f"{self.REGISTRY_NAME}.tsv.gz"
 
     @property
     def _lookup_filepath(self) -> Path:
-        return self._data_path / "lookup_index_str.tsv"
+        return self._data_path / "lookup_index_str.tsv.gz"
 
     @property
     def _lookup_int_filepath(self) -> Path:
-        return self._data_path / "lookup_index_int.tsv"
+        return self._data_path / "lookup_index_int.tsv.gz"
 
     @locked_cached_property
     def _cache(self) -> Mapping[int, View[T, Store]]:
@@ -133,6 +133,9 @@ class QueryableRegistry(Registry[T]):
     NAME_FIELDS: tuple[str, ...] = ()
     """View fields holding the record's names, fuzzy-matched against a search query; context is matched through the context trigram index. Can be nested fields using dot notation."""
 
+    PROMINENCE_COLUMN: str | None = None
+    """A numeric store column that ranks search results tied on score, named as in an ordering: "-populations" larger first, "admin_levels" smaller first."""
+
     @property
     def _filter_prefix(self) -> Path:
         return self._data_path / "filter_index"
@@ -150,6 +153,7 @@ class QueryableRegistry(Registry[T]):
             cache=self._cache,
             data_path=self._data_path,
             name_fields=self.NAME_FIELDS,
+            prominence_column=self.PROMINENCE_COLUMN,
             allowed_ids=self._allowed_ids,
         )
 

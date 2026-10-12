@@ -1,4 +1,4 @@
-# This stage merges country data from ISO 3166-1, GeoNames and Wikidata, with ISO's values shipped as published and the latter two contributing aliases; CLDR places them in macroregions and gives their currencies and languages.
+# This stage merges country data from ISO 3166-1, GeoNames and Wikidata, with ISO's values shipped as published, GeoNames contributing ids, continents and aliases, and Wikidata aliases; CLDR places them in macroregions and gives their currencies and languages.
 # GeoNames' alternateNames.txt is not used since the names tend to be noisy and mainly historical.
 
 from .load_iso_countries import load_iso_countries

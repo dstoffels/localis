@@ -4,13 +4,16 @@ import unicodedata
 from ingest.utils import COUNTRIES, ingest_log
 from ingest.utils.strings import name_key
 from localis.utils.strings import is_latin
-from ingest.shared.models import CountryModel
-from .fetch_countries import GEONAMES_COUNTRIES_DEST
+from ingest.shared.models import CountryModel, ContinentModel
+from .fetch_countries import GEONAMES_COUNTRIES_DEST, GEONAMES_README_DEST
 from .load_historic_countries import historic_by_alpha2
 from .wikidata_countries import CountryNames
 
 _LEADING_THE_RE = re.compile(r"^the\s+", re.IGNORECASE)
 _SUBDIVISION_CODE_RE = re.compile(r"^[A-Z]{2}-[A-Z0-9]{1,3}$")
+# a continent line of GeoNames' readme: "EU : Europe\t\t\tgeonameId=6255148"
+_CONTINENT_RE = re.compile(r"^([A-Z]{2}) : (.+?)\s+geonameId=(\d+)$")
+CONTINENT_COUNT = 7
 NAME_BLOCKLIST_PATH = COUNTRIES.inputs / "name_blocklist.json"
 
 
@@ -82,11 +85,26 @@ def drop_ambiguous_aliases(countries: dict[str, CountryModel]) -> None:
             c.aliases = [a for a in c.aliases if a not in ambiguous]
 
 
+def parse_continents(readme: str) -> dict[str, ContinentModel]:
+    """Raises unless the readme lists exactly seven distinct continents."""
+    continents: dict[str, ContinentModel] = {}
+    for line in readme.splitlines():
+        if m := _CONTINENT_RE.match(line.strip()):
+            code, name, geonames_id = m.groups()
+            if code in continents:
+                raise ValueError(f"GeoNames' readme lists continent {code} twice")
+            continents[code] = ContinentModel(geonames_code=code, name=name, geonames_id=int(geonames_id))
+    if len(continents) != CONTINENT_COUNT:
+        raise ValueError(f"GeoNames' readme lists {len(continents)} continents ({', '.join(continents) or 'none'}), not {CONTINENT_COUNT}; check its 'Continent codes' section")
+    return continents
+
+
 # GeoNames countries file format: tab-separated values with the following columns:
 # ISO	ISO3	ISO-Numeric	fips	Country	Capital	Area(in sq km)	Population	Continent	tld	CurrencyCode	CurrencyName	Phone	Postal Code Format	Postal Code Regex	Languages	geonameid	neighbours	EquivalentFipsCode
 def merge_geonames(countries: dict[str, CountryModel]) -> None:
-    """Sets each country's GeoNames id and adds GeoNames' name as an alias, adding a country GeoNames lists under a code in neither ISO list (Kosovo)."""
+    """Sets each country's GeoNames id, continent and alias, adding a country GeoNames lists under a code in neither ISO list (Kosovo)."""
     ingest_log.writeline("Merging GeoNames countries...")
+    continents = parse_continents(GEONAMES_README_DEST.read_text(encoding="utf-8"))
 
     # historic entries are keyed by alpha_4, so a GeoNames row for a withdrawn code (CS, AN) would otherwise be added as a new country; a code ISO reused goes to its most recent holder, the country GeoNames still lists under it (CS: Serbia and Montenegro, not Czechoslovakia)
     historic_entries = historic_by_alpha2(countries)
@@ -143,6 +161,9 @@ def merge_geonames(countries: dict[str, CountryModel]) -> None:
                 countries[alpha2] = country
 
             country.geonames_id = geonames_id
+            if continent and continent not in continents:
+                raise ValueError(f"GeoNames places {alpha2} in continent {continent!r}, which its readme doesn't list")
+            country.continent = continents[continent] if continent else None
             # ingest_countries() dedupes every alias against the country's names once all sources are merged
             if name:
                 country.aliases.append(name)

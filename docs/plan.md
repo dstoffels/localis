@@ -10,90 +10,82 @@ This document outlines the project plan for the Localis project, detailing the o
 
 ## Features
 
-Next: the Skill decision lifecycle (below), landing before the 1 November 2026 cron, either in 2.2.0 or as a 2.1.x patch from `main`.
+Next: release 3.0.0b2. The betas move to release candidate two weeks after b2 at the earliest, since b2's continents add API and restart the clock, and only fixes land in a release candidate.
 
-At 3.0.0 final: set pyproject's classifier back to `Development Status :: 5 - Production/Stable`, and the README's Installation line back to `pip install localis` with its beta banner removed.
+At 3.0.0 final: set pyproject's classifier back to `Development Status :: 5 - Production/Stable`, and the README's Installation commands back to `pip install localis` and `uv add localis` with its beta banner removed.
 
-Out of scope: translated names. Localis ships names in Latin script only and doesn't map them to other locales; a pycountry-style `translate(locale)` and `language_code` query support were planned and dropped.
+Cities search, potential feature: GeoNames names New York City "New York City", so `cities.filter(name="New York")` finds nothing and search finds it only partly. English alternate names for cities, previously left out because adding all of them would bloat the dataset, could be bounded instead: English only, for cities above a population floor (15,000 keeps about 34,000 of 236,000), skipping colloquial and historic entries as the subdivision stage does. `alternateNamesV2.txt` is already fetched for subdivisions, so it needs no new source. Measure the growth of the shipped data and the canon trigram index before deciding; a `City.aliases` field would be an API addition, so in a beta it restarts the two weeks before the release candidate. Names in other languages belong to the translation layer (Translations, below), not to `City.aliases`.
 
 ## Done
 
 - Currency, Script and Language (ISO 4217, ISO 15924, ISO 639-3), implemented 2026-10-04 for 2.2.0, closing the gap against pycountry, which also covers those standards. methodology.md describes their sources and rules.
 - Atomic pipeline, implemented 2026-10-04 from the review of codebase area 1: every stage builds on every run into staging, and a build is promoted only whole and reconciled. dev.md's Pipeline section describes it.
 - One CLDR and one iso-codes commit per run, so every stage builds from the same upstream versions, done in the review of codebase area 3.
+- Continents (#25), 3.0.0b2: `Country.continent`, a plain `Continent` (`name`, `geonames_code`, `geonames_id`) with no id or key, since there's no registry, and `countries.filter(continent=...)`, from GeoNames' readme and `countryInfo.txt` as enrichment rather than a standard. methodology.md's Continents section records the sourcing and what was rejected.
+- Cities search tie-break (#26), 3.0.0b2: cities tied on score rank by population, largest first, at the shortlist and candidate cuts as well as the final sort, through each registry's one `PROMINENCE_COLUMN`. dev.md's search section records it, and why subdivisions have none.
+- The cldr-json commit lookup authenticates with the CI job's `GITHUB_TOKEN` (#27), 3.0.0b2, so a shared runner's unauthenticated rate limit no longer fails a run.
+- Skill decision lifecycle (#28), 3.0.0b2: every skill decision is classified on every run, stale, contested and new-candidate decisions go back to the skill, and retired ones move to `retired_decisions`. methodology.md's Merge precedence and dev.md describe it.
+- Gzipped data files (#29), 3.0.0b2: every shipped data file but `NOTICE` is gzipped, cutting the install from 53.6 MB to about 32 MB. dev.md's shipped-size section describes it.
+- Data changelog, 3.0.0b2: every ingest run that changes a record adds a table to the CHANGELOG's Data subsection and its renamed, added and removed records to `DATA_CHANGELOG.md`, replacing the per-stage change reports. dev.md's Pipeline section describes it.
 
 ## Backlog
 
 1. Batch throughput for large cleanups: registries are thread-safe, but on the standard (GIL) build threads don't parallelize search, which is mostly Python code, and rapidfuzz's single scorer calls don't release the GIL usefully (only `process.cdist(..., workers=N)` does, which doesn't fit localis's search). Free-threaded Python is the threaded route: rapidfuzz supports 3.14t since 3.14.2 (3.14.0 added support, 3.14.6 dropped the experimental 3.13t wheels). It requires no change to `requires-python = ">=3.11"`, since free threading is a property of the user's interpreter and localis is pure Python; GIL builds keep working as now. Adopting it is additive: a 3.14t job in the test matrix, optionally raising the `rapidfuzz` floor to 3.14.2 and adding the free-threading PyPI classifier, and a batch API such as `search_many(queries, workers=N)` on a thread pool (parallel on 3.14t, serial on GIL builds, with process pools as the GIL-build option: each worker loads its own cache, about 127MB for cities). Measure throughput on both builds.
 2. City radius feature using lat/lng to return nearby cities within a specified distance?
-3. Implement custom exceptions (localis.exceptions module)?
-4. Implement autocomplete for registries and/or global interface.
-5. Search, remaining limits: a subdivision query without context can't pick among same-name records (dozens of Washington Counties), which caps subdivisions' top-result accuracy; benchmarking subdivision queries with their country as context would measure that case the way cities' admin1 context does. Indexing each name separately (true per-name Dice) is parked until a failure trace shows alias dilution.
-6. Macroregion filters on subdivisions and cities (`cities.filter(macroregion="Europe")`), at the cost of another filter column on the largest dataset; deferred until there's demand. The macroregions design is recorded in `methodology.md` (sources, naming, placement rules) and `dev.md`.
-7. Split cities from the core package (`localis` with macroregions, countries and subdivisions, about 11MB installed; cities as an extra backed by a separate data package, about 42MB). Deferred until users report package size as a problem. City rows store country and subdivision ids that are only valid against the exact core data they were built with, so the two would release in lockstep from one ingest run with an exact-version pin, which removes most of the usual benefit of a split.
-8. Population range filters on cities, `cities.filter(population__gt=..., population__lt=...)`, removed as a commented-out stub from `CityRegistry.filter()` during the code review cleanup. The filter index only holds exact values, so a range needs its own path, such as a scan over `CityStore.populations` or a population-sorted id array searched with `bisect`.
-9. Corroboration for `wikidata_changed` orphans: accepting a changed crosswalk mapping when automerge's scoring would pick the same record. Left out so every relink of a shipped subdivision is reviewed; revisit if those orphans turn out to be mostly noise.
-10. Measure the full pipeline's local run time, never measured since the atomic pipeline landed.
+3. Implement autocomplete for registries and/or global interface.
+4. Search, remaining limits: a subdivision query without context can't pick among same-name records (dozens of Washington Counties), which caps subdivisions' top-result accuracy; benchmarking subdivision queries with their country as context would measure that case the way cities' admin1 context does. Indexing each name separately (true per-name Dice) is parked until a failure trace shows alias dilution. A prominence key for subdivisions, the total population of each one's shipped cities, waits for a real need: a bare county name is genuinely ambiguous, and it would need cities loaded before subdivisions are dumped, or a sidecar file. For cities, near-ties (a slightly better match for a much smaller city) would need population blended into the score itself; measure first how often the benchmark's intended city comes second by a small margin.
+5. Macroregion filters on subdivisions and cities (`cities.filter(macroregion="Europe")`), at the cost of another filter column on the largest dataset; deferred until there's demand. The macroregions design is recorded in `methodology.md` (sources, naming, placement rules) and `dev.md`.
+6. Split cities from the core package (`localis` with macroregions, countries and subdivisions, about 11MB installed; cities as an extra backed by a separate data package, about 42MB). Deferred until users report package size as a problem. City rows store country and subdivision ids that are only valid against the exact core data they were built with, so the two would release in lockstep from one ingest run with an exact-version pin, which removes most of the usual benefit of a split.
+7. Population range filters on cities, `cities.filter(population__gt=..., population__lt=...)`, removed as a commented-out stub from `CityRegistry.filter()` during the code review cleanup. The filter index only holds exact values, so a range needs its own path, such as a scan over `CityStore.populations` or a population-sorted id array searched with `bisect`.
+8. Corroboration for `wikidata_changed` orphans: accepting a changed crosswalk mapping when automerge's scoring would pick the same record. Left out so every relink of a shipped subdivision is reviewed; revisit if those orphans turn out to be mostly noise.
+9. Measure the full pipeline's local run time, never measured since the atomic pipeline landed.
+10. Evaluate replacing GeoNames with more authoritative, versioned sources, source by source. No authoritative global city dataset exists: UN/LOCODE (UNECE) is a UN standard released twice a year with ISO 3166-2 subdivision codes, but it lists trade and transport locations rather than all populated places and has no population, which search's tie-breaker and `population_sort` need; Natural Earth's populated places (about 7,000) are too few; Wikidata is crowd-edited; national gazetteers are authoritative but come in hundreds of formats. For subdivisions below ISO 3166-2, geoBoundaries (CC BY 4.0, versioned GitHub releases, built from government sources where available) is the strongest candidate; measure its download size, coverage and per-country licensing. Countries' GeoNames fields have statistical replacements (UN World Population Prospects, World Bank). City keys are GeoNames IDs, so replacing GeoNames for cities, or for any subdivision keyed by it, changes keys and is a 4.0 change rather than one to fit before the 3.0 release candidate.
+11. Smaller data files after gzipping (#29): the offsets files are numbers stored as text and would be several times smaller as packed binary arrays, and cities' `lookup_index_int.tsv.gz` (GeoNames id to row) may be rebuildable at load from the `geonames_id` column rather than shipped. Measure both.
 
-## Skill decision lifecycle
+## Translations
 
-Status: designed, not started; to land as a patch before the next scheduled ingest run (the monthly cron, 1 November 2026), since that run is the first that can retire or reopen skill decisions.
+Status: designed, not started. It only adds API, so it can land in any 3.x release.
 
-Goal: a skill decision is never silently ignored or replaced. Wikidata merges, automerge, `geonames_absent` and the non-administrative bypass are recomputed every run and already follow source updates. Skill decisions are permanent and applied first, and today only `flag_wikidata_conflicts()` ever re-examines them, so a GeoNames or ISO update can leave one wrong without anything failing.
+Goal: names in other languages for every record, as a layer on top of the shipped datasets rather than baked into them, so the core data and its indexes stay English plus local names and every translation has a citable source.
 
-### Gaps being closed
+### Showing versus matching
 
-1. An add is never re-checked against new GeoNames records. When GeoNames adds the missing place (a too-new district like Kassanda, a gap like Karuzi), it ships twice unless Wikidata happens to link the new record.
-2. A merge whose target was deleted, or is claimed by another decision, falls through to Wikidata and automerge with only a WARN line, so a fuzzy match can replace a reviewed decision unreviewed.
-3. Decisions for ISO codes that were removed, renumbered or newly bypassed stay in the map. `flag_wikidata_conflicts()` iterates the decisions, not the live codes, so one still mapped by Wikidata could be sent to the skill, which can't load the subdivision.
+Showing a translated name (`country.name_in("de")` returning "Deutschland") only stores strings. Matching one (`lookup("Deutschland")` finding Germany) needs a reverse map, and fuzzy search needs trigram entries on top. The reverse map is free: each locale's table (key to name) is inverted when it loads, so exact lookup and filtering by a translated name reuse the same file. Fuzzy search is the costly part, since it needs a trigram index per locale; it can be built in memory the first time a locale is searched rather than shipped, trading memory and startup for package size. Non-Latin input (Japanese, Russian) needs its own normalization before it can be searched; exact lookup works with it as is.
 
-Out of scope: re-checking a merge against a better record GeoNames adds later. It's rare and doesn't create a duplicate; Wikidata already catches the linked cases.
+### Sources
 
-### Classification
+Countries, currencies, languages and scripts take CLDR's localized display names (`cldr-localenames`), keyed by code, from the same pinned CLDR commit as the rest of ingest. CLDR is the standard ICU, browsers and Babel use, and it's already a localis source. Cities and GeoNames subdivisions take names from `alternateNamesV2.txt`, already fetched, keyed by geonameid with a language code per name, skipping colloquial and historic names as the subdivisions stage does. ISO subdivisions take them through their GeoNames counterpart where merged, or from CLDR's subdivision names if cldr-json publishes them, which needs checking. The locale set is CLDR's own coverage level, modern or full (cldr-json ships both as `-modern` and `-full` packages), so the choice cites CLDR rather than a list localis keeps; which one depends on measured size. Variants fall back to their parent locale (`de_AT` to `de`) by CLDR's `parentLocales`.
 
-Every decision is classified on every run:
+### Local names stay in the baseline
 
-- **applied**: target present and unclaimed, or an add with no new qualifying candidate. Nothing changes.
-- **stale**: a merge whose GeoNames record no longer exists.
-- **contested**: two or more decisions name the same record. All of them go to review and none is applied, so dictionary order never picks a winner.
-- **new_candidate**: an add for which a GeoNames record now qualifies that didn't when the decision was made.
-- **retired**: the ISO code is no longer in ISO's data, or is now bypassed as non-administrative. The decision moves from `skill_decisions` to a new top-level `retired_decisions` map, so the pipeline documents its own history rather than relying on git.
+The shipped aliases keep English plus local names, the Latin-script names in a territory's own languages that subdivisions already carry ("Bayern" for Bavaria). Local names are what turns up in real-world input such as addresses, so they stay matchable without choosing a locale. Only names in other languages ("Frankreich" for France) move to the translation layer.
 
-stale, contested and new_candidate become orphans in three new buckets, so the run exits 10 exactly like a `wikidata_conflict`. Each bucket gets its own dataclass in `resolution_map.py`, following `WikidataConflictOrphan`: `StaleDecisionOrphan(iso_code, decision_geonames_id)`, `ContestedDecisionOrphan(iso_code, decision_geonames_id, contested_with: list[str])`, `NewCandidateOrphan(iso_code, candidate_geonames_ids: list[int])`. `Orphans.count()`/`summary()` include them.
+### API
 
-### Pipeline changes
+A locale-bound object, `de = localis.locale("de")`, exposes the registries: `de.countries.lookup("Deutschland")` maps the translated name to the record's key, not to its English name (English names aren't unique and change), and returns the entity. Entities stay canonical, so a record looks the same however it was fetched; translations come from `name_in(locale)` on entities or a `localized_name` on the locale-bound view. No global "current locale" setting, since it would leak between threads and between libraries in one process.
 
-`apply_skill_decisions()` does the classification before applying anything: it retires decisions for codes that are gone or bypassed, builds a target-to-codes map to find contested ones, checks each merge target's existence, and applies only the rest. stale and contested codes are written to their buckets and **not** returned as remaining, so neither Wikidata nor automerge can take them. It resets its two buckets itself, since `try_merge()` only resets its own.
+### Packaging
 
-`flag_wikidata_conflicts()` iterates live decisions only, never retired ones.
+One table per locale per dataset (key to name), loaded the first time that locale is used. Keys are stable references (`alpha2`, currency and language codes, `geonames_id`), not internal ids, so a separate data package (`pip install localis[names]`) wouldn't need to release in lockstep with the core the way a cities split would; a key it doesn't have returns no translation.
 
-### `retired_decisions`
+### Open questions
 
-`retired_decisions: dict[str, RetiredDecision]`, where `RetiredDecision` carries the full `SkillDecision` plus `retired_because: Literal["removed_from_iso", "bypassed"]`. No timestamp, to keep ingest output deterministic. Retirement is one-way: if ISO later restores a retired code, it comes back as a normal orphan, and its retired entry stays as the record of the earlier decision; the skill sees that entry as `previous_decision` in `next_orphan` so the history informs the new decision without deciding it. MH-L's decision, removed by hand when the Marshall Islands chains were bypassed, is backfilled as the first entry.
+- A missing translation returns None or falls back to English. Leaning towards fallback, not decided; None tells the caller the translation is missing, and `name_in("de") or name` gives the fallback in one expression.
+- Modern or full locale coverage, and translations in the core package or a separate one, both decided by measured size.
+- Whether fuzzy search over translated names is in the first release or exact lookup and filtering ship first, and how non-Latin input is normalized.
+- `name_in()`, `localized_name` or both.
+- Whether cldr-json publishes subdivision names.
 
-A new `flag_new_candidates()` runs after `try_merge()`, once every recomputed source has claimed what it will, so only genuinely unclaimed records count. For each add decision it scores the ISO subdivision against its country's unclaimed GeoNames records at every level, with automerge's gates (`score_candidates()` with the type-family and directional checks on, `score >= threshold`). A level-crossing match only reopens a decision for review, never merges, so the wider pool is safe here even though automerge itself stays same-level. A qualifying record not in the decision's `candidates_seen` makes it a `new_candidate` orphan.
+### Rejected
 
-### `candidates_seen`
-
-Without it the check would reopen the same decisions every run: Szolnok scores high against Szolnoki Járás, which the skill already rejected. `SkillDecision` gains `candidates_seen: list[int] | None`, the qualifying records at the time of the decision, mirroring how `wikidata_seen` makes a Wikidata override a known one. The skill's `write_resolution()` computes it with the same function `flag_new_candidates()` uses, for adds only (empty for merges). A decision with `None` gets its current qualifying records stored as its baseline on the first run instead of being reopened, which migrates the existing adds without a one-off script; every one of them was decided with its full candidate list in view.
-
-### Skill side
-
-`get_next_orphan()` includes `current_decision` (id or "add as-is", and its reason) for all three new buckets, as for `wikidata_conflict`. First batches via `_flagged_candidates()`: the new qualifying records noted "new GeoNames record since this decision" for new_candidate; the contested record noted "also named by <codes>" for contested; Wikidata's valid mapping, if any, noted "Wikidata's mapping" for stale, otherwise the regular top tier. `pop_orphan()` handles the new buckets. `SKILL.md` gains a short section like the `wikidata_conflict` one: keep the current decision only with a concrete reason, and escalate any reopened decision a human made, since the agent shouldn't overturn a human ruling on its own.
-
-### Docs
-
-`methodology.md`: the precedence section states the guarantee and the five classes; Known limitations drops the duplicate risk for adds. `dev.md`: the pipeline integration steps and the new buckets. CHANGELOG entry.
-
-### Decisions
-
-- `contested` keeps its own bucket. It should only arise from manual map edits or a decision made against stale state, but when it does, the note has to say exactly why the decision was reopened.
-- A place too new for GeoNames still requires human review, even though adds become recoverable. The agent escalates; the pipeline falls back to review rather than ever adding on the agent's own judgment. `SKILL.md` Step 5 is unchanged.
-- Retired decisions are kept in the map, never deleted, so the pipeline is self-documenting.
+- iso-codes' gettext catalogs (pycountry's approach): keyed by the English name, so a renamed record loses its translations, and volunteer-translated where CLDR is the standard and already a source.
+- Translating an entity's fields in place: a record's `name` would depend on how it was fetched.
+- A locale list localis picks itself, rather than CLDR's coverage levels.
+- Moving local names out of the baseline: it would shrink the data little and make English-default matching worse on the input localis is used to clean.
 
 ## Audit system
 
-Goal: every shipped subdivision resolution is independently verified, and the audit is idempotent, so running it twice against the same data changes nothing and a finished audit stays finished until the facts behind a verdict change. Required before the audit claims in `methodology.md` can say more than "spot-checked by sampling". Designed together with the skill decision lifecycle above, since both rely on fingerprints and on history that is moved rather than deleted.
+Goal: every shipped subdivision resolution is independently verified, and the audit is idempotent, so running it twice against the same data changes nothing and a finished audit stays finished until the facts behind a verdict change. Required before the audit claims in `methodology.md` can say more than "spot-checked by sampling". Designed together with the skill decision lifecycle (#28), since both rely on fingerprints and on history that is moved rather than deleted.
 
 ### Idempotency rules
 
@@ -114,7 +106,7 @@ Cheapest first; a resolution only moves to the next tier if the previous one can
 - **Automerge**: every result goes to blind re-derivation, since none can be corroborated, lowest margin first, since that's where `MG-D` and `TW-TNN` sat.
 - **Wikidata**: single-source merges automerge wouldn't make. Turns its >99% agreement rate into a per-entry record.
 - **Skill decisions**: agent decisions go through blind re-derivation; human decisions are spot-checked rather than re-derived.
-- **Adds**: verified by the lifecycle plan's `new_candidate` check finding no qualifying record.
+- **Adds**: verified by the skill decision lifecycle's `new_candidate` check finding no qualifying record.
 - **Non-administrative bypass**: audited per rule, not per entry. Each `NON_ADMINISTRATIVE_TYPES` entry carries its evidence (source URL and the quoted statement of no administrative function), so an unsourced ruling like the earlier Guinea-Bissau exclusion can't recur.
 - **Missed matches**: a duplicate scan pairing ISO-only records with unclaimed GeoNames-only records in the same country by name similarity. The only way to audit the unmerged list, which no per-resolution check reaches.
 

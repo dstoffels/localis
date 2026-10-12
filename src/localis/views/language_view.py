@@ -11,6 +11,7 @@ class LanguageView(View[Language, LanguageStore]):
     """Runtime view over LanguageStore, used by Registry._cache; resolves its scripts against the script view mapping."""
 
     __slots__ = ("_script_views",)
+    COLUMNS = ("name", "alpha3", "alpha2", "bibliographic", "scope", "type", "inverted_name", "aliases", "scripts")
 
     def __init__(self, id: int, store: LanguageStore, script_views: Mapping[int, ScriptView]):
         super().__init__(id, store)
@@ -80,9 +81,10 @@ class LanguageView(View[Language, LanguageStore]):
     @classmethod
     def load(cls, filepath: Path, script_views: Mapping[int, ScriptView]) -> ViewMap["LanguageView"]:
         store = LanguageStore()
-        with open(filepath, "r", encoding="utf-8") as f:
+        with cls._open_data(filepath) as f:
             for idx, line in enumerate(f):
-                name, alpha3, alpha2, bibliographic, scope, type_, inverted_name, alias_s, scripts_s, secondary_s = line.rstrip("\r\n").split("\t")
+                name, alpha3, alpha2, bibliographic, scope, type_, inverted_name, alias_s, scripts_s = line.rstrip("\r\n").split("\t")
+                scripts = [item.split(":") for item in scripts_s.split("|") if item]
                 store.id_to_idx.append(idx)
                 store.append(
                     name,
@@ -94,7 +96,7 @@ class LanguageView(View[Language, LanguageStore]):
                     sys.intern(type_),
                     inverted_name,
                     tuple(a for a in alias_s.split("|") if a),
-                    tuple(int(i) for i in scripts_s.split("|") if i),
-                    tuple(int(i) for i in secondary_s.split("|") if i),
+                    tuple(int(id_s) for id_s, secondary in scripts if secondary == "0"),
+                    tuple(int(id_s) for id_s, secondary in scripts if secondary == "1"),
                 )
         return ViewMap(store, lambda id: cls(id, store, script_views))

@@ -1,6 +1,6 @@
 from pathlib import Path
 from typing import Mapping, cast
-from localis.entities import Country, CountryBase, CountryLanguage, CurrencyBase, HistoricInfo, LanguageStatus, MacroregionBase
+from localis.entities import Continent, Country, CountryBase, CountryLanguage, CurrencyBase, HistoricInfo, LanguageStatus, MacroregionBase
 from localis.stores import CountryStore
 from .view import View, ViewMap
 from .macroregion_view import MacroregionView
@@ -13,6 +13,7 @@ class CountryView(View[Country, CountryStore]):
     """Runtime view over CountryStore, used by Registry._cache; resolves its macroregions, currencies, languages and their scripts against their view mappings."""
 
     __slots__ = ("_macroregion_views", "_currency_views", "_language_views", "_script_views")
+    COLUMNS = ("name", "alpha2", "alpha3", "geonames_id", "official_name", "common_name", "aliases", "numeric", "flag", "historic", "macroregions", "groupings", "currencies", "languages", "continent")
 
     def __init__(
         self,
@@ -76,6 +77,10 @@ class CountryView(View[Country, CountryStore]):
         return self._store.historics[self._idx]
 
     @property
+    def continent(self) -> Continent | None:
+        return self._store.continents[self._idx]
+
+    @property
     def macroregions(self) -> list[MacroregionBase]:
         return [self._macroregion_views[i].to_base() for i in self._store.macroregion_ids[self._idx]]
 
@@ -110,6 +115,7 @@ class CountryView(View[Country, CountryStore]):
 
     def to_entity(self) -> Country:
         historic = self.historic
+        continent = self.continent
         return Country(
             id=self.id,
             name=self.name,
@@ -123,6 +129,7 @@ class CountryView(View[Country, CountryStore]):
             geonames_id=self.geonames_id,
             # the store's own object, so copied: a change to the entity's must not reach later calls
             historic=HistoricInfo(historic.alpha_4, historic.withdrawal_date, historic.comment) if historic else None,
+            continent=Continent(name=continent.name, geonames_code=continent.geonames_code, geonames_id=continent.geonames_id) if continent else None,
             macroregions=self.macroregions,
             groupings=self.groupings,
             currencies=self.currencies,
@@ -139,7 +146,8 @@ class CountryView(View[Country, CountryStore]):
         script_views: Mapping[int, ScriptView],
     ) -> ViewMap["CountryView"]:
         store = CountryStore()
-        with open(filepath, "r", encoding="utf-8") as f:
+        continents: dict[str, Continent] = {}
+        with cls._open_data(filepath) as f:
             for idx, line in enumerate(f):
                 row = line.rstrip("\r\n").split("\t")
                 (
@@ -157,11 +165,16 @@ class CountryView(View[Country, CountryStore]):
                     groupings_s,
                     currencies_s,
                     languages_s,
+                    continent_s,
                 ) = row
                 alias_list = tuple(a for a in alias_s.split("|") if a)
                 geonames_id = int(geonames_id_s) if geonames_id_s else None
                 numeric = int(numeric_s) if numeric_s else None
                 historic = cls._parse_historic(historic_s)
+                # shared by its countries' rows; to_entity() copies it
+                if continent_s and continent_s not in continents:
+                    continents[continent_s] = cls._parse_continent(continent_s)
+                continent = continents.get(continent_s)
                 macroregion_ids = tuple(int(i) for i in macroregions_s.split("|") if i)
                 grouping_ids = tuple(int(i) for i in groupings_s.split("|") if i)
                 currency_ids = tuple(int(i) for i in currencies_s.split("|") if i)
@@ -178,6 +191,7 @@ class CountryView(View[Country, CountryStore]):
                     numeric,
                     flag,
                     historic,
+                    continent,
                     macroregion_ids,
                     grouping_ids,
                     currency_ids,
@@ -189,6 +203,11 @@ class CountryView(View[Country, CountryStore]):
     def _parse_language(item: str) -> tuple[int, str, float | None, int]:
         language_id, status, percent, script_id = item.split(":")
         return int(language_id), status, float(percent) if percent else None, int(script_id) if script_id else -1
+
+    @staticmethod
+    def _parse_continent(s: str) -> Continent:
+        geonames_code, name, geonames_id = s.split("|")
+        return Continent(name=name, geonames_code=geonames_code, geonames_id=int(geonames_id))
 
     @staticmethod
     def _parse_historic(s: str) -> HistoricInfo | None:

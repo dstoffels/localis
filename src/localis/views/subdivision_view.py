@@ -13,6 +13,7 @@ class SubdivisionView(
     """Runtime view over SubdivisionStore, used by Registry._cache."""
 
     __slots__ = ()
+    COLUMNS = ("name", "iso_code", "geonames_code", "geonames_id", "type", "aliases", "admin_level", "parent", "country")
 
     @property
     def name(self) -> str:
@@ -90,7 +91,7 @@ class SubdivisionView(
         cls, filepath: Path, country_views: Mapping[int, CountryView]
     ) -> ViewMap["SubdivisionView"]:
         store = SubdivisionStore()
-        with open(filepath, "r", encoding="utf-8") as f:
+        with cls._open_data(filepath) as f:
             for idx, line in enumerate(f):
                 row = line.rstrip("\r\n").split("\t")
                 (

@@ -14,6 +14,15 @@ class HistoricInfo:
     comment: str | None
 
 
+@dataclass(slots=True)
+class Continent:
+    """A country's continent, from GeoNames: enrichment, not a standard."""
+
+    name: str
+    geonames_code: str
+    geonames_id: int
+
+
 @entity
 class CountryBase(Entity):
     """A country as other records nest it."""
@@ -38,6 +47,8 @@ class Country(CountryBase):
     numeric: int | None
     flag: str | None
     historic: HistoricInfo | None
+    # none for a country GeoNames doesn't list
+    continent: Continent | None
     # CLDR path, top-down (region, subregion)
     macroregions: list[MacroregionBase]
     groupings: list[MacroregionBase]

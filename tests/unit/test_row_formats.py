@@ -1,6 +1,10 @@
+import gzip
+from dataclasses import fields
+import pytest
 from pathlib import Path
 from ingest.shared.models import (
     CityModel,
+    ContinentModel,
     CountryLanguageModel,
     CountryModel,
     CurrencyModel,
@@ -12,6 +16,7 @@ from ingest.shared.models import (
     SubdivisionModel,
 )
 from ingest.utils.index import dump_data
+from localis.entities import City, Country, Currency, Language, Macroregion, Script, Subdivision
 from localis.views import CityView, CountryView, CurrencyView, LanguageView, MacroregionView, ScriptView, SubdivisionView
 
 
@@ -38,31 +43,46 @@ def _subdivision(id: int, country: CountryModel, parent: SubdivisionModel | None
 class TestRowFormats:
     """ROW FORMATS"""
 
+    @pytest.mark.parametrize("view, entity", [
+        (MacroregionView, Macroregion), (CurrencyView, Currency), (ScriptView, Script), (LanguageView, Language),
+        (CountryView, Country), (SubdivisionView, Subdivision), (CityView, City),
+    ])
+    def test_columns_are_served_fields(self, view, entity):
+        """should name every data file column after a field the registry serves, and leave none out but the id"""
+        assert set(view.COLUMNS) == {f.name for f in fields(entity)} - {"id"}
+
+    def test_rejects_other_columns(self, tmp_path: Path):
+        """should refuse a data file whose header names other columns than the view reads"""
+        (tmp_path / "rows.tsv.gz").write_bytes(gzip.compress(b"name\talpha3\nDemo Dollar\tDMD\n"))
+
+        with pytest.raises(ValueError):
+            CurrencyView.load(tmp_path / "rows.tsv.gz")
+
     # each test writes a model whose every field holds a distinct value through ingest's dump, then reads it back through the runtime view, so a column the two order differently fails
 
     def test_macroregions(self, tmp_path: Path):
         """should read back every macroregion column, its parent included"""
         region = _macroregion(1)
-        dump_data([region, MacroregionModel(id=2, name="Western Demo", code="155", type="subregion", parent=region)], tmp_path / "rows.tsv")
+        dump_data([region, MacroregionModel(id=2, name="Western Demo", code="155", type="subregion", parent=region)], tmp_path / "rows.tsv.gz")
 
-        view = MacroregionView.load(tmp_path / "rows.tsv")[2]
+        view = MacroregionView.load(tmp_path / "rows.tsv.gz")[2]
 
         assert (view.name, view.code, view.type) == ("Western Demo", "155", "subregion")
         assert view.parent is not None and view.parent.id == 1
 
     def test_currencies(self, tmp_path: Path):
         """should read back every currency column"""
-        dump_data([CurrencyModel(id=1, name="Demo Dollar", alpha3="DMD", numeric=8)], tmp_path / "rows.tsv")
+        dump_data([CurrencyModel(id=1, name="Demo Dollar", alpha3="DMD", numeric=8)], tmp_path / "rows.tsv.gz")
 
-        view = CurrencyView.load(tmp_path / "rows.tsv")[1]
+        view = CurrencyView.load(tmp_path / "rows.tsv.gz")[1]
 
         assert (view.name, view.alpha3, view.numeric) == ("Demo Dollar", "DMD", 8)
 
     def test_scripts(self, tmp_path: Path):
         """should read back every script column"""
-        dump_data([ScriptModel(id=1, name="Demoscript", alpha4="Dmos", numeric=999, aliases=["Demo A", "Demo B"])], tmp_path / "rows.tsv")
+        dump_data([ScriptModel(id=1, name="Demoscript", alpha4="Dmos", numeric=999, aliases=["Demo A", "Demo B"])], tmp_path / "rows.tsv.gz")
 
-        view = ScriptView.load(tmp_path / "rows.tsv")[1]
+        view = ScriptView.load(tmp_path / "rows.tsv.gz")[1]
 
         assert (view.name, view.alpha4, view.numeric, view.aliases) == ("Demoscript", "Dmos", 999, ("Demo A", "Demo B"))
 
@@ -72,9 +92,9 @@ class TestRowFormats:
             id=1, name="Demolang", alpha3="dmo", alpha2="dm", bibliographic="dmb", scope="macrolanguage", type="historical", inverted_name="Lang, Demo",
             aliases=["Demoish"], scripts=[LanguageScriptModel(script=_script(3), secondary=False), LanguageScriptModel(script=_script(4), secondary=True)],
         )
-        dump_data([language], tmp_path / "rows.tsv")
+        dump_data([language], tmp_path / "rows.tsv.gz")
 
-        view = LanguageView.load(tmp_path / "rows.tsv", {})[1]
+        view = LanguageView.load(tmp_path / "rows.tsv.gz", {})[1]
 
         assert (view.name, view.alpha3, view.alpha2, view.bibliographic, view.scope, view.type, view.inverted_name, view.aliases) == (
             "Demolang", "dmo", "dm", "dmb", "macrolanguage", "historical", "Lang, Demo", ("Demoish",),
@@ -88,16 +108,18 @@ class TestRowFormats:
             aliases=["Demostan"], numeric=123, flag="🏳", historic=HistoricModel(alpha_4="DMHH", withdrawal_date="1990-01-01", comment="merged"),
             macroregions=[_macroregion(5), _macroregion(6)], groupings=[_macroregion(7)], currencies=[CurrencyModel(id=8, name="Demo Dollar", alpha3="DMD", numeric=None)],
             languages=[CountryLanguageModel(language=_language(9), status="regional", population_percent=12.5, script=_script(10))],
+            continent=ContinentModel(geonames_code="DC", name="Democontinent", geonames_id=333),
         )
-        dump_data([country], tmp_path / "rows.tsv")
+        dump_data([country], tmp_path / "rows.tsv.gz")
 
-        view = CountryView.load(tmp_path / "rows.tsv", {}, {}, {}, {})[1]
+        view = CountryView.load(tmp_path / "rows.tsv.gz", {}, {}, {}, {})[1]
         store, idx = view._store, view._idx
 
         assert (view.name, view.alpha2, view.alpha3, view.geonames_id, view.official_name, view.common_name, view.aliases, view.numeric, view.flag) == (
             "Demoland", "DM", "DMO", 111, "Republic of Demoland", "Demo", ("Demostan",), 123, "🏳",
         )
         assert view.historic is not None and (view.historic.alpha_4, view.historic.withdrawal_date, view.historic.comment) == ("DMHH", "1990-01-01", "merged")
+        assert view.continent is not None and (view.continent.name, view.continent.geonames_code, view.continent.geonames_id) == ("Democontinent", "DC", 333)
         assert (store.macroregion_ids[idx], store.grouping_ids[idx], store.currency_ids[idx], store.languages[idx]) == ((5, 6), (7,), (8,), ((9, "regional", 12.5, 10),))
 
     def test_subdivisions(self, tmp_path: Path):
@@ -105,9 +127,9 @@ class TestRowFormats:
         country = _country(3)
         parent = _subdivision(1, country)
         child = SubdivisionModel(id=2, name="Demo Province", iso_code="DM-B", geonames_code="DM.02", geonames_id=222, type="Province", aliases=["Demoshire"], admin_level=2, parent=parent, country=country)
-        dump_data([parent, child], tmp_path / "rows.tsv")
+        dump_data([parent, child], tmp_path / "rows.tsv.gz")
 
-        view = SubdivisionView.load(tmp_path / "rows.tsv", {})[2]
+        view = SubdivisionView.load(tmp_path / "rows.tsv.gz", {})[2]
 
         assert (view.name, view.iso_code, view.geonames_code, view.geonames_id, view.type, view.aliases, view.admin_level) == (
             "Demo Province", "DM-B", "DM.02", 222, "Province", ("Demoshire",), 2,
@@ -119,9 +141,9 @@ class TestRowFormats:
         """should read back every city column, its subdivisions and country as ids"""
         country = _country(6)
         city = CityModel(id=1, name="Democity", geonames_id=333, subdivisions=[_subdivision(4, country), _subdivision(5, country)], country=country, population=7000, lat=1.5, lng=-2.25)
-        dump_data([city], tmp_path / "rows.tsv")
+        dump_data([city], tmp_path / "rows.tsv.gz")
 
-        view = CityView.load(tmp_path / "rows.tsv", {}, {})[1]
+        view = CityView.load(tmp_path / "rows.tsv.gz", {}, {})[1]
         store, idx = view._store, view._idx
         offset, count = store.subdivision_offsets[idx], store.subdivision_counts[idx]
 

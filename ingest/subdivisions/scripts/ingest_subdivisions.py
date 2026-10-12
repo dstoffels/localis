@@ -11,7 +11,7 @@ from .geonames_subdivisions import map_geonames_subdivisions
 from .iso_subdivisions import load_iso_subs
 from .merge_alternate_names import merge_alternate_name_aliases
 from .automerge import try_merge
-from .resolve_subdivisions import apply_skill_decisions, log_inactive_decisions
+from .resolve_subdivisions import apply_skill_decisions, flag_new_candidates, retire_decisions
 from .wikidata_subdivisions import (
     CROSSWALK,
     fetch_wikidata_crosswalk,
@@ -72,9 +72,10 @@ def ingest_subdivisions(countries: dict[str, CountryModel]) -> dict[str, Subdivi
 
         # Cache and dedupe iso subs by id
         iso_subs, non_administrative_subs = load_iso_subs(countries, resolution_map)
-        # every ISO code in this release, against which a skill decision is active or inactive
-        build_codes = {*iso_subs, *(sub.iso_code for sub in non_administrative_subs if sub.iso_code)}
-        log_inactive_decisions(resolution_map, build_codes)
+        # every ISO code in this release; a skill decision for a code outside it, or for a bypassed grouping, is retired
+        bypassed_codes = {sub.iso_code for sub in non_administrative_subs if sub.iso_code}
+        build_codes = {*iso_subs, *bypassed_codes}
+        retire_decisions(resolution_map, build_codes, bypassed_codes)
 
         # Apply skill-resolved decisions directly, before auto-merge ever sees these iso_subs, so a verified decision can never lose its target to a fresh auto-merge
         remaining_iso_subs = apply_skill_decisions(iso_subs, resolution_map, sub_map)
@@ -93,6 +94,9 @@ def ingest_subdivisions(countries: dict[str, CountryModel]) -> dict[str, Subdivi
 
         # Catch an automerge into a grouping's twin that apply_non_administrative() couldn't identify in time
         flag_grouping_twin_merges(non_administrative_subs, sub_map, resolution_map)
+
+        # Reopen an add decision GeoNames now has a qualifying record for, once every recomputed source has claimed what it will
+        flag_new_candidates(iso_subs, resolution_map, sub_map)
 
         # rebuild cache with complete data, update parents
         sub_map.refresh()

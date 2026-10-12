@@ -1,5 +1,5 @@
 from array import array
-from localis.entities import HistoricInfo
+from localis.entities import Continent, HistoricInfo
 from .store import Store
 
 
@@ -14,6 +14,7 @@ class CountryStore(Store):
         "numerics",
         "flags",
         "historics",
+        "continents",
         "macroregion_ids",
         "grouping_ids",
         "currency_ids",
@@ -32,6 +33,7 @@ class CountryStore(Store):
         self.numerics = array("i")  # -1 sentinel for None
         self.flags: list[str] = []
         self.historics: list[HistoricInfo | None] = []
+        self.continents: list[Continent | None] = []
         self.macroregion_ids: list[tuple[int, ...]] = []
         self.grouping_ids: list[tuple[int, ...]] = []
         self.currency_ids: list[tuple[int, ...]] = []
@@ -50,6 +52,7 @@ class CountryStore(Store):
         numeric: int | None,
         flag: str,
         historic: HistoricInfo | None,
+        continent: Continent | None,
         macroregion_ids: tuple[int, ...],
         grouping_ids: tuple[int, ...],
         currency_ids: tuple[int, ...],
@@ -65,6 +68,7 @@ class CountryStore(Store):
         self.numerics.append(numeric if numeric is not None else -1)
         self.flags.append(flag)
         self.historics.append(historic)
+        self.continents.append(continent)
         self.macroregion_ids.append(macroregion_ids)
         self.grouping_ids.append(grouping_ids)
         self.currency_ids.append(currency_ids)

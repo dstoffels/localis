@@ -4,6 +4,7 @@ from pathlib import Path
 from typing import Any
 import localis
 from localis.registries import CityRegistry, Registry
+from localis.utils.data import open_data
 
 ROOT = Path(__file__).resolve().parents[2]
 DATA_PATH = ROOT / "src" / "localis" / "data"
@@ -254,11 +255,9 @@ def _city_stats() -> dict[str, int]:
 def _filter_index_stats() -> dict[str, dict[str, int]]:
     """Per queryable registry, how many distinct filter values it indexes and how many belong to a single record."""
     stats: dict[str, dict[str, int]] = {}
-    for offsets_path in sorted(DATA_PATH.glob("*/filter_index_offsets.tsv")):
-        counts = [
-            int(line.rsplit("\t", 1)[1])
-            for line in offsets_path.read_text(encoding="utf-8").splitlines()
-        ]
+    for offsets_path in sorted(DATA_PATH.glob("*/filter_index_offsets.tsv.gz")):
+        with open_data(offsets_path) as f:
+            counts = [int(line.rstrip("\n").rsplit("\t", 1)[1]) for line in f]
         stats[offsets_path.parent.name] = {
             "values": len(counts),
             "single_record_values": counts.count(1),

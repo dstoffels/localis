@@ -1,4 +1,11 @@
-from typing import Any, Protocol
+import gzip
+from pathlib import Path
+from typing import Any, Protocol, TextIO
+
+
+def open_data(path: Path, newline: str | None = None) -> TextIO:
+    """A shipped data file, every one of which is gzipped, opened for reading as text."""
+    return gzip.open(path, "rt", encoding="utf-8", newline=newline)
 
 
 class CacheFilterPredicate(Protocol):

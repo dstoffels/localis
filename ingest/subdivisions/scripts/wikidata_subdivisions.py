@@ -49,8 +49,11 @@ def flag_wikidata_conflicts(
 ) -> None:
     """A skill decision may override Wikidata only knowingly: one that disagrees with a valid Wikidata mapping it wasn't made against (`wikidata_seen`) is sent back to the skill as a `wikidata_conflict` orphan. Recomputed every run, so a later change on Wikidata's side resurfaces the decision; an inactive decision, whose code isn't in this build, is left alone."""
     conflicts: list[WikidataConflictOrphan] = []
+    # a stale or contested decision is already back with the skill, and an orphan sits in one bucket only
+    orphans = resolution_map.automerge.orphans
+    reopened = {orphan.iso_code for orphan in (*orphans.stale_decision, *orphans.contested_decision)}
     for iso_code, decision in resolution_map.skill_decisions.items():
-        if iso_code not in build_codes:
+        if iso_code not in build_codes or iso_code in reopened:
             continue
         mapped_sub = _valid_target(crosswalk, iso_code, sub_map)
         if mapped_sub is None:

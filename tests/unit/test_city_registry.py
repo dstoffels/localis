@@ -67,6 +67,18 @@ class TestPopulationThreshold:
         assert registry.population_threshold is None
 
 
+class TestTieBreak:
+    """SEARCH TIE-BREAK"""
+
+    def test_ties_rank_by_population(self, city: City):
+        """should rank cities with the same score largest first"""
+        results = cities.search(city.name)
+
+        for (a, a_score), (b, b_score) in zip(results, results[1:]):
+            if a_score == b_score:
+                assert a.population >= b.population, f"[{city.name}] {a.name} ({a.population}) ranks above {b.name} ({b.population}) at {a_score}"
+
+
 class TestPopulationSort:
     """POPULATION SORT"""
 

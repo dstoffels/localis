@@ -1,6 +1,6 @@
 [project]
 name = "localis"
-version = "3.0.0b1"
+version = "3.0.0b2"
 description = "Fast, offline access to comprehensive data for countries, subdivisions, cities, macroregions, currencies, languages and scripts. Built on ISO 3166, ISO 4217, ISO 639-3, ISO 15924, GeoNames and Unicode CLDR datasets (updated monthly) with support for exact lookups, filtering, and fuzzy search."
 readme = "README.md"
 authors = [
@@ -34,6 +34,7 @@ dependencies = [
 homepage = "https://github.com/dstoffels/localis"
 repository = "https://github.com/dstoffels/localis"
 changelog = "https://github.com/dstoffels/localis/blob/main/CHANGELOG.md"
+"data changelog" = "https://github.com/dstoffels/localis/blob/main/DATA_CHANGELOG.md"
 funding = "https://github.com/sponsors/dstoffels"
 
 [dependency-groups]
