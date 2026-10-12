@@ -86,7 +86,7 @@ def drop_ambiguous_aliases(countries: dict[str, CountryModel]) -> None:
 
 
 def parse_continents(readme: str) -> dict[str, ContinentModel]:
-    """GeoNames' continents by code, from its readme's continent lines; raises unless there are exactly seven, distinct by code."""
+    """Raises unless the readme lists exactly seven distinct continents."""
     continents: dict[str, ContinentModel] = {}
     for line in readme.splitlines():
         if m := _CONTINENT_RE.match(line.strip()):
@@ -102,7 +102,7 @@ def parse_continents(readme: str) -> dict[str, ContinentModel]:
 # GeoNames countries file format: tab-separated values with the following columns:
 # ISO	ISO3	ISO-Numeric	fips	Country	Capital	Area(in sq km)	Population	Continent	tld	CurrencyCode	CurrencyName	Phone	Postal Code Format	Postal Code Regex	Languages	geonameid	neighbours	EquivalentFipsCode
 def merge_geonames(countries: dict[str, CountryModel]) -> None:
-    """Sets each country's GeoNames id and continent and adds GeoNames' name as an alias, adding a country GeoNames lists under a code in neither ISO list (Kosovo)."""
+    """Sets each country's GeoNames id, continent and alias, adding a country GeoNames lists under a code in neither ISO list (Kosovo)."""
     ingest_log.writeline("Merging GeoNames countries...")
     continents = parse_continents(GEONAMES_README_DEST.read_text(encoding="utf-8"))
 

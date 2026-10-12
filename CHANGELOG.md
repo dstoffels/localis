@@ -9,8 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- `Country.continent`, a `Continent` with `name`, `geonames_code` and `geonames_id` for the seven continents, from GeoNames, filterable with `countries.filter(continent=...)` by name or GeoNames code (#25). Continents are GeoNames enrichment, not an authoritative standard, and separate from macroregions; `None` for a country GeoNames doesn't list
-- Each release's Data subsection: every data refresh it ships, dated, with each dataset's record counts and changed fields, linked to the records it renamed, added and removed in `DATA_CHANGELOG.md`, recorded back to 2026-10-04
+- `Country.continent`, a `Continent` with `name`, `geonames_code` and `geonames_id` for the seven continents, from GeoNames, filterable with `countries.filter(continent=...)` by name or GeoNames code; `None` for a country GeoNames doesn't list. Continents are GeoNames enrichment, not an authoritative standard, and separate from macroregions (#25).
+- Each release's Data subsection: every data refresh it ships, dated, with each dataset's record counts and changed fields, linked to the records it renamed, added and removed in `DATA_CHANGELOG.md`, recorded back to 2026-10-04.
 
 ### Changed
 
@@ -19,8 +19,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - `cities.search()` ranks cities with the same score by population, largest first, so "Paris" returns Paris, France before Paris, Ontario, and a large city among many same-name places is never cut before it's scored. Reported by @SchubmannM in #8 (#26).
-- Subdivision skill decisions are rechecked on every ingest run instead of applying permanently: a merge whose GeoNames record was deleted or is named by another decision, or an add-as-is GeoNames now has a matching record for, goes back for review rather than shipping a duplicate or being replaced by an unreviewed fuzzy match, and a decision whose code ISO removed is retired with its history kept (#28).
 - The ingest pipeline's cldr-json commit lookup authenticates with the workflow's token, so a scheduled or CI run no longer fails on the rate limit GitHub-hosted runners share (#27).
+- Subdivision skill decisions are rechecked on every ingest run instead of applying permanently: a merge whose GeoNames record was deleted or is named by another decision, or an add-as-is GeoNames now has a matching record for, goes back for review rather than shipping a duplicate or being replaced by an unreviewed fuzzy match, and a decision whose code ISO removed is retired with its history kept (#28).
 
 ### Data
 

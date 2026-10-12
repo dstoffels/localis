@@ -11,7 +11,7 @@ from ingest.subdivisions.scripts import ingest_subdivisions
 from ingest.cities.scripts import ingest_cities
 from ingest.shared.scripts import fetch_shared_sources
 from ingest.utils import REPO_PATH, SHARED, ingest_log, pipeline_log, reset_staging, mark_complete, promote
-from ingest.utils.change_report import write_change_report
+from ingest.utils.change_report import write_data_changes
 
 
 def _analysis(*args: str) -> None:
@@ -51,7 +51,7 @@ def run_pipeline() -> None:
         pipeline_log.step("checking the staged build")
         _analysis("--staging")
         pipeline_log.step("recording the data changes in the changelog")
-        write_change_report()
+        write_data_changes()
         pipeline_log.step("promoting the build")
         promote()
         pipeline_log.promoted = True

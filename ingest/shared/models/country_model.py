@@ -57,7 +57,7 @@ class CountryModel(Model):
     currencies: list[CurrencyModel] = field(default_factory=list)
     # one per CLDR tag with an official status, by population share
     languages: list[CountryLanguageModel] = field(default_factory=list)
-    # GeoNames' continent, enrichment rather than a standard; none without a GeoNames row
+    # none for a country GeoNames doesn't list
     continent: ContinentModel | None = None
 
     LOOKUP_FIELDS = ("alpha2", "alpha3", "numeric")

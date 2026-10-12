@@ -4,7 +4,7 @@ ISO_COUNTRIES_PATH = COUNTRIES.inputs / "iso_3166-1.json"
 ISO_HISTORIC_COUNTRIES_PATH = COUNTRIES.inputs / "iso_3166-3.json"
 GEONAMES_COUNTRIES_URL = f"{GEONAMES_DUMP_URL}/countryInfo.txt"
 GEONAMES_COUNTRIES_DEST = COUNTRIES.inputs / "geonamesInfo.txt"
-# the dump's readme, the only place GeoNames publishes its continent codes' names and geonameIds
+# the only place GeoNames lists its continents' names and ids
 GEONAMES_README_URL = f"{GEONAMES_DUMP_URL}/readme.txt"
 GEONAMES_README_DEST = COUNTRIES.inputs / "geonames_readme.txt"
 CLDR_CURRENCY_DATA_PATH = COUNTRIES.inputs / "cldr_currency_data.json"

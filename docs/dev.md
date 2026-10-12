@@ -113,7 +113,7 @@ Earlier benchmarks in this document used `resource.getrusage(resource.RUSAGE_SEL
 
 ### Shipped data size
 
-`src/localis/data/` is <stat key="data.shipped_size.total:size">32.0MB</stat> total, almost entirely cities. Every data file but `NOTICE` ships gzipped, written by `_gzip()` (`ingest/utils/index.py`) with no timestamp and a fixed OS byte so identical data dumps identical bytes and the drift check holds, and read whole through `open_data()` (`localis/utils/data.py`), so decompression adds little to a cache load. The plain-text files had been 31.9MB of 3.0.0b1's 53.6MB install; the wheel, already zip-compressed, barely changed. Data diffs aren't readable in a PR as a result, and don't need to be: the CHANGELOG's data changes are the record of what each build changed.
+`src/localis/data/` is <stat key="data.shipped_size.total:size">32.0MB</stat> total, almost entirely cities. Every data file but `NOTICE` ships gzipped, written by `gzip_bytes()` (`ingest/utils/index.py`) with no timestamp and a fixed OS byte so identical data dumps identical bytes and the drift check holds, and read whole through `open_data()` (`localis/utils/data.py`), so decompression adds little to a cache load. The plain-text files had been 31.9MB of 3.0.0b1's 53.6MB install; the wheel, already zip-compressed, barely changed. Data diffs aren't readable in a PR as a result, and don't need to be: the CHANGELOG's data changes are the record of what each build changed.
 
 | Domain | Size | Share |
 |---|---|---|

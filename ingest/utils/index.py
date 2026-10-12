@@ -24,7 +24,7 @@ def _write_tsv(rows: Iterable[Iterable[object]], path: Path) -> None:
             if "\t" in cell or "\n" in cell or "\r" in cell:
                 raise ValueError(f"{path.name} row {number} has the cell {cell!r}, holding a tab or line break, which would split its row; strip it from the value in the stage that loads it")
         lines.append("\t".join(cells) + "\n")
-    path.write_bytes(_gzip("".join(lines).encode("utf-8")))
+    path.write_bytes(gzip_bytes("".join(lines).encode("utf-8")))
 
 
 def dump_data(data: Sequence[Model], file_path: Path) -> None:
@@ -62,7 +62,7 @@ def dump_filter_index(data: Sequence[Model], datadir_path: Path) -> None:
     _dump_inverted_index(index, datadir_path / "filter_index")
 
 
-def _gzip(buf: bytes | bytearray) -> bytes:
+def gzip_bytes(buf: bytes | bytearray) -> bytes:
     # mtime=0: gzip otherwise embeds the current time, so identical data would produce different bytes on every dump. The OS header byte (index 9) also varies by Python version (3.11 writes the host OS, later versions 255), so it's pinned to 255 ("unknown")
     blob = bytearray(gzip.compress(buf, compresslevel=6, mtime=0))
     blob[9] = 255
@@ -83,12 +83,12 @@ def _dump_inverted_index(index: InvertedIndex, prefix: Path) -> None:
     # little-endian whatever the machine, so the shipped bytes read the same everywhere
     if sys.byteorder == "big":
         postings.byteswap()
-    prefix.with_name(prefix.name + ".bin.gz").write_bytes(_gzip(postings.tobytes()))
+    prefix.with_name(prefix.name + ".bin.gz").write_bytes(gzip_bytes(postings.tobytes()))
 
     # read back with csv.reader, so a key holding a quote is quoted
     buf = io.StringIO(newline="")
     csv.writer(buf, delimiter="\t", lineterminator="\n").writerows(offsets_rows)
-    prefix.with_name(prefix.name + "_offsets.tsv.gz").write_bytes(_gzip(buf.getvalue().encode("utf-8")))
+    prefix.with_name(prefix.name + "_offsets.tsv.gz").write_bytes(gzip_bytes(buf.getvalue().encode("utf-8")))
 
 
 def _invert_trigrams(trigram_sets: dict[int, set[str]]) -> InvertedIndex:
@@ -104,7 +104,7 @@ def _dump_short_names(data: Sequence[Model], path: Path) -> None:
     rows = sorted({(name, item.id) for item in data if item.SHORT_NAMES for name in item.extract_short_names()}, key=lambda r: (len(r[0]), r[0], r[1]))
     if not rows:
         return
-    path.write_bytes(_gzip("".join(f"{name}\t{id}\n" for name, id in rows).encode("utf-8")))
+    path.write_bytes(gzip_bytes("".join(f"{name}\t{id}\n" for name, id in rows).encode("utf-8")))
 
 
 def dump_search_index(data: Sequence[Model], datadir_path: Path) -> None:

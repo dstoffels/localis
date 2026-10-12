@@ -171,7 +171,7 @@ class CountryView(View[Country, CountryStore]):
                 geonames_id = int(geonames_id_s) if geonames_id_s else None
                 numeric = int(numeric_s) if numeric_s else None
                 historic = cls._parse_historic(historic_s)
-                # each continent is built once and shared by its countries' rows; to_entity() copies it
+                # shared by its countries' rows; to_entity() copies it
                 if continent_s and continent_s not in continents:
                     continents[continent_s] = cls._parse_continent(continent_s)
                 continent = continents.get(continent_s)

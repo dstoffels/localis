@@ -16,7 +16,7 @@ class HistoricInfo:
 
 @dataclass(slots=True)
 class Continent:
-    """A country's continent: GeoNames' enrichment rather than a standard, since no authority defines the seven continents, and separate from macroregions."""
+    """A country's continent, from GeoNames: enrichment, not a standard."""
 
     name: str
     geonames_code: str
@@ -47,7 +47,7 @@ class Country(CountryBase):
     numeric: int | None
     flag: str | None
     historic: HistoricInfo | None
-    # GeoNames' continent; none for a country without a GeoNames record
+    # none for a country GeoNames doesn't list
     continent: Continent | None
     # CLDR path, top-down (region, subregion)
     macroregions: list[MacroregionBase]

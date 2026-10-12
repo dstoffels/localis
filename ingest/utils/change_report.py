@@ -18,7 +18,7 @@ from localis.registries import (
     CityRegistry,
 )
 from localis.utils.data import open_data
-from .index import _gzip
+from .index import gzip_bytes
 from .logger import pipeline_log
 from .paths import REPO_PATH, DATA_PATH, STAGED_DATA_PATH
 from .staging import stage_text
@@ -43,7 +43,7 @@ def _rooted(cls: type[R], root: Path) -> type[R]:
 
 
 def _registries(root: Path) -> list[Registry]:
-    """Registries over the build under root, apart from localis's own singletons."""
+    """Registries over the build under root, apart from localis's singletons."""
     macroregions = _rooted(MacroregionRegistry, root)()
     currencies = _rooted(CurrencyRegistry, root)()
     scripts = _rooted(ScriptRegistry, root)()
@@ -83,11 +83,11 @@ Record = tuple[Any, str, dict[str, Any]]
 
 
 def _records(registry: Registry) -> Iterator[Record]:
-    """Each record's key, name and comparable fields; none for a registry new in this build."""
+    """Yields nothing for a registry new in this build."""
     try:
         views = registry._cache.values()
     except FileNotFoundError:
-        # a registry that shipped must be read, or every record of it would count as added
+        # a shipped registry must be readable, or every record would count as added
         if registry._data_path.exists():
             raise
         return
@@ -98,7 +98,7 @@ def _records(registry: Registry) -> Iterator[Record]:
 
 @dataclass
 class Changes:
-    """A registry's changes from one build to the next: its records added, removed and renamed by key, and how many it changed, in all and per field."""
+    """A registry's changes from one build to the next."""
 
     count_before: int
     count_after: int
@@ -113,7 +113,7 @@ class Changes:
 
 
 def _compare(shipped: Iterable[Record], staged: Iterable[Record]) -> Changes:
-    """The staged build's changes to the shipped one, compared by key."""
+    """Matches records by key."""
     before = {key: (name, record) for key, name, record in shipped}
     count_before = len(before)
     added: list[str] = []
@@ -139,13 +139,12 @@ def _listed(title: str, items: list[str]) -> list[str]:
     return [f"**{title} ({len(items):,})**", "", *(f"- {item}" for item in items), ""] if items else []
 
 
-def _anchor(heading: str) -> str:
-    """GitHub's id for a heading."""
+def _github_anchor(heading: str) -> str:
     return re.sub(r"[^\w\- ]", "", heading.lower()).replace(" ", "-")
 
 
-def _run_lists(when: str, datasets: list[tuple[str, Changes]]) -> list[str]:
-    """A run's section of the data changelog: each registry's records renamed, with both names, added and removed; none if it has none."""
+def _records_section(when: str, datasets: list[tuple[str, Changes]]) -> list[str]:
+    """DATA_CHANGELOG.md's section for a run; empty if it renamed, added and removed nothing."""
     lines: list[str] = []
     for name, c in datasets:
         listed = [*_listed("Renamed", c.renamed), *_listed("Added", c.added), *_listed("Removed", c.removed)]
@@ -156,8 +155,8 @@ def _run_lists(when: str, datasets: list[tuple[str, Changes]]) -> list[str]:
     return [f"## {when}", "", *lines] if lines else []
 
 
-def _run_table(when: str, datasets: list[tuple[str, Changes]]) -> list[str]:
-    """A run's section of the changelog's data changes: a table of each registry it changed, linked to its records in the data changelog if it listed any; none if it changed no registry."""
+def _counts_section(when: str, datasets: list[tuple[str, Changes]]) -> list[str]:
+    """CHANGELOG.md's section for a run; empty if it changed nothing."""
     changed = [(name, changes) for name, changes in datasets if changes]
     if not changed:
         return []
@@ -166,12 +165,12 @@ def _run_table(when: str, datasets: list[tuple[str, Changes]]) -> list[str]:
         by_count = ", ".join(f"`{field}` ({count:,})" for field, count in sorted(c.changed_fields.items(), key=lambda item: (-item[1], item[0])))
         lines.append(f"| {name.capitalize()} | {c.count_before:,} → {c.count_after:,} | {len(c.added):,} | {len(c.removed):,} | {c.changed:,} | {by_count} |")
     if any(c.renamed or c.added or c.removed for _, c in changed):
-        lines += ["", f"[Records renamed, added and removed]({DATA_CHANGELOG_URL}#{_anchor(when)})"]
+        lines += ["", f"[Records renamed, added and removed]({DATA_CHANGELOG_URL}#{_github_anchor(when)})"]
     return lines
 
 
-def _insert_run(changelog: str, run: list[str]) -> str:
-    """The changelog with the run's section first under [Unreleased]'s data changes, a subsection added last if missing, as is [Unreleased] above the releases."""
+def _insert_counts(changelog: str, run: list[str]) -> str:
+    """Inserts the section first under [Unreleased]'s ### Data, adding either heading if missing."""
     lines = changelog.rstrip("\n").split("\n")
     if UNRELEASED not in lines:
         first_release = next((i for i, line in enumerate(lines) if line.startswith("## ")), len(lines))
@@ -189,8 +188,7 @@ def _insert_run(changelog: str, run: list[str]) -> str:
     return "\n".join(lines) + "\n"
 
 
-def _prepend_run(data_changelog: str, run: list[str]) -> str:
-    """The data changelog with the run's section above the earlier runs."""
+def _prepend_records(data_changelog: str, run: list[str]) -> str:
     lines = data_changelog.rstrip("\n").split("\n")
     at = next((i for i, line in enumerate(lines) if line.startswith("## ")), None)
     if at is None:
@@ -200,22 +198,21 @@ def _prepend_run(data_changelog: str, run: list[str]) -> str:
     return "\n".join(lines) + "\n"
 
 
-def _columns(path: Path) -> int:
-    """How many columns a data file's rows have; 0 for an empty file."""
+def _column_count(path: Path) -> int:
     with open_data(path) as f:
         line = f.readline()
     return len(line.rstrip("\r\n").split("\t")) if line else 0
 
 
-def _padded(shipped_root: Path, staged_root: Path, scratch: Path) -> Path:
-    """The shipped build as this build's code reads it: copied under scratch with empty cells for the columns a field added since appends to a registry's rows, or shipped_root itself if no registry gained one."""
+def _pad_shipped_columns(shipped_root: Path, staged_root: Path, scratch: Path) -> Path:
+    """shipped_root, or a copy under scratch whose rows gain empty cells for the columns this build appended."""
     names = [registry.REGISTRY_NAME for registry in _registries(staged_root)]
     short: dict[str, int] = {}
     for name in names:
         shipped, staged = shipped_root / name / f"{name}.tsv.gz", staged_root / name / f"{name}.tsv.gz"
-        if not (shipped.exists() and staged.exists()) or not (shipped_columns := _columns(shipped)):
+        if not (shipped.exists() and staged.exists()) or not (shipped_columns := _column_count(shipped)):
             continue
-        missing = _columns(staged) - shipped_columns
+        missing = _column_count(staged) - shipped_columns
         if missing < 0:
             raise ValueError(f"{name}: the shipped rows have {-missing} more columns than this build's; a removed column can't be compared")
         if missing:
@@ -231,29 +228,28 @@ def _padded(shipped_root: Path, staged_root: Path, scratch: Path) -> Path:
         if name not in short:
             shutil.copyfile(source, target)
             continue
-        # a new field's column is appended at the row's end, so an empty cell there reads as the field's empty value
+        # a new field appends its column, so an empty trailing cell reads as its empty value
         with open_data(source) as f:
             text = "".join(line.rstrip("\r\n") + "\t" * short[name] + "\n" for line in f)
-        target.write_bytes(_gzip(text.encode("utf-8")))
+        target.write_bytes(gzip_bytes(text.encode("utf-8")))
         pipeline_log.writeline(f"{name}: compared with the shipped rows' {short[name]} missing column(s), which this build added, empty")
     return scratch
 
 
 def _compare_builds(shipped_root: Path, staged_root: Path) -> list[tuple[str, Changes]]:
-    """Each registry's changes from the build under shipped_root to the one under staged_root."""
     with tempfile.TemporaryDirectory() as scratch:
-        shipped_root = _padded(shipped_root, staged_root, Path(scratch))
+        shipped_root = _pad_shipped_columns(shipped_root, staged_root, Path(scratch))
         return [(staged.REGISTRY_NAME, _compare(_records(shipped), _records(staged))) for shipped, staged in zip(_registries(shipped_root), _registries(staged_root))]
 
 
-def write_change_report() -> None:
-    """Stages this run's table first under the changelog's [Unreleased] data changes and its records renamed, added and removed first in the data changelog; a run that changed no record writes neither."""
+def write_data_changes() -> None:
+    """Stages this run's sections of CHANGELOG.md and DATA_CHANGELOG.md; a run that changed no record writes neither."""
     when = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     datasets = _compare_builds(DATA_PATH, STAGED_DATA_PATH)
-    table = _run_table(when, datasets)
+    table = _counts_section(when, datasets)
     if not table:
         return
-    stage_text(CHANGELOG_PATH, _insert_run(CHANGELOG_PATH.read_text(encoding="utf-8"), table))
-    if lists := _run_lists(when, datasets):
+    stage_text(CHANGELOG_PATH, _insert_counts(CHANGELOG_PATH.read_text(encoding="utf-8"), table))
+    if lists := _records_section(when, datasets):
         data_changelog = DATA_CHANGELOG_PATH.read_text(encoding="utf-8") if DATA_CHANGELOG_PATH.exists() else DATA_CHANGELOG_HEADER
-        stage_text(DATA_CHANGELOG_PATH, _prepend_run(data_changelog, lists))
+        stage_text(DATA_CHANGELOG_PATH, _prepend_records(data_changelog, lists))

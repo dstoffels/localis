@@ -14,7 +14,6 @@ from ingest.subdivisions.utils.resolution_map import (
     NewCandidateOrphan,
 )
 from ingest.shared.models import SubdivisionModel
-from ingest.utils import SUBDIVISIONS
 from ingest.shared.scripts import load_countries
 from ingest.subdivisions.scripts.automerge.type_families import is_type_disqualified, raw_type_families
 from ingest.subdivisions.scripts import (
@@ -24,9 +23,8 @@ from ingest.subdivisions.scripts import (
     score_candidates,
 )
 from ingest.subdivisions.scripts.wikidata_subdivisions import CROSSWALK
+from ingest.subdivisions.scripts.ingest_subdivisions import RESOLUTION_MAP_PATH
 from ingest.subdivisions.scripts.automerge.scoring import is_directional_mismatch, qualifying_candidates
-
-RESOLUTION_MAP_PATH = SUBDIVISIONS.outputs / "resolution_map.json"
 
 # resolution_map.json's modification time as this server last loaded or saved it; any other change is a fresh ingest or another session's decision
 _known_mtime: int | None = None
@@ -197,7 +195,7 @@ def get_candidates(iso_code: str, batch_num: int = 0) -> list[str]:
     flagged_ids = [gid for gid, _ in flagged]
     sub_map = get_geonames_submap()
 
-    # ambiguity, low_margin, grouping_twin and wikidata orphans see the specific records the pipeline flagged first, before the full pool
+    # an orphan the pipeline flagged specific records for sees them first, before the full pool
     if flagged and batch_num == 0:
         records = [(sub_map.get(geonames_id=gid), note) for gid, note in flagged]
         return [_format_candidate(c, note) for c, note in records if c is not None]
