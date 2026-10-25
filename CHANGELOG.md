@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [3.0.0rc1] - 2026-10-25
 
+### Changed
+
+- The Test workflow no longer runs the data pipeline on pushes to `dev`. It fetched every source as published that day, so it failed whenever GeoNames or Wikidata had changed since the last refresh, whether or not the push touched the pipeline; upstream changes reach the data through the monthly ingest workflow, and the pipeline's logic stays covered by its unit tests.
+
 ### Data
 
 #### 2026-10-25 04:10 UTC
