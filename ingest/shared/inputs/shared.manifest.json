@@ -1,8 +1,8 @@
 {
   "alternateNamesV2.txt": {
     "url": "https://download.geonames.org/export/dump/alternateNamesV2.zip",
-    "etag": "\"c357157-65d87dc539418\"",
-    "sha256": "99369c637badf55ec198f930da4daf9b6a872bb7477093ab7a35cf522b8e972d"
+    "etag": "\"c3a7bfa-65e8c7bb1722c\"",
+    "sha256": "eaa2957ee6f39a2a46e4f67f17cfc5c884009d116f0f824268e4c7f7b0acdbf9"
   },
   "cldr_territory_info.json": {
     "url": "https://raw.githubusercontent.com/unicode-org/cldr-json/91c267402229a59e3ef2774544f001bf959e8809/cldr-json/cldr-core/supplemental/territoryInfo.json",

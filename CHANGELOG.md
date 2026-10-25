@@ -7,6 +7,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.0rc1] - 2026-10-25
+
+### Changed
+
+- The Test workflow no longer runs the data pipeline on pushes to `dev`. It fetched every source as published that day, so it failed whenever GeoNames or Wikidata had changed since the last refresh, whether or not the push touched the pipeline; upstream changes reach the data through the monthly ingest workflow, and the pipeline's logic stays covered by its unit tests.
+
+### Data
+
+#### 2026-10-25 04:10 UTC
+
+| Dataset | Records | Added | Removed | Changed | Changed fields |
+|---|---|---|---|---|---|
+| Subdivisions | 51,709 → 51,833 | 131 | 7 | 25 | `aliases` (25), `name` (15) |
+| Cities | 236,353 → 236,652 | 303 | 4 | 1,401 | `lng` (1,249), `lat` (1,245), `name` (134), `subdivisions` (111), `population` (33) |
+
+[Records renamed, added and removed](https://github.com/dstoffels/localis/blob/main/DATA_CHANGELOG.md#2026-10-25-0410-utc)
+
+#### 2026-10-19 14:53 UTC
+
+| Dataset | Records | Added | Removed | Changed | Changed fields |
+|---|---|---|---|---|---|
+| Subdivisions | 51,710 → 51,709 | 0 | 1 | 6 | `aliases` (6), `name` (1) |
+| Cities | 236,041 → 236,353 | 319 | 7 | 79 | `population` (67), `name` (8), `lat` (7), `lng` (7), `subdivisions` (3) |
+
+[Records renamed, added and removed](https://github.com/dstoffels/localis/blob/main/DATA_CHANGELOG.md#2026-10-19-1453-utc)
+
 ## [3.0.0b2] - 2026-10-11
 
 ### Added
@@ -367,7 +393,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Comprehensive test suite
 - GitHub CI/CD Workflows
 
-[Unreleased]: https://github.com/dstoffels/localis/compare/v3.0.0b2...HEAD
+[Unreleased]: https://github.com/dstoffels/localis/compare/v3.0.0rc1...HEAD
+[3.0.0rc1]: https://github.com/dstoffels/localis/compare/v3.0.0b2...v3.0.0rc1
 [3.0.0b2]: https://github.com/dstoffels/localis/compare/v3.0.0b1...v3.0.0b2
 [3.0.0b1]: https://github.com/dstoffels/localis/compare/v2.1.0...v3.0.0b1
 [2.1.0]: https://github.com/dstoffels/localis/compare/v2.0.0...v2.1.0

@@ -10,7 +10,7 @@ This document outlines the project plan for the Localis project, detailing the o
 
 ## Features
 
-Next: release 3.0.0b2. The betas move to release candidate two weeks after b2 at the earliest, since b2's continents add API and restart the clock, and only fixes land in a release candidate.
+Next: release 3.0.0 from 3.0.0rc1 after a week with no blocking issue, 2026-11-01 at the earliest. The API is frozen, and only fixes land in a release candidate.
 
 At 3.0.0 final: set pyproject's classifier back to `Development Status :: 5 - Production/Stable`, and the README's Installation commands back to `pip install localis` and `uv add localis` with its beta banner removed.
 
@@ -125,3 +125,42 @@ Blind re-derivation runs on Fable 5.1, a different and more capable model than t
 ### Open questions
 
 - Whether corroboration counts as verified on its own, or only lowers the sampling rate: Wikidata and automerge are independent in method but could share a GeoNames naming quirk.
+
+## Search result details
+
+Status: proposed, not designed in detail. It changes what `search()` returns, so it's a 4.0 change.
+
+Goal: search results that say how each one matched and how clearly it won, so a caller can choose between accepting the top result, asking the user and rejecting the query, rather than thresholding one number.
+
+### What's computed and thrown away
+
+A result's score is the best fuzzy ratio over its names and the parts of the query each could fill, reduced by up to `CONTEXT_PENALTY` (half) for the share of the rest of the query its context (for a city, its subdivision and country) doesn't explain. `_score_candidate()` works out which name matched and how much the context explained, and the final sort sees every candidate above `NOISE_THRESHOLD`, but only each returned record's score survives.
+
+### Per match
+
+- `score`: the current score, unchanged.
+- `name_score`: the fuzzy similarity of the best-matching name alone.
+- `matched_name`: the name or alias that won, as shipped rather than in its normalized search form ("Bayern" for Bavaria).
+- `context_score`: the rarity-weighted share of the query outside the matched name that the record's context explains ("illinois" in "springfeld illinois"). This is where a query's other registries show up: the city's subdivision and country confirm or fail to confirm it. A query that is all name has nothing to explain, for which `_explained()` returns 1.0 today; None would say so.
+- `exact`: the matched part of the query equals the name after normalization. Not `name_score == 1.0`, since `token_sort_ratio` scores reordered words 100.
+
+### Per result set
+
+- `margin`: the top score less the runner-up's.
+- `tied`: how many results share the top score, so the tie-break (population for cities, the trigram score otherwise), not the match, picked the winner.
+
+Both are taken over every scored candidate, not the returned `limit`, so `search("springfield", limit=1)` still reports the tie; that costs nothing, since every candidate is scored before the cut. `tied` is a lower bound: only `TOP_K` candidates (or `limit`, if larger) reach scoring, plus short-name matches, so past that it's reported as at least that many, or as a flag. Together they make the backlog's remaining search limits visible per query: a bare county name's ties, and a city winning by a small margin.
+
+Ambiguity belongs to the set, not to one result, so `search()` returns a container (`SearchResults`, a sequence of `SearchMatch`) rather than `list[tuple[T, float]]`.
+
+### Calibrated confidence
+
+A calibrated confidence ("0.9 is right 90% of the time") is a separate, later step: a `confidence` field on the match is additive once the result type exists, so it can follow in any 4.x. Calibration needs labeled pairs of a query and its intended record; without them a "confidence" is another heuristic that callers would threshold as if it were a probability. Labels can be generated from the data, by perturbing each record's names (typos, dropped diacritics, aliases, added context) and keeping the source record as the answer, and by extending the search benchmark, which already pairs queries with an intended city. A curve per registry (logistic regression over the features above, or isotonic regression over the score alone) ships as a small table, refit by `poe analysis` on every data update and every change to the scoring constants, with its reliability published beside the benchmark figures.
+
+The fit depends on the query distribution it assumes, which is a policy choice rather than a measurement: sampling records uniformly makes most "paris" queries mean one of the small Parises, so Paris, France gets a low confidence, while sampling by population gives it a high one. It's the same question as blending population into the score for cities' near-ties (backlog), and should be decided once for both.
+
+### Open questions
+
+- Whether `SearchMatch` keeps unpacking as `(entity, score)` through `__iter__`, easing the upgrade at the cost of a class that's also a pair.
+- Splitting `context_score` by the record that explained it (a city's subdivision against its country): the context index maps trigrams to record ids only, with no record of which field each came from, so it would need an index per context source or provenance in the one index. Measure the growth first.
+- The query distribution calibration assumes, and whether population blending for cities shares it.

@@ -1,11 +1,14 @@
 [SUBDIVISIONS]
-[INFO] No update needed for admin1CodesASCII.txt
-[INFO] No update needed for admin2Codes.txt
-[INFO] No update needed for iso_3166-2.json
+[INFO] Downloading admin1CodesASCII.txt from https://download.geonames.org/export/dump/admin1CodesASCII.txt
+[INFO] Downloaded and updated admin1CodesASCII.txt
+[INFO] Downloading admin2Codes.txt from https://download.geonames.org/export/dump/admin2Codes.txt
+[INFO] Downloaded and updated admin2Codes.txt
+[INFO] Downloading iso_3166-2.json from https://salsa.debian.org/iso-codes-team/iso-codes/-/raw/e1ae709ba406c1c3698f2130b3480ad9e5d1b0df/data/iso_3166-2.json
+[INFO] Downloaded and updated iso_3166-2.json
 [INFO] Querying Wikidata for ISO/GeoNames crosswalk...
 [INFO] Loading GeoNames subdivisions...
 [INFO] Merging GeoNames alternate names into subdivision aliases...
-[INFO] Enriched 20268 GeoNames subdivisions with alternate names
+[INFO] Enriched 20278 GeoNames subdivisions with alternate names
 [INFO] Loading ISO subdivisions...
 [INFO] resolved 344/4997 subdivisions from skill decisions, 0 stale, 0 contested
 [INFO] resolved 4295/4653 subdivisions from Wikidata crosswalk, 0 held back as changed
@@ -41,8 +44,8 @@
 [INFO] Merged 353/358 ISO subdivisions
 [INFO] 5 added as-is, their countries have no GeoNames subdivisions: SG-01, SG-02, SG-03, SG-04, SG-05
 [INFO] 0 subdivisions orphaned (no_candidates=0, no_matches=0, ambiguity=0, low_margin=0, wikidata_conflict=0, stale_decision=0, contested_decision=0, new_candidate=0, wikidata_changed=0, grouping_twin=0)
-[INFO] Dumping 51710 subdivisions...
+[INFO] Dumping 51833 subdivisions...
 [INFO] Dumping subdivisions lookup indexes...
 [INFO] Dumping subdivisions filter index...
 [INFO] Dumping subdivisions search index...
-[INFO] completed: 51710 subdivisions
+[INFO] completed: 51833 subdivisions

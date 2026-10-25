@@ -4329,5 +4329,73 @@
         }
       }
     }
+  },
+  "2026-10-25T00:12:11": {
+    "host": {
+      "os": "Linux 7.0.0-38-generic",
+      "machine": "x86_64",
+      "cpu": "12th Gen Intel(R) Core(TM) i9-12900KF",
+      "cpu_count": 24,
+      "memory_total_bytes": 66125537280,
+      "python": "3.14.4",
+      "localis": "3.0.0b2"
+    },
+    "sample_size": 5000,
+    "iterations": 1,
+    "seed": 0,
+    "notes": null,
+    "registries": {
+      "countries": {
+        "search": {
+          "p50_ms": 1.0037,
+          "p95_ms": 2.8229,
+          "p99_ms": 4.4752,
+          "max_ms": 6.2412
+        },
+        "accuracy": {
+          "queries": 423,
+          "failures": 0,
+          "twin_hits": 0,
+          "success_pct": 100.0,
+          "top1_pct": 99.3,
+          "mrr": 0.996,
+          "avg_hit_score": 0.894
+        }
+      },
+      "subdivisions": {
+        "search": {
+          "p50_ms": 1.7008,
+          "p95_ms": 3.1275,
+          "p99_ms": 4.3022,
+          "max_ms": 7.42
+        },
+        "accuracy": {
+          "queries": 7003,
+          "failures": 165,
+          "twin_hits": 680,
+          "success_pct": 97.6,
+          "top1_pct": 93.4,
+          "mrr": 0.95,
+          "avg_hit_score": 0.912
+        }
+      },
+      "cities": {
+        "search": {
+          "p50_ms": 4.5512,
+          "p95_ms": 7.8322,
+          "p99_ms": 9.6945,
+          "max_ms": 14.2877
+        },
+        "accuracy": {
+          "queries": 5000,
+          "failures": 63,
+          "twin_hits": 134,
+          "success_pct": 98.7,
+          "top1_pct": 93.4,
+          "mrr": 0.955,
+          "avg_hit_score": 0.81
+        }
+      }
+    }
   }
 }

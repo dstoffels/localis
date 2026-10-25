@@ -1,7 +1,7 @@
 {
   "cities500.txt": {
     "url": "https://download.geonames.org/export/dump/cities500.zip",
-    "etag": "\"d3ac88-65d87c7c1e4d6\"",
-    "sha256": "b4d92b987a72e35cfb8a03e0ad60fda36ae54a8c8397fbfefcc9556dcaa967c5"
+    "etag": "\"d42715-65e8c67e16e46\"",
+    "sha256": "8c1184dcb3475a158a544f5cc2a3cdf9d385dddc1f015b0ecf2c8d1bad24f7fa"
   }
 }
