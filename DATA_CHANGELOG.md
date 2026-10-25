@@ -4,6 +4,981 @@ Every record an ingest run renamed, added or removed, by `key`, newest first. Ea
 
 Runs up to 2026-10-11 21:33 UTC were rebuilt from the per-dataset reports committed with each, dated by their commit; where several runs went into one commit, only the last one's changes were recorded.
 
+## 2026-10-25 04:10 UTC
+
+### Subdivisions
+
+**Renamed (15)**
+
+- `KR.01.39020` Seogwipo-si → Seogwipo
+- `KR.03.35020` Gunsan-si → Gunsan
+- `KR.03.35060` Gimje-si → Gimje
+- `KR.14.37050` Gumi-si → Gumi
+- `KR.20.38050` Tongyeong-si → Tong-yeong-si
+- `KR.05.33020` Chungju-si → Chungju
+- `KR.17.34350` Cheongyang-gun → Cheong-yang
+- `KR.17.34010` Cheonan-si → Cheonan
+- `KR.20.38030` Jinju-si → Jinju
+- `KR.14.37390` Chilgok-gun → Chilgok
+- `KR.17.34040` Asan-si → Asan
+- `KR.12.23080` Seo-gu → Seohae
+- `KR.12.23020` Dong-gu → Jemulpo
+- `KR.14.37340` Yeongyang-gun → Yeong-yang
+- `TW.01` Fukien → Fujian
+
+**Added (131)**
+
+- `DE.16.00` Schöneberg
+- `SA.17.106043` Ḩarūb
+- `SD.62.13711192` Al Dibab
+- `SD.62.13711196` Al Meiram
+- `SD.62.13711215` Al Khiwai
+- `SD.62.13711221` Abu Zabad
+- `SD.62.13711227` Al Lagowa
+- `SD.62.13711230` Abyei
+- `SD.62.13711233` Al Idia
+- `SD.56.13724151` Ar Rahad
+- `SD.49.13724152` Beliel
+- `SD.50.13724153` Dilling
+- `SD.39.13724154` Gala'a al Nahal
+- `SD.60.13724155` Bahr al Arab
+- `SD.50.13724156` Delami
+- `SD.36.13724157` Dordieb
+- `SD.49.13724158` Gereida
+- `SD.53.13724159` Barbar
+- `SD.49.13724160` Buram
+- `SD.42.13724161` Geisan
+- `SD.49.13724162` Damso
+- `SD.56.13724163` Gebrat al Sheikh
+- `SD.50.13724164` Ar Reif ash Shargi
+- `SD.49.13724165` As Salam South Darfur
+- `SD.50.13724166` At Tadamon South Kordofan
+- `SD.55.13724167` At Tawisha
+- `SD.61.13724168` Azum
+- `SD.43.13724169` Delgo
+- `SD.41.13724170` As Salam ar Rawat
+- `SD.42.13724171` At Tadamon Blue Nile
+- `SD.39.13724172` Basundah
+- `SD.39.13724173` Galabat ash Shargiah
+- `SD.56.13724174` Gharb Bara
+- `SD.39.13724175` Ar Rahad
+- `SD.42.13724176` Ar Rusayris
+- `SD.43.13724177` Dongola
+- `SD.56.13724178` An Nuhud
+- `SD.50.13724179` As Sunut
+- `SD.42.13724180` Ed Damazine
+- `SD.56.13724181` Ghubaish
+- `SD.50.13724182` Ar Rashad
+- `SD.55.13724183` As Serief
+- `SD.47.13724184` At Tina
+- `SD.47.13724185` Beida
+- `SD.49.13724186` Ed al Fursan
+- `SD.60.13724187` Assalaya
+- `SD.47.13724188` Foro Baranga
+- `SD.50.13724189` Ghadeer
+- `SD.50.13724190` As Salam West Kordofan
+- `SD.61.13724191` Gharb Jabal Marrah
+- `SD.49.13724192` As Sunta
+- `SD.55.13724193` Dar as Salam
+- `SD.53.13724194` Atbara
+- `SD.50.13724195` Babanusa
+- `SD.61.13724196` Bendasi
+- `SD.49.13727704` Rehaid Albirdi
+- `SD.41.13727705` Guli
+- `SD.50.13727706` Habila South Kordofan
+- `SD.47.13727707` Habila West Darfur
+- `SD.43.13727708` Halfa
+- `SD.52.13727709` Halfa aj Jadeedah
+- `SD.36.13727710` Haya
+- `SD.50.13727711` Heiban
+- `SD.38.13727712` Janub al Jazirah
+- `SD.29.13727713` Jebel Awlia
+- `SD.47.13727714` Jebel Moon
+- `SD.36.13727715` Jubayt Elma'aadin
+- `SD.50.13727716` Kadugli
+- `SD.29.13727717` Karrari
+- `SD.49.13727718` Kateila
+- `SD.55.13727719` Kebkabiya
+- `SD.50.13727720` Keilak
+- `SD.55.13727721` Kelemando
+- `SD.47.13727722` Kereneik
+- `SD.47.13727723` Kernoi
+- `SD.49.13727724` Kubum
+- `SD.39.13727725` Madeinat al Gedaref
+- `SD.52.13727726` Madeinat Kassala
+- `SD.38.13727727` Medani al Kubra
+- `SD.55.13727728` Melit
+- `SD.49.13727729` Mershing
+- `SD.43.13727730` Merwoe
+- `SD.61.13727731` Mukjar
+- `SD.49.13727732` Nitega
+- `SD.49.13727733` Nyala Janoub
+- `SD.49.13727734` Nyala Shimal
+- `SD.36.13727735` Port Sudan
+- `SD.52.13727736` Reifi Aroma
+- `SD.52.13727737` Reifi Gharb Kassala
+- `SD.52.13727738` Reifi Hamash Kureib
+- `SD.52.13727739` Reifi Kassla
+- `SD.52.13727740` Reifi Khashm Elgirba
+- `SD.52.13727741` Reifi Nahr Atbara
+- `SD.52.13727742` Reifi Shamal ad Delta
+- `SD.52.13727743` Reifi Telkok
+- `SD.39.13727744` Reifi Wad Elhilaiw
+- `SD.47.13727745` Saraf Omra
+- `SD.36.13727746` Sawakin
+- `SD.41.13727747` Rabak
+- `SD.47.13727748` Kulbus
+- `SD.55.13727764` Shamal Jabal Marrah
+- `SD.49.13727765` Sharg aj Jabal
+- `SD.38.13727766` Sharg al Jazirah
+- `SD.29.13727767` Sharg an Neel
+- `SD.61.13727768` Shattaya
+- `SD.56.13727769` Sheikan
+- `SD.60.13727770` Shia'ria
+- `SD.47.13727771` Sirba
+- `SD.56.13727772` Soudari
+- `SD.50.13727773` Talawdi
+- `SD.55.13727774` Tawila
+- `SD.36.13727775` Tawkar
+- `SD.41.13727776` Tendalti
+- `SD.49.13727777` Tulus
+- `SD.38.13727778` Um Algura
+- `SD.29.13727779` Um Bada
+- `SD.55.13727780` Um Baru
+- `SD.49.13727781` Um Dafoug
+- `SD.56.13727782` Um Dam Haj Ahmed
+- `SD.61.13727783` Um Dukhun
+- `SD.50.13727784` Um Durein
+- `SD.55.13727785` Um Kadadah
+- `SD.41.13727786` Um Rimta
+- `SD.42.13727787` Wad al Mahi
+- `SD.61.13727788` Wadi Salih
+- `SD.39.13727789` Wasat al Gedaref
+- `SD.61.13727790` Wasat Jabal Marrah
+- `SD.60.13727791` Yassin
+- `SD.61.13727792` Zalingi
+- `SD.56.13727793` Wad Bandah
+- `TM.02.13731390` Gyzylarbat Etraby
+
+**Removed (7)**
+
+- `SD.50.13711192` Al Dibab
+- `SD.50.13711196` Al Meiram
+- `SD.56.13711215` Al Khiwai
+- `SD.56.13711221` Abu Zabad
+- `SD.50.13711227` Al Lagowa
+- `SD.50.13711230` Abyei
+- `SD.56.13711233` Al Idia
+
+### Cities
+
+**Renamed (134)**
+
+- `3460744` Itapejara d'Oeste → Itapejara d’Oeste
+- `3464046` Herval d'Oeste → Herval d’Oeste
+- `3464737` Diamante d'Oeste → Diamante d’Oeste
+- `12147333` Pingo-d'Água → Pingo-d’Água
+- `12957804` Pau d'Arco do Piauí → Pau d’Arco do Piauí
+- `13111788` Glória d'Oeste → Glória d’Oeste
+- `13453184` Machadinho d'Oeste → Machadinho d’Oeste
+- `1793656` Taikang Chengguanzhen → Taikang
+- `2841619` Sankt Georgen im Schwarzwald → St. Georgen im Schwarzwald
+- `293207` Yehud → Yehud Monosson
+- `294021` Nir Tsevi → Nir Tsvi
+- `32733` Golzār-e Bālā → Golzār
+- `41979` Qeshlāq → Qeshlāq-e Malārd
+- `140300` Bonārdān → Bondārān
+- `2455914` Kalaban Koro → Kalaban-Koro
+- `3514052` Zaragoza → Zaragoza de Guadalupe
+- `3514414` Xometla → La Concepción
+- `3514529` Xhitey → El Xhitey
+- `3514940` El Consuelo Ulapa → Consuelo Ulapa
+- `3515438` Tlalmanalco → Tlalmanalco de Velázquez
+- `3515722` Texcalyacac → San Mateo Texcalyacac
+- `3516049` Temascalcingo → Temascalcingo de José María Velasco
+- `3516174` San Pedro Techuchulco → Techuchulco de Allende
+- `3516266` Tapachula → Tapachula de Córdova y Ordóñez
+- `3516480` Sultepec → Sultepec de Pedro Ascencio de Alquisiras
+- `3516497` Brisas Barra de Suchiate → Brisas del Suchiate
+- `3516510` Soyaniquilpan → San Francisco Soyaniquilpan
+- `3516819` Atzingo → Santo Tomás Atzingo
+- `3516907` Santiago Yeché → Santiago Yeche
+- `3517284` Atarasquillo → Santa María Atarasquillo
+- `3517337` Santa María Citendejé → Santa María Citendeje
+- `3517377` Sanata Lucía → Santa Lucía
+- `3517524` Tecámac → Tecámac de Felipe Villanueva
+- `3517588` Santa Cruz Ayotuxco → Santa Cruz Ayotuzco
+- `3517956` San Juan y San Pedro Tezompa → San Juan Tezompa
+- `3518183` Coatepec → Villa de San Nicolás Coatepec de las Bateas
+- `3518221` Zinacantepec → San Miguel Zinacantepec
+- `3518258` San Miguel Mimlapan → San Miguel Mimiapan
+- `3518275` San Miguel de La Victoria → San Miguel de la Victoria
+- `3518328` San Miguel Almoloyan → San Miguel Almoloyán
+- `3518377` Mexicaltzingo → San Mateo Mexicaltzingo
+- `3518388` San Mateo Almomoloha → San Mateo Almomoloa
+- `3518488` San Luis Ayucán → San Luis Ayucan
+- `3518618` Teotihuacán → Teotihuacán de Arista
+- `3518726` Teacalco → San Juan Teacalco
+- `3519063` Ixtapantongo → San Jerónimo Ixtapantongo
+- `3519076` San Jerónimo → San Jerónimo Chicahualco
+- `3519243` San Francisco → San Francisco Zacacalco
+- `3519251` San Francisco Tepexoxica → San Francisco Tepexoxuca
+- `3519283` San Francisco → San Francisco Cheje
+- `3519457` Cuecuecuatitla → San Esteban Cuecuecuautitla
+- `3519487` Xochimanca → San Dieguito Xochimanca
+- `3519676` Zoyatzingo → San Antonio Zoyatzingo
+- `3519707` Pinada de Arriba → San Antonio la Pinada
+- `3522265` Otumba → Otumba de Gómez Farías
+- `3522334` Omoa → Omoha
+- `3522732` Nicolás Romero → Villa Nicolás Romero
+- `3522926` Motozintla → Motozintla de Mendoza
+- `3523031` Montecristo → Montecristo de Guerrero
+- `3523307` Metapa → Metapa de Domínguez
+- `3523420` Mazapa → Mazapa de Madero
+- `3523690` Malé → Male
+- `3523759` La Magdalena Chichicaspa → Magdalena Chichicaspa
+- `3523900` Reyes Acozac → Los Reyes Acozac
+- `3523901` Los Reyes Acatlixhuayán → Los Reyes Acatlixhuayan
+- `3525424` Magdalena Atlicpac → La Magdalena Atlicpac
+- `3526355` Juchitepec → Juchitepec de Mariano Rivapalacio
+- `3526450` Joquicingo → Joquicingo de León Guzmán
+- `3526473` Jocotitlán → Ciudad de Jocotitlán
+- `3526544` Jesús Carranza → Jesús
+- `3526606` Ex-hacienda de Xalpa → Ex-Hacienda de Xalpa
+- `3527542` Comalapa → Frontera Comalapa
+- `3527601` Fondo → Fondó
+- `3530569` Coacalco → San Francisco Coacalco
+- `3530756` San Pedro Chochula → San Pedro Cholula
+- `3530937` Chicoloapan → Chicoloapan de Juárez
+- `3531200` Chalco → Chalco de Díaz Covarrubias
+- `3531747` Cambil → El Cambil
+- `3531798` Calimaya → Calimaya de Díaz González
+- `3531889` Cacalomacan → Cacalomacán
+- `3532855` Angel Díaz → Ángel Díaz
+- `3533475` Acambay → Villa de Acambay de Ruíz Castañeda
+- `3761194` Miraflores → San Mateo Tezoquipan Miraflores
+- `3816590` Diamante de Echeverría → El Diamante de Echeverría
+- `3816812` Colonia Central → La Central
+- `3817505` Porfirío Díaz → Porfirio Díaz
+- `3817619` Santiago Cuautenco → Santiago Cuauhtenco
+- `3817626` Zentlalpan → San Francisco Zentlalpan
+- `3817638` Zula → Santiago Zula
+- `3817685` Santiago Cuautlalpan → Villa Santiago Cuautlalpan
+- `3817712` La Purificación → La Purificación Tepetitla
+- `3817714` Tulantongo → Santa María Tulantongo
+- `3817790` Santa Ana Tlachiahualpa → Santa Ana Tlachihualpa
+- `3817791` San Luis Tecuhautitlán → San Luis Tecuautitlán
+- `3817806` Teopancala → San Mateo Teopancala
+- `3817823` La Gloria → San Pedro la Gloria
+- `3817876` San Francisco Shaxni Ejido → San Francisco Shaxní Ejido
+- `3817878` Juando → Juandó
+- `3817885` El Bonxhi → El Bonxhí
+- `3821784` Ocotlán → Ocotitlán
+- `3821805` San Francisco Oxtutla → San Francisco Oztutla
+- `3821842` Oztotitlán → Oxtotitlán
+- `3821847` Tepehuisco → Tepehuixco
+- `3822018` Las Animas → Las Ánimas
+- `3822078` Cuyuxtlahuaca → Cuyuxtlahuac
+- `3826891` El Capulín Primera Seccion → El Capulín Primera Sección
+- `3827100` Xhimojay → Xhimójay
+- `3827234` La Huanica → La Huánica
+- `3827263` San Francisco Cuaxusco → San Francisco Coaxusco
+- `3827336` San Felipe el Mirasol → El Mirasol
+- `3827368` San Mateo Atarasquíllo → San Mateo Atarasquillo
+- `3827427` Colonia Álvaro Obregón → Colonia Álvaro Obregón Tlalmimilolpan
+- `3827486` El Puerto Magú → Puerto Magú
+- `3827597` Tonanitla → Santa María Tonanitla
+- `3985469` San Miguel Xoltepec → San Miguel Xooltepec
+- `3986473` San Jose Solís → San José Solís
+- `4026532` El Potrero de Tenayac → Potrero de Tenayac
+- `4026570` La Compañía → Cerro Colorado
+- `4026626` San Francisco Solis → San Francisco Solís
+- `4026635` Santiago Coachochitlan → Santiago Coachochitlán
+- `4026735` La Trampa → La Trampa Grande
+- `4026759` El Potrero de San Diego → Potrero de San Diego
+- `4026781` Santa María → Santa María de las Delicias
+- `4027257` Santa Rosa de Lima Dos → Santa Rosa de Lima
+- `4027374` San Luis de La Loma → San Luis de la Loma
+- `4027527` Pié de la Cuesta → Pie de la Cuesta
+- `4027749` Playa del Carrizal → El Carrizal
+- `9026011` Tlalmimilolpan → Tlalmimilolpa
+- `9532425` Estación Huehuetán → Huehuetán Estación FFCC
+- `9870390` Mihuacan → Mihuacán
+- `11240141` Nueva Sesecapa → Sesecapa
+- `11371777` Tequisistlán Primero → Ejido de Tequisistlán Primero
+- `2247123` Noumoufoukha → Noumofoukha
+- `317455` Dedeli → Merkez
+
+**Added (303)**
+
+- `6415294` Lāma
+- `6317370` Jardim Presidente Dutra
+- `13731643` Annjennete Park
+- `13731644` O'Leary's
+- `13724417` Chuanhui
+- `2950958` Bad Bentheim
+- `3043617` Ugod
+- `6752592` Japan
+- `13715595` Japan
+- `1255540` Sukhpur Solhani
+- `1255716` Sopāra
+- `1259595` Pīparwāni
+- `1266824` Khawāsa
+- `1268162` Kanchad
+- `1269587` Jagatballabhpur
+- `1271933` Fatehābād
+- `1276837` Baruāri
+- `1276947` Badi
+- `1348713` Jhingra
+- `1348726` Bankul
+- `1348731` Harinārāyanpur
+- `1348792` Islāmpur
+- `10470608` Bādalpār
+- `10470620` Bādalpār
+- `10470704` Turiya
+- `10470718` Kohka
+- `10470724` Telīya
+- `10711730` Saraura Kalān
+- `10711754` Maholi
+- `10711830` Basantpur
+- `10711918` Ahmadpurjat
+- `11725202` Karīho
+- `11725210` Chain Singh Patti
+- `11725216` Bainia
+- `11725221` Bina
+- `11725245` Karanpur
+- `11725247` Baspiti
+- `11725250` Telwa
+- `11725273` Bakaur
+- `11725288` Balha
+- `11725296` Bairo
+- `11725311` Ekma
+- `11725317` Jhahura
+- `11725318` Laukāha
+- `11725324` Bela
+- `11725330` Amha
+- `11725333` Itahāri
+- `11725334` Hardi
+- `13715567` Bamunpara
+- `13715568` Ichhapur
+- `13715569` Hafezpur
+- `13715570` Chandul
+- `13715571` Sadipara
+- `13715572` Ichhanagari
+- `13715573` Kamalapur
+- `13715574` Goalpota
+- `13715575` Telihati
+- `13715576` Dhasa
+- `13715577` Godaria
+- `13715578` Nimabalia
+- `13715579` Rampur
+- `13715580` Badebalia
+- `13715581` Chak Sadat
+- `13715582` Ramanathbati
+- `13715583` Naikuli
+- `13715584` Narendrapur
+- `13715585` Anantabati
+- `7787` Tork Kolā
+- `8634` Rūdbār Dasht
+- `8778` Kamāngar Kolā
+- `11515` Khūsh Rūdpey
+- `17036` Tūprāq Kandī
+- `21177` Qūlonjī
+- `24466` Qal‘eh-ye Shīān
+- `28611` Sarāvān
+- `32600` Shotor Khār
+- `32778` Moḩammadābād-e A‘lā
+- `36607` Eslāmābād
+- `39156` Marzan Kalāteh
+- `39206` ‘Aţāābād
+- `39271` Tūrang Tappeh
+- `39583` Mīr Maḩalleh
+- `39607` Vāleshābād
+- `39608` Toqor Tappeh
+- `41995` Amīrābād
+- `44026` Kūrūnī
+- `48819` Shahrak-e Dastgheyb
+- `111289` Zarkesh
+- `116243` Seyyedābād
+- `116709` Sarzeh
+- `117414` Sāq
+- `118250` Rūdbāl
+- `118279` Rūshnāvand
+- `118538` Reẕvān
+- `118756` Rasht Kolā
+- `118929` Raḩmatābād
+- `119316` Qezel Kand
+- `120934` Pol-e Sharqī
+- `121816` Ordaklū
+- `122095` Noşratābād
+- `123706` Moghānjūq
+- `123718` Mo‘ezzābād-e Jāberī
+- `125671` Līqvān
+- `126615` Korand
+- `126838` Kolāhī
+- `127650` Khavīrak
+- `128664` Kargān
+- `130676` Jāydasht
+- `132857` Gorjī Maḩalleh
+- `135695` Dowzeyn
+- `135968` Bahārestān
+- `136682` Deh-e Moḩsen
+- `138568` Cheshmeh Kabūd
+- `140490` Bīland
+- `140570` Bīdokht
+- `145204` ‘Abdolābād
+- `145372` ‘Abbāsābād-e Sardār
+- `388963` Majīdābād
+- `406447` Raẕīābād-e Bālā
+- `406491` Meymanatābād
+- `1114091` Moḩammadī
+- `1160526` Gīmān
+- `6652945` Akbarābād
+- `6666853` Parandak
+- `6680620` Karūnī
+- `6959772` Shamsābād
+- `7329764` Moḩammadābād
+- `7626066` Rūḩābād
+- `13715518` Eslāmābād
+- `13715519` Ajab Shir Military Garrison
+- `13715521` Kāl Zarkesh
+- `13715548` Chāh Akramī
+- `13715696` Sejong
+- `8864158` Nueva Libertad
+- `3617147` Momotombo
+- `2745739` Veere
+- `2749341` Oost-Souburg
+- `2014669` Tyungyulyu
+- `3057723` Sebedražie
+- `161773` Hudaýberdi
+- `162197` Arapgala
+- `295868` Zirekli
+- `296292` Yukarıkülecik
+- `296406` Yukarıgözlüce
+- `296412` Yukarıgöçmez
+- `296433` Yukarıdüzmeydan
+- `296456` Yukarı Dalören
+- `296552` Yücekapı
+- `296736` Yılanlı
+- `297459` Yayladüzü
+- `298141` Uzunyazı
+- `298167` Uzunöz
+- `298318` Ürküt
+- `298415` Ulukent
+- `298726` Tutak
+- `299396` Telçeker
+- `299516` Tazekent
+- `299740` Taşkın
+- `299750` Taşkesen
+- `300167` Suluca
+- `300229` Süleymankümbet
+- `300361` Somkaya
+- `300919` Seyithanbey
+- `302249` Sağdıç
+- `302991` Özdemir
+- `303336` Ortadirek
+- `303681` Oğlaksuyu
+- `304006` Mutlu
+- `305347` Kuşburnu
+- `305672` Kumluca
+- `306273` Aşağıköşkköy
+- `306638` Konakbeyi
+- `306944` Koçaklar
+- `307181` Yalçınkaya
+- `309708` Karakazan
+- `310214` Karabulak
+- `310955` Kaçmaz
+- `311891` Hoşhaber
+- `312863` Halfeli
+- `313069` Hacıhalit
+- `313381` Gürbulak
+- `313549` Günbuldu
+- `313694` Güllüce
+- `314213` Gökoğlu
+- `314642` Gençali
+- `315417` Ergeçli
+- `315853` Ekincik
+- `316274` Dorukdibi
+- `317390` Değirmendüzü
+- `317714` Dalbahçe
+- `317956` Çukurbağ
+- `318182` Çöğurlu
+- `318577` Çiftlikköy
+- `318745` Çetenli
+- `318931` Çelebaşı
+- `319929` Çakırbey
+- `320513` Budak
+- `320591` Bozoğlak
+- `321072` Bintosun
+- `322010` Bardaklı
+- `323268` Aşağıküpkıran
+- `323375` Aşağıdumanlı
+- `324737` Akdilek
+- `325333` Adımova
+- `6970652` Kazanbey
+- `6970656` Çaputlu
+- `6970674` Eskikonak
+- `6970678` Alatay
+- `6970683` Ortadamla
+- `6970684` Yukarıdamla
+- `6970801` Yukarıyenigün
+- `6970805` Özdirek
+- `6970838` Oklavalı
+- `6971607` Yardımcılar
+- `6972225` Taşbasamak
+- `6972351` Atabakan
+- `6972357` Güngören
+- `6972904` Sarıgül
+- `6973642` Esnemez
+- `8694518` Tahir
+- `13697219` Melekli
+- `13715458` Yeni
+- `13715459` Kale
+- `13715460` Kümbet
+- `13715464` Adnan Menderes
+- `13715465` Cumhuriyet
+- `13715466` 15 Temmuz Şehitler
+- `13715467` Hürriyet
+- `13715487` Murat
+- `13715488` Pınar
+- `13715489` Karşıyaka
+- `13715490` Yeni
+- `13715491` Cami
+- `13715492` Müftüselim
+- `13715493` İstiklal
+- `13715494` Hürriyet
+- `13715495` Lozan
+- `13715496` Fatih
+- `13715497` Esentepe
+- `13715498` Karşıyaka
+- `13715499` Cumhuriyet
+- `13715500` Karşıyaka
+- `13715501` Şehit Engin
+- `13715502` Yeşil
+- `13715503` Karşıyaka
+- `13715507` Fatih
+- `13715508` Atatürk
+- `13715509` İsaağa
+- `13715510` Göl
+- `13715511` Ketenpınar
+- `13715512` 14 Nisan
+- `13715513` Murat
+- `13715522` Atatürk
+- `13715523` Yunusemre
+- `13715524` Alpaslan
+- `13715525` Yeni
+- `13715526` Çay
+- `13715527` Cumhuriyet
+- `13715528` Sütlü Pınar
+- `13715529` Selahaddini Eyyubi
+- `13715530` Yeşil Çimen
+- `13715531` 14 Nisan
+- `13715532` Sanayi
+- `13715533` Süphan Dağı
+- `13715534` Serhad
+- `13715535` Ahmed-i Hani
+- `13715536` Sarısu
+- `13715537` Abdulvehap Küfrevi
+- `13715538` İnönu
+- `13715539` Badişan
+- `13715540` Cami
+- `13715541` Turgut Özal
+- `13715542` Akbulut
+- `13715552` Ahmedihani
+- `13715553` Çiftepınar
+- `13715554` İshakpaşa
+- `13715555` Yeni
+- `13715556` Hasankeyf
+- `13715557` Uluyol
+- `13715558` Sanayi
+- `13715559` Büyük Ağrı
+- `13715560` Hürriyet
+- `13715561` Koçkıran
+- `13715562` Barış
+- `13715563` Vatan
+- `13715564` Abdigör
+- `13715598` Fırat
+- `13715599` Abide
+- `13715600` Yüzüncü Yıl
+- `13715601` Fatih
+- `13715602` Mehmet Akif Ersoy
+- `13715603` Kazım Karabekir
+- `13715604` Sıtkıye
+- `13715605` Gazi
+- `13715606` Yavuz
+- `13715607` Cumhuriyet
+- `13715608` Hürriyet
+- `13715609` Leylek Pınar
+- `13715610` Alpaslan
+- `13715611` Murat
+- `13715612` Kurtuluş
+- `13715613` Bahçelievler
+- `13715614` Fevzi Çakmak
+
+**Removed (4)**
+
+- `13607858` Mehar Ali Brohi
+- `513998` Osyno
+- `299958` Tahir
+- `301586` Sarısu
+
+## 2026-10-19 14:53 UTC
+
+### Subdivisions
+
+**Renamed (1)**
+
+- `IR.01.449444` Orūmīyeh → Orūmīeh
+
+**Removed (1)**
+
+- `IR.10.12543583` Chardāval
+
+### Cities
+
+**Renamed (8)**
+
+- `12156837` University → University of Toronto
+- `3061648` Ždírec nad Doubravkou → Ždírec nad Doubravou
+- `2750278` Nieuwe-Niedorp → Nieuwe Niedorp
+- `1685622` Suay → Su-ay
+- `1702359` Mambagatan → Mambagaton
+- `685789` Băile Olăneşti → Băile Olănești
+- `741149` Oluklu → Büyük Oluklu
+- `709064` Furmanovka → Aktachy
+
+**Added (319)**
+
+- `1185999` Tola Nurpur
+- `1186765` Shyāmnagar
+- `1188215` Shāhānpur
+- `1188741` Sāntala
+- `1188932` Salta
+- `1190038` Rāmkrishnapur
+- `1190458` Rahelāpur
+- `1193079` Nātna
+- `1194398` Mirāpur
+- `1197137` Kismat Rājāpur
+- `1197159` Kismat Ināyetpur
+- `1197205` Kifājtnagar
+- `1197342` Khojārhāt
+- `1198030` Kāyetkhāli
+- `1198268` Kashimpur
+- `1200863` Ichhāli
+- `1201285` Hashimpur
+- `1202570` Ghona
+- `1203914` Dihi Kanejpur
+- `1204868` Daulatdihi
+- `1205399` Dakshin Māgura
+- `1205540` Dakshinpāra
+- `1205566` Dākātia
+- `1205599` Dahārpāra
+- `1208731` Bijaynagar
+- `1211189` Bamangrām
+- `1211791` Bahālnagar
+- `1212445` Āsānnagar
+- `1212479` Arpāra
+- `7475837` Natun Pallānpāra
+- `7475865` Mahishkhālipāra
+- `7475871` Godārbīl
+- `7476154` Mathapanichara
+- `7476228` Nāzirpāra
+- `7476384` Bāhārchara
+- `7476411` Acharbania
+- `7476446` Dailpāra
+- `7478839` Manoharpur
+- `7479685` Jalkar
+- `7485692` Char Para
+- `8355758` Lakshmipur
+- `9171969` Kaliakair
+- `13715450` Jessore Cantonment
+- `2790737` Moorsel
+- `13713125` Rock Sound
+- `8469026` Bruderholz
+- `3075676` Staré Hodějovice
+- `2815174` Bad Friedrichshall
+- `12123481` Babelsberg Nord
+- `2618070` Kværndrup
+- `347196` Tūnis
+- `2520583` Urbanización Calabardina
+- `13715440` Urbanización Collados Zieschang
+- `13715442` Urbanización Todosol
+- `2644882` Lansallos
+- `13713164` Lower Tregantle
+- `1253934` Uggi
+- `1255433` Sundarpahari
+- `1264411` Mehatpur
+- `1264627` Mcleodganj
+- `1269442` Jalālgarh
+- `10256300` Behār
+- `10701816` Addi
+- `10701837` Bal Kohna
+- `10701845` Pandori Khās
+- `10701856` Bhodipur
+- `10701866` Akbarpur Kalān
+- `10701870` Bulanda
+- `10701874` Bhullar
+- `10701877` Khurampur
+- `10701878` Angi Kiri
+- `10701879` Adarmān
+- `10701897` Sangowāl
+- `10701906` Alowāl
+- `10701912` Bila Nawāb
+- `10701915` Mālri
+- `10701925` Bal Hukmi
+- `10713139` Kang Sahbu
+- `10713142` Bajuha Khurd
+- `10713143` Bajuha Kalān
+- `10713159` Dhāliwāl
+- `10713163` Boparai
+- `10713184` Sarih
+- `10713267` Bāghela
+- `10713279` Bāth
+- `10880082` Chak Nur
+- `10880104` Jitwārpur Nizāmat
+- `10880105` Jitwārpur Chauth
+- `10880123` Balari urf Jagdishpur Deal
+- `10880152` Pataili
+- `10880154` Bhagwānpur Kamla
+- `10880198` Chaita
+- `10880228` Angār
+- `10880230` Bhagwānpur Desua
+- `10880231` Supaul
+- `10880236` Muriāro
+- `10880268` Bishunpur Hakīmābād
+- `10880526` Chand Chaur
+- `10880535` Bela Megh
+- `10880545` Baikunthpur Barhanda
+- `10880736` Mehsāri
+- `10929452` Nocchād
+- `11016277` Jāmjuri
+- `11030630` Chak Abdul Ghani
+- `11030651` Bajopur
+- `13715447` Kewas Nizamat
+- `13715448` Lakhmipur Maheshpatti Deal
+- `1248` Senowkesh
+- `1253` Tāzeh Kand-e Khūsheh Mehr
+- `3287` Ḩājjīābād
+- `3291` Aḩmadābād
+- `3378` Khalvat
+- `17539` Yengī Kand
+- `17540` Banājūy-e Shomālī
+- `17590` Tajaraq
+- `17591` Zavāraq
+- `17603` Tāzeh Kand
+- `17632` Shalīvand
+- `17656` Sargezeh
+- `17686` Ravesht-e Kūchak
+- `17753` Qarātlū
+- `17766` Qal‘eh Khāleşeh
+- `17805` Narjābād
+- `17836` Mehmāndār
+- `17878` Kordeh Deh
+- `17899` Khāneqāh
+- `17901` Khāneh-ye Barq-e Mojarlū
+- `17913` Karajābād
+- `17934` Javān Qal‘eh
+- `17958` Ḩūrī
+- `18000` Gowravān
+- `18061` Dastjerd
+- `18084` Dīzaj-e Parvāneh
+- `18107` Chavān-e Soflá
+- `18108` Chavān-e ‘Olyā
+- `18149` Bārāzlu
+- `18210` Āghājerī
+- `18532` Şadāqeh
+- `22205` Zaglūjeh
+- `22335` Shīrvāneh Deh
+- `22374` Sīnāb
+- `22527` Nokhvodābād
+- `22650` Jūqān-e Kūchak
+- `22790` Charzeh Khūn
+- `22932` Ābrīz
+- `22963` ‘Eyn od Dīn
+- `40078` Shahrak-e Beheshtī
+- `41839` Amīrābād-e Kohneh
+- `41845` Ārāsanj-e Pā’īn
+- `41848` Fatḩābād
+- `41850` Şeḩḩatābād
+- `111760` Yengījeh
+- `112123` Varzeqān
+- `112289` Valīābād
+- `115447` Sharabīān
+- `117954` Şadrābād
+- `119404` Qeshlāq-e Mūrānlū
+- `119860` Qarah Chopoq
+- `119902` Qarah Bābā
+- `123299` Morād Tappeh
+- `127095` Khūsheh Mehr-e Khūjeh Mīr
+- `127162` Khūnān
+- `127361` Khormā Zard
+- `129184` Kalhor
+- `130288` Jārū
+- `130565` Jahānābād
+- `130715` Eyvaq
+- `132755` Gūrchīn
+- `134334` Kahaq
+- `135121` ‘Eşmatābād
+- `136216` Dīkhū’īyeh
+- `137156` Dastjerd
+- `139901` Bū’īn
+- `139902` Bū’īn
+- `140712` Bīāhī
+- `142800` Āshān
+- `143110` Ārāsanj-e Bālā
+- `143544` Amīr Zakarīā
+- `143769` Ālqū
+- `144348` Qeshlāq Ākhūnd
+- `144618` Āhaq
+- `402130` Varnakesh
+- `6709970` Āghcheh Masjed
+- `6717089` Jānbahān
+- `1840898` Paju
+- `2338393` Ijiegwu maa clan
+- `2743595` Zwaag
+- `2751369` Lutjewinkel
+- `2753488` Huis ter Heide
+- `2753510` Huisduinen
+- `2755211` Grootebroek
+- `2755996` Etten-Leur
+- `2758498` Bovenkarspel
+- `6544871` J. J. Allanstraat
+- `1681421` To-oy
+- `1698993` Nabali-an
+- `1713461` Gabon
+- `1723472` Buenavista
+- `13713159` Sara-et
+- `13713162` Bayan-bayanan
+- `3060430` Dolné Vestenice
+- `161398` Ýasga
+- `161611` Nohur
+- `1218943` Hojeýpil
+- `314353` Gökçealan
+- `319607` Çamlık
+- `737457` Cumhuriyet
+- `737907` Yayıklı
+- `738041` Yalınkaya
+- `738128` Yağlıca
+- `738209` Varlı
+- `738725` Tomarlı
+- `739342` Subatan
+- `739895` Şehitemin
+- `740093` Sarıgün
+- `740467` Şabanköy
+- `740710` Paşaçayırı
+- `741165` Olçulu
+- `741603` Mescitli
+- `742268` Kümbetli
+- `742288` Kuloğlu
+- `742478` Koyunyurdu
+- `742803` Koçköy
+- `742851` Kocaköy
+- `743223` Türkmeşen
+- `743598` Kazıkkaya
+- `744215` Karakuş
+- `744328` Karahan
+- `744591` Karabağ
+- `744592` Karabağ
+- `744820` Kalebaşı
+- `745161` İnkaya
+- `745211` İncesu
+- `745836` Harmanlı
+- `745915` Hamzagerek
+- `746003` Halefoğlu
+- `746293` Günindi
+- `747010` Gecikmez
+- `747242` Eşmeyazı
+- `747327` Esenyayla
+- `748130` Dikme
+- `748322` Derecik
+- `748364` Denizgölü
+- `748403` Demirkent
+- `748687` Damar
+- `749136` Çığırgan
+- `749268` Çerme
+- `749311` Çengilli
+- `749521` Çayarası
+- `749800` Çamyazı
+- `749948` Çallı
+- `750028` Çakmak
+- `750230` Büyük Çatak
+- `750435` Boyuntaş
+- `750574` Bucuklu
+- `750711` Beşyol
+- `750764` Benliahmet
+- `750802` Belencik
+- `751016` Başköy
+- `751488` Aydınkavak
+- `751849` Arpalı
+- `751885` Armutlu
+- `752090` Alisofu
+- `752162` Alem
+- `752517` Akdam
+- `752605` Akçakale
+- `752763` Akören
+- `10201625` Eşmeçayır
+- `13713146` Kazım Karabekir Mahallesi
+- `13713147` İnönü Mahallesi
+- `13713148` Tepe Mahallesi
+- `13713149` Topkaya Mahallesi
+- `13713150` İstasyon Mahallesi
+- `13713151` Yeni Mahallesi
+- `13713152` Orta Mahallesi
+- `13713154` Çarşı Mahallesi
+- `13713155` Cumhuriyet Mahallesi
+- `13713156` Köprübaşı Mahallesi
+- `13713167` Inönü
+- `13713168` Cumhuriyet
+- `13713169` İstiklal
+- `13713170` Şehitler
+- `13713171` Tepe
+- `13713172` Yeni
+- `13713173` İstasyon
+- `13713174` Erenler
+- `13713176` Şahindere
+- `13713177` Aşağı Kümbet
+- `13713178` Aşağıdere
+- `13713179` Yukarı Kümbet
+- `13713180` Zuvar
+- `13713181` Yukarı Dere
+- `13713182` Toprakkale
+- `13713184` Yenişehir
+- `13713185` Şehitler
+- `13713186` İstasyon
+- `13713187` Cumhuriyet
+- `13713188` Örnek
+- `13713189` Yeni
+- `13713190` Halitpaşa
+- `13713191` Ortakapı
+- `13713192` Bülbül
+- `13713193` Aydınlıkevler
+- `13713194` Hafızpaşa
+- `13713195` Merkez
+- `13713196` 30 Ekim
+- `13713197` Alpaslan
+- `13713198` Bayrampaşa
+- `13713199` Yusufpaşa
+- `13713200` Bahçelievler
+- `13713201` Fevziçakmak
+- `13713202` Karadağ
+- `13713203` Atatürk
+- `13713204` Kaleiçi
+- `13713217` Küre
+- `13715435` Uzunyalı
+- `13715437` Cumhuriyet
+- `702285` Maksymilyanivka
+- `1567523` Nha Bích
+
+**Removed (7)**
+
+- `17556` Valīn Jeq
+- `18177` Alīn Jaq
+- `744053` Karaurgan
+- `744216` Karakurt
+- `751029` Başgedikler
+- `751737` Aşağı Irmaklar
+- `704046` Kryva Luka
+
 ## 2026-10-11 21:33 UTC
 
 ### Subdivisions

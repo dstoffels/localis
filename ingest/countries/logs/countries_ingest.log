@@ -1,14 +1,19 @@
 [COUNTRIES]
-[INFO] No update needed for iso_3166-1.json
-[INFO] No update needed for iso_3166-3.json
-[INFO] No update needed for geonamesInfo.txt
-[INFO] No update needed for geonames_readme.txt
+[INFO] Downloading iso_3166-1.json from https://salsa.debian.org/iso-codes-team/iso-codes/-/raw/e1ae709ba406c1c3698f2130b3480ad9e5d1b0df/data/iso_3166-1.json
+[INFO] Downloaded and updated iso_3166-1.json
+[INFO] Downloading iso_3166-3.json from https://salsa.debian.org/iso-codes-team/iso-codes/-/raw/e1ae709ba406c1c3698f2130b3480ad9e5d1b0df/data/iso_3166-3.json
+[INFO] Downloaded and updated iso_3166-3.json
+[INFO] Downloading geonamesInfo.txt from https://download.geonames.org/export/dump/countryInfo.txt
+[INFO] Downloaded and updated geonamesInfo.txt
+[INFO] Downloading geonames_readme.txt from https://download.geonames.org/export/dump/readme.txt
+[INFO] Downloaded and updated geonames_readme.txt
 [INFO] No update needed for cldr_currency_data.json
 [INFO] Loading ISO countries...
 [INFO] Loading historic ISO countries...
 [INFO] Merging GeoNames countries...
 [INFO] country not in ISO 3166-1, added from GeoNames: XK (Kosovo)
 [INFO] Querying Wikidata for country names...
+[INFO] Wikidata country names changed since the last promoted build: 1 changed, 0 added, 0 removed
 [INFO] Merging Wikidata country names...
 [INFO] MF: dropped aliases shared with another country: Saint Martin, Saint-Martin, St Martin, St. Martin
 [INFO] SX: dropped aliases shared with another country: Saint Martin, St Martin

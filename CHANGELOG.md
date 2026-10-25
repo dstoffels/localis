@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Data
+
+#### 2026-10-25 04:10 UTC
+
+| Dataset | Records | Added | Removed | Changed | Changed fields |
+|---|---|---|---|---|---|
+| Subdivisions | 51,709 → 51,833 | 131 | 7 | 25 | `aliases` (25), `name` (15) |
+| Cities | 236,353 → 236,652 | 303 | 4 | 1,401 | `lng` (1,249), `lat` (1,245), `name` (134), `subdivisions` (111), `population` (33) |
+
+[Records renamed, added and removed](https://github.com/dstoffels/localis/blob/main/DATA_CHANGELOG.md#2026-10-25-0410-utc)
+
+#### 2026-10-19 14:53 UTC
+
+| Dataset | Records | Added | Removed | Changed | Changed fields |
+|---|---|---|---|---|---|
+| Subdivisions | 51,710 → 51,709 | 0 | 1 | 6 | `aliases` (6), `name` (1) |
+| Cities | 236,041 → 236,353 | 319 | 7 | 79 | `population` (67), `name` (8), `lat` (7), `lng` (7), `subdivisions` (3) |
+
+[Records renamed, added and removed](https://github.com/dstoffels/localis/blob/main/DATA_CHANGELOG.md#2026-10-19-1453-utc)
+
 ## [3.0.0b2] - 2026-10-11
 
 ### Added
