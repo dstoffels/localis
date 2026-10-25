@@ -1,5 +1,5 @@
 version = 1
-revision = 3
+revision = 5
 requires-python = ">=3.11"
 resolution-markers = [
     "python_full_version >= '3.14'",
@@ -443,7 +443,7 @@ wheels = [
 
 [[package]]
 name = "localis"
-version = "3.0.0b2"
+version = "3.0.0rc1"
 source = { editable = "." }
 dependencies = [
     { name = "rapidfuzz" },

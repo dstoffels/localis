@@ -2,7 +2,7 @@
 
 Fast, offline data for **countries**, **subdivisions**, **cities**, **macroregions**, **currencies**, **languages** and **scripts**, built from ISO 3166, ISO 4217, ISO 639-3, ISO 15924, GeoNames, Unicode CLDR and Wikidata (updated monthly), with exact lookups, filtering and typo-tolerant search.
 
-> ⚠️ **localis 3.0 is in beta.** `pip install localis` still installs 2.1.x, which is no longer maintained; install the beta with `pip install --pre localis`. The [CHANGELOG](https://github.com/dstoffels/localis/blob/main/CHANGELOG.md#upgrading-from-210) lists what changed from 2.1, and [docs/versioning.md](https://github.com/dstoffels/localis/blob/main/docs/versioning.md#pre-releases) explains the beta.
+> ⚠️ **localis 3.0 is a release candidate.** `pip install localis` still installs 2.1.x, which is no longer maintained; install the release candidate with `pip install --pre localis`. The [CHANGELOG](https://github.com/dstoffels/localis/blob/main/CHANGELOG.md#upgrading-from-210) lists what changed from 2.1, and [docs/versioning.md](https://github.com/dstoffels/localis/blob/main/docs/versioning.md#pre-releases) explains release candidates.
 
 ## Features
 
@@ -296,7 +296,7 @@ Narrows the cache and every index to cities of at least that population (`popula
 ```python
 localis.cities.set_population_threshold(15000)
 
-# Builds the cache with ~34178 cities on next access
+# Builds the cache with only cities of 15,000 or more on next access
 len(localis.cities)
 
 # back to every city

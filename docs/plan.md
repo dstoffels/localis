@@ -10,7 +10,7 @@ This document outlines the project plan for the Localis project, detailing the o
 
 ## Features
 
-Next: release 3.0.0b2. The betas move to release candidate two weeks after b2 at the earliest, since b2's continents add API and restart the clock, and only fixes land in a release candidate.
+Next: release 3.0.0 from 3.0.0rc1 after a week with no blocking issue, 2026-11-01 at the earliest. The API is frozen, and only fixes land in a release candidate.
 
 At 3.0.0 final: set pyproject's classifier back to `Development Status :: 5 - Production/Stable`, and the README's Installation commands back to `pip install localis` and `uv add localis` with its beta banner removed.
 
