@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.0] - 2026-11-01
+
 ### Data
 
 #### 2026-11-01 08:11 UTC
@@ -407,7 +409,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Comprehensive test suite
 - GitHub CI/CD Workflows
 
-[Unreleased]: https://github.com/dstoffels/localis/compare/v3.0.0rc1...HEAD
+[Unreleased]: https://github.com/dstoffels/localis/compare/v3.0.0...HEAD
+[3.0.0]: https://github.com/dstoffels/localis/compare/v3.0.0rc1...v3.0.0
 [3.0.0rc1]: https://github.com/dstoffels/localis/compare/v3.0.0b2...v3.0.0rc1
 [3.0.0b2]: https://github.com/dstoffels/localis/compare/v3.0.0b1...v3.0.0b2
 [3.0.0b1]: https://github.com/dstoffels/localis/compare/v2.1.0...v3.0.0b1
