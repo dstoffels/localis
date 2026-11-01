@@ -1,6 +1,6 @@
 [CURRENCIES]
-[INFO] Using iso-codes main at e1ae709ba406c1c3698f2130b3480ad9e5d1b0df
-[INFO] Downloading iso_4217.json from https://salsa.debian.org/iso-codes-team/iso-codes/-/raw/e1ae709ba406c1c3698f2130b3480ad9e5d1b0df/data/iso_4217.json
+[INFO] Using iso-codes main at 53b1c294240bcfb7429bbc225b9caeb9bf2128b3
+[INFO] Downloading iso_4217.json from https://salsa.debian.org/iso-codes-team/iso-codes/-/raw/53b1c294240bcfb7429bbc225b9caeb9bf2128b3/data/iso_4217.json
 [INFO] Downloaded and updated iso_4217.json
 [INFO] Loading ISO 4217 currencies...
 [INFO] Dumping 178 currencies...

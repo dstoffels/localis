@@ -3,15 +3,18 @@
 [INFO] Downloaded and updated admin1CodesASCII.txt
 [INFO] Downloading admin2Codes.txt from https://download.geonames.org/export/dump/admin2Codes.txt
 [INFO] Downloaded and updated admin2Codes.txt
-[INFO] Downloading iso_3166-2.json from https://salsa.debian.org/iso-codes-team/iso-codes/-/raw/e1ae709ba406c1c3698f2130b3480ad9e5d1b0df/data/iso_3166-2.json
+[INFO] Downloading iso_3166-2.json from https://salsa.debian.org/iso-codes-team/iso-codes/-/raw/53b1c294240bcfb7429bbc225b9caeb9bf2128b3/data/iso_3166-2.json
 [INFO] Downloaded and updated iso_3166-2.json
 [INFO] Querying Wikidata for ISO/GeoNames crosswalk...
+[INFO] Wikidata crosswalk is missing 4 committed keys, querying again to confirm
+[WARN] confirmed 4 Wikidata crosswalk entries removed on Wikidata: KY, NO-3905, SX, VG
+[INFO] Wikidata crosswalk changed since the last promoted build: 0 changed, 4 added, 4 removed
 [INFO] Loading GeoNames subdivisions...
 [INFO] Merging GeoNames alternate names into subdivision aliases...
-[INFO] Enriched 20278 GeoNames subdivisions with alternate names
+[INFO] Enriched 20285 GeoNames subdivisions with alternate names
 [INFO] Loading ISO subdivisions...
 [INFO] resolved 344/4997 subdivisions from skill decisions, 0 stale, 0 contested
-[INFO] resolved 4295/4653 subdivisions from Wikidata crosswalk, 0 held back as changed
+[INFO] resolved 4297/4653 subdivisions from Wikidata crosswalk, 0 held back as changed
 [INFO] bypassed IE-C 'Connaught' merged into its GeoNames twin IE.C 'Connacht'
 [INFO] bypassed IE-L 'Leinster' merged into its GeoNames twin IE.L 'Leinster'
 [INFO] bypassed IE-M 'Munster' merged into its GeoNames twin IE.M 'Munster'
@@ -41,11 +44,12 @@
 [INFO] Attempting to merge ISO to GeoNames subdivisions...
 [INFO] merged MK-211 'Štip' -> MK.98 'Shtip' (89/75)
 [INFO] merged UZ-TK 'Toshkent' -> UZ.13 'Tashkent' (88/80)
-[INFO] Merged 353/358 ISO subdivisions
+[INFO] Merged 351/356 ISO subdivisions
 [INFO] 5 added as-is, their countries have no GeoNames subdivisions: SG-01, SG-02, SG-03, SG-04, SG-05
 [INFO] 0 subdivisions orphaned (no_candidates=0, no_matches=0, ambiguity=0, low_margin=0, wikidata_conflict=0, stale_decision=0, contested_decision=0, new_candidate=0, wikidata_changed=0, grouping_twin=0)
-[INFO] Dumping 51833 subdivisions...
+[WARN] GeoNames admin2 IL.WE.11821182 'Mateh Binyamin Regional Council' has no admin1 IL.WE in this build, so it ships at level 1 with no parent
+[INFO] Dumping 51827 subdivisions...
 [INFO] Dumping subdivisions lookup indexes...
 [INFO] Dumping subdivisions filter index...
 [INFO] Dumping subdivisions search index...
-[INFO] completed: 51833 subdivisions
+[INFO] completed: 51827 subdivisions

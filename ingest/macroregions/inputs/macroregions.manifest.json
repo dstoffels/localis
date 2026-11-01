@@ -1,12 +1,12 @@
 {
   "cldr_territory_containment.json": {
-    "url": "https://raw.githubusercontent.com/unicode-org/cldr-json/91c267402229a59e3ef2774544f001bf959e8809/cldr-json/cldr-core/supplemental/territoryContainment.json",
-    "etag": "\"f000254a685b658aa68c1abacdbbbbd4778e02456cbd7c3549a1b9568946103e\"",
-    "sha256": "9f7d2eed5278ebb7c302b7536e391708b237945c314d09a206c632c2fab45ee2"
+    "url": "https://raw.githubusercontent.com/unicode-org/cldr-json/7d2b9cb11cec08f4d333ad73209deb3df0711c3b/cldr-json/cldr-core/supplemental/territoryContainment.json",
+    "etag": "\"5a535c796d663016986dfbe4775e77f747a94bf9a9c5d00346992d8d65dcd636\"",
+    "sha256": "9d124223e0005038b3ce0b9c2b80f8f30f221658373768aaa98bc28b3cdd9beb"
   },
   "cldr_territory_names_en.json": {
-    "url": "https://raw.githubusercontent.com/unicode-org/cldr-json/91c267402229a59e3ef2774544f001bf959e8809/cldr-json/cldr-localenames-full/main/en/territories.json",
-    "etag": "\"2e654bc2dcd5b21ed0c8c0e719f1eb34733777607d5a105581643193ef8af8c9\"",
-    "sha256": "158c1d575308f7e46912edbeda435c8fe2ef5dad280798231f3a432e406b1807"
+    "url": "https://raw.githubusercontent.com/unicode-org/cldr-json/7d2b9cb11cec08f4d333ad73209deb3df0711c3b/cldr-json/cldr-localenames-full/main/en/territories.json",
+    "etag": "\"1debc27d6581eb7c5e98e56dd777665383bb12da6194350a41c8b6367888ebac\"",
+    "sha256": "1326fb3bcdf8b8cf63df73ea02ea7f8bf7a8362cbb60bd12bcdb53f3ad22bf04"
   }
 }

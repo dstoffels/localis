@@ -4,6 +4,290 @@ Every record an ingest run renamed, added or removed, by `key`, newest first. Ea
 
 Runs up to 2026-10-11 21:33 UTC were rebuilt from the per-dataset reports committed with each, dated by their commit; where several runs went into one commit, only the last one's changes were recorded.
 
+## 2026-11-01 08:11 UTC
+
+### Subdivisions
+
+**Renamed (4)**
+
+- `IN.38.357` Purba Singhbhum → Purbi Singhbhum
+- `MN.03.6619142` Ulaanhus → Ulaankhus
+- `MN.03.6619144` Sagsay sum → Sagsai
+- `MN.03.6619150` Altay → Altai
+
+**Removed (6)**
+
+- `AO.02.3351013` Camacupa
+- `DE.16.00` Schöneberg
+- `ET.52.327278` Gashamo Hawd Somali Ethiopia
+- `IL.WE` Judea and Samaria Area
+- `MN.03.6619140` Tsagaannuur
+- `TM.01.11189155` Bäherden District
+
+### Cities
+
+**Renamed (15)**
+
+- `1337233` Bogra → Bogura
+- `13665232` Fort Garry South → Fort Garry
+- `1279715` Rikaze → Xigazê
+- `1261870` Nārāinpur → Narayanpur
+- `7934` Koshkesarā → Khoshk-e Sarā
+- `130697` Īz̄eh → Īẕeh
+- `688732` Dneprovka → Dniprovka
+- `692039` Svitiaz → Svityaz
+- `693272` Sokolinoye → Sokolyne
+- `693342` Sofiivka → Sofiyivka
+- `695265` Ruch’i → Ruchyi
+- `703498` Kuibyshevo → Albat
+- `713202` Aromatnoye → Aromatne
+- `7021048` Luganskoye → Luhanske
+- `7040021` Aromatnoye → Aromatne
+
+**Added (226)**
+
+- `1186744` Shyampur
+- `1186869` Surjya Narayanpur
+- `1188692` Sāphāisri
+- `1189607` Rāynanda
+- `1189640` Rāutkona
+- `1190121` Rāmdāsdi
+- `1191658` Pābur
+- `1196287` Lakshmipur
+- `1196868` Krishnapur
+- `1196961` Kotrabad
+- `1197352` Khudādia
+- `1198689` Kardania
+- `1199691` Junia
+- `1200303` Jāmirdia
+- `1201792` Habirbāri
+- `1203605` Dasyu Nārāyanpur
+- `1207073` Chārbaria
+- `1210038` Bārun
+- `1210426` Barajona
+- `1211056` Bandhugaon
+- `1211115` Bānār Hāola
+- `1211255` Ballabhpur
+- `1212324` Ātgāon
+- `1213265` Ādampur
+- `7487903` Bajania
+- `7487907` Chota Bālihāra
+- `7487911` Alampur
+- `7487912` Bara Bālihāra
+- `7487966` Baragaon
+- `7487969` Barua
+- `7487976` Dakkhingaon
+- `7488270` Biral
+- `8430421` Kapasia
+- `13731759` Kutubpur
+- `13731760` Kalyanpur
+- `13731761` Muslimpur
+- `13731762` Zaherpur
+- `13731763` Nazirpur
+- `13731764` Muradpur
+- `13731765` Beri Daulatpur
+- `727391` Seliminovo
+- `3571275` Upper Bogue
+- `3571500` Sandy Point
+- `3571944` Mangrove Cay
+- `3572110` Kemps Bay
+- `3572165` Hope Town
+- `3572443` Eight Mile Rock
+- `3572716` Bullocks Harbour
+- `11694815` Grand Cay
+- `5907166` Bradford
+- `5957169` Foxtrap
+- `5990415` Kelligrews
+- `6140443` Sand Pits
+- `6167794` Topsail
+- `13731645` Wigmore
+- `13731646` Baird
+- `13731647` Cumberland
+- `13731648` Memorial University of Newfoundland
+- `13731649` Summerville
+- `13731650` Central St. John's
+- `13731651` White Hills
+- `13731654` Ecclesiastical District
+- `13731656` Wedgewood Park
+- `13731657` Kents Pond
+- `13731658` Ropewalk Lane
+- `13731660` Sheffield Estates
+- `13731662` Crosbie
+- `13731663` Old Pennywell Road
+- `13731664` Newton
+- `13731665` West End
+- `13731666` Lower Cowan Heights
+- `13731667` Old West End
+- `13731668` Cornwall Heights
+- `13731669` Newtown
+- `13731670` Westgate
+- `13731671` Chamberlains
+- `13731672` Manuels
+- `13731673` Long Pond
+- `13731674` Upper Gullies
+- `13731675` East End
+- `13731778` Peachytown
+- `13731797` Beaumont
+- `13731798` Brockville
+- `13731800` Crescent Park
+- `13731801` Linden Ridge
+- `13731802` Maybank
+- `13731803` Pembina Strip
+- `13731804` Point Road
+- `13731805` Whyte Ridge
+- `13731806` Wildwood
+- `13731807` Assiniboine South
+- `13731808` Betsworth
+- `13731809` Edgeland
+- `13731810` Elmhurst
+- `13731811` Eric Coy
+- `13731812` Marlton
+- `13731813` Old Tuxedo
+- `13731814` Ridgedale
+- `13731815` Ridgewood South
+- `13731816` River West Park
+- `13731817` Roblin Park
+- `13731818` South Tuxedo
+- `13731819` Southboine
+- `13731820` Tuxedo
+- `13731821` Tuxedo Industrial
+- `13731822` Varsity View
+- `13731823` Vialoux
+- `13731824` Westdale
+- `13731825` Wilkes South
+- `2827219` Stetten
+- `2909105` Hauingen
+- `2943818` Brombach
+- `3205431` Tüllingen
+- `13731722` Salzert
+- `3025692` Chazay-d'Azergues
+- `2301715` Dixcove
+- `1274290` Chhotedongar
+- `1275543` Benoor
+- `1429710` Dāra
+- `1429733` Faqir Gujri
+- `1429801` Sangam
+- `1429810` Gagarzoo
+- `1430737` Takan Wari Pora
+- `8440738` Mahimagawadi
+- `9035970` Sahispur
+- `11625217` Gore
+- `13731792` Lasjan
+- `13731827` Bhatpal
+- `13731829` Sonapal
+- `13731835` Malingnar
+- `13731838` Udidgaon
+- `13731839` Seoni
+- `13731840` Matawand Bagbeda
+- `13731841` Timnar
+- `13731844` Cooper's Camp
+- `93726` Qaryat Manārat Shabak
+- `445592` Khaznah Tabah
+- `6860784` Qaryat al Lakk
+- `13731884` Al-Mūwaffaqiyah
+- `35697` Vargeh Sarān
+- `37562` Kūrā’īm
+- `37740` Qarah Tappeh-ye Sabalān
+- `37822` Kordeh Deh
+- `38032` Āldāshīn
+- `125775` Lavāsān-e Bozorg
+- `130167` Jerā
+- `130175` Jenāqerd
+- `135295` Esfeden
+- `136254` Dezhkord
+- `137432` Darreh Shūr
+- `138080` Delīābād
+- `142793` ‘Āsheqlū
+- `143738` Alvārsī
+- `144649` Āghān
+- `144920` Ābsard
+- `11838560` Quartieri Spagnoli
+- `12023019` Città Giardino
+- `13731753` Villaggio Snia
+- `13731755` Barriera di Orbassano
+- `13731757` Barriera di Chieri
+- `13731885` Pista
+- `13731886` Europa
+- `13731887` Orti
+- `13731888` Cristo
+- `13731889` Borgo Cittadella
+- `2743746` Zuidermeer
+- `2744237` Wognum
+- `2744239` Wogmeer
+- `2744820` Wervershoof
+- `2744977` Watergang
+- `2745674` Velsen-Noord
+- `2745858` Valkeveen
+- `2745924` Ursem
+- `2746255` t Kruis
+- `2746980` Spanbroek
+- `2747132` Sloten
+- `2747332` Sijbekarspel
+- `2747377` `s-Graveland
+- `2747640` Schellingwoude
+- `2747668` Scharwoude
+- `2747759` Santpoort-Zuid
+- `2747760` Santpoort-Noord
+- `2748917` Oudorp
+- `2749242` Osdorp
+- `2749997` Noord-Bakkum
+- `2750016` Nollen
+- `2750345` Nieuwebrug
+- `2750398` Nibbixwoud
+- `2750415` Nes aan de Amstel
+- `2753006` Katwoude
+- `2753691` Hoogkarspel
+- `2756524` Duin en Bosch
+- `2756648` Draai
+- `2757893` Crailo
+- `2758271` Broekhorn
+- `2758495` Bovenkerk
+- `2759191` Benningbroek
+- `2759751` Ankeveen
+- `2759951` Aerdenhout
+- `11395749` Spaarndam gem. Haarlem
+- `12547269` Nieuw-Vennep - Getsewoud
+- `1173176` Kot Khaira
+- `1179038` Gandakha
+- `1183994` Bagh
+- `3080129` Zimna Wódka
+- `1506230` Gorodok
+- `723510` Stakčín
+- `3056916` Veľká Lehôtka
+- `3056934` Veľká Čausa
+- `3057884` Ráztočno
+- `3058901` Malá Čausa
+- `3059074` Lipník
+- `3059457` Kocurany
+- `3059737` Jalovec
+- `3059893` Hradec
+- `3060408` Kamenec pod Vtáčnikom
+- `3060702` Chrenovec-Brusno
+- `3060783` Čereňany
+- `3060861` Bystričany
+- `3060918` Brusno
+- `161647` Mehinli
+- `13731653` Sursuru
+- `13731769` Pınarbaşı
+- `697947` Pasichna
+- `710474` Chyhyri
+- `13731714` Moldavanka
+
+**Removed (12)**
+
+- `2911461` Hallungen
+- `2950958` Bad Bentheim
+- `6652945` Akbarābād
+- `6666853` Parandak
+- `9533956` Bahābād
+- `13715696` Sejong
+- `3517524` Tecámac de Felipe Villanueva
+- `3518618` Teotihuacán de Arista
+- `3530756` San Pedro Cholula
+- `1170564` Mehrabpur
+- `1182851` Bhagwal
+- `12167218` Avtozavodskyi
+
 ## 2026-10-25 04:10 UTC
 
 ### Subdivisions

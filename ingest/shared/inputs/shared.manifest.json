@@ -1,12 +1,12 @@
 {
   "alternateNamesV2.txt": {
     "url": "https://download.geonames.org/export/dump/alternateNamesV2.zip",
-    "etag": "\"c3a7bfa-65e8c7bb1722c\"",
-    "sha256": "eaa2957ee6f39a2a46e4f67f17cfc5c884009d116f0f824268e4c7f7b0acdbf9"
+    "etag": "\"c3ab785-65f2edc0013e5\"",
+    "sha256": "56c9adf18af2b246f915f9fed424a949e4d8d731c6f24d293a8fc1cbdd7cd0c7"
   },
   "cldr_territory_info.json": {
-    "url": "https://raw.githubusercontent.com/unicode-org/cldr-json/91c267402229a59e3ef2774544f001bf959e8809/cldr-json/cldr-core/supplemental/territoryInfo.json",
-    "etag": "\"8c6146cae002a8b99dabd61010f70745716edd940dba4a9b90758ea597dbeff1\"",
-    "sha256": "b50369a0e1f5434c942dfe45064b39f488604ca0cedac5117e993248c19f2c0a"
+    "url": "https://raw.githubusercontent.com/unicode-org/cldr-json/7d2b9cb11cec08f4d333ad73209deb3df0711c3b/cldr-json/cldr-core/supplemental/territoryInfo.json",
+    "etag": "\"63293162b7a4c82f75b8a1bfb5a0a867a2c35c8eb63c5a988a7fe62bc67eadc6\"",
+    "sha256": "c8aa7654c87de234118f14ada0e1466eb09467bed4048da7eab3e7e63ffe335d"
   }
 }
