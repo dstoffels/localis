@@ -10,10 +10,6 @@ This document outlines the project plan for the Localis project, detailing the o
 
 ## Features
 
-Next: release 3.0.0 from 3.0.0rc1 after a week with no blocking issue, 2026-11-01 at the earliest. The API is frozen, and only fixes land in a release candidate.
-
-At 3.0.0 final: set pyproject's classifier back to `Development Status :: 5 - Production/Stable`, and the README's Installation commands back to `pip install localis` and `uv add localis` with its beta banner removed.
-
 Cities search, potential feature: GeoNames names New York City "New York City", so `cities.filter(name="New York")` finds nothing and search finds it only partly. English alternate names for cities, previously left out because adding all of them would bloat the dataset, could be bounded instead: English only, for cities above a population floor (15,000 keeps about 34,000 of 236,000), skipping colloquial and historic entries as the subdivision stage does. `alternateNamesV2.txt` is already fetched for subdivisions, so it needs no new source. Measure the growth of the shipped data and the canon trigram index before deciding; a `City.aliases` field would be an API addition, so in a beta it restarts the two weeks before the release candidate. Names in other languages belong to the translation layer (Translations, below), not to `City.aliases`.
 
 ## Done
@@ -27,6 +23,7 @@ Cities search, potential feature: GeoNames names New York City "New York City", 
 - Skill decision lifecycle (#28), 3.0.0b2: every skill decision is classified on every run, stale, contested and new-candidate decisions go back to the skill, and retired ones move to `retired_decisions`. methodology.md's Merge precedence and dev.md describe it.
 - Gzipped data files (#29), 3.0.0b2: every shipped data file but `NOTICE` is gzipped, cutting the install from 53.6 MB to about 32 MB. dev.md's shipped-size section describes it.
 - Data changelog, 3.0.0b2: every ingest run that changes a record adds a table to the CHANGELOG's Data subsection and its renamed, added and removed records to `DATA_CHANGELOG.md`, replacing the per-stage change reports. dev.md's Pipeline section describes it.
+- 3.0.0, released 2026-11-01 from 3.0.0rc1 after a week with no blocking issue, with pyproject's classifier back to `Development Status :: 5 - Production/Stable` and the README's Installation commands back to `pip install localis` and `uv add localis`, its release-candidate banner replaced by a pointer to the upgrade notes.
 
 ## Backlog
 

@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.0] - 2026-11-01
+
+### Data
+
+#### 2026-11-01 08:11 UTC
+
+| Dataset | Records | Added | Removed | Changed | Changed fields |
+|---|---|---|---|---|---|
+| Scripts | 226 → 226 | 0 | 0 | 1 | `aliases` (1) |
+| Languages | 7,923 → 7,923 | 0 | 0 | 13 | `scripts` (12), `aliases` (1) |
+| Countries | 281 → 281 | 0 | 0 | 5 | `languages` (3), `groupings` (2) |
+| Subdivisions | 51,833 → 51,827 | 0 | 6 | 15 | `aliases` (12), `name` (4), `admin_level` (1), `parent` (1) |
+| Cities | 236,652 → 236,866 | 226 | 12 | 252 | `population` (123), `subdivisions` (116), `name` (15), `lat` (5), `lng` (5) |
+
+[Records renamed, added and removed](https://github.com/dstoffels/localis/blob/main/DATA_CHANGELOG.md#2026-11-01-0811-utc)
+
 ## [3.0.0rc1] - 2026-10-25
 
 ### Changed
@@ -393,7 +409,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Comprehensive test suite
 - GitHub CI/CD Workflows
 
-[Unreleased]: https://github.com/dstoffels/localis/compare/v3.0.0rc1...HEAD
+[Unreleased]: https://github.com/dstoffels/localis/compare/v3.0.0...HEAD
+[3.0.0]: https://github.com/dstoffels/localis/compare/v3.0.0rc1...v3.0.0
 [3.0.0rc1]: https://github.com/dstoffels/localis/compare/v3.0.0b2...v3.0.0rc1
 [3.0.0b2]: https://github.com/dstoffels/localis/compare/v3.0.0b1...v3.0.0b2
 [3.0.0b1]: https://github.com/dstoffels/localis/compare/v2.1.0...v3.0.0b1

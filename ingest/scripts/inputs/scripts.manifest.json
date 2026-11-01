@@ -1,11 +1,11 @@
 {
   "cldr_script_names_en.json": {
-    "url": "https://raw.githubusercontent.com/unicode-org/cldr-json/91c267402229a59e3ef2774544f001bf959e8809/cldr-json/cldr-localenames-full/main/en/scripts.json",
-    "etag": "\"a96a77dff52fa8eb8fe091bf4a45ea550a4b349ca9d04453a39fd2a7f6008e3a\"",
-    "sha256": "48ce7e6cf85ca719ec04850786e778bb93fb7c83067a417f56f02d2fa882448b"
+    "url": "https://raw.githubusercontent.com/unicode-org/cldr-json/7d2b9cb11cec08f4d333ad73209deb3df0711c3b/cldr-json/cldr-localenames-full/main/en/scripts.json",
+    "etag": "\"8fe6bc3b3745ff5b43f7aee9ca208fec213a8fb49bdaf9a32b9fa5d6d6e03960\"",
+    "sha256": "614a57f49733751c5b2d8df4bd880e5354582ee8362e47e3a2633bedc13b2403"
   },
   "iso_15924.json": {
-    "url": "https://salsa.debian.org/iso-codes-team/iso-codes/-/raw/e1ae709ba406c1c3698f2130b3480ad9e5d1b0df/data/iso_15924.json",
+    "url": "https://salsa.debian.org/iso-codes-team/iso-codes/-/raw/53b1c294240bcfb7429bbc225b9caeb9bf2128b3/data/iso_15924.json",
     "etag": "W/\"a207def2586075d409bd4dff9337e44d-gzip\"",
     "sha256": "cb7e2ed1bd2345a9ac119aad0a38adfaf6170b8699f45b988c30cc102199312d"
   }

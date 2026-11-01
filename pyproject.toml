@@ -1,7 +1,7 @@
 [project]
 name = "localis"
-version = "3.0.0rc1"
-description = "Fast, offline access to comprehensive data for countries, subdivisions, cities, macroregions, currencies, languages and scripts. Built on ISO 3166, ISO 4217, ISO 639-3, ISO 15924, GeoNames and Unicode CLDR datasets (updated monthly) with support for exact lookups, filtering, and fuzzy search."
+version = "3.0.0"
+description = "Offline reference data for countries, subdivisions, cities, macroregions, currencies, scripts and languages, merged from ISO standards, GeoNames, Unicode CLDR and Wikidata, with lookups, filtering and typo-tolerant search."
 readme = "README.md"
 authors = [
   {name = 'danimal', email= 'dan.stoffels@gmail.com'}
@@ -14,7 +14,7 @@ keywords = [
   "iso", "3166", "iso-3166", "3166-1", "3166-2", "3166-3", "iso-4217", "iso-639", "iso-639-3", "iso-15924", "m49", "geocoding", "country codes", "geonames", "cldr", "wikidata", "geography", "geodata", "gazetteer", "offline", "fuzzy-search",
 ]
 classifiers = [
-    "Development Status :: 4 - Beta",
+    "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.11",
