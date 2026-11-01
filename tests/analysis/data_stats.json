@@ -22,15 +22,15 @@
   },
   "scripts": {
     "total": 226,
-    "with_aliases": 69
+    "with_aliases": 70
   },
   "languages": {
     "total": 7923,
     "living": 7078,
     "macrolanguages": 63,
     "with_alpha2": 184,
-    "with_scripts": 811,
-    "with_aliases": 117,
+    "with_scripts": 820,
+    "with_aliases": 118,
     "country_entries": 492,
     "country_entries_with_script": 20,
     "current_countries_without": 4
@@ -114,23 +114,23 @@
       "municipalities": 38,
       "kosovan_records": 45
     },
-    "total": 51833,
+    "total": 51827,
     "iso_total": 5046,
     "iso_merged": 4843,
     "iso_merged_pct": 96.0,
     "iso_only": 203,
-    "geonames_total": 51630,
-    "geonames_only": 46787,
+    "geonames_total": 51624,
+    "geonames_only": 46781,
     "by_level": {
       "0": 49,
       "1": 4199,
-      "2": 47520,
+      "2": 47514,
       "3": 65
     }
   },
   "resolution": {
-    "wikidata": 4295,
-    "automerge": 353,
+    "wikidata": 4297,
+    "automerge": 351,
     "skill_merge": 170,
     "skill_add": 174,
     "bypass_twinned": 25,
@@ -144,24 +144,24 @@
   },
   "wikidata": {
     "crosswalk_codes": 4968,
-    "disagreements": 278,
-    "disagreements_not_admin": 276
+    "disagreements": 279,
+    "disagreements_not_admin": 277
   },
   "cities": {
-    "total": 236652,
+    "total": 236866,
     "threshold": 15000,
-    "above_threshold": 34198,
+    "above_threshold": 34213,
     "ascii_names": 24,
-    "unlinked": 459,
+    "unlinked": 461,
     "unlinked_no_admin1": 117,
     "unlinked_admin1_00": 303,
-    "unlinked_unknown_admin1": 39,
-    "shipped_unlinked": 459
+    "unlinked_unknown_admin1": 41,
+    "shipped_unlinked": 461
   },
   "filter_index": {
     "cities": {
-      "values": 277874,
-      "single_record_values": 217195
+      "values": 278093,
+      "single_record_values": 217381
     },
     "countries": {
       "values": 2121,
@@ -172,44 +172,44 @@
       "single_record_values": 176
     },
     "languages": {
-      "values": 9761,
-      "single_record_values": 9648
+      "values": 9766,
+      "single_record_values": 9649
     },
     "scripts": {
-      "values": 298,
-      "single_record_values": 298
+      "values": 299,
+      "single_record_values": 299
     },
     "subdivisions": {
-      "values": 75753,
-      "single_record_values": 70535
+      "values": 75761,
+      "single_record_values": 70547
     }
   },
   "shipped_size": {
-    "total": 32048512,
+    "total": 32067669,
     "cities": {
-      "total": 25831463,
+      "total": 25851750,
       "share_pct": 80.6,
       "files": {
-        "canon_index.bin.gz": 4985044,
-        "canon_index_offsets.tsv.gz": 73957,
-        "cities.tsv.gz": 5029350,
-        "context_index.bin.gz": 8592150,
-        "context_index_offsets.tsv.gz": 44320,
-        "filter_index.bin.gz": 3377013,
-        "filter_index_offsets.tsv.gz": 2105660,
-        "lookup_index_int.tsv.gz": 1149396,
-        "short_names.tsv.gz": 474573
+        "canon_index.bin.gz": 4989606,
+        "canon_index_offsets.tsv.gz": 74102,
+        "cities.tsv.gz": 5033673,
+        "context_index.bin.gz": 8600116,
+        "context_index_offsets.tsv.gz": 44363,
+        "filter_index.bin.gz": 3377531,
+        "filter_index_offsets.tsv.gz": 2107134,
+        "lookup_index_int.tsv.gz": 1150464,
+        "short_names.tsv.gz": 474761
       }
     },
     "countries": {
-      "total": 64649,
+      "total": 64651,
       "share_pct": 0.2,
       "files": {
         "canon_index.bin.gz": 10945,
         "canon_index_offsets.tsv.gz": 12247,
-        "countries.tsv.gz": 15712,
-        "filter_index.bin.gz": 4782,
-        "filter_index_offsets.tsv.gz": 15727,
+        "countries.tsv.gz": 15705,
+        "filter_index.bin.gz": 4784,
+        "filter_index_offsets.tsv.gz": 15734,
         "lookup_index_int.tsv.gz": 915,
         "lookup_index_str.tsv.gz": 1745,
         "short_names.tsv.gz": 2576
@@ -230,16 +230,16 @@
       }
     },
     "languages": {
-      "total": 451893,
+      "total": 452075,
       "share_pct": 1.4,
       "files": {
         "canon_index.bin.gz": 153824,
         "canon_index_offsets.tsv.gz": 30226,
-        "filter_index.bin.gz": 54065,
-        "filter_index_offsets.tsv.gz": 72617,
-        "languages.tsv.gz": 81466,
+        "filter_index.bin.gz": 54138,
+        "filter_index_offsets.tsv.gz": 72661,
+        "languages.tsv.gz": 81524,
         "lookup_index_str.tsv.gz": 33776,
-        "short_names.tsv.gz": 25919
+        "short_names.tsv.gz": 25926
       }
     },
     "macroregions": {
@@ -251,36 +251,36 @@
       }
     },
     "scripts": {
-      "total": 19685,
+      "total": 19702,
       "share_pct": 0.1,
       "files": {
         "canon_index.bin.gz": 4037,
         "canon_index_offsets.tsv.gz": 6381,
-        "filter_index.bin.gz": 469,
-        "filter_index_offsets.tsv.gz": 2799,
+        "filter_index.bin.gz": 472,
+        "filter_index_offsets.tsv.gz": 2805,
         "lookup_index_int.tsv.gz": 805,
         "lookup_index_str.tsv.gz": 1092,
-        "scripts.tsv.gz": 3454,
-        "short_names.tsv.gz": 648
+        "scripts.tsv.gz": 3457,
+        "short_names.tsv.gz": 653
       }
     },
     "subdivisions": {
-      "total": 5665876,
+      "total": 5664545,
       "share_pct": 17.7,
       "files": {
-        "canon_index.bin.gz": 1705858,
-        "canon_index_offsets.tsv.gz": 62485,
-        "context_index.bin.gz": 1531168,
-        "context_index_offsets.tsv.gz": 31709,
-        "filter_index.bin.gz": 485018,
-        "filter_index_offsets.tsv.gz": 591457,
-        "lookup_index_str.tsv.gz": 295646,
-        "short_names.tsv.gz": 106169,
-        "subdivisions.tsv.gz": 856366
+        "canon_index.bin.gz": 1705538,
+        "canon_index_offsets.tsv.gz": 62397,
+        "context_index.bin.gz": 1530734,
+        "context_index_offsets.tsv.gz": 31661,
+        "filter_index.bin.gz": 484902,
+        "filter_index_offsets.tsv.gz": 591432,
+        "lookup_index_str.tsv.gz": 295575,
+        "short_names.tsv.gz": 106066,
+        "subdivisions.tsv.gz": 856240
       }
     }
   },
   "totals": {
-    "records": 297127
+    "records": 297335
   }
 }

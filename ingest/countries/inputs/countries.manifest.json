@@ -1,26 +1,26 @@
 {
   "cldr_currency_data.json": {
-    "url": "https://raw.githubusercontent.com/unicode-org/cldr-json/91c267402229a59e3ef2774544f001bf959e8809/cldr-json/cldr-core/supplemental/currencyData.json",
-    "etag": "\"c583862c57dbed9fd8f18682d05ae7d36de9dc8e5bfe56815c696be9f2a72a80\"",
-    "sha256": "e50315091b1f34428480f82970be64159ad207af0bdcebe7faa6260d3e34c8a6"
+    "url": "https://raw.githubusercontent.com/unicode-org/cldr-json/7d2b9cb11cec08f4d333ad73209deb3df0711c3b/cldr-json/cldr-core/supplemental/currencyData.json",
+    "etag": "\"77488f32d164c6a1ad9c0d361870aa0966c2322838738f5b1cd1818ba5978fc1\"",
+    "sha256": "c187138fb1a91508056924caa7e11a63d4d579c2f34176949afa817f7ed63715"
   },
   "geonamesInfo.txt": {
     "url": "https://download.geonames.org/export/dump/countryInfo.txt",
-    "etag": "\"7bca-65e8c7cc2ce76\"",
-    "sha256": "c55f638cfaafb4fe45a9aa15120a0f1f78e8a34a8e1847d7b9320cf740fbc9ab"
+    "etag": "\"7d70-65f2ede7feaf5\"",
+    "sha256": "79f8f59ea01cbb40438bf1856dd6c2ff201f03f8fc72d0530b2646aaf603ef04"
   },
   "geonames_readme.txt": {
     "url": "https://download.geonames.org/export/dump/readme.txt",
-    "etag": "\"228b-65e8c42d6b928\"",
+    "etag": "\"228b-65f2ea62eaaed\"",
     "sha256": "b1957379b6c1242c700c98ac9a8aa0a09f56c3c0a50ee72175527005f48ef2c5"
   },
   "iso_3166-1.json": {
-    "url": "https://salsa.debian.org/iso-codes-team/iso-codes/-/raw/e1ae709ba406c1c3698f2130b3480ad9e5d1b0df/data/iso_3166-1.json",
+    "url": "https://salsa.debian.org/iso-codes-team/iso-codes/-/raw/53b1c294240bcfb7429bbc225b9caeb9bf2128b3/data/iso_3166-1.json",
     "etag": "W/\"5af71921cc8d6683538e692027135ff9-gzip\"",
     "sha256": "f01b812b57fba9f31ff621bf33e7c7570a01964dbeb5be2167e94decf538c89f"
   },
   "iso_3166-3.json": {
-    "url": "https://salsa.debian.org/iso-codes-team/iso-codes/-/raw/e1ae709ba406c1c3698f2130b3480ad9e5d1b0df/data/iso_3166-3.json",
+    "url": "https://salsa.debian.org/iso-codes-team/iso-codes/-/raw/53b1c294240bcfb7429bbc225b9caeb9bf2128b3/data/iso_3166-3.json",
     "etag": "W/\"9c9723ac0a39efcdad3b859dba23fa6c-gzip\"",
     "sha256": "eb92d1cce3e352559f610e60e2acb23687eb1cf07b23675fb112863a5741a6fa"
   }

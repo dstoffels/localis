@@ -1,10 +1,11 @@
 [SCRIPTS]
-[INFO] Downloading iso_15924.json from https://salsa.debian.org/iso-codes-team/iso-codes/-/raw/e1ae709ba406c1c3698f2130b3480ad9e5d1b0df/data/iso_15924.json
+[INFO] Downloading iso_15924.json from https://salsa.debian.org/iso-codes-team/iso-codes/-/raw/53b1c294240bcfb7429bbc225b9caeb9bf2128b3/data/iso_15924.json
 [INFO] Downloaded and updated iso_15924.json
-[INFO] No update needed for cldr_script_names_en.json
+[INFO] Downloading cldr_script_names_en.json from https://raw.githubusercontent.com/unicode-org/cldr-json/7d2b9cb11cec08f4d333ad73209deb3df0711c3b/cldr-json/cldr-localenames-full/main/en/scripts.json
+[INFO] Downloaded and updated cldr_script_names_en.json
 [INFO] Loading ISO 15924 scripts...
 [INFO] CLDR names scripts not in ISO 15924, skipped: Qaag
-[INFO] 226 scripts, 69 with CLDR aliases
+[INFO] 226 scripts, 70 with CLDR aliases
 [INFO] Dumping 226 scripts...
 [INFO] Dumping scripts lookup indexes...
 [INFO] Dumping scripts filter index...

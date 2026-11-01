@@ -1,11 +1,13 @@
 [LANGUAGES]
-[INFO] Downloading iso_639-3.json from https://salsa.debian.org/iso-codes-team/iso-codes/-/raw/e1ae709ba406c1c3698f2130b3480ad9e5d1b0df/data/iso_639-3.json
+[INFO] Downloading iso_639-3.json from https://salsa.debian.org/iso-codes-team/iso-codes/-/raw/53b1c294240bcfb7429bbc225b9caeb9bf2128b3/data/iso_639-3.json
 [INFO] Downloaded and updated iso_639-3.json
-[INFO] No update needed for cldr_language_names_en.json
-[INFO] No update needed for cldr_language_data.json
+[INFO] Downloading cldr_language_names_en.json from https://raw.githubusercontent.com/unicode-org/cldr-json/7d2b9cb11cec08f4d333ad73209deb3df0711c3b/cldr-json/cldr-localenames-full/main/en/languages.json
+[INFO] Downloaded and updated cldr_language_names_en.json
+[INFO] Downloading cldr_language_data.json from https://raw.githubusercontent.com/unicode-org/cldr-json/7d2b9cb11cec08f4d333ad73209deb3df0711c3b/cldr-json/cldr-core/supplemental/languageData.json
+[INFO] Downloaded and updated cldr_language_data.json
 [INFO] Loading ISO 639-3 languages...
 [INFO] CLDR gives scripts for codes not in ISO 639-3, skipped: kro
-[INFO] 7923 languages, 811 with scripts and 117 with aliases
+[INFO] 7923 languages, 820 with scripts and 118 with aliases
 [INFO] Dumping 7923 languages...
 [INFO] Dumping languages lookup indexes...
 [INFO] Dumping languages filter index...
